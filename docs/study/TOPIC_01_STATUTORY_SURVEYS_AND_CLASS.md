@@ -1,13 +1,28 @@
 # TOPIC 01 — Statutory Framework, Survey & Classification (`D01`)
 
-**Study pack for Nixon. Built 2026-08-22 from main `906e8a4`.**
+**Study pack for Nixon. Built 2026-08-22, revised against the official
+syllabus the same day.**
 Evidence: 46 mapped Oral questions, 96 Written questions across 39 of 40
 solved papers, 39 Oral questions carrying examiner evidence from all 6 named
 examiners, 16 recurring written families.
 
-> **Not an official DGMA syllabus.** No official instrument exists in this
-> repository — see `SYLLABUS_SOURCE_STATUS.md`. This topic is derived from
-> what MIW's own corpora prove is examined.
+> **Now grounded in the official syllabus.** DGMA EAC Branch Circular **No.49
+> of 2026** (15-Aug-2026), **Annexure III** — *Syllabus for MEO Class I
+> Preparatory Course* — has been obtained from the issuer, read, and ingested
+> (`docs/study/official_syllabus.json`, SHA-256 `07170f57…`).
+>
+> **D01 carries more of that syllabus than any other topic:** 6 of the 25
+> official items as PRIMARY subject matter, and a further 5 as supporting
+> material — 11 of 25 in total.
+>
+> **Timing.** The revised syllabus is **adopted but not yet in force**; it
+> bites on **01-Jan-2027**. Nothing here says the 2027 syllabus governs your
+> sitting today. It is used as the authoritative statement of *scope*,
+> because the subjects DGMA has just written down are the subjects the
+> examiners are working toward.
+>
+> The topic *headings* below remain MIW's, not DGMA's. Official wording is
+> quoted only in the OFFICIAL DGMA SCOPE section, never paraphrased.
 
 ---
 
@@ -17,17 +32,31 @@ Not because it "sounds foundational". Because the evidence converges:
 
 | Signal | D01 | Rank |
 |---|---|---|
+| **Official Annexure III items owned (PRIMARY)** | **6 of 25** | **1st** |
+| **Official items touched (primary + supporting)** | **11 of 25** | **1st** |
 | Written questions | **96 / 360** (27%) | **1st** |
 | Written papers touched | **39 of 40** | **1st** |
 | Written marks | **1536** | **1st** |
 | Domains that depend on it | **8 of 9** | **1st** |
+| Prerequisites of its own | **none** | **1st** |
 | Oral questions (post-adjudication) | 46 | 3rd |
 | Oral questions with examiner evidence | 39 | 3rd |
-| Composite priority score | 0.567 | 3rd |
+| Composite priority score | 0.590 | 2nd |
 
-D01 is **3rd** on the blended score — D03 (Human Element, 0.778) and D02
-(Commercial Law, 0.629) carry more raw oral volume. It is still Topic 01, and
-the reason is dependency, which the score deliberately under-weights (10%):
+**The decision was recomputed against the final syllabus, not inherited:
+KEEP D01 as Topic 01.**
+
+Two things changed since the first build. D01 rose from 3rd to **2nd** on the
+blended score, because the model gained an `official_scope` component once the
+circular was ingested and D01 owns six PRIMARY official items to D02's two —
+a signal corpus counts alone were blind to. D03 (Human Element, 0.805) still
+scores highest.
+
+But the score is not what decides Topic 01. **Dependency is**, and the
+dependency graph is unambiguous: D01 is the only domain with real evidence and
+**no prerequisites of its own**, while eight of the nine others list D01 as a
+prerequisite — including D03. You cannot start with D03; it is gated behind
+this topic.
 
 - **It appears on 39 of 40 papers.** No other domain is nearly guaranteed on
   your written paper.
@@ -44,20 +73,55 @@ the reason is dependency, which the score deliberately under-weights (10%):
 
 | Candidate | Why not first |
 |---|---|
-| **D03 Human Element / ISM** (score 0.778, oral 210) | Highest volume, and it is Topic 02. But ISM answers are *about* certification, audit and RO action — the machinery D01 supplies. Studying it first means learning the vocabulary twice. |
-| **D02 Commercial Law** (score 0.629, oral 134, written 70) | Genuinely large and largely self-contained, which makes it a good Topic 03. It is not a prerequisite for anything, so nothing is lost by deferring it. |
-| **D05 GHG & Decarbonisation** (score 0.356, written 50) | The most currentness-sensitive domain in the corpus — answers age fastest. Studying it early wastes the work; it should sit closer to the exam. |
-| **D04 MARPOL** (score 0.349) | Strong, but its Class I treatment is heavily certification- and survey-shaped. Cheaper after D01. |
+| **D03 Human Element / ISM** (score 0.805, oral 210, 8 official items) | Highest volume and the largest official footprint, and it is Topic 02. But it **lists D01 as a prerequisite**, and its answers are *about* certification, audit and RO action — the machinery D01 supplies. Studying it first means learning the vocabulary twice. |
+| **D02 Commercial Law** (score 0.578, oral 134, written 70, 2 official items) | Genuinely large and largely self-contained, which makes it a good Topic 03. Also gated behind D01, and a prerequisite for nothing but D06, so little is lost by deferring it. |
+| **D05 GHG & Decarbonisation** (score 0.340, written 50) | The most currentness-sensitive domain in the corpus — answers age fastest. Studying it early wastes the work; it should sit closer to the exam. |
+| **D04 MARPOL** (score 0.318) | Strong, but its Class I treatment is heavily certification- and survey-shaped. Cheaper after D01. |
+| **D10 Construction & Stability** (score 0.074) | The only *other* domain with no prerequisites, so it is technically startable — but it has 0 written questions mapped and 26 orals. Far too thin to open on. |
 
 ---
 
-## DGMA SCOPE
+## OFFICIAL DGMA SCOPE
 
-**Unavailable.** No official syllabus statement can be quoted, because no
-official instrument is held. What follows is MIW-derived scope, inferred from
-96 written questions and 46 oral questions actually asked. When the circular
-is ingested, official wording attaches here and this section is replaced —
-not merged — so official text and MIW judgement never blur.
+Verbatim from **Annexure III** of DGMA EAC Branch Circular No.49 of 2026,
+*Syllabus for MEO Class I Preparatory Course* (two months, 8 weeks, 40
+working days, 240 contact hours). Quoted, never paraphrased.
+
+### Items D01 owns (PRIMARY)
+
+**Item 3** · `C49-A3-03` · p.25 · coverage **STRONG** (oral 18, written 56, examiners 5)
+
+> Overview of Classification Societies and their functions in ensuring the safety, structural integrity and seaworthiness of ships, including statutory certificates and documents under international conventions. Study of the role and duties of classification societies, principles of ship classification, and classification surveys including continuous surveys of machinery and hull, other survey methods, and enhanced special survey programmes. Procedures for assignment, maintenance, suspension and withdrawal of class. Role of Classification Societies as Recognized Organizations to flag administrations for statutory survey and certification of ships. Duty of care and responsibilities owed by Classification societies. RO Code and RO monitoring by maritime administrations. Ship inspections for first entry into the Indian flag with reference to the Merchant Shipping Act, 2025 and the Merchant Shipping (Registration of Indian Ships) Rules, 2026 relating to registration and compliance requirements. Introduction to open registry and its implications in international shipping.
+
+**Item 6** · `C49-A3-06` · p.25 · coverage **STRONG** (oral 12, written 25, examiners 5)
+
+> Monitoring and control of compliance with legislative requirements relating to safety of life at sea and protection of the marine environment, including knowledge of conventions adopted by the International Maritime Organization. Statutory shipboard certificates and documents, their issuance and validity, and responsibilities under the International Convention on Load Lines, International Convention for the Safety of Life at Sea (SOLAS), and International Convention for the Prevention of Pollution from Ships (MARPOL), along with relevant national legislation such as the Merchant Shipping Act, 2025. Chief Engineer’s role in tanker vetting and inspection programmes such as the Ship Inspection Report Programme (SIRE), Tanker Management and Self-Assessment (TMSA), and the RightShip Inspection Programme, together with marine environmental awareness and industry best practices recommended by International Chamber of Shipping, INTERTANKO, BIMCO, and Oil Companies International Marine Forum. Managerial oversight of BWMS commissioning testing and malfunction reporting.
+
+**Item 7** · `C49-A3-07` · p.26 · coverage **STRONG** (oral 9, written 12, examiners 3)
+
+> Knowledge of ship security systems in accordance with the International Ship and Port Facility Security (ISPS) Code, including mandatory requirements and guidance contained in Part A and Part B under SOLAS Chapter XI-2, and coverage of piracy threats and anti-piracy measures, including existing and proposed counter-piracy practices and industry guidance.
+
+**Item 9** · `C49-A3-09` · p.26 · coverage **STRONG** (oral 6, written 52, examiners 3)
+
+> Knowledge of Port State Control as the inspection of foreign ships in national ports to verify compliance with international regulations relating to ship condition, equipment, manning, and operation. Updates on Port State Control directives, the concept, role, and duties of the Flag State in exercising regulatory control over ships registered under its flag, and responsibilities as outlined by the International Chamber of Shipping and the International Shipping Federation. Coverage shall also include participation in the IMO Member State Audit Scheme, commitments under regional Memoranda of Understanding (MoU), relevant instruments used by MoU authorities, inspection procedures, rectification and detention, appeal procedures and the importance of Detention review panels, provision of information by authorities, operational violations, and procedures for proposing and enforcing amendments to MoU provisions.
+
+**Item 10** · `C49-A3-10` · p.26 · coverage **STRONG** (oral 3, written 17, examiners 2)
+
+> Knowledge of ship survey and certification requirements, including the principles of the Harmonized System of Survey and Certification (HSSC). Types of statutory surveys such as initial, annual, intermediate, periodical, renewal, non-periodical surveys, in-water surveys and additional surveys, their purpose and scope, general survey requirements, and the statutory certificates required to be carried on board ships under the harmonized system.
+
+**Item 24** · `C49-A3-24` · p.30 · coverage **STRONG** (oral 6, written 21, examiners 5)
+
+> The study of Classic maritime casualties; Practices related to Casualty Investigations, related IMO guidelines and procedures.
+
+### Items D01 supports
+
+| Item | Node | Subject | Primary topic |
+|---|---|---|---|
+| 1 | `C49-A3-01` | Knowledge of national maritime legislation, including the Indian Merchant Shipping Act, 2025, R… | D06 |
+| 2 | `C49-A3-02` | Overview of Quality, Safety and Energy Management Systems in maritime organizations with refere… | D03 |
+| 4 | `C49-A3-04` | Principles of ship stability including stability during dry docking, damage stability in cases… | D10 |
+| 5 | `C49-A3-05` | Overview of Official Log Books, including their purpose, statutory significance and maintenance… | D06 |
+| 8 | `C49-A3-08` | Knowledge of the role of the World Health Organization in global public health, including monit… | D03 |
 
 ---
 
@@ -164,6 +228,16 @@ wording, so the generated count reports 3 + 2. The true recurrence is 5. This
 is a known limitation of exact-title family matching — recorded as debt, not
 repaired here (no written answer edits this session).
 
+**Known misfiling — do not study these as D01.** Three written questions are
+categorised `Statutory Framework & Class` in their specs but are pure
+machinery condition-monitoring: `QP2303-Q9`, `QP2406-Q9`, `QP2411-Q9`
+(*Periodical Lubricating Oil Analysis* — spectrometric, FTIR, ferrography).
+They belong to D09, and Annexure III places that content under item 21, not
+under any D01 item. The mapping is faithful to the spec; the **spec's
+`primary_category` is wrong**. Specs are product content, so this session did
+not touch them — raised here as a defect to fix in a written-production
+session. It inflates D01's written count by 3 (96 → true 93).
+
 † The PSC group is a *thematic* family assembled by hand: each occurrence has
 a distinct short_title, so the generator counts them as singletons. Eight
 separate PSC questions across 2023–2026 is nonetheless the strongest recurring
@@ -237,7 +311,30 @@ authority; the solved written answers are the more recently governed layer.
 - **N5 — corrosion numbers.** Substantial corrosion definition and diminution
   /renewal criteria, with the actual figures.
 
-Do **not** write general textbook notes. Write these five, driven by what is
+### Gaps the FINAL circular newly created
+
+These three are not old gaps. They are subjects the **final** Annexure III
+added over the 28-Jul draft, or newly named in it, and the corpus has not
+caught up. They are the highest-value new work in this topic.
+
+- **N6 — classification societies' duty of care.** Item 3 now requires "Duty
+  of care and responsibilities owed by Classification societies". Corpus
+  coverage is **zero** — no oral, no written question touches it. This is the
+  single clearest content gap in D01. Cover: the class contract vs third
+  parties, reliance and negligent misstatement, the *Nicholas H* line of
+  authority, and the limitation/exclusion clauses IACS members write into
+  their rules.
+  *RO Code itself is well covered (20 written, 1 oral) — it is the duty-of-care
+  limb that is missing, not the RO framework.*
+- **N7 — in-water survey.** Item 10 newly names "non-periodical surveys,
+  in-water surveys" as survey types. Corpus: **1 oral (`QB1_G#q31`), 0
+  written**. Know the conditions class requires (hull condition, coating,
+  approved diver/ROV, class attendance) and when IWS substitutes for drydock.
+- **N8 — Official Log Book.** Item 5 is a whole official item and the corpus
+  has **1 oral (`QB9_G#q4`), 0 written**. It is primarily D06, but it is
+  statutory record-keeping and reaches D01 as supporting scope.
+
+Do **not** write general textbook notes. Write these eight, driven by what is
 asked.
 
 ---
@@ -260,10 +357,48 @@ asked.
 
 Five sessions, 45–90 minutes each, sized from the real 46 + 96 question load.
 
-**Session 1 — Skeleton + the framework layer (60–75 min)**
-Read the nine branches. Then attempt cold, aloud: `QB1_H#q3`,
-`QB1_K#q2`, `QB3_B#q9`. Then study written QP2506-Q2 (entry into force) and
-QP2402-Q1 (instrument hierarchy). Close and re-answer in 60 seconds each.
+### ▶ BEGIN TOPIC 01 — SESSION 1 (60–75 minutes)
+
+Do exactly this. Nothing else. No QB browsing.
+
+**1. Read the skeleton (8 min).**
+The nine branches above. Read once. Do not take notes yet.
+
+**2. Attempt these three orals COLD, aloud, ~60 seconds each (10 min).**
+Do not open the answers first.
+
+| Order | ID | Question | Examiners |
+|---|---|---|---|
+| 1 | `QB1_H#q3` | Differentiate an IACS Unified Requirement (UR), Procedural Requirement (PR) and Unified Interpretation (UI) | Nair, Rajappan |
+| 2 | `QB1_K#q2` | Condition of Class — who issues it, and when? | Simon |
+| 3 | `QB3_B#q9` | Overview of the classification society survey system — types of surveys, periodicity, role of class | Nair, Srivastava |
+
+**3. Now study those three MIW answers (15 min).**
+15-second answer first, then the 60-second answer, then the full answer.
+Note *where you were wrong*, not everything.
+
+**4. Read these two written questions and their model answers (20 min).**
+
+| ID | Family | Why |
+|---|---|---|
+| `QP2506-Q2` | Entry into Force of an IMO Convention | The single most repeated family in D01 — **5 occurrences** |
+| `QP2402-Q1` | IMO Structure and the Instrument Hierarchy | **4 occurrences**; it is the frame every other D01 answer hangs on |
+
+**5. Close everything (10 min).**
+Books shut. Screen off. Then, aloud, in 60 seconds each:
+
+1. UR vs PR vs UI — and what class does that a flag State does not.
+2. Condition of Class — who issues it, when, and what it obliges.
+3. The four stages from adoption to implementation, and why tacit acceptance
+   matters.
+4. Name the survey types in a five-year cycle, in order.
+
+**6. Stop.**
+Do not start Session 2 today. Delayed recall is the point — Session 2 opens by
+re-answering question 4 above, cold.
+
+**Completion signal for this session:** you can say the four answers in step 5
+without hesitating. That moves you `NOT_STARTED` → `SKELETON_KNOWN`.
 
 **Session 2 — The survey regime (75–90 min)**
 Orals 1–4 and 8 (`QB3_B#q9`, `#q1`, `#q11`, `#q5`, `QB1_supplementary#q4`).

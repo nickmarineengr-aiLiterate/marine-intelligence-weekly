@@ -109,6 +109,38 @@ def main():
     check('R-AUTHORITY', 'not an official dgma syllabus' in spine['authority'].lower(),
           'spine does not disclaim official authority for its own headings')
 
+    # ---- R-TOPIC01: the study pack may not cite a question that is not there
+    # A pack that sends Nixon to a dead anchor is worse than no pack, and a
+    # pack is exactly the kind of hand-written file that rots as the corpus
+    # moves. Every id it prints is re-resolved here on every run.
+    pack = os.path.join(ROOT, 'docs', 'study',
+                        'TOPIC_01_STATUTORY_SURVEYS_AND_CLASS.md')
+    check('R-TOPIC01-EXISTS', os.path.exists(pack), 'Topic 01 pack is missing')
+    if os.path.exists(pack):
+        import re as _re
+        text = open(pack, encoding='utf-8').read()
+        live_ids = {q['id'] for f in qb['files'].values() for q in f['questions']}
+        store_ids = set(json.load(open(os.path.join(
+            ROOT, 'docs', 'study', 'study_mappings.json'),
+            encoding='utf-8'))['mappings'])
+        cited_oral = sorted(set(_re.findall(r'QB[0-9A-Za-z_]+#q\d+', text)))
+        cited_written = sorted(set(_re.findall(r'QP\d{4}-Q\d+', text)))
+        check('R-TOPIC01-ORAL-CITED', bool(cited_oral),
+              'Topic 01 pack cites no oral questions at all')
+        for qid in cited_oral:
+            check('R-TOPIC01-ORAL', qid in live_ids,
+                  f'Topic 01 pack cites oral {qid}, which is not in the QB index')
+        for qid in cited_written:
+            check('R-TOPIC01-WRITTEN', qid in store_ids,
+                  f'Topic 01 pack cites written {qid}, which is not mapped')
+        # The pack quotes official wording: it must name the instrument it
+        # quotes and must not present the 2027 syllabus as already in force.
+        check('R-TOPIC01-SOURCE', 'No.49 of 2026' in text,
+              'Topic 01 pack does not name the official circular it quotes')
+        check('R-TOPIC01-NOT-IN-FORCE',
+              '2027-01-01' in text or '01-Jan-2027' in text,
+              'Topic 01 pack does not state when the official syllabus takes effect')
+
     # ---- R-COVER: every official node is accounted for by the matrix -------
     cov_path = os.path.join(ROOT, 'docs', 'study', 'coverage_matrix.json')
     check('R-COVER-EXISTS', os.path.exists(cov_path),

@@ -66,12 +66,29 @@ semantically wrong parents.
 ## Routine commands
 
 ```bash
+python tools/study/ingest_official_syllabus.py        # official Annexure III
+python tools/study/build_official_crosswalk.py        # official node -> topic
 python tools/study/build_study_mappings.py            # incremental map
-python tools/study/build_study_mappings.py --status   # taxonomy drift report
+python tools/study/reconcile_official_mappings.py     # attach official join
 python tools/study/build_study_spine.py               # aggregate
+python tools/study/build_coverage_matrix.py           # coverage per official node
 python tools/study/validate_study_spine.py            # gate
 python tools/study/test_mapping_engine.py             # acceptance
 ```
+
+Each builder also takes `--check`, which fails if its artefact is stale. The
+gate sequence for a study change is the `--check` of every builder plus the
+validator and the acceptance suite.
+
+The source PDF is **not committed** (`docs/study/sources/*.pdf` is ignored in
+both `.gitignore` and `.vercelignore`). To restore it:
+
+```bash
+python tools/study/ingest_official_syllabus.py --download
+```
+
+That verifies the pinned SHA-256 and **fails closed** on any mismatch — and
+names the superseded July draft specifically if it is handed that instead.
 
 After editing `study_spine.py` (a taxonomy change) the digest moves, so run:
 
@@ -120,11 +137,59 @@ is an authored, governed field. **A new paper only needs its
 invents a new one, `R-CAT-CLAIMED` fails loudly rather than dropping the
 question.
 
+### Future XLSX export (`tools/oral/export_xlsx.py`)
+
+The exporter stays **downstream** and gains no syllabus logic of its own:
+
+```
+mapping_engine  ->  study_mappings.json  ->  export_xlsx.py
+```
+
+When an approved workbook is to carry syllabus columns, it reads the already
+governed fields — `topic_id`, `official_syllabus_node_id` (or its candidate
+set), `official_alignment_status`, `official_mapping_confidence` — and prints
+them. **Do not classify anything inside the Excel tooling.** A second
+classifier in the exporter would be a second taxonomy by the back door.
+
+Note for whoever wires this: 111 questions are `ORPHANED_IN_ADOPTED_SYLLABUS`
+(all D07 cargo). A column that renders that as blank will read as a data
+defect. Render the status, not an empty cell.
+
 ### Study packs / QI / future audio, flashcards, examiner simulation
 
 All must resolve through `get_topic_questions()` / `get_question_topic()`.
 One canonical question identity drives every mode. Do not build a second
 lookup.
+
+## The official syllabus layer
+
+```
+DGMA Circular 49 of 2026, Annexure III   (25 official items, SHA-256 pinned)
+        |  build_official_crosswalk.py   (hand-adjudicated, 43 edges)
+        v
+canonical MIW topics  (10 domains -- the durable study/join layer)
+        |  mapping_engine.attach_official()  (STRUCTURAL, never text similarity)
+        v
+1081 governed question mappings
+```
+
+Rules that must not be relaxed:
+
+1. **Official wording is quoted, never paraphrased.** It lives only in
+   `official_syllabus.json`. MIW topic headings are *not* DGMA headings and
+   the spine must keep saying so (`R-AUTHORITY`).
+2. **Two syllabus versions, never merged.** `syllabus_version`
+   (`MIW-DERIVED-1.0`) is what is operative today; `official_syllabus_version`
+   (`DGMA-C49-2026-ANNEX3`) is adopted and takes effect **2027-01-01**. No
+   public surface may present the 2027 syllabus as in force before then.
+3. **`syllabus_node_id` is not `official_syllabus_node_id`.** The operative
+   version defines no node ids at all, so the former must stay null; the
+   validator rejects an official node smuggled into it.
+4. **A pinpointed official node must be earned.** It may only be set when the
+   candidate set contains exactly one node. Otherwise the record aligns to the
+   set and says so.
+5. **The coverage matrix is diagnostic, never a mapping.** Its probe terms
+   must never be used to decide a question's topic or node.
 
 ## Fresh-session test
 
