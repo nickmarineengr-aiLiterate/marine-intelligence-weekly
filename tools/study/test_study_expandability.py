@@ -94,9 +94,28 @@ def test_socket_is_declared_and_empty():
        str(h['recurrence_windows']))
     ok('socket carries a stable family id namespace',
        h['family_id_namespace'] == 'FAMILY-EM-', h['family_id_namespace'])
-    ok('the 2006-2020 gap is recorded rather than glossed',
-       any(g['from_year'] == 2006 and g['to_year'] == 2020
-           for g in h['known_gaps']), str(h['known_gaps']))
+    # The 2010-2020 window ceased to be "unreachable" on 2026-08-23 when the
+    # source layer was adopted, so the single 2006-2020 gap correctly split in
+    # two. What must never happen is either half quietly disappearing: a gap
+    # that stops being recorded reads as coverage.
+    gaps = h['known_gaps']
+    ok('the 2006-2009 gap is recorded rather than glossed',
+       any(g['from_year'] == 2006 and g['to_year'] == 2009 for g in gaps),
+       str(gaps))
+    ok('the 2010-2020 window is still recorded as a QI gap',
+       any(g['from_year'] == 2010 and g['to_year'] == 2020 for g in gaps),
+       str(gaps))
+    ok('the 2010-2020 gap says the questions are NOT ingested',
+       any(g['from_year'] == 2010 and 'NOT ingested' in g['reason']
+           for g in gaps), str(gaps))
+    ok('adopting the source layer did not populate the QI coverage layer',
+       h['papers_total'] is None and h['questions_total'] is None,
+       f"{h['papers_total']}/{h['questions_total']}")
+    ok('the socket says only the SOURCE layer was adopted',
+       h['source_status'] == 'SOURCE_LAYER_ADOPTED_QUESTIONS_NOT_INGESTED',
+       h['source_status'])
+    ok('an unpopulated coverage layer vouches for no dates',
+       h['date_certainty'] == 'NONE', h['date_certainty'])
 
 
 def test_consumers_tolerate_a_null_socket():
@@ -114,7 +133,7 @@ def test_consumers_tolerate_a_null_socket():
 def test_partial_recovery_is_storable_exactly():
     """If only 2018-2026 is recovered, store 2018-2026 -- not 2010-2026."""
     partial = EM.empty_qi_socket(
-        'VALIDATED_RANGE',
+        'VALIDATED_RANGE', date_certainty='OFFICIAL_DATED',
         papers_total=88, questions_total=792,
         earliest_year=2018, latest_year=2026,
         earliest_sitting='2018-01', latest_sitting='2026-08',
@@ -175,7 +194,8 @@ def test_public_claim_cannot_outrun_the_evidence():
 
     # ...and it strengthens BY ITSELF once, and only once, evidence exists.
     validated = EM.empty_qi_socket(
-        'VALIDATED_RANGE', papers_total=88, questions_total=792,
+        'VALIDATED_RANGE', date_certainty='OFFICIAL_DATED',
+        papers_total=88, questions_total=792,
         earliest_year=2015, latest_year=2026,
         validated_ranges=[{'from_year': 2015, 'to_year': 2026}])
     stronger = EM.public_evidence_claim(cur, validated)
@@ -183,6 +203,99 @@ def test_public_claim_cannot_outrun_the_evidence():
        '2015' in stronger and 'historical' in stronger.lower(), stronger)
     ok('a NOT_STARTED layer never strengthens it',
        EM.public_evidence_claim(cur, hist) == claim)
+
+
+def test_coverage_alone_never_licences_a_public_dated_claim():
+    """The 2026-08-23 trap, pinned.
+
+    The 2010-2020 recovery holds 115 of 132 months with every page hashed.
+    Read on coverage alone that is nearly complete, and a future session could
+    reasonably promote the socket and start saying "papers since 2010" in
+    public. It would be wrong: not one of those sittings is dated by an
+    official document. Coverage and date certainty are separate axes and the
+    public claim hangs off the second one.
+    """
+    cur = _load('written_evidence_horizon.json')['layers']['current_solved_written']
+
+    trap = EM.empty_qi_socket(
+        'COMPLETE', date_certainty='SECONDARY_CLAIMED',
+        papers_total=115, questions_total=1026,
+        earliest_year=2010, latest_year=2020,
+        validated_ranges=[{'from_year': 2010, 'to_year': 2020}])
+    allowed, why = EM.date_certainty_gate(trap)
+    ok('COMPLETE coverage on secondary dates is BARRED from a public claim',
+       not allowed, why)
+    ok('...and the derived sentence does not mention the historical span',
+       '2010' not in EM.public_evidence_claim(cur, trap),
+       EM.public_evidence_claim(cur, trap))
+
+    for tier in ('NONE', 'SECONDARY_CLAIMED', 'MIXED'):
+        s2 = EM.empty_qi_socket(
+            'COMPLETE', date_certainty=tier, papers_total=115,
+            questions_total=1026, earliest_year=2010, latest_year=2020,
+            validated_ranges=[{'from_year': 2010, 'to_year': 2020}])
+        ok(f'date_certainty {tier} is barred', not EM.date_certainty_gate(s2)[0])
+    official = EM.empty_qi_socket(
+        'COMPLETE', date_certainty='OFFICIAL_DATED', papers_total=115,
+        questions_total=1026, earliest_year=2010, latest_year=2020,
+        validated_ranges=[{'from_year': 2010, 'to_year': 2020}])
+    ok('date_certainty OFFICIAL_DATED over a validated range is permitted',
+       EM.date_certainty_gate(official)[0])
+    ok('OFFICIAL_DATED still needs coverage',
+       not EM.date_certainty_gate(EM.empty_qi_socket(
+           'PARTIAL', date_certainty='OFFICIAL_DATED', papers_total=3,
+           earliest_year=2010, latest_year=2011))[0])
+    ok('the required tier is exactly OFFICIAL_DATED',
+       EM.PUBLIC_DATED_CLAIM_REQUIRES == 'OFFICIAL_DATED')
+    ok('an unknown date-certainty tier is rejected by the honesty check',
+       EM.assert_honest(EM.empty_qi_socket(
+           'PARTIAL', date_certainty='PROBABLY_FINE')) != [])
+    ok('papers held with date_certainty NONE is rejected',
+       EM.assert_honest(EM.empty_qi_socket(
+           'PARTIAL', papers_total=115)) != [])
+
+
+def test_adopted_source_layer_adds_no_coverage():
+    """ADOPT_SOURCE_LAYER_ONLY must stay exactly that."""
+    hsl = _load('historical_source_layer.json')
+    ok('source layer is adopted', hsl['status'] == 'ADOPTED_SOURCE_LAYER_ONLY',
+       hsl['status'])
+    ok('source layer holds 115 archived pages',
+       len(hsl['papers']) == 115, str(len(hsl['papers'])))
+    ok('every page is re-obtainable',
+       all(p.get('sha256') and p.get('archive_url') for p in hsl['papers']))
+    ok('every sitting date is a secondary claim',
+       all(p['date_certainty'] == 'MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE'
+           for p in hsl['papers']))
+    ok('the three claims are kept apart',
+       hsl['claim_separation']['A_question_text_existed_on_the_page']
+       == 'CORROBORATED'
+       and hsl['claim_separation']['B_question_belonged_to_that_sitting']
+       == 'CLAIMED_BY_SECONDARY_SOURCE'
+       and hsl['claim_separation']['C_officially_administered_in_that_sitting']
+       == 'NOT_ESTABLISHED', str(hsl['claim_separation']))
+    # The layer must carry provenance and NOT content.
+    blob = json.dumps(hsl)
+    for leaked in ('raw_wording', 'normalized_wording', 'text_verbatim',
+                   'modern_corpus_joins', 'family_joins'):
+        ok(f'no {leaked} leaked into the governed source layer',
+           f'"{leaked}"' not in blob)
+    ok('the research branch is recorded as unmerged',
+       hsl['research_provenance']['merged_into_main'] is False)
+    ok('the research commit is pinned, not floating',
+       len(hsl['research_provenance']['commit']) == 40)
+    # And it must not have moved a single MIW count.
+    horizon = _load('written_evidence_horizon.json')
+    cur = horizon['layers']['current_solved_written']
+    ok('the current written corpus is untouched by the adoption',
+       cur['papers_total'] == 40 and cur['questions_total'] == 360,
+       f"{cur['papers_total']}/{cur['questions_total']}")
+    ok('month gaps distinguish no-source-page from no-archive-capture',
+       {g['classification'] for g in hsl['month_gaps']}
+       == {'NO_SOURCE_PAGE', 'NO_ARCHIVE_CAPTURE'},
+       str([g['classification'] for g in hsl['month_gaps']]))
+    ok('no month gap is converted into a no-sitting claim',
+       all(g['no_sitting_evidence'] != 'EVIDENCED' for g in hsl['month_gaps']))
 
 
 def test_pages_make_no_unearned_claim():
@@ -413,7 +526,8 @@ def test_public_roadmap_is_derived_and_bounded():
     horizon = _load('written_evidence_horizon.json')
     widened = copy.deepcopy(horizon)
     widened['layers']['historical_written_qi'].update(
-        status='VALIDATED_RANGE', earliest_year=2011, latest_year=2020,
+        status='VALIDATED_RANGE', date_certainty='OFFICIAL_DATED',
+        earliest_year=2011, latest_year=2020,
         papers_total=70, questions_total=630)
     # build_evidence_horizon.py rewrites the stored sentence whenever the
     # socket changes, so the fixture does the same. Skipping this would test a
@@ -483,6 +597,8 @@ def main():
                test_partial_recovery_is_storable_exactly,
                test_fake_completeness_is_rejected,
                test_public_claim_cannot_outrun_the_evidence,
+               test_coverage_alone_never_licences_a_public_dated_claim,
+               test_adopted_source_layer_adds_no_coverage,
                test_pages_make_no_unearned_claim,
                test_no_review_queue_leakage,
                test_no_paid_answer_leakage,

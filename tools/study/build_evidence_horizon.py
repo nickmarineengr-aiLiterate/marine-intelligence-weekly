@@ -101,17 +101,55 @@ DISCOVERED_ASSETS = [
                  'nothing.'),
     },
     {
-        'asset': 'MEO Class I written papers for sittings 2006-2020',
-        'location': 'nowhere reachable from this machine',
+        'asset': 'docs/study/historical_source_layer.json',
+        'location': 'main (committed)',
+        'classification': 'FOUND_AND_ADOPTED_AS_SOURCE_LAYER',
+        'schema': 'miw.study.historical_source_layer.v1',
+        'status': 'ADOPTED_SOURCE_LAYER_ONLY',
+        'papers': 115,
+        'questions': 0,
+        'coverage': '2010-2020 archived source pages (provenance only)',
+        'note': ('Adjudicated 2026-08-23. Identity, hash and CLAIMED sitting '
+                 'month of 115 archived pages; 1,026 stems are VISIBLE on '
+                 'those pages and NONE is ingested as a MIW question, which '
+                 'is why questions is 0. Question text is corroborated -- 8 '
+                 'of the 9 official DGS Question Bank items held on the '
+                 'phase3b branch match an archived stem -- but every sitting '
+                 'DATE is MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE. Feeds '
+                 'internal recurrence work only; licenses no public claim.'),
+    },
+    {
+        'asset': 'research/historical-written-qi/ (occurrences + joins)',
+        'location': ('origin/research/historical-written-qi-2010-2020 '
+                     '@ 2b22cd4 (UNMERGED)'),
+        'classification': 'FOUND_NOT_ADOPTED',
+        'status': 'RESEARCH_ONLY',
+        'papers': 115,
+        'questions': 1026,
+        'coverage': '2010-2020 question stems and recurrence candidates',
+        'note': ('The occurrence and join layers were reviewed and NOT '
+                 'adopted. Joins are counted per occurrence, which restates '
+                 'one entity-level decision once per asserted sitting: 83 '
+                 'family joins collapse to 18 entity-family decisions, 1,873 '
+                 'modern join pairs to 287, and 895 asserted-link checks to '
+                 '147, with 11 of the 12 HIGH_CONFIDENCE family joins being '
+                 'one and the same question. The evidence is sound and the '
+                 'COUNT is inflated, so it is re-adjudicated at entity '
+                 'granularity before it may move any number.'),
+    },
+    {
+        'asset': 'MEO Class I written papers for sittings 2006-2009',
+        'location': 'not acquired',
         'classification': 'NOT_FOUND_ON_ACCESSIBLE_LAPTOP_STATE',
         'status': 'ABSENT',
         'coverage': 'none',
-        'note': ('Searched every local and remote ref and the working tree. '
-                 'This is the gap that matters: the accessible evidence falls '
-                 'into two disjoint bands, 1999-2005 and 2021-2026, with '
-                 'roughly fifteen years missing between them. Absent here is '
-                 'not absent in the world -- it is not verifiable from this '
-                 'machine.'),
+        'note': ('Sets for 2006-2009 exist on the secondary source index but '
+                 'were deliberately left unacquired. CORRECTION 2026-08-23: '
+                 'this entry previously read "2006-2020 ... nowhere reachable '
+                 'from this machine". That was true of the laptop state when '
+                 'written and is now false -- the Desktop found a route to '
+                 '2010-2020. The genuinely missing band is 2006-2009, plus '
+                 'the 1999-2005 papers which are a different subject family.'),
     },
 ]
 
@@ -119,11 +157,24 @@ DISCOVERED_ASSETS = [
 def build():
     current = EM.current_written_horizon(SPECS)
 
+    # The socket stays NOT_STARTED on purpose. The 2010-2020 SOURCE layer is
+    # adopted (docs/study/historical_source_layer.json) but no question from it
+    # is ingested, so the QI coverage layer -- which is what drives counts and
+    # the public claim -- genuinely holds nothing yet. Saying PARTIAL here
+    # would put a number on a layer that has none.
     historical = EM.empty_qi_socket(
         'NOT_STARTED',
-        known_gaps=[{'from_year': 2006, 'to_year': 2020,
-                     'reason': 'no accessible source on this machine'}],
-        source_status='NOT_INTEGRATED',
+        known_gaps=[
+            {'from_year': 2006, 'to_year': 2009,
+             'reason': 'no accessible source on this machine'},
+            {'from_year': 2010, 'to_year': 2020,
+             'reason': ('source layer ADOPTED 2026-08-23 and questions NOT '
+                        'ingested; sitting dates are '
+                        'MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE, so this '
+                        'window can never reach VALIDATED_RANGE on the '
+                        'present evidence')},
+        ],
+        source_status='SOURCE_LAYER_ADOPTED_QUESTIONS_NOT_INGESTED',
     )
     errors = EM.assert_honest(historical)
     if errors:
@@ -153,10 +204,22 @@ def build():
             'policy': ('Public copy is GENERATED from this file. Until the '
                        'historical layer reaches VALIDATED_RANGE, no surface '
                        'may claim a span wider than the current layer states.'),
+            'date_certainty_policy': (
+                'A dated public claim is gated on DATE_CERTAINTY, never on '
+                'coverage. See evidence_model.date_certainty_gate(): the '
+                'historical layer may be COMPLETE and still barred, because '
+                'holding the papers is not the same as an official document '
+                'saying when they were set. The 2010-2020 layer is '
+                'SECONDARY_CLAIMED and is therefore barred indefinitely on '
+                'the present evidence, however much coverage it gains.'),
             'forbidden_until_validated': [
                 'based on 16 years of papers',
                 '2010-2026 analysis',
                 'appeared N times since 2010',
+                'since 2010',
+                'asked since 2010',
+                'papers from 2010',
+                '16 years of question intelligence',
             ],
         },
         'discovered_assets': DISCOVERED_ASSETS,

@@ -25,6 +25,8 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 import study_spine as SP
 import mapping_engine as ME
+import evidence_model as EM
+import ingest_historical_source_layer as IHSL
 
 SPINE  = os.path.join(ROOT, 'docs', 'study', 'study_spine.json')
 QB     = os.path.join(ROOT, 'meoclass1', 'qb_content_index.json')
@@ -326,6 +328,39 @@ def main():
         check('R-STORE-AGREES-SPINE', store_mapped == t['oral_questions_mapped'],
               f'store maps {store_mapped} oral questions, spine says '
               f"{t['oral_questions_mapped']}")
+
+    # ---- R-HSL: the adopted historical SOURCE layer -------------------------
+    # Adopted 2026-08-23 as source-layer-only. The gate here is not that it is
+    # correct -- its own ingest tool validates that -- but that it has not
+    # quietly grown into a coverage claim. A provenance layer that starts
+    # carrying question text, or dates that stop saying who claimed them, has
+    # become something nobody adjudicated.
+    hsl_path = os.path.join(ROOT, 'docs', 'study', 'historical_source_layer.json')
+    check('R-HSL-EXISTS', os.path.exists(hsl_path),
+          'docs/study/historical_source_layer.json is missing')
+    if os.path.exists(hsl_path):
+        hsl = json.load(open(hsl_path, encoding='utf-8'))
+        errs = IHSL.validate(hsl)
+        check('R-HSL-VALID', not errs, f'{len(errs)} error(s): {errs[:2]}')
+        check('R-HSL-SCOPE', hsl.get('status') == 'ADOPTED_SOURCE_LAYER_ONLY',
+              f"status is {hsl.get('status')!r}, not ADOPTED_SOURCE_LAYER_ONLY")
+        # It must add nothing to the QI coverage layer that drives claims.
+        horizon = json.load(open(os.path.join(
+            ROOT, 'docs', 'study', 'written_evidence_horizon.json'),
+            encoding='utf-8'))
+        h = horizon['layers']['historical_written_qi']
+        check('R-HSL-NO-COVERAGE-DRIFT',
+              h.get('papers_total') is None and h.get('questions_total') is None,
+              'the historical QI coverage layer has been populated without an '
+              'adjudicated ingest')
+        allowed, why = EM.date_certainty_gate(h)
+        check('R-HSL-NO-PUBLIC-DATED-CLAIM', not allowed,
+              f'a public dated historical claim is now licensed ({why}) -- '
+              f'this requires a Founder decision, not a build')
+        for phrase in horizon['public_claim']['forbidden_until_validated']:
+            check(f'R-HSL-FORBIDDEN', phrase.lower() not in
+                  horizon['public_claim']['derived_sentence'].lower(),
+                  f'derived public sentence contains {phrase!r}')
 
     # ---- report ------------------------------------------------------------
     print(f'study spine validator -- {checks} checks')

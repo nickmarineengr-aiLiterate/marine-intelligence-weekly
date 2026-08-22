@@ -59,6 +59,34 @@ WRITTEN_QI_SCHEMA_VERSION = '1.0'
 # --- integration status of an evidence layer ------------------------------
 QI_STATUS = ('NOT_STARTED', 'PARTIAL', 'VALIDATED_RANGE', 'COMPLETE')
 
+# --------------------------------------------------------------------------- #
+# COVERAGE AND DATE CERTAINTY ARE TWO AXES.
+#
+# QI_STATUS answers "how much of the window do we hold?".
+# DATE_CERTAINTY answers "who says these papers are from those months?".
+#
+# They are independent, and conflating them is the specific mistake this pair
+# blocks. The 2010-2020 recovery adjudicated on 2026-08-23 is a live example:
+# 115 of 132 months are held and every page is hashed -- excellent coverage --
+# yet not one sitting date comes from an official document. A future session
+# looking only at QI_STATUS would see near-complete coverage and reasonably
+# conclude that "papers since 2010" is now sayable in public. It is not.
+#
+# So the PUBLIC claim is gated on DATE_CERTAINTY, never on coverage alone,
+# while INTERNAL recurrence analysis is gated on coverage. Being wrong about a
+# month costs an internal model a study-priority nudge; it costs a public
+# claim its credibility. Different costs, different thresholds, on purpose.
+# --------------------------------------------------------------------------- #
+DATE_CERTAINTY = (
+    'NONE',               # nothing held
+    'SECONDARY_CLAIMED',  # a secondary source asserts the month; no official
+    'MIXED',              # some papers officially dated, some not
+    'OFFICIAL_DATED',     # an official document ties these papers to months
+)
+
+# Only this tier may licence a dated public claim.
+PUBLIC_DATED_CLAIM_REQUIRES = 'OFFICIAL_DATED'
+
 # --- how a family behaves over time (adopted from qi_v2 families v2) ------
 DORMANCY_CLASSES = ('ACTIVE_RECURRENCE', 'RECENT_RETURN', 'HISTORICAL_RETURN',
                     'LONG_GAP_RETURN', 'ONE_OFF_HISTORICAL',
@@ -146,6 +174,8 @@ def empty_qi_socket(status='NOT_STARTED', **known):
         'layer': 'HISTORICAL_WRITTEN_QI',
         'schema_version': WRITTEN_QI_SCHEMA_VERSION,
         'status': status,
+        # Coverage says how much; date_certainty says who vouches for WHEN.
+        'date_certainty': 'NONE',
         'papers_total': None,
         'questions_total': None,
         'earliest_year': None,
@@ -195,25 +225,57 @@ def assert_honest(socket):
         for f in ('papers_total', 'questions_total'):
             if socket.get(f):
                 errors.append(f'NOT_STARTED but {f} is populated')
+    dc = socket.get('date_certainty')
+    if dc not in DATE_CERTAINTY:
+        errors.append(f'date_certainty {dc!r} invalid')
+    elif dc == 'NONE' and socket.get('papers_total'):
+        errors.append('papers are held but date_certainty is still NONE -- '
+                      'say who vouches for the sitting months')
+    elif dc != 'NONE' and st == 'NOT_STARTED':
+        errors.append(f'NOT_STARTED but date_certainty claims {dc}')
     e, l = socket.get('earliest_year'), socket.get('latest_year')
     if e and l and e > l:
         errors.append('earliest_year is after latest_year')
     return errors
 
 
+def date_certainty_gate(historical):
+    """May the historical layer licence a DATED public claim? -> (bool, why).
+
+    This is the single chokepoint between "we hold the evidence" and "we may
+    say so in public". It is deliberately not satisfiable by coverage: a layer
+    can be COMPLETE and still be barred, because completeness says nothing
+    about who dated the papers.
+    """
+    dc = historical.get('date_certainty', 'NONE')
+    st = historical.get('status')
+    if dc != PUBLIC_DATED_CLAIM_REQUIRES:
+        return False, (
+            f'date_certainty is {dc}; a public dated claim requires '
+            f'{PUBLIC_DATED_CLAIM_REQUIRES}. Coverage does not substitute: '
+            f'holding the papers is not the same as an official document '
+            f'saying when they were set.')
+    if st not in ('VALIDATED_RANGE', 'COMPLETE'):
+        return False, f'coverage status is {st}'
+    if not (historical.get('earliest_year') and historical.get('latest_year')):
+        return False, 'no span is stored'
+    return True, 'officially dated papers over a validated range'
+
+
 def public_evidence_claim(current, historical):
     """The strongest sentence the STORED evidence supports. Never hand-written.
 
     While historical QI is unintegrated this can only describe the current
-    governed corpus. Once a validated historical range exists, the same
-    function strengthens the wording automatically -- and only then.
+    governed corpus. Once a validated historical range exists AND those papers
+    are officially dated, the same function strengthens the wording
+    automatically -- and only then. Coverage alone never unlocks it.
     """
     base = (f"Based on MIW's currently mapped Oral corpus and "
             f"{current['questions_total']} solved Written questions across "
             f"{current['papers_total']} papers "
             f"({current['earliest_sitting']} to {current['latest_sitting']}).")
-    if historical.get('status') in ('VALIDATED_RANGE', 'COMPLETE') \
-            and historical.get('earliest_year') and historical.get('latest_year'):
+    allowed, _ = date_certainty_gate(historical)
+    if allowed:
         return (f"{base} Recurrence intelligence additionally draws on "
                 f"validated historical papers from "
                 f"{historical['earliest_year']} to {historical['latest_year']}.")
