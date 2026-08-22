@@ -99,6 +99,17 @@ FIELD_CLASSES: dict[str, str] = {
     # STRUCTURE rather than as prose in `note` is what makes it assertable --
     # and it is asserted below, so it cannot become decoration.
     "held_actions": LOAD_BEARING,
+    # The mirror of held_actions: a LATER batch recording that it discharged an
+    # EARLIER batch's hold.
+    #
+    # Without it, a hold is only ever closable by rewriting the manifest that
+    # declared it -- which would make the holding batch's record a mutable
+    # status board and destroy the one place that says the work was owed. So
+    # the hold stays where it was declared, permanently true of that batch, and
+    # the discharge is recorded here, in the batch that actually did the work.
+    # "Is FUP-006 still owed?" is then answerable from repository data rather
+    # than by arithmetic over handoffs.
+    "discharges_hold": LOAD_BEARING,
     "authorisation_count_key": LOAD_BEARING,
     "actual_new_card_count": LOAD_BEARING,
     "examiner_relationship_delta": LOAD_BEARING,
@@ -569,6 +580,50 @@ def audit_manifest(path) -> list[Finding]:
                       if h.get("followup_id") in produced)
         add("held_actions_are_not_also_produced", not both,
             "both=%s" % (both or "none"))
+
+    # 5c. Discharged holds -- the mirror of 5b, and asserted for the same
+    # reason. A batch may not claim to have closed an earlier batch's hold
+    # unless it (a) names a holding record that really declares that hold and
+    # (b) actually produced the action. Without (b) "discharged" would be a
+    # word a manifest could simply assert, and the outstanding work would
+    # vanish from the repository while nothing had been written.
+    discharged = manifest.get("discharges_hold")
+    if discharged is not None:
+        produced = {action_id_of(c) for c in cards}
+        bad_shape = [d.get("followup_id") or "?" for d in discharged
+                     if not (isinstance(d, dict) and d.get("followup_id")
+                             and d.get("held_by_manifest")
+                             and d.get("discharged_by"))]
+        add("discharged_holds_well_formed", not bad_shape,
+            "malformed=%s" % (bad_shape or "none"))
+
+        not_produced = sorted(d.get("followup_id") for d in discharged
+                              if d.get("followup_id") not in produced)
+        add("discharged_holds_are_actually_produced", not not_produced,
+            "claimed_but_absent_from_cards=%s" % (not_produced or "none"))
+
+        # The holding record must exist AND still declare the hold. A discharge
+        # that points at a manifest which never held the action -- or whose hold
+        # has since been deleted -- is an unverifiable claim, and deleting the
+        # hold is precisely how the history would be laundered.
+        unbacked = []
+        for d in discharged:
+            fid = d.get("followup_id")
+            holder = p.parent / str(d.get("held_by_manifest") or "")
+            if not holder.is_file():
+                unbacked.append("%s: %s absent" % (fid, d.get("held_by_manifest")))
+                continue
+            try:
+                held_there = json.loads(read_text(holder)).get("held_actions") or []
+            except Exception as exc:
+                unbacked.append("%s: %s unreadable (%s)"
+                                % (fid, d.get("held_by_manifest"), exc))
+                continue
+            if not any(h.get("followup_id") == fid for h in held_there):
+                unbacked.append("%s: %s declares no such hold"
+                                % (fid, d.get("held_by_manifest")))
+        add("discharged_holds_name_a_real_hold", not unbacked,
+            "unbacked=%s" % (unbacked or "none"))
 
     # 6. distinct_target_cards, when declared, must be true.
     if "distinct_target_cards" in manifest:
