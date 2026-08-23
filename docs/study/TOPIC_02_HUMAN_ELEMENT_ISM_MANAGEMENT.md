@@ -218,7 +218,8 @@ on occurrence count alone, which is flat in this corpus. Every one is
 | 15 | `QB5_E#q2` | Hazard vs risk — with shipboard examples | Paul, Senthil, Simon | Branch 10's gateway; three examiners |
 | 16 | `QB4_B#q9` | Maslow's Hierarchy of Needs applied to crew motivation | Nair, Srivastava | Branch 8, and the **answer donor for QP2512-Q4** |
 
-**B-priority (18)** — `QB4_E#q8` (PSC appeal and post-detention, 3 examiners),
+**B-priority (18)** — `QB4_E#q8` (PSC appeal and post-detention, 3 examiners
+— adjudicated to **D01** on 2026-08-23, where it is also B-priority),
 `QB4_C#q15` (RO Code, 3 examiners — but it is D01 material reached from here),
 `QB5_E#q3` (Code of Conduct for Seafarers, 3 examiners), `QB4_A#q5` (how a PSC
 inspection is conducted — adjudicated to D01 on 2026-08-23), `QB4_A#q6` (grounds
@@ -233,7 +234,11 @@ management), `QB5_A#q2` (Engine Room Resource Management), `QB5_C_A#q4`
 (Management of Change), `QB5_C_A#q6` (HAZID / HAZOP / JSA and the matrix),
 `QB4_J#q8` (types of leadership).
 
-**C-priority (~181)** — the remainder. It includes three genuine sub-clusters
+**C-priority (166)** — the remainder: 196 governed D03 orals, less the 16
+A-priority and the 14 B-priority questions D03 actually owns. (The other four
+B entries are D01-owned and reached from here, so they are not subtracted
+twice.) The figure moved from 204 to 196 on 2026-08-23 when the second
+contradiction tranche reassigned eight QB4 questions to D01 and D06. It includes three genuine sub-clusters
 worth naming so you can find them when you need them: the **security cluster**
 (`QB4_A#q11`–`#q13`, `QB4_B#q15`–`#q19`, `QB4_H#q2`–`#q8` — ISPS, SSP, SSAS,
 BMP5, AIS, jamming/spoofing), the **training-instrument cluster** (`QB5_A#q14`
@@ -243,9 +248,28 @@ Bloom, `#q16` TEAP, `#q17` META, `#q18` VICT, `#q19` TOTA/TOTI), and the
 > **Adjudication notes.** `QB4_C#q15` (RO Code) and `QB4_E#q8` (PSC appeal) are
 > D01 subject matter reached through the ISM file. They are legitimately here —
 > the audit regime is *why* a CE meets them — but study them as **D01 revision
-> inside D03**, not as new material. The three `REVIEW_PENDING` questions
+> inside D03**, not as new material. `QB4_E#q8` is no longer only an
+> observation: it was **formally reassigned to D01** on 2026-08-23 and is now
+> governed there, so by the time you reach D03 you will already have met it in
+> the D01 pack. Seven further QB4 questions left D03 in that tranche —
+> `QB4_E#q11`/`#q12`, `QB4_C#q4`/`#q5`/`#q11` and `QB4_H#q10` to D01, and
+> `QB4_E#q13` (Indian ship registration) to **D06** — none of which this pack
+> cited. `QB4_H#q9` (WHO-related ship certificates) was **held**: it stays
+> counted in D03 but is unpublished pending adjudication. The three `REVIEW_PENDING` questions
 > (`QB1_G#q25` STCW latest amendment, and two siblings) are safe to study but
 > are **not** individually reviewed and must not be published as settled.
+>
+> **TAXONOMY_GAP_CANDIDATE — the public-health regime.** `QB4_H#q9` is held
+> because no MIW domain owns it, not because the question is unclear. The Ship
+> Sanitation Control / Exemption Certificate, the Maritime Declaration of
+> Health and the IHR 2005 port-health inspection regime are a coherent body of
+> law of which D01 (flag and class statutory certification) and D03 (ISM, MLC
+> and STCW human element) each hold only half. This sits alongside the
+> maritime-policy gap already recorded in Topic 03 (Blue Economy, Marine
+> Spatial Planning) and the maritime-security gap recorded against `QB1_A#q17`
+> (SUA Convention). **No new domain is being created for it** — the gap is
+> recorded so that a future taxonomy review sees three data points rather than
+> three isolated holds.
 
 ---
 
@@ -603,7 +627,10 @@ Build **N4** (human element vocabulary) and **N5** (risk toolkit).
 
 Entry `FOLLOWUPS_REVIEWED`. Exit `NOTE_COMPLETE` → then `60S_RECALL_READY`.
 
-B-priority orals, especially `QB4_E#q8`, `QB4_C#q6`, `QB5_A#q11`.
+B-priority orals: `QB4_J#q6` (the ISM manuals and SMS documentation
+structure — the frame N6 is built on), `QB4_C#q6` and `QB5_A#q11`. (`QB4_E#q8`
+held the first slot until 2026-08-23; it is now D01-governed, so you will have
+covered it in Topic 01 — revisit it here only if the PSC limb feels cold.)
 Then write **N6** (records, standing orders, night order book) and **N7**
 (ROP, lead time, safety stock, low-BN oil) — these have no corpus to lean on,
 so they must be written, not read.

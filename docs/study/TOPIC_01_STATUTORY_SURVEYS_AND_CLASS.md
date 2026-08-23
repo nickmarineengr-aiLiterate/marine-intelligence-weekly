@@ -179,8 +179,12 @@ memorable.
 
 ## A-PRIORITY ORAL QUESTIONS (18)
 
-Re-derived 2026-08-23 against the **current governed 72-question D01 corpus**,
-replacing the cohort that was derived from the pre-tranche 53.
+Re-derived 2026-08-23 against the **current governed 80-question D01 corpus**,
+replacing the cohort that was derived from the pre-tranche 53. The universe
+grew 72 -> 80 later the same day when the second contradiction tranche
+(QB4_E, QB4_C, QB4_H, QB2_A, QB6_D) moved eight settled questions into D01;
+those eight were absorbed into B and C, and **the A set was deliberately left
+unchanged** so the study sessions did not churn.
 
 **A-priority means: know this cold.** It is a *compression* set, not a
 completeness set. Where two questions test the same concept only the better-
@@ -239,7 +243,7 @@ entries are those two branches being filled for the first time. PSC is the
 single strongest written theme in this domain (8 occurrences) and until today
 it had zero oral representation in the study plan.
 
-### B-PRIORITY ORAL QUESTIONS (14)
+### B-PRIORITY ORAL QUESTIONS (18)
 
 **Second pass.** Settled, worth real study time, but each either restates an A
 question from a second angle or narrows to one instrument.
@@ -260,8 +264,12 @@ question from a second angle or narrows to one instrument.
 | `QB4_G#q1` | Flag State vs RO — the difference | Near-duplicate of an A question; kept for retrieval practice |
 | `QB4_A#q21` | Why take a second class society; what IACS is and who belongs | Backed by a 2× written family; narrower than the A class set |
 | `QB4_G#q8` | Which statutory certificate needs no renewal survey besides AFS | A trap question — valuable, but it tests one fact |
+| `QB4_H#q10` | Extending a statutory certificate when a survey cannot be completed on time | **Strongest promotion candidate at the next A re-derivation.** A distinct HSSC procedure — flag application via the RO, 3-month cap, passage to the survey port only — that no A question reaches. Held at B this session only to leave the sessions untouched |
+| `QB4_C#q5` | Suspension vs withdrawal of class | Second angle on the A Condition-of-Class pair, and the only place *withdrawal* is drawn |
+| `QB4_C#q4` | CSR and E-CSR — contents, and the IACS Common Structural Rules trap | One instrument under the A certificate frame; the name collision is the examinable part |
+| `QB4_E#q8` | PSC appeal process, the codes involved, and the process after detention | Restates the A detention question from the appeal side; its action-code limb is drilled at C |
 
-### C-PRIORITY ORAL QUESTIONS (9)
+### C-PRIORITY ORAL QUESTIONS (13)
 
 **Lower immediate return / extension.** Settled, but either a straight
 duplicate of an A question or detail inside a frame an A question already
@@ -278,6 +286,10 @@ gives you.
 | `QB1_A#q20` | Sovereign rights vs jurisdiction under UNCLOS | Detail inside the A maritime-zones frame |
 | `QB1_A#q21` | Innocent passage under UNCLOS | Detail inside the A maritime-zones frame |
 | `QB1_A#q23` | Hot pursuit — definition and conditions | Detail inside the A maritime-zones frame |
+| `QB4_E#q11` | Class notations of your vessel — list and explain each | Duplicate of an A question |
+| `QB4_E#q12` | Members of IACS — list all member societies | Pure recall beneath the B second-class-society question |
+| `QB4_C#q11` | PSC deficiency action codes | One fact set inside the A PSC frame |
+| `QB2_A#q15` | ICOF — full name, issuer, contents, validity and survey cycle | Detail inside the A certificate frame; reaches D01 through certification only |
 
 ### REVIEW — MAPPED, STUDIABLE, NOT YET PRIORITISED (31)
 
@@ -299,25 +311,29 @@ The remaining nineteen: `QB1_H#q1`, `QB1_H#q2`, `QB1_I#q1`, `QB1_I#q4`,
 `QB1_K#q1`, `QB1_K#q8`, `QB1_supplementary#q6`, `QB1_supplementary#q7`,
 `QB1_D#q5`, `QB1_F#q4`, `QB1_F#q6`, `QB1_F#q16`, `QB10_B#q8`.
 
-**How this bucket empties.** Only by adjudication. The 2026-08-23 tranche
-covered QB3_A, QB4_A and QB4_G; the next tranche covers QB4_E, QB4_C, QB4_H,
-QB2_A and QB6_D. **Neither touches the QB1 files where all 31 of these live.**
-A QB1-file adjudication tranche is therefore the specific governance action
-that restores priority letters to this bucket, and it is not currently
-scheduled. Recorded here so the gap is visible rather than inferred.
+**How this bucket empties.** Only by adjudication. Two tranches have now run
+— QB3_A/QB4_A/QB4_G, then QB4_E/QB4_C/QB4_H/QB2_A/QB6_D — and **neither
+touched the QB1 files where all 31 of these live**, so the bucket is unchanged
+at 31 after both. That is not an oversight twice over: the QB1 files are the
+mixed-title files whose questions were never file-title mapped in the first
+place, so they raise no *contradiction* for the detector to surface and will
+never appear in a contradiction tranche. A dedicated **QB1 review-bucket
+adjudication** is therefore the specific governance action that restores
+priority letters here, and it remains unscheduled. Recorded so the gap is
+visible rather than inferred.
 
 ### Cohort arithmetic
 
 | Cohort | Count |
 |---|---|
 | A-priority | 18 |
-| B-priority | 14 |
-| C-priority | 9 |
+| B-priority | 18 |
+| C-priority | 13 |
 | Review — not yet prioritised | 31 |
-| **Total** | **72** — the whole governed D01 oral universe |
+| **Total** | **80** — the whole governed D01 oral universe |
 
 No question appears in two cohorts; none is missing. `A + B + C` equals the
-41 `VALID_MAPPED` records exactly, and the review bucket equals the 31
+49 `VALID_MAPPED` records exactly, and the review bucket equals the 31
 `REVIEW_PENDING` records exactly. This is gated by
 `tools/study/test_d01_priority_cohort.py`, which parses these lists out of
 this file and fails if they drift from `study_mappings.json`.

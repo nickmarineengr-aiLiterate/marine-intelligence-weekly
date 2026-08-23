@@ -152,7 +152,7 @@ references.
 5. **D05 — Alternative Fuels, GHG & Decarbonisation**
    Straight after D04 (shares Annex VI). Placed late deliberately: the most
    currentness-sensitive domain, so studying it near the exam wastes least.
-6. **D07 — Cargo Operations & Bulk Carriage** — 98 oral, only 13 written.
+6. **D07 — Cargo Operations & Bulk Carriage** — 95 oral, only 13 written.
 7. **D08 — Fire Safety, LSA & FSS** — oral-only; pairs naturally with D07.
 8. **D10 — Ship Construction, Stability & Naval Architecture** — oral-only.
 9. **D09 — Machinery, Electrical & Automation** — oral-only.
@@ -161,17 +161,29 @@ references.
 
 ## Known limitations — read before trusting a number
 
-1. **D06 shows 0 oral questions.** Indian-law orals exist (e.g.
-   `QB1_I#q2` ship registration in India, `QB4_E#q13`), but they live inside
-   files assigned to other domains, and the mapper assigns one PRIMARY topic
-   per question. `SECONDARY` / `CROSS_TOPIC` roles are defined in the schema
-   but not yet populated. **D06's oral coverage is understated, not absent.**
+1. **D06 shows 2 oral questions.** It was 1 until 2026-08-23, when
+   `QB4_E#q13` (ship registration in India) was adjudicated out of D03 into
+   D06 — the first time an Indian-law oral was moved there deliberately.
+   Others still exist inside files assigned to other domains (e.g.
+   `QB1_I#q2`), and the mapper assigns one PRIMARY topic per question;
+   `SECONDARY` / `CROSS_TOPIC` roles are defined in the schema but not yet
+   populated. **D06's oral coverage remains understated, not absent.**
+
+   The detector cannot help here: `QUESTION_CUES` in `study_spine.py` has
+   **no D06 pattern at all**, so a contradiction on an Indian-law question can
+   only ever propose D01. `QB4_E#q13` was flagged D01 and reassigned to D06 by
+   hand. Adding a D06 cue is a deliberate engine change and is **not** being
+   made to shrink the queue; it is recorded here as a known blind spot.
 2. **39 oral questions are `ACCIDENTALLY_UNMAPPED`** and sit in the review
    queue. Mostly candidate-experience questions ("Any incident on your ship",
    "Describe your last vessel") that legitimately belong to no domain — most
    should probably be reclassified `INTENTIONALLY_UNMAPPED` after review.
-3. **82 mappings are `REVIEW_PENDING`** — cue-derived and not individually
-   adjudicated. They are excluded from `VALID_MAPPED` topic views by default.
+3. **121 mappings are `REVIEW_PENDING`** — cue-derived or human-held, and in
+   either case not settled. They are excluded from `VALID_MAPPED` topic views
+   by default. The figure rises as well as falls: the two 2026-08-23
+   contradiction tranches *demoted* file-title mappings they did not settle,
+   which is the intended behaviour — a contradicted mapping keeps its topic as
+   a placeholder but loses the claim to being settled.
 4. **Written recurrence uses exact `short_title` matching**, which splits
    families whose titles were worded slightly differently (the III Code
    family reports 3 + 2 instead of 5) and misses thematic families whose
