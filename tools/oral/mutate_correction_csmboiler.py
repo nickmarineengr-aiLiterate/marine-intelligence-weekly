@@ -36,11 +36,13 @@ HERE = pathlib.Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 VALIDATOR = HERE / "validate_correction_csmboiler.py"
 PAGE = REPO / "meoclass1" / "QB1_G.html"
-MANIFEST = HERE / "correction_corr_csm_boiler_survey_20260823_manifest.json"
+MANIFEST = HERE / "correction_corr_csm_india_authority_20260823_manifest.json"
 
 AUX_BULLET = (
-    "heat exchangers, and boiler <em>auxiliaries</em> such as forced-draught fans, "
-    "boiler burning pumps and feed water pumps")
+    "boiler <em>auxiliaries</em> — IRS names forced or induced draught fans")
+AUTHORITY_BULLET = "<li><strong>Answer this one in the Indian order:</strong>"
+CREDIT_BULLET = "<li><strong>The trap: \"in CSM\" is not the same as"
+CLASSNK_QUALIFIER = "Implementation example only, not Indian authority."
 NOT_ITSELF = "<li><strong>Not the boiler itself:</strong>"
 UR_Z18 = '<span class="reg-code">IACS UR Z18</span>'
 
@@ -77,6 +79,18 @@ def _drop_bullet(raw):
     """
     t = raw.decode("utf-8")
     i = t.find(NOT_ITSELF)
+    if i < 0:
+        return None
+    j = t.find("</li>", i)
+    if j < 0:
+        return None
+    return (t[:i] + t[j + len("</li>"):]).encode("utf-8")
+
+
+def _drop_li(raw, opener):
+    """Delete a whole <li> by its opening fragment."""
+    t = raw.decode("utf-8")
+    i = t.find(opener)
     if i < 0:
         return None
     j = t.find("</li>", i)
@@ -124,6 +138,23 @@ MUTATIONS = [
     ("G", "manifest authority block emptied",
      "primary_authority_recorded",
      (MANIFEST, drop_authority)),
+
+    ("H", "ClassNK stripped of its implementation-example label",
+     "classnk_never_presented_as_authority",
+     sub(PAGE, CLASSNK_QUALIFIER, "The governing CMS equipment list.")),
+
+    ("I", "the Indian authority-order bullet deleted",
+     "dg_shipping_named",
+     (PAGE, lambda raw: _drop_li(raw, AUTHORITY_BULLET))),
+
+    ("J", "the CSM-vs-CE-credit trap bullet deleted",
+     "csm_vs_ce_credit_distinction",
+     (PAGE, lambda raw: _drop_li(raw, CREDIT_BULLET))),
+
+    ("K", "the pressure-boundary framing reverted to the base wording",
+     "pressure_boundary_framing",
+     sub(PAGE, "The boiler's <em>pressure boundary</em> is not on the CSM clock.",
+         "Boilers are not CSM items.")),
 ]
 
 

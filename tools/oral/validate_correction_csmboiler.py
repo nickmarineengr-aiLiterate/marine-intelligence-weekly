@@ -1,6 +1,25 @@
 #!/usr/bin/env python3
 """
-Content validator for CORR-CSM-BOILER-SURVEY-20260823.
+Content validator for the boiler/CSM substance of QB1_G#q40.
+
+It guards TWO corrections, because they govern the same text:
+
+    CORR-CSM-BOILER-SURVEY-20260823   took the boiler out of the CSM list
+    CORR-CSM-INDIA-AUTHORITY-20260823 re-framed it in the Indian order and
+                                      narrowed the claim
+
+The refinement is the current truth, so the digest is pinned to its record. The
+base record must still exist, because validate_corrections.py re-derives its
+post_edit_digest from its own governing commit.
+
+Note what the refinement changed about the CLAIM, not just the framing. The base
+correction said flatly that boilers "are not CSM items". IRS draws its boiler
+line at Chief Engineer credit instead - IRS-G-SUR-02 §4.1.1(d) puts "Boilers and
+all other pressure vessels" among items not acceptable for survey by Chief
+Engineers, to be surveyed by IRS Surveyors - so for an IRS-classed ship the flat
+statement is too strong. What every source supports is narrower: the boiler's
+PRESSURE BOUNDARY is not on the five-year CSM item interval, because the boiler
+survey regime governs its internal examination.
 
 WHY THIS EXISTS AND WHY THE DIGEST PIN IS NOT ENOUGH
 ----------------------------------------------------
@@ -64,8 +83,17 @@ sys.path.insert(0, str(HERE))
 from oral_bytes import read_text                       # noqa: E402
 from validate_batch_b import card_digests              # noqa: E402
 
-CORRECTION_ID = "CORR-CSM-BOILER-SURVEY-20260823"
-MANIFEST = HERE / "correction_corr_csm_boiler_survey_20260823_manifest.json"
+# One validator guards this card's boiler/CSM substance across BOTH corrections.
+# Two validators asserting different states of the same text would fight: the
+# base record says "boilers are not CSM items", the refinement narrows that to
+# the pressure boundary not being on the CSM interval. The refinement is the
+# current truth, so the digest is checked against it, and the base record is
+# asserted to still exist because its own governing commit is what
+# validate_corrections.py re-derives.
+CORRECTION_ID = "CORR-CSM-INDIA-AUTHORITY-20260823"
+BASE_CORRECTION_ID = "CORR-CSM-BOILER-SURVEY-20260823"
+MANIFEST = HERE / "correction_corr_csm_india_authority_20260823_manifest.json"
+BASE_MANIFEST = HERE / "correction_corr_csm_boiler_survey_20260823_manifest.json"
 PAGE = "meoclass1/QB1_G.html"
 FILE = "QB1_G.html"
 ANCHOR = "q40"
@@ -81,6 +109,29 @@ def report(check: str, ok: bool, detail: str = "") -> None:
     if not ok:
         FAILS.append(check)
     print("%-4s %-42s %s" % ("PASS" if ok else "FAIL", check, detail))
+
+
+def answer_body_text(page_text: str, anchor: str) -> str:
+    """Just the taught answer, excluding the reference box.
+
+    This split is not cosmetic. When the reference box was expanded to carry
+    the Indian authority hierarchy, it began repeating phrases the content
+    checks were using to guard the ANSWER -- "36 months", "forced or induced
+    draught fans", "DG Shipping / DGMA", "not acceptable for survey by Chief
+    Engineers". Four checks silently became satisfiable by a citation while
+    the teaching they were written to protect could be deleted outright.
+    Mutations D, E, I and J all escaped on exactly that. A claim the candidate
+    is supposed to READ has to be asserted where the candidate reads it.
+    """
+    start = page_text.find('<div class="q-card" id="%s"' % anchor)
+    assert start >= 0, "card not found: %s" % anchor
+    body = page_text.find('class="answer-body"', start)
+    end = page_text.find('<div class="numbers-box"', body)
+    if end < 0:
+        end = page_text.find('<div class="reg-box"', body)
+    raw = page_text[body:end if end > 0 else len(page_text)]
+    flat = re.sub(r"<[^>]+>", " ", raw)
+    return re.sub(r"\s+", " ", htmllib.unescape(flat))
 
 
 def card_text(page_text: str, anchor: str) -> str:
@@ -102,22 +153,55 @@ BANNED = [
      r"Vital Auxiliary Systems\s*\([^)]*\bboilers\b[^)]*\)"),
     ("pr1c_citation_not_restored",   r"PR\s*1C"),
     ("pr1c_citation_not_restored",   r"continuous class verification"),
+    # The two pump types the base correction took from ClassNK's list and
+    # attributed to no one. IRS does not name them as CE-surveyable.
+    ("classnk_pumps_not_presented_as_the_list",
+     r"boiler burning pumps and feed water pumps"),
 ]
+
+# ClassNK may appear, but never as the governing source. The card cites it once,
+# labelled an implementation example; any sentence that makes it authority for an
+# Indian candidate is the defect this refinement exists to remove.
+CLASSNK_UNIVERSAL = re.compile(
+    r"ClassNK(?![^.]{0,120}(?:example|differ|implementation))", re.I)
 
 # The boiler may be named as a CSM item nowhere; but it must be named as a
 # NON-item somewhere, and the auxiliaries must survive.
 REQUIRED = [
     ("separate_boiler_survey_named",
      r"separate\b[^.]{0,40}\bBoiler Survey\b|\bBoiler Survey\b[^.]{0,60}\bnot\b"),
-    ("boiler_excluded_from_csm_stated",
-     r"\bnot\b[^.]{0,30}\bCSM items\b|\bNot the boiler itself\b"),
+    ("boiler_excluded_from_csm_stated", r"\bNot the boiler itself\b"),
+    # The refined claim. The base correction said flatly "boilers are not CSM
+    # items"; for an IRS-classed ship that is too strong, because IRS draws its
+    # boiler line at Chief Engineer credit, not at CSM eligibility. What every
+    # source does support is that the PRESSURE BOUNDARY is off the CSM clock.
+    ("pressure_boundary_framing", r"pressure boundary"),
+    # The Indian answering order: statutory first, class second.
+    ("dg_shipping_named", r"DG Shipping\s*/?\s*DGMA"),
+    ("running_survey_term_taught", r"running survey"),
+    ("society_variation_caveat",
+     r"differs between societies|differ|own equipment lists"),
+    # The trap the base correction left open: being inside the machinery-survey
+    # framework is not the same as being creditable by the Chief Engineer.
+    ("csm_vs_ce_credit_distinction",
+     r"not acceptable for survey by Chief Engineers|creditable by the Chief Engineer"),
     ("boiler_survey_two_internals",
      r"\btwo internal examinations\b|\bminimum of two internal\b"),
     ("boiler_auxiliaries_still_in_list",
-     r"forced-?draught fans|boiler burning pumps|feed water pumps"),
+     r"forced or induced draught fans|forced-?draught fans"),
+    ("csm_five_year_item_interval_kept", r"\bfive years\b|\b5 years\b|\b5-year\b"),
+]
+
+# Asserted anywhere in the card, because the reference box is where these
+# belong. Everything in REQUIRED above is a claim the candidate has to be able
+# to READ in the answer, so it is asserted against the answer body alone.
+REQUIRED_CARD = [
     ("urz18_cited", r"\bUR\s*Z18\b"),
     ("urz18_sections_cited", r"1\.3[^.]{0,80}Continuous Surveys"),
-    ("csm_five_year_item_interval_kept", r"\bfive years\b|\b5 years\b|\b5-year\b"),
+    ("urz18_not_called_statutory",
+     r"unified class baseline|not a statutory authority"),
+    ("irs_named_as_class_layer", r"\bIRS\b"),
+    ("irs_boiler_pressure_vessel_quote", r"Boilers and all other pressure vessels"),
 ]
 
 
@@ -188,6 +272,7 @@ def main() -> int:
     # ---- the live card ---------------------------------------------------
     page = read_text(REPO / PAGE)
     text = card_text(page, ANCHOR)
+    body = answer_body_text(page, ANCHOR)
 
     if declared:
         live = card_digests(page)[ANCHOR]
@@ -200,12 +285,30 @@ def main() -> int:
     report("anchor_unchanged", '<div class="q-card" id="%s"' % ANCHOR in page,
            ANCHOR)
 
+    # The base correction is not reopened by the refinement: its record must
+    # still be on disk, because validate_corrections.py re-derives its
+    # post_edit_digest from its own governing commit.
+    report("base_correction_record_intact", BASE_MANIFEST.is_file(),
+           "missing %s" % BASE_MANIFEST.name)
+    # Declared through the generic supersession contract, not a bespoke field:
+    # oral_supersession reads cards[].supersedes, and that declaration is what
+    # lets the base record's pin resolve as SUPERSEDED instead of drifting.
+    sup = declared[0].get("supersedes") if declared else None
+    report("refinement_declares_descent_from_base",
+           bool(sup) and sup.get("manifest") == BASE_MANIFEST.name
+           and bool(sup.get("post_edit_digest")),
+           "supersedes=%s" % (sup.get("manifest") if sup else None))
+
     # ---- the substance ---------------------------------------------------
     for name, pattern in BANNED:
         hits = re.findall(pattern, text, re.I)
         report(name, not hits, "%d hit(s): %s" % (len(hits), str(hits[:2])[:90]))
 
     for name, pattern in REQUIRED:
+        m = re.search(pattern, body, re.I)
+        report(name, bool(m), "MISSING from answer body" if m is None else "")
+
+    for name, pattern in REQUIRED_CARD:
         m = re.search(pattern, text, re.I)
         report(name, bool(m), "MISSING" if m is None else "")
 
@@ -215,9 +318,17 @@ def main() -> int:
     # and a completely different rule. A bare search for "36 months" is
     # therefore satisfied by text that says nothing about boilers at all --
     # mutation D proved it, by deleting the boiler interval and still passing.
-    near = [m for m in re.finditer(r"\b36\s*months?\b", text, re.I)
+    # ClassNK may appear once, labelled an implementation example. Any mention
+    # not qualified within the same sentence makes a Japanese society's
+    # equipment list read as authority for an Indian candidate, which is the
+    # defect this refinement exists to remove.
+    bare = CLASSNK_UNIVERSAL.findall(text)
+    report("classnk_never_presented_as_authority", not bare,
+           "%d unqualified mention(s)" % len(bare))
+
+    near = [m for m in re.finditer(r"\b36\s*months?\b", body, re.I)
             if re.search(r"internal examination|boiler",
-                         text[max(0, m.start() - 200):m.start()], re.I)]
+                         body[max(0, m.start() - 200):m.start()], re.I)]
     report("boiler_survey_36_month_interval", bool(near),
            "MISSING in boiler context" if not near else "")
 

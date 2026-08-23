@@ -866,6 +866,67 @@ GREP: main boilers
 ---
 
 
+### 44. CSM/boiler answer built on IACS and ClassNK with no Indian authority in the chain
+
+Follow-up to Entry 43. That correction was right to take the boiler out of the CSM
+machinery list, but it reached the answer through **IACS UR Z18** and a **ClassNK**
+equipment list. For an MEO Class I candidate sitting before a DG Shipping examiner the
+authority order is wrong, and the ClassNK list read as though it were *the* list.
+
+Checked against the Indian sources, which do not merely re-order the answer — **they
+change part of it**:
+
+- **IRS Guidelines on Continuous Surveys of Machinery (IRS-G-SUR-02, March 2022)** draws
+  its boiler line as a **Chief Engineer credit** boundary, not a CSM eligibility
+  boundary. Section 4 is *"Typical List of Machinery Items not acceptable for Survey by
+  Chief Engineers"*, and **4.1.1(d) "Boilers and all other pressure vessels"** are *"to be
+  surveyed by IRS Surveyors"*. That is a different proposition from "boilers are not CSM
+  items", and for an IRS-classed ship the flat version is too strong. The card now makes
+  the narrower claim every source supports: the boiler's **pressure boundary** is not on
+  the 5-year CSM item interval, because the boiler survey regime governs its internal
+  examination.
+- The base correction's auxiliary list was **ClassNK's, not IRS's**. IRS **3.1.1(w)**
+  forced or induced draught fans and **3.1.1(aa)** adjustment of exhaust-gas boiler safety
+  valves under steam are Chief-Engineer-surveyable; IRS does **not** name boiler burning
+  pumps or feed water pumps, and **4.1.1(e)** puts boiler fuel oil heaters above 6.9 bar
+  out of the CE's reach. Those two pump types are removed from the card.
+- **IRS Main Rules Part 1, Ch 2, §8.2** is CSM proper — Special Survey of machinery
+  completed within 5 years, item interval not exceeding 5 years, ~⅕ of items a year;
+  **§1.4** allows certain items under CE supervision subject to confirmatory survey.
+- The Indian **statutory** vocabulary is *"running survey"* — under Rule 274 of the MS
+  (Construction and Survey of Passenger Ships) Rules 2026 the hull and machinery are
+  opened up and surveyed within 5 years on a schedule the owner draws and the
+  Administration approves, with the RO keeping a parallel *Continuous Survey of Hull &
+  Machinery* cycle and the Principal Officer specifying MMD attendance. A candidate who
+  only knows the word "CSM" is answering in the class register alone.
+- On **intervals the three layers coincide** and the card now says so: IACS UR Z18 §2.1,
+  the IRS regime and the Indian statutory requirement all give ≥2 internal examinations
+  per 5-year special survey cycle, no two more than **36 months** apart.
+
+**Status care:** the draft *Merchant Shipping (Survey, Audit and Certification) Rules,
+2026* opens `DRAFT … NOTIFICATION … New Delhi, the____________ 2026 … G.S.R. ______ (E)`
+— blank date, blank GSR number. Consultation ran 12.12.2025–11.01.2026. It is cited for
+terminology and interval, and the card states it is **not yet notified**. It is not quoted
+as binding.
+
+**ClassNK is demoted** from evidence to *implementation example only*, labelled as such in
+the reference box, retained solely to show that the detailed equipment list differs
+between IACS member societies. IACS is described as a **unified class baseline, not a
+statutory authority**.
+
+Entry 43 is **not reopened**: "main boilers" stays out of the machinery list and the false
+IACS PR 1C citation stays removed. Q40 v1.1 → v1.2.
+
+Recorded, not actioned: the CE Oral Tip says the CE cannot credit *"the Boiler Safety
+Valves"*, right as a general statement under IRS 4.1.1(d), but IRS 3.1.1(aa) and UR Z18
+§2.2 both let the CE set **exhaust-gas** boiler safety valves at sea where steam cannot be
+raised in port. Editing examiner-voice CE-tip prose is a separate editorial act.
+
+GREP: boiler burning pumps and feed water pumps
+
+---
+
+
 ## Meta-corrections to `qb_health_check.py` itself (non-content fixes, logged here for continuity)
 
 - 2026-08-01: Fixed a Windows-console `UnicodeEncodeError` crash in the Brevo-fallback print path when SMTP credentials aren't set locally (was crashing on ⚠/✅ glyphs; also fixed a related bug where the fallback path's temporary `TextIOWrapper` around `sys.stdout.buffer` closed the underlying buffer on garbage collection, breaking all later prints in the same run).
@@ -937,3 +998,4 @@ GREP: main boilers
 | 2026-08-21 | Entries 40–41: QB1_B Q15 said the Casualty Investigation Code "incorporates" the fair-treatment Guidelines (it cites them; its own mandatory protections are Part II Ch 12) and asserted an unverifiable requirement to assess medical fitness and fatigue before prolonged interrogation (removed); QB5_A Q4 cited MLC Reg. 2.7 as Recreational Facilities — 2.7 is Manning Levels, recreational facilities are Reg. 3.1. Q15 v1.1→v1.2, Q4 v1.0→v1.1. | Repo-wide scope pass following Entry 38 |
 | 2026-08-22 | Entry 42: MSC.535(107) lifeboat ventilation — application rule was new-build-only with a "keel laid" test; resolution defines "installed" in two limbs and limb (b) catches existing ships | Candidate (Vivek) screenshot correction on QB2_F |
 | 2026-08-23 | Entry 43: "main boilers" listed as a Vital Auxiliary System assessed under Continuous Machinery Survey (QB1_G Q40) - the boiler itself is not a CSM item and is not on the 5-year CSM interval; IACS UR Z18 §2 requires two internal examinations per 5-year period at a maximum 36-month interval, plus the §2.2 annual external survey, while §1.3 governs the CSM item cycle. Boiler auxiliaries (FD fans, burning pumps, feed water pumps) ARE in the class-approved CMS list per ClassNK Guidance on CMS Ver.4 (June 2025). The card's IACS PR 1C citation was also unsupported - PR 1C is suspension/withdrawal of class for overdue surveys - and was replaced with UR Z18. QB1_supplementary and QB1_F already state the boiler exclusion correctly and were not changed. | Candidate report via Nixon (WhatsApp screenshot) |
+| 2026-08-23 | Entry 44: CSM/boiler answer re-framed in the Indian authority order — DG Shipping/DGMA statutory ("running survey", Rule 274), IRS class implementation (Main Rules Pt.1 Ch.2 §8.2/§1.4 and IRS-G-SUR-02), IACS UR Z18 as unified class baseline not a statutory authority, ClassNK demoted to implementation example. IRS 4.1.1(d) shows the real line is Chief Engineer CREDIT, not CSM eligibility, so the claim is narrowed to the boiler's pressure boundary being off the 5-year CSM interval; two ClassNK-derived pump types removed from the card. | Founder review following Entry 43 |
