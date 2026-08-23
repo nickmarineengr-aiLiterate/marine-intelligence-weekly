@@ -148,3 +148,83 @@ every other member of a resolved family the guard bites as written.
 
 See `tools/study/SKILL.md`, section "Phase 2". Nothing in this document
 replaces the working procedure there.
+
+---
+
+## What tranche 002 added, and why
+
+### A third blocked state: `HOLD_NO_CURRENT_ANSWER_OWNER`
+
+The two existing blocked states both say **the research did not close**:
+authority could not be established, or a family relationship has to be settled
+first. Tranche 002 hit a different wall six times. The research closed
+perfectly well — the present-day core was understood, the authority was read,
+the framework movement was established — and there was still nothing to send a
+candidate to.
+
+Filing that as `HOLD_FOR_AUTHORITY` would blame the sources for a gap in the
+product, and the gap would then be invisible to anyone reading this store to
+decide what to build next. So it has its own state, and
+`R-P2-HOLD-REASON` refuses any blocked record that does not say what stopped it.
+
+### A hold must reach the answers inside the held family
+
+`R-P2-ANSWER-SCOPE` stops a **resolution** spreading to members it never
+verified. Nothing stopped a **hold** from failing to spread, and that gap was
+live until tranche 002 found it.
+
+`QIF-EM-0058` is the case. Its answers are built on Merchant Shipping Act 1958
+sections repealed on 15 March 2026, eight months after the newest sitting in the
+family. Phase 2 established that and held the family — and `QP2507-Q9` went on
+reading **"Currentness check pending"**, which tells a candidate that nobody has
+looked. Somebody had looked, and had rejected it.
+
+`question_readiness()` now pushes a block down to any member that **has an
+answer**, and leaves `NEW_ANSWER_REQUIRED` alone on members that do not — for a
+wording-only sitting, "MIW has no current-framework answer" is already the more
+precise statement, and demoting it to "answer under currentness review" would
+tell a candidate an answer exists. `R-P2-HOLD-REACHES-ANSWERS` gates it.
+
+### A tranche may not retreat from the families with no answer
+
+Every one of the 37 `NEW_MODERN_ANSWER_REQUIRED` families ranks below 45, and
+verify families convert readily while new-answer families do not. A rank-ordered
+queue will therefore defer the ones where the product is actually missing, for
+ever, while the readiness count improves.
+
+So a tranche may declare a `new_answer_bias` in its manifest, and if it does,
+`R-P2-NEW-ANSWER-BIAS` checks it against the **action pinned at selection** — a
+family cannot be counted toward the bias by being reclassified afterwards.
+
+### What the bias measured
+
+Of the six new-answer families tranche 002 selected, **one** resolved:
+`QIF-EM-0011`, and only because a governed `WHOLE_VS_LIMB` join (`QIJ-0030`,
+containment 1.00) already pointed at `QP2407-Q7`, whose limb A is that family's
+stem word for word.
+
+The other five cannot be resolved at any price, and the reason is structural
+rather than editorial:
+
+- every member of every one of them is a **2021 or 2022 wording-only** record;
+- `validate_phase2_tranche.spec_question_ids()` draws the set of nameable
+  answers **solely from the solved 2023–2026 specs**, so a present-day answer
+  could only be named by inventing a question inside a past paper;
+- `meoclass1/pastpapers/intelligence/historical_qp_intelligence.json` states
+  that no answer for those sittings may be authored **without a separate Founder
+  decision**.
+
+**The cost of a new modern answer is not authoring effort. It is a Founder
+decision plus an answer container that does not exist.** Two of the five also
+fail independently: `QIF-EM-0024` and `QIF-EM-0052` are term-list questions
+whose limbs are answered by five different solved questions, and
+`canonical_current_answer` names exactly one question by design.
+
+### Known imprecision, recorded rather than patched
+
+A successor grant does **not** make the successor read "Current answer
+verified". `project_question()` sets `phase2_names_this` by walking the
+question's OWN families, and an out-of-family successor is in none of them. That
+is the conservative reading and it is correct — resolving `QIF-EM-0011` verified
+the ROUTING, not `QP2407-Q7`'s own currentness, and `QIF-EM-0170` has never been
+reviewed. It is recorded here so that nobody "fixes" it into an overclaim.

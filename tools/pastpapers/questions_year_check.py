@@ -189,6 +189,237 @@ def _card_block(html, qid):
     return html[max(0, i - 400):i + 2500]
 
 
+
+# --------------------------------------------------------------------------- #
+# THE WORDING ARCHIVE  --  questions-2021 / questions-2022
+# --------------------------------------------------------------------------- #
+#
+# These sheets carry questions MIW has NOT answered, on the same URL shape as
+# the sheets for years it has. That is deliberate -- a candidate should be able
+# to walk the chronology without learning a second convention -- and it is
+# exactly why they need their own tests. The failure to prevent is not a broken
+# page. It is a page that looks like the paid product.
+#
+# The boundary test is the one to read twice. 2021 and 2022 are publishable
+# because their sitting dates are PRINTED ON A SOURCE COPY. 2010 to 2020 reach
+# MIW as SECONDARY_CLAIMED dates through a web archive, and a year page is a
+# dated claim about every question on it. So a questions-2020.html is not a
+# smaller version of this work; it is a different product with a different
+# provenance vocabulary, and until that exists this gate refuses the file.
+
+import build_questions_year as BQY
+
+#: Phrases that assert a solved product. None may appear on an archive sheet.
+SOLVED_CLAIMS = (
+    'solved paper available',
+    'open the solved paper',
+    'open the solved answer',
+    'current answer verified',
+)
+
+
+def _archive_papers():
+    return BQY.load_archive()
+
+
+def check_archive(errors, warnings):
+    """Rules A to K for every published wording-archive sheet."""
+    specs = [json.load(open(p, encoding='utf-8'))
+             for p in sorted(glob.glob(os.path.join(PP_DIR, 'specs', '*.json')))]
+    archive = _archive_papers()
+    years = BQY.archive_years(specs, archive)
+
+    sys.path.insert(0, os.path.join(REPO_ROOT, 'tools', 'study'))
+    import qi_projection as QIP
+
+    solved_ids = {q['question_id'] for d in specs for q in d['questions']}
+
+    for year in years:
+        expected = sorted(q['question_id']
+                          for ms in archive[year].values()
+                          for p in ms for q in p['questions'])
+        for path in (os.path.join(PP_DIR, 'questions-%d.html' % year),
+                     os.path.join(REPO_ROOT, 'solvedQP', 'questions-%d.html' % year)):
+            rel = os.path.relpath(path, REPO_ROOT).replace('\\', '/')
+            if not os.path.exists(path):
+                errors.append('ARCHIVE-A %s: archive year %d has no sheet' % (rel, year))
+                continue
+            html = open(path, encoding='utf-8').read()
+            low = html.lower()
+            got = re.findall(r'<div class="hit" data-qsearch="[^"]*" id="([^"]+)">', html)
+
+            # A -- derives from the governed archive store, question for question.
+            if sorted(got) != expected:
+                errors.append('ARCHIVE-A %s: rendered question set does not match the '
+                              'archive store (%d rendered, %d held)'
+                              % (rel, len(got), len(expected)))
+
+            # B -- no duplicates. A repeated card doubles a question silently.
+            if len(got) != len(set(got)):
+                errors.append('ARCHIVE-B %s: a question is rendered more than once' % rel)
+
+            # C -- NO FABRICATION. Every id on the page exists in the store.
+            ghosts = sorted(set(got) - set(expected))
+            if ghosts:
+                errors.append('ARCHIVE-C %s: question(s) on the page that the archive '
+                              'store does not hold: %s' % (rel, ghosts[:5]))
+
+            # D -- no solved-answer claim, in any of its wordings.
+            #
+            # Scanned with the LEGEND BLOCKS REMOVED. The legend has to name the
+            # readiness vocabulary in order to explain whose answer it describes
+            # -- including "Current answer verified" -- and a rule that cannot
+            # tell an explanation from an assertion would force the page to
+            # choose between passing the gate and telling the truth. Everything
+            # else on the page, chips and headings included, is still scanned.
+            body = re.sub(r'<section class="topic-group qy-legend">.*?</section>',
+                          ' ', low, flags=re.S)
+            for claim in SOLVED_CLAIMS:
+                if claim in body:
+                    errors.append('ARCHIVE-D %s: asserts %r on a sheet MIW has not '
+                                  'solved' % (rel, claim))
+
+            # E -- no link into a solved paper or answer anchor. The successor
+            #      is rendered as a SENTENCE by qi_projection for this reason.
+            for href in re.findall(r'href="([^"]+)"', html):
+                if re.search(r'/(solvedQP|pastpapers)/QP\d{4}[^"]*\.html', href):
+                    errors.append('ARCHIVE-E %s: links to a solved paper (%s). An archive '
+                                  'question must not resolve to an answer.' % (rel, href))
+                    break
+
+            # F -- Layer 1 stays off. The calendar recurrence model is built from
+            #      the SPEC set; a modern tag here would either be invented or
+            #      would mean the archive had been fed into that model, which
+            #      rewrites the tags on 2023-2026.
+            for tag in ('>Repeated<', '>First in set<', '>Once in MIW'):
+                if tag in html:
+                    errors.append('ARCHIVE-F %s: carries a Layer-1 recurrence tag (%s). '
+                                  'Those are computed from the solved calendar.'
+                                  % (rel, tag.strip('<>')))
+
+            # G -- longitudinal tags come from the candidate-safe projection and
+            #      match it question by question. Not "are in the vocabulary" --
+            #      are the ones THIS question was projected.
+            for qid in got:
+                want = {t for _, t in QIP.tags_for(qid, audience='GATED')}
+                block = _archive_card(html, qid)
+                for chip in re.findall(r'<span class="q-tag[^"]*">([^<]+)</span>', block):
+                    c = _unescape(chip).strip()
+                    if c in ('Question wording held', 'No sitting',
+                             'Not yet in the MIW set'):
+                        continue
+                    if _unescape_all(want, c):
+                        continue
+                    errors.append('ARCHIVE-G %s %s: chip %r is not what the governed '
+                                  'projection gives this question' % (rel, qid, c))
+                    break
+
+            # H -- no third-party host recurrence annotation.
+            m = HOST_RECURRENCE.search(strip_tags(html))
+            if m:
+                errors.append('ARCHIVE-H %s: source-copy host recurrence annotation '
+                              'reached the page (%s)' % (rel, m.group(0)))
+
+            # I -- the page states what it does not have, in terms.
+            if 'has not solved these papers' not in low:
+                errors.append('ARCHIVE-I %s: does not state that MIW has not solved these '
+                              'papers' % rel)
+            if '0 solved answers' not in low:
+                errors.append('ARCHIVE-I %s: header does not carry the zero-answer count'
+                              % rel)
+
+            # J -- counts on the page equal the governed source.
+            if ('%d questions' % len(expected)) not in low:
+                errors.append('ARCHIVE-J %s: header question count disagrees with the '
+                              'archive store (%d held)' % (rel, len(expected)))
+
+            # M -- a readiness chip on this page is about the CONCEPT's answer
+            #      elsewhere in the corpus, never about the question printed
+            #      here. 55 of the 198 archive questions inherit
+            #      READY_TO_STUDY_NOW from their family and render an all-clear;
+            #      unqualified, that contradicts the page's own header.
+            if 'never this' not in low or 'has been answered by miw' not in low:
+                errors.append('ARCHIVE-M %s: renders readiness chips without the sentence '
+                              'that says whose answer they describe' % rel)
+
+            # L -- the search on this sheet must not reach into the solved
+            #      corpus. The solved year sheets carry an escape hatch that
+            #      offers "search all solved papers"; on an archive sheet that
+            #      folds two different statuses into one result list, and a
+            #      reader who searches "general average" would be shown solved
+            #      hits under a heading that says these questions are not
+            #      solved. The archive searches itself and stops there.
+            # Probe the MARKUP and the SCRIPT, not the stylesheet: the shared
+            # CSS defines .mc-wrap for every page that links it, and matching
+            # that would fail every archive sheet on a rule about behaviour.
+            for probe in ('id="mc-wrap"', 'search all solved papers',
+                          'miwcorpus.load'):
+                if probe in low:
+                    errors.append('ARCHIVE-L %s: carries the solved-corpus search escape '
+                                  'hatch (%r), which mixes archive and solved status in '
+                                  'one result list' % (rel, probe))
+                    break
+
+            # K -- a successor sentence may only name a REAL solved question.
+            for sid in re.findall(r'Current framework: see ([A-Za-z0-9\-]+)', html):
+                if sid not in solved_ids:
+                    errors.append('ARCHIVE-K %s: names %s as the current framework and no '
+                                  'such solved question exists' % (rel, sid))
+
+    return years
+
+
+def _archive_card(html, qid):
+    """Exactly one card's markup, bounded by the next card or the next month.
+
+    _card_block() takes a fixed 2,900-character window, which is fine for a
+    solved sheet where the cards are long. Archive cards are short: the window
+    ran past the end of one card and swept up the chips of the two after it,
+    so every question appeared to be carrying its neighbours' tags. A bounded
+    slice is the only honest way to ask "what does THIS card say".
+    """
+    start = html.find('id="%s">' % qid)
+    if start < 0:
+        return ''
+    start = html.rfind('<div class="hit"', 0, start + 1)
+    nxt = html.find('<div class="hit"', start + 1)
+    end = html.find('<section class="topic-group"', start + 1)
+    stops = [x for x in (nxt, end) if x > 0]
+    return html[start:min(stops)] if stops else html[start:]
+
+
+def _unescape_all(want, chip):
+    """True if `chip` matches any projected tag once entities are folded."""
+    return any(_unescape(strip_tags(w)).strip() == chip for w in want)
+
+
+def check_pre_archive_boundary(errors):
+    """No year page below the floor, and no navigation reaching for one.
+
+    This is the guard that keeps 2010-2020 out of the standard chronology. It
+    is deliberately a FILESYSTEM test as well as a link test: a page can exist
+    and be unlinked, and it is still published.
+    """
+    floor = BQY.ARCHIVE_FLOOR
+    for root in (PP_DIR, os.path.join(REPO_ROOT, 'solvedQP')):
+        for path in sorted(glob.glob(os.path.join(root, 'questions-*.html'))):
+            m = re.search(r'questions-(\d{4})\.html$', os.path.basename(path))
+            if m and int(m.group(1)) < floor:
+                errors.append('ARCHIVE-BOUNDARY %s exists. Years below %d reach MIW as '
+                              'SECONDARY_CLAIMED dates and may not carry a year page '
+                              'until a historical-archive design exists.'
+                              % (os.path.relpath(path, REPO_ROOT).replace('\\', '/'), floor))
+    for path in sorted(glob.glob(os.path.join(REPO_ROOT, 'solvedQP', '*.html'))) + \
+            sorted(glob.glob(os.path.join(PP_DIR, '*.html'))):
+        html = open(path, encoding='utf-8').read()
+        for y in re.findall(r'questions-(\d{4})\.html', html):
+            if int(y) < floor:
+                errors.append('ARCHIVE-BOUNDARY %s links to questions-%s.html, which is '
+                              'below the %d floor'
+                              % (os.path.relpath(path, REPO_ROOT).replace('\\', '/'),
+                                 y, floor))
+                break
+
 def main():
     errors, warnings = [], []
     specs = [json.load(open(p, encoding='utf-8'))
@@ -196,6 +427,13 @@ def main():
     years = sorted({d['year'] for d in specs})
     for y in years:
         check_year(y, errors, warnings)
+
+    # The wording archive is a different product on the same URL shape, so it
+    # gets its own rules -- and the boundary guard runs whether or not any
+    # archive year exists, because its job is to catch a year appearing.
+    arc = check_archive(errors, warnings)
+    check_pre_archive_boundary(errors)
+    years = years + list(arc)
 
     for w in warnings:
         print('  WARN  %s' % w)

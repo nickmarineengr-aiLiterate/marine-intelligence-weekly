@@ -22,6 +22,7 @@ supports, and a page is bytes.
     R-PROJ-J   the workbook's prose matches the architecture that is live
     R-PROJ-K   topic readiness on the page equals the adapter's
     R-PROJ-L   Phase-1 recurrence is untouched by projection work
+    R-PROJ-M   a wording-archive surface carries NO modern tag at all
 """
 import glob
 import io
@@ -62,8 +63,15 @@ REC_TAG = re.compile(r'<span class="q-tag rec">(.*?)</span>')
 # is how a census silently measures one of them twice. The year sheet keys the
 # card on the canonical id; the solved paper keys it on the in-page anchor and
 # carries the canonical id in data-qid.
-YEAR_CARD = re.compile(r'<div class="hit" [^>]*id="(QP\d{4}-Q\d+)"')
-PAPER_CARD = re.compile(r'<article class="q-card" [^>]*data-qid="(QP\d{4}-Q\d+)"')
+#
+# The `-S2` limb of the id is not decoration. July 2021 held TWO sittings and
+# the second prints no serial at all, so its nine questions are keyed
+# QP2107-S2-Qn. A pattern that assumes QPnnnn-Qn skips them silently -- the
+# census simply reports eighteen fewer cards and every rule below stops
+# examining nine real questions on two real pages.
+YEAR_CARD = re.compile(r'<div class="hit" [^>]*id="(QP\d{4}(?:-S\d)?-Q\d+)"')
+PAPER_CARD = re.compile(
+    r'<article class="q-card" [^>]*data-qid="(QP\d{4}(?:-S\d)?-Q\d+)"')
 
 # The solved paper prints a SECOND rec badge -- "N sittings in this set" -- next
 # to the status label. It is a count of the family, not a status, and it is a
@@ -131,14 +139,26 @@ def run():
 
     # Card census over every gated surface that renders question cards.
     cards = []
+    archive_cards = []
     for p in gated:
         if '/topics.html' in p or '/study.html' in p:
             continue
-        cards += [(p,) + c for c in page_cards(_read(p))]
+        body = _read(p)
+        # A wording-archive sheet (2021, 2022) is a DIFFERENT surface and
+        # declares itself as one on <body>. Its questions were never solved, so
+        # the calendar recurrence model -- which is built from the SPEC set --
+        # has nothing to say about them. Counting them in the modern-tag census
+        # would force one of two wrong answers: either the archive invents a
+        # Layer-1 tag, or the archive papers get fed into recurrence_model and
+        # silently rewrite the tags on 2023-2026. They are censused separately
+        # and the OPPOSITE assertion is made about them, in R-PROJ-M.
+        rows = [(p,) + c for c in page_cards(body)]
+        (archive_cards if 'data-archive="1"' in body else cards).extend(rows)
 
     if not QUIET:
-        print('QI projection gate  (%d gated surfaces, %d cards, %d projected '
-              'questions)' % (len(gated), len(cards), len(proj['questions'])))
+        print('QI projection gate  (%d gated surfaces, %d solved cards, %d archive '
+              'cards, %d projected questions)'
+              % (len(gated), len(cards), len(archive_cards), len(proj['questions'])))
 
     # ---- FRESH ---------------------------------------------------------
     # The artefact must be exactly what its inputs produce. Without this the
@@ -255,6 +275,17 @@ def run():
     missing = [(p, q) for p, q, t, _ in cards if not t]
     ok('R-PROJ-H', not missing and len(cards) > 0,
        '%d cards carry no modern recurrence tag: %s' % (len(missing), missing[:5]))
+
+    # ---- M -----------------------------------------------------------------
+    # The inverse of H, and the reason H may exempt anything at all. An archive
+    # sheet must carry no modern recurrence tag ANYWHERE: a tag there is either
+    # invented, or evidence that the archive has been joined to the calendar
+    # model, and the second would change what 2023-2026 says about itself.
+    strays = [(p, q, t) for p, q, t, _ in archive_cards if t]
+    ok('R-PROJ-M', not strays,
+       '%d card(s) on a wording-archive surface carry a modern recurrence tag, '
+       'which the calendar model cannot have produced: %s'
+       % (len(strays), strays[:5]))
 
     # ---- I -----------------------------------------------------------------
     aug = {'QP2608-Q%d' % i for i in range(1, 10)}

@@ -525,6 +525,310 @@ def _render_question(a, n, relations, nodes, spec_q, solved):
     a('  </div>')
 
 
+
+# --------------------------------------------------------------------------- #
+# THE WORDING ARCHIVE  --  2021 and 2022
+# --------------------------------------------------------------------------- #
+#
+# A year sheet above is built from a SOLVED spec. These are built from
+# meoclass1/pastpapers/intelligence/historical_qp_intelligence.json, which holds
+# printed question wording and printed rubric metadata for sittings MIW has a
+# source copy of and has never solved. That file's own governing statement is
+# that no model answer for those sittings may be authored without a separate
+# Founder decision, so this page can only ever be a wording archive.
+#
+# Why 2021 and 2022 belong in the candidate's chronology and 2010-2020 do not
+# -------------------------------------------------------------------------
+# Their SITTING DATES ARE PRINTED ON A SOURCE COPY MIW HOLDS -- the same
+# date_certainty as every solved paper (PRINTED_ON_SOURCE_COPY, 558 of the 1,584
+# governed occurrences). The 2010-2020 band is SECONDARY_CLAIMED: recovered
+# through a secondary repository via a web archive, with dates nobody has
+# corroborated against a printed paper. Both are good recurrence evidence and
+# only one of them can carry a date in front of a candidate. A year page is a
+# dated claim about every question it prints, so this file builds 2021 and 2022
+# and REFUSES to build anything earlier -- see ARCHIVE_FLOOR, and the boundary
+# guard in questions_year_check.py that proves the refusal.
+#
+# Three things this page must never do
+# ------------------------------------
+# 1. LOOK SOLVED. No "Solved paper available", no "Open the solved paper", no
+#    "Open the solved answer". The whole difference between this page and the
+#    sheet above is that MIW has not answered these questions.
+# 2. CARRY A LAYER-1 RECURRENCE TAG. recurrence_model computes those from the
+#    SPEC set, so feeding archive papers into it would silently rewrite the
+#    modern tags on 2023-2026: a question that reads "first in set" would become
+#    "repeated" and the calendar model would stop matching the shipped product.
+#    The archive shows the GOVERNED longitudinal projection instead, which
+#    already covers all 198 of these questions, and nothing else.
+# 3. REPUBLISH THE HOST'S ANNOTATION. `host_recurrence_hint` on these records is
+#    the source copy publisher's own recurrence analysis. Rule 2 at the top of
+#    this file bars it, and it is directional besides.
+ARCHIVE_PATH = os.path.join(PP_DIR, 'intelligence', 'historical_qp_intelligence.json')
+
+#: The earliest year that may appear in the standard question-year chronology.
+#: Not a preference. Raising this floor is a separate historical-archive design
+#: with its own provenance vocabulary, not an edit here.
+ARCHIVE_FLOOR = 2021
+
+
+def load_archive():
+    """Question-only sittings, grouped {year: {month_num: [paper, ...]}}.
+
+    A month can hold MORE THAN ONE paper: July 2021 carries two, and the second
+    prints no serial at all. The solved builder keys one spec per month because
+    the solved set has never had a double sitting; assuming the same here would
+    silently drop nine questions.
+    """
+    if not os.path.exists(ARCHIVE_PATH):
+        return {}
+    doc = json.load(open(ARCHIVE_PATH, encoding='utf-8'))
+    out = {}
+    for p in doc.get('papers', []):
+        out.setdefault(p['year'], {}).setdefault(RM.MONTH_NUM[p['month']], []).append(p)
+    for months in out.values():
+        for papers in months.values():
+            papers.sort(key=lambda p: (bool(p.get('second_sitting')),
+                                       p.get('printed_serial') or ''))
+    return out
+
+
+def archive_years(specs, archive):
+    """Years the archive may publish: at or above the floor, and NOT solved.
+
+    A year holding even one solved spec is served by the solved year sheet, and
+    two sheets for one year would be two answers to the same question. The
+    intelligence file states this exclusion for its consumers; applying it here
+    by rule rather than by dropping the records is what makes it testable.
+    """
+    solved = {d['year'] for d in specs}
+    return sorted(y for y in archive if y >= ARCHIVE_FLOOR and y not in solved)
+
+
+def _archive_search_tokens(paper, q):
+    parts = [q['q_no'], q['question_id'], paper['paper_id'], paper['month'],
+             str(paper['year']), paper['sitting'], strip_tags(q['text_verbatim'])]
+    seen, out = set(), []
+    for p in parts:
+        t = strip_tags(p).lower()
+        if t and t not in seen:
+            seen.add(t)
+            out.append(t)
+    return ' '.join(out)
+
+
+def _archive_js():
+    """Search only. No recurrence or topic filters, because there is no
+    governed per-question topic mapping for these years and no Layer-1 tag --
+    and a filter control with nothing behind it is itself a claim."""
+    return """
+  var cards = Array.prototype.slice.call(document.querySelectorAll('[data-qsearch]'));
+  var input = document.getElementById('qy-search');
+  var clear = document.getElementById('qy-clear');
+  var count = document.getElementById('qy-count');
+  var q = '';
+
+  function apply() {
+    var shown = 0;
+    cards.forEach(function (c) {
+      var ok = !q || c.getAttribute('data-qsearch').indexOf(q) !== -1;
+      c.hidden = !ok;
+      if (ok) shown++;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-month-block]'), function (b) {
+      var any = b.querySelector('[data-qsearch]:not([hidden])');
+      b.hidden = !!q && !any;
+    });
+    count.textContent = q ? shown + ' of ' + cards.length + ' questions'
+                          : cards.length + ' questions';
+  }
+  if (input) {
+    input.addEventListener('input', function () {
+      q = input.value.trim().toLowerCase(); apply();
+    });
+  }
+  if (clear) {
+    clear.addEventListener('click', function () {
+      input.value = ''; q = ''; apply(); input.focus();
+    });
+  }
+  apply();
+"""
+
+
+def build_archive_year_page(archive, year, publish, deliver=False):
+    months = archive[year]
+    papers = [p for ms in months.values() for p in ms]
+    total_q = sum(len(p['questions']) for p in papers)
+
+    o = []
+    a = o.append
+    title = ('MEO Class I Written Examination Questions &mdash; %d (question archive) '
+             '| Marine Intelligence Weekly' % year)
+    desc = ('The printed MEO Class I Engineering Management written examination questions MIW '
+            'holds for %d, month by month. Question wording only &mdash; MIW has not solved '
+            'these papers.' % year)
+    canonical = (('/solvedQP/questions-%d.html' % year) if deliver
+                 else ('/meoclass1/pastpapers/questions-%d.html' % year))
+    o.extend(head_meta(strip_tags(title), strip_tags(desc), canonical, publish))
+    a('<style>')
+    a(read_css())
+    a(YEAR_CSS)
+    a('</style>')
+    a('</head>')
+    a('<body data-year="%d" data-archive="1">' % year)
+    a(GATE_STUB)
+    a('<a class="skip" href="#qy-main">Skip to content</a>')
+    o.extend(topbar('Questions by year' if deliver else '',
+                    links=delivery_links(year=year) if deliver else None))
+    a('<header class="page-header"><div class="wrap">')
+    a('  <span class="badge">MEO Class I &middot; Engineering Management</span>')
+    a('  <h1>%d &mdash; the question papers MIW holds</h1>' % year)
+    a('  <p class="sub"><b>Question wording archive.</b> The printed paper for each %d sitting '
+      'MIW holds a source copy of. <b>MIW has not solved these papers</b> &mdash; there is no '
+      'model answer, exam plan, study guide or recall content for any question below, and none '
+      'is implied by its presence here.</p>' % year)
+    a('  <div class="header-meta"><span>%d question%s</span><span>%d sitting%s</span>'
+      '<span>0 solved answers</span></div>'
+      % (total_q, '' if total_q == 1 else 's',
+         len(papers), '' if len(papers) == 1 else 's'))
+    a('</div></header>')
+    if not publish and not deliver:
+        a('<div class="review-banner"><strong>Founder review copy.</strong> Generated by '
+          '<code>tools/pastpapers/build_questions_year.py</code> from '
+          '<code>intelligence/historical_qp_intelligence.json</code>. Not indexable.</div>')
+
+    a('<div class="controls-bar"><div class="controls-inner">')
+    a('  <label class="search-wrap"><span aria-hidden="true">&#128269;</span>')
+    a('    <input id="qy-search" type="search" autocomplete="off" '
+      'placeholder="Search every %d question &mdash; e.g. general average, lay-up, MARPOL" '
+      'aria-label="Search every %d written question">' % (year, year))
+    a('    <button id="qy-clear" class="icon-btn" type="button" aria-label="Clear search">'
+      '&times;</button>')
+    a('  </label>')
+    a('  <span class="count-label" id="qy-count" role="status" aria-live="polite"></span>')
+    a('</div></div>')
+
+    a('<main id="qy-main" style="max-width:1000px;margin:0 auto;padding:20px;">')
+
+    a('<section class="topic-group qy-legend">')
+    a('  <h3>What MIW has, and what it does not</h3>')
+    a('  <div class="tg-sub">Stated first, because everything below is question wording and '
+      'nothing below is an answer.</div>')
+    a('  <div class="cov-row"><span class="cov-k">Held</span>'
+      '<span class="cov-v">The printed question paper for %d %s, transcribed from a source '
+      'copy: every question in full, with the printed serial, the time allowed and the total '
+      'marks exactly as printed.</span></div>'
+      % (len(papers), 'sittings' if len(papers) != 1 else 'sitting'))
+    a('  <div class="cov-row"><span class="cov-k">Not held</span>'
+      '<span class="cov-v"><b>No solved answer for any of these questions.</b> No per-question '
+      'mark split either &mdash; these papers print a total only. Where a question carries no '
+      'longer-term signal below, that means no governed recurrence family reaches it yet, not '
+      'that it has never recurred.</span></div>')
+    a('  <div class="cov-row"><span class="cov-k">Dates</span>'
+      '<span class="cov-v">Every sitting below is dated from the printed source copy, which is '
+      'the same standard as MIW&rsquo;s solved papers. MIW holds recurrence evidence reaching '
+      'further back than this, but those dates rest on secondary sources and are therefore '
+      'never printed as a year or a count.</span></div>')
+    a('</section>')
+
+    a('<section class="topic-group qy-legend">')
+    a('  <h3>How to read the longer-term signal</h3>')
+    a('  <div class="tg-sub">The same governed projection the solved papers and the other year '
+      'sheets use, rendered by the same code. This page computes no recurrence of its '
+      'own.</div>')
+    a('  <div class="cov-row"><span class="cov-k">Persistent &middot; Rising &middot; '
+      'Re-emerging &middot; Active in recent papers</span>'
+      '<span class="cov-v">How the underlying examinable concept behaves over MIW&rsquo;s '
+      'governed horizon. Qualitative on purpose: no count and no year is claimed.</span></div>')
+    # THE SENTENCE THIS PAGE CANNOT SHIP WITHOUT.
+    #
+    # 55 of these 198 questions read READY_TO_STUDY_NOW and therefore render
+    # "No currentness risk flagged". That readiness is inherited from the
+    # question's recurrence FAMILY, and the family's answer lives on a solved
+    # paper from a later year. On a page whose header says MIW has not solved
+    # these papers, an unqualified all-clear chip reads as "this one is fine to
+    # study" -- and there is nothing here to study. The chips are correct; what
+    # they are ABOUT has to be stated once, plainly, or the page contradicts its
+    # own heading. ARCHIVE-M refuses the page without it.
+    a('  <div class="cov-row"><span class="cov-k">No currentness risk flagged &middot; '
+      'Current answer verified &middot; Currentness check pending &middot; Answer under '
+      'currentness review</span>'
+      '<span class="cov-v"><b>These describe MIW&rsquo;s answer to the CONCEPT, on a later '
+      'solved paper &mdash; never this %d question.</b> None of the questions on this page has '
+      'been answered by MIW. A concept that recurred here and was later set again in a year MIW '
+      'has solved carries the readiness of THAT answer, which is why an all-clear can appear '
+      'beside a question with no answer behind it.</span></div>' % year)
+    a('  <div class="cov-row"><span class="cov-k">Current-framework answer in preparation</span>'
+      '<span class="cov-v">MIW holds no current answer to this concept yet. That is a '
+      'statement about MIW, not about the question.</span></div>')
+    a('  <div class="cov-row"><span class="cov-k">Current framework: see &hellip;</span>'
+      '<span class="cov-v">A governed review has found that a <i>later</i> solved question '
+      'covers what this one asks, and names it. <b>It does not mean this %d question has been '
+      'answered.</b> It means the concept has a current home elsewhere in the corpus.</span>'
+      '</div>' % year)
+    a('</section>')
+
+    for mn in range(1, 13):
+        month = RM.MONTHS[mn - 1]
+        a('<section class="topic-group" data-month-block="%d">' % mn)
+        if mn in months:
+            for p in months[mn]:
+                a('  <h3>%s <span class="q-tag sub">Question wording held</span></h3>'
+                  % esc(p['sitting'] + (' (second sitting)' if p.get('second_sitting') else '')))
+                bits = [('printed serial %s' % p['printed_serial']) if p.get('printed_serial')
+                        else 'no printed serial on the source copy',
+                        p.get('time_allowed') or '',
+                        ('%s marks printed as the paper total' % p['total_marks'])
+                        if p.get('total_marks') else '',
+                        '%d question%s printed' % (len(p['questions']),
+                                                   '' if len(p['questions']) == 1 else 's')]
+                a('  <div class="tg-sub">%s</div>'
+                  % ' &middot; '.join(esc(b) for b in bits if b))
+                a('  <div class="rec-note"><b>No solved answer.</b> MIW holds the printed '
+                  'wording for this sitting and has not answered it.</div>')
+                for q in p['questions']:
+                    _render_archive_question(a, p, q)
+        elif (year, mn) in KNOWN_ABSENT:
+            a('  <h3>%s %d <span class="q-tag sub">No sitting</span></h3>' % (esc(month), year))
+            a('  <div class="rec-note"><strong>No examination paper exists for this month.'
+              '</strong> %s</div>' % KNOWN_ABSENT[(year, mn)])
+        else:
+            a('  <h3>%s %d <span class="q-tag sub">Not yet in the MIW set</span></h3>'
+              % (esc(month), year))
+            a('  <div class="rec-note">MIW holds no source copy for this sitting. That is a '
+              'statement about MIW&rsquo;s shelf, not about whether the examination was '
+              'held.</div>')
+        a('</section>')
+
+    a('</main>')
+    a('<script>')
+    a(_archive_js())
+    a('</script>')
+    o.extend(footer(publish or deliver))
+    a('</body>')
+    a('</html>')
+    return '\n'.join(o) + '\n'
+
+
+def _render_archive_question(a, paper, q):
+    a('  <div class="hit" data-qsearch="%s" id="%s">'
+      % (esc_attr(_archive_search_tokens(paper, q)), esc_attr(q['question_id'])))
+    a('    <div class="hit-top">%s <span class="sep">&middot;</span> %s '
+      '<span class="sep">&middot;</span> marks not printed per question</div>'
+      % (esc(paper['sitting']), esc(q['q_no'])))
+    for line in q['text_verbatim'].split('\n'):
+        a('    <div class="q-stem">%s</div>' % esc(line))
+    for limb in q.get('printed_limbs') or []:
+        a('    <div class="q-stem">%s</div>'
+          % esc(limb if isinstance(limb, str)
+                else json.dumps(limb, ensure_ascii=False)))
+    # The governed projection, and nothing else. No Layer-1 tag: see the note at
+    # the top of this section.
+    block = QIP.render_block(q['question_id'], audience='GATED')
+    if block:
+        a('    %s' % block)
+    a('  </div>')
+
 def write(path, text):
     prev = open(path, encoding='utf-8', newline='').read() if os.path.exists(path) else None
     with io.open(path, 'w', encoding='utf-8', newline='\n') as fh:
@@ -546,6 +850,9 @@ def main():
         print('ERROR: no specs found under %s' % SPEC_GLOB)
         sys.exit(1)
 
+    archive = load_archive()
+    arc_years = archive_years(specs, archive)
+
     if args.year:
         years = [args.year]
     elif args.deliver:
@@ -557,15 +864,33 @@ def main():
     else:
         years = sorted({d['year'] for d in specs})
 
-    for year in years:
+    # The archive years join the SAME chronology. They are not a second product
+    # and they are not a separate URL shape: a candidate reading questions-2023
+    # should be able to walk back to questions-2022 without learning a new
+    # convention. What differs is the page, not the address -- and the page says
+    # in its first paragraph that MIW has not solved it.
+    #
+    # `--year` is honoured for both sets, so a single archive year can be
+    # rebuilt on its own. It cannot conjure one: a year absent from the archive
+    # store and from the specs simply produces nothing.
+    if args.year:
+        arc_years = [args.year] if args.year in arc_years else []
+        years = [y for y in years if y in {d['year'] for d in specs}]
+
+    for year in years + arc_years:
+        is_archive = year in arc_years
         if args.deliver:
             path = os.path.join(REPO_ROOT, 'solvedQP', 'questions-%d.html' % year)
             os.makedirs(os.path.dirname(path), exist_ok=True)
         else:
             path = os.path.join(PP_DIR, 'questions-%d.html' % year)
-        st = write(path, build_year_page(specs, year, args.publish, deliver=args.deliver))
-        print('%squestions-%d.html  %s'
-              % ('solvedQP/' if args.deliver else '', year, st))
+        text = (build_archive_year_page(archive, year, args.publish, deliver=args.deliver)
+                if is_archive
+                else build_year_page(specs, year, args.publish, deliver=args.deliver))
+        st = write(path, text)
+        print('%squestions-%d.html  %s%s'
+              % ('solvedQP/' if args.deliver else '', year, st,
+                 '  (wording archive)' if is_archive else ''))
 
 
 if __name__ == '__main__':

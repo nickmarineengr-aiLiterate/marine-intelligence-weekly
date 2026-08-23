@@ -270,7 +270,7 @@ def solved_years(specs=None):
     return sorted({s['year'] for s in specs if not is_intake(s)})
 
 
-def delivery_links(year=None, years=None):
+def delivery_links(year=None, years=None, archive_years=()):
     """Navigation for the paid Written delivery surface at /solvedQP/.
 
     It must not link into /meoclass1/: a customer who owns SOLVED_QP but not
@@ -291,6 +291,14 @@ def delivery_links(year=None, years=None):
     if year is not None:
         links.append(('Questions by year', '/solvedQP/questions-%d.html' % year))
     else:
+        # Archive years first, so the chronology reads left to right and oldest
+        # first, and LABELLED. "2021 questions" beside "2023 questions" would
+        # imply the same thing is behind both links; it is not, and the label is
+        # the cheapest place to say so -- a reader who never clicks still learns
+        # that MIW's 2021 holding is wording rather than answers.
+        for y in sorted(archive_years):
+            links.append(('%d questions (archive)' % y,
+                          '/solvedQP/questions-%d.html' % y))
         for y in (years if years is not None else solved_years()):
             links.append(('%d questions' % y, '/solvedQP/questions-%d.html' % y))
     # The Study Topic Map -- "what should I study?" -- is inside the same

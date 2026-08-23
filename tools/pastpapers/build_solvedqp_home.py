@@ -26,6 +26,10 @@ from render_common import (REPO_ROOT, CONTACT, esc, strip_tags, read_css,
                            topbar, head_meta, footer, GATE_STUB, delivery_links,
                            CORPUS_SEARCH_JS, STICKY_SYNC_JS)
 import recurrence_model as RM
+# The archive-year rule lives with the generator that owns it. Re-deriving
+# "which years are wording-only" here would be a second definition, and the
+# first symptom of drift would be a nav link to a sheet nobody built.
+import build_questions_year as BQY
 # KNOWN_ABSENT is owned by the year-sheet builder, which already distinguishes
 # "no sitting was held" from "not yet in the MIW set". Importing it keeps ONE
 # statement of which months genuinely have no examination -- a second hand-kept
@@ -1013,7 +1017,12 @@ def build(specs):
     # The home covers every solved year, so its navigation carries one link
     # per year rather than a single hard-coded sheet.
     home_years = sorted({d['year'] for d in sittings})
-    o.extend(topbar('Solved QP', links=delivery_links(years=home_years)))
+    # Years MIW holds question wording for and has NOT solved. Derived from the
+    # intelligence store and the spec set, never listed: a year that gets solved
+    # stops being an archive year on the next build without anyone editing this.
+    arc_years = BQY.archive_years(specs, BQY.load_archive())
+    o.extend(topbar('Solved QP',
+                    links=delivery_links(years=home_years, archive_years=arc_years)))
 
     a('<header class="sq-hero">')
     a('  <div class="wrap">')
@@ -1268,10 +1277,44 @@ def build(specs):
           % (y, y))
         a('    </article>')
     a('  </div>')
+
+    # ---- 7b. THE WORDING ARCHIVE -----------------------------------
+    # A SEPARATE block inside the same section, not extra cards in the grid
+    # above. The grid says "questions from a year we have solved"; these say
+    # "questions from a year we have not". Rendering them as four more identical
+    # cards would make the difference invisible at exactly the moment a reader
+    # is choosing what to open, and the difference is the whole point.
+    if arc_years:
+        arc_q = sum(len(p['questions']) for (yy, _), p in intel.items()
+                    if yy in arc_years)
+        arc_s = sum(1 for (yy, _) in intel if yy in arc_years)
+        a('  <h3 class="sq-sub">Question wording archive &mdash; %s</h3>'
+          % ' and '.join(str(y) for y in arc_years))
+        a('  <p class="lead">MIW holds the printed question papers for %d earlier '
+          'sittings &mdash; %d questions in all &mdash; and <b>has not solved them</b>. '
+          'There is no model answer, exam plan or study guide behind these sheets, and '
+          'nothing on them is part of what you have bought. They are here because the '
+          'questions are real, they are dated from the printed paper, and several of them '
+          'come back later in the corpus.</p>' % (arc_s, arc_q))
+        a('  <div class="sq-grid">')
+        for y in reversed(arc_years):
+            n = sum(len(p['questions']) for (yy, _), p in intel.items() if yy == y)
+            ns = sum(1 for (yy, _) in intel if yy == y)
+            a('    <article class="sq-card">')
+            a('      <span class="m">Wording only &middot; not solved</span>')
+            a('      <h3><a href="/solvedQP/questions-%d.html">%d &mdash; question '
+              'archive</a></h3>' % (y, y))
+            a('      <p class="meta">%d questions across %d sittings. Printed wording only, '
+              'with the longer-term signal where MIW has one. No answers.</p>' % (n, ns))
+            a('      <a class="go" href="/solvedQP/questions-%d.html">Open the %d archive '
+              '&rarr;</a>' % (y, y))
+            a('    </article>')
+        a('  </div>')
     a('</section>')
 
     a('<p class="sq-note">Your access covers every solved paper here, including all future '
-      'sittings added to this collection.</p>')
+      'sittings added to this collection. The question archive above is wording only and '
+      'carries no answers.</p>')
 
     # ---- 8. RETURN TO TOP ------------------------------------------
     # Hidden until the reader is actually deep in the page; the script that

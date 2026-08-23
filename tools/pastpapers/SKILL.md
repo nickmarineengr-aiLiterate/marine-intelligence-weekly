@@ -273,3 +273,50 @@ Report to Founder:
 6. **Files changed** — or `0`
 7. **Validation** — exact results, including honest pre-existing failures
 8. **Backlog raised** — any out-of-scope finding, and where it was registered
+
+
+## The 2021-2022 wording archive
+
+`questions-2021.html` and `questions-2022.html` are built by the SAME generator
+as the solved year sheets (`build_questions_year.py`) and are a **different
+product on the same URL shape**: printed question wording for sittings MIW
+holds a source copy of and has never solved. 99 questions each, both the public
+copy under `meoclass1/pastpapers/` and the delivered copy under `solvedQP/`.
+
+```bash
+python tools/pastpapers/build_questions_year.py --publish   # builds solved AND archive years
+python tools/pastpapers/build_questions_year.py --deliver
+python tools/pastpapers/questions_year_check.py             # ARCHIVE-A..L + the boundary guard
+python tools/pastpapers/questions_year_archive_mutations.py # 10 mutations, zero residue
+```
+
+### Three rules, and the third is the one that will be broken
+
+1. **It must never look solved.** No "Solved paper available", no "Open the
+   solved paper", no "Open the solved answer", no "Current answer verified".
+   `ARCHIVE-D` and `ARCHIVE-E` gate the bytes. A governed Phase-2 successor
+   renders as the SENTENCE "Current framework: see QP2407-Q7", never as a link
+   -- `qi_projection.tags_for()` decides that, not this page.
+
+2. **It carries no Layer-1 recurrence tag.** The calendar model is built from
+   the SPEC set; feeding archive papers into it would rewrite the modern tags
+   on 2023-2026, turning a "first in set" into a "repeated". The archive shows
+   the governed longitudinal projection instead, which already covers all 198
+   of these questions. `ARCHIVE-F` refuses a Layer-1 tag here and `R-PROJ-M`
+   refuses one anywhere on a page marked `data-archive="1"`; `R-PROJ-H`
+   exempts those pages from the must-have-a-tag census for the same reason.
+
+3. **2021 IS THE FLOOR AND IT IS NOT A BACKLOG.** 2021-2022 are publishable
+   because their sitting dates are `PRINTED_ON_SOURCE_COPY`. 2010-2020 reach
+   MIW as `SECONDARY_CLAIMED` through a web archive, and a year page prints a
+   month and a year over every question on it. `ARCHIVE_FLOOR = 2021` and
+   `check_pre_archive_boundary()` fail the build if a pre-2021 year page
+   **exists on disk** or if any shipped page **links to one** -- an unlinked
+   page is still published. The design a 2010-2020 surface would need instead
+   is recorded in `docs/study/HISTORICAL_QI_ADOPTION_DECISION.md` section 12.
+   **Do not build it by copying `build_archive_year_page`.**
+
+One more thing the archive exposed: `QP2107-S2-Qn`. July 2021 held TWO sittings
+and the second prints no serial, so a `QP\d{4}-Q\d+` pattern skips nine real
+questions silently. `load_archive()` groups a LIST of papers per month for the
+same reason.

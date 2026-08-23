@@ -286,3 +286,78 @@ priority weighting.
    settles.
 
 Nothing above changes what Nixon studies. `D01 → D03 → D02` stands.
+
+---
+
+## 12. The candidate-facing chronology — 2021 opens, 2010–2020 does not
+
+Added 2026-08-23, when the question-year chronology was extended backwards for
+the first time. This section is the governing record for **which years may
+carry a year page**, and it exists because the next person to look at this will
+be looking at 2020.
+
+### What was done
+
+`questions-2021.html` and `questions-2022.html` were built, in both the public
+discovery copy and the paid delivery copy, as a **question wording archive**:
+99 questions each, the printed paper for every sitting MIW holds a source copy
+of, and **no answers of any kind**. The candidate chronology now reads
+
+    2021  2022  2023  2024  2025  2026
+
+with the first two labelled `(archive)` in the navigation.
+
+### Why the line falls between 2020 and 2021
+
+Not tidiness, and not backlog. **The two bands carry different date evidence,
+and a year page is a dated claim about every question printed on it.**
+
+| | 2021–2022 | 2010–2020 |
+|---|---|---|
+| Source | MIW's own transcription of a printed source copy | secondary repository via a web archive |
+| Evidence band | `MIW_WORDING_ONLY` | `HISTORICAL_SECONDARY_ARCHIVE` |
+| Date certainty | `PRINTED_ON_SOURCE_COPY` | `SECONDARY_CLAIMED` |
+| Sitting date printed to a candidate? | **Yes** — same standard as a solved paper | **No**, and §7 of this document is why |
+| Governed occurrences | 198 | 1,026 |
+
+2021–2022 carry the *same* date certainty as the solved papers. That is the
+whole permission. §2 of this document already forbids collapsing the three
+claims, and a 2010–2020 year page would collapse two of them in its heading:
+it would print a month and a year over questions whose month and year nobody
+has corroborated against a printed paper.
+
+Enforced, not merely intended: `build_questions_year.ARCHIVE_FLOOR = 2021`, and
+`questions_year_check.check_pre_archive_boundary()` fails the build both if a
+`questions-<pre-2021>.html` **exists on disk** and if any shipped page **links
+to one**. The filesystem half matters: an unlinked page is still published.
+
+### The 2010–2020 surface, when it comes, is NOT this page
+
+Recorded now so that the cheap version is not built by default. A historical
+question archive must not clone the 2021–2026 year-page model, because the
+year-page model's central act — printing a sitting month over a question — is
+the one thing this evidence cannot support.
+
+A future historical surface has to keep four things apart that a year page
+folds into one:
+
+1. **The wording**, which is well evidenced and is the valuable part.
+2. **The claimed sitting**, which must render as a claim with its source named,
+   never as a date in a heading.
+3. **Whether the occurrence is officially attested at all** — `OFFICIAL_DATED`
+   is absent from every record in this band and no amount of coverage supplies
+   it.
+4. **The route forward** — the current successor question, and the current
+   answer owner where a governed Phase-2 record names one. This is what makes
+   the surface worth building: a 2014 question is useful to a candidate only
+   through what MIW can answer *today*.
+
+So it is organised by CONCEPT with wording as evidence, not by MONTH with dates
+as headings. That is a different page, a different vocabulary and a different
+validator, and it should be designed after Phase 2 has built enough current
+answer coverage for point 4 to have something to point at. Tranche 002 is the
+measure of how far off that is: of six families whose only members are
+wording-only sittings, **one** could be routed to a current answer and five
+could not.
+
+**Do not implement it by copying `build_archive_year_page`.**

@@ -485,8 +485,33 @@ answer.
 | Path | Role |
 |---|---|
 | `tools/study/qi_phase2_adjudications.json` | **Hand-maintained, and the RATIFIED owner of present-day family decisions.** One record per family. Same family id space as `qi_phase1_adjudications.json` and `study_qi_holds.json`. Full ownership statement: `docs/study/PHASE2_PRESENT_DAY_LAYER.md`. |
-| `tools/study/validate_phase2_tranche.py` | The gate. 30 invariants, fails closed. |
-| `tools/study/test_phase2_mutations.py` | 13 mutations, all must be caught, zero residue. |
+| `tools/study/validate_phase2_tranche.py` | The gate. 37 invariants, fails closed. |
+| `tools/study/test_phase2_mutations.py` | 16 mutations, all must be caught, zero residue. |
+
+### A new answer has nowhere to live -- read this before planning a tranche
+
+Tranche 002 was weighted six-of-twelve toward `NEW_MODERN_ANSWER_REQUIRED` to
+price the creation of a present-day answer. **One of the six resolved.** The
+other five could not be, at any price, and the reason is structural:
+
+- all 37 `NEW_MODERN_ANSWER_REQUIRED` families have their newest member in
+  **2021 or 2022**, and those are WORDING-ONLY records;
+- `spec_question_ids()` builds the nameable-answer set **only** from
+  `meoclass1/pastpapers/specs/*.json`, which is the SOLVED 2023-2026 set;
+- `historical_qp_intelligence.json` forbids authoring an answer for those
+  sittings without a separate Founder decision.
+
+So do not plan a tranche around converting new-answer families until a Founder
+decision and an answer container exist. The families that CAN convert are the
+ones a governed `WHOLE_VS_LIMB` join already points at a solved successor --
+check `qi_family_joins.json` before selecting.
+
+Three invariants added with that tranche, and the middle one was catching a
+live defect: `R-P2-NEW-ANSWER-BIAS` (a declared new-answer minimum is checked
+against the action PINNED at selection), `R-P2-HOLD-REACHES-ANSWERS` (a HOLD
+must reach the solved answers inside the held family -- the inverse of
+`R-P2-ANSWER-SCOPE`), and `R-P2-HOLD-REASON` (a hold with no reason is backlog
+in a hold's clothes).
 
 ```bash
 python tools/study/validate_phase2_tranche.py

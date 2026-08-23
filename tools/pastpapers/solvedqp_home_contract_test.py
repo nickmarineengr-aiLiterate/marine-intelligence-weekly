@@ -47,8 +47,10 @@ if __name__ == '__main__':
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from render_common import REPO_ROOT
+from render_common import REPO_ROOT, strip_tags
 import build_solvedqp_home as HOME
+# The archive-year rule lives with the generator that owns it.
+import build_questions_year as BQY
 from build_solvedqp_manifest import recently_updated
 
 INDEX = os.path.join(REPO_ROOT, 'solvedQP', 'index.html')
@@ -150,14 +152,42 @@ def rule_inventory(html, specs, fail):
 
 
 def rule_years(html, specs, fail):
-    """4. The year inventory follows the solved set. Adding the first paper of
-    a new year must add its sheet with no edit to the page."""
+    """4. The year inventory follows the evidence, and says which kind it is.
+
+    Two populations, never one. A SOLVED year is linked because a paper in it
+    was answered; adding the first paper of a new year must add its sheet with
+    no edit to the page. An ARCHIVE year is linked because MIW holds the printed
+    wording and has NOT answered it -- and the link must say so, because
+    "2021 questions" beside "2023 questions" tells a reader the same thing is
+    behind both.
+
+    So the rule checks three things rather than one: no year is linked that
+    neither store knows about, no solved year is missing, and every archive year
+    is labelled at every link. The third is the one that keeps the paid
+    navigation honest.
+    """
     want = {d['year'] for d in HOME.solved_sittings(specs)}
+    arc = set(BQY.archive_years(specs, BQY.load_archive()))
     got = {int(y) for y in re.findall(r'/solvedQP/questions-(\d{4})\.html', html)}
-    for y in sorted(got - want):
-        fail('year sheet %d is linked but has no solved paper' % y)
+    for y in sorted(got - want - arc):
+        fail('year sheet %d is linked and neither the solved set nor the '
+             'wording archive holds that year' % y)
     for y in sorted(want - got):
         fail('year %d has solved papers but no sheet link' % y)
+    for y in sorted(arc & got):
+        # Every anchor to an archive sheet, in its own markup, must carry the
+        # word "archive". Checking the page as a whole would pass on one
+        # labelled link and nine bare ones.
+        anchors = re.findall(
+            r'<a[^>]*href="/solvedQP/questions-%d\.html"[^>]*>(.*?)</a>' % y,
+            html, re.S)
+        if not anchors:
+            continue
+        bare = [strip_tags(t).strip() for t in anchors
+                if 'archive' not in strip_tags(t).lower()]
+        if bare:
+            fail('%d is a wording archive year and %d of its %d link(s) do not '
+                 'say so: %s' % (y, len(bare), len(anchors), bare[:3]))
 
 
 def rule_updates(html, specs, man, fail):
