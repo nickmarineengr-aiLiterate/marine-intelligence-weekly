@@ -1,0 +1,1554 @@
+{
+  "schema": "miw.study.modern_qi_baseline.v1",
+  "schema_version": "1.0",
+  "generated_by": "tools/study/build_study_qi.py",
+  "hand_editable": false,
+  "what_this_is": "The inventory of MIW existing 2021 -> August 2026 question-level question intelligence, as it stood when the 2010 -> August 2026 longitudinal layer was joined to the study engine. The validator compares the live corpus against this frozen record. A modern repeat tag, a related-question edge or a modern family that disappears without an explicit migration fails the gate.",
+  "horizon": "2021 through August 2026",
+  "sources": {
+    "authored": "meoclass1/pastpapers/specs/*.json",
+    "derived": "meoclass1/pastpapers/intelligence/derived/sixyear_families.json"
+  },
+  "counts": {
+    "authored_questions": 360,
+    "questions_with_repeat_intelligence": 353,
+    "authored_hint_references": 1121,
+    "authored_related_question_edges": 389,
+    "reused_from_records": 176,
+    "modern_families": 290,
+    "modern_multi_member_families": 129,
+    "modern_family_members_in_multi": 388,
+    "modern_families_by_class": {
+      "UNIQUE": 161,
+      "EXACT_REPEAT": 82,
+      "NEAR_REPEAT": 47
+    },
+    "modern_families_by_evidence": {
+      "SINGLETON": 161,
+      "DETERMINISTIC": 82,
+      "INFERRED": 47
+    },
+    "temporal_watch_families": 18,
+    "recurrence_class_distinct_raw_values": 21,
+    "recurrence_class_distinct_normalised": 15
+  },
+  "questions_with_repeat_intelligence": [
+    "QP2301-Q1",
+    "QP2301-Q2",
+    "QP2301-Q3",
+    "QP2301-Q4",
+    "QP2301-Q5",
+    "QP2301-Q6",
+    "QP2301-Q7",
+    "QP2301-Q8",
+    "QP2301-Q9",
+    "QP2302-Q1",
+    "QP2302-Q2",
+    "QP2302-Q3",
+    "QP2302-Q4",
+    "QP2302-Q5",
+    "QP2302-Q6",
+    "QP2302-Q7",
+    "QP2302-Q8",
+    "QP2302-Q9",
+    "QP2303-Q1",
+    "QP2303-Q2",
+    "QP2303-Q3",
+    "QP2303-Q4",
+    "QP2303-Q5",
+    "QP2303-Q6",
+    "QP2303-Q7",
+    "QP2303-Q8",
+    "QP2303-Q9",
+    "QP2304-Q1",
+    "QP2304-Q2",
+    "QP2304-Q3",
+    "QP2304-Q4",
+    "QP2304-Q5",
+    "QP2304-Q6",
+    "QP2304-Q7",
+    "QP2304-Q8",
+    "QP2304-Q9",
+    "QP2306-Q1",
+    "QP2306-Q2",
+    "QP2306-Q3",
+    "QP2306-Q4",
+    "QP2306-Q5",
+    "QP2306-Q6",
+    "QP2306-Q7",
+    "QP2306-Q8",
+    "QP2306-Q9",
+    "QP2307-Q1",
+    "QP2307-Q2",
+    "QP2307-Q3",
+    "QP2307-Q4",
+    "QP2307-Q5",
+    "QP2307-Q6",
+    "QP2307-Q7",
+    "QP2307-Q8",
+    "QP2307-Q9",
+    "QP2308-Q1",
+    "QP2308-Q2",
+    "QP2308-Q3",
+    "QP2308-Q4",
+    "QP2308-Q5",
+    "QP2308-Q6",
+    "QP2308-Q7",
+    "QP2308-Q8",
+    "QP2308-Q9",
+    "QP2309-Q1",
+    "QP2309-Q2",
+    "QP2309-Q3",
+    "QP2309-Q4",
+    "QP2309-Q5",
+    "QP2309-Q6",
+    "QP2309-Q7",
+    "QP2309-Q8",
+    "QP2309-Q9",
+    "QP2310-Q1",
+    "QP2310-Q2",
+    "QP2310-Q3",
+    "QP2310-Q4",
+    "QP2310-Q5",
+    "QP2310-Q6",
+    "QP2310-Q7",
+    "QP2310-Q8",
+    "QP2310-Q9",
+    "QP2311-Q1",
+    "QP2311-Q2",
+    "QP2311-Q3",
+    "QP2311-Q4",
+    "QP2311-Q5",
+    "QP2311-Q6",
+    "QP2311-Q7",
+    "QP2311-Q8",
+    "QP2311-Q9",
+    "QP2312-Q1",
+    "QP2312-Q2",
+    "QP2312-Q3",
+    "QP2312-Q4",
+    "QP2312-Q5",
+    "QP2312-Q6",
+    "QP2312-Q7",
+    "QP2312-Q8",
+    "QP2312-Q9",
+    "QP2401-Q1",
+    "QP2401-Q2",
+    "QP2401-Q3",
+    "QP2401-Q4",
+    "QP2401-Q5",
+    "QP2401-Q6",
+    "QP2401-Q7",
+    "QP2401-Q8",
+    "QP2401-Q9",
+    "QP2402-Q1",
+    "QP2402-Q2",
+    "QP2402-Q3",
+    "QP2402-Q4",
+    "QP2402-Q5",
+    "QP2402-Q6",
+    "QP2402-Q7",
+    "QP2402-Q8",
+    "QP2402-Q9",
+    "QP2403-Q1",
+    "QP2403-Q2",
+    "QP2403-Q3",
+    "QP2403-Q4",
+    "QP2403-Q5",
+    "QP2403-Q6",
+    "QP2403-Q7",
+    "QP2403-Q8",
+    "QP2403-Q9",
+    "QP2404-Q1",
+    "QP2404-Q2",
+    "QP2404-Q3",
+    "QP2404-Q4",
+    "QP2404-Q5",
+    "QP2404-Q6",
+    "QP2404-Q7",
+    "QP2404-Q8",
+    "QP2404-Q9",
+    "QP2406-Q1",
+    "QP2406-Q2",
+    "QP2406-Q3",
+    "QP2406-Q4",
+    "QP2406-Q5",
+    "QP2406-Q6",
+    "QP2406-Q7",
+    "QP2406-Q8",
+    "QP2406-Q9",
+    "QP2407-Q1",
+    "QP2407-Q2",
+    "QP2407-Q3",
+    "QP2407-Q4",
+    "QP2407-Q5",
+    "QP2407-Q6",
+    "QP2407-Q7",
+    "QP2407-Q8",
+    "QP2407-Q9",
+    "QP2408-Q1",
+    "QP2408-Q2",
+    "QP2408-Q3",
+    "QP2408-Q4",
+    "QP2408-Q5",
+    "QP2408-Q6",
+    "QP2408-Q7",
+    "QP2408-Q8",
+    "QP2408-Q9",
+    "QP2409-Q1",
+    "QP2409-Q2",
+    "QP2409-Q3",
+    "QP2409-Q4",
+    "QP2409-Q5",
+    "QP2409-Q6",
+    "QP2409-Q7",
+    "QP2409-Q8",
+    "QP2409-Q9",
+    "QP2410-Q1",
+    "QP2410-Q2",
+    "QP2410-Q3",
+    "QP2410-Q4",
+    "QP2410-Q5",
+    "QP2410-Q6",
+    "QP2410-Q7",
+    "QP2410-Q8",
+    "QP2410-Q9",
+    "QP2411-Q1",
+    "QP2411-Q2",
+    "QP2411-Q3",
+    "QP2411-Q4",
+    "QP2411-Q5",
+    "QP2411-Q6",
+    "QP2411-Q7",
+    "QP2411-Q8",
+    "QP2411-Q9",
+    "QP2412-Q1",
+    "QP2412-Q2",
+    "QP2412-Q3",
+    "QP2412-Q4",
+    "QP2412-Q5",
+    "QP2412-Q6",
+    "QP2412-Q7",
+    "QP2412-Q8",
+    "QP2412-Q9",
+    "QP2501-Q1",
+    "QP2501-Q2",
+    "QP2501-Q3",
+    "QP2501-Q4",
+    "QP2501-Q5",
+    "QP2501-Q6",
+    "QP2501-Q7",
+    "QP2501-Q8",
+    "QP2501-Q9",
+    "QP2502-Q1",
+    "QP2502-Q2",
+    "QP2502-Q3",
+    "QP2502-Q4",
+    "QP2502-Q5",
+    "QP2502-Q6",
+    "QP2502-Q7",
+    "QP2502-Q8",
+    "QP2502-Q9",
+    "QP2503-Q1",
+    "QP2503-Q2",
+    "QP2503-Q3",
+    "QP2503-Q4",
+    "QP2503-Q5",
+    "QP2503-Q6",
+    "QP2503-Q7",
+    "QP2503-Q8",
+    "QP2503-Q9",
+    "QP2504-Q1",
+    "QP2504-Q2",
+    "QP2504-Q3",
+    "QP2504-Q4",
+    "QP2504-Q5",
+    "QP2504-Q6",
+    "QP2504-Q7",
+    "QP2504-Q8",
+    "QP2504-Q9",
+    "QP2506-Q1",
+    "QP2506-Q2",
+    "QP2506-Q3",
+    "QP2506-Q4",
+    "QP2506-Q5",
+    "QP2506-Q6",
+    "QP2506-Q7",
+    "QP2506-Q8",
+    "QP2506-Q9",
+    "QP2507-Q1",
+    "QP2507-Q2",
+    "QP2507-Q3",
+    "QP2507-Q4",
+    "QP2507-Q5",
+    "QP2507-Q6",
+    "QP2507-Q7",
+    "QP2507-Q8",
+    "QP2507-Q9",
+    "QP2508-Q1",
+    "QP2508-Q2",
+    "QP2508-Q3",
+    "QP2508-Q4",
+    "QP2508-Q5",
+    "QP2508-Q6",
+    "QP2508-Q7",
+    "QP2508-Q8",
+    "QP2508-Q9",
+    "QP2509-Q1",
+    "QP2509-Q2",
+    "QP2509-Q3",
+    "QP2509-Q4",
+    "QP2509-Q5",
+    "QP2509-Q6",
+    "QP2509-Q7",
+    "QP2509-Q8",
+    "QP2509-Q9",
+    "QP2510-Q1",
+    "QP2510-Q2",
+    "QP2510-Q3",
+    "QP2510-Q4",
+    "QP2510-Q5",
+    "QP2510-Q6",
+    "QP2510-Q7",
+    "QP2510-Q8",
+    "QP2510-Q9",
+    "QP2511-Q1",
+    "QP2511-Q2",
+    "QP2511-Q3",
+    "QP2511-Q4",
+    "QP2511-Q5",
+    "QP2511-Q6",
+    "QP2511-Q7",
+    "QP2511-Q8",
+    "QP2511-Q9",
+    "QP2512-Q1",
+    "QP2512-Q2",
+    "QP2512-Q3",
+    "QP2512-Q4",
+    "QP2512-Q5",
+    "QP2512-Q6",
+    "QP2512-Q7",
+    "QP2512-Q8",
+    "QP2512-Q9",
+    "QP2601-Q1",
+    "QP2601-Q2",
+    "QP2601-Q3",
+    "QP2601-Q4",
+    "QP2601-Q5",
+    "QP2601-Q6",
+    "QP2601-Q7",
+    "QP2601-Q8",
+    "QP2601-Q9",
+    "QP2602-Q1",
+    "QP2602-Q2",
+    "QP2602-Q3",
+    "QP2602-Q4",
+    "QP2602-Q5",
+    "QP2602-Q6",
+    "QP2602-Q7",
+    "QP2602-Q8",
+    "QP2602-Q9",
+    "QP2603-Q1",
+    "QP2603-Q2",
+    "QP2603-Q3",
+    "QP2603-Q4",
+    "QP2603-Q5",
+    "QP2603-Q6",
+    "QP2603-Q7",
+    "QP2603-Q8",
+    "QP2603-Q9",
+    "QP2604-Q1",
+    "QP2604-Q2",
+    "QP2604-Q3",
+    "QP2604-Q4",
+    "QP2604-Q5",
+    "QP2604-Q6",
+    "QP2604-Q7",
+    "QP2604-Q8",
+    "QP2604-Q9",
+    "QP2606-Q1",
+    "QP2606-Q2",
+    "QP2606-Q3",
+    "QP2606-Q4",
+    "QP2606-Q5",
+    "QP2606-Q6",
+    "QP2606-Q7",
+    "QP2606-Q8",
+    "QP2606-Q9",
+    "QP2607-Q1",
+    "QP2607-Q2",
+    "QP2607-Q3",
+    "QP2607-Q4",
+    "QP2607-Q5",
+    "QP2607-Q6",
+    "QP2607-Q7",
+    "QP2607-Q8",
+    "QP2607-Q9",
+    "QP2608-Q8",
+    "QP2608-Q9"
+  ],
+  "modern_multi_member_families": {
+    "QP2101-Q3": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2101-Q3",
+        "QP2111-Q4",
+        "QP2206-Q3"
+      ]
+    },
+    "QP2101-Q4": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2101-Q4",
+        "QP2107-Q1",
+        "QP2109-Q1",
+        "QP2110-Q5",
+        "QP2111-Q5",
+        "QP2206-Q5"
+      ]
+    },
+    "QP2101-Q6": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2101-Q6",
+        "QP2111-Q7",
+        "QP2206-Q6"
+      ]
+    },
+    "QP2101-Q7": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2101-Q7",
+        "QP2212-Q3"
+      ]
+    },
+    "QP2101-Q8": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2101-Q8",
+        "QP2111-Q9",
+        "QP2206-Q8"
+      ]
+    },
+    "QP2101-Q9": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2101-Q9",
+        "QP2302-Q9",
+        "QP2304-Q7",
+        "QP2310-Q8",
+        "QP2402-Q2",
+        "QP2409-Q6",
+        "QP2509-Q7"
+      ]
+    },
+    "QP2102-Q1": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2102-Q1",
+        "QP2202-Q2",
+        "QP2312-Q6",
+        "QP2402-Q6",
+        "QP2606-Q6"
+      ]
+    },
+    "QP2102-Q2": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2102-Q2",
+        "QP2109-Q2"
+      ]
+    },
+    "QP2102-Q3": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2102-Q3",
+        "QP2202-Q3"
+      ]
+    },
+    "QP2102-Q4": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2102-Q4",
+        "QP2108-Q3"
+      ]
+    },
+    "QP2102-Q5": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2102-Q5",
+        "QP2308-Q8"
+      ]
+    },
+    "QP2102-Q6": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2102-Q6",
+        "QP2202-Q4",
+        "QP2304-Q3",
+        "QP2406-Q8",
+        "QP2509-Q3",
+        "QP2601-Q3",
+        "QP2604-Q3",
+        "QP2607-Q5"
+      ]
+    },
+    "QP2102-Q7": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2102-Q7",
+        "QP2202-Q7"
+      ]
+    },
+    "QP2102-Q8": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2102-Q8",
+        "QP2202-Q8"
+      ]
+    },
+    "QP2102-Q9": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2102-Q9",
+        "QP2202-Q9"
+      ]
+    },
+    "QP2103-Q4": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2103-Q4",
+        "QP2110-Q7"
+      ]
+    },
+    "QP2103-Q6": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2103-Q6",
+        "QP2512-Q3"
+      ]
+    },
+    "QP2103-Q7": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2103-Q7",
+        "QP2204-Q4",
+        "QP2512-Q4"
+      ]
+    },
+    "QP2103-Q9": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2103-Q9",
+        "QP2108-Q6",
+        "QP2206-Q9",
+        "QP2212-Q7"
+      ]
+    },
+    "QP2104-Q2": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2104-Q2",
+        "QP2210-Q9",
+        "QP2303-Q1",
+        "QP2306-Q1",
+        "QP2309-Q8",
+        "QP2404-Q9"
+      ]
+    },
+    "QP2104-Q4": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2104-Q4",
+        "QP2107-Q4"
+      ]
+    },
+    "QP2104-Q7": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2104-Q7",
+        "QP2203-Q5",
+        "QP2401-Q8"
+      ]
+    },
+    "QP2104-Q8": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2104-Q8",
+        "QP2201-Q2"
+      ]
+    },
+    "QP2104-Q9": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2104-Q9",
+        "QP2109-Q8",
+        "QP2207-Q3"
+      ]
+    },
+    "QP2107-Q2": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2107-Q2",
+        "QP2406-Q1"
+      ]
+    },
+    "QP2107-S2-Q6": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2107-S2-Q6",
+        "QP2108-Q8",
+        "QP2201-Q1",
+        "QP2203-Q7"
+      ]
+    },
+    "QP2107-Q8": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2107-Q8",
+        "QP2501-Q5"
+      ]
+    },
+    "QP2108-Q2": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2108-Q2",
+        "QP2203-Q2",
+        "QP2303-Q9",
+        "QP2406-Q9",
+        "QP2411-Q9"
+      ]
+    },
+    "QP2108-Q4": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2108-Q4",
+        "QP2410-Q3"
+      ]
+    },
+    "QP2108-Q7": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2108-Q7",
+        "QP2204-Q2"
+      ]
+    },
+    "QP2109-Q3": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2109-Q3",
+        "QP2110-Q9"
+      ]
+    },
+    "QP2109-Q7": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2109-Q7",
+        "QP2201-Q8"
+      ]
+    },
+    "QP2111-Q1": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2111-Q1",
+        "QP2112-Q8",
+        "QP2206-Q4"
+      ]
+    },
+    "QP2111-Q6": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2111-Q6",
+        "QP2112-Q1"
+      ]
+    },
+    "QP2111-Q8": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2111-Q8",
+        "QP2201-Q9"
+      ]
+    },
+    "QP2112-Q9": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2112-Q9",
+        "QP2203-Q6"
+      ]
+    },
+    "QP2201-Q5": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2201-Q5",
+        "QP2509-Q6",
+        "QP2601-Q2"
+      ]
+    },
+    "QP2201-Q6": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2201-Q6",
+        "QP2202-Q1"
+      ]
+    },
+    "QP2201-Q7": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2201-Q7",
+        "QP2209-Q7",
+        "QP2301-Q1",
+        "QP2308-Q3",
+        "QP2404-Q4",
+        "QP2409-Q9",
+        "QP2506-Q1"
+      ]
+    },
+    "QP2202-Q6": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2202-Q6",
+        "QP2307-Q7",
+        "QP2503-Q8"
+      ]
+    },
+    "QP2203-Q1": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2203-Q1",
+        "QP2210-Q1",
+        "QP2407-Q7"
+      ]
+    },
+    "QP2203-Q3": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2203-Q3",
+        "QP2407-Q2"
+      ]
+    },
+    "QP2203-Q9": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2203-Q9",
+        "QP2402-Q4"
+      ]
+    },
+    "QP2204-Q6": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2204-Q6",
+        "QP2210-Q4"
+      ]
+    },
+    "QP2204-Q7": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2204-Q7",
+        "QP2208-Q9",
+        "QP2307-Q6",
+        "QP2312-Q9",
+        "QP2606-Q9"
+      ]
+    },
+    "QP2207-Q4": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2207-Q4",
+        "QP2211-Q1"
+      ]
+    },
+    "QP2208-Q2": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2208-Q2",
+        "QP2303-Q3",
+        "QP2503-Q5",
+        "QP2507-Q5"
+      ]
+    },
+    "QP2208-Q3": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2208-Q3",
+        "QP2212-Q4"
+      ]
+    },
+    "QP2208-Q7": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2208-Q7",
+        "QP2302-Q7",
+        "QP2403-Q4",
+        "QP2410-Q7",
+        "QP2510-Q4"
+      ]
+    },
+    "QP2209-Q2": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2209-Q2",
+        "QP2304-Q1",
+        "QP2509-Q1"
+      ]
+    },
+    "QP2209-Q3": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2209-Q3",
+        "QP2403-Q5",
+        "QP2504-Q9",
+        "QP2510-Q5"
+      ]
+    },
+    "QP2209-Q5": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2209-Q5",
+        "QP2311-Q5"
+      ]
+    },
+    "QP2209-Q8": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2209-Q8",
+        "QP2304-Q2",
+        "QP2503-Q6",
+        "QP2509-Q5"
+      ]
+    },
+    "QP2209-Q9": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2209-Q9",
+        "QP2304-Q8",
+        "QP2402-Q9",
+        "QP2509-Q8"
+      ]
+    },
+    "QP2210-Q2": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2210-Q2",
+        "QP2401-Q1",
+        "QP2607-Q9"
+      ]
+    },
+    "QP2210-Q3": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2210-Q3",
+        "QP2403-Q6",
+        "QP2510-Q6"
+      ]
+    },
+    "QP2210-Q5": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2210-Q5",
+        "QP2304-Q9",
+        "QP2310-Q2",
+        "QP2312-Q8",
+        "QP2412-Q4",
+        "QP2509-Q9",
+        "QP2606-Q8"
+      ]
+    },
+    "QP2210-Q7": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2210-Q7",
+        "QP2306-Q9"
+      ]
+    },
+    "QP2210-Q8": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2210-Q8",
+        "QP2503-Q7"
+      ]
+    },
+    "QP2211-Q3": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2211-Q3",
+        "QP2302-Q8",
+        "QP2307-Q4",
+        "QP2407-Q6"
+      ]
+    },
+    "QP2212-Q1": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2212-Q1",
+        "QP2308-Q1",
+        "QP2404-Q1"
+      ]
+    },
+    "QP2212-Q2": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2212-Q2",
+        "QP2404-Q2",
+        "QP2411-Q2"
+      ]
+    },
+    "QP2212-Q5": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2212-Q5",
+        "QP2310-Q1",
+        "QP2402-Q3",
+        "QP2411-Q3"
+      ]
+    },
+    "QP2212-Q9": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2212-Q9",
+        "QP2304-Q5",
+        "QP2308-Q2",
+        "QP2404-Q3",
+        "QP2509-Q4",
+        "QP2512-Q9"
+      ]
+    },
+    "QP2301-Q2": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2301-Q2",
+        "QP2306-Q5",
+        "QP2404-Q5",
+        "QP2409-Q8"
+      ]
+    },
+    "QP2301-Q4": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2301-Q4",
+        "QP2506-Q4"
+      ]
+    },
+    "QP2301-Q5": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2301-Q5",
+        "QP2310-Q7",
+        "QP2506-Q5"
+      ]
+    },
+    "QP2301-Q6": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2301-Q6",
+        "QP2404-Q6",
+        "QP2410-Q9",
+        "QP2506-Q6",
+        "QP2508-Q6",
+        "QP2602-Q6"
+      ]
+    },
+    "QP2301-Q7": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2301-Q7",
+        "QP2408-Q3",
+        "QP2506-Q7",
+        "QP2601-Q8",
+        "QP2604-Q8"
+      ]
+    },
+    "QP2301-Q8": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2301-Q8",
+        "QP2404-Q7",
+        "QP2502-Q2",
+        "QP2506-Q8",
+        "QP2508-Q4",
+        "QP2601-Q9",
+        "QP2602-Q4",
+        "QP2604-Q9"
+      ]
+    },
+    "QP2301-Q9": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2301-Q9",
+        "QP2310-Q6",
+        "QP2409-Q7"
+      ]
+    },
+    "QP2302-Q1": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2302-Q1",
+        "QP2503-Q4"
+      ]
+    },
+    "QP2302-Q2": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2302-Q2",
+        "QP2308-Q9",
+        "QP2401-Q9",
+        "QP2403-Q7",
+        "QP2412-Q9",
+        "QP2510-Q7"
+      ]
+    },
+    "QP2302-Q3": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2302-Q3",
+        "QP2401-Q3",
+        "QP2410-Q8",
+        "QP2504-Q6"
+      ]
+    },
+    "QP2302-Q4": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2302-Q4",
+        "QP2307-Q1",
+        "QP2408-Q7",
+        "QP2411-Q5"
+      ]
+    },
+    "QP2302-Q5": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2302-Q5",
+        "QP2312-Q4",
+        "QP2606-Q4"
+      ]
+    },
+    "QP2302-Q6": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2302-Q6",
+        "QP2403-Q2",
+        "QP2510-Q2"
+      ]
+    },
+    "QP2303-Q2": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2303-Q2",
+        "QP2411-Q7"
+      ]
+    },
+    "QP2303-Q4": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2303-Q4",
+        "QP2307-Q3",
+        "QP2310-Q5"
+      ]
+    },
+    "QP2303-Q5": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2303-Q5",
+        "QP2308-Q6"
+      ]
+    },
+    "QP2303-Q6": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2303-Q6",
+        "QP2411-Q8"
+      ]
+    },
+    "QP2303-Q7": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2303-Q7",
+        "QP2406-Q3"
+      ]
+    },
+    "QP2303-Q8": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2303-Q8",
+        "QP2309-Q2",
+        "QP2401-Q5",
+        "QP2607-Q3"
+      ]
+    },
+    "QP2304-Q4": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2304-Q4",
+        "QP2307-Q8",
+        "QP2503-Q9",
+        "QP2507-Q9"
+      ]
+    },
+    "QP2304-Q6": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2304-Q6",
+        "QP2502-Q8"
+      ]
+    },
+    "QP2306-Q7": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2306-Q7",
+        "QP2412-Q8"
+      ]
+    },
+    "QP2306-Q8": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2306-Q8",
+        "QP2412-Q7"
+      ]
+    },
+    "QP2307-Q9": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2307-Q9",
+        "QP2410-Q1",
+        "QP2506-Q9",
+        "QP2508-Q5",
+        "QP2602-Q5"
+      ]
+    },
+    "QP2309-Q1": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2309-Q1",
+        "QP2407-Q1"
+      ]
+    },
+    "QP2309-Q3": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2309-Q3",
+        "QP2402-Q5"
+      ]
+    },
+    "QP2309-Q4": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2309-Q4",
+        "QP2402-Q1",
+        "QP2407-Q3",
+        "QP2502-Q1"
+      ]
+    },
+    "QP2309-Q7": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2309-Q7",
+        "QP2404-Q8"
+      ]
+    },
+    "QP2309-Q9": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2309-Q9",
+        "QP2310-Q3",
+        "QP2312-Q2",
+        "QP2606-Q2"
+      ]
+    },
+    "QP2310-Q4": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2310-Q4",
+        "QP2408-Q8"
+      ]
+    },
+    "QP2310-Q9": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2310-Q9",
+        "QP2412-Q5"
+      ]
+    },
+    "QP2311-Q4": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2311-Q4",
+        "QP2504-Q4"
+      ]
+    },
+    "QP2311-Q7": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2311-Q7",
+        "QP2408-Q6"
+      ]
+    },
+    "QP2311-Q9": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2311-Q9",
+        "QP2406-Q7",
+        "QP2502-Q7",
+        "QP2504-Q8"
+      ]
+    },
+    "QP2312-Q1": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2312-Q1",
+        "QP2606-Q1"
+      ]
+    },
+    "QP2312-Q3": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2312-Q3",
+        "QP2606-Q3"
+      ]
+    },
+    "QP2312-Q5": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2312-Q5",
+        "QP2408-Q9",
+        "QP2606-Q5"
+      ]
+    },
+    "QP2312-Q7": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2312-Q7",
+        "QP2502-Q9",
+        "QP2606-Q7"
+      ]
+    },
+    "QP2401-Q7": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2401-Q7",
+        "QP2504-Q7"
+      ]
+    },
+    "QP2403-Q1": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2403-Q1",
+        "QP2510-Q1"
+      ]
+    },
+    "QP2403-Q3": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2403-Q3",
+        "QP2510-Q3"
+      ]
+    },
+    "QP2403-Q8": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2403-Q8",
+        "QP2510-Q8"
+      ]
+    },
+    "QP2403-Q9": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2403-Q9",
+        "QP2510-Q9"
+      ]
+    },
+    "QP2408-Q2": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2408-Q2",
+        "QP2411-Q4"
+      ]
+    },
+    "QP2410-Q4": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2410-Q4",
+        "QP2511-Q8",
+        "QP2603-Q9"
+      ]
+    },
+    "QP2410-Q5": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2410-Q5",
+        "QP2511-Q7"
+      ]
+    },
+    "QP2501-Q1": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2501-Q1",
+        "QP2507-Q1"
+      ]
+    },
+    "QP2501-Q7": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2501-Q7",
+        "QP2507-Q2"
+      ]
+    },
+    "QP2501-Q9": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2501-Q9",
+        "QP2507-Q4"
+      ]
+    },
+    "QP2502-Q5": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2502-Q5",
+        "QP2504-Q5"
+      ]
+    },
+    "QP2503-Q1": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2503-Q1",
+        "QP2507-Q8"
+      ]
+    },
+    "QP2503-Q2": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2503-Q2",
+        "QP2507-Q7"
+      ]
+    },
+    "QP2503-Q3": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2503-Q3",
+        "QP2507-Q6"
+      ]
+    },
+    "QP2506-Q2": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2506-Q2",
+        "QP2508-Q7",
+        "QP2511-Q9",
+        "QP2602-Q7",
+        "QP2603-Q1"
+      ]
+    },
+    "QP2508-Q1": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2508-Q1",
+        "QP2602-Q1"
+      ]
+    },
+    "QP2508-Q2": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2508-Q2",
+        "QP2509-Q2",
+        "QP2602-Q2"
+      ]
+    },
+    "QP2508-Q3": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2508-Q3",
+        "QP2602-Q3",
+        "QP2603-Q8",
+        "QP2604-Q2"
+      ]
+    },
+    "QP2508-Q8": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2508-Q8",
+        "QP2602-Q8"
+      ]
+    },
+    "QP2508-Q9": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2508-Q9",
+        "QP2602-Q9"
+      ]
+    },
+    "QP2511-Q3": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2511-Q3",
+        "QP2512-Q1",
+        "QP2601-Q6",
+        "QP2603-Q4",
+        "QP2604-Q6"
+      ]
+    },
+    "QP2511-Q4": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2511-Q4",
+        "QP2512-Q2",
+        "QP2603-Q5"
+      ]
+    },
+    "QP2511-Q5": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2511-Q5",
+        "QP2603-Q6"
+      ]
+    },
+    "QP2511-Q6": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2511-Q6",
+        "QP2603-Q7"
+      ]
+    },
+    "QP2601-Q4": {
+      "class": "EXACT_REPEAT",
+      "evidence": "DETERMINISTIC",
+      "members": [
+        "QP2601-Q4",
+        "QP2604-Q4"
+      ]
+    },
+    "QP2601-Q7": {
+      "class": "NEAR_REPEAT",
+      "evidence": "INFERRED",
+      "members": [
+        "QP2601-Q7",
+        "QP2604-Q7"
+      ]
+    }
+  }
+}

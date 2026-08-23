@@ -1,0 +1,625 @@
+{
+  "schema": "miw.study.study_qi_holds.v1",
+  "schema_version": "1.0",
+  "hand_editable": true,
+  "what_this_is": "The governed holds standing between the existing modern question-level QI and the canonical longitudinal QI. A hold is finished governance work: a named human read the evidence and recorded that it does not settle the question. It is not backlog and no summary may count it as unadjudicated work.",
+  "why_a_hold_is_not_a_fix": "Resolving a modern/canonical disagreement changes what a recurrence relationship MEANS. Doing that inside an integration build would be a semantic decision taken by a script. Every disagreement below is therefore recorded and left standing.",
+  "conflict_hold_states": {
+    "HOLD_RECONCILIATION": "Modern and canonical layers group the same questions incompatibly and no governed join explains it. Both groupings survive; the adapter reports both and weights neither twice.",
+    "RESOLVED_MODERN": "A human confirmed the modern grouping. Requires adjudicated_by.",
+    "RESOLVED_CANONICAL": "A human confirmed the canonical split. Requires adjudicated_by."
+  },
+  "topic_mapping_hold_states": {
+    "HOLD_TOPIC_MAPPING": "The family is alive in the 2021-2022 wording-only band and reaches no topic, because the one mapper has never been given that band as input. This is a scope gap in the mapper, not an unmappable family, and it is NOT fixed by classifying the question here -- a second classifier in the adapter would be a second taxonomy by the back door. The route out is to extend build_study_mappings.py input scope to the wording-only band, which is a corpus-scope decision.",
+    "MAPPED": "The mapper has since reached it; the hold is spent."
+  },
+  "conflict_holds": [
+    {
+      "hold_id": "SQI-CONF-001",
+      "modern_family_id": "QP2102-Q6",
+      "state": "HOLD_RECONCILIATION",
+      "modern_class": "NEAR_REPEAT",
+      "modern_evidence_class": "INFERRED",
+      "modern_members": [
+        "QP2102-Q6",
+        "QP2202-Q4",
+        "QP2304-Q3",
+        "QP2406-Q8",
+        "QP2509-Q3",
+        "QP2601-Q3",
+        "QP2604-Q3",
+        "QP2607-Q5"
+      ],
+      "canonical_split_into": [
+        "QIF-EM-0009",
+        "QIF-EM-0180"
+      ],
+      "precedence_while_held": "CANONICAL_ADJUDICATION_WINS",
+      "adjudicated_by": null,
+      "note": "The similarity cluster merges the salvage-law ask with the particular-average / general-average ask. They share marine-insurance vocabulary and almost nothing else, and the canonical layer split them into QIF-EM-0009 and QIF-EM-0180. The split reads correct, but confirming it retires a seven-member modern lineage, so a human states it."
+    },
+    {
+      "hold_id": "SQI-CONF-002",
+      "modern_family_id": "QP2104-Q2",
+      "state": "HOLD_RECONCILIATION",
+      "modern_class": "NEAR_REPEAT",
+      "modern_evidence_class": "INFERRED",
+      "modern_members": [
+        "QP2104-Q2",
+        "QP2210-Q9",
+        "QP2303-Q1",
+        "QP2306-Q1",
+        "QP2309-Q8",
+        "QP2404-Q9"
+      ],
+      "canonical_split_into": [
+        "QIF-EM-0053",
+        "QIF-EM-0167"
+      ],
+      "precedence_while_held": "CANONICAL_ADJUDICATION_WINS",
+      "adjudicated_by": null,
+      "note": "Both limbs are UNCLOS. QIF-EM-0053 asks about protection of the marine environment; QIF-EM-0167 asks for the highlights of UNCLOS generally. Sibling asks under one instrument, which is exactly the case where a near-repeat threshold and a semantic adjudication may legitimately differ."
+    },
+    {
+      "hold_id": "SQI-CONF-003",
+      "modern_family_id": "QP2209-Q9",
+      "state": "HOLD_RECONCILIATION",
+      "modern_class": "NEAR_REPEAT",
+      "modern_evidence_class": "INFERRED",
+      "modern_members": [
+        "QP2209-Q9",
+        "QP2304-Q8",
+        "QP2402-Q9",
+        "QP2509-Q8"
+      ],
+      "canonical_split_into": [
+        "QIF-EM-0233",
+        "QIF-EM-0243"
+      ],
+      "precedence_while_held": "CANONICAL_ADJUDICATION_WINS",
+      "adjudicated_by": null,
+      "note": "The two canonical families open with the same IMO/ILO-regime sentence and diverge afterwards. A shared framing sentence defeats similarity scoring in both directions, so neither the merge nor the split can be trusted from wording alone."
+    },
+    {
+      "hold_id": "SQI-CONF-004",
+      "modern_family_id": "QP2210-Q5",
+      "state": "HOLD_RECONCILIATION",
+      "modern_class": "NEAR_REPEAT",
+      "modern_evidence_class": "INFERRED",
+      "modern_members": [
+        "QP2210-Q5",
+        "QP2304-Q9",
+        "QP2310-Q2",
+        "QP2312-Q8",
+        "QP2412-Q4",
+        "QP2509-Q9",
+        "QP2606-Q8"
+      ],
+      "canonical_split_into": [
+        "QIF-EM-0073",
+        "QIF-EM-0082"
+      ],
+      "precedence_while_held": "CANONICAL_ADJUDICATION_WINS",
+      "adjudicated_by": null,
+      "note": "QIF-EM-0082 is the role of classification societies; QIF-EM-0073 is the purpose of annual surveys and its listed items. QP2310-Q2 is the only member on the QIF-EM-0073 side, so this is a single-member disagreement inside an otherwise agreeing six-member lineage."
+    },
+    {
+      "hold_id": "SQI-CONF-005",
+      "modern_family_id": "QP2302-Q6",
+      "state": "HOLD_RECONCILIATION",
+      "modern_class": "NEAR_REPEAT",
+      "modern_evidence_class": "INFERRED",
+      "modern_members": [
+        "QP2302-Q6",
+        "QP2403-Q2",
+        "QP2510-Q2"
+      ],
+      "canonical_split_into": [
+        "QIF-EM-0106",
+        "QIF-EM-0255"
+      ],
+      "precedence_while_held": "CANONICAL_ADJUDICATION_WINS",
+      "adjudicated_by": null,
+      "note": "Bill of Lading: QIF-EM-0106 asks for its main functions, QIF-EM-0255 asks for a definition and its significance. This is the closest of the seven and the most likely to be resolved as one family, which is precisely why it may not be resolved by a build."
+    },
+    {
+      "hold_id": "SQI-CONF-006",
+      "modern_family_id": "QP2309-Q9",
+      "state": "HOLD_RECONCILIATION",
+      "modern_class": "NEAR_REPEAT",
+      "modern_evidence_class": "INFERRED",
+      "modern_members": [
+        "QP2309-Q9",
+        "QP2310-Q3",
+        "QP2312-Q2",
+        "QP2606-Q2"
+      ],
+      "canonical_split_into": [
+        "QIF-EM-0010",
+        "QIF-EM-0164",
+        "QIF-EM-0249"
+      ],
+      "precedence_while_held": "CANONICAL_ADJUDICATION_WINS",
+      "adjudicated_by": null,
+      "note": "Port State Control split three ways -- provisions, enumeration, and the concept with a stated focus. Three families over four modern members is the widest split observed, and the modern layer saw one lineage. Neither reading is obviously right."
+    },
+    {
+      "hold_id": "SQI-CONF-007",
+      "modern_family_id": "QP2310-Q4",
+      "state": "HOLD_RECONCILIATION",
+      "modern_class": "NEAR_REPEAT",
+      "modern_evidence_class": "INFERRED",
+      "modern_members": [
+        "QP2310-Q4",
+        "QP2408-Q8"
+      ],
+      "canonical_split_into": [
+        "QIF-EM-0031",
+        "QIF-EM-0111"
+      ],
+      "precedence_while_held": "CANONICAL_ADJUDICATION_WINS",
+      "adjudicated_by": null,
+      "note": "Turbocharging: QIF-EM-0031 lists modern methods, QIF-EM-0111 asks about latest developments. Both carry time-relative language, so the currentness layer already flags them; the family question is separate and stays open."
+    }
+  ],
+  "topic_mapping_holds": [
+    {
+      "hold_id": "SQI-MAP-001",
+      "family_id": "QIF-EM-0004",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2107-Q3"
+      ],
+      "label": "What are the principal reasons responsible for compounding of machinery vibration in conne",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-002",
+      "family_id": "QIF-EM-0011",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2104-Q3"
+      ],
+      "label": "Explain the significance of propeller curves. Enumerate the safety margins in relation to ",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-003",
+      "family_id": "QIF-EM-0014",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2101-Q4",
+        "QP2107-Q1",
+        "QP2109-Q1",
+        "QP2110-Q5",
+        "QP2111-Q5",
+        "QP2206-Q5"
+      ],
+      "label": "The vessel in which you are the Chief Engineer is about to be laid up for 3 months for com",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-004",
+      "family_id": "QIF-EM-0024",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2103-Q4",
+        "QP2110-Q7",
+        "QP2112-Q5"
+      ],
+      "label": "Explain the following maritime terms: - A. Charter Party; B. Freight; C. Bare Boat charter",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-005",
+      "family_id": "QIF-EM-0025",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2104-Q6"
+      ],
+      "label": "During inspection of propeller in the dry dock, a surface crack has been noticed on one of",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-006",
+      "family_id": "QIF-EM-0030",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2103-Q1"
+      ],
+      "label": "(a) As a Chief Engineer officer of a tanker vessel, how do you ensure protection of the en",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-007",
+      "family_id": "QIF-EM-0034",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2104-Q4",
+        "QP2107-Q4",
+        "QP2109-Q5"
+      ],
+      "label": "The initial IMO strategy for GHG reduction adopted at MEPC 72 is the first milestone set o",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-008",
+      "family_id": "QIF-EM-0043",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2101-Q1"
+      ],
+      "label": "Stress is one of the factors affecting the performance of an individual. What are the prim",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-009",
+      "family_id": "QIF-EM-0052",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2101-Q3",
+        "QP2111-Q4",
+        "QP2206-Q3"
+      ],
+      "label": "Write short notes on any THREE: A. Lloyd's Open Form; B. General Average and Particular Av",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-010",
+      "family_id": "QIF-EM-0054",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2103-Q3"
+      ],
+      "label": "With respect to Energy Efficiency Design Index(EEDI) explain in detail the following; A. R",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-011",
+      "family_id": "QIF-EM-0061",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2107-S2-Q2",
+        "QP2109-Q9",
+        "QP2203-Q4"
+      ],
+      "label": "(a) The STCW convention was amended in manila in 25 June 2010. What major changes and amen",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-012",
+      "family_id": "QIF-EM-0064",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2204-Q3"
+      ],
+      "label": "What are the engine developments & retrofitting which were adopted by engine manufacturers",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-013",
+      "family_id": "QIF-EM-0065",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2104-Q8",
+        "QP2201-Q2"
+      ],
+      "label": "To operate engines in compliance with the new IMO 2020 Sulphur limits and to prepare the e",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-014",
+      "family_id": "QIF-EM-0067",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2107-Q9"
+      ],
+      "label": "List the objectives of an ISM code. How an internal audit helps in External Audit of a ves",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-015",
+      "family_id": "QIF-EM-0068",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2103-Q5"
+      ],
+      "label": "Illustrate the salient factors for “onboard training’ and standard of competence as laid o",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-016",
+      "family_id": "QIF-EM-0077",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2102-Q8",
+        "QP2202-Q8"
+      ],
+      "label": "How many types of warranties are there in Marine Insurance? Give an example of each type w",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-017",
+      "family_id": "QIF-EM-0078",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2109-Q6"
+      ],
+      "label": "(A) Describe the salient features of latest IOPP equipment compared with the earlier versi",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-018",
+      "family_id": "QIF-EM-0080",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2212-Q6"
+      ],
+      "label": "Why does a ship require Marine Insurance cover? Explain Hull Claims and Cargo Claims relat",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-019",
+      "family_id": "QIF-EM-0086",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2102-Q7",
+        "QP2202-Q7"
+      ],
+      "label": "Socio cultural differences have been an accepted fact in major merchant ships around the g",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-020",
+      "family_id": "QIF-EM-0087",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2112-Q2"
+      ],
+      "label": "With reference to PSC inspections, explain various codes used to represent 'action to be t",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-021",
+      "family_id": "QIF-EM-0088",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2101-Q8",
+        "QP2111-Q9",
+        "QP2206-Q8"
+      ],
+      "label": "With reference to surveying of large starting air receivers: (a) Explain where corrosion i",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-022",
+      "family_id": "QIF-EM-0091",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2101-Q7",
+        "QP2212-Q3"
+      ],
+      "label": "Describe the general structure of a Ballast Water Treatment (BWT) System, highlighting the",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-023",
+      "family_id": "QIF-EM-0102",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2101-Q5",
+        "QP2103-Q8",
+        "QP2111-Q1",
+        "QP2112-Q8",
+        "QP2206-Q4"
+      ],
+      "label": "Discuss the additional risks of bulk carriers and tankers which have necessitated the enha",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-024",
+      "family_id": "QIF-EM-0105",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2102-Q9",
+        "QP2202-Q9"
+      ],
+      "label": "Referring generally to a general Ballast Water Treatment (BWT) System, explain; a. Require",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-025",
+      "family_id": "QIF-EM-0107",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2108-Q9"
+      ],
+      "label": "A) What is meant by Strategic Management? Explain the significance of strategic management",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-026",
+      "family_id": "QIF-EM-0133",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2112-Q3"
+      ],
+      "label": "(a) Elaborate some of the technological innovations adopted / developed to improve plant e",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-027",
+      "family_id": "QIF-EM-0145",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2212-Q8"
+      ],
+      "label": "Referring to the latest IMO “Code on noise level onboard Ships”. Define and explain the fo",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-028",
+      "family_id": "QIF-EM-0166",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2101-Q6",
+        "QP2111-Q7",
+        "QP2206-Q6"
+      ],
+      "label": "The European Union (EU) Monitoring, Reporting and Verification (MRV) regulation requires s",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-029",
+      "family_id": "QIF-EM-0168",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2110-Q6",
+        "QP2111-Q8",
+        "QP2201-Q9"
+      ],
+      "label": "Regarding Ballast Water Management Convention explain (a) Ballast Water Exchange Standard ",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-030",
+      "family_id": "QIF-EM-0221",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2102-Q2",
+        "QP2109-Q2"
+      ],
+      "label": "(a) Describe the structure of IMO. (b) Specify the responsibilities and work done by the A",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-031",
+      "family_id": "QIF-EM-0222",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2102-Q3",
+        "QP2202-Q3"
+      ],
+      "label": "Assume a collision occurs between an oil tanker and a bulk carrier in an Indian port. (a)D",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-032",
+      "family_id": "QIF-EM-0223",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2102-Q4",
+        "QP2108-Q3"
+      ],
+      "label": "India, one of the world's five major ship recycling countries, has acceded to the IMO Hong",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-033",
+      "family_id": "QIF-EM-0224",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2108-Q7",
+        "QP2204-Q2"
+      ],
+      "label": "A ship sustained damages on hull while berthing. As a chief engineer officer of this ship,",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-034",
+      "family_id": "QIF-EM-0225",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2109-Q3",
+        "QP2110-Q9"
+      ],
+      "label": "(a) As chief engineer officer, explain how you will prepare vessel for dry docking. Your a",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-035",
+      "family_id": "QIF-EM-0226",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2111-Q6",
+        "QP2112-Q1"
+      ],
+      "label": "(a) What is the purpose of FAL convention and list the main contents of the FAL convention",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-036",
+      "family_id": "QIF-EM-0227",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2112-Q4",
+        "QP2201-Q3"
+      ],
+      "label": "Guidelines on Maritime Cyber Risk Management are laid down in MSC. FAL.1/Circ.3, Consideri",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-037",
+      "family_id": "QIF-EM-0228",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2112-Q6",
+        "QP2203-Q8"
+      ],
+      "label": "(a) The advent of multimodal transportation has entirely changed the legal obligations of ",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-038",
+      "family_id": "QIF-EM-0229",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2201-Q6",
+        "QP2202-Q1"
+      ],
+      "label": "With reference to MEPC 76, the combined technical and operational approaches to improve en",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-039",
+      "family_id": "QIF-EM-0231",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2204-Q6",
+        "QP2210-Q4"
+      ],
+      "label": "The ESP (Enhanced Survey Programme) is applicable to bulk carriers and tankers. (a) Explai",
+      "adjudicated_by": null
+    },
+    {
+      "hold_id": "SQI-MAP-040",
+      "family_id": "QIF-EM-0232",
+      "state": "HOLD_TOPIC_MAPPING",
+      "modern_members": [
+        "QP2207-Q4",
+        "QP2211-Q1"
+      ],
+      "label": "Discuss new developments in Impressed Current Cathodic Protection (ICCP) employed for mari",
+      "adjudicated_by": null
+    }
+  ],
+  "counts": {
+    "conflict_holds": 7,
+    "topic_mapping_holds": 40,
+    "known_authored_edge_defects": 1
+  },
+  "known_authored_edge_defects": {
+    "what_this_is": "Authored host_recurrence_hint references that name a question which does not exist. They are pre-existing corpus defects surfaced by this integration, NOT integration damage. Each is listed individually so the dangling-edge gate stays sharp for new breakage instead of being switched off.",
+    "policy": "Recording is deliberate. Editing forty paper specs to correct authoring notes is corpus maintenance and is out of scope for a QI -> study integration; mixing the two would make the integration diff unreviewable. Correct these in a bounded corpus pass.",
+    "defects": [
+      {
+        "reference": "2024/APR/Q78",
+        "resolves_to": "QP2404-Q78",
+        "found_in": "meoclass1/pastpapers/specs/QP2404.json",
+        "why_broken": "QP2404 prints Q1 to Q9. Q78 is a typed run-together of two question numbers, most likely Q7 and Q8.",
+        "state": "RECORDED_NOT_FIXED",
+        "owner_action": "split the reference into the two intended questions, or delete it if the lineage was mis-recalled"
+      }
+    ]
+  }
+}
