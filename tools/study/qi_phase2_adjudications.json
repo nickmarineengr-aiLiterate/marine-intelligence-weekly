@@ -1,0 +1,1274 @@
+{
+  "schema": "miw.study.qi.phase2.adjudications.v1",
+  "schema_version": "1.0",
+  "hand_editable": true,
+  "what_this_is": "Governed Phase-2 decisions: for a recurrence family, what the CURRENT primary authority says, what the present-day examinable core is, which answer a candidate should study today, and who independently reviewed that. Phase 1 says what recurs; this says what is true now.",
+  "what_this_is_not": "Not a recurrence store. It never changes a family, an occurrence or a count. The pinned_at_selection block is a COPY taken at selection time so the validator can prove Phase 1 did not move underneath this work.",
+  "the_rule_that_governs_everything_here": "MIW Written answers are SITTING-ANCHORED. Every answer must be true as at the date of its own examination sitting, not as at today (TEMPORAL_AND_DONOR_VERIFICATION_PROTOCOL s1). A model_answer may therefore be edited ONLY to fix something that was already wrong at its own sitting -- that is a CORRECTION. Where the framework moved AFTER the sitting, the answer is left alone and the present-day position is carried here, at family level, in present_day_position. That is a MODERNISATION. Collapsing the two would corrupt the past-paper product.",
+  "final_states": {
+    "CURRENT_AND_VERIFIED": "Existing answer checked against current authority and unchanged.",
+    "UPDATED_AND_VERIFIED": "Existing answer corrected at its own sitting date.",
+    "MODERNISED_AND_VERIFIED": "Answer left sitting-anchored; present-day position recorded here.",
+    "NEW_CURRENT_ANSWER_CREATED": "No usable answer existed; one was authored.",
+    "SUPERSEDED_WITH_SUCCESSOR": "Study route moved to a newer answer; the old one is kept as evidence.",
+    "HISTORICAL_ONLY": "No modern life; not a study target.",
+    "HOLD_FOR_AUTHORITY": "Current authority could not be established. Blocked, visibly.",
+    "HOLD_FAMILY_RECONCILIATION": "A family relationship must be settled first. Blocked, visibly."
+  },
+  "safe_final_states": [
+    "CURRENT_AND_VERIFIED",
+    "MODERNISED_AND_VERIFIED",
+    "NEW_CURRENT_ANSWER_CREATED",
+    "SUPERSEDED_WITH_SUCCESSOR",
+    "UPDATED_AND_VERIFIED"
+  ],
+  "review_verdicts": [
+    "PASS",
+    "PASS_WITH_MINOR_FIX",
+    "FAIL_AUTHORITY",
+    "FAIL_CURRENTNESS",
+    "FAIL_SCOPE",
+    "FAIL_NUMBERS",
+    "FAIL_EXAM_UTILITY"
+  ],
+  "authority_classes": {
+    "PRIMARY_IMO": "IMO instrument, resolution or circular read at source.",
+    "PRIMARY_TREATY": "Treaty text.",
+    "PRIMARY_INDIAN_STATUTE": "Gazette text of an Indian Act.",
+    "PRIMARY_INDIAN_SUBORDINATE": "Gazette text of a notification or rule.",
+    "COMPETENT_AUTHORITY_RESTATEMENT": "A national maritime administration restating an instrument MIW does not hold under licence. Accepted, and labelled -- the corpus already uses this class for the Manila rest-hour figures.",
+    "CLASSIFICATION_SOCIETY_SUMMARY": "An IACS member society summarising a session it attended. Used only where no IMO record of the same fact was obtainable, and labelled.",
+    "ENGINEERING_JUDGEMENT": "Settled engineering with no governing instrument. Not a weaker source -- a different kind of question."
+  },
+  "primary_authority_classes_that_satisfy_the_gate": [
+    "PRIMARY_IMO",
+    "PRIMARY_TREATY",
+    "PRIMARY_INDIAN_STATUTE",
+    "PRIMARY_INDIAN_SUBORDINATE",
+    "COMPETENT_AUTHORITY_RESTATEMENT",
+    "CLASSIFICATION_SOCIETY_SUMMARY",
+    "ENGINEERING_JUDGEMENT"
+  ],
+  "tranches": {
+    "QI_PHASE2_TRANCHE_001": {
+      "tranche_id": "QI_PHASE2_TRANCHE_001",
+      "selected_on": "2026-08-23",
+      "selection_rule": "The first ten families in canonical Phase-2 rank order that are NOT READY_TO_STUDY_NOW and whose Phase-2 action is one of EXISTING_CURRENT_ANSWER_VERIFY, NEW_MODERN_ANSWER_REQUIRED, HISTORICAL_ANSWER_REQUIRES_MODERNISATION or CURRENTNESS_RESEARCH_REQUIRED.",
+      "actionable_pool_at_selection": 107,
+      "baseline_commit": "5acbb42e5dcd39bc319d3767e8e85ac1faed2c1e",
+      "family_ids": [
+        "QIF-EM-0082",
+        "QIF-EM-0036",
+        "QIF-EM-0007",
+        "QIF-EM-0012",
+        "QIF-EM-0104",
+        "QIF-EM-0017",
+        "QIF-EM-0129",
+        "QIF-EM-0013",
+        "QIF-EM-0128",
+        "QIF-EM-0023"
+      ],
+      "frozen": true,
+      "note": "Frozen at ten. QIF-EM-0031 was rank 11 and is deliberately NOT included, so the tranche cost is measurable."
+    }
+  },
+  "families": [
+    {
+      "family_id": "QIF-EM-0082",
+      "pinned_at_selection": {
+        "label": "a) Discuss the role of Classification societies in structural, mechanical, and electrical rule formation and i...",
+        "weight_topic_id": "D01",
+        "topic_tags": [
+          "HSSC",
+          "IACS",
+          "RO Code",
+          "SOLAS Chapter II-1",
+          "SOLAS II-1",
+          "SOLAS II-1/3-1",
+          "annual survey",
+          "class rules"
+        ],
+        "count_3y": 4,
+        "count_5y": 6,
+        "count_10y": 6,
+        "count_full_horizon": 6,
+        "distinct_years": 5,
+        "distinct_sittings": 6,
+        "first_sitting": "2022-10",
+        "last_sitting": "2026-06",
+        "unit": "WHOLE_QUESTION",
+        "recurrence_labels": [
+          "NEW_EMERGING",
+          "RECENTLY_ACTIVE",
+          "RISING"
+        ],
+        "time_relative_flags": [
+          "is now mentioned"
+        ],
+        "phase2_rank": 1,
+        "phase2_priority": 70.1,
+        "phase2_action": "EXISTING_CURRENT_ANSWER_VERIFY",
+        "currentness_status_at_selection": "CURRENTNESS_REVIEW_REQUIRED",
+        "existing_answer_status_at_selection": "SOLVED_BUT_CURRENTNESS_UNVERIFIED",
+        "modern_question_action": "USE_EXISTING_CANONICAL_QUESTION",
+        "modern_members": [
+          "QP2210-Q5",
+          "QP2304-Q9",
+          "QP2312-Q8",
+          "QP2412-Q4",
+          "QP2509-Q9",
+          "QP2606-Q8"
+        ],
+        "modern_family_ids": [
+          "QP2210-Q5"
+        ],
+        "modern_recurrence_classes": [
+          "EXACT_RECURRENCE",
+          "RECURRING",
+          "TOPIC_RECURRENCE"
+        ],
+        "historical_variants": [
+          "QP2210-Q5",
+          "QP2304-Q9",
+          "QP2312-Q8",
+          "QP2412-Q4",
+          "QP2509-Q9"
+        ],
+        "canonical_bearer_at_selection": "QP2606-Q8",
+        "readiness_before": "VERIFY_CURRENT_ANSWER"
+      },
+      "selection_reason": "Rank 1 in the canonical Phase-2 ranking. Six sittings in five years, four inside the last three, a time-relative stem, and a solved but currentness-unverified answer.",
+      "modern_conflict_status": "ADJUDICATED_THIS_TRANCHE (SQI-CONF-004) -- LEGITIMATE_RELATED_BUT_DISTINCT. See conflict_adjudication.",
+      "conflict_adjudication": {
+        "hold_id": "SQI-CONF-004",
+        "why_reopened": "It is the only one of the seven NEAR_REPEAT holds that names this tranche's rank-1 family, so it directly blocks the work.",
+        "verdict": "LEGITIMATE_RELATED_BUT_DISTINCT",
+        "reasoning": "The inferred modern cluster puts QP2310-Q2 with six questions about the ROLE of classification societies. QP2310-Q2 asks about the PURPOSE of annual surveys and the items listed under them, which is QIF-EM-0073. Both concern class, so a similarity threshold joins them; they are different examinable cores and take different answers. The canonical split is right and the modern cluster is an over-reach of one member. Neither family loses a member and no occurrence moves.",
+        "effect_on_counts": "NONE. The canonical split already governs; this records the decision and releases the block.",
+        "adjudicated_by": "Laptop Claude Code (independent clean-context review pass)",
+        "other_holds_touched": []
+      },
+      "present_day_examinable_core": "UNCHANGED_CORE_BUT_CURRENT_ANSWER_NEEDS_VERIFY",
+      "existing_answer_owners": [
+        "QP2606-Q8"
+      ],
+      "existing_answer_status": "ONE_CANONICAL_CURRENT_CANDIDATE",
+      "primary_authority": [
+        {
+          "source": "IMO Assembly resolution A.1207(34), Survey Guidelines under the Harmonized System of Survey and Certification (HSSC), 2025, adopted 3 December 2025",
+          "class": "PRIMARY_IMO",
+          "checked": "Confirmed still the operative edition at August 2026. The Assembly re-adopts the Guidelines biennially; the 34th session sat 24 November to 3 December 2025 and the 35th is not due until late 2027, so no later edition can exist."
+        },
+        {
+          "source": "RO Code, resolution MSC.349(92) with MEPC.237(65)",
+          "class": "PRIMARY_IMO",
+          "checked": "Resolution pair unchanged."
+        }
+      ],
+      "authority_currentness_date": "2026-08-23",
+      "current_framework_finding": "UNCHANGED SINCE THE SITTING. The bearer answer is a June 2026 sitting, two months before this review, and its own verification record already read A.1207(34) at source. The single B_CURRENCY_CHECK it carried -- that no later edition of the Survey Guidelines has been adopted -- is now discharged.",
+      "future_not_in_force": [],
+      "superseded_elements": [
+        "A.1186(33), the 2023 Guidelines, revoked by A.1207(34). Already recorded in the bearer answer."
+      ],
+      "action_taken": "VERIFY_EXISTING_ANSWER_NO_CHANGE",
+      "correction_or_modernisation": "NEITHER -- verification only",
+      "canonical_current_question": "QP2606-Q8",
+      "canonical_current_answer": {
+        "question_id": "QP2606-Q8",
+        "kind": "SITTING_ANCHORED_BEARER",
+        "present_day_delta": "NONE. Correct as at August 2026 as well as at its own sitting."
+      },
+      "material_claims_changed": [],
+      "numbers_dates_verified": [
+        "A.1207(34) adopted 3 December 2025",
+        "Assembly 34th session 24 November to 3 December 2025",
+        "A.1207(34) revokes A.1186(33)",
+        "RO Code = MSC.349(92) with MEPC.237(65)"
+      ],
+      "independent_review": {
+        "reviewer": "Laptop Claude Code (independent clean-context review pass)",
+        "verdict": "PASS",
+        "notes": "Checked that the discharge of the currency flag rests on the biennial adoption cycle rather than on absence of evidence. The 35th Assembly cannot have sat before August 2026, so the claim is structural, not a failure to find a later resolution."
+      },
+      "final_state": "CURRENT_AND_VERIFIED",
+      "readiness_after": "READY_TO_STUDY_NOW",
+      "tranche_id": "QI_PHASE2_TRANCHE_001"
+    },
+    {
+      "family_id": "QIF-EM-0036",
+      "pinned_at_selection": {
+        "label": "A). How is Human Element issue addressed in STCW code. B). Discuss the IMO guidance on fatigue mitigation and...",
+        "weight_topic_id": "D03",
+        "topic_tags": [
+          "Guidelines on Fatigue",
+          "MLC",
+          "MSC.1/Circ.1598",
+          "Manila amendments",
+          "Regulation VIII/1",
+          "STCW",
+          "STCW Code",
+          "Section A-VIII/1"
+        ],
+        "count_3y": 6,
+        "count_5y": 7,
+        "count_10y": 9,
+        "count_full_horizon": 10,
+        "distinct_years": 7,
+        "distinct_sittings": 10,
+        "first_sitting": "2016-07",
+        "last_sitting": "2026-02",
+        "unit": "WHOLE_QUESTION",
+        "recurrence_labels": [
+          "PERSISTENT",
+          "RECENTLY_ACTIVE",
+          "RISING"
+        ],
+        "time_relative_flags": [],
+        "phase2_rank": 3,
+        "phase2_priority": 68.5,
+        "phase2_action": "EXISTING_CURRENT_ANSWER_VERIFY",
+        "currentness_status_at_selection": "CURRENT_WITH_AMENDMENT",
+        "existing_answer_status_at_selection": "SOLVED_BUT_CURRENTNESS_UNVERIFIED",
+        "modern_question_action": "USE_EXISTING_CANONICAL_QUESTION",
+        "modern_members": [
+          "QP2301-Q8",
+          "QP2404-Q7",
+          "QP2502-Q2",
+          "QP2506-Q8",
+          "QP2508-Q4",
+          "QP2601-Q9",
+          "QP2602-Q4"
+        ],
+        "modern_family_ids": [
+          "QP2301-Q8"
+        ],
+        "modern_recurrence_classes": [
+          "EXACT_RECURRENCE",
+          "NEAR_RECURRENCE",
+          "TOPIC_RECURRENCE"
+        ],
+        "historical_variants": [
+          "QP2301-Q8",
+          "QP2404-Q7",
+          "QP2502-Q2",
+          "QP2506-Q8",
+          "QP2508-Q4",
+          "QP2601-Q9"
+        ],
+        "canonical_bearer_at_selection": "QP2602-Q4",
+        "readiness_before": "VERIFY_CURRENT_ANSWER"
+      },
+      "selection_reason": "Rank 3. Ten sittings across seven years, six inside the last three; the strongest persistent human-element family in the corpus.",
+      "modern_conflict_status": "NO_CONFLICT",
+      "present_day_examinable_core": "CURRENT_FRAMEWORK_AMENDED",
+      "existing_answer_owners": [
+        "QP2602-Q4"
+      ],
+      "existing_answer_status": "ONE_CANONICAL_CURRENT_CANDIDATE",
+      "primary_authority": [
+        {
+          "source": "IMO resolution MSC.560(108), 2024 amendments to Part A of the STCW Code, adopted 23 May 2024, entered into force 1 January 2026",
+          "class": "COMPETENT_AUTHORITY_RESTATEMENT",
+          "checked": "Adoption date, entry-into-force date, the amended table (A-VI/1-4 in section A-VI/1 of chapter VI) and the transitional arrangement for existing certificate holders were taken from the implementation notice of a national maritime administration and corroborated by a second administration and by industry restatement. MIW holds no licensed STCW Code, so this is the same evidence class the corpus already accepts for the Manila rest-hour figures."
+        },
+        {
+          "source": "MSC.1/Circ.1598, Guidelines on fatigue",
+          "class": "PRIMARY_IMO",
+          "checked": "No superseding circular found at August 2026. Remains the current IMO fatigue guidance. The STCW comprehensive review has still produced no adopted revision of chapter VIII."
+        }
+      ],
+      "authority_currentness_date": "2026-08-23",
+      "current_framework_finding": "A MATERIAL HUMAN-ELEMENT AMENDMENT WAS IN FORCE AT THE SITTING AND IS ABSENT FROM THE ANSWER. MSC.560(108) entered into force on 1 January 2026, six weeks BEFORE the February 2026 sitting, and adds to STCW Code table A-VI/1-4 a competence on contributing to the prevention of and response to violence and harassment, including sexual harassment, bullying and sexual assault. The question asks how the human element is addressed in the STCW Code. This is therefore a defect at the answer's OWN sitting date, not a later development: under the sitting-date rule the amendment belonged in the February 2026 answer. The fatigue limb (B) is unaffected and stands.",
+      "future_not_in_force": [],
+      "superseded_elements": [],
+      "action_taken": "UPDATE_EXISTING_ANSWER",
+      "correction_or_modernisation": "CORRECTION",
+      "correction_rationale": "The answer was incomplete under the framework it claimed to describe AT ITS OWN SITTING. Adding MSC.560(108) does not breach sitting-anchoring -- it restores it. Nothing post-dating February 2026 has been added.",
+      "canonical_current_question": "QP2602-Q4",
+      "canonical_current_answer": {
+        "question_id": "QP2602-Q4",
+        "kind": "SITTING_ANCHORED_BEARER",
+        "present_day_delta": "NONE beyond the correction. The corrected answer is true both at February 2026 and at August 2026."
+      },
+      "material_claims_changed": [
+        {
+          "old": "The STCW human-element treatment was presented through regulations I/6, I/8, I/9, I/11, I/14, chapter VIII and MLC linkage, with no mention of the 2024 amendments to the STCW Code.",
+          "new": "The same treatment plus MSC.560(108), in force 1 January 2026, adding the violence-and-harassment competence to table A-VI/1-4, with the transitional arrangement for existing certificate holders.",
+          "why": "In force at the sitting and squarely within the question asked."
+        }
+      ],
+      "numbers_dates_verified": [
+        "MSC.560(108) adopted 23 May 2024 (MSC 108)",
+        "entered into force 1 January 2026",
+        "amends STCW Code Part A chapter VI, table A-VI/1-4 of section A-VI/1",
+        "MSC.1/Circ.1598 not superseded as at August 2026"
+      ],
+      "independent_review": {
+        "reviewer": "Laptop Claude Code (independent clean-context review pass)",
+        "verdict": "PASS",
+        "notes": "Confirmed the amendment pre-dates the sitting, so this is a sitting-date correction and not a forbidden modernisation of a past paper. Confirmed the evidence class is stated honestly rather than claimed as licensed Code text. Confirmed no rest-hour figure was disturbed and limb (B) is untouched."
+      },
+      "final_state": "UPDATED_AND_VERIFIED",
+      "written_source_edited": [
+        "meoclass1/pastpapers/specs/QP2602.json :: QP2602-Q4"
+      ],
+      "readiness_after": "READY_TO_STUDY_NOW",
+      "tranche_id": "QI_PHASE2_TRANCHE_001"
+    },
+    {
+      "family_id": "QIF-EM-0007",
+      "pinned_at_selection": {
+        "label": "A. State the applicable regulation of SOLAS and MARPOL under which it is mandatory for a flag state to conduct...",
+        "weight_topic_id": "D04",
+        "topic_tags": [
+          "Casualty Investigation Code",
+          "MARPOL Article 12",
+          "MSC.255(84)",
+          "SOLAS XI-1/6",
+          "SOLAS regulation I/21",
+          "casualty investigation",
+          "flag state",
+          "marine safety investigation"
+        ],
+        "count_3y": 4,
+        "count_5y": 5,
+        "count_10y": 9,
+        "count_full_horizon": 17,
+        "distinct_years": 13,
+        "distinct_sittings": 17,
+        "first_sitting": "2011-11",
+        "last_sitting": "2026-04",
+        "unit": "WHOLE_QUESTION",
+        "recurrence_labels": [
+          "PERSISTENT",
+          "RECENTLY_ACTIVE"
+        ],
+        "time_relative_flags": [],
+        "phase2_rank": 4,
+        "phase2_priority": 66.45,
+        "phase2_action": "EXISTING_CURRENT_ANSWER_VERIFY",
+        "currentness_status_at_selection": "CURRENT_WITH_AMENDMENT",
+        "existing_answer_status_at_selection": "SOLVED_BUT_CURRENTNESS_UNVERIFIED",
+        "modern_question_action": "USE_EXISTING_CANONICAL_QUESTION",
+        "modern_members": [
+          "QP2301-Q7",
+          "QP2408-Q3",
+          "QP2506-Q7",
+          "QP2601-Q8",
+          "QP2604-Q8"
+        ],
+        "modern_family_ids": [
+          "QP2301-Q7"
+        ],
+        "modern_recurrence_classes": [
+          "EXACT_RECURRENCE",
+          "NEAR_RECURRENCE",
+          "TOPIC_RECURRENCE"
+        ],
+        "historical_variants": [
+          "QP2301-Q7",
+          "QP2408-Q3",
+          "QP2506-Q7",
+          "QP2601-Q8"
+        ],
+        "canonical_bearer_at_selection": "QP2604-Q8",
+        "readiness_before": "VERIFY_CURRENT_ANSWER"
+      },
+      "selection_reason": "Rank 4. Seventeen sittings across thirteen years -- the deepest-reaching family in the tranche.",
+      "modern_conflict_status": "NO_CONFLICT",
+      "present_day_examinable_core": "UNCHANGED_CORE",
+      "existing_answer_owners": [
+        "QP2604-Q8"
+      ],
+      "existing_answer_status": "ONE_CANONICAL_CURRENT_CANDIDATE",
+      "primary_authority": [
+        {
+          "source": "Casualty Investigation Code, resolution MSC.255(84), adopted 16 May 2008",
+          "class": "PRIMARY_IMO",
+          "checked": "No amendment affecting the definitions or the investigation duty relied on was found at August 2026. A candidate resolution number carried into this review, MSC.515(105), was checked and is NOT a Casualty Code amendment at all -- it is performance standards for survival-craft two-way VHF apparatus. The false lead was discarded rather than cited."
+        },
+        {
+          "source": "SOLAS regulation XI-1/6, made mandatory by MSC.257(84) from 1 January 2010",
+          "class": "PRIMARY_IMO",
+          "checked": "Unchanged."
+        }
+      ],
+      "authority_currentness_date": "2026-08-23",
+      "current_framework_finding": "UNCHANGED. The bearer is an April 2026 sitting whose verification record re-read the Code at source four months before this review. The evaluative test for severe damage to the environment, the 72-hour serious-injury test and the mandatory investigation duty for a very serious marine casualty are all intact.",
+      "future_not_in_force": [],
+      "superseded_elements": [],
+      "action_taken": "VERIFY_EXISTING_ANSWER_NO_CHANGE",
+      "correction_or_modernisation": "NEITHER -- verification only",
+      "canonical_current_question": "QP2604-Q8",
+      "canonical_current_answer": {
+        "question_id": "QP2604-Q8",
+        "kind": "SITTING_ANCHORED_BEARER",
+        "present_day_delta": "NONE."
+      },
+      "material_claims_changed": [],
+      "numbers_dates_verified": [
+        "MSC.255(84) adopted 16 May 2008",
+        "SOLAS XI-1/6 mandatory from 1 January 2010 via MSC.257(84)",
+        "MSC.515(105) confirmed UNRELATED to the Casualty Code"
+      ],
+      "independent_review": {
+        "reviewer": "Laptop Claude Code (independent clean-context review pass)",
+        "verdict": "PASS",
+        "notes": "The paragraph-numbering currency flag is left OPEN rather than discharged: MIW still holds no current consolidated edition of the Code, so the numbering cannot be positively confirmed. The answer is verified on substance, and the limitation stays recorded. Discharging it would have been the easy and wrong call."
+      },
+      "final_state": "CURRENT_AND_VERIFIED",
+      "readiness_after": "READY_TO_STUDY_NOW",
+      "tranche_id": "QI_PHASE2_TRANCHE_001"
+    },
+    {
+      "family_id": "QIF-EM-0012",
+      "pinned_at_selection": {
+        "label": "What do you understand by \"Unseaworthy vessels\" within the meaning of the Merchant Shipping Act, 1958, as amen...",
+        "weight_topic_id": "D06",
+        "topic_tags": [
+          "Merchant Shipping Act 1958",
+          "detention",
+          "implied obligation",
+          "implied warranty of seaworthiness",
+          "obligations of owner",
+          "owner obligations",
+          "owner's obligation to crew",
+          "proper provisions"
+        ],
+        "count_3y": 4,
+        "count_5y": 5,
+        "count_10y": 7,
+        "count_full_horizon": 14,
+        "distinct_years": 9,
+        "distinct_sittings": 14,
+        "first_sitting": "2011-11",
+        "last_sitting": "2026-02",
+        "unit": "WHOLE_QUESTION",
+        "recurrence_labels": [
+          "PERSISTENT",
+          "RECENTLY_ACTIVE"
+        ],
+        "time_relative_flags": [],
+        "phase2_rank": 5,
+        "phase2_priority": 64.4,
+        "phase2_action": "EXISTING_CURRENT_ANSWER_VERIFY",
+        "currentness_status_at_selection": "CURRENT_WITH_AMENDMENT",
+        "existing_answer_status_at_selection": "SOLVED_BUT_CURRENTNESS_UNVERIFIED",
+        "modern_question_action": "USE_EXISTING_CANONICAL_QUESTION",
+        "modern_members": [
+          "QP2307-Q9",
+          "QP2410-Q1",
+          "QP2506-Q9",
+          "QP2508-Q5",
+          "QP2602-Q5"
+        ],
+        "modern_family_ids": [
+          "QP2307-Q9"
+        ],
+        "modern_recurrence_classes": [
+          "NEAR_RECURRENCE",
+          "RECURRING",
+          "TOPIC_RECURRENCE"
+        ],
+        "historical_variants": [
+          "QP2307-Q9",
+          "QP2410-Q1",
+          "QP2506-Q9",
+          "QP2508-Q5"
+        ],
+        "canonical_bearer_at_selection": "QP2602-Q5",
+        "readiness_before": "VERIFY_CURRENT_ANSWER"
+      },
+      "selection_reason": "Rank 5. Fourteen sittings across nine years, and the family most exposed to the Indian statutory transition.",
+      "modern_conflict_status": "NO_CONFLICT",
+      "present_day_examinable_core": "CURRENT_FRAMEWORK_MATERIALLY_CHANGED",
+      "existing_answer_owners": [
+        "QP2602-Q5"
+      ],
+      "existing_answer_status": "HISTORICAL_ANSWER_ONLY (correct at its sitting; the statute it describes is no longer in force)",
+      "primary_authority": [
+        {
+          "source": "The Merchant Shipping Act, 2025 (Act No. 24 of 2025) -- full Gazette text read: Gazette of India, Extraordinary, Part II Section 1, No. 29, 18 August 2025, CG-DL-E-19082025-265484",
+          "class": "PRIMARY_INDIAN_STATUTE",
+          "checked": "Sections 2(69), 98(2), 127, 128, 278, 307, 308 and 324(1) read verbatim in the Gazette text this session."
+        },
+        {
+          "source": "Commencement notification S.O. 1244(E), Ministry of Ports, Shipping and Waterways, 10 March 2026, appointing 15 March 2026",
+          "class": "PRIMARY_INDIAN_SUBORDINATE",
+          "checked": "Carried from the QP2607-Q7 primary verification record, which read the notification in the Gazette."
+        }
+      ],
+      "authority_currentness_date": "2026-08-23",
+      "current_framework_finding": "THE GOVERNING STATUTE HAS BEEN REPLACED ENTIRELY. Section 324(1) of the Merchant Shipping Act, 2025 repeals the Merchant Shipping Act, 1958 (except Part XIV, but not including section 411A therein) and the Coasting Vessels Act, 1838, with effect from 15 March 2026. Sections 334, 335 and 336 of the 1958 Act -- the whole spine of the sitting-anchored answer -- are no longer live law. The examinable CORE survives almost intact, because the 2025 Act carries the same concepts forward, but every citation moves and one changes character.",
+      "present_day_provision_map": [
+        {
+          "old": "MS Act 1958 s.334 -- definition of unseaworthy ship",
+          "new": "MS Act 2025 s.2(69) -- \"unseaworthy vessel\"",
+          "note": "Substantively the same test: materials, construction and design, number/description/qualification of seafarers including officers, weight/description/stowage of cargo and ballast, condition of hull, equipment, boilers and machinery, not such as to render her in every respect fit for the proposed voyage or service. Moved from a Part heading into the definitions section, and now says \"vessel\" not \"ship\"."
+        },
+        {
+          "old": "MS Act 1958 s.335 -- sending unseaworthy ship to sea",
+          "new": "MS Act 2025 s.127 -- \"Unseaworthy vessel not to be sent to sea\"",
+          "note": "s.127(1) the sender, s.127(2) the master who knowingly takes her to sea, each with the reasonable-and-justifiable defence; s.127(3) evidence. THE CHARACTER OF THE SANCTION HAS CHANGED: the 2025 Act casts these as liability to PENALTY rather than criminal offence."
+        },
+        {
+          "old": "MS Act 1958 s.336 -- obligation of owner to crew as to seaworthiness",
+          "new": "MS Act 2025 s.128 -- \"Obligation of ship owner, master or agent with respect to seaworthiness\"",
+          "note": "s.128(1) implies into every contract of service, irrespective of any agreement to the contrary, an obligation to use all reasonable means to ensure seaworthiness at the commencement of the voyage and to keep her in a seaworthy state during it; s.128(2) survey power."
+        },
+        {
+          "old": "detention of unsafe ships",
+          "new": "MS Act 2025 s.278 and s.307, with s.308 for detention costs",
+          "note": "s.278 detention where a vessel arrives in or proceeds from an Indian port in an unseaworthy condition; s.307 control measures with an Explanation defining \"unsafe vessel\" as including an unseaworthy vessel which poses a risk to safety of life, or an unreasonable threat of harm to the environment by reason of safe manning, hull, machinery, equipment, training and working conditions or operational safety being substantially below required standards; appeal to the Director-General within seven days; s.308 makes the owner liable for detention costs."
+        },
+        {
+          "old": "seafarer refusing to sail on an unseaworthy ship",
+          "new": "MS Act 2025 s.98(2)",
+          "note": "Unseaworthiness is deemed reasonable cause for desertion or absence without leave, PROVIDED the seafarer first complained to the master or a listed officer."
+        }
+      ],
+      "future_not_in_force": [],
+      "superseded_elements": [
+        "Merchant Shipping Act 1958 ss.334, 335, 336 -- repealed 15 March 2026",
+        "Coasting Vessels Act 1838 -- repealed 15 March 2026"
+      ],
+      "action_taken": "MODERNISE_AT_FAMILY_LEVEL",
+      "correction_or_modernisation": "MODERNISATION",
+      "canonical_current_question": "QP2602-Q5",
+      "canonical_current_answer": {
+        "question_id": "QP2602-Q5",
+        "kind": "SITTING_ANCHORED_BEARER_PLUS_FAMILY_CURRENT_NOTE",
+        "present_day_delta": "MATERIAL. The bearer answer remains correct for its February 2026 sitting and is NOT edited. The present-day position is carried by present_day_provision_map above, which is the study-facing current-law statement for this family."
+      },
+      "material_claims_changed": [
+        {
+          "old": "The operative Indian law on unseaworthiness is the Merchant Shipping Act, 1958, ss.334 to 336.",
+          "new": "As at August 2026 the operative Indian law is the Merchant Shipping Act, 2025, ss.2(69), 127, 128, with detention under ss.278, 307 and 308 and the seafarer's position at s.98(2). The 1958 Act was repealed on 15 March 2026 by s.324(1).",
+          "why": "The repeal took effect between the sitting and this review."
+        }
+      ],
+      "numbers_dates_verified": [
+        "MS Act 2025 = Act No. 24 of 2025, assented 18 August 2025",
+        "commenced 15 March 2026 by S.O. 1244(E) dated 10 March 2026",
+        "s.324(1) repeals the 1958 Act except Part XIV, not including s.411A, and the Coasting Vessels Act 1838",
+        "definition at s.2(69); offence/penalty at s.127; owner obligation at s.128; detention at ss.278, 307, 308; seafarer at s.98(2)"
+      ],
+      "independent_review": {
+        "reviewer": "Laptop Claude Code (independent clean-context review pass)",
+        "verdict": "PASS",
+        "notes": "Every section number was read in the Gazette text obtained this session, not inferred from commentary -- an earlier attempt to source the Act from India Code was blocked and a guessed Gazette number returned an unrelated Road Transport notification, both discarded. Confirmed the bearer answer was NOT edited, which is required: editing it would have made a February 2026 paper cite a statute by provisions that were not yet the governing ones at that sitting."
+      },
+      "final_state": "MODERNISED_AND_VERIFIED",
+      "readiness_after": "READY_TO_STUDY_NOW",
+      "tranche_id": "QI_PHASE2_TRANCHE_001"
+    },
+    {
+      "family_id": "QIF-EM-0104",
+      "pinned_at_selection": {
+        "label": "Improving efficiency of propellers is recognized as a growing means to improve energy efficiency of ships. Dis...",
+        "weight_topic_id": "D05",
+        "topic_tags": [
+          "CII",
+          "EEXI",
+          "Kappel propeller",
+          "Kort nozzle",
+          "SEEMP",
+          "accelerating duct",
+          "axial loss",
+          "azimuth"
+        ],
+        "count_3y": 3,
+        "count_5y": 5,
+        "count_10y": 5,
+        "count_full_horizon": 5,
+        "distinct_years": 4,
+        "distinct_sittings": 5,
+        "first_sitting": "2022-08",
+        "last_sitting": "2025-10",
+        "unit": "WHOLE_QUESTION",
+        "recurrence_labels": [
+          "NEW_EMERGING",
+          "RECENTLY_ACTIVE",
+          "RISING"
+        ],
+        "time_relative_flags": [
+          "growing means"
+        ],
+        "phase2_rank": 8,
+        "phase2_priority": 58.25,
+        "phase2_action": "EXISTING_CURRENT_ANSWER_VERIFY",
+        "currentness_status_at_selection": "CURRENTNESS_REVIEW_REQUIRED",
+        "existing_answer_status_at_selection": "SOLVED_BUT_CURRENTNESS_UNVERIFIED",
+        "modern_question_action": "USE_EXISTING_CANONICAL_QUESTION",
+        "modern_members": [
+          "QP2208-Q7",
+          "QP2302-Q7",
+          "QP2403-Q4",
+          "QP2410-Q7",
+          "QP2510-Q4"
+        ],
+        "modern_family_ids": [
+          "QP2208-Q7"
+        ],
+        "modern_recurrence_classes": [
+          "EXACT_RECURRENCE",
+          "NEW",
+          "RECURRING"
+        ],
+        "historical_variants": [
+          "QP2208-Q7",
+          "QP2302-Q7",
+          "QP2403-Q4",
+          "QP2410-Q7"
+        ],
+        "canonical_bearer_at_selection": "QP2510-Q4",
+        "readiness_before": "VERIFY_CURRENT_ANSWER"
+      },
+      "selection_reason": "Rank 8. Five sittings in four years, rising, with a time-relative stem (\"growing means\").",
+      "modern_conflict_status": "NO_CONFLICT",
+      "present_day_examinable_core": "UNCHANGED_CORE",
+      "existing_answer_owners": [
+        "QP2510-Q4"
+      ],
+      "existing_answer_status": "ONE_CANONICAL_CURRENT_CANDIDATE",
+      "primary_authority": [
+        {
+          "source": "Settled naval architecture: the decomposition of propulsive efficiency and the axial, rotational and frictional loss mechanisms",
+          "class": "ENGINEERING_JUDGEMENT",
+          "checked": "No instrument prescribes a propeller type, so there is no regulatory currency to check. The hydrodynamics are not date-sensitive."
+        }
+      ],
+      "authority_currentness_date": "2026-08-23",
+      "current_framework_finding": "UNCHANGED, AND STRUCTURALLY INCAPABLE OF GOING STALE IN THE WAY THE TRIAGE FEARED. The currentness flag fired on the time-relative phrase \"growing means\" in the stem, not on anything in the answer. The answer deliberately quotes no percentage gain and cites no regulation number, so it holds no perishable claim. The triage flag is a prompt, not evidence -- and here the prompt is a false positive.",
+      "future_not_in_force": [],
+      "superseded_elements": [],
+      "action_taken": "VERIFY_EXISTING_ANSWER_NO_CHANGE",
+      "correction_or_modernisation": "NEITHER -- verification only",
+      "canonical_current_question": "QP2510-Q4",
+      "canonical_current_answer": {
+        "question_id": "QP2510-Q4",
+        "kind": "SITTING_ANCHORED_BEARER",
+        "present_day_delta": "NONE."
+      },
+      "material_claims_changed": [],
+      "numbers_dates_verified": [
+        "No numeric claim is made in this answer by design; nothing to verify. The deliberate omission of vendor efficiency figures was confirmed intact."
+      ],
+      "independent_review": {
+        "reviewer": "Laptop Claude Code (independent clean-context review pass)",
+        "verdict": "PASS",
+        "notes": "Checked specifically that the review did not \"improve\" the answer by adding efficiency percentages or EEXI/CII regulation numbers. Both omissions are governed and were left alone. Verifying a family as current must not become a licence to widen it."
+      },
+      "final_state": "CURRENT_AND_VERIFIED",
+      "readiness_after": "READY_TO_STUDY_NOW",
+      "tranche_id": "QI_PHASE2_TRANCHE_001"
+    },
+    {
+      "family_id": "QIF-EM-0017",
+      "pinned_at_selection": {
+        "label": "What are the ongoing developments at IMO with respect to the technical and operational and market-based measur...",
+        "weight_topic_id": "D05",
+        "topic_tags": [
+          "2023 IMO GHG Strategy",
+          "CII",
+          "DCS",
+          "EEDI",
+          "EEXI",
+          "GHG emissions pricing",
+          "GHG pricing",
+          "GHG strategy"
+        ],
+        "count_3y": 2,
+        "count_5y": 2,
+        "count_10y": 4,
+        "count_full_horizon": 13,
+        "distinct_years": 9,
+        "distinct_sittings": 13,
+        "first_sitting": "2010-11",
+        "last_sitting": "2024-02",
+        "unit": "WHOLE_QUESTION",
+        "recurrence_labels": [
+          "PERSISTENT",
+          "RECENTLY_ACTIVE"
+        ],
+        "time_relative_flags": [
+          "ongoing development",
+          "ongoing developments"
+        ],
+        "phase2_rank": 14,
+        "phase2_priority": 50.55,
+        "phase2_action": "EXISTING_CURRENT_ANSWER_VERIFY",
+        "currentness_status_at_selection": "CURRENTNESS_REVIEW_REQUIRED",
+        "existing_answer_status_at_selection": "SOLVED_BUT_CURRENTNESS_UNVERIFIED",
+        "modern_question_action": "USE_EXISTING_CANONICAL_QUESTION",
+        "modern_members": [
+          "QP2309-Q3",
+          "QP2402-Q5"
+        ],
+        "modern_family_ids": [
+          "QP2309-Q3"
+        ],
+        "modern_recurrence_classes": [
+          "NEAR_RECURRENCE",
+          "RECURRING"
+        ],
+        "historical_variants": [
+          "QP2309-Q3"
+        ],
+        "canonical_bearer_at_selection": "QP2402-Q5",
+        "readiness_before": "VERIFY_CURRENT_ANSWER"
+      },
+      "selection_reason": "Rank 14. Thirteen sittings across nine years, and the highest time-relative exposure in the corpus: the stem literally asks for \"ongoing developments\".",
+      "modern_conflict_status": "NO_CONFLICT",
+      "present_day_examinable_core": "MODERN_SUCCESSOR_REQUIRED",
+      "existing_answer_owners": [
+        "QP2402-Q5",
+        "QP2602-Q8 (successor, different family)"
+      ],
+      "existing_answer_status": "MULTIPLE_CANDIDATE_ANSWERS",
+      "primary_authority": [
+        {
+          "source": "IMO press briefing, IMO net-zero shipping talks to resume in 2026 -- the extraordinary session of MEPC (MEPC/ES.2), 14 to 17 October 2025, adjourned for twelve months without adopting the draft amendments to MARPOL Annex VI",
+          "class": "PRIMARY_IMO",
+          "checked": "Read at source this session."
+        },
+        {
+          "source": "MEPC 84, 27 April to 1 May 2026 -- outcome",
+          "class": "CLASSIFICATION_SOCIETY_SUMMARY",
+          "checked": "The Net-Zero Framework was NOT adopted; it was preserved as the basis for continued negotiation, with further intersessional work before MEPC 85. The resumed extraordinary session MEPC/ES.2 is scheduled for one day on Friday 4 December 2026, subject to MEPC 85 (tentatively 30 November to 3 December 2026). A new Emission Control Area was adopted in the North-East Atlantic for NOx, SOx and particulate matter. Taken from a class-society session summary, not from the session report, and labelled accordingly."
+        },
+        {
+          "source": "Resolution MEPC.377(80), the 2023 IMO GHG Strategy, adopted 7 July 2023",
+          "class": "PRIMARY_IMO",
+          "checked": "Still the operative Strategy at August 2026; the revised Strategy is due in 2028."
+        }
+      ],
+      "authority_currentness_date": "2026-08-23",
+      "current_framework_finding": "THE BEARER IS THIRTY MONTHS STALE AND MUST NOT BE REUSED. QP2402-Q5 answers a February 2024 sitting, five weeks before MEPC 81. Everything the question now turns on -- the Net-Zero Framework approved at MEPC 83 in April 2025, the adjournment of MEPC/ES.2 in October 2025, the MEPC 84 outcome in 2026 -- post-dates it entirely. Its own verification record states in terms that it must never be reused at a later sitting and that a reviewer must not correct it to the current position. BUT MIW ALREADY HOLDS A CURRENT-FACING ANSWER: QP2602-Q8 (February 2026) covers the revised GHG Strategy, the draft new chapter 5 of MARPOL Annex VI and the adjourned extraordinary session, and is correctly hedged. So no new answer is required -- a successor pointer is.",
+      "present_day_position": [
+        "The 2023 IMO GHG Strategy, MEPC.377(80), remains the operative strategy; the revised Strategy is due in 2028.",
+        "In force now under MARPOL Annex VI chapter 4: EEDI, EEXI, the CII rating mechanism and the SEEMP, with the DCS.",
+        "NOT in force: the IMO Net-Zero Framework. It was APPROVED at MEPC 83 in April 2025 as a draft new chapter 5 of MARPOL Annex VI, and remains approved-but-not-adopted at August 2026.",
+        "MEPC/ES.2, convened 14 to 17 October 2025 to adopt it, was adjourned for twelve months following a roll-call vote.",
+        "MEPC 84 (27 April to 1 May 2026) preserved the Framework as the basis for negotiation and agreed further intersessional work; it did not adopt it.",
+        "MEPC/ES.2 is scheduled to resume for one day on Friday 4 December 2026, subject to MEPC 85 (tentatively 30 November to 3 December 2026).",
+        "There is still no IMO carbon price and no adopted mid-term measure.",
+        "A North-East Atlantic Emission Control Area for NOx, SOx and particulate matter was adopted at MEPC 84."
+      ],
+      "future_not_in_force": [
+        "The IMO Net-Zero Framework and the draft new chapter 5 of MARPOL Annex VI -- approved, NOT adopted, not in force. Any statement that shipping has a global carbon price is wrong at August 2026.",
+        "The North-East Atlantic ECA -- adopted at MEPC 84; its effective dates were not established at this review and are deliberately not stated.",
+        "The revised IMO GHG Strategy is DUE IN 2028 and does not exist yet. The 2023 Strategy, MEPC.377(80), is the operative one until then."
+      ],
+      "superseded_elements": [
+        "MEPC.346(78) SEEMP guidelines -- amended by MEPC.388(81) and replaced by MEPC.395(82). Correct in the Feb 2024 bearer; superseded today.",
+        "The bearer's statement that no mid-term measure had advanced -- true at February 2024, false today."
+      ],
+      "action_taken": "SUPERSEDE_WITH_SUCCESSOR",
+      "correction_or_modernisation": "MODERNISATION",
+      "canonical_current_question": "QP2602-Q8",
+      "canonical_current_answer": {
+        "question_id": "QP2602-Q8",
+        "kind": "SUCCESSOR_IN_ADJACENT_FAMILY",
+        "present_day_delta": "The successor is a February 2026 sitting and could not know the MEPC 84 outcome. The delta a candidate needs on top of it is exactly two facts: MEPC 84 (27 April to 1 May 2026) preserved but did not adopt the Framework, and the resumed MEPC/ES.2 now has a date -- Friday 4 December 2026 -- where the February answer could only say \"around October 2026\". Both are carried in present_day_position above."
+      },
+      "material_claims_changed": [
+        {
+          "old": "Study route for this family ran through QP2402-Q5 (February 2024).",
+          "new": "Study route runs through QP2602-Q8 (February 2026) plus the present-day position recorded here. QP2402-Q5 is retained unedited as sitting-anchored historical evidence.",
+          "why": "A time-relative question cannot be studied from a thirty-month-old answer, and its own record forbids updating it."
+        }
+      ],
+      "numbers_dates_verified": [
+        "MEPC/ES.2 convened 14 to 17 October 2025, adjourned 17 October 2025 for twelve months",
+        "MEPC 84 held 27 April to 1 May 2026",
+        "resumed MEPC/ES.2 scheduled Friday 4 December 2026",
+        "MEPC 85 tentatively 30 November to 3 December 2026",
+        "MEPC.377(80) adopted 7 July 2023; revised Strategy due 2028",
+        "Net-Zero Framework approved at MEPC 83, April 2025 -- approved, not adopted"
+      ],
+      "independent_review": {
+        "reviewer": "Laptop Claude Code (independent clean-context review pass)",
+        "verdict": "PASS",
+        "notes": "The date was the thing to get right. Widely repeated secondary material still says the session resumes \"around October 2026\", which was the only thing knowable in February 2026; the date was actually fixed at MEPC 84 as 4 December 2026. Taking the older wording would have reproduced an error this organisation has already had to correct once on a live surface. Also confirmed QP2402-Q5 was NOT edited and that its never-reuse warning is preserved, and that the ECA effective dates are omitted rather than guessed."
+      },
+      "final_state": "SUPERSEDED_WITH_SUCCESSOR",
+      "readiness_after": "READY_TO_STUDY_NOW",
+      "tranche_id": "QI_PHASE2_TRANCHE_001"
+    },
+    {
+      "family_id": "QIF-EM-0129",
+      "pinned_at_selection": {
+        "label": "The HNS Convention is expected shortly to come into force. Explain the following in respect of this convention...",
+        "weight_topic_id": "D04",
+        "topic_tags": [
+          "Bunker Convention",
+          "Bunker Convention 2001",
+          "CLC",
+          "CLC 1992",
+          "HNS Convention",
+          "HNS Fund",
+          "certificates",
+          "compulsory insurance"
+        ],
+        "count_3y": 2,
+        "count_5y": 4,
+        "count_10y": 4,
+        "count_full_horizon": 4,
+        "distinct_years": 3,
+        "distinct_sittings": 4,
+        "first_sitting": "2022-09",
+        "last_sitting": "2025-09",
+        "unit": "WHOLE_QUESTION",
+        "recurrence_labels": [
+          "NEW_EMERGING",
+          "RECENTLY_ACTIVE",
+          "RISING"
+        ],
+        "time_relative_flags": [
+          "expected shortly"
+        ],
+        "phase2_rank": 18,
+        "phase2_priority": 46.4,
+        "phase2_action": "EXISTING_CURRENT_ANSWER_VERIFY",
+        "currentness_status_at_selection": "CURRENTNESS_REVIEW_REQUIRED",
+        "existing_answer_status_at_selection": "SOLVED_BUT_CURRENTNESS_UNVERIFIED",
+        "modern_question_action": "USE_EXISTING_CANONICAL_QUESTION",
+        "modern_members": [
+          "QP2209-Q8",
+          "QP2304-Q2",
+          "QP2503-Q6",
+          "QP2509-Q5"
+        ],
+        "modern_family_ids": [
+          "QP2209-Q8"
+        ],
+        "modern_recurrence_classes": [
+          "EXACT_RECURRENCE",
+          "NEW",
+          "RECURRING"
+        ],
+        "historical_variants": [
+          "QP2209-Q8",
+          "QP2304-Q2",
+          "QP2503-Q6"
+        ],
+        "canonical_bearer_at_selection": "QP2509-Q5",
+        "readiness_before": "VERIFY_CURRENT_ANSWER"
+      },
+      "selection_reason": "Rank 18. Four sittings in three years, rising, and a stem whose premise (\"expected shortly to come into force\") is itself the perishable claim.",
+      "modern_conflict_status": "NO_CONFLICT",
+      "present_day_examinable_core": "CURRENT_FRAMEWORK_AMENDED",
+      "existing_answer_owners": [
+        "QP2509-Q5"
+      ],
+      "existing_answer_status": "ONE_CANONICAL_CURRENT_CANDIDATE",
+      "primary_authority": [
+        {
+          "source": "IMO press briefing, IMO treaty on hazardous and noxious cargo to enter into force in 2027",
+          "class": "PRIMARY_IMO",
+          "checked": "Read at source this session. Entry-into-force conditions of the 2010 HNS Protocol were met on 29 May 2026; the Convention enters into force on 29 November 2027, eighteen months later."
+        },
+        {
+          "source": "2010 HNS Convention, consolidated text",
+          "class": "PRIMARY_IMO",
+          "checked": "Substantive articles relied on by the answer -- 1.5, 1.6, 4, 7, 9, 12, 14, 37 -- are unchanged. Only the entry-into-force STATUS has moved."
+        }
+      ],
+      "authority_currentness_date": "2026-08-23",
+      "current_framework_finding": "THE PREMISE OF THE QUESTION HAS BEEN OVERTAKEN. At the September 2025 sitting the entry-into-force conditions were NOT met, and the answer says so correctly. They were met on 29 May 2026 and the Convention now has a fixed entry-into-force date of 29 November 2027. The substantive law in the answer -- the seven substance categories, the wider definition of damage, strict liability, compulsory insurance, the HNS Fund and the 250 million SDR ceiling -- is unaffected. What changed is one status sentence, and it changed AFTER the sitting, so the answer itself is not edited.",
+      "present_day_position": [
+        "The 2010 HNS Convention is STILL NOT IN FORCE at August 2026.",
+        "Its entry-into-force conditions were satisfied on 29 May 2026.",
+        "It enters into force on 29 November 2027.",
+        "Twelve Contracting States: Belgium, Canada, Denmark, Estonia, France, Germany, the Kingdom of the Netherlands, Norway, Slovakia, South Africa, Sweden and Türkiye. Nine of the twelve exceed 2 million units of gross tonnage; the treaty requires at least four such States.",
+        "More than 40 million tonnes of contributing cargo was confirmed for the 2025 reporting year.",
+        "Total compensation remains capped at 250 million SDR per incident."
+      ],
+      "future_not_in_force": [
+        "The Convention itself -- entry into force 29 November 2027 is a FUTURE date. It must not be taught as currently in force."
+      ],
+      "superseded_elements": [
+        "The September 2025 statement that the entry-into-force conditions had not been met. Correct then; overtaken on 29 May 2026."
+      ],
+      "action_taken": "MODERNISE_AT_FAMILY_LEVEL",
+      "correction_or_modernisation": "MODERNISATION",
+      "canonical_current_question": "QP2509-Q5",
+      "canonical_current_answer": {
+        "question_id": "QP2509-Q5",
+        "kind": "SITTING_ANCHORED_BEARER_PLUS_FAMILY_CURRENT_NOTE",
+        "present_day_delta": "MATERIAL but narrow -- status only. Carried by present_day_position above. The bearer is not edited."
+      },
+      "material_claims_changed": [
+        {
+          "old": "The entry-into-force conditions of the 2010 HNS Convention have not been met and no entry-into-force date exists.",
+          "new": "The conditions were met on 29 May 2026 and the Convention enters into force on 29 November 2027. It is still not in force at August 2026.",
+          "why": "The threshold was crossed between the sitting and this review."
+        }
+      ],
+      "numbers_dates_verified": [
+        "conditions met 29 May 2026",
+        "entry into force 29 November 2027",
+        "12 Contracting States, 9 of them above 2 million GT",
+        "treaty threshold: 12 States including 4 with not less than 2 million units of gross tonnage, and 40 million tonnes of contributing cargo",
+        "250 million SDR total compensation cap"
+      ],
+      "independent_review": {
+        "reviewer": "Laptop Claude Code (independent clean-context review pass)",
+        "verdict": "PASS",
+        "notes": "The State count is now asserted where the bearer deliberately asserted none -- that is legitimate ONLY because it is recorded as the present-day figure in the family layer and not back-dated into the September 2025 answer, whose C_ACCEPTED_LIMITATION on this exact point remains intact. Also checked that \"conditions met\" was not allowed to read as \"in force\"; the two dates are eighteen months apart and both are stated."
+      },
+      "final_state": "MODERNISED_AND_VERIFIED",
+      "readiness_after": "READY_TO_STUDY_NOW",
+      "tranche_id": "QI_PHASE2_TRANCHE_001"
+    },
+    {
+      "family_id": "QIF-EM-0013",
+      "pinned_at_selection": {
+        "label": "Define communication. Enumerate and discuss the different types of communications. Discuss the various barrier...",
+        "weight_topic_id": "D03",
+        "topic_tags": [
+          "barriers",
+          "barriers to communication",
+          "communication",
+          "decarbonisation",
+          "decarbonisation overhaul",
+          "human element",
+          "permit to work",
+          "risk assessment"
+        ],
+        "count_3y": 2,
+        "count_5y": 3,
+        "count_10y": 13,
+        "count_full_horizon": 13,
+        "distinct_years": 6,
+        "distinct_sittings": 13,
+        "first_sitting": "2018-04",
+        "last_sitting": "2026-01",
+        "unit": "WHOLE_QUESTION",
+        "recurrence_labels": [
+          "PERSISTENT",
+          "RECENTLY_ACTIVE"
+        ],
+        "time_relative_flags": [],
+        "phase2_rank": 19,
+        "phase2_priority": 44.05,
+        "phase2_action": "EXISTING_CURRENT_ANSWER_VERIFY",
+        "currentness_status_at_selection": "CURRENT_WITH_AMENDMENT",
+        "existing_answer_status_at_selection": "SOLVED_BUT_CURRENTNESS_UNVERIFIED",
+        "modern_question_action": "USE_EXISTING_CANONICAL_QUESTION",
+        "modern_members": [
+          "QP2201-Q5",
+          "QP2509-Q6",
+          "QP2601-Q2"
+        ],
+        "modern_family_ids": [
+          "QP2201-Q5"
+        ],
+        "modern_recurrence_classes": [
+          "NEAR_RECURRENCE",
+          "TOPIC_RECURRENCE"
+        ],
+        "historical_variants": [
+          "QP2201-Q5",
+          "QP2509-Q6"
+        ],
+        "canonical_bearer_at_selection": "QP2601-Q2",
+        "readiness_before": "VERIFY_CURRENT_ANSWER"
+      },
+      "selection_reason": "Rank 19. Thirteen sittings across six years.",
+      "modern_conflict_status": "NO_CONFLICT",
+      "present_day_examinable_core": "UNCHANGED_CORE",
+      "existing_answer_owners": [
+        "QP2601-Q2"
+      ],
+      "existing_answer_status": "ONE_CANONICAL_CURRENT_CANDIDATE",
+      "primary_authority": [
+        {
+          "source": "ISM Code, SOLAS chapter V and STCW -- the regulatory hooks the answer uses for shipboard communication",
+          "class": "PRIMARY_IMO",
+          "checked": "No change affecting the communication duty relied on. MSC.560(108), which entered into force on 1 January 2026, adds a human-element competence but does not bear on this question's communication-theory core."
+        },
+        {
+          "source": "Communication theory and the engineering hazards discussed",
+          "class": "ENGINEERING_JUDGEMENT",
+          "checked": "Established practice; the answer already states that the hazard list is generic good practice rather than a mandated procedure and that the ship's own SMS governs."
+        }
+      ],
+      "authority_currentness_date": "2026-08-23",
+      "current_framework_finding": "UNCHANGED. The bearer is a January 2026 sitting. The currentness triage marked this CURRENT_WITH_AMENDMENT on the strength of the decarbonisation vocabulary in the family label, but the examinable core is communication and its barriers, which no instrument has moved.",
+      "future_not_in_force": [],
+      "superseded_elements": [],
+      "action_taken": "VERIFY_EXISTING_ANSWER_NO_CHANGE",
+      "correction_or_modernisation": "NEITHER -- verification only",
+      "canonical_current_question": "QP2601-Q2",
+      "canonical_current_answer": {
+        "question_id": "QP2601-Q2",
+        "kind": "SITTING_ANCHORED_BEARER",
+        "present_day_delta": "NONE."
+      },
+      "material_claims_changed": [],
+      "numbers_dates_verified": [
+        "No perishable numeric claim is made in this answer."
+      ],
+      "independent_review": {
+        "reviewer": "Laptop Claude Code (independent clean-context review pass)",
+        "verdict": "PASS",
+        "notes": "Checked that the standing C_ACCEPTED_LIMITATION -- the hazard list is good practice, not a mandated control set -- was preserved rather than quietly upgraded into a regulatory claim."
+      },
+      "final_state": "CURRENT_AND_VERIFIED",
+      "readiness_after": "READY_TO_STUDY_NOW",
+      "tranche_id": "QI_PHASE2_TRANCHE_001"
+    },
+    {
+      "family_id": "QIF-EM-0128",
+      "pinned_at_selection": {
+        "label": "Guidelines on Maritime Cyber Risk Management are laid down in MSC. FAL.1/Circ.3, considering these guidelines...",
+        "weight_topic_id": "D03",
+        "topic_tags": [
+          "ECDIS",
+          "IT",
+          "IT and OT",
+          "MSC-FAL.1/Circ.3",
+          "OT",
+          "cyber risk",
+          "cyber security",
+          "risk management"
+        ],
+        "count_3y": 3,
+        "count_5y": 4,
+        "count_10y": 4,
+        "count_full_horizon": 4,
+        "distinct_years": 3,
+        "distinct_sittings": 4,
+        "first_sitting": "2022-09",
+        "last_sitting": "2025-10",
+        "unit": "WHOLE_QUESTION",
+        "recurrence_labels": [
+          "NEW_EMERGING",
+          "RECENTLY_ACTIVE",
+          "RISING"
+        ],
+        "time_relative_flags": [],
+        "phase2_rank": 21,
+        "phase2_priority": 43.4,
+        "phase2_action": "EXISTING_CURRENT_ANSWER_VERIFY",
+        "currentness_status_at_selection": "CURRENT_WITH_AMENDMENT",
+        "existing_answer_status_at_selection": "SOLVED_BUT_CURRENTNESS_UNVERIFIED",
+        "modern_question_action": "USE_EXISTING_CANONICAL_QUESTION",
+        "modern_members": [
+          "QP2209-Q3",
+          "QP2403-Q5",
+          "QP2504-Q9",
+          "QP2510-Q5"
+        ],
+        "modern_family_ids": [
+          "QP2209-Q3"
+        ],
+        "modern_recurrence_classes": [
+          "NEW",
+          "REPEAT"
+        ],
+        "historical_variants": [
+          "QP2209-Q3",
+          "QP2403-Q5",
+          "QP2504-Q9"
+        ],
+        "canonical_bearer_at_selection": "QP2510-Q5",
+        "readiness_before": "VERIFY_CURRENT_ANSWER"
+      },
+      "selection_reason": "Rank 21. Four sittings in three years, rising, and the bearer carried a named, specific prediction of the exact risk that has now materialised.",
+      "modern_conflict_status": "NO_CONFLICT",
+      "present_day_examinable_core": "CURRENT_FRAMEWORK_AMENDED",
+      "existing_answer_owners": [
+        "QP2510-Q5"
+      ],
+      "existing_answer_status": "ONE_CANONICAL_CURRENT_CANDIDATE",
+      "primary_authority": [
+        {
+          "source": "MSC-FAL.1/Circ.3/Rev.4, Guidelines on Maritime Cyber Risk Management, 28 May 2026",
+          "class": "PRIMARY_IMO",
+          "checked": "Obtained from the IMO CDN and READ IN FULL this session -- covering circular and annex. Approved by the Facilitation Committee at its fiftieth session (23 to 27 March 2026) and the Maritime Safety Committee at its 111th session (13 to 22 May 2026)."
+        }
+      ],
+      "authority_currentness_date": "2026-08-23",
+      "current_framework_finding": "A NEW REVISION EXISTS AND THE BEARER PREDICTED IT BY NAME. QP2510-Q5 recorded a B_CURRENCY_CHECK asking whether a Rev.4 had appeared that a later editor might wrongly back-date. Rev.4 was issued on 28 May 2026, seven months after that sitting. The October 2025 answer correctly cites Rev.3 of 4 April 2025 and is NOT edited. The present-day guidance is Rev.4, and the delta is smaller than the revision number suggests.",
+      "present_day_position": [
+        "The current guidance is MSC-FAL.1/Circ.3/Rev.4, dated 28 May 2026, approved by FAL 50 and MSC 111.",
+        "The SIX functional elements are UNCHANGED from Rev.3 and still lead with Govern: Govern, Identify, Protect, Detect, Respond, Recover.",
+        "The vulnerable-systems list at annex 2.2.1 still has NINE heads, ending with ship-port interfaces and ship-to-shore integrated systems (with remote control systems and Maritime Autonomous Surface Ships given as the example).",
+        "The substantive change is definitional: Rev.4 is built around Computer Based Systems (CBS). CBS is now the lead definition, IT and OT are both defined AS kinds of CBS, and two new definitions appear -- \"cyber incident\" and \"cyber risk management\".",
+        "The IT/OT segregation duty survives at annex 2.2.2, now expressed in CBS terms, and adds that OT should be protected from Internet-facing systems.",
+        "The circular continues to supersede the interim guidelines in MSC.1/Circ.1526."
+      ],
+      "future_not_in_force": [],
+      "superseded_elements": [
+        "MSC-FAL.1/Circ.3/Rev.3 of 4 April 2025 -- superseded by Rev.4 on 28 May 2026. Correct for the October 2025 bearer."
+      ],
+      "action_taken": "MODERNISE_AT_FAMILY_LEVEL",
+      "correction_or_modernisation": "MODERNISATION",
+      "canonical_current_question": "QP2510-Q5",
+      "canonical_current_answer": {
+        "question_id": "QP2510-Q5",
+        "kind": "SITTING_ANCHORED_BEARER_PLUS_FAMILY_CURRENT_NOTE",
+        "present_day_delta": "MATERIAL on citation, minor on substance. Carried by present_day_position above. The bearer is not edited."
+      },
+      "material_claims_changed": [
+        {
+          "old": "The current guidance is MSC-FAL.1/Circ.3/Rev.3 of 4 April 2025.",
+          "new": "As at August 2026 the current guidance is Rev.4 of 28 May 2026. The six functional elements and the nine-head vulnerable-systems list carry over unchanged; the framing is now Computer Based Systems.",
+          "why": "Rev.4 was issued after the sitting."
+        }
+      ],
+      "numbers_dates_verified": [
+        "Rev.4 dated 28 May 2026",
+        "approved by FAL 50 (23 to 27 March 2026) and MSC 111 (13 to 22 May 2026)",
+        "six functional elements, Govern first -- counted in the Rev.4 annex",
+        "nine heads at annex 2.2.1 -- counted in the Rev.4 annex",
+        "supersedes MSC.1/Circ.1526"
+      ],
+      "independent_review": {
+        "reviewer": "Laptop Claude Code (independent clean-context review pass)",
+        "verdict": "PASS",
+        "notes": "The element count and the nine heads were counted in the Rev.4 text rather than assumed to have changed because the revision number moved. That matters in both directions: the bearer's own record notes that much published material still says FIVE elements, so a reviewer working from secondary sources could have \"corrected\" a right answer into a wrong one. Confirmed Rev.3 was not back-dated out of the October 2025 answer."
+      },
+      "final_state": "MODERNISED_AND_VERIFIED",
+      "readiness_after": "READY_TO_STUDY_NOW",
+      "tranche_id": "QI_PHASE2_TRANCHE_001"
+    },
+    {
+      "family_id": "QIF-EM-0023",
+      "pinned_at_selection": {
+        "label": "State the UNCLOS requirements for member States, (a) To register ships flagged with them and (b) To control sa...",
+        "weight_topic_id": "D01",
+        "topic_tags": [
+          "Article 217",
+          "Article 94",
+          "DG Shipping",
+          "IMSAS",
+          "UNCLOS",
+          "flag State",
+          "genuine link",
+          "recognized organizations"
+        ],
+        "count_3y": 1,
+        "count_5y": 3,
+        "count_10y": 11,
+        "count_full_horizon": 11,
+        "distinct_years": 6,
+        "distinct_sittings": 11,
+        "first_sitting": "2017-02",
+        "last_sitting": "2026-01",
+        "unit": "WHOLE_QUESTION",
+        "recurrence_labels": [
+          "PERSISTENT",
+          "RECENTLY_ACTIVE",
+          "RE_EMERGING"
+        ],
+        "time_relative_flags": [],
+        "phase2_rank": 24,
+        "phase2_priority": 42.35,
+        "phase2_action": "EXISTING_CURRENT_ANSWER_VERIFY",
+        "currentness_status_at_selection": "CURRENT_WITH_AMENDMENT",
+        "existing_answer_status_at_selection": "SOLVED_BUT_CURRENTNESS_UNVERIFIED",
+        "modern_question_action": "USE_EXISTING_CANONICAL_QUESTION",
+        "modern_members": [
+          "QP2204-Q1",
+          "QP2211-Q9",
+          "QP2601-Q7"
+        ],
+        "modern_family_ids": [
+          "QP2204-Q1",
+          "QP2211-Q9",
+          "QP2601-Q7"
+        ],
+        "modern_recurrence_classes": [
+          "TOPIC_RECURRENCE"
+        ],
+        "historical_variants": [
+          "QP2204-Q1",
+          "QP2211-Q9"
+        ],
+        "canonical_bearer_at_selection": "QP2601-Q7",
+        "readiness_before": "VERIFY_CURRENT_ANSWER"
+      },
+      "selection_reason": "Rank 24. Eleven sittings across six years, re-emerging after a 38-month gap.",
+      "modern_conflict_status": "NO_CONFLICT",
+      "present_day_examinable_core": "CURRENT_FRAMEWORK_AMENDED",
+      "existing_answer_owners": [
+        "QP2601-Q7"
+      ],
+      "existing_answer_status": "ONE_CANONICAL_CURRENT_CANDIDATE",
+      "primary_authority": [
+        {
+          "source": "UNCLOS Articles 91, 92, 94 and 217",
+          "class": "PRIMARY_TREATY",
+          "checked": "Treaty text; unchanged. Article 91 still requires a genuine link without defining it."
+        },
+        {
+          "source": "The Merchant Shipping Act, 2025 (Act No. 24 of 2025), s.7 -- Gazette text read this session",
+          "class": "PRIMARY_INDIAN_STATUTE",
+          "checked": "Section 7(1), in Chapter II headed MARITIME ADMINISTRATION, empowers the Central Government to appoint a person to be the DIRECTOR-GENERAL OF MARITIME ADMINISTRATION. This is the statutory basis for the renamed administration."
+        }
+      ],
+      "authority_currentness_date": "2026-08-23",
+      "current_framework_finding": "THE INTERNATIONAL LIMB IS UNCHANGED; THE INDIAN LIMB HAS SETTLED. The bearer carried a B_CURRENCY_CHECK saying the naming of the administration was in transition and should be re-checked before publication. It has now settled: s.7 of the Merchant Shipping Act, 2025 creates the Director-General of Maritime Administration, the Act commenced on 15 March 2026, and the office was assumed under that title in June 2026. The bearer is a January 2026 sitting, before commencement, so it is correct to describe the administration in its pre-commencement terms and it is NOT edited.",
+      "present_day_position": [
+        "UNCLOS Articles 91, 92, 94 and 217 are unchanged. Article 94 duties of the flag State and Article 217 flag-State enforcement stand as stated.",
+        "The Indian implementing statute as at August 2026 is the Merchant Shipping Act, 2025, in force from 15 March 2026.",
+        "The Indian maritime administration is the Directorate General of Maritime Administration (formerly DG Shipping); the office of Director-General of Maritime Administration is created by s.7(1) of the 2025 Act.",
+        "Registration of Indian vessels is governed by the 2025 Act (registration provisions at ss.15 to 17), not by the 1958 Act.",
+        "No authoritative test for the UNCLOS \"genuine link\" has been settled, and none should be offered."
+      ],
+      "future_not_in_force": [],
+      "superseded_elements": [
+        "The Merchant Shipping Act, 1958 as the Indian implementing statute -- repealed 15 March 2026.",
+        "The title \"Director General of Shipping\" for the live administration. Historical instrument titles keep their issued names."
+      ],
+      "action_taken": "MODERNISE_AT_FAMILY_LEVEL",
+      "correction_or_modernisation": "MODERNISATION",
+      "canonical_current_question": "QP2601-Q7",
+      "canonical_current_answer": {
+        "question_id": "QP2601-Q7",
+        "kind": "SITTING_ANCHORED_BEARER_PLUS_FAMILY_CURRENT_NOTE",
+        "present_day_delta": "The Indian limb only. Carried by present_day_position above. The bearer is not edited."
+      },
+      "material_claims_changed": [
+        {
+          "old": "The Indian administration and implementing statute were described at institutional level with the naming recorded as in transition.",
+          "new": "As at August 2026 the statute is the Merchant Shipping Act, 2025 (in force 15 March 2026) and the administration is the Directorate General of Maritime Administration, the office being created by s.7(1).",
+          "why": "Commencement and the renaming both took effect after the sitting."
+        }
+      ],
+      "numbers_dates_verified": [
+        "UNCLOS Articles 91, 92, 94, 217 -- unchanged",
+        "MS Act 2025 s.7(1) creates the Director-General of Maritime Administration",
+        "Chapter II of the 2025 Act is headed MARITIME ADMINISTRATION",
+        "MS Act 2025 in force 15 March 2026"
+      ],
+      "independent_review": {
+        "reviewer": "Laptop Claude Code (independent clean-context review pass)",
+        "verdict": "PASS",
+        "notes": "Checked that no rule number under the 2025 Act is cited. Subordinate rule-making was still in progress and the bearer deliberately declined to enumerate rules; that limitation is preserved. The renaming is asserted from the statute itself rather than from press reporting of the appointment."
+      },
+      "final_state": "MODERNISED_AND_VERIFIED",
+      "readiness_after": "READY_TO_STUDY_NOW",
+      "tranche_id": "QI_PHASE2_TRANCHE_001"
+    }
+  ],
+  "counts": {
+    "families": 10,
+    "by_final_state": {
+      "CURRENT_AND_VERIFIED": 4,
+      "UPDATED_AND_VERIFIED": 1,
+      "MODERNISED_AND_VERIFIED": 4,
+      "SUPERSEDED_WITH_SUCCESSOR": 1
+    },
+    "by_correction_or_modernisation": {
+      "NEITHER -- verification only": 4,
+      "CORRECTION": 1,
+      "MODERNISATION": 5
+    }
+  }
+}

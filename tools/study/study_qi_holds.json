@@ -83,7 +83,7 @@
     {
       "hold_id": "SQI-CONF-004",
       "modern_family_id": "QP2210-Q5",
-      "state": "HOLD_RECONCILIATION",
+      "state": "RESOLVED_CANONICAL",
       "modern_class": "NEAR_REPEAT",
       "modern_evidence_class": "INFERRED",
       "modern_members": [
@@ -100,8 +100,10 @@
         "QIF-EM-0082"
       ],
       "precedence_while_held": "CANONICAL_ADJUDICATION_WINS",
-      "adjudicated_by": null,
-      "note": "QIF-EM-0082 is the role of classification societies; QIF-EM-0073 is the purpose of annual surveys and its listed items. QP2310-Q2 is the only member on the QIF-EM-0073 side, so this is a single-member disagreement inside an otherwise agreeing six-member lineage."
+      "adjudicated_by": "Laptop Claude Code, QI_PHASE2_TRANCHE_001, 2026-08-23",
+      "note": "QIF-EM-0082 is the role of classification societies; QIF-EM-0073 is the purpose of annual surveys and its listed items. QP2310-Q2 is the only member on the QIF-EM-0073 side, so this is a single-member disagreement inside an otherwise agreeing six-member lineage.",
+      "adjudication_verdict": "LEGITIMATE_RELATED_BUT_DISTINCT",
+      "adjudication_note": "Reopened ONLY because it blocked QIF-EM-0082, the rank-1 family of Phase-2 tranche 001. The stems were read, not the labels. Six of the seven inferred members ask about the ROLE of classification societies (QIF-EM-0082). QP2310-Q2 asks about the PURPOSE of annual surveys and the items listed under them (QIF-EM-0073). Both sit in the class domain, which is why a similarity threshold joined them, but they are different examinable cores taking different answers. The canonical split is confirmed correct and the inferred cluster over-reached by one member. No member moves, no occurrence moves, no count changes: the canonical layer already governed while the hold stood, so this records the decision and releases the block rather than altering anything. The other six conflict holds were NOT examined and remain HOLD_RECONCILIATION."
     },
     {
       "hold_id": "SQI-CONF-005",
@@ -606,7 +608,11 @@
   "counts": {
     "conflict_holds": 7,
     "topic_mapping_holds": 40,
-    "known_authored_edge_defects": 1
+    "known_authored_edge_defects": 1,
+    "conflict_holds_by_state": {
+      "HOLD_RECONCILIATION": 6,
+      "RESOLVED_CANONICAL": 1
+    }
   },
   "known_authored_edge_defects": {
     "what_this_is": "Authored host_recurrence_hint references that name a question which does not exist. They are pre-existing corpus defects surfaced by this integration, NOT integration damage. Each is listed individually so the dangling-edge gate stays sharp for new breakage instead of being switched off.",
