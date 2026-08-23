@@ -1,0 +1,846 @@
+{
+ "record_version": "1.0",
+ "generated": "2026-08-23",
+ "generated_by": "Examiner evidence reconciliation, laptop session of 2026-08-23, from repo state 2c793d3. Derived from live QB HTML, EXAMINER_EVIDENCE_LEDGER.jsonl, RELEASE_A_PUBLICATION.json, EXAMINER_INDEX_SNAPSHOT.json, EXAMINER_ALIAS_REGISTER.json and git history; no identifier hand-typed.",
+ "scope": "Every in-card examiner attribution rendered by a QB question card, reconciled against the published relationship universe.",
+ "what_canonical_means_here": "CURRENT_EXAMINER_RELATIONSHIPS.jsonl is one input to the published universe, not the whole of it. build_examiner_index.py upserts four inputs into one row per (examiner, question): the ledger, card data-examiner attributes, RELEASE_A_PUBLICATION.json and STRONG_CE_TIP_REVIEW_DECISIONS.json. A pair absent from the ledger but present in Release A is published, rendered and canonical. Reconciling the card against the ledger alone would have reported 21 missing relationships and created 14 duplicates of already-published ones. The divergence that actually exists is 7.",
+ "attribution_classes": {
+  "IN_CARD_EXAMINER_TAG": "A span with class \"q-tag examiner-tag\" reading \"Examiner: X\", rendered inside a q-card. This is the class this reconciliation governs.",
+  "PAGE_HEADER_NON_ATTRIBUTION": "A header-meta span reading an alias-register non_examiner_attributions value. Asserts the absence of an examiner, never an identity."
+ },
+ "excluded_constructs": {
+  "TRAP_QUESTION_SPEAKER_LABEL": "A bolded \"Examiner:\" introducing a quoted line inside a Trap Questions list. \"Examiner\" is a speaker role in scripted dialogue, never an identity claim. Found in QB9_D, QB7_D, QB8_A, QB9_A, QB9_B, QB9_C, QB10_B and others; none is an attribution and none belongs in the ledger.",
+  "SEO_META_DESCRIPTION": "\"Examiner: Nair / Simon\" inside a meta description tag. Not candidate-facing card metadata; out of scope for the divergence gate.",
+  "CE_TIP_PROSE": "Examiner names inside CE Oral Tip prose. Already governed by the CE_TIP tier and the STRONG_CE_TIP_REVIEW_DECISIONS adjudication. Not re-opened here.",
+  "ORAL_NOTES_PAGES": "meoclass1/oralnotes/ carries its own examiner evidence layer in ORAL_NOTES_EXAMINER_EVIDENCE.jsonl. Not a QB card surface."
+ },
+ "card_as_provenance_policy": "Governance already defines one card-level provenance channel: the data-examiner attribute, harvested by build_examiner_index.py as EXPLICIT_QCARD and published at tier 'ce_tip' -- page-declared, not tracker-confirmed. A rendered examiner-tag span is NOT that channel and is never harvested, which is the mechanism of this divergence. A card that renders an attribution therefore proves only that someone authored the line; on its own it earns tier 'ce_tip' at most, and only through data-examiner. Every relationship added by this reconciliation is tiered on its master-tracker primary record instead, so no tier anywhere rests on the card alone.",
+ "source_layer_gap": "CURRENT_EXAMINER_RELATIONSHIPS.jsonl was reconstructed entirely from CURRENT_INDEX_RECOVERY: all 862 rows carry that source_layer and their evidence is the published index's own rows, so the recovery could only ever contain what meoclass1/examiner-index.html already displayed. Five QB files -- QB1_I, QB2_H, QB3_H, QB4_I, QB7_H -- have zero ledger rows, so the recovery never saw them. Release A later reached fourteen of their pairs from the master tracker; the remaining seven were reached by neither. The index is a derived product of the relationships it would be used to confirm and is not more authoritative than the card or the tracker.",
+ "decisions": [
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB1_I#q1",
+   "file": "QB1_I.html",
+   "anchor": "q1",
+   "raw_examiner_string": "Nair",
+   "canonical_examiner": "Nair",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0266"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "CANONICAL_MATCH_BUT_LEGACY_MAPPING_WRONG"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": false,
+   "published_tier": null,
+   "published_via": null,
+   "release_a_relation_id": null,
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ADD_RELATIONSHIP",
+   "research_best_tier": "PRIMARY_CONFIRMED",
+   "current_tier": "confirmed",
+   "tier_basis": "The tier is earned by the primary candidate record in the master tracker, not by the card. The card corroborates it and is what made the gap visible.",
+   "master_primary_evidence_ids": [
+    "MASTER-AQ-0266"
+   ],
+   "corroborating_sibling_evidence_ids": [],
+   "sibling_note": null
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB1_I#q2",
+   "file": "QB1_I.html",
+   "anchor": "q2",
+   "raw_examiner_string": "Nair",
+   "canonical_examiner": "Nair",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0535"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "ALREADY_CANONICAL_LINK_MISSING"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "confirmed",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-NAIR-QB1_I-q2",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB1_I#q3",
+   "file": "QB1_I.html",
+   "anchor": "q3",
+   "raw_examiner_string": "Simon",
+   "canonical_examiner": "Simon",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0546"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "ALREADY_CANONICAL_LINK_MISSING"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "confirmed",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-SIMON-QB1_I-q3",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB1_I#q4",
+   "file": "QB1_I.html",
+   "anchor": "q4",
+   "raw_examiner_string": "Simon",
+   "canonical_examiner": "Simon",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0547"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "ALREADY_CANONICAL_LINK_MISSING"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "confirmed",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-SIMON-QB1_I-q4",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB1_I#q5",
+   "file": "QB1_I.html",
+   "anchor": "q5",
+   "raw_examiner_string": "Nair",
+   "canonical_examiner": "Nair",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0550"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "ALREADY_CANONICAL_LINK_MISSING"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "confirmed",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-NAIR-QB1_I-q5",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB1_I#q6",
+   "file": "QB1_I.html",
+   "anchor": "q6",
+   "raw_examiner_string": "Nair",
+   "canonical_examiner": "Nair",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0555"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "ALREADY_CANONICAL_LINK_MISSING"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "confirmed",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-NAIR-QB1_I-q6",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB2_H#q1",
+   "file": "QB2_H.html",
+   "anchor": "q1",
+   "raw_examiner_string": "Nair",
+   "canonical_examiner": "Nair",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0302"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "CANONICAL_MATCH_BUT_LEGACY_MAPPING_WRONG"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": false,
+   "published_tier": null,
+   "published_via": null,
+   "release_a_relation_id": null,
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ADD_RELATIONSHIP",
+   "research_best_tier": "PRIMARY_CONFIRMED",
+   "current_tier": "confirmed",
+   "tier_basis": "The tier is earned by the primary candidate record in the master tracker, not by the card. The card corroborates it and is what made the gap visible.",
+   "master_primary_evidence_ids": [
+    "MASTER-AQ-0302"
+   ],
+   "corroborating_sibling_evidence_ids": [],
+   "sibling_note": null
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB2_H#q2",
+   "file": "QB2_H.html",
+   "anchor": "q2",
+   "raw_examiner_string": "Simon",
+   "canonical_examiner": "Simon",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0543"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "ALREADY_CANONICAL_LINK_MISSING"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "confirmed",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-SIMON-QB2_H-q2",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB2_H#q3",
+   "file": "QB2_H.html",
+   "anchor": "q3",
+   "raw_examiner_string": "John",
+   "canonical_examiner": "John",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "NEW_EXTERNAL_ONLY_EXAMINER",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [],
+   "primary_evidence_sources": [],
+   "primary_evidence_dispositions": [],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": false,
+   "published_tier": null,
+   "published_via": null,
+   "release_a_relation_id": null,
+   "card_provenance_class": "AUTHOR_ENTERED_WITH_PROVENANCE",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "HOLD_PROVENANCE",
+   "research_best_tier": null,
+   "current_tier": null,
+   "hold_reason": "Traceable to source occurrence ASC-0080 in the all-surveyors external compilation (family GAP-0124, examiner John), which is the same evidence class as John's eleven published 'reported' relationships. Two governed facts block automatic promotion: tools/oral/batch_b_manifest.json pins examiner_relationship_delta = 0 for the batch that authored this card, and John's alias-register status is NEW_EXTERNAL_ONLY_EXAMINER. Promotion to a published relationship at tier 'reported' is defensible on the evidence but requires explicit authorisation, not a side effect of this reconciliation."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB3_H#q1",
+   "file": "QB3_H.html",
+   "anchor": "q1",
+   "raw_examiner_string": "Simon",
+   "canonical_examiner": "Simon",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0070"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "ALREADY_CANONICAL_LINK_MISSING"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "confirmed",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-SIMON-QB3_H-q1",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB3_H#q2",
+   "file": "QB3_H.html",
+   "anchor": "q2",
+   "raw_examiner_string": "Simon",
+   "canonical_examiner": "Simon",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "JULY-NEW-012",
+    "MASTER-AQ-0097"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions",
+    "MIW_July2026_QuestionBank_SHARE.xlsx#New Questions (July 2026)"
+   ],
+   "primary_evidence_dispositions": [
+    "AMBIGUOUS",
+    "CANONICAL_MATCH_BUT_LEGACY_MAPPING_WRONG"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "reported",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-SIMON-QB3_H-q2",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count.",
+   "tier_observation": "Release A published this at EXTERNAL_SOURCE_CONFIRMED on ASC-0145, while the master tracker holds MASTER-AQ-0097 for the same pair. The published tier may understate the evidence. Recorded only: re-tiering a finalised Release A relationship is an editorial decision, not part of an evidence reconciliation."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB3_H#q3",
+   "file": "QB3_H.html",
+   "anchor": "q3",
+   "raw_examiner_string": "Rajappan",
+   "canonical_examiner": "Rajappan",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0119"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "ALREADY_CANONICAL_LINK_MISSING"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "confirmed",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-RAJAPPAN-QB3_H-q3",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB3_H#q4",
+   "file": "QB3_H.html",
+   "anchor": "q4",
+   "raw_examiner_string": "Simon",
+   "canonical_examiner": "Simon",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0263"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "CANONICAL_MATCH_BUT_LEGACY_MAPPING_WRONG"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": false,
+   "published_tier": null,
+   "published_via": null,
+   "release_a_relation_id": null,
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ADD_RELATIONSHIP",
+   "research_best_tier": "PRIMARY_CONFIRMED",
+   "current_tier": "confirmed",
+   "tier_basis": "The tier is earned by the primary candidate record in the master tracker, not by the card. The card corroborates it and is what made the gap visible.",
+   "master_primary_evidence_ids": [
+    "MASTER-AQ-0263"
+   ],
+   "corroborating_sibling_evidence_ids": [],
+   "sibling_note": null
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB3_H#q5",
+   "file": "QB3_H.html",
+   "anchor": "q5",
+   "raw_examiner_string": "Simon",
+   "canonical_examiner": "Simon",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0316"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "CANONICAL_MATCH_BUT_LEGACY_MAPPING_WRONG"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": false,
+   "published_tier": null,
+   "published_via": null,
+   "release_a_relation_id": null,
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ADD_RELATIONSHIP",
+   "research_best_tier": "PRIMARY_CONFIRMED",
+   "current_tier": "confirmed",
+   "tier_basis": "The tier is earned by the primary candidate record in the master tracker, not by the card. The card corroborates it and is what made the gap visible.",
+   "master_primary_evidence_ids": [
+    "MASTER-AQ-0316"
+   ],
+   "corroborating_sibling_evidence_ids": [],
+   "sibling_note": null
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB3_H#q6",
+   "file": "QB3_H.html",
+   "anchor": "q6",
+   "raw_examiner_string": "Nair",
+   "canonical_examiner": "Nair",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0558"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "ALREADY_CANONICAL_LINK_MISSING"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "confirmed",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-NAIR-QB3_H-q6",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB4_I#q1",
+   "file": "QB4_I.html",
+   "anchor": "q1",
+   "raw_examiner_string": "Simon",
+   "canonical_examiner": "Simon",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0073"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "CANONICAL_MATCH_BUT_LEGACY_MAPPING_WRONG"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": false,
+   "published_tier": null,
+   "published_via": null,
+   "release_a_relation_id": null,
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ADD_RELATIONSHIP",
+   "research_best_tier": "PRIMARY_CONFIRMED",
+   "current_tier": "confirmed",
+   "tier_basis": "The tier is earned by the primary candidate record in the master tracker, not by the card. The card corroborates it and is what made the gap visible.",
+   "master_primary_evidence_ids": [
+    "MASTER-AQ-0073"
+   ],
+   "corroborating_sibling_evidence_ids": [],
+   "sibling_note": null
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB4_I#q2",
+   "file": "QB4_I.html",
+   "anchor": "q2",
+   "raw_examiner_string": "Senthil",
+   "canonical_examiner": "Senthil",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0537"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "ALREADY_CANONICAL_LINK_MISSING"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "confirmed",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-SENTHIL-QB4_I-q2",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB4_I#q3",
+   "file": "QB4_I.html",
+   "anchor": "q3",
+   "raw_examiner_string": "Simon",
+   "canonical_examiner": "Simon",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0542"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "ALREADY_CANONICAL_LINK_MISSING"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "confirmed",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-SIMON-QB4_I-q3",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB4_I#q4",
+   "file": "QB4_I.html",
+   "anchor": "q4",
+   "raw_examiner_string": "Simon",
+   "canonical_examiner": "Simon",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "MASTER-AQ-0544"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions"
+   ],
+   "primary_evidence_dispositions": [
+    "ALREADY_CANONICAL_LINK_MISSING"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "confirmed",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-SIMON-QB4_I-q4",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB4_I#q5",
+   "file": "QB4_I.html",
+   "anchor": "q5",
+   "raw_examiner_string": "Simon",
+   "canonical_examiner": "Simon",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "JULY-NEW-004",
+    "MASTER-AQ-0545"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions",
+    "MIW_July2026_QuestionBank_SHARE.xlsx#New Questions (July 2026)"
+   ],
+   "primary_evidence_dispositions": [
+    "ALREADY_CANONICAL_LINK_MISSING",
+    "PARTIAL_COVERAGE"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": true,
+   "published_tier": "confirmed",
+   "published_via": [
+    "RELEASE_A"
+   ],
+   "release_a_relation_id": "RELA-SIMON-QB4_I-q5",
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ALREADY_REPRESENTED",
+   "research_best_tier": null,
+   "current_tier": null,
+   "already_represented_note": "The pair is already a published relationship and already renders in the examiner index, so the card and the canonical evidence agree. It was absent only from CURRENT_EXAMINER_RELATIONSHIPS.jsonl, which is one input to the published universe rather than the whole of it. Adding a ledger row would duplicate a published relationship and inflate the examiner count."
+  },
+  {
+   "attribution_class": "IN_CARD_EXAMINER_TAG",
+   "question_id": "QB7_H#q1",
+   "file": "QB7_H.html",
+   "anchor": "q1",
+   "raw_examiner_string": "Simon",
+   "canonical_examiner": "Simon",
+   "alias_path": "exact canonical_name",
+   "examiner_register_status": "ESTABLISHED",
+   "already_in_ledger": false,
+   "primary_evidence_ids": [
+    "JULY-NEW-136",
+    "MASTER-AQ-0248"
+   ],
+   "primary_evidence_sources": [
+    "MEO_QB_master_v26.xlsx#All Questions",
+    "MIW_July2026_QuestionBank_SHARE.xlsx#New Questions (July 2026)"
+   ],
+   "primary_evidence_dispositions": [
+    "AMBIGUOUS",
+    "CANONICAL_MATCH_BUT_LEGACY_MAPPING_WRONG"
+   ],
+   "card_first_seen": "04430b9 2026-07-07",
+   "published_in_index": false,
+   "published_tier": null,
+   "published_via": null,
+   "release_a_relation_id": null,
+   "card_provenance_class": "LEGACY_UNTRACED_CARD_METADATA",
+   "display_line_action": "KEEP_AS_IS",
+   "decision": "ADD_RELATIONSHIP",
+   "research_best_tier": "PRIMARY_CONFIRMED",
+   "current_tier": "confirmed",
+   "tier_basis": "The tier is earned by the primary candidate record in the master tracker, not by the card. The card corroborates it and is what made the gap visible.",
+   "master_primary_evidence_ids": [
+    "MASTER-AQ-0248"
+   ],
+   "corroborating_sibling_evidence_ids": [
+    "JULY-NEW-136"
+   ],
+   "sibling_note": "July-sheet rows matched AMBIGUOUS or PARTIAL_COVERAGE. Recorded as corroboration; they never raise the tier to MULTI_SOURCE_CONFIRMED."
+  },
+  {
+   "attribution_class": "PAGE_HEADER_NON_ATTRIBUTION",
+   "question_id": null,
+   "file": "QB1_J.html",
+   "anchor": null,
+   "raw_examiner_string": "Not yet assigned",
+   "canonical_examiner": null,
+   "alias_path": "non_examiner_attributions -> UNATTRIBUTED",
+   "ledger_rows_on_this_file": [
+    [
+     "QB1_J#q1",
+     "Nair",
+     "header",
+     []
+    ],
+    [
+     "QB1_J#q2",
+     "Nair",
+     "header",
+     []
+    ]
+   ],
+   "file_ever_named_that_examiner": false,
+   "decision": "CONFLICT_REQUIRES_REVIEW",
+   "card_provenance_class": "CONFLICTING_METADATA",
+   "conflict": "The page header and every CE Oral Tip on this file read 'Examiner: Not yet assigned', which the alias register classes as UNATTRIBUTED. The ledger nonetheless carries 2 relationships attributing every question on the file to Nair at tier 'header', whose stated meaning is 'attribution from the QB page header only'. The string 'Nair' has never appeared in this file at any commit in its history, so the provenance those rows cite does not exist. They carry no primary evidence: primary_evidence_ids is empty on all of them.",
+   "action_taken": "RECORDED_ONLY",
+   "why_not_removed": "Removing published relationships changes the candidate-facing examiner index and the study examiner signal. Section 9 permits removal only on proof of error, and section 17 holds editorial changes for explicit review. The provenance is disproved; the underlying claim is merely unsupported, which is not the same thing. Founder review required.",
+   "display_line_action": "KEEP_AS_IS"
+  },
+  {
+   "attribution_class": "PAGE_HEADER_NON_ATTRIBUTION",
+   "question_id": null,
+   "file": "QB3_I.html",
+   "anchor": null,
+   "raw_examiner_string": "Not yet assigned",
+   "canonical_examiner": null,
+   "alias_path": "non_examiner_attributions -> UNATTRIBUTED",
+   "ledger_rows_on_this_file": [
+    [
+     "QB3_I#q1",
+     "Nair",
+     "header",
+     []
+    ],
+    [
+     "QB3_I#q2",
+     "Nair",
+     "header",
+     []
+    ],
+    [
+     "QB3_I#q3",
+     "Nair",
+     "header",
+     []
+    ],
+    [
+     "QB3_I#q4",
+     "Nair",
+     "header",
+     []
+    ],
+    [
+     "QB3_I#q5",
+     "Nair",
+     "header",
+     []
+    ],
+    [
+     "QB3_I#q6",
+     "Nair",
+     "header",
+     []
+    ],
+    [
+     "QB3_I#q7",
+     "Nair",
+     "header",
+     []
+    ]
+   ],
+   "file_ever_named_that_examiner": false,
+   "decision": "CONFLICT_REQUIRES_REVIEW",
+   "card_provenance_class": "CONFLICTING_METADATA",
+   "conflict": "The page header and every CE Oral Tip on this file read 'Examiner: Not yet assigned', which the alias register classes as UNATTRIBUTED. The ledger nonetheless carries 7 relationships attributing every question on the file to Nair at tier 'header', whose stated meaning is 'attribution from the QB page header only'. The string 'Nair' has never appeared in this file at any commit in its history, so the provenance those rows cite does not exist. They carry no primary evidence: primary_evidence_ids is empty on all of them.",
+   "action_taken": "RECORDED_ONLY",
+   "why_not_removed": "Removing published relationships changes the candidate-facing examiner index and the study examiner signal. Section 9 permits removal only on proof of error, and section 17 holds editorial changes for explicit review. The provenance is disproved; the underlying claim is merely unsupported, which is not the same thing. Founder review required.",
+   "display_line_action": "KEEP_AS_IS"
+  }
+ ],
+ "summary": {
+  "in_card_attributions": 21,
+  "page_header_non_attributions": 2,
+  "decisions": {
+   "ADD_RELATIONSHIP": 6,
+   "ALREADY_REPRESENTED": 14,
+   "HOLD_PROVENANCE": 1,
+   "CONFLICT_REQUIRES_REVIEW": 2
+  },
+  "new_relationship_rows": 6,
+  "duplicates_prevented": 14,
+  "conflicting_ledger_rows_recorded": 9,
+  "deferred_out_of_scope": [
+   {
+    "pair": "QB1_I#q1 / Simon",
+    "evidence_id": "JULY-NEW-006",
+    "why_deferred": "A second primary record on a question whose card names only Nair. It is not an in-card attribution, so it is outside this reconciliation boundary. Recorded so the pair is not lost; adding it would raise that question examiner breadth from 1 to 2 and belongs to a separate evidence pass."
+   }
+  ]
+ }
+}
