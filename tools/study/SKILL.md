@@ -24,6 +24,7 @@ be described to a candidate as "the DGMA syllabus".
 | `tools/study/build_study_spine.py` | Aggregates the store into per-domain intelligence. Reads the store; never re-derives mappings. |
 | `tools/study/validate_study_spine.py` | The gate. Fails closed. |
 | `tools/study/test_mapping_engine.py` | Acceptance tests, synthetic fixtures only. |
+| `tools/study/test_d01_priority_cohort.py` | Gates the Topic 01 A/B/C/review partition against the live corpus. Parses the cohorts back out of the pack — there is no second store of cohort membership. |
 | `docs/study/study_mappings.json` | Governed mapping records (generated). |
 | `docs/study/mapping_review_queue.json` | Ambiguous mappings awaiting adjudication (generated). |
 | `docs/study/study_spine.json` | Per-domain aggregation (generated). |
@@ -119,6 +120,7 @@ python tools/study/build_public_study_roadmap.py      # SQ/study-roadmap.html (P
 python tools/study/validate_study_spine.py            # gate
 python tools/study/test_mapping_engine.py             # acceptance
 python tools/study/test_study_expandability.py        # expandability controls
+python tools/study/test_d01_priority_cohort.py        # D01 A/B/C partition gate
 ```
 
 Each builder also takes `--check`, which fails if its artefact is stale. The
