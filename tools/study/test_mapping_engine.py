@@ -513,6 +513,59 @@ def test_hold_review_is_never_published():
        str(ME.validate_mapping(r)))
 
 
+def test_held_is_not_counted_as_unadjudicated():
+    """A summary must never roll a human HOLD into the backlog number.
+
+    Reported live on 2026-08-23: mapping_review_queue.json said QB4_H.html had
+    one 'unadjudicated' question, and that question was QB4_H#q9 -- carrying a
+    written human HOLD with a reasoned note. The item record was already
+    honest; only the roll-up flattened it. Held work shown as outstanding work
+    is pressure to clear a hold, and forcing a topic to empty the queue is the
+    one move the adjudication contract forbids.
+
+    Synthetic fixture, deliberately: this must keep testing the rule after the
+    live corpus has no held items left to borrow.
+    """
+    items = [
+        {'canonical_question_id': 'SYNTH_A#q1',
+         'review_status': ME.FRESH_UNADJUDICATED},
+        {'canonical_question_id': 'SYNTH_A#q2',
+         'review_status': ME.FRESH_UNADJUDICATED},
+        {'canonical_question_id': 'SYNTH_B#q1',
+         'review_status': ME.HELD_ADJUDICATED},
+    ]
+    s = ME.queue_summary(items)
+    ok('queue summary/total is every open item', s['total'] == 3, str(s))
+    ok('queue summary/held is not fresh', s['fresh_unadjudicated'] == 2, str(s))
+    ok('queue summary/held is reported', s['held_adjudicated'] == 1, str(s))
+    ok('queue summary/the two states partition the total',
+       s['fresh_unadjudicated'] + s['held_adjudicated'] == s['total'], str(s))
+
+    # A held item stays visible. Dropping it from the queue would be the
+    # opposite defect: uncertainty must remain countable, just not as backlog.
+    ok('queue summary/holds are never hidden', s['held_adjudicated'] > 0, str(s))
+
+    # ---- mutation controls -------------------------------------------------
+    # Each mutation is the defect this test exists to catch; each must be seen.
+    escapes = []
+
+    held_as_fresh = [dict(i, review_status=ME.FRESH_UNADJUDICATED) for i in items]
+    if ME.queue_summary(held_as_fresh)['fresh_unadjudicated'] != 3:
+        escapes.append('relabelling the hold as fresh was not visible')
+
+    dropped = [i for i in items if i['review_status'] != ME.HELD_ADJUDICATED]
+    if ME.queue_summary(dropped)['total'] != 2:
+        escapes.append('dropping the hold from the queue was not visible')
+
+    unknown = [dict(i, review_status='SOMETHING_NEW') for i in items]
+    if ME.queue_summary(unknown)['held_adjudicated'] != 0:
+        escapes.append('an unrecognised state was counted as held -- the '
+                       'summary must fail toward "not adjudicated", never '
+                       'toward "already settled"')
+
+    ok('queue summary/3 mutations caught', not escapes, str(escapes))
+
+
 def main():
     for fn in (test_oral_high, test_oral_medium_routes_to_review,
                test_oral_unresolved, test_written,
@@ -536,6 +589,7 @@ def main():
                test_reassign_moves_the_question_and_its_official_join,
                test_reassign_is_refused_when_the_mapper_has_moved,
                test_hold_review_is_never_published,
+               test_held_is_not_counted_as_unadjudicated,
                test_no_fixture_leak):
         fn()
     print(f'mapping engine acceptance -- {len(PASS) + len(FAIL)} assertions')

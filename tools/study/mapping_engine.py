@@ -661,6 +661,31 @@ def review_queue(store):
     return q
 
 
+# Queue states, and the reason they must never be summed into one number.
+#
+# HELD is not UNADJUDICATED. A held item has been read by a named human who
+# wrote down why the evidence does not settle it; an awaiting item has been
+# read by nobody. Rolling them together makes finished governance work look
+# like a backlog -- which is the exact pressure that gets a hold cleared for
+# the wrong reason, and the SKILL contract already forbids forcing a topic
+# merely to empty the queue.
+FRESH_UNADJUDICATED = 'AWAITING_ADJUDICATION'
+HELD_ADJUDICATED = 'HELD_PENDING_EVIDENCE'
+
+
+def queue_summary(items):
+    """-> counts that keep human HOLDs apart from unread items.
+
+    ``total`` is every open item; the two components partition it. Any caller
+    reporting "how much work is left" wants ``fresh_unadjudicated``.
+    """
+    fresh = sum(1 for i in items if i.get('review_status') != HELD_ADJUDICATED)
+    held = sum(1 for i in items if i.get('review_status') == HELD_ADJUDICATED)
+    return {'total': len(items),
+            'fresh_unadjudicated': fresh,
+            'held_adjudicated': held}
+
+
 def _candidates(rec):
     """Every domain whose cue also fires -- the evidence a reviewer needs.
 

@@ -312,6 +312,53 @@ def main():
               f'{len(unqueued)} unmapped questions are not in the review queue '
               f'(e.g. {unqueued[:3]})')
 
+        # ---- R-QUEUE: HELD is not UNADJUDICATED ---------------------------
+        # The queue's summary counters must keep human HOLDs apart from items
+        # nobody has read. They were summed together until 2026-08-23, which
+        # reported finished governance work as outstanding backlog.
+        q = json.load(open(os.path.join(
+            ROOT, 'docs', 'study', 'mapping_review_queue.json'),
+            encoding='utf-8'))
+        qstates = q.get('queue_states') or {}
+        check('R-QUEUE-STATES-SPLIT',
+              'fresh_unadjudicated' in qstates and 'held_adjudicated' in qstates,
+              'mapping_review_queue.json reports no fresh/held split')
+        check('R-QUEUE-STATES-PARTITION',
+              qstates.get('fresh_unadjudicated', 0)
+              + qstates.get('held_adjudicated', -1) == qstates.get('total'),
+              f'queue_states do not partition the total: {qstates}')
+        live_held = {i['canonical_question_id'] for i in q['items']
+                     if i.get('review_status') == ME.HELD_ADJUDICATED}
+        check('R-QUEUE-HELD-COUNTED',
+              qstates.get('held_adjudicated') == len(live_held),
+              f"queue says {qstates.get('held_adjudicated')} held, items show "
+              f'{len(live_held)}')
+        # Every held item must carry the human stamp that earned the hold --
+        # otherwise 'held' becomes a place to park unread work.
+        unstamped = sorted(x for x in live_held
+                           if not maps[x].get('adjudicated_candidate_topic_ids')
+                           and not maps[x].get('review_hold'))
+        check('R-QUEUE-HELD-IS-HUMAN', not unstamped,
+              f'{len(unstamped)} held items carry no human hold record: '
+              f'{unstamped[:3]}')
+        ftc = q.get('file_title_contradictions') or {}
+        by_file = ftc.get('by_file') or {}
+        miscounted = sorted(
+            f for f, v in by_file.items()
+            if v.get('fresh_unadjudicated', 0) + v.get('held_adjudicated', 0)
+            != len(v.get('questions', [])))
+        check('R-QUEUE-FILE-SPLIT-SUMS', not miscounted,
+              f'{len(miscounted)} contradiction files have a split that does '
+              f'not sum to their question list: {miscounted[:3]}')
+        held_as_fresh = sorted(
+            f for f, v in by_file.items()
+            if any(qq.get('review_status') == ME.HELD_ADJUDICATED
+                   for qq in v.get('questions', []))
+            and v.get('held_adjudicated', 0) == 0)
+        check('R-QUEUE-NO-HELD-AS-FRESH', not held_as_fresh,
+              f'{len(held_as_fresh)} files report a human-held question as '
+              f'unadjudicated: {held_as_fresh[:3]}')
+
         # taxonomy drift must be visible, not silent
         cls = ME.classify_against_taxonomy(store)
         check('R-STORE-FRESH', not cls['STALE'],

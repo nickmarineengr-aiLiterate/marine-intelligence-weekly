@@ -106,6 +106,13 @@ def main():
     # whose title names one domain, holding questions whose own text cues a
     # different one. DERIVED, so it can never rot into a stale hand-list -- a
     # file drops off this summary the moment its questions are adjudicated.
+    #
+    # Every count below splits FRESH from HELD. A single 'unadjudicated'
+    # number was wrong in one direction only, but it was wrong on the number
+    # a human reads: on 2026-08-23 QB4_H.html reported one unadjudicated
+    # question, and that question was QB4_H#q9 -- carrying a written human
+    # HOLD. Held work reported as outstanding work is pressure to clear a
+    # hold, which is the one thing the adjudication contract forbids.
     contra = {}
     for i in queue:
         rec = store['mappings'][i['canonical_question_id']]
@@ -113,13 +120,26 @@ def main():
             continue
         f = contra.setdefault(rec['source_file'],
                               {'file_topic_id': rec['topic_id'],
-                               'unadjudicated': 0, 'questions': []})
-        f['unadjudicated'] += 1
+                               'fresh_unadjudicated': 0,
+                               'held_adjudicated': 0, 'questions': []})
+        held = i.get('review_status') == ME.HELD_ADJUDICATED
+        f['held_adjudicated' if held else 'fresh_unadjudicated'] += 1
         f['questions'].append({
             'canonical_question_id': i['canonical_question_id'],
+            'review_status': i.get('review_status'),
             'contradicting_topic_ids': rec.get('contradicting_topic_ids') or []})
+    contra_items = [i for i in queue
+                    if store['mappings'][i['canonical_question_id']]
+                    .get('mapping_evidence') == 'FILE_TITLE_CONTRADICTED']
     qbody = json.dumps({'generated_by': 'tools/study/build_study_mappings.py',
                         'taxonomy_version': ME.taxonomy_version(),
+                        'queue_states': {
+                            'what': 'HELD is not UNADJUDICATED. A held item '
+                                    'was read by a named human who recorded '
+                                    'why the evidence does not settle it; a '
+                                    'fresh item has been read by nobody. '
+                                    'Never sum these into one backlog number.',
+                            **ME.queue_summary(queue)},
                         'total': len(queue),
                         'file_title_contradictions': {
                             'what': 'QB files whose title names one domain but '
@@ -127,8 +147,7 @@ def main():
                                     'another. Follow-up inventory for the '
                                     '2026-08-23 over-capture correction.',
                             'files': len(contra),
-                            'unadjudicated':
-                                sum(f['unadjudicated'] for f in contra.values()),
+                            **ME.queue_summary(contra_items),
                             'by_file': dict(sorted(contra.items()))},
                         'items': queue},
                        indent=2, ensure_ascii=False) + '\n'
@@ -150,7 +169,10 @@ def main():
     print(f'  {stats}')
     print(f'  adjudications: {astats}')
     print(f'  by status: {store["summary"]["by_status"]}')
-    print(f'wrote docs/study/mapping_review_queue.json  ({len(queue)} awaiting adjudication)')
+    qs = ME.queue_summary(queue)
+    print(f'wrote docs/study/mapping_review_queue.json  ({qs["total"]} open: '
+          f'{qs["fresh_unadjudicated"]} unadjudicated, '
+          f'{qs["held_adjudicated"]} human-held)')
     return 0
 
 

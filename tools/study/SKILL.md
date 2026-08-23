@@ -100,7 +100,20 @@ taxonomy move is still caught.
 
 `docs/study/mapping_review_queue.json` carries a derived
 `file_title_contradictions` block: the standing inventory of files still
-showing this pattern. It is regenerated every build, so it cannot rot. The engine **never** copies a "similar" question's
+showing this pattern. It is regenerated every build, so it cannot rot.
+
+**HELD is not UNADJUDICATED, and no summary may sum them.** Every counter in
+that file — top-level `queue_states` and per-file alike — splits
+`fresh_unadjudicated` (nobody has read it) from `held_adjudicated` (a named
+human read it and recorded why the evidence does not settle it). They were a
+single `unadjudicated` number until 2026-08-23, when `QB4_H.html` was found
+reporting one outstanding question that was in fact `QB4_H#q9`, carrying a
+written HOLD. Reporting finished governance work as backlog is pressure to
+clear a hold, and forcing a topic to empty the queue is the one move this
+contract forbids. `mapping_engine.queue_summary()` is the only place the split
+is computed; `R-QUEUE-*` in the validator gates it, and a held item must still
+appear in the queue — uncertainty stays visible, it just stops being counted
+as work nobody has done. The engine **never** copies a "similar" question's
 mapping: the oral follow-up work already proved similarity scoring picks
 semantically wrong parents.
 
