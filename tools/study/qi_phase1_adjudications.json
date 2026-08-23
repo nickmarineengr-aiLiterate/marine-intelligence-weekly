@@ -1,0 +1,132 @@
+{
+  "note": "HAND-MAINTAINED. The semantic decisions that qi_similarity.py is not allowed to make for itself. build_qi.py reads this file and FAILS CLOSED: if the proposal set changes so that a recorded decision no longer matches anything, or a proposal appears that was never reviewed, the build stops rather than shipping an unreviewed family.",
+  "schema_version": "1.0",
+  "adjudicated_on": "2026-08-23",
+  "adjudicator": "laptop-opus",
+  "authority": "Classifies relationships between question entities. It never invents an entity, never edits a stem, and never changes an occurrence. Entity and occurrence identity are derived from the evidence bands and are read-only to this file.",
+  "method": [
+    "qi_similarity.py proposes MERGE_CANDIDATE pairs (containment_low >= 0.75) and RELATION_CANDIDATE pairs (containment_high >= 0.60, containment_low < 0.75).",
+    "Merge proposals are closed transitively into groups. Every group was read in full, member stem by member stem.",
+    "A rare-token divergence audit was run over every group: tokens present in some members and absent from others, ranked by corpus document frequency. It is the detector for the failure mode lexical containment cannot see -- an identical framing sentence wrapped around a different subject noun.",
+    "A chain audit was run over every group: the weakest DIRECT containment_low between any two members. Zero groups were found to have been chained together below 0.60, so no group owes its existence to transitivity alone.",
+    "Scores never decided anything. Every split below was made against the proposal."
+  ],
+  "limb_coverage_rule": {
+    "rule": "When one entity's whole ask is a subset of another's printed limbs, count the shared limbs as a fraction of the LARGER limb set. At or above 0.60 the two are SAME_FAMILY_VARIANT -- the answer core is shared and the limb count merely moved. Below 0.60 they are two families joined by WHOLE_VS_LIMB_RELATION.",
+    "why": "Without a stated fraction this judgement drifts case by case, and the direction it drifts in is always toward merging -- which is the direction that inflates. A question answering two of four limbs is not the same preparation as one answering all four.",
+    "consequence": "Two families related by WHOLE_VS_LIMB_RELATION share no occurrence. Neither one's sitting count may ever be quoted as the other's."
+  },
+  "forced_splits": [
+    {
+      "split_id": "SPLIT-001",
+      "verdict": "RELATED_BUT_DISTINCT",
+      "reason": "Identical framing sentence, different fuel. 'Hydrogen is widely discussed as a sustainable fuel...' and 'Ammonia is widely discussed as a sustainable fuel...' share every word except the one that decides the answer. The technical, safety and commercial content of a hydrogen answer and an ammonia answer are different bodies of knowledge: toxicity and nitrogen slip versus cryogenics and volumetric energy density.",
+      "detected_by": "rare-token divergence audit (hydrogen / ammonia)",
+      "partitions": [
+        [
+          "QIE-M-QP2207-Q6"
+        ],
+        [
+          "QIE-M-QP2212-Q2",
+          "QIE-M-QP2404-Q2",
+          "QIE-M-QP2411-Q2"
+        ]
+      ]
+    },
+    {
+      "split_id": "SPLIT-002",
+      "verdict": "RELATED_BUT_DISTINCT",
+      "reason": "EEXI and EEDI are two different regulatory instruments sharing one framing sentence. EEDI applies to new builds from 2013; EEXI applies to existing vessels from 2023. The design features a candidate must describe differ, and so does the compliance pathway. Merging them would let an existing-ship question inherit a new-build question's recurrence.",
+      "detected_by": "rare-token divergence audit (eexi / eedi / builds)",
+      "partitions": [
+        [
+          "QIE-M-QP2207-Q8"
+        ],
+        [
+          "QIE-M-QP2210-Q8",
+          "QIE-M-QP2503-Q7"
+        ]
+      ]
+    },
+    {
+      "split_id": "SPLIT-003",
+      "verdict": "RELATED_BUT_DISTINCT",
+      "reason": "The same 'Maritime industries have taken several initiatives to explore new digital technologies and X is one of such initiatives' template around Blockchain and around 3D Printing. The template is the examiner's; the answer is not. Distributed-ledger consensus and additive manufacturing share no content.",
+      "detected_by": "rare-token divergence audit (blockchain / printing / ledger)",
+      "partitions": [
+        [
+          "QIE-M-QP2208-Q1"
+        ],
+        [
+          "QIE-M-QP2503-Q4"
+        ]
+      ]
+    },
+    {
+      "split_id": "SPLIT-004",
+      "verdict": "WHOLE_VS_LIMB_RELATION",
+      "reason": "QIE-H-59566 asks ONLY the charter-survey comparison -- limbs (c) and (d) of the four-limb bill-of-lading question. It holds eight governed occurrences of its own. Merged, those eight sittings would be read as eight sittings of the whole bill-of-lading question, which has been set far less often. This is the exact inflation the limb model exists to prevent.",
+      "limb_coverage": "2 of 4 limbs = 0.50, below the 0.60 rule",
+      "partitions": [
+        [
+          "QIE-H-59566"
+        ],
+        [
+          "QIE-H-59560",
+          "QIE-M-QP2311-Q3"
+        ]
+      ]
+    },
+    {
+      "split_id": "SPLIT-005",
+      "verdict": "WHOLE_VS_LIMB_RELATION",
+      "reason": "The exhaust-emission short-notes bundle is set in a four-limb form (Tier II/III regulation, primary vs secondary NOx, SCR, scavenge-air moisturising and EGR) and a two-limb form (primary vs secondary NOx, SAM and EGR). The two-limb form requires neither the Tier II/III regulatory limits nor SCR, which is half the preparation. Two families, related.",
+      "limb_coverage": "2 of 4 limbs = 0.50, below the 0.60 rule",
+      "partitions": [
+        [
+          "QIE-M-QP2303-Q4",
+          "QIE-M-QP2310-Q5"
+        ],
+        [
+          "QIE-H-59087",
+          "QIE-M-QP2307-Q3"
+        ]
+      ]
+    }
+  ],
+  "confirmed_variant_groups": [
+    {
+      "anchor": "QIE-H-59044",
+      "verdict": "SAME_FAMILY_VARIANT",
+      "note": "The IMO GHG 'ongoing developments' stem, with and without 'market-based' in the limb list. One answer core, and the single most currentness-dangerous family in the corpus: a 2010 answer and a 2026 answer to this stem describe different regulatory worlds."
+    },
+    {
+      "anchor": "QIE-H-58974",
+      "verdict": "SAME_FAMILY_VARIANT",
+      "note": "Emission short notes, three limbs against four (the fourth adds the NOx Technical File). 3 of 4 = 0.75, above the limb-coverage rule."
+    },
+    {
+      "anchor": "QIE-H-58827",
+      "verdict": "SAME_FAMILY_VARIANT",
+      "note": "MLC 2006 minimum requirements, three limbs against four (the fourth adds abandonment of seafarers). 3 of 4 = 0.75."
+    },
+    {
+      "anchor": "QIE-H-59022",
+      "verdict": "SAME_FAMILY_VARIANT",
+      "note": "'Explain the following maritime terms' -- a term bundle whose membership shifts between sittings while the ask and the answer core do not."
+    },
+    {
+      "anchor": "QIE-H-59060",
+      "verdict": "SAME_FAMILY_VARIANT",
+      "note": "Suspension or withdrawal of class plus the classification-society vocabulary list, five terms against six. The two entities order the limbs differently and ask the same thing."
+    },
+    {
+      "anchor": "QIE-M-QP2103-Q2",
+      "verdict": "SAME_FAMILY_VARIANT",
+      "note": "UNCLOS marine-environment highlights plus the maritime zones, five zones against six (one adds Internal Waters). 5 of 6 = 0.83."
+    }
+  ],
+  "held": [],
+  "reviewed_proposal_digest": "d79e65d0dfecaab47b254a8301a57a09f36818c1acebedbc3543693484ed6677",
+  "digest_policy": "build_qi.py computes a digest over the full proposal set (every candidate pair, its two entities and its proposal class). When this field is null the build writes the digest it computed and marks the run UNPINNED. Once pinned, any later change to the proposal set breaks the digest and stops the build, because a changed proposal set means the semantic review above no longer covers what is being merged."
+}
