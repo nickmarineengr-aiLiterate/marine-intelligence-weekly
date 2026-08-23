@@ -15,6 +15,12 @@ without proving anything about the substance.
   E  the boiler auxiliaries stripped back out of the CMS list
   F  the unsupported IACS PR 1C citation restored
   G  the manifest's authority block emptied
+  H  ClassNK stripped of its implementation-example label
+  I  the Indian authority-order bullet deleted
+  J  the CSM-vs-CE-credit trap bullet deleted
+  K  the pressure-boundary framing reverted
+  L  the retired name "DG Shipping" offered as a live alternative
+  M  the "formerly DG Shipping" gloss dropped
 
 Every mutation is preflighted in memory. A mutation that matches nothing
 writes nothing and exercises nothing: it is an absent test that reports like a
@@ -144,12 +150,26 @@ MUTATIONS = [
      sub(PAGE, CLASSNK_QUALIFIER, "The governing CMS equipment list.")),
 
     ("I", "the Indian authority-order bullet deleted",
-     "dg_shipping_named",
+     "administration_named_in_full",
      (PAGE, lambda raw: _drop_li(raw, AUTHORITY_BULLET))),
 
     ("J", "the CSM-vs-CE-credit trap bullet deleted",
      "csm_vs_ce_credit_distinction",
      (PAGE, lambda raw: _drop_li(raw, CREDIT_BULLET))),
+
+    ("L", "the retired name offered as a live alternative again",
+     "dg_shipping_not_offered_as_a_current_name",
+     sub(PAGE, "The <strong>Directorate General of Maritime Administration</strong> (formerly DG Shipping)",
+         "<strong>DG Shipping / DGMA</strong>")),
+
+    # Anchored on q40's own sentence. A bare " (formerly DG Shipping)" matched
+    # an EARLIER question on the same page first -- QB1_G#q13 carries "the DGMA
+    # (Directorate General of Maritime Administration, formerly DG Shipping)" --
+    # so the mutation edited a card the validator does not read and escaped.
+    ("M", "the historical gloss dropped, orphaning older circular titles",
+     "former_name_kept_as_gloss_only",
+     sub(PAGE, "</strong> (formerly DG Shipping) prescribes",
+         "</strong> prescribes")),
 
     ("K", "the pressure-boundary framing reverted to the base wording",
      "pressure_boundary_framing",

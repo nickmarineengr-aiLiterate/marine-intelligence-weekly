@@ -2,15 +2,22 @@
 """
 Content validator for the boiler/CSM substance of QB1_G#q40.
 
-It guards TWO corrections, because they govern the same text:
+It guards THREE corrections, because they govern the same text:
 
     CORR-CSM-BOILER-SURVEY-20260823   took the boiler out of the CSM list
     CORR-CSM-INDIA-AUTHORITY-20260823 re-framed it in the Indian order and
                                       narrowed the claim
+    CORR-DGMA-NAMING-20260823         named the authority in full, keeping
+                                      "formerly DG Shipping" as a gloss
 
-The refinement is the current truth, so the digest is pinned to its record. The
-base record must still exist, because validate_corrections.py re-derives its
-post_edit_digest from its own governing commit.
+The digest is pinned to the NEWEST record, and every earlier record must still
+exist, because validate_corrections.py re-derives each one's post_edit_digest
+from its own governing commit. The chain is declared through cards[].supersedes.
+
+Note where each assertion reads from. The CSM/boiler authority is asserted
+against the refinement's record, which is what decided it - not against whatever
+record is newest, because a later correction made for an unrelated reason (as the
+naming one was) carries different authority and would fail the check.
 
 Note what the refinement changed about the CLAIM, not just the framing. The base
 correction said flatly that boilers "are not CSM items". IRS draws its boiler
@@ -83,16 +90,13 @@ sys.path.insert(0, str(HERE))
 from oral_bytes import read_text                       # noqa: E402
 from validate_batch_b import card_digests              # noqa: E402
 
-# One validator guards this card's boiler/CSM substance across BOTH corrections.
-# Two validators asserting different states of the same text would fight: the
-# base record says "boilers are not CSM items", the refinement narrows that to
-# the pressure boundary not being on the CSM interval. The refinement is the
-# current truth, so the digest is checked against it, and the base record is
-# asserted to still exist because its own governing commit is what
-# validate_corrections.py re-derives.
-CORRECTION_ID = "CORR-CSM-INDIA-AUTHORITY-20260823"
+# One validator guards this card across all three corrections. Two validators
+# asserting different states of the same text would fight, so the newest record
+# owns the digest pin and the earlier ones stay on disk for their own commits.
+CORRECTION_ID = "CORR-DGMA-NAMING-20260823"
 BASE_CORRECTION_ID = "CORR-CSM-BOILER-SURVEY-20260823"
-MANIFEST = HERE / "correction_corr_csm_india_authority_20260823_manifest.json"
+MANIFEST = HERE / "correction_corr_dgma_naming_20260823_manifest.json"
+PRIOR_MANIFEST = HERE / "correction_corr_csm_india_authority_20260823_manifest.json"
 BASE_MANIFEST = HERE / "correction_corr_csm_boiler_survey_20260823_manifest.json"
 PAGE = "meoclass1/QB1_G.html"
 FILE = "QB1_G.html"
@@ -157,6 +161,12 @@ BANNED = [
     # attributed to no one. IRS does not name them as CE-surveyable.
     ("classnk_pumps_not_presented_as_the_list",
      r"boiler burning pumps and feed water pumps"),
+    # "DG Shipping" is the former name of the Directorate General of Maritime
+    # Administration. Presenting the two as live alternatives implies the old
+    # name is still current, so the slash pair is banned outright. The name may
+    # appear only as a historical gloss, which the REQUIRED side asserts.
+    ("dg_shipping_not_offered_as_a_current_name", r"DG Shipping\s*/\s*DGMA"),
+    ("dg_shipping_not_offered_as_a_current_name", r"DGMA\s*/\s*DG Shipping"),
 ]
 
 # ClassNK may appear, but never as the governing source. The card cites it once,
@@ -176,8 +186,12 @@ REQUIRED = [
     # boiler line at Chief Engineer credit, not at CSM eligibility. What every
     # source does support is that the PRESSURE BOUNDARY is off the CSM clock.
     ("pressure_boundary_framing", r"pressure boundary"),
-    # The Indian answering order: statutory first, class second.
-    ("dg_shipping_named", r"DG Shipping\s*/?\s*DGMA"),
+    # The Indian answering order: statutory first, class second. The authority
+    # is named in full, with the former name kept only as a historical gloss so
+    # a candidate who has read older circulars can still connect the two.
+    ("administration_named_in_full",
+     r"Directorate General of Maritime Administration"),
+    ("former_name_kept_as_gloss_only", r"formerly DG Shipping"),
     ("running_survey_term_taught", r"running survey"),
     ("society_variation_caveat",
      r"differs between societies|differ|own equipment lists"),
@@ -234,19 +248,25 @@ def main() -> int:
     # still name-drops the instruments -- mutation G proved it. The block is
     # what a later reader re-checks the correction against, so the block is
     # what must carry the clauses.
-    auth = record.get("authority", [])
+    # The CSM/boiler authority lives in the record that decided it, which is the
+    # refinement, not the naming correction on top of it. Asserting it against
+    # whichever record happens to be newest would fail the moment a correction
+    # is made for some unrelated reason -- as this naming one was.
+    auth = json.loads(read_text(PRIOR_MANIFEST)).get("authority", []) \
+        if PRIOR_MANIFEST.is_file() else []
     auth_json = json.dumps(auth, ensure_ascii=False)
     report("primary_authority_recorded",
            bool(auth) and "UR Z18" in auth_json and "36 months" in auth_json
-           and "ClassNK" in auth_json,
-           "entries=%d URZ18=%s 36mo=%s ClassNK=%s"
+           and "IRS" in auth_json and "ClassNK" in auth_json,
+           "entries=%d URZ18=%s 36mo=%s IRS=%s ClassNK=%s"
            % (len(auth), "UR Z18" in auth_json, "36 months" in auth_json,
-              "ClassNK" in auth_json))
+              "IRS" in auth_json, "ClassNK" in auth_json))
 
+    own_auth = record.get("authority", [])
     report("authority_entries_cite_clauses",
-           bool(auth) and all(a.get("clauses") for a in auth),
+           bool(own_auth) and all(a.get("clauses") for a in own_auth),
            "%d/%d entries carry clauses"
-           % (sum(1 for a in auth if a.get("clauses")), len(auth)))
+           % (sum(1 for a in own_auth if a.get("clauses")), len(own_auth)))
 
     report("candidate_verdict_recorded",
            record.get("candidate_verdict") in {"CORRECT", "PARTLY_CORRECT", "INCORRECT"},
@@ -294,10 +314,12 @@ def main() -> int:
     # oral_supersession reads cards[].supersedes, and that declaration is what
     # lets the base record's pin resolve as SUPERSEDED instead of drifting.
     sup = declared[0].get("supersedes") if declared else None
-    report("refinement_declares_descent_from_base",
-           bool(sup) and sup.get("manifest") == BASE_MANIFEST.name
+    report("current_record_declares_descent",
+           bool(sup) and sup.get("manifest") == PRIOR_MANIFEST.name
            and bool(sup.get("post_edit_digest")),
            "supersedes=%s" % (sup.get("manifest") if sup else None))
+    report("prior_correction_record_intact", PRIOR_MANIFEST.is_file(),
+           "missing %s" % PRIOR_MANIFEST.name)
 
     # ---- the substance ---------------------------------------------------
     for name, pattern in BANNED:

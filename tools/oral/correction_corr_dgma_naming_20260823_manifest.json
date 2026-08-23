@@ -1,0 +1,120 @@
+{
+ "correction_id": "CORR-DGMA-NAMING-20260823",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "founder_review",
+ "date": "2026-08-23",
+ "title": "\"DG Shipping / DGMA\" removed from QB1_G#q40 - the authority is named in full, with the former name kept only as a historical gloss",
+ "baseline_commit": "69440a0",
+ "governing_commits": [],
+ "authorisation_source": "meoclass1/known_traps.md",
+ "known_traps_entries": [
+  45
+ ],
+ "candidate_claim": "Founder: delete DG Shipping from QB1_G#q40 - it is not called that any more. \"Formerly DG Shipping\" is acceptable; the slash pair is not.",
+ "candidate_verdict": "CORRECT",
+ "rationale": "CORR-CSM-INDIA-AUTHORITY-20260823 introduced the string 'DG Shipping / DGMA' twice on this card, once in the authority-order bullet and once as the reg-box code. That construction presents a retired name and its successor as live alternatives, which implies the old name is still current. It also regressed a convention the repository had already settled: the Entry 6 follow-up audit converted 191 references across 65 files from 'DG Shipping' to 'DGMA', and the corpus expands the name consistently as 'Directorate General of Maritime Administration' in 31 places. The card now names the authority in full on first mention, keeps 'formerly DG Shipping' as a parenthetical gloss so a candidate who has read older circulars can connect the two, and uses 'DGMA' as the short form thereafter including the reg-box code.",
+ "note": "Scope was deliberately held to q40. QB1_G carries about a dozen other 'DG Shipping' strings, and they were checked and left alone because they are document titles - 'DG Shipping Engineering Circular 02 of 2024', 'DG Shipping MS Notice 08 of 2022' and similar. A circular's title is its identity at time of issue; renaming it would make it uncitable and an examiner would not recognise the renamed form. That distinction was put to the Founder and confirmed. Ten further candidate-facing files outside QB1_G still contain 'DG Shipping' strings of the same two kinds; no sweep was run here, and any such sweep would need its own record because it would have to separate live-authority references from document titles file by file. The naming change is the whole of this correction: no technical claim, citation, interval or authority-hierarchy statement was touched, and the CSM/boiler substance of the two preceding corrections is unchanged.",
+ "content_index_effect": "tools/oral/qb_content_index_governed.json and its generated twin meoclass1/qb_content_index.json were regenerated. QB1_G.html governed version 1.3 -> 1.4; one corrections_applied row added and one recently_updated row prepended. Canonical totals unchanged at 721 questions across 86 files.",
+ "authority": [
+  {
+   "source": "Repository naming convention, established by the known_traps.md Entry 6 follow-up audit",
+   "clauses": [
+    "Entry 6 follow-up, 2026-08-13: repo-wide DG Shipping to DGMA audit, 65 files touched, 191 references corrected, 12 dead dgshipping.gov.in links repointed to dgma.gov.in",
+    "Corpus expands the name as 'Directorate General of Maritime Administration' in 31 places and uses no competing expansion"
+   ],
+   "role": "ESTABLISHED_HOUSE_CONVENTION_REGRESSED_BY_THE_PRECEDING_CORRECTION"
+  },
+  {
+   "source": "Founder direction, 2026-08-23, in session",
+   "clauses": [
+    "Delete DG Shipping from QB1_G#q40; it is not called that any more",
+    "'formerly DG Shipping' is acceptable; the slash pair is not",
+    "Confirmed on enquiry: name the authority in full on first mention, DGMA as the short form thereafter including the reg-box code",
+    "Confirmed on enquiry: leave 'DG Shipping ... Circular/Notice' document titles unchanged, as they are titles rather than references to the live authority"
+   ],
+   "role": "AUTHORISATION"
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "CORR-DGMANAME-01",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q40",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "a0c93d8549aa3f7df19f9e3d3ed0c8908068c5321c944a4c2c49542be1f85fbf",
+   "post_edit_digest": "4166691c4a9a6d62f02b103bcf87f7196080a01898729989ff4b2581ac7ca7ee",
+   "known_traps_entry": 45,
+   "supersedes": {
+    "manifest": "correction_corr_csm_india_authority_20260823_manifest.json",
+    "action_id": "CORR-CSMINDIA-01",
+    "post_edit_digest": "a0c93d8549aa3f7df19f9e3d3ed0c8908068c5321c944a4c2c49542be1f85fbf",
+    "note": "Third state of this card. The refinement's pinned post-edit state is this correction's pre-edit state, so the chain now runs base -> refinement -> naming and both earlier records resolve as SUPERSEDED while keeping the digests their own governing commits produced."
+   },
+   "rationale": "Two string replacements, no other change. The authority-order bullet now opens 'The Directorate General of Maritime Administration (formerly DG Shipping) prescribes the statutory survey requirement'; the reg-box code is 'DGMA'. Question text, anchor, card position, every technical claim, every citation and the CE Oral Tip are untouched. Version badge Q40 v1.2 -> v1.3.",
+   "surfaces_corrected": [
+    "answer-body Indian authority-order bullet",
+    "reg-box authority code",
+    "q-version badge"
+   ]
+  }
+ ],
+ "propagation": [
+  {
+   "path": "meoclass1/QB1_G.html (questions other than q40)",
+   "classification": "INDEPENDENT_CONTEXT",
+   "action": "NO_CHANGE_REQUIRED",
+   "finding": "About a dozen 'DG Shipping Engineering Circular', 'DG Shipping MS Notice' and 'DG Shipping Merchant Shipping Notice' strings. These are document titles carrying the issuing authority's name at time of issue, not references to the live authority. Confirmed with the Founder and left unchanged."
+  },
+  {
+   "path": "meoclass1/QB3_G.html, QB4_D.html, QB4_E.html, QB9_E.html, QB9_E_CheatSheet.html, oralnotes/miw-notes-mgmt-p1/p5/p14/p15/p16.html",
+   "classification": "SCOPE_SWEEP",
+   "action": "DEFERRED_SEPARATE_CORRECTION",
+   "finding": "Ten further candidate-facing files still contain 'DG Shipping' strings. They mix document titles with what may be live-authority references, and separating the two requires reading each occurrence in context. Recorded rather than swept, because a blind global replace would rename circular titles and make them uncitable."
+  }
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/known_traps.md",
+   "classification": "INDEX_METADATA",
+   "known_traps_entry": 45,
+   "rationale": "Entry 45 added; this file is the authorisation_source for the record.",
+   "guarded_by": "qb_health_check changelog scan"
+  },
+  {
+   "path": "tools/oral/qb_content_index_governed.json",
+   "classification": "INDEX_METADATA",
+   "known_traps_entry": 45,
+   "rationale": "QB1_G version bump, new corrections_applied row, new recently_updated row.",
+   "guarded_by": "validate_qb_content_index.py"
+  },
+  {
+   "path": "meoclass1/qb_content_index.json",
+   "classification": "INDEX_METADATA",
+   "known_traps_entry": 45,
+   "rationale": "Generated from the governed source by build_qb_content_index.py; never hand-edited.",
+   "guarded_by": "build_qb_content_index.py --check"
+  },
+  {
+   "path": "tools/oral/validate_correction_csmboiler.py",
+   "classification": "GOVERNANCE_TOOLING",
+   "known_traps_entry": 45,
+   "rationale": "The single content validator for this card now pins the digest to this record, bans the slash pair in both orders, and asserts the full name and the historical gloss.",
+   "guarded_by": "mutate_correction_csmboiler.py"
+  }
+ ],
+ "invariants": {
+  "question_text_unchanged": true,
+  "anchor_unchanged": true,
+  "canonical_question_count_unchanged": true,
+  "examiner_relationships_unchanged": true,
+  "study_taxonomy_unchanged": true,
+  "historical_qi_unchanged": true,
+  "technical_claims_unchanged": true,
+  "citations_unchanged": true,
+  "preceding_corrections_reopened": false,
+  "supersession_required": true,
+  "supersession_rationale": "Third correction to one card. Declared through the generic cards[].supersedes contract in tools/oral/oral_supersession.py, so the chain resolves base -> refinement -> naming and neither earlier record is rewritten or relaxed."
+ }
+}

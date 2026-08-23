@@ -927,6 +927,43 @@ GREP: boiler burning pumps and feed water pumps
 ---
 
 
+### 45. "DG Shipping / DGMA" written as a live pair, reviving a retired name
+
+Entry 44 introduced the string **"DG Shipping / DGMA"** twice on `QB1_G.html` Q40 — once
+in the authority-order bullet, once as the reg-box code. Presenting a retired name and its
+successor as alternatives implies the old one is still current. It also regressed a
+convention this repository had already settled: the **Entry 6 follow-up** audit converted
+191 references across 65 files from "DG Shipping" to "DGMA", and the corpus expands the
+name as **"Directorate General of Maritime Administration"** in 31 places with no competing
+form. `QB1_G` itself already carried the house pattern on another card — *"the DGMA
+(Directorate General of Maritime Administration, formerly DG Shipping)"*.
+
+Q40 now reads *"The **Directorate General of Maritime Administration** (formerly DG
+Shipping) prescribes the statutory survey requirement"*, with **DGMA** as the short form
+thereafter including the reg-box code. The gloss is kept deliberately: a candidate reading
+older circulars needs to connect the two names.
+
+**Scope held to Q40.** `QB1_G` carries about a dozen other "DG Shipping" strings and they
+were checked and **left unchanged**, because they are *document titles* — "DG Shipping
+Engineering Circular 02 of 2024", "DG Shipping MS Notice 08 of 2022", "DG Shipping Merchant
+Shipping Notice 14 of 2020". A circular's title is its identity at time of issue; renaming
+it would make it uncitable and an examiner would not recognise the renamed form. Confirmed
+with the Founder before editing.
+
+**Recorded, not swept:** ten further candidate-facing files still contain "DG Shipping" —
+`QB3_G`, `QB4_D`, `QB4_E`, `QB9_E`, `QB9_E_CheatSheet` and `oralnotes/miw-notes-mgmt-p1`,
+`p5`, `p14`, `p15`, `p16`. They mix document titles with possible live-authority references
+and need reading occurrence by occurrence. A blind global replace would rename circular
+titles, which is exactly the failure this entry guards against.
+
+No technical claim, citation, interval or authority-hierarchy statement changed. Entries 43
+and 44 are not reopened. Q40 v1.2 → v1.3.
+
+GREP: DG Shipping / DGMA
+
+---
+
+
 ## Meta-corrections to `qb_health_check.py` itself (non-content fixes, logged here for continuity)
 
 - 2026-08-01: Fixed a Windows-console `UnicodeEncodeError` crash in the Brevo-fallback print path when SMTP credentials aren't set locally (was crashing on ⚠/✅ glyphs; also fixed a related bug where the fallback path's temporary `TextIOWrapper` around `sys.stdout.buffer` closed the underlying buffer on garbage collection, breaking all later prints in the same run).
@@ -999,3 +1036,4 @@ GREP: boiler burning pumps and feed water pumps
 | 2026-08-22 | Entry 42: MSC.535(107) lifeboat ventilation — application rule was new-build-only with a "keel laid" test; resolution defines "installed" in two limbs and limb (b) catches existing ships | Candidate (Vivek) screenshot correction on QB2_F |
 | 2026-08-23 | Entry 43: "main boilers" listed as a Vital Auxiliary System assessed under Continuous Machinery Survey (QB1_G Q40) - the boiler itself is not a CSM item and is not on the 5-year CSM interval; IACS UR Z18 §2 requires two internal examinations per 5-year period at a maximum 36-month interval, plus the §2.2 annual external survey, while §1.3 governs the CSM item cycle. Boiler auxiliaries (FD fans, burning pumps, feed water pumps) ARE in the class-approved CMS list per ClassNK Guidance on CMS Ver.4 (June 2025). The card's IACS PR 1C citation was also unsupported - PR 1C is suspension/withdrawal of class for overdue surveys - and was replaced with UR Z18. QB1_supplementary and QB1_F already state the boiler exclusion correctly and were not changed. | Candidate report via Nixon (WhatsApp screenshot) |
 | 2026-08-23 | Entry 44: CSM/boiler answer re-framed in the Indian authority order — DG Shipping/DGMA statutory ("running survey", Rule 274), IRS class implementation (Main Rules Pt.1 Ch.2 §8.2/§1.4 and IRS-G-SUR-02), IACS UR Z18 as unified class baseline not a statutory authority, ClassNK demoted to implementation example. IRS 4.1.1(d) shows the real line is Chief Engineer CREDIT, not CSM eligibility, so the claim is narrowed to the boiler's pressure boundary being off the 5-year CSM interval; two ClassNK-derived pump types removed from the card. | Founder review following Entry 43 |
+| 2026-08-23 | Entry 45: "DG Shipping / DGMA" written as a live pair on QB1_G Q40 — the authority is the Directorate General of Maritime Administration, named in full on first mention with "formerly DG Shipping" as a historical gloss and DGMA as the short form. Document titles carrying the old name ("DG Shipping Engineering Circular 02 of 2024" etc.) deliberately left unchanged; ten further files recorded for a separate scoped pass. | Founder correction following Entry 44 |
