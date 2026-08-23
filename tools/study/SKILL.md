@@ -484,7 +484,7 @@ answer.
 
 | Path | Role |
 |---|---|
-| `tools/study/qi_phase2_adjudications.json` | **Hand-maintained.** The governed answer decisions, one record per family. Same family as `qi_phase1_adjudications.json` and `study_qi_holds.json`. |
+| `tools/study/qi_phase2_adjudications.json` | **Hand-maintained, and the RATIFIED owner of present-day family decisions.** One record per family. Same family id space as `qi_phase1_adjudications.json` and `study_qi_holds.json`. Full ownership statement: `docs/study/PHASE2_PRESENT_DAY_LAYER.md`. |
 | `tools/study/validate_phase2_tranche.py` | The gate. 30 invariants, fails closed. |
 | `tools/study/test_phase2_mutations.py` | 13 mutations, all must be caught, zero residue. |
 
@@ -557,6 +557,102 @@ modern repeat metadata during answer work is caught, not inherited.
 
 **Only adjudicate a conflict hold if it blocks a family you selected.** The
 other holds are finished work, not backlog.
+
+## Candidate-facing projection -- three layers, one artefact
+
+Backend intelligence that no candidate can see is not a product. But the three
+things MIW now knows are answers to three DIFFERENT questions, and the whole
+risk of showing them is that they read as one.
+
+| Layer | Question it answers | Owner |
+|---|---|---|
+| 1 MODERN RECURRENCE | "Within the sittings MIW has transcribed, has this exact examiner task come back?" | `tools/pastpapers/recurrence_model.py` -- from the CALENDAR |
+| 2 LONGITUDINAL SIGNAL | "Over 2010->Aug-2026, how persistent is this concept?" | `docs/study/qi/*` via the adapter |
+| 3 ANSWER READINESS | "Is MIW's current answer safe to study TODAY?" | the Phase-2 present-day layer |
+
+```
+study_qi.json + qi_families/qi_occurrences + phase2 store
+                        |
+            tools/study/qi_projection.py       <- chooses every candidate string
+                        |
+            docs/study/safe_qi_projection.json
+                        |
+   year sheets / solved papers / topics / study / workbook
+```
+
+| Path | Role |
+|---|---|
+| `tools/study/qi_projection.py` | **The library.** Tier whitelists, the closed label vocabulary, and `render_block()` -- the shared markup every candidate surface emits. |
+| `tools/study/build_qi_projection.py` | **Only writer** of `safe_qi_projection.json`. `--check` proves disk matches inputs. |
+| `tools/study/validate_qi_projection.py` | The gate. 14 invariants over the ARTEFACT and the SHIPPED BYTES. Fails closed. |
+| `tools/study/test_qi_projection_mutations.py` | 12 mutations, all must be caught, zero residue. |
+
+```bash
+python tools/study/build_qi_projection.py            # rebuild
+python tools/study/build_qi_projection.py --check    # stale?
+python tools/study/validate_qi_projection.py         # the gate
+python tools/study/test_qi_projection_mutations.py   # prove the gate bites
+```
+
+### Four rules that are easy to break
+
+1. **Layer 1 is not sourced from here.** The candidate-facing modern tag is
+   computed from the calendar by `recurrence_model.py`. It is NOT
+   `study_qi.json`'s `modern_recurrence_class`, which is the AUTHORING field --
+   `recurrence_model.py` names three questions in the 2026 set where the two
+   say opposite things. Because this projection never touches Layer 1, "no
+   modern tag was lost" is true by construction, not by test.
+
+2. **A label must survive its own evidence.** The 2010-2020 band is
+   `SECONDARY_CLAIMED`. `RE_EMERGING` is a statement about WHEN wearing an
+   adjective, so a qualitative label can smuggle a barred dated claim through.
+   Every family is therefore labelled TWICE by the SAME engine
+   (`qi_model.intelligence_labels`) -- over all governed occurrences, and over
+   printed-on-source-copy occurrences alone. Only labels surviving the second
+   pass reach a candidate. Reach beyond that renders as
+   `WIDER_RECURRENCE_HELD`: MIW holds more, and says nothing about when.
+   QIF-EM-0220 is the worked case (2010-04 claimed + 2026-08 printed).
+
+3. **"Ready" is not "verified".** 82 families are ready; ten carry a governed
+   Phase-2 record. The rest are ready because triage fired no risk -- an
+   absence of signal, not a check. `readiness_basis` chooses the wording and
+   only `PHASE2_GOVERNED_REVIEW` earns the word "verified".
+
+4. **Phase-1 triage does not veto Phase 2.** A question may read
+   `READY_TO_STUDY_NOW` while its family triage still says
+   `CURRENTNESS_REVIEW_REQUIRED`; the triage value is frozen on purpose. The
+   unsafe-currentness guard is exempted for -- and only for -- the question a
+   governed record NAMES. See `PHASE2_PRESENT_DAY_LAYER.md`.
+
+### Tiers are whitelists, not filters
+
+`PUBLIC` gets the longitudinal signal only; `GATED` adds currentness and
+readiness; `INTERNAL` adds counts, family ids, both label sets and the Phase-2
+action. A field added to the internal record is absent from the others until
+someone deliberately adds it -- which is why `SQ/study-roadmap.html` rebuilt
+byte-identical when topic readiness landed: `PUBLIC_TOPIC_FIELDS` dropped the
+new fields without anyone naming them.
+
+### Rebuild order
+
+The projection reads `study_qi.json`, so it is built after it and before any
+page:
+
+```bash
+python tools/study/build_study_qi.py
+python tools/study/build_qi_projection.py
+python tools/study/export_roadmap_xlsx.py
+python tools/study/build_topic_pages.py
+python tools/pastpapers/run_toolchain.py --publish     # NOT --gated
+python tools/study/validate_qi_projection.py
+python tools/study/test_qi_projection_mutations.py
+```
+
+**`--publish`, and not `--gated`.** The committed review copies under
+`meoclass1/pastpapers/` carry `index, follow` and JSON-LD; rebuilding without
+`--publish` silently flips forty papers to `noindex` and strips their
+structured data. `--gated` is a separate hazard already recorded. Determine the
+mode from the committed bytes, never from habit.
 
 ## Fresh-session test
 
