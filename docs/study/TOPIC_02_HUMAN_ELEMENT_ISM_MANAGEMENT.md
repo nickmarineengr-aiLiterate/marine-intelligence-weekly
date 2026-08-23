@@ -185,19 +185,24 @@ Selected on **examiner breadth × chain position × official centrality** — no
 on occurrence count alone, which is flat in this corpus. Every one is
 `VALID_MAPPED` at HIGH confidence.
 
-> **Mapping state — and why it differs from D01.** **180 of D03's 215** oral
+> **Mapping state — and why it differs from D01.** **190 of D03's 195** oral
 > mappings are `VALID_MAPPED`, because the QB file *title names exactly one
 > domain* (`QB4_* = ISM Code, ISPS, MLC 2006 & STCW`, `QB5_* = Management,
-> Leadership & Human Element`) — 63 of those are additionally corroborated by
-> the question's own text, and 5 were moved into D03 by human adjudication on
-> 2026-08-23 when the D02 over-capture was corrected.
+> Leadership & Human Element`), and because every file-title contradiction
+> raised against this domain has now been individually adjudicated by a human.
 >
-> **35 are `REVIEW_PENDING`**, and 32 of those are new. They are questions
-> whose file title says D03 but whose own text cues a different domain — the
-> mapper now demotes that combination instead of publishing it, so the
-> contradiction is visible rather than silent. They keep their D03 topic as a
-> placeholder and are safe to study; they are simply not settled. The other 3
-> come from the mixed `QB1_G` file.
+> **Only 5 remain `REVIEW_PENDING`** — two of them human HOLDs recorded with a
+> written reason, three unadjudicated questions from the mixed `QB1_G` and
+> `QB10_B` files that no contradiction detector can reach, because a question
+> that was never given a file topic cannot contradict one.
+>
+> **Restated 2026-08-23** against the governed store after the fresh
+> file-title contradiction tranche. The earlier edition of this block read
+> "180 of 215 … 35 `REVIEW_PENDING`" and had gone stale across two adjudication
+> passes; these numbers are re-derived, not carried forward. Three questions
+> left D03 in this tranche — the CE survey-documents question and the CSR
+> question to D01, and DRI cargo hazards to D07 — none of which this pack
+> cited.
 
 | # | ID | Question | Examiners | Why core |
 |---|---|---|---|---|
@@ -255,9 +260,11 @@ Bloom, `#q16` TEAP, `#q17` META, `#q18` VICT, `#q19` TOTA/TOTI), and the
 > `QB4_E#q11`/`#q12`, `QB4_C#q4`/`#q5`/`#q11` and `QB4_H#q10` to D01, and
 > `QB4_E#q13` (Indian ship registration) to **D06** — none of which this pack
 > cited. `QB4_H#q9` (WHO-related ship certificates) was **held**: it stays
-> counted in D03 but is unpublished pending adjudication. The three `REVIEW_PENDING` questions
-> (`QB1_G#q25` STCW latest amendment, and two siblings) are safe to study but
-> are **not** individually reviewed and must not be published as settled.
+> counted in D03 but is unpublished pending adjudication, as is `QB4_A#q19`
+> (Formal Safety Assessment applied to Li-ion battery fire risk). The three
+> remaining `REVIEW_PENDING` questions (`QB1_G#q25` STCW latest amendment and
+> the two `QB10_B` siblings) are safe to study but are **not** individually
+> reviewed and must not be published as settled.
 >
 > **TAXONOMY_GAP_CANDIDATE — the public-health regime.** `QB4_H#q9` is held
 > because no MIW domain owns it, not because the question is unclear. The Ship

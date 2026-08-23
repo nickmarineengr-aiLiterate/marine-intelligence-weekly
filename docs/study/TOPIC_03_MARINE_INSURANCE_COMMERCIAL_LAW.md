@@ -150,19 +150,27 @@ examiner's follow-up is nearly always the boundary between them.
 Selected on **examiner breadth × branch centrality × written leverage**. Every
 one is `VALID_MAPPED` at HIGH confidence.
 
-> **Mapping state.** D02 now holds **114** oral mappings, down from 134: the
+> **Mapping state.** D02 now holds **110** oral mappings, down from 134: the
 > file-level over-capture recorded in the previous edition of this pack has
-> been **corrected in the governed mapping system**, not merely noted. **96**
-> are `VALID_MAPPED` and **18** are `REVIEW_PENDING`. The boundary is now
+> been **corrected in the governed mapping system**, not merely noted. **98**
+> are `VALID_MAPPED` and **12** are `REVIEW_PENDING`. The boundary is now
 > honest rather than perfect: everything still in D02 is either settled or
-> **visibly queued**, where before the wrong ones were silently settled. Nine
-> of those 18 are newly surfaced questions whose own text disputes the file
-> title (`QB1_B#q5` CSR, `QB9_C#q4` tanker liabilities, `QB9_F#q4` fraudulent
-> registration, `QB9_G#q1` other Indian shipping Acts, `QB9_H#q2` casualty
-> response, `QB9_H#q13` CE certificates, `QB9_A#q9` war risk, `QB9_B#q8`
-> medical evacuation, `QB1_A#q24` casualty investigation). They are safe to
-> study as D02 and are not yet settled. The note at the end of this section
-> records what was done.
+> **visibly queued**, where before the wrong ones were silently settled.
+>
+> **Updated 2026-08-23** by the fresh file-title contradiction pass. The nine
+> questions the previous edition listed as "newly surfaced" have all been
+> adjudicated. Four left the domain — CSR (`QB1_B#q5`), fraudulent registration
+> (`QB9_F#q4`), casualty response (`QB9_H#q2`) and the CE certificate set
+> (`QB9_H#q13`) to **D01** — and one, other Indian shipping Acts
+> (`QB9_G#q1`), to **D06**. Tanker liabilities (`QB9_C#q4`) was **affirmed**
+> here: CLC, the Fund Convention and P&I are marine liability, and the cue that
+> disputed it had fired on the word *tanker*. War risk (`QB9_A#q9`) and medical
+> evacuation (`QB9_B#q8`) are **held**, as is casualty investigation
+> (`QB1_A#q24`).
+>
+> **All 12 remaining `REVIEW_PENDING` records are human HOLDs**, each with a
+> written reason. Nothing in D02 is now merely unread: this domain's fresh
+> contradiction queue is empty.
 
 | # | ID | Question | Examiners | Why core |
 |---|---|---|---|---|
@@ -193,11 +201,12 @@ supplementary, overspill), `QB9_D#q2` (International Group and pooling),
 `QB9_E#q12` (Inchmaree clause), `QB9_G#q7` (GA vs particular average),
 `QB9_H#q8` (types of liability in shipping).
 
-**C-priority (~83)** — the remainder, including three clusters worth naming:
+**C-priority (~79)** — the remainder, including three clusters worth naming:
 the **Indian-law cluster** (`QB9_D#q4` Bharat Maritime Insurance Pool,
 `QB9_D#q5` GIFT City, `QB9_D#q9` Act vs rule, `QB9_E#q2`/`#q8` MS Act,
-`QB9_G#q1` other shipping Acts, `QB9_H#q1` ratification in India — most of this
-is D06 material reached from here); the **UNCLOS remnant** (`QB9_A#q8`,
+`QB9_H#q1` ratification in India — most of this is D06 material reached from
+here; the *other shipping Acts* question that used to head this list was
+formally moved to D06 on 2026-08-23); the **UNCLOS remnant** (`QB9_A#q8`,
 `QB9_D#q10` — `QB1_A#q19`–`#q23` were moved to D01 on 2026-08-23); and the
 **war-risk cluster** (`QB9_A#q9`, `QB9_B#q5`,
 `QB9_E#q3`, `QB9_E#q7`) which is currently live and pairs with `QP2603-Q3`.

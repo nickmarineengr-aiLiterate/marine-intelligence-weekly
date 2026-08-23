@@ -145,7 +145,7 @@ working days, 240 contact hours). Quoted, never paraphrased.
 ## MENTAL SKELETON
 
 Nine branches. Own these and you can construct an answer to most of the 168
-mapped questions (69 Oral + 96 Written).
+mapped questions (75 Oral + 96 Written).
 
 **Revalidated 2026-08-23 against the corrected corpus and left unchanged.**
 Every one of the 19 questions the taxonomy tranche moved into D01 lands inside
@@ -187,7 +187,7 @@ memorable.
 Re-derived 2026-08-23 against the **current governed 69-question D01 corpus**,
 replacing the cohort that was derived from the pre-tranche 53.
 
-**The A set has now survived three governance passes unchanged.** The universe
+**The A set has now survived four governance passes unchanged.** The universe
 went 72 -> 80 when the second contradiction tranche (QB4_E, QB4_C, QB4_H,
 QB2_A, QB6_D) moved eight settled questions in, and 80 -> 69 when the QB1
 review-bucket adjudication settled the last 31 unadjudicated mappings — 20
@@ -198,6 +198,15 @@ most are second angles on an A question rather than new ground (three ESP
 questions, two CSM questions, a second class-quarterly-listing question). A is
 a compression set of 18; adding near-duplicates would make it a longer list,
 not a better one.
+
+**Fourth pass, 2026-08-23 — the fresh file-title contradiction tranche.** The
+universe went 69 -> 75 when six settled questions moved in from D02 and D03.
+None was promoted. Two are new ground and sit at B (flag-State casualty
+investigation and fraudulent registration, both branch 3); four are third or
+fourth angles on the CSR and survey-documents ground the B set already holds,
+and sit at C. The skeleton was checked again and needed no tenth branch:
+casualty investigation and registry fraud are both flag-State duties under
+branch 3.
 
 **A-priority means: know this cold.** It is a *compression* set, not a
 completeness set. Where two questions test the same concept only the better-
@@ -256,7 +265,7 @@ entries are those two branches being filled for the first time. PSC is the
 single strongest written theme in this domain (8 occurrences) and until today
 it had zero oral representation in the study plan.
 
-### B-PRIORITY ORAL QUESTIONS (26)
+### B-PRIORITY ORAL QUESTIONS (28)
 
 **Second pass.** Settled, worth real study time, but each either restates an A
 question from a second angle or narrows to one instrument.
@@ -289,8 +298,10 @@ question from a second angle or narrows to one instrument.
 | `QB1_I#q4` | Anniversary date of a certificate — how it is defined and used | **New at B.** The HSSC survey-window mechanic that every A survey question assumes and none defines |
 | `QB1_K#q1` | Qualifications needed to become a Class auditor | **New at B.** RO Code Part 2 competence and authorisation, beneath the A flag-vs-RO frame |
 | `QB1_C#q6` | Hull hole found — CE actions and Condition of Class | **New at B.** Puts the A Condition-of-Class pair into a damage scenario; the immediate-action limb is what earns the slot |
+| `QB9_H#q2` | Ship casualty — the response sequence, who responds, and how the flag State conducts its investigation | **New at B, 2026-08-23.** Branch 3. The Casualty Investigation Code (MSC.255(84), mandatory via SOLAS XI-1/6) is a flag-State statutory duty no other D01 question reaches, and the safety-investigation-versus-liability distinction is the examinable part |
+| `QB9_F#q4` | Fraudulent registration of ships — what it is and what follows | **New at B.** Branch 3. Registry, the right to fly a flag and the UNCLOS genuine link, from the failure side. The A maritime-zones question gives jurisdiction *between* States; this is the grant of nationality itself |
 
-### C-PRIORITY ORAL QUESTIONS (25)
+### C-PRIORITY ORAL QUESTIONS (29)
 
 **Lower immediate return / extension.** Settled, but either a straight
 duplicate of an A question or detail inside a frame an A question already
@@ -323,6 +334,10 @@ gives you.
 | `QB1_G#q34` | Certificate of Fitness — details and contents | **New at C.** Same certificate as the ICOF question directly above |
 | `QB1_G#q36` | Class quarterly listing — contents, significance, CE actions | **New at C.** Duplicate of the B class-quarterly-listing question |
 | `QB1_I#q6` | IACS — what its functions are | **New at C.** Sits between the B second-class-society question and the C members list; adds the UR/UI/quality-certification limb only |
+| `QB4_B#q4` | Documents the CE must have ready for class and statutory surveys | **New at C, 2026-08-23.** Duplicate of the B CE-survey-documents question; the engine-department slant is the only difference |
+| `QB9_H#q13` | Certificates the CE manages, and reading the current SMS revision | **New at C.** The certificate inventory sits under the A statutory-certificate frame. Its SMS limb is answered in the negative — the DOC/SMC dates the audit, not the revision — which is a good trap but one fact |
+| `QB1_B#q5` | Continuous Synopsis Record — what it is and what entries it carries | **New at C.** Duplicate of the B CSR question, which already carries the Common Structural Rules name-collision trap |
+| `QB5_C_B#q8` | Two meanings of CSR, and CSR vs E-CSR | **New at C.** Third question on the same CSR ground. Its Corporate Social Responsibility limb is a one-line contrast, not a second subject |
 
 ### REVIEW — MAPPED, STUDIABLE, NOT YET PRIORITISED (0)
 
@@ -375,12 +390,12 @@ forbids it. Two blind spots were recorded instead:
 | Cohort | Count |
 |---|---|
 | A-priority | 18 |
-| B-priority | 26 |
-| C-priority | 25 |
+| B-priority | 28 |
+| C-priority | 29 |
 | Review — not yet prioritised | 0 |
-| **Total** | **69** — the whole governed D01 oral universe |
+| **Total** | **75** — the whole governed D01 oral universe |
 
-No question appears in two cohorts; none is missing. `A + B + C` equals all 69
+No question appears in two cohorts; none is missing. `A + B + C` equals all 75
 `VALID_MAPPED` records exactly, and the review bucket is empty because D01 now
 holds zero `REVIEW_PENDING` records. This is gated by
 `tools/study/test_d01_priority_cohort.py`, which parses these lists out of
