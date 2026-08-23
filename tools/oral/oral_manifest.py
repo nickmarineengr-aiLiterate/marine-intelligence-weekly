@@ -279,6 +279,24 @@ CORRECTION_FIELD_CLASSES: dict[str, str] = {
     # this schema exists to forbid, and a pin on an unguarded file would expire
     # on the next unrelated edit to it.
     "artefacts": INFORMATIONAL,
+
+    # ---- candidate-reported corrections ----
+    # Added for CORR-CSM-BOILER-SURVEY-20260823. Each of these is asserted by
+    # that correction's own content validator, which is the only reason they
+    # are allowed in: this table is a closed set so that a record cannot grow
+    # decorative fields nothing reads, and a field no validator touches is
+    # exactly that decoration. `known_traps_entries` is the precedent -- it is
+    # INFORMATIONAL here and still asserted by validate_corrections.py.
+    #   candidate_claim    what was reported, in the reporter's own words
+    #   candidate_verdict  CORRECT / PARTLY_CORRECT / INCORRECT
+    #   authority          the rule text that decided it, with clause numbers
+    #   propagation        every other occurrence found, and its disposition
+    #   invariants         what the correction asserts it did NOT change
+    "candidate_claim": INFORMATIONAL,
+    "candidate_verdict": INFORMATIONAL,
+    "authority": INFORMATIONAL,
+    "propagation": INFORMATIONAL,
+    "invariants": INFORMATIONAL,
 }
 
 CORRECTION_CARD_FIELDS = ("file", "path", "anchor",

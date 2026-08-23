@@ -800,6 +800,72 @@ saying they are wrong.
 ---
 
 
+### 43. "main boilers" listed as a Continuous Machinery Survey item — the boiler is not on the CSM clock
+
+`QB1_G.html` Q40 (CSM survey) listed **"main boilers"** among the *Vital Auxiliary
+Systems* assessed under Continuous Machinery Survey, alongside main air compressors,
+steering gear pumps, emergency fire pumps and heat exchangers — in an answer that also
+states every CSM item is examined at least once in five years and that the interval
+between examinations of any item must not exceed five years.
+
+A boiler is not on that clock. **IACS UR Z18 (Survey of Machinery)** keeps the two
+regimes in separate sections with separate intervals:
+
+- **§1.3 Continuous Surveys** — special surveys of machinery may be carried out on a
+  continuous survey basis; the interval between consecutive examinations of *each item*
+  is not to exceed **five years**.
+- **§2.1 Survey of Steam Boilers** — water tube boilers for main propulsion including
+  reheat boilers, all other boilers of essential service, and boilers of non-essential
+  service above 0.35 N/mm² working pressure and 4.5 m² heating surface are to be
+  surveyed **internally**, with a **minimum of two internal examinations during each
+  5-year special survey period** and the interval between any two such examinations
+  **not to exceed 36 months**. Boilers, superheaters and economizers are examined on
+  both the water-steam side and the fire side; mountings and safety valves are examined
+  at each survey.
+- **§2.2** — an **annual** external survey with testing of safety and protective devices
+  and of the safety valve using its relieving gear.
+
+So the defect was not a loose category. Reading the boiler as an ordinary CSM item
+stretches its internal examination interval from **36 months to five years**.
+
+The **ClassNK Guidance on Continuous Machinery Survey (CMS), Ver.4, June 2025** shows the
+same boundary from the applicability side. Its enumeration of machinery applicable to the
+CMS system (items ①–⑱) contains **no boiler**, but does contain boiler *auxiliaries*:
+Forced Draft Fans for Boiler, Boiler Burning Pumps, Boiler Water Circulating Pumps, Feed
+Water Pumps, and F.O. Tanks for Boilers; the Appendix D CMS Reference Table carries a
+`Boiler F.D. Fan` row and no boiler row.
+
+The card now names those auxiliaries instead, states that boilers, superheaters and
+economizers are **not** CSM items and carry their own **Boiler Survey**, and gives the
+36-month figure and the annual external survey.
+
+Second defect on the same card: the reg-box cited **IACS Procedural Requirements PR 1C**
+as the "framework for continuous class verification". PR 1C is the *Procedure for
+Suspension and Reinstatement or Withdrawal of Class in Case of Surveys or Conditions of
+Class Going Overdue* and says nothing about continuous survey. It is replaced by **IACS
+UR Z18** with the two sections actually relied on.
+
+Scope pass: the rest of the machinery list was checked item by item against the ClassNK
+CMS enumeration and is **correct** — crank pins, main bearings, crossheads and
+turbochargers (item ①), auxiliary generator engines (③), main and auxiliary starting air
+compressors (④), steering gears (⑯), bilge/ballast/GS/fire pumps and heat exchangers,
+coolers and condensers (Reference Table). `QB1_supplementary.html` and `QB1_F.html`
+already state the boiler exclusion correctly and were **not changed** — the former says
+CMS "explicitly excludes statutory items with their own independent regimes … pressure
+vessels such as auxiliary boilers", the latter carries the trap answered "No. Boilers and
+pressure vessels are strictly surveyor-only items." `QB4_J.html` already writes
+"CSM/boiler/shaft surveys" as distinct engagements. Q40 v1.0 → v1.1.
+
+Two open items recorded, not actioned: this card's question stem expands CSM as
+"Condition Survey Method" (CSM is the **Continuous Survey of Machinery**, which the
+answer body itself uses), and `QB1_supplementary.html` cites **UR Z7/Z7.1** as governing
+CMS where the machinery survey requirement is **Z18**.
+
+GREP: main boilers
+
+---
+
+
 ## Meta-corrections to `qb_health_check.py` itself (non-content fixes, logged here for continuity)
 
 - 2026-08-01: Fixed a Windows-console `UnicodeEncodeError` crash in the Brevo-fallback print path when SMTP credentials aren't set locally (was crashing on ⚠/✅ glyphs; also fixed a related bug where the fallback path's temporary `TextIOWrapper` around `sys.stdout.buffer` closed the underlying buffer on garbage collection, breaking all later prints in the same run).
@@ -870,3 +936,4 @@ saying they are wrong.
 | 2026-08-21 | Entry 39: SQ teaser copies of simon-notes-p1 and p2 cited MEPC.337(76)/MEPC.338(76) as the CII calculation and rating guidelines; correct are MEPC.336(76) (G1) and MEPC.339(76) (G4), with 337 = G2 reference lines and 338 = G3 reduction factors. Gated copies were already correct — teaser drift, Entry 36 class. Root cause noted: post-MEPC 76 session briefs circulated the quartet one number low. | Repo-wide scope pass following Entry 38; verified against the MEPC.338(76) primary text |
 | 2026-08-21 | Entries 40–41: QB1_B Q15 said the Casualty Investigation Code "incorporates" the fair-treatment Guidelines (it cites them; its own mandatory protections are Part II Ch 12) and asserted an unverifiable requirement to assess medical fitness and fatigue before prolonged interrogation (removed); QB5_A Q4 cited MLC Reg. 2.7 as Recreational Facilities — 2.7 is Manning Levels, recreational facilities are Reg. 3.1. Q15 v1.1→v1.2, Q4 v1.0→v1.1. | Repo-wide scope pass following Entry 38 |
 | 2026-08-22 | Entry 42: MSC.535(107) lifeboat ventilation — application rule was new-build-only with a "keel laid" test; resolution defines "installed" in two limbs and limb (b) catches existing ships | Candidate (Vivek) screenshot correction on QB2_F |
+| 2026-08-23 | Entry 43: "main boilers" listed as a Vital Auxiliary System assessed under Continuous Machinery Survey (QB1_G Q40) - the boiler itself is not a CSM item and is not on the 5-year CSM interval; IACS UR Z18 §2 requires two internal examinations per 5-year period at a maximum 36-month interval, plus the §2.2 annual external survey, while §1.3 governs the CSM item cycle. Boiler auxiliaries (FD fans, burning pumps, feed water pumps) ARE in the class-approved CMS list per ClassNK Guidance on CMS Ver.4 (June 2025). The card's IACS PR 1C citation was also unsupported - PR 1C is suspension/withdrawal of class for overdue surveys - and was replaced with UR Z18. QB1_supplementary and QB1_F already state the boiler exclusion correctly and were not changed. | Candidate report via Nixon (WhatsApp screenshot) |

@@ -1,0 +1,135 @@
+{
+ "correction_id": "CORR-CSM-BOILER-SURVEY-20260823",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "candidate_feedback",
+ "date": "2026-08-23",
+ "title": "\"main boilers\" removed from the CSM machinery list - the boiler itself is not a Continuous Machinery Survey item and is not on the 5-year CSM interval",
+ "baseline_commit": "48ad7f7",
+ "authorisation_source": "meoclass1/known_traps.md",
+ "known_traps_entries": [
+  43
+ ],
+ "candidate_claim": "Boiler Survey is separate from CSM survey; I don't think boiler is included.",
+ "candidate_verdict": "CORRECT",
+ "rationale": "A candidate challenged the inclusion of \"main boilers\" in the QB1_G Q40 list of Vital Auxiliary Systems assessed under Continuous Machinery Survey. The claim was verified against IACS UR Z18 Survey of Machinery (IACS Req. 2001/Rev.8 2018), read in full from the Turk Loydu published copy of the Unified Requirement, and against the ClassNK Guidance on Continuous Machinery Survey (CMS) Ver.4, June 2025, read in full from ClassNK's own publications library. UR Z18 separates the two regimes structurally and by interval. Section 1.3 Continuous Surveys provides that special surveys of machinery may be carried out on a continuous survey basis, in which case the interval between consecutive examinations of each item is not to exceed five years. Section 2 Survey of Steam Boilers is a distinct section with a distinct clock: water tube boilers used for main propulsion including reheat boilers, all other boilers of essential service, and boilers of non-essential service having working pressure exceeding 0.35 N/mm2 and heating surface exceeding 4.5 m2 are to be surveyed internally, with a minimum of two internal examinations during each five-year special survey period and the interval between any two such examinations not to exceed 36 months; section 2.2 adds an annual external survey with testing of safety and protective devices. Listing the boiler as an ordinary CSM machinery element therefore does not merely blur a category, it doubles its internal examination interval from 36 months to the five years the same answer states for CSM items. The ClassNK guidance establishes the same boundary from the applicability side: its enumeration of machinery and equipment applicable to the CMS system, items 1 to 18, contains no boiler, while boiler auxiliaries appear repeatedly - forced draft fans for boiler, boiler burning pumps, boiler water circulating pumps, feed water pumps, and F.O. tanks for boilers - as does Boiler F.D. Fan in the CMS Reference Table. So the distinction the candidate drew is exactly the distinction the rules draw, and it is an IACS Unified Requirement rather than one society's practice, which makes it general enough to teach.",
+ "note": "The rest of the machinery list on the card was checked item by item against the ClassNK CMS enumeration and is correct: crank pins, main bearings, crossheads and turbochargers under item 1; auxiliary generator engines under item 3; main and auxiliary starting air compressors under item 4; steering gears under item 16; bilge/ballast/general service/fire pumps and heat exchangers, coolers and condensers in the CMS Reference Table. Only the boiler was over-generalised. Two open items were found and are recorded rather than actioned, because neither is the reported defect and each needs its own adjudication: the question text of this card expands CSM as \"Condition Survey Method\", which is wrong - CSM is the Continuous Survey of Machinery, and the answer body itself uses that expansion - but changing a question stem drives index display text and is an editorial decision; and QB1_supplementary cites IACS UR Z7/Z7.1 as governing CMS, where the machinery survey Unified Requirement is Z18, Z7 being the hull requirement.",
+ "content_index_effect": "tools/oral/qb_content_index_governed.json and its generated twin meoclass1/qb_content_index.json were regenerated. QB1_G.html governed version 1.1 -> 1.2; one corrections_applied row added and one recently_updated row prepended. Canonical totals unchanged at 721 questions across 86 files.",
+ "authority": [
+  {
+   "source": "IACS UR Z18 - Survey of Machinery, IACS Req. 2001/Rev.8 2018",
+   "clauses": [
+    "1.3 Continuous Surveys - special surveys of machinery may be carried out on a continuous survey basis; interval between consecutive examinations of each item not to exceed five (5) years",
+    "2.1 Survey of Steam Boilers - minimum two internal examinations during each 5-year special survey period; interval between any two such examinations not to exceed 36 months; boilers, superheaters and economizers examined internally on water-steam side and fire side; boiler mountings and safety valves examined at each survey",
+    "2.2 - external survey of boilers including test of safety and protective devices carried out annually within the Annual Survey window"
+   ],
+   "url": "https://www.turkloydu.org/pdf-files/iacs-karar-ve-csr-degisimleri/iacs-es-gereklilikleri/UR_Z18_Rev8_TR_EN.pdf",
+   "note": "IACS Unified Requirement text as published by Turk Loydu, an IACS member society. The IACS consolidated UR Z PDF was fetched but exceeded the reader size limit; this per-requirement copy carries the same IACS Req. 2001/Rev.8 2018 designation."
+  },
+  {
+   "source": "ClassNK Guidance on Continuous Machinery Survey (CMS), Ver.4, June 2025",
+   "clauses": [
+    "2. Application - enumeration of machinery and equipment applicable to the CMS system, items 1 to 18; contains no boiler as an item",
+    "Item 4 Air Compressors, Blowers - Forced Draft Fans for Boiler (excluding the same for Boilers with a maximum evaporation of 3 tons/h or less)",
+    "Item 6 F.O. Pumps - Boiler Burning Pumps (same exclusion)",
+    "Item 8 Feed Water Pumps, Condensate Pumps, Drain Pumps - Feed Water Pumps, Boiler Water Circulating Pumps",
+    "Item 13 Tanks - F.O. Tanks for Boilers",
+    "Appendix D CMS Reference Table - Boiler F.D. Fan appears as an item row; no boiler row"
+   ],
+   "url": "https://www.classnk.or.jp/hp/pdf/publications/Publications_image/GUIDANCE_ON_CONTINUOUS_MACHINERY_SURVEY_CMS_E.pdf"
+  },
+  {
+   "source": "IACS PR 1C",
+   "clauses": [
+    "Procedure for Suspension and Reinstatement or Withdrawal of Class in Case of Surveys or Conditions of Class Going Overdue"
+   ],
+   "note": "Cited here only to record why the card's existing reg-box reference to PR 1C for \"continuous class verification\" was removed. PR 1C governs suspension and withdrawal of class for overdue surveys and does not support the claim it was attached to."
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "CORR-CSMBOILER-01",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q40",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "17b1aa92ed79b06485063abde5d7f52c91c5e050da0df4bd27bc54cd8988bc9e",
+   "post_edit_digest": "0e557098378cc5db05f324ffcad1a33a7fb2684834adf1cdf6b95c686e9e5f2c",
+   "known_traps_entry": 43,
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "Three edits to one card. The Vital Auxiliary Systems bullet no longer names main boilers and instead names the boiler auxiliaries that the class-approved CMS list actually carries. A new bullet states that boilers, superheaters and economizers are not CSM items, that they carry a separate Boiler Survey, and gives the 36-month maximum internal interval and the annual external survey, so the distinction is stated rather than merely implied by an absence. The reg-box entry citing IACS Procedural Requirements PR 1C for continuous class verification is replaced by IACS UR Z18 with the two section numbers relied on. Question text, anchor and card position are unchanged, and no examiner attribution or CE Oral Tip was touched. Version badge Q40 v1.0 -> v1.1.",
+   "surfaces_corrected": [
+    "answer-body Vital Auxiliary Systems bullet",
+    "answer-body new boiler/CSM distinction bullet",
+    "reg-box IACS citation",
+    "q-version badge"
+   ]
+  }
+ ],
+ "propagation": [
+  {
+   "path": "meoclass1/QB1_supplementary.html",
+   "classification": "INDEPENDENT_CONTEXT",
+   "action": "NO_CHANGE_REQUIRED",
+   "finding": "Already correct and corroborating. States that CMS explicitly excludes statutory items with their own independent regimes, naming the oily water separator, life-saving appliances and pressure vessels such as auxiliary boilers, and carries the trap \"Can you self-credit the internal inspection of the auxiliary boiler as a CMS item?\" answered No. Its separate UR Z7/Z7.1 citation defect is recorded in the note field of this manifest, not actioned here."
+  },
+  {
+   "path": "meoclass1/QB1_F.html",
+   "classification": "INDEPENDENT_CONTEXT",
+   "action": "NO_CHANGE_REQUIRED",
+   "finding": "Already correct and corroborating. Its trap question offers \"Yes, to keep the maintenance system updated\" as the tempting Trap Answer and then gives the Correct Answer: No, boilers and pressure vessels are strictly surveyor-only items. This is the house trap convention, not an assertion."
+  },
+  {
+   "path": "meoclass1/QB4_J.html",
+   "classification": "INDEPENDENT_CONTEXT",
+   "action": "NO_CHANGE_REQUIRED",
+   "finding": "Refers to \"surveyors for CSM/boiler/shaft surveys\", which already treats CSM and boiler survey as distinct engagements."
+  },
+  {
+   "path": "corpus-wide",
+   "classification": "SCOPE_SWEEP",
+   "action": "NO_FURTHER_INSTANCE",
+   "finding": "The literal string \"main boilers\" occurs nowhere else in any tracked HTML. A proximity sweep for the word boiler within 260 characters of CSM, CMS or Continuous Machinery Survey across meoclass1 and SQ returned only the files classified above. No cheat sheet or derived copy carries the Vital Auxiliary Systems list; the string \"Vital Auxiliary Systems\" occurs only in QB1_G."
+  }
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/known_traps.md",
+   "classification": "INDEX_METADATA",
+   "known_traps_entry": 43,
+   "rationale": "Entry 43 added; this file is the authorisation_source for the record.",
+   "guarded_by": "qb_health_check changelog scan"
+  },
+  {
+   "path": "tools/oral/qb_content_index_governed.json",
+   "classification": "INDEX_METADATA",
+   "known_traps_entry": 43,
+   "rationale": "Governed source of the content index: QB1_G version bump, new corrections_applied row, new recently_updated row.",
+   "guarded_by": "validate_qb_content_index.py"
+  },
+  {
+   "path": "meoclass1/qb_content_index.json",
+   "classification": "INDEX_METADATA",
+   "known_traps_entry": 43,
+   "rationale": "Generated from the governed source by build_qb_content_index.py; never hand-edited.",
+   "guarded_by": "build_qb_content_index.py --check"
+  },
+  {
+   "path": "meoclass1/index.html",
+   "classification": "GENERATED_SURFACE",
+   "known_traps_entry": 43,
+   "rationale": "build_qb_content_index.py rewrites the Q_INDEX line, card question counts and hero counter from the governed source in the same pass.",
+   "guarded_by": "build_qb_content_index.py --check"
+  }
+ ],
+ "invariants": {
+  "question_text_unchanged": true,
+  "anchor_unchanged": true,
+  "canonical_question_count_unchanged": true,
+  "examiner_relationships_unchanged": true,
+  "study_taxonomy_unchanged": true,
+  "historical_qi_unchanged": true,
+  "supersession_required": false,
+  "supersession_rationale": "No earlier manifest pins a card digest for QB1_G.html. batch_e1_enrichment_manifest.json touches QB1_G#q29 but carries no baseline_card_digests entry for the file, and its sibling_pin_delegation records that no earlier manifest pins its targets. QB1_G#q40 is therefore not historically digest-owned and the correction needs no supersession chain."
+ }
+}
