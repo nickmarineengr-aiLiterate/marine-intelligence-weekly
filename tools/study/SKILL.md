@@ -475,6 +475,89 @@ disagreed, and the roadmap read the weakest of the three. If you need a
 recurrence number, call the adapter. If the number you need is missing, extend
 the adapter -- do not compute it where you stand.
 
+## Phase 2 -- from "what recurs" to "what is true now"
+
+Phase 1 says what keeps coming back. Phase 2 says whether a candidate can
+safely study it **today**, and that is the dangerous question: getting it
+wrong does not look like a bug, it looks like a confident, current, wrong
+answer.
+
+| Path | Role |
+|---|---|
+| `tools/study/qi_phase2_adjudications.json` | **Hand-maintained.** The governed answer decisions, one record per family. Same family as `qi_phase1_adjudications.json` and `study_qi_holds.json`. |
+| `tools/study/validate_phase2_tranche.py` | The gate. 30 invariants, fails closed. |
+| `tools/study/test_phase2_mutations.py` | 13 mutations, all must be caught, zero residue. |
+
+```bash
+python tools/study/validate_phase2_tranche.py
+python tools/study/test_phase2_mutations.py
+```
+
+### The rule the whole product rests on
+
+**MIW Written answers are SITTING-ANCHORED.** Every answer must be true as at
+the date of its own examination sitting, not as at today
+(`TEMPORAL_AND_DONOR_VERIFICATION_PROTOCOL.md` s1). That governs what Phase 2
+may and may not touch, and the distinction is not a nicety:
+
+| Situation | Class | What you do |
+|---|---|---|
+| The answer was already wrong **at its own sitting** | `CORRECTION` | Edit `model_answer`. This RESTORES sitting-anchoring. |
+| The framework moved **after** the sitting | `MODERNISATION` | Leave the answer alone. Record the present-day position in the family record. |
+
+`R-P2-MODERNISATION-NOEDIT` fails the build if a record classed as a
+modernisation also claims to have edited a past paper. Collapsing the two
+would make a February 2026 paper cite law that did not govern it, which is
+worse than the staleness being fixed.
+
+### Readiness is earned, never asserted
+
+`READY_TO_STUDY_NOW` is a consequence, not a field. A Phase-2 record only
+clears a currentness block if it carries **all** of: a safe final state, dated
+current primary authority, an independent review that passed, and a canonical
+answer that resolves to a real question. Hollow out any one and the grant
+evaporates (`R-P2-EARNED` inputs, gated by `R-P2-AUTHORITY*`, `R-P2-REVIEW*`,
+`R-P2-ANSWER*`). `validate_study_qi.R-READY-SAFE` honours that exemption and
+nothing else -- the triage value in `qi_currentness.json` is never rewritten,
+because Phase 1 is an input here.
+
+### A grant reaches ONE answer, not a family
+
+This is the mistake tranche 001 actually made before it was caught. Resolving
+`QIF-EM-0017` initially marked `QP2402-Q5` ready -- a February 2024 answer to
+a question about *ongoing developments*, whose own record says in terms that
+it must never be reused at a later sitting -- while the successor it had been
+superseded by still read `VERIFY`. Exactly backwards.
+
+`study_qi_adapter.question_readiness()` therefore grants Phase-2 readiness
+only to the question the record NAMES as `canonical_current_answer`; every
+other member keeps its triage verdict. `R-P2-ANSWER-SCOPE` gates it. A family
+being sorted out is not the same as every sitting inside it being safe.
+
+### Recurrence is an input and the manifest proves it
+
+Each tranche pins the counts it selected on into `pinned_at_selection`, and
+the gate compares the pins with the live layer (`R-P2-PIN-*`, `R-P2-MODERN`).
+So the manifest is self-policing: altering a recurrence count or dropping
+modern repeat metadata during answer work is caught, not inherited.
+
+### Working a tranche
+
+1. Select from `qi_phase2_action_queue.json` in `phase2_rank` order, skipping
+   anything already `READY_TO_STUDY_NOW`. Freeze the list.
+2. Read the actual question and answer text. Labels lie; the D01 cue and the
+   NEAR_REPEAT clusters both prove it.
+3. Verify against current primary authority appropriate to the question --
+   IMO for a convention, the Gazette for an Indian statute, OEM or naval
+   architecture for a machinery concept. Do not put DGMA first reflexively.
+4. Classify CORRECTION vs MODERNISATION and act accordingly.
+5. Record authority, dates, review verdict and final state.
+6. `python tools/study/build_study_qi.py` then the two Phase-2 commands above,
+   then the normal study gate sequence.
+
+**Only adjudicate a conflict hold if it blocks a family you selected.** The
+other holds are finished work, not backlog.
+
 ## Fresh-session test
 
 A new Claude Code session can, using only this file:

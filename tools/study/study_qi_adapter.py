@@ -73,6 +73,8 @@ SIXYEAR = os.path.join(REPO, 'meoclass1', 'pastpapers', 'intelligence', 'derived
                        'sixyear_families.json')
 SIXYEAR_WATCH = os.path.join(REPO, 'meoclass1', 'pastpapers', 'intelligence', 'derived',
                              'sixyear_temporal_watch.json')
+PHASE2_STORE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            'qi_phase2_adjudications.json')
 
 SCHEMA_VERSION = '1.0'
 
@@ -181,6 +183,21 @@ ACTION_READINESS = {
     'LOW_PRIORITY_HISTORICAL_ONLY': 'HISTORICAL_ONLY',
     'AMBIGUOUS_FAMILY_REVIEW': 'CURRENTNESS_HOLD',
 }
+
+#: Phase-2 final states that MAY clear a currentness block.
+#: Clearing one is not a build decision: it requires a governed record in
+#: `qi_phase2_adjudications.json` carrying current primary authority, an
+#: independent review verdict and a resolvable canonical answer. The validator
+#: enforces all three (R-P2-*). This is the ONLY route out of an unsafe
+#: currentness state -- rule 5 still holds, and recurrence still never appears.
+PHASE2_SAFE_STATES = {
+    'CURRENT_AND_VERIFIED', 'UPDATED_AND_VERIFIED', 'MODERNISED_AND_VERIFIED',
+    'NEW_CURRENT_ANSWER_CREATED', 'SUPERSEDED_WITH_SUCCESSOR',
+}
+
+#: Phase-2 final states that are explicitly still blocked. A hold is finished
+#: work, not backlog -- same rule as the mapping review queue.
+PHASE2_BLOCKED_STATES = {'HOLD_FOR_AUTHORITY', 'HOLD_FAMILY_RECONCILIATION'}
 
 #: Currentness classes that can never read as ready, whatever the action says.
 UNSAFE_CURRENTNESS = {
@@ -360,6 +377,19 @@ def load_modern_qi():
 # 2. THE CANONICAL LONGITUDINAL QI  (2010 -> August 2026)
 # --------------------------------------------------------------------------
 
+def load_phase2():
+    """Governed Phase-2 answer decisions, keyed by family.
+
+    Hand-maintained, like `qi_phase1_adjudications.json` and
+    `study_qi_holds.json`. Absent file is not an error: Phase 2 is incremental
+    by tranche, and most families have not been worked yet.
+    """
+    if not os.path.exists(PHASE2_STORE):
+        return {}
+    store = _load(PHASE2_STORE)
+    return {r['family_id']: r for r in store.get('families', [])}
+
+
 def load_canonical_qi():
     ents = {e['entity_id']: e for e in
             _load(os.path.join(QI_DIR, 'qi_source_entities.json'))['entities']}
@@ -398,6 +428,7 @@ def load_canonical_qi():
         'metrics': metrics,
         'currentness': curr,
         'queue': queue,
+        'phase2': load_phase2(),
         'joins': joins,
         'join_index': join_index,
         'occurrence_sitting': occ_sitting,
@@ -602,13 +633,45 @@ def readiness_for(canonical, fid):
     # A currentness risk overrides a cheerful action, never the other way round.
     if status in UNSAFE_CURRENTNESS and state == 'READY_TO_STUDY_NOW':
         state = 'CURRENTNESS_HOLD'
+
+    triage_readiness = state
+
+    # Phase-2 governed resolution. The triage above is only ever a TRIAGE: it
+    # says nobody checked, not that the answer is wrong. Where a human has
+    # since established current primary authority for this family and a second
+    # pass reviewed that work, the block it raised is resolved -- and that is
+    # the only thing that resolves it. No count is consulted here.
+    p2 = (canonical.get('phase2') or {}).get(fid) or {}
+    if p2:
+        final = p2.get('final_state')
+        if final in PHASE2_SAFE_STATES:
+            state = 'READY_TO_STUDY_NOW'
+        elif final == 'HISTORICAL_ONLY':
+            state = 'HISTORICAL_ONLY'
+        else:
+            state = 'CURRENTNESS_HOLD'
+
     return {
         'readiness': state,
         'phase2_action': action,
         'currentness_status': status,
-        'answer_coverage': q.get('answer_coverage_state') or q.get('answer_coverage'),
+        # The queue writes this field as `existing_answer_status`. It was read
+        # here under two names it never had, so it was silently None on every
+        # family in the corpus until 2026-08-23.
+        'answer_coverage': q.get('existing_answer_status'),
         'modern_question_action': q.get('modern_question_action'),
         'blocked': state not in ('READY_TO_STUDY_NOW', 'HISTORICAL_ONLY'),
+        'triage_readiness': triage_readiness,
+        'phase2_resolution': ({
+            'tranche_id': p2.get('tranche_id'),
+            'final_state': p2.get('final_state'),
+            'action_taken': p2.get('action_taken'),
+            'correction_or_modernisation': p2.get('correction_or_modernisation'),
+            'authority_currentness_date': p2.get('authority_currentness_date'),
+            'review_verdict': (p2.get('independent_review') or {}).get('verdict'),
+            'canonical_current_answer':
+                (p2.get('canonical_current_answer') or {}).get('question_id'),
+        } if p2 else None),
     }
 
 
@@ -683,6 +746,28 @@ def project_families(modern, canonical, mappings):
     return rows
 
 
+def question_readiness(fam_row, nid):
+    """The readiness ONE question inherits from ONE family.
+
+    A family can be resolved while most of its members stay unsafe to study.
+    They are older sittings whose answers nobody re-checked, and in a
+    SUPERSEDED_WITH_SUCCESSOR family the family's own bearer is explicitly the
+    thing NOT to study. So a Phase-2 grant reaches only the question the
+    governed record actually names as the canonical current answer; every
+    other member keeps the triage verdict it already had.
+
+    Without this, resolving a family silently blesses every historical variant
+    in it -- which is how a thirty-month-old answer to a question about
+    "ongoing developments" comes to read as ready.
+    """
+    p2 = fam_row.get('phase2_resolution') or {}
+    if not p2:
+        return fam_row['readiness']
+    if p2.get('canonical_current_answer') == nid:
+        return fam_row['readiness']
+    return fam_row.get('triage_readiness') or fam_row['readiness']
+
+
 def project_questions(modern, canonical, mappings, fam_rows):
     """Per modern question: the modern tag AND the family context, side by side.
     Neither field is derived from the other and neither replaces the other."""
@@ -724,7 +809,7 @@ def project_questions(modern, canonical, mappings, fam_rows):
             'recurrence_labels': sorted({l for r in fr for l in r['labels']}),
             'family_unit': sorted({r['unit'] for r in fr if r.get('unit')}),
             'currentness_status': sorted({r['currentness_status'] for r in fr}),
-            'readiness': sorted({r['readiness'] for r in fr}),
+            'readiness': sorted({question_readiness(r, nid) for r in fr}),
             'phase2_action': sorted({r['phase2_action'] for r in fr if r['phase2_action']}),
             # ---- weighting (rule 4) -----------------------------------------
             'bears_family_weight_for': bearer_of,

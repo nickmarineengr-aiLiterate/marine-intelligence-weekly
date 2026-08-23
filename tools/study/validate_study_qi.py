@@ -245,10 +245,27 @@ def run_checks(ctx):
           'a whole-vs-limb verdict was recorded without its governing join')
 
     # ---------------------------------------------------------------- G
-    # A currentness risk can never read as ready to study.
+    # A currentness risk can never read as ready to study -- unless a human
+    # went and RESOLVED it. `currentness_status` is a TRIAGE verdict and says
+    # so itself: it means nobody checked, not that the answer is wrong. A
+    # governed Phase-2 record is the one thing that can answer it, and the
+    # exemption is only granted where that record was actually earned:
+    # a safe final state, a dated authority check, an independent review that
+    # passed, and a canonical answer to point the candidate at. A record
+    # missing any of those grants nothing, so hollowing one out cannot buy a
+    # READY. The triage value itself is never rewritten -- Phase 1 is input.
+    def _phase2_earned(row):
+        p2 = row.get('phase2_resolution') or {}
+        return bool(
+            p2.get('final_state') in A.PHASE2_SAFE_STATES
+            and p2.get('authority_currentness_date')
+            and p2.get('review_verdict') in ('PASS', 'PASS_WITH_MINOR_FIX')
+            and p2.get('canonical_current_answer'))
+
     unsafe_ready = [r['family_id'] for r in fams
                     if r['currentness_status'] in A.UNSAFE_CURRENTNESS
-                    and r['readiness'] == 'READY_TO_STUDY_NOW']
+                    and r['readiness'] == 'READY_TO_STUDY_NOW'
+                    and not _phase2_earned(r)]
     check('R-READY-SAFE', not unsafe_ready,
           '%d family(ies) carry a currentness risk and still read as ready: %s'
           % (len(unsafe_ready), unsafe_ready[:8]))
