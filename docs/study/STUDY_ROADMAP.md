@@ -1,5 +1,17 @@
 # MEO Class I — study roadmap
 
+> **DEPRECATED 2026-08-23. Do not read the numbers in this file.**
+>
+> This document is hand-written, has no generator, and nothing in the
+> repository links to it. Its per-domain counts have gone stale at every
+> adjudication pass since it was written and were patched by hand twice; that
+> is the loop this notice ends. Every figure it once carried is now derived:
+> `docs/study/study_spine.json` for the per-domain evidence,
+> `docs/study/MIW_MEO_Class1_Study_Roadmap.xlsx` for the study cockpit,
+> `meoclass1/topics.html` and `meoclass1/study.html` for the candidate
+> surfaces, and the three `TOPIC_0*.md` packs for the study plans. The prose
+> below is kept only as the design record of how the spine was built.
+
 Built 2026-08-22 from main `906e8a4`. Generated evidence:
 `study_spine.json`, `study_mappings.json`, `mapping_review_queue.json`.
 
