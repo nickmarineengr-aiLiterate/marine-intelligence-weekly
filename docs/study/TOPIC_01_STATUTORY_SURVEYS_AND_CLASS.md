@@ -2,9 +2,11 @@
 
 **Study pack for Nixon. Built 2026-08-22, revised against the official
 syllabus the same day.**
-Evidence: 53 mapped Oral questions, 96 Written questions across 39 of 40
-solved papers, 46 Oral questions carrying examiner evidence from all 6 named
-examiners, 16 recurring written families.
+Evidence: 72 mapped Oral questions, 96 Written questions across 39 of 40
+solved papers, 64 Oral questions carrying examiner evidence from all 6 named
+examiners, 16 recurring written families. The Oral figures rose from 53 and 46
+on 2026-08-23 when the QB3_A / QB4_A / QB4_G file-title contradiction tranche
+was adjudicated; no question text or answer changed.
 
 > **Now grounded in the official syllabus.** DGMA EAC Branch Circular **No.49
 > of 2026** (15-Aug-2026), **Annexure III** — *Syllabus for MEO Class I
@@ -162,16 +164,24 @@ mapped questions.
 Hand-adjudicated. Every one verified as genuinely D01, and each carries
 examiner evidence unless noted.
 
-> **Mapping state.** D01 holds **53** oral mappings. **45** are cue-derived
+> **Mapping state.** D01 holds **72** oral mappings. **45** are cue-derived
 > (MEDIUM confidence), because every QB1 file titled "Engine Construction,
 > Stability & Surveys" names three domains and is therefore adjudicated per
-> question. **7** were moved into D01 by human adjudication on 2026-08-23
-> (`HUMAN_ADJUDICATION` evidence) when the D02 file-level over-capture was
-> corrected — see the note in the Topic 03 pack. **1** comes from a
-> single-domain file title. **22** are `VALID_MAPPED`; the remaining **31**
-> stay `REVIEW_PENDING` and appear in
+> question. **26** were moved into D01 by human adjudication on 2026-08-23
+> (`HUMAN_ADJUDICATION` evidence): **7** when the D02 file-level over-capture
+> was corrected — see the note in the Topic 03 pack — and **19** more later the
+> same day from the QB3_A, QB4_A and QB4_G file-title contradiction tranche.
+> **1** comes from a single-domain file title. **41** are `VALID_MAPPED`; the
+> remaining **31** stay `REVIEW_PENDING` and appear in
 > `docs/study/mapping_review_queue.json` — they are safe to study, but they
 > have not been individually reviewed and must not be published as settled.
+>
+> **Prioritisation is one tranche behind.** The A/B/C lists below were derived
+> from the 53-question cohort and still sum to 53. The **19** questions that
+> arrived on 2026-08-23 from QB3_A, QB4_A and QB4_G are mapped and studiable,
+> but are **not yet prioritised**. Re-deriving A/B/C is the next study-pack
+> action and is deliberately NOT done here: it changes what to study next, so
+> it needs review rather than being a side effect of taxonomy maintenance.
 
 | # | ID | Question |
 |---|---|---|

@@ -221,8 +221,10 @@ on occurrence count alone, which is flat in this corpus. Every one is
 **B-priority (18)** — `QB4_E#q8` (PSC appeal and post-detention, 3 examiners),
 `QB4_C#q15` (RO Code, 3 examiners — but it is D01 material reached from here),
 `QB5_E#q3` (Code of Conduct for Seafarers, 3 examiners), `QB4_A#q5` (how a PSC
-inspection is conducted), `QB4_A#q6` (grounds for detention and appeal),
-`QB4_A#q7` (FSI vs PSC), `QB4_A#q18` (Manila amendments and the CE benchmark),
+inspection is conducted — adjudicated to D01 on 2026-08-23), `QB4_A#q6` (grounds
+for detention and appeal — D01), `QB4_A#q7` (FSI vs PSC — D01; all three are, like
+`QB4_C#q15`, D01 material reached from here rather than owned here),
+`QB4_A#q18` (Manila amendments and the CE benchmark),
 `QB4_A#q16` (Maritime Labour Certificate), `QB4_C#q6` (MLC five Titles),
 `QB4_C#q12` (additional verification under ISM), `QB4_B#q3` (planned
 maintenance under the SMS), `QB4_J#q6` (SMS documentation structure),
@@ -414,7 +416,8 @@ Written: `QP2608-Q5` (sudden loss of propulsion), `QP2608-Q7` (main switchboard
 isolation and restoration), `QP2510-Q8` (ME fails to respond to bridge
 control), `QP2401-Q8` (fault tree analysis of a starting failure). Oral:
 `QB4_C#q1` (bunker shortage, step by step), `QB4_G#q7` (hull damage or oil
-pollution — how you proceed).
+pollution — how you proceed; adjudicated to D04 on 2026-08-23, so it is a
+pollution-response question drilled here as a management-response chain).
 
 ---
 
