@@ -39,6 +39,13 @@ from render_common import (REPO_ROOT, TPL, BASE, CONTACT, LS_BOOKMARKS, LS_PROGR
                            load_all_specs, CORPUS_SEARCH_JS, corpus_fallback_block)
 import recurrence_model as RM
 
+# Same shared projection the year sheet renders. Section 42: if the year sheet
+# shows a longer-term signal for a question and the solved paper does not, the
+# customer has been given two different accounts of the same question. One
+# projection, one block, both surfaces.
+sys.path.insert(0, os.path.join(REPO_ROOT, 'tools', 'study'))
+import qi_projection as QIP
+
 CHEV = ('<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>')
 
@@ -550,6 +557,10 @@ def build_card(q, paper, out, publish, corpus=None, deliver=False, delivered_ids
     # set, shipped to a paying student as though MIW had established it.
     out.append('  <p class="rec-note"><span class="q-tag rec">%s</span> %s</p>'
                % (rel['label'], RM.family_summary(nodes, relations, qid)))
+    # Layer 2 / Layer 3 -- the same governed projection the year sheet renders.
+    block = QIP.render_block(qid, audience='GATED')
+    if block:
+        out.append('  %s' % block)
 
     # Production metadata: review mode only. Never shipped to students.
     if not publish:

@@ -75,8 +75,15 @@ STATUS_FIRST = 'first'            # earliest sitting of a family that repeats la
 STATUS_REPEAT_EXACT = 'repeat_exact'   # later sitting, stem identical to the first
 STATUS_REPEAT_NEAR = 'repeat_near'     # later sitting, stem materially reworded
 
+# "Once in this set" was the original wording and it was safe while this was
+# the only recurrence layer MIW held. It stopped being safe when the canonical
+# 2010->Aug-2026 question intelligence went live beside it: a reader who sees
+# one tag saying "once" and another saying the concept recurs has been handed a
+# contradiction, and the likelier reading of the shorter tag -- "this has only
+# ever been asked once" -- is the false one. The denominator now travels with
+# the label. The CLASSIFICATION is unchanged; only the words are.
 STATUS_LABEL = {
-    STATUS_SINGLE: 'Once in this set',
+    STATUS_SINGLE: 'Once in MIW&rsquo;s transcribed set',
     STATUS_FIRST: 'First in set',
     STATUS_REPEAT_EXACT: 'Repeated &mdash; same wording',
     STATUS_REPEAT_NEAR: 'Repeated &mdash; reworded',
@@ -87,7 +94,8 @@ STATUS_LABEL = {
 # entity inside a `data-search` attribute is double-escaped, so a candidate
 # searching "repeated" would match and a candidate searching the label as it
 # appears on screen would not.
-STATUS_LABEL_PLAIN = {k: v.replace('&mdash;', '-') for k, v in STATUS_LABEL.items()}
+STATUS_LABEL_PLAIN = {k: v.replace('&mdash;', '-').replace('&rsquo;', "'")
+                      for k, v in STATUS_LABEL.items()}
 
 # Coarse filter buckets. 'repeated' covers both repeat flavours so a candidate
 # can ask the only question they actually have: "has this come back?"
@@ -483,7 +491,7 @@ def family_summary(nodes, relations, qid):
     """
     rel = relations[qid]
     if rel['status'] == STATUS_SINGLE:
-        return 'Set once in the sittings MIW has transcribed.'
+        return ('Set once in the sittings MIW has transcribed. That is a statement about this comparison set, not about whether the concept has been examined before.')
     others = ', '.join('%s %s' % (nodes[m]['month_year'], nodes[m]['q_no'])
                        for m in rel['others'])
     if rel['status'] == STATUS_FIRST:

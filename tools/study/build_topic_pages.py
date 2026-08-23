@@ -100,6 +100,9 @@ main{max-width:960px;margin:0 auto;padding:1.5rem;}
 .chip.partial{background:#fffbeb;border-color:#fde68a;color:#b45309;}
 .chip.weak{background:#fef2f2;border-color:#fecaca;color:#b91c1c;}
 .chip.official{background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8;}
+.chip.ready{background:#ecfdf5;border-color:#a7f3d0;color:#047857;}
+.chip.review{background:#fffbeb;border-color:#fde68a;color:#b45309;}
+.readiness{font-size:.78rem;color:var(--grey-text);margin:-.3rem 0 .8rem;}
 .blocklabel{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grey-text);font-weight:700;margin:.9rem 0 .4rem;}
 .off-item{border-left:3px solid var(--teal);padding:.45rem .7rem;margin-bottom:.45rem;background:var(--grey-bg);font-size:.8rem;}
 .off-item b{color:var(--teal-dark);}
@@ -180,6 +183,30 @@ def coverage_chips(bands):
     return ''.join(out)
 
 
+def readiness_chips(t):
+    """Answer-readiness chips for one topic, read from the governed model.
+
+    Section 17: a candidate must be able to tell HIGH PRIORITY + READY from
+    HIGH PRIORITY + UNDER REVIEW. Recurrence weight already drives the study
+    order these cards appear in, so a topic near the top with nothing ready is
+    the case that has to be visible -- otherwise a stale high-recurrence answer
+    looks exactly as safe as a verified one.
+
+    Zero-count chips are omitted rather than rendered as "0 under review":
+    an absent warning is the absence of a warning.
+    """
+    out = []
+    if t['families_ready_now']:
+        out.append(f'<span class="chip ready">{t["families_ready_now"]} ready to study</span>')
+    if t['families_under_review']:
+        out.append(f'<span class="chip review">{t["families_under_review"]} '
+                   f'under currentness review</span>')
+    if t['families_in_preparation']:
+        out.append(f'<span class="chip review">{t["families_in_preparation"]} '
+                   f'answer in preparation</span>')
+    return ''.join(out)
+
+
 def build_topics_html(model, mappings, official, ex):
     by_node = {n['official_node_id']: n for n in official['nodes']}
     cov_bands = collections.defaultdict(list)
@@ -239,7 +266,13 @@ def build_topics_html(model, mappings, official, ex):
         parts.append(coverage_chips(cov_bands.get(tid, [])))
         parts.append(f'<span class="chip">{t["current_written_papers"]} written papers</span>')
         parts.append(f'<span class="chip">{t["distinct_examiners"]} examiners</span>')
+        parts.append(readiness_chips(t))
         parts.append('</div>')
+        if t['families_mapped']:
+            parts.append(f'<div class="readiness">Written answer readiness: '
+                         f'{E(t["readiness_text"])}. Readiness is about whether MIW&rsquo;s '
+                         f'answer is current TODAY &mdash; every written answer remains '
+                         f'correct for its own sitting either way.</div>')
 
         nodes = [n for n in t['official_node_ids'].split(', ') if n != '—']
         if nodes:
@@ -328,6 +361,7 @@ def build_study_html(model, official):
         parts.append(f'<span class="chip">{t["current_written_papers"]} papers</span>')
         parts.append(f'<span class="chip">{t["current_written_recurrence_families"]} '
                      f'recurring written families</span>')
+        parts.append(readiness_chips(t))
         parts.append('</div>')
         parts.append(
             f'<div class="q-more"><a href="topics.html#{tid}">Oral questions for '

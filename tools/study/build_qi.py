@@ -587,34 +587,9 @@ def build_metrics(families, occurrences):
         meaningful = [g for g in gaps if g >= M.DORMANCY_GAP_MONTHS]
         span = M.months_between(sits[0], sits[-1])
 
-        labels = []
-        if len(occ) < M.MATERIALLY_RECURRENT_MIN_OCCURRENCES:
-            labels.append('INSUFFICIENT_HISTORY')
-        else:
-            if len(years) >= 4 and span >= 60:
-                labels.append('PERSISTENT')
-            if counts['RECENT_3Y'] >= 1:
-                labels.append('RECENTLY_ACTIVE')
-            else:
-                labels.append('DORMANT')
-            if all(s <= '2020-12' for s in sits):
-                labels.append('HISTORICAL_ONLY')
-            if sits[0] >= M.RECURRENCE_WINDOWS['RECENT_5Y'][0]:
-                labels.append('NEW_EMERGING')
-            # RISING: recent rate at least double the earlier rate.
-            recent_years = 3.0
-            earlier_span = max(M.months_between(M.QI_LOWER_BOUNDARY,
-                                                M.RECURRENCE_WINDOWS['RECENT_3Y'][0]) / 12.0, 1.0)
-            earlier = len(occ) - counts['RECENT_3Y']
-            if counts['RECENT_3Y'] >= 2 and (counts['RECENT_3Y'] / recent_years) >= 2 * (earlier / earlier_span):
-                labels.append('RISING')
-            # RE_EMERGING is about the SHAPE of the return, so it keys on the
-            # LATEST gap only. Any long-lived family accumulates a long gap
-            # somewhere; that is not re-emergence, it is history. Re-emergence is
-            # "absent for a long time, then set again" -- which means the gap
-            # immediately before the most recent sitting is the meaningful one.
-            if gaps and gaps[-1] >= M.DORMANCY_GAP_MONTHS:
-                labels.append('RE_EMERGING')
+        # ONE label engine, in qi_model. The projection layer calls the same
+        # function over the printed-evidence-only subset; see its docstring.
+        labels = M.intelligence_labels([o['sitting'] for o in occ])
 
         out.append({
             'family_id': f['family_id'],
@@ -636,7 +611,7 @@ def build_metrics(families, occurrences):
             'meaningful_gaps_months': meaningful,
             'largest_gap_months': max(gaps) if gaps else 0,
             'evidence_breakdown': f['evidence_breakdown'],
-            'intelligence_labels': sorted(set(labels)),
+            'intelligence_labels': labels,
         })
     out.sort(key=lambda r: (-r['total_occurrences'], r['family_id']))
     return out

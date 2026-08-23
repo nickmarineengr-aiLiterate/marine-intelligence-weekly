@@ -20,9 +20,18 @@ EXPANDABLE BY CONSTRUCTION
 --------------------------
 No corpus size is hardcoded. Counts come from the evidence horizon, so adding
 papers widens the numbers *and the derived public sentence* without anyone
-editing this file. The historical-QI columns already exist in the model and
-render as NOT YET INTEGRATED; when that layer reaches VALIDATED_RANGE they
-populate themselves.
+editing this file.
+
+TWO DIFFERENT THINGS ARE CALLED "HISTORICAL QI" AND ONLY ONE IS OUTSTANDING.
+The CANONICAL LONGITUDINAL QI LAYER (docs/study/qi/*, 2010 to August 2026) is
+LIVE and feeds this workbook today: family ids, 3Y/5Y/10Y/full counts,
+recurrence labels, currentness and answer readiness all reach the topic and
+written sheets through tools/study/study_qi_adapter.py and
+tools/study/qi_projection.py. What is still NOT_STARTED is the HISTORICAL
+WRITTEN QUESTION CORPUS -- ingesting the 2010-2020 question and answer text
+itself. The reserved columns below wait on that, not on recurrence
+intelligence, and the WRITTEN QI sheet has to say which of the two it means or
+it reads as though the roadmap were running on nothing.
 
 Six sheets rather than one wide one, because forty columns is not a roadmap.
 Each sheet is a projection of the same normalized model, so they cannot drift
@@ -49,6 +58,7 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 
 import evidence_model as EM
+import qi_projection as QIP
 import study_links as LINKS
 
 D = os.path.join(ROOT, 'docs', 'study')
@@ -332,6 +342,10 @@ def build_model():
     for row in coverage['nodes']:
         cov_by_topic.setdefault(row['primary_topic'], []).append(row['coverage'])
 
+    projection = QIP.load()
+    qi_families = _load(os.path.join(D, 'qi', 'qi_families.json'))
+    qi_occ = _load(os.path.join(D, 'qi', 'qi_occurrences.json'))
+    phase2_count = _load(os.path.join(HERE, 'qi_phase2_adjudications.json'))['counts']['families']
     order = study_order(spine['domains'])
     topics = []
     for d in sorted(spine['domains'], key=lambda x: order[x['domain_id']]):
@@ -390,6 +404,25 @@ def build_model():
             row[f] = NOT_YET if not qi_live else None
         row['historical_qi_status'] = hist['status']
         row['gaps'] = '—'
+        # --- present-day answer readiness, from the ONE adapter -----------
+        # Read, never recomputed. A topic page that derived readiness from its
+        # own questions would be a second readiness model, and it would drift
+        # the first time a Phase-2 family was resolved. Absent projection rows
+        # give zeros rather than an error, so a fresh topic is "nothing ready
+        # yet" rather than a build failure.
+        pr = QIP.topic(did, audience='INTERNAL', doc=projection) or {}
+        row['families_ready_now'] = pr.get('ready_now', 0)
+        row['phase2_verified_answers'] = pr.get('phase2_verified_answers', 0)
+        row['families_under_review'] = pr.get('under_review', 0)
+        row['families_in_preparation'] = pr.get('in_preparation', 0)
+        row['families_verify_current_answer'] = pr.get('verify_current_answer', 0)
+        row['families_new_answer_required'] = pr.get('new_answer_required', 0)
+        row['families_modernise_required'] = pr.get('modernise_required', 0)
+        row['families_currentness_hold'] = pr.get('currentness_hold', 0)
+        row['families_historical_only'] = pr.get('historical_only', 0)
+        row['families_mapped'] = pr.get('total_families', 0)
+        row['readiness_pct'] = pr.get('readiness_pct', 0.0)
+        row['readiness_text'] = pr.get('readiness_text', '—')
         topics.append(row)
 
     # Topic 01's named gaps are the only hand-recorded ones today; they live
@@ -549,6 +582,36 @@ def build_model():
         'topics': topics,
         'official_nodes': official_rows,
         'future_written_fields': list(FUTURE_WRITTEN_FIELDS),
+        # The live longitudinal layer, described from the artefacts rather than
+        # from prose. Every number here is read; none is typed. That is what
+        # keeps the sheet's description of the architecture from going stale
+        # again the next time the layer moves.
+        'longitudinal_qi': {
+            'status': 'LIVE',
+            'horizon': qi_families['horizon'].get('language')
+                       or '2010 through August 2026',
+            'families': qi_families['counts']['families'],
+            'occurrences': qi_occ['counts']['recurrence_bearing'],
+            'phase2_families': phase2_count,
+            'ready_now': sum(t['families_ready_now'] for t in topics),
+            'phase2_verified_answers': sum(t['phase2_verified_answers'] for t in topics),
+            'via': 'tools/study/study_qi_adapter.py -> docs/study/study_qi.json '
+                   '-> tools/study/qi_projection.py',
+            'sheets': 'ROADMAP (Answer Readiness), TOPIC DETAIL (readiness '
+                      'partition), WRITTEN BY TOPIC (QI Family, 3Y/5Y/10Y/Full, '
+                      'Recurrence Labels, Currentness, Answer Readiness, Phase-2)',
+            'why_reserved_blank':
+                'They hold per-topic counts of INGESTED historical questions and '
+                'papers. The 2010-2020 question text is not ingested, so a number '
+                'there would be invented. The recurrence intelligence above is a '
+                'different artefact and is live.',
+            'date_certainty_note':
+                'The 2010-2020 sitting dates are SECONDARY_CLAIMED. Exact counts '
+                'and family ids stay in this workbook, which is internal. No '
+                'candidate-facing surface prints a historical count or date; it '
+                'prints qualitative labels that survive on printed evidence '
+                'alone. See tools/study/qi_projection.py.',
+        },
     }
 
 
@@ -837,18 +900,18 @@ def render_workbook(model, out_path):
            'Written Papers', 'Recurrence Families', 'Official Items',
            'Coverage', 'Priority Rank', 'Priority Score', 'Study Status',
            'Open Study Topic', 'Oral by Topic', 'Written by Topic',
-           'Topic Pack', 'Next Session', 'Gaps'],
+           'Topic Pack', 'Next Session', 'Gaps', 'Answer Readiness'],
           [[t['study_order'], t['topic_id'], t['topic'], t['prerequisites'],
             t['unlocks'], t['oral_questions'], t['examiner_evidenced_oral'],
             t['current_written_questions'], t['current_written_papers'],
             t['current_written_recurrence_families'],
             t['official_syllabus_items'], t['coverage'], t['priority_rank'],
             t['priority_score'], t['study_status'], None, None, None, None,
-            None, t['gaps']]
+            None, t['gaps'], t['readiness_text']]
            for t in model['topics']],
           [11, 9, 34, 13, 16, 8, 12, 9, 9, 12, 10, 16, 11, 11, 18,
-           17, 15, 17, 15, 15, 46],
-          wrap_cols={3, 21})
+           17, 15, 17, 15, 15, 46, 62],
+          wrap_cols={3, 21, 22})
     cur_tid = (model['current']['topic'] or {}).get('topic_id')
     for i, t in enumerate(model['topics'], start=2):
         put_link(ws, i, 16, t['link_study'], text='STUDY \u25b8')
@@ -865,7 +928,7 @@ def render_workbook(model, out_path):
         else:
             ws.cell(row=i, column=20, value=NOT_AVAILABLE).font = DEADF
         if t['topic_id'] == cur_tid:
-            for col in range(1, 22):
+            for col in range(1, 23):
                 cell = ws.cell(row=i, column=col)
                 if cell.font is not LINKF:
                     cell.fill = NOW
@@ -878,15 +941,25 @@ def render_workbook(model, out_path):
            'Examiner Relationships', 'Distinct Examiners', 'Written Qs',
            'Written Papers', 'Recurrence Families', 'Official PRIMARY Items',
            'Official SUPPORTING Items', 'Official Node IDs', 'Priority Score',
-           'Study Topic', 'Oral Questions', 'Written Questions', 'Topic Pack'],
+           'Study Topic', 'Oral Questions', 'Written Questions', 'Topic Pack',
+           'QI Families Mapped', 'Ready To Study Now',
+           'Phase-2 Verified Answers', 'Verify Current Answer',
+           'New Answer Required', 'Modernise Required', 'Currentness Hold',
+           'Historical Only', 'Readiness %'],
           [[t['topic_id'], t['topic'], t['oral_questions'],
             t['examiner_evidenced_oral'], t['examiner_relationships'],
             t['distinct_examiners'], t['current_written_questions'],
             t['current_written_papers'], t['current_written_recurrence_families'],
             t['official_syllabus_items'], t['official_supporting_items'],
-            t['official_node_ids'], t['priority_score'], None, None, None, None]
+            t['official_node_ids'], t['priority_score'], None, None, None, None,
+            t['families_mapped'], t['families_ready_now'],
+            t['phase2_verified_answers'], t['families_verify_current_answer'],
+            t['families_new_answer_required'], t['families_modernise_required'],
+            t['families_currentness_hold'], t['families_historical_only'],
+            t['readiness_pct']]
            for t in model['topics']],
-          [9, 34, 8, 12, 12, 10, 9, 9, 12, 12, 12, 34, 11, 14, 15, 17, 14],
+          [9, 34, 8, 12, 12, 10, 9, 9, 12, 12, 12, 34, 11, 14, 15, 17, 14,
+           12, 12, 13, 13, 12, 12, 12, 12, 11],
           wrap_cols={2, 12})
     for i, t in enumerate(model['topics'], start=2):
         put_link(ws, i, 14, t['link_study'], text='STUDY \u25b8')
@@ -970,11 +1043,29 @@ def render_workbook(model, out_path):
         rows.append(['', f"{g['from_year']}–{g['to_year']}", g['reason']])
     rows += [
         ['', '', ''],
-        ['RESERVED FIELDS (populate themselves when the layer is validated)', '', ''],
+        ['RESERVED FIELDS — these await the HISTORICAL WRITTEN QUESTION CORPUS '
+         '(ingested 2010–2020 question and answer text), NOT the longitudinal '
+         'recurrence layer, which is live below', '', ''],
     ]
     for f in model['future_written_fields']:
         rows.append(['', f, NOT_YET])
+    q = model['longitudinal_qi']
     rows += [
+        ['', '', ''],
+        ['CANONICAL LONGITUDINAL QI — LIVE, and feeding this workbook', '', ''],
+        ['Layer', 'CANONICAL_LONGITUDINAL_QI', ''],
+        ['Status', q['status'], ''],
+        ['Horizon', q['horizon'], ''],
+        ['Governed families', q['families'], ''],
+        ['Recurrence-bearing occurrences', q['occurrences'], ''],
+        ['Present-day answer decisions (Phase 2)', q['phase2_families'], ''],
+        ['Families ready to study now', q['ready_now'], ''],
+        ['Answers independently verified against current authority',
+         q['phase2_verified_answers'], ''],
+        ['Reaches this workbook via', q['via'], ''],
+        ['Sheets carrying it', q['sheets'], ''],
+        ['Why the reserved fields above are still blank', q['why_reserved_blank'], ''],
+        ['Why no dated historical claim appears anywhere', q['date_certainty_note'], ''],
         ['', '', ''],
         ['PUBLIC CLAIM (generated, never hand-written)', '', ''],
         ['', model['public_claim'], ''],

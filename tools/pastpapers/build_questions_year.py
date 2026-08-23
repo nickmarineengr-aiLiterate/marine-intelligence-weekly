@@ -43,6 +43,14 @@ from render_common import (REPO_ROOT, esc, esc_attr, strip_tags, read_css,
                            CORPUS_SEARCH_JS, corpus_fallback_block)
 import recurrence_model as RM
 
+# The candidate-safe QI projection lives in the study layer because that is
+# where both intelligence layers are joined. This page RENDERS it and decides
+# nothing: which longitudinal label a candidate may see, and in what words, is
+# settled in tools/study/qi_projection.py so that this page, the solved paper
+# page and the topic page cannot disagree about the same question.
+sys.path.insert(0, os.path.join(REPO_ROOT, 'tools', 'study'))
+import qi_projection as QIP
+
 PP_DIR = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers')
 SPEC_GLOB = os.path.join(PP_DIR, 'specs', '*.json')
 
@@ -380,10 +388,40 @@ def build_year_page(specs, year, publish, deliver=False):
     a('  <div class="cov-row"><span class="cov-k">Repeated</span>'
       '<span class="cov-v">The same examiner task has already been set at an earlier sitting '
       '&mdash; either in the same words, or reworded.</span></div>')
-    a('  <div class="cov-row"><span class="cov-k">Set once</span>'
-      '<span class="cov-v">Set once across the sittings MIW has transcribed. That is not the '
-      'same as never asked before &mdash; MIW has transcribed %s so far.</span></div>'
+    a('  <div class="cov-row"><span class="cov-k">Once in MIW&rsquo;s transcribed set</span>'
+      '<span class="cov-v">Set once across the sittings MIW has transcribed &mdash; %s so far. '
+      '<b>That is not the same as never asked before.</b> It is a statement about this '
+      'comparison set only, and the longer-term signal below may still show the concept '
+      'recurring outside it.</span></div>'
       % esc(_scope_phrase(specs)))
+    a('</section>')
+    # The second layer gets its own legend block, because the mistake this page
+    # has to prevent is a reader treating the two vocabularies as one scale.
+    a('<section class="topic-group qy-legend">')
+    a('  <h3>How to read the longer-term signal</h3>')
+    a('  <div class="tg-sub">A second, separate layer. The tags above compare printed '
+      'questions <i>within</i> the set MIW has transcribed. These compare the underlying '
+      'examinable concept against MIW&rsquo;s governed question intelligence, which reaches '
+      'further back than the solved papers do.</div>')
+    a('  <div class="cov-row"><span class="cov-k">Persistent &middot; Rising &middot; '
+      'Re-emerging &middot; Active in recent papers</span>'
+      '<span class="cov-v">How the concept behaves over the longer horizon. These are '
+      'qualitative on purpose: MIW does not publish sitting dates it cannot evidence from a '
+      'source copy, so no count and no year is claimed here.</span></div>')
+    a('  <div class="cov-row"><span class="cov-k">Recurs beyond MIW&rsquo;s solved set</span>'
+      '<span class="cov-v">MIW&rsquo;s question intelligence holds earlier occurrences of this '
+      'concept whose sitting dates rest on secondary sources. The recurrence is reported; the '
+      'dates are not, and are not counted.</span></div>')
+    a('  <div class="cov-row"><span class="cov-k">Current answer verified</span>'
+      '<span class="cov-v">MIW has checked this answer against current primary authority and '
+      'an independent reviewer passed it. <i>No currentness risk flagged</i> is weaker: '
+      'nothing suggests the framework has moved, but no verification has been done.</span></div>')
+    a('  <div class="cov-row"><span class="cov-k">Currentness check pending &middot; '
+      'Answer under currentness review</span>'
+      '<span class="cov-v">The framework behind this answer may have moved since the sitting. '
+      'The answer is still correct <i>for its own sitting</i> &mdash; every MIW written answer '
+      'is anchored to the date of its examination &mdash; but do not rely on it as a statement '
+      'of the law today.</span></div>')
     a('</section>')
 
     for mn in range(1, 13):
@@ -440,8 +478,13 @@ def _scope_phrase(specs):
 def _render_question(a, n, relations, nodes, spec_q, solved):
     rel = relations[n['question_id']]
     q = spec_q[n['question_id']]
+    # label_plain, not label. An HTML entity inside a data-search attribute is
+    # escaped a second time, so the shipped token read "repeated &amp;mdash;
+    # reworded" and a candidate searching the words on screen matched nothing.
+    # STATUS_LABEL_PLAIN exists for exactly this slot; it was simply never
+    # wired to it.
     a('  <div class="hit" data-qsearch="%s" data-rec="%s" data-cat="%s" id="%s">'
-      % (esc_attr(question_search_tokens(n, q, rel['label'])),
+      % (esc_attr(question_search_tokens(n, q, rel['label_plain'])),
          esc_attr(rel['filter']), esc_attr(n['primary_category'] or ''),
          esc_attr(n['question_id'])))
     a('    <div class="hit-top">%s <span class="sep">&middot;</span> %s '
@@ -464,8 +507,17 @@ def _render_question(a, n, relations, nodes, spec_q, solved):
              ' <b>(%s)</b>' % marks if marks else ''))
     a('    <div class="pc-topics" style="margin-top:6px;">%s</div>'
       % ''.join('<span class="q-tag sub">%s</span>' % esc(t) for t in n['topic_tags'][:5]))
+    # LAYER 1 -- modern recurrence, from the calendar. Unchanged.
     a('    <div class="rec-note"><span class="q-tag rec">%s</span> %s</div>'
       % (rel['label'], RM.family_summary(nodes, relations, n['question_id'])))
+    # LAYER 2/3 -- longitudinal signal and answer readiness, from the governed
+    # projection. A SEPARATE line: the two layers answer different questions
+    # over different horizons and folding them into one sentence is how a
+    # "set once" tag comes to contradict a "persistent topic" tag. Renders
+    # nothing at all where the projection knows nothing.
+    block = QIP.render_block(n['question_id'], audience='GATED')
+    if block:
+        a('    %s' % block)
     if solved:
         a('    <div class="btn-row"><a class="nav-btn" href="%s.html#%s">'
           'Open the solved answer &rarr;</a></div>'

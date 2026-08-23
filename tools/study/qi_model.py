@@ -360,4 +360,75 @@ def in_window(sitting, window):
     return lo <= sitting <= hi
 
 
+def window_counts(occurrence_sittings):
+    """Occurrences (not distinct sittings) falling in each recurrence window."""
+    return {w: sum(1 for s in occurrence_sittings if in_window(s, w))
+            for w in RECURRENCE_WINDOWS}
+
+
+def intelligence_labels(occurrence_sittings):
+    """The ONE label engine. A pure function of the occurrence sitting dates.
+
+    ``occurrence_sittings`` is one ``YYYY-MM`` string PER OCCURRENCE, so two
+    occurrences at the same sitting appear twice. That distinction is load
+    bearing: PERSISTENT and RE_EMERGING key on distinct sittings and years,
+    while RECENTLY_ACTIVE and RISING key on occurrence volume.
+
+    WHY THIS IS A FUNCTION AND NOT INLINE IN ``build_qi.build_metrics``
+    ------------------------------------------------------------------
+    It has two callers and they must never disagree.
+
+    ``build_qi.py`` calls it over ALL governed evidence, which is the right
+    answer to "what does MIW know?".
+
+    ``qi_projection.py`` calls it a SECOND time over the printed-evidence-only
+    subset, which is the right answer to "what may MIW say to a candidate?".
+    The 2010-2020 band is ``SECONDARY_CLAIMED`` (see ``DATE_CERTAINTY``), so a
+    label that survives only because of a claimed date is a historical
+    assertion MIW cannot support in public. QIF-EM-0220 is the worked example:
+    2010-04 claimed plus 2026-08 printed earns RE_EMERGING over all evidence
+    and earns nothing over printed evidence alone.
+
+    Re-deriving these rules in the projection layer would be a second label
+    engine, and the two would drift the first time a threshold moved. There is
+    one engine and both callers pass it a different population.
+    """
+    occ = list(occurrence_sittings)
+    sits = sorted(set(occ))
+    years = sorted({int(s[:4]) for s in sits})
+    counts = window_counts(occ)
+    gaps = [months_between(sits[i], sits[i + 1]) for i in range(len(sits) - 1)]
+    span = months_between(sits[0], sits[-1]) if sits else 0
+
+    labels = []
+    if len(occ) < MATERIALLY_RECURRENT_MIN_OCCURRENCES:
+        labels.append('INSUFFICIENT_HISTORY')
+    else:
+        if len(years) >= 4 and span >= 60:
+            labels.append('PERSISTENT')
+        if counts['RECENT_3Y'] >= 1:
+            labels.append('RECENTLY_ACTIVE')
+        else:
+            labels.append('DORMANT')
+        if all(s <= '2020-12' for s in sits):
+            labels.append('HISTORICAL_ONLY')
+        if sits[0] >= RECURRENCE_WINDOWS['RECENT_5Y'][0]:
+            labels.append('NEW_EMERGING')
+        # RISING: recent rate at least double the earlier rate.
+        recent_years = 3.0
+        earlier_span = max(months_between(QI_LOWER_BOUNDARY,
+                                          RECURRENCE_WINDOWS['RECENT_3Y'][0]) / 12.0, 1.0)
+        earlier = len(occ) - counts['RECENT_3Y']
+        if counts['RECENT_3Y'] >= 2 and (counts['RECENT_3Y'] / recent_years) >= 2 * (earlier / earlier_span):
+            labels.append('RISING')
+        # RE_EMERGING is about the SHAPE of the return, so it keys on the
+        # LATEST gap only. Any long-lived family accumulates a long gap
+        # somewhere; that is not re-emergence, it is history. Re-emergence is
+        # "absent for a long time, then set again" -- which means the gap
+        # immediately before the most recent sitting is the meaningful one.
+        if gaps and gaps[-1] >= DORMANCY_GAP_MONTHS:
+            labels.append('RE_EMERGING')
+    return sorted(set(labels))
+
+
 SCHEMA_VERSION = '1.0'

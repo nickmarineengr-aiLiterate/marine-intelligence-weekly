@@ -1790,7 +1790,7 @@ if (F.recurrence) {
 // Asserted structurally rather than by fixture: the label of any given question
 // changes the moment another year is transcribed, which is the whole point of
 // computing it from the calendar.
-const STATUS_LABELS = ['once in this set', 'first in set',
+const STATUS_LABELS = ["once in miw's transcribed set", 'first in set',
                        'repeated - same wording', 'repeated - reworded'];
 const missing = cards.filter(c =>
   !STATUS_LABELS.some(l => c.search.indexOf(l) !== -1)).map(c => c.qid);
