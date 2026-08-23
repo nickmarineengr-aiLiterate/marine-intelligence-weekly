@@ -174,6 +174,23 @@ def examiner_signal():
     return {k: sorted(v) for k, v in out.items()}
 
 
+def study_qi_index():
+    """question_id -> the unified study-QI row, read from the governed
+    projection. NOT re-derived here: this file classifies nothing.
+
+    It sits BESIDE `family_index()` rather than replacing it. That one supplies
+    the modern 2021-2026 repeat tag the workbook has always printed; this one
+    supplies the 2010-2026 longitudinal context. Printing only the second would
+    silently drop the precise modern tag the workbook already carries.
+    """
+    path = os.path.join(ROOT, 'docs', 'study', 'study_qi.json')
+    if not os.path.exists(path):
+        return {}
+    with open(path, encoding='utf-8') as fh:
+        doc = json.load(fh)
+    return {r['question_id']: r for r in doc['questions']}
+
+
 def family_index():
     """member question_id -> its recurrence family, plus the temporal watchlist.
 
@@ -336,7 +353,19 @@ def build_model():
             'distinct_examiners': d['examiner_intelligence']['distinct_examiners'],
             'current_written_questions': d['written']['questions'],
             'current_written_papers': len(papers_by_topic.get(did, ())),
-            'current_written_recurrence_families': d['written_question_intelligence']['recurring_families'],
+            # PUBLIC-SAFE, and the field name is the contract: "current" means
+            # the solved 2023-2026 corpus, which is the same population as the
+            # `current_written_questions` and `current_written_papers` beside
+            # it. The longitudinal count is a DIFFERENT population -- it rests
+            # partly on secondary-claimed 2010-2020 evidence -- and printing it
+            # under this name would put two denominators under one heading on a
+            # public page. It travels as its own field below and is not in
+            # PUBLIC_TOPIC_FIELDS.
+            'current_written_recurrence_families':
+                d['written_question_intelligence']['solved_corpus_short_title_families'],
+            # INTERNAL: the governed 2010-2026 recurrence weight input.
+            'longitudinal_recurrence_families':
+                d['written_question_intelligence']['recurring_families'],
             'official_syllabus_items': len(d['official_syllabus_nodes']),
             'official_supporting_items': len(d['official_supporting_nodes']),
             'official_node_ids': ', '.join(d['official_syllabus_nodes']) or '—',
@@ -456,11 +485,13 @@ def build_model():
     # exists but is keyed on a PRODUCT taxonomy (dom-*) with no governed join
     # to the D01-D10 spine, and inventing that join here would be exactly the
     # second classifier this file refuses to become.
+    sqi = study_qi_index()
     written_rows = []
     for qid, rec in sorted(store.items()):
         if rec['content_type'] != 'WRITTEN':
             continue
         fam = fams.get(qid)
+        q = sqi.get(qid) or {}
         lk = LINKS.written_question(qid)
         written_rows.append({
             'question_id': qid,
@@ -470,6 +501,19 @@ def build_model():
             'recurrence': ('%s \u00d7%d' % (fam['class'], fam['size'])) if fam else '\u2014',
             'last_seen': (fam or {}).get('last_seen') or '\u2014',
             'on_temporal_watch': 'YES' if fam and fam['family_id'] in watch else 'no',
+            # --- longitudinal context, from the unified adapter ------------
+            # Added BESIDE the modern columns above, never in place of them.
+            'modern_repeat_tag': q.get('modern_recurrence_class') or '\u2014',
+            'related_qp_ids': ', '.join(q.get('modern_related_question_ids') or ()) or '\u2014',
+            'qi_family_id': ', '.join(q.get('canonical_family_ids') or ()) or '\u2014',
+            'count_3y': q.get('count_3y', 0),
+            'count_5y': q.get('count_5y', 0),
+            'count_10y': q.get('count_10y', 0),
+            'count_full': q.get('count_full_horizon', 0),
+            'recurrence_labels': ', '.join(q.get('recurrence_labels') or ()) or '\u2014',
+            'currentness': ', '.join(q.get('currentness_status') or ()) or '\u2014',
+            'answer_readiness': ', '.join(q.get('readiness') or ()) or '\u2014',
+            'phase2_action': ', '.join(q.get('phase2_action') or ()) or '\u2014',
             'link': lk,
         })
 
@@ -859,16 +903,29 @@ def render_workbook(model, out_path):
     # with no governed join to the D01-D10 spine. Rather than invent that
     # join, the workbook lists the questions themselves: study_mappings
     # already assigns each one a topic, and the anchor convention is proved.
+    # The modern block (Recurrence 6-yr / Last Seen / Temporal Watch / Modern
+    # Repeat / Related QPs) and the longitudinal block (QI Family / 3Y / 5Y /
+    # 10Y / Full / Labels / Currentness / Readiness / Phase-2) sit side by side
+    # on purpose. They answer different questions and neither replaces the
+    # other: the modern block says WHICH questions relate, the longitudinal
+    # block says how far back the concept goes and whether it is safe to study.
     ws = sheet('WRITTEN BY TOPIC',
           ['Topic ID', 'Question ID', 'Paper', 'Recurrence (6-yr)',
-           'Last Seen', 'Temporal Watch', 'Question', 'Open Answer'],
+           'Last Seen', 'Temporal Watch', 'Modern Repeat', 'Related QPs',
+           'QI Family', '3Y', '5Y', '10Y', 'Full', 'Recurrence Labels',
+           'Currentness', 'Answer Readiness', 'Phase-2 Action',
+           'Question', 'Open Answer'],
           [[r_['topic_id'], r_['question_id'], r_['paper_id'], r_['recurrence'],
-            r_['last_seen'], r_['on_temporal_watch'], r_['question'], None]
+            r_['last_seen'], r_['on_temporal_watch'], r_['modern_repeat_tag'],
+            r_['related_qp_ids'], r_['qi_family_id'], r_['count_3y'],
+            r_['count_5y'], r_['count_10y'], r_['count_full'],
+            r_['recurrence_labels'], r_['currentness'], r_['answer_readiness'],
+            r_['phase2_action'], r_['question'], None]
            for r_ in written_sorted],
-          [9, 14, 9, 18, 15, 14, 96, 14],
-          wrap_cols={7})
+          [9, 14, 9, 18, 15, 14, 18, 26, 16, 6, 6, 6, 6, 26, 26, 24, 30, 96, 14],
+          wrap_cols={18})
     for i, r_ in enumerate(written_sorted, start=2):
-        put_link(ws, i, 8, r_['link'], text='OPEN \u25b8')
+        put_link(ws, i, 19, r_['link'], text='OPEN \u25b8')
 
     # --- 3. OFFICIAL SYLLABUS -- the DGMA text, quoted --------------------
     sheet('OFFICIAL SYLLABUS',

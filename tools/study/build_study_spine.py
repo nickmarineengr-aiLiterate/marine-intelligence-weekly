@@ -28,6 +28,7 @@ sys.path.insert(0, os.path.join(ROOT, 'tools', 'pastpapers'))
 
 import study_spine as SP
 import mapping_engine as ME
+import study_qi_adapter as SQI
 import topic_taxonomy as TT
 
 SPECS_GLOB = os.path.join(ROOT, 'meoclass1', 'pastpapers', 'specs', '*.json')
@@ -114,11 +115,30 @@ def main():
         rel_by_q[r['question_id']] += 1
     oral_dom = {r['id']: r['domain_id'] for r in oral}
 
-    # ---- written recurrence families (exact short_title) ------------------
+    # ---- recurrence: ONE source for the weight, one for the public label --
+    #
+    # These are two different jobs and conflating them is how a public page
+    # ends up quoting secondary-source occurrence counts.
+    #
+    #   recurring_families  -> the WEIGHT. Read from the unified study-QI
+    #       adapter, which joins the existing modern question-level QI to the
+    #       canonical 2010-2026 family layer. This is the only recurrence
+    #       quantity the priority model may see, and the adapter guarantees a
+    #       family is counted for exactly ONE topic (its bearer's), so a
+    #       historical variant cannot multiply a score.
+    #
+    #   largest_families    -> the PUBLIC LABEL. Still grouped by MIW
+    #       short_title over the SOLVED corpus only. These strings are printed
+    #       on SQ/study-roadmap.html. QI family labels are raw question stems
+    #       carrying secondary-claimed dates, so they may never take this slot.
+    #
+    # Do not "tidy" this into one field. The comment is the reason.
     fam = collections.defaultdict(list)
     for r in written:
         fam[r['short_title']].append(r)
     recurring = {k: v for k, v in fam.items() if len(v) > 1}
+
+    adapter_recurrence = SQI.roadmap_recurrence_by_topic()
 
     # ---- per-domain aggregation -------------------------------------------
     domains = []
@@ -165,9 +185,16 @@ def main():
                 'examiners': examiners,
             },
             'written_question_intelligence': {
-                'recurring_families': len(w_fam),
+                'recurring_families': adapter_recurrence[did],
+                'recurring_families_source': SQI.RECURRENCE_WEIGHT_SOURCE,
+                'recurring_families_via': 'tools/study/study_qi_adapter.py',
                 'largest_families': sorted(w_fam.items(),
                                            key=lambda kv: (-kv[1], kv[0]))[:8],
+                'largest_families_source': 'MIW_SHORT_TITLE_SOLVED_CORPUS',
+                'largest_families_note': (
+                    'Public display labels only. Not the weight input, and not '
+                    'the same population as recurring_families.'),
+                'solved_corpus_short_title_families': len(w_fam),
             },
         })
 
