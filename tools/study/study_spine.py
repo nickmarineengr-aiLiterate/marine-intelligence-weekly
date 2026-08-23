@@ -190,6 +190,29 @@ ORAL_FILE_DOMAIN = {
 }
 
 # Files deliberately left to per-question adjudication (tier MEDIUM/UNRESOLVED).
+#
+# DO NOT ADD A FILE HERE JUST BECAUSE ITS TITLE NAMES TWO SUBJECTS. Demotion
+# to this list replaces a file-title mapping with a QUESTION_CUES mapping, and
+# on 2026-08-23 that trade was measured on the second contradiction tranche
+# before any file was moved. Simulated cue-only outcomes:
+#
+#   QB4_E ("ISM, MLC, SOLAS, PSC & Class", D03, 15 questions)
+#       3 questions match NO cue -> ACCIDENTALLY_UNMAPPED, gate fails
+#       (SOLAS amendments, ship age norms, cyber security management)
+#   QB6_D (D09, 5 questions)
+#       1 unmapped (SCR working principle); azimuth propeller and pump
+#       cavitation both pulled to D10 on the bare word "propeller"
+#   QB2_A ("Cargo & Ship Types", D07, 30 questions)
+#       7 unmapped, and IMDG, IMSBC and the CSC container convention all
+#       pulled to D01 on "certificat"/"survey"
+#
+# So for these files the TITLE is the stronger classifier and the cue table is
+# the weak instrument -- the reverse of QB3_A, whose h1 genuinely named three
+# domains and whose demotion was correct. All five tranche-2 files were
+# therefore kept SINGLE_DOMAIN and their misfits moved one at a time through
+# adjudications.json. The rule that falls out: demote a file only when the
+# file-level topic has stopped being semantically representative of the file,
+# never merely because some of its questions are off-topic.
 ORAL_MIXED_FILES = [
     'QB1_C.html', 'QB1_D.html', 'QB1_E.html', 'QB1_H.html', 'QB1_I.html',
     'QB1_J.html', 'QB1_K.html', 'QB1_supplementary.html',
@@ -206,6 +229,19 @@ ORAL_MIXED_FILES = [
 # First match wins; a question matching nothing goes to the review queue.
 # Tier MEDIUM: the cue is a real domain marker, but it is a text cue and not a
 # governed field, so it is reviewable rather than authoritative.
+#
+# KNOWN BLIND SPOTS, recorded 2026-08-23 and deliberately NOT patched -- a cue
+# added to shrink the review queue is a taxonomy change smuggled in as a regex:
+#
+#   * There is NO D06 cue at all, so an Indian Maritime Legislation question
+#     can only ever be proposed as D01 (they share "registrat", "certificat").
+#     QB4_E#q13 was flagged D01 and hand-reassigned to D06.
+#   * The D10 cue misses "watertight"/"weathertight", bare "GT"/"NT" tonnage
+#     and Goal-Based Standards, so QB2_A#q19, #q21 and #q22 raise no
+#     contradiction at all despite being naval-architecture questions in a
+#     cargo file. Under-detection, not misdetection: the inventory is a floor.
+#   * D07 precedes D10, so a stability question that says "cargo" (QB2_A#q20,
+#     parametric rolling) resolves to D07 silently.
 # --------------------------------------------------------------------------- #
 QUESTION_CUES = [
     ('D01', r'\bsurvey|certificat|class(?:ification)?\b|\bIACS\b|\bCSM\b|\bCSR\b|'
