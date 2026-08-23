@@ -160,12 +160,45 @@ def run_checks(B):
               '%s: declares a family that does not exist in the QI queue: %s'
               % (tid, sorted(set(declared) - set(queue))))
 
+        # A tranche may declare that it deliberately weighted itself toward
+        # new-answer families, and if it does, the weighting is checked. This
+        # exists because the cheap way to make a tranche look productive is to
+        # fill it with EXISTING_CURRENT_ANSWER_VERIFY families, which convert
+        # readily, and quietly drop the NEW_MODERN_ANSWER_REQUIRED ones, which
+        # are where the product is actually missing. The declaration is
+        # honoured against the ACTION PINNED AT SELECTION, so a family cannot
+        # be counted toward the bias by being reclassified afterwards.
+        bias = tr.get('new_answer_bias')
+        if bias:
+            want = min(bias.get('minimum', 0),
+                       bias.get('qualifying_pool_at_selection', 0))
+            got = sum(1 for f in declared
+                      if ((by_id.get(f) or {}).get('pinned_at_selection') or {})
+                      .get('phase2_action') == 'NEW_MODERN_ANSWER_REQUIRED')
+            check('R-P2-NEW-ANSWER-BIAS', got >= want,
+                  '%s declares a minimum of %d new-answer families and the '
+                  'queue offered %d, but only %d were selected. A tranche may '
+                  'not quietly retreat to the families that convert easily.'
+                  % (tid, bias.get('minimum', 0),
+                     bias.get('qualifying_pool_at_selection', 0), got))
+
     # ------------------------------------------------------------------ B
     # Every family finishes in exactly one governed final state. There is no
     # generic REVIEWED, and there is no blank.
     bad_state = [r['family_id'] for r in fams if r.get('final_state') not in ALL_FINAL]
     check('R-P2-FINAL-STATE', not bad_state,
           'family(ies) with a missing or unrecognised final_state: %s' % bad_state)
+
+    # A hold is FINISHED WORK, not backlog -- the same rule the mapping review
+    # queue runs on. What makes it finished is that somebody wrote down what
+    # stopped it. A blocked state with no stated reason is indistinguishable
+    # from a family nobody got to, and the next tranche cannot tell whether it
+    # is looking at a decision or at a gap in the record.
+    no_reason = [r['family_id'] for r in fams
+                 if r['final_state'] in BLOCKED and not r.get('hold_reason')]
+    check('R-P2-HOLD-REASON', not no_reason,
+          'held family(ies) carrying no hold_reason. A hold without a reason '
+          'is backlog wearing a hold\'s clothes: %s' % no_reason)
 
     # ------------------------------------------------------------------ C/D/E
     # A safe state must be EARNED. Three independent legs, checked separately
@@ -269,6 +302,33 @@ def run_checks(B):
     check('R-P2-ANSWER-SCOPE', not over_reach,
           'a Phase-2 resolution blessed a historical variant it never '
           'verified: %s' % over_reach)
+
+    # ...and the same rule in the other direction, which tranche 002 found
+    # missing. R-P2-ANSWER-SCOPE stops a RESOLUTION spreading. Nothing stopped a
+    # HOLD from failing to spread, and that is the more dangerous of the two: a
+    # held family means somebody looked and could not clear it, so a member
+    # carrying a SOLVED answer must not go on reading "currentness check
+    # pending", which says nobody has looked yet. QIF-EM-0058 is the case --
+    # its answers cite Merchant Shipping Act 1958 sections repealed eight
+    # months after the sitting.
+    #
+    # Members with no answer are exempt: NEW_ANSWER_REQUIRED already says more
+    # than a currentness hold does, and demoting it would imply an answer
+    # exists.
+    soft = []
+    for r in fams:
+        if r['final_state'] not in BLOCKED:
+            continue
+        for member in (projected.get(r['family_id']) or {}).get('modern_members') or []:
+            if member not in real_qids:
+                continue
+            states = (questions.get(member) or {}).get('readiness') or []
+            if states and 'CURRENTNESS_HOLD' not in states:
+                soft.append('%s: %s is held but reads %s'
+                            % (r['family_id'], member, states))
+    check('R-P2-HOLD-REACHES-ANSWERS', not soft,
+          'a Phase-2 HOLD did not reach a solved answer inside the held '
+          'family, so a finding is showing as an absence of one: %s' % soft)
 
     # ------------------------------------------------------------------ future
     # ADOPTED IS NOT IN FORCE. If a present-day position names a year later

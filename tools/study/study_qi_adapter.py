@@ -197,7 +197,20 @@ PHASE2_SAFE_STATES = {
 
 #: Phase-2 final states that are explicitly still blocked. A hold is finished
 #: work, not backlog -- same rule as the mapping review queue.
-PHASE2_BLOCKED_STATES = {'HOLD_FOR_AUTHORITY', 'HOLD_FAMILY_RECONCILIATION'}
+#:
+#: HOLD_NO_CURRENT_ANSWER_OWNER was added by tranche 002 and it is the state
+#: the other two could not express. The first two say the RESEARCH did not
+#: close: authority could not be established, or a family relationship has to
+#: be settled first. This one says the research closed perfectly well and MIW
+#: still has nothing a candidate can be sent to -- the present-day core is
+#: understood, and no question in the solved corpus answers it. Filing that as
+#: HOLD_FOR_AUTHORITY would blame the sources for a gap in the product, and
+#: the gap would then be invisible to anyone reading the store for what to
+#: build next.
+PHASE2_BLOCKED_STATES = {
+    'HOLD_FOR_AUTHORITY', 'HOLD_FAMILY_RECONCILIATION',
+    'HOLD_NO_CURRENT_ANSWER_OWNER',
+}
 
 #: Currentness classes that can never read as ready, whatever the action says.
 UNSAFE_CURRENTNESS = {
@@ -746,7 +759,7 @@ def project_families(modern, canonical, mappings):
     return rows
 
 
-def question_readiness(fam_row, nid):
+def question_readiness(fam_row, nid, has_answer=True):
     """The readiness ONE question inherits from ONE family.
 
     A family can be resolved while most of its members stay unsafe to study.
@@ -765,6 +778,29 @@ def question_readiness(fam_row, nid):
         return fam_row['readiness']
     if p2.get('canonical_current_answer') == nid:
         return fam_row['readiness']
+
+    # The fallback above is asymmetric on purpose, and tranche 002 found the
+    # side that had not been thought through.
+    #
+    # Falling back to TRIAGE is right when the family was RESOLVED: the grant
+    # must not spread, so every other member keeps the verdict it already had.
+    # It is wrong when the family was HELD, because then the triage verdict is
+    # the weaker statement and falling back to it SOFTENS a finding. QIF-EM-0058
+    # is the worked case: its answer cites Merchant Shipping Act 1958 sections
+    # that were repealed eight months after the sitting, Phase 2 established
+    # that and held the family -- and the member still read "Currentness check
+    # pending", which says nobody has looked. Somebody had looked. That is the
+    # weaker claim beating the stronger one, which is the failure direction this
+    # whole layer is built to prevent.
+    #
+    # A held family therefore pushes its block down to any member that HAS an
+    # answer. A member with no answer keeps NEW_ANSWER_REQUIRED, which is not a
+    # softening: "MIW has no current-framework answer" is already the more
+    # precise statement for a wording-only sitting, and demoting it to "answer
+    # under currentness review" would tell a candidate that an answer exists.
+    if p2.get('final_state') in PHASE2_BLOCKED_STATES and has_answer:
+        return fam_row['readiness']
+
     return fam_row.get('triage_readiness') or fam_row['readiness']
 
 
@@ -809,7 +845,8 @@ def project_questions(modern, canonical, mappings, fam_rows):
             'recurrence_labels': sorted({l for r in fr for l in r['labels']}),
             'family_unit': sorted({r['unit'] for r in fr if r.get('unit')}),
             'currentness_status': sorted({r['currentness_status'] for r in fr}),
-            'readiness': sorted({question_readiness(r, nid) for r in fr}),
+            'readiness': sorted({question_readiness(r, nid, nid in modern['authored'])
+                                 for r in fr}),
             'phase2_action': sorted({r['phase2_action'] for r in fr if r['phase2_action']}),
             # ---- weighting (rule 4) -----------------------------------------
             'bears_family_weight_for': bearer_of,

@@ -37,6 +37,7 @@ WATCHED = [
     os.path.join(DOC, 'qi', 'qi_phase2_action_queue.json'),
     os.path.join(REPO, 'tools', 'study', 'study_qi_holds.json'),
     os.path.join(REPO, 'meoclass1', 'pastpapers', 'specs', 'QP2602.json'),
+    os.path.join(REPO, 'meoclass1', 'pastpapers', 'specs', 'QP2606.json'),
 ]
 
 VERIFIED = 'QIF-EM-0082'      # CURRENT_AND_VERIFIED
@@ -168,6 +169,55 @@ def mut_13_resolution_blesses_a_historical_variant(B):
     return 'R-P2-ANSWER-SCOPE'
 
 
+def mut_14_tranche_retreats_from_new_answer_families(B):
+    """The tranche declares it will take six families that have NO answer, and
+    then takes the easy ones instead.
+
+    This is the most comfortable way for this programme to fail. Verify
+    families convert: an answer already exists, the work is a currency check,
+    and the readiness count goes up. New-answer families do not convert, and
+    every one of the 37 ranks below 45, so a rank-ordered queue will defer them
+    for ever while the topline improves. The declaration exists so the retreat
+    is a build failure rather than a quiet quarter."""
+    tr = B['store']['tranches']['QI_PHASE2_TRANCHE_002']
+    for fid in tr['family_ids']:
+        pin = rec(B, fid).get('pinned_at_selection') or {}
+        if pin.get('phase2_action') == 'NEW_MODERN_ANSWER_REQUIRED':
+            pin['phase2_action'] = 'EXISTING_CURRENT_ANSWER_VERIFY'
+    return 'R-P2-NEW-ANSWER-BIAS'
+
+
+def mut_15_hold_recorded_without_a_reason(B):
+    """A family is held and nobody says why.
+
+    Six families in tranche 002 are held because MIW has no answer to send a
+    candidate to -- which is a finding, and the most valuable one the tranche
+    produced. Strip the reason and it becomes indistinguishable from a family
+    nobody reached, so the next tranche re-does the research to rediscover a
+    decision that was already made."""
+    for r in B['fams']:
+        if r['final_state'] in V.BLOCKED:
+            r.pop('hold_reason', None)
+    return 'R-P2-HOLD-REASON'
+
+
+def mut_16_hold_softened_on_a_solved_answer(B):
+    """A held family's solved answer quietly reverts to the triage verdict.
+
+    The inverse of mutation 13, and the one that was actually live until
+    tranche 002. QP2507-Q9 answers a July 2025 sitting out of the Merchant
+    Shipping Act 1958, which was repealed on 15 March 2026; Phase 2 established
+    that and held the family. If the member falls back to "currentness check
+    pending", a candidate is told nobody has looked at an answer somebody
+    looked at and rejected."""
+    fid = 'QIF-EM-0058'
+    for member in B['projected'][fid]['modern_members']:
+        q = B['questions'].get(member)
+        if q and member in B['real_qids']:
+            q['readiness'] = ['VERIFY_CURRENT_ANSWER']
+    return 'R-P2-HOLD-REACHES-ANSWERS'
+
+
 MUTATIONS = [
     mut_01_unverified_family_reads_ready,
     mut_02_authority_removed,
@@ -182,6 +232,9 @@ MUTATIONS = [
     mut_11_modernisation_edits_a_past_paper,
     mut_12_unrelated_conflict_hold_resolved,
     mut_13_resolution_blesses_a_historical_variant,
+    mut_14_tranche_retreats_from_new_answer_families,
+    mut_15_hold_recorded_without_a_reason,
+    mut_16_hold_softened_on_a_solved_answer,
 ]
 
 
