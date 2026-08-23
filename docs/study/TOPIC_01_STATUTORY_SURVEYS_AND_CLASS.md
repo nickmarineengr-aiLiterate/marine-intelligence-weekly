@@ -3,14 +3,16 @@
 **Study pack for Nixon. Built 2026-08-22, revised against the official
 syllabus the same day.**
 **A/B/C study priorities re-derived 2026-08-23 against the current corpus.**
+**QB1 review bucket adjudicated 2026-08-23 — D01 now carries no unadjudicated
+oral mapping at all.**
 
-Evidence: 72 mapped Oral questions, 96 Written questions across 39 of 40
+Evidence: 69 mapped Oral questions, 96 Written questions across 39 of 40
 solved papers, 64 Oral questions carrying examiner evidence from all 6 named
-examiners, 93 examiner relationship occurrences, 16 recurring written
-families. The Oral figures rose from 53 mapped and 46 examiner-evidenced on
-2026-08-23 when the QB3_A / QB4_A / QB4_G file-title contradiction tranche was
-adjudicated; no question text or answer changed then, and none changed in this
-re-derivation either.
+examiners, 95 examiner relationship occurrences, 16 recurring written
+families. The Oral figure moved 53 -> 72 -> 80 -> 69 across three governance
+passes on 2026-08-23: two file-title contradiction tranches added questions,
+and the QB1 review-bucket adjudication then moved 11 out of D01 to the domains
+that actually own them. **No question text or answer changed in any of them.**
 
 > **Now grounded in the official syllabus.** DGMA EAC Branch Circular **No.49
 > of 2026** (15-Aug-2026), **Annexure III** — *Syllabus for MEO Class I
@@ -45,9 +47,9 @@ Not because it "sounds foundational". Because the evidence converges:
 | Written marks | **1536** | **1st** |
 | Domains that depend on it | **8 of 9** | **1st** |
 | Prerequisites of its own | **none** | **1st** |
-| Oral questions (post-adjudication) | **72** | 4th |
+| Oral questions (post-adjudication) | **69** | 4th |
 | Oral questions with examiner evidence | **64** | 4th |
-| Composite priority score | **0.655** | 2nd |
+| Composite priority score | **0.657** | 2nd |
 
 **The decision was recomputed against the final syllabus, not inherited:
 KEEP D01 as Topic 01.**
@@ -58,8 +60,11 @@ circular was ingested and D01 owns six PRIMARY official items to D02's two —
 a signal corpus counts alone were blind to. D03 (Human Element, 0.805) still
 scores highest.
 
-*Figures refreshed 2026-08-23 after the taxonomy tranche: oral 53 → 72,
-examiner-evidenced 46 → 64, composite 0.590 → 0.655. D01's oral **rank** is
+*Figures refreshed 2026-08-23 after the QB1 review-bucket adjudication:
+oral 53 → 72 → 80 → 69, examiner-evidenced 46 → 64, composite 0.590 → 0.657.
+Losing 11 oral questions did not move the decision, because D01 leads on
+written load, dependants and official scope, none of which the QB1
+adjudication touched. D01's oral **rank** is
 4th, behind D03, D02 and D07 on raw volume — which is exactly why raw oral
 count is the weakest of the seven signals in this table and why the decision
 below turns on dependency instead.*
@@ -140,7 +145,7 @@ working days, 240 contact hours). Quoted, never paraphrased.
 ## MENTAL SKELETON
 
 Nine branches. Own these and you can construct an answer to most of the 168
-mapped questions (72 Oral + 96 Written).
+mapped questions (69 Oral + 96 Written).
 
 **Revalidated 2026-08-23 against the corrected corpus and left unchanged.**
 Every one of the 19 questions the taxonomy tranche moved into D01 lands inside
@@ -179,12 +184,20 @@ memorable.
 
 ## A-PRIORITY ORAL QUESTIONS (18)
 
-Re-derived 2026-08-23 against the **current governed 80-question D01 corpus**,
-replacing the cohort that was derived from the pre-tranche 53. The universe
-grew 72 -> 80 later the same day when the second contradiction tranche
-(QB4_E, QB4_C, QB4_H, QB2_A, QB6_D) moved eight settled questions into D01;
-those eight were absorbed into B and C, and **the A set was deliberately left
-unchanged** so the study sessions did not churn.
+Re-derived 2026-08-23 against the **current governed 69-question D01 corpus**,
+replacing the cohort that was derived from the pre-tranche 53.
+
+**The A set has now survived three governance passes unchanged.** The universe
+went 72 -> 80 when the second contradiction tranche (QB4_E, QB4_C, QB4_H,
+QB2_A, QB6_D) moved eight settled questions in, and 80 -> 69 when the QB1
+review-bucket adjudication settled the last 31 unadjudicated mappings — 20
+affirmed to D01, 11 reassigned out. Every one of the 20 newly settled
+questions was tested against this table and none was promoted: they land in
+branches 5-8, which already carry between one and five A entries each, and
+most are second angles on an A question rather than new ground (three ESP
+questions, two CSM questions, a second class-quarterly-listing question). A is
+a compression set of 18; adding near-duplicates would make it a longer list,
+not a better one.
 
 **A-priority means: know this cold.** It is a *compression* set, not a
 completeness set. Where two questions test the same concept only the better-
@@ -243,7 +256,7 @@ entries are those two branches being filled for the first time. PSC is the
 single strongest written theme in this domain (8 occurrences) and until today
 it had zero oral representation in the study plan.
 
-### B-PRIORITY ORAL QUESTIONS (18)
+### B-PRIORITY ORAL QUESTIONS (26)
 
 **Second pass.** Settled, worth real study time, but each either restates an A
 question from a second angle or narrows to one instrument.
@@ -268,8 +281,16 @@ question from a second angle or narrows to one instrument.
 | `QB4_C#q5` | Suspension vs withdrawal of class | Second angle on the A Condition-of-Class pair, and the only place *withdrawal* is drawn |
 | `QB4_C#q4` | CSR and E-CSR — contents, and the IACS Common Structural Rules trap | One instrument under the A certificate frame; the name collision is the examinable part |
 | `QB4_E#q8` | PSC appeal process, the codes involved, and the process after detention | Restates the A detention question from the appeal side; its action-code limb is drilled at C |
+| `QB1_F#q13` | Audit, survey, inspection and statutory survey — definitions and differences | **New at B, 2026-08-23.** The vocabulary frame the whole domain is argued in; no A question defines these four terms against each other |
+| `QB1_F#q7` | Documents related to survey, for the Chief Engineer | **New at B.** The CE's actual survey document set — certificates, class listing, previous survey reports, PMS records for CMS credit — under the A certificate frame |
+| `QB1_D#q3` | Lifting appliance survey — how it is conducted and what is required | **New at B.** A distinct statutory survey (SOLAS II-1/3-13, MSC.1/Circ.1663, proof load and the statutory register) that no A question reaches |
+| `QB1_G#q31` | In-water survey — details and the conditions class requires | **New at B.** The alternative to the A drydock bottom survey, with its own class notation. Also official item N7, where it is the corpus's only oral |
+| `QB1_H#q1` | IACS PR 17 — what it is and when it applies | **New at B.** One Procedural Requirement beneath the A UR/PR/UI frame, and the only question drawing the survey-deficiency-to-ISM bridge |
+| `QB1_I#q4` | Anniversary date of a certificate — how it is defined and used | **New at B.** The HSSC survey-window mechanic that every A survey question assumes and none defines |
+| `QB1_K#q1` | Qualifications needed to become a Class auditor | **New at B.** RO Code Part 2 competence and authorisation, beneath the A flag-vs-RO frame |
+| `QB1_C#q6` | Hull hole found — CE actions and Condition of Class | **New at B.** Puts the A Condition-of-Class pair into a damage scenario; the immediate-action limb is what earns the slot |
 
-### C-PRIORITY ORAL QUESTIONS (13)
+### C-PRIORITY ORAL QUESTIONS (25)
 
 **Lower immediate return / extension.** Settled, but either a straight
 duplicate of an A question or detail inside a frame an A question already
@@ -290,62 +311,102 @@ gives you.
 | `QB4_E#q12` | Members of IACS — list all member societies | Pure recall beneath the B second-class-society question |
 | `QB4_C#q11` | PSC deficiency action codes | One fact set inside the A PSC frame |
 | `QB2_A#q15` | ICOF — full name, issuer, contents, validity and survey cycle | Detail inside the A certificate frame; reaches D01 through certification only |
+| `QB1_F#q16` | "explain ESP.." | **New at C, 2026-08-23.** Duplicate of the A ESP question. Terse candidate wording, verified against the source HTML — not a truncated index entry |
+| `QB1_G#q30` | "Esp complete" | **New at C.** Third question on the same ESP ground. Also verbatim candidate wording |
+| `QB1_I#q1` | What the ESP Code is, in full | **New at C.** Pure recall of the title and scope beneath the A ESP question |
+| `QB1_F#q14` | Types of survey under HSSC, and what CSM is | **New at C.** Duplicate of the A class-survey-system and CMS-scope questions |
+| `QB1_F#q15` | Items the CE cannot credit in a CSM survey | **New at C.** The exclusion limb of the A CMS-scope question. Sharp as a trap, but one fact set |
+| `QB1_G#q40` | CSM — concept, when it applies, what is assessed | **New at C.** Third question on the same CMS ground |
+| `QB1_F#q8` | Hull survey | **New at C.** Duplicate of the B hull-survey umbrella |
+| `QB1_D#q4` | Load Line survey — which documents are required | **New at C.** The document limb under the B Load Line preparation question |
+| `QB1_E#q1` | SEQ survey — documents required and how to prepare | **New at C.** Duplicate of the B SEQ / certificate-supplement question |
+| `QB1_G#q34` | Certificate of Fitness — details and contents | **New at C.** Same certificate as the ICOF question directly above |
+| `QB1_G#q36` | Class quarterly listing — contents, significance, CE actions | **New at C.** Duplicate of the B class-quarterly-listing question |
+| `QB1_I#q6` | IACS — what its functions are | **New at C.** Sits between the B second-class-society question and the C members list; adds the UR/UI/quality-certification limb only |
 
-### REVIEW — MAPPED, STUDIABLE, NOT YET PRIORITISED (31)
+### REVIEW — MAPPED, STUDIABLE, NOT YET PRIORITISED (0)
 
-These are **not** low-value questions. They are the questions whose mapping is
-`REVIEW_PENDING`: cue-derived from the mixed QB1 files, never individually
-adjudicated. They carry no priority letter because a letter is a claim about
-settled evidence and that claim has not been earned. **They are safe to
-study** — the doubt is procedural, not substantive.
+**Empty as of 2026-08-23.** Every mapped D01 oral question now carries a
+priority letter, because every one of them has been individually adjudicated
+by a human. There is no longer any D01 oral whose topic is a machine guess.
 
-The first twelve are the ones the study sessions already draw on, in the order
-worth taking them:
+This bucket existed because the mixed-title QB1 files were never file-title
+mapped, so their questions were classified by text cue alone at MEDIUM
+confidence. It held 31 questions and survived two contradiction tranches
+untouched, exactly as this pack predicted it would: a question that was never
+given a file topic can never *contradict* one, so the detector had nothing to
+surface and a dedicated adjudication job was the only thing that could clear
+it.
 
-`QB1_F#q13`, `QB1_F#q15`, `QB1_F#q14`, `QB1_G#q36`, `QB1_G#q31`, `QB1_D#q4`,
-`QB1_D#q3`, `QB1_E#q1`, `QB1_F#q7`, `QB1_F#q8`, `QB1_G#q40`,
-`QB1_supplementary#q1`.
+**How this bucket empties.** Only by adjudication — and on 2026-08-23 it did.
+The dedicated QB1 review-bucket job ran and read all 31 questions in full — stem, tags and answer body —
+against the source HTML rather than the index. **20 were affirmed to D01 and
+11 were reassigned out:**
 
-The remaining nineteen: `QB1_H#q1`, `QB1_H#q2`, `QB1_I#q1`, `QB1_I#q4`,
-`QB1_I#q6`, `QB1_C#q6`, `QB1_G#q30`, `QB1_G#q34`, `QB1_J#q1`, `QB1_J#q2`,
-`QB1_K#q1`, `QB1_K#q8`, `QB1_supplementary#q6`, `QB1_supplementary#q7`,
-`QB1_D#q5`, `QB1_F#q4`, `QB1_F#q6`, `QB1_F#q16`, `QB10_B#q8`.
+| Destination | Count | Questions |
+|---|---|---|
+| D03 Human Element | 2 | `QB1_H#q2` (IACS PR 9 — the conduct of the ISM audit), `QB1_supplementary#q1` (CE's ISM survey duties, expressly *beyond* machinery) |
+| D04 MARPOL | 2 | `QB1_supplementary#q6` (IOPP survey preparation), `QB1_supplementary#q7` (NOx Technical File) |
+| D10 Construction & Stability | 3 | `QB1_D#q5` (Fresh Water Allowance), `QB1_J#q1` (hull paint coating inspection), `QB1_K#q8` (CSR = IACS Common Structural Rules) |
+| D05 GHG & Fuels | 1 | `QB1_F#q6` (sustainable fuel certificates / Proof of Sustainability) |
+| D06 Indian Law | 1 | `QB10_B#q8` (recent DG Shipping / DGMA circulars) |
+| D07 Cargo | 1 | `QB1_F#q4` (CSC Convention — container testing and certification) |
+| D09 Machinery | 1 | `QB1_J#q2` (propeller securing / locking arrangement) |
 
-**How this bucket empties.** Only by adjudication. Two tranches have now run
-— QB3_A/QB4_A/QB4_G, then QB4_E/QB4_C/QB4_H/QB2_A/QB6_D — and **neither
-touched the QB1 files where all 31 of these live**, so the bucket is unchanged
-at 31 after both. That is not an oversight twice over: the QB1 files are the
-mixed-title files whose questions were never file-title mapped in the first
-place, so they raise no *contradiction* for the detector to surface and will
-never appear in a contradiction tranche. A dedicated **QB1 review-bucket
-adjudication** is therefore the specific governance action that restores
-priority letters here, and it remains unscheduled. Recorded so the gap is
-visible rather than inferred.
+**Why this bucket was overwhelmingly a D01 problem is worth knowing.**
+`QUESTION_CUES` in `tools/study/study_spine.py` is an ordered, first-match-wins
+list and D01 is entry number one, matching `survey|certificat|class`. Inside a
+mixed file, *any* question mentioning a survey or a certificate is claimed by
+D01 before D04, D05, D07, D09 or D10 is ever consulted — which is how a
+container convention, a NOx file and an IOPP checklist all arrived here. The
+cue table was **not** edited to fix this: a cue added to shrink a review queue
+is a taxonomy change smuggled in as a regex, and the integration contract
+forbids it. Two blind spots were recorded instead:
+
+- **`\bCSR\b` is ambiguous** between the Continuous Synopsis Record (SOLAS
+  XI-1/5, genuinely D01 — see `QB4_C#q4`) and the IACS Common Structural Rules
+  (naval architecture, D10). `QB1_K#q8` is the second instrument; the cue was
+  written for the first.
+- **There is still no D06 cue at all**, so `QB10_B#q8` could only ever be
+  proposed as D01. Same structural blindness already recorded for `QB4_E#q13`.
 
 ### Cohort arithmetic
 
 | Cohort | Count |
 |---|---|
 | A-priority | 18 |
-| B-priority | 18 |
-| C-priority | 13 |
-| Review — not yet prioritised | 31 |
-| **Total** | **80** — the whole governed D01 oral universe |
+| B-priority | 26 |
+| C-priority | 25 |
+| Review — not yet prioritised | 0 |
+| **Total** | **69** — the whole governed D01 oral universe |
 
-No question appears in two cohorts; none is missing. `A + B + C` equals the
-49 `VALID_MAPPED` records exactly, and the review bucket equals the 31
-`REVIEW_PENDING` records exactly. This is gated by
+No question appears in two cohorts; none is missing. `A + B + C` equals all 69
+`VALID_MAPPED` records exactly, and the review bucket is empty because D01 now
+holds zero `REVIEW_PENDING` records. This is gated by
 `tools/study/test_d01_priority_cohort.py`, which parses these lists out of
 this file and fails if they drift from `study_mappings.json`.
 
 ### Adjudication notes
 
-- The Indian-circulars question is Indian regulatory currency rather than
-  statutory-framework theory. It sits last in the review bucket and is flagged
-  for D06 if an oral Indian-law mapping is ever created.
-- The IOPP and NOx Technical File questions are MARPOL certification items
-  reached through the survey route. Legitimate in D01, but study them as
-  survey preparation, not as MARPOL.
+- The Indian-circulars question was flagged here on 2026-08-22 as "for D06 if
+  an oral Indian-law mapping is ever created". That is what happened:
+  `QB10_B#q8` is now D06, and D06's oral corpus grew 2 -> 3.
+- **Overturned.** This pack previously recorded the IOPP and NOx Technical File
+  questions as "MARPOL certification items reached through the survey route.
+  Legitimate in D01, but study them as MARPOL survey preparation." The QB1
+  adjudication reversed that reading and moved both to D04. The reason is the
+  D01 settlement rule: reaching a domain *through* a route is not owning the
+  subject, and both answers are MARPOL content end to end — 15 ppm bilge alarm,
+  automatic stopping device, Oil Record Book Part I; Annex VI Reg 13, EIAPP,
+  Tier I/II/III, SCR/EGR in a NECA. The survey was the setting, not the
+  subject. Recorded as an overturn rather than a silent change, because the
+  earlier note was never itself an adjudication — both questions sat in the
+  review bucket, unsettled, when it was written.
+- `QB1_H#q1` and `QB1_H#q2` were split across domains deliberately. IACS PR 17
+  is a class surveyor's duty *at survey* and stays in D01; PR 9 is the conduct
+  of the ISM audit itself — durations, auditor qualification, NC/MNC
+  escalation, CAP via the DPA — which D03's own rationale claims. Two adjacent
+  questions in one file need not share a topic.
 - The dry-dock preparation question in QB4_G was adjudicated into D01 on its
   statutory-interval limb. This re-derivation reviewed that call and did not
   disturb it: the interval is a statutory survey requirement, and the question
@@ -396,13 +457,14 @@ theme in the domain. Treat PSC as an A-priority written topic.
 Reported as **three separate signals**, never summed:
 
 - **64** unique canonical Oral questions in D01 carry examiner evidence
-  (of **72** mapped — 8 carry none)
-- **93** examiner relationship occurrences across those questions
+  (of **69** mapped — 5 carry none)
+- **95** examiner relationship occurrences across those questions
 - **6** distinct examiners: Nair, Paul, Rajappan, Senthil, Simon, Srivastava
 
-Recomputed after the taxonomy tranche: 46 → 64 evidenced questions and
-63 → 93 occurrences. Nothing in the examiner data changed; the questions those
-relationships were always attached to are now correctly inside D01.
+Recomputed after the QB1 adjudication: 46 → 64 evidenced questions and
+63 → 95 occurrences. **Nothing in the examiner data changed** — not one
+relationship record was written, moved or deleted in any of these passes. The
+numbers move only because the set of questions counted as D01 moved.
 
 The occurrence counts inside D01 are flat (1–2 per question), so examiner
 evidence here tells you a question is *real* — it does not rank questions
@@ -414,17 +476,23 @@ not equivalent: `confirmed` is direct evidence the examiner asked it,
 Two `inferred` examiners are *not* stronger than one `confirmed` one, which is
 why the A-priority derivation treats breadth as a floor rather than a score.
 
-Across the 93 D01 occurrences the tier split is **33 `confirmed`,
-52 `inferred`, 6 `ce_tip`, 2 `header`** — the majority of this domain's
+Across the 95 D01 occurrences the tier split is **37 `confirmed`,
+50 `inferred`, 5 `ce_tip`, 3 `header`** — the majority of this domain's
 examiner evidence is derived, not direct.
 
-**Cross-examiner convergence.** Nair carries 45 of the 72 questions,
-Srivastava 19, Simon 12, Rajappan 10, Senthil 5, Paul 2. The strongest pairing
-is Nair + Srivastava on 18 shared questions — 18 of Srivastava's 19 — almost
-all of them the hull, ESP, drydock and PSC cluster; Rajappan overlaps Nair on
-8. Simon carries the certificate and Condition-of-Class line. The 8 questions with no examiner evidence at all are
-led by `QB1_I#q5`, which is in A anyway because it is the integrating
+**Cross-examiner convergence.** Nair carries 43 of the 69 questions,
+Srivastava 21, Simon 14, Rajappan 8, Senthil 7, Paul 2. The strongest pairing
+is Nair + Srivastava on 20 shared questions — 20 of Srivastava's 21 — almost
+all of them the hull, ESP, drydock and PSC cluster. Simon carries the
+certificate and Condition-of-Class line. The 5 questions with no examiner
+evidence at all are `QB1_I#q1`, `QB1_I#q4`, `QB1_I#q5`, `QB1_I#q6` and
+`QB4_A#q21`. `QB1_I#q5` is in A anyway because it is the integrating
 question — an explicit, single exception to signal 3.
+
+*Open item, not fixed here:* the QB1_I cards render an "Examiner:" line in
+their own HTML (Nair on q1 and q6, Simon on q4) that has no matching record in
+`CURRENT_EXAMINER_RELATIONSHIPS.jsonl`. That is an examiner-index question, not
+a study-mapping one, and no examiner artefact was touched in this session.
 
 **Follow-up themes** — of the 35 registered oral follow-ups, `FUP-001` is
 D01-adjacent (Nair, Paul: *"Tell about annual survey, what are things surveyor
@@ -502,8 +570,10 @@ per-question node claim.
 Four of six covered, and no question was forced into A to cover a node. The two
 misses are real findings:
 
-- **`C49-A3-07` (ISPS).** Not one of the 72 mapped D01 orals mentions ISPS,
-  ISSC or ship security. This is a genuine corpus gap on an item D01 owns as
+- **`C49-A3-07` (ISPS).** Re-checked after the QB1 adjudication against all 69
+  mapped D01 orals: still not one mentions ISPS, ISSC or ship security. None of
+  the 31 questions read in that pass covered it either, and none was pushed
+  into D01 to close the node. This is a genuine corpus gap on an item D01 owns as
   PRIMARY subject matter.
 - **`C49-A3-24` (casualty investigation).** Also zero in D01 — but *not*
   because the questions do not exist. Three of them (the SUA Convention, the
@@ -529,7 +599,8 @@ caught up. They are the highest-value new work in this topic.
   limb that is missing, not the RO framework.*
 - **N7 — in-water survey.** Item 10 newly names "non-periodical surveys,
   in-water surveys" as survey types. Corpus: **1 oral (`QB1_G#q31`), 0
-  written**. Know the conditions class requires (hull condition, coating,
+  written**, now settled and promoted to **B-priority** by the QB1
+  adjudication. Know the conditions class requires (hull condition, coating,
   approved diver/ROV, class attendance) and when IWS substitutes for drydock.
 - **N8 — Official Log Book.** Item 5 is a whole official item and the corpus
   has **1 oral (`QB9_G#q4`), 0 written**. It is primarily D06, but it is
@@ -549,16 +620,27 @@ asked.
   direction (`QB3_A#q7`); RO Code oversight changes; the IMO net-zero /
   MEPC schedule where it touches certification
 
-**CURRENTNESS_WATCH — questions where memorising the detail is risky.** Four
+**CURRENTNESS_WATCH — questions where memorising the detail is risky.** Two
 questions in D01 turn on facts that move. Learn the *structure* of these
 answers and re-verify the specifics before you quote them:
 
 | ID | Cohort | Why it moves |
 |---|---|---|
 | `QB3_A#q7` | C | Asks explicitly for the *recent direction* of ESP tightening — a moving target by construction |
-| `QB1_F#q6` | Review | Sustainable fuel certificates: the issuing regime is still forming |
-| `QB10_B#q8` | Review | "Recent DG Shipping/DGMA circulars" — stale by definition; DGMA Circular 49 of 2026 is the current one that matters here |
 | `QB4_A#q10` | **A** | The statutory certificate set moves with the Indian Merchant Shipping Act 2025 and SOLAS amendment cycle |
+
+The list shrank from four on 2026-08-23 and **nothing was declared stable**:
+the two that left are the two most currentness-sensitive questions of the four,
+and both left D01 entirely. `QB1_F#q6` (sustainable fuel certificates) is now
+D05, the most currentness-sensitive domain in the corpus; `QB10_B#q8` (recent
+DG Shipping / DGMA circulars) is now D06. Each must be carried on **its new
+topic's** watch list, and neither of those packs has been built yet. Recorded
+here so the obligation is visible rather than lost in the move.
+
+The 20 newly settled D01 questions were reviewed for currentness sensitivity
+and none was added: ESP, CSM, HSSC anniversary dates, the RO Code and the class
+quarterly listing are all stable structures, and no answer content was read for
+currency in this session — only for subject matter.
 
 The last one matters most: it is A-priority 12 and the source of note N1. Build
 N1 from the answer's *structure* — instrument, certificate, issuer, validity,
@@ -577,7 +659,7 @@ invented as a new schema field.
 
 ## STUDY SESSIONS
 
-Five sessions, 45–90 minutes each, sized from the real **72 + 96** question
+Five sessions, 45–90 minutes each, sized from the real **69 + 96** question
 load. Session ids `D01-S01`…`D01-S05` are stable and unchanged; the
 machine-readable form is `docs/study/study_sessions.json`, which pins this
 file by sha256 so the two cannot drift apart.

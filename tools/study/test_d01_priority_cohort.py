@@ -181,27 +181,56 @@ def main():
     # ---- mutation controls -------------------------------------------------
     # A test that only ever sees a passing corpus proves nothing. Each mutation
     # below is a defect this gate exists to catch; each must fail.
+    #
+    # Each mutator takes (text, universe) and returns (text, universe), because
+    # one of these defects can no longer be expressed by editing the pack alone.
+    # The QB1 review-bucket adjudication on 2026-08-23 settled every D01 oral,
+    # so there is no unadjudicated question left to borrow: the "unsettled
+    # promoted to A" control now injects a SYNTHETIC REVIEW_PENDING record
+    # instead of harvesting a real one. A fixture built out of live corpus
+    # state is a wasting asset -- succeeding at the governance work destroys it.
+
+    def m_duplicate(t, q):
+        return t.replace('| `QB3_B#q1` | What is a hull survey',
+                         '| `QB1_H#q3` | What is a hull survey'), q
+
+    def m_unsettled_in_a(t, q):
+        q = dict(q)
+        q['SYNTH_UNSETTLED#q1'] = {
+            'canonical_question_id': 'SYNTH_UNSETTLED#q1',
+            'content_type': 'ORAL', 'topic_id': 'D01',
+            'mapping_status': 'REVIEW_PENDING',
+        }
+        # Placed in A *and* added to the universe, so the only rule it breaks
+        # is the settled-evidence gate -- not "id not in the universe".
+        t = t.replace('| 5 | 5 Class | `QB1_K#q2` |',
+                      '| 5 | 5 Class | `QB1_K#q2` `SYNTH_UNSETTLED#q1` |')
+        return t.replace('## A-PRIORITY ORAL QUESTIONS (18)',
+                         '## A-PRIORITY ORAL QUESTIONS (19)'), q
+
+    def m_dropped(t, q):
+        return t.replace('| `QB1_F#q16` | "explain ESP.."', '| `` | "explain ESP.."'), q
+
+    def m_stale_heading(t, q):
+        return t.replace('## A-PRIORITY ORAL QUESTIONS (18)',
+                         '## A-PRIORITY ORAL QUESTIONS (14)'), q
+
+    def m_stale_table(t, q):
+        return t.replace('| A-priority | 18 |', '| A-priority | 14 |'), q
+
     mutations = [
-        ('duplicate across cohorts',
-         lambda t: t.replace('| `QB3_B#q1` | What is a hull survey',
-                             '| `QB1_H#q3` | What is a hull survey')),
-        ('unsettled question promoted to A',
-         lambda t: t.replace('| 5 | 5 Class | `QB1_K#q2` |',
-                             '| 5 | 5 Class | `QB1_F#q15` |')),
-        ('a question dropped from every cohort',
-         lambda t: t.replace('`QB1_F#q16`, ', '')),
-        ('heading count left stale',
-         lambda t: t.replace('## A-PRIORITY ORAL QUESTIONS (18)',
-                             '## A-PRIORITY ORAL QUESTIONS (14)')),
-        ('arithmetic table left stale',
-         lambda t: t.replace('| A-priority | 18 |', '| A-priority | 14 |')),
+        ('duplicate across cohorts', m_duplicate),
+        ('unsettled question promoted to A', m_unsettled_in_a),
+        ('a question dropped from every cohort', m_dropped),
+        ('heading count left stale', m_stale_heading),
+        ('arithmetic table left stale', m_stale_table),
     ]
     escapes = []
     for label, mutate in mutations:
-        mutated = mutate(text)
-        if mutated == text:
+        mutated, mutated_qs = mutate(text, qs)
+        if mutated == text and mutated_qs is qs:
             escapes.append('%s -- mutation did not apply (anchor moved)' % label)
-        elif not check(mutated, qs):
+        elif not check(mutated, mutated_qs):
             escapes.append('%s -- mutation NOT caught' % label)
         checks += 1
 
