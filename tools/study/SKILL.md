@@ -375,6 +375,106 @@ what would be merged. Re-review the affected groups, then re-pin.
 The full Phase-1 account, including the Top-25 Founder list, is
 `docs/study/QI_PHASE1_REPORT.md`.
 
+## QI -> study: one adapter, two layers, one weight
+
+MIW holds **two** question-intelligence layers and they are complementary. The
+integration mistake to avoid is not "which one wins" -- it is letting both
+vote.
+
+| Layer | Horizon | What it is good at | Where it lives |
+|---|---|---|---|
+| **Modern question-level QI** | 2021 -> Aug 2026 | *Which* modern questions relate, and how. High precision, limb-aware. | `meoclass1/pastpapers/specs/*.json` (`host_recurrence_hint`, `recurrence_class`, `reuse_tier`, `reused_from`, `question_delta`, `cross_links`) and `meoclass1/pastpapers/intelligence/derived/sixyear_families.json` |
+| **Canonical longitudinal QI** | 2010 -> Aug 2026 | *How far back* a concept goes, and whether it is persistent, rising, dormant or re-emerging. | `docs/study/qi/*` |
+
+```
+modern QI  +  canonical QI  +  study mappings
+                   |
+        tools/study/study_qi_adapter.py        <- the ONLY join
+                   |
+        docs/study/study_qi.json
+                   |
+   topics / roadmap / cohorts / workbook / internal study page
+```
+
+| Path | Role |
+|---|---|
+| `tools/study/study_qi_adapter.py` | **The library.** Loads both layers, reconciles them, projects questions/topics/roadmap input. Read its docstring first. |
+| `tools/study/build_study_qi.py` | **Only writer** of `study_qi.json` and `modern_qi_baseline.json`. `--check` proves disk matches inputs. |
+| `tools/study/study_qi_holds.json` | **Hand-maintained.** Governed holds: modern/canonical conflicts, wording-only topic gaps, known authored-edge defects. |
+| `tools/study/validate_study_qi.py` | The gate. 35 checks, fails closed. |
+| `tools/study/test_study_qi_mutations.py` | 19 mutations, all must be caught, zero residue. |
+
+```bash
+python tools/study/build_study_qi.py            # rebuild
+python tools/study/build_study_qi.py --check    # stale?
+python tools/study/validate_study_qi.py         # the gate
+python tools/study/test_study_qi_mutations.py   # prove the gate bites
+```
+
+### The five rules that are easy to break
+
+1. **One weight, two views.** A modern repeat tag and a canonical family are
+   usually the *same evidence stream seen twice*. The adapter emits exactly
+   ONE recurrence quantity per topic (`RECURRENCE_WEIGHT_SOURCE =
+   CANONICAL_QI_FAMILY`); the modern layer contributes precision fields that
+   carry no weight. `roadmap_recurrence_by_topic()` is the only entry point a
+   priority model may call, deliberately, so there is no way to reach in and
+   add a second quantity. `R-WEIGHT-*` gates it.
+
+2. **Precedence is earned, not assumed.** Modern evidence is `AUTHORED`
+   (a human wrote it into a spec), `DETERMINISTIC` (identical normalised
+   stems), or `INFERRED` (a similarity threshold nobody adjudicated). Modern
+   wins for modern question identity where its evidence is authored or
+   deterministic. Canonical adjudication wins over `INFERRED`. That asymmetry
+   holds only because **every** deterministic modern family agrees with the
+   canonical layer and every disagreement observed is inferred. `R-PRECEDENCE`
+   fails the build the day that stops being true -- re-argue the rule then,
+   do not relax the gate.
+
+3. **A family votes once, through one question.** `canonical_current_question`
+   picks the most recent solved modern member as the bearer; every other
+   member is a `historical_variant` carrying zero weight. Without this an
+   eight-member family votes eight times and historical bulk drowns current
+   relevance. This is why production order differs from the Phase-1 preview --
+   see the deprecation notice in `preview_qi_study_impact.py`.
+
+4. **Recurrence is not readiness.** A twelve-time repeat carrying a currentness
+   risk is high importance AND blocked. `UNSAFE_CURRENTNESS` overrides a
+   cheerful Phase-2 action, never the reverse. `R-READY-SAFE`.
+
+5. **`recurring_families` and `largest_families` are different populations.**
+   In `study_spine.json`, `recurring_families` is the canonical 2010-2026
+   weight; `largest_families` holds MIW short-title labels over the SOLVED
+   corpus only, and those strings are **printed on the public page**. They may
+   never be merged: QI family labels are raw question stems carrying
+   secondary-claimed dates, and the public card already says "96 solved
+   Written questions across 39 papers" beside them. Two denominators under one
+   heading is the defect. `current_written_recurrence_families` in the
+   workbook model is the public-safe, solved-corpus figure;
+   `longitudinal_recurrence_families` is the internal one.
+
+### Holds are finished work, not backlog
+
+Same rule as the mapping review queue. A `HOLD_RECONCILIATION` means a human
+read a modern/canonical disagreement and recorded that the evidence does not
+settle it. Resolving one changes what a recurrence relationship *means*, so no
+build may do it: `R-CONF-HELD` refuses a conflict with no hold, and
+`R-CONF-HUMAN` refuses a resolution with no named adjudicator.
+
+`known_authored_edge_defects` is an allowlist of individually named broken
+`host_recurrence_hint` references -- pre-existing corpus defects, recorded so
+the dangling-edge gate stays sharp for new breakage instead of being switched
+off. `R-EDGE-ALLOW` fails if an allowance outlives the defect it excuses.
+
+### Do not build a fourth recurrence engine
+
+Before this integration the repository had **three**: `build_study_spine.py`
+grouped by exact `short_title`, `build_sixyear_intelligence.py` clustered
+2021-2026 stems, and `build_qi.py` adjudicated 2010-2026 families. They
+disagreed, and the roadmap read the weakest of the three. If you need a
+recurrence number, call the adapter. If the number you need is missing, extend
+the adapter -- do not compute it where you stand.
+
 ## Fresh-session test
 
 A new Claude Code session can, using only this file:
