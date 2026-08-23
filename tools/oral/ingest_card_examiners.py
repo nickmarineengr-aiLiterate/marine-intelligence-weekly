@@ -20,6 +20,27 @@ whose source_id names the master-tracker record that actually earns the tier:
 Both are already in the provenance model, and MASTER_TRACKER is not a derived
 source type, so the record is self-consistent under oral_provenance.violations.
 
+Removals
+--------
+A REMOVE_RELATIONSHIP decision deletes published rows whose stated provenance
+is disproved, together with the evidence records that cite them -- leaving the
+evidence behind would trip validate_phase2's "every evidence record resolves to
+a relationship". Removal is only ever executed from an adjudicated decision
+carrying an `adjudication` field, never inferred, and the decision must name
+the relationship ids so the diff is reviewable before it is run.
+
+Tiering
+-------
+Two paths, and the tool refuses anything that mixes them:
+
+  master_primary_evidence_ids  -> PRIMARY_CONFIRMED  -> 'confirmed'
+      backed by a PRIMARY_CANDIDATE_RECORD in the master tracker whose
+      examiner and question both match the pair.
+  external_evidence_ids        -> EXTERNAL_SOURCE_CONFIRMED -> 'reported'
+      backed by an ALL_SURVEYORS_COMPILATION source record. A reported
+      attribution stays reported: the external compilation can never produce
+      a primary tier, which oral_provenance enforces independently.
+
 What this tool will not do
 --------------------------
   * it never invents an examiner: every name must resolve in the alias register;
@@ -84,6 +105,52 @@ def build():
     base_evidence = [e for e in evidence
                      if not str(e.get("evidence_id", "")).startswith(EVIDENCE_PREFIX + "-")]
 
+    # ---- adjudicated removals -------------------------------------------
+    # Executed only from a decision that carries an adjudication and names the
+    # rows. A removal inferred from a classification alone would let a future
+    # edit to this record silently delete published relationships.
+    doomed = set()
+    for d in record["decisions"]:
+        if d.get("decision") != "REMOVE_RELATIONSHIP":
+            continue
+        if not d.get("adjudication"):
+            fail("a REMOVE_RELATIONSHIP decision for %s carries no adjudication"
+                 % d.get("file"))
+        named = d.get("relationships_removed") or []
+        if not named:
+            fail("the REMOVE_RELATIONSHIP decision for %s names no relationship ids"
+                 % d.get("file"))
+        for row in named:
+            doomed.add((row["relationship_id"], row["question_id"], row["examiner"]))
+
+    live = {r["relationship_id"]: r for r in base_ledger}
+    live_pairs = {(r["question_id"], r["examiner"]): r["relationship_id"]
+                  for r in base_ledger}
+    for rid, qid, ex in sorted(doomed):
+        r = live.get(rid)
+        if r is None:
+            # Already removed: a second run is a no-op, which is what makes
+            # --check a meaningful byte comparison. But absence of the ID is
+            # not proof the row is gone -- it could have been rewritten under
+            # a different id, and deleting nothing while reporting success is
+            # exactly the silent failure this tool exists to prevent.
+            if (qid, ex) in live_pairs:
+                fail("removal target %s is absent but %s/%s is still published as %s"
+                     % (rid, qid, ex, live_pairs[(qid, ex)]))
+            continue
+        # The record must still describe the row it is deleting. If the ledger
+        # moved under the record, the reviewed diff is not the applied one.
+        if (r["question_id"], r["examiner"]) != (qid, ex):
+            fail("removal target %s is %s/%s in the ledger, not %s/%s"
+                 % (rid, r["question_id"], r["examiner"], qid, ex))
+
+    removed_ids = {rid for rid, _q, _e in doomed}
+    base_ledger = [r for r in base_ledger if r["relationship_id"] not in removed_ids]
+    # The evidence records that cited them go too: an orphan evidence record
+    # fails validate_phase2's "every evidence record resolves to a relationship".
+    base_evidence = [e for e in base_evidence
+                     if e.get("relationship_id") not in removed_ids]
+
     pub = json.loads((OUT / "RELEASE_A_PUBLICATION.json").read_text(encoding="utf-8"))
     release_a = {(c["canonical_question_id"], c["examiner"]): c["relation_id"]
                  for c in pub["connections"]}
@@ -96,6 +163,8 @@ def build():
     anchors = L.all_anchors()
 
     master = {e["evidence_id"]: e for e in jl("EXAMINER_EVIDENCE_LEDGER.jsonl")}
+    surveyors = {s["source_id"]: s
+                 for s in jl("ALL_SURVEYORS_SOURCE_RECORDS.jsonl")}
 
     adds = [d for d in record["decisions"] if d.get("decision") == "ADD_RELATIONSHIP"]
     if not adds:
@@ -121,9 +190,13 @@ def build():
                  "row would duplicate a published relationship"
                  % (qid, ex, release_a[(qid, ex)]))
 
-        primaries = d["master_primary_evidence_ids"]
-        if not primaries:
-            fail("%s / %s is an ADD with no master-tracker evidence" % (qid, ex))
+        primaries = d.get("master_primary_evidence_ids") or []
+        externals = d.get("external_evidence_ids") or []
+        if primaries and externals:
+            fail("%s / %s cites both master and external evidence; the two tier "
+                 "differently and the record must choose" % (qid, ex))
+        if not primaries and not externals:
+            fail("%s / %s is an ADD with no evidence at all" % (qid, ex))
 
         # The cited record must actually name this examiner and this question:
         # an id that resolves is a pointer, not evidence.
@@ -137,6 +210,26 @@ def build():
             if m.get("canonical_question_id") != qid:
                 fail("%s points at %r, not %s" % (pid, m.get("canonical_question_id"), qid))
 
+        for sid in externals:
+            s = surveyors.get(sid)
+            if s is None:
+                fail("source id %s (%s) is not in ALL_SURVEYORS_SOURCE_RECORDS" % (sid, qid))
+            if s.get("surveyor_normalized") != ex:
+                fail("%s names surveyor %r, not %r (%s)"
+                     % (sid, s.get("surveyor_normalized"), ex, qid))
+
+        if externals:
+            if d["research_best_tier"] != "EXTERNAL_SOURCE_CONFIRMED":
+                fail("%s / %s is externally sourced and may only carry "
+                     "EXTERNAL_SOURCE_CONFIRMED, not %r"
+                     % (qid, ex, d["research_best_tier"]))
+            if d["current_tier"] != "reported":
+                fail("%s / %s is externally sourced and may only publish at "
+                     "'reported', not %r" % (qid, ex, d["current_tier"]))
+        elif d["research_best_tier"] != "PRIMARY_CONFIRMED":
+            fail("%s / %s cites master evidence but claims %r"
+                 % (qid, ex, d["research_best_tier"]))
+
         rel_id = "REL-%s-%s-%s" % (ex.upper(), file_[:-5], anchor)
         if rel_id in existing_rel_ids:
             fail("relationship id %s already exists" % rel_id)
@@ -144,23 +237,47 @@ def build():
         if ev_id in existing_ev_ids:
             fail("evidence id %s already exists" % ev_id)
 
-        new_ev.append({
-            "evidence_id": ev_id,
-            "relationship_id": rel_id,
-            "examiner_raw": d["raw_examiner_string"],
-            "examiner_normalized": ex,
-            "source_type": "MASTER_TRACKER",
-            "source_id": ",".join(primaries),
-            "source_location": "%s#%s (in-card examiner-tag)" % (file_, anchor),
-            "source_date": master[primaries[0]].get("source_date"),
-            "raw_question_text": master[primaries[0]].get("source_wording") or "",
-            "source_comment": "card/ledger reconciliation 2026-08-23",
-            "evidence_tier": "PRIMARY_TRACKER",
-            "match_status": "RESOLVED",
-            "notes": ("The primary candidate record earns this tier. The card's "
-                      "examiner-tag corroborates it and is what surfaced the gap; "
-                      "the card alone would never carry a primary tier."),
-        })
+        if primaries:
+            src = master[primaries[0]]
+            new_ev.append({
+                "evidence_id": ev_id,
+                "relationship_id": rel_id,
+                "examiner_raw": d["raw_examiner_string"],
+                "examiner_normalized": ex,
+                "source_type": "MASTER_TRACKER",
+                "source_id": ",".join(primaries),
+                "source_location": "%s#%s (in-card examiner-tag)" % (file_, anchor),
+                "source_date": src.get("source_date"),
+                "raw_question_text": src.get("source_wording") or "",
+                "source_comment": "card/ledger reconciliation 2026-08-23",
+                "evidence_tier": "PRIMARY_TRACKER",
+                "match_status": "RESOLVED",
+                "notes": ("The primary candidate record earns this tier. The card's "
+                          "examiner-tag corroborates it and is what surfaced the gap; "
+                          "the card alone would never carry a primary tier."),
+            })
+        else:
+            src = surveyors[externals[0]]
+            new_ev.append({
+                "evidence_id": ev_id,
+                "relationship_id": rel_id,
+                "examiner_raw": src.get("surveyor_raw") or d["raw_examiner_string"],
+                "examiner_normalized": ex,
+                "source_type": "ALL_SURVEYORS_COMPILATION",
+                "source_id": ",".join(externals),
+                "source_location": "%s p.%s para %s (%s)"
+                                   % (src.get("source_provenance"), src.get("source_page"),
+                                      src.get("source_paragraph"), src.get("source_family_id")),
+                "source_date": None,
+                "raw_question_text": src.get("raw_question_text") or "",
+                "source_comment": "card/ledger reconciliation 2026-08-23, Founder-authorised",
+                "evidence_tier": "EXTERNAL_SURVEYOR_COMPILATION",
+                "match_status": "RESOLVED",
+                "notes": ("An external compilation record: a reported ask, not a tracker "
+                          "record. It publishes at 'reported' and can never reach a primary "
+                          "tier - oral_provenance refuses EXTERNAL_SURVEYOR_COMPILATION on "
+                          "any primary tier independently of this tool."),
+            })
 
         new_rels.append({
             "relationship_id": rel_id,
@@ -186,10 +303,11 @@ def build():
                       "while the card displayed it."),
             "primary_evidence_ids": primaries,
             "primary_evidence_count": len(primaries),
+            "external_evidence_ids": externals,
             "derived_sibling_evidence_count": len(d.get("corroborating_sibling_evidence_ids") or []),
             "prose_strength": None,
             "research_best_tier": d["research_best_tier"],
-            "evidence_count": len(primaries),
+            "evidence_count": len(primaries) + len(externals),
             "tier_changed": False,
         })
 

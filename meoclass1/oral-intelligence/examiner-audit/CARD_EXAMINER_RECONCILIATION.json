@@ -307,10 +307,18 @@
    "release_a_relation_id": null,
    "card_provenance_class": "AUTHOR_ENTERED_WITH_PROVENANCE",
    "display_line_action": "KEEP_AS_IS",
-   "decision": "HOLD_PROVENANCE",
-   "research_best_tier": null,
-   "current_tier": null,
-   "hold_reason": "Traceable to source occurrence ASC-0080 in the all-surveyors external compilation (family GAP-0124, examiner John), which is the same evidence class as John's eleven published 'reported' relationships. Two governed facts block automatic promotion: tools/oral/batch_b_manifest.json pins examiner_relationship_delta = 0 for the batch that authored this card, and John's alias-register status is NEW_EXTERNAL_ONLY_EXAMINER. Promotion to a published relationship at tier 'reported' is defensible on the evidence but requires explicit authorisation, not a side effect of this reconciliation."
+   "decision": "ADD_RELATIONSHIP",
+   "research_best_tier": "EXTERNAL_SOURCE_CONFIRMED",
+   "current_tier": "reported",
+   "adjudication": "Founder adjudication, 2026-08-23, in session. Both standing items in this record were put to the Founder with the evidence as recorded and both were decided.",
+   "adjudication_outcome": "Authorised to publish at tier 'reported' with ASC-0080 as the explicit provenance. The Founder's reasoning on the batch manifest is recorded because it corrects this record's earlier reading: examiner_relationship_delta 0 in batch_b_manifest.json states that the batch which authored the card published no examiner relationship. It is a statement of what that batch did, not evidence that the attribution is false. Not to be promoted to 'confirmed' or MULTI_SOURCE_CONFIRMED under any later pass: the attribution is reported, and John's alias-register status remains NEW_EXTERNAL_ONLY_EXAMINER.",
+   "tier_basis": "The tier is earned by ASC-0080 in the all-surveyors external compilation, verified in ALL_SURVEYORS_SOURCE_RECORDS.jsonl: surveyor_raw 'JOHN SIR', surveyor_normalized 'John', source_type ALL_SURVEYORS_COMPILATION, source_confidence REPORTED_ASK, source_family_id ASF-0124, page 8 of 'All Surveyors Class1 Oral Questions.docx', raw question text 'Flammability diagram - why the line at 21% O2 is slightly slant? He asked why there is a slope on the mixing line.' That is an external compilation record, which the tier policy maps EXTERNAL_SOURCE_CONFIRMED -> 'reported'. It is the same evidence class as John's eleven existing published relationships, all of which are 'reported'.",
+   "external_evidence_ids": [
+    "ASC-0080"
+   ],
+   "master_primary_evidence_ids": [],
+   "corroborating_sibling_evidence_ids": [],
+   "sibling_note": null
   },
   {
    "attribution_class": "IN_CARD_EXAMINER_TAG",
@@ -755,12 +763,48 @@
     ]
    ],
    "file_ever_named_that_examiner": false,
-   "decision": "CONFLICT_REQUIRES_REVIEW",
+   "decision": "REMOVE_RELATIONSHIP",
    "card_provenance_class": "CONFLICTING_METADATA",
    "conflict": "The page header and every CE Oral Tip on this file read 'Examiner: Not yet assigned', which the alias register classes as UNATTRIBUTED. The ledger nonetheless carries 2 relationships attributing every question on the file to Nair at tier 'header', whose stated meaning is 'attribution from the QB page header only'. The string 'Nair' has never appeared in this file at any commit in its history, so the provenance those rows cite does not exist. They carry no primary evidence: primary_evidence_ids is empty on all of them.",
-   "action_taken": "RECORDED_ONLY",
-   "why_not_removed": "Removing published relationships changes the candidate-facing examiner index and the study examiner signal. Section 9 permits removal only on proof of error, and section 17 holds editorial changes for explicit review. The provenance is disproved; the underlying claim is merely unsupported, which is not the same thing. Founder review required.",
-   "display_line_action": "KEEP_AS_IS"
+   "display_line_action": "KEEP_AS_IS",
+   "adjudication": "Founder adjudication, 2026-08-23, in session. Both standing items in this record were put to the Founder with the evidence as recorded and both were decided.",
+   "adjudication_outcome": "Remove the published Nair relationships on this file. The stated provenance is false: the rows claim tier 'header', meaning attribution from the page header only, and the page header says 'Examiner: Not yet assigned'. The Founder's condition for removal was that no other independent source in the repository positively supports a specific pair. That condition was tested against every evidence store and is met.",
+   "independent_evidence_sweep": {
+    "stores_searched": [
+     "EXAMINER_EVIDENCE_LEDGER.jsonl (master tracker + July sheets)",
+     "ORAL_NOTES_EXAMINER_EVIDENCE.jsonl",
+     "ORAL_788_RECONCILIATION.jsonl",
+     "ALL_SURVEYORS_SOURCE_RECORDS.jsonl",
+     "RELEASE_A_PUBLICATION.json",
+     "STRONG_CE_TIP_REVIEW_DECISIONS.json"
+    ],
+    "records_found": "Records exist, and none of them supports Nair on a specific pair. Each of the nine questions has exactly one PRIMARY_CANDIDATE_RECORD in the master tracker (MASTER-AQ-0630 to MASTER-AQ-0638). Every one of them carries examiner_raw 'Not yet assigned', examiner_normalized null and attribution_kind UNATTRIBUTED. They are primary evidence, and what they positively support is the ABSENCE of an examiner - the master tracker agreeing with the page header.",
+    "derived_records": "Each pair also has a JULY-NAIR-3xx record naming Nair, but these are evidence_class DERIVED_PRODUCT_SURFACE from MIW_July2026_QuestionBank_SHARE.xlsx#Nair, and their own legacy_match_confidence field reads 'july-sheet-hyperlink(file-only)': the July per-examiner sheet linked to the FILE, not to a question. Governance already holds that the July per-examiner sheets never raise a tier because they are a derived product of the relationships they would be used to confirm, and oral_provenance lists JULY_EXAMINER_SHEET among DERIVED_SOURCE_TYPES. A file-level hyperlink on a derived surface does not positively support a specific pair.",
+    "root_cause": "This is the origin of the phantom attribution and it is a closed circle of derived surfaces. Questions from these two files were placed on Nair's July sheet as file-level hyperlinks; the examiner index rendered them under section ex-nair with a page-metadata badge; the index recovery then read the published index back as evidence and wrote nine relationships at tier 'header'. At no point did a primary record naming Nair enter the chain, and the one primary record per question says the opposite.",
+    "unresolved_lead": "JULY-NEW-080 is a PRIMARY_CANDIDATE_RECORD naming Nair with source wording 'Certificates related to AFS.', attached to QB3_I#q2. It is flagged legacy_mapping WRONG_MATCH, disposition AMBIGUOUS, match_score 0.125, so it does not positively support that pair and cannot save the relationship. Its wording is a closer fit to QB3_I#q7, the AFS certificate question, but asserting that match would be inventing evidence. Recorded here as an open lead for a future evidence pass; no relationship is created from it."
+   },
+   "relationships_removed": [
+    {
+     "relationship_id": "REL-NAIR-QB1_J-q1",
+     "question_id": "QB1_J#q1",
+     "examiner": "Nair",
+     "tier": "header",
+     "evidence_ids": [
+      "IDXREC-0311"
+     ],
+     "primary_evidence_ids": []
+    },
+    {
+     "relationship_id": "REL-NAIR-QB1_J-q2",
+     "question_id": "QB1_J#q2",
+     "examiner": "Nair",
+     "tier": "header",
+     "evidence_ids": [
+      "IDXREC-0312"
+     ],
+     "primary_evidence_ids": []
+    }
+   ]
   },
   {
    "attribution_class": "PAGE_HEADER_NON_ATTRIBUTION",
@@ -815,27 +859,123 @@
     ]
    ],
    "file_ever_named_that_examiner": false,
-   "decision": "CONFLICT_REQUIRES_REVIEW",
+   "decision": "REMOVE_RELATIONSHIP",
    "card_provenance_class": "CONFLICTING_METADATA",
    "conflict": "The page header and every CE Oral Tip on this file read 'Examiner: Not yet assigned', which the alias register classes as UNATTRIBUTED. The ledger nonetheless carries 7 relationships attributing every question on the file to Nair at tier 'header', whose stated meaning is 'attribution from the QB page header only'. The string 'Nair' has never appeared in this file at any commit in its history, so the provenance those rows cite does not exist. They carry no primary evidence: primary_evidence_ids is empty on all of them.",
-   "action_taken": "RECORDED_ONLY",
-   "why_not_removed": "Removing published relationships changes the candidate-facing examiner index and the study examiner signal. Section 9 permits removal only on proof of error, and section 17 holds editorial changes for explicit review. The provenance is disproved; the underlying claim is merely unsupported, which is not the same thing. Founder review required.",
-   "display_line_action": "KEEP_AS_IS"
+   "display_line_action": "KEEP_AS_IS",
+   "adjudication": "Founder adjudication, 2026-08-23, in session. Both standing items in this record were put to the Founder with the evidence as recorded and both were decided.",
+   "adjudication_outcome": "Remove the published Nair relationships on this file. The stated provenance is false: the rows claim tier 'header', meaning attribution from the page header only, and the page header says 'Examiner: Not yet assigned'. The Founder's condition for removal was that no other independent source in the repository positively supports a specific pair. That condition was tested against every evidence store and is met.",
+   "independent_evidence_sweep": {
+    "stores_searched": [
+     "EXAMINER_EVIDENCE_LEDGER.jsonl (master tracker + July sheets)",
+     "ORAL_NOTES_EXAMINER_EVIDENCE.jsonl",
+     "ORAL_788_RECONCILIATION.jsonl",
+     "ALL_SURVEYORS_SOURCE_RECORDS.jsonl",
+     "RELEASE_A_PUBLICATION.json",
+     "STRONG_CE_TIP_REVIEW_DECISIONS.json"
+    ],
+    "records_found": "Records exist, and none of them supports Nair on a specific pair. Each of the nine questions has exactly one PRIMARY_CANDIDATE_RECORD in the master tracker (MASTER-AQ-0630 to MASTER-AQ-0638). Every one of them carries examiner_raw 'Not yet assigned', examiner_normalized null and attribution_kind UNATTRIBUTED. They are primary evidence, and what they positively support is the ABSENCE of an examiner - the master tracker agreeing with the page header.",
+    "derived_records": "Each pair also has a JULY-NAIR-3xx record naming Nair, but these are evidence_class DERIVED_PRODUCT_SURFACE from MIW_July2026_QuestionBank_SHARE.xlsx#Nair, and their own legacy_match_confidence field reads 'july-sheet-hyperlink(file-only)': the July per-examiner sheet linked to the FILE, not to a question. Governance already holds that the July per-examiner sheets never raise a tier because they are a derived product of the relationships they would be used to confirm, and oral_provenance lists JULY_EXAMINER_SHEET among DERIVED_SOURCE_TYPES. A file-level hyperlink on a derived surface does not positively support a specific pair.",
+    "root_cause": "This is the origin of the phantom attribution and it is a closed circle of derived surfaces. Questions from these two files were placed on Nair's July sheet as file-level hyperlinks; the examiner index rendered them under section ex-nair with a page-metadata badge; the index recovery then read the published index back as evidence and wrote nine relationships at tier 'header'. At no point did a primary record naming Nair enter the chain, and the one primary record per question says the opposite.",
+    "unresolved_lead": "JULY-NEW-080 is a PRIMARY_CANDIDATE_RECORD naming Nair with source wording 'Certificates related to AFS.', attached to QB3_I#q2. It is flagged legacy_mapping WRONG_MATCH, disposition AMBIGUOUS, match_score 0.125, so it does not positively support that pair and cannot save the relationship. Its wording is a closer fit to QB3_I#q7, the AFS certificate question, but asserting that match would be inventing evidence. Recorded here as an open lead for a future evidence pass; no relationship is created from it."
+   },
+   "relationships_removed": [
+    {
+     "relationship_id": "REL-NAIR-QB3_I-q1",
+     "question_id": "QB3_I#q1",
+     "examiner": "Nair",
+     "tier": "header",
+     "evidence_ids": [
+      "IDXREC-0313"
+     ],
+     "primary_evidence_ids": []
+    },
+    {
+     "relationship_id": "REL-NAIR-QB3_I-q2",
+     "question_id": "QB3_I#q2",
+     "examiner": "Nair",
+     "tier": "header",
+     "evidence_ids": [
+      "IDXREC-0314"
+     ],
+     "primary_evidence_ids": []
+    },
+    {
+     "relationship_id": "REL-NAIR-QB3_I-q3",
+     "question_id": "QB3_I#q3",
+     "examiner": "Nair",
+     "tier": "header",
+     "evidence_ids": [
+      "IDXREC-0315"
+     ],
+     "primary_evidence_ids": []
+    },
+    {
+     "relationship_id": "REL-NAIR-QB3_I-q4",
+     "question_id": "QB3_I#q4",
+     "examiner": "Nair",
+     "tier": "header",
+     "evidence_ids": [
+      "IDXREC-0316"
+     ],
+     "primary_evidence_ids": []
+    },
+    {
+     "relationship_id": "REL-NAIR-QB3_I-q5",
+     "question_id": "QB3_I#q5",
+     "examiner": "Nair",
+     "tier": "header",
+     "evidence_ids": [
+      "IDXREC-0317"
+     ],
+     "primary_evidence_ids": []
+    },
+    {
+     "relationship_id": "REL-NAIR-QB3_I-q6",
+     "question_id": "QB3_I#q6",
+     "examiner": "Nair",
+     "tier": "header",
+     "evidence_ids": [
+      "IDXREC-0318"
+     ],
+     "primary_evidence_ids": []
+    },
+    {
+     "relationship_id": "REL-NAIR-QB3_I-q7",
+     "question_id": "QB3_I#q7",
+     "examiner": "Nair",
+     "tier": "header",
+     "evidence_ids": [
+      "IDXREC-0319"
+     ],
+     "primary_evidence_ids": []
+    }
+   ]
   }
  ],
  "summary": {
   "in_card_attributions": 21,
   "page_header_non_attributions": 2,
   "decisions": {
-   "ADD_RELATIONSHIP": 6,
+   "ADD_RELATIONSHIP": 7,
    "ALREADY_REPRESENTED": 14,
-   "HOLD_PROVENANCE": 1,
-   "CONFLICT_REQUIRES_REVIEW": 2
+   "REMOVE_RELATIONSHIP": 2
   },
-  "new_relationship_rows": 6,
+  "new_relationship_rows": 7,
   "duplicates_prevented": 14,
-  "conflicting_ledger_rows_recorded": 9,
   "deferred_out_of_scope": [],
-  "deferred_out_of_scope_note": "None. An earlier draft of this record deferred QB1_I#q1 / Simon as a second primary record (JULY-NEW-006) on a card that names only Nair. That was wrong: the pair is already published as RELA-SIMON-QB1_I-q1 at tier confirmed and renders in the examiner index, so there was never anything to defer. The mistake came from checking the pair against CURRENT_EXAMINER_RELATIONSHIPS.jsonl instead of the published universe -- the same error this record exists to document, made once more while documenting it."
- }
+  "deferred_out_of_scope_note": "None. An earlier draft of this record deferred QB1_I#q1 / Simon as a second primary record (JULY-NEW-006) on a card that names only Nair. That was wrong: the pair is already published as RELA-SIMON-QB1_I-q1 at tier confirmed and renders in the examiner index, so there was never anything to defer. The mistake came from checking the pair against CURRENT_EXAMINER_RELATIONSHIPS.jsonl instead of the published universe -- the same error this record exists to document, made once more while documenting it.",
+  "removed_relationship_rows": 9,
+  "adjudication_note": "Both standing items were adjudicated by the Founder on 2026-08-23. The nine QB3_I and QB1_J Nair relationships are removed; QB2_H#q3 / John is published at tier 'reported'. The counts above are this record's own decisions, not corpus totals."
+ },
+ "checked_and_retained": [
+  {
+   "file": "QB7_I.html",
+   "rows": 4,
+   "examiner": "Nair",
+   "tier": "header",
+   "finding": "Surfaced by the same screening test used on QB3_I and QB1_J - the examiner's name appears nowhere in the page - and deliberately retained, because the screen is not the decision rule. QB7_I#q5, #q7, #q8 and #q9 each carry a PRIMARY_CANDIDATE_RECORD in the master tracker (MASTER-AQ-0643, 0645, 0646, 0647) with examiner_normalized 'Nair' and attribution_kind EXAMINER. That is independent evidence positively supporting each specific pair, so the Founder's condition for removal is not met. The name's absence from the page is irrelevant: the evidence is a candidate's report of what was asked, not a claim about the page.",
+   "observation": "Those four rows sit at tier 'header' while their evidence is PRIMARY_CANDIDATE_RECORD, which understates them - the same recovery artefact that produced the QB3_I and QB1_J rows, in the opposite direction. Recorded only; re-tiering is not part of this adjudication."
+  }
+ ]
 }
