@@ -16,9 +16,12 @@
 //      NEVER reads .gitignore -- so this file must carry .gitignore's
 //      protections itself, and a synthetic sentinel in each protected
 //      class is asserted excluded (NEGATIVE CONTROL);
-//   3. every .gitignore pattern appears verbatim in .vercelignore
-//      (fail-closed mirror: a new .gitignore entry breaks this test
-//      until it is carried across);
+//   3. every .gitignore pattern is EITHER carried verbatim into
+//      .vercelignore, OR provably subsumed by a broader line there.
+//      The two files are read by different pattern engines, so a byte
+//      mirror is unsatisfiable for the recursive candidate-carrier
+//      patterns; the property is checked semantically instead, which
+//      is stronger -- a mirrored but inert pattern fails it;
 //   4. every candidate runtime surface remains deployable: /solvedQP/,
 //      /SQ/, /meoclass1/ product pages and indexes, api/, middleware,
 //      vercel.json, assets and the marketing site.
@@ -162,6 +165,11 @@ describe("CLI negative control — git-ignored classes remain undeployable", () 
     "meoclass1/pastpapers/intelligence/derived/sixyear.json",
     "Notes-for-written-answers/handout-01.pdf",
     "docs/MIW-master-Question-bank/master.xlsx",
+    // The August 2026 intake arrives in a SUBFOLDER as pasted candidate text,
+    // which the top-level globs above cannot reach -- the exposure 38a546a was
+    // written to close. Probe the nested depth and the plain-text carrier.
+    "docs/MIW-master-Question-bank/august-2026-intake/S009_raw_report.txt",
+    "docs/MIW-master-Question-bank/august-2026-intake/deeper/S009_raw_report.docx",
     // Excel owner-lock file, at the ROOT deliberately: docs/ and tools/ are
     // already excluded wholesale, so a sentinel under either would pass
     // without `~$*` doing any work at all. The mutation control below
@@ -194,12 +202,137 @@ describe("CLI negative control — git-ignored classes remain undeployable", () 
     }
   });
 
-  test("every .gitignore pattern is carried verbatim into .vercelignore", () => {
-    const gitPats = gitignoreText.split(/\r?\n/).map((l) => l.replace(/\s+$/, ""))
+  // -----------------------------------------------------------------
+  // THE .gitignore -> .vercelignore CONTRACT
+  //
+  // These two files are read by two DIFFERENT pattern engines. git reads
+  // .gitignore with the full gitignore grammar; the deployment matcher in
+  // deploy_set.mjs implements a deliberate subset and REFUSES `**` rather
+  // than guess at it. A byte-for-byte mirror is therefore only a sound
+  // proxy for "the same material is excluded" while both files are able to
+  // express the same patterns -- and since 38a546a added recursive patterns
+  // for the raw candidate carrier, they are not. Mirroring those verbatim
+  // does not fail an assertion, it kills this whole file with a parse error.
+  //
+  // So the contract is expressed as the property the mirror stood in for:
+  //
+  //   RULE 1 (unchanged, and still the default): a .gitignore pattern is
+  //   carried verbatim into .vercelignore.
+  //
+  //   RULE 2 (an exemption, EARNED per pattern and never granted by name):
+  //   a pattern may be absent verbatim only if a broader .vercelignore line
+  //   already excludes every concrete path that pattern describes. Checked
+  //   by expanding the pattern into representative files at several nesting
+  //   depths and matching each against the live deployment patterns.
+  //
+  // Rule 2 is strictly STRONGER than the string comparison it replaces: a
+  // string check cannot tell a covering pattern from an inert one, which is
+  // exactly the failure the `~$*` mutation control below was written for.
+  // -----------------------------------------------------------------
+  const PROBE_LEAF = "SENTINEL-PROBE.bin";
+
+  /** Concrete example files that a gitignore pattern describes. */
+  function representativePaths(pattern) {
+    let p = pattern;
+    const dirOnly = p.endsWith("/");
+    if (dirOnly) p = p.slice(0, -1);
+    const anchored = p.startsWith("/") || p.includes("/");
+    if (p.startsWith("/")) p = p.slice(1);
+    // A `**/` segment stands for "any number of directories, including
+    // none", so probe none, one and two. That depth is the entire reason
+    // the pattern could not be mirrored, so it is the case that matters.
+    const bodies = p.includes("**/")
+      ? ["", "nested/", "nested/deeper/"].map((n) => p.replace(/\*\*\//g, n))
+      : [p];
+    const out = new Set();
+    for (const b of bodies) {
+      const leaf = b.replace(/\*/g, "sample").replace(/\?/g, "x");
+      const file = dirOnly ? `${leaf}/${PROBE_LEAF}` : leaf;
+      out.add(file);
+      // An unanchored pattern matches by basename at any depth; say so.
+      if (!anchored) out.add(`deep/dir/${file}`);
+    }
+    return [...out];
+  }
+
+  /**
+   * The contract as a pure function, so the controls below can run it
+   * against fabricated inputs without touching the real files. Returns the
+   * patterns satisfying NEITHER rule, and the evidence for those exempted
+   * under rule 2.
+   */
+  function auditMirror(gitText, vercelText) {
+    const gitPats = gitText.split(/\r?\n/).map((l) => l.replace(/\s+$/, ""))
       .filter((l) => l && !l.startsWith("#"));
-    const vPats = new Set(vercelignoreText.split(/\r?\n/).map((l) => l.replace(/\s+$/, "")));
-    const missing = gitPats.filter((p) => !vPats.has(p));
-    assert.deepEqual(missing, [], ".gitignore patterns absent from .vercelignore");
+    const vSet = new Set(vercelText.split(/\r?\n/).map((l) => l.replace(/\s+$/, "")));
+    const live = [
+      ...parsePatterns(VERCEL_DEFAULT_IGNORES.join("\n"), "vercel-defaults"),
+      ...parsePatterns(vercelText, ".vercelignore"),
+    ];
+    const defaultsOnly = parsePatterns(VERCEL_DEFAULT_IGNORES.join("\n"), "d");
+    const unsatisfied = [], subsumed = [];
+    for (const p of gitPats) {
+      if (vSet.has(p)) continue;                                   // rule 1
+      const probes = representativePaths(p);                       // rule 2
+      const uncovered = probes.filter((f) => !isIgnored(f, live));
+      if (!probes.length || uncovered.length) {
+        unsatisfied.push(`${p} -> ` +
+          (probes.length ? `still deployable: ${uncovered.join(", ")}` : "(no representative path)"));
+      } else {
+        subsumed.push({
+          pattern: p, probes,
+          by: [...new Set(probes.map((f) => isIgnored(f, live)))],
+          coveredByDefaults: probes.some((f) => isIgnored(f, defaultsOnly)),
+        });
+      }
+    }
+    return { unsatisfied, subsumed };
+  }
+
+  test("every .gitignore pattern is mirrored verbatim, or provably subsumed by a broader deploy exclusion", () => {
+    const { unsatisfied } = auditMirror(gitignoreText, vercelignoreText);
+    assert.deepEqual(unsatisfied, [],
+      ".gitignore patterns neither mirrored into .vercelignore nor covered by a broader line there");
+  });
+
+  test("each rule-2 exemption is earned by .vercelignore itself, not by Vercel's built-in defaults", () => {
+    const { subsumed } = auditMirror(gitignoreText, vercelignoreText);
+    for (const s of subsumed) {
+      assert.ok(s.probes.length > 0, `${s.pattern}: no representative path -- the exemption is vacuous`);
+      assert.ok(!s.coveredByDefaults,
+        `${s.pattern}: matched by Vercel's default list, so .vercelignore is not what protects it`);
+      console.log(`    subsumed: ${s.pattern}  <-  ${s.by.join(", ")}  (${s.probes.length} probes)`);
+    }
+  });
+
+  test("POSITIVE CONTROL: an unmirrored pattern with no broader cover is reported", () => {
+    // Fabricated .gitignore text; the real files are untouched. The first
+    // line is a genuine exemption, the second has nothing covering it.
+    const { unsatisfied } = auditMirror(
+      "docs/MIW-master-Question-bank/**/*.txt\nSQ/private/**/*.txt\n", vercelignoreText);
+    assert.equal(unsatisfied.length, 1, `expected only the uncovered pattern: ${unsatisfied.join(" | ")}`);
+    assert.match(unsatisfied[0], /^SQ\/private/);
+  });
+
+  test("MUTATION: dropping `docs/` from the deployment ignore re-exposes the raw candidate carrier", () => {
+    const kept = vercelignoreText.split(/\r?\n/)
+      .filter((l) => l.replace(/\s+$/, "") !== "docs/").join("\n");
+    const { unsatisfied } = auditMirror(gitignoreText, kept);
+    assert.ok(unsatisfied.some((u) => u.startsWith("docs/MIW-master-Question-bank/**/")),
+      `the candidate-carrier patterns must become uncovered: ${unsatisfied.join(" | ") || "(nothing reported)"}`);
+  });
+
+  test("MUTATION: a raw candidate file nested one level deeper must not become deployable", () => {
+    const NESTED = "docs/MIW-master-Question-bank/august-2026-intake/deeper/S009_raw_report.txt";
+    assert.ok(isIgnored(NESTED, PATTERNS), "control: the nested carrier is excluded today");
+    const kept = vercelignoreText.split(/\r?\n/)
+      .filter((l) => !/^docs\//.test(l.replace(/\s+$/, ""))).join("\n");
+    const without = [
+      ...parsePatterns(VERCEL_DEFAULT_IGNORES.join("\n"), "d"),
+      ...parsePatterns(kept, "mutated"),
+    ];
+    assert.equal(isIgnored(NESTED, without), null,
+      "no docs/ line matches it -- so the coverage proven above is real, not incidental");
   });
 
   // MUTATION CONTROL for the one entry this suite was red on. `~$*` reached

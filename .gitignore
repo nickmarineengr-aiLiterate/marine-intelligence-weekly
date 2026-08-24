@@ -1,7 +1,10 @@
-# NOTE: every pattern in this file is mirrored verbatim in .vercelignore. The
-# Vercel CLI never reads .gitignore, so the mirror is what keeps these classes
-# off a workstation deployment. tools/security/deploy_surface.test.mjs fails
-# when the two files drift -- add new entries to both.
+# NOTE: the Vercel CLI never reads .gitignore, so .vercelignore is what keeps
+# these classes off a workstation deployment. Every pattern here must EITHER be
+# carried verbatim into .vercelignore, OR be provably subsumed by a broader line
+# there -- the recursive patterns below cannot be mirrored, because the
+# deployment matcher refuses `**` by design (see the block above them).
+# tools/security/deploy_surface.test.mjs checks that contract both ways and
+# fails when a new entry here is neither mirrored nor covered.
 
 # Environment variables - NEVER commit these
 .env
@@ -85,6 +88,12 @@ docs/MIW-master-Question-bank/*.pdf
 # untracked and unignored on a public repo. Match every depth, and the plain-text
 # carrier too. Derived per-occurrence records are committed instead, exactly as
 # the .docx is excluded while ALL_SURVEYORS_SOURCE_RECORDS.jsonl is not.
+# NOT mirrored into .vercelignore, and deliberately so: the deployment matcher
+# in tools/security/deploy_set.mjs refuses `**` rather than guess at it, so a
+# verbatim copy is a parse error, not a rule. The deployment excludes the whole
+# of docs/ instead, which is broader than these five lines; deploy_surface's
+# rule-2 check proves that cover holds at every nesting depth, and its mutation
+# control proves the cover is real by removing docs/ and watching them escape.
 docs/MIW-master-Question-bank/**/*.txt
 docs/MIW-master-Question-bank/**/*.xlsx
 docs/MIW-master-Question-bank/**/*.docx

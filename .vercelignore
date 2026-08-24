@@ -30,7 +30,8 @@
 # -----------------------------------------------------------------------------
 # A. MIRROR OF .gitignore -- local material that must never leave the machine
 #    on a CLI deployment. Derived from .gitignore on 2026-08-15; every entry
-#    there is repeated here.
+#    there is repeated here, EXCEPT the recursive candidate-carrier patterns
+#    that this file's matcher cannot parse -- see the note beside them below.
 # -----------------------------------------------------------------------------
 .env
 .env*
@@ -77,6 +78,12 @@ docs/MIW-master-Question-bank/*.xlsx
 docs/MIW-master-Question-bank/*.docx
 docs/MIW-master-Question-bank/*.doc
 docs/MIW-master-Question-bank/*.pdf
+# The August 2026 intake arrives in SUBFOLDERS, which .gitignore covers with
+# recursive `docs/MIW-master-Question-bank/**/*` patterns. Those are NOT copied
+# here: this file is evaluated by a matcher that refuses `**`, so the copy would
+# be a parse error. Section C's blanket `docs/` line already excludes them at
+# every depth, and deploy_surface.test.mjs proves that subsumption rather than
+# comparing the two files as strings. Do not narrow `docs/` without reading it.
 # Official DGMA source circulars. Freely published by the issuer, so this is
 # data minimisation rather than confidentiality: the committed extraction and
 # its SHA-256 pin are the auditable artefacts, not the PDF.
