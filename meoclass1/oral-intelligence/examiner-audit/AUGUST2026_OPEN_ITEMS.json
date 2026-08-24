@@ -1,7 +1,7 @@
 {
   "record_class": "CURRENT_INTAKE_OPEN_ITEMS",
   "date": "2026-08-24",
-  "note": "Work the August 2026 fresh-intake sessions have identified and deliberately NOT done. These carry their own OPEN-G1-* ids and do NOT enter tools/oral/oral_followup_register.json: that register is generated from the historical authorisation sources and its FUP-001..FUP-035 ids are stable release evidence. Inventing an FUP-036 by hand would put a hand-written row into a derived file and break the one property that makes those ids trustworthy.",
+  "note": "Work the August 2026 fresh-intake sessions have identified and deliberately NOT done. These carry their own OPEN-G1-* ids and do NOT enter tools/oral/oral_followup_register.json: that register is generated from the historical authorisation sources and its FUP-001..FUP-035 ids are stable release evidence. Inventing an FUP-036 by hand would put a hand-written row into a derived file and break the one property that makes those ids trustworthy. 2026-08-24: OPEN-G1-006 and OPEN-G1-007 closed; OPEN-G1-008 opened for the class-wide artefact scope that OPEN-G1-007 understated.",
   "items": [
     {
       "id": "OPEN-G1-001",
@@ -27,10 +27,10 @@
     {
       "id": "OPEN-G1-003",
       "title": "Seven batch-1 genuine-new asks are adjudicated but not yet authored",
-      "evidence": "AUG-0001 (chemical/product tanker vs crude carrier), AUG-0003 (primary and secondary means of venting), AUG-0005 (emergency towing - time requirement), AUG-0007 (EU SRR alongside the Hong Kong Convention), AUG-0015 (RoRo latest amendments), AUG-0018 (ALARP), AUG-0022 (fire tetrahedron). All seven carry a structured negative_search and remain GENUINE_NEW_QUESTION.",
+      "evidence": "AUG-0001 (chemical/product tanker vs crude carrier), AUG-0003 (primary and secondary means of venting), AUG-0005 (emergency towing - time requirement), AUG-0007 (EU SRR alongside the Hong Kong Convention), AUG-0015 (RoRo latest amendments), AUG-0018 (ALARP), AUG-0022 (fire tetrahedron). All seven carry a structured negative_search and remain GENUINE_NEW_QUESTION. Two further genuine-new asks joined this queue on 2026-08-24 from submission S007: AUG-0065 (which conventions apply to an LPG carrier - the instrument set for a gas ship, where the liability limb is HNS rather than CLC/Fund) and AUG-0068 (which conventions are engaged when a job is assigned to a 2E or 3E). Both carry a structured negative_search. The queue is therefore NINE asks, not seven.",
       "candidate_impact": "Seven questions asked at the August 2026 Kochi sitting have no card. These are current-value questions and should be produced ahead of the historical follow-up backlog.",
       "why_not_done_here": "Batch G1 produced the four asks from the newer submission plus the three follow-up limbs. AUG-0015 and AUG-0005 additionally need their scope settled before authoring - the brief flags 'RoRo amendments' as too broad without further candidate evidence, and the emergency-towing 'time requirement' limb should not be guessed from the phrase alone.",
-      "size": "Five straightforward cards, two needing a scope decision first.",
+      "size": "Nine cards: the batch-1 seven, plus AUG-0065 and AUG-0068 from S007.",
       "status": "OPEN_NEXT_PRODUCTION_BATCH",
       "visible_in": "validate_batch_g1.py check g1_unproduced_new_asks_are_still_visible, and the master ledger's production.outstanding_new_asks"
     },
@@ -56,7 +56,8 @@
       "found_via": "AUG-0049",
       "evidence": "The question text reads 'Empanelment of salvors. ( ms notice 1 of 202)'. 202 is not a year, and \"ms notice\" is unnormalised where the rest of the bank writes \"MS Notice\". The string is candidate-visible and is also emitted into the page JSON-LD.",
       "why_not_done_here": "Correcting candidate-facing question text is a post-release correction needing its own manifest, and the correct Merchant Shipping Notice number must be verified against the DGMA source rather than reconstructed from a truncated string.",
-      "status": "OPEN_NEEDS_SOURCE_VERIFICATION"
+      "status": "CLOSED_SOURCE_VERIFIED_AND_CORRECTED",
+      "closure": "Closed 2026-08-24. The number was verified, not reconstructed: the DGMA Nautical Wing casualty page records MS Notice No. 01 of 2026, dated 15 January 2026, as the checklist for empanelment and retention of salvors under Section 255 of the Merchant Shipping Act 2025, with applications commencing 01 March 2026, and the notice published on the same official domain carries that number in its title. The missing digit was 6. Corrected on every candidate-visible surface - the q-text, the JSON-LD Question name generated from it, and the QB1_FG cheat sheet cue - and normalised to 'MS Notice'. The generated examiner index, which carried the old string twice, was rebuilt from the live corpus rather than hand-edited. The historical evidence ledgers were deliberately NOT rewritten: source_wording records what the July sources actually said. Governed by correction_corr_g1_006_salvor_citation_20260824_manifest.json; known trap 50."
     },
     {
       "id": "OPEN-G1-007",
@@ -65,7 +66,19 @@
       "evidence": "Live in the rendered card: literal '[cite: 1]' markers inside the Regulatory References box (four occurrences), a <pre> block duplicating that box in plain ASCII with ==== rules plus a duplicated CE Oral Tip, literal markdown --- separators rendered as paragraphs, the word \"arrow\" where a glyph belonged, and a stale correction footer reading QB8 Q16 v1.0 inside a card whose own footer reads QB8 Q3.",
       "candidate_impact": "This is a paid page. Draft artefacts beside correct content undermine the authority of the correct content.",
       "why_not_done_here": "A presentation cleanup of a whole card is a separate bounded job with its own correction manifest, and mixing it into a fresh-intake batch is how blast radius grows.",
-      "status": "OPEN_AWAITING_FOUNDER_SIZING"
+      "status": "CLOSED_FOR_THE_CARD_IT_NAMES",
+      "closure": "Closed 2026-08-24 for QB8_A#q3. Removed four [cite: 1] markers, the ASCII REGULATORY REFERENCE BOX inside a <pre> duplicating the real reg-box, a second copy of the CE Oral Tip, ten literal markdown --- rules rendered as visible paragraphs, and the draft footer reading QB8 Q16 v1.0; the word 'arrow' became the glyph it stood in for. TWO OF THE FOUR cite markers were inside the REAL reg-box rather than the duplicate, so deleting the <pre> block alone would have left them live - recorded as known trap 51 because it is the general shape of a half-finished repair. Nothing was lost: every deletion was verified redundant against the surviving copy first, and the reg-box, ce-tip, real footer, freight-rate limb and every heading are asserted present after the edit. The card's digest chain descends from CORR-G1R-006 rather than rebaselining it. Governed by correction_corr_g1_007_qb8a_q3_artefacts_20260824_manifest.json. The class-wide remainder is OPEN-G1-008."
+    },
+    {
+      "id": "OPEN-G1-008",
+      "title": "Raw draft scaffolding is live on ten QB pages, not just the one card OPEN-G1-007 named",
+      "found_via": "the OPEN-G1-007 cleanup, when the artefact patterns were swept corpus-wide before editing",
+      "evidence": "Exact counts on 2026-08-24. '[cite: N]' markers: 65 occurrences across 4 files - QB3_C 2, QB8_A 18, QB9_A 30, QB9_B 15. '<p>---</p>' literal markdown rules rendered as visible paragraphs: 251 occurrences across 10 files - QB1_C 7, QB2_C 4, QB3_C 5, QB6_D 3, QB7_B 7, QB7_E 4, QB8_A 57, QB8_B 12, QB9_A 86, QB9_B 66. ASCII 'REGULATORY REFERENCE BOX' inside <pre>, and 'CORRECTION FOOTER' draft paragraphs: 22 occurrences each across 3 files - QB8_A 6, QB9_A 9, QB9_B 7. The QB8_A#q3 figures include the card already corrected.",
+      "candidate_impact": "These are paid pages. Draft scaffolding standing beside correct content undermines the authority of the correct content, and the ASCII boxes duplicate reg-boxes that are themselves sometimes more current than the duplicate - a candidate reading the <pre> copy can take away a stale version of an answer the card gets right.",
+      "why_not_done_here": "OPEN-G1-007 authorised one card. A presentation sweep across ten paid pages is its own sized job: it needs its own correction record, its own digest pins for every card it touches, and its own review, and several of the pages are already digest-pinned by earlier batches so the sweep would have to declare a supersession per card. Note this is NOT the OPEN-G1-001 situation - removing noise from one card does not make its siblings read worse, which is why fixing q3 alone was safe and fixing 1 of 18 empty answer blocks was not.",
+      "size": "Ten files; one correction record; a per-card digest pin and supersession review for every card touched.",
+      "status": "OPEN_AWAITING_FOUNDER_SIZING",
+      "predates_this_intake": true
     }
   ]
 }
