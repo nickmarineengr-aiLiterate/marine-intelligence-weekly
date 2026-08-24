@@ -1,0 +1,89 @@
+{
+ "correction_id": "CORR-G1-006-SALVOR-CITATION-20260824",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "open_items_register",
+ "date": "2026-08-24",
+ "title": "QB1_G#q32 shipped a truncated Merchant Shipping Notice citation; verified against the DGMA source as MS Notice 1 of 2026",
+ "baseline_commit": "01a1eca",
+ "governing_commits": [
+  "0ccc93f"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_OPEN_ITEMS.json",
+ "known_traps_entries": [
+  50
+ ],
+ "candidate_claim": "Raised as OPEN-G1-006 while adjudicating AUG-0049 (Empanelment of salvors), reported by an August 2026 candidate.",
+ "candidate_verdict": "CORRECT",
+ "rationale": "The candidate-facing question text read 'Empanelment of salvors. ( ms notice 1 of 202)'. 202 is not a year. The truncation mattered more than a typo would, because the card body never states the notice number anywhere: it refers only to 'the relevant Director General of Shipping (DGS) Merchant Shipping Notice' and to 'specialized MS Notices'. The truncated string in the stem was therefore the only citation a candidate could take away, and it was unusable. The open item required the number to be verified against the DGMA source rather than reconstructed from the truncation, and it was: the Directorate General of Maritime Administration's own Nautical Wing casualty page records MS Notice No. 01 of 2026, dated 15 January 2026, prescribing the checklist for empanelment and retention of salvors under Section 255 of the Merchant Shipping Act 2025, with applications commencing 01 March 2026. The notice published on the same official domain carries 'Merchant Shipping Notice No. 01 of 2026' in its own title. The missing digit is 6, read from the source. 'ms notice' was also normalised to 'MS Notice', which is how the rest of the bank writes it.",
+ "note": "This correction changes candidate-facing QUESTION TEXT, which is unusual and has a wider surface than a body edit: the same string is emitted into the page's JSON-LD Question name, into the QB1_FG cheat sheet cue, and into the generated examiner index, which carries it twice (the Simon and Rajappan rows for QB1_G#q32). All generated surfaces are regenerated from the live corpus rather than hand-edited. The historical evidence ledgers are NOT rewritten: EXAMINER_EVIDENCE_LEDGER.jsonl records source_wording, which is what the source sheet actually said and remains true of that source. Only claims ABOUT the live text are refreshed, and only by their generators.",
+ "authority": [
+  {
+   "source": "Directorate General of Maritime Administration (DGMA), Nautical Wing - Maritime Casualty Investigation & Emergency Response",
+   "clauses": [
+    "MS Notice 01 of 2026, dated 15 January 2026 - checklist for empanelment and retention of salvors",
+    "Issued under Section 255 of the Merchant Shipping Act 2025",
+    "Applications for empanelment prescribed to commence from 01 March 2026"
+   ],
+   "url": "https://dgma.gov.in/nautical-wing/nw-casualty",
+   "note": "Official DGMA domain. dgshipping.gov.in no longer serves this content."
+  },
+  {
+   "source": "Merchant Shipping Notice No. 01 of 2026 (DGMA published PDF)",
+   "clauses": [
+    "Title carries the notice number relied on: Merchant Shipping Notice No. 01 of 2026"
+   ],
+   "url": "https://dgma.gov.in/download/1768826188_696e254c273f4_merchant-shipping-notice-no-01-of-2026.pdf",
+   "note": "Corroborates the number independently of the casualty page. Direct fetch of the PDF was refused by the host at the time of writing; the number is taken from the published title on the same official domain."
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "CORR-G1-006-01",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q32",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "6c56ce4ca7d45c5d2d19602f07b1fccbdefc282b29f7f26194f527bb49c237e4",
+   "post_edit_digest": "28e574d2e1da5a2457426ab85e653784569be11ce52c7c7749b55df81a7a4f7d",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "One string, corrected on both of its occurrences in this page: the q-text div and the JSON-LD Question name generated from it. '( ms notice 1 of 202)' becomes '(MS Notice 1 of 2026)'. The answer body, reg-box, CE Oral Tip, anchor, card position and every technical claim are untouched.",
+   "surfaces_corrected": [
+    "q-text",
+    "JSON-LD Question name"
+   ]
+  }
+ ],
+ "propagation": [
+  {
+   "path": "meoclass1/QB1_FG_CheatSheet.html",
+   "classification": "DERIVED_CANDIDATE_SURFACE",
+   "action": "CORRECTED_IN_THIS_RECORD",
+   "finding": "The cheat sheet cue-source line carried the same truncated string and is candidate-facing. Corrected in the same commit. The cheat sheet holds no q-card anchors, so it carries no card digest and is pinned by this record's governing commit rather than by a digest."
+  },
+  {
+   "path": "meoclass1/examiner-index.html",
+   "classification": "GENERATED_SURFACE",
+   "action": "REGENERATED",
+   "finding": "Carries the display text twice for QB1_G#q32. Rebuilt from the live corpus by build_examiner_index.py; never hand-edited."
+  },
+  {
+   "path": "meoclass1/oral-intelligence/examiner-audit/EXAMINER_EVIDENCE_LEDGER.jsonl",
+   "classification": "HISTORICAL_EVIDENCE",
+   "action": "NO_CHANGE_REQUIRED",
+   "finding": "source_wording records what the July master sheet and the candidate records actually said. That remains true of those sources and must not be rewritten to match a later corpus state; doing so would falsify the evidence trail the attribution tiers rest on."
+  }
+ ],
+ "invariants": {
+  "question_text_unchanged": false,
+  "anchor_unchanged": true,
+  "canonical_question_count_unchanged": true,
+  "examiner_relationships_unchanged": true,
+  "study_taxonomy_unchanged": true,
+  "historical_qi_unchanged": true,
+  "technical_claims_unchanged": true,
+  "citations_unchanged": false,
+  "supersession_required": false,
+  "supersession_rationale": "No earlier manifest pins a card digest for QB1_G#q32. The correction_corr_csm_boiler and correction_corr_csm_india records touch QB1_G#q40, a different anchor, and no batch manifest declares q32. The chain for this card starts here."
+ }
+}

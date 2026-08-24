@@ -1,0 +1,86 @@
+{
+ "correction_id": "CORR-G1-007-QB8A-Q3-ARTEFACTS-20260824",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "open_items_register",
+ "date": "2026-08-24",
+ "title": "QB8_A#q3 shipped raw draft scaffolding to candidates: cite markers, a duplicated ASCII reg-box, a duplicated CE Oral Tip, literal markdown rules and a stale draft footer",
+ "baseline_commit": "01a1eca",
+ "governing_commits": [
+  "0f5f2d7"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_OPEN_ITEMS.json",
+ "known_traps_entries": [
+  51
+ ],
+ "candidate_claim": "Raised as OPEN-G1-007 by the independent clean-context review, incidentally, outside its assigned section.",
+ "candidate_verdict": "CORRECT",
+ "rationale": "Presentation-only cleanup of one card on a paid page. Removed: four '[cite: 1]' markers, an ASCII 'REGULATORY REFERENCE BOX' inside a <pre> element duplicating the real reg-box, a second copy of the CE Oral Tip, ten literal markdown '---' rules rendered as visible paragraphs, and a draft footer reading 'CORRECTION FOOTER: QB8 - Q16 - v1.0' inside a card whose real footer reads QB8 - Q3 - v1.1. The word 'arrow' in the Examiner Chain was replaced with the glyph it stood in for. Two of the four cite markers were inside the REAL reg-box rather than the duplicate, so deleting the <pre> block alone would have left them live on the page. No substance was removed: the ASCII box's four references (EU Competition Law, FMC Regulations, ISM Code Section 7, ISO 50001) are all carried by the real reg-box, which also holds a fifth the draft did not - the freight-rate sources limb added on 24 Aug 2026 - and the duplicated tip matched the real ce-tip word for word.",
+ "note": "SCOPE. These artefacts are not confined to this card, and the open item understated the size. Across the bank: '[cite: N]' appears 65 times in 4 files (QB3_C 2, QB8_A 18, QB9_A 30, QB9_B 15); '<p>---</p>' 251 times in 10 files (QB1_C 7, QB2_C 4, QB3_C 5, QB6_D 3, QB7_B 7, QB7_E 4, QB8_A 57, QB8_B 12, QB9_A 86, QB9_B 66); the ASCII reg-box and the draft correction footer 22 times each in 3 files. Only QB8_A#q3 - the card OPEN-G1-007 names - is corrected here. The remainder is recorded as OPEN-G1-008 rather than swept, because a presentation sweep across ten paid pages is its own sized job needing its own review. Removing noise from one card does not make its siblings read worse, which is why this differs from OPEN-G1-001, where filling one empty block of eighteen would.",
+ "authority": [
+  {
+   "source": "The card's own live content",
+   "clauses": [
+    "The real <div class=\"reg-box\"> carries all four references the ASCII duplicate listed, plus the freight-rate sources limb",
+    "The real <div class=\"ce-tip\"> is word-for-word identical to the removed duplicate",
+    "The real q-footer reads QB8 - Q3 - v1.1; the removed draft footer claimed Q16 v1.0"
+   ],
+   "note": "A presentation correction takes its authority from the card it deduplicates, not from an external instrument. Every deletion was verified redundant against the surviving copy before it was made."
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "CORR-G1-007-01",
+   "file": "QB8_A.html",
+   "path": "meoclass1/QB8_A.html",
+   "anchor": "q3",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "94c3c4fbbbf9069a30d6dea52f87d92f060c102bef11c39587d9ccae204fc79e",
+   "post_edit_digest": "8154bb0a82488d0c69714f14715a68e102fd01fef559333fa8d384d0a365858f",
+   "digest_pinned_by_earlier_manifest": true,
+   "supersedes": {
+    "manifest": "correction_corr_g1_independent_review_20260824_manifest.json",
+    "action_id": "CORR-G1R-006",
+    "post_edit_digest": "94c3c4fbbbf9069a30d6dea52f87d92f060c102bef11c39587d9ccae204fc79e",
+    "note": "Third state of this card: batch G1 authored it, the independent review added the freight-rate sources limb and corrected the Baltic Dry Index composition, and this record strips the draft scaffolding. The review's pinned post-edit state is this correction's pre-edit state, so the chain resolves G1-008 -> CORR-G1R-006 -> CORR-G1-007-01 and neither earlier record is rewritten or relaxed."
+   },
+   "rationale": "Seventeen deletions and one substitution, all presentation. Question text, anchor, card position, the reg-box, the ce-tip, the real footer, every h4 and h5 heading and every technical claim are unchanged - asserted structurally after the edit, with div nesting required to balance. The freight-rate limb and the corrected BDI composition from CORR-G1R-006 are explicitly guarded as surviving.",
+   "surfaces_corrected": [
+    "answer-body [cite: N] markers",
+    "reg-box [cite: N] markers",
+    "deep-dive ASCII <pre> reg-box (removed)",
+    "deep-dive duplicated CE Oral Tip (removed)",
+    "deep-dive stale QB8 Q16 draft footer (removed)",
+    "literal markdown --- paragraphs (removed)",
+    "Examiner Chain glyph"
+   ]
+  }
+ ],
+ "propagation": [
+  {
+   "path": "meoclass1/QB8_AB_CheatSheet.html",
+   "classification": "DERIVED_CANDIDATE_SURFACE",
+   "action": "NO_CHANGE_REQUIRED",
+   "finding": "Checked for the removed artefacts and for the duplicated blocks; carries none of them."
+  },
+  {
+   "path": "corpus-wide",
+   "classification": "SCOPE_SWEEP",
+   "action": "DEFERRED_SEPARATE_CORRECTION",
+   "finding": "Nine further files carry the same artefact classes. Enumerated with exact counts in this record's note field and registered as OPEN-G1-008."
+  }
+ ],
+ "invariants": {
+  "question_text_unchanged": true,
+  "anchor_unchanged": true,
+  "canonical_question_count_unchanged": true,
+  "examiner_relationships_unchanged": true,
+  "study_taxonomy_unchanged": true,
+  "historical_qi_unchanged": true,
+  "technical_claims_unchanged": true,
+  "citations_unchanged": true,
+  "preceding_corrections_reopened": false,
+  "supersession_required": true,
+  "supersession_rationale": "CORR-G1R-006 pins this exact card. Declared through the generic cards[].supersedes contract in tools/oral/oral_supersession.py so the chain descends rather than rebaselines, and the independent review's own corrections stay pinned by the commit that produced them."
+ }
+}

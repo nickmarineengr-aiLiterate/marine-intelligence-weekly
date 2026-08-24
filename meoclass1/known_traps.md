@@ -1112,3 +1112,49 @@ may **liquefy or undergo dynamic separation**.
 | 2026-08-23 | Entry 44: CSM/boiler answer re-framed in the Indian authority order — DG Shipping/DGMA statutory ("running survey", Rule 274), IRS class implementation (Main Rules Pt.1 Ch.2 §8.2/§1.4 and IRS-G-SUR-02), IACS UR Z18 as unified class baseline not a statutory authority, ClassNK demoted to implementation example. IRS 4.1.1(d) shows the real line is Chief Engineer CREDIT, not CSM eligibility, so the claim is narrowed to the boiler's pressure boundary being off the 5-year CSM interval; two ClassNK-derived pump types removed from the card. | Founder review following Entry 43 |
 | 2026-08-23 | Entry 45: "DG Shipping / DGMA" written as a live pair on QB1_G Q40 — the authority is the Directorate General of Maritime Administration, named in full on first mention with "formerly DG Shipping" as a historical gloss and DGMA as the short form. Document titles carrying the old name ("DG Shipping Engineering Circular 02 of 2024" etc.) deliberately left unchanged; ten further files recorded for a separate scoped pass. | Founder correction following Entry 44 |
 | 2026-08-24 | Entries 46-49: found by an INDEPENDENT clean-context review of the batch-G1 cards, and by a second independent pass over its own fixes. Rescue-boat 5-knot figure attached to recovery instead of launching (QB2_E Q1 and Q3, seven places including an SVG label and the page meta); MARPOL Annex VI Chapter 4 cited in pre-2021 numbering and GBS scope understated (QB1_C Q9); Baltic Dry Index described with a Handysize component eight years after its removal (QB8_A Q3); "TML = 90% of FMP" applied to iron ore fines, which has no FMP, plus a stale Group A definition (QB2_A Q31). Also corrected in the same pass: a revoked VTS resolution A.857(20) and SOLAS V/19-1 mislabelled as AIS (QB9_E Q9, QB3_G Q2), and the Pablo casualty described as producing an oil slick when she was in ballast. | Independent clean-context review, then a second independent pass over the fixes |
+| 2026-08-24 | Entries 50-51: `QB1_G` Q32 carried a truncated Merchant Shipping Notice citation, "1 of 202" -- verified against the DGMA Nautical Wing source as **MS Notice 01 of 2026** (15 Jan 2026, empanelment and retention of salvors, s.255 MS Act 2025) rather than reconstructed from the truncation; and `QB8_A` Q3 shipped raw draft scaffolding to candidates, where two of the four `[cite: 1]` markers turned out to be inside the REAL reg-box rather than the `<pre>` duplicate, so deleting the obvious artefact alone would have left them live. Class-wide artefact scope enumerated and registered as OPEN-G1-008. | OPEN-G1-006 and OPEN-G1-007, closed from the August intake open-items register |
+
+### 50. A truncated citation is worse than no citation
+
+`QB1_G.html` Q32 asked about the empanelment of salvors and carried its authority in the
+question stem as **"( ms notice 1 of 202)"**. **202 is not a year.** The card body never
+states the number anywhere else -- it refers only to "the relevant Director General of
+Shipping (DGS) Merchant Shipping Notice" -- so the truncated string was the whole of the
+citation a candidate could take into the room.
+
+The instrument is **MS Notice No. 01 of 2026, dated 15 January 2026**, prescribing the
+checklist for **empanelment and retention of salvors** under **Section 255 of the Merchant
+Shipping Act 2025**, with applications commencing **01 March 2026**.
+
+Two lessons, and the second is the general one.
+
+* The missing digit was **read from the DGMA source, not inferred from the truncation**.
+  "202" is equally consistent with 2020, 2021, 2022 and 2026, and a plausible guess in a
+  citation is indistinguishable to a candidate from a verified one.
+* A question stem is **not decoration**. It is emitted into the page JSON-LD, into the cheat
+  sheet cue and into the generated examiner index, so a defect there is reproduced on every
+  derived surface -- and correcting it moves display text that several generated files pin.
+
+### 51. Draft scaffolding shipped to candidates, and the copy that survives the cleanup
+
+`QB8_A.html` Q3 -- a paid card -- shipped its own authoring scaffolding live: four
+`[cite: 1]` markers, an ASCII **REGULATORY REFERENCE BOX** inside a `<pre>` duplicating the
+real reg-box, a second copy of the CE Oral Tip, ten literal markdown `---` rules rendered as
+visible paragraphs, the word "arrow" where a glyph belonged, and a draft footer reading
+**QB8 Q16 v1.0** inside a card whose real footer reads **QB8 Q3 v1.1**.
+
+The trap is in the repair, not the defect. **Two of the four `[cite: 1]` markers were inside
+the REAL reg-box**, not the duplicate. Deleting the obvious artefact -- the `<pre>` block --
+would have removed two markers, looked complete, and left two live on the page. This is the
+same shape as fixing prose and leaving the summary, the SVG label or the meta description
+stale: **after any repair, search the whole card for the pattern, not the block you were
+looking at.**
+
+Second lesson: **verify redundancy before deleting**. Each removal here was checked against
+the surviving copy first -- the ASCII box's four references are all carried by the real
+reg-box, which holds a fifth besides, and the duplicated tip matched word for word. A
+"duplicate" that is not actually a duplicate is content loss dressed as tidying.
+
+Scope: these artefact classes are **not confined to that card**. `[cite: N]` appears 65
+times across 4 files, `<p>---</p>` 251 times across 10, and the ASCII box and draft footer
+22 times each across 3. Recorded as OPEN-G1-008 rather than swept.
