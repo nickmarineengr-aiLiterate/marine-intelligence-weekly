@@ -162,6 +162,11 @@ describe("CLI negative control — git-ignored classes remain undeployable", () 
     "meoclass1/pastpapers/intelligence/derived/sixyear.json",
     "Notes-for-written-answers/handout-01.pdf",
     "docs/MIW-master-Question-bank/master.xlsx",
+    // Excel owner-lock file, at the ROOT deliberately: docs/ and tools/ are
+    // already excluded wholesale, so a sentinel under either would pass
+    // without `~$*` doing any work at all. The mutation control below
+    // proves this one genuinely depends on it.
+    "~$MIW_MEO_Class1_Study_Roadmap.xlsx",
     "tools/notes/_scratch_probe.txt",
     "node_modules/some-dep/index.js",
     "tools/pastpapers/__pycache__/build_index.cpython-311.pyc",
@@ -195,6 +200,25 @@ describe("CLI negative control — git-ignored classes remain undeployable", () 
     const vPats = new Set(vercelignoreText.split(/\r?\n/).map((l) => l.replace(/\s+$/, "")));
     const missing = gitPats.filter((p) => !vPats.has(p));
     assert.deepEqual(missing, [], ".gitignore patterns absent from .vercelignore");
+  });
+
+  // MUTATION CONTROL for the one entry this suite was red on. `~$*` reached
+  // .gitignore on 2026-08-23 and was never mirrored here, so the mirror test
+  // above failed until 2026-08-24. Adding the line turns that test green --
+  // but a pattern can be present and still match nothing, and a mirror test
+  // compares STRINGS, so it cannot tell the difference. Strip only `~$*`
+  // from the live patterns and the sentinel must become deployable again.
+  test("MUTATION: removing `~$*` from the deployment ignore lets a lock file through", () => {
+    const LOCK = "~$MIW_MEO_Class1_Study_Roadmap.xlsx";
+    assert.ok(isIgnored(LOCK, PATTERNS), "control: the lock file is excluded today");
+    const kept = vercelignoreText.split(/\r?\n/)
+      .filter((l) => l.replace(/\s+$/, "") !== "~$*").join("\n");
+    const without = [
+      ...parsePatterns(VERCEL_DEFAULT_IGNORES.join("\n"), "d"),
+      ...parsePatterns(kept, "mutated"),
+    ];
+    assert.equal(isIgnored(LOCK, without), null,
+      "`~$*` matches nothing -- the mirror entry is present but inert");
   });
 
   test("POSITIVE CONTROL: a matcher without section A would let a sentinel through", () => {
