@@ -43,8 +43,38 @@ if __name__ == '__main__':
 import qi_projection as QIP
 import study_qi_adapter as SQI
 import recurrence_model as RM
+# Importing the adapter puts tools/current_answers on sys.path, so this resolves.
+# OWNERSHIP IS TYPED AND `ca_model.resolve_owner` IS THE SINGLE PLACE THAT
+# NORMALISES IT. R-PROJ-E and R-PROJ-G used to read `canonical_current_answer`
+# for a bare `question_id` key, which is only the LEGACY shape: a record written
+# in the preferred typed form, or one that owns its family limb by limb, was
+# invisible to both rules. That direction fails CLOSED -- the named-answer set
+# is a whitelist, so a short whitelist over-reports rather than under-reports --
+# but it blocked three legitimately verified answers in Phase-2 tranche 003.
+import ca_model as CA
 
 D = os.path.join(ROOT, 'docs', 'study')
+
+
+def _named_question_owners(record):
+    """Every past-paper question a Phase-2 record names as a WHOLE answer.
+
+    Two exclusions, and both are deliberate.
+
+    A LIBRARY id is excluded because it matches no question, so a projection row
+    can never claim it; admitting one to a whitelist of question ids would be
+    meaningless at best.
+
+    A `SOLVED_PAPER_LIMB` owner is excluded because this whitelist governs a
+    WHOLE-QUESTION claim -- `readiness_basis == PHASE2_GOVERNED_REVIEW` renders
+    as "Current answer verified" on that question's own card. Verifying ONE LIMB
+    of a solved question does not verify the question, and admitting limb owners
+    here would have quietly widened the guard while fixing its blind spot. The
+    library side of the same rule is `R-CA-LIMB-SLOT`; this is the paper side of
+    it, and until now nothing enforced it.
+    """
+    return {oid for otype, oid in CA.owner_ids(record)
+            if otype == 'SOLVED_PAPER' and oid}
 
 #: Every candidate-facing surface that may carry the projection, and whether
 #: the middleware matcher gates it. Derived from middleware.js, not assumed:
@@ -234,10 +264,7 @@ def run():
                         encoding='utf-8'))
     named = set()
     for r in p2['families']:
-        v = r.get('canonical_current_answer')
-        nid = v.get('question_id') if isinstance(v, dict) else v
-        if nid:
-            named.add(nid)
+        named |= _named_question_owners(r)
     wrong = [r['question_id'] for r in proj['questions']
              if r['readiness_basis'] == 'PHASE2_GOVERNED_REVIEW'
              and r['question_id'] not in named]
@@ -261,11 +288,10 @@ def run():
     for r in p2['families']:
         if r['final_state'] != 'SUPERSEDED_WITH_SUCCESSOR':
             continue
-        v = r.get('canonical_current_answer')
-        nid = v.get('question_id') if isinstance(v, dict) else v
+        nids = _named_question_owners(r)
         for q in proj['questions']:
             if r['family_id'] in (q['canonical_family_ids'] or ()) \
-                    and q['question_id'] != nid \
+                    and q['question_id'] not in nids \
                     and q['readiness_basis'] == 'PHASE2_GOVERNED_REVIEW':
                 bad_inherit.append(q['question_id'])
     ok('R-PROJ-G', not bad_inherit,

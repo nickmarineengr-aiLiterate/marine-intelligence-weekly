@@ -133,6 +133,40 @@ def mut_6_currentness_risk_marked_ready(ctx):
     return 'R-READY-SAFE'
 
 
+def mut_6b_limb_owned_family_ready_with_no_owner(ctx):
+    """The LIMB-OWNED half of R-READY-SAFE, untested until Phase-2 tranche 003
+    tripped it in production.
+
+    `_phase2_earned` originally read only `canonical_current_answer`, so a
+    family owned LIMB BY LIMB looked as though it answered nothing and lost a
+    readiness grant it had fully earned. The gap stayed latent because the only
+    limb-owned family before tranche 003 carried an UNKNOWN currentness triage,
+    and UNKNOWN never reaches this guard. QIF-EM-0061 was the first limb-owned
+    family whose triage flagged a real risk.
+
+    Fixing that must not open the other door, so this mutation proves the new
+    branch FAILS CLOSED: a limb-owned family carrying a currentness risk, left
+    reading READY with no `owner_id` in any limb slot, must still be refused.
+    A limb list is not an owner; an owner is.
+
+    The positive control is the baseline itself, which now contains a genuinely
+    limb-owned family with an unsafe triage and passes. The condition here is
+    CONSTRUCTED onto whichever family carries a Phase-2 resolution rather than
+    harvested from whichever family happens to be limb-owned today, so this
+    mutation cannot quietly expire when the next tranche changes the corpus.
+    """
+    row = next(r for r in ctx['doc']['families'] if r.get('phase2_resolution'))
+    row['currentness_status'] = 'CURRENT_FRAMEWORK_CHANGED'
+    row['readiness'] = 'READY_TO_STUDY_NOW'
+    row['blocked'] = False
+    p2 = row['phase2_resolution']
+    p2['canonical_current_answer'] = None
+    p2['family_current_answers'] = [
+        {'limb_id': 'L-A', 'scope': 'a limb with nothing in it',
+         'owner_type': 'CURRENT_LIBRARY_LIMB', 'owner_id': None}]
+    return 'R-READY-SAFE'
+
+
 def mut_7_phase2_debt_omitted(ctx):
     """A Phase-2 queue family is dropped from the study projection, so answer
     debt stops being visible to the person planning study."""
@@ -219,6 +253,7 @@ MUTATIONS = [
     ('5   limb recurrence promoted to whole question', mut_5_limb_promoted_to_whole_question),
     ('5b  whole-vs-limb join stripped', mut_5b_whole_vs_limb_join_unlabelled),
     ('6   currentness-risk family marked ready', mut_6_currentness_risk_marked_ready),
+    ('6b  limb-owned family ready with no owner', mut_6b_limb_owned_family_ready_with_no_owner),
     ('7   Phase-2 answer debt omitted', mut_7_phase2_debt_omitted),
     ('8   roadmap recurrence hand-edited', mut_8_roadmap_recurrence_hand_edited),
     ('8b  spine detached from the adapter', mut_8b_spine_detached_from_adapter),

@@ -130,6 +130,46 @@ def mut_4_bless_a_stale_answer_from_its_successor():
     return 'R-PROJ-E', lambda: _write(PROJ, orig)
 
 
+def mut_4b_a_limb_owner_claims_the_whole_question():
+    """R-PROJ-E, from the direction that opened when ownership became TYPED.
+
+    The rule reads a whitelist of the questions a governed record names, and it
+    used to build that whitelist from the LEGACY `{"question_id": ...}` shape
+    only -- so a record written in the preferred typed form was invisible and
+    three legitimately verified answers were rejected in Phase-2 tranche 003.
+    Teaching it `ca_model.resolve_owner` fixed that, and created the obvious
+    risk of over-correcting: if limb owners were admitted too, verifying ONE
+    LIMB of a solved question would buy a "Current answer verified" badge on the
+    WHOLE question's card.
+
+    They are not admitted, and this proves it. An existing WHOLE owner is
+    demoted in the store to a `SOLVED_PAPER_LIMB` naming the same question,
+    while the projection continues to render that question as verified. The
+    question is still named by a governed record -- just not as a whole answer
+    -- and the gate must refuse it.
+
+    Nothing is hardcoded: the victim is whichever verified family the store
+    happens to carry, so this cannot expire when the corpus moves.
+    """
+    store = os.path.join(HERE, 'qi_phase2_adjudications.json')
+
+    def f(doc):
+        victim = next(
+            r for r in doc['families']
+            if isinstance(r.get('canonical_current_answer'), dict)
+            and (r['canonical_current_answer'].get('owner_id')
+                 or r['canonical_current_answer'].get('question_id')))
+        cca = victim.pop('canonical_current_answer')
+        qid = cca.get('owner_id') or cca.get('question_id')
+        victim['family_current_answers'] = [
+            {'limb_id': 'L-A', 'limb_label': 'demoted by mutation',
+             'scope': 'one limb only', 'owner_type': 'SOLVED_PAPER_LIMB',
+             'owner_id': qid}]
+
+    orig = _patch_json(store, f)
+    return 'R-PROJ-E', lambda: _write(store, orig)
+
+
 def mut_5_remove_a_currentness_warning():
     """Strip a rendered currentness warning off a card, leaving a page that
     implies a moved framework is still current.
@@ -223,6 +263,8 @@ MUTATIONS = [
     ('remove an existing modern repeat tag', mut_3_remove_a_modern_repeat_tag),
     ('mark a stale answer CURRENT ANSWER VERIFIED',
      mut_4_bless_a_stale_answer_from_its_successor),
+    ('a limb owner claims the whole question',
+     mut_4b_a_limb_owner_claims_the_whole_question),
     ('remove a currentness warning', mut_5_remove_a_currentness_warning),
     ('modify a recurrence count during projection',
      mut_6_change_a_recurrence_count_in_projection),

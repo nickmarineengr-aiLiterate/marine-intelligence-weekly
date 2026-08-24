@@ -254,13 +254,33 @@ def run_checks(ctx):
     # passed, and a canonical answer to point the candidate at. A record
     # missing any of those grants nothing, so hollowing one out cannot buy a
     # READY. The triage value itself is never rewritten -- Phase 1 is input.
+    #
+    # OWNERSHIP IS TYPED, AND A FAMILY IS OWNED WHOLE *OR* LIMB BY LIMB.
+    # Reading only `canonical_current_answer` reports every LIMB-OWNED family as
+    # answering nothing, and so withdraws a readiness grant that was fully
+    # earned -- the same failure `validate_phase2_tranche` was hardened against
+    # when limb ownership was introduced, arriving from the other side.
+    # This rule was NOT hardened at the same time and the gap stayed latent,
+    # because the only limb-owned family until Phase-2 tranche 003 was
+    # QIF-EM-0052, whose Phase-1 triage is UNKNOWN -- and UNKNOWN is not in
+    # UNSAFE_CURRENTNESS, so the guard never reached it. QIF-EM-0061 is the
+    # first limb-owned family whose triage flagged a real currentness risk, and
+    # it failed here with its research complete and its answers published.
+    #
+    # This is a HARDENING and not a relaxation: an owner must still exist. A
+    # limb list with no `owner_id` in it counts for nothing, and the other three
+    # legs are untouched, so a hollowed-out record still buys no READY.
     def _phase2_earned(row):
         p2 = row.get('phase2_resolution') or {}
+        owns_something = bool(
+            p2.get('canonical_current_answer')
+            or [l for l in (p2.get('family_current_answers') or [])
+                if l.get('owner_id')])
         return bool(
             p2.get('final_state') in A.PHASE2_SAFE_STATES
             and p2.get('authority_currentness_date')
             and p2.get('review_verdict') in ('PASS', 'PASS_WITH_MINOR_FIX')
-            and p2.get('canonical_current_answer'))
+            and owns_something)
 
     unsafe_ready = [r['family_id'] for r in fams
                     if r['currentness_status'] in A.UNSAFE_CURRENTNESS
