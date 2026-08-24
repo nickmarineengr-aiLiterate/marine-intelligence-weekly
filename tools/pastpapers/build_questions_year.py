@@ -766,6 +766,37 @@ def build_archive_year_page(archive, year, publish, deliver=False):
       'covers what this one asks, and names it. <b>It does not mean this %d question has been '
       'answered.</b> It means the concept has a current home elsewhere in the corpus.</span>'
       '</div>' % year)
+    # THE SECOND SENTENCE THIS PAGE CANNOT SHIP WITHOUT, added with the
+    # current-answer library on 2026-08-24.
+    #
+    # A link is louder than a chip. Everything else on this page is a
+    # description; this one is a door, and a candidate who walks through it
+    # lands on a full model answer. On a page whose header says MIW has not
+    # solved these papers, an unexplained door reads as the solution to the
+    # question beside it -- so what is on the other side has to be stated
+    # before the link is offered. It is NOT this question answered. It is
+    # MIW's own present-day answer to the CONCEPT, written to no sitting and
+    # carrying a review date instead of an examination date.
+    a('  <div class="cov-row"><span class="cov-k">Current framework answer &rarr;</span>'
+      '<span class="cov-v">MIW holds a <b>present-day</b> answer to the concept this question '
+      'examines, and the link opens it. <b>This %d question has still not been solved.</b> '
+      'What is on the other side is not a past paper and never was: it has no sitting, no '
+      'printed serial and no printed marks, it was set by no examiner, and it answers '
+      '&ldquo;what should I write about this <i>now</i>&rdquo; rather than &ldquo;what was '
+      'correct at this sitting&rdquo;. It carries a review date for exactly that reason.</span>'
+      '</div>' % year)
+    # A multi-part question is not owned by one answer, and pretending otherwise
+    # would send a candidate asked for three concepts to an answer about one.
+    # Where the parts are answered in different places the chips say so
+    # part by part -- which also makes it visible when only SOME parts are
+    # covered, instead of a single reassuring link hiding the gap.
+    a('  <div class="cov-row"><span class="cov-k">A. &hellip; &middot; B. &hellip; &mdash; one '
+      'chip per part</span>'
+      '<span class="cov-v">Where a question asks for several independent things, MIW answers '
+      'them <i>separately</i> and each part is routed on its own &mdash; some to a current '
+      'framework answer, some to a later solved question that covers that part. Read the parts '
+      'you are offered: a part with no chip is a part MIW does not yet answer, and the absence '
+      'is deliberate rather than an oversight.</span></div>')
     a('</section>')
 
     for mn in range(1, 13):

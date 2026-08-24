@@ -105,6 +105,10 @@ sys.path.insert(0, HERE)
 
 import qi_model as M
 
+sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'current_answers'))
+import ca_model as _CA
+import study_qi_adapter as _A
+
 ROOT = os.path.dirname(os.path.dirname(HERE))
 DOC = os.path.join(ROOT, 'docs', 'study')
 QI_DIR = os.path.join(DOC, 'qi')
@@ -209,6 +213,12 @@ CURRENTNESS_TEXT = {
 #: Currentness classes under which "Current answer verified" may never render,
 #: whatever readiness says. Mirrors study_qi_adapter.UNSAFE_CURRENTNESS; the
 #: validator proves the two agree rather than trusting the copy.
+#: Phase-2 final states under which a current-answer ROUTE may be shown.
+#: Imported rather than restated so the two can never disagree about which
+#: states are safe -- a route offered out of a HELD family would send a
+#: candidate to an answer MIW itself has refused to stand behind.
+SAFE_PHASE2_STATES = _A.PHASE2_SAFE_STATES
+
 UNSAFE_CURRENTNESS = {
     'CURRENT_FRAMEWORK_CHANGED', 'LIKELY_SUPERSEDED',
     'CURRENTNESS_REVIEW_REQUIRED', 'HISTORICAL_ONLY',
@@ -220,7 +230,13 @@ QUESTION_FIELDS = {
     'GATED': ('question_id', 'longitudinal_signal', 'longitudinal_text',
               'currentness_signal', 'currentness_text',
               'readiness_signal', 'readiness_text', 'readiness_basis',
-              'successor_question_id'),
+              'successor_question_id',
+              # The current-answer route is GATED and above. It is not on the
+              # PUBLIC list and adding it there would put a paid URL on the
+              # public roadmap -- R-CA-PUBLIC-ROADMAP proves it has not
+              # happened, and the whitelist is why it cannot happen by
+              # accident. A tier shows exactly these keys and no others.
+              'current_answer_id', 'current_answer_url', 'current_answer_limbs'),
     'INTERNAL': None,   # everything
 }
 
@@ -312,16 +328,48 @@ READINESS_ORDER = ('CURRENTNESS_HOLD', 'NEW_ANSWER_REQUIRED',
 
 
 def _named_answer(p2):
-    """The ONE question a Phase-2 record names as its canonical current answer.
+    """The ONE past-paper question a Phase-2 record names, or None.
 
-    The field is a dict in the governed store and the older prose writes it as
-    a bare id, so both shapes are read. A record that names nothing returns
-    None and can therefore never grant readiness to anything.
+    Three shapes reach here -- typed, dict-with-question_id, and bare string --
+    and `ca_model.resolve_owner` is the single place that normalises them.
+
+    A CURRENT_LIBRARY owner deliberately returns None. A library answer is not
+    a sitting, so it can never be "this question", and letting it through here
+    would make a 2021 archive question read "Current answer verified" on the
+    strength of an answer that is not to that question. What the library owner
+    does instead is produce a ROUTE -- see `_library_answer` -- which says the
+    concept has a current home without claiming this paper was solved.
     """
-    v = p2.get('canonical_current_answer')
-    if isinstance(v, dict):
-        return v.get('question_id')
-    return v
+    otype, oid = _CA.resolve_owner(p2.get('canonical_current_answer'))
+    return oid if otype in _CA.PAPER_OWNER_TYPES else None
+
+
+def _library_answer(p2):
+    """The current-answer library id a family routes to, or None.
+
+    Whole-question ownership only. A multi-limb family routes to several places,
+    some of them past papers, so there is no single URL to send anyone to and
+    picking one would send a candidate asked for four concepts to an answer
+    about one. Limb routing belongs on the page that knows the limbs.
+    """
+    otype, oid = _CA.resolve_owner(p2.get('canonical_current_answer'))
+    return oid if otype == 'CURRENT_LIBRARY' else None
+
+
+def _library_limbs(p2):
+    """Ordered limb routes for a multi-limb family. Empty for a whole-question
+    family. Each entry says which limb, and where that limb is answered."""
+    out = []
+    for l in p2.get('family_current_answers') or []:
+        otype, oid = _CA.resolve_owner(l)
+        if not oid:
+            continue
+        out.append({'limb_id': l.get('limb_id'),
+                    'limb_label': l.get('limb_label'), 'scope': l.get('scope'),
+                    'owner_type': otype, 'owner_id': oid,
+                    'url': (_CA.page_url(oid)
+                            if otype in _CA.LIBRARY_OWNER_TYPES else None)})
+    return out
 
 
 def project_question(q, lab_by_fid, phase2_by_fid):
@@ -348,6 +396,7 @@ def project_question(q, lab_by_fid, phase2_by_fid):
     # different question. Never inferred from family membership.
     successor = None
     phase2_names_this = False
+    library_id, library_url, library_limbs = None, None, []
     for f in fids:
         p2 = phase2_by_fid.get(f) or {}
         nid = _named_answer(p2)
@@ -355,6 +404,20 @@ def project_question(q, lab_by_fid, phase2_by_fid):
             phase2_names_this = True
         if p2.get('final_state') == 'SUPERSEDED_WITH_SUCCESSOR' and nid                 and nid != q['question_id']:
             successor = nid
+        # THE CURRENT-ANSWER ROUTE.
+        #
+        # Shown only where a governed record in a SAFE state names a library
+        # entry, and never inferred. Unlike the successor pointer above this
+        # one is a LINK, because the URL is deterministic
+        # (`/solvedQP/current/<id>.html`) and `R-CA-PAGE-EXISTS` guarantees a
+        # verified entry has a page. The successor stays a sentence because its
+        # target may sit on a paper the reading surface does not carry, and a
+        # dead link is worse than a sentence.
+        if p2.get('final_state') in SAFE_PHASE2_STATES:
+            lib = _library_answer(p2)
+            if lib:
+                library_id, library_url = lib, _CA.page_url(lib)
+            library_limbs.extend(_library_limbs(p2))
 
     # PHASE-1 TRIAGE IS AN INPUT, NOT A VETO OVER PHASE 2.
     #
@@ -407,6 +470,15 @@ def project_question(q, lab_by_fid, phase2_by_fid):
         'readiness_text': ready_text,
         'readiness_basis': basis,
         'successor_question_id': successor,
+        # ---- LAYER 3, the current-answer route ---------------------------
+        # NOT a claim that this question has been answered. It says the
+        # CONCEPT has a current home, which is the same distinction the
+        # successor pointer already draws -- and the archive legend states it
+        # in terms, because on a page whose header says MIW has not solved
+        # these papers an unqualified link reads as a solution.
+        'current_answer_id': library_id,
+        'current_answer_url': library_url,
+        'current_answer_limbs': library_limbs,
         # ---- INTERNAL ONLY -------------------------------------------------
         'canonical_family_ids': fids,
         'count_3y': q.get('count_3y', 0),
@@ -643,7 +715,7 @@ def write(path, obj):
 #: Class hints so a surface can style the three kinds differently without
 #: parsing the strings back apart.
 _KIND_CLASS = {'longitudinal': '', 'currentness': ' warn', 'readiness': ' ready',
-               'successor': ' warn'}
+               'successor': ' warn', 'current_answer': ' ready'}
 
 
 def tags_for(qid, audience='GATED', doc=None):
@@ -670,7 +742,20 @@ def tags_for(qid, audience='GATED', doc=None):
                  and ready in ('VERIFY_CURRENT_ANSWER', 'CURRENTNESS_HOLD'))
     if row.get('currentness_text') and not redundant:
         out.append(('currentness', row['currentness_text']))
-    if row.get('readiness_text'):
+    # "Current-framework answer in preparation" is FALSE once the answer has
+    # been published, and it is false in the direction that costs a customer
+    # something: it tells them to wait for work that is already done and
+    # already paid for. So a published current answer suppresses it, exactly as
+    # a redundant currentness chip is suppressed above, and the route chip
+    # below carries the news instead.
+    #
+    # It suppresses ONLY the in-preparation wording. It never suppresses a hold
+    # or a pending check, because those are warnings and a route is not an
+    # answer to a warning.
+    superseded_by_route = ((row.get('current_answer_url')
+                            or row.get('current_answer_limbs'))
+                           and ready in ('NEW_ANSWER_REQUIRED', 'MODERNISE_REQUIRED'))
+    if row.get('readiness_text') and not superseded_by_route:
         out.append(('readiness', row['readiness_text']))
     # Section 23. Named by a governed record, never inferred, and rendered as
     # a statement rather than a link: the successor may sit on a paper this
@@ -678,6 +763,31 @@ def tags_for(qid, audience='GATED', doc=None):
     if row.get('successor_question_id'):
         out.append(('successor',
                     'Current framework: see %s' % row['successor_question_id']))
+    # Sections 19, 23 and 48. The wording is "Current framework answer", never
+    # "solved answer": this question has NOT been solved, and on a wording
+    # archive that distinction is the entire page. `R-CA-ARCHIVE-LABEL` reads
+    # the shipped bytes around every library id and refuses the word "solved".
+    if row.get('current_answer_url'):
+        out.append(('current_answer',
+                    '<a href="%s">Current framework answer &rarr;</a>'
+                    % row['current_answer_url']))
+    # A multi-limb family has no single page, and inventing one would send a
+    # candidate asked for four concepts to an answer about one. So it routes
+    # limb by limb, and the chips say which limb goes where.
+    #
+    # A library limb is a LINK: the URL is deterministic and R-CA-PAGE-EXISTS
+    # guarantees the page. A solved-paper limb is a SENTENCE, for the same
+    # reason the successor pointer is one -- the target sits on a paper this
+    # surface may not carry, and a dead link is worse than a sentence.
+    for l in row.get('current_answer_limbs') or ():
+        label = l.get('limb_label') or l.get('limb_id') or ''
+        if l.get('url'):
+            out.append(('current_answer',
+                        '<a href="%s">%s &mdash; current framework answer &rarr;</a>'
+                        % (l['url'], label)))
+        else:
+            out.append(('successor',
+                        '%s &mdash; see %s' % (label, l.get('owner_id'))))
     return out
 
 
