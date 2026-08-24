@@ -286,6 +286,13 @@ EXPECTED_BATCH_MANIFESTS = [
     "batch_e_gap0609_manifest.json",
     "batch_f1_manifest.json",
     "batch_f1b_manifest.json",
+    # The August 2026 fresh-intake batches. G1 and G2 were never registered
+    # here, so this control has been red since G1 shipped -- the same
+    # guard-expiry shape the E/F-series validators hit: a hardcoded list
+    # that silently expires the next time the thing it counts grows.
+    "batch_g1_manifest.json",
+    "batch_g2_manifest.json",
+    "batch_g3_manifest.json",
 ]
 manifests = sorted(HERE.glob("batch_*manifest.json"))
 check("every batch manifest on disk is audited, and no other",
@@ -651,10 +658,28 @@ if CORRECTIONS:
         check("an unknown correction classification is caught",
               "card_classifications_known" in bad, str(bad))
 
-        bad = cprobe(lambda d: [c.__setitem__("classification", "PRIMARY_CORRECTION")
-                                for c in d["cards"]])
-        check("two events merged into one record are caught",
-              "exactly_one_primary_correction" in bad, str(bad))
+        # This probe needs a record with MORE THAN ONE card. CORRECTIONS[0] sorts
+        # to a single-card manifest whose only card is already
+        # PRIMARY_CORRECTION, so setting every card to PRIMARY_CORRECTION there
+        # mutates nothing and the control can never fire -- it read as a passing
+        # guard for as long as the first correction on disk had one card. Pick a
+        # multi-card record explicitly, and fail loudly if none exists rather
+        # than quietly going vacuous again.
+        _multi = next((c for c in CORRECTIONS
+                       if len(json.loads(B.read_text(c)).get("cards") or []) > 1), None)
+        check("a multi-card correction record exists to test merging against",
+              _multi is not None,
+              _multi.name if _multi else "no correction manifest has >1 card")
+        if _multi is not None:
+            _src = json.loads(B.read_text(_multi))
+            _d = json.loads(json.dumps(_src))
+            for _c in _d["cards"]:
+                _c["classification"] = "PRIMARY_CORRECTION"
+            _q = Path(tmp) / _multi.name
+            B.write_text(_q, json.dumps(_d))
+            bad = [f.check for f in M.audit_correction_manifest(_q) if not f.ok]
+            check("two events merged into one record are caught",
+                  "exactly_one_primary_correction" in bad, str(bad))
 
         bad = cprobe(lambda d: d["cards"][0].__setitem__("path", "elsewhere/Other.html"))
         check("a card whose path and file disagree is caught",

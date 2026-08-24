@@ -439,6 +439,15 @@ GATES = (
                       "carrier file must not reach a tracked or deployed surface, and "
                       "neither QB projection may drift from the governed card count"),
 
+    *_batch_pair("batch_g3", "validate_batch_g3.py", "mutate_batch_g3.py",
+                 1800, historical_39=False,
+                 note="third fresh-intake batch: same contract as G1 and G2, reused "
+                      "rather than copied. First batch to carry a FREEZE RECORD - "
+                      "every question identity settled before any answer was written "
+                      "- so the shared contract now reads that record instead of "
+                      "trusting the manifest: a produced ask must have been frozen, "
+                      "and a frozen ask must be produced or explicitly held"),
+
     # ---- health: candidate LOCAL vs clean ref ------------------------------
     _gate("qb_health_check",
           ["python", "meoclass1/qb_health_check.py", "--source", "local",

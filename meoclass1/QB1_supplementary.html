@@ -2087,6 +2087,133 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
     <span class="q-version">QB1 · Q20 · v1.2</span>
   </div>
 </div>
+<div class="q-card" id="q21" data-tags="stability solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">21</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What is the margin line, and is it still how subdivision is judged?</div>
+          <div class="q-tags"><span class="q-tag tag-stability">STABILITY</span><span class="q-tag tag-solas">SOLAS II-1</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span><p>The margin line is a line drawn <strong>at least 76 mm below the upper surface of the bulkhead deck at side</strong>. It is the immersion limit in the <em>deterministic</em> subdivision method: a ship survived its assumed damage if, in the final flooded condition, the waterline did not go above it &mdash; the 76 mm being a deliberate margin so that the bulkhead deck is treated as at risk before it is actually awash. <strong>But it is no longer the governing criterion for a modern ship.</strong> Under the harmonised SOLAS II-1 that applies from <strong>1 January 2009</strong>, subdivision is assessed probabilistically &mdash; <strong>Attained Index A must be at least Required Index R</strong> &mdash; and the margin line does not appear in that calculation.</p></div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span><p>Sir, the margin line belongs to the deterministic framework and I would answer it in that order. Its definition is a line at least 76 mm below the upper surface of the bulkhead deck at side, and it exists to give a margin: rather than wait until the bulkhead deck is immersed, the criterion treats the ship as having failed once the damaged waterline reaches a line just below it. It works together with floodable length, permeability and the factor of subdivision: floodable length is the length of compartment that can be flooded without immersing the margin line, and the factor of subdivision then reduces the permissible length to set how closely the bulkheads must be spaced. That whole apparatus governed passenger-ship subdivision for most of the twentieth century. What changed is that the <strong>2009 harmonised damage stability amendments to SOLAS II-1, adopted as MSC.216(82)</strong>, replaced it with a probabilistic method for cargo ships of 80 m and above and for passenger ships. There, survival is expressed as an index: for every credible damage case, p is the probability that the damage occurs and s the probability of surviving it, and the ship complies when the Attained Index A is greater than or equal to the Required Index R. The margin line plays no part in that calculation. So the honest answer is that the term is not obsolete &mdash; it still governs ships built under the earlier regime and it is still the right vocabulary for floodable-length work &mdash; but if my ship was built on or after 1 January 2009 the criterion the examiner should be asking about is A greater than or equal to R.</p></div>
+        <div class="answer-body">
+          <h4>1. The definition, precisely</h4>
+          <p>A line drawn <strong>at least 76 mm (3 inches) below the upper surface of the bulkhead deck at
+          side</strong>. Two details are commonly dropped and both matter. It is measured
+          <strong>at side</strong>, not on the centreline, because that is where a heeled and trimmed ship
+          immerses the deck first. And it is <strong>at least</strong> 76 mm &mdash; the figure is a minimum
+          margin, not a fixed offset.</p>
+          <p>The <strong>bulkhead deck</strong> is the uppermost deck to which the transverse watertight
+          bulkheads are carried, and it is the reference from which the margin line is struck. If the examiner
+          asks the margin line question, the bulkhead deck definition is usually the next one.</p>
+
+          <h4>2. What it was used for &mdash; the deterministic chain</h4>
+          <ul>
+            <li><strong>Floodable length</strong> at any point along the ship: the maximum length of the ship,
+            centred on that point, that could be flooded without immersing any part of the ship beyond the
+            margin line, at a given permeability.</li>
+            <li><strong>Permeability</strong>: the proportion of a compartment's volume that water can actually
+            occupy &mdash; higher for a store or an empty hold, lower for a machinery space full of steel.</li>
+            <li><strong>Factor of subdivision (F)</strong>: a factor, below one, applied to floodable length to
+            give the <em>permissible</em> length. A lower F means a smaller permissible length, so bulkheads
+            closer together and a more finely subdivided ship. It was driven by ship length and by the criterion
+            of service, which reflected how many passengers she carried.</li>
+            <li>The result was expressed as a <em>one-compartment</em> or <em>two-compartment</em> standard
+            &mdash; the number of adjacent compartments that could flood without the margin line being
+            immersed.</li>
+          </ul>
+          <p>QB1_supplementary#q9 covers the factor of subdivision in detail; this card is the datum that
+          apparatus is built on.</p>
+
+          <h4>3. What replaced it, and for which ships</h4>
+          <ul>
+            <li><strong>SOLAS II-1 Part B-1</strong> as harmonised by <strong>MSC.216(82)</strong>, in force
+            <strong>1 January 2009</strong>, applies the probabilistic method to <strong>cargo ships of 80 m in
+            length and above</strong> and to <strong>passenger ships</strong>.</li>
+            <li>The criterion is <strong>A &ge; R</strong>. A is built as the sum over every credible damage
+            case of p<sub>i</sub> &times; s<sub>i</sub>, computed at three draughts and combined as A = 0.4A<sub>s</sub>
+            + 0.4A<sub>p</sub> + 0.2A<sub>l</sub>, and each partial index must also meet a minimum fraction of R &mdash; <strong>0.9R for passenger ships and 0.5R for cargo ships</strong>, so a ship cannot average its way past a weak draught.
+            <strong>MSC.421(98)</strong>, adopted 2017 and in force 1 January 2020, raised R for passenger ships.</li>
+            <li>There is no margin line in that calculation. What replaces its role &mdash; the concern that the
+            bulkhead deck must not be lost &mdash; is carried instead by the s-factor, which examines the final
+            equilibrium, the residual GZ curve, the range of positive stability, the heel, and progressive
+            flooding through unprotected openings.</li>
+          </ul>
+
+          <h4>4. So is the term dead?</h4>
+          <p>Not as a working term &mdash; but be precise, because this is where a careless answer goes wrong in either direction. The words &ldquo;margin line&rdquo; do <em>not</em> appear anywhere in the harmonised SOLAS chapter II-1: the 2009 amendments deleted the term along with the floodable-length regulations it served. What survives is its application to ships built under the earlier regime, and its continued use in non-SOLAS standards &mdash; EU Directive 2009/45/EC on domestic passenger ships still works in margin line, floodable length and factor of subdivision. The margin line still
+          governs ships built under the earlier regime, which are still trading. It remains the correct
+          vocabulary for floodable-length curves and for the subdivision language used in older stability
+          booklets and in naval-architecture teaching. And several non-SOLAS and national damage-stability
+          standards for smaller passenger craft still use it. What is <em>not</em> true is that a modern SOLAS
+          ship demonstrates compliance by keeping her damaged waterline below a margin line &mdash; she does it
+          by index.</p>
+
+          <h4>5. The one-sentence answer if he wants it short</h4>
+          <p>&ldquo;It is a line at least 76 mm below the bulkhead deck at side, and it was the immersion limit
+          in the deterministic subdivision method &mdash; but for ships built from 1 January 2009 subdivision is
+          judged probabilistically by A greater than or equal to R, and the margin line does not feature in
+          that.&rdquo; Say the second half unprompted: it is what shows you know when the definition
+          applies.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">&#9878; Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">Margin line</span><span class="reg-desc">A line drawn at least <strong>76 mm below the upper surface of the bulkhead deck at side</strong>. The immersion limit in the deterministic subdivision method.</span></div><div class="reg-item"><span class="reg-code">Bulkhead deck</span><span class="reg-desc">The uppermost deck to which the transverse watertight bulkheads are carried. The reference from which the margin line is struck.</span></div><div class="reg-item"><span class="reg-code">SOLAS II-1 Part B-1, MSC.216(82)</span><span class="reg-desc">The 2009 harmonised damage stability amendments, in force <strong>1 January 2009</strong>. Probabilistic method for cargo ships of 80 m and above and for passenger ships: A &ge; R. Covered at QB1_supplementary#q3.</span></div><div class="reg-item"><span class="reg-code">Attained and Required Index</span><span class="reg-desc">A = &Sigma;(p<sub>i</sub> &times; s<sub>i</sub>) across damage cases, combined over three draughts as 0.4A<sub>s</sub> + 0.4A<sub>p</sub> + 0.2A<sub>l</sub>, with partial indices also required to meet a minimum fraction of R. MSC.421(98) raised R for passenger ships.</span></div><div class="reg-item"><span class="reg-code">Floodable length and factor of subdivision</span><span class="reg-desc">The deterministic apparatus the margin line serves: floodable length is the length that can flood without immersing the margin line; the factor of subdivision reduces it to a permissible length. See QB1_supplementary#q9.</span></div>
+        </div>
+        <div class="ce-tip"><strong>CE Oral Tip:</strong> The trap in this question is temporal, not technical. Give the definition cleanly &mdash; <strong>at least 76 mm below the upper surface of the bulkhead deck at side</strong>, and do not drop <em>at side</em> &mdash; and then, without waiting to be asked, place it in time: it is the deterministic criterion, and since <strong>1 January 2009</strong> subdivision for cargo ships of 80 m and above and for passenger ships is judged probabilistically by <strong>A &ge; R</strong>. Do not overcorrect either: the term is not abolished, and saying it is will cost you as much as teaching it as current. The natural cross-questions are the bulkhead deck definition, floodable length and permeability, so have all three ready in one chain.</div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5><p>Damage stability is not the Chief Engineer's calculation, but the Damage Control Plan
+and Booklet are his to know, and the machinery-space case is the one he owns: bilge and ballast system
+integrity, watertight door status and indication, cross-flooding arrangements and their operating times, and
+whether the emergency generator and its supplies remain above the damaged waterline. When the examiner moves
+from the margin line to &ldquo;what would you do&rdquo;, that is the ground he is heading for.</p>
+
+<h5>Trap Questions</h5><ul>
+<li><strong>Examiner:</strong> <em>&ldquo;Where is it measured?&rdquo;</em> At side, below the upper surface of
+the bulkhead deck &mdash; not at the centreline. A heeled ship immerses at side first.</li>
+<li><strong>Examiner:</strong> <em>&ldquo;Is 76 mm exact?&rdquo;</em> It is a minimum: <em>at least</em> 76 mm,
+which is three inches.</li>
+<li><strong>Examiner:</strong> <em>&ldquo;Does your ship comply with the margin line?&rdquo;</em> If she was
+built on or after 1 January 2009 and is a cargo ship of 80 m or more, the question does not arise in that form
+&mdash; she complies by A &ge; R. Say so rather than answering yes.</li>
+<li><strong>Examiner:</strong> <em>&ldquo;So the margin line has been abolished?&rdquo;</em> No. It still
+governs ships under the earlier regime and remains the language of floodable length. It is simply not the
+criterion for a modern SOLAS ship.</li>
+<li><strong>Examiner:</strong> <em>&ldquo;What replaced its function?&rdquo;</em> The s-factor &mdash; final
+equilibrium, residual GZ range and magnitude, heel, and no progressive flooding through unprotected
+openings.</li></ul>
+
+<h5>Common CE Failures</h5><p>Giving 76 mm but omitting &ldquo;at side&rdquo;, or saying &ldquo;below the
+bulkhead deck&rdquo; without &ldquo;upper surface&rdquo;. Teaching the deterministic method as though it were
+current, which is the failure this question is set to find. Overcorrecting and claiming the term no longer
+exists. Confusing the bulkhead deck with the freeboard deck &mdash; they are often the same deck, but they are
+defined for different purposes. Mixing up floodable length with permissible length: the factor of subdivision
+is what turns one into the other.</p>
+
+<h5>Numbers to Memorise</h5><p><strong>76 mm</strong> (3 in) below the upper surface of the bulkhead deck
+<strong>at side</strong>, and it is a minimum. <strong>1 January 2009</strong> &mdash; harmonised SOLAS II-1,
+<strong>MSC.216(82)</strong>. <strong>80 m</strong> &mdash; the cargo-ship length threshold for the
+probabilistic method. <strong>A &ge; R</strong>, with A = 0.4A<sub>s</sub> + 0.4A<sub>p</sub> + 0.2A<sub>l</sub>, and partial indices at least <strong>0.9R</strong> (passenger) or <strong>0.5R</strong> (cargo).</p>
+
+<h5>Casualty Link</h5><p>The deterministic apparatus is Titanic's legacy &mdash; the compartment standard and
+the margin line came out of the subdivision debate that followed 1912. The move to a probabilistic method was
+driven by the recognition, sharpened by the ro-ro passenger losses of the 1980s and 1990s, that a fixed
+compartment standard says nothing about how likely a given damage is or how the ship actually behaves
+afterwards. Both halves of that history are worth one sentence, because they explain why the answer has two
+parts.</p>
+
+<h5>On My Vessel</h5><p>The Damage Control Plan is posted and the booklet is aboard, and the item I check
+personally is the watertight door indication, because that is the assumption every damage stability calculation
+silently makes. A door reported closed on the bridge panel and standing open in fact turns a compliant ship into
+a non-compliant one without anything appearing on any certificate.</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_supplementary, Q21, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB1_supplementary &middot; Q21 &middot; v1.0</span>
+        </div>
+      </div>
+    </div>
 
     <div id="no-results">No matching questions found. Try different keywords or clear the filter.</div>
   </main>

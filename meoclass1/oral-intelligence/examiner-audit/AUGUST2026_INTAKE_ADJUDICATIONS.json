@@ -2,7 +2,7 @@
   "record_class": "CURRENT_INTAKE_ADJUDICATION",
   "denominator_class": "CURRENT_AUGUST_INTAKE",
   "isolated_from_historical_788": true,
-  "note": "Human adjudication of the August 2026 candidate intake against the live 721-card bank. Similarity is recorded as evidence, never as the decision: the matcher ranked the correct parametric-rolling card THIRD (AUG-0012) behind an unrelated tonnage card, and ranked an unrelated DP card first for AUG-0001. Every GENUINE_NEW_QUESTION row states the negative search that established the gap, so the judgement can be rechecked rather than the arithmetic.",
+  "note": "Human adjudication of the August 2026 candidate intake against the live 721-card bank. Similarity is recorded as evidence, never as the decision: the matcher ranked the correct parametric-rolling card THIRD (AUG-0012) behind an unrelated tonnage card, and ranked an unrelated DP card first for AUG-0001. Every GENUINE_NEW_QUESTION row states the negative search that established the gap, so the judgement can be rechecked rather than the arithmetic. 2026-08-25 (batch G3): AUG-0003 reclassified GENUINE_NEW_QUESTION -> FOLLOWUP with matched_question_id QB8_A#q7. The card already answered the concept; only the primary/secondary pairing was missing. The original classification and the original negative_search are both preserved in the record.",
   "governing_principle": "A new card is created only when the examiner's actual tested ask is materially distinct from every live card. Novel wording alone is never sufficient.",
   "live_corpus_at_adjudication": {
     "canonical_questions": 727,
@@ -82,8 +82,8 @@
     },
     {
       "occurrence_id": "AUG-0003",
-      "classification": "GENUINE_NEW_QUESTION",
-      "matched_question_id": null,
+      "classification": "FOLLOWUP",
+      "matched_question_id": "QB8_A#q7",
       "evidence": "Regex 'vent(ing|s)?|p/v valve|pressure vacuum|breather' returns 0 hits across 721 cards, and 'primary means|secondary means' returns 0. An earlier plain substring search appeared to return 45 hits only because 'Convention' contains 'vent'. Tank venting is genuinely absent from the bank.",
       "ask": "Primary and secondary means of venting on a tanker.",
       "negative_search": [
@@ -99,7 +99,9 @@
           "rejected": []
         }
       ],
-      "negative_search_provenance": "Structured form added 2026-08-24 during batch-2 reconciliation. The classification and target are unchanged from batch 1; every pattern was re-run against the live 721 and returned what batch 1 recorded."
+      "negative_search_provenance": "Structured form added 2026-08-24 during batch-2 reconciliation. The classification and target are unchanged from batch 1; every pattern was re-run against the live 721 and returned what batch 1 recorded.",
+      "reclassified_2026_08_25": "GENUINE_NEW_QUESTION -> FOLLOWUP, on reading the live card rather than searching it. The negative_search below looked for the candidate's phrase and for venting hardware; it did not open QB8_A#q7, whose section 5 was already headed 'Secondary Means of Venting' and already carried SOLAS II-2/11.6 and 11.6.3.2, the 1 January 2017 application date, and both permitted forms - a full-flow P/V valve, or a per-tank pressure sensor with alarm. The concept was covered. What was genuinely absent was the PAIR: the examiner asked for the 'primary and secondary means of venting' and no card named a primary means as such, so the two-tier architecture appeared nowhere. That is an added limb on an existing card, which is what FOLLOWUP means here, and it is why batch G3 produced an enrichment at QB8_A#q7 rather than a twelfth new card. The original classification is left visible in this record rather than erased.",
+      "negative_search_note_2026_08_25": "The structured negative_search below is retained UNCHANGED as the record of what was searched in August 2026. It is not amended to fit the new classification: it is evidence of how the miss happened, and rewriting it would destroy the only trace of the failure mode - a phrase search over a corpus whose answer bodies use different words."
     },
     {
       "occurrence_id": "AUG-0004",

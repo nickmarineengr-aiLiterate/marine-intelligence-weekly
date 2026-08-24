@@ -142,6 +142,34 @@ def main(manifest_path=None, review_path=None, label="g1") -> int:
     adj = {a["occurrence_id"]: a
            for a in json.loads(ADJ.read_text(encoding="utf-8"))["adjudications"]}
 
+    # ---- 2b. the freeze record, where a batch declares one -----------------
+    #
+    # G3 is the first batch to freeze every question IDENTITY before writing any
+    # answer. The field is LOAD_BEARING, so it is read here rather than trusted:
+    # a field no validator opens is decoration, and a manifest showing eleven new
+    # cards would otherwise be indistinguishable from one where the bank was
+    # never searched. Conditional, so batches without a freeze record are
+    # unaffected; fail-closed for any batch that claims one.
+    frozen_path = manifest.get("freeze_record")
+    if frozen_path:
+        fp = REPO / frozen_path
+        check("%s_freeze_record_resolves" % label, fp.is_file(), str(frozen_path))
+        if fp.is_file():
+            frozen = json.loads(fp.read_text(encoding="utf-8"))
+            ids = {a.get("occurrence_id") for a in frozen.get("asks", [])}
+            produced = {oid for c in cards for oid in c["source_occurrence_ids"]}
+            unfrozen = sorted(produced - ids)
+            check("%s_every_produced_ask_was_frozen_first" % label, not unfrozen,
+                  "produced but never frozen: %s" % (unfrozen or "none"))
+            # A frozen ask must be produced OR declared held. Silence is the
+            # failure mode: an authorised ask that is quietly dropped and one
+            # that was never authorised look identical from cards[] alone.
+            held = {h for a in (manifest.get("held_actions") or [])
+                    for h in (a.get("source_occurrence_ids") or [])}
+            dropped = sorted(ids - produced - held)
+            check("%s_every_frozen_ask_is_produced_or_held" % label, not dropped,
+                  "frozen but neither produced nor held: %s" % (dropped or "none"))
+
     # ---- 3. every card traces to an adjudicated occurrence -----------------
     unresolved, mismatched = [], []
     # A card may cite occurrences that CORROBORATE it without driving what kind

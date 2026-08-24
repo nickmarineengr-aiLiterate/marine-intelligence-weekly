@@ -116,6 +116,7 @@ POST_E6_GATES = [
     # the control compares this list to a sorted derivation from the registry.
     "batch_g1_mutate",
     "batch_g2_mutate",
+    "batch_g3_mutate",
     "correction_lsavent_mutate",
     "corrections_mutate",
     "followup_register_mutate",
@@ -132,12 +133,14 @@ POST_E6_GATES = [
     "validate_batch_f1b",
     "validate_batch_g1",
     "validate_batch_g2",
+    "validate_batch_g3",
     "validate_correction_lsavent",
     "validate_corrections",
     "validate_followup_register",
 ]
 POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
                            "batch_g1_mutate", "batch_g2_mutate",
+                           "batch_g3_mutate",
                            "correction_lsavent_mutate", "corrections_mutate",
                            "followup_register_mutate"]
 

@@ -71,7 +71,9 @@
       "target": "QB8_A#q7",
       "live_corpus_search": "Live-727: QB8_A#q7 already owns tank venting hardware (P/V valve, mast riser, P/V breaker) under SOLAS II-2/4.5.3 and is the only card carrying the phrase 'secondary means' in a venting sense. A second venting card would duplicate the whole of it.",
       "authority": "SOLAS II-2/4.5.3.2.1 and 4.5.3.2.2, and the parallel 11.6; IACS UI SC140.",
-      "identity_notes": "The examiner used the regulation's own vocabulary. The enrichment adds the two-tier framing and the two PERMITTED secondary options - a full-flow P/V valve, or a per-tank pressure sensor with alarm, the sensor being acceptable only where a full-flow P/V valve is the primary means - which is the limb the existing card does not carry."
+      "identity_notes": "The examiner used the regulation's own vocabulary. The enrichment adds the two-tier framing and the two PERMITTED secondary options - a full-flow P/V valve, or a per-tank pressure sensor with alarm, the sensor being acceptable only where a full-flow P/V valve is the primary means - which is the limb the existing card does not carry.",
+      "outcome": "PUBLISHED_AS_ENRICHMENT",
+      "outcome_note": "REVISED ON READING THE LIVE CARD, which is why the reuse rule says read the card and not the title. QB8_A#q7 already carried a section 5 headed 'Secondary Means of Venting' with the correct regulation (SOLAS II-2/11.6 and 11.6.3.2), the 1 January 2017 application date and both permitted options. The adjudication had classified AUG-0003 GENUINE_NEW_QUESTION; on the evidence it is not. What was genuinely absent is the PAIR - the examiner asked for 'primary and secondary means of venting' and the card never named a primary means as such, so the two-tier architecture he was using appeared nowhere. The enrichment adds exactly that, plus the conditional nature of the pressure-sensor option and IACS UI SC140, and restates none of the existing hardware content."
     },
     {
       "occurrence_id": "AUG-0005",
@@ -109,11 +111,13 @@
       "candidates": 1,
       "examiner_evidence": "PANEL_LEVEL_ONLY",
       "question_identity": "The latest ro-ro-specific amendment package. This is NOT too broad to answer: as at August 2026 there is one clearly latest ro-ro package - the SOLAS II-2/20 and FSS Code fire-safety amendments for vehicle, special category and ro-ro spaces.",
-      "production_decision": "ENRICH_EXISTING",
+      "production_decision": "HOLD_GOVERNANCE",
       "target": "QB2_F#q3",
       "live_corpus_search": "Live-727: ro-ro returns 0 q-text hits. The content EXISTS but is scattered - QB10_B#q1 carries the package correctly under MSC.550(108) and MSC.555(108), and QB2_F#q3 carries a one-line ro-ro limb. Neither is reachable by a candidate searching for ro-ro.",
       "authority": "Res. MSC.550(108) amending SOLAS II-2/20 and Res. MSC.555(108) amending the FSS Code, in force 1 January 2026, applying to cargo ships and ro-ro passenger ships constructed on or after that date, with retroactive requirements on existing passenger ships by the first survey on or after 1 January 2028; the EMSA FIRESAFE studies as the driver.",
-      "identity_notes": "DEFECT FOUND WHILE SEARCHING, recorded separately rather than folded in: QB2_F#q3 attributes the ro-ro detection and cargo-control-room alarm requirements to MSC.532(107). MSC.532(107) is the PFOS, lifting appliance, inclinometer and Polar package. The ro-ro fire package is MSC.550(108), with the FSS amendments in MSC.555(108). QB10_B#q1 has it right, so the bank currently contradicts itself. This is the wrong-regulation-number trap class and is raised as OPEN-G1-010."
+      "identity_notes": "DEFECT FOUND WHILE SEARCHING, recorded separately rather than folded in: QB2_F#q3 attributes the ro-ro detection and cargo-control-room alarm requirements to MSC.532(107). MSC.532(107) is the PFOS, lifting appliance, inclinometer and Polar package. The ro-ro fire package is MSC.550(108), with the FSS amendments in MSC.555(108). QB10_B#q1 has it right, so the bank currently contradicts itself. This is the wrong-regulation-number trap class and is raised as OPEN-G1-010.",
+      "outcome": "HELD",
+      "outcome_note": "HELD, and not for the reason the brief anticipated. The scope is NOT too broad: as at August 2026 there is one clearly latest ro-ro package and it was verified - MSC.550(108) amending SOLAS II-2/20, with FSS Code amendments in MSC.555(108), in force 1 January 2026, applying to cargo ships and ro-ro passenger ships constructed on or after that date, with retroactive requirements on existing passenger ships by the first survey on or after 1 January 2028. The answer is writable today. It is held because there is nowhere safe to put it. Its natural home, QB2_F#q3, currently credits those same ro-ro requirements to MSC.532(107), which is wrong (OPEN-G1-010). Enriching that card would produce a single card stating two different resolutions for one requirement, and opening a second card in the same file would put a correct answer and a wrong one side by side on one page - which is worse for a candidate than the cross-file disagreement that exists today. The correct sequence is: size and land OPEN-G1-010 as a correction with its own manifest and digest pin, then produce AUG-0015 against a card that agrees with itself. Publishing into a known contradiction is not a bounded risk, it is a manufactured one."
     },
     {
       "occurrence_id": "AUG-0018",
@@ -200,5 +204,14 @@
       "identity_notes": "Resolved from evidence rather than assumed: the candidate wrote 'sw (or Fw) ... directly from cargo hold', so the context is water that has entered a hold, not tank ballast. The answer turns on contamination status, and on the fact that hold bilges are led to the bilge system rather than to a direct overboard line."
     }
   ],
-  "anchor_allocation_note": "Every anchor was allocated from the CANONICAL extractor, never from a .q-card div count. QB1_A is the case that proves why: 33 divs, 31 canonical questions, next anchor q32."
+  "anchor_allocation_note": "Every anchor was allocated from the CANONICAL extractor, never from a .q-card div count. QB1_A is the case that proves why: 33 divs, 31 canonical questions, next anchor q32.",
+  "production_outcome": {
+    "new_cards": 11,
+    "enriched_existing": 1,
+    "held": 1,
+    "canonical_before": 727,
+    "canonical_after": 738,
+    "held_ask": "AUG-0015 (see its outcome_note; blocked by OPEN-G1-010, not by evidence)",
+    "note": "Two of the thirteen changed decision once the LIVE card was opened rather than searched: AUG-0003 from new card to enrichment, and AUG-0015 from enrichment to a governance hold. Both changes were made by reading, and both are recorded rather than quietly applied."
+  }
 }

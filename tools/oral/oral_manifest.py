@@ -99,6 +99,12 @@ FIELD_CLASSES: dict[str, str] = {
     # STRUCTURE rather than as prose in `note` is what makes it assertable --
     # and it is asserted below, so it cannot become decoration.
     "held_actions": LOAD_BEARING,
+    # The record that froze a batch's question IDENTITIES before any answer
+    # was written. Batch G3 is the first to carry one. It is LOAD_BEARING
+    # rather than a note because the reuse-first decision for each ask lives
+    # there and nowhere else: without it, a manifest showing eleven new cards
+    # cannot be distinguished from one where the bank was never searched.
+    "freeze_record": LOAD_BEARING,
     # The mirror of held_actions: a LATER batch recording that it discharged an
     # EARLIER batch's hold.
     #
@@ -131,6 +137,11 @@ FIELD_CLASSES: dict[str, str] = {
     # LOAD_BEARING; this records the governed change that moved it, so a
     # refresh can never look like a quiet rebaseline.
     "expected_examiner_relationships_note": INFORMATIONAL,
+    # Why a batch's post-edit digests were refreshed after publication of the
+    # manifest -- e.g. an independent review that changed card content. Prose,
+    # so INFORMATIONAL; the digests themselves stay LOAD_BEARING and are
+    # compared against the live pages regardless of what this says.
+    "review_round_note": INFORMATIONAL,
 
     # ---- the payload ----
     "cards": LOAD_BEARING,
