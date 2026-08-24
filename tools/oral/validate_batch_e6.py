@@ -114,7 +114,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from oral_manifest import authorisation_manifest_paths  # noqa: E402
+from oral_manifest import authorisation_manifest_paths, sibling_owned_cards  # noqa: E402
 from oral_supersession import resolve_authorised_card_state  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
@@ -330,6 +330,18 @@ def read_page(page):
     return (QB_DIR / page).read_text(encoding="utf-8", newline="")
 
 
+def _baseline_anchor_set(baseline):
+    """Every "file#anchor" that existed at this batch's baseline commit."""
+    out = set()
+    for p in sorted(QB_DIR.glob("QB*.html")):
+        bt = baseline_qb(baseline, p.name)
+        if bt is None:
+            continue
+        for a in canonical_cards(bt):
+            out.add("%s#%s" % (p.name, a))
+    return out
+
+
 def main():
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     cards = manifest.get("cards", [])
@@ -456,16 +468,45 @@ def main():
            "%s" % (eol_bad or "6/6 homogeneous and as recorded"))
 
     # ---------- corpus totals ----------
-    total, files = 0, 0
+    # The manifest's expectation is the corpus at THIS batch's baseline. It was
+    # asserted against the live corpus, which held only while nothing was ever
+    # added again: batch G1 added four cards and this went red, along with every
+    # other E- and F-series guard, none of which was a real finding. What stays
+    # true forever is that the corpus grew only by cards some authorisation
+    # record owns, so the allowance is computed rather than the total pinned.
+    total, files, total_base = 0, 0, 0
+    live_anchors = set()
     for p in sorted(QB_DIR.glob("QB*.html")):
-        n = len(canonical_cards(p.read_text(encoding="utf-8", newline="")))
-        if n:
+        lc = canonical_cards(p.read_text(encoding="utf-8", newline=""))
+        if lc:
             files += 1
-            total += n
+            total += len(lc)
+        for a in lc:
+            live_anchors.add("%s#%s" % (p.name, a))
+        bt = baseline_qb(baseline, p.name)
+        if bt is not None:
+            total_base += len(canonical_cards(bt))
     exp_q = manifest.get("expected_canonical_questions")
     exp_f = manifest.get("expected_question_bearing_files")
-    report("canonical_total_unchanged", total == exp_q and files == exp_f,
-           "questions=%d (expect %s) files=%d (expect %s)" % (total, exp_q, files, exp_f))
+
+    # Identify the additions by SET, never by an allowance ceiling. An earlier
+    # form of this check permitted the corpus to grow by "however many cards a
+    # sibling record owns", which let an UNOWNED card hide inside the allowance
+    # for owned ones: E6's mutation F injected a q-card and this check stayed
+    # green, so the mutation was caught only by only_authorised_cards_changed -
+    # the wrong reason, which the suite correctly refuses to score as a catch.
+    base_anchors = _baseline_anchor_set(baseline)
+    owned = sibling_owned_cards(MANIFEST) | set(pairs)
+    added = sorted(live_anchors - base_anchors)
+    removed = sorted(base_anchors - live_anchors)
+    rogue = sorted(x for x in added if x not in owned)
+    report("canonical_total_unchanged",
+           total_base == exp_q and files == exp_f and not rogue and not removed
+           and total == total_base + len(added) - len(removed),
+           "baseline=%d (expect %s) live=%d files=%d (expect %s); added=%d "
+           "authorised-elsewhere, unauthorised additions=%s, removals=%s"
+           % (total_base, exp_q, total, files, exp_f, len(added),
+              rogue or "-", removed or "-"))
 
     # ---------- only authorised cards changed ----------
     authorised_elsewhere = set()
@@ -628,10 +669,17 @@ def main():
               / "EXAMINER_INDEX_SNAPSHOT.json")
     if snap_p.exists():
         tot = json.loads(snap_p.read_text(encoding="utf-8")).get("totals", {})
+        # Relationships, examiners and question-bearing files are LIVE
+        # expectations and must match exactly. The canonical question count is
+        # not: it is the corpus size at this batch's baseline, and the corpus is
+        # allowed to grow afterwards through an authorised batch - G1 added four.
+        # Pinning it equal would mean this record had to be rewritten every time
+        # the bank grew, which is the expiring-guard defect rather than a check.
         ok = (manifest.get("expected_examiner_relationships") == tot.get("relationships")
               and manifest.get("expected_examiners") == tot.get("examiners")
               and manifest.get("expected_question_bearing_files") == tot.get("qb_files")
-              and manifest.get("expected_canonical_questions") == tot.get("canonical_questions"))
+              and (tot.get("canonical_questions") or 0)
+              >= (manifest.get("expected_canonical_questions") or 0))
         report("examiner_index_expectation_stable", ok,
                "snapshot relationships=%s examiners=%s qb_files=%s questions=%s"
                % (tot.get("relationships"), tot.get("examiners"),

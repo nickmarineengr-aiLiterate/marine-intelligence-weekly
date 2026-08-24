@@ -118,8 +118,33 @@ def main():
     bl = rv.get("baseline") or {}
     before, after = bl.get("canonical_questions_before"), bl.get("canonical_questions_after")
     live_total = sum(len(r.get("questions", [])) for r in idx["files"].values())
-    ck(live_total == after,
-       "recorded canonical_questions_after %r != live derivation %d" % (after, live_total))
+    # `canonical_questions_after` is HISTORY: the corpus size at the moment this
+    # exception was applied, 720 -> 721. It was originally asserted equal to the
+    # live corpus, which held only for as long as no later batch added a card -
+    # F1 and F1b both declared creates_new_cards false, so it survived by
+    # accident until batch G1 added four. Asserting it against live again would
+    # mean either falsifying this record on every future batch, or blocking
+    # every future batch: the expiring-guard defect class.
+    #
+    # What is still true forever, and is what this record actually claims, is
+    # that the corpus never shrank below the state this exception produced and
+    # that the card it authorised is still there. Both are checked instead.
+    ck(live_total >= after,
+       "corpus shrank below the state this exception produced: live %d < recorded %r"
+       % (live_total, after))
+    # The record names its card in ONE field, `target`, as "QB4_G.html#q13".
+    # An earlier draft of this check read rv["file"] and rv["anchor"], which do
+    # not exist, so it skipped itself and passed vacuously - the precise failure
+    # it was written to prevent. The target is therefore required, not optional.
+    gap_anchor = str(rv.get("target", "")).strip()
+    live_anchors = {f + "#" + q["anchor"]
+                    for f, r in idx["files"].items()
+                    for q in r.get("questions", [])}
+    if disp == "NEW_CANONICAL_QA":
+        ck(bool(gap_anchor),
+           "the review record names no target, so its card cannot be checked")
+        ck(gap_anchor in live_anchors,
+           "the card this exception authorised is no longer live: %r" % gap_anchor)
     expect = (before or 0) + (1 if disp == "NEW_CANONICAL_QA" else 0)
     ck(after == expect,
        "canonical count %r is wrong for disposition %s - expected %d" % (after, disp, expect))

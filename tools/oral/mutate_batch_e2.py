@@ -148,8 +148,8 @@ def build():
 
         Mutation("J", "claim an examiner relationship delta",
                  MANIFEST,
-                 lambda t: t.replace('"expected_examiner_relationships": 960',
-                                     '"expected_examiner_relationships": 961'),
+                 lambda t: t.replace('"expected_examiner_relationships": 958',
+                                     '"expected_examiner_relationships": 959'),
                  "examiner_relationship_delta_zero"),
 
         Mutation("K", "delete baseline text from an authorised card (A011)",

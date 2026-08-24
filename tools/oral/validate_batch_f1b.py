@@ -65,7 +65,7 @@ REPO = HERE.parents[1]
 QB_DIR = REPO / "meoclass1"
 sys.path.insert(0, str(HERE))
 
-from oral_manifest import authorisation_manifest_paths, HELD_STATUSES  # noqa: E402
+from oral_manifest import authorisation_manifest_paths, sibling_owned_cards, HELD_STATUSES  # noqa: E402
 from oral_supersession import (  # noqa: E402
     SUPERSEDES_REQUIRED, build_chain, load_card_records,
     resolve_authorised_card_state,
@@ -474,15 +474,29 @@ def main():
             if qtext_of(L[a]) != qtext_of(B[a]):
                 qtext_moved.append("%s#%s" % (p.name, a))
 
-    report("canonical_total_unchanged",
-           total_live == total_base
-           and total_live == manifest.get("expected_canonical_questions"),
-           "baseline %d -> live %d (manifest expects %s)"
-           % (total_base, total_live, manifest.get("expected_canonical_questions")))
+    # A card ADDED since this batch's baseline is legitimate iff some OTHER
+    # authorisation record owns it. "Nothing was added since my baseline" stops
+    # being true the first time the bank grows for any reason - batch G1 added
+    # four cards and turned every E- and F-series guard red at once, none of
+    # which was a real finding. The claim this batch can make forever is
+    # "nothing was added that nobody authorised".
+    sibling_owned = sibling_owned_cards(MANIFEST)
+    added = [x for x in changed if "CARD ADDED" in x]
+    removed = [x for x in changed if "CARD REMOVED" in x]
+    added_legit = [x for x in added if x.split(" ")[0] in sibling_owned]
+    added_rogue = [x for x in added if x.split(" ")[0] not in sibling_owned]
 
-    report("no_new_canonical_card",
-           not [x for x in changed if "CARD " in x],
-           "%s" % ([x for x in changed if "CARD " in x] or "-"))
+    report("canonical_total_unchanged",
+           total_base == manifest.get("expected_canonical_questions")
+           and total_live == total_base + len(added_legit) - len(removed),
+           "baseline %d (manifest expects %s) -> live %d, of which %d addition(s) "
+           "authorised elsewhere"
+           % (total_base, manifest.get("expected_canonical_questions"), total_live,
+              len(added_legit)))
+
+    report("no_new_canonical_card", not added_rogue and not removed,
+           "unauthorised additions %s; removals %s"
+           % (added_rogue or "-", removed or "-"))
 
     report("q_text_and_anchors_stable", not qtext_moved,
            "moved=%s" % (qtext_moved or "-"))
@@ -499,8 +513,16 @@ def main():
             authorised_elsewhere.add("%s#%s" % (sc.get("file"), sc.get("anchor")))
 
     authorised = {"%s#%s" % (c.get("file"), c.get("anchor")) for c in cards}
-    unauthorised = sorted(set(changed) - authorised - authorised_elsewhere)
-    exempt = sorted((set(changed) - authorised) & authorised_elsewhere)
+    # Bare "file#anchor": the CARD ADDED / CARD REMOVED suffix used to make a
+    # sibling-authorised addition unmatchable, which is what made this guard
+    # expire when batch G1 added four cards. A plain edit carries no suffix, so
+    # an edit to a card no manifest owns still fails exactly as before.
+    unauthorised = sorted(x for x in changed
+                          if x.split(" ")[0] not in authorised
+                          and x.split(" ")[0] not in authorised_elsewhere)
+    exempt = sorted(x for x in changed
+                    if x.split(" ")[0] not in authorised
+                    and x.split(" ")[0] in authorised_elsewhere)
     report("only_authorised_cards_changed", not unauthorised,
            "unauthorised=%s authorised-elsewhere=%s"
            % (unauthorised or "-", exempt or "-"))
@@ -537,7 +559,11 @@ def main():
     # HELD_GOVERNANCE action F1b exists to discharge. Removing it would leave
     # this check asserting nothing at all -- passing hardest exactly when the
     # batch did nothing.
-    f1b_blast = sorted(set(changed) - (authorised_elsewhere - authorised))
+    # Bare "file#anchor" for the same reason as above: a card ADDED by a later
+    # authorised batch carries a suffix and would otherwise never be subtracted,
+    # making this check fail on every future addition.
+    _elsewhere_only = authorised_elsewhere - authorised
+    f1b_blast = sorted(x for x in changed if x.split(" ")[0] not in _elsewhere_only)
     report("exactly_one_card_changed_since_baseline",
            len(authorised) == 1 and f1b_blast == sorted(authorised),
            "f1b-authorised=%d changed(excluding authorised-elsewhere)=%s"

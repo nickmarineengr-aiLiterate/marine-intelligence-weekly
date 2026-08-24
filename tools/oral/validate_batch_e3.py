@@ -53,7 +53,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from oral_manifest import authorisation_manifest_paths  # noqa: E402
+from oral_manifest import authorisation_manifest_paths, sibling_owned_cards  # noqa: E402
 from oral_supersession import resolve_authorised_card_state  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
@@ -277,14 +277,33 @@ def main():
             if ql and qb and ql.group(1).strip() != qb.group(1).strip():
                 qtext_moved.append("%s#%s" % (fname, a))
 
-    report("canonical_total_unchanged", total_live == total_base
-           and total_live == manifest["expected_canonical_questions"],
-           "baseline %d -> live %d (manifest expects %d)"
-           % (total_base, total_live, manifest["expected_canonical_questions"]))
+    # A card ADDED since this batch's baseline is legitimate iff some OTHER
+    # authorisation record owns it. The original form of these two checks said
+    # "the corpus is exactly the size it was at my baseline, and nothing was
+    # added" - true of this batch, but a claim that stops being true the first
+    # time the bank grows for any reason. Batch G1 added four cards and turned
+    # every E- and F-series guard red at once, none of which was a real finding.
+    #
+    # The claim this batch can make forever is "nothing was added that nobody
+    # authorised". It is not a weakening: an addition no manifest owns still
+    # fails, and so does any removal.
+    sibling_owned = sibling_owned_cards(MANIFEST)
+    added = [x for x in changed if "CARD ADDED" in x]
+    removed = [x for x in changed if "CARD REMOVED" in x]
+    added_legit = [x for x in added if x.split(" ")[0] in sibling_owned]
+    added_rogue = [x for x in added if x.split(" ")[0] not in sibling_owned]
 
-    report("no_new_canonical_card",
-           not [x for x in changed if "CARD ADDED" in x or "CARD REMOVED" in x],
-           "%s" % ([x for x in changed if "CARD" in x] or "-"))
+    report("canonical_total_unchanged",
+           total_base == manifest["expected_canonical_questions"]
+           and total_live == total_base + len(added_legit) - len(removed),
+           "baseline %d (manifest expects %d) -> live %d, of which %d addition(s) "
+           "authorised elsewhere"
+           % (total_base, manifest["expected_canonical_questions"], total_live,
+              len(added_legit)))
+
+    report("no_new_canonical_card", not added_rogue and not removed,
+           "unauthorised additions %s; removals %s"
+           % (added_rogue or "-", removed or "-"))
 
     # A card that a SIBLING batch manifest authorises is legitimate here too.
     # Built in from the start rather than left to expire: without it this check
@@ -303,8 +322,16 @@ def main():
             authorised_elsewhere.add("%s#%s" % (sc["file"], sc["anchor"]))
 
     authorised = {"%s#%s" % (c["file"], c["anchor"]) for c in cards}
-    unauthorised = sorted(set(changed) - authorised - authorised_elsewhere)
-    exempt = sorted((set(changed) - authorised) & authorised_elsewhere)
+    # Compare on the bare "file#anchor": the CARD ADDED / CARD REMOVED suffix
+    # used to make an addition unmatchable, which is precisely what made this
+    # guard expire. A plain edit carries no suffix, so an edit to a card no
+    # manifest owns still fails exactly as before.
+    unauthorised = sorted(x for x in changed
+                          if x.split(" ")[0] not in authorised
+                          and x.split(" ")[0] not in authorised_elsewhere)
+    exempt = sorted(x for x in changed
+                    if x.split(" ")[0] not in authorised
+                    and x.split(" ")[0] in authorised_elsewhere)
     report("only_authorised_cards_changed", not unauthorised,
            "unauthorised=%s authorised-elsewhere=%s"
            % (unauthorised or "-", exempt or "-"))

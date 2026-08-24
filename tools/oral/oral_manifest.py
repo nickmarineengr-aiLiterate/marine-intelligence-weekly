@@ -127,6 +127,10 @@ FIELD_CLASSES: dict[str, str] = {
     "enrichment_programme": INFORMATIONAL,
     "followup_overlap": INFORMATIONAL,
     "initial_authorised_count": INFORMATIONAL,
+    # Why a LIVE expectation was refreshed. The number itself stays
+    # LOAD_BEARING; this records the governed change that moved it, so a
+    # refresh can never look like a quiet rebaseline.
+    "expected_examiner_relationships_note": INFORMATIONAL,
 
     # ---- the payload ----
     "cards": LOAD_BEARING,
@@ -312,6 +316,36 @@ def classify_correction(field: str) -> str:
 
 def is_correction_manifest(path) -> bool:
     return pathlib.Path(path).name.startswith("correction_")
+
+
+def sibling_owned_cards(manifest_path, directory=None) -> set:
+    """Every "file#anchor" that some OTHER authorisation record owns.
+
+    Batch guards ask two different questions of a card that moved: "did I
+    authorise it?" and, failing that, "did anyone?".  The second question is
+    what stops a guard expiring the moment a later batch legitimately touches
+    a file this one also touched.
+
+    E1 built that exemption for EDITED cards but deliberately excluded ADDED
+    ones, on the assumption that no later batch would add a card to a file an
+    enrichment batch had touched.  Batch G1 added four, and every E- and F-
+    series guard went red at once - not because anything was wrong, but because
+    "no card was added since my baseline" is a claim that stops being true the
+    first time the bank grows.  The claim a batch can actually make forever is
+    "no card was added since my baseline that nobody authorised", and this
+    helper is what lets each guard say that instead.
+    """
+    owned = set()
+    for path in authorisation_manifest_paths(directory or pathlib.Path(manifest_path).parent,
+                                             exclude=manifest_path):
+        try:
+            record = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        for card in record.get("cards", []):
+            if card.get("file") and card.get("anchor"):
+                owned.add("%s#%s" % (card["file"], card["anchor"]))
+    return owned
 
 
 def authorisation_manifest_paths(directory=None, exclude=None) -> tuple:
