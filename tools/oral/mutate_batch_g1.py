@@ -58,6 +58,7 @@ QBOOK = REPO / "docs" / "MIW-master-Question-bank"
 JULY = QBOOK / "MIW_July2026_QuestionBank_SHARE.xlsx"
 FAKE_V27 = QBOOK / "MIW_August2026_QuestionBank_v27_FINAL.xlsx"
 QB2E = REPO / "meoclass1" / "QB2_E.html"
+QB9D = REPO / "meoclass1" / "QB9_D.html"
 
 INTAKE = "validate_oral_intake.py"
 G1 = "validate_batch_g1.py"
@@ -199,10 +200,20 @@ def m_name_examiner_in_card():
 
 
 def m_edit_neighbouring_card():
-    t = io.open(QB2E, encoding="utf-8", newline="").read()
-    t = t.replace("why is the rescue boat often positioned on the starboard side?",
-                  "why is the rescue boat usually positioned on the starboard side?", 1)
-    io.open(QB2E, "w", encoding="utf-8", newline="").write(t)
+    """Edit a card in a file this batch touched that NO record owns.
+
+    The original target was QB2_E#q1. That card is now owned by the
+    independent-review correction record, so the blast-radius guard exempts it
+    correctly and the mutation stopped proving anything - a mutation that
+    cannot fail is not evidence. QB9_D#q1 is in a file batch G1 touched and is
+    owned by no manifest.
+    """
+    t = io.open(QB9D, encoding="utf-8", newline="").read()
+    m = re.search(r'(<div class="q-card"[^>]*id="q1"[\s\S]{0,4000}?<div class="q-text">)', t)
+    if not m:
+        return
+    t = t[:m.end()] + "MUTATED " + t[m.end():]
+    io.open(QB9D, "w", encoding="utf-8", newline="").write(t)
 
 
 def m_leak_production_vocabulary():
@@ -250,7 +261,7 @@ MUTATIONS = [
     ("M", "name an examiner inside a new card",
      [QB2E], m_name_examiner_in_card, G1, "g1_new_cards_name_no_examiner"),
     ("N", "edit a neighbouring card the batch never declared",
-     [QB2E], m_edit_neighbouring_card, G1,
+     [QB9D], m_edit_neighbouring_card, G1,
      "g1_no_undeclared_card_moved_in_a_touched_file"),
     ("O", "leak an occurrence id into candidate-facing text",
      [QB2E], m_leak_production_vocabulary, G1,

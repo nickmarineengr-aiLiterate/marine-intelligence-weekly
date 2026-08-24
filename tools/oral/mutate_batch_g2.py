@@ -172,15 +172,22 @@ def _xlsx(path):
 
 
 def m_master_drops_a_card():
+    """Delete a row from the QUESTION sheet.
+
+    worksheets[0] is the About sheet - fourteen rows of provenance. Deleting
+    its last row changes nothing the validator looks at, so the first version
+    of this mutation escaped while proving only that it had chosen the wrong
+    sheet. The question sheet is found by name.
+    """
     wb = _xlsx(MASTER)
-    ws = wb.worksheets[0]
+    ws = next((w for w in wb.worksheets if w.max_row > 100), wb.worksheets[-1])
     ws.delete_rows(ws.max_row)
     wb.save(MASTER)
 
 
 def m_shareable_leaks_private_evidence():
     wb = _xlsx(SHARE)
-    ws = wb.worksheets[0]
+    ws = next((w for w in wb.worksheets if w.max_row > 100), wb.worksheets[-1])
     ws.cell(row=ws.max_row, column=1).value = "FUP-001 internal manifest digest"
     wb.save(SHARE)
 
