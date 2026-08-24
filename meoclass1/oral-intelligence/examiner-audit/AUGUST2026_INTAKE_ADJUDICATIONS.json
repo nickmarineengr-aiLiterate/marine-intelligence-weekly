@@ -1,0 +1,196 @@
+{
+  "record_class": "CURRENT_INTAKE_ADJUDICATION",
+  "denominator_class": "CURRENT_AUGUST_INTAKE",
+  "isolated_from_historical_788": true,
+  "note": "Human adjudication of the August 2026 candidate intake against the live 721-card bank. Similarity is recorded as evidence, never as the decision: the matcher ranked the correct parametric-rolling card THIRD (AUG-0012) behind an unrelated tonnage card, and ranked an unrelated DP card first for AUG-0001. Every GENUINE_NEW_QUESTION row states the negative search that established the gap, so the judgement can be rechecked rather than the arithmetic.",
+  "governing_principle": "A new card is created only when the examiner's actual tested ask is materially distinct from every live card. Novel wording alone is never sufficient.",
+  "live_corpus_at_adjudication": {
+    "canonical_questions": 721,
+    "commit": "7e3b46732b8f1d2be06221af5999a11dea3378e1"
+  },
+  "vocabularies": {
+    "classification": [
+      "EXACT_EXISTING",
+      "PARAPHRASE_EXISTING",
+      "FOLLOWUP",
+      "GENUINE_NEW_QUESTION",
+      "AMBIGUOUS",
+      "NON_QUESTION_UNRECOVERABLE"
+    ]
+  },
+  "examiner_attribution": {
+    "basis": "EXPLICITLY_STATED_BY_CANDIDATE",
+    "panel": {"EXTERNAL": "Rajappan", "INTERNAL": "Senthil"},
+    "caution": "Both submissions name the same panel. Neither candidate attributed an individual question to an individual examiner, so every row carries PANEL_LEVEL_ONLY. No question may be assigned to Rajappan or Senthil individually on this evidence."
+  },
+  "adjudications": [
+    {
+      "occurrence_id": "AUG-0001",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "evidence": "Regex search for 'product tanker|crude oil tanker|crude carrier' over all 721 live questions returns 0 hits. The nearest cards (QB8_H#q2 Type 1 vs Type 2 chemical tankers, QB1_G#q33 chemical tanker construction by type) both partition WITHIN chemical tankers; neither contrasts a chemical/product carrier against a traditional crude oil tanker.",
+      "ask": "Difference between a chemical / oil-product tanker and a traditional crude oil tanker."
+    },
+    {
+      "occurrence_id": "AUG-0002",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB5_B#q15",
+      "evidence": "QB5_B#q15 'Risk Assessment and PTW for Operating a Portable Framo Submersible Cargo Pump' is the same examinable ask; the candidate noted the examiner 'was expecting risk assessment', which is precisely this card's subject.",
+      "ask": "Risk assessment for the emergency portable cargo pump."
+    },
+    {
+      "occurrence_id": "AUG-0003",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "evidence": "Regex 'vent(ing|s)?|p/v valve|pressure vacuum|breather' returns 0 hits across 721 cards, and 'primary means|secondary means' returns 0. An earlier plain substring search appeared to return 45 hits only because 'Convention' contains 'vent'. Tank venting is genuinely absent from the bank.",
+      "ask": "Primary and secondary means of venting on a tanker."
+    },
+    {
+      "occurrence_id": "AUG-0004",
+      "classification": "FOLLOWUP",
+      "matched_question_id": "QB7_A#q2",
+      "evidence": "Onboard carbon capture is covered by QB7_A#q2 and QB7_D#q1/#q3. The tested limb here is the definitional contrast 'net zero vs carbon neutral', which those cards do not draw. Recorded as a follow-up limb on QB7_A#q2, not a new card.",
+      "ask": "Onboard carbon capture; net zero versus carbon neutral."
+    },
+    {
+      "occurrence_id": "AUG-0005",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "evidence": "Regex 'emergency towing|towing arrangement' returns 0 hits. NOTE: the candidate wrote 'ETS'; in this row it expands to Emergency Towing System/Arrangement, whereas in AUG-0011 the same acronym expands to EU ETS. The two must not be conflated.",
+      "ask": "Emergency towing arrangement - time requirement for deployment.",
+      "authoring_caution": "SOLAS II-1/3-4 and MSC.35(63) govern emergency towing arrangements; the deployment time requirement must be verified against the current text before any answer is authored."
+    },
+    {
+      "occurrence_id": "AUG-0006",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB5_A#q2",
+      "evidence": "QB5_A#q2 'Engine Room Resource Management (ERRM) - Explain.' Containment 1.00, Jaccard 0.80 - the strongest agreement in the batch.",
+      "ask": "Engine room resource management."
+    },
+    {
+      "occurrence_id": "AUG-0007",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "evidence": "Seven live cards cover the Hong Kong Convention and Indian ship recycling (QB3_C#q3, QB3_F#q5, QB3_G#q3/#q4, QB3_H#q4/#q5), but none addresses the EU Ship Recycling Regulation or why it persists alongside the HKC. Regex 'eusrr' returns 0 hits.",
+      "ask": "EU Ship Recycling Regulation - why is it required when the Hong Kong Convention exists?",
+      "authoring_caution": "The HKC entered into force 26 June 2025. The answer must state the CURRENT relationship between EU SRR and HKC as at August 2026, not the pre-entry-into-force position."
+    },
+    {
+      "occurrence_id": "AUG-0008",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB3_F#q7",
+      "evidence": "QB3_F#q7 'How will you order bunkers for your vessel for both quantity and quality' - containment 1.00 over the candidate's terser prompt.",
+      "ask": "How will you order bunkers."
+    },
+    {
+      "occurrence_id": "AUG-0009",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB4_J#q8",
+      "evidence": "QB4_J#q8 'What are the different types of leadership?' carries the primary ask. The trailing limb 'which one you will follow and why' is a cross-question on the same card, not a separate ask.",
+      "ask": "Types of leadership; which will you follow and why."
+    },
+    {
+      "occurrence_id": "AUG-0010",
+      "classification": "NON_QUESTION_UNRECOVERABLE",
+      "matched_question_id": null,
+      "evidence": "The candidate recorded 'One more question I forgot and didn't know the answer too'. It is preserved as an occurrence so the count cannot silently shrink, but it carries no examinable ask and can never be matched or answered.",
+      "ask": null
+    },
+    {
+      "occurrence_id": "AUG-0011",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB8_B#q6",
+      "evidence": "QB8_B#q6 'Latest container vessel amendments - key SOLAS changes?' and QB2_A#q6 both carry this ask; QB1_F#q20 is the terse legacy duplicate.",
+      "ask": "Latest amendments applying to container vessels.",
+      "authoring_caution": "The candidate's own gloss 'Ets from 2028' is a CANDIDATE RECOLLECTION, not authority, and must not be ingested as a regulatory fact. EU ETS phased in for shipping over 2024-2026; the 2028 date belongs to the IMO Net-Zero Framework. Any card update must resolve which instrument is meant against primary sources."
+    },
+    {
+      "occurrence_id": "AUG-0012",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB2_A#q20",
+      "evidence": "QB2_A#q20 'Parametric rolling - cause, mechanism, why container ships are susceptible' matches all three limbs of the ask. The matcher ranked this THIRD (containment 0.43) behind QB1_G#q27 'GT, NT, Container ship calculation' (0.67) - a token-overlap artefact of the shared words 'container ship'. Adjudicated on the ask, not the score.",
+      "ask": "Parametric rolling - reason, why container ships, remedies."
+    },
+    {
+      "occurrence_id": "AUG-0013",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB2_B#q18",
+      "evidence": "QB2_B#q18 'How is firefighting on deck carried out on a container ship when a container is on fire' is the same ask; the candidate's 'what is used on your ship and how to use it' is the standard on-my-vessel limb this card already carries.",
+      "ask": "Container firefighting - what is used onboard and how."
+    },
+    {
+      "occurrence_id": "AUG-0014",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB2_A#q7",
+      "evidence": "QB2_A#q7 'Li-ion battery fire on a container vessel - thermal runaway mechanism and response' covers the firefighting ask directly. QB4_A#q19 also scored 0.75 but is an FSA card that merely uses Li-ion as its worked example.",
+      "ask": "Li-ion battery firefighting."
+    },
+    {
+      "occurrence_id": "AUG-0015",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "evidence": "Regex 'ro-ro|roro|ro ro' returns 0 hits across 721 cards. Every high-scoring candidate was a CONTAINER amendments card (QB1_F#q20, QB8_B#q6) reached purely through the shared phrase 'latest amendments'. RoRo is absent from the bank.",
+      "ask": "RoRo vessel latest amendments, with cross questions.",
+      "authoring_caution": "Must distinguish in-force from adopted-not-yet-in-force. SOLAS II-2 amendments on new-energy-carrying vehicles and the RoRo fire-safety package have staggered application dates."
+    },
+    {
+      "occurrence_id": "AUG-0016",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB4_A#q19",
+      "evidence": "QB4_A#q19 'Explain Formal Safety Assessment (FSA) and its application to Li-Ion batteries' carries the explain limb the candidate was asked for. QB2_B#q19 applies FSA in a container context. The generic 'FSA - explain' needs no separate card.",
+      "ask": "FSA - explain."
+    },
+    {
+      "occurrence_id": "AUG-0017",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB5_A#q11",
+      "evidence": "QB5_A#q11 'Risk Assessment - How to Carry Out. How to Decide Risk Category.' is the same ask; QB5_C_A#q10 covers the L x S matrix limb.",
+      "ask": "Risk assessment - explain."
+    },
+    {
+      "occurrence_id": "AUG-0018",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "evidence": "Regex 'alarp' returns 0 hits across 721 cards. The ALARP principle underpins the risk cards but is nowhere stated or examined, and the specific ask 'why reduce, why can't you eliminate' tests the tolerability argument rather than the assessment method.",
+      "ask": "ALARP - why reduce risk, why can it not be eliminated?"
+    },
+    {
+      "occurrence_id": "AUG-0019",
+      "classification": "AMBIGUOUS",
+      "matched_question_id": null,
+      "evidence": "Regex 'risk analysis' returns 0 hits, but the bank carries QB5_A#q10 (Risk vs Hazard), QB5_A#q11 (Risk Assessment) and QB4_J#q3 (Risk Based Planning). Whether the examiner tested 'risk analysis' as a distinct step or as a loose synonym for risk assessment cannot be decided from a three-word prompt. Held rather than forced to a target.",
+      "ask": "Risk analysis - why and how.",
+      "hold_reason": "SOURCE_PROMPT_TOO_TERSE"
+    },
+    {
+      "occurrence_id": "AUG-0020",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB4_J#q8",
+      "evidence": "QB4_J#q8 'What are the different types of leadership?' - containment 1.00, Jaccard 0.67. This is the SAME ask as AUG-0009 reported by a different candidate from the same panel; it is recorded as a recurrence edge on one card, never as a second card.",
+      "ask": "Types of leadership - explain.",
+      "duplicate_ask_of": "AUG-0009"
+    },
+    {
+      "occurrence_id": "AUG-0021",
+      "classification": "FOLLOWUP",
+      "matched_question_id": "QB4_J#q8",
+      "evidence": "Regex 'lead from|leading from' returns 0 hits. The item is numbered immediately after the leadership question in the same submission, which is direct evidence of a cross-question rather than an independently posed ask. Recorded as a follow-up limb on QB4_J#q8.",
+      "ask": "As CE will you lead from the front or from the back?"
+    },
+    {
+      "occurrence_id": "AUG-0022",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "evidence": "Regex 'tetrahedron' returns 0 hits across 721 cards. The bank is fire-heavy but nowhere states the fire tetrahedron itself; the top scorers were unrelated CO2-room and container-fire cards reached through the token 'fire'.",
+      "ask": "Fire tetrahedron - explain."
+    },
+    {
+      "occurrence_id": "AUG-0023",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB5_A#q5",
+      "evidence": "A compound ask whose limbs are each already covered: motivation by QB5_A#q5 and QB4_B#q8/#q9/#q10 (8 live motivation cards), quality management by QB5_A#q7 (TQM). No limb is uncovered, so no new card is warranted.",
+      "ask": "Human element management, quality, how to motivate, with cross questions.",
+      "compound_cover_question_ids": ["QB5_A#q5", "QB5_A#q7", "QB4_B#q8"]
+    }
+  ]
+}
