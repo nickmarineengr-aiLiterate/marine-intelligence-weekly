@@ -416,6 +416,22 @@ GATES = (
                       "historical predecessor pin is preserved rather than "
                       "rebaselined"),
 
+    # ---- current-intake production batches ---------------------------------
+    # G1 is the first batch authorised by a CURRENT-intake adjudication record
+    # rather than by the historical 788 disposition or the enrichment
+    # consolidation. It postdates E6, so historical_39 is False.
+    #
+    # It is registered AFTER the follow-up register pair because G1 enriches
+    # three cards that the register also pins: if a G1 edit moved a pinned
+    # parent, the register gate must go red first, so the cause is reported
+    # before the consequence.
+    *_batch_pair("batch_g1", "validate_batch_g1.py", "mutate_batch_g1.py",
+                 1800, historical_39=False,
+                 note="fresh-intake batch: every card must trace to an August "
+                      "occurrence a candidate actually reported, an enrichment "
+                      "must target the card the adjudication named, and no card "
+                      "may name an examiner the evidence does not support"),
+
     # ---- health: candidate LOCAL vs clean ref ------------------------------
     _gate("qb_health_check",
           ["python", "meoclass1/qb_health_check.py", "--source", "local",
