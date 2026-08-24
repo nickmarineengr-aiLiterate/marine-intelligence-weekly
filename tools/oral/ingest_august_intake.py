@@ -50,6 +50,16 @@ RULE_RE = re.compile(r"^[-]{3,}$")
 # submission, so the parser can never invent an attribution that the candidate
 # did not write.
 ATTRIB_RE = re.compile(r"^([A-Za-z][A-Za-z .'-]{1,40}?)\s*:\s*(.*)$", re.S)
+# A bare "Internal" / "Ext" heading with no name after it. Candidates use it the
+# same way they use a name marker: everything below it came from that seat.
+# It is honoured ONLY when the submission declared exactly one examiner in that
+# role, so it can never pick between two people.
+BARE_ROLE_RE = re.compile(r"^(Ext|Int|External|Internal)\s*[-:.]?\s*$", re.I)
+# A line that is only a date. In an unnumbered submission every non-metadata
+# line becomes an occurrence, so the sitting date must be recognised as
+# metadata or it would be counted as a question.
+DATE_ONLY_RE = re.compile(
+    r"^\d{1,2}\s*[-/. ]\s*(?:\d{1,2}|[A-Za-z]{3,9})\s*[-/. ]\s*\d{2,4}\s*$")
 
 ROLE_NORM = {"ext": "EXTERNAL", "external": "EXTERNAL",
              "int": "INTERNAL", "internal": "INTERNAL"}
@@ -89,7 +99,19 @@ def normalise_examiner(raw: str) -> str:
     return s
 
 
-def parse_submission(lines, submission_id: str, seq_start: int):
+def parse_submission(lines, submission_id: str, seq_start: int,
+                     unnumbered: bool = False):
+    """Parse one candidate report.
+
+    `unnumbered` is set by parse_file when the candidate wrote no "1." "2."
+    numbering at all. In that mode the candidate's own line breaks are the
+    occurrence boundary, because there is nothing else to use. Metadata lines
+    (role declarations, attempt, result, a bare date, a bare role heading) are
+    still recognised and excluded; everything else is preserved as an
+    occurrence and dispositioned downstream. Over-capturing a stray remark is
+    visible and adjudicable; dropping a question is silent, which is why the
+    default leans towards keeping the line.
+    """
     examiners, occurrences = [], []
     attempt_no = result = None
     preamble = []
@@ -98,6 +120,7 @@ def parse_submission(lines, submission_id: str, seq_start: int):
     # gave no per-question attribution, which stays PANEL_LEVEL_ONLY.
     current_attrib = None
     attrib_marker = None
+    attrib_basis = None
 
     for ln in lines:
         t = ln.strip()
@@ -112,6 +135,18 @@ def parse_submission(lines, submission_id: str, seq_start: int):
                 "name_normalized": normalise_examiner(m.group(2)),
                 "attribution_basis": "EXPLICITLY_STATED_BY_CANDIDATE",
             })
+            continue
+
+        m = BARE_ROLE_RE.match(t)
+        if m:
+            want = ROLE_NORM[m.group(1).lower()]
+            holders = [e for e in examiners if e["role"] == want]
+            if len(holders) == 1:
+                current_attrib = holders[0]["name_normalized"]
+                attrib_marker = t
+                attrib_basis = "ROLE_MARKER_SOLE_HOLDER"
+            # Two holders, or none declared yet: the heading identifies no one
+            # individually, so attribution is left exactly as it was.
             continue
 
         m = ATTEMPT_RE.match(t)
@@ -130,6 +165,7 @@ def parse_submission(lines, submission_id: str, seq_start: int):
             cand = normalise_examiner(m.group(1))
             if cand.lower() in declared:
                 current_attrib, attrib_marker = cand, t
+                attrib_basis = "NAME_MARKER"
                 trailing = m.group(2).strip()
                 if trailing:
                     # "Senthil : tqm, new acts and difference between act and
@@ -147,6 +183,7 @@ def parse_submission(lines, submission_id: str, seq_start: int):
                         "is_question": not looks_like_non_question(trailing),
                         "_attrib": current_attrib,
                         "_attrib_marker": t,
+                        "_attrib_basis": attrib_basis,
                     })
                 continue
             # A name-like line that is NOT a declared examiner is never an
@@ -164,6 +201,22 @@ def parse_submission(lines, submission_id: str, seq_start: int):
                 "is_question": not looks_like_non_question(raw),
                 "_attrib": current_attrib,
                 "_attrib_marker": attrib_marker,
+                "_attrib_basis": attrib_basis,
+            })
+            continue
+
+        if unnumbered and not DATE_ONLY_RE.match(t):
+            occurrences.append({
+                "occurrence_id": f"AUG-{seq_start + len(occurrences):04d}",
+                "submission_id": submission_id,
+                "source_question_number": None,
+                "source_line_style": "UNNUMBERED",
+                "raw_question_text": t,
+                "normalised_question_text": normalise(t),
+                "is_question": not looks_like_non_question(t),
+                "_attrib": current_attrib,
+                "_attrib_marker": attrib_marker,
+                "_attrib_basis": attrib_basis,
             })
             continue
 
@@ -174,11 +227,16 @@ def parse_submission(lines, submission_id: str, seq_start: int):
         o["attempt_result"] = result
         o["examiners"] = [e["name_normalized"] for e in examiners]
         who, marker = o.pop("_attrib"), o.pop("_attrib_marker")
+        basis = o.pop("_attrib_basis")
         if who:
             # The candidate wrote this examiner's name above the question.
             o["examiner_attribution"] = "INDIVIDUALLY_ATTRIBUTED"
             o["attributed_examiner"] = who
             o["attribution_marker"] = marker
+            # Emitted only for the role-heading route, so that records written
+            # by the original name-marker route stay byte-identical.
+            if basis == "ROLE_MARKER_SOLE_HOLDER":
+                o["attribution_basis"] = basis
         else:
             # Both examiners sat the same panel and the candidate tied no
             # question to a person; neither may be named for this question.
@@ -211,15 +269,30 @@ def parse_file(path: Path):
             cur.append(ln)
     blocks.append(cur)
 
-    subs, seq = [], 1
-    for blk in blocks:
-        if not any(Q_RE.match(l.strip()) for l in blk):
+    subs, seq, skipped = [], 1, []
+    for idx, blk in enumerate(blocks, 1):
+        numbered = any(Q_RE.match(l.strip()) for l in blk)
+        # A candidate who numbers nothing still declares the panel. Requiring
+        # numbering to recognise a submission silently discarded an entire
+        # sitting report: the block just failed the test and `continue` said
+        # nothing. Either signal now identifies a submission.
+        declared = any(ROLE_RE.match(l.strip()) and not Q_RE.match(l.strip())
+                       for l in blk)
+        if not numbered and not declared:
+            if any(l.strip() for l in blk):
+                skipped.append({
+                    "block_index": idx,
+                    "nonempty_lines": sum(1 for l in blk if l.strip()),
+                    "first_line": next(l.strip() for l in blk if l.strip()),
+                })
             continue
-        s = parse_submission(blk, f"AUG2026-S{len(subs) + 1:03d}", seq)
+        s = parse_submission(blk, f"AUG2026-S{len(subs) + 1:03d}", seq,
+                             unnumbered=not numbered)
         s["source_file"] = path.name
+        s["line_style"] = "NUMBERED" if numbered else "UNNUMBERED"
         seq += len(s["occurrences"])
         subs.append(s)
-    return subs
+    return subs, skipped
 
 
 def main():
@@ -229,7 +302,7 @@ def main():
                     help="verify committed records still match the source")
     a = ap.parse_args()
 
-    subs = parse_file(Path(a.txt))
+    subs, skipped = parse_file(Path(a.txt))
     occ = [o for s in subs for o in s["occurrences"]]
 
     roles = {}
@@ -244,6 +317,10 @@ def main():
         "raw_occurrences": len(occ),
         "question_bearing_occurrences": sum(1 for o in occ if o["is_question"]),
         "non_question_occurrences": sum(1 for o in occ if not o["is_question"]),
+        # A block of the carrier that yielded no submission. Reported so that a
+        # lost sitting report is visible in the derived record instead of
+        # vanishing between two rule lines.
+        "unparsed_source_blocks": skipped,
         "examiners_represented": sorted(roles),
         "examiner_roles": roles,
         "individually_attributed_occurrences": sorted(
@@ -267,6 +344,14 @@ def main():
     }
 
     if a.check:
+        # Content the carrier holds but the parser could not place is a defect,
+        # not a clean run. This is checked BEFORE the record comparison because
+        # a dropped block leaves the committed records perfectly self-consistent
+        # — which is exactly how a whole submission went missing unnoticed.
+        if skipped:
+            print(f"FAIL: {len(skipped)} source block(s) yielded no submission: "
+                  f"{[s['block_index'] for s in skipped]}")
+            return 1
         have = [json.loads(l) for l in RECORDS.read_text(encoding="utf-8").splitlines() if l]
         drift = [o["occurrence_id"] for o, h in zip(occ, have)
                  if o["raw_question_text"] != h["raw_question_text"]]

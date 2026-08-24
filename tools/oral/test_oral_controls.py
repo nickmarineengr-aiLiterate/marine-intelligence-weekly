@@ -362,6 +362,109 @@ ok("NOTE_EXPLICIT is not TOPIC_INFERRED",
 
 
 # ==========================================================================
+# Fresh-intake parser controls.
+#
+# The August carrier holds one candidate report per rule-separated block. The
+# parser recognised a block ONLY by its "1." "2." numbering, so a candidate who
+# numbered nothing produced a block that failed the test and was skipped by a
+# bare `continue`. That is a silent loss: the committed records stay perfectly
+# self-consistent, every count agrees with itself, and an entire sitting report
+# is simply absent. S007 lost fourteen occurrences that way.
+#
+# These controls pin the generalisation: numbering is one formatting habit, not
+# the definition of a submission, and anything the parser cannot place must be
+# reported rather than dropped.
+# ==========================================================================
+import ingest_august_intake as IA   # noqa: E402
+
+_NUMBERED = [
+    "Ext- Rajappan sir", "Int- Senthil sir", "Attempt 1",
+    "1. First numbered question?", "2. Second numbered question?",
+    "Result- Fail",
+]
+_UNNUMBERED = [
+    "24-08-2026", "External: Nair sir", "Internal: Senthil sir",
+    "An unnumbered question about conventions",
+    "Another unnumbered question",
+    "Internal",
+    "A question under the internal heading",
+    "Result: Pass",
+]
+
+_n = IA.parse_submission(_NUMBERED, "T-001", 1)
+ok("numbered submission still yields exactly its numbered lines",
+   len(_n["occurrences"]) == 2, str(len(_n["occurrences"])))
+ok("numbered submission keeps its source question numbers",
+   [o["source_question_number"] for o in _n["occurrences"]] == [1, 2])
+ok("a numbered block does not absorb its metadata lines",
+   all("Rajappan" not in o["raw_question_text"] for o in _n["occurrences"]))
+
+_u = IA.parse_submission(_UNNUMBERED, "T-002", 1, unnumbered=True)
+_ut = [o["raw_question_text"] for o in _u["occurrences"]]
+ok("an unnumbered submission is parsed, not discarded", len(_ut) == 3, str(_ut))
+ok("a bare date line is metadata, never a question",
+   not any(d.startswith("24-08") for d in _ut))
+ok("a role declaration is metadata, never a question",
+   not any("Nair sir" in d or "Senthil sir" in d for d in _ut))
+ok("a bare role heading is metadata, never a question",
+   "Internal" not in _ut)
+ok("the result line is metadata, never a question",
+   not any(d.startswith("Result") for d in _ut) and _u["attempt_result"] == "Pass")
+ok("unnumbered occurrences are marked as such",
+   all(o["source_line_style"] == "UNNUMBERED" for o in _u["occurrences"]))
+
+# A bare role heading attributes ONLY when it names one person unambiguously.
+_by = {o["raw_question_text"]: o for o in _u["occurrences"]}
+_under = _by["A question under the internal heading"]
+ok("a role heading attributes to the sole holder of that role",
+   _under["examiner_attribution"] == "INDIVIDUALLY_ATTRIBUTED"
+   and _under["attributed_examiner"] == "Senthil"
+   and _under["attribution_marker"] == "Internal")
+ok("a role-heading attribution records its distinct basis",
+   _under.get("attribution_basis") == "ROLE_MARKER_SOLE_HOLDER")
+ok("lines before any heading stay panel-level",
+   _by["An unnumbered question about conventions"]["examiner_attribution"]
+   == "PANEL_LEVEL_ONLY")
+
+_TWO_INTERNAL = ["Int- Senthil sir", "Int- Nair sir", "Internal", "A question"]
+_t = IA.parse_submission(_TWO_INTERNAL, "T-003", 1, unnumbered=True)
+ok("a role heading naming two holders attributes to neither",
+   _t["occurrences"][0]["examiner_attribution"] == "PANEL_LEVEL_ONLY",
+   str(_t["occurrences"][0].get("attributed_examiner")))
+
+
+def _blocks(text, tmp):
+    tmp.write_text(text, encoding="utf-8")
+    return IA.parse_file(tmp)
+
+
+_TMP = Path(__file__).resolve().parent / "_intake_control.tmp.txt"
+try:
+    _subs, _skipped = _blocks(
+        "Ext- A sir\n1. q one?\n-----------\nExternal: B sir\nan unnumbered ask\n",
+        _TMP)
+    ok("a mixed carrier yields both submissions", len(_subs) == 2, str(len(_subs)))
+    ok("the styles are recorded per submission",
+       [s["line_style"] for s in _subs] == ["NUMBERED", "UNNUMBERED"])
+    ok("occurrence ids stay dense across a style change",
+       [o["occurrence_id"] for s in _subs for o in s["occurrences"]]
+       == ["AUG-0001", "AUG-0002"])
+
+    # Content the parser cannot place must SURFACE. This is the control that
+    # would have caught the original defect on the day it happened.
+    _subs2, _skipped2 = _blocks("Ext- A sir\n1. q one?\n-----------\nstray text\n", _TMP)
+    ok("an unplaceable block is reported, not silently dropped",
+       len(_skipped2) == 1 and _skipped2[0]["nonempty_lines"] == 1,
+       str(_skipped2))
+    _subs3, _skipped3 = _blocks("Ext- A sir\n1. q one?\n-----------\n\n\n", _TMP)
+    ok("an empty trailing block is not reported as a loss", _skipped3 == [],
+       str(_skipped3))
+finally:
+    if _TMP.exists():
+        _TMP.unlink()
+
+
+# ==========================================================================
 # Phase 2A-ii - the Oral Notes secondary layer.
 #
 # Imported rather than run separately so that ONE gate owns every control and
