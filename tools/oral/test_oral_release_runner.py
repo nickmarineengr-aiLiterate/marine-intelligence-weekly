@@ -115,6 +115,7 @@ POST_E6_GATES = [
     # The August 2026 fresh-intake production batch. Kept in sorted position:
     # the control compares this list to a sorted derivation from the registry.
     "batch_g1_mutate",
+    "batch_g2_mutate",
     "correction_lsavent_mutate",
     "corrections_mutate",
     "followup_register_mutate",
@@ -130,13 +131,15 @@ POST_E6_GATES = [
     "validate_batch_f1",
     "validate_batch_f1b",
     "validate_batch_g1",
+    "validate_batch_g2",
     "validate_correction_lsavent",
     "validate_corrections",
     "validate_followup_register",
 ]
 POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
-                           "batch_g1_mutate", "correction_lsavent_mutate",
-                           "corrections_mutate", "followup_register_mutate"]
+                           "batch_g1_mutate", "batch_g2_mutate",
+                           "correction_lsavent_mutate", "corrections_mutate",
+                           "followup_register_mutate"]
 
 # E6 reported 266 mutations across 15 suites. That number is HISTORY and stays
 # pinned to the historical gates; post-E6 suites are counted separately rather

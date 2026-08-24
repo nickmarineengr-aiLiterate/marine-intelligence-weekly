@@ -412,6 +412,7 @@ document.addEventListener('selectstart', function(e){e.preventDefault();});
     <a class="toc-link" href="#q9">Q9. IGF Code — key requirements for ships using g</a>
     <a class="toc-link" href="#q10">Q10. MEPC highlights for a CE — latest MEPC sessio</a>
     <a class="toc-link" href="#q11">Q11. FLL (Fuel Lifecycle LCA) and CE duty — explai</a>
+          <a class="toc-link" href="#q13">Q13. LNG bunkering &mdash; leak &amp; fire</a>
     <div class="divider"></div>
     <div class="upcoming-note">Companion file — own Q1…Qn numbering. Part of the MIW MEO Class 1 QB7_D series.</div>
   </div>
@@ -1058,7 +1059,82 @@ document.addEventListener('selectstart', function(e){e.preventDefault();});
           <span class="q-version">QB7_D · Q12 · v1.0</span>
         </div>
       </div>
+    </div><div class="q-card" id="q13" data-tags="machinery">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">13</div>
+        <div class="q-text-wrap">
+          <div class="q-text">LNG bunkering &mdash; what is your action for a leak at the manifold, and how do you fight a minor and a major fire there?</div>
+          <div class="q-tags"><span class="q-tag tag-machinery">MACHINERY</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span><p>Both answers start the same way: <strong>hit the ESD and stop the transfer</strong>. For a <strong>leak</strong>: ESD, stop transfer, sound the alarm, start the water curtain to protect the steel and disperse vapour, control ignition sources, keep people upwind, and never put a solid water jet into the pool &mdash; water boils LNG and makes more gas. For a <strong>minor fire</strong> at the manifold: ESD, isolate, and extinguish with <strong>dry chemical powder</strong>, with boundary cooling around it. For a <strong>major fire</strong>: ESD, emergency release the coupling, boundary-cool and protect the ship, and <strong>do not extinguish a gas fire you cannot isolate</strong> &mdash; a burning leak is safer than an unignited vapour cloud.</p></div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span><p>LNG at atmospheric pressure is about <strong>&minus;162&deg;C</strong> and expands roughly <strong>600 times</strong> on vaporising to gas at atmospheric pressure and ambient temperature, so a small liquid leak makes a large gas cloud, flammable between about <strong>5% and 15%</strong> in air. That gives three hazards at once: cryogenic damage to the deck steel and to people, a flammable cloud that can drift and find an ignition source, and, if liquid reaches water, a rapid phase transition &mdash; a physical explosion with no combustion at all. So the response is built around isolating the source and controlling the vapour, not around putting something on the fire. The ship-shore link and ESD system exist to do the first part in seconds: ESD1 stops the transfer and closes the valves, and ESD2 parts the emergency release coupling if the ship must move. After that it is water curtain and boundary cooling to protect steel and disperse gas, dry chemical powder if there is a fire small enough to be worth extinguishing, and a very disciplined refusal to extinguish a large fire that would simply refill the area with unignited gas.</p></div>
+        <div class="answer-body">
+          <h4>1. The controls that make a response possible</h4>
+          <p>The answer to "what will you do" is largely decided before the hose is connected:</p>
+          <ul>
+            <li><strong>Ship-shore or ship-ship safety link and ESD system</strong> &mdash; a positive link that trips the transfer from either side. <strong>ESD1</strong> stops pumping and closes the valves; <strong>ESD2</strong> operates the <strong>emergency release coupling</strong>, parting the connection with valves closing on both halves.</li>
+            <li><strong>Dry-break / powered emergency release coupling</strong> at the manifold, so separation does not spill the line contents.</li>
+            <li><strong>Fixed gas detection</strong> at the manifold and around the bunker station, with <strong>low-temperature detection</strong> in the drip trays.</li>
+            <li><strong>Stainless steel drip trays</strong> under the connection, with a water curtain, so a spill never lands on ordinary hull steel.</li>
+            <li><strong>Water curtain and manifold water spray</strong>, running before transfer starts.</li>
+            <li><strong>Dry chemical powder</strong> units covering the bunker station, which is the extinguishing medium for a gas fire.</li>
+            <li><strong>ESD initiation</strong> &mdash; automatic on gas detection, low-temperature alarm in the drip tray, tank high level or high or low pressure, fire detection, or loss of the ship-shore link or excessive vessel movement; plus manual initiation from both the ship and the supplier station. Knowing what <em>trips</em> the ESD is the natural follow-up to knowing what it does.</li>
+            <li><strong>Bunkering checklist, agreed transfer plan and hazardous zone</strong>, control of hot work and simultaneous operations, and manned communication throughout.</li>
+          </ul>
+          <h4>2. Leak at the manifold &mdash; action</h4>
+          <ul>
+            <li><strong>Activate ESD and stop the transfer immediately</strong>; raise the alarm and inform the bunker supplier and the terminal or port.</li>
+            <li><strong>Start or confirm the water curtain and manifold spray.</strong> Its purpose is to <em>protect the steel</em> from cryogenic embrittlement and to <em>disperse and warm the vapour</em>, not to extinguish anything.</li>
+            <li><strong>Do not direct a solid water jet into the liquid pool.</strong> Water carries far more heat than the pool needs; it accelerates vaporisation and makes the gas cloud bigger.</li>
+            <li><strong>Eliminate ignition sources</strong> &mdash; stop hot work, stop non-essential machinery in the area, check that accommodation and machinery space intakes are closed, and keep the vapour cloud out of the engine room.</li>
+            <li><strong>Muster and account for people, upwind and clear.</strong> Note wind direction early; the cloud is heavier than air when cold and will travel low before it warms and lifts.</li>
+            <li><strong>Contain and monitor</strong> &mdash; the spill in the tray, gas readings around the area, and the deck steel where liquid may have touched. Suspect any plating that has been in contact with LNG until it is inspected.</li>
+            <li><strong>Do not restart</strong> until the cause is found, the area is gas-free, the connection is proved and both sides agree.</li>
+          </ul>
+          <h4>3. Minor fire at the manifold</h4>
+          <ul>
+            <li><strong>ESD and isolate.</strong> Very often stopping the flow is what puts the fire out, because the fuel supply ends.</li>
+            <li><strong>Dry chemical powder</strong> is the primary medium for an LNG fire &mdash; it interrupts the combustion chemistry. Apply it from upwind, at the base, and only when the source can be isolated.</li>
+            <li><strong>Boundary cooling with water spray</strong> on surrounding steel and on the manifold structure &mdash; around the fire, not into the pool.</li>
+            <li><strong>After extinction, keep gas monitoring running.</strong> An extinguished leak that is still leaking is now producing an unignited flammable cloud, which is a worse problem than the fire was.</li>
+          </ul>
+          <h4>4. Major fire at the manifold</h4>
+          <ul>
+            <li><strong>ESD, then emergency release</strong> &mdash; part the coupling so the ship can move clear of the source if required.</li>
+            <li><strong>Sound the general emergency alarm</strong>, muster, and call for shore and tug fire support; on many ships this is also the point to consider unberthing.</li>
+            <li><strong>Fight the fire by protecting the ship, not by attacking the flame.</strong> Boundary cooling with water spray and monitors to keep the surrounding structure, the accommodation front and any adjacent tanks below damaging temperature.</li>
+            <li><strong>Do not extinguish a large gas fire that you cannot isolate.</strong> A controlled, burning release consumes the gas at the point of leak. Extinguish it without stopping the flow and you replace a visible fire with an invisible vapour cloud looking for an ignition source &mdash; and the re-ignition is then an explosion, not a fire.</li>
+            <li><strong>Withdraw personnel from the manifold area</strong> and fight from protected positions with fixed monitors where fitted.</li>
+          </ul>
+          <h4>5. The hazards behind all of it</h4>
+          <ul>
+            <li><strong>Cryogenic embrittlement</strong> &mdash; ordinary carbon steel exposed to LNG loses ductility and can fracture brittly under load. This is why the drip tray and the water curtain exist, and why contacted plating is treated as suspect.</li>
+            <li><strong>Cold burns</strong> to personnel, and the need for proper cryogenic PPE at the connection.</li>
+            <li><strong>Rapid phase transition (RPT)</strong> &mdash; LNG contacting water can flash-vaporise so quickly that it produces a physical explosion with no combustion.</li>
+            <li><strong>Vapour cloud behaviour</strong> &mdash; cold gas is denser than air and hugs the deck; it lifts only as it warms. Detection at low level matters.</li>
+            <li><strong>Rollover</strong> &mdash; receiving a bunker of different density on top of the existing tank contents can leave stratified layers that later roll over, with a sharp rise in boil-off and tank pressure. On a gas-fuelled ship this is <em>fuel</em>, not cargo, and it is a bunker planning and compatibility issue rather than an emergency-response one.</li>
+          </ul>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">&#9878; Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IGF Code, mandatory through SOLAS Ch. II-1 Part G</span><span class="reg-desc">Safety requirements for ships using gases or other low-flashpoint fuels &mdash; bunkering arrangements, the gas-safe philosophy, ESD, drip trays, gas detection and the bunkering manifold. See also the IGF Code cards in QB7_D and QB7_E.</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS Ch. II-2</span><span class="reg-desc">Fire protection, detection and extinction &mdash; the general fire-safety framework the bunker station arrangements sit inside.</span></div>
+          <div class="reg-item"><span class="reg-code">IGC Code</span><span class="reg-desc">Applies to the gas CARRIER rather than to the gas-fuelled ship. Do not quote it for a bunkering vessel's own fuel system; that is the IGF Code.</span></div>
+          <div class="reg-item"><span class="reg-code">Industry guidance &mdash; SIGTTO and SGMF</span><span class="reg-desc">LNG bunkering safety guidelines, the ship-shore checklist and the compatibility study. Guidance and industry practice, not statutory instruments &mdash; say so if asked.</span></div>
+          <div class="reg-item"><span class="reg-code">Key physical properties</span><span class="reg-desc">LNG boils at about &minus;162&deg;C, expands roughly 600:1 on vaporising, and methane is flammable in air between about 5% and 15% by volume with an auto-ignition temperature near 537&deg;C.</span></div>
+        </div>
+        <div class="ce-tip"><strong>CE Oral Tip:</strong> The examiner split this deliberately into <em>minor</em> and <em>major</em>, so give him a split answer and make the dividing line explicit: <strong>can I isolate the source or not?</strong> That single question decides everything after it. Say the words <em>"ESD first"</em> before anything else, because both halves start there. The mark is won on the counter-intuitive part &mdash; that you do <strong>not</strong> extinguish a large gas fire you cannot isolate, and that water goes on the steel and into the vapour, never into the pool. If he pushes further, the next step in the chain is cryogenic embrittlement of the deck plating and how you would inspect it afterwards.</div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5><p>On a gas-fuelled ship the Chief Engineer owns the bunkering operation in a way he never owned fuel oil bunkering: the gas-safe machinery space boundary, the double-walled piping and its ventilation, the gas detection, the ESD logic and the tank pressure management are all engineering systems, and their failure modes are engineering failure modes. The single most valuable thing a CE brings to this question is that he knows the ESD is a system that must be <em>tested</em>, not a button that is assumed to work.</p><h5>Trap Questions</h5><ul><li><strong>Examiner:</strong> <em>"Why not just put the fire out?"</em> Because a fire you extinguish without isolating keeps releasing gas, and the cloud that forms will find an ignition source and explode. A controlled burn at the leak is the safer state until the source is isolated.</li><li><strong>Examiner:</strong> <em>"Will you cool the spill with water?"</em> Not into the pool. Water is warm compared with LNG and will boil it faster. Water goes on the surrounding steel and as a curtain through the vapour.</li><li><strong>Examiner:</strong> <em>"Which code applies &mdash; IGC or IGF?"</em> IGF for a ship using gas as fuel; IGC for a ship carrying it as cargo.</li></ul><h5>Common CE Failures</h5><p>Starting with extinguishing media instead of with ESD. Offering CO2 or foam as the primary agent for a gas fire instead of dry chemical powder. Not knowing the flammable range. Treating a spill as a housekeeping problem and missing the cryogenic embrittlement of the deck. Forgetting to close accommodation and machinery space intakes, which is how a vapour cloud becomes an engine room event.</p><h5>Numbers to Memorise</h5><p>LNG boils at about <strong>&minus;162&deg;C</strong>. Liquid to gas expansion about <strong>600:1</strong>. Methane flammable range about <strong>5&ndash;15%</strong> by volume in air. Auto-ignition about <strong>537&deg;C</strong>, which is high &mdash; so a hot surface is unlikely to ignite it. But the <strong>minimum ignition energy is only about 0.28 mJ</strong>, so a spark or a static discharge will. That is why the working precaution is ignition-source control, not surface temperature. <strong>ESD1</strong> stops transfer; <strong>ESD2</strong> releases the coupling.</p><h5>Casualty Link</h5><p>Gas release incidents at transfer connections turn overwhelmingly on two things: whether the ESD actually operated as designed, and whether the leak was allowed to accumulate before anyone acted. Both are answerable in advance by testing the ESD chain and by having gas detection that people trust rather than silence.</p><h5>On My Vessel</h5><p>The ESD chain is function-tested with the supplier before every bunkering, not merely signed for on the checklist, and the water curtain runs from before the connection is made until after it is broken. The bunkering toolbox talk fixes wind direction, the muster point upwind and who operates ESD from our side, so that nobody in the first ten seconds is deciding who is allowed to press it.</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_D, Q13, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB7_D &middot; Q13 &middot; v1.0</span>
+        </div>
+      </div>
     </div>
+
 
   </div>
 </div>

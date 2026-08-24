@@ -1,0 +1,53 @@
+{
+  "batch_id": "G2",
+  "title": "August 2026 fresh-intake production - batch G2 (the two asks the fifth submission established that the bank could not answer)",
+  "kind": "CURRENT_INTAKE_PRODUCTION",
+  "note": "Second fresh-intake batch, authorised by the same per-occurrence adjudication record as G1. Both cards are two-occurrence cards, and neither merge was made by the parser - each is recorded in the adjudication so it can be reviewed. G2-001 answers a casualty that TWO examiners asked about in the same window: Nair asked S004 for 'a recent bulk carrier accident' (AUG-0035, held as AMBIGUOUS because no casualty was named) and Senthil asked S005 for the Ocean Winner by name (AUG-0050). S005 therefore RESOLVED a batch-3 hold, and AUG-0035 is the source because it is the earlier occurrence. G2-002 merges the leak limb (AUG-0044) into the fire limb (AUG-0042) because both are the same bunkering operation and two cards would have duplicated the whole of the ESD, coupling, water-curtain and cryogenic context. NOTE ON EXAMINER ATTRIBUTION: neither card names an examiner. Senthil is individually attributed on AUG-0050 by the candidate, but the examiner index derives from its own governed evidence ledger and writing a relationship in through card markup would bypass it - so relationships stay at 958 and the attribution is recorded in the intake store instead. NOTE ON CURRENCY: G2-001 concerns an OPEN casualty with seafarers still missing. It states the cause as undetermined and offers the liquefaction mechanism as hypothesis, never as finding.",
+  "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_INTAKE_ADJUDICATIONS.json",
+  "authorisation_batch_key": "batches.G2",
+  "authorisation_commit": "30c70a493f098587f3b12890f33034afe6094838",
+  "baseline_commit": "30c70a493f098587f3b12890f33034afe6094838",
+  "baseline_canonical_questions": 725,
+  "expected_canonical_questions": 727,
+  "expected_question_bearing_files": 86,
+  "expected_examiner_relationships": 958,
+  "expected_examiners": 7,
+  "creates_new_cards": true,
+  "actual_new_card_count": 2,
+  "distinct_target_cards": 2,
+  "examiner_relationship_delta": 0,
+  "cards": [
+    {
+      "action_id": "G2-001",
+      "file": "QB2_A.html",
+      "anchor": "q31",
+      "action_kind": "NEW_CARD",
+      "source_occurrence_ids": [
+        "AUG-0035"
+      ],
+      "supporting_occurrence_ids": [
+        "AUG-0050"
+      ],
+      "topic": "MV Ocean Winner - what is established, what is not, and the liquefaction mechanism behind a Group A cargo listing and sinking in under ten minutes",
+      "adjudication": "GENUINE_NEW_QUESTION",
+      "pre_edit_digest": null,
+      "post_edit_digest": "faa895ede34c9fef1cb791776c000363f8f0180bcb2fff735d0592ebe85a1230"
+    },
+    {
+      "action_id": "G2-002",
+      "file": "QB7_D.html",
+      "anchor": "q13",
+      "action_kind": "NEW_CARD",
+      "source_occurrence_ids": [
+        "AUG-0042"
+      ],
+      "supporting_occurrence_ids": [
+        "AUG-0044"
+      ],
+      "topic": "LNG bunkering emergency response - leak at the manifold, and minor versus major fire, built around whether the source can be isolated",
+      "adjudication": "GENUINE_NEW_QUESTION",
+      "pre_edit_digest": null,
+      "post_edit_digest": "f4de93d5a02a50109f39e37f68c3a1d7f96f989eb791242e7078674b96faf943"
+    }
+  ]
+}

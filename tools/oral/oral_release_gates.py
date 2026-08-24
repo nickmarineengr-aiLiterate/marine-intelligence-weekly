@@ -432,6 +432,13 @@ GATES = (
                       "must target the card the adjudication named, and no card "
                       "may name an examiner the evidence does not support"),
 
+    *_batch_pair("batch_g2", "validate_batch_g2.py", "mutate_batch_g2.py",
+                 1800, historical_39=False,
+                 note="second fresh-intake batch: same contract as G1, reused rather "
+                      "than copied. Adds the checks S005 made necessary - a raw "
+                      "carrier file must not reach a tracked or deployed surface, and "
+                      "neither QB projection may drift from the governed card count"),
+
     # ---- health: candidate LOCAL vs clean ref ------------------------------
     _gate("qb_health_check",
           ["python", "meoclass1/qb_health_check.py", "--source", "local",
