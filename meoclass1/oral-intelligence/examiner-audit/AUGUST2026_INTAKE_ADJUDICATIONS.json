@@ -5,9 +5,9 @@
   "note": "Human adjudication of the August 2026 candidate intake against the live 721-card bank. Similarity is recorded as evidence, never as the decision: the matcher ranked the correct parametric-rolling card THIRD (AUG-0012) behind an unrelated tonnage card, and ranked an unrelated DP card first for AUG-0001. Every GENUINE_NEW_QUESTION row states the negative search that established the gap, so the judgement can be rechecked rather than the arithmetic.",
   "governing_principle": "A new card is created only when the examiner's actual tested ask is materially distinct from every live card. Novel wording alone is never sufficient.",
   "live_corpus_at_adjudication": {
-    "canonical_questions": 725,
-    "commit": "30c70a493f098587f3b12890f33034afe6094838",
-    "note": "S005 was adjudicated against the bank AFTER batch G1 shipped, so the four G1 cards and four G1 enrichments were themselves candidates for matching. AUG-0052 matched a card G1 had enriched two submissions earlier."
+    "canonical_questions": 727,
+    "commit": "bbc615a (batches G1 and G2 both shipped)",
+    "note": "S006 was adjudicated against a bank that already contained both G1 and G2. Two of its eleven occurrences resolved onto cards created earlier the SAME DAY, which is the clearest evidence yet that the fresh-intake lane is working: a question asked at the sitting is answered by the time the next candidate reports it."
   },
   "vocabularies": {
     "classification": [
@@ -34,10 +34,14 @@
       "AUG2026-S004": {
         "EXTERNAL": "Nair",
         "INTERNAL": "Senthil"
+      },
+      "AUG2026-S006": {
+        "EXTERNAL": "Rajappan",
+        "INTERNAL": "Senthil"
       }
     },
-    "caution": "The August panel is not constant: Nair sat as external for S004, Rajappan for the other four. Senthil is internal throughout. FIVE occurrences now carry a per-question attribution and ALL FIVE are Senthil, because he is the examiner these candidates consistently wrote a name-marker for: AUG-0032, AUG-0040, AUG-0050, AUG-0051, AUG-0052. Everything else stays PANEL_LEVEL_ONLY. AUG-0041..AUG-0049 are NOT attributed to Rajappan on the strength of sitting above the Senthil marker - that is a layout inference, not candidate evidence.",
-    "cross_submission_recurrence": "Senthil asked SHADOW FLEET in both S003 (AUG-0032) and S005 (AUG-0052), and in both cases the candidate attributed it to him by name. That is the strongest examiner-question evidence the August intake has produced. It is recorded here and in the intake store; it is deliberately NOT injected into the examiner index by adding a tag to the card, because that index derives from its own governed evidence ledger and writing a relationship in through card markup would bypass it."
+    "caution": "The August panel is not constant: Nair sat as external for S004, Rajappan for the other five. Senthil is internal throughout. SIX occurrences now carry a per-question marker and ALL SIX are Senthil - AUG-0032, AUG-0040, AUG-0050, AUG-0051, AUG-0052 and AUG-0063 - because he is the examiner these candidates consistently write a name for. Everything else stays PANEL_LEVEL_ONLY. In particular the ten occurrences sitting above his marker in S006 are NOT attributed to Rajappan: that is a layout inference, not candidate evidence.",
+    "cross_submission_recurrence": "Senthil now has two questions asked twice under his own name: SHADOW FLEET in S003 (AUG-0032) and S005 (AUG-0052), and RIGHTSHIP in S004 (AUG-0038, panel-level under the Nair panel) and S006 (AUG-0063, individually attributed). Recorded here and in the intake store; deliberately NOT written into the examiner index through card markup, which would bypass that index's own governed evidence ledger."
   },
   "adjudications": [
     {
@@ -838,6 +842,137 @@
       "submission_id": "AUG2026-S005",
       "batch": "AUGUST_BATCH_4",
       "cross_batch_check": "Compared against all 725 live cards INCLUDING the four batch-G1 cards and four G1 enrichments, against AUG-0001..AUG-0040, and against every prior August ask. AUG-0050 and AUG-0052 both matched prior fresh evidence rather than opening new ground."
+    },
+    {
+      "occurrence_id": "AUG-0053",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB1_F#q1",
+      "ask": "An incident on your ship.",
+      "evidence": "/\\bincident\\b/ returns eight cards; QB1_F#q1 'Any incident on your ship' is this ask verbatim. It is the standard opener that the examiner then chains from - here, straight into risk assessment and root cause analysis.",
+      "submission_id": "AUG2026-S006",
+      "batch": "AUGUST_BATCH_5",
+      "cross_batch_check": "Compared against all 727 live cards INCLUDING both batch-G1 and batch-G2 output, against AUG-0001..AUG-0052, and against every prior August ask. ZERO new cards required: every occurrence resolved onto an existing card, and two of them onto cards created earlier the same day."
+    },
+    {
+      "occurrence_id": "AUG-0054",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB5_A#q12",
+      "additional_matched_question_ids": [
+        "QB5_A#q11"
+      ],
+      "ask": "Risk assessment and root cause analysis.",
+      "evidence": "Two limbs, both covered: QB5_A#q12 'Root Cause Analysis / Fault Analysis Methods' and QB5_A#q11 'Risk assessment - explain', the card AUG-0017 already resolved to. Note this pairing does NOT resolve AUG-0019 ('Risk analysis - why and how'), which remains held: root cause analysis is a named method, risk analysis is the ambiguous term.",
+      "submission_id": "AUG2026-S006",
+      "batch": "AUGUST_BATCH_5",
+      "cross_batch_check": "Compared against all 727 live cards INCLUDING both batch-G1 and batch-G2 output, against AUG-0001..AUG-0052, and against every prior August ask. ZERO new cards required: every occurrence resolved onto an existing card, and two of them onto cards created earlier the same day."
+    },
+    {
+      "occurrence_id": "AUG-0055",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB9_C#q5",
+      "ask": "Marine insurance, and utmost good faith.",
+      "evidence": "/utmost good faith|uberrima/ returns 0 hits across candidate-facing QUESTION text, which is why a question-text search alone would have called this a gap. Reading the bodies finds QB9_C#q5 'Insurance principles - list all principles of marine insurance and explain each', whose answer opens with Utmost Good Faith (uberrimae fidei) as the first of six. Covered.",
+      "submission_id": "AUG2026-S006",
+      "batch": "AUGUST_BATCH_5",
+      "cross_batch_check": "Compared against all 727 live cards INCLUDING both batch-G1 and batch-G2 output, against AUG-0001..AUG-0052, and against every prior August ask. ZERO new cards required: every occurrence resolved onto an existing card, and two of them onto cards created earlier the same day."
+    },
+    {
+      "occurrence_id": "AUG-0056",
+      "classification": "SAME_AS_PRIOR_FRESH_ASK",
+      "matched_question_id": null,
+      "prior_fresh_ask_ref": "AUG-0035",
+      "ask": "The Ocean Winner incident, and what could be the reason.",
+      "evidence": "The THIRD candidate asked about this casualty and the second to name it - the wording is verbatim identical to AUG-0050. Three occurrences across three submissions and two examiners now sit behind one card, QB2_A#q31, which was created earlier today from AUG-0035. No second card.",
+      "submission_id": "AUG2026-S006",
+      "batch": "AUGUST_BATCH_5",
+      "cross_batch_check": "Compared against all 727 live cards INCLUDING both batch-G1 and batch-G2 output, against AUG-0001..AUG-0052, and against every prior August ask. ZERO new cards required: every occurrence resolved onto an existing card, and two of them onto cards created earlier the same day."
+    },
+    {
+      "occurrence_id": "AUG-0057",
+      "classification": "FOLLOWUP",
+      "matched_question_id": "QB2_A#q31",
+      "ask": "Discuss more on liquefaction.",
+      "evidence": "The examiner chained directly from the Ocean Winner into the mechanism. That is exactly the chain QB2_A#q31 was built to answer - its section 3 is the liquefaction mechanism, and the card was already corrected to state that iron ore fines has no FMP. No enrichment is needed; this occurrence CONFIRMS the card's construction. QB2_A#q27 (comparing liquefaction, cohesive cargo collapse and grain shift) supports it but is not the parent, because the examiner arrived here from the casualty.",
+      "submission_id": "AUG2026-S006",
+      "batch": "AUGUST_BATCH_5",
+      "cross_batch_check": "Compared against all 727 live cards INCLUDING both batch-G1 and batch-G2 output, against AUG-0001..AUG-0052, and against every prior August ask. ZERO new cards required: every occurrence resolved onto an existing card, and two of them onto cards created earlier the same day."
+    },
+    {
+      "occurrence_id": "AUG-0058",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB5_C_B#q1",
+      "additional_matched_question_ids": [
+        "QB5_A#q15"
+      ],
+      "ask": "Reverse mentoring - is it good or bad, justify.",
+      "evidence": "The same ask as AUG-0043 (S003), differently framed. QB5_C_B#q1 'Mentoring vs reverse mentoring' owns it. Two candidates, two submissions, one card.",
+      "submission_id": "AUG2026-S006",
+      "batch": "AUGUST_BATCH_5",
+      "cross_batch_check": "Compared against all 727 live cards INCLUDING both batch-G1 and batch-G2 output, against AUG-0001..AUG-0052, and against every prior August ask. ZERO new cards required: every occurrence resolved onto an existing card, and two of them onto cards created earlier the same day."
+    },
+    {
+      "occurrence_id": "AUG-0059",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB5_A#q5",
+      "additional_matched_question_ids": [
+        "QB4_B#q8",
+        "QB4_B#q10",
+        "QB5_C_A#q1"
+      ],
+      "ask": "Motivating the crew as Chief Engineer.",
+      "evidence": "/motivat/ returns eight cards. QB5_A#q5 'Motivation of Crew - Principles of Motivation' is the ask; QB4_B#q10 covers motivating junior engineers specifically and QB5_C_A#q1 the management theories. Thoroughly covered.",
+      "submission_id": "AUG2026-S006",
+      "batch": "AUGUST_BATCH_5",
+      "cross_batch_check": "Compared against all 727 live cards INCLUDING both batch-G1 and batch-G2 output, against AUG-0001..AUG-0052, and against every prior August ask. ZERO new cards required: every occurrence resolved onto an existing card, and two of them onto cards created earlier the same day."
+    },
+    {
+      "occurrence_id": "AUG-0060",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB7_A#q2",
+      "additional_matched_question_ids": [
+        "QB7_D#q3",
+        "QB7_D#q2",
+        "QB7_I#q8"
+      ],
+      "ask": "Onboard carbon capture - the procedure.",
+      "evidence": "/carbon capture/ returns five cards. QB7_A#q2 is the parent ask, the same card AUG-0004 resolved to in batch 1, and QB7_D#q3 (amine separation setup) is the procedural limb this candidate was pushed on. Covered.",
+      "submission_id": "AUG2026-S006",
+      "batch": "AUGUST_BATCH_5",
+      "cross_batch_check": "Compared against all 727 live cards INCLUDING both batch-G1 and batch-G2 output, against AUG-0001..AUG-0052, and against every prior August ask. ZERO new cards required: every occurrence resolved onto an existing card, and two of them onto cards created earlier the same day."
+    },
+    {
+      "occurrence_id": "AUG-0061",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB7_G#q1",
+      "ask": "E-fuels.",
+      "evidence": "/\\be.?fuel|electrofuel|synthetic fuel|power.to.x/ returns exactly one card, QB7_G#q1 'What are e-fuels, and how do they relate to shipping's net-zero target?'. Same ask.",
+      "submission_id": "AUG2026-S006",
+      "batch": "AUGUST_BATCH_5",
+      "cross_batch_check": "Compared against all 727 live cards INCLUDING both batch-G1 and batch-G2 output, against AUG-0001..AUG-0052, and against every prior August ask. ZERO new cards required: every occurrence resolved onto an existing card, and two of them onto cards created earlier the same day."
+    },
+    {
+      "occurrence_id": "AUG-0062",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB3_B#q19",
+      "additional_matched_question_ids": [
+        "QB3_C#q4",
+        "QB2_A#q25"
+      ],
+      "ask": "GESAMP.",
+      "evidence": "/\\bGESAMP\\b/ returns three cards. QB3_B#q19 'What does GESAMP stand for, and what is its role in the maritime context?' is the bare ask.",
+      "submission_id": "AUG2026-S006",
+      "batch": "AUGUST_BATCH_5",
+      "cross_batch_check": "Compared against all 727 live cards INCLUDING both batch-G1 and batch-G2 output, against AUG-0001..AUG-0052, and against every prior August ask. ZERO new cards required: every occurrence resolved onto an existing card, and two of them onto cards created earlier the same day."
+    },
+    {
+      "occurrence_id": "AUG-0063",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB9_F#q9",
+      "ask": "RightShip.",
+      "evidence": "QB9_F#q9 'RightShip Inspection' - the same card AUG-0038 resolved to in S004. Asked again two submissions later, and this time the candidate attributed it to Senthil by name.",
+      "submission_id": "AUG2026-S006",
+      "batch": "AUGUST_BATCH_5",
+      "cross_batch_check": "Compared against all 727 live cards INCLUDING both batch-G1 and batch-G2 output, against AUG-0001..AUG-0052, and against every prior August ask. ZERO new cards required: every occurrence resolved onto an existing card, and two of them onto cards created earlier the same day."
     }
   ],
   "existing_card_defects": [
