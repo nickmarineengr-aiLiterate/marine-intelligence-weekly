@@ -498,8 +498,18 @@ def main():
            "unauthorised additions %s; removals %s"
            % (added_rogue or "-", removed or "-"))
 
-    report("q_text_and_anchors_stable", not qtext_moved,
-           "moved=%s" % (qtext_moved or "-"))
+    # A stem reworded on a card ANOTHER authorisation record owns is that
+    # record's business, not this batch's. Without this exemption the check
+    # asserts "no question text anywhere in the corpus has changed since my
+    # baseline", which stops being true the first time any authorised
+    # correction rewords a stem -- the same expiry the checks above were
+    # already fixed for. A reword on a card NOBODY owns still fails, and so
+    # does a reword of this batch's OWN cards, which is what the check is for.
+    qtext_unowned = [x for x in qtext_moved if x not in sibling_owned]
+    qtext_elsewhere = sorted(set(qtext_moved) - set(qtext_unowned))
+    report("q_text_and_anchors_stable", not qtext_unowned,
+           "moved=%s authorised-elsewhere=%s"
+           % (qtext_unowned or "-", qtext_elsewhere or "-"))
 
     authorised_elsewhere = set()
     for sib in authorisation_manifest_paths(MANIFEST.parent):

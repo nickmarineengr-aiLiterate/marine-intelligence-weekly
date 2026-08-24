@@ -486,8 +486,18 @@ def main():
     report("every_authorised_card_changed", not not_changed,
            "unchanged=%s" % (not_changed or "-"))
 
-    report("q_text_and_anchors_stable", not qtext_moved,
-           "moved=%s" % (qtext_moved or "-"))
+    # A stem reworded on a card ANOTHER authorisation record owns is that
+    # record's business, not this batch's. Without this exemption the check
+    # asserts "no question text anywhere in the corpus has changed since my
+    # baseline", which stops being true the first time any authorised
+    # correction rewords a stem -- the same expiry the checks above were
+    # already fixed for. A reword on a card NOBODY owns still fails, and so
+    # does a reword of this batch's OWN cards, which is what the check is for.
+    qtext_unowned = [x for x in qtext_moved if x not in sibling_owned]
+    qtext_elsewhere = sorted(set(qtext_moved) - set(qtext_unowned))
+    report("q_text_and_anchors_stable", not qtext_unowned,
+           "moved=%s authorised-elsewhere=%s"
+           % (qtext_unowned or "-", qtext_elsewhere or "-"))
 
     # ---- the limb is actually there, and its authority with it ----
     additive_bad, digest_bad, claim_bad, qual_bad, ab_bad = [], [], [], [], []
