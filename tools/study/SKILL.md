@@ -488,23 +488,71 @@ answer.
 | `tools/study/validate_phase2_tranche.py` | The gate. 37 invariants, fails closed. |
 | `tools/study/test_phase2_mutations.py` | 16 mutations, all must be caught, zero residue. |
 
-### A new answer has nowhere to live -- read this before planning a tranche
+### A new answer HAD nowhere to live. Since 2026-08-24 it does.
 
 Tranche 002 was weighted six-of-twelve toward `NEW_MODERN_ANSWER_REQUIRED` to
 price the creation of a present-day answer. **One of the six resolved.** The
-other five could not be, at any price, and the reason is structural:
+other five could not be, at any price, and the reason was structural:
 
 - all 37 `NEW_MODERN_ANSWER_REQUIRED` families have their newest member in
   **2021 or 2022**, and those are WORDING-ONLY records;
-- `spec_question_ids()` builds the nameable-answer set **only** from
-  `meoclass1/pastpapers/specs/*.json`, which is the SOLVED 2023-2026 set;
+- `spec_question_ids()` built the nameable-answer set **only** from
+  `meoclass1/pastpapers/specs/*.json`, the SOLVED 2023-2026 set;
 - `historical_qp_intelligence.json` forbids authoring an answer for those
   sittings without a separate Founder decision.
 
-So do not plan a tranche around converting new-answer families until a Founder
-decision and an answer container exist. The families that CAN convert are the
-ones a governed `WHOLE_VS_LIMB` join already points at a solved successor --
-check `qi_family_joins.json` before selecting.
+**Both blockers are now gone.** Under the Founder decision of 24 August 2026
+there is a governed present-day container outside the sitting-anchored specs --
+`meoclass1/current-answers/`, full contract in
+`docs/study/CURRENT_ANSWER_LIBRARY.md` -- and Phase-2 ownership is TYPED, so a
+family may name a library entry instead of a past-paper question:
+
+```json
+"canonical_current_answer": {"owner_type": "CURRENT_LIBRARY",
+                             "owner_id": "CA-EM-0001"}
+```
+
+...or, where the family genuinely contains several independently examinable
+concepts, own itself limb by limb:
+
+```json
+"family_current_answers": [
+  {"limb_id": "L-A", "limb_label": "...", "scope": "...",
+   "owner_type": "CURRENT_LIBRARY_LIMB", "owner_id": "CA-EM-0002"},
+  {"limb_id": "L-B", "limb_label": "...", "scope": "...",
+   "owner_type": "SOLVED_PAPER_LIMB",    "owner_id": "QP2304-Q3"}
+]
+```
+
+Four rules that are easy to get wrong here:
+
+1. **Apply the reuse order before authoring anything.** Existing solved answer,
+   then existing solved limb, then a library entry, then library limbs, then
+   HOLD. On `QIF-EM-0052` this changed the output from four new answers to two:
+   `QP2304-Q3` and `QP2510-Q2` already owned two limbs cleanly. Read the
+   candidate owner's stem and answer in full -- `QP2406-Q8` and `QP2308-Q7`
+   both LOOK like owners on a title sweep and neither is one.
+2. **A family is owned whole OR limb by limb, never both**
+   (`R-P2-OWNER-EXCLUSIVE`). And do not split on brackets: a limb exists only
+   where the family holds genuinely independent examinable concepts.
+3. **The one-answer rule is not relaxed -- it moves down a level.** Each limb
+   names one owner and each owner is reviewed on its own evidence.
+   `R-CA-LIMB-SLOT` stops one verified limb answering for a whole question.
+4. **A library answer blesses NO sitting, and that is the point.** It names a
+   `CA-EM-nnnn`, which matches no question id, so no member question becomes
+   ready and no 2021 paper becomes solved. Resolving the two acceptance
+   families moved question readiness for **zero** questions.
+
+Three invariants added with tranche 002, and the middle one was catching a live
+defect: `R-P2-NEW-ANSWER-BIAS`, `R-P2-HOLD-REACHES-ANSWERS`, `R-P2-HOLD-REASON`.
+Four more added with the library: `R-P2-OWNER-TYPED`, `R-P2-OWNER-SHAPE`,
+`R-P2-OWNER-EXCLUSIVE`, `R-P2-NO-SYNTHETIC-MEMBER`.
+
+```bash
+python tools/current_answers/build_current_answers.py
+python tools/current_answers/validate_current_answers.py       # 51 invariants
+python tools/current_answers/test_current_answer_mutations.py  # 22 mutations
+```
 
 Three invariants added with that tranche, and the middle one was catching a
 live defect: `R-P2-NEW-ANSWER-BIAS` (a declared new-answer minimum is checked
@@ -664,14 +712,26 @@ The projection reads `study_qi.json`, so it is built after it and before any
 page:
 
 ```bash
+python tools/current_answers/build_current_answers.py  # BEFORE build_study_qi
 python tools/study/build_study_qi.py
 python tools/study/build_qi_projection.py
 python tools/study/export_roadmap_xlsx.py
 python tools/study/build_topic_pages.py
 python tools/pastpapers/run_toolchain.py --publish     # NOT --gated
+python tools/pastpapers/build_questions_year.py --deliver   # NOT --publish
 python tools/study/validate_qi_projection.py
 python tools/study/test_qi_projection_mutations.py
 ```
+
+**Two mode traps on that list, and they point opposite ways.**
+`run_toolchain.py` needs `--publish`, because the committed review copies under
+`meoclass1/pastpapers/` carry `index, follow` and JSON-LD; rebuilding without it
+silently flips forty papers to `noindex` and strips their structured data.
+`build_questions_year.py --deliver` must NOT also take `--publish`: the
+committed `/solvedQP/` year sheets are `noindex`, and adding `--publish` flips
+four PAID pages to `index, follow` with OpenGraph. That second one was hit and
+caught on 2026-08-24. `--gated` is a third, separately recorded hazard.
+Determine the mode from the committed bytes, never from habit.
 
 **`--publish`, and not `--gated`.** The committed review copies under
 `meoclass1/pastpapers/` carry `index, follow` and JSON-LD; rebuilding without
