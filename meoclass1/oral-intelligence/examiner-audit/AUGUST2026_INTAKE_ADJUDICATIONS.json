@@ -6,27 +6,28 @@
   "governing_principle": "A new card is created only when the examiner's actual tested ask is materially distinct from every live card. Novel wording alone is never sufficient.",
   "live_corpus_at_adjudication": {
     "canonical_questions": 725,
-    "commit": "0c9da2521cf0238c5c3a046db374190ee52f87b7 plus the uncommitted batch G1"
+    "commit": "30c70a493f098587f3b12890f33034afe6094838",
+    "note": "S005 was adjudicated against the bank AFTER batch G1 shipped, so the four G1 cards and four G1 enrichments were themselves candidates for matching. AUG-0052 matched a card G1 had enriched two submissions earlier."
   },
   "vocabularies": {
     "classification": [
       "EXACT_EXISTING",
       "PARAPHRASE_EXISTING",
       "FOLLOWUP",
-      "SAME_AS_BATCH1_NEW",
-      "EXPANDS_BATCH1_NEW",
+      "SAME_AS_PRIOR_FRESH_ASK",
+      "EXPANDS_PRIOR_FRESH_ASK",
       "GENUINE_NEW_QUESTION",
       "AMBIGUOUS",
       "NON_QUESTION_UNRECOVERABLE",
       "ADMINISTRATIVE_NOT_EXAMINABLE"
     ],
-    "cross_batch_note": "SAME_AS_BATCH1_NEW and EXPANDS_BATCH1_NEW were added for batch 2. They exist so that a second candidate independently reporting a batch-1 provisional new ask strengthens that ask instead of spawning a duplicate card. No batch-2 occurrence took either state: S003 sat the same panel but was asked an entirely disjoint commercial/management set.",
+    "cross_batch_note": "SAME_AS_PRIOR_FRESH_ASK and EXPANDS_PRIOR_FRESH_ASK exist so that a later candidate reporting an ask an earlier submission already logged as new strengthens that ask instead of spawning a duplicate card. They were originally named for batch 1 and were renamed at S005, which needed them against a batch-3 ask - the states were never batch-1-specific.",
     "administrative_note": "ADMINISTRATIVE_NOT_EXAMINABLE was added for batch 3. S004 opened with 'Written status.' and 'Type of ship.' - real questions, really asked, but about the candidate rather than about knowledge. They stay in the denominator and can never become a card. Calling them NON_QUESTION_UNRECOVERABLE would be false, and AMBIGUOUS would imply unresolved work."
   },
   "examiner_attribution": {
     "basis": "EXPLICITLY_STATED_BY_CANDIDATE",
     "panels": {
-      "AUG2026-S001 / S002 / S003": {
+      "AUG2026-S001 / S002 / S003 / S005": {
         "EXTERNAL": "Rajappan",
         "INTERNAL": "Senthil"
       },
@@ -35,7 +36,8 @@
         "INTERNAL": "Senthil"
       }
     },
-    "caution": "The August panel is NOT constant. S004 is the first submission with a different external examiner - Nair, who is already a canonical identity from the historical corpus. Senthil is the internal examiner across all four. Two occurrences carry a per-question attribution, both to Senthil and both written by the candidate: AUG-0032 ('Senthil :' on its own line) and AUG-0040 ('Senthil : tqm, new acts and difference between act and rule.'). Everything else stays PANEL_LEVEL_ONLY. In particular AUG-0033..AUG-0039 are NOT attributed to Nair: the layout implies it, but the candidate never wrote his name over that block, and a layout inference is not candidate evidence."
+    "caution": "The August panel is not constant: Nair sat as external for S004, Rajappan for the other four. Senthil is internal throughout. FIVE occurrences now carry a per-question attribution and ALL FIVE are Senthil, because he is the examiner these candidates consistently wrote a name-marker for: AUG-0032, AUG-0040, AUG-0050, AUG-0051, AUG-0052. Everything else stays PANEL_LEVEL_ONLY. AUG-0041..AUG-0049 are NOT attributed to Rajappan on the strength of sitting above the Senthil marker - that is a layout inference, not candidate evidence.",
+    "cross_submission_recurrence": "Senthil asked SHADOW FLEET in both S003 (AUG-0032) and S005 (AUG-0052), and in both cases the candidate attributed it to him by name. That is the strongest examiner-question evidence the August intake has produced. It is recorded here and in the intake store; it is deliberately NOT injected into the examiner index by adding a tag to the card, because that index derives from its own governed evidence ledger and writing a relationship in through card markup would bypass it."
   },
   "adjudications": [
     {
@@ -549,13 +551,56 @@
     },
     {
       "occurrence_id": "AUG-0035",
-      "classification": "AMBIGUOUS",
+      "classification": "GENUINE_NEW_QUESTION",
       "matched_question_id": null,
-      "ask": "Recent bulk carrier accident - causes, location, the accident investigation, survivors' rights, with cross questions.",
+      "ask": "A recent bulk carrier accident - causes, location, the accident investigation, survivors' rights, with cross questions. Identified by S005 as the MV Ocean Winner, sunk 22 August 2026 off Paradip.",
       "evidence": "Deliberately held, and the reasons differ limb by limb. The INVESTIGATION limb is already covered - /casualty investigation|accident investigation|marine safety investigation/ returns QB1_A#q24, QB1_B#q15, QB4_B#q6, QB4_G#q6 and QB5_B#q16. The 'recent bulk carrier accident' limb names no casualty, and /bulk carrier/ returns 5 cards none of which is a named-casualty card; identifying which accident the examiner meant would be a guess. The SURVIVORS' RIGHTS limb is a genuine gap - /survivor|next of kin|seafarer.{0,20}death|repatriation/ returns 0 hits across all 725 - but the candidate wrote only the phrase plus 'lots of cross questions', which is exactly the vague recollection the intake contract forbids turning into a precise regulatory question. Held for corroboration from a later submission.",
       "submission_id": "AUG2026-S004",
       "batch": "AUGUST_BATCH_3",
-      "cross_batch_check": "Compared against all 725 live cards, against AUG-0001..AUG-0032, and against every previous August ask including the seven batch-1 provisional new ones. No overlap with any earlier August ask: S004 sat a different external examiner and was asked a disjoint set."
+      "cross_batch_check": "Compared against all 725 live cards, against AUG-0001..AUG-0032, and against every previous August ask including the seven batch-1 provisional new ones. No overlap with any earlier August ask: S004 sat a different external examiner and was asked a disjoint set.",
+      "prior_classification": "AMBIGUOUS",
+      "reclassified_on": "2026-08-24",
+      "reclassification_reason": "S005 resolved it. Batch 3 held this occurrence because the candidate wrote 'recent bulk carrier accident' and named no casualty, and identifying which one the examiner meant would have been a guess. S005's AUG-0050 named the Ocean Winner, asked by the other examiner in the same window, and the two asks are the same. The hold was correct at the time and the release is evidence-driven, which is why the prior classification is preserved here rather than overwritten.",
+      "residual_held_limb": "The SURVIVORS' RIGHTS limb of this occurrence remains unproduced. /survivor|next of kin|seafarer.{0,20}death|repatriation/ still returns 0 hits across the corpus, and S005 brought no evidence on it. Held, and registered in AUGUST2026_OPEN_ITEMS.json.",
+      "negative_search": [
+        {
+          "pattern": "ocean winner|ocean.{0,10}winner",
+          "hits": 0,
+          "rejected": []
+        },
+        {
+          "pattern": "bulk carrier",
+          "hits": 5,
+          "rejected": [
+            {
+              "id": "QB10_B#q6",
+              "why": "Recent/upcoming amendments applying to bulk carriers - a regulatory-horizon card, not a casualty card."
+            },
+            {
+              "id": "QB2_A#q10",
+              "why": "IMSBC/BLU Code, Group A/B/C, TML and the moisture certificate. It is the MECHANISM behind this casualty and is cited by the new card, but it examines the Code rather than the incident."
+            },
+            {
+              "id": "QB2_A#q13",
+              "why": "Cohesive cargo and carrying logs in a bulk carrier."
+            },
+            {
+              "id": "QB3_A#q1",
+              "why": "SOLAS Chapter XII scope."
+            },
+            {
+              "id": "QB3_B#q10",
+              "why": "Under which rules a bulk carrier is built."
+            }
+          ]
+        },
+        {
+          "pattern": "survivor|next of kin|seafarer.{0,20}death|repatriation",
+          "hits": 0,
+          "rejected": [],
+          "note": "The survivors'-rights limb is a real gap and stays held."
+        }
+      ]
     },
     {
       "occurrence_id": "AUG-0036",
@@ -615,6 +660,184 @@
       "submission_id": "AUG2026-S004",
       "batch": "AUGUST_BATCH_3",
       "cross_batch_check": "Compared against all 725 live cards, against AUG-0001..AUG-0032, and against every previous August ask including the seven batch-1 provisional new ones. No overlap with any earlier August ask: S004 sat a different external examiner and was asked a disjoint set."
+    },
+    {
+      "occurrence_id": "AUG-0041",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB4_E#q6",
+      "ask": "Master's review as per the ISM Code.",
+      "evidence": "QB4_E#q6 was read in full. It covers the Master's Review as an appraisal of the SMS feeding back to shore under Element 12, alongside overriding authority under ISM 5.2. Same examinable ask.",
+      "submission_id": "AUG2026-S005",
+      "batch": "AUGUST_BATCH_4",
+      "cross_batch_check": "Compared against all 725 live cards INCLUDING the four batch-G1 cards and four G1 enrichments, against AUG-0001..AUG-0040, and against every prior August ask. AUG-0050 and AUG-0052 both matched prior fresh evidence rather than opening new ground."
+    },
+    {
+      "occurrence_id": "AUG-0042",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "ask": "LNG bunkering - action for a leak at the manifold, and fighting a minor and a major fire there.",
+      "evidence": "The bank has LNG cargo cards (QB8_G#q1, QB8_H#q8, QB8_H#q9) and IGF Code cards (QB7_D#q9, QB7_E#q3, QB7_E#q4), but nothing on the BUNKERING operation or its emergency response. /manifold/ returns 0 hits across all 725. /gas carrier.{0,30}fire|dry chemical|water curtain|water spray/ returns only QB2_B#q17, a container-deck DCP card. Gap confirmed.",
+      "negative_search": [
+        {
+          "pattern": "manifold",
+          "hits": 0,
+          "rejected": []
+        },
+        {
+          "pattern": "gas carrier.{0,30}fire|dry chemical|water curtain|water spray",
+          "hits": 1,
+          "rejected": [
+            {
+              "id": "QB2_B#q17",
+              "why": "Dry chemical powder system on a CONTAINER ship's deck. Same medium, different installation and different ask."
+            }
+          ]
+        },
+        {
+          "pattern": "\\bIGF\\b|gas fuel|methanol bunker|ammonia bunker",
+          "hits": 4,
+          "rejected": [
+            {
+              "id": "QB7_D#q9",
+              "why": "IGF Code key requirements - the design framework, not the bunkering operation or its emergency response."
+            },
+            {
+              "id": "QB7_E#q3",
+              "why": "Why the IGF Code is required."
+            },
+            {
+              "id": "QB7_E#q4",
+              "why": "Where low-flashpoint fuels are used without the IGF Code."
+            },
+            {
+              "id": "QB6_E#q2",
+              "why": "GFI calculation - a GHG intensity metric, unrelated."
+            }
+          ]
+        }
+      ],
+      "submission_id": "AUG2026-S005",
+      "batch": "AUGUST_BATCH_4",
+      "cross_batch_check": "Compared against all 725 live cards INCLUDING the four batch-G1 cards and four G1 enrichments, against AUG-0001..AUG-0040, and against every prior August ask. AUG-0050 and AUG-0052 both matched prior fresh evidence rather than opening new ground."
+    },
+    {
+      "occurrence_id": "AUG-0043",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB5_C_B#q1",
+      "additional_matched_question_ids": [
+        "QB5_A#q15",
+        "QB4_B#q14"
+      ],
+      "ask": "Reverse mentoring - advantages and disadvantages.",
+      "evidence": "/mentor/ returns three cards. QB5_C_B#q1 'Mentoring vs reverse mentoring' is the same ask; QB5_A#q15 covers mentoring and reverse mentoring directly. The advantages/disadvantages framing is a presentation of the same content, not a new ask.",
+      "submission_id": "AUG2026-S005",
+      "batch": "AUGUST_BATCH_4",
+      "cross_batch_check": "Compared against all 725 live cards INCLUDING the four batch-G1 cards and four G1 enrichments, against AUG-0001..AUG-0040, and against every prior August ask. AUG-0050 and AUG-0052 both matched prior fresh evidence rather than opening new ground."
+    },
+    {
+      "occurrence_id": "AUG-0044",
+      "classification": "EXPANDS_PRIOR_FRESH_ASK",
+      "matched_question_id": null,
+      "prior_fresh_ask_ref": "AUG-0042",
+      "ask": "LNG leakage during bunkering - action.",
+      "evidence": "The same examinable topic as AUG-0042, asked as a separate question two apart in the same sitting. Deliberately NOT given its own card: leak response and fire response at an LNG bunker manifold share the whole of their context - the ESD chain, the emergency release coupling, the water curtain, gas detection, cryogenic hazards - and two cards would have duplicated that context and split the answer a candidate needs whole. Merged into QB2 of the batch as one card with two clearly headed limbs, and the merge is recorded here rather than performed silently by the parser.",
+      "submission_id": "AUG2026-S005",
+      "batch": "AUGUST_BATCH_4",
+      "cross_batch_check": "Compared against all 725 live cards INCLUDING the four batch-G1 cards and four G1 enrichments, against AUG-0001..AUG-0040, and against every prior August ask. AUG-0050 and AUG-0052 both matched prior fresh evidence rather than opening new ground."
+    },
+    {
+      "occurrence_id": "AUG-0045",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB9_H#q16",
+      "ask": "Incoterms, and which rules apply at sea.",
+      "evidence": "/incoterm/ returns exactly one card, QB9_H#q16 'What are Incoterms? Which ones matter at sea, and what do they not decide?'. Same ask, including the sea-specific limb.",
+      "submission_id": "AUG2026-S005",
+      "batch": "AUGUST_BATCH_4",
+      "cross_batch_check": "Compared against all 725 live cards INCLUDING the four batch-G1 cards and four G1 enrichments, against AUG-0001..AUG-0040, and against every prior August ask. AUG-0050 and AUG-0052 both matched prior fresh evidence rather than opening new ground."
+    },
+    {
+      "occurrence_id": "AUG-0046",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB1_A#q6",
+      "additional_matched_question_ids": [
+        "QB1_B#q1",
+        "QB3_H#q2",
+        "QB9_A#q3"
+      ],
+      "ask": "HNS Convention in detail - liability and compensation.",
+      "evidence": "/\\bHNS\\b/ returns four cards. QB1_A#q6 covers application, in-force status, the HNS Protocol and the HNS Fund - which is the liability and compensation limb. Well covered; no new card.",
+      "submission_id": "AUG2026-S005",
+      "batch": "AUGUST_BATCH_4",
+      "cross_batch_check": "Compared against all 725 live cards INCLUDING the four batch-G1 cards and four G1 enrichments, against AUG-0001..AUG-0040, and against every prior August ask. AUG-0050 and AUG-0052 both matched prior fresh evidence rather than opening new ground."
+    },
+    {
+      "occurrence_id": "AUG-0047",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB9_H#q12",
+      "additional_matched_question_ids": [
+        "QB9_H#q7"
+      ],
+      "ask": "Strict liability.",
+      "evidence": "/strict liability/ returns QB9_H#q12 'Strict liability in marine insurance' and QB9_H#q7 (strict liability under the Wreck Removal Convention). The bare ask is QB9_H#q12.",
+      "submission_id": "AUG2026-S005",
+      "batch": "AUGUST_BATCH_4",
+      "cross_batch_check": "Compared against all 725 live cards INCLUDING the four batch-G1 cards and four G1 enrichments, against AUG-0001..AUG-0040, and against every prior August ask. AUG-0050 and AUG-0052 both matched prior fresh evidence rather than opening new ground."
+    },
+    {
+      "occurrence_id": "AUG-0048",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB4_G#q5",
+      "ask": "Dry dock preparation as Chief Engineer.",
+      "evidence": "QB4_G#q5 is 'Dry dock preparation as CE - steps and documents. What is the dry dock interval?' - near-verbatim. Eight drydock cards exist; this is the one that owns the ask.",
+      "submission_id": "AUG2026-S005",
+      "batch": "AUGUST_BATCH_4",
+      "cross_batch_check": "Compared against all 725 live cards INCLUDING the four batch-G1 cards and four G1 enrichments, against AUG-0001..AUG-0040, and against every prior August ask. AUG-0050 and AUG-0052 both matched prior fresh evidence rather than opening new ground."
+    },
+    {
+      "occurrence_id": "AUG-0049",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB1_G#q32",
+      "ask": "Empanelment of salvors.",
+      "evidence": "/salvage|salvor|salver|empanel/ returns four cards; QB1_G#q32 'Empanelment of salvors' is the ask exactly. The candidate wrote 'salvers'; a word-aware rather than exact-token search is why it was found. NOTE: reading this card to adjudicate exposed a defect in its own question text - see existing_card_defects.",
+      "submission_id": "AUG2026-S005",
+      "batch": "AUGUST_BATCH_4",
+      "cross_batch_check": "Compared against all 725 live cards INCLUDING the four batch-G1 cards and four G1 enrichments, against AUG-0001..AUG-0040, and against every prior August ask. AUG-0050 and AUG-0052 both matched prior fresh evidence rather than opening new ground."
+    },
+    {
+      "occurrence_id": "AUG-0050",
+      "classification": "SAME_AS_PRIOR_FRESH_ASK",
+      "matched_question_id": null,
+      "prior_fresh_ask_ref": "AUG-0035",
+      "ask": "The Ocean Winner incident, and what could be the reason.",
+      "evidence": "This is the SECOND candidate to be asked about this casualty and the one who named it. AUG-0035 (S004, Nair) asked for 'a recent bulk carrier accident - causes, location, accident investigation, survivors' rights'; AUG-0050 (S005, Senthil) asked for the Ocean Winner by name. Verified externally: MV Ocean Winner, Panama-flagged Panamax bulk carrier built 1998, sailed Paradip late on 20 August 2026 with about 72,100 t of iron ore fines and sank on 22 August about 240 nm offshore; 24 crew, 2 rescued, 22 missing; survivors reported a heavy list and a sinking in under ten minutes. It is therefore the same ask, and it RESOLVES the ambiguity that batch 3 held. One card is produced, owned by AUG-0035 as the earlier occurrence, and this occurrence strengthens it rather than claiming a second.",
+      "submission_id": "AUG2026-S005",
+      "batch": "AUGUST_BATCH_4",
+      "cross_batch_check": "Compared against all 725 live cards INCLUDING the four batch-G1 cards and four G1 enrichments, against AUG-0001..AUG-0040, and against every prior August ask. AUG-0050 and AUG-0052 both matched prior fresh evidence rather than opening new ground."
+    },
+    {
+      "occurrence_id": "AUG-0051",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB6#q7",
+      "additional_matched_question_ids": [
+        "QB6#q4",
+        "QB7_A#q1",
+        "QB7_C#q1"
+      ],
+      "ask": "IMO GHG strategy, and the related certificates onboard.",
+      "evidence": "Two limbs, both covered. Strategy: QB6#q7 carries the 2023 IMO GHG Strategy (MEPC.377(80)), the 2030/2040/2050 targets and the midterm measures. Certificates: QB6#q4 covers SEEMP Part III and the International Energy Efficiency Certificate, with QB7_A#q1 and QB7_C#q1 on SEEMP Part III. No new card.",
+      "submission_id": "AUG2026-S005",
+      "batch": "AUGUST_BATCH_4",
+      "cross_batch_check": "Compared against all 725 live cards INCLUDING the four batch-G1 cards and four G1 enrichments, against AUG-0001..AUG-0040, and against every prior August ask. AUG-0050 and AUG-0052 both matched prior fresh evidence rather than opening new ground."
+    },
+    {
+      "occurrence_id": "AUG-0052",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB3_G#q2",
+      "ask": "Shadow fleet.",
+      "evidence": "QB3_G#q2 is the shadow-fleet card, and batch G1 enriched it two submissions ago with the pre-joining verification limb drawn from AUG-0032. This occurrence needs no further production: it is CROSS-CANDIDATE CONFIRMATION that the enrichment was worth making. Both occurrences are individually attributed to Senthil by their candidates, which makes this the strongest examiner-question pairing in the August intake.",
+      "submission_id": "AUG2026-S005",
+      "batch": "AUGUST_BATCH_4",
+      "cross_batch_check": "Compared against all 725 live cards INCLUDING the four batch-G1 cards and four G1 enrichments, against AUG-0001..AUG-0040, and against every prior August ask. AUG-0050 and AUG-0052 both matched prior fresh evidence rather than opening new ground."
     }
   ],
   "existing_card_defects": [
@@ -624,6 +847,13 @@
       "defect": "The 15-Second Answer practice-block is present but empty: a pb-label span with no body after it. A candidate opening this card sees a labelled block and no answer.",
       "scope": "Not isolated. A sweep of every QB page found 18 empty practice-blocks, and all 18 are the 15-Second Answer of every question in QB5_C_A.html (q1-q10) and QB5_C_B.html (q1-q8). The two files were authored without that block. This predates the August intake and is unrelated to it.",
       "action": "A single-card repair to QB5_C_A#q4 was authored during this session and then deliberately REVERTED, because a batch manifest cannot own a post-release repair and because fixing 1 of 18 identical defects would leave QB5_C_A internally inconsistent. The whole 18-card class is registered as OPEN-G1-001 in AUGUST2026_OPEN_ITEMS.json for a properly sized correction run."
+    },
+    {
+      "found_via": "AUG-0049",
+      "card": "QB1_G#q32",
+      "defect": "The candidate-facing question text reads 'Empanelment of salvors. ( ms notice 1 of 202)'. The year is truncated - 202 is not a year - and 'ms notice' is unnormalised where the rest of the bank writes 'MS Notice'. The string is visible to candidates and is also emitted into the page's JSON-LD.",
+      "scope": "One card. Predates the August intake.",
+      "action": "NOT fixed in this session. Correcting candidate-facing question text is a post-release correction and needs its own correction manifest with governing commits, and the correct Merchant Shipping Notice number must be verified against the DGMA source rather than guessed at from a truncated string. Registered as OPEN-G1-006."
     }
   ]
 }

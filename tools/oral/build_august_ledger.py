@@ -39,15 +39,16 @@ LEDGER = OUT / "AUGUST2026_MASTER_INTAKE_LEDGER.json"
 HISTORICAL_EXPECTED = 788
 
 # Which submissions belong to which arrival batch. Batch 1 governed S001-S002;
-# S003 and then S004 each arrived appended to the same carrier file later the
-# same day. A submission missing from this map is a FAILURE, not an "UNKNOWN"
+# S003, S004 and then S005 each arrived appended to the same carrier file later
+# the same day - a new submission is a BIGGER FILE, never a new file. A submission missing from this map is a FAILURE, not an "UNKNOWN"
 # bucket: S004 was silently bucketed as UNKNOWN on its first build, which is
 # exactly how a new submission gets counted in the total while disappearing
 # from the per-batch view that a reader actually looks at.
 BATCH_OF = {"AUG2026-S001": "AUGUST_BATCH_1",
             "AUG2026-S002": "AUGUST_BATCH_1",
             "AUG2026-S003": "AUGUST_BATCH_2",
-            "AUG2026-S004": "AUGUST_BATCH_3"}
+            "AUG2026-S004": "AUGUST_BATCH_3",
+            "AUG2026-S005": "AUGUST_BATCH_4"}
 
 MATCHED = {"EXACT_EXISTING", "PARAPHRASE_EXISTING"}
 

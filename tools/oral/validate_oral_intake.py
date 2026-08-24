@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
 from collections import Counter
 from pathlib import Path
@@ -30,7 +31,7 @@ AUG_RE = re.compile(r"^AUG-\d{4}$")
 
 CLASSES = {
     "EXACT_EXISTING", "PARAPHRASE_EXISTING", "FOLLOWUP",
-    "SAME_AS_BATCH1_NEW", "EXPANDS_BATCH1_NEW",
+    "SAME_AS_PRIOR_FRESH_ASK", "EXPANDS_PRIOR_FRESH_ASK",
     "GENUINE_NEW_QUESTION", "AMBIGUOUS", "NON_QUESTION_UNRECOVERABLE",
     # S004 opened with "Written status." and "Type of ship." Those are real
     # questions the examiner really asked, so they belong in the denominator,
@@ -42,9 +43,10 @@ CLASSES = {
 NEEDS_TARGET = {"EXACT_EXISTING", "PARAPHRASE_EXISTING", "FOLLOWUP"}
 NEEDS_NO_TARGET = {"GENUINE_NEW_QUESTION", "NON_QUESTION_UNRECOVERABLE",
                    "ADMINISTRATIVE_NOT_EXAMINABLE"}
-# A later candidate reporting an ask that an earlier batch already logged as new
-# must point back at that batch's occurrence instead of claiming a second card.
-CROSS_BATCH = {"SAME_AS_BATCH1_NEW", "EXPANDS_BATCH1_NEW"}
+# A later candidate reporting an ask an earlier submission already logged as new
+# must point back at that occurrence instead of claiming a second card. Named for
+# ANY prior fresh ask, not for batch 1: S005 needed it against a batch-3 ask.
+CROSS_BATCH = {"SAME_AS_PRIOR_FRESH_ASK", "EXPANDS_PRIOR_FRESH_ASK"}
 
 results = []
 
@@ -217,7 +219,7 @@ def main():
                if a["classification"] == "GENUINE_NEW_QUESTION"}
     bad_ref = [a["occurrence_id"] for a in adj
                if a["classification"] in CROSS_BATCH
-               and a.get("batch1_ask_ref") not in new_ids]
+               and a.get("prior_fresh_ask_ref") not in new_ids]
     check("A13_cross_batch_rows_reference_the_ask_they_strengthen", not bad_ref,
           f"{bad_ref}")
 
@@ -225,6 +227,33 @@ def main():
     byid = {o["occurrence_id"]: o["raw_question_text"] for o in intake}
     check("A11_intake_raw_wording_present",
           all(byid.get(a["occurrence_id"]) is not None for a in adj))
+
+    # ---------------- privacy ----------------
+    # The carrier file holds candidate names, examiner-panel evidence and, in
+    # S004, a pasted chat transcript naming a third party. It must never become
+    # a repository artefact. Checked as a PROPERTY of the repo, not as a habit:
+    # `git check-ignore` and `git ls-files` are the two questions that matter.
+    carrier_dir = L.REPO / "docs" / "MIW-master-Question-bank" / "New questions from August orals"
+    carriers = sorted(carrier_dir.glob("*.txt")) if carrier_dir.is_dir() else []
+    not_ignored, tracked = [], []
+    for c in carriers:
+        rel = c.relative_to(L.REPO).as_posix()
+        r = subprocess.run(["git", "check-ignore", "-q", rel],
+                           cwd=str(L.REPO), capture_output=True)
+        if r.returncode != 0:
+            not_ignored.append(rel)
+        r = subprocess.run(["git", "ls-files", "--error-unmatch", rel],
+                           cwd=str(L.REPO), capture_output=True)
+        if r.returncode == 0:
+            tracked.append(rel)
+    check("P1_raw_carrier_files_are_git_ignored", carriers and not not_ignored,
+          "%d carrier file(s); not ignored: %s" % (len(carriers), not_ignored or "none"))
+    check("P2_raw_carrier_files_are_untracked", not tracked,
+          "tracked: %s" % (tracked or "none"))
+    deploy = (L.REPO / ".vercelignore")
+    excluded = deploy.is_file() and "docs/" in deploy.read_text(encoding="utf-8")
+    check("P3_raw_carrier_directory_is_deployment_excluded", excluded,
+          ".vercelignore excludes docs/")
 
     # ---------------- freeze ----------------
     qb = L.REPO / "docs" / "MIW-master-Question-bank"
