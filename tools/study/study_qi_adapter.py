@@ -65,6 +65,18 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import qi_model as M
 import study_spine as SP
 
+sys.path.insert(0, os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'current_answers'))
+import ca_model as _CA
+
+
+def _owner_type(p2):
+    return _CA.resolve_owner(p2.get('canonical_current_answer'))[0]
+
+
+def _owner_id(p2):
+    return _CA.resolve_owner(p2.get('canonical_current_answer'))[1]
+
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DOC = os.path.join(REPO, 'docs', 'study')
 QI_DIR = os.path.join(DOC, 'qi')
@@ -682,8 +694,29 @@ def readiness_for(canonical, fid):
             'correction_or_modernisation': p2.get('correction_or_modernisation'),
             'authority_currentness_date': p2.get('authority_currentness_date'),
             'review_verdict': (p2.get('independent_review') or {}).get('verdict'),
-            'canonical_current_answer':
-                (p2.get('canonical_current_answer') or {}).get('question_id'),
+            # THE ONE ANSWER A GRANT REACHES -- now typed.
+            #
+            # Until the current-answer library existed there was exactly one
+            # kind of owner, so a bare `question_id` was unambiguous. There are
+            # now four (SOLVED_PAPER, SOLVED_PAPER_LIMB, CURRENT_LIBRARY,
+            # CURRENT_LIBRARY_LIMB) and telling them apart by inspecting the
+            # STRING would put a parsing rule on the critical path of a
+            # readiness grant. `ca_model.resolve_owner` is the single place that
+            # normalises, and it maps the legacy shapes to SOLVED_PAPER because
+            # that is the only thing they could ever have meant.
+            #
+            # `canonical_current_answer` keeps its name and its meaning -- the
+            # id of the ONE thing a grant reaches. For a library-owned family
+            # that id is a CA-EM-nnnn, which matches no question, so no member
+            # question is blessed. That is correct and it is the point: MIW now
+            # answers the CONCEPT, and still has not answered the 2021 sitting.
+            'canonical_current_answer': _owner_id(p2),
+            'canonical_current_answer_owner_type': _owner_type(p2),
+            'family_current_answers': [
+                {'limb_id': l.get('limb_id'), 'scope': l.get('scope'),
+                 'owner_type': _CA.resolve_owner(l)[0],
+                 'owner_id': _CA.resolve_owner(l)[1]}
+                for l in (p2.get('family_current_answers') or [])],
         } if p2 else None),
     }
 

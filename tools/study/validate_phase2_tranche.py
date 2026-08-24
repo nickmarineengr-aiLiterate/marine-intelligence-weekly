@@ -38,6 +38,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import study_qi_adapter as A
 
+sys.path.insert(0, os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'current_answers'))
+import ca_model as CA
+
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DOC = os.path.join(REPO, 'docs', 'study')
 QI_DIR = os.path.join(DOC, 'qi')
@@ -113,6 +117,13 @@ def load_bundle():
                                       'qi_time_window_metrics.json'))['families']},
         'holds': load(os.path.join(os.path.dirname(STORE), 'study_qi_holds.json')),
         'real_qids': spec_question_ids(),
+        # The other set of nameable answers. Until this existed,
+        # `spec_question_ids()` WAS the set of things a present-day answer could
+        # be, which is why tranche 002 held six families it had fully researched:
+        # the only container available was a past paper, and putting a 2026
+        # answer inside a 2021 paper would have made that paper cite law that did
+        # not govern it.
+        'lib_entries': CA.load_entries(),
         'public_html': read_public(),
     }
 
@@ -136,6 +147,7 @@ def run_checks(B):
     metrics = B['metrics']
     holds = B['holds']
     real_qids = B['real_qids']
+    lib_entries = B.get('lib_entries') or {}
     questions = B.get('questions') or {}
 
     # ------------------------------------------------------------------ A
@@ -221,11 +233,25 @@ def run_checks(B):
             no_review.append(fid)
         elif rev['verdict'] not in PASSING_REVIEW:
             bad_review.append(fid)
-        ans = (r.get('canonical_current_answer') or {}).get('question_id')
-        if not ans:
+        # OWNERSHIP, TYPED. A resolved family must name something a candidate
+        # can be sent to. Since the current-answer library exists there are two
+        # kinds of thing and two shapes of ownership, and BOTH have to be read
+        # here -- reading only `canonical_current_answer` would report every
+        # multi-limb family as answering nothing, which is the same failure as
+        # naming an answer that does not exist, arriving from the other side.
+        owners = CA.owner_ids(r)
+        if not owners:
             no_answer.append(fid)
-        elif ans not in real_qids:
-            ghost_answer.append('%s -> %s' % (fid, ans))
+        for otype, oid in owners:
+            if otype in CA.LIBRARY_OWNER_TYPES:
+                if oid not in lib_entries:
+                    ghost_answer.append('%s -> %s (library entry absent)'
+                                        % (fid, oid))
+                elif lib_entries[oid].get('review_status') not in CA.RENDERABLE:
+                    ghost_answer.append('%s -> %s (library entry not verified, '
+                                        'so it has no page)' % (fid, oid))
+            elif oid not in real_qids:
+                ghost_answer.append('%s -> %s' % (fid, oid))
 
     check('R-P2-AUTHORITY', not no_auth,
           'verified family(ies) carrying NO primary authority: %s' % no_auth)
@@ -241,8 +267,61 @@ def run_checks(B):
     check('R-P2-ANSWER', not no_answer,
           'verified family(ies) naming no canonical current answer: %s' % no_answer)
     check('R-P2-ANSWER-REAL', not ghost_answer,
-          'verified family(ies) pointing at a question that does not exist: %s'
+          'verified family(ies) pointing at an answer that does not exist: %s'
           % ghost_answer)
+
+    # ------------------------------------------------------- typed ownership
+    # A library owner MUST be written in the typed form. Section 17: prefer
+    # typed ownership, do not overload string interpretation.
+    #
+    # This is not tidiness. `resolve_owner` maps the legacy untyped shape to
+    # SOLVED_PAPER, because when that shape was written a solved past-paper
+    # question was the only nameable answer in existence. If a library id were
+    # allowed to arrive in that shape it would be resolved as a past-paper
+    # question, fail to appear in the spec set, and surface as "points at a
+    # question that does not exist" -- a confusing failure a long way from its
+    # cause. Refuse it at the shape instead.
+    untyped, cross_shaped = [], []
+    for r in fams:
+        for obj in ([r.get('canonical_current_answer')]
+                    + list(r.get('family_current_answers') or [])):
+            if not isinstance(obj, dict):
+                continue
+            otype, oid = CA.resolve_owner(obj)
+            if CA.is_ca_id(oid) and not obj.get('owner_type'):
+                untyped.append('%s -> %s' % (r['family_id'], oid))
+            if otype in CA.LIBRARY_OWNER_TYPES and CA.is_qp_id(oid):
+                cross_shaped.append('%s: %s names %s' % (r['family_id'], otype, oid))
+            if otype in CA.PAPER_OWNER_TYPES and CA.is_ca_id(oid):
+                cross_shaped.append('%s: %s names %s' % (r['family_id'], otype, oid))
+    check('R-P2-OWNER-TYPED', not untyped,
+          'family(ies) naming a current-answer library entry without an '
+          'explicit owner_type: %s' % untyped)
+    check('R-P2-OWNER-SHAPE', not cross_shaped,
+          'family(ies) whose owner_type and owner_id disagree about what kind '
+          'of answer is being named: %s' % cross_shaped)
+
+    # A family is owned WHOLE or LIMB BY LIMB, never both. Two answers to
+    # "where does this candidate go" is one answer too many, and the two drift.
+    both = [r['family_id'] for r in fams
+            if r.get('family_current_answers') and r.get('canonical_current_answer')]
+    check('R-P2-OWNER-EXCLUSIVE', not both,
+          'family(ies) claiming both a whole-question owner and limb owners: %s'
+          % both)
+
+    # A SYNTHETIC QUESTION IS NOT A SITTING. The library record carries the
+    # present-day question text; the Phase-2 record must not restate it as
+    # though the family had acquired a new member. Sections 27 and 28.
+    fake_member = []
+    for r in fams:
+        members = (projected.get(r['family_id']) or {}).get('modern_members') or []
+        for m in members:
+            if CA.is_ca_id(m):
+                fake_member.append('%s: %s' % (r['family_id'], m))
+    check('R-P2-NO-SYNTHETIC-MEMBER', not fake_member,
+          'a current-answer id appears as a MEMBER of a recurrence family. A '
+          'present-day answer is not evidence that anybody was asked it, and a '
+          'family that counts one is partly counting MIW: %s' % fake_member)
 
     # Changed answers specifically: a CORRECTION must name the file it changed.
     changed_no_file = [r['family_id'] for r in fams
@@ -281,8 +360,13 @@ def run_checks(B):
     # it must never be reused at a later sitting -- while the successor it was
     # superseded BY still read VERIFY. A family being sorted out is not the
     # same as every sitting inside it being safe to study.
-    named = {(r.get('canonical_current_answer') or {}).get('question_id')
-             for r in fams if r['final_state'] in SAFE}
+    # Every question id a governed record blesses, whole or limb. A library id
+    # never appears here and that is the point: a family answered by the current
+    # library has blessed NO sitting, so every one of its members stays exactly
+    # as unsafe to study as it was. MIW now answers the CONCEPT; it still has
+    # not answered the 2021 paper.
+    named = {oid for r in fams if r['final_state'] in SAFE
+             for otype, oid in CA.owner_ids(r) if otype in CA.PAPER_OWNER_TYPES}
     over_reach = []
     for r in fams:
         if r['final_state'] not in SAFE:
