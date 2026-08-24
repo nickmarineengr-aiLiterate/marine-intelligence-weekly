@@ -35,10 +35,21 @@ REPORT = OUT / "AUGUST2026_INTAKE_REPORT.json"
 # "Ext- Rajappan sir" / "Int- Senthil sir"
 ROLE_RE = re.compile(r"^(Ext|Int|External|Internal)\s*[-:]\s*(.+?)\s*$", re.I)
 # "1. text" / "2. <U+2060>text"  (the source uses invisible separators after the dot)
-Q_RE = re.compile(r"^(\d+)[.)]\s*(.*)$", re.S)
-ATTEMPT_RE = re.compile(r"^Attempt\s+(\d+)\s*$", re.I)
+# "1. text" / "2) text" / "1 .text" - the candidate's phone inserts a space
+# before the separator often enough that requiring adjacency silently drops the
+# question into context. S004 lost two occurrences that way before this was
+# widened, and a lost occurrence raises no error: it just is not counted.
+Q_RE = re.compile(r"^(\d+)\s*[.)]\s*(.*)$", re.S)
+# "Attempt 1" / "Attempt-1" / "Attempt : 2" - candidates punctuate this freely
+# and the attempt number is evidence about the sitting, not decoration.
+ATTEMPT_RE = re.compile(r"^Attempt\s*[-:]?\s*(\d+)\s*$", re.I)
 RESULT_RE = re.compile(r"^Result\s*[-:]\s*(.+?)\s*$", re.I)
 RULE_RE = re.compile(r"^[-]{3,}$")
+# A bare "<Name> :" line inside the body. It is treated as an attribution
+# marker ONLY when <Name> matches an examiner already declared by this same
+# submission, so the parser can never invent an attribution that the candidate
+# did not write.
+ATTRIB_RE = re.compile(r"^([A-Za-z][A-Za-z .'-]{1,40}?)\s*:\s*(.*)$", re.S)
 
 ROLE_NORM = {"ext": "EXTERNAL", "external": "EXTERNAL",
              "int": "INTERNAL", "internal": "INTERNAL"}
@@ -48,6 +59,17 @@ ROLE_NORM = {"ext": "EXTERNAL", "external": "EXTERNAL",
 INVISIBLE = dict.fromkeys(map(ord, "⁠​‌‍﻿"), None)
 
 NON_QUESTION_CUES = ("i forgot", "forgot", "don't remember", "didn't know")
+
+# Candidates paste chat transcripts into their reports. The carrier file is
+# git-ignored, but context_comments IS committed, so a third party's name would
+# otherwise enter the repository through the derived record. The substance is
+# kept; only the identifier is removed.
+CHAT_ATTRIB_RE = re.compile(
+    r"\[\s*\d{1,2}:\d{2}\s*,\s*\d{1,2}/\d{1,2}/\d{2,4}\s*\]\s*[^:]{1,60}:")
+
+
+def redact_third_parties(text: str) -> str:
+    return CHAT_ATTRIB_RE.sub("[third party, name removed]:", text)
 
 
 def normalise(raw: str) -> str:
@@ -71,6 +93,11 @@ def parse_submission(lines, submission_id: str, seq_start: int):
     examiners, occurrences = [], []
     attempt_no = result = None
     preamble = []
+    # Set by an in-body "<Name> :" marker; applies to every following
+    # occurrence until another marker replaces it. None means the candidate
+    # gave no per-question attribution, which stays PANEL_LEVEL_ONLY.
+    current_attrib = None
+    attrib_marker = None
 
     for ln in lines:
         t = ln.strip()
@@ -97,6 +124,34 @@ def parse_submission(lines, submission_id: str, seq_start: int):
             result = m.group(1).strip()
             continue
 
+        m = ATTRIB_RE.match(t)
+        if m and not Q_RE.match(t):
+            declared = {e["name_normalized"].lower() for e in examiners}
+            cand = normalise_examiner(m.group(1))
+            if cand.lower() in declared:
+                current_attrib, attrib_marker = cand, t
+                trailing = m.group(2).strip()
+                if trailing:
+                    # "Senthil : tqm, new acts and difference between act and
+                    # rule." - the marker carries its questions on the same
+                    # line and is not numbered. Treated as ONE occurrence
+                    # holding the raw line: splitting it into limbs here would
+                    # be the parser inventing question boundaries the candidate
+                    # never wrote. Adjudication splits it, on the record.
+                    occurrences.append({
+                        "occurrence_id": f"AUG-{seq_start + len(occurrences):04d}",
+                        "submission_id": submission_id,
+                        "source_question_number": None,
+                        "raw_question_text": m.group(2),
+                        "normalised_question_text": normalise(m.group(2)),
+                        "is_question": not looks_like_non_question(trailing),
+                        "_attrib": current_attrib,
+                        "_attrib_marker": t,
+                    })
+                continue
+            # A name-like line that is NOT a declared examiner is never an
+            # attribution. It stays context, exactly as before.
+
         m = Q_RE.match(t)
         if m:
             raw = m.group(2)
@@ -107,17 +162,29 @@ def parse_submission(lines, submission_id: str, seq_start: int):
                 "raw_question_text": raw,
                 "normalised_question_text": normalise(raw),
                 "is_question": not looks_like_non_question(raw),
+                "_attrib": current_attrib,
+                "_attrib_marker": attrib_marker,
             })
             continue
 
-        preamble.append(t)
+        preamble.append(redact_third_parties(t))
 
     for o in occurrences:
         o["attempt_number"] = attempt_no
         o["attempt_result"] = result
-        # Both examiners sat the same panel; neither can be tied to one question.
-        o["examiner_attribution"] = "PANEL_LEVEL_ONLY"
         o["examiners"] = [e["name_normalized"] for e in examiners]
+        who, marker = o.pop("_attrib"), o.pop("_attrib_marker")
+        if who:
+            # The candidate wrote this examiner's name above the question.
+            o["examiner_attribution"] = "INDIVIDUALLY_ATTRIBUTED"
+            o["attributed_examiner"] = who
+            o["attribution_marker"] = marker
+        else:
+            # Both examiners sat the same panel and the candidate tied no
+            # question to a person; neither may be named for this question.
+            o["examiner_attribution"] = "PANEL_LEVEL_ONLY"
+            o["attributed_examiner"] = None
+            o["attribution_marker"] = None
 
     return {
         "submission_id": submission_id,
@@ -179,12 +246,20 @@ def main():
         "non_question_occurrences": sum(1 for o in occ if not o["is_question"]),
         "examiners_represented": sorted(roles),
         "examiner_roles": roles,
+        "individually_attributed_occurrences": sorted(
+            o["occurrence_id"] for o in occ
+            if o["examiner_attribution"] == "INDIVIDUALLY_ATTRIBUTED"),
+        "panel_level_occurrences": sum(
+            1 for o in occ if o["examiner_attribution"] == "PANEL_LEVEL_ONLY"),
         "per_submission": [
             {"submission_id": s["submission_id"],
              "raw_occurrences": len(s["occurrences"]),
              "attempt_number": s["attempt_number"],
              "attempt_result": s["attempt_result"],
-             "examiners": [e["name_normalized"] for e in s["examiners"]]}
+             "examiners": [e["name_normalized"] for e in s["examiners"]],
+             "occurrence_ids": [o["occurrence_id"] for o in s["occurrences"]],
+             "per_question_attribution": sorted(
+                 {o["examiner_attribution"] for o in s["occurrences"]})}
             for s in subs
         ],
         "submissions_detail": [{k: v for k, v in s.items() if k != "occurrences"}
@@ -195,6 +270,12 @@ def main():
         have = [json.loads(l) for l in RECORDS.read_text(encoding="utf-8").splitlines() if l]
         drift = [o["occurrence_id"] for o, h in zip(occ, have)
                  if o["raw_question_text"] != h["raw_question_text"]]
+        # Attribution is evidence too: a committed row may not claim an
+        # examiner the source does not carry, nor drop one that it does.
+        drift += [o["occurrence_id"] for o, h in zip(occ, have)
+                  if (o["examiner_attribution"] != h.get("examiner_attribution")
+                      or o["attributed_examiner"] != h.get("attributed_examiner"))
+                  and o["occurrence_id"] not in drift]
         if len(have) != len(occ) or drift:
             print(f"FAIL: committed intake drifted from source "
                   f"(count {len(have)} vs {len(occ)}, drift={drift})")

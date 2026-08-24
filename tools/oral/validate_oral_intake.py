@@ -30,10 +30,21 @@ AUG_RE = re.compile(r"^AUG-\d{4}$")
 
 CLASSES = {
     "EXACT_EXISTING", "PARAPHRASE_EXISTING", "FOLLOWUP",
+    "SAME_AS_BATCH1_NEW", "EXPANDS_BATCH1_NEW",
     "GENUINE_NEW_QUESTION", "AMBIGUOUS", "NON_QUESTION_UNRECOVERABLE",
+    # S004 opened with "Written status." and "Type of ship." Those are real
+    # questions the examiner really asked, so they belong in the denominator,
+    # but they ask about the CANDIDATE rather than about knowledge and can
+    # never become a card. NON_QUESTION_UNRECOVERABLE would be false - they are
+    # perfectly recoverable - and AMBIGUOUS would imply unresolved work.
+    "ADMINISTRATIVE_NOT_EXAMINABLE",
 }
 NEEDS_TARGET = {"EXACT_EXISTING", "PARAPHRASE_EXISTING", "FOLLOWUP"}
-NEEDS_NO_TARGET = {"GENUINE_NEW_QUESTION", "NON_QUESTION_UNRECOVERABLE"}
+NEEDS_NO_TARGET = {"GENUINE_NEW_QUESTION", "NON_QUESTION_UNRECOVERABLE",
+                   "ADMINISTRATIVE_NOT_EXAMINABLE"}
+# A later candidate reporting an ask that an earlier batch already logged as new
+# must point back at that batch's occurrence instead of claiming a second card.
+CROSS_BATCH = {"SAME_AS_BATCH1_NEW", "EXPANDS_BATCH1_NEW"}
 
 results = []
 
@@ -107,6 +118,8 @@ def main():
     intake = jsonl(OUT / "AUGUST2026_INTAKE_RECORDS.jsonl")
     adj = json.loads((OUT / "AUGUST2026_INTAKE_ADJUDICATIONS.json")
                      .read_text(encoding="utf-8"))["adjudications"]
+    report = json.loads((OUT / "AUGUST2026_INTAKE_REPORT.json")
+                        .read_text(encoding="utf-8"))
 
     aid = [o["occurrence_id"] for o in intake]
     check("A1_intake_ids_unique_and_wellformed",
@@ -136,15 +149,77 @@ def main():
                   if a.get("matched_question_id")} - inv)
     check("A8_intake_card_targets_resolve", not bad, f"unresolved: {bad[:5]}")
 
-    # every new-card claim must carry the negative search that justifies it
-    thin = [a["occurrence_id"] for a in adj
-            if a["classification"] == "GENUINE_NEW_QUESTION"
-            and "0 hits" not in a.get("evidence", "")]
-    check("A9_new_card_claims_carry_negative_search", not thin, f"{thin}")
+    # Every new-card claim must carry the negative search that justifies it, as
+    # structure rather than prose. The old form only required the substring
+    # "0 hits" in the evidence text, which a row could satisfy by mentioning the
+    # phrase without ever running a search - and which a search that legitimately
+    # returned hits, all of them rejected on reading, could never satisfy at all.
+    thin = []
+    for a in adj:
+        if a["classification"] != "GENUINE_NEW_QUESTION":
+            continue
+        ns = a.get("negative_search")
+        if not isinstance(ns, list) or not ns:
+            thin.append(a["occurrence_id"])
+            continue
+        for e in ns:
+            pat, hits = e.get("pattern"), e.get("hits")
+            rej = e.get("rejected", [])
+            if (not isinstance(pat, str) or not pat.strip()
+                    or not isinstance(hits, int) or hits < 0
+                    or not isinstance(rej, list)
+                    # no hit may survive unexplained
+                    or len(rej) < hits
+                    # a rejection must name a card that actually exists
+                    or any(r.get("id") not in inv or not r.get("why") for r in rej)):
+                thin.append(a["occurrence_id"])
+                break
+    check("A9_new_card_claims_carry_negative_search", not thin, f"{sorted(set(thin))}")
 
-    # attribution must never be pinned to one examiner on panel-level evidence
-    check("A10_intake_attribution_is_panel_level",
-          all(o.get("examiner_attribution") == "PANEL_LEVEL_ONLY" for o in intake))
+    # Attribution must match the evidence. PANEL_LEVEL_ONLY may name nobody;
+    # INDIVIDUALLY_ATTRIBUTED must name an examiner that this same submission
+    # declared, and must quote the source line that established it. Asserting a
+    # blanket PANEL_LEVEL_ONLY, as this gate used to, would have forced the
+    # August intake to discard the first real per-question attribution it got.
+    declared = {sd["submission_id"]: {e["name_normalized"]
+                                      for e in sd.get("examiners", [])}
+                for sd in report.get("submissions_detail", [])}
+    bad_attr = []
+    for o in intake:
+        mode = o.get("examiner_attribution")
+        who = o.get("attributed_examiner")
+        if mode == "PANEL_LEVEL_ONLY":
+            if who is not None:
+                bad_attr.append(o["occurrence_id"])
+        elif mode == "INDIVIDUALLY_ATTRIBUTED":
+            if (not who or who not in declared.get(o["submission_id"], set())
+                    or not o.get("attribution_marker")):
+                bad_attr.append(o["occurrence_id"])
+        else:
+            bad_attr.append(o["occurrence_id"])
+    check("A10_intake_attribution_matches_evidence", not bad_attr, f"{bad_attr}")
+
+    # ---------------- cross-batch ----------------
+    # One ask, one card. Two occurrences may both be new, but they may not both
+    # claim a new card for the same ask - that is how a duplicate card is born.
+    norm_ask = {}
+    for a in adj:
+        if a["classification"] == "GENUINE_NEW_QUESTION":
+            k = " ".join((a.get("ask") or "").lower().split())
+            norm_ask.setdefault(k, []).append(a["occurrence_id"])
+    dupes = {k: v for k, v in norm_ask.items() if len(v) > 1}
+    check("A12_no_two_occurrences_claim_the_same_new_card", not dupes,
+          f"{ {k[:40]: v for k, v in dupes.items()} }")
+
+    # A cross-batch state is only meaningful if it points back at the earlier
+    # occurrence it strengthens, and that occurrence must itself be a new ask.
+    new_ids = {a["occurrence_id"] for a in adj
+               if a["classification"] == "GENUINE_NEW_QUESTION"}
+    bad_ref = [a["occurrence_id"] for a in adj
+               if a["classification"] in CROSS_BATCH
+               and a.get("batch1_ask_ref") not in new_ids]
+    check("A13_cross_batch_rows_reference_the_ask_they_strengthen", not bad_ref,
+          f"{bad_ref}")
 
     # raw wording immutability across the intake layer
     byid = {o["occurrence_id"]: o["raw_question_text"] for o in intake}

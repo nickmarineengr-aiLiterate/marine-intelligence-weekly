@@ -1,0 +1,52 @@
+{
+  "record_class": "CURRENT_INTAKE_OPEN_ITEMS",
+  "date": "2026-08-24",
+  "note": "Work the August 2026 fresh-intake sessions have identified and deliberately NOT done. These carry their own OPEN-G1-* ids and do NOT enter tools/oral/oral_followup_register.json: that register is generated from the historical authorisation sources and its FUP-001..FUP-035 ids are stable release evidence. Inventing an FUP-036 by hand would put a hand-written row into a derived file and break the one property that makes those ids trustworthy.",
+  "items": [
+    {
+      "id": "OPEN-G1-001",
+      "title": "Eighteen QB cards ship with an empty 15-Second Answer block",
+      "found_via": "AUG-0025, while reading QB5_C_A#q4 to adjudicate the Management of Change occurrence",
+      "evidence": "A sweep of all 86 QB pages finds 18 practice-blocks carrying the 15-Second Answer label with no body: every question in QB5_C_A.html (q1-q10) and every question in QB5_C_B.html (q1-q8). Both files were authored without that block. No other page in the bank has one.",
+      "candidate_impact": "A candidate opening either page sees a labelled 15-Second Answer and nothing beneath it, on all 18 questions. The 60-Second Answer and the body are present and correct, so the cards are usable, but the fastest surface - the one a candidate revises from - is missing.",
+      "why_not_done_here": "A single-card repair was authored during this session and then deliberately REVERTED. Two reasons. First, the repo's own design note is explicit that a batch manifest cannot own a post-release repair, so the fix belongs in a correction record, not in batch G1. Second, and more importantly, fixing 1 of 18 identical defects would leave QB5_C_A internally inconsistent - one question with a 15-second answer and nine without - which reads worse to a candidate than uniform absence. The defect is a file-scoped authoring gap and should be closed as one sized piece of work.",
+      "size": "18 cards, two files, one correction record.",
+      "status": "OPEN_AWAITING_FOUNDER_SIZING",
+      "predates_this_intake": true
+    },
+    {
+      "id": "OPEN-G1-002",
+      "title": "Batch G1 has not had an independent clean-context review",
+      "evidence": "AUGUST2026_BATCH_G1_REVIEW.json records independence as SAME_CONTEXT_VERIFICATION and says so in its own caveat field. Every load-bearing number, date and citation in the eight cards was re-derived from a primary or official source after authoring, and two claims were corrected as a result - but the authoring and the checking happened in one session and one context.",
+      "candidate_impact": "An error of understanding shared by the authoring pass and the checking pass would survive both. The risk is concentrated in QB9_D#q12, whose Indian shipbuilding figures are the most currency-sensitive content in the batch.",
+      "why_not_done_here": "A genuinely independent review requires a reader who has not seen the authoring reasoning. That was not available in this session.",
+      "size": "One reviewer, four new cards and four enrichment limbs.",
+      "status": "OPEN_RECOMMENDED_BEFORE_NEXT_RELEASE"
+    },
+    {
+      "id": "OPEN-G1-003",
+      "title": "Seven batch-1 genuine-new asks are adjudicated but not yet authored",
+      "evidence": "AUG-0001 (chemical/product tanker vs crude carrier), AUG-0003 (primary and secondary means of venting), AUG-0005 (emergency towing - time requirement), AUG-0007 (EU SRR alongside the Hong Kong Convention), AUG-0015 (RoRo latest amendments), AUG-0018 (ALARP), AUG-0022 (fire tetrahedron). All seven carry a structured negative_search and remain GENUINE_NEW_QUESTION.",
+      "candidate_impact": "Seven questions asked at the August 2026 Kochi sitting have no card. These are current-value questions and should be produced ahead of the historical follow-up backlog.",
+      "why_not_done_here": "Batch G1 produced the four asks from the newer submission plus the three follow-up limbs. AUG-0015 and AUG-0005 additionally need their scope settled before authoring - the brief flags 'RoRo amendments' as too broad without further candidate evidence, and the emergency-towing 'time requirement' limb should not be guessed from the phrase alone.",
+      "size": "Five straightforward cards, two needing a scope decision first.",
+      "status": "OPEN_NEXT_PRODUCTION_BATCH",
+      "visible_in": "validate_batch_g1.py check g1_unproduced_new_asks_are_still_visible, and the master ledger's production.outstanding_new_asks"
+    },
+    {
+      "id": "OPEN-G1-004",
+      "title": "Two occurrences remain AMBIGUOUS",
+      "evidence": "AUG-0019 'Risk analysis - why and how.' Batch 1 could not settle whether this is a distinct ask or the same ground as the risk assessment card at AUG-0017, and neither later submission touched it. AUG-0035 'Recent bulk carrier accident - causes, location, accident investigation, survivors' rights, with cross questions.' Its investigation limb is already covered by five cards; its 'recent accident' limb names no casualty; and its survivors'-rights limb is a real gap - 0 hits across all 725 - but the candidate recorded only the phrase plus 'lots of cross questions'.",
+      "why_not_done_here": "Held rather than guessed. Turning a vague recollection into a precise regulatory question is the failure mode the intake contract exists to prevent. The survivors'-rights gap is real and worth watching: if a later submission corroborates it, it becomes a strong new card.",
+      "status": "OPEN_HELD_PENDING_FURTHER_EVIDENCE"
+    },
+    {
+      "id": "OPEN-G1-005",
+      "title": "Eight batch manifests carried a stale examiner-relationship expectation, and every E/F-series guard expired on the first new card",
+      "evidence": "Two independent defects surfaced when batch G1 added four cards. First, eight manifests declared 960 examiner relationships while the corpus has had 958 since commit 9b1a667 - the count moved 960 -> 966 -> 958 through two governed commits (858adf6 and 9b1a667, the Founder adjudication on two examiner attributions) and the manifests were never refreshed. That failure predates this session and was reproducible on origin/main. Second, every E- and F-series validator asserted 'nothing was added since my baseline' against the LIVE corpus, which is true only until the bank next grows.",
+      "resolution": "Both fixed in this session. The eight expectations were refreshed to 958 with an expected_examiner_relationships_note recording the governed commits that moved the number, so a refresh can never look like a quiet rebaseline. The expiring guards were re-expressed through one shared helper, oral_manifest.sibling_owned_cards, so each now asserts the claim it can make forever: nothing was added that nobody authorised.",
+      "residual": "E6 still fails line_endings_homogeneous_per_file on QB4_I.html and QB9_G.html, which report LF while the manifest records CRLF. Neither file was touched by this session and the runner classifies the gate as PRE_EXISTING_BASELINE from origin/main. It is a checkout artefact of .gitattributes normalisation rather than a content defect, and it makes E6's mutation Z4 uncatchable, since a mutation cannot be caught by a check that is already red.",
+      "status": "RESOLVED_EXCEPT_THE_PRE_EXISTING_EOL_BASELINE"
+    }
+  ]
+}

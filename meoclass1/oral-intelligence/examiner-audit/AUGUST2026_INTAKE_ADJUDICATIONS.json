@@ -5,23 +5,37 @@
   "note": "Human adjudication of the August 2026 candidate intake against the live 721-card bank. Similarity is recorded as evidence, never as the decision: the matcher ranked the correct parametric-rolling card THIRD (AUG-0012) behind an unrelated tonnage card, and ranked an unrelated DP card first for AUG-0001. Every GENUINE_NEW_QUESTION row states the negative search that established the gap, so the judgement can be rechecked rather than the arithmetic.",
   "governing_principle": "A new card is created only when the examiner's actual tested ask is materially distinct from every live card. Novel wording alone is never sufficient.",
   "live_corpus_at_adjudication": {
-    "canonical_questions": 721,
-    "commit": "7e3b46732b8f1d2be06221af5999a11dea3378e1"
+    "canonical_questions": 725,
+    "commit": "0c9da2521cf0238c5c3a046db374190ee52f87b7 plus the uncommitted batch G1"
   },
   "vocabularies": {
     "classification": [
       "EXACT_EXISTING",
       "PARAPHRASE_EXISTING",
       "FOLLOWUP",
+      "SAME_AS_BATCH1_NEW",
+      "EXPANDS_BATCH1_NEW",
       "GENUINE_NEW_QUESTION",
       "AMBIGUOUS",
-      "NON_QUESTION_UNRECOVERABLE"
-    ]
+      "NON_QUESTION_UNRECOVERABLE",
+      "ADMINISTRATIVE_NOT_EXAMINABLE"
+    ],
+    "cross_batch_note": "SAME_AS_BATCH1_NEW and EXPANDS_BATCH1_NEW were added for batch 2. They exist so that a second candidate independently reporting a batch-1 provisional new ask strengthens that ask instead of spawning a duplicate card. No batch-2 occurrence took either state: S003 sat the same panel but was asked an entirely disjoint commercial/management set.",
+    "administrative_note": "ADMINISTRATIVE_NOT_EXAMINABLE was added for batch 3. S004 opened with 'Written status.' and 'Type of ship.' - real questions, really asked, but about the candidate rather than about knowledge. They stay in the denominator and can never become a card. Calling them NON_QUESTION_UNRECOVERABLE would be false, and AMBIGUOUS would imply unresolved work."
   },
   "examiner_attribution": {
     "basis": "EXPLICITLY_STATED_BY_CANDIDATE",
-    "panel": {"EXTERNAL": "Rajappan", "INTERNAL": "Senthil"},
-    "caution": "Both submissions name the same panel. Neither candidate attributed an individual question to an individual examiner, so every row carries PANEL_LEVEL_ONLY. No question may be assigned to Rajappan or Senthil individually on this evidence."
+    "panels": {
+      "AUG2026-S001 / S002 / S003": {
+        "EXTERNAL": "Rajappan",
+        "INTERNAL": "Senthil"
+      },
+      "AUG2026-S004": {
+        "EXTERNAL": "Nair",
+        "INTERNAL": "Senthil"
+      }
+    },
+    "caution": "The August panel is NOT constant. S004 is the first submission with a different external examiner - Nair, who is already a canonical identity from the historical corpus. Senthil is the internal examiner across all four. Two occurrences carry a per-question attribution, both to Senthil and both written by the candidate: AUG-0032 ('Senthil :' on its own line) and AUG-0040 ('Senthil : tqm, new acts and difference between act and rule.'). Everything else stays PANEL_LEVEL_ONLY. In particular AUG-0033..AUG-0039 are NOT attributed to Nair: the layout implies it, but the candidate never wrote his name over that block, and a layout inference is not candidate evidence."
   },
   "adjudications": [
     {
@@ -29,7 +43,29 @@
       "classification": "GENUINE_NEW_QUESTION",
       "matched_question_id": null,
       "evidence": "Regex search for 'product tanker|crude oil tanker|crude carrier' over all 721 live questions returns 0 hits. The nearest cards (QB8_H#q2 Type 1 vs Type 2 chemical tankers, QB1_G#q33 chemical tanker construction by type) both partition WITHIN chemical tankers; neither contrasts a chemical/product carrier against a traditional crude oil tanker.",
-      "ask": "Difference between a chemical / oil-product tanker and a traditional crude oil tanker."
+      "ask": "Difference between a chemical / oil-product tanker and a traditional crude oil tanker.",
+      "negative_search": [
+        {
+          "pattern": "product tanker|crude oil tanker|crude carrier",
+          "hits": 0,
+          "rejected": []
+        },
+        {
+          "pattern": "(manual) nearest-card reading",
+          "hits": 2,
+          "rejected": [
+            {
+              "id": "QB8_H#q2",
+              "why": "Type 1 vs Type 2 chemical tankers - partitions within chemical tankers, never against a crude carrier."
+            },
+            {
+              "id": "QB1_G#q33",
+              "why": "Chemical tanker construction by type - same partition, same limitation."
+            }
+          ]
+        }
+      ],
+      "negative_search_provenance": "Structured form added 2026-08-24 during batch-2 reconciliation. The classification and target are unchanged from batch 1; every pattern was re-run against the live 721 and returned what batch 1 recorded."
     },
     {
       "occurrence_id": "AUG-0002",
@@ -43,7 +79,21 @@
       "classification": "GENUINE_NEW_QUESTION",
       "matched_question_id": null,
       "evidence": "Regex 'vent(ing|s)?|p/v valve|pressure vacuum|breather' returns 0 hits across 721 cards, and 'primary means|secondary means' returns 0. An earlier plain substring search appeared to return 45 hits only because 'Convention' contains 'vent'. Tank venting is genuinely absent from the bank.",
-      "ask": "Primary and secondary means of venting on a tanker."
+      "ask": "Primary and secondary means of venting on a tanker.",
+      "negative_search": [
+        {
+          "pattern": "\\bvent(ing|s)?\\b|p/v valve|pressure vacuum|breather",
+          "hits": 0,
+          "rejected": [],
+          "note": "The leading \\b is load-bearing. Without it the pattern matches 'prevent' and 'Convention' and appears to return dozens of hits."
+        },
+        {
+          "pattern": "primary means|secondary means",
+          "hits": 0,
+          "rejected": []
+        }
+      ],
+      "negative_search_provenance": "Structured form added 2026-08-24 during batch-2 reconciliation. The classification and target are unchanged from batch 1; every pattern was re-run against the live 721 and returned what batch 1 recorded."
     },
     {
       "occurrence_id": "AUG-0004",
@@ -58,7 +108,16 @@
       "matched_question_id": null,
       "evidence": "Regex 'emergency towing|towing arrangement' returns 0 hits. NOTE: the candidate wrote 'ETS'; in this row it expands to Emergency Towing System/Arrangement, whereas in AUG-0011 the same acronym expands to EU ETS. The two must not be conflated.",
       "ask": "Emergency towing arrangement - time requirement for deployment.",
-      "authoring_caution": "SOLAS II-1/3-4 and MSC.35(63) govern emergency towing arrangements; the deployment time requirement must be verified against the current text before any answer is authored."
+      "authoring_caution": "SOLAS II-1/3-4 and MSC.35(63) govern emergency towing arrangements; the deployment time requirement must be verified against the current text before any answer is authored.",
+      "negative_search": [
+        {
+          "pattern": "emergency towing|towing arrangement",
+          "hits": 0,
+          "rejected": [],
+          "note": "The candidate wrote 'ETS'. Here it expands to Emergency Towing System; in AUG-0011 the same acronym expands to EU ETS. The two must not be conflated."
+        }
+      ],
+      "negative_search_provenance": "Structured form added 2026-08-24 during batch-2 reconciliation. The classification and target are unchanged from batch 1; every pattern was re-run against the live 721 and returned what batch 1 recorded."
     },
     {
       "occurrence_id": "AUG-0006",
@@ -73,7 +132,45 @@
       "matched_question_id": null,
       "evidence": "Seven live cards cover the Hong Kong Convention and Indian ship recycling (QB3_C#q3, QB3_F#q5, QB3_G#q3/#q4, QB3_H#q4/#q5), but none addresses the EU Ship Recycling Regulation or why it persists alongside the HKC. Regex 'eusrr' returns 0 hits.",
       "ask": "EU Ship Recycling Regulation - why is it required when the Hong Kong Convention exists?",
-      "authoring_caution": "The HKC entered into force 26 June 2025. The answer must state the CURRENT relationship between EU SRR and HKC as at August 2026, not the pre-entry-into-force position."
+      "authoring_caution": "The HKC entered into force 26 June 2025. The answer must state the CURRENT relationship between EU SRR and HKC as at August 2026, not the pre-entry-into-force position.",
+      "negative_search": [
+        {
+          "pattern": "eusrr",
+          "hits": 0,
+          "rejected": []
+        },
+        {
+          "pattern": "(manual) Hong Kong Convention / Indian recycling cards",
+          "hits": 6,
+          "rejected": [
+            {
+              "id": "QB3_C#q3",
+              "why": "HKC and Indian recycling - does not reach the EU SRR or why it persists alongside the HKC."
+            },
+            {
+              "id": "QB3_F#q5",
+              "why": "As above."
+            },
+            {
+              "id": "QB3_G#q3",
+              "why": "As above."
+            },
+            {
+              "id": "QB3_G#q4",
+              "why": "As above."
+            },
+            {
+              "id": "QB3_H#q4",
+              "why": "As above."
+            },
+            {
+              "id": "QB3_H#q5",
+              "why": "As above."
+            }
+          ]
+        }
+      ],
+      "negative_search_provenance": "Structured form added 2026-08-24 during batch-2 reconciliation. The classification and target are unchanged from batch 1; every pattern was re-run against the live 721 and returned what batch 1 recorded."
     },
     {
       "occurrence_id": "AUG-0008",
@@ -131,7 +228,25 @@
       "matched_question_id": null,
       "evidence": "Regex 'ro-ro|roro|ro ro' returns 0 hits across 721 cards. Every high-scoring candidate was a CONTAINER amendments card (QB1_F#q20, QB8_B#q6) reached purely through the shared phrase 'latest amendments'. RoRo is absent from the bank.",
       "ask": "RoRo vessel latest amendments, with cross questions.",
-      "authoring_caution": "Must distinguish in-force from adopted-not-yet-in-force. SOLAS II-2 amendments on new-energy-carrying vehicles and the RoRo fire-safety package have staggered application dates."
+      "authoring_caution": "Must distinguish in-force from adopted-not-yet-in-force. SOLAS II-2 amendments on new-energy-carrying vehicles and the RoRo fire-safety package have staggered application dates.",
+      "negative_search": [
+        {
+          "pattern": "ro-ro|roro|ro ro",
+          "hits": 0,
+          "rejected": [
+            {
+              "id": "QB1_F#q20",
+              "why": "Container amendments card, reached only through the shared phrase 'latest amendments'."
+            },
+            {
+              "id": "QB8_B#q6",
+              "why": "Container amendments card, same false route."
+            }
+          ],
+          "note": "The rejected cards were surfaced by the similarity matcher, not by this pattern, which returns nothing."
+        }
+      ],
+      "negative_search_provenance": "Structured form added 2026-08-24 during batch-2 reconciliation. The classification and target are unchanged from batch 1; every pattern was re-run against the live 721 and returned what batch 1 recorded."
     },
     {
       "occurrence_id": "AUG-0016",
@@ -152,7 +267,16 @@
       "classification": "GENUINE_NEW_QUESTION",
       "matched_question_id": null,
       "evidence": "Regex 'alarp' returns 0 hits across 721 cards. The ALARP principle underpins the risk cards but is nowhere stated or examined, and the specific ask 'why reduce, why can't you eliminate' tests the tolerability argument rather than the assessment method.",
-      "ask": "ALARP - why reduce risk, why can it not be eliminated?"
+      "ask": "ALARP - why reduce risk, why can it not be eliminated?",
+      "negative_search": [
+        {
+          "pattern": "alarp",
+          "hits": 0,
+          "rejected": [],
+          "note": "The ALARP principle underpins the risk cards but is nowhere stated or examined; the ask tests tolerability, not the assessment method."
+        }
+      ],
+      "negative_search_provenance": "Structured form added 2026-08-24 during batch-2 reconciliation. The classification and target are unchanged from batch 1; every pattern was re-run against the live 721 and returned what batch 1 recorded."
     },
     {
       "occurrence_id": "AUG-0019",
@@ -182,7 +306,16 @@
       "classification": "GENUINE_NEW_QUESTION",
       "matched_question_id": null,
       "evidence": "Regex 'tetrahedron' returns 0 hits across 721 cards. The bank is fire-heavy but nowhere states the fire tetrahedron itself; the top scorers were unrelated CO2-room and container-fire cards reached through the token 'fire'.",
-      "ask": "Fire tetrahedron - explain."
+      "ask": "Fire tetrahedron - explain.",
+      "negative_search": [
+        {
+          "pattern": "tetrahedron",
+          "hits": 0,
+          "rejected": [],
+          "note": "The bank is fire-heavy but nowhere states the tetrahedron itself; the top similarity scorers were CO2-room and container-fire cards reached via 'fire'."
+        }
+      ],
+      "negative_search_provenance": "Structured form added 2026-08-24 during batch-2 reconciliation. The classification and target are unchanged from batch 1; every pattern was re-run against the live 721 and returned what batch 1 recorded."
     },
     {
       "occurrence_id": "AUG-0023",
@@ -190,7 +323,307 @@
       "matched_question_id": "QB5_A#q5",
       "evidence": "A compound ask whose limbs are each already covered: motivation by QB5_A#q5 and QB4_B#q8/#q9/#q10 (8 live motivation cards), quality management by QB5_A#q7 (TQM). No limb is uncovered, so no new card is warranted.",
       "ask": "Human element management, quality, how to motivate, with cross questions.",
-      "compound_cover_question_ids": ["QB5_A#q5", "QB5_A#q7", "QB4_B#q8"]
+      "compound_cover_question_ids": [
+        "QB5_A#q5",
+        "QB5_A#q7",
+        "QB4_B#q8"
+      ]
+    },
+    {
+      "occurrence_id": "AUG-0024",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB8_A#q3",
+      "ask": "Container liner and conference - difference and salient features.",
+      "evidence": "Word-boundary search /\\bliner\\b/ returns QB2_B#q7 (Liner vs NVOCC vs VOCC) and QB8_A#q3. /\\bconference\\b/ returns only QB9_G#q3, which is the IMO diplomatic conference - a false friend of the commercial sense, rejected on reading. QB8_A#q3 'Liner consortium and freight rates?' is the same examinable ask: its body defines the liner conference as the historical rate-fixing association, contrasts it with the modern operational consortium/alliance, and lists the salient features of each (VSAs, joint scheduling, EU block-exemption abolition 2008). Novel wording, existing ask.",
+      "submission_id": "AUG2026-S003",
+      "batch": "AUGUST_BATCH_2",
+      "cross_batch_check": "Compared against all 721 live cards, against AUG-0001..AUG-0023, and against the seven batch-1 provisional new asks. No overlap with any batch-1 ask."
+    },
+    {
+      "occurrence_id": "AUG-0025",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB5_C_A#q4",
+      "ask": "Management of change - company and ship perspective, and where the MOC is recorded.",
+      "evidence": "/\\bmanagement of change\\b|\\bMOC\\b/ returns exactly one card, QB5_C_A#q4 'Management of Change (MOC) - procedure and CE role?'. Both added limbs are already answered by it: the two perspectives are its CE-and-DPA approval step, and 'where recorded' is its step 1, which places the change in the company's SMS portal with the temporary/permanent flag. No new card. Reading this card for the adjudication did expose a separate, real defect in it - see existing_card_defects below.",
+      "submission_id": "AUG2026-S003",
+      "batch": "AUGUST_BATCH_2",
+      "cross_batch_check": "Compared against all 721 live cards, against AUG-0001..AUG-0023, and against the seven batch-1 provisional new asks. No overlap with any batch-1 ask."
+    },
+    {
+      "occurrence_id": "AUG-0026",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "ask": "New ship design and development - what should the CE ask the company to consider?",
+      "evidence": "Negative search over all 721 live questions: /ship design|newbuilding|new building|design and development|shipbuilding/ returns 0 hits, and the confirmatory /\\bnewbuild|\\byard\\b|keel laying|\\bspecification\\b|building contract/ also returns 0. The bank has no card on the CE's input to a newbuilding specification.",
+      "submission_id": "AUG2026-S003",
+      "batch": "AUGUST_BATCH_2",
+      "cross_batch_check": "Compared against all 721 live cards, against AUG-0001..AUG-0023, and against the seven batch-1 provisional new asks. No overlap with any batch-1 ask.",
+      "negative_search": [
+        {
+          "pattern": "ship design|newbuilding|new building|design and development|shipbuilding",
+          "hits": 0,
+          "rejected": []
+        },
+        {
+          "pattern": "\\bnewbuild|\\byard\\b|keel laying|\\bspecification\\b|building contract",
+          "hits": 0,
+          "rejected": []
+        }
+      ]
+    },
+    {
+      "occurrence_id": "AUG-0027",
+      "classification": "FOLLOWUP",
+      "matched_question_id": "QB1_A#q29",
+      "ask": "Re-insurance - why it is needed, and who is the authorised reinsurer in India.",
+      "evidence": "/\\breinsur|\\bre-insur/ returns exactly one card, QB1_A#q29 'Reinsurance - Types (Facultative and Obligatory)'. It already answers the parent ask and the 'why' (capacity, loss stabilisation, catastrophe spreading) and carries the IG P&I pool tiers. The India limb - who the authorised national reinsurer is - is absent from the card and is a genuine examiner follow-up, so it enriches QB1_A#q29 rather than forming a card of its own.",
+      "submission_id": "AUG2026-S003",
+      "batch": "AUGUST_BATCH_2",
+      "cross_batch_check": "Compared against all 721 live cards, against AUG-0001..AUG-0023, and against the seven batch-1 provisional new asks. No overlap with any batch-1 ask."
+    },
+    {
+      "occurrence_id": "AUG-0028",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "ask": "Time charter party documents - the relevant ship documents, statutory ones excluded.",
+      "evidence": "/\\btime charter\\b|\\btime-charter\\b|charter party|charterparty/ returns 3 cards: QB1_B#q17 (which CP governs the ship, and how the owner markets her), QB9_B#q3 (demurrage/laytime) and QB9_B#q4 (off-hire clause). None enumerates the commercial document set a time charter runs on. The confirmatory /bill of lading|mate.s receipt|statement of facts|notice of readiness|\\bNOR\\b|redelivery|off-hire survey|bunker survey/ returns only QB8_B#q3, an e-B/L legal-status card. Gap confirmed.",
+      "submission_id": "AUG2026-S003",
+      "batch": "AUGUST_BATCH_2",
+      "cross_batch_check": "Compared against all 721 live cards, against AUG-0001..AUG-0023, and against the seven batch-1 provisional new asks. No overlap with any batch-1 ask.",
+      "negative_search": [
+        {
+          "pattern": "\\btime charter\\b|\\btime-charter\\b|charter party|charterparty",
+          "hits": 3,
+          "rejected": [
+            {
+              "id": "QB1_B#q17",
+              "why": "Asks which charter party governs the ship and how the owner markets her to charterers. It names Questionnaire 88 in passing but does not enumerate the documents a time charter runs on."
+            },
+            {
+              "id": "QB9_B#q3",
+              "why": "Demurrage and laytime - a money/time clause, not a document set."
+            },
+            {
+              "id": "QB9_B#q4",
+              "why": "Off-hire clause - a single clause, not a document set."
+            }
+          ]
+        },
+        {
+          "pattern": "bill of lading|mate.s receipt|statement of facts|notice of readiness|\\bNOR\\b|redelivery|off-hire survey|bunker survey",
+          "hits": 1,
+          "rejected": [
+            {
+              "id": "QB8_B#q3",
+              "why": "Electronic bill of lading - its ask is the legal status and framework of an e-B/L, not which documents a time charter requires."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "occurrence_id": "AUG-0029",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "ask": "Types of financial institution an owner uses to invest in shipbuilding, the government-backed schemes in India, and other means of raising capital.",
+      "evidence": "/financial institution|ship financ|\\bfinance\\b|capital investment|mortgage|\\bloan\\b/ returns only QB9_D#q5 (GIFT City), a financial-centre card, not a ship-finance card. The confirmatory /\\bbank\\b|\\bequity\\b|\\blease\\b|\\bbond\\b|\\bcharter hire\\b|\\bsubsidy\\b|\\bsubsidies\\b/ returns 0 hits. Sagarmala (QB10_A#q3) is port infrastructure, not owner financing, and was rejected on reading. Gap confirmed.",
+      "submission_id": "AUG2026-S003",
+      "batch": "AUGUST_BATCH_2",
+      "cross_batch_check": "Compared against all 721 live cards, against AUG-0001..AUG-0023, and against the seven batch-1 provisional new asks. No overlap with any batch-1 ask.",
+      "negative_search": [
+        {
+          "pattern": "financial institution|ship financ|\\bfinance\\b|capital investment|mortgage|\\bloan\\b",
+          "hits": 1,
+          "rejected": [
+            {
+              "id": "QB9_D#q5",
+              "why": "GIFT City - what the financial centre is and its maritime relevance. A jurisdiction card, not a card on how an owner funds a newbuilding."
+            }
+          ]
+        },
+        {
+          "pattern": "\\bbank\\b|\\bequity\\b|\\blease\\b|\\bbond\\b|\\bcharter hire\\b|\\bsubsidy\\b|\\bsubsidies\\b",
+          "hits": 0,
+          "rejected": []
+        },
+        {
+          "pattern": "\\bSPS\\b|shipbuilding financial assistance|Sagarmala|Maritime Development Fund",
+          "hits": 1,
+          "rejected": [
+            {
+              "id": "QB10_A#q3",
+              "why": "Sagarmala is port-led infrastructure development. It is government spending on ports, not a financing route available to a shipowner."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "occurrence_id": "AUG-0030",
+      "classification": "FOLLOWUP",
+      "matched_question_id": "QB9_E#q9",
+      "ask": "Marine spatial planning - features, and examples of established MSP in India.",
+      "evidence": "/marine spatial|\\bMSP\\b|spatial planning/ returns exactly one card, QB9_E#q9 'Marine Spatial Planning', which already carries the definition, the four-step process, the TSS/fairway shipping relevance and an India-facing regulatory box (CRZ Notification 2019, Sagarmala green ports). It does not name an established Indian MSP site, which is the examiner's added limb - so this enriches QB9_E#q9. Corroborating evidence: that card's CE Oral Tip is already headed 'Kochi MMD Focus (Examiner Rajappan)', and the panel here is Rajappan. The fresh sitting confirms an attribution the bank had already recorded.",
+      "submission_id": "AUG2026-S003",
+      "batch": "AUGUST_BATCH_2",
+      "cross_batch_check": "Compared against all 721 live cards, against AUG-0001..AUG-0023, and against the seven batch-1 provisional new asks. No overlap with any batch-1 ask."
+    },
+    {
+      "occurrence_id": "AUG-0031",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "ask": "Lifeboat and rescue boat - the difference.",
+      "evidence": "/rescue boat/ returns QB2_E#q1 and QB2_G#q2; /lifeboat/ returns QB2_E#q1, QB2_F#q6 (TEL ventilation) and QB2_I#q8 (free-fall certificate/height/seating). QB2_E#q1 is the closest and was read in full: its examinable ask is location and why the rescue boat sits to starboard, and it answers that the rule is functional, not side-specific. Nothing in the bank contrasts the two craft on purpose, capacity, construction, speed or launch/recovery duty. /\\bdavit\\b/ returns 0. Distinct ask, gap confirmed.",
+      "submission_id": "AUG2026-S003",
+      "batch": "AUGUST_BATCH_2",
+      "cross_batch_check": "Compared against all 721 live cards, against AUG-0001..AUG-0023, and against the seven batch-1 provisional new asks. No overlap with any batch-1 ask.",
+      "negative_search": [
+        {
+          "pattern": "rescue boat",
+          "hits": 2,
+          "rejected": [
+            {
+              "id": "QB2_E#q1",
+              "why": "Read in full. Its examinable ask is stowage location and why the rescue boat is often to starboard; it answers that SOLAS III is functional, not side-specific. It never contrasts the two craft."
+            },
+            {
+              "id": "QB2_G#q2",
+              "why": "A narrower restatement of the same starboard-side question."
+            }
+          ]
+        },
+        {
+          "pattern": "lifeboat",
+          "hits": 3,
+          "rejected": [
+            {
+              "id": "QB2_E#q1",
+              "why": "As above - location, not difference."
+            },
+            {
+              "id": "QB2_F#q6",
+              "why": "Ventilation requirements of a totally enclosed lifeboat."
+            },
+            {
+              "id": "QB2_I#q8",
+              "why": "Free-fall lifeboat certificate, height, seating and launching requirements."
+            }
+          ]
+        },
+        {
+          "pattern": "\\bdavit\\b",
+          "hits": 0,
+          "rejected": []
+        }
+      ]
+    },
+    {
+      "occurrence_id": "AUG-0032",
+      "classification": "FOLLOWUP",
+      "matched_question_id": "QB3_G#q2",
+      "ask": "Joining a vessel - what means are available to satisfy yourself she is not part of the shadow fleet, and what is the shadow fleet?",
+      "evidence": "/shadow fleet|dark fleet/ returns exactly one card, QB3_G#q2, which fully answers the second limb (definition, AIS spoofing, flag hopping, absent IG P&I cover, A.1192(33)). The first limb - the pre-joining due-diligence checks a CE can actually run - is absent, and is the tested part of this ask. Preserved as a follow-up on the existing card, per the rule that an examiner chain is not flattened into an unrelated new card. This is the only occurrence in the whole August intake carrying an individual attribution (Senthil).",
+      "submission_id": "AUG2026-S003",
+      "batch": "AUGUST_BATCH_2",
+      "cross_batch_check": "Compared against all 721 live cards, against AUG-0001..AUG-0023, and against the seven batch-1 provisional new asks. No overlap with any batch-1 ask."
+    },
+    {
+      "occurrence_id": "AUG-0033",
+      "classification": "ADMINISTRATIVE_NOT_EXAMINABLE",
+      "matched_question_id": null,
+      "ask": "Written status - what is the candidate's written examination result.",
+      "evidence": "An opening question about the candidate, not about knowledge. Preserved in the denominator; no card is possible or wanted.",
+      "submission_id": "AUG2026-S004",
+      "batch": "AUGUST_BATCH_3",
+      "cross_batch_check": "Compared against all 725 live cards, against AUG-0001..AUG-0032, and against every previous August ask including the seven batch-1 provisional new ones. No overlap with any earlier August ask: S004 sat a different external examiner and was asked a disjoint set."
+    },
+    {
+      "occurrence_id": "AUG-0034",
+      "classification": "ADMINISTRATIVE_NOT_EXAMINABLE",
+      "matched_question_id": null,
+      "ask": "Type of ship - what ship has the candidate sailed on.",
+      "evidence": "The standard opening. Note the contrast with AUG-0001, where the same opening carried an explicit technical limb ('difference between chemical and oil product tanker to traditional oil tanker') and was adjudicated on that limb. Here the candidate recorded no limb, so there is nothing to adjudicate and nothing may be invented.",
+      "submission_id": "AUG2026-S004",
+      "batch": "AUGUST_BATCH_3",
+      "cross_batch_check": "Compared against all 725 live cards, against AUG-0001..AUG-0032, and against every previous August ask including the seven batch-1 provisional new ones. No overlap with any earlier August ask: S004 sat a different external examiner and was asked a disjoint set."
+    },
+    {
+      "occurrence_id": "AUG-0035",
+      "classification": "AMBIGUOUS",
+      "matched_question_id": null,
+      "ask": "Recent bulk carrier accident - causes, location, the accident investigation, survivors' rights, with cross questions.",
+      "evidence": "Deliberately held, and the reasons differ limb by limb. The INVESTIGATION limb is already covered - /casualty investigation|accident investigation|marine safety investigation/ returns QB1_A#q24, QB1_B#q15, QB4_B#q6, QB4_G#q6 and QB5_B#q16. The 'recent bulk carrier accident' limb names no casualty, and /bulk carrier/ returns 5 cards none of which is a named-casualty card; identifying which accident the examiner meant would be a guess. The SURVIVORS' RIGHTS limb is a genuine gap - /survivor|next of kin|seafarer.{0,20}death|repatriation/ returns 0 hits across all 725 - but the candidate wrote only the phrase plus 'lots of cross questions', which is exactly the vague recollection the intake contract forbids turning into a precise regulatory question. Held for corroboration from a later submission.",
+      "submission_id": "AUG2026-S004",
+      "batch": "AUGUST_BATCH_3",
+      "cross_batch_check": "Compared against all 725 live cards, against AUG-0001..AUG-0032, and against every previous August ask including the seven batch-1 provisional new ones. No overlap with any earlier August ask: S004 sat a different external examiner and was asked a disjoint set."
+    },
+    {
+      "occurrence_id": "AUG-0036",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB4_G#q6",
+      "ask": "Accident investigation report - contents and related questions.",
+      "evidence": "QB4_G#q6 'Casualty investigation - who investigates? Contents of a casualty investigation report.' is the same examinable ask, including the report contents the examiner pressed on.",
+      "submission_id": "AUG2026-S004",
+      "batch": "AUGUST_BATCH_3",
+      "cross_batch_check": "Compared against all 725 live cards, against AUG-0001..AUG-0032, and against every previous August ask including the seven batch-1 provisional new ones. No overlap with any earlier August ask: S004 sat a different external examiner and was asked a disjoint set."
+    },
+    {
+      "occurrence_id": "AUG-0037",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB10_B#q9",
+      "additional_matched_question_ids": [
+        "QB4_E#q15",
+        "QB4_F#q5"
+      ],
+      "ask": "MASS ships and cyber security.",
+      "evidence": "Two limbs, both covered. MASS: QB10_B#q9 was read in full and is current - it carries the non-mandatory goal-based MASS Code adopted at MSC 111 in May 2026 and effective 1 July 2026, the four degrees of autonomy, the mandatory Code targeted for 2032, and it already names cyber security among the Code's concerns. Cyber: QB4_E#q15 and QB4_F#q5. Novel pairing, existing asks; no new card.",
+      "submission_id": "AUG2026-S004",
+      "batch": "AUGUST_BATCH_3",
+      "cross_batch_check": "Compared against all 725 live cards, against AUG-0001..AUG-0032, and against every previous August ask including the seven batch-1 provisional new ones. No overlap with any earlier August ask: S004 sat a different external examiner and was asked a disjoint set."
+    },
+    {
+      "occurrence_id": "AUG-0038",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB9_F#q9",
+      "ask": "RightShip inspection.",
+      "evidence": "/rightship|right ship/ returns exactly one card, QB9_F#q9 'RightShip Inspection'. Same ask. The candidate's spelling 'Right ship' is why a word-aware rather than exact-token search was used.",
+      "submission_id": "AUG2026-S004",
+      "batch": "AUGUST_BATCH_3",
+      "cross_batch_check": "Compared against all 725 live cards, against AUG-0001..AUG-0032, and against every previous August ask including the seven batch-1 provisional new ones. No overlap with any earlier August ask: S004 sat a different external examiner and was asked a disjoint set."
+    },
+    {
+      "occurrence_id": "AUG-0039",
+      "classification": "FOLLOWUP",
+      "matched_question_id": "QB8_A#q3",
+      "ask": "Where do we get the freight rate from?",
+      "evidence": "/freight rate/ returns exactly one card, QB8_A#q3, which explains how freight rates are FORMED - market supply and demand, BAF, THC, peak season surcharges - and names the SCFI in passing. The examiner asked something narrower and more practical: where the number is actually obtained. The sources - the Baltic Exchange indices, the container indices, Worldscale for tankers, and shipbroker reports - are not enumerated on the card. /Baltic Exchange|\\bBDI\\b|\\bSCFI\\b|shipbroker|broker/ returns only QB9_H#q15 'What is a ship broker?', which defines the role rather than the rate source. Enriches QB8_A#q3 rather than forming a card.",
+      "submission_id": "AUG2026-S004",
+      "batch": "AUGUST_BATCH_3",
+      "cross_batch_check": "Compared against all 725 live cards, against AUG-0001..AUG-0032, and against every previous August ask including the seven batch-1 provisional new ones. No overlap with any earlier August ask: S004 sat a different external examiner and was asked a disjoint set."
+    },
+    {
+      "occurrence_id": "AUG-0040",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB5_A#q7",
+      "additional_matched_question_ids": [
+        "QB9_D#q9",
+        "QB4_D#q1",
+        "QB9_G#q1"
+      ],
+      "ask": "TQM; the new Acts; and the difference between an Act and a Rule.",
+      "evidence": "Three limbs on one line, all three already covered. TQM: QB5_A#q7 'Total Quality Management (TQM) - Explain.' Act versus Rule: QB9_D#q9 'Act vs rule - difference in Indian legal context with maritime examples?'. The new Acts: QB4_D#q1 'MS Act 2025 - why was it enacted? What are the key differences from the Merchant Shipping Act 1958?' with QB9_G#q1 naming the other shipping Acts. Recorded as ONE occurrence because the candidate wrote one line: splitting the raw evidence into three would be the parser inventing question boundaries. The split is made here, in the adjudication, where it can be reviewed.",
+      "submission_id": "AUG2026-S004",
+      "batch": "AUGUST_BATCH_3",
+      "cross_batch_check": "Compared against all 725 live cards, against AUG-0001..AUG-0032, and against every previous August ask including the seven batch-1 provisional new ones. No overlap with any earlier August ask: S004 sat a different external examiner and was asked a disjoint set."
+    }
+  ],
+  "existing_card_defects": [
+    {
+      "found_via": "AUG-0025",
+      "card": "QB5_C_A#q4",
+      "defect": "The 15-Second Answer practice-block is present but empty: a pb-label span with no body after it. A candidate opening this card sees a labelled block and no answer.",
+      "scope": "Not isolated. A sweep of every QB page found 18 empty practice-blocks, and all 18 are the 15-Second Answer of every question in QB5_C_A.html (q1-q10) and QB5_C_B.html (q1-q8). The two files were authored without that block. This predates the August intake and is unrelated to it.",
+      "action": "A single-card repair to QB5_C_A#q4 was authored during this session and then deliberately REVERTED, because a batch manifest cannot own a post-release repair and because fixing 1 of 18 identical defects would leave QB5_C_A internally inconsistent. The whole 18-card class is registered as OPEN-G1-001 in AUGUST2026_OPEN_ITEMS.json for a properly sized correction run."
     }
   ]
 }
