@@ -276,8 +276,15 @@ def check_page(path, is_qb2c):
             got = norm(w.qtext.get(a))
             ok("QB2_C#%s carries the approved wording" % a, got == want,
                "got %r" % got[:100])
-        ok("QB2_C has exactly the four repaired anchors",
-           ids == ["q1", "q2", "q3", "q4"], str(ids))
+        # PIN IDENTITIES, NOT TOTALS. This asserted `ids == [q1..q4]`, which made
+        # it a guard that expires the moment QB2_C legitimately grows - and it did,
+        # when batch G3 added q5. What the repair actually needs protected is that
+        # the four repaired cards are all still present and still carry their
+        # approved wording and answer digests, which the checks around this one
+        # already verify per anchor. A fifth card is not a regression; a missing
+        # or renamed q1..q4 is.
+        ok("QB2_C still carries all four repaired anchors",
+           set(QB2C_APPROVED) <= set(ids), str(ids))
         regions = qb2c_answer_regions(path.read_text(encoding="utf-8"))
         hashes = {a: hashlib.sha256(r.encode("utf-8")).hexdigest()
                   for a, r in regions.items()}

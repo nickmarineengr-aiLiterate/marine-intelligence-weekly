@@ -251,18 +251,39 @@ def main() -> int:
     # permanent property of the corpus: if it ever stops being true, the
     # correction must grow a chain rather than silently overwrite a batch's
     # release evidence. So it is asserted, never assumed.
-    pinning = [path.name for path in sorted(HERE.glob("batch_*_manifest.json"))
-               if "QB2_F" in read_text(path)]
+    # A PIN is a digest recorded against a card in `cards[]`. It is NOT any
+    # mention of the filename: batch G3 names QB2_F.html#q3 in `held_actions`,
+    # because that is the card it deliberately did NOT publish into, and a
+    # substring search read that as a pin. Read the structure, not the text.
+    pinning = []
+    for path in sorted(HERE.glob("batch_*_manifest.json")):
+        try:
+            produced = json.loads(read_text(path)).get("cards") or []
+        except Exception:                                          # noqa: BLE001
+            continue
+        if any(str(card.get("file", "")).startswith("QB2_F") for card in produced):
+            pinning.append(path.name)
     report("no_batch_pins_this_card", not pinning,
            "pinning=%s -- none, so no supersession chain is required"
            % (pinning or "none"))
 
     # ---- derived surfaces -----------------------------------------------
     index = json.loads(read_text(REPO / "meoclass1/qb_content_index.json"))
-    report("canonical_totals_unchanged",
-           index.get("total_questions") == 721 and index.get("total_files") == 86,
-           "questions=%s files=%s"
-           % (index.get("total_questions"), index.get("total_files")))
+    # WAS: index.get("total_questions") == 721. That guard expired the moment the
+    # corpus grew past 721 and has been red ever since - reproducible on a clean
+    # worktree of any commit after the bank reached 727. A correction record has
+    # no business pinning the size of the whole corpus; what it needs to know is
+    # that the derived index is CURRENT with the corpus it describes, which is
+    # the property asserted here and which does not expire.
+    live_questions = sum(len(f.get("questions") or f.get("anchors") or [])
+                         for f in index["files"].values())
+    report("content_index_agrees_with_its_own_corpus",
+           index.get("total_questions") == live_questions
+           and index.get("total_files") == len(index["files"]),
+           "index says questions=%s files=%s; its own rows carry %s questions "
+           "across %s files"
+           % (index.get("total_questions"), index.get("total_files"),
+              live_questions, len(index["files"])))
 
     entry = index["files"]["QB2_F.html"]
     corr_blob = " ".join(entry.get("corrections_applied") or [])

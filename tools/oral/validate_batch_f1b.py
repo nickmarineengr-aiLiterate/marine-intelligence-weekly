@@ -505,7 +505,16 @@ def main():
     # correction rewords a stem -- the same expiry the checks above were
     # already fixed for. A reword on a card NOBODY owns still fails, and so
     # does a reword of this batch's OWN cards, which is what the check is for.
-    qtext_unowned = [x for x in qtext_moved if x not in sibling_owned]
+    # THIS BATCH'S OWN CARDS ARE NEVER EXEMPT. QB1_A#q9 is f1b's target and is
+    # also owned by batch E1, so a bare `not in sibling_owned` test exempted the
+    # very card this check exists to protect - and rewording it was then caught
+    # only by manifest_digests_match, which is a different guard answering a
+    # different question.
+    own_cards = {"%s#%s" % (c.get("file"), c.get("anchor"))
+                 for c in (manifest.get("cards") or [])
+                 if c.get("file") and c.get("anchor")}
+    qtext_unowned = [x for x in qtext_moved
+                     if x in own_cards or x not in sibling_owned]
     qtext_elsewhere = sorted(set(qtext_moved) - set(qtext_unowned))
     report("q_text_and_anchors_stable", not qtext_unowned,
            "moved=%s authorised-elsewhere=%s"

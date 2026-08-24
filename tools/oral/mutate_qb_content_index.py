@@ -172,8 +172,16 @@ def mut_I(work):
 
 def mut_J(work):
     m, h = load(work)
-    h = h.replace('"file": "QB1_A.html", "title": "Conventions & Liability Law", "qcount": 31',
-                  '"file": "QB1_A.html", "title": "Conventions & Liability Law", "qcount": 33')
+    # DERIVE the qcount instead of hardcoding it. This used to replace a literal
+    # `"qcount": 31`, which stopped matching the moment QB1_A grew a card - the
+    # mutation then changed no bytes at all and was reported as an ESCAPE. That
+    # is the honest outcome, but only because this harness checks for no-ops; a
+    # hardcoded literal inside a MUTATION is the same expiring-guard defect as a
+    # hardcoded total inside a validator, and it fails in the direction that
+    # looks like a passing test.
+    mm = re.search(r'("file": "QB1_A\.html"[^}]*?"qcount":\s*)(\d+)', h)
+    assert mm, "QB1_A qcount row not found in the generated hub"
+    h = h[:mm.start(2)] + str(int(mm.group(2)) + 2) + h[mm.end(2):]
     save(work, None, h)
 
 
