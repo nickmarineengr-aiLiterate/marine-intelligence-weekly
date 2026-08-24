@@ -55,6 +55,14 @@ ATTRIB_RE = re.compile(r"^([A-Za-z][A-Za-z .'-]{1,40}?)\s*:\s*(.*)$", re.S)
 # It is honoured ONLY when the submission declared exactly one examiner in that
 # role, so it can never pick between two people.
 BARE_ROLE_RE = re.compile(r"^(Ext|Int|External|Internal)\s*[-:.]?\s*$", re.I)
+# "Internal Senthil sir" - a role declaration with NO separator at all. Accepted
+# only when the name carries an honorific, because without that guard the rule
+# would read "Internal audit procedure?" as declaring an examiner named "audit".
+# A candidate who writes "Internal Senthil" with no honorific is left at panel
+# level: under-attributed, never mis-attributed.
+ROLE_NOSEP_RE = re.compile(
+    r"^(Ext|Int|External|Internal)\s+([A-Za-z][A-Za-z .'-]{1,40}?\s+(?:sir|madam|ma'?am))\s*[.,]?\s*$",
+    re.I)
 # A line that is only a date. In an unnumbered submission every non-metadata
 # line becomes an occurrence, so the sitting date must be recognised as
 # metadata or it would be counted as a question.
@@ -127,14 +135,24 @@ def parse_submission(lines, submission_id: str, seq_start: int,
         if not t or RULE_RE.match(t):
             continue
 
-        m = ROLE_RE.match(t)
+        m = ROLE_RE.match(t) or ROLE_NOSEP_RE.match(t)
         if m and not Q_RE.match(t):
+            who = normalise_examiner(m.group(2))
             examiners.append({
                 "role": ROLE_NORM[m.group(1).lower()],
                 "name_raw": m.group(2).strip(),
-                "name_normalized": normalise_examiner(m.group(2)),
+                "name_normalized": who,
                 "attribution_basis": "EXPLICITLY_STATED_BY_CANDIDATE",
             })
+            # A declaration written in the PREAMBLE names the panel and nothing
+            # more. One written after questions have already been recorded is
+            # doing the job of a heading - the candidate put it above the
+            # questions that examiner asked - so it also attributes what
+            # follows, exactly as a bare role heading does.
+            if occurrences:
+                current_attrib = who
+                attrib_marker = t
+                attrib_basis = "ROLE_DECLARATION_INLINE_HEADING"
             continue
 
         m = BARE_ROLE_RE.match(t)
@@ -233,9 +251,13 @@ def parse_submission(lines, submission_id: str, seq_start: int,
             o["examiner_attribution"] = "INDIVIDUALLY_ATTRIBUTED"
             o["attributed_examiner"] = who
             o["attribution_marker"] = marker
-            # Emitted only for the role-heading route, so that records written
-            # by the original name-marker route stay byte-identical.
-            if basis == "ROLE_MARKER_SOLE_HOLDER":
+            # Emitted for every route EXCEPT the original name-marker one, so
+            # that records written before this field existed stay byte-identical
+            # while each newer route is self-describing. Naming the routes
+            # explicitly rather than testing one value: the first version of
+            # this checked for ROLE_MARKER_SOLE_HOLDER alone and silently
+            # dropped the basis of the route added next.
+            if basis and basis != "NAME_MARKER":
                 o["attribution_basis"] = basis
         else:
             # Both examiners sat the same panel and the candidate tied no

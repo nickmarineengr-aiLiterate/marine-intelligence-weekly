@@ -426,6 +426,41 @@ ok("lines before any heading stay panel-level",
    _by["An unnumbered question about conventions"]["examiner_attribution"]
    == "PANEL_LEVEL_ONLY")
 
+# A role declaration written WITHOUT a separator. S008 wrote "Internal Senthil
+# sir"; ROLE_RE requires [-:], so the internal examiner was dropped from the
+# panel entirely and the two questions under that heading would have been
+# recorded as a panel of the external examiner alone. Not under-attribution -
+# a wrong panel.
+_NOSEP = ["Ext -Nair", "1. first question?", "Internal Senthil sir",
+          "1) after the heading?", "Result:pass"]
+_ns = IA.parse_submission(_NOSEP, "T-004", 1)
+ok("a role declaration with no separator still declares its examiner",
+   [(e["role"], e["name_normalized"]) for e in _ns["examiners"]]
+   == [("EXTERNAL", "Nair"), ("INTERNAL", "Senthil")],
+   str([(e["role"], e["name_normalized"]) for e in _ns["examiners"]]))
+ok("the no-separator declaration is not itself counted as a question",
+   len(_ns["occurrences"]) == 2, str(len(_ns["occurrences"])))
+ok("a declaration in the preamble attributes nothing",
+   _ns["occurrences"][0]["examiner_attribution"] == "PANEL_LEVEL_ONLY")
+ok("a declaration written after questions attributes what follows",
+   _ns["occurrences"][1]["examiner_attribution"] == "INDIVIDUALLY_ATTRIBUTED"
+   and _ns["occurrences"][1]["attributed_examiner"] == "Senthil"
+   and _ns["occurrences"][1].get("attribution_basis")
+   == "ROLE_DECLARATION_INLINE_HEADING")
+ok("a numbering reset does not disturb the dense occurrence ids",
+   [o["occurrence_id"] for o in _ns["occurrences"]] == ["AUG-0001", "AUG-0002"]
+   and [o["source_question_number"] for o in _ns["occurrences"]] == [1, 1])
+
+# THE guard on the rule above. Without the honorific requirement, a real
+# question opening with a role word would declare an examiner named after its
+# second word.
+for _trap in ("Internal audit procedure?", "External audit by class",
+              "Internal communication on board"):
+    _t = IA.parse_submission(["Ext- A sir", "1. q?", _trap], "T-005", 1)
+    ok("a question opening with a role word declares nobody: %r" % _trap[:28],
+       [e["name_normalized"] for e in _t["examiners"]] == ["A"],
+       str([e["name_normalized"] for e in _t["examiners"]]))
+
 _TWO_INTERNAL = ["Int- Senthil sir", "Int- Nair sir", "Internal", "A question"]
 _t = IA.parse_submission(_TWO_INTERNAL, "T-003", 1, unnumbered=True)
 ok("a role heading naming two holders attributes to neither",
