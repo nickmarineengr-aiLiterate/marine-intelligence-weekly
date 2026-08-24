@@ -7,7 +7,7 @@
   "live_corpus_at_adjudication": {
     "canonical_questions": 727,
     "commit": "bbc615a (batches G1 and G2 both shipped)",
-    "note": "S006 was adjudicated against a bank that already contained both G1 and G2. Two of its eleven occurrences resolved onto cards created earlier the SAME DAY, which is the clearest evidence yet that the fresh-intake lane is working: a question asked at the sitting is answered by the time the next candidate reports it."
+    "note": "S006 was adjudicated against a bank that already contained both G1 and G2. Two of its eleven occurrences resolved onto cards created earlier the SAME DAY, which is the clearest evidence yet that the fresh-intake lane is working: a question asked at the sitting is answered by the time the next candidate reports it. S007 was adjudicated against the same 727-card bank and required TWO new cards - the conventions applying to an LPG carrier, and the instruments engaged when a job is assigned to a junior engineer. Twelve of its fourteen occurrences the bank already answered, four of them confirming an ask a previous August candidate had reported."
   },
   "vocabularies": {
     "classification": [
@@ -973,6 +973,255 @@
       "submission_id": "AUG2026-S006",
       "batch": "AUGUST_BATCH_5",
       "cross_batch_check": "Compared against all 727 live cards INCLUDING both batch-G1 and batch-G2 output, against AUG-0001..AUG-0052, and against every prior August ask. ZERO new cards required: every occurrence resolved onto an existing card, and two of them onto cards created earlier the same day."
+    },
+    {
+      "occurrence_id": "AUG-0064",
+      "classification": "ADMINISTRATIVE_NOT_EXAMINABLE",
+      "matched_question_id": null,
+      "ask": "Which vessels and types of engine the candidate has sailed on.",
+      "evidence": "An opening question about the candidate's own service, not about knowledge. Follows the precedent set for AUG-0033 (Written status) and AUG-0034 (Type of ship): really asked, stays in the denominator, can never become a card. QB10_A#q1 rehearses how to present one's own vessel and is the preparation surface for it, but the ask itself is not examinable content.",
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
+    },
+    {
+      "occurrence_id": "AUG-0065",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "ask": "Which conventions apply to an LPG carrier - the instrument set for a gas ship.",
+      "evidence": "The bank covers the IGC Code from several angles but nowhere enumerates the CONVENTION SET that attaches to a gas carrier. The one card shaped like this ask, QB9_C#q4, does it for an OIL tanker, where CLC/Fund answer the liability limb; for an LPG ship the liability limb is HNS instead - which is exactly where this examiner went next (AUG-0066, AUG-0067). That contrast is the substance of the ask and no card carries it.",
+      "negative_search": [
+        {
+          "pattern": "which all convention|conventions? (that )?(appl(y|icable))",
+          "hits": 1,
+          "rejected": [
+            {
+              "id": "QB9_C#q4",
+              "why": "Same shape of ask but scoped to oil tankers; its liability answer is CLC 1992 and the Fund Convention, which by their own terms cover persistent oil only and never reach an LPG cargo."
+            }
+          ]
+        },
+        {
+          "pattern": "\\bIGC Code\\b|gas carrier|\\bLPG\\b|liquefied gas",
+          "hits": 7,
+          "rejected": [
+            {
+              "id": "QB2_B#q6",
+              "why": "LPG cargo hazards and handling risk - operational, not the applicable-instrument set."
+            },
+            {
+              "id": "QB2_I#q7",
+              "why": "What is the IGC Code - one instrument, defined; does not enumerate the others."
+            },
+            {
+              "id": "QB6#q10",
+              "why": "Dual/tri-fuel engines and LPG bunkering - LPG as FUEL, not conventions applying to an LPG carrier."
+            },
+            {
+              "id": "QB8_D#q1",
+              "why": "IGC key requirements and application - the deepest IGC card, but still partitions WITHIN the IGC Code."
+            },
+            {
+              "id": "QB8_F#q1",
+              "why": "LPG as an alternative marine fuel - fuel-side IGF/STCW V/3, not the carriage instrument set."
+            },
+            {
+              "id": "QB8_G#q2",
+              "why": "IGC tank types A/B/C and membrane - construction detail inside the IGC Code."
+            },
+            {
+              "id": "QB8_H#q6",
+              "why": "LPG reliquefaction plant - machinery operation, no regulatory enumeration."
+            }
+          ]
+        }
+      ],
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
+    },
+    {
+      "occurrence_id": "AUG-0066",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB1_A#q6",
+      "ask": "HNS Convention and the HNS Fund.",
+      "evidence": "QB1_A#q6 (HNS Convention - for whom does it apply? Is it in force? What is the HNS Protocol and HNS Fund?) is the same ask including the Fund limb. Second candidate to be asked it in this window: AUG-0046 (S005) resolved to the same card.",
+      "additional_matched_question_ids": [
+        "QB1_B#q1",
+        "QB3_H#q2",
+        "QB9_A#q3"
+      ],
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
+    },
+    {
+      "occurrence_id": "AUG-0067",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB9_H#q12",
+      "ask": "What is strict liability.",
+      "evidence": "QB9_H#q12 (Strict liability in marine insurance - explain). AUG-0047 (S005) resolved to this same card, and in both submissions it was asked immediately after HNS - the same examiner chain, twice.",
+      "additional_matched_question_ids": [
+        "QB9_H#q7"
+      ],
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
+    },
+    {
+      "occurrence_id": "AUG-0068",
+      "classification": "GENUINE_NEW_QUESTION",
+      "matched_question_id": null,
+      "ask": "Assigning a job to the 2nd or 3rd Engineer - which conventions are engaged.",
+      "evidence": "The ask is the legal framework around DELEGATION: competence and certification for the task, watchkeeping and rest-hour limits, and the ISM duties to provide resources, procedures and supervision. The bank answers each ingredient separately but has no card on which instruments bind the act of assigning work to a junior engineer. QB5_A#q20 comes closest and points the opposite way - it states the CE's duties are non-delegable - without addressing what governs a delegation that is properly made.",
+      "negative_search": [
+        {
+          "pattern": "assign|delegat|entrust",
+          "hits": 2,
+          "rejected": [
+            {
+              "id": "QB1_B#q7",
+              "why": "Delegation of statutory survey functions from a Flag State to a Recognised Organisation - a different delegation entirely, State to RO, not CE to engineer."
+            },
+            {
+              "id": "QB3_B#q9",
+              "why": "Class survey system and the RO role; delegated appears only in that same Flag-State sense."
+            }
+          ]
+        },
+        {
+          "pattern": "hours of (work|rest)|rest hours",
+          "hits": 1,
+          "rejected": [
+            {
+              "id": "QB4_A#q15",
+              "why": "MLC A2.3 / STCW A-VIII/1 limits and rest splitting - one ingredient of the answer, but it is a numbers card and never frames the delegation decision."
+            }
+          ]
+        },
+        {
+          "pattern": "[Dd]uties of (the )?CE|CE duties",
+          "hits": 1,
+          "rejected": [
+            {
+              "id": "QB5_A#q20",
+              "why": "The CE's own duties under each instrument, expressly framed as non-delegable and personal; it does not address what applies when the CE assigns a task to a 2E or 3E."
+            }
+          ]
+        }
+      ],
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
+    },
+    {
+      "occurrence_id": "AUG-0069",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB4_E#q6",
+      "ask": "The Master's review of the SMS.",
+      "evidence": "QB4_E#q6 (Master's review and authority under ISM Code - overriding authority?). AUG-0041 (S005) resolved to this same card as Master's review as per the ISM Code - two candidates, two submissions, one card.",
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
+    },
+    {
+      "occurrence_id": "AUG-0070",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB4_E#q13",
+      "ask": "Ship registration.",
+      "evidence": "QB4_E#q13 (Process of ship registration in India - what certificates and who issues them?) is the bare ask, and the following occurrence (AUG-0071) narrows it to owner eligibility, confirming the Indian scope.",
+      "additional_matched_question_ids": [
+        "QB1_I#q2"
+      ],
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
+    },
+    {
+      "occurrence_id": "AUG-0071",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB4_D#q1",
+      "ask": "Eligibility criteria for a ship owner to register a vessel in India, old and new.",
+      "evidence": "QB4_D#q1 (MS Act 2025 vs MS Act 1958) carries this limb directly: ownership liberalisation broadens eligible owners of Indian-flagged vessels to include NRIs, OCIs, and a wider range of corporate structures, and permits bareboat charter-cum-demise registration. The examiner's old and new is precisely that 1958-versus-2025 contrast. Recorded as a paraphrase rather than a new card; the limb is present, though thinly, and any expansion belongs to that card rather than to a second one.",
+      "additional_matched_question_ids": [
+        "QB4_E#q13",
+        "QB1_I#q2"
+      ],
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
+    },
+    {
+      "occurrence_id": "AUG-0072",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB7_I#q8",
+      "ask": "Onboard carbon capture as a latest technology.",
+      "evidence": "QB7_I#q8 (What is Onboard Carbon Capture (OCC) technology and what is its current state of deployment on merchant vessels?) - the ask verbatim. The third time carbon capture has appeared in this window (AUG-0004, AUG-0060), and the first to use the OCC abbreviation.",
+      "additional_matched_question_ids": [
+        "QB7_A#q2"
+      ],
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
+    },
+    {
+      "occurrence_id": "AUG-0073",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB6#q1",
+      "ask": "CII and its yearly target.",
+      "evidence": "QB6#q1 answers both limbs: the indicator itself and the Required CII from MEPC.333(76) that drops approximately 2 per cent per year, which is the yearly target the examiner asked for.",
+      "additional_matched_question_ids": [
+        "QB6_E#q1"
+      ],
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
+    },
+    {
+      "occurrence_id": "AUG-0074",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB4_E#q9",
+      "ask": "Age norms for vessels.",
+      "evidence": "QB4_E#q9 (Age norms for ships - age-related requirements and restrictions?), which carries the Indian limb the panel would expect (DG Shipping Order 1 of 2026) alongside ESP, MARPOL phase-outs and charterer vetting.",
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
+    },
+    {
+      "occurrence_id": "AUG-0075",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB10_B#q1",
+      "ask": "The latest SOLAS amendments.",
+      "evidence": "QB10_B#q1 is the consolidated SOLAS and MARPOL amendment overview for 2024 through 2028, structured by entry-into-force tranche. Same treatment as AUG-0011, where the container-scoped version of this ask was recorded as a paraphrase of its own subject card rather than as a new one.",
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
+    },
+    {
+      "occurrence_id": "AUG-0076",
+      "classification": "EXACT_EXISTING",
+      "matched_question_id": "QB3_G#q2",
+      "ask": "What the shadow fleet is, and who imposes the sanctions.",
+      "evidence": "QB3_G#q2 covers both limbs. The sanctions limb looked at first like a gap, but the card names the sanctioning regimes twice - check the ship, the registered owner, the manager and the beneficial owner against the OFAC, EU and UK lists - and again in pre-joining verification. AUG-0052 (S005) resolved to this same card. No follow-up is required.",
+      "examiner_attribution_note": "Individually attributed to Senthil by the candidate's own Internal heading, the sole internal examiner declared by this submission.",
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
+    },
+    {
+      "occurrence_id": "AUG-0077",
+      "classification": "PARAPHRASE_EXISTING",
+      "matched_question_id": "QB7_I#q2",
+      "ask": "LPG for ship propulsion - the LGIP system.",
+      "evidence": "QB7_I#q2 describes the ME-LGIP by name: ME-LGIP (LPG), developed for LPG carriers, injecting liquid petroleum gas at approximately 50-60 bar, using the cargo itself as fuel. That last clause is the whole point of LGIP on a gas carrier and it is already on the card. QB6#q10 and QB8_F#q1 carry the IGF and gas-detection safety side.",
+      "additional_matched_question_ids": [
+        "QB6#q10",
+        "QB8_F#q1"
+      ],
+      "examiner_attribution_note": "Individually attributed to Senthil by the candidate's Internal heading.",
+      "submission_id": "AUG2026-S007",
+      "batch": "AUGUST_BATCH_6",
+      "cross_batch_check": "Compared against all 727 live cards including batches G1 and G2, against AUG-0001..AUG-0063 from the six earlier submissions, and against the fresh-ask register. S007 is the first UNNUMBERED submission: the candidate wrote no question numbers, so the parser had silently discarded the whole report until parse_file was generalised. Fourteen occurrences were recovered."
     }
   ],
   "existing_card_defects": [
