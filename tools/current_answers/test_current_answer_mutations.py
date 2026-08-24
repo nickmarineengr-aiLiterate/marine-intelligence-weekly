@@ -146,6 +146,21 @@ MUTATIONS = [
 
     (22, 'a rendered page named like a past-paper question', 'R-CA-ID-NOT-QP',
      lambda B: B['pages'].__setitem__('QP2101-Q4', B['pages']['CA-EM-0001'])),
+
+    # ---------------------------------------------------------------- 23 - 24
+    # SLOT vs SCOPE. Both of these are perfectly well-shaped ownership -- the
+    # type is known, the id matches the store the type names, and the owner
+    # exists -- and both are still wrong, because the FIELD they sit in has a
+    # scope of its own. 23 is the dangerous direction: it tells every reader
+    # that a family answered limb by limb has been answered outright.
+    (23, 'a limb owner written into the whole-question slot', 'R-CA-OWNER-SLOT',
+     lambda B: _fam(B, 'QIF-EM-0082').__setitem__(
+         'canonical_current_answer',
+         {'owner_type': 'SOLVED_PAPER_LIMB', 'owner_id': 'QP2606-Q8'})),
+
+    (24, 'a whole-question owner written into a limb slot', 'R-CA-OWNER-SLOT',
+     lambda B: _fam(B, 'QIF-EM-0052')['family_current_answers'][0]
+     .__setitem__('owner_type', 'CURRENT_LIBRARY')),
 ]
 
 

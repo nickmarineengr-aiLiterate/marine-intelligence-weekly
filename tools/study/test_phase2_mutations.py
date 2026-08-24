@@ -218,6 +218,33 @@ def mut_16_hold_softened_on_a_solved_answer(B):
     return 'R-P2-HOLD-REACHES-ANSWERS'
 
 
+def mut_17_limb_owner_in_the_whole_slot(B):
+    """A limb owner written into `canonical_current_answer`.
+
+    Well-typed, well-shaped and resolvable: SOLVED_PAPER_LIMB naming a question
+    that really exists. Every ownership rule that existed before this one passed
+    it, because they all check the owner against the STORE it names and none of
+    them checked it against the SCOPE of the field it was written into.
+
+    What it means downstream is that a family answered limb by limb reads as
+    answered outright -- the whole question inherits the family's READY grant,
+    and a SUPERSEDED_WITH_SUCCESSOR family publishes a successor pointer, both on
+    the strength of an answer covering one limb of several."""
+    rec(B, VERIFIED)['canonical_current_answer'] = {
+        'owner_type': 'SOLVED_PAPER_LIMB', 'owner_id': 'QP2606-Q8'}
+    return 'R-P2-OWNER-SLOT'
+
+
+def mut_18_whole_owner_in_a_limb_slot(B):
+    """The same disagreement from the other side: a whole-question owner listed
+    as though it answered one limb. Harmless-looking, and it understates what
+    MIW holds -- but the two slots stop meaning anything the moment either can
+    carry either scope."""
+    r = next(x for x in B['fams'] if x.get('family_current_answers'))
+    r['family_current_answers'][0]['owner_type'] = 'CURRENT_LIBRARY'
+    return 'R-P2-OWNER-SLOT'
+
+
 MUTATIONS = [
     mut_01_unverified_family_reads_ready,
     mut_02_authority_removed,
@@ -235,6 +262,8 @@ MUTATIONS = [
     mut_14_tranche_retreats_from_new_answer_families,
     mut_15_hold_recorded_without_a_reason,
     mut_16_hold_softened_on_a_solved_answer,
+    mut_17_limb_owner_in_the_whole_slot,
+    mut_18_whole_owner_in_a_limb_slot,
 ]
 
 

@@ -309,6 +309,27 @@ def run_checks(B):
           'family(ies) claiming both a whole-question owner and limb owners: %s'
           % both)
 
+    # AND THE SLOT MUST MATCH THE TYPE'S SCOPE. R-P2-OWNER-SHAPE above checks
+    # the owner_id against the STORE the type names; this checks the type
+    # against the SCOPE of the slot it was written into. They are different
+    # mistakes: `SOLVED_PAPER_LIMB -> QP2606-Q8` is perfectly well shaped and
+    # perfectly resolvable, and is still wrong in `canonical_current_answer`,
+    # because that field means the whole family is answered and a limb owner
+    # says only that one of its limbs is.
+    wrong_scope = []
+    for r in fams:
+        t, i = CA.resolve_owner(r.get('canonical_current_answer'))
+        if i and t in CA.OWNER_TYPES and t not in CA.WHOLE_OWNER_TYPES:
+            wrong_scope.append('%s: whole-question slot carries %s'
+                               % (r['family_id'], t))
+        for l in r.get('family_current_answers') or []:
+            t, i = CA.resolve_owner(l)
+            if i and t in CA.OWNER_TYPES and t not in CA.LIMB_OWNER_TYPES:
+                wrong_scope.append('%s.%s: limb slot carries %s'
+                                   % (r['family_id'], l.get('limb_id'), t))
+    check('R-P2-OWNER-SLOT', not wrong_scope,
+          'ownership slot and owner_type disagree about scope: %s' % wrong_scope)
+
     # A SYNTHETIC QUESTION IS NOT A SITTING. The library record carries the
     # present-day question text; the Phase-2 record must not restate it as
     # though the family had acquired a new member. Sections 27 and 28.

@@ -106,6 +106,47 @@ a `LIMB`-scope entry claimed as a whole-question owner or vice versa. A sibling
 limb can only be reached through its own slot, so verifying one can never
 verify another.
 
+### The slot has a scope, and so does the type
+
+The two rules above govern *which store* an owner names and *whether* a family
+mixes whole and limb ownership. Neither governs the pairing between them: the
+whole slot means "this answers the family" and a limb type means "this answers
+one limb of it", so `SOLVED_PAPER_LIMB` written into `canonical_current_answer`
+is well-typed, well-shaped, resolvable — and says the opposite of what it means.
+`R-CA-OWNER-SLOT` and `R-P2-OWNER-SLOT` refuse the pairing from both sides:
+the whole slot takes only `SOLVED_PAPER` or `CURRENT_LIBRARY`, the limb list
+only the two `_LIMB` types.
+
+This matters because a limb owner carries a **real question id**, so any reader
+that matches on the id alone hands it the whole question. Three did.
+
+## The owner-reader contract
+
+**A consumer MUST NOT parse Phase-2 ownership ad hoc.** It either resolves
+through `ca_model` — `resolve_owner`, `owner_ids`, `library_owner_ids`,
+`paper_owner_ids`, `entry_url_for` — or it states in its own docstring which
+single owner class it consumes and why. Reading `canonical_current_answer` for
+an id and comparing that id to something is not resolution; it is the parsing
+rule the typed model was introduced to remove.
+
+Three consequences, and they are the whole contract:
+
+1. **Scope is decided by the type, never by the id.** `_named_answer` tests
+   `== 'SOLVED_PAPER'`, not `in PAPER_OWNER_TYPES`, because the second admits
+   `SOLVED_PAPER_LIMB` — and a limb answer is not an answer to the question.
+2. **Unknown owner types fail closed.** An `owner_type` the repository does not
+   recognise grants nothing, routes nowhere, and is refused by
+   `R-CA-OWNER-TYPE-KNOWN`. It is never read as the legacy solved-paper shape.
+3. **A whole-only reader is legitimate — if it says so.** Not every surface
+   should widen to accept limb owners; some must not. What is forbidden is
+   being whole-only *by accident*, which is what a bare id comparison is.
+
+`tools/current_answers/test_owner_reader_contract.py` asserts this against the
+readers themselves, on constructed records rather than on whichever families
+happen to be owned which way today. It is deliberately separate from the gate
+suites: the gates refuse a bad record, and this refuses a good record read
+badly — which is the failure that has actually happened, twice.
+
 ## The reuse order, and the evidence that it does work
 
 For each family, in order:

@@ -339,9 +339,18 @@ def _named_answer(p2):
     strength of an answer that is not to that question. What the library owner
     does instead is produce a ROUTE -- see `_library_answer` -- which says the
     concept has a current home without claiming this paper was solved.
+
+    WHOLE-QUESTION OWNERSHIP ONLY, which is why this tests one type and not the
+    PAPER_OWNER_TYPES set. SOLVED_PAPER_LIMB is in that set and carries a real
+    question id, so a limb-typed owner written into the whole slot used to be
+    returned here as the question the family names -- setting `phase2_names_this`
+    and, in a SUPERSEDED_WITH_SUCCESSOR family, publishing a "Current framework:
+    see QPnnnn-Qn" pointer on a candidate page, all on the strength of an answer
+    covering one limb of several. `_library_answer` below already tests its one
+    whole type; these two read the same slot and now read it the same way.
     """
     otype, oid = _CA.resolve_owner(p2.get('canonical_current_answer'))
-    return oid if otype in _CA.PAPER_OWNER_TYPES else None
+    return oid if otype == 'SOLVED_PAPER' else None
 
 
 def _library_answer(p2):

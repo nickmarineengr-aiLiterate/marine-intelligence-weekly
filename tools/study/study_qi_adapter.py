@@ -809,7 +809,27 @@ def question_readiness(fam_row, nid, has_answer=True):
     p2 = fam_row.get('phase2_resolution') or {}
     if not p2:
         return fam_row['readiness']
-    if p2.get('canonical_current_answer') == nid:
+    # THE GRANT IS TYPED, NOT MATCHED ON THE ID.
+    #
+    # This used to compare `canonical_current_answer` -- by then already
+    # normalised to a bare owner id -- straight against the question id, and it
+    # gave the right answer for the wrong reason: a CURRENT_LIBRARY owner is a
+    # `CA-EM-nnnn` and could never equal a `QPnnnn-Qn`, so library ownership
+    # fell through by id-space luck rather than by decision.
+    #
+    # Two owner shapes broke that luck. A SOLVED_PAPER_LIMB owner carries a REAL
+    # question id, so it matched -- and the whole question inherited the family's
+    # READY grant on the strength of an answer to ONE of its limbs, which is the
+    # exact false positive the limb model exists to prevent. An unrecognised
+    # owner_type carrying a question id matched too, so an ownership shape
+    # nothing understands granted the strongest state there is.
+    #
+    # Only a WHOLE-question owner can bless a whole question, and only a
+    # SOLVED_PAPER one can bless it HERE -- a CURRENT_LIBRARY answer is not to
+    # this question at all. Everything else, limb owners and unknown types
+    # alike, falls through to the triage verdict below: fail closed.
+    if (p2.get('canonical_current_answer_owner_type') == 'SOLVED_PAPER'
+            and p2.get('canonical_current_answer') == nid):
         return fam_row['readiness']
 
     # The fallback above is asymmetric on purpose, and tranche 002 found the

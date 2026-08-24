@@ -411,6 +411,34 @@ def run_checks(B):
           'family(ies) claiming BOTH a whole-question owner and limb owners: %s'
           % both)
 
+    # THE SLOT AND THE TYPE MUST AGREE, and the dangerous direction is a LIMB
+    # owner in the WHOLE slot. `canonical_current_answer` means "this answers
+    # the family", `family_current_answers` means "this answers one limb of
+    # it", and until now nothing said which of the four types each slot could
+    # carry. Every rule above checks the owner against the STORE it names
+    # (library id vs question id, exists, renderable) and none of them checks
+    # it against the SCOPE of the field it was written into -- so
+    # `{'owner_type': 'SOLVED_PAPER_LIMB', 'owner_id': 'QP2606-Q8'}` in the
+    # whole slot passed every one of them while telling three consumers that a
+    # four-limb family had been answered outright. Refuse the shape here, the
+    # same way R-CA-OWNER-TYPED refuses an untyped library owner: at the gate,
+    # near its cause, rather than downstream where it reads as a routing bug.
+    wrong_scope = []
+    for r in B['fams']:
+        fid = r['family_id']
+        t, i = M.resolve_owner(r.get('canonical_current_answer'))
+        if i and t in M.OWNER_TYPES and t not in M.WHOLE_OWNER_TYPES:
+            wrong_scope.append('%s: whole-question slot carries %s' % (fid, t))
+        for l in r.get('family_current_answers') or []:
+            t, i = M.resolve_owner(l)
+            if i and t in M.OWNER_TYPES and t not in M.LIMB_OWNER_TYPES:
+                wrong_scope.append('%s.%s: limb slot carries %s'
+                                   % (fid, l.get('limb_id'), t))
+    check('R-CA-OWNER-SLOT', not wrong_scope,
+          'ownership slot and owner_type disagree about SCOPE. A limb owner in '
+          'the whole-question slot claims the family is answered outright: %s'
+          % wrong_scope)
+
     # A library LIMB entry must be claimed by a limb slot, never by a whole
     # family. This is the rule that stops one verified limb blessing its
     # siblings: a sibling can only be reached through its OWN slot.

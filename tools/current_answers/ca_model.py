@@ -92,6 +92,27 @@ LIBRARY_OWNER_TYPES = {'CURRENT_LIBRARY', 'CURRENT_LIBRARY_LIMB'}
 PAPER_OWNER_TYPES = {'SOLVED_PAPER', 'SOLVED_PAPER_LIMB'}
 LIMB_OWNER_TYPES = {'SOLVED_PAPER_LIMB', 'CURRENT_LIBRARY_LIMB'}
 
+#: The other axis. Not a fifth and sixth owner type -- the same four, grouped by
+#: SCOPE rather than by where the answer lives, exactly as the three sets above
+#: group them by store. It exists because the two ownership SLOTS are scoped:
+#: `canonical_current_answer` answers the whole family and
+#: `family_current_answers` answers it limb by limb, and until a consumer can
+#: name that distinction it has to infer scope from the id -- which is the
+#: parsing rule this module was written to remove.
+WHOLE_OWNER_TYPES = {'SOLVED_PAPER', 'CURRENT_LIBRARY'}
+
+#: Which owner types each slot may carry. A LIMB owner in the whole slot is the
+#: dangerous direction: it says "one of the four things this family asks has
+#: been answered" in the field that means "all of them have", and a consumer
+#: that reads only the owner ID cannot tell the two apart. See
+#: `validate_current_answers.R-CA-OWNER-SLOT`, which refuses the shape, and
+#: `study_qi_adapter.question_readiness`, which refuses to act on it even if
+#: the shape ever got past the gate.
+SLOT_OWNER_TYPES = {
+    'canonical_current_answer': WHOLE_OWNER_TYPES,
+    'family_current_answers': LIMB_OWNER_TYPES,
+}
+
 #: Review status. CURRENT_ANSWER_VERIFIED is the ONLY value that may reach a
 #: candidate as a verification claim, and it is earned by authority + an
 #: independent review that passed. Section 16.
@@ -252,6 +273,13 @@ def entry_url_for(record):
     A multi-limb family has no single page by design -- its limbs live in
     different places, some of them on past papers -- so this returns None rather
     than picking one. Picking one is the exact error section 34 forbids.
+
+    WHOLE-QUESTION OWNERSHIP ONLY, and the type is what decides it. This used to
+    test `t in LIBRARY_OWNER_TYPES`, which is true of CURRENT_LIBRARY_LIMB too --
+    so a limb-typed owner written into the whole slot would have been handed back
+    as the family's one URL, sending a candidate asked for four concepts to an
+    answer about one. That is the error the docstring above forbids, committed by
+    the function that forbids it.
     """
     t, i = resolve_owner(record.get('canonical_current_answer'))
-    return page_url(i) if t in LIBRARY_OWNER_TYPES and i else None
+    return page_url(i) if t == 'CURRENT_LIBRARY' and i else None
