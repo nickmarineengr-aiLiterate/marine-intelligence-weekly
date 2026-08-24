@@ -1,0 +1,112 @@
+{
+  "correction_id": "CORR-G1-INDEPENDENT-REVIEW-20260824",
+  "kind": "POST_RELEASE_CORRECTION",
+  "status": "AUTHORISED",
+  "origin": "independent_clean_context_review",
+  "date": "2026-08-24",
+  "title": "Defects found by the independent clean-context review of batch G1, and by the second pass over its own fixes",
+  "baseline_commit": "30c70a4",
+  "governing_commits": [
+    "312d3de"
+  ],
+  "known_traps_entries": [
+    46,
+    47,
+    48
+  ],
+  "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_BATCH_G1_REVIEW.json",
+  "rationale": "Batch G1 shipped at 30c70a4 with a review that recorded itself as SAME_CONTEXT_VERIFICATION and warned in its own caveat field that it could not catch an error of understanding shared by the authoring and the checking pass. That exposure was registered as OPEN-G1-002. An independent reviewer, given only the card anchors and a rubric and barred from the adjudication record, the manifests, the review record and the commit history, then found five defects - two authored by that session and three predating it on cards it had touched. A second independent pass over the fixes found that the first fix had introduced a new citation error and had patched prose and reference boxes while leaving the same defect verbatim in the summary bullets, an SVG label and the page metadata. Both rounds are recorded in the review record. No card was left live with a known defect.",
+  "note": "Five of these cards are owned by batch_g1_manifest.json, whose post-edit digests are published release evidence. They are NOT rebaselined. Each declares a supersedes claim against its G1 pin, so the batch validator resolves the live card as a descendant of what G1 authorised rather than as tampering with it. QB2_E#q1 is owned by no batch and is authorised by this record directly, as a scope-pass correction: it carried the same defect as the reviewed card and was found by sweeping the file afterwards.",
+  "cards": [
+    {
+      "action_id": "CORR-G1R-001",
+      "file": "QB2_E.html",
+      "anchor": "q3",
+      "path": "meoclass1/QB2_E.html",
+      "classification": "SCOPE_PASS_CORRECTION",
+      "why": "The 5-knot headway figure was attached to recovery. SOLAS III/17.3 puts it on launching; recovery is 5 minutes in moderate sea under III/17.4. Five occurrences, plus the sub-paragraph numbers which a first attempt at this fix got wrong.",
+      "pre_edit_digest": "6e2f6701eff6ae1f2e4ac68c8e6cdd4a0683e9b326b6c9ca47f9d992d07c91f5",
+      "post_edit_digest": "6bea0da4d195901f3a5f8182c68da87aafc3e58842998843f7111a821d9cbfa3",
+      "supersedes": {
+        "manifest": "batch_g1_manifest.json",
+        "action_id": "G1-001",
+        "post_edit_digest": "6e2f6701eff6ae1f2e4ac68c8e6cdd4a0683e9b326b6c9ca47f9d992d07c91f5",
+        "note": "The batch record stays exactly as published. This correction is a later authorised state descending from that pin, not a rebaseline."
+      }
+    },
+    {
+      "action_id": "CORR-G1R-002",
+      "file": "QB2_E.html",
+      "anchor": "q1",
+      "path": "meoclass1/QB2_E.html",
+      "classification": "SCOPE_PASS_CORRECTION",
+      "why": "The same launch/recovery conflation, found by sweeping the file after the reviewed card was corrected. It survived in the Numbers block, in an SVG diagram label and in the page meta description, and the card also stated Regulation 21 for cargo-ship carriage where its own body correctly says Regulation 31. Not owned by any batch manifest, so this record is what authorises the edit.",
+      "pre_edit_digest": "41862ecbfb8e8cb9675bc338d6d91c6a2f384d03de41b15090346eaecd7178b1",
+      "post_edit_digest": "a11b54d280c3eb1027678a121c5c42513cf6c75fb4d8e7f26425053feff63bdb"
+    },
+    {
+      "action_id": "CORR-G1R-003",
+      "file": "QB1_C.html",
+      "anchor": "q9",
+      "path": "meoclass1/QB1_C.html",
+      "classification": "PRIMARY_CORRECTION",
+      "why": "Cited MARPOL Annex VI Reg. 21 and 22 as EEDI and SEEMP - the pre-2021 numbering. MEPC.328(76) renumbered Chapter 4: Reg. 22 attained EEDI, 24 required EEDI, 26 SEEMP, 28 operational carbon intensity. GBS applicability completed (150 m and above, contract on or after 1 July 2016) and the Net-Zero resumed session dated.",
+      "pre_edit_digest": "2ebb96399bbf88ae3108c2635a2329f4c98b2695cd93f474c2815d770d0a9b0e",
+      "post_edit_digest": "a5ce8494dbc255c9b9e0205705d039d817b662cb7071607a09674ac50109df89",
+      "supersedes": {
+        "manifest": "batch_g1_manifest.json",
+        "action_id": "G1-004",
+        "post_edit_digest": "2ebb96399bbf88ae3108c2635a2329f4c98b2695cd93f474c2815d770d0a9b0e",
+        "note": "The batch record stays exactly as published. This correction is a later authorised state descending from that pin, not a rebaseline."
+      }
+    },
+    {
+      "action_id": "CORR-G1R-004",
+      "file": "QB9_E.html",
+      "anchor": "q9",
+      "path": "meoclass1/QB9_E.html",
+      "classification": "SCOPE_PASS_CORRECTION",
+      "why": "Two defects. The Odisha MSP claim overstated an MoU signing as a plan rollout. And the reference box cited IMO Res. A.857(20) for VTS guidelines, revoked by A.1158(32) on 15 December 2021.",
+      "pre_edit_digest": "8cf16cf4cd7512a3513ca8c142fcfe836241ee7fdaa8e474b8421869e06232ee",
+      "post_edit_digest": "d4c0a3a2e3acd93535d56577ec11727b0baf771004987bc58919580f84eec0e5",
+      "supersedes": {
+        "manifest": "batch_g1_manifest.json",
+        "action_id": "G1-006",
+        "post_edit_digest": "8cf16cf4cd7512a3513ca8c142fcfe836241ee7fdaa8e474b8421869e06232ee",
+        "note": "The batch record stays exactly as published. This correction is a later authorised state descending from that pin, not a rebaseline."
+      }
+    },
+    {
+      "action_id": "CORR-G1R-005",
+      "file": "QB3_G.html",
+      "anchor": "q2",
+      "path": "meoclass1/QB3_G.html",
+      "classification": "SCOPE_PASS_CORRECTION",
+      "why": "SOLAS V/19-1 was labelled AIS; it is long-range identification and tracking. And the Pablo casualty was described as producing an oil slick - she was in ballast and no spill was reported; three of twenty-eight were lost.",
+      "pre_edit_digest": "3a22ccc3b18a5e99411715d2acfd13582553bcb551bdf65fa5535a52536d39b1",
+      "post_edit_digest": "e9431803c9154889ae6d8d4da21e2478d96099f524281193f455e597300aa943",
+      "supersedes": {
+        "manifest": "batch_g1_manifest.json",
+        "action_id": "G1-007",
+        "post_edit_digest": "3a22ccc3b18a5e99411715d2acfd13582553bcb551bdf65fa5535a52536d39b1",
+        "note": "The batch record stays exactly as published. This correction is a later authorised state descending from that pin, not a rebaseline."
+      }
+    },
+    {
+      "action_id": "CORR-G1R-006",
+      "file": "QB8_A.html",
+      "anchor": "q3",
+      "path": "meoclass1/QB8_A.html",
+      "classification": "SCOPE_PASS_CORRECTION",
+      "why": "The Baltic Dry Index was described with a Handysize component. Handysize was removed on 1 March 2018 and the index has been weighted 40% Capesize / 30% Panamax / 30% Supramax since; the BHSI already existed and continues separately.",
+      "pre_edit_digest": "f32a01fdb0d50e07c625eedae67753c833437d961532f15b9ce0f2e3ebedbb09",
+      "post_edit_digest": "94c3c4fbbbf9069a30d6dea52f87d92f060c102bef11c39587d9ccae204fc79e",
+      "supersedes": {
+        "manifest": "batch_g1_manifest.json",
+        "action_id": "G1-008",
+        "post_edit_digest": "f32a01fdb0d50e07c625eedae67753c833437d961532f15b9ce0f2e3ebedbb09",
+        "note": "The batch record stays exactly as published. This correction is a later authorised state descending from that pin, not a rebaseline."
+      }
+    }
+  ]
+}

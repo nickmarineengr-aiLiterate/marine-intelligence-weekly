@@ -1007,6 +1007,80 @@ GREP: DG Shipping / DGMA
 
 | Date | Entry added | Source |
 |---|---|---|
+
+
+### 46. The rescue boat's 5-knot figure belongs to LAUNCHING, not to recovery
+
+`QB2_E.html` Q1 and Q3 both attached the **5 knots of ship headway** to the *recovery*
+of a rescue boat. SOLAS III has two separate requirements and they are easy to fuse:
+
+* **Reg. 17.3** — the rescue boat must be capable of being **launched**, where necessary
+  using painters, with the ship making headway at speeds up to **5 knots in calm water**.
+* **Reg. 17.4** — **recovery** time shall be **not more than 5 minutes** in moderate sea
+  conditions, loaded with its full complement of persons and equipment.
+
+Recovery is governed by a *time*, not by a ship speed. A candidate who says "recovered at
+up to five knots" has merged two regulations and can be taken apart on either.
+
+The correction pass itself taught the second half of this entry. A first attempt fixed the
+prose and the regulatory reference box and left the defect **verbatim in the Numbers block,
+in an SVG diagram label and in the page meta description** — the summary lines being
+precisely what a candidate memorises. It also mis-cited the sub-paragraphs as 17.1 and
+17.3. **When correcting a card, sweep the bullets, the Numbers block, diagram labels and
+page metadata, not only the prose.**
+
+### 47. MARPOL Annex VI Regulations 21 and 22 are not EEDI and SEEMP any more
+
+`QB1_C.html` Q9 cited **"MARPOL Annex VI, Reg. 21 & 22 — EEDI and SEEMP"**. That is the
+pre-2021 numbering. **MEPC.328(76)**, the revised Annex VI in force **1 November 2022**,
+renumbered Chapter 4:
+
+| Reg. | Subject |
+|---|---|
+| 20 | Goal |
+| **21** | **Functional requirements** |
+| **22** | **Attained EEDI** |
+| 23 | Attained EEXI |
+| **24** | **Required EEDI** |
+| 25 | Required EEXI |
+| **26** | **SEEMP** |
+| 27 | Collection and reporting of fuel oil consumption data |
+| **28** | **Operational carbon intensity** (the CII rating) |
+
+Any answer still saying "Reg. 21 is EEDI, Reg. 22 is SEEMP" is quoting a numbering that
+was superseded four years ago. Related: the same card understated **SOLAS II-1/3-10**
+(Goal-Based Standards) as applying to "bulk carriers and oil tankers" — the scope is oil
+tankers and bulk carriers of **150 m in length and above** with a building contract placed
+**on or after 1 July 2016**. See also Entry 33, where CSR applicability was wrongly
+equated with GBS applicability.
+
+### 48. The Baltic Dry Index has had no Handysize component since 1 March 2018
+
+`QB8_A.html` Q3 described the BDI as built from **Capesize, Panamax, Supramax and
+Handysize** sub-indices. Baltic Exchange Circular 08/18 removed the Handysize timecharter
+average from the BDI on **1 March 2018**. Since then the index is weighted **40% Capesize,
+30% Panamax, 30% Supramax**. The **Baltic Handysize Index (BHSI)** already existed and
+continues to be published separately — it was not created by that change. The equal
+four-way split is the pre-2018 arrangement.
+
+### 49. TML is 90% of the Flow Moisture Point — except for the cargo you are most likely to be asked about
+
+`QB2_A.html` Q31 stated flatly that **TML = 90% of FMP** and, in an adjacent bullet, that
+iron ore fines uses the **modified Proctor/Fagerberg** test. Those two statements are
+mutually exclusive, and the cargo in question is the one that sinks ships.
+
+* Where the **Flow Moisture Point is measured** — the flow-table and penetration tests —
+  **TML is 90% of the FMP**.
+* Where the **Proctor/Fagerberg** test is used, TML is read directly off the compaction
+  curve as the critical moisture content at a stated **degree of saturation**: **70%** for
+  the general test, and **80%** for **iron ore fines** under the modified procedure in
+  **IMSBC Appendix 2**. Iron ore fines therefore **has no FMP at all**.
+
+A candidate who recites "TML is 90% of FMP" and is then asked "and for iron ore fines?"
+is caught. Related, and found in the same pass: **Group A** is no longer just "cargoes
+which may liquefy" — since the 05-19 / 06-21 amendments the definition is cargoes which
+may **liquefy or undergo dynamic separation**.
+
 | 2026-07-16 | Initial 10 entries | Compiled from Claude memory / prior correction sessions |
 | 2026-07-18 | Entry 11: IMO GFI vs FuelEU Maritime baseline | Candidate (Rathesh) annotated-screenshot correction on QB6_E |
 | 2026-07-19 | Entry 12: CLC scope — mineral oil only (whale oil trap) | Candidate (Vivek) screenshot correction on QB1_A |
@@ -1037,3 +1111,4 @@ GREP: DG Shipping / DGMA
 | 2026-08-23 | Entry 43: "main boilers" listed as a Vital Auxiliary System assessed under Continuous Machinery Survey (QB1_G Q40) - the boiler itself is not a CSM item and is not on the 5-year CSM interval; IACS UR Z18 §2 requires two internal examinations per 5-year period at a maximum 36-month interval, plus the §2.2 annual external survey, while §1.3 governs the CSM item cycle. Boiler auxiliaries (FD fans, burning pumps, feed water pumps) ARE in the class-approved CMS list per ClassNK Guidance on CMS Ver.4 (June 2025). The card's IACS PR 1C citation was also unsupported - PR 1C is suspension/withdrawal of class for overdue surveys - and was replaced with UR Z18. QB1_supplementary and QB1_F already state the boiler exclusion correctly and were not changed. | Candidate report via Nixon (WhatsApp screenshot) |
 | 2026-08-23 | Entry 44: CSM/boiler answer re-framed in the Indian authority order — DG Shipping/DGMA statutory ("running survey", Rule 274), IRS class implementation (Main Rules Pt.1 Ch.2 §8.2/§1.4 and IRS-G-SUR-02), IACS UR Z18 as unified class baseline not a statutory authority, ClassNK demoted to implementation example. IRS 4.1.1(d) shows the real line is Chief Engineer CREDIT, not CSM eligibility, so the claim is narrowed to the boiler's pressure boundary being off the 5-year CSM interval; two ClassNK-derived pump types removed from the card. | Founder review following Entry 43 |
 | 2026-08-23 | Entry 45: "DG Shipping / DGMA" written as a live pair on QB1_G Q40 — the authority is the Directorate General of Maritime Administration, named in full on first mention with "formerly DG Shipping" as a historical gloss and DGMA as the short form. Document titles carrying the old name ("DG Shipping Engineering Circular 02 of 2024" etc.) deliberately left unchanged; ten further files recorded for a separate scoped pass. | Founder correction following Entry 44 |
+| 2026-08-24 | Entries 46-49: found by an INDEPENDENT clean-context review of the batch-G1 cards, and by a second independent pass over its own fixes. Rescue-boat 5-knot figure attached to recovery instead of launching (QB2_E Q1 and Q3, seven places including an SVG label and the page meta); MARPOL Annex VI Chapter 4 cited in pre-2021 numbering and GBS scope understated (QB1_C Q9); Baltic Dry Index described with a Handysize component eight years after its removal (QB8_A Q3); "TML = 90% of FMP" applied to iron ore fines, which has no FMP, plus a stale Group A definition (QB2_A Q31). Also corrected in the same pass: a revoked VTS resolution A.857(20) and SOLAS V/19-1 mislabelled as AIS (QB9_E Q9, QB3_G Q2), and the Pablo casualty described as producing an oil slick when she was in ballast. | Independent clean-context review, then a second independent pass over the fixes |
