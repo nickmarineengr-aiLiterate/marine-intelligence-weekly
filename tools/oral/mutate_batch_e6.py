@@ -237,10 +237,37 @@ def build():
                  QB_DIR / "QB6_F.html",
                  sub_once(r'(<div class="q-card"[^>]*)id="q4"', r'\1id="q41"'),
                  "targets_resolve"),
+        # K RETARGETED, 2026-08-26. It used to delete from QB9_G#q3, which
+        # CORR-DEFN-TREATY-20260825 has since SUPERSEDED. On a superseded card
+        # `edits_purely_additive` compares E6's baseline against the state E6
+        # itself produced -- recovered from git, so a working-tree deletion
+        # cannot move it -- and K began reporting WRONG REASON, caught by
+        # `manifest_digests_match` instead. That is a real escape by this
+        # suite's own rule: a mutation caught only because a digest moved has
+        # not proved its own guard.
+        #
+        # The card was always an arbitrary choice; the mutation exists to prove
+        # that deleting BASELINE text trips ADDITIVITY. So it now deletes from
+        # an UNSUPERSEDED authorised card, which tests exactly what it always
+        # tested. "Onboard Integration" carries no LIMB, AUTHORITY or
+        # QUALIFIER token of A050, so additivity is the only substantive check
+        # it can trip -- the same property that made the FAL heading a good
+        # target before.
         Mutation("K", "delete baseline text from an authorised card",
+                 QB_DIR / "QB6_F.html",
+                 sub_once(r"<h4>Onboard Integration</h4>", ""),
+                 "edits_purely_additive"),
+        # K2 is K's other half, and the reason this is a repair rather than a
+        # retreat. Retargeting K alone would leave "the superseded card is
+        # still guarded against live deletion" as an ASSERTION. K2 makes it a
+        # RESULT: it performs the very deletion K used to perform, on the very
+        # card K used to perform it on, and requires the check that coverage
+        # MOVED to. If a future change ever breaks the chain check, K2 goes red
+        # instead of the gap being discovered by accident years later.
+        Mutation("K2", "delete live text from a SUPERSEDED authorised card",
                  QB_DIR / "QB9_G.html",
                  sub_once(r"<h4>FAL Committee</h4>", ""),
-                 "edits_purely_additive"),
+                 "manifest_digests_match"),
         Mutation("M", "staledate the in-force container-loss regime",
                  QB_DIR / "QB1_A.html",
                  sub_once(r"Since <strong>1 January 2026</strong>, amendments "
