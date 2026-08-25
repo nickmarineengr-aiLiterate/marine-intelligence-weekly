@@ -1114,6 +1114,7 @@ may **liquefy or undergo dynamic separation**.
 | 2026-08-24 | Entries 46-49: found by an INDEPENDENT clean-context review of the batch-G1 cards, and by a second independent pass over its own fixes. Rescue-boat 5-knot figure attached to recovery instead of launching (QB2_E Q1 and Q3, seven places including an SVG label and the page meta); MARPOL Annex VI Chapter 4 cited in pre-2021 numbering and GBS scope understated (QB1_C Q9); Baltic Dry Index described with a Handysize component eight years after its removal (QB8_A Q3); "TML = 90% of FMP" applied to iron ore fines, which has no FMP, plus a stale Group A definition (QB2_A Q31). Also corrected in the same pass: a revoked VTS resolution A.857(20) and SOLAS V/19-1 mislabelled as AIS (QB9_E Q9, QB3_G Q2), and the Pablo casualty described as producing an oil slick when she was in ballast. | Independent clean-context review, then a second independent pass over the fixes |
 | 2026-08-24 | Entries 50-51: `QB1_G` Q32 carried a truncated Merchant Shipping Notice citation, "1 of 202" -- verified against the DGMA Nautical Wing source as **MS Notice 01 of 2026** (15 Jan 2026, empanelment and retention of salvors, s.255 MS Act 2025) rather than reconstructed from the truncation; and `QB8_A` Q3 shipped raw draft scaffolding to candidates, where two of the four `[cite: 1]` markers turned out to be inside the REAL reg-box rather than the `<pre>` duplicate, so deleting the obvious artefact alone would have left them live. Class-wide artefact scope enumerated and registered as OPEN-G1-008. | OPEN-G1-006 and OPEN-G1-007, closed from the August intake open-items register |
 | 2026-08-25 | Entry 52: `QB2_F` Q3 credited the ro-ro / vehicle / special-category fire-safety package to **MSC.532(107)** across three blocks; the package is **MSC.550(108)** with FSS Code amendments in **MSC.555(108)**, and `QB10_B` Q1 already had it right, so two paid cards disagreed. Root cause is a shared 1 Jan 2026 entry-into-force date, not carelessness - identify a package by the regulation it AMENDS. Two further defects found in the same card: the 10 mg/kg PFOS threshold is MSC.1/Circ.1694, not SOLAS (II-2/10.11.2 is an unqualified prohibition); and SOLAS II-2/20 states application in each section chapeau, so summarising the requirements gave cargo ships the entire passenger-ship package. The last of these was found only by independent clean-context review. | OPEN-G1-010, and the AUG-0015 ro-ro ask it was blocking |
+| 2026-08-25 | Entry 53: `QB9_G` Q6 taught a legal hierarchy Treaty → Convention → Protocol that international law does not recognise (VCLT Art.2(1)(a): a treaty “whatever its particular designation”), defined a Protocol as only an amendment, claimed every Protocol needs its own ratification (disproved by MARPOL Protocol of 1978 Art.IV(1)) and dismissed an IMO Resolution as committee guidance (SOLAS Art.VIII(b) amendments are adopted BY MSC resolution). Q3’s instrument ladder carried the same resolution defect. All three `QB9_G_CheatSheet` copies reconciled. Definition-source rule recorded once at `Claude skill/miw-correction-workflow_SKILL.md` §2a. | Founder review while studying from the MIW study roadmap |
 
 ### 50. A truncated citation is worse than no citation
 
@@ -1206,3 +1207,59 @@ own reusable lesson:
   weather-deck monitors (20.6.2), structural fire protection (20.5) and decision-making
   signage (20.7) are all passenger-ship duties. This was found by an **independent
   clean-context review**, not by the producing pass, which had read the same PDF.
+
+### 53. An instrument’s TITLE is not a legal rank — and “resolution” is not a synonym for “non-binding”
+
+`QB9_G.html` Q6 answered “Convention vs Protocol vs Treaty” with a hierarchy it printed under
+its own heading: **Treaty → Convention → Protocol**. International law recognises no such
+ladder. **VCLT 1969, Art.2(1)(a)** defines a treaty as *“an international agreement concluded
+between States in written form and governed by international law, whether embodied in a
+single instrument or in two or more related instruments and whatever its particular
+designation”*. That closing phrase is the whole point: “Convention” and “Protocol” are **titles
+reflecting treaty practice**, not tiers. A Convention is a treaty; a Protocol is a treaty.
+
+Four defects travelled with the hierarchy, all in the same card, and three of them were
+also in `QB9_G_CheatSheet.html` — the diagram caption, the Convention-vs-Protocol confusable
+box and the Q554 flip-card answer. **Candidates memorise the cheat sheet first, so a
+corrected answer beside a stale mnemonic still fails.**
+
+* **A Protocol is not by definition an amendment.** The UN Treaty Collection records
+  protocols of signature, optional protocols, protocols based on a framework treaty,
+  protocols to amend, and protocols as a supplementary treaty. “Major structural
+  add-on/update” was MIW shorthand presented as terminology.
+* **“A Protocol requires its own separate ratification” is false as a universal.** VCLT
+  Art.11 allows consent by signature, exchange of instruments, ratification, acceptance,
+  approval, accession, *or any other means if so agreed*, and the **instrument’s own final
+  clauses** decide which. The card’s own flagship example disproves it: **MARPOL Protocol
+  of 1978, Art.IV(1)** lets a State become a Party by signature without reservation as to
+  ratification, by signature followed by ratification/acceptance/approval, **or by
+  accession**.
+* **There is no universal rule that the parent Convention must be ratified first.** The
+  card said “generally no”. Compare, inside one regime: the **1978 Protocol** is open to
+  States generally and its Art.I(1) binds Parties to give effect to the 1973 Convention as
+  modified, while the **1997 Protocol, Art.5(1)** provides that *only* Contracting States
+  to the 1978 Protocol may become Parties to it. Same convention, opposite answers —
+  read the final clauses.
+* **“An IMO Resolution is committee guidance without independent treaty force” is wrong.**
+  A resolution is a formal decision of an IMO organ and the word alone settles nothing.
+  Amendments to the SOLAS annex are **adopted by MSC resolution** under **SOLAS
+  Art.VIII(b)** and bind Contracting Governments through tacit acceptance; **MSC.48(66)**
+  adopted the LSA Code and **MSC.47(66)** adopted the SOLAS chapter III amendments that
+  made it mandatory on or after 1 July 1998. Only *some* resolutions stay recommendatory —
+  `QB1_A` Q25 (A.987(24)) and `QB2_G` Q1 (A.1048(27)) already scoped that correctly and
+  were **not** changed.
+
+The same wrong rung was live in `QB9_G.html` **Q3**, whose instrument ladder read
+“Guideline, circular or resolution — recommendatory”. Q3 and Q6 are now consistent, and Q3
+states explicitly that its ladder ranks instruments by *what makes them binding on you*,
+not by legal class.
+
+**The governing rule this produced** is recorded once, at
+`Claude skill/miw-correction-workflow_SKILL.md` §2a: official definition first, MIW
+explanation second, clearly labelled as MIW’s own wording, never universalised beyond the
+instrument’s scope. Q6 v1.0→v1.1, Q3 v1.0→v1.1.
+
+GREP: SKIP — the corrected text deliberately quotes the wording it rejects
+(“Treaty → Convention → Protocol”, “always requires ratification”, “resolution” beside
+“recommendatory”) so a phrase scan can only ever fire on the fix. Verify by reading the
+sentence: every mention must be **negated or quoted**.

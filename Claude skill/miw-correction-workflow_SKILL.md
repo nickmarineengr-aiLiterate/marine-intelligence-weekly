@@ -90,6 +90,50 @@ IACS UR/UI > class rules > DG Shipping/DGMA > manufacturer docs > ISO/IEC).
 State confidence level ([Certain]/[Likely]/[Speculative]) when reporting
 back to Nixon.
 
+## 2a. Regulatory / legal definition source rule
+
+**This is the single in-repo home for how a regulatory or legal claim is SOURCED and
+PRESENTED in candidate-facing content. Do not copy it into another document — add a
+pointer instead.**
+
+*Governance note.* The declared canonical owner of QB **content** rules is the
+`miw-qb-production` skill, whose §7 already carries the citation-priority order — but that
+skill is not version-controlled in this repository. The rule therefore lives here, beside
+§2’s reference-priority order, which it extends. If `miw-qb-production` is ever brought
+into the repo, move this section there and leave a pointer, rather than keeping two copies.
+
+Added 2026-08-25 after `QB9_G` Q6 was found teaching a Treaty → Convention → Protocol
+hierarchy that international law does not recognise (`known_traps.md` entry 53).
+
+1. **Use the express definition in the governing instrument** where the instrument defines
+   the term itself. Quote enough of it to preserve the legal meaning — the operative
+   qualifier is often the part that gets dropped. VCLT Art.2(1)(a)’s *“whatever its
+   particular designation”* WAS the answer to Q6, and the card omitted it.
+2. **If the instrument does not define it, use the strongest official interpretative,
+   depositary or issuing-body source** — IMO, UN Treaty Collection / UN Office of Legal
+   Affairs, ILO, IACS, the competent national authority, or the instrument’s own official
+   explanatory material. Never a blog, a training-note site or Wikipedia where first-party
+   authority exists.
+3. **The MIW plain-language explanation comes AFTER the official definition and is visibly
+   secondary.** Give it its own heading, and say in the heading that it is MIW’s wording.
+4. **Never present MIW-created shorthand, a mnemonic or a memory line as an official
+   definition.** A memory line is what candidates actually retain, so it must be at least
+   as accurate as the full answer — and it must never encode a structure the law does not
+   have.
+5. **Preserve instrument-specific scope. Do not universalise.** A definition given “for the
+   purposes of the present Convention” is scoped to it. Where final clauses differ between
+   instruments in the same regime, say so and cite both (MARPOL Protocol of 1978 Art.IV(1)
+   is open to States generally; the 1997 Protocol, Art.5(1), only to Contracting States to
+   the 1978 Protocol).
+6. **A word is not a legal status.** “Convention”, “Protocol”, “Resolution”, “Code”,
+   “Circular” and “Guideline” describe practice and provenance. What binds is whether a
+   regulation, in an instrument in force for the flag State, makes that text mandatory. Ask
+   what an instrument *does*, never what it is *called*.
+
+**Cheat sheets, 15-second answers, diagram captions, SVG labels and memory lines are in
+scope.** A corrected main paragraph beside a stale mnemonic still fails. Scope the search
+per §3 across every candidate-facing copy, not only the file that was flagged.
+
 ## 3. Scope the search — find every instance of the same conflation
 
 A single wrong claim is rarely isolated. Search the whole
