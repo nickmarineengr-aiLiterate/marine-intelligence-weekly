@@ -785,10 +785,14 @@ question identity (the July/v26 files are presentation references only and live
 git-ignored under `docs/MIW-master-Question-bank/`, as does every generated one).
 
 ```
-PYTHONIOENCODING=utf-8 python tools/oral/export_question_bank_xlsx.py --candidate-interim
-PYTHONIOENCODING=utf-8 python tools/oral/validate_question_bank_xlsx.py docs/MIW-master-Question-bank/MIW_August2026_QuestionBank_INTERIM.xlsx --interim
+PYTHONIOENCODING=utf-8 python tools/oral/export_question_bank_xlsx.py --candidate-share --month 2026-08
+PYTHONIOENCODING=utf-8 python tools/oral/validate_question_bank_xlsx.py docs/MIW-master-Question-bank/MIW_MEO_Class1_Oral_QuestionBank_August_2026.xlsx --month 2026-08
 PYTHONIOENCODING=utf-8 python tools/oral/test_question_bank_xlsx.py
 ```
+
+`--candidate-share` is the group-facing product; `--candidate-interim` and
+`--working-master` still write the internal INTERIM and WORKING copies from the
+same model. Regenerate all three together so the on-disk set never disagrees.
 
 Pipeline: `qb_content_index.json` (identity + text, proven fresh by
 `build_qb_content_index.py --check`) + `EXAMINER_INDEX_SNAPSHOT.json` (the same
@@ -800,10 +804,45 @@ they are empty and unrendered until that mapper is production-authorised — the
 exporter must never populate them. "Topic / Category" is the current production
 QB page title. Examiner cells are names only (tier/evidence stay internal).
 
-Counting semantics (do not mix): 721 canonical questions; 86 question-bearing
-pages; 960 examiner relationships = distinct (examiner, question) pairs across
-7 examiners, covering 675 questions; the older 862/6 figure is the pre-Release-A
+Counting semantics (do not mix): 738 canonical questions; 86 question-bearing
+pages; 958 examiner relationships = distinct (examiner, question) pairs across
+7 examiners; the older 862/6 figure is the pre-Release-A
 `CURRENT_EXAMINER_RELATIONSHIPS.jsonl` before John and the 103 Release-A rows.
+
+### 13.1 The monthly "New & Updated" sheet
+
+The share workbook carries a `<Month> <Year> - New & Updated` sheet as sheet 2.
+Its rows come from `tools/oral/oral_monthly.py`, never from curation. Three rules
+carry all the weight, and each exists because the obvious alternative is wrong:
+
+* **Date the question, not the anchor.** Identity is file+anchor and anchors get
+  RENUMBERED, so "first commit carrying this anchor id" invents new cards out of
+  renumbered old ones — on August 2026 it claimed 109 new anchors against 50
+  governed `NEW_CARD` actions. The module instead reconstructs the corpus from
+  the git tree at the last commit BEFORE the month and compares wording.
+* **Occupancy beats wording.** A card sitting on an anchor the baseline already
+  carried existed then, whatever its text now says, so it is capped at UPDATED.
+  This demoted five August cards (the four QB2_C slots whose July q-text was
+  answer scaffolding, plus one enriched leadership question just under the
+  similarity floor). Over-claiming "new" is the dangerous direction in a
+  marketing artefact; this rule can only ever under-claim.
+* **Two evidence streams, cross-checked.** Every manifest `NEW_CARD` action must
+  land in the wording-derived NEW set or the export FAILS. The manifest regime
+  only began 2026-08-19, so a month may legitimately hold new cards no manifest
+  governs (the eight QB pages of 2026-08-04) — but never a governed creation the
+  wording test disputes.
+
+A manifest action kind that is in neither `CREATE_KINDS` nor `UPDATE_KINDS` is a
+hard failure: a new governance word must be classified deliberately, not drop
+silently out of the candidate-facing view. Derived-index regeneration, CSS/TOC
+repair and validator-only edits are deliberately NOT updates.
+
+`validate_question_bank_xlsx.py --month YYYY-MM` re-derives the projection
+INDEPENDENTLY rather than reading the exporter's answer back, and
+`test_question_bank_xlsx.py` mutation-proves each month control (deleted row,
+flipped status, duplicate, phantom id, wrong link, inflated headline, buried
+sheet). August 2026 baseline: `2c0fd8b` (2026-07-31, 627 questions) → 738 today,
+111 NEW + 71 UPDATED = 182 rows.
 
 Exporting changes no product content, so it does NOT trigger the full release
 runner. The protected names (`MEO_QB_master_v26.xlsx`,

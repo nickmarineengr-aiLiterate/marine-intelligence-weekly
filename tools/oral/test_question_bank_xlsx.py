@@ -60,6 +60,26 @@ def refused(name, path, must_mention):
           "rc=%d, wanted %r in output; got: %s" % (rc, must_mention, out.strip().splitlines()[:2]))
 
 
+MONTH = X.DEFAULT_MONTH
+
+
+def validate_month(path):
+    buf = io.StringIO()
+    with redirect_stdout(buf):
+        rc = V.main([str(path), "--month", MONTH])
+    return rc, buf.getvalue()
+
+
+def month_refused(name, path, must_mention):
+    """A month control only counts as a control if a deliberate corruption of the
+    thing it names makes it fail. Every case below edits ONE cell of a valid
+    share workbook, so a pass here cannot come from the projection agreeing with
+    itself."""
+    rc, out = validate_month(path)
+    check(name, rc != 0 and must_mention in out,
+          "rc=%d, wanted %r in output; got: %s" % (rc, must_mention, out.strip().splitlines()[:2]))
+
+
 def main():
     scratch = Path(tempfile.mkdtemp(prefix="qbxlsx_"))
     try:
@@ -196,6 +216,82 @@ def main():
         check("syllabus_fields_reserved_not_rendered",
               all(all(r[k] == "" for k in X.SYLLABUS_FIELDS) for r in rows)
               and not any(h in [c for _, c, _ in X.MAIN_COLUMNS] for h in X.SYLLABUS_FIELDS))
+
+        # ---- monthly New & Updated view -----------------------------------
+        m_meta, m_rows = X.build_export_model(check_fresh=False, month=MONTH)
+        share = scratch / "share.xlsx"
+        X.write_workbook(X.render_workbook(m_meta, m_rows, "test-time"), share)
+        sheet = m_meta["month_sheet"]
+        hrow = X.MONTH_HEADER_ROW
+        mcols = [h for h, _, _ in X.MONTH_COLUMNS]
+        c_status = mcols.index("Status") + 1
+        c_id = mcols.index("MIW Question ID") + 1
+        c_link = mcols.index("MIW Answer Link") + 1
+
+        rc, out = validate_month(share)
+        check("month/validator_passes", rc == 0, " | ".join(out.strip().splitlines()[-2:]))
+
+        n_new = sum(1 for r in m_rows if r["month_status"] == "NEW")
+        n_upd = sum(1 for r in m_rows if r["month_status"] == "UPDATED")
+        check("month/one_row_per_card",
+              n_new + n_upd == m_meta["month_rows"] and m_meta["month_rows"] > 0
+              and len({r["id"] for r in m_rows if r["month_status"]}) == m_meta["month_rows"],
+              "NEW %d UPDATED %d rows %d" % (n_new, n_upd, m_meta["month_rows"]))
+        check("month/status_is_governed",
+              all(r["month_evidence"] for r in m_rows if r["month_status"])
+              and not any(r["month_evidence"] for r in m_rows if not r["month_status"]))
+        check("month/evidence_never_rendered",
+              not any("month_evidence" in str(c.value or "")
+                      or str(r["month_evidence"]) == str(c.value or "")
+                      for r in m_rows[:1]
+                      for s in openpyxl.load_workbook(share).worksheets
+                      for row in s.iter_rows() for c in row))
+        check("month/sheet_is_second", openpyxl.load_workbook(share).sheetnames[1] == sheet,
+              ", ".join(openpyxl.load_workbook(share).sheetnames[:3]))
+
+        def mutate(name, fn):
+            p = scratch / (name + ".xlsx")
+            shutil.copy(share, p)
+            wb = openpyxl.load_workbook(p)
+            fn(wb)
+            wb.save(p)
+            return p
+
+        def del_row(wb):
+            wb[sheet].delete_rows(hrow + 1)
+        month_refused("month/deleted_row_refused", mutate("m_del", del_row), "month/complete")
+
+        def flip(wb):
+            c = wb[sheet].cell(row=hrow + 1, column=c_status)
+            c.value = "UPDATED" if c.value == "NEW" else "NEW"
+        month_refused("month/flipped_status_refused", mutate("m_flip", flip), "month/status")
+
+        def dup(wb):
+            ws2 = wb[sheet]
+            ws2.cell(row=hrow + 2, column=c_id).value = ws2.cell(row=hrow + 1, column=c_id).value
+        month_refused("month/duplicate_row_refused", mutate("m_dup", dup), "month/duplicates")
+
+        def phantom(wb):
+            wb[sheet].cell(row=hrow + 1, column=c_id).value = "QB99_Z#q1"
+        month_refused("month/phantom_row_refused", mutate("m_ph", phantom), "month/provenance")
+
+        def badlink(wb):
+            wb[sheet].cell(row=hrow + 1, column=c_link).value = \
+                "https://marineintelligenceweekly.com/meoclass1/QB1_A.html#q9999"
+        month_refused("month/wrong_link_refused", mutate("m_link", badlink), "month/rows")
+
+        def headline(wb):
+            ws2 = wb[sheet]
+            for r in range(1, hrow):
+                v = str(ws2.cell(row=r, column=1).value or "")
+                if "New this month:" in v:
+                    ws2.cell(row=r, column=1).value = v.replace(
+                        "New this month: %d" % n_new, "New this month: %d" % (n_new + 40))
+        month_refused("month/inflated_count_refused", mutate("m_head", headline), "month/summary")
+
+        def demote(wb):
+            wb.move_sheet(sheet, offset=3)
+        month_refused("month/buried_sheet_refused", mutate("m_move", demote), "month/sheet")
 
         # CLI smoke: --out into scratch
         r = subprocess.run([sys.executable, str(HERE / "export_question_bank_xlsx.py"),
