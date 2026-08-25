@@ -232,8 +232,8 @@
     },
     {
       "occurrence_id": "AUG-0015",
-      "classification": "GENUINE_NEW_QUESTION",
-      "matched_question_id": null,
+      "classification": "FOLLOWUP",
+      "matched_question_id": "QB2_F#q3",
       "evidence": "Regex 'ro-ro|roro|ro ro' returns 0 hits across 721 cards. Every high-scoring candidate was a CONTAINER amendments card (QB1_F#q20, QB8_B#q6) reached purely through the shared phrase 'latest amendments'. RoRo is absent from the bank.",
       "ask": "RoRo vessel latest amendments, with cross questions.",
       "authoring_caution": "Must distinguish in-force from adopted-not-yet-in-force. SOLAS II-2 amendments on new-energy-carrying vehicles and the RoRo fire-safety package have staggered application dates.",
@@ -254,7 +254,10 @@
           "note": "The rejected cards were surfaced by the similarity matcher, not by this pattern, which returns nothing."
         }
       ],
-      "negative_search_provenance": "Structured form added 2026-08-24 during batch-2 reconciliation. The classification and target are unchanged from batch 1; every pattern was re-run against the live 721 and returned what batch 1 recorded."
+      "negative_search_provenance": "Structured form added 2026-08-24 during batch-2 reconciliation. The classification and target are unchanged from batch 1; every pattern was re-run against the live 721 and returned what batch 1 recorded.",
+      "reclassified_2026_08_25": "GENUINE_NEW_QUESTION -> FOLLOWUP, and the reason is a change in the CORPUS, not a change of mind about the evidence. When this was adjudicated, the negative_search below was correct on its own terms: 'ro-ro|roro|ro ro' returned 0 hits across 721 cards, and no card owned the ask. It stayed GENUINE_NEW_QUESTION through batch G3, which held it rather than producing it, because its only sensible home - QB2_F#q3 - credited the ro-ro fire-safety package to MSC.532(107) and a card cannot be enriched into a contradiction it already contains. Correction CORR-G1-010-RORO-ATTRIBUTION-20260825 removed that contradiction and, in doing so, made QB2_F#q3 the genuine owner of the SOLAS II-2/20 package under MSC.550(108) and MSC.555(108). The ask is therefore an added limb on an existing card, which is what FOLLOWUP means here, and batch G4 produces an enrichment rather than a 739th card. The original classification is left visible in this record rather than erased.",
+      "negative_search_note_2026_08_25": "The structured negative_search below is retained UNCHANGED. It is not amended to fit the new classification: it is the accurate record of a corpus in which ro-ro really did return nothing, and of the fact that the content existed but was scattered and misattributed. Rewriting it would destroy the trace of how a correct search over a defective card produces a correct-looking wrong answer.",
+      "owner_note_2026_08_25": "REACHABILITY IS A SEPARATE PROBLEM AND IS NOT CLOSED BY THIS. The corrected card now answers the ask in full, and 'Ro-Ro' was added to its visible tag string so a candidate searching the page can reach it. But the governed question text is still 'What are the latest SOLAS Chapter II amendments and their key changes?', so a corpus-wide q-text search for 'ro-ro' still returns nothing, and OPEN-G1-011 means the in-page search cannot see answer bodies at all. The ask is OWNED; it is not yet as FINDABLE as it should be, and that is OPEN-G1-011's job, not this record's."
     },
     {
       "occurrence_id": "AUG-0016",

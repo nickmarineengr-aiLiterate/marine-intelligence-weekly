@@ -1,0 +1,48 @@
+{
+ "review_id": "G4-REVIEW-20260825",
+ "record_class": "BATCH_REVIEW",
+ "batch_id": "G4",
+ "date": "2026-08-25",
+ "independence": "INDEPENDENT_CLEAN_CONTEXT",
+ "independence_caveat": "TWO reviewers, run in sequence, each in a clean context. Each was given exactly four things: the governed question text, the full plain-text of the card as it would ship, the extracted text of the primary IMO resolutions, and a rubric. Each was explicitly barred from the producing reasoning, the batch manifest, the correction record, AUGUST2026_OPEN_ITEMS.json, the G3 freeze record and the commit history, and neither was told what the defect was, what had been changed, or what verdict was expected. The second reviewer was not shown the first reviewer's report - it was given the fixed card cold, which is the only way a defect introduced BY a fix can be found.",
+ "scope": "The single produced action of batch G4 - the AUG-0015 ro-ro enrichment of QB2_F#q3. The card is shared with correction CORR-G1-010-RORO-ATTRIBUTION-20260825, and both reviewers audited the whole card rather than the enrichment limb alone, because a candidate reads the card and not the manifest that owns each paragraph.",
+ "outcome": "The enrichment required fixes in both rounds and was published only after the second round. Pass 1 returned FAIL_APPLICATION with five material findings, of which the structural one was that SOLAS II-2/20 states application in each SECTION CHAPEAU rather than beside the requirement - so summarising the requirements had given cargo ships the entire passenger-ship package. Pass 2 returned PASS_WITH_FIX with two material findings, one of which was a defect the pass-1 FIX had introduced. Eleven further minor findings were adopted across the two rounds; four were verified and deliberately not adopted, and are listed below so that the decision is visible rather than silent.",
+ "producer_verification_of_findings": "No finding was applied on a reviewer's word. Every one was re-read in the resolution text before the edit was made: the 20.4.1 chapeau confining 4.1.1-4.1.4 to passenger ships and 4.1.5 to cargo ships; the section 5, 6.1 and 7 chapeaux; FSS 7/2.5's ro-ro-passenger-ship-only chapeau and its 'combined capacity of all fixed monitors' wording; II-2/10.11.2.1, which requires delivery to shore reception facilities and imposes no logging duty; and 20.5.2.1 versus 20.5.3.3, which is the pair the pass-1 fix had conflated. Two findings sent the producer back to primary sources it had not yet pulled: MSC.549(108) was downloaded from the IMO CDN and read to confirm that it amends SOLAS II-1/3-4 - a chapter II amendment - with entry into force 1 January 2028, and MSC.555(108)'s FSS chapter 9 was re-read to confirm new paragraph 2.5.1.4 on smoke-detector disconnection during cargo work.",
+ "cards": [
+  {
+   "action_id": "G4-001",
+   "card": "QB2_F#q3",
+   "verdict": "PASS",
+   "independent_verdict_pass_1": "FAIL_APPLICATION",
+   "independent_verdict_pass_2": "PASS_WITH_FIX",
+   "independent_fix_applied": true,
+   "verdict_basis": "PASS after both rounds of fixes were applied and re-verified against the resolution text. The second reviewer confirmed resolution identity, adoption dates, entry-into-force dates, the four-population split, and every figure it checked; its two material findings were fixed before publication.",
+   "authority_checked": [
+    "MSC.550(108) annex read in full. Confirmed: reg. 20 retitled; 20.4.1 chapeau splits passenger (4.1.1-4.1.4) from cargo (4.1.5); 20.2.1.3 names exactly 20.4.1.6, 20.4.4 and 20.6.2.3 for existing passenger ships; the section 4, 4.4 and 6.1 chapeaux each independently set first survey on or after 1 January 2028; 20.4.4.2 gives seven days new / 24 hours existing on ro-ro passenger ships; 20.6.2.2 sizes drainage at 125%; 20.6.2.3 sets 1,250 L/min per monitor for the retrofit.",
+    "MSC.555(108) annex read in full. Confirmed FSS 7/2.5 applies to ro-ro passenger ships built on/after 1 Jan 2026, its combined 2.0 L/min per m² and 1,250 L/min floor, the 75% throw rule and the 5.0 L/min per m² nozzles; and FSS 9/2.5.1.4 on smoke-detector disconnection during loading and unloading with automatic reset, central-unit indication, and no disconnection of heat detection or manual call points.",
+    "MSC.532(107) annex read in full. Confirmed it reaches neither II-2/20 nor II-2/7, and confirmed II-1/2.33's two-limb definition of 'installed on or after 1 January 2026', the 3-13.1.2 exclusions and the 3-13.1.3 discretion below 1,000 kg SWL.",
+    "MSC.1/Circ.1694 (4 July 2025) and IACS UI SC309 verified externally as the source of the 10 mg/kg (0.001% by weight) figure, and as directing verification through manufacturers' declarations and laboratory test reports rather than through any log entry.",
+    "MSC.549(108) pulled from the IMO CDN and read: new SOLAS II-1/3-4 section 2, emergency towing arrangements on ships other than tankers of not less than 20,000 GT constructed on or after 1 January 2028, entering into force 1 January 2028.",
+    "FINDING (pass 1, MATERIAL): the card gave cargo ships the passenger-ship detection package. 20.4.1's chapeau confines 4.1.1-4.1.4 to passenger ships; 4.1.5 imports no individual identifiability, no smoke-and-heat mandate and no deluge-section matching. Rewritten as separate passenger and cargo limbs.",
+    "FINDING (pass 1, MATERIAL): video monitoring, weather-deck monitors, structural fire protection and decision-making signage were stated unqualified. All four are passenger-ship duties, and 20.6.2.1/.2 are ro-ro-passenger-ship duties. Rewritten, and the 'who has to do what' section rebuilt as four populations.",
+    "FINDING (pass 1, MATERIAL): FSS 7/2.5 figures were quoted as general weather-deck numbers, and Key Numbers dropped 'combined' from the 2.0 L/min per m² aggregate. Both corrected, with the note that FSS 7/2.5 does not reach the existing-ship retrofit.",
+    "FINDING (pass 1, MATERIAL): the CE Oral Tip asserted an official log book entry for PFOS disposal. SOLAS imposes no such duty. Removed, and replaced with the actual evidence route.",
+    "FINDING (pass 1, MATERIAL): new II-2/4.2.1.9 - a chapter II-2 amendment in the same resolution, and the most machinery-side item in the tranche - was absent. Added.",
+    "FINDING (pass 2, MATERIAL, INTRODUCED BY THE PASS-1 FIX): the pass-1 rewrite attached 20.5.3.3's reduction to 3.0 m to the OPENINGS rule of 20.5.2.1. 20.5.3.3 sits inside 20.5.3 and reduces only the weather-deck vehicle-lane distance; 20.5.2.1 has no distance relief, and its only relief is 20.5.2.3's boundary-integrity condition, which does not extend to survival craft or embarkation stations. Rewritten as two explicitly distinct regimes, and Key Numbers corrected.",
+    "FINDING (pass 2, MATERIAL): the currency note dismissed the 1 January 2028 tranche as 'different ground'. MSC.549(108) amends SOLAS II-1/3-4 and is therefore a chapter II item. Rewritten to name it as adopted-but-not-yet-in-force, while keeping the chapter V items excluded.",
+    "FINDINGS (minor, adopted): 20.7 applies only where fixed pressure water-spraying systems are fitted; II-1/2.33's delivery-date limb added; 20.3.1.5 no longer asserted to carry a construction-date limit it does not state; 20.5.1.1's 'A-0' reliefs added; the regulation I/11(c) carve-out and the loose-gear duty restored to II-1/3-13; FSS 9/2.5.1.4 detector disconnection added; MSC.550(108) identified as a chapters II-2 AND V instrument."
+   ],
+   "findings_verified_and_deliberately_not_adopted": [
+    "FSS 7/2.5.1.2 (coverage to superstructure boundaries up to 8.0 m from the vehicle-storage area) and 2.5.5 (supply for the full width and 40 m of length). Both verified correct. Left out because the card is an oral answer and already carries the monitor figures a Chief Engineer is asked for; adding pump-sizing detail turns the answer into a specification.",
+    "FSS table 9.1 detector spacings and the 2.4.2.2.2 linear-heat cable distances. Verified; left out on the same ground.",
+    "Deletion of II-2/9.6.1 with consequential renumbering, and the replacement of II-2/23.6.10 (safety centre). Verified as part of MSC.550(108); left out as having no Chief Engineer content.",
+    "The reviewer's note that 'VDES' could not be confirmed as part of the 1 January 2028 tranche. Rather than assert or deny it, the claim was removed from the card entirely, so nothing unverified ships."
+   ]
+  }
+ ],
+ "batch_level_findings": [
+  "THE SECOND PASS IS NOT A FORMALITY, AND THIS BATCH IS THE PROOF. Pass 2's most serious finding was a defect that pass 1's own fix created: a distance relief moved onto the wrong regulation. A same-context re-check would not have found it, because the producer would have re-read its own summary rather than the two chapeaux. Any future correction to published regulatory content should assume its fix round has introduced something, and should hand the FIXED text to a reader who has not seen the first report.",
+  "APPLICATION LIVES IN THE CHAPEAU. SOLAS II-2/20 states which ships each section catches in the introductory paragraph of that section, not beside the requirement. Reading the requirements carefully and summarising them faithfully still produced a card that was wrong for every cargo ship. When a regulation is structured this way, the summary must be built from the chapeaux first and the requirements second.",
+  "A CORRECT NUMBER CAN CARRY A WRONG CITATION. The 10 mg/kg PFOS threshold is right; SOLAS does not contain it. Attribution has to be checked separately from the value, because a plausible attribution on a correct figure is invisible to any check that only asks whether the number is right."
+ ]
+}
