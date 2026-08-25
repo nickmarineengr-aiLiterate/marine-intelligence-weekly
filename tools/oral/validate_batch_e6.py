@@ -115,7 +115,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from oral_manifest import authorisation_manifest_paths, sibling_owned_cards  # noqa: E402
-from oral_supersession import resolve_authorised_card_state  # noqa: E402
+from oral_supersession import (resolve_authorised_card_state,  # noqa: E402
+                               successor_claim_for)
 
 REPO = Path(__file__).resolve().parents[2]
 MANIFEST = Path(__file__).resolve().parent / "batch_e6_enrichment_manifest.json"
@@ -540,6 +541,7 @@ def main():
     # ---------- limbs, authority, additivity, digests ----------
     limb_bad, auth_bad, add_bad, dig_bad, qual_bad, claim_bad = [], [], [], [], [], []
     hygiene_bad, qtext_bad, timed_bad = [], [], []
+    subjects = {}
     for c in cards:
         aid = c["action_id"]
         lc, bc = live.get(aid), base.get(aid)
@@ -565,10 +567,51 @@ def main():
             if m:
                 claim_bad.append("%s: %r" % (aid, m.group(0)[:70]))
 
-        ops = difflib.SequenceMatcher(None, bc, lc, autojunk=False).get_opcodes()
-        nondd = [t for t, _, _, _, _ in ops if t in ("delete", "replace")]
-        if nondd:
-            add_bad.append("%s has %s" % (aid, nondd))
+        # SUBJECT OF THE CONTENT ASSERTIONS BELOW.
+        #
+        # `edits_purely_additive` and `timed_blocks_unchanged` are claims about
+        # what THIS batch's edit did. They read the live card as a stand-in for
+        # "the state E6 produced", which is right only while that state is live.
+        # Once a later authorised record supersedes it -- as
+        # CORR-DEFN-TREATY-20260825 does for ENRICH-A046 on QB9_G#q3 -- the live
+        # card is the successor's state, and comparing against it would report
+        # the successor's edit as E6's regression. Guard expiry in the "starts
+        # failing" direction (SKILL 7.5b).
+        #
+        # So the check changes SUBJECT rather than standing down: with a
+        # successor declared, E6 compares its baseline against the state E6
+        # itself produced, recovered from the successor's baseline commit and
+        # REFUSED unless it digests to E6's own pin. With no successor this is
+        # byte-for-byte the original comparison, and an arbitrary edit still
+        # fails it under either regime.
+        subject, subject_note = lc, "live"
+        succ = successor_claim_for(manifest=MANIFEST.name, action_id=aid,
+                                   file=c["file"], anchor=c["anchor"],
+                                   directory=MANIFEST.parent)
+        if succ:
+            ref = succ.get("baseline_commit")
+            recovered = None
+            if ref:
+                bt2 = baseline_qb(ref, c["file"])
+                if bt2 is not None:
+                    recovered = canonical_cards(bt2).get(c["anchor"])
+            if recovered is not None and digest(recovered) == c.get("post_edit_digest"):
+                subject, subject_note = recovered, "superseded-by-%s" % succ["manifest"]
+            else:
+                # Fail closed: an unrecoverable or non-matching predecessor
+                # state is not permission to skip the assertion.
+                add_bad.append("%s superseded but its own state is unrecoverable "
+                               "at %s" % (aid, ref or "<no baseline_commit>"))
+                timed_bad.append("%s superseded but its own state is unrecoverable" % aid)
+                subject = None
+        subjects[aid] = subject_note
+
+        if subject is not None:
+            ops = difflib.SequenceMatcher(None, bc, subject,
+                                          autojunk=False).get_opcodes()
+            nondd = [t for t, _, _, _, _ in ops if t in ("delete", "replace")]
+            if nondd:
+                add_bad.append("%s has %s" % (aid, nondd))
 
         if digest(bc) != c.get("pre_edit_digest"):
             dig_bad.append("%s pre" % aid)
@@ -601,7 +644,9 @@ def main():
         def timed(card):
             return re.findall(r"(15-Second Answer.*?</div>|60-Second Answer.*?</div>"
                               r"|oral-box oral-\d+.*?</div>)", card, re.S)
-        if timed(bc) != timed(lc):
+        # Same subject rule as edits_purely_additive above: E6 asserts that ITS
+        # edit left the timed blocks alone, not that nobody may ever touch them.
+        if subject is not None and timed(bc) != timed(subject):
             timed_bad.append(aid)
         if c.get("timed_blocks_changed") is not False:
             timed_bad.append("%s manifest claims a timed change" % aid)

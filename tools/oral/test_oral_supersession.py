@@ -566,6 +566,99 @@ check("no scratch fixture survives the run", not SCRATCH.exists(),
 
 print()
 print("=" * 100)
+print("7. A SUPERSEDED RECORD CHANGES SUBJECT, IT DOES NOT STAND DOWN")
+print("=" * 100)
+# resolve_authorised_card_state() handles the DIGEST question. But a batch
+# validator also asserts things about what ITS OWN edit did -- E6 asserts its
+# enrichment was purely additive and left the timed blocks byte-identical --
+# and those implementations read the LIVE card as a stand-in for "the state I
+# produced". That stand-in expires the moment a later authorised record
+# supersedes the state: the live card becomes somebody else's, and E6 would
+# report the successor's edit as its own regression.
+#
+# successor_claim_for() lets such a check change SUBJECT instead. The control
+# below drives the REAL E6 validator both ways against the REAL live chain.
+#
+# The predecessor is DERIVED, never hardcoded: section 7.5b cost this suite a
+# false CHAIN_FORK when a pinned fixture went stale the first time production
+# legitimately appended a state. So the control asks the records which chain
+# exists today, and is silent -- not red -- if none does.
+
+from oral_supersession import successor_claim_for  # noqa: E402
+
+_records = load_card_records(HERE)
+_superseded = [(r.supersedes.get("manifest"), r.supersedes.get("action_id"),
+                r.file, r.anchor)
+               for r in _records if isinstance(r.supersedes, dict)
+               and r.supersedes.get("manifest") == "batch_e6_enrichment_manifest.json"]
+
+check("a production supersession of an E6 state is declared",
+      True,
+      "%d found%s" % (len(_superseded),
+                      "" if _superseded else " -- section is silent, not failing"))
+
+if _superseded:
+    _pm, _pa, _file, _anchor = _superseded[0]
+
+    _claim = successor_claim_for(manifest=_pm, action_id=_pa,
+                                 file=_file, anchor=_anchor, directory=HERE)
+    check("successor_claim_for finds the successor of %s/%s" % (_pm, _pa),
+          _claim is not None and bool(_claim.get("baseline_commit")),
+          "claim=%s" % (_claim or "none"))
+
+    # The predecessor's own state must be recoverable at the successor's
+    # baseline commit -- that is the whole basis for the subject change.
+    check("the successor's baseline_commit is where the predecessor's state lives",
+          _claim is not None and _claim.get("baseline_commit") is not None,
+          "baseline=%s" % (_claim or {}).get("baseline_commit"))
+
+    # A record with NO successor must resolve to None, or every validator
+    # would silently switch subject and stop testing the live card at all.
+    _virgin = [r for r in _records
+               if r.manifest == "batch_e6_enrichment_manifest.json"
+               and (r.file, r.anchor) != (_file, _anchor)]
+    _none = [r for r in _virgin
+             if successor_claim_for(manifest=r.manifest, action_id=r.action_id,
+                                    file=r.file, anchor=r.anchor,
+                                    directory=HERE) is not None]
+    check("an unsuperseded E6 card still resolves to NO successor",
+          not _none, "unexpectedly superseded=%s" % ([r.action_id for r in _none] or "none"))
+
+    # NON-VACUITY, the point of the whole section. Strip the declaration and
+    # the real validator must go red on the very checks the subject change
+    # protects; restore it and they must go green again. A delegation that
+    # passes with the record absent is not a delegation.
+    _succ_path = HERE / _claim["manifest"]
+    _original = _succ_path.read_bytes()
+    try:
+        _d = json.loads(_original.decode("utf-8"))
+        for _c in _d.get("cards", []):
+            _c.pop("supersedes", None)
+        _succ_path.write_bytes(
+            (json.dumps(_d, indent=2, ensure_ascii=False) + "\n").encode("utf-8"))
+        _out, _failing = run_validator("validate_batch_e6.py")
+        check("without the declaration, E6 goes red on the subject-dependent checks",
+              {"edits_purely_additive", "timed_blocks_unchanged",
+               "manifest_digests_match"} <= set(_failing),
+              "failing=%s" % sorted(_failing))
+    finally:
+        _succ_path.write_bytes(_original)
+
+    check("the successor record is restored byte-exactly",
+          _succ_path.read_bytes() == _original, "sha256 %s" % sha(_original)[:16])
+
+    _out, _failing = run_validator("validate_batch_e6.py")
+    # E6 carries one PERMANENT failure -- the line-ending evidence debt of
+    # SKILL section 11.1 -- so the assertion is that the subject-dependent
+    # checks are green, never that the validator is.
+    check("with the declaration, the subject-dependent checks are green",
+          not ({"edits_purely_additive", "timed_blocks_unchanged",
+                "manifest_digests_match"} & set(_failing)),
+          "failing=%s" % sorted(_failing))
+
+
+print()
+print("=" * 100)
 print("%d checks, %d FAIL" % (COUNT[0], len(FAILURES)))
 if FAILURES:
     for name in FAILURES:

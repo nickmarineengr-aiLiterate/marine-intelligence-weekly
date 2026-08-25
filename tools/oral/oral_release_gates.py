@@ -383,6 +383,27 @@ GATES = (
           note="includes the second-pass mutation: prose corrected, REG-BOX left "
                "wrong - the shape that has escaped this repo's corrections before"),
 
+    # Content gates for CORR-DEFN-TREATY-20260825. Third pair of this shape,
+    # and the one that shows why the shape is needed: QB9_G#q6 shipped a legal
+    # HIERARCHY -- Treaty then Convention then Protocol -- under its own
+    # heading, and every digest pin over it was green the whole time, because a
+    # pin asserts "still the authorised bytes" and never "the authorised bytes
+    # state the law correctly".
+    _gate("validate_correction_defntreaty",
+          ["python", "%s/validate_correction_defntreaty.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="asserts the VCLT Art.2(1)(a) foundation, the QUOTED UN Treaty "
+               "Collection terminology, and that no hierarchy, amendment-only "
+               "protocol, universal-ratification or resolution-is-guidance claim "
+               "is ASSERTED anywhere across both cards and the cheat sheet"),
+    _gate("correction_defntreaty_mutate",
+          ["python", "%s/mutate_correction_defntreaty.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1800,
+          historical_39=False, depends_on=("validate_correction_defntreaty",),
+          note="12 mutations, each required to trip its OWN named check; includes "
+               "the cheat-sheet-left-stale case and the MIW-line-relabelled-as-"
+               "official case, both of which escaped the first guard"),
+
     # ---- follow-up authorisation register ---------------------------------
     # Postdates E6, so outside the historical 39, and not held back either.
     #

@@ -487,6 +487,69 @@ def resolve_authorised_card_state(*, manifest, action_id, file, anchor,
                       "superseded by %s, which is live" % terminal.describe(), path)
 
 
+# ------------------------------------------------- superseded-state recovery
+
+
+def successor_claim_for(*, manifest, action_id, file, anchor,
+                        records=None, directory=None) -> dict | None:
+    """The immediate successor that supersedes this record's state, or None.
+
+    WHY A CALLER NEEDS THIS, AND WHY ``resolve_authorised_card_state`` IS NOT
+    ENOUGH
+    ------------------------------------------------------------------------
+    ``resolve_authorised_card_state`` answers the DIGEST question: is my pinned
+    state still the live card, or the ancestor of it?  It was folded into every
+    generation-2 validator's digest check, so no validator gained a check.
+
+    But a batch validator also asserts things about WHAT ITS OWN EDIT DID --
+    E6 asserts its enrichment was purely additive and left the 15s/60s blocks
+    byte-identical.  Those implementations read the LIVE card as a stand-in for
+    "the state I produced".  That stand-in is correct only while the record's
+    state IS live.  The moment a later authorised record supersedes it, the
+    live card is somebody else's state and the assertion silently changes
+    meaning -- it starts testing the successor's edit and reports it as the
+    predecessor's regression.  That is guard expiry in the "starts failing"
+    direction (SKILL section 7.5b), caused by a legitimate change.
+
+    The rule there is: make the check change SUBJECT, do not stand it down.
+    So a superseded record compares against the state IT produced, which the
+    successor's own ``baseline_commit`` names -- the successor's pre-edit tree
+    IS the predecessor's post-edit tree, by the chain-continuity requirement
+    that ``pre_edit_digest == predecessor's post_edit_digest``.
+
+    Returns a dict with ``manifest``, ``action_id`` and ``baseline_commit`` of
+    the successor.  The caller recovers the text at that commit and MUST verify
+    it digests to its own pinned ``post_edit_digest`` before using it -- this
+    function deliberately does not touch git, so the module stays free of
+    subprocess and Windows path handling, and so a caller cannot be handed
+    bytes it never checked.
+    """
+    records = load_card_records(directory) if records is None else records
+    for r in records:
+        claim = r.supersedes
+        if not isinstance(claim, dict):
+            continue
+        if (r.file, r.anchor) != (file, anchor):
+            continue
+        if claim.get("manifest") != manifest or claim.get("action_id") != action_id:
+            continue
+        base = _manifest_baseline_commit(r.manifest, directory)
+        return {"manifest": r.manifest, "action_id": r.action_id,
+                "baseline_commit": base}
+    return None
+
+
+def _manifest_baseline_commit(name, directory=None):
+    for path in authorisation_manifest_paths(directory):
+        if path.name != name:
+            continue
+        try:
+            return json.loads(read_text(path)).get("baseline_commit")
+        except Exception:
+            return None
+    return None
+
+
 # ------------------------------------------------------------------ audit
 
 

@@ -73,10 +73,10 @@ check("determinism is the only held-back phase",
 _correction = [g for g in REG.ALL_GATES if g["category"] == REG.CAT_CORRECTION]
 check("the correction gates are registered",
       sorted(g["id"] for g in _correction)
-      == ["correction_g1_010_mutate", "correction_lsavent_mutate",
-          "corrections_mutate",
-          "validate_correction_g1_010", "validate_correction_lsavent",
-          "validate_corrections"],
+      == ["correction_defntreaty_mutate", "correction_g1_010_mutate",
+          "correction_lsavent_mutate", "corrections_mutate",
+          "validate_correction_defntreaty", "validate_correction_g1_010",
+          "validate_correction_lsavent", "validate_corrections"],
       str(sorted(g["id"] for g in _correction)))
 check("correction gates are post-E6, so not part of the historical 39",
       all(g["historical_39"] is False for g in _correction))
@@ -120,6 +120,7 @@ POST_E6_GATES = [
     "batch_g2_mutate",
     "batch_g3_mutate",
     "batch_g4_mutate",
+    "correction_defntreaty_mutate",
     "correction_g1_010_mutate",
     "correction_lsavent_mutate",
     "corrections_mutate",
@@ -139,6 +140,7 @@ POST_E6_GATES = [
     "validate_batch_g2",
     "validate_batch_g3",
     "validate_batch_g4",
+    "validate_correction_defntreaty",
     "validate_correction_g1_010",
     "validate_correction_lsavent",
     "validate_corrections",
@@ -147,6 +149,7 @@ POST_E6_GATES = [
 POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
                            "batch_g1_mutate", "batch_g2_mutate",
                            "batch_g3_mutate", "batch_g4_mutate",
+                           "correction_defntreaty_mutate",
                            "correction_g1_010_mutate",
                            "correction_lsavent_mutate", "corrections_mutate",
                            "followup_register_mutate"]
