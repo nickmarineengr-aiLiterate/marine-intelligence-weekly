@@ -25,7 +25,14 @@ HERE = pathlib.Path(__file__).resolve().parent
 REPO = HERE.parent.parent
 sys.path.insert(0, str(HERE))
 
-import validate_batch_g1 as G  # noqa: E402
+from oral_bytes import enable_utf8_stdio      # noqa: E402
+import validate_batch_g1 as G                # noqa: E402
+
+# Reach the shared UTF-8 stdio contract directly rather than inheriting it as
+# a side effect of importing validate_batch_g1. The infra control scans this
+# file's SOURCE, and a contract satisfied only at runtime by somebody else's
+# import is exactly the kind of thing that stops being true after a refactor.
+enable_utf8_stdio()
 
 MANIFEST = HERE / "batch_g3_manifest.json"
 REVIEW = (REPO / "meoclass1" / "oral-intelligence" / "examiner-audit"
