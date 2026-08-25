@@ -1,0 +1,48 @@
+{
+ "batch_id": "G4",
+ "title": "August 2026 fresh-intake production - batch G4 (the thirteenth ask, released once its owner stopped contradicting itself)",
+ "kind": "CURRENT_INTAKE_PRODUCTION",
+ "note": "One action, and it keeps the action id G3 gave it. The card entry is G3-013, not G4-001, because that is the action G3 authorised and then held: the schema requires a discharged hold to be matched by a produced action of the same id, which is what stops 'discharged' being a word a manifest can simply assert while nothing was written. AUG-0015 - 'Roro vessel latest amendments and cross questions' - was the single ask batch G3 froze and did not produce. G3 declared it HELD_GOVERNANCE, not for want of evidence or authority: the answer was writable, and G3 verified it. It was held because its only sensible home, QB2_F#q3, credited the same ro-ro requirements to MSC.532(107), and enriching that card would have produced one card stating two different resolutions for one requirement. Correction CORR-G1-010-RORO-ATTRIBUTION-20260825 removed the contradiction, and this batch discharges the hold through `discharges_hold` rather than by editing G3's record - G3 still declares AUG-0015 as held, permanently and truthfully of that batch. THE DIGESTS AND THE CORRECTION. The baseline here is 3a9c9f2, the same baseline the correction declares, and the pre-edit digest is the card as it stood there. That is deliberate and it is worth stating plainly rather than hiding behind two records that each imply sole authorship: the correction and the enrichment are ONE edit. The section of the card that credits the package to MSC.550(108) IS the ro-ro answer; there is no sequence of bytes in which the attribution is fixed and the ro-ro content is absent, short of writing an intermediate card state that would never have shipped and that no reviewer saw. So both records pin the same transition, each declares the scope it authorises, and each names the other. Every statement either record makes about the bytes is true. EXAMINER ATTRIBUTION. AUG-0015 is PANEL_LEVEL_ONLY - Rajappan and Senthil sat the panel, and neither is individually attributed to this question by the candidate. No examiner name was added to the card, relationships stay at 958, and the panel fact stays in the intake store where it belongs. Note that the shared contract's new_cards_name_no_examiner check skips enrichments, so it passes VACUOUSLY here; mutate_batch_g4.py therefore proves the property through the derived examiner index instead, which is the surface that would actually have been corrupted. NO NEW CARD. The bank stays at 738. A second ro-ro card in QB2_F would have duplicated the whole II-2/20 package that q3 now carries, on the same page, which is worse for a candidate than one card that answers the question.",
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_INTAKE_ADJUDICATIONS.json",
+ "authorisation_batch_key": "batches.G4",
+ "authorisation_commit": "a4d64a9",
+ "baseline_commit": "3a9c9f2",
+ "baseline_canonical_questions": 738,
+ "expected_canonical_questions": 738,
+ "expected_question_bearing_files": 86,
+ "expected_examiner_relationships": 958,
+ "expected_examiners": 7,
+ "creates_new_cards": false,
+ "actual_new_card_count": 0,
+ "distinct_target_cards": 1,
+ "examiner_relationship_delta": 0,
+ "discharges_hold": [
+  {
+   "followup_id": "G3-013",
+   "source_occurrence_ids": [
+    "AUG-0015"
+   ],
+   "held_by_manifest": "batch_g3_manifest.json",
+   "held_status": "HELD_GOVERNANCE",
+   "held_blocker": "QB2_F#q3, the only sensible home for the ask, credited the SOLAS II-2/20 vehicle, special category and ro-ro space fire-safety requirements to MSC.532(107). The package is MSC.550(108), with FSS Code amendments in MSC.555(108). Enriching that card would have put two different resolutions for one requirement on a single paid card, and opening a second card in the same file would have put a correct answer beside a wrong one on one page.",
+   "discharged_by": "Correction CORR-G1-010-RORO-ATTRIBUTION-20260825, which re-credited the package across every surface of the card and was verified against the IMO's own resolution PDFs and by two independent clean-context reviews. No G3-specific bypass, no relaxation of any guard, and no special case keyed on this action id or this card.",
+   "held_record_left_intact": "batch_g3_manifest.json still declares AUG-0015 as HELD_GOVERNANCE in held_actions, and AUGUST2026_BATCH_G3_FREEZE.json still records its outcome as HELD with the reasoning that was true when it was written. Neither is rewritten. A manifest that can be edited to close its own holds is a status board, not evidence, and 'was that work ever owed?' would stop being answerable from repository data. Implementation history lives in THIS manifest.",
+   "freeze_provenance": "AUG-0015 appears as ask 7 of 13 in AUGUST2026_BATCH_G3_FREEZE.json, frozen with its question identity settled before any answer was written. No freeze_record field is declared on this manifest, because the shared contract's freeze check is two-sided and would make G4 answerable for the twelve asks G3 produced. The provenance is asserted directly against G3's freeze by validate_batch_g4.py instead."
+  }
+ ],
+ "cards": [
+  {
+   "action_id": "G3-013",
+   "file": "QB2_F.html",
+   "anchor": "q3",
+   "action_kind": "ENRICH_EXISTING",
+   "source_occurrence_ids": [
+    "AUG-0015"
+   ],
+   "topic": "The latest ro-ro amendment package as at August 2026 - SOLAS II-2/20 rewritten by MSC.550(108) with FSS Code support in MSC.555(108), answered by ship-type population rather than as a single set of requirements, because reg. 20 states its application in each section chapeau",
+   "adjudication": "FOLLOWUP",
+   "pre_edit_digest": "8a7b9fbdc5c70e586ab0ad592a40fb04004191b74087360a7e739330d57be410",
+   "post_edit_digest": "541f1e2e6737d9f35be2d0fbebb87f0f42ca4cfa9e36f9083ac33dee8d44bdba"
+  }
+ ]
+}
