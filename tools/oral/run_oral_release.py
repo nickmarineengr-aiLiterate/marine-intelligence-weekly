@@ -411,7 +411,24 @@ def health_findings(text):
         if not line or _HEALTH_NOISE.match(line):
             continue
         # strip a leading timestamp if a report ever carries one per line
-        lines.append(re.sub(r"^\d{2}:\d{2}(:\d{2})?\s+", "", line))
+        line = re.sub(r"^\d{2}:\d{2}(:\d{2})?\s+", "", line)
+
+        # NORMALISE THE REPORT'S OWN COUNT-BEARING HEADERS. These are structure,
+        # not findings, and comparing them verbatim means every legitimate
+        # addition to the corpus shows up as NEW+GONE and blocks the release.
+        # The per-file header is still needed for attribution - finding lines
+        # carry no filename - so it keeps the file and loses the count.
+        line = re.sub(r"^(\s*\u25b6\s*\S+)\s*\(\d+\s+questions?\)\s*$",
+                      r"\1", line)
+        # The disk-vs-manifest line exists to assert that the two AGREE. Keep
+        # that property and drop the absolute numbers, so a real divergence
+        # still changes the line and still fails.
+        m = re.match(r"^\s*Questions found on disk:\s*(\d+)\s*\|\s*"
+                     r"Manifest total:\s*(\d+)\s*$", line)
+        if m:
+            line = ("Questions on disk == manifest total" if m.group(1) == m.group(2)
+                    else "Questions on disk != manifest total")
+        lines.append(line)
     return collections.Counter(lines)
 
 
