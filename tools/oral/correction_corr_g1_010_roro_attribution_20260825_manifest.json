@@ -1,0 +1,168 @@
+{
+ "correction_id": "CORR-G1-010-RORO-ATTRIBUTION-20260825",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "open_items_register",
+ "date": "2026-08-25",
+ "title": "QB2_F#q3 credited the SOLAS II-2/20 ro-ro and vehicle-space fire-safety package to MSC.532(107); it is MSC.550(108) with FSS Code amendments in MSC.555(108), and QB10_B#q1 already said so",
+ "baseline_commit": "3a9c9f2",
+ "governing_commits": [
+  "b4bebf4"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_OPEN_ITEMS.json",
+ "known_traps_entries": [
+  52
+ ],
+ "candidate_claim": "Raised as OPEN-G1-010 by the batch-G3 live-corpus reuse search for AUG-0015, not by a candidate: QB2_F#q3 attributes the ro-ro detection and cargo-control-room alarm requirements to MSC.532(107), while QB10_B#q1 carries the same package correctly under MSC.550(108) and MSC.555(108).",
+ "candidate_verdict": "CORRECT",
+ "rationale": "The open item was right that the attribution was wrong, and understated the defect in one respect and overstated the corpus scope in another. UNDERSTATED: it described the ro-ro half as wrong and the PFOS half as correct. MSC.532(107)'s annex reaches II-1/2, II-1/3-13, II-2/1, II-2/10, V/2, V/19, XIV/2 and XIV/3 - neither II-2/20 nor II-2/7 - so the card's cargo-control-room claim, which belongs to the rewritten II-2/7.5.5, was misattributed on the same terms. OVERSTATED nothing, but the corpus sweep found the wrong attribution nowhere else: the only other candidate-facing carrier of this package, QB10_B#q1, was already correct, and the MSC.532(107) mentions in oralnotes/current-topics-p1.html and archive/issue23.html are lifting-appliance and PFOS references that are correct as they stand. Two further defects were found in the card while correcting it and are fixed in the same record because both sit inside sentences this correction was already rewriting: the 10 mg/kg PFOS threshold was presented as MSC.532(107)'s, when II-2/10.11.2 states an unqualified prohibition and the figure is the MSC.1/Circ.1694 unified interpretation; and the CE Oral Tip asserted an official log book entry for PFOS disposal, a duty SOLAS does not impose.",
+ "note": "SCOPE AND METHOD. Authority was re-established from the IMO's own resolution PDFs - MSC.532(107), MSC.550(108), MSC.555(108) and, for the adopted-not-yet-in-force limb, MSC.549(108) - and not taken from the previous session's report or from class-society summaries. Every occurrence of MSC.532(107) in the oral corpus was classified before any edit: CORRECT_EXISTING_REFERENCE in oralnotes/current-topics-p1.html (lifting appliances, PFOS-free foam) and in archive/issue23.html (II-1/3-13 anchor handling winches); WRONG_RORO_ATTRIBUTION in QB2_F#q3 only. TWO independent clean-context reviews were run, each given only the governed question, the card text and the primary sources, and barred from the producing reasoning, this record and the open item. The first returned FAIL_APPLICATION and the second PASS_WITH_FIX. The second pass earned its place: it caught a MATERIAL defect that the FIRST round of fixes introduced - the 20.5.3.3 reduction to 3.0 m attached to the openings rule of 20.5.2.1, which has no distance relief at all. DELIBERATELY NOT DONE: the per-character q-tag rendering in QB2_F.html (every tag string is split into one span per character, in all six cards) is a pre-existing file-scoped presentation defect and is registered as OPEN-G1-013 rather than repaired for one card; and the FSS 7/2.5 pump-sizing figures (8.0 m coverage beyond the vehicle area, supply for the full width and 40 m of length) and the FSS table 9.1 detector spacings were verified and deliberately left out, because the card is an oral answer and not an amendment chronology.",
+ "authority": [
+  {
+   "source": "IMO Resolution MSC.532(107), adopted 8 June 2023, in force 1 January 2026 (official IMO PDF, read in full)",
+   "clauses": [
+    "Annex amends SOLAS II-1/2 (definitions 30-33), new II-1/3-13, II-2/1 (new 2.10), II-2/10 (new section 11), V/2, V/19 (new 2.12) and XIV/2-3. It amends NEITHER II-2/20 NOR II-2/7.",
+    "II-2/10.11.2.2: 'Use or storage of extinguishing media containing perfluorooctane sulfonic acid (PFOS) shall be prohibited.' No concentration threshold appears anywhere in the regulation.",
+    "II-2/10.11.1: applies to ships constructed on or after 1 January 2026. New II-2/1.2.10: all ships constructed before that date comply with 10.11.2 by the first survey on or after 1 January 2026.",
+    "II-1/2.33 defines 'installed on or after 1 January 2026' in two limbs - any installation date for a ship keel-laid on/after that date, otherwise the contractual or actual delivery date of the equipment to the ship.",
+    "II-1/3-13.2.1 routes lifting appliances to recognised class or equivalent standards; 3-13.2.2 routes anchor handling winches to the Administration on IMO Guidelines. 3-13.2.4 requires existing lifting appliances to comply with 2.3 (SWL marking); 3-13.2.5 does not extend that to anchor handling winches.",
+    "II-1/3-13.1.2 exclusions (MODUs, offshore construction ships, hatch-cover machinery, LSA Code launching appliances) and 3-13.1.3 (Administration discretion below 1,000 kg SWL)."
+   ]
+  },
+  {
+   "source": "IMO Resolution MSC.550(108), adopted 23 May 2024, in force 1 January 2026 (official IMO PDF, read in full)",
+   "clauses": [
+    "Titled 'Amendments to chapters II-2 and V'. Annex paragraph 6 retitles regulation 20 'Protection of vehicle, special category, open and closed ro-ro spaces, and weather decks intended for the carriage of vehicles'.",
+    "Paragraph 4 replaces II-2/7.5.5: for cargo ships constructed on or after 1 January 2026, methods IC, IIC and IIIC each require smoke detection in all control stations and cargo control rooms. Paragraph 3 replaces 7.5.2 for passenger ships carrying more than 36 passengers.",
+    "Paragraph 11, new 20.4.1 chapeau: paragraphs 4.1.1 to 4.1.4 apply ONLY to passenger ships constructed on or after 1 January 2026; 4.1.5 applies to cargo ships constructed on or after that date. The cargo-ship limb imports no individual identifiability, no smoke-and-heat mandate and no deluge-section matching.",
+    "Paragraph 8, new 20.2.1.3: passenger ships constructed before 1 January 2026, including those before 1 July 2012, shall also comply with 20.4.1.6, 20.4.4 and 20.6.2.3.",
+    "Section 4 chapeau, 4.4 chapeau and section 6.1 chapeau each set the deadline for those three regulations at not later than the first survey on or after 1 January 2028.",
+    "20.4.4.2: replay for at least seven days on ro-ro passenger ships constructed on or after 1 January 2026, and 24 hours for existing ro-ro passenger ships constructed before that date.",
+    "Section 6.1 chapeau confines 6.2.1 and 6.2.2 to ro-ro passenger ships constructed on or after 1 January 2026; 20.6.2.2 sizes drainage at not less than 125% of combined monitor and required hose-nozzle capacity; 20.6.2.3 sets 1,250 L/min per monitor for the existing-ship retrofit, reducible by the Administration.",
+    "Section 5 chapeau confines the structural package to passenger ships constructed on or after 1 January 2026. 20.5.2.1 bars openings on decks directly below and within a minimum 6.0 m horizontally, with NO distance relief; 20.5.2.3 gives a boundary-integrity relief instead. 20.5.3.2/5.3.4 set the weather-deck lane distances at more than 6.0 m and more than 12.0 m, and 20.5.3.3 is the ONLY provision permitting a reduction to 3.0 m.",
+    "New section 7 applies to passenger ships constructed on or after 1 January 2026 and only where fixed pressure water-spraying systems are fitted.",
+    "Paragraphs 1-2 insert new II-2/4.2.1.9: oil fuel delivered to and used on board shall not jeopardize the safety of ships or adversely affect machinery performance or be harmful to personnel.",
+    "Paragraph 9 replaces 20.3.1.5 (permanent openings in cargo ships) with no construction-date chapeau of its own."
+   ]
+  },
+  {
+   "source": "IMO Resolution MSC.555(108), adopted 23 May 2024, in force 1 January 2026 (official IMO PDF, read in full)",
+   "clauses": [
+    "FSS Code chapter 7, new 2.5, applies to ro-ro passenger ships constructed on or after 1 January 2026: combined capacity of all fixed monitors at least 2.0 L/min per square metre of protected area and in no case any monitor below 1,250 L/min (2.5.2); 75% of still-air throw (2.5.3); 5.0 L/min per square metre nozzles for uncovered areas (2.5.4).",
+    "FSS Code chapter 9, new 2.5.1.4: on ro-ro passenger ships constructed on or after 1 January 2026 the smoke detector function in special category and ro-ro spaces may be disconnected during loading and unloading, for a predetermined time, automatically reset, with central-unit indication - and disconnection of the heat detection function or manual call points is not permitted."
+   ]
+  },
+  {
+   "source": "IMO MSC.1/Circ.1694, 4 July 2025, and IACS UI SC309",
+   "clauses": [
+    "The unified interpretation of SOLAS II-2/10.11 sets the PFOS concentration limit at 10 mg/kg, equivalent to 0.001% by weight, and directs verification through manufacturers' declarations and laboratory test reports. It creates no logging duty."
+   ],
+   "note": "This is the only source of the 10 mg/kg figure. Stating it as the content of MSC.532(107) is a citation error even though the number is right."
+  },
+  {
+   "source": "IMO Resolution MSC.549(108), adopted 23 May 2024, in force 1 January 2028 (official IMO PDF)",
+   "clauses": [
+    "Amends SOLAS chapter II-1, adding new section 2 to regulation 3-4: emergency towing arrangements on ships other than tankers of not less than 20,000 gross tonnage constructed on or after 1 January 2028."
+   ],
+   "note": "Added because the card's currency note originally dismissed the 2028 tranche as 'different ground'. It is not: this is a chapter II-1 amendment and belongs in a chapter II answer, correctly labelled adopted-but-not-yet-in-force."
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "CORR-G1-010-01",
+   "file": "QB2_F.html",
+   "path": "meoclass1/QB2_F.html",
+   "anchor": "q3",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "8a7b9fbdc5c70e586ab0ad592a40fb04004191b74087360a7e739330d57be410",
+   "post_edit_digest": "541f1e2e6737d9f35be2d0fbebb87f0f42ca4cfa9e36f9083ac33dee8d44bdba",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "The ro-ro and cargo-control-room limbs are re-credited to MSC.550(108) and MSC.555(108) across every surface of the card - 15-Second, 60-Second, body, Key Numbers, Regulatory References, CE Oral Tip and five deep-dive blocks - and the II-2/20 content is restated with its application chapeaux rather than as generic requirements. MSC.532(107) is retained and correctly scoped to PFOS, lifting appliances, inclinometers and the Polar Code, because deleting it would have traded one wrong card for another. The question text, the anchor, the card's position among q1-q6 and the examiner chain are unchanged.",
+   "surfaces_corrected": [
+    "15-Second Answer",
+    "60-Second Answer",
+    "answer-body Chapter II-2 section (split into the two packages)",
+    "answer-body application section (four populations)",
+    "answer-body Chapter II-1 section",
+    "Key Numbers box",
+    "Regulatory References box (three rows corrected, four added)",
+    "CE Oral Tip",
+    "deep-dive CE Relevance",
+    "deep-dive Trap Questions",
+    "deep-dive Common CE Failures",
+    "deep-dive Numbers & Regulations to Memorise",
+    "deep-dive Casualty Link",
+    "q-tags (Ro-Ro added, the card now carries the package)",
+    "q-version footer v1.0 -> v1.1"
+   ]
+  },
+  {
+   "correction_action_id": "CORR-G1-010-02",
+   "file": "QB10_B.html",
+   "path": "meoclass1/QB10_B.html",
+   "anchor": "q1",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "37f579f34d6b7c5447f5d1394c024fd7c3c67b4e3cdaf5b17772051ea629ba4d",
+   "post_edit_digest": "3ecca484502640a396cc33c947649b27544b98fbc10ee6f99b4938c9ebbfd976",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "This card had the RESOLUTION right and one FIGURE wrong. It stated video monitoring 'with 24-hour storage' without qualification; 20.4.4.2 gives at least seven days for ro-ro passenger ships built on or after 1 January 2026 and 24 hours only for existing ones. It also listed the fire patrol for vehicle, special category and ro-ro spaces, where 20.4.3.1 confines it to special category spaces, and left the video monitoring and weather-deck limbs unqualified by ship type. Corrected in one sentence. Included in this record rather than deferred because the corrected QB2_F#q3 now states seven days: leaving QB10_B#q1 at 24 hours would have recreated, in a different figure, exactly the cross-card contradiction this correction exists to close.",
+   "surfaces_corrected": [
+    "answer-body vehicle/ro-ro/weather deck bullet"
+   ]
+  }
+ ],
+ "propagation": [
+  {
+   "path": "meoclass1/oralnotes/current-topics-p1.html",
+   "classification": "CORRECT_EXISTING_REFERENCE",
+   "action": "NO_CHANGE_REQUIRED",
+   "finding": "Two MSC.532(107) references, both to II-1/3-13 lifting appliance overload testing and PFOS-free foam. Correct as they stand; neither touches ro-ro or vehicle spaces."
+  },
+  {
+   "path": "archive/issue23.html",
+   "classification": "CORRECT_EXISTING_REFERENCE",
+   "action": "NO_CHANGE_REQUIRED",
+   "finding": "Magazine archive, three MSC.532(107) references, all to SOLAS II-1/3-13 anchor handling winches. Correct, and outside the oral corpus."
+  },
+  {
+   "path": "meoclass1/pastpapers/**",
+   "classification": "RELATED_BUT_DISTINCT",
+   "action": "NO_CHANGE_REQUIRED",
+   "finding": "The solved-past-paper demand maps already record MSC.550(108) and MSC.555(108) correctly and are sitting-anchored historical documents, not current-law surfaces."
+  },
+  {
+   "path": "docs/MIW-master-Question-bank/*.xlsx",
+   "classification": "INDEX_METADATA",
+   "action": "REGENERATED",
+   "finding": "Both workbooks are question indexes: columns are number, canonical id, question text, topic, question bank, examiners and answer link. Neither has ever carried answer text, so neither carried the wrong attribution. Regenerated so the projection is demonstrably current, and searched for MSC.532/MSC.550/ro-ro strings: zero cells."
+  },
+  {
+   "path": "meoclass1/qb_content_index.json",
+   "classification": "INDEX_METADATA",
+   "action": "NO_CHANGE_REQUIRED",
+   "finding": "The generated index keys on file, anchor and question text, none of which changed. build_qb_content_index.py --check reports the on-disk outputs still match the live derivation."
+  }
+ ],
+ "invariants": {
+  "question_text_unchanged": true,
+  "anchor_unchanged": true,
+  "canonical_question_count_unchanged": true,
+  "examiner_relationships_unchanged": true,
+  "study_taxonomy_unchanged": true,
+  "historical_qi_unchanged": true,
+  "technical_claims_unchanged": false,
+  "citations_unchanged": false,
+  "preceding_corrections_reopened": false,
+  "supersession_required": false,
+  "supersession_rationale": "Neither card is pinned by any earlier correction manifest, and no batch manifest pins them at this baseline. The only other correction touching QB2_F.html is CORR-LSA-LIFEBOAT-VENTILATION-20260822, which declares q6, a different card in the same file. Nothing to descend from, so no supersedes declaration is made rather than a decorative one."
+ },
+ "review": {
+  "independence": "INDEPENDENT_CLEAN_CONTEXT",
+  "passes": 2,
+  "pass_1_verdict": "FAIL_APPLICATION",
+  "pass_1_material_findings": 5,
+  "pass_2_verdict": "PASS_WITH_FIX",
+  "pass_2_material_findings": 2,
+  "note": "Two reviewers, each given only the governed question, the card text and the three resolution extracts, and each barred from the producing reasoning, this record, the open item and the commit history. Pass 1 found that reg. 20's application lives in each section chapeau, so summarising the requirements had given cargo ships the passenger-ship package; it also found an invented official-log-book duty and an omitted II-2/4.2.1.9. Pass 2 found a defect the pass-1 FIX had introduced: 20.5.3.3's reduction to 3.0 m attached to the openings rule of 20.5.2.1, which has no distance relief. Every finding was re-verified by the producer against the resolution text before any edit."
+ }
+}

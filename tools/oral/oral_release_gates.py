@@ -366,6 +366,23 @@ GATES = (
           historical_39=False, depends_on=("validate_correction_lsavent",),
           note="each mutation must trip its OWN named check, never the digest pin"),
 
+    # Content gates for CORR-G1-010-RORO-ATTRIBUTION-20260825. Same shape and
+    # same reason as the lsavent pair above: a digest pin was green for weeks
+    # while QB2_F#q3 credited the SOLAS II-2/20 ro-ro package to MSC.532(107),
+    # because a pin asserts "still the authorised bytes" and never "the
+    # authorised bytes are right".
+    _gate("validate_correction_g1_010",
+          ["python", "%s/validate_correction_g1_010.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="asserts the MSC.550(108) attribution, both application dates and "
+               "the two cards' agreement - none of which a digest pin can see"),
+    _gate("correction_g1_010_mutate",
+          ["python", "%s/mutate_correction_g1_010.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=2400,
+          historical_39=False, depends_on=("validate_correction_g1_010",),
+          note="includes the second-pass mutation: prose corrected, REG-BOX left "
+               "wrong - the shape that has escaped this repo's corrections before"),
+
     # ---- follow-up authorisation register ---------------------------------
     # Postdates E6, so outside the historical 39, and not held back either.
     #
@@ -447,6 +464,16 @@ GATES = (
                       "- so the shared contract now reads that record instead of "
                       "trusting the manifest: a produced ask must have been frozen, "
                       "and a frozen ask must be produced or explicitly held"),
+
+    *_batch_pair("batch_g4", "validate_batch_g4.py", "mutate_batch_g4.py",
+                 1800, historical_39=False,
+                 note="fourth fresh-intake batch, and the first to DISCHARGE an "
+                      "earlier batch's hold: G3 declared AUG-0015 HELD_GOVERNANCE "
+                      "because its only home credited the ro-ro package to the "
+                      "wrong resolution. G3's record is not rewritten - the "
+                      "discharge is declared here, and this validator asserts that "
+                      "the hold it names is real, still stands in G3's manifest, "
+                      "and was frozen before it was ever answered"),
 
     # ---- health: candidate LOCAL vs clean ref ------------------------------
     _gate("qb_health_check",

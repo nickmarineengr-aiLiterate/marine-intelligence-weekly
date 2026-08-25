@@ -312,6 +312,18 @@ CORRECTION_FIELD_CLASSES: dict[str, str] = {
     "authority": INFORMATIONAL,
     "propagation": INFORMATIONAL,
     "invariants": INFORMATIONAL,
+    # Added for CORR-G1-010-RORO-ATTRIBUTION-20260825, on the same terms as the
+    # candidate-reported block above: it is allowed in because that correction's
+    # own content validator ASSERTS it. A correction to published regulatory
+    # content is only authorised once an independent reader who never saw the
+    # producing reasoning has passed it, and that fact has to live in the record
+    # rather than in a commit message, because the commit message is not
+    # something any gate can read. Recording the pass COUNT and each pass's
+    # verdict matters as much as the final verdict: G1-010's second pass caught
+    # a material defect the first round of fixes had introduced, so a record
+    # showing only "reviewed: PASS" would hide the reason the second pass is
+    # mandatory rather than optional.
+    "review": INFORMATIONAL,
 }
 
 CORRECTION_CARD_FIELDS = ("file", "path", "anchor",
