@@ -251,17 +251,32 @@ def main() -> int:
     # permanent property of the corpus: if it ever stops being true, the
     # correction must grow a chain rather than silently overwrite a batch's
     # release evidence. So it is asserted, never assumed.
-    # A PIN is a digest recorded against a card in `cards[]`. It is NOT any
-    # mention of the filename: batch G3 names QB2_F.html#q3 in `held_actions`,
-    # because that is the card it deliberately did NOT publish into, and a
-    # substring search read that as a pin. Read the structure, not the text.
+    # A PIN is a digest recorded against THIS CARD in `cards[]`. Two things it
+    # is not, and each was learned the hard way:
+    #
+    #   * Not any mention of the filename in any field. Batch G3 names
+    #     QB2_F.html#q3 in `held_actions`, because that is the card it
+    #     deliberately did NOT publish into, and a substring search read that
+    #     as a pin.
+    #   * Not a pin on a SIBLING card in the same file. This check compared
+    #     `file.startswith("QB2_F")` and ignored the anchor, so when batch G4
+    #     enriched QB2_F#q3 on 2026-08-25 it turned red and stopped the
+    #     release -- while q6, the card this correction actually owns, was
+    #     untouched by any batch. That is the expiring-guard shape: a guard
+    #     that goes off the next time anybody edits a neighbour.
+    #
+    # Supersession is a per-CARD obligation, because the digest it would have
+    # to descend from is a per-card digest. A batch pinning a different card in
+    # the same file creates no obligation at all. Read the structure, and read
+    # it at the granularity the obligation actually has.
     pinning = []
     for path in sorted(HERE.glob("batch_*_manifest.json")):
         try:
             produced = json.loads(read_text(path)).get("cards") or []
         except Exception:                                          # noqa: BLE001
             continue
-        if any(str(card.get("file", "")).startswith("QB2_F") for card in produced):
+        if any(str(card.get("file", "")) == "QB2_F.html"
+               and card.get("anchor") == ANCHOR for card in produced):
             pinning.append(path.name)
     report("no_batch_pins_this_card", not pinning,
            "pinning=%s -- none, so no supersession chain is required"
