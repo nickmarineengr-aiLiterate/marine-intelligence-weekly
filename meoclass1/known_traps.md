@@ -1113,6 +1113,7 @@ may **liquefy or undergo dynamic separation**.
 | 2026-08-23 | Entry 45: "DG Shipping / DGMA" written as a live pair on QB1_G Q40 — the authority is the Directorate General of Maritime Administration, named in full on first mention with "formerly DG Shipping" as a historical gloss and DGMA as the short form. Document titles carrying the old name ("DG Shipping Engineering Circular 02 of 2024" etc.) deliberately left unchanged; ten further files recorded for a separate scoped pass. | Founder correction following Entry 44 |
 | 2026-08-24 | Entries 46-49: found by an INDEPENDENT clean-context review of the batch-G1 cards, and by a second independent pass over its own fixes. Rescue-boat 5-knot figure attached to recovery instead of launching (QB2_E Q1 and Q3, seven places including an SVG label and the page meta); MARPOL Annex VI Chapter 4 cited in pre-2021 numbering and GBS scope understated (QB1_C Q9); Baltic Dry Index described with a Handysize component eight years after its removal (QB8_A Q3); "TML = 90% of FMP" applied to iron ore fines, which has no FMP, plus a stale Group A definition (QB2_A Q31). Also corrected in the same pass: a revoked VTS resolution A.857(20) and SOLAS V/19-1 mislabelled as AIS (QB9_E Q9, QB3_G Q2), and the Pablo casualty described as producing an oil slick when she was in ballast. | Independent clean-context review, then a second independent pass over the fixes |
 | 2026-08-24 | Entries 50-51: `QB1_G` Q32 carried a truncated Merchant Shipping Notice citation, "1 of 202" -- verified against the DGMA Nautical Wing source as **MS Notice 01 of 2026** (15 Jan 2026, empanelment and retention of salvors, s.255 MS Act 2025) rather than reconstructed from the truncation; and `QB8_A` Q3 shipped raw draft scaffolding to candidates, where two of the four `[cite: 1]` markers turned out to be inside the REAL reg-box rather than the `<pre>` duplicate, so deleting the obvious artefact alone would have left them live. Class-wide artefact scope enumerated and registered as OPEN-G1-008. | OPEN-G1-006 and OPEN-G1-007, closed from the August intake open-items register |
+| 2026-08-25 | Entry 52: `QB2_F` Q3 credited the ro-ro / vehicle / special-category fire-safety package to **MSC.532(107)** across three blocks; the package is **MSC.550(108)** with FSS Code amendments in **MSC.555(108)**, and `QB10_B` Q1 already had it right, so two paid cards disagreed. Root cause is a shared 1 Jan 2026 entry-into-force date, not carelessness - identify a package by the regulation it AMENDS. Two further defects found in the same card: the 10 mg/kg PFOS threshold is MSC.1/Circ.1694, not SOLAS (II-2/10.11.2 is an unqualified prohibition); and SOLAS II-2/20 states application in each section chapeau, so summarising the requirements gave cargo ships the entire passenger-ship package. The last of these was found only by independent clean-context review. | OPEN-G1-010, and the AUG-0015 ro-ro ask it was blocking |
 
 ### 50. A truncated citation is worse than no citation
 
@@ -1158,3 +1159,50 @@ reg-box, which holds a fifth besides, and the duplicated tip matched word for wo
 Scope: these artefact classes are **not confined to that card**. `[cite: N]` appears 65
 times across 4 files, `<p>---</p>` 251 times across 10, and the ASCII box and draft footer
 22 times each across 3. Recorded as OPEN-G1-008 rather than swept.
+
+### 52. Resolutions adopted into the same entry-into-force tranche are not interchangeable — identify a package by what it AMENDS
+
+`QB2_F.html` Q3 credited the ro-ro, vehicle and special-category-space fire-safety
+requirements to **MSC.532(107)**, in its 15-Second block, its 60-Second block and its body.
+That package is **MSC.550(108)**, with the FSS Code amendments in **MSC.555(108)**.
+`QB10_B.html` Q1 had it right, so two paid cards in the bank contradicted each other, and
+`QB10_B`'s own CE Oral Tip says Nair asks for the resolution number verbatim.
+
+The confusion is structural, not careless. **MSC.532(107) and MSC.550(108) share an
+entry-into-force date of 1 January 2026** and both amend SOLAS chapter II-2, so a
+session brief that lists the 2026 tranche puts them side by side. They are different
+packages adopted a year apart:
+
+* **MSC.532(107)**, adopted **8 June 2023** — II-2/10.11 PFOS prohibition (and II-2/1.2.10
+  for existing ships), new II-1/3-13 lifting appliances and anchor handling winches,
+  V/19.2.12 electronic inclinometers, and the chapter XIV Polar Code extension to
+  non-SOLAS ships. It **never touches II-2/20 or II-2/7**.
+* **MSC.550(108)**, adopted **23 May 2024** — II-2/20 rewritten for vehicle, special
+  category, open and closed ro-ro spaces and weather decks intended for vehicles;
+  II-2/7.5.2 and 7.5.5 detection; II-2/4.2.1.9 oil-fuel quality; plus chapter V/31 and
+  V/32 container-loss reporting.
+* **MSC.555(108)**, adopted 23 May 2024 — FSS Code chapters 7 and 9.
+
+**The rule: identify an amendment package by the regulation it amends, not by the
+resolution number nearest to it in a tranche list.** Open the annex and read which
+chapter and regulation headings it contains. A one-minute check of the resolution's own
+table of amended regulations settles it; a plausible neighbouring number does not.
+
+Two further defects were found in the same card while correcting it, and both are their
+own reusable lesson:
+
+* **A threshold can be attributed to the wrong instrument even when the number is right.**
+  The card said MSC.532(107) prohibits PFOS media "above 10 mg/kg". The regulation text is
+  an unqualified prohibition — *"use or storage of extinguishing media containing
+  perfluorooctane sulfonic acid (PFOS) shall be prohibited"*. The **10 mg/kg (0.001% by
+  weight)** figure is the unified interpretation in **MSC.1/Circ.1694** (4 July 2025),
+  mirrored by IACS UI SC309. Quoting a UI figure as if it were treaty text is a citation
+  error even though the number is correct.
+* **Application lives in the chapeau, not in the requirement.** SOLAS II-2/20 states which
+  ships each section catches in the *introductory paragraph* of that section, not beside
+  the requirement. Reading the requirements and summarising them produced a card that gave
+  cargo ships the entire passenger-ship package: 20.4.1's chapeau confines 20.4.1.1–.1.4
+  to passenger ships and gives cargo ships only 20.4.1.5, and video monitoring (20.4.4),
+  weather-deck monitors (20.6.2), structural fire protection (20.5) and decision-making
+  signage (20.7) are all passenger-ship duties. This was found by an **independent
+  clean-context review**, not by the producing pass, which had read the same PDF.
