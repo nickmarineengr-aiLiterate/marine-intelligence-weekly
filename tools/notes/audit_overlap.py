@@ -14,7 +14,34 @@ import glob, io, json, os, re, sys
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 _real_print = print
 
-ROOT = r'F:\marine-intelligence-weekly'
+# FUP-E. This was a hard-coded canonical path, so the tool wrote its report into
+# the canonical repository no matter where it ran. Inside a governed Controller
+# job that is a PROTECTED ROOT, and the write was caught as a filesystem escape
+# that failed the cycle closed (AC-000021 cycle 0). The root now comes from the
+# tool's own location, which is the convention miw_paths.py already documents,
+# and it is correct with NO arguments -- a governed executor cannot pass any,
+# because the Python policy refuses script options.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from miw_paths import REPO_ROOT  # noqa: E402
+
+ROOT = REPO_ROOT
+
+
+def _assert_inside_root(path):
+    """Refuse to write outside the root this tool resolved for itself.
+
+    The hard-coded root was only half the defect; the other half was that
+    nothing checked where the output landed. This makes the escape impossible
+    rather than merely unlikely.
+    """
+    root = os.path.realpath(ROOT)
+    target = os.path.realpath(path)
+    if os.path.commonpath([root, target]) != root:
+        raise SystemExit('REFUSING TO WRITE OUTSIDE THE RESOLVED ROOT\n'
+                         '  root  : %s\n'
+                         '  target: %s' % (root, target))
+
+
 SPECS = os.path.join(ROOT, 'tools', 'notes', 'specs')
 NOTES = os.path.join(ROOT, 'meoclass1', 'oralnotes')
 
@@ -100,6 +127,7 @@ def grep_parts(term, parts):
 
 def main():
     out_path = os.path.join(ROOT, 'tools', 'notes', '_overlap_report.txt')
+    _assert_inside_root(out_path)
     out = open(out_path, 'w', encoding='utf-8', newline='\n')
     def print(*a, **k):
         k['file'] = out

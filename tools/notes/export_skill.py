@@ -1,6 +1,15 @@
 import io, sys, os, shutil, hashlib
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-R = r'F:\marine-intelligence-weekly'
+
+# FUP-E. This was a hard-coded canonical path, and this script WRITES A TRACKED
+# FILE (docs/miw-notes-mgmt_SKILL.md), so running it from any other checkout
+# would have written into the canonical repository -- a Controller PROTECTED
+# ROOT during a governed job. Same defect class as audit_overlap.py, which did
+# escape in AC-000021 cycle 0. The root now comes from this file's own location.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from miw_paths import REPO_ROOT  # noqa: E402
+
+R = REPO_ROOT
 src = os.path.join(R, 'tools', 'notes', 'SKILL.md')
 dst = os.path.join(R, 'docs', 'miw-notes-mgmt_SKILL.md')
 
