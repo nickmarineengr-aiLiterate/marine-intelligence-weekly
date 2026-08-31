@@ -1,200 +1,578 @@
 {
-  "schema": "miw.sources.registry.v1",
-  "generated_by": "hand-authored during production; every entry is added by the run that first verified the source",
-  "what_this_is": "The lane-neutral registry of FIRST-HAND and OFFICIAL sources MIW has verified and intends to reuse. Oral, Written, Notes and Study production all read it. It exists so that a primary source is researched ONCE, verified, preserved, reused, and revalidated when due - rather than rediscovered from the open web on every production run.",
-  "what_this_is_not": "NOT answer authority by itself. Authority derives from ISSUER + VERSION + APPLICABILITY + CURRENTNESS, never from the fact that a file or a record exists locally. A cached entry marked CURRENT_VERIFIED still gets a lightweight supersession check before it is relied on for a current/latest claim.",
-  "why_it_exists": "Recorded from a real production failure. The H1 BMP MS card was authored from a currency record that was itself one edition out of date, because the original check asked 'does BMP MS supersede BMP5?' - a question that returns the launch coverage, answers correctly, and is structurally incapable of revealing that a later edition has since appeared. See query_discipline below.",
-  "query_discipline": {
-    "insufficient": "Does X supersede Y?",
-    "required": "What has the authoritative publisher said MOST RECENTLY about this publication or instrument?",
-    "rule": "Both questions must be asked. The first establishes the transition; only the second establishes the present state. A correct historical transition plus a stale present state reads exactly like current truth and is the failure this registry exists to prevent."
-  },
-  "conventions": {
-    "bytes_storage": "Downloadable official documents are stored beside this file under docs/sources/ and are git-ignored by extension, exactly as docs/study/sources/*.pdf already is. The DIGEST is committed here; the bytes are not, because this repository is public and the instruments are served by their own publishers.",
-    "field_vocabulary": "source_id, source_class, provider, original_url, sha256, bytes and verification_status follow docs/study/historical_source_layer.json (schema miw.study.historical_source_layer.v1) so the two layers read alike.",
-    "access_discipline": "Authentication, access controls, robots restrictions and publisher restrictions are never bypassed. Where bytes cannot lawfully or technically be obtained the entry is ACCESS_LIMITED and preserves metadata, the official URL, the publisher announcement and the specific verified claims - never a pretence that the document was archived.",
-    "history": "A superseded entry is retained and marked, never overwritten. New official truth wins for production; the old record stays as evidence of what was true when."
-  },
-  "currentness_states": {
-    "CURRENT_VERIFIED": "Verified against the issuer's own most recent statement at checked_on.",
-    "CURRENT_BUT_RECHECK_ON_EVENT": "Believed current, but a named event could change it before any date-based review would.",
-    "HISTORICAL_SUPERSEDED": "A later version exists. Retained as predecessor evidence; must not be used as current truth.",
-    "FUTURE_ADOPTED_NOT_EFFECTIVE": "Adopted with a known effective date still ahead; does not govern sittings before it.",
-    "ACCESS_LIMITED": "Identity and issuer verified, but the document's own bytes could not lawfully or technically be retrieved. Claims are limited to what the publisher has stated publicly.",
-    "CURRENTNESS_UNVERIFIED": "Not established. Barred from candidate-facing use."
-  },
-  "revalidation_triggers": [
-    "ON_NEXT_PUBLISHER_VERSION",
-    "ON_RELEVANT_MSC_SESSION",
-    "ON_RELEVANT_MEPC_SESSION",
-    "ON_DGMA_AMENDMENT",
-    "BEFORE_CURRENTNESS_SENSITIVE_USE",
-    "EXPLICIT_DATE"
-  ],
-  "sources": [
+ "schema": "miw.sources.registry.v1",
+ "generated_by": "hand-authored during production; every entry is added by the run that first verified the source",
+ "what_this_is": "The lane-neutral registry of FIRST-HAND and OFFICIAL sources MIW has verified and intends to reuse. Oral, Written, Notes and Study production all read it. It exists so that a primary source is researched ONCE, verified, preserved, reused, and revalidated when due - rather than rediscovered from the open web on every production run.",
+ "what_this_is_not": "NOT answer authority by itself. Authority derives from ISSUER + VERSION + APPLICABILITY + CURRENTNESS, never from the fact that a file or a record exists locally. A cached entry marked CURRENT_VERIFIED still gets a lightweight supersession check before it is relied on for a current/latest claim.",
+ "why_it_exists": "Recorded from a real production failure. The H1 BMP MS card was authored from a currency record that was itself one edition out of date, because the original check asked 'does BMP MS supersede BMP5?' - a question that returns the launch coverage, answers correctly, and is structurally incapable of revealing that a later edition has since appeared. See query_discipline below.",
+ "query_discipline": {
+  "insufficient": "Does X supersede Y?",
+  "required": "What has the authoritative publisher said MOST RECENTLY about this publication or instrument?",
+  "rule": "Both questions must be asked. The first establishes the transition; only the second establishes the present state. A correct historical transition plus a stale present state reads exactly like current truth and is the failure this registry exists to prevent."
+ },
+ "conventions": {
+  "bytes_storage": "Downloadable official documents are stored beside this file under docs/sources/ and are git-ignored by extension, exactly as docs/study/sources/*.pdf already is. The DIGEST is committed here; the bytes are not, because this repository is public and the instruments are served by their own publishers.",
+  "field_vocabulary": "source_id, source_class, provider, original_url, sha256, bytes and verification_status follow docs/study/historical_source_layer.json (schema miw.study.historical_source_layer.v1) so the two layers read alike.",
+  "access_discipline": "Authentication, access controls, robots restrictions and publisher restrictions are never bypassed. Where bytes cannot lawfully or technically be obtained the entry is ACCESS_LIMITED and preserves metadata, the official URL, the publisher announcement and the specific verified claims - never a pretence that the document was archived.",
+  "history": "A superseded entry is retained and marked, never overwritten. New official truth wins for production; the old record stays as evidence of what was true when."
+ },
+ "currentness_states": {
+  "CURRENT_VERIFIED": "Verified against the issuer's own most recent statement at checked_on.",
+  "CURRENT_BUT_RECHECK_ON_EVENT": "Believed current, but a named event could change it before any date-based review would.",
+  "HISTORICAL_SUPERSEDED": "A later version exists. Retained as predecessor evidence; must not be used as current truth.",
+  "FUTURE_ADOPTED_NOT_EFFECTIVE": "Adopted with a known effective date still ahead; does not govern sittings before it.",
+  "ACCESS_LIMITED": "Identity and issuer verified, but the document's own bytes could not lawfully or technically be retrieved. Claims are limited to what the publisher has stated publicly.",
+  "CURRENTNESS_UNVERIFIED": "Not established. Barred from candidate-facing use."
+ },
+ "revalidation_triggers": [
+  "ON_NEXT_PUBLISHER_VERSION",
+  "ON_RELEVANT_MSC_SESSION",
+  "ON_RELEVANT_MEPC_SESSION",
+  "ON_DGMA_AMENDMENT",
+  "BEFORE_CURRENTNESS_SENSITIVE_USE",
+  "EXPLICIT_DATE"
+ ],
+ "sources": [
+  {
+   "source_id": "SRC-BMPMS-2026",
+   "title": "Best Management Practices for Maritime Security (BMP MS)",
+   "edition": "2026 edition; one secondary trade source designates it Version 2",
+   "issuing_authority": "BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO and OCIMF",
+   "issuing_authority_note": "Six bodies, taken from co-publisher INTERCARGO's own current BMP page, which names 'BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO & OCIMF supported by over forty maritime stakeholders'. One SECONDARY source (MaritimeCyprus, 2 August 2026) additionally names CLIA for the 2026 edition, giving seven. That addition is NOT corroborated by any co-publisher page read here, so the six-body list is what MIW states and the CLIA claim is recorded as unverified rather than adopted.",
+   "source_class": "OFFICIAL_INDUSTRY_GUIDANCE",
+   "source_type": "official guidance",
+   "authority_rank": "industry consensus publication of the recognised co-sponsoring bodies; NOT an IMO instrument and NOT mandatory of itself",
+   "original_url": "https://www.maritimeglobalsecurity.org/best-management-practices/",
+   "document_url": "https://www.maritimeglobalsecurity.org/media/t4jccjou/bmp-ms_lo-res_s.pdf",
+   "local_path": null,
+   "sha256": null,
+   "bytes": null,
+   "access_status": "ACCESS_LIMITED",
+   "access_note": "Both the Maritime Global Security portal and the lo-res PDF returned HTTP 403 to the producer and, independently, to the H1 reviewer. No attempt was made to defeat that control. The document's own bytes are therefore NOT held locally and MIW asserts no structural detail beyond what publishers have stated publicly.",
+   "publication_date": "2026",
+   "publication_date_note": "Sources differ on the precise stamp and MIW does not pick one: co-publisher BIMCO announced the update on 6 July 2026; co-publisher INTERCARGO calls it 'the June 2026 updated version'; Steamship Mutual calls it the June 2026 edition published 14 July 2026. What is firmly established is the 2026 edition, announced by the co-publishers in July 2026.",
+   "effective_date": null,
+   "effective_date_note": "None. Industry guidance carries no entry-into-force date, which is itself a teaching point.",
+   "supersedes": [
+    "BMP Maritime Security, first edition, announced 31 March 2025 and referred to by INTERCARGO as the April 2025 launch version",
+    "BMP5 - Best Management Practices to Deter Piracy and Enhance Maritime Security in the Red Sea, Gulf of Aden, Indian Ocean and Arabian Sea",
+    "Global Counter Piracy Guidance for Companies, Masters and Seafarers",
+    "BMP West Africa"
+   ],
+   "supersedes_note": "The first edition consolidated and replaced the three earlier publications; the 2026 edition supersedes that first edition. Steamship Mutual records that BMP5, BMP West Africa and the Global Counter Piracy Guidance are no longer listed by the co-publishers; OCIMF's publications area returns 403 to us, so that is consistent with the claim rather than proof of it. MIW states 'replaces' rather than 'formally withdrawn', because no co-publisher page read here uses the word withdrawn.",
+   "superseded_by": null,
+   "currentness": "CURRENT_VERIFIED",
+   "checked_on": "2026-08-31",
+   "checked_how": "Both questions of the query discipline were asked. The supersession question established the BMP5 transition; the latest-position question - what has the publisher said most recently - established the 2026 edition and returned nothing later than it.",
+   "revalidation_trigger": "ON_NEXT_PUBLISHER_VERSION",
+   "revalidation_note": "Also BEFORE_CURRENTNESS_SENSITIVE_USE. This publication has now moved twice inside eighteen months, so any card citing it as current re-asks the latest-position question before release.",
+   "verified_claims": [
+    "It is the industry's consolidated global maritime-security guidance, covering threat assessment, voyage planning, mitigation measures, incident response and post-incident recovery.",
+    "It replaced the three earlier region-scoped and counter-piracy publications named in supersedes.",
+    "It is global rather than region-locked, with signposting to the most current regional security intelligence.",
+    "It covers piracy, armed robbery, illegal boarding, state-actor intervention, missiles, drones, sea mines and cyber-related threats.",
+    "The 2026 edition's principal change is the addition of 'Actions on Boarding by Activists' within Section 6, Incident Response, covering preparation, communication, de-escalation, evidence preservation and safe management, and advising against physical confrontation, razor wire, water cannon and interference with drones.",
+    "It is an interactive online publication providing a threat and risk management process, a directory of global authorities and seafarer welfare material.",
+    "The Maritime Industry Security Threat Overview (MISTO), revised November 2025, is the complementary threat-assessment resource that supports its application."
+   ],
+   "claims_NOT_established": [
+    "Any chapter, page or numbered-phase structure other than the existence of Section 6 (Incident Response), which two independent sources name.",
+    "That CLIA is a publisher of the 2026 edition - one secondary source only.",
+    "A precise publication day for the 2026 edition.",
+    "Whether the superseded publications were formally WITHDRAWN as opposed to replaced. MIW says 'replaced', which is true either way. NOTE: co-publisher ICS's own Global Counter Piracy Guidance resource page is reported to state it 'was withdrawn in March 2025'; ICS returns 403 to direct fetch, so this is a lead to confirm, not settled."
+   ],
+   "evidence": [
     {
-      "source_id": "SRC-BMPMS-2026",
-      "title": "Best Management Practices for Maritime Security (BMP MS)",
-      "edition": "2026 edition; one secondary trade source designates it Version 2",
-      "issuing_authority": "BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO and OCIMF",
-      "issuing_authority_note": "Six bodies, taken from co-publisher INTERCARGO's own current BMP page, which names 'BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO & OCIMF supported by over forty maritime stakeholders'. One SECONDARY source (MaritimeCyprus, 2 August 2026) additionally names CLIA for the 2026 edition, giving seven. That addition is NOT corroborated by any co-publisher page read here, so the six-body list is what MIW states and the CLIA claim is recorded as unverified rather than adopted.",
-      "source_class": "OFFICIAL_INDUSTRY_GUIDANCE",
-      "source_type": "official guidance",
-      "authority_rank": "industry consensus publication of the recognised co-sponsoring bodies; NOT an IMO instrument and NOT mandatory of itself",
-      "original_url": "https://www.maritimeglobalsecurity.org/best-management-practices/",
-      "document_url": "https://www.maritimeglobalsecurity.org/media/t4jccjou/bmp-ms_lo-res_s.pdf",
-      "local_path": null,
-      "sha256": null,
-      "bytes": null,
-      "access_status": "ACCESS_LIMITED",
-      "access_note": "Both the Maritime Global Security portal and the lo-res PDF returned HTTP 403 to the producer and, independently, to the H1 reviewer. No attempt was made to defeat that control. The document's own bytes are therefore NOT held locally and MIW asserts no structural detail beyond what publishers have stated publicly.",
-      "publication_date": "2026",
-      "publication_date_note": "Sources differ on the precise stamp and MIW does not pick one: co-publisher BIMCO announced the update on 6 July 2026; co-publisher INTERCARGO calls it 'the June 2026 updated version'; Steamship Mutual calls it the June 2026 edition published 14 July 2026. What is firmly established is the 2026 edition, announced by the co-publishers in July 2026.",
-      "effective_date": null,
-      "effective_date_note": "None. Industry guidance carries no entry-into-force date, which is itself a teaching point.",
-      "supersedes": [
-        "BMP Maritime Security, first edition, announced 31 March 2025 and referred to by INTERCARGO as the April 2025 launch version",
-        "BMP5 - Best Management Practices to Deter Piracy and Enhance Maritime Security in the Red Sea, Gulf of Aden, Indian Ocean and Arabian Sea",
-        "Global Counter Piracy Guidance for Companies, Masters and Seafarers",
-        "BMP West Africa"
-      ],
-      "supersedes_note": "The first edition consolidated and replaced the three earlier publications; the 2026 edition supersedes that first edition. Steamship Mutual records that BMP5, BMP West Africa and the Global Counter Piracy Guidance are no longer listed by the co-publishers; OCIMF's publications area returns 403 to us, so that is consistent with the claim rather than proof of it. MIW states 'replaces' rather than 'formally withdrawn', because no co-publisher page read here uses the word withdrawn.",
-      "superseded_by": null,
-      "currentness": "CURRENT_VERIFIED",
-      "checked_on": "2026-08-31",
-      "checked_how": "Both questions of the query discipline were asked. The supersession question established the BMP5 transition; the latest-position question - what has the publisher said most recently - established the 2026 edition and returned nothing later than it.",
-      "revalidation_trigger": "ON_NEXT_PUBLISHER_VERSION",
-      "revalidation_note": "Also BEFORE_CURRENTNESS_SENSITIVE_USE. This publication has now moved twice inside eighteen months, so any card citing it as current re-asks the latest-position question before release.",
-      "verified_claims": [
-        "It is the industry's consolidated global maritime-security guidance, covering threat assessment, voyage planning, mitigation measures, incident response and post-incident recovery.",
-        "It replaced the three earlier region-scoped and counter-piracy publications named in supersedes.",
-        "It is global rather than region-locked, with signposting to the most current regional security intelligence.",
-        "It covers piracy, armed robbery, illegal boarding, state-actor intervention, missiles, drones, sea mines and cyber-related threats.",
-        "The 2026 edition's principal change is the addition of 'Actions on Boarding by Activists' within Section 6, Incident Response, covering preparation, communication, de-escalation, evidence preservation and safe management, and advising against physical confrontation, razor wire, water cannon and interference with drones.",
-        "It is an interactive online publication providing a threat and risk management process, a directory of global authorities and seafarer welfare material.",
-        "The Maritime Industry Security Threat Overview (MISTO), revised November 2025, is the complementary threat-assessment resource that supports its application."
-      ],
-      "claims_NOT_established": [
-        "Any chapter, page or numbered-phase structure other than the existence of Section 6 (Incident Response), which two independent sources name.",
-        "That CLIA is a publisher of the 2026 edition - one secondary source only.",
-        "A precise publication day for the 2026 edition.",
-        "Whether the superseded publications were formally WITHDRAWN as opposed to replaced. MIW says 'replaced', which is true either way. NOTE: co-publisher ICS's own Global Counter Piracy Guidance resource page is reported to state it 'was withdrawn in March 2025'; ICS returns 403 to direct fetch, so this is a lead to confirm, not settled."
-      ],
-      "evidence": [
-        {
-          "url": "https://www.bimco.org/news-insights/bimco-news/2026/07/06-bmp/",
-          "kind": "PRIMARY - co-publisher announcement of the 2026 edition",
-          "fetched": true,
-          "establishes": "the 2026 update and the activist-boarding addition"
-        },
-        {
-          "url": "https://www.intercargo.org/best-management-practices-bmp/",
-          "kind": "PRIMARY - co-publisher's own standing BMP page",
-          "fetched": true,
-          "establishes": "the six-body publisher list, the June 2026 version, the April 2025 launch, the consolidation and the threat-and-risk-management purpose"
-        },
-        {
-          "url": "https://www.bimco.org/news-insights/press-media/press-releases/2025/20250331-new-bmp/",
-          "kind": "PRIMARY - co-publisher release of the first edition",
-          "fetched": true,
-          "establishes": "31 March 2025 announcement, six bodies, forty-plus stakeholders, purpose wording, the 2024 threat figures with their qualifiers"
-        },
-        {
-          "url": "https://www.westpandi.com/news-and-resources/news/april-2025/best-management-practices-maritime-security-(bmp-m/",
-          "kind": "SECONDARY - P&I club quoting the publication",
-          "fetched": true,
-          "establishes": "'BMP Maritime Security replaces all the existing versions of the BMP. This includes BMP5, Global BMP and BMP West Africa.'"
-        },
-        {
-          "url": "https://www.steamshipmutual.com/publications/articles/bmp-maritime-security-updated-2026",
-          "kind": "SECONDARY - P&I club",
-          "fetched": true,
-          "establishes": "Section 6 placement of the activist content, the threat-type list, MISTO November 2025, and that the superseded titles are off the OCIMF site"
-        },
-        {
-          "url": "https://maritimecyprus.com/2026/08/02/maritime-industry-releases-ver-2-2026-best-management-practices-bmp-for-maritime-security/",
-          "kind": "SECONDARY - trade site",
-          "fetched": false,
-          "establishes": "the 'Ver.2 (2026)' designation; also the uncorroborated CLIA claim"
-        }
-      ],
-      "used_by": [
-        "QB4_H#q13"
-      ],
-      "first_registered": "2026-08-31",
-      "registered_by": "ORAL-AUG-2 H1 retry"
+     "url": "https://www.bimco.org/news-insights/bimco-news/2026/07/06-bmp/",
+     "kind": "PRIMARY - co-publisher announcement of the 2026 edition",
+     "fetched": true,
+     "establishes": "the 2026 update and the activist-boarding addition"
     },
     {
-      "source_id": "SRC-BMPMS-2025",
-      "title": "Best Management Practices for Maritime Security (BMP MS), first edition",
-      "edition": "first edition",
-      "issuing_authority": "BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO and OCIMF, supported by over forty maritime stakeholders",
-      "source_class": "OFFICIAL_INDUSTRY_GUIDANCE",
-      "source_type": "official guidance",
-      "authority_rank": "industry consensus publication; not an IMO instrument",
-      "original_url": "https://www.bimco.org/news-insights/press-media/press-releases/2025/20250331-new-bmp/",
-      "local_path": null,
-      "sha256": null,
-      "access_status": "ACCESS_LIMITED",
-      "publication_date": "2025-03-31",
-      "publication_date_note": "Announced 31 March 2025; INTERCARGO refers to an April 2025 launch and IMO MSC 110 was informed it was issued April 2025.",
-      "supersedes": [
-        "BMP5",
-        "Global Counter Piracy Guidance for Companies, Masters and Seafarers",
-        "BMP West Africa"
-      ],
-      "superseded_by": "SRC-BMPMS-2026",
-      "currentness": "HISTORICAL_SUPERSEDED",
-      "checked_on": "2026-08-31",
-      "revalidation_trigger": "NONE_HISTORICAL",
-      "verified_claims": [
-        "Consolidated and replaced BMP5, the Global Counter Piracy Guidance and BMP West Africa.",
-        "Its stated aim is to help all vessels plan voyages and to detect, avoid, deter, delay and report attacks and incidents wherever they occur.",
-        "2024 threat picture as published: ships were attacked WITH WEAPONS OF WAR IN THE BLACK SEA AND IN THE SOUTHERN RED SEA more than one hundred times and four seafarers lost their lives; separately and GLOBALLY, 126 seafarers were held hostage during pirate attacks and armed robberies and 12 were kidnapped."
-      ],
-      "claims_NOT_established": [
-        "That the 'more than one hundred' figure is a global attack count - it is explicitly scoped to two regions and to weapons of war. Stripping that qualifier is a recorded H1 review finding."
-      ],
-      "retained_because": "Predecessor evidence. Examiners still name BMP5 and the first edition, and the lineage question was actually asked on 27 August 2026 (AUG-0091).",
-      "used_by": [
-        "QB4_H#q13"
-      ],
-      "first_registered": "2026-08-31",
-      "registered_by": "ORAL-AUG-2 H1 retry"
+     "url": "https://www.intercargo.org/best-management-practices-bmp/",
+     "kind": "PRIMARY - co-publisher's own standing BMP page",
+     "fetched": true,
+     "establishes": "the six-body publisher list, the June 2026 version, the April 2025 launch, the consolidation and the threat-and-risk-management purpose"
     },
     {
-      "source_id": "SRC-MISTO-2025-11",
-      "title": "Maritime Industry Security Threat Overview (MISTO)",
-      "edition": "revised 26 November 2025",
-      "issuing_authority": "the BMP Maritime Security co-publishers, via the Maritime Global Security portal",
-      "source_class": "OFFICIAL_INDUSTRY_GUIDANCE",
-      "source_type": "official guidance",
-      "authority_rank": "industry consensus threat assessment; companion to BMP MS, not an IMO instrument",
-      "original_url": "https://www.maritimeglobalsecurity.org/media/1slhm0pf/2025-11-26-misto.pdf",
-      "local_path": null,
-      "sha256": null,
-      "access_status": "ACCESS_LIMITED",
-      "publication_date": "2025-11-26",
-      "effective_date": null,
-      "supersedes": null,
-      "superseded_by": null,
-      "currentness": "CURRENT_BUT_RECHECK_ON_EVENT",
-      "checked_on": "2026-08-31",
-      "revalidation_trigger": "BEFORE_CURRENTNESS_SENSITIVE_USE",
-      "revalidation_note": "MISTO states its own cadence as updated every three to six months. Six months from 26 November 2025 expired in May 2026 and no later revision was found on 31 August 2026 - so either an update is overdue or one exists that is not indexed. Any card citing the November 2025 revision by DATE must re-ask the latest-position question first.",
-      "verified_claims": [
-        "Revised 26 November 2025.",
-        "It is the companion threat assessment that supports applying BMP Maritime Security.",
-        "Its own stated update cadence is every three to six months."
-      ],
-      "claims_NOT_established": [
-        "That the November 2025 revision is still the latest."
-      ],
-      "used_by": [
-        "QB4_H#q13"
-      ],
-      "first_registered": "2026-08-31",
-      "registered_by": "ORAL-AUG-2 H1 retry"
+     "url": "https://www.bimco.org/news-insights/press-media/press-releases/2025/20250331-new-bmp/",
+     "kind": "PRIMARY - co-publisher release of the first edition",
+     "fetched": true,
+     "establishes": "31 March 2025 announcement, six bodies, forty-plus stakeholders, purpose wording, the 2024 threat figures with their qualifiers"
+    },
+    {
+     "url": "https://www.westpandi.com/news-and-resources/news/april-2025/best-management-practices-maritime-security-(bmp-m/",
+     "kind": "SECONDARY - P&I club quoting the publication",
+     "fetched": true,
+     "establishes": "'BMP Maritime Security replaces all the existing versions of the BMP. This includes BMP5, Global BMP and BMP West Africa.'"
+    },
+    {
+     "url": "https://www.steamshipmutual.com/publications/articles/bmp-maritime-security-updated-2026",
+     "kind": "SECONDARY - P&I club",
+     "fetched": true,
+     "establishes": "Section 6 placement of the activist content, the threat-type list, MISTO November 2025, and that the superseded titles are off the OCIMF site"
+    },
+    {
+     "url": "https://maritimecyprus.com/2026/08/02/maritime-industry-releases-ver-2-2026-best-management-practices-bmp-for-maritime-security/",
+     "kind": "SECONDARY - trade site",
+     "fetched": false,
+     "establishes": "the 'Ver.2 (2026)' designation; also the uncorroborated CLIA claim"
     }
-  ]
+   ],
+   "used_by": [
+    "QB4_H#q13"
+   ],
+   "first_registered": "2026-08-31",
+   "registered_by": "ORAL-AUG-2 H1 retry"
+  },
+  {
+   "source_id": "SRC-BMPMS-2025",
+   "title": "Best Management Practices for Maritime Security (BMP MS), first edition",
+   "edition": "first edition",
+   "issuing_authority": "BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO and OCIMF, supported by over forty maritime stakeholders",
+   "source_class": "OFFICIAL_INDUSTRY_GUIDANCE",
+   "source_type": "official guidance",
+   "authority_rank": "industry consensus publication; not an IMO instrument",
+   "original_url": "https://www.bimco.org/news-insights/press-media/press-releases/2025/20250331-new-bmp/",
+   "local_path": null,
+   "sha256": null,
+   "access_status": "ACCESS_LIMITED",
+   "publication_date": "2025-03-31",
+   "publication_date_note": "Announced 31 March 2025; INTERCARGO refers to an April 2025 launch and IMO MSC 110 was informed it was issued April 2025.",
+   "supersedes": [
+    "BMP5",
+    "Global Counter Piracy Guidance for Companies, Masters and Seafarers",
+    "BMP West Africa"
+   ],
+   "superseded_by": "SRC-BMPMS-2026",
+   "currentness": "HISTORICAL_SUPERSEDED",
+   "checked_on": "2026-08-31",
+   "revalidation_trigger": "NONE_HISTORICAL",
+   "verified_claims": [
+    "Consolidated and replaced BMP5, the Global Counter Piracy Guidance and BMP West Africa.",
+    "Its stated aim is to help all vessels plan voyages and to detect, avoid, deter, delay and report attacks and incidents wherever they occur.",
+    "2024 threat picture as published: ships were attacked WITH WEAPONS OF WAR IN THE BLACK SEA AND IN THE SOUTHERN RED SEA more than one hundred times and four seafarers lost their lives; separately and GLOBALLY, 126 seafarers were held hostage during pirate attacks and armed robberies and 12 were kidnapped."
+   ],
+   "claims_NOT_established": [
+    "That the 'more than one hundred' figure is a global attack count - it is explicitly scoped to two regions and to weapons of war. Stripping that qualifier is a recorded H1 review finding."
+   ],
+   "retained_because": "Predecessor evidence. Examiners still name BMP5 and the first edition, and the lineage question was actually asked on 27 August 2026 (AUG-0091).",
+   "used_by": [
+    "QB4_H#q13"
+   ],
+   "first_registered": "2026-08-31",
+   "registered_by": "ORAL-AUG-2 H1 retry"
+  },
+  {
+   "source_id": "SRC-MISTO-2025-11",
+   "title": "Maritime Industry Security Threat Overview (MISTO)",
+   "edition": "revised 26 November 2025",
+   "issuing_authority": "the BMP Maritime Security co-publishers, via the Maritime Global Security portal",
+   "source_class": "OFFICIAL_INDUSTRY_GUIDANCE",
+   "source_type": "official guidance",
+   "authority_rank": "industry consensus threat assessment; companion to BMP MS, not an IMO instrument",
+   "original_url": "https://www.maritimeglobalsecurity.org/media/1slhm0pf/2025-11-26-misto.pdf",
+   "local_path": null,
+   "sha256": null,
+   "access_status": "ACCESS_LIMITED",
+   "publication_date": "2025-11-26",
+   "effective_date": null,
+   "supersedes": null,
+   "superseded_by": null,
+   "currentness": "CURRENT_BUT_RECHECK_ON_EVENT",
+   "checked_on": "2026-08-31",
+   "revalidation_trigger": "BEFORE_CURRENTNESS_SENSITIVE_USE",
+   "revalidation_note": "MISTO states its own cadence as updated every three to six months. Six months from 26 November 2025 expired in May 2026 and no later revision was found on 31 August 2026 - so either an update is overdue or one exists that is not indexed. Any card citing the November 2025 revision by DATE must re-ask the latest-position question first.",
+   "verified_claims": [
+    "Revised 26 November 2025.",
+    "It is the companion threat assessment that supports applying BMP Maritime Security.",
+    "Its own stated update cadence is every three to six months."
+   ],
+   "claims_NOT_established": [
+    "That the November 2025 revision is still the latest."
+   ],
+   "used_by": [
+    "QB4_H#q13"
+   ],
+   "first_registered": "2026-08-31",
+   "registered_by": "ORAL-AUG-2 H1 retry"
+  },
+  {
+   "source_id": "SRC-GRAINCODE-MSC552-2026",
+   "title": "Resolution MSC.552(108) - Amendments to the International Code for the Safe Carriage of Grain in Bulk (International Grain Code, resolution MSC.23(59))",
+   "edition": "The resolution as adopted 23 May 2024, held in full; plus IMO's January 2026 publication supplement to the 1991 Edition (sales number I240E), which carries the same amendment INCOMPLETELY",
+   "issuing_authority": "International Maritime Organization",
+   "issuing_authority_note": "IMO itself, as publisher of the Code and of its own supplement. Tier 1 - this is not a class-society or P&I restatement.",
+   "source_class": "IMO_INSTRUMENT_AMENDMENT",
+   "source_type": "official publication supplement carrying an adopted MSC resolution",
+   "authority_rank": "Mandatory. The Grain Code is given force by SOLAS chapter VI, part C, regulation 9; MSC.552(108) amends the Code itself.",
+   "original_url": "https://www.imo.org/en/publications/Pages/Supplements.aspx",
+   "document_url": "https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.552(108).pdf",
+   "local_path": "F:/RulesApp-Local-Input/true-source/03-imo-instruments/Grain-Code/_base-and-amendments/IMO_resolution_MSC.552-108_full.pdf",
+   "sha256": "c9233600fb2832e79875d21581969dc7edf7d44a5a145e519f4649f22d2ec0d3",
+   "bytes": 734439,
+   "access_status": "RETRIEVED",
+   "access_note": "TWO IMO FILES ARE HELD AND THEY DO NOT AGREE. The AUTHORITY is the resolution itself (6 pages, full text layer, operative clauses and complete annex), retrieved from IMO's resolutions index. The companion is IMO's January 2026 publication supplement (132,651 bytes, sha256 2201d471db0ebac7f8c4f23ad82c0a6f6e141c57810d37190e513a10b1fe1432), which is INCOMPLETE in two ways: it OMITS annex item 6 (the A 12.3.3 cross-reference repair) and carries NO operative clauses at all. This registry entry originally cited the supplement alone; the resolution was obtained after an independent reviewer challenged the amendment list, and the discrepancy is the reason the entry now names the resolution as authority. A supplement to a sales publication is an editorial aid, not the instrument. Both files are filed in the shared desktop-team corpus at 03-imo-instruments/Grain-Code/ with the discrepancy recorded in its INSTRUMENT_LOG.md.",
+   "publication_date": "2026-01",
+   "publication_date_note": "Supplement dated January 2026; the resolution it carries was adopted 23 May 2024.",
+   "effective_date": "2026-01-01",
+   "effective_date_note": "MSC.552(108) entered into force 1 January 2026 and applies to both new and existing ships - there is no newbuilding-only limb.",
+   "supersedes": [],
+   "supersedes_note": "Amends the 1991 Edition; it does not replace the Code.",
+   "superseded_by": null,
+   "currentness": "CURRENT_VERIFIED",
+   "checked_on": "2026-08-31",
+   "checked_how": "Asked the publisher-anchored question rather than the supersession question: what is the most recent Grain Code amendment IMO itself publishes? IMO's current supplement to the 1991 Edition is the January 2026 one and its whole content is MSC.552(108). Independently re-checked against MSC 109, MSC 110 and MSC 111 outcomes - MSC 111 (13-22 May 2026) adopted the MASS Code, SOLAS IV/V amendments, the ESP Code and IMDG 43-26, and no Grain Code amendment.",
+   "revalidation_trigger": "ON_RELEVANT_MSC_SESSION",
+   "revalidation_note": "Not yet confirmed against the official IMO depositary/status list, which is the stronger check this corpus uses elsewhere. Logged as RQ-G02 in the shared corpus review queue.",
+   "verified_claims": [
+    "Adopted by MSC at its 108th session by resolution MSC.552(108) on 23 May 2024, under SOLAS article VIII(b)(iv); deemed accepted 1 July 2025 under article VIII(b)(vi)(2)(bb); in force 1 January 2026 under article VIII(b)(vii)(2).",
+    "The resolution contains NO application clause, so it binds new and existing ships alike. This can only be established from the resolution - the supplement carries no operative clauses.",
+    "The Grain Code was adopted by resolution MSC.23(59) and is mandatory under SOLAS chapter VI; the amendment procedure is article VIII(b) read with regulation VI/8.1.",
+    "New definition A 2.8: \"specially suitable compartment, partly filled in way of the hatch opening, with ends untrimmed\" - not filled to the maximum extent in way of the hatch opening but filled to a level equal with or above the bottom edge of the hatch end beams, and not trimmed outside the periphery of the hatch opening by A 10.4.",
+    "New A 10.4 permits the grain outside the hatch periphery to lie at its natural angle of repose and allows dispensation from trimming the ends.",
+    "A 10.7 (ex 10.6) replaced: only the free surface in way of the hatch opening need be level in such a compartment.",
+    "New B 1.1.5: surface assumed to slope in all directions at 30 degrees from the lower edge of the hatch end beam; if feeding holes per table B 1-2 are provided and the free surface in way of the hatch opening is above them, from the mean line on the hatch end beam as shown in figure B-1.",
+    "B 1.5 replaced: total heeling moment = 1.12 x calculated transverse heeling moment, now covering the new category as well as partly filled compartments.",
+    "New Part B section 4: B 2 provisions for filled-and-trimmed compartments apply, except that after shifting the surfaces are assumed at 25 degrees to the horizontal.",
+    "Sixteen numbered annex items in total. Consequential cross-reference and renumbering changes in A 10.3.1, A 10.10.3, A 12.3.3 (annex item 6, under heading 12 Divisions loaded on both sides - PRESENT IN THE RESOLUTION AND ABSENT FROM THE SUPPLEMENT), A 14.1, B 1.2, B 2.6, B 2.8, B 2.9, B 3.1 and renumbered B 5."
+   ],
+   "claims_NOT_established": [
+    "That MSC.552(108) requires the approved grain loading manual or Document of Authorization to be updated. This is widely and correctly stated as PRACTICAL GUIDANCE by class societies and P&I clubs (LR class news 09/25, Britannia, BIMCO, NorthStandard) and follows from the ship only being loadable to a condition its approved booklet covers - but it is NOT in the amendment text and must not be attributed to the resolution.",
+    "Anything about the Grain Code outside this amendment delta. The 1991 base publication is NOT held (RQ-G01 in the shared corpus review queue)."
+   ],
+   "evidence": [
+    {
+     "id": "Resolution MSC.552(108), IMO index of MSC resolutions",
+     "where": "https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.552(108).pdf",
+     "kind": "the resolution itself - tier 1, and the authority for every claim above"
+    },
+    {
+     "id": "IMO January 2026 supplement to the International Grain Code",
+     "where": "https://wwwcdn.imo.org/localresources/en/publications/Documents/Supplements/English/2Q240E_supplement_January2026_EBK.pdf",
+     "kind": "the publisher's own document - tier 1"
+    },
+    {
+     "id": "Lloyd's Register class news 09/25, Amendments to the International Grain Code",
+     "where": "https://www.lr.org/en/knowledge/class-news/09-25/",
+     "kind": "IACS-member class society, for the practical grain-manual guidance only"
+    }
+   ],
+   "used_by": [
+    "meoclass1/QB2_A.html#q33",
+    "meoclass1/QB2_A.html#q11"
+   ],
+   "first_registered": "2026-08-31",
+   "registered_by": "ORAL-AUG-2 H2-B"
+  },
+  {
+   "source_id": "SRC-NSBRULES-2026",
+   "title": "National Shipping Board Rules, 2026 - G.S.R. 379(E)",
+   "edition": "As notified 20 May 2026, in supersession of the National Shipping Board Rules, 1960",
+   "issuing_authority": "Ministry of Ports, Shipping and Waterways, Government of India",
+   "issuing_authority_note": "F. No. SY-19014/185/2025-MG, signed Mukesh Mangal, Additional Secretary. Published in the Gazette of India, Extraordinary, Part II - Section 3 - Sub-section (i), No. 344; the PDF carries a digital signature dated 23 May 2026.",
+   "source_class": "INDIA_SUBORDINATE_LEGISLATION",
+   "source_type": "statutory rules notified in the Official Gazette",
+   "authority_rank": "Binding subordinate legislation, made under s.6(1) and s.6(2)(a) read with s.4(8) and (9) of the Merchant Shipping Act, 2025 (24 of 2025).",
+   "original_url": "https://dgma.gov.in/mercantile-marine-law/the-merchant-shipping-act-2025",
+   "document_url": "https://dgma.gov.in/download/1781181176_6a2aaaf8e85fe_national-shipping-board-rules-2026-notified-on-200526.pdf",
+   "local_path": "F:/RulesApp-Local-Input/true-source/06-india-law-and-dg-shipping/Merchant-Shipping-Act-2025/_rules/National_Shipping_Board_Rules_2026_GSR379E_20260520.pdf",
+   "sha256": "681a6ae92f758d66bbc6670ca8cd5fe6e537589fe4eb1d1f22bb735d94ed63ca",
+   "bytes": 679987,
+   "access_status": "RETRIEVED",
+   "access_note": "Hosted by DGMA, the competent authority. Bilingual Hindi/English, ten pages, full text layer; the English text was read in full. indiacode.nic.in returned HTTP 403 and was not worked around.",
+   "publication_date": "2026-05-20",
+   "publication_date_note": "Notified 20 May 2026; gazette copy digitally signed 23 May 2026.",
+   "effective_date": "2026-05-20",
+   "effective_date_note": "Rule 1(2): in force on the date of publication in the Official Gazette.",
+   "supersedes": [
+    "National Shipping Board Rules, 1960"
+   ],
+   "supersedes_note": "Supersession is expressly 'except as respects things done or omitted to be done before such supersession'.",
+   "superseded_by": null,
+   "currentness": "CURRENT_VERIFIED",
+   "checked_on": "2026-08-31",
+   "checked_how": "Read from the gazette text itself, obtained from DGMA's own Merchant Shipping Act 2025 page, which lists the rules made under the Act and is the authority's most recent published position.",
+   "revalidation_trigger": "ON_DGMA_AMENDMENT",
+   "revalidation_note": "DGMA's page lists 24 subsidiary rule sets notified in 2026; check that page rather than a search engine when re-verifying.",
+   "verified_claims": [
+    "Made under s.6(1) and s.6(2)(a) read with s.4(8) and (9) of the MS Act 2025, in supersession of the National Shipping Board Rules, 1960; in force on gazette publication.",
+    "Rule 3: the Board is established with the s.4(2) composition for two years in the first instance and re-established every two years; if not re-established on expiry the existing Board continues until the successor is constituted, subject to a maximum of six months.",
+    "Rule 4: Chairperson and members other than the six MPs hold office for two years; a person filling a casual vacancy serves only the residue of the term.",
+    "Rule 5: resignation takes effect on acceptance or after thirty days from receipt, whichever is earlier.",
+    "Rule 6 removal grounds: absence from India over six months without permission; absence from three consecutive meetings; insolvency; conviction for an offence involving moral turpitude; or ceasing to represent the interests for which appointed. Separate removal for undesirability requires written reasons and a hearing.",
+    "Rules 7-9: Secretary appointed by the Central Government; secretarial assistance, staff and their cost come from the Director-General's establishment and budget; headquarters at New Delhi.",
+    "Schedule II: the Board normally meets once every three months; fifteen days' notice; e-mail approved by the Board is a valid mode; extraordinary meeting on written requisition of not less than five members within fifteen days; quorum eight members, and an adjourned meeting is valid whether or not the quorum is secured; recommendations are forwarded to MoPSW; Chairperson has a casting vote; working year 1 April to 31 March; annual report to the Central Government."
+   ],
+   "claims_NOT_established": [
+    "Anything about who currently sits on the Board. The Rules prescribe the framework, not the membership; the seated Board is a separate fact - see SRC-NSB-MIN31-2026."
+   ],
+   "evidence": [
+    {
+     "id": "National Shipping Board Rules, 2026, G.S.R. 379(E)",
+     "where": "https://dgma.gov.in/download/1781181176_6a2aaaf8e85fe_national-shipping-board-rules-2026-notified-on-200526.pdf",
+     "kind": "the Gazette of India itself, hosted by the competent authority - tier 1"
+    }
+   ],
+   "used_by": [
+    "meoclass1/QB1_F.html#q21"
+   ],
+   "first_registered": "2026-08-31",
+   "registered_by": "ORAL-AUG-2 H2-C"
+  },
+  {
+   "source_id": "SRC-MSACT-2025",
+   "title": "The Merchant Shipping Act, 2025 (Act No. 24 of 2025)",
+   "edition": "As assented 18 August 2025; DGMA also publishes a corrigenda dated 30 September 2025",
+   "issuing_authority": "Ministry of Law and Justice (Legislative Department), Government of India",
+   "issuing_authority_note": "Published in the Gazette of India, Extraordinary, Part II - Section 1, No. 29, New Delhi, 18 August 2025.",
+   "source_class": "INDIA_PRIMARY_LEGISLATION",
+   "source_type": "Act of Parliament",
+   "authority_rank": "Primary legislation. Consolidates and amends Indian merchant shipping law; repeals the Merchant Shipping Act 1958 (with a saving for Part XIV) and the Coasting Vessels Act 1838.",
+   "original_url": "https://dgma.gov.in/mercantile-marine-law/the-merchant-shipping-act-2025",
+   "document_url": "https://dgma.gov.in/download/1763973754_69241a7a5c4c1_the-merchant-shipping-act2025.pdf",
+   "local_path": "F:/RulesApp-Local-Input/true-source/06-india-law-and-dg-shipping/Merchant-Shipping-Act-2025/_base/MS_Act_2025_A2025-24.pdf",
+   "sha256": "6fb38616ed8b82ae7e831e5589ffd59a7b27e13d55b1728940fe25892f758f63",
+   "bytes": 2257845,
+   "access_status": "RETRIEVED",
+   "access_note": "PROVENANCE UPGRADE, NOT A NEW FILE. The shared corpus already held this exact file, recorded as a PRS India reproduction to be replaced with an official original when retrievable (RQ-32). It has now been retrieved from DGMA's own portal and is BYTE-IDENTICAL, so the reproduction is proved faithful and the file's rank rises without the bytes changing. indiacode.nic.in returned HTTP 403 and was not worked around.",
+   "publication_date": "2025-08-18",
+   "publication_date_note": "Presidential assent 18 August 2025; passed Lok Sabha 6 August 2025 and Rajya Sabha 11 August 2025.",
+   "effective_date": "2026-03-15",
+   "effective_date_note": "Brought into force 15 March 2026 per S.O. 1244(E) of 10 March 2026, as recorded in the shared corpus instrument log. The notification itself is NOT held (RQ-33 open).",
+   "supersedes": [
+    "Merchant Shipping Act, 1958 (except Part XIV)",
+    "Coasting Vessels Act, 1838"
+   ],
+   "supersedes_note": "The Part XIV saving is what keeps 1958 cabotage law citable.",
+   "superseded_by": null,
+   "currentness": "CURRENT_VERIFIED",
+   "checked_on": "2026-08-31",
+   "checked_how": "Retrieved from the competent authority's own page listing the Act and the 24 rule sets made under it, and section 4 was read directly from the PDF.",
+   "revalidation_trigger": "ON_DGMA_AMENDMENT",
+   "revalidation_note": "A corrigenda dated 30 September 2025 is listed on the same DGMA page and is NOT held. Obtain it before quoting any section verbatim beyond s.4.",
+   "verified_claims": [
+    "Act No. 24 of 2025, assent 18 August 2025.",
+    "s.4(2)(a): six members of Parliament - four elected from amongst themselves by members of the House of the People, two by members of the Council of States.",
+    "s.4(2)(b): not exceeding sixteen other members, at least four of whom shall be women, representing the Central Government, ship owners, seafarers and such other interests as the Central Government considers ought to be represented, with a proviso requiring an equal number of ship owner and seafarer representatives. Statutory maximum therefore 22.",
+    "s.4(4): the Central Government nominates one of the members as Chairperson.",
+    "s.4(5): such a member or Chairperson does not hold an office of profit for article 102(1)(a).",
+    "s.4(6): the Board ADVISES the Central Government on matters relating to Indian shipping including its development, and on other matters referred to it under the Act.",
+    "s.4(7): the Board may regulate its own procedure.",
+    "s.4(8)/(9): term, casual vacancies, allowances, the Chairperson's service conditions and the Board's staff are as prescribed - the hook for the 2026 Rules.",
+    "s.5 constitutes a separate Seafarer's Welfare Board."
+   ],
+   "claims_NOT_established": [
+    "Section numbers outside s.4 and s.5. The shared corpus's section-mapping text pass (TS-7) is still pending and the 30 September 2025 corrigenda is not held.",
+    "The commencement notification S.O. 1244(E) itself (RQ-33)."
+   ],
+   "evidence": [
+    {
+     "id": "The Merchant Shipping Act, 2025, as published by DGMA",
+     "where": "https://dgma.gov.in/download/1763973754_69241a7a5c4c1_the-merchant-shipping-act2025.pdf",
+     "kind": "the competent authority's own copy of the Gazette text - tier 1"
+    }
+   ],
+   "used_by": [
+    "meoclass1/QB1_F.html#q21"
+   ],
+   "first_registered": "2026-08-31",
+   "registered_by": "ORAL-AUG-2 H2-C"
+  },
+  {
+   "source_id": "SRC-NSB-MIN31-2026",
+   "title": "Minutes of the National Shipping Board meetings of March 2026 (New Delhi) and 16-17 April 2026 (Mumbai)",
+   "edition": "As published by DGMA; two sets held",
+   "issuing_authority": "National Shipping Board / Directorate General of Maritime Administration",
+   "issuing_authority_note": "Published on DGMA's own site. A proceedings record, not law.",
+   "source_class": "INDIA_OFFICIAL_PROCEEDINGS",
+   "source_type": "minutes of a statutory advisory body",
+   "authority_rank": "Authoritative as to what the Board did and who attended. It is NOT a source of law and its contents are recommendations, not decisions binding anyone.",
+   "original_url": "https://dgma.gov.in/",
+   "document_url": "https://dgma.gov.in/download/1778827196_6a06bfbc50285_mom-mumbai-16-17042026.pdf",
+   "local_path": "F:/Marine-Intelligence-Weekly/Knowledge Central/national-shipping-board/sources/NSB_32nd_meeting_2026-04.pdf (April, 38,749,093 bytes) and NSB_31st_meeting_minutes_2026-03.pdf (March, 8,798,206 bytes)",
+   "sha256": "1cafa40a1ed8c8619f763dc1bb520cce300197392b6fb9848cb170d7cc034603",
+   "bytes": 38749093,
+   "access_status": "RETRIEVED",
+   "access_note": "The April minutes run to 358 pages including annexures; the March set to 117. Both filed in the MIW-owned Knowledge Central corpus rather than the shared law corpus, because proceedings are not an instrument.",
+   "publication_date": "2026-04",
+   "publication_date_note": "THE SOURCE IS UNRELIABLE ON ITS OWN NUMBERING AND DATES, AND THIS IS THE MOST IMPORTANT THING THE ENTRY RECORDS. (1) BOTH sets call themselves the \"31st meeting\" - the March set in its heading and the April set in its opening remarks - so the ordinal is not usable and MIW quotes dates and venues instead. (2) The March set contradicts itself on its own day: heading \"9th March 2026\", body \"10th March 2026\", DGMA filename \"10032026\". The April minutes settle it by confirming \"the minutes of the last meeting which was held on 10/03/2026 in New Delhi\", so 10 March 2026 is the Board's own confirmed date.",
+   "effective_date": null,
+   "effective_date_note": "Not applicable to a proceedings record.",
+   "supersedes": [],
+   "supersedes_note": "Minutes of the meeting held 26-27 February 2026 were, at the time of this meeting, still to be circulated.",
+   "superseded_by": null,
+   "currentness": "CURRENT_BUT_RECHECK_ON_EVENT",
+   "checked_on": "2026-08-31",
+   "checked_how": "CORRECTED 2026-08-31 AFTER INDEPENDENT REVIEW. This entry originally recorded the March 2026 meeting as the latest MIW had verified. It was not: DGMA had already published the 16-17 April 2026 Mumbai meeting, five months before this check. The original hedge - that the March meeting might not be latest \"as at any date after 31 August 2026\" - was on the WRONG SIDE OF THE DATE; it was already not latest on the day it was written. The failure was checking a document rather than the issuer's listing. DGMA's NSB document listing is now the thing to check.",
+   "revalidation_trigger": "BEFORE_CURRENTNESS_SENSITIVE_USE",
+   "revalidation_note": "NEVER cite any meeting as \"the latest\" without re-reading DGMA's NSB listing. The Rules require a meeting only once every three months, but this Board has met in May, July, August, October, November and December 2025 and February, March and April 2026 - roughly monthly. A meeting fact goes stale in weeks, not quarters.",
+   "verified_claims": [
+    "The Board sitting through 2026 was constituted vide Gazette notification S.O. 1935(E) dated 30 April 2025 (MoPSW File No. ST-16011/4/2016-MA, as amended from time to time) and commenced operations on 1 May 2025.",
+    "Chairperson: Shri Sameer Kumar Khare, IAS (Retired). Secretary: Captain Nitin Mukesh.",
+    "LATEST VERIFIED MEETING: 16-17 April 2026, Conference Hall of the Indian Register of Shipping, Powai, Mumbai, from 09:30. It opened with an executive session of physically present members whose deliberations were expressly not recorded, confirmed the minutes of the Goa meeting of 26-27 February 2026 and the New Delhi meeting of 10 March 2026, and reviewed action taken on every meeting back to 30 May 2025.",
+    "By April 2026 one Board seat was vacant - that of the Chief Surveyor, Directorate General of Shipping, who had taken voluntary retirement - and an Additional Director-General for the National Shipping Board had been appointed.",
+    "PRECEDING MEETING: March 2026 at the NSB office, Janpath, New Delhi, held to finalise the Board's presentation to the Minister of Ports, Shipping and Waterways on 11 March 2026.",
+    "In its first ten months the Board held seven meetings - Mumbai twice, Kandla, Kochi, Kolkata, Visakhapatnam and Goa; consulted 98 stakeholders at board level with a further 44 consultations by the Chairperson across 12 sectors; and constituted 14 sub-committees, to which the March meeting added a Sub-committee on Taxation Reforms chaired by the CEO of INSA.",
+    "Action items on a permanent office, advance reconstitution of successive Boards and an MSDC invitation were recorded as still PENDING with MoPSW, with no update provided."
+   ],
+   "claims_NOT_established": [
+    "That the April 2026 meeting is the most recent NSB meeting as at any date after 31 August 2026. It is the most recent MIW has VERIFIED, which is a different claim and is how the card words it.",
+    "Any meeting ORDINAL. Two published sets both call themselves the 31st.",
+    "The substantive outcomes of the April meeting beyond its opening and confirmation items. The document is 358 pages and only its front matter and agenda structure were read."
+   ],
+   "evidence": [
+    {
+     "id": "Minutes of the NSB meeting held 16-17 April 2026, Mumbai",
+     "where": "https://dgma.gov.in/download/1778827196_6a06bfbc50285_mom-mumbai-16-17042026.pdf",
+     "kind": "the body's own minutes, published by DGMA - tier 1 for proceedings"
+    },
+    {
+     "id": "Minutes of the NSB meeting held March 2026, New Delhi",
+     "where": "https://dgma.gov.in/download/1775563100_69d4f15c6dbe2_new-delhi-meeting-10032026.pdf",
+     "kind": "the body's own minutes, published by DGMA - superseded as 'latest' but retained"
+    }
+   ],
+   "used_by": [
+    "meoclass1/QB1_F.html#q21"
+   ],
+   "first_registered": "2026-08-31",
+   "registered_by": "ORAL-AUG-2 H2-C"
+  },
+  {
+   "source_id": "SRC-NMDPF-2026",
+   "title": "National Maritime Decarbonisation Policy Framework 2026 (draft)",
+   "edition": "Draft dated 3 July 2026, published on DGMA's Maritime INDIA @ Net Zero page",
+   "issuing_authority": "Directorate General of Maritime Administration (DGMA), Ministry of Ports, Shipping and Waterways",
+   "issuing_authority_note": "DGMA is the competent maritime authority; the page also carries the Draft National Green Shipping Policy version 6 (4 May 2026) and eight pillar implementation roadmaps.",
+   "source_class": "INDIA_POLICY_DRAFT",
+   "source_type": "draft national policy framework",
+   "authority_rank": "DRAFT. Authoritative as to what the competent authority PROPOSES; it is NOT law, NOT notified policy, and creates no obligation. This distinction is load-bearing for any candidate-facing use.",
+   "original_url": "https://dgma.gov.in/engineering-wing/maritime-india-net-zero",
+   "document_url": "https://dgma.gov.in/download/1785761838_6a70902e84564_draft-national-maritime-decarbonization-policy-framework-dt030726.pdf",
+   "local_path": "F:/Marine-Intelligence-Weekly/Knowledge Central/india-maritime-decarbonisation/sources/DGMA_draft_national_maritime_decarbonisation_policy_framework_2026-07-03.pdf",
+   "sha256": "7da85237698ed24f72337e84b814545fd50952a2cf4c810cd02be7dafc5745a7",
+   "bytes": 2816516,
+   "access_status": "RETRIEVED",
+   "access_note": "104 pages, full text layer. WARNING: the document is internally inconsistent in places - see claims_NOT_established. Read its deployment-status sections (Part I section 4 onward, and the \"what is deployed or actively underway as of mid-2026\" chapter) before relying on any narrative summary earlier in it.",
+   "publication_date": "2026-07-03",
+   "publication_date_note": "The most recent document on DGMA's Maritime INDIA @ Net Zero page as at 31 August 2026.",
+   "effective_date": null,
+   "effective_date_note": "None - it is a draft framework. Recording 'no effective date' is the point, not an omission.",
+   "supersedes": [],
+   "supersedes_note": "It does not supersede Harit Sagar, the Green Tug Transition Programme, MIV-2030 or MAKV-2047; it is the policy spine intended to connect them.",
+   "superseded_by": null,
+   "currentness": "CURRENT_VERIFIED",
+   "checked_on": "2026-08-31",
+   "checked_how": "Asked what DGMA has published MOST RECENTLY on Indian maritime decarbonisation, rather than checking a known programme list. That is what surfaced the National Green Shipping Policy and this framework, neither of which appeared in the earlier programme-by-programme currency record.",
+   "revalidation_trigger": "ON_DGMA_AMENDMENT",
+   "revalidation_note": "A DRAFT at version 6 is by definition moving. Re-check the DGMA page before any currentness-sensitive use, and expect a notified policy to replace this framing. When re-reading, go to the deployment-status chapters, not the narrative ones.",
+   "verified_claims": [
+    "The framework is built on eight pillars: Green Shipbuilding and Retrofits; Green Ports; Green Ship Recycling; Green Finance; Green Skill; Alternate Fuels; Green Technology; Pollution Prevention / Waste Management.",
+    "The Draft National Green Shipping Policy is at version 6 dated 4 May 2026 and is structured around seven pillars - the framework's eight add Pollution Prevention.",
+    "Maritime INDIA @ Net Zero is described as a multi-ministerial platform to translate the National Green Shipping Policy into coordinated national action; a workshop was held on 14-15 January 2026 at the India Habitat Centre with 312 participants.",
+    "Harit Sagar Green Port Guidelines were issued by MoPSW in 2023 and require, among other things, all major ports to achieve 60% renewable electricity consumption by 2030, shore power connectivity at major ports on specified timelines, ISO 14001 certification, and greenhouse-gas inventories with carbon emissions tracked per tonne of cargo handled.",
+    "Pilot ports identified for green hydrogen and ammonia bunkering infrastructure: JNPT, Kandla, Visakhapatnam, Paradip, Kochi and Chennai.",
+    "The Shipbuilding Financial Assistance Scheme is extended to 31 March 2036 with a corpus of Rs 24,736 crore; a Shipbuilding Development Scheme with an outlay of Rs 19,989 crore is PROPOSED; the capacity target is 4.5 million Gross Tonnage annually.",
+    "India's port decarbonisation is guided by Harit Sagar carbon accounting rather than by a port equivalent of the MARPOL Annex VI CII, which applies to ships of 5,000 GT and above.",
+    "The Green Tug Transition Programme was LAUNCHED IN OCTOBER 2024 and is described as India's most advanced vessel-level decarbonisation initiative. PHASE 1 COVERS FOUR PILOT PORTS - Deendayal, JNPA, Paradip and V.O. Chidambaranar - with two green tugs to be procured or chartered at each, and work orders placed at all four. Deendayal has completed tender float and contract award; VOCPA, JNPA, PPA, NMPA and VPA have issued Notices Inviting Tender. Cochin (KPL) is planning green tug procurement only after its current diesel tug contract expires in August 2027 - it is NOT a Phase 1 port. India's first all-electric tug, built by Atreya Shipyard for Deendayal with Kongsberg permanent-magnet propulsion, was expected by late 2026. About 100 green tugs are in the procurement pipeline at approximately Rs 12,000 crore.",
+    "Renewable energy was 15.48% of total electricity consumption across Indian major ports as of 2023-24; Deendayal Port Authority is at 69.41% and Mumbai Port Authority at 87.22%, both already past the 60% target, and nine major ports are on track for 2030.",
+    "A Cabinet-approved allocation of Rs 69,725 crore spans four schemes: SBFAS Rs 24,736 crore, Maritime Development Fund Rs 25,000 crore (Maritime Investment Fund Rs 20,000 cr + Interest Incentivisation Fund Rs 5,000 cr), Shipbuilding Development Scheme Rs 19,989 crore, and legal / policy / process reforms as a structural enabler. The framework states that \"none of these allocations are currently green-labelled, green-conditioned, or subject to environmental performance criteria\" and that no maritime-specific green finance taxonomy exists.",
+    "Harit Sagar requires an annual port-level GHG inventory and reduction targets \"aligned with the IMO Port Carbon Intensity Indicator (PCII) framework\"; a Port CII concept therefore EXISTS, while Indian port performance is measured as carbon per tonne of cargo handled against Environmental Performance Indicators.",
+    "The framework proposes mandatory sustainable-biofuel blending for domestic coastal vessels commencing 2027, with ISCC or RSB certification and a Proof of Sustainability document."
+   ],
+   "claims_NOT_established": [
+    "That the National Green Shipping Policy or this framework has been NOTIFIED or adopted. Both are drafts as at 31 August 2026.",
+    "The \"23% renewable energy use at ports\" figure carried by the earlier August currency record. DGMA's own framework states 60% renewable electricity at major ports by 2030 under Harit Sagar, against a 15.48% baseline. The 23% figure was not located in any DGMA document read here and is not used.",
+    "That any Green Tug Transition Programme tug is in service.",
+    "THE DOCUMENT CONTRADICTS ITSELF AND MIW DOES NOT PICK A SIDE. (1) On the GTTP pilot ports: its narrative chapter says \"pilot deployments at JNPT and Kochi\", its deployment-status chapter says Phase 1 is Deendayal, JNPA, Paradip and V.O. Chidambaranar with Cochin waiting until 2027. The status chapter is the one that describes reality and is what MIW uses; the first version of the card used the narrative chapter and was WRONG, caught by independent review. (2) On the GTTP end date: one section says at least 30% green tugs at all major ports by 2030 with full transition by 2036, another says 50 green tugs by 2030 and full fleet transition by 2047."
+   ],
+   "evidence": [
+    {
+     "id": "DRAFT NATIONAL MARITIME DECARBONISATION POLICY-FRAMEWORK, 3 July 2026",
+     "where": "https://dgma.gov.in/download/1785761838_6a70902e84564_draft-national-maritime-decarbonization-policy-framework-dt030726.pdf",
+     "kind": "the competent authority's own draft - tier 1 for what is proposed"
+    },
+    {
+     "id": "DGMA, Maritime INDIA @ Net Zero",
+     "where": "https://dgma.gov.in/engineering-wing/maritime-india-net-zero",
+     "kind": "the competent authority's own page"
+    }
+   ],
+   "used_by": [
+    "meoclass1/QB10_A.html#q7"
+   ],
+   "first_registered": "2026-08-31",
+   "registered_by": "ORAL-AUG-2 H2-D"
+  },
+  {
+   "source_id": "SRC-OCIMF-SIRE20",
+   "title": "OCIMF SIRE 2.0 - Ship Inspection Report Programme, version 2.0",
+   "edition": "The programme as operated from its 2 September 2024 go-live",
+   "issuing_authority": "Oil Companies International Marine Forum (OCIMF)",
+   "issuing_authority_note": "OCIMF owns and operates the programme; there is no co-publisher.",
+   "source_class": "INDUSTRY_PROGRAMME",
+   "source_type": "commercial vetting programme documentation",
+   "authority_rank": "Commercial, not statutory. No IMO instrument mandates SIRE; it binds through charterparty and terminal acceptance, not through flag or class.",
+   "original_url": "https://www.ocimf.org/programmes/sire-2-0",
+   "document_url": null,
+   "local_path": null,
+   "sha256": null,
+   "bytes": null,
+   "access_status": "ACCESS_LIMITED",
+   "access_note": "OCIMF's own programme page is readable and was read. Its underlying programme documents are behind signed, expiring document-library links: the SIRE 2.0 FAQ link returned HTTP 500 (expired signature) and the 'SIRE 2.0 is live' press release is an image-only PDF with no text layer. Neither was worked around. The programme's Question Library and CVIQ content are member-restricted by design and were not sought.",
+   "publication_date": "2024-09-02",
+   "publication_date_note": "Go-live and permanent withdrawal of the VIQ7 option.",
+   "effective_date": "2024-09-02",
+   "effective_date_note": "From this date SIRE 2.0 is the sole OCIMF tanker inspection regime. Submitted VIQ7 reports remained downloadable for 12 months from publication.",
+   "supersedes": [
+    "SIRE VIQ7"
+   ],
+   "supersedes_note": "VIQ7 was a fixed questionnaire; SIRE 2.0 compiles a vessel-specific CVIQ per inspection. The replacement is architectural, not a version bump.",
+   "superseded_by": null,
+   "currentness": "CURRENT_VERIFIED",
+   "checked_on": "2026-08-31",
+   "checked_how": "Asked what OCIMF ITSELF currently says about SIRE 2.0, not whether SIRE 2.0 had replaced VIQ7. OCIMF's live programme page describes the regime in the present tense, with 2026 inspector-accreditation and refresher-course scheduling, and names no successor programme.",
+   "revalidation_trigger": "ON_NEXT_PUBLISHER_VERSION",
+   "revalidation_note": "Watch OCIMF bulletins. Focused Inspection Campaigns change what is asked without changing the programme, so a campaign is not a version change.",
+   "verified_claims": [
+    "PRIMARY, from OCIMF's own page: SIRE 2.0 replaced VIQ7 and was 'developed alongside industry and the OCIMF membership' to 'future proof the tanker inspection process in line with evolving risks, technology and expertise'.",
+    "PRIMARY: the Compiled Vessel Inspection Questionnaire (CVIQ) is 'a unique, vessel-specific set of questions compiled for each vessel inspection', drawn by algorithm from core and rotational question pools.",
+    "PRIMARY: inspections evaluate hardware, process and human factors, and 'observations will be supported by objective evidence'.",
+    "PRIMARY: an inspector must obtain sponsorship from a SIRE submitting member before applying for an accreditation course; submitting companies commission inspections and are 'responsible for reviewing each inspection report ... for quality before releasing it'.",
+    "PRIMARY: the programme is operational, with an Inspector Continuous Professional Development Programme and 2026 refresher-course scheduling from 13 January 2026.",
+    "PRIMARY: OCIMF's glossary names FOUR question types - core (\"minimum questions required to meet the fundamental risk assessment criteria\"), rotational (\"a non-core question assigned to a vessel on an occasional basis\"), campaign (\"a new (or existing rotational) question assigned to every inspection for a fixed period\") and conditional (\"a question assigned to verify an aspect of a vessel's operational history\").",
+    "PRIMARY: Performance Influencing Factors (PIFs) are defined as \"a collective term for those factors that are known to influence or shape human performance\", which \"can enhance and assist human performance, or they can degrade and obstruct it\"; the inspector must \"select the most appropriate PIF from a prescribed drop-down list\".",
+    "PRIMARY: OCIMF states the effect of the compiled questionnaire is to \"reduce the overall number of questions assigned to an inspection\". OCIMF publishes no question count."
+   ],
+   "claims_NOT_established": [
+    "SECONDARY ONLY - the 2 September 2024 go-live date and the permanent withdrawal of VIQ7 on that date. Consistently reported by multiple independent outlets citing OCIMF's own announcement, but OCIMF's press release PDF is image-only and could not be read.",
+    "SECONDARY ONLY - the graded response scale (Exceeds Expectations ... Not as Expected) replacing binary yes/no, and the 12-month availability of submitted VIQ7 reports.",
+    "SECONDARY ONLY - the count of inspections completed, and the October 2025 Focused Inspection Campaign on vessel hardening. Not used in the card.",
+    "NOT ESTABLISHED AND DELIBERATELY NOT USED - any number of questions per inspection. Trade sources give approximate figures; OCIMF publishes none, and the card says so rather than importing an unsourced number.",
+    "CORRECTED 2026-08-31: this entry previously listed the campaign and conditional question types as secondary-only. They are on OCIMF's own page, as are PIFs. The entry was over-conservative and the card was thinner than the primary source allowed; both are fixed."
+   ],
+   "evidence": [
+    {
+     "id": "OCIMF, SIRE 2.0 programme page",
+     "where": "https://www.ocimf.org/programmes/sire-2-0",
+     "kind": "the programme owner's own page - tier 1"
+    },
+    {
+     "id": "OCIMF SIRE 2.0 FAQ (June 2021)",
+     "where": "https://www.ocimf.org/doclink/ocimf-sire-2-0-faqs-june-2021/",
+     "kind": "OCIMF document-library link - EXPIRED SIGNATURE, HTTP 500, not read"
+    },
+    {
+     "id": "OCIMF press release, SIRE 2.0 is live",
+     "where": "https://www.ocimf.org/ru/document-libary/943-sire-2-0-is-live/file",
+     "kind": "OCIMF's own release - image-only PDF, no text layer, not read"
+    }
+   ],
+   "used_by": [
+    "meoclass1/QB9_F.html#q12"
+   ],
+   "first_registered": "2026-08-31",
+   "registered_by": "ORAL-AUG-2 H2-A"
+  }
+ ]
 }
