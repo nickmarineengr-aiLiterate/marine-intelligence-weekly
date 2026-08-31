@@ -1,47 +1,67 @@
 {
-  "record_class": "CURRENT_INTAKE_SOURCE_CARRIERS",
-  "generated_by": "hand-authored; read by tools/oral/ingest_august_intake.py",
-  "note": "The ordered list of raw candidate-report carriers that make up the CURRENT August 2026 intake. Order is identity-bearing: submission and occurrence ids are allocated by walking this list, so a carrier is APPENDED and never inserted. The raw .txt files stay git-ignored, exactly like the historical .docx; only this provenance record and the derived per-occurrence records are committed.",
-  "authority": "SOURCE PROVENANCE ONLY. This file says which candidate reports MIW received and when. It is not answer authority, and it makes no claim about whether anything in a carrier is technically correct.",
-  "date_semantics": {
-    "received_date": "the date the candidate report reached MIW, taken from the carrier itself.",
-    "attempt_date": "the date of the sitting the report describes.",
-    "why_they_are_equal_here": "Every carrier so far is a same-day WhatsApp relay of that day's sitting, and the carrier names its own date. No carrier contains a sitting date distinct from its own, so nothing finer is asserted. If a future carrier reports an earlier sitting, attempt_date is the one that moves and received_date stays the day it arrived.",
-    "not_invented": "An attempt NUMBER (Attempt 1/2/3) is written by candidates and is parsed from the body. An attempt DATE is not written by candidates and is never inferred from one."
+ "record_class": "CURRENT_INTAKE_SOURCE_CARRIERS",
+ "generated_by": "hand-authored; read by tools/oral/ingest_august_intake.py",
+ "note": "The ordered list of raw candidate-report carriers that make up the CURRENT August 2026 intake. Order is identity-bearing: submission and occurrence ids are allocated by walking this list, so a carrier is APPENDED and never inserted. The raw .txt files stay git-ignored, exactly like the historical .docx; only this provenance record and the derived per-occurrence records are committed.",
+ "authority": "SOURCE PROVENANCE ONLY. This file says which candidate reports MIW received and when. It is not answer authority, and it makes no claim about whether anything in a carrier is technically correct.",
+ "date_semantics": {
+  "received_date": "the date the candidate report reached MIW, taken from the carrier itself.",
+  "attempt_date": "the date of the sitting the report describes.",
+  "why_they_are_equal_here": "Every carrier so far is a same-day WhatsApp relay of that day's sitting, and the carrier names its own date. No carrier contains a sitting date distinct from its own, so nothing finer is asserted. If a future carrier reports an earlier sitting, attempt_date is the one that moves and received_date stays the day it arrived.",
+  "not_invented": "An attempt NUMBER (Attempt 1/2/3) is written by candidates and is parsed from the body. An attempt DATE is not written by candidates and is never inferred from one."
+ },
+ "carriers": [
+  {
+   "source_file": "24 Aug 2026 oral questions.txt",
+   "sha256": "ba426d1842d3d217bfabb976fbdb0b5f35764f87b8c49fb79e5ad550d0379b8f",
+   "bytes": 6171,
+   "carrier_date": "2026-08-24",
+   "received_date": "2026-08-24",
+   "attempt_date": "2026-08-24",
+   "source_type": "CANDIDATE_SITTING_REPORT",
+   "status": "INGESTED_AND_ADJUDICATED",
+   "note": "The founding carrier. Its eight submissions and 87 occurrences are historical identities: AUG2026-S001 through S008 and AUG-0001 through AUG-0087. They are reproduced byte-identically by every later run and are never renumbered."
   },
-  "carriers": [
-    {
-      "source_file": "24 Aug 2026 oral questions.txt",
-      "sha256": "ba426d1842d3d217bfabb976fbdb0b5f35764f87b8c49fb79e5ad550d0379b8f",
-      "bytes": 6171,
-      "carrier_date": "2026-08-24",
-      "received_date": "2026-08-24",
-      "attempt_date": "2026-08-24",
-      "source_type": "CANDIDATE_SITTING_REPORT",
-      "status": "INGESTED_AND_ADJUDICATED",
-      "note": "The founding carrier. Its eight submissions and 87 occurrences are historical identities: AUG2026-S001 through S008 and AUG-0001 through AUG-0087. They are reproduced byte-identically by every later run and are never renumbered."
-    },
-    {
-      "source_file": "27 Aug 2026 oral questions.txt",
-      "sha256": "98a526bc56f08b3379c4eaabac60732b36e47c2f4b93089ad7c77dd257d7dbff",
-      "bytes": 3218,
-      "carrier_date": "2026-08-27",
-      "received_date": "2026-08-27",
-      "attempt_date": "2026-08-27",
-      "source_type": "CANDIDATE_SITTING_REPORT",
-      "status": "INGESTED",
-      "note": "Carries the five starred follow-up probes recorded under question 2 of its first submission, and two no-question sentinels."
-    },
-    {
-      "source_file": "28 Aug 2026 oral questions.txt",
-      "sha256": "bda8f140719683ad709018d3788ea9c640fb12325470a7fab8c2ca2b54b6f2f2",
-      "bytes": 3873,
-      "carrier_date": "2026-08-28",
-      "received_date": "2026-08-28",
-      "attempt_date": "2026-08-28",
-      "source_type": "CANDIDATE_SITTING_REPORT",
-      "status": "INGESTED",
-      "note": "Carries two no-question sentinels and a bare role heading with no name."
-    }
-  ]
+  {
+   "source_file": "27 Aug 2026 oral questions.txt",
+   "sha256": "98a526bc56f08b3379c4eaabac60732b36e47c2f4b93089ad7c77dd257d7dbff",
+   "bytes": 3218,
+   "carrier_date": "2026-08-27",
+   "received_date": "2026-08-27",
+   "attempt_date": "2026-08-27",
+   "source_type": "CANDIDATE_SITTING_REPORT",
+   "status": "INGESTED",
+   "note": "Carries the five starred follow-up probes recorded under question 2 of its first submission, and two no-question sentinels."
+  },
+  {
+   "source_file": "28 Aug 2026 oral questions.txt",
+   "sha256": "bda8f140719683ad709018d3788ea9c640fb12325470a7fab8c2ca2b54b6f2f2",
+   "bytes": 3873,
+   "carrier_date": "2026-08-28",
+   "received_date": "2026-08-28",
+   "attempt_date": "2026-08-28",
+   "source_type": "CANDIDATE_SITTING_REPORT",
+   "status": "INGESTED",
+   "note": "Carries two no-question sentinels and a bare role heading with no name."
+  },
+  {
+   "source_file": "_snapshots/31 Aug 2026 oral questions - snapshot 01.txt",
+   "sha256": "79c9f26988bf072b1347e13d10a90ec0318b9c85228774aeb8ce8aef76a34da1",
+   "bytes": 2617,
+   "carrier_date": "2026-08-31",
+   "received_date": "2026-08-31",
+   "attempt_date": "2026-08-31",
+   "source_type": "CANDIDATE_SITTING_REPORT",
+   "status": "INGESTED_AND_ADJUDICATED",
+   "note": "SNAPSHOT 1 OF A ROLLING DAY - MORE INPUT MAY FOLLOW. The 31 August inbox file is still being written: it stood at 842 bytes at 16:27 and 2,617 bytes at 19:48, and the Founder confirms more candidates may report today. An inbox that grows cannot be a carrier, because ingest_carriers re-walks every carrier from the first and reproduces earlier records byte-for-byte - a carrier that changed would renumber identities already issued. So the inbox is COPIED to an immutable snapshot under _snapshots/ and the SNAPSHOT is what is registered. The next tranche becomes snapshot 02 carrying ONLY the new material, appended after this one, so nothing allocated here ever moves."
+  }
+ ],
+ "intake_window": {
+  "status": "OPEN_EXPECTING_MORE_INPUT",
+  "as_at": "2026-08-31",
+  "day": "2026-08-31",
+  "snapshots_taken": 1,
+  "note": "31 AUG SNAPSHOT 1 - MORE INPUT MAY FOLLOW. August is NOT closed and the current 31-August occurrence count is NOT final. The Founder confirms further candidates may report today.",
+  "how_the_next_tranche_is_absorbed": "The live inbox file 'docs/MIW-master-Question-bank/New questions from August orals/31 Aug 2026 oral questions.txt' is a MUTABLE HUMAN INBOX and is never itself a carrier. When more material arrives: (1) diff the inbox against snapshot 01; (2) copy ONLY the new material into '_snapshots/31 Aug 2026 oral questions - snapshot 02.txt'; (3) APPEND that snapshot to this registry after snapshot 01; (4) re-run the ingest. Identities are allocated by walking the registry in order, so snapshot 02's submissions start at AUG2026-S026 and its occurrences at AUG-0256, and NOTHING allocated in snapshot 01 moves. A snapshot carries only its own increment - never a fresh full copy of the inbox - or its submissions would be ingested twice.",
+  "why_a_snapshot_at_all": "ingest_carriers re-walks EVERY registered carrier from the first on every run and reproduces earlier records byte-for-byte, which is what M4-BYTE-STABLE checks. A carrier that grew between runs would therefore renumber identities already issued and published. The inbox demonstrably grows: it stood at 842 bytes at 16:27 today and 2,617 bytes at 19:48. So the inbox is copied to an immutable snapshot and the snapshot is the carrier."
+ }
 }
