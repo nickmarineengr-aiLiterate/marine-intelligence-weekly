@@ -1331,3 +1331,30 @@ Every Grain Code answer built before 2026 teaches two compartment configurations
 GREP: SKIP — the corrected card deliberately names both old configurations while adding the
 third, so a phrase scan for “filled” or “partly filled” fires on the fix. Verify by reading the
 sentence: wherever the configurations are enumerated, **all three** must appear.
+
+### 56. “Freedom of navigation” has a condition, and it is the words *due regard*
+
+A 31 August 2026 candidate was asked for **freedom of navigation** and then, as the follow-up,
+for the **condition of** freedom of navigation. Most candidates answer the first and stall on the
+second, because the freedom is taught as though it were unqualified. It is not.
+
+* **In the EEZ — Article 58(3).** A State exercising its Article 58 freedoms *“shall have due
+  regard to the rights and duties of the coastal State and shall comply with the laws and
+  regulations adopted by the coastal State”* in accordance with the Convention.
+* **On the high seas — Article 87(2).** The Article 87 freedoms *“shall be exercised…with due
+  regard for the interests of other States in their exercise of the freedom of the high seas”*.
+
+**Say “due regard” and give both articles.** That single phrase is the answer to the condition
+limb in both zones, and a candidate who produces it has visibly read the Convention rather than a
+summary of it.
+
+**Do not confuse the freedom with innocent passage.** They are different rights in different
+zones under different articles: innocent passage (Arts. 17–19) operates in the **territorial
+sea**, is subject to the passage being continuous, expeditious and not prejudicial, and can be
+lost; freedom of navigation operates in the **EEZ and high seas** and is qualified by due regard,
+not by innocence. Answering “freedom of navigation is innocent passage” collapses two regimes and
+is the single commonest error on this question.
+
+GREP: SKIP — the corrected card names innocent passage deliberately, in order to distinguish it.
+Verify by reading the sentence: every mention must be drawing the distinction, never equating the
+two.
