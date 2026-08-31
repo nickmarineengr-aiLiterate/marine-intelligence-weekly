@@ -1263,3 +1263,34 @@ GREP: SKIP — the corrected text deliberately quotes the wording it rejects
 (“Treaty → Convention → Protocol”, “always requires ratification”, “resolution” beside
 “recommendatory”) so a phrase scan can only ever fire on the fix. Verify by reading the
 sentence: every mention must be **negated or quoted**.
+
+### 54. Naming BMP5 as the current security guidance — and the currency question that cannot find a second edition
+
+Five live cards taught **BMP5** as the standard in force. It is not. **BMP Maritime Security
+(BMP MS)** was published on **31 March 2025** by **BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO and
+OCIMF**, and it states that it **replaces all the existing versions of the BMP** — BMP5, the
+Global Counter Piracy Guidance and BMP West Africa. A **second edition followed in 2026**. An
+examiner who asks “what do you follow for a Red Sea transit?” in a 2026 oral is asking about a
+publication that has now superseded its own first edition twice over the guidance the card named.
+
+* **Say the supersession before the technique.** BMP5's hardening, citadel, lookout and
+  reporting content is still examinable and is still correct as technique — it is the
+  **edition label** that fails you. Answer “BMP Maritime Security, which replaced BMP5 in 2025;
+  the measures are…”, never “BMP5 says…”.
+* **Do not re-region-lock it.** BMP5 was scoped to the Red Sea, Gulf of Aden, Indian Ocean and
+  Arabian Sea; BMP West Africa to the Gulf of Guinea. BMP MS is **deliberately global** and
+  covers **state and non-state threats** — missile, drone and sea-mine attack as well as piracy
+  and armed robbery. “Which High Risk Area does it apply in?” is a question built on the model it
+  replaced. It is **voluntary industry guidance**; **SOLAS Ch. XI-2 and the ISPS Code** are the
+  mandatory instruments it helps you discharge.
+* **The trap behind the trap — a currency check that cannot fail correctly.** The first version
+  of this correction taught the **2025 first edition** as current, because the currency record
+  behind it asked only *“does BMP MS supersede BMP5?”*. That question answers **yes**, truthfully,
+  and is **structurally incapable** of revealing a later edition of BMP MS itself. The question
+  that finds it is *“what has the authoritative publisher said MOST RECENTLY about this subject?”*
+  The rule is recorded at `docs/sources/MIW_SOURCE_REGISTRY.json` under `query_discipline`, and it
+  is why that registry exists.
+
+GREP: SKIP — every corrected card still names BMP5 on purpose, as the predecessor. A phrase scan
+for “BMP5” fires on the fix. Verify by reading the sentence: each mention must be **labelled as
+superseded** or **scoped to technique**, never presented as the guidance in force.
