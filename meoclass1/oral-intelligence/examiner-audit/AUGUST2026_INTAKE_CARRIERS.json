@@ -1,0 +1,47 @@
+{
+  "record_class": "CURRENT_INTAKE_SOURCE_CARRIERS",
+  "generated_by": "hand-authored; read by tools/oral/ingest_august_intake.py",
+  "note": "The ordered list of raw candidate-report carriers that make up the CURRENT August 2026 intake. Order is identity-bearing: submission and occurrence ids are allocated by walking this list, so a carrier is APPENDED and never inserted. The raw .txt files stay git-ignored, exactly like the historical .docx; only this provenance record and the derived per-occurrence records are committed.",
+  "authority": "SOURCE PROVENANCE ONLY. This file says which candidate reports MIW received and when. It is not answer authority, and it makes no claim about whether anything in a carrier is technically correct.",
+  "date_semantics": {
+    "received_date": "the date the candidate report reached MIW, taken from the carrier itself.",
+    "attempt_date": "the date of the sitting the report describes.",
+    "why_they_are_equal_here": "Every carrier so far is a same-day WhatsApp relay of that day's sitting, and the carrier names its own date. No carrier contains a sitting date distinct from its own, so nothing finer is asserted. If a future carrier reports an earlier sitting, attempt_date is the one that moves and received_date stays the day it arrived.",
+    "not_invented": "An attempt NUMBER (Attempt 1/2/3) is written by candidates and is parsed from the body. An attempt DATE is not written by candidates and is never inferred from one."
+  },
+  "carriers": [
+    {
+      "source_file": "24 Aug 2026 oral questions.txt",
+      "sha256": "ba426d1842d3d217bfabb976fbdb0b5f35764f87b8c49fb79e5ad550d0379b8f",
+      "bytes": 6171,
+      "carrier_date": "2026-08-24",
+      "received_date": "2026-08-24",
+      "attempt_date": "2026-08-24",
+      "source_type": "CANDIDATE_SITTING_REPORT",
+      "status": "INGESTED_AND_ADJUDICATED",
+      "note": "The founding carrier. Its eight submissions and 87 occurrences are historical identities: AUG2026-S001 through S008 and AUG-0001 through AUG-0087. They are reproduced byte-identically by every later run and are never renumbered."
+    },
+    {
+      "source_file": "27 Aug 2026 oral questions.txt",
+      "sha256": "98a526bc56f08b3379c4eaabac60732b36e47c2f4b93089ad7c77dd257d7dbff",
+      "bytes": 3218,
+      "carrier_date": "2026-08-27",
+      "received_date": "2026-08-27",
+      "attempt_date": "2026-08-27",
+      "source_type": "CANDIDATE_SITTING_REPORT",
+      "status": "INGESTED",
+      "note": "Carries the five starred follow-up probes recorded under question 2 of its first submission, and two no-question sentinels."
+    },
+    {
+      "source_file": "28 Aug 2026 oral questions.txt",
+      "sha256": "bda8f140719683ad709018d3788ea9c640fb12325470a7fab8c2ca2b54b6f2f2",
+      "bytes": 3873,
+      "carrier_date": "2026-08-28",
+      "received_date": "2026-08-28",
+      "attempt_date": "2026-08-28",
+      "source_type": "CANDIDATE_SITTING_REPORT",
+      "status": "INGESTED",
+      "note": "Carries two no-question sentinels and a bare role heading with no name."
+    }
+  ]
+}
