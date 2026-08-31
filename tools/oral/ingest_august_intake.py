@@ -43,6 +43,12 @@ Q_RE = re.compile(r"^(\d+)\s*[.)]\s*(.*)$", re.S)
 # "Attempt 1" / "Attempt-1" / "Attempt : 2" - candidates punctuate this freely
 # and the attempt number is evidence about the sitting, not decoration.
 ATTEMPT_RE = re.compile(r"^Attempt\s*[-:]?\s*(\d+)\s*$", re.I)
+#: The same fact written the other way round. The 31-August product-tanker
+#: candidate wrote "2nd attempt", which ATTEMPT_RE does not match, so the
+#: number went to the preamble as prose. A resit report is a different kind
+#: of witness and the field is what recurrence intelligence reads.
+ATTEMPT_ORDINAL_RE = re.compile(
+    r"^(\d+)\s*(?:st|nd|rd|th)?\s+attempts?\s*$", re.I)
 RESULT_RE = re.compile(r"^Result\s*[-:]\s*(.+?)\s*$", re.I)
 RULE_RE = re.compile(r"^[-]{3,}$")
 # A bare "<Name> :" line inside the body. It is treated as an attribution
@@ -172,6 +178,21 @@ def canonical_examiner(name: str) -> str:
 # and every one fell through into the preamble, because a starred line matches
 # no other branch. A line whose content carries no word character is a bullet,
 # not a question, and is deliberately NOT promoted.
+#: A LETTERED ROOT ASK. The 31-August candidate wrote his four top-level
+#: subjects as "A." "B." "C." "D." and hung the examiner's cross-questions
+#: under each, renumbering from 1 every time. The parser recognised only "\d."
+#: numbering, so all four roots fell into the preamble and the eight probes
+#: under A were promoted to eight independent root questions -- the same shape
+#: as the S007 loss and the 27-August starred probes, and just as silent.
+#: Exactly one capital letter before the separator, so "Internal:" and a
+#: numbered line cannot match it.
+LETTERED_ROOT_RE = re.compile(r"^([A-Z])\s*[.)]\s+(\S.*)$", re.S)
+
+#: The candidate's own word for "what follows hangs off the ask above". Checked
+#: BEFORE the attribution branch, which would otherwise read "Cross questions:"
+#: as a name marker and drop the line.
+CROSS_Q_RE = re.compile(r"^cross\s+questions?\s*[:.]?\s*$", re.I)
+
 STAR_RE = re.compile(r"^\*+\s*(.*)$", re.S)
 
 
@@ -208,6 +229,12 @@ def parse_submission(lines, submission_id: str, seq_start: int,
     current_attrib = None
     attrib_marker = None
     attrib_basis = None
+    # The lettered ask the following cross-questions were asked ON, and whether
+    # the candidate has actually written "Cross questions:" yet. Both are needed:
+    # a numbered line under a lettered root but BEFORE that marker is not
+    # asserted to be a probe of it.
+    letter_root_id = None
+    in_cross = False
 
     for ln in lines:
         t = ln.strip()
@@ -254,7 +281,7 @@ def parse_submission(lines, submission_id: str, seq_start: int,
             # individually, so attribution is left exactly as it was.
             continue
 
-        m = ATTEMPT_RE.match(t)
+        m = ATTEMPT_RE.match(t) or ATTEMPT_ORDINAL_RE.match(t)
         if m:
             attempt_no = int(m.group(1))
             continue
@@ -262,6 +289,33 @@ def parse_submission(lines, submission_id: str, seq_start: int,
         m = RESULT_RE.match(t)
         if m:
             result = m.group(1).strip()
+            continue
+
+        if CROSS_Q_RE.match(t):
+            # Structural, not examinable. It says the numbered lines that
+            # follow are probes of the lettered ask above, and it is kept in
+            # the preamble so the record still shows the candidate wrote it.
+            in_cross = True
+            preamble.append(redact_third_parties(t))
+            continue
+
+        m = LETTERED_ROOT_RE.match(t)
+        if m and not Q_RE.match(t) and not ROLE_RE.match(t):
+            occurrences.append({
+                "occurrence_id": f"AUG-{seq_start + len(occurrences):04d}",
+                "submission_id": submission_id,
+                "source_question_number": None,
+                "source_line_style": "LETTERED_ROOT",
+                "source_letter": m.group(1),
+                "raw_question_text": m.group(2),
+                "normalised_question_text": normalise(m.group(2)),
+                "is_question": not looks_like_non_question(m.group(2)),
+                "_attrib": current_attrib,
+                "_attrib_marker": attrib_marker,
+                "_attrib_basis": attrib_basis,
+            })
+            letter_root_id = occurrences[-1]["occurrence_id"]
+            in_cross = False
             continue
 
         m = ATTRIB_RE.match(t)
@@ -334,7 +388,7 @@ def parse_submission(lines, submission_id: str, seq_start: int,
         m = Q_RE.match(t)
         if m:
             raw = m.group(2)
-            occurrences.append({
+            rec = {
                 "occurrence_id": f"AUG-{seq_start + len(occurrences):04d}",
                 "submission_id": submission_id,
                 "source_question_number": int(m.group(1)),
@@ -344,7 +398,25 @@ def parse_submission(lines, submission_id: str, seq_start: int,
                 "_attrib": current_attrib,
                 "_attrib_marker": attrib_marker,
                 "_attrib_basis": attrib_basis,
-            })
+            }
+            # Under a lettered root, after the candidate wrote "Cross
+            # questions:", a numbered line is a probe OF that root and not a
+            # root of its own. The fields are added only in that case, so every
+            # record written before this branch existed stays byte-identical.
+            if in_cross:
+                rec["source_line_style"] = "CROSS_QUESTION"
+                # Normally the lettered root the candidate wrote above. Where he
+                # wrote "Cross questions" with no lettered root - the 31-August
+                # product-tanker report does exactly this, putting one probe at
+                # the end of a plain numbered list - fall back to the most recent
+                # non-cross occurrence, which is the same rule the starred-probe
+                # branch already uses. Declining to would throw away a structural
+                # signal the candidate DID write, and an independent reviewer
+                # caught the asymmetry between the two branches.
+                rec["parent_occurrence_id"] = letter_root_id or next(
+                    (o["occurrence_id"] for o in reversed(occurrences)
+                     if o.get("source_line_style") != "CROSS_QUESTION"), None)
+            occurrences.append(rec)
             continue
 
         if unnumbered and not DATE_ONLY_RE.match(t):
@@ -353,6 +425,28 @@ def parse_submission(lines, submission_id: str, seq_start: int,
                 "submission_id": submission_id,
                 "source_question_number": None,
                 "source_line_style": "UNNUMBERED",
+                "raw_question_text": t,
+                "normalised_question_text": normalise(t),
+                "is_question": not looks_like_non_question(t),
+                "_attrib": current_attrib,
+                "_attrib_marker": attrib_marker,
+                "_attrib_basis": attrib_basis,
+            })
+            continue
+
+        # A LINE ENDING IN A QUESTION MARK IS NEVER PREAMBLE. The 31-August
+        # candidate wrote "Internal:" and then, unnumbered on its own line,
+        # "When DOC will be withdrawn ?". The submission was in numbered mode,
+        # so the line matched no branch and went to the preamble -- a real
+        # examiner question, recorded but never adjudicable. `unnumbered` is a
+        # whole-submission mode and could not help here; this is per-line and
+        # deliberately narrow, because the "?" is the candidate's own signal.
+        if t.endswith("?") and not DATE_ONLY_RE.match(t):
+            occurrences.append({
+                "occurrence_id": f"AUG-{seq_start + len(occurrences):04d}",
+                "submission_id": submission_id,
+                "source_question_number": None,
+                "source_line_style": "UNNUMBERED_QUESTION_MARK",
                 "raw_question_text": t,
                 "normalised_question_text": normalise(t),
                 "is_question": not looks_like_non_question(t),

@@ -46,6 +46,15 @@ STORE = L.OUT / "AUGUST2026_INTAKE_RECORDS.jsonl"
 C24 = "24 Aug 2026 oral questions.txt"
 C27 = "27 Aug 2026 oral questions.txt"
 C28 = "28 Aug 2026 oral questions.txt"
+C31 = "_snapshots/31 Aug 2026 oral questions - snapshot 01.txt"
+
+#: The 24/27/28 carriers are the HISTORICAL PREFIX of the registry. They are
+#: named here so the controls can assert that they stay first and unchanged.
+#: The registry itself is deliberately NOT pinned to a fixed set: 31 August is
+#: a rolling day and more snapshot carriers are expected, so a control that
+#: asserted the whole registry would go red on the next candidate report --
+#: the guard-expiry defect this repository has now hit five times.
+HISTORICAL_PREFIX = [C24, C27, C28]
 
 # The committed 24-August corpus. These are historical identities and this file
 # exists partly to keep them that way.
@@ -155,8 +164,16 @@ def t_m4_preservation():
 def t_m5_check():
     print("\nM5  --check validates EVERY registered carrier")
     regs = carriers()
-    check("M5-ALL-REGISTERED", {c["source_file"] for c in regs} == {C24, C27, C28},
-          f"registry holds {[c['source_file'] for c in regs]}")
+    # NOT an equality against a fixed set. The claim a rolling registry can make
+    # forever is that the historical carriers are still its first entries, in
+    # order, and that every entry is distinct.
+    names = [c["source_file"] for c in regs]
+    check("M5-HISTORICAL-PREFIX", names[:3] == HISTORICAL_PREFIX,
+          f"registry opens with {names[:3]}")
+    check("M5-NO-DUPLICATE-CARRIER", len(names) == len(set(names)),
+          f"a carrier is registered twice: {names}")
+    check("M5-31AUG-REGISTERED", C31 in names,
+          f"the 31 August snapshot is not registered: {names}")
 
     ok, why = I.verify_carriers(regs)
     check("M5-CLEAN-PASSES", ok, f"a clean tree failed the multi-carrier check: {why}")
@@ -270,6 +287,268 @@ def t_s3_starred():
 
 # ── source-line accounting ──────────────────────────────────────────────────
 
+# ── S4: the grammar the 31-August carrier introduced ────────────────────────
+# Every defect below was reproduced against the pre-fix parser on the real
+# snapshot before a line of the fix was written. None of them raises an error
+# on its own: three of the four are SILENT LOSSES, which is the whole reason
+# this block exists.
+
+def _s31():
+    """The 31-August snapshot's submissions, parsed in registry position."""
+    regs = carriers()
+    idx = [c["source_file"] for c in regs].index(C31)
+    subs, occ, _ = ingest_all()
+    return [s for s in subs if s.get("source_file") == Path(C31).name], occ, idx
+
+
+def t_s4_lettered_roots():
+    print("\nS4  lettered root asks with 'Cross questions:' underneath")
+    subs, _, _ = _s31()
+    occ = [o for s in subs for o in s["occurrences"]]
+    roots = [o for o in occ if o.get("source_line_style") == "LETTERED_ROOT"]
+    texts = [o["normalised_question_text"] for o in roots]
+
+    # The candidate wrote four top-level asks as A. B. C. D. and hung the
+    # examiner's cross-questions under each. The pre-fix parser recognised only
+    # "1." numbering, so all four roots fell into the preamble and the eight
+    # probes under A were promoted to eight independent root questions.
+    check("S4-ROOTS-CAPTURED", len(roots) == 4, f"{len(roots)} lettered roots: {texts}")
+    for want in ("Reason for Bulk carrier losses",
+                 "Dry docking flooding precautions",
+                 "H&M insurance",
+                 "Manage Stress on board"):
+        check(f"S4-ROOT {want[:24]!r}", any(want.lower() in x.lower() for x in texts),
+              f"root not captured; have {texts}")
+
+    # A lettered root must not be mistaken for a question number.
+    check("S4-ROOT-NO-QNUM", all(o.get("source_question_number") is None for o in roots),
+          "a lettered root carried a numeric source_question_number")
+
+
+def t_s4_cross_questions():
+    print("\nS4  cross-questions hang off their lettered root")
+    subs, _, _ = _s31()
+    occ = [o for s in subs for o in s["occurrences"]]
+    roots = {o["occurrence_id"]: o for o in occ
+             if o.get("source_line_style") == "LETTERED_ROOT"}
+    cross = [o for o in occ if o.get("source_line_style") == "CROSS_QUESTION"]
+
+    check("S4-CROSS-CAPTURED", len(cross) == 16,
+          f"{len(cross)} cross-questions (8+3+3+1 under letters, +1 with no letter)")
+
+    # EVERY cross-question has a parent. Most hang off a lettered root; the
+    # product-tanker candidate wrote "Cross questions" with no lettered root at
+    # all, and that probe falls back to the most recent non-cross occurrence -
+    # the same rule the starred-probe branch uses. The claim is "never an
+    # orphan", not "always a letter": asserting the stronger form was this
+    # control's first version and it would have kept the parser's asymmetry.
+    orphan = [o["occurrence_id"] for o in cross if not o.get("parent_occurrence_id")]
+    check("S4-CROSS-NEVER-ORPHAN", not orphan, f"cross-questions with no parent: {orphan}")
+    lettered = [o for o in cross if o.get("parent_occurrence_id") in roots]
+    check("S4-CROSS-HAS-ROOT", len(lettered) == 15,
+          f"{len(lettered)} of {len(cross)} cross-questions hang off a lettered root")
+
+    # The candidate restarted numbering at 1 under every letter. That is what
+    # the source says and the record keeps it, so source_question_number is NOT
+    # unique within a submission -- occurrence_id is the only identity.
+    nums = [o.get("source_question_number") for o in cross
+            if o.get("parent_occurrence_id") in roots]
+    check("S4-RESTARTED-NUMBERING-KEPT", nums.count(1) == 4,
+          f"expected four restarts at 1, saw {nums}")
+
+    # And the eight probes under A must NOT be siblings of the three under B.
+    by_root = {}
+    for o in cross:
+        by_root.setdefault(o["parent_occurrence_id"], []).append(o)
+    by_letter = {k: v for k, v in by_root.items() if k in roots}
+    check("S4-CROSS-GROUPED", sorted(len(v) for v in by_letter.values()) == [1, 3, 3, 8],
+          f"grouping under lettered roots is {sorted(len(v) for v in by_letter.values())}")
+
+
+def t_s4_unnumbered_question():
+    print("\nS4  an unnumbered question under a bare role heading")
+    subs, _, _ = _s31()
+    occ = [o for s in subs for o in s["occurrences"]]
+    hit = [o for o in occ if "doc will be withdrawn" in o["normalised_question_text"].lower()]
+
+    # "Internal:" then, on its own line, "When DOC will be withdrawn ?". The
+    # submission was in numbered mode, so this line matched no branch and went
+    # to the preamble. A question ending in "?" is never preamble.
+    check("S4-UNNUMBERED-Q-CAPTURED", len(hit) == 1,
+          f"{len(hit)} occurrences for the unnumbered DOC question")
+    if hit:
+        check("S4-UNNUMBERED-Q-IS-QUESTION", hit[0]["is_question"],
+              "captured but marked not-a-question")
+
+
+def t_s4_honorifics():
+    print("\nS4  'Mr. Simon' is Simon")
+    check("S4-HONORIFIC-STRIPPED",
+          I.canonical_examiner(I.normalise_examiner("Mr. Simon,")) == "Simon",
+          repr(I.canonical_examiner(I.normalise_examiner("Mr. Simon,"))))
+    check("S4-HONORIFIC-STRIPPED-2",
+          I.canonical_examiner(I.normalise_examiner("Mr. Srivastava.")) == "Srivastava",
+          repr(I.canonical_examiner(I.normalise_examiner("Mr. Srivastava."))))
+
+    # The register is the authority on identity, so no carrier may introduce a
+    # name it does not know. This is what stops "Mr. Simon" quietly becoming a
+    # seventh examiner in the attribution store.
+    reg = json.loads((L.OUT / "EXAMINER_ALIAS_REGISTER.json").read_text(encoding="utf-8"))
+    known = {e["canonical_name"] for e in reg["examiners"]}
+    subs, _, _ = ingest_all()
+    seen = {e["name_normalized"] for s in subs for e in s["examiners"]}
+    check("S4-NO-NEW-EXAMINER-IDENTITIES", seen <= known,
+          f"identities not in the alias register: {sorted(seen - known)}")
+
+
+def t_s4_commentary():
+    print("\nS4  the candidate's own commentary is not an examiner question")
+    subs, _, _ = _s31()
+    occ = [o for s in subs for o in s["occurrences"]]
+    texts = [o["normalised_question_text"].lower() for o in occ]
+    for phrase in ("conducting yoga",
+                   "main answer he is expecting",
+                   "these are the main points"):
+        bad = [x for x in texts if phrase in x and len(x) < 120]
+        check(f"S4-COMMENTARY-NOT-A-QUESTION {phrase[:22]!r}",
+              all(not o["is_question"] for o in occ
+                  if phrase in o["normalised_question_text"].lower()),
+              f"commentary promoted to an examinable question: {bad}")
+
+
+def t_s4_duplicate_numbering():
+    print("\nS4  the source's own duplicate '1.' is kept, not deduplicated")
+    subs, _, _ = _s31()
+    first = subs[0]["occurrences"]
+    ones = [o for o in first if o.get("source_question_number") == 1]
+    check("S4-DUPLICATE-NUMBER-KEPT", len(ones) == 2,
+          f"the carrier writes '1.' twice; parser kept {len(ones)}")
+
+
+def t_s4_attempt_ordinal():
+    print("\nS4  '2nd attempt' is an attempt number, not a comment")
+    subs, _, _ = _s31()
+    # ATTEMPT_RE reads "Attempt 2"; this candidate wrote "2nd attempt". The
+    # number is evidence about the report's weight - a resit is a different
+    # kind of witness - so it belongs in the field, not in prose.
+    got = [s.get("attempt_number") for s in subs]
+    check("S4-ORDINAL-ATTEMPT-PARSED", 2 in got, f"attempt numbers are {got}")
+    occ = [o for s in subs for o in s["occurrences"] if s.get("attempt_number") == 2]
+    check("S4-ATTEMPT-ON-OCCURRENCES", occ and all(o["attempt_number"] == 2 for o in occ),
+          "the attempt number did not reach that submission's occurrences")
+
+
+def t_s4_line_accounting():
+    print("\nS4  every meaningful source line is accounted for")
+    subs, _, _ = _s31()
+    src = (SRC / C31).read_text(encoding="utf-8").splitlines()
+    meaningful = [l.strip() for l in src
+                  if l.strip() and not I.RULE_RE.match(l.strip())]
+    accounted = set()
+    for s in subs:
+        for o in s["occurrences"]:
+            accounted.add(I.normalise(o["raw_question_text"]).lower())
+        for c in s["context_comments"]:
+            accounted.add(I.normalise(c).lower())
+        for e in s["examiners"]:
+            accounted.add(I.normalise(e["name_raw"]).lower())
+
+    # A line CONSUMED by a metadata branch is accounted for by the value it
+    # produced, not by surviving as text: "RESULT: PASS!" becomes
+    # attempt_result, "Internal:" becomes an attribution state. Requiring those
+    # to reappear verbatim was this control's own first bug, and it would have
+    # driven the fix in exactly the wrong direction - towards keeping copies of
+    # lines the parser had correctly understood.
+    consumed = 0
+    lost = []
+    for line in meaningful:
+        n = I.normalise(line).lower()
+        if any(n in a or a in n for a in accounted if a):
+            continue
+        if (I.RESULT_RE.match(line) or I.BARE_ROLE_RE.match(line)
+                or I.ATTEMPT_RE.match(line) or I.ATTEMPT_ORDINAL_RE.match(line)
+                or I.CROSS_Q_RE.match(line)):
+            consumed += 1
+            continue
+        lost.append(line)
+    check("S4-NO-SILENT-LINE-LOSS", not lost,
+          f"{len(lost)} source line(s) reach neither an occurrence, the record, "
+          f"nor a metadata branch: {lost[:4]}")
+    check("S4-METADATA-CONSUMED", consumed >= 3,
+          f"only {consumed} lines were consumed by a metadata branch")
+    # and the values those lines produced actually landed
+    results = {s.get("attempt_result") for s in subs}
+    check("S4-RESULT-LANDED", {"pass", "PASS!"} <= {str(r) for r in results},
+          f"attempt_result values are {results}")
+
+
+# ── S5: the rolling-snapshot contract ───────────────────────────────────────
+# 31 August is a rolling day: the human inbox file keeps growing as more
+# candidates report. ingest_carriers re-walks EVERY carrier from the first and
+# reproduces earlier records byte-for-byte, so a carrier that grew between runs
+# would renumber identities already issued and published. The contract is that
+# the inbox is never a carrier - an immutable SNAPSHOT is - and that appending
+# the next snapshot moves nothing. This control proves it instead of asserting
+# it, by simulating snapshot 02 without writing one.
+
+def t_s5_rolling_snapshot():
+    print("\nS5  appending the next snapshot moves no existing identity")
+    regs = carriers()
+    subs, occ, _ = ingest_all()
+    before = {o["occurrence_id"]: o for o in occ}
+
+    # A hypothetical snapshot 02 carrying ONLY new material. Any file will do -
+    # the 28-August carrier is reused as a stand-in for "some further text",
+    # because what is under test is IDENTITY ALLOCATION, not that file's content.
+    nxt = [dict(c) for c in regs] + [{
+        **{k: v for k, v in regs[2].items()},
+        "carrier_date": "2026-08-31", "received_date": "2026-08-31",
+        "attempt_date": "2026-08-31",
+    }]
+    subs2, occ2, _ = I.ingest_carriers(nxt)
+    after = {o["occurrence_id"]: o for o in occ2}
+
+    # 1. every identity that existed still exists, unchanged
+    drift = [k for k in before if k not in after
+             or after[k]["raw_question_text"] != before[k]["raw_question_text"]
+             or after[k]["submission_id"] != before[k]["submission_id"]]
+    check("S5-EXISTING-IDS-IMMOVABLE", not drift,
+          f"{len(drift)} identity/identities moved when a snapshot was appended: {drift[:4]}")
+
+    # 2. the new material lands strictly AFTER, never interleaved
+    fresh = [k for k in after if k not in before]
+    check("S5-NEW-IDS-CONTINUE", fresh and all(int(k[4:]) > len(before) for k in fresh),
+          f"appended snapshot did not continue the sequence: {sorted(fresh)[:3]}")
+
+    # 3. and the submission sequence continues too
+    old_subs = {s["submission_id"] for s in subs}
+    new_subs = {s["submission_id"] for s in subs2} - old_subs
+    check("S5-NEW-SUBMISSIONS-CONTINUE",
+          new_subs and min(new_subs) > max(old_subs),
+          f"submission ids collided or restarted: {sorted(new_subs)[:3]}")
+
+    # 4. the inbox itself must never be registered as a carrier
+    inbox = "31 Aug 2026 oral questions.txt"
+    check("S5-INBOX-NOT-A-CARRIER",
+          inbox not in {c["source_file"] for c in regs},
+          "the mutable inbox file is registered as a carrier; it will renumber "
+          "identities the next time a candidate adds to it")
+
+    # 5. and the snapshot that IS registered must still match its recorded hash.
+    #    Checked directly rather than through verify_carriers, which refuses a
+    #    SUBSET on purpose - dropping a carrier is itself a failure mode it
+    #    guards (M5-DROPPED-CARRIER-CAUGHT), and handing it one was this
+    #    control's own first bug.
+    import hashlib
+    snaps = [c for c in regs if c["source_file"].startswith("_snapshots/")]
+    check("S5-SNAPSHOT-REGISTERED", bool(snaps), "no snapshot carrier is registered")
+    for c in snaps:
+        got = hashlib.sha256(I.carrier_path(c).read_bytes()).hexdigest()
+        check(f"S5-SNAPSHOT-IMMUTABLE {c['source_file'][-13:]}", got == c["sha256"],
+              f"snapshot bytes changed: recorded {c['sha256'][:12]}, on disk {got[:12]}")
+
+
+
 def t_accounting():
     print("\nACC  nothing in a carrier disappears silently")
     _, _, reports = ingest_all()
@@ -281,7 +560,11 @@ def t_accounting():
 def main() -> int:
     print("multi-carrier August intake -- Stage 0 controls")
     for fn in (t_m1_dates, t_m2_m3_identities, t_m4_preservation, t_m5_check,
-               t_s1_sentinels, t_s2_canonical, t_s3_starred, t_accounting):
+               t_s1_sentinels, t_s2_canonical, t_s3_starred,
+               t_s4_lettered_roots, t_s4_cross_questions,
+               t_s4_unnumbered_question, t_s4_honorifics, t_s4_commentary,
+               t_s4_duplicate_numbering, t_s4_attempt_ordinal,
+               t_s4_line_accounting, t_s5_rolling_snapshot, t_accounting):
         try:
             fn()
         except Exception as e:  # a missing hook is a RED result, not a crash
