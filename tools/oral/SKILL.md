@@ -254,11 +254,13 @@ uncommitted corruption, where local mode must see it and ref mode must not.
 |---|---|
 | **Backslashes through a heredoc** | Author anything containing a backslash with a **file writer**, never a shell heredoc. E1 lost `\b` to 0x08, E5 lost `\1` to 0x01, and E6's handoff reproduced *both bytes* in the sentence describing them. Scan prose artefacts too: `python tools/oral/oral_bytes.py <paths>`. |
 | **Working-copy CRLF vs LF blob** | `.gitattributes` pins `*.html text eol=lf`. A freshly written file may hold CRLF until the next checkout normalises it. Normalise before comparing text; keep exact bytes only where the digest is the subject. **Never pin working-copy EOL in a manifest** — see debt item 1. |
+| **YOUR OWN WRITER CREATES THE CRLF** | On Windows, `pathlib.write_text()` / `open(..., 'w')` translate `\n` to `\r\n`. Every product file written that way in H2 flipped to CRLF, `validate_examiner_index` went red on *SQ home is LF-only*, and **E1–E5 went red with it** through their transitive `examiner_relationship_delta_zero` gate — nine reds from one writer. **Digests were unaffected**, because `card_digests` normalises, which is exactly why it stayed invisible until the full sweep. Write product files as `p.write_bytes(s.encode('utf-8').replace(b'\r\n', b'\n'))`, and audit EOL across every file you touched before running the suite. |
 | **Windows path separators** | `glob` returns backslashes; `git show origin/main:meoclass1\QB1_A.html` fails for every file, every baseline loads empty, and the whole corpus reads as new. A baseline that silently fails to load reports catastrophe rather than breakage. |
 | **cp1252 decoding** | Always `encoding="utf-8"`. `subprocess(text=True)` once manufactured 450 false diffs. |
 | **Counting `.q-card` divs** | Gives 723 against a canonical 721. Use the canonical extractor. |
 | **Guards that expire** | A guard pinning "the corpus total is 721" or "batches A–D digests" passes vacuously on the next batch. This has happened at least four times. Pin identities, not totals. |
 | **Reading the wrong exit code** | `cmd \| tail; echo $?` reports `tail`'s status. Use `${PIPESTATUS[0]}`. |
+| **`validate_corrections.py` is not the manifest auditor** | They audit different things. `validate_corrections.py` checks CORRECTION records against the live corpus; **`python tools/oral/oral_manifest.py` with no arguments audits every manifest on disk, batch and correction alike** (417 checks). H1 ran the first and not the second and shipped a batch manifest that was red on two counts. Run the bare auditor before every ship — it is one command and it covers records you are not thinking about. |
 | **Fixtures harvested from live state** | A self-test that reads the live corpus stops testing anything the moment the corpus changes. Build the fixture — or, where the point is to drive the shipped validator, DERIVE its inputs (§7.5b). |
 | **A killed mutating gate leaves product bytes** | `test_oral_supersession.py` and every `mutate_batch_*.py` restore in a `finally:`, which does **not** run when the process is killed by a timeout. Run them through `run_oral_release.py`, which owns a byte snapshot and an exact-path restore. Invoked bare and killed at 2 minutes, the supersession control left `QB1_A.html` mutated on disk and `validate_batch_e1.py` red — a "failure" that was purely the leftover. Check `git status` before believing a validator that suddenly went red. |
 | **Never run two gates concurrently** | The runner enforces serial ownership for a reason. A validator run while a mutating control was live in the background read a transiently-probed `QB3_I.html` and reported a card as changed that was byte-identical to `HEAD`. |
@@ -722,6 +724,56 @@ The wider shape, and why this sits beside §8.2a: a digest pin cannot tell you t
 content is right, and a **content** gate cannot tell you the content is still
 current. Correctness and currency fail independently, and only a source with a
 state and a revalidation trigger catches the second.
+
+---
+
+### 8.2c A source is not one voice — read the status chapter, and ask the issuer's index
+
+§8.2b is about asking the right *question* of an issuer. This is about what to do when the
+issuer's own answer is not single. Both H2 blocking defects were this, and neither was a
+research failure — the correct text was in a document already held.
+
+**A long document contradicts itself, and the narrative chapter is the one that lies.**
+DGMA's decarbonisation framework says, in its narrative chapter, that the Green Tug Transition
+Programme began *"with pilot deployments at JNPT and Kochi"*. Its **deployment-status** chapter
+says Phase 1 is Deendayal, JNPA, Paradip and V.O. Chidambaranar, work orders placed at all four,
+and Cochin waiting until its diesel tug contract expires in 2027. A card was written from the
+narrative chapter and then turned that error into *advice* — it told a Kochi MMD candidate to
+volunteer "Kochi as a GTTP pilot port" as one of three memorised facts, in front of the one panel
+certain to know better.
+
+> **Rule.** In any policy, framework or programme document, find the section that reports **what
+> has actually been deployed, tendered, awarded or commissioned**, and prefer it over any
+> narrative, executive-summary or context passage. Narrative chapters are written to motivate;
+> status chapters are written to account. When they disagree, say in the record that they
+> disagree and which one you used — do not silently pick.
+
+IMO does the same thing at instrument level. Its **January 2026 publication supplement** to the
+Grain Code omits annex item 6 of MSC.552(108) and carries **no operative clauses at all**, so the
+supplement alone cannot establish the adoption route, the deemed-acceptance date, or the absence
+of an application clause — the fact that decides whether an amendment binds existing ships.
+**A supplement to a sales publication is an editorial aid, not the instrument.** Get the
+resolution.
+
+**A "latest event" fact is checked against the issuer's INDEX, not against a document.**
+A card recorded the March 2026 National Shipping Board meeting as the latest verified, and hedged
+that it might not be latest *"after 31 August 2026"* — while DGMA's own listing had carried the
+16–17 April meeting for five months. The hedge was on the wrong side of the date. Worse, the card
+said the Board *"meets quarterly"* — the Rules' norm — when that Board had been meeting roughly
+monthly, which made a five-month-old answer look one meeting behind instead of four.
+
+> **Rule.** For anything with a recurring cadence — meetings, sessions, circulars, editions —
+> open the issuer's **listing page** and take the most recent row. Never infer currency from the
+> document you happen to hold. And state the **observed** cadence, not the prescribed one: a
+> cadence that understates reality hides staleness.
+
+Retrieving the later minutes then produced a better finding than the review had asked for:
+**both** the March and April sets are titled the *"31st meeting"*. Where a source is unreliable
+about its own identifiers, drop them — that card now gives dates and venues and no ordinals.
+
+The common shape across all three: **the defect was inside a source already held, and only
+reading a second part of it exposed the first.** Independent review found two of them; the third
+and fourth surfaced only because the findings were re-verified at source instead of accepted.
 
 ---
 
