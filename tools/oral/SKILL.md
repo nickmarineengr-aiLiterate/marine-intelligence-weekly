@@ -771,9 +771,22 @@ Retrieving the later minutes then produced a better finding than the review had 
 **both** the March and April sets are titled the *"31st meeting"*. Where a source is unreliable
 about its own identifiers, drop them — that card now gives dates and venues and no ordinals.
 
-The common shape across all three: **the defect was inside a source already held, and only
-reading a second part of it exposed the first.** Independent review found two of them; the third
-and fourth surfaced only because the findings were re-verified at source instead of accepted.
+**And a corpus index row is a pointer, not evidence — open the artefact.** H3A asked whether
+MARPOL Annex I Appendix II had been amended since 2018, searched the shared corpus, read its
+`INSTRUMENT_LOG.md` row for `MEPC.359(79)` — *"Annex I ch.6 reg 38 (reception facilities)"* — and
+concluded no. The resolution's own title is *"…(Regional reception facilities within Arctic waters
+and **Form of IOPP Certificate and Supplements**)"*, and its operative paragraph 3 replaces the
+title of Form B section 5. **The file was on disk in the folder that was searched.** A card shipped
+telling candidates the Supplement was last amended in 2018 when the answer is 2024, and an
+independent reviewer caught it. The log had been written by an earlier run that summarised the
+resolution by its headline subject and dropped the second limb. Treat every log row, manifest
+entry, register line and `used_by` list the same way: it tells you *where to look*, and it is not
+what you cite. This is the sibling of §14b's rule about quoting the card you reject — both say
+that a summary is not the thing.
+
+The common shape across all four: **the defect was inside a source already held, and only reading
+a second part of it exposed the first.** Independent review found most of them; the rest surfaced
+only because the findings were re-verified at source instead of accepted.
 
 ---
 
