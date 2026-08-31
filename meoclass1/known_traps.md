@@ -1294,3 +1294,40 @@ publication that has now superseded its own first edition twice over the guidanc
 GREP: SKIP — every corrected card still names BMP5 on purpose, as the predecessor. A phrase scan
 for “BMP5” fires on the fix. Verify by reading the sentence: each mention must be **labelled as
 superseded** or **scoped to technique**, never presented as the guidance in force.
+
+### 55. The Grain Code has THREE loading configurations since 1 January 2026, not two
+
+Every Grain Code answer built before 2026 teaches two compartment configurations —
+**filled** and **partly filled** — each with its own assumed volumetric heeling moment.
+**Resolution MSC.552(108)**, adopted **23 May 2024** and in force **1 January 2026** for
+**new and existing ships alike**, added a third:
+
+> **“specially suitable compartment, partly filled in way of the hatch opening, with ends
+> untrimmed”** — new definition **A 2.8**.
+
+* **What it permits.** New **A 10.4**: the hold is filled to a level **equal with or above the
+  bottom edge of the hatch end beams**, but the grain **outside the periphery of the hatch
+  opening may lie at its natural angle of repose** — so **dispensation may be granted from
+  trimming the ends**. Amended **A 10.7** then requires only the surface **in way of the hatch
+  opening** to be level. The commercial driver is the cost, time and confined-space exposure of
+  end-trimming a hold.
+* **What it costs.** The relief is bought with harsher assumed geometry, not with a lower pass
+  mark. New **B 1.1.5**: after loading, the surface is assumed to slope in all directions at
+  **30°** from the lower edge of the hatch end beam. New **Part B section 4**: after shifting,
+  the surfaces are assumed at **25°** to the horizontal. **B 1.5** carries the
+  **1.12 × transverse heeling moment** vertical-shift factor into the new category.
+* **What did NOT change.** The three intact-stability criteria are untouched — **12°** maximum
+  heel, **0.075 m·rad** residual area to 40°, **0.30 m** minimum corrected GM — and so is the
+  Document of Authorisation regime. A candidate who says the criteria were relaxed has inverted
+  the amendment.
+* **The attribution trap inside the trap.** It is widely and correctly said that an owner using
+  the new option must have the **approved grain loading manual updated** — the ship can only be
+  loaded to a condition its booklet covers. That is **class-society and P&I guidance**, and it is
+  **not in the text of MSC.552(108)**. Give the point, but label it.
+* **Do not confuse it with the IMSBC Code.** **MSC.575(110)**, IMSBC amendment 08-25, is a
+  different code on a different timetable — voluntary from 1 January 2026, envisaged entry into
+  force 1 January 2027.
+
+GREP: SKIP — the corrected card deliberately names both old configurations while adding the
+third, so a phrase scan for “filled” or “partly filled” fires on the fix. Verify by reading the
+sentence: wherever the configurations are enumerated, **all three** must appear.
