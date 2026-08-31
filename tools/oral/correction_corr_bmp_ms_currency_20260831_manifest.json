@@ -1,0 +1,135 @@
+{
+ "correction_id": "CORR-BMP-MS-CURRENCY-20260831",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "august_intake_answer_production",
+ "date": "2026-08-31",
+ "title": "The bank taught BMP5 as current maritime-security guidance. BMP Maritime Security replaced it in 2025 and is now at its 2026 edition; one new card states the current position and five live cards stop contradicting it",
+ "baseline_commit": "c7cabf4",
+ "governing_commits": [
+  "4ec0ba2"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_PRODUCTION_QUEUE.json (lane Q-C, AUG-0089 - the currentness-sensitive lane, which is what put this family in front of a source check at all) and AUGUST2026_CURRENCY_VERIFICATION.json (SRC-BMPMS-2026)",
+ "known_traps_entries": [
+  54
+ ],
+ "candidate_claim": "Raised by candidates, not by review: a candidate sitting on 27 August 2026 was asked 'what is bmp ms' with five follow-up probes, and a second candidate was asked it again on 28 August. The bank had no card for it and five cards presenting BMP5 as the current publication.",
+ "candidate_verdict": "UPHELD",
+ "rationale": "Adjudication AUG-0089 classified BMP MS as a GENUINE_NEW_QUESTION because every BMP card in the bank was edition-scoped to BMP5. Answer production then established that BMP Maritime Security replaced BMP5, BMP West Africa and the Global Counter Piracy Guidance for Companies, Masters and Seafarers in 2025, and is itself now at its 2026 edition. A card teaching BMP5 as current teaches a superseded publication, which is the same defect class as a stale regulation number.",
+ "note": "The first attempt at this correction was REJECTED by independent review because the new card taught the 31 March 2025 FIRST edition as current, having been written from a currency record that was itself one edition out of date. That record asked only 'does BMP MS supersede BMP5?' - a question that answers correctly and is structurally incapable of revealing a later edition. The rule this produced is recorded in docs/sources/MIW_SOURCE_REGISTRY.json under query_discipline and is the reason the source registry exists. SCOPE OF THIS RECORD. The new card QB4_H#q13 is NOT declared here. It is a card that did not exist, which is production and not correction, and it is authorised by batch_h1_manifest.json (action H1-001) against this same baseline. This record authorises only the change to cards that already existed. The two records name each other and neither claims the other's bytes. CLASSIFICATION. QB4_H#q11 is the primary: it is the card that said in terms that BMP5 is the current industry standard guide. QB4_H#q2 is a SCOPE_PASS_CORRECTION rather than a propagation because the sweep found two defects in it that are independent of the currency fact - a re-region-locking of a deliberately global publication, and a structural claim about a document nobody can read. The remaining three carry the same currency fact and nothing else, and are propagations.",
+ "authority": "BMP Maritime Security, 2026 edition, published by BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO and OCIMF. Registered as SRC-BMPMS-2026 with its predecessor SRC-BMPMS-2025 and the companion SRC-MISTO-2025-11 in docs/sources/MIW_SOURCE_REGISTRY.json. The publication's own bytes are behind HTTP 403 and were not obtained; no structure is asserted beyond Section 6 (Incident Response), which co-publishers BIMCO and INTERCARGO both name.",
+ "cards": [
+  {
+   "correction_action_id": "CORR-BMP-MS-01",
+   "file": "QB4_H.html",
+   "path": "meoclass1/QB4_H.html",
+   "anchor": "q11",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "77db33be64285d86fbecfef21b8cc22a736e232345f852cae26c2e7696cf0c44",
+   "post_edit_digest": "1eb7d80f7e14149e7c0b32c0d8860613f795f4576226dd776784a1f1e224549c",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "Said 'BMP5 is the current industry standard guide'. Relabelled as the superseded predecessor with a cross-reference to q13; reg-box entry marked superseded; source-confidence note rewritten to state the supersession instead of telling the candidate to 'verify the current BMP5 edition'. Separately, its On My Vessel block asserted that BMP5 is embedded in a named company's live transit manual - a fabricated company fact - and is replaced by guidance to state what the candidate's own ship actually holds. The BMP5 technique content is retained deliberately: examiners still ask about BMP5 by name.",
+   "surfaces_corrected": [
+    "15-second answer",
+    "reg-box",
+    "deep-dive On My Vessel",
+    "source-confidence",
+    "q-version"
+   ]
+  },
+  {
+   "correction_action_id": "CORR-BMP-MS-02",
+   "file": "QB4_H.html",
+   "path": "meoclass1/QB4_H.html",
+   "anchor": "q2",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "692fa5b7ddfcf3df6808be45422b96a0d589689df00148c2ee7146762263869a",
+   "post_edit_digest": "0958d35ca0abc3a251629dbc300e2d84a87f1ff9fedd7e7abe6917017e62f53e",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "Three defects, all found by independent review. Its reg-box described BMP-MS as 'covering the wider Gulf/Indian Ocean region', which RE-REGION-LOCKS a publication that is deliberately global - the single most important fact about it. It twice asserted that BMP5 Section 5 was 'carried into BMP-MS', a structural claim about a document nobody can read; the body assertion is removed and the reg-item now records that the carriage is not verifiable from the published extracts. And its 15-second answer and CE-relevance block still named BMP5 as the live standard for a 2026 transit; those now read BMP principles and BMP MS, with the same currentness note used on the other cards.",
+   "surfaces_corrected": [
+    "15-second answer",
+    "CE relevance",
+    "reg-box",
+    "currentness note",
+    "q-version"
+   ]
+  },
+  {
+   "correction_action_id": "CORR-BMP-MS-03",
+   "file": "QB4_B.html",
+   "path": "meoclass1/QB4_B.html",
+   "anchor": "q16",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "123c615d4d5c8bcc049a6ff0f54e37457a089c13d72f6a752db6199052f5790a",
+   "post_edit_digest": "fa5f94f89821d65769a2b970b84ed7fc613cf24ddef5820f375eefcf68b6711b",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "Presented BMP5 as the current framework with no supersession marker. A currentness note is prepended and the version stamped. The BMP5 technique below it is unchanged and still examinable.",
+   "surfaces_corrected": [
+    "currentness note",
+    "q-version"
+   ]
+  },
+  {
+   "correction_action_id": "CORR-BMP-MS-04",
+   "file": "QB9_A.html",
+   "path": "meoclass1/QB9_A.html",
+   "anchor": "q9",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "422c92002a987341521df1ee3cece3818355a9f0a5256326c1711efc687ce73e",
+   "post_edit_digest": "713247b0d3314ec7adc3bb786afe825c664dd33e9b7a958ba142dfbd00e5e441",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "Same defect, same narrowest treatment: 'BMP5 vessel hardening' presented as current. Currentness note prepended, version stamped, technique content untouched.",
+   "surfaces_corrected": [
+    "currentness note",
+    "q-version"
+   ]
+  },
+  {
+   "correction_action_id": "CORR-BMP-MS-05",
+   "file": "QB9_B.html",
+   "path": "meoclass1/QB9_B.html",
+   "anchor": "q5",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "1188f39372fe182374b327bd61ba5f17331aa74b53cf71b0d4d350c88d229e84",
+   "post_edit_digest": "f822a6a56cca6ef8f7ea905d187fe926be8488e5e5748840237b146c86298364",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "Same defect, same narrowest treatment: BMP5 guidelines described as mandating vessel hardening. Currentness note prepended, version stamped, technique content untouched.",
+   "surfaces_corrected": [
+    "currentness note",
+    "q-version"
+   ]
+  }
+ ],
+ "propagation": {
+  "derived_surfaces": "qb_content_index.json and meoclass1/index.html regenerated by build_qb_content_index.py (738 -> 739 canonical questions); EXAMINER_INDEX_SNAPSHOT.json, meoclass1/examiner-index.html, SQ/examiner-index.html and SQ/index.html regenerated by build_examiner_index.py.",
+  "hand_maintained_surfaces": "QB4_H page furniture (TOC entry for Q13, showing-count, section count, cheat-sheet note) and the SQ home oral-question counter are hand-maintained - no generator owns them, and validate_examiner_index is their only guard. Both were updated by hand for that reason. SQ/study-roadmap.html is GENERATED and was deliberately NOT hand-edited; its counter moves when build_public_study_roadmap.py next runs.",
+  "cheat_sheet": "QB4_H_cheatsheet.html is hand-maintained with no generator under tools/oral. It is NOT updated here: the cheat sheet carries the pre-existing twelve rows and gains no row for Q13. Recorded as an explicit H5 dependency rather than hand-built in a parallel format."
+ },
+ "invariants": {
+  "canonical_questions_before": 738,
+  "canonical_questions_after": 739,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "corrected_cards": 5,
+  "historical_content_removed": "none - every BMP5 technique block is retained; only currency framing, one fabricated company fact and one unverifiable structural claim were changed",
+  "new_cards_note": "The one new card in this working tree, QB4_H#q13, belongs to batch_h1_manifest.json. The 738 -> 739 movement is that batch's, not this record's; it is stated here because both records share the baseline and a reader of either needs to know where the extra question came from."
+ },
+ "review": {
+  "independent_review": "clean-context reviewer, two rounds",
+  "round_1_verdict": "REVISE",
+  "round_1_blocking": "the card taught the 31 March 2025 first edition as current; BMP MS is at its 2026 edition",
+  "round_2_verdict": "ACCEPTED_WITH_BOUNDED_FIX",
+  "round_2_findings_applied": [
+   "no correction manifest existed and the repository's own validate_corrections.py was red naming all six anchors - this manifest is that fix",
+   "version stamps missing on q2, QB9_A#q9 and QB9_B#q5 - all three now stamped",
+   "q2 still named BMP5 as the live standard in its 15-second answer and CE-relevance block - both reworded and a currentness note added",
+   "MISTO was cited candidate-facing with a date but not registered - now SRC-MISTO-2025-11 with a BEFORE_CURRENTNESS_SENSITIVE_USE trigger and its own three-to-six-month cadence recorded",
+   "registry called a trade site a publisher - reworded",
+   "registry's 'withdrawn not established' now carries the ICS lead that contradicts it",
+   "the OCIMF-listing claim softened to what the evidence supports",
+   "15-second answer trimmed"
+  ],
+  "reviewer_adjudication_upheld_producer": "The round-1 reviewer asserted seven publishers including CLIA. The round-2 reviewer independently confirmed the producer was right to state six: every co-publisher source names six, the seven-body list appears only on one trade site, and CLIA's association is with the Joint Industry Security Group rather than with this publication. The uncorroborated claim stays recorded in claims_NOT_established rather than adopted or buried."
+ }
+}
