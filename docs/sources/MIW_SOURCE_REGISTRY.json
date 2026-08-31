@@ -1,0 +1,200 @@
+{
+  "schema": "miw.sources.registry.v1",
+  "generated_by": "hand-authored during production; every entry is added by the run that first verified the source",
+  "what_this_is": "The lane-neutral registry of FIRST-HAND and OFFICIAL sources MIW has verified and intends to reuse. Oral, Written, Notes and Study production all read it. It exists so that a primary source is researched ONCE, verified, preserved, reused, and revalidated when due - rather than rediscovered from the open web on every production run.",
+  "what_this_is_not": "NOT answer authority by itself. Authority derives from ISSUER + VERSION + APPLICABILITY + CURRENTNESS, never from the fact that a file or a record exists locally. A cached entry marked CURRENT_VERIFIED still gets a lightweight supersession check before it is relied on for a current/latest claim.",
+  "why_it_exists": "Recorded from a real production failure. The H1 BMP MS card was authored from a currency record that was itself one edition out of date, because the original check asked 'does BMP MS supersede BMP5?' - a question that returns the launch coverage, answers correctly, and is structurally incapable of revealing that a later edition has since appeared. See query_discipline below.",
+  "query_discipline": {
+    "insufficient": "Does X supersede Y?",
+    "required": "What has the authoritative publisher said MOST RECENTLY about this publication or instrument?",
+    "rule": "Both questions must be asked. The first establishes the transition; only the second establishes the present state. A correct historical transition plus a stale present state reads exactly like current truth and is the failure this registry exists to prevent."
+  },
+  "conventions": {
+    "bytes_storage": "Downloadable official documents are stored beside this file under docs/sources/ and are git-ignored by extension, exactly as docs/study/sources/*.pdf already is. The DIGEST is committed here; the bytes are not, because this repository is public and the instruments are served by their own publishers.",
+    "field_vocabulary": "source_id, source_class, provider, original_url, sha256, bytes and verification_status follow docs/study/historical_source_layer.json (schema miw.study.historical_source_layer.v1) so the two layers read alike.",
+    "access_discipline": "Authentication, access controls, robots restrictions and publisher restrictions are never bypassed. Where bytes cannot lawfully or technically be obtained the entry is ACCESS_LIMITED and preserves metadata, the official URL, the publisher announcement and the specific verified claims - never a pretence that the document was archived.",
+    "history": "A superseded entry is retained and marked, never overwritten. New official truth wins for production; the old record stays as evidence of what was true when."
+  },
+  "currentness_states": {
+    "CURRENT_VERIFIED": "Verified against the issuer's own most recent statement at checked_on.",
+    "CURRENT_BUT_RECHECK_ON_EVENT": "Believed current, but a named event could change it before any date-based review would.",
+    "HISTORICAL_SUPERSEDED": "A later version exists. Retained as predecessor evidence; must not be used as current truth.",
+    "FUTURE_ADOPTED_NOT_EFFECTIVE": "Adopted with a known effective date still ahead; does not govern sittings before it.",
+    "ACCESS_LIMITED": "Identity and issuer verified, but the document's own bytes could not lawfully or technically be retrieved. Claims are limited to what the publisher has stated publicly.",
+    "CURRENTNESS_UNVERIFIED": "Not established. Barred from candidate-facing use."
+  },
+  "revalidation_triggers": [
+    "ON_NEXT_PUBLISHER_VERSION",
+    "ON_RELEVANT_MSC_SESSION",
+    "ON_RELEVANT_MEPC_SESSION",
+    "ON_DGMA_AMENDMENT",
+    "BEFORE_CURRENTNESS_SENSITIVE_USE",
+    "EXPLICIT_DATE"
+  ],
+  "sources": [
+    {
+      "source_id": "SRC-BMPMS-2026",
+      "title": "Best Management Practices for Maritime Security (BMP MS)",
+      "edition": "2026 edition; one secondary trade source designates it Version 2",
+      "issuing_authority": "BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO and OCIMF",
+      "issuing_authority_note": "Six bodies, taken from co-publisher INTERCARGO's own current BMP page, which names 'BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO & OCIMF supported by over forty maritime stakeholders'. One SECONDARY source (MaritimeCyprus, 2 August 2026) additionally names CLIA for the 2026 edition, giving seven. That addition is NOT corroborated by any co-publisher page read here, so the six-body list is what MIW states and the CLIA claim is recorded as unverified rather than adopted.",
+      "source_class": "OFFICIAL_INDUSTRY_GUIDANCE",
+      "source_type": "official guidance",
+      "authority_rank": "industry consensus publication of the recognised co-sponsoring bodies; NOT an IMO instrument and NOT mandatory of itself",
+      "original_url": "https://www.maritimeglobalsecurity.org/best-management-practices/",
+      "document_url": "https://www.maritimeglobalsecurity.org/media/t4jccjou/bmp-ms_lo-res_s.pdf",
+      "local_path": null,
+      "sha256": null,
+      "bytes": null,
+      "access_status": "ACCESS_LIMITED",
+      "access_note": "Both the Maritime Global Security portal and the lo-res PDF returned HTTP 403 to the producer and, independently, to the H1 reviewer. No attempt was made to defeat that control. The document's own bytes are therefore NOT held locally and MIW asserts no structural detail beyond what publishers have stated publicly.",
+      "publication_date": "2026",
+      "publication_date_note": "Sources differ on the precise stamp and MIW does not pick one: co-publisher BIMCO announced the update on 6 July 2026; co-publisher INTERCARGO calls it 'the June 2026 updated version'; Steamship Mutual calls it the June 2026 edition published 14 July 2026. What is firmly established is the 2026 edition, announced by the co-publishers in July 2026.",
+      "effective_date": null,
+      "effective_date_note": "None. Industry guidance carries no entry-into-force date, which is itself a teaching point.",
+      "supersedes": [
+        "BMP Maritime Security, first edition, announced 31 March 2025 and referred to by INTERCARGO as the April 2025 launch version",
+        "BMP5 - Best Management Practices to Deter Piracy and Enhance Maritime Security in the Red Sea, Gulf of Aden, Indian Ocean and Arabian Sea",
+        "Global Counter Piracy Guidance for Companies, Masters and Seafarers",
+        "BMP West Africa"
+      ],
+      "supersedes_note": "The first edition consolidated and replaced the three earlier publications; the 2026 edition supersedes that first edition. Steamship Mutual records that BMP5, BMP West Africa and the Global Counter Piracy Guidance are no longer listed by the co-publishers; OCIMF's publications area returns 403 to us, so that is consistent with the claim rather than proof of it. MIW states 'replaces' rather than 'formally withdrawn', because no co-publisher page read here uses the word withdrawn.",
+      "superseded_by": null,
+      "currentness": "CURRENT_VERIFIED",
+      "checked_on": "2026-08-31",
+      "checked_how": "Both questions of the query discipline were asked. The supersession question established the BMP5 transition; the latest-position question - what has the publisher said most recently - established the 2026 edition and returned nothing later than it.",
+      "revalidation_trigger": "ON_NEXT_PUBLISHER_VERSION",
+      "revalidation_note": "Also BEFORE_CURRENTNESS_SENSITIVE_USE. This publication has now moved twice inside eighteen months, so any card citing it as current re-asks the latest-position question before release.",
+      "verified_claims": [
+        "It is the industry's consolidated global maritime-security guidance, covering threat assessment, voyage planning, mitigation measures, incident response and post-incident recovery.",
+        "It replaced the three earlier region-scoped and counter-piracy publications named in supersedes.",
+        "It is global rather than region-locked, with signposting to the most current regional security intelligence.",
+        "It covers piracy, armed robbery, illegal boarding, state-actor intervention, missiles, drones, sea mines and cyber-related threats.",
+        "The 2026 edition's principal change is the addition of 'Actions on Boarding by Activists' within Section 6, Incident Response, covering preparation, communication, de-escalation, evidence preservation and safe management, and advising against physical confrontation, razor wire, water cannon and interference with drones.",
+        "It is an interactive online publication providing a threat and risk management process, a directory of global authorities and seafarer welfare material.",
+        "The Maritime Industry Security Threat Overview (MISTO), revised November 2025, is the complementary threat-assessment resource that supports its application."
+      ],
+      "claims_NOT_established": [
+        "Any chapter, page or numbered-phase structure other than the existence of Section 6 (Incident Response), which two independent sources name.",
+        "That CLIA is a publisher of the 2026 edition - one secondary source only.",
+        "A precise publication day for the 2026 edition.",
+        "Whether the superseded publications were formally WITHDRAWN as opposed to replaced. MIW says 'replaced', which is true either way. NOTE: co-publisher ICS's own Global Counter Piracy Guidance resource page is reported to state it 'was withdrawn in March 2025'; ICS returns 403 to direct fetch, so this is a lead to confirm, not settled."
+      ],
+      "evidence": [
+        {
+          "url": "https://www.bimco.org/news-insights/bimco-news/2026/07/06-bmp/",
+          "kind": "PRIMARY - co-publisher announcement of the 2026 edition",
+          "fetched": true,
+          "establishes": "the 2026 update and the activist-boarding addition"
+        },
+        {
+          "url": "https://www.intercargo.org/best-management-practices-bmp/",
+          "kind": "PRIMARY - co-publisher's own standing BMP page",
+          "fetched": true,
+          "establishes": "the six-body publisher list, the June 2026 version, the April 2025 launch, the consolidation and the threat-and-risk-management purpose"
+        },
+        {
+          "url": "https://www.bimco.org/news-insights/press-media/press-releases/2025/20250331-new-bmp/",
+          "kind": "PRIMARY - co-publisher release of the first edition",
+          "fetched": true,
+          "establishes": "31 March 2025 announcement, six bodies, forty-plus stakeholders, purpose wording, the 2024 threat figures with their qualifiers"
+        },
+        {
+          "url": "https://www.westpandi.com/news-and-resources/news/april-2025/best-management-practices-maritime-security-(bmp-m/",
+          "kind": "SECONDARY - P&I club quoting the publication",
+          "fetched": true,
+          "establishes": "'BMP Maritime Security replaces all the existing versions of the BMP. This includes BMP5, Global BMP and BMP West Africa.'"
+        },
+        {
+          "url": "https://www.steamshipmutual.com/publications/articles/bmp-maritime-security-updated-2026",
+          "kind": "SECONDARY - P&I club",
+          "fetched": true,
+          "establishes": "Section 6 placement of the activist content, the threat-type list, MISTO November 2025, and that the superseded titles are off the OCIMF site"
+        },
+        {
+          "url": "https://maritimecyprus.com/2026/08/02/maritime-industry-releases-ver-2-2026-best-management-practices-bmp-for-maritime-security/",
+          "kind": "SECONDARY - trade site",
+          "fetched": false,
+          "establishes": "the 'Ver.2 (2026)' designation; also the uncorroborated CLIA claim"
+        }
+      ],
+      "used_by": [
+        "QB4_H#q13"
+      ],
+      "first_registered": "2026-08-31",
+      "registered_by": "ORAL-AUG-2 H1 retry"
+    },
+    {
+      "source_id": "SRC-BMPMS-2025",
+      "title": "Best Management Practices for Maritime Security (BMP MS), first edition",
+      "edition": "first edition",
+      "issuing_authority": "BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO and OCIMF, supported by over forty maritime stakeholders",
+      "source_class": "OFFICIAL_INDUSTRY_GUIDANCE",
+      "source_type": "official guidance",
+      "authority_rank": "industry consensus publication; not an IMO instrument",
+      "original_url": "https://www.bimco.org/news-insights/press-media/press-releases/2025/20250331-new-bmp/",
+      "local_path": null,
+      "sha256": null,
+      "access_status": "ACCESS_LIMITED",
+      "publication_date": "2025-03-31",
+      "publication_date_note": "Announced 31 March 2025; INTERCARGO refers to an April 2025 launch and IMO MSC 110 was informed it was issued April 2025.",
+      "supersedes": [
+        "BMP5",
+        "Global Counter Piracy Guidance for Companies, Masters and Seafarers",
+        "BMP West Africa"
+      ],
+      "superseded_by": "SRC-BMPMS-2026",
+      "currentness": "HISTORICAL_SUPERSEDED",
+      "checked_on": "2026-08-31",
+      "revalidation_trigger": "NONE_HISTORICAL",
+      "verified_claims": [
+        "Consolidated and replaced BMP5, the Global Counter Piracy Guidance and BMP West Africa.",
+        "Its stated aim is to help all vessels plan voyages and to detect, avoid, deter, delay and report attacks and incidents wherever they occur.",
+        "2024 threat picture as published: ships were attacked WITH WEAPONS OF WAR IN THE BLACK SEA AND IN THE SOUTHERN RED SEA more than one hundred times and four seafarers lost their lives; separately and GLOBALLY, 126 seafarers were held hostage during pirate attacks and armed robberies and 12 were kidnapped."
+      ],
+      "claims_NOT_established": [
+        "That the 'more than one hundred' figure is a global attack count - it is explicitly scoped to two regions and to weapons of war. Stripping that qualifier is a recorded H1 review finding."
+      ],
+      "retained_because": "Predecessor evidence. Examiners still name BMP5 and the first edition, and the lineage question was actually asked on 27 August 2026 (AUG-0091).",
+      "used_by": [
+        "QB4_H#q13"
+      ],
+      "first_registered": "2026-08-31",
+      "registered_by": "ORAL-AUG-2 H1 retry"
+    },
+    {
+      "source_id": "SRC-MISTO-2025-11",
+      "title": "Maritime Industry Security Threat Overview (MISTO)",
+      "edition": "revised 26 November 2025",
+      "issuing_authority": "the BMP Maritime Security co-publishers, via the Maritime Global Security portal",
+      "source_class": "OFFICIAL_INDUSTRY_GUIDANCE",
+      "source_type": "official guidance",
+      "authority_rank": "industry consensus threat assessment; companion to BMP MS, not an IMO instrument",
+      "original_url": "https://www.maritimeglobalsecurity.org/media/1slhm0pf/2025-11-26-misto.pdf",
+      "local_path": null,
+      "sha256": null,
+      "access_status": "ACCESS_LIMITED",
+      "publication_date": "2025-11-26",
+      "effective_date": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "currentness": "CURRENT_BUT_RECHECK_ON_EVENT",
+      "checked_on": "2026-08-31",
+      "revalidation_trigger": "BEFORE_CURRENTNESS_SENSITIVE_USE",
+      "revalidation_note": "MISTO states its own cadence as updated every three to six months. Six months from 26 November 2025 expired in May 2026 and no later revision was found on 31 August 2026 - so either an update is overdue or one exists that is not indexed. Any card citing the November 2025 revision by DATE must re-ask the latest-position question first.",
+      "verified_claims": [
+        "Revised 26 November 2025.",
+        "It is the companion threat assessment that supports applying BMP Maritime Security.",
+        "Its own stated update cadence is every three to six months."
+      ],
+      "claims_NOT_established": [
+        "That the November 2025 revision is still the latest."
+      ],
+      "used_by": [
+        "QB4_H#q13"
+      ],
+      "first_registered": "2026-08-31",
+      "registered_by": "ORAL-AUG-2 H1 retry"
+    }
+  ]
+}
