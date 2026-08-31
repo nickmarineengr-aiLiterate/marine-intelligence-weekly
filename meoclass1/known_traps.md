@@ -1358,3 +1358,46 @@ is the single commonest error on this question.
 GREP: SKIP — the corrected card names innocent passage deliberately, in order to distinguish it.
 Verify by reading the sentence: every mention must be drawing the distinction, never equating the
 two.
+
+### 57. The Oil Record Book section letters never changed — the section *wording* did, in 2011
+
+Every Oil Record Book answer written before 2011 still **looks** right, because the letters are
+the same. **Resolution MEPC.187(59)**, in force **1 January 2011**, replaced **Part I sections
+(A) to (H)** in their entirety and **Part II section (J)**. Section **(I)** was not replaced.
+
+* **(C)** became **“Collection, *transfer* and disposal of oil residues (sludge)”**, and gained an
+  item recording the **quantity collected by manual operation**.
+* **(D)** and **(E)** changed from *“non-automatic / automatic **discharge** overboard or disposal
+  otherwise”* to *“non-automatic / automatic **starting of** discharge, **transfer** or disposal
+  otherwise”*.
+* The same resolution replaced the word “sludge” with the defined term **“oil residue (sludge)”**
+  in regs 12.2, 13, **17.2.3**, 38.2 and 38.7, and **deleted “and other oil residues”** from
+  reg. 17.2.3.
+
+**The thread running through all of it is *internal transfer*.** Moving oily water or sludge
+between tanks was not expressly recordable before 2011, and unrecorded internal transfers were how
+quantities were made to disappear between the tanks and the book. A candidate who says “(C) is
+collection and disposal of sludge” is giving the pre-2011 answer.
+
+**Two more that get answered wrongly by habit:**
+
+* **Part I is not “all ships”.** Reg. 17.1: **oil tankers of 150 GT and above** *and* **other ships
+  of 400 GT and above**. Two different thresholds.
+* **The master signs the page, the officer in charge signs the operation** (reg. 17.4). A Chief
+  Engineer countersignature is common company practice and is **not** a MARPOL requirement — do not
+  present it as one.
+
+**And an electronic ORB must be *approved*.** Reg. 1.39, added by **MEPC.314(74)** in force
+**1 October 2020**, defines an Electronic Record Book as one *“approved by the Administration”*.
+An unapproved software log is not an ORB.
+
+GREP: SKIP meoclass1/QB3_F.html#q10, meoclass1/QB1_F.html#q2, meoclass1/QB5_A.html#q20 — these three
+deliberately state the superseded wording in order to reject it, and only these three.
+
+**The skip is deliberately narrow, and here is the reason.** `QB1_supplementary.html#q6` is the one
+card that prints the section letters as a list to be **memorised**, not rejected. When this trap was
+first written its skip was blanket, which would have disarmed the guard over precisely the card
+most able to teach the wrong answer — it carried the pre-2011 headings for (B), (C), (D), (E) and
+(F) under the instruction “know all ORB code letters by memory”. It has been corrected to the MEPC.187(59)
+wording; the guard must stay armed over it so that a future edit cannot quietly restore the old
+list. A blanket skip on a currency trap protects the defect it was written to catch.
