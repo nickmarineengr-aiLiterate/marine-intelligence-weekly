@@ -1,0 +1,150 @@
+{
+ "correction_id": "CORR-ORB-APPLICABILITY-20260831",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "august_intake_answer_production",
+ "date": "2026-08-31",
+ "title": "The corpus stated the Oil Record Book signatory as the Chief Engineer in five places and printed the pre-2011 section headings in a sixth; MARPOL Annex I regs. 17.1 and 17.4, as amended by MEPC.187(59), say otherwise",
+ "baseline_commit": "ebabe00",
+ "governing_commits": [
+  "0d13038"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_PRODUCTION_QUEUE.json",
+ "known_traps_entries": [
+  57
+ ],
+ "candidate_claim": "Raised by production while building the canonical Oil Record Book card for AUG-0163, not by a candidate. The new card states reg. 17.1 applicability and reg. 17.4 signatures; QB1_F#q2 stated both differently, so the bank would have contradicted itself on the day the new card shipped.",
+ "candidate_verdict": "UPHELD",
+ "rationale": "TWO REGULATORY FACTS, WRONG IN SIX CARDS BETWEEN THEM. (1) APPLICABILITY. QB1_F#q2 said ORB Part I is 'Machinery Space Operations (all ships)'. Reg. 17.1 requires it in every oil tanker of 150 gross tonnage and above and every ship of 400 gross tonnage and above OTHER than an oil tanker - two different thresholds, and a non-tanker below 400 GT carries no Part I at all. (2) SIGNATURES. Reg. 17.4 provides that each completed operation is signed by the officer or officers in charge of that operation, and each completed page is signed by the master. MARPOL imposes no Chief Engineer signature anywhere. Five cards said or implied otherwise, and the worst of them, QB5_A#q20, did it three times in one card and scripted it as the answer to a named examiner's question: 'Nair sir tests MARPOL: \"Who signs the Oil Record Book?\" CE signs Part I; Master countersigns.' That is the rule inverted and handed to the candidate as a line to recite, with reg. 17 cited beside it. (3) A SIXTH CARD, DIFFERENT DEFECT, SAME ROOT. QB1_supplementary#q6 instructed the candidate to memorise nine section headings and gave the PRE-2011 wording for five of them - (B) as 'Cleaning of fuel oil tanks' when cleaning is inside (A) and (B) is the discharge of that cleaning water; (C), (D) and (E) missing the word 'transfer'; (F) as 'Condition of OWS and alarm' rather than 'Condition of the oil filtering equipment'. Its (B) was wrong even against the 2004 base text. This is trap 57 realised: the letters never changed, so the stale list looks right and survives.",
+ "note": "SCOPE, AND AN HONEST ACCOUNT OF HOW IT MOVED. This record was first written as a single-card correction on the strength of a corpus sweep that returned nothing else. The sweep was wrong - see propagation.corpus_sweep - and an independent review found four further contradicting cards by reading rather than grepping. The bound has therefore been widened from one card to six, deliberately and on evidence, rather than defended. Each of the five added cards is named with the sentence that contradicts the regulation. WHAT WAS STILL NOT DONE: the other seventy cards that mention the Oil Record Book were not touched, and four cards that loosely call the ORB a document the CE signs are registered as residue rather than corrected, because section 25 of the governing brief bounds this tranche to direct contradictions. Widening on evidence and sweeping on impulse are different acts and this record does the first only.",
+ "authority": "MARPOL Annex I regulation 17.1 (applicability) and regulation 17.4 (entries, signatures and language), read from resolution MEPC.117(52) - the Revised Annex I - held locally in the shared desktop corpus with a full text layer. The current Part I section headings come from resolution MEPC.187(59), in force 1 January 2011, read at source in this run. The 'or group of electronic entries' addition to reg. 17.4 comes from resolution MEPC.314(74), in force 1 October 2020, also read at source and acquired in this run.",
+ "cards": [
+  {
+   "correction_action_id": "CORR-ORB-01",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q2",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "b0e2f9c223dce014b1c3bdfc55d4a3def8ab864857e957e55cc5d71a124845c0",
+   "post_edit_digest": "5e362f528091cb236a1f8598e0be21881a7c9f9144da4923b07dbdbb8660a8f2",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "The ORB bullet in the mandatory-record-books list is rewritten. '(all ships)' becomes the two reg. 17.1 thresholds with an explicit note that they differ; 'every page signed by the Chief Engineer and Master' becomes the reg. 17.4 split, with the CE countersignature identified as company practice rather than a MARPOL requirement; and a cross-reference to QB3_F Q10 is added. v1.0 to v1.1.",
+   "surfaces_corrected": [
+    "answer-body mandatory record books list",
+    "q-version"
+   ]
+  },
+  {
+   "correction_action_id": "CORR-ORB-02",
+   "file": "QB1_supplementary.html",
+   "path": "meoclass1/QB1_supplementary.html",
+   "anchor": "q6",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "0c7a38166594faa1bf59b0440310b9289db3f51e6676b4dbda63140f1b22bc00",
+   "post_edit_digest": "6d8993673e68d1f21a3e5610be8c1aa4bfd87aff41503172090bba54c94240cf",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "The CE tip listed nine ORB Part I section headings 'to know by memory' and five carried pre-2011 wording, (B) being wrong even against the 2004 base. Replaced with the MEPC.187(59) headings, the amendment named and dated, and the two habitual errors called out: cleaning belongs to (A) not (B), and the word 'transfer' in (C), (D) and (E) is what 2011 added. This card is the one the trap-57 grep guard must stay armed over, which is why that guard's skip list names three cards and not this one. v1.4 to v1.5.",
+   "surfaces_corrected": [
+    "ce-tip section-letter list",
+    "q-version"
+   ]
+  },
+  {
+   "correction_action_id": "CORR-ORB-03",
+   "file": "QB5_A.html",
+   "path": "meoclass1/QB5_A.html",
+   "anchor": "q20",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "50769836f1f169963be459d5447e39b8df4025b8e2e336cf1707209b0b4b546c",
+   "post_edit_digest": "4f1fae518cc56c1ab5ef544dbfad1c95086559bc1e68ea0bffa602eda3492777",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "The gravest instance and the reason the bound moved. Three surfaces stated the CE as signatory: the duties table ('sign and certify ORB Part I (all entries)'), the reg-box beside a reg. 17 citation ('CE signs and certifies all Part I entries'), and the CE tip, which scripted a named examiner's question with the rule inverted ('CE signs Part I; Master countersigns'). All three now state reg. 17.4 and the tip says explicitly that MARPOL gives the CE no signature. SEPARATELY AND DECLARED: the same CE tip sentence still cited 'MS Act §225', although this card's own v1.1 stamp records a 15 July 2026 correction that moved §225 to Parts VII and XIV of the Merchant Shipping Act 2025 - that pass missed this surface. It was inside the sentence being rewritten and is corrected here rather than left to contradict the card's own 60-second answer. v1.1 to v1.2.",
+   "surfaces_corrected": [
+    "duties-by-instrument table row",
+    "reg-box reg-desc",
+    "ce-tip",
+    "q-version"
+   ]
+  },
+  {
+   "correction_action_id": "CORR-ORB-04",
+   "file": "QB4_B.html",
+   "path": "meoclass1/QB4_B.html",
+   "anchor": "q4",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "fa42f1f1e871e61c5ca7790b9ce5e3f597b7434b4d3d5a88ad537212138fc492",
+   "post_edit_digest": "8af0915d33c55f1f0d08bb78eab23d529381ec01c79f30b46be5cd2c7dd8ddb0",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "'signed on every page by the CE' removed the master from the rule entirely. Restated as reg. 17.4 with the CE countersignature identified as company practice. v1.0 to v1.1.",
+   "surfaces_corrected": [
+    "answer-body",
+    "q-version"
+   ]
+  },
+  {
+   "correction_action_id": "CORR-ORB-05",
+   "file": "QB9_C.html",
+   "path": "meoclass1/QB9_C.html",
+   "anchor": "q4",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "17351904a0eedeab1790769ab0b95bd6e87f8f0bf7c75a563071d4a937c62c61",
+   "post_edit_digest": "d4ba137adac1cb4349f70c961f88deffb9eb9462caedce131d9ee9629f15155d",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "'The Chief Engineer signs off on every machinery space operation (Part I)' was the reg. 17.4 first limb with the wrong officer in it. Restated, keeping the CE's real departmental responsibility for the entries being true, which is not the same as being the signatory. v1.0 to v1.1.",
+   "surfaces_corrected": [
+    "answer-body",
+    "q-version"
+   ]
+  },
+  {
+   "correction_action_id": "CORR-ORB-06",
+   "file": "QB5_E.html",
+   "path": "meoclass1/QB5_E.html",
+   "anchor": "q7",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "d35636fdcde5d61101165faa69cc8e4a5454103fe4212c9350db826ed5d44870",
+   "post_edit_digest": "37ff7ee5f7da5d2d2d9356416e36a4446228bb31df72ea8e10f530c0ec3cee50",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "'outgoing CE must sign off all pages up to the handover hour' put the CE in the master's place at handover. Rewritten so the outgoing CE's duty is to satisfy himself the entries are made and signed correctly - which is the real handover duty and a better answer - rather than to sign the pages himself. v1.0 to v1.1.",
+   "surfaces_corrected": [
+    "answer-body",
+    "q-version"
+   ]
+  }
+ ],
+ "propagation": {
+  "corpus_sweep": "REPRODUCIBLE SWEEP, STATED AS RUN. Pattern: card blocks extracted by the balanced-div walker, HTML tags stripped, entities unescaped, then matched on /oil record book|\\bORB\\b/i. Against baseline ebabe00 that returns 75 cards across 90 files; after this run it returns 76, the extra one being the new QB3_F#q10. A second pattern, /(?:chief engineer|\\bCE\\b|master|officer in charge)[^.]{0,120}\\bsign/i applied inside those blocks, returns 17 cards at baseline: QB1_F#q2, QB1_supplementary#q1, QB1_supplementary#q6, QB3_F#q7, QB3_F#q8, QB4_B#q2, QB4_F#q4, QB5_A#q20, QB5_B#q1, QB5_B#q4, QB5_E#q7, QB5_F#q2, QB6#q1, QB6#q6, QB6_F#q5, QB9_C#q4, QB9_H#q8. All seventeen were read. A third pattern /\\bA\\b\\s*=\\s*Ballast/i returns exactly one card, QB1_supplementary#q6. WHAT AN EARLIER DRAFT OF THIS RECORD GOT WRONG, AND WHY IT MATTERS. It claimed 'QB1_F#q2 is the only card that states ORB APPLICABILITY or SIGNATURE rules' and that ZERO cards carry any section-code structure. Both were false, and both were false in the same way: the sweep regex was written to match the shape the new card uses - 'section (C)', 'code C' - and the corpus wrote the same content in a different shape, 'A = Ballasting of fuel oil tanks'. A negative search proves nothing unless the pattern can match the way the corpus actually writes the thing. The independent review found this by reading the card rather than by running the pattern. SIX CARDS ARE THEREFORE CORRECTED, NOT ONE. The eleven remaining signature-mentioning cards were read and are not contradictions: QB1_supplementary#q1 states the master's page signature correctly; QB3_F#q7 concerns a letter of protest signed by a bunker barge master, an unrelated signature; QB3_F#q8, QB4_B#q2, QB5_B#q4, QB6#q6 and QB5_F#q2 use the ORB contextually and assert no signatory rule. FOUR ARE LEFT AS REGISTERED FOLLOW-UPS RATHER THAN SWEPT, because each characterises the ORB in passing as a document the CE signs without stating it as a regulatory requirement, which is loose rather than wrong, and section 25 of the governing brief bounds this tranche to direct contradictions: QB5_B#q1 ('the moment you countersign'), QB6#q1 ('CE signs off annual fuel data from ORB Part I' - which is DCS/CII data reporting, a different act), QB6_F#q5 and QB9_H#q8 (both 'the ORB the CE signs'). Sweeping them would have been the opportunistic cleanup the brief forbids; leaving them unrecorded would have been the silent-truncation defect. They are recorded here as residue with their exact wording so the next tranche can find them.",
+  "derived_surfaces": "qb_content_index.json and meoclass1/index.html regenerated by build_qb_content_index.py (746 to 747); EXAMINER_INDEX_SNAPSHOT.json and the examiner index pages by build_examiner_index.py; oral_followup_register.json by build_followup_register.py. Counts are reported from the generators' own output, not assumed.",
+  "hand_maintained_surfaces": "The SQ home counter is hand-maintained and moved 746 to 747. QB3_F's static 'Showing N of N' moved 9 to 10.",
+  "revision_layer": "QB3_F has no cheat sheet, so the new card creates no revision-layer inconsistency. QB1_FG_CheatSheet.html was inspected for the corrected card: it is a curated cue-card sheet spanning QB1_F and QB1_G, it carries no Oil Record Book content, and nothing on it becomes wrong. Not edited.",
+  "residue_registered_not_corrected": "Four cards characterise the ORB in passing as a document the CE signs, without stating a regulatory requirement. QB5_B#q1: 'the moment you countersign, you assume personal criminal liability' - the surrounding advice, do not sign an entry you believe false, is sound and the word used is countersign, which is practice. QB6#q1: 'CE signs off annual fuel data from ORB Part I and BDNs' - this is DCS/CII data reporting, a different act from a reg. 17.4 entry signature, and the sentence is defensible as written. QB6_F#q5 and QB9_H#q8 both say 'the ORB the CE signs' in a list. None contradicts the new canonical card outright; all four would read better with the reg. 17.4 split. They are left for a later tranche under the section 25 bound and are named here so that tranche does not have to rediscover them."
+ },
+ "invariants": {
+  "canonical_questions_before": 746,
+  "canonical_questions_after": 747,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "new_cards_note": "The one new card in this working tree, QB3_F#q10, belongs to batch_h3a_orb_manifest.json. The 746 to 747 movement is that batch's, not this record's; both share the baseline ebabe00 and name each other.",
+  "corrected_cards": 6,
+  "examiner_relationships_before": 958,
+  "examiner_relationships_after": 958,
+  "historical_content_removed": "none. Every corrected surface keeps its place and gains the regulation number it lacked. The pre-2011 section wording is not deleted from the corpus - QB3_F#q10 and QB5_A#q20 now state it expressly as the superseded version, which is what makes the currency point teachable."
+ },
+ "review": {
+  "independent_review": "complete",
+  "round_1_verdict": "ACCEPTED_WITH_BOUNDED_FIX",
+  "round_1_blocking": [
+   "BLOCKING-1: QB1_supplementary#q6 carried the pre-2011 section headings as a memorisation list, wrong on five of nine, and both manifests claimed no card carried any section-code structure. VERIFIED TRUE at source and fixed as CORR-ORB-02; both sweep statements rewritten.",
+   "BLOCKING-2: QB4_B#q4, QB9_C#q4 and QB5_E#q7 each state a CE signature rule contradicting reg. 17.4, so the claim that QB1_F#q2 was the only such card was false. VERIFIED TRUE at source. Fixed, and re-reading the full signature sweep found a fourth, QB5_A#q20, worse than the three.",
+   "BLOCKING-3: trap 57 ended with a blanket 'GREP: SKIP', which disarmed the currency guard over QB1_supplementary#q6 - the single card that printed the stale list to be memorised. VERIFIED TRUE and scoped to three named cards, with the reasoning recorded in the trap itself."
+  ],
+  "round_2_verdict": null,
+  "round_2_findings_applied": [
+   "Senthil's attribution on QB3_F#q10 softened to 'the internal examiner for that sitting, recorded as Senthil', with the ROLE_MARKER_SOLE_HOLDER inference stated rather than presented as the candidate's own words.",
+   "reg. 36.5, 36.6, 36.7 and 36.9 added to QB3_F#q10 so the Part II signature, monitoring-failure, retention and sub-150 GT questions are answerable from the card.",
+   "The Appendix III Part I header literally reads '(All Ships)'. QB3_F#q10 now disarms it explicitly - the header is a form title, reg. 17.1 governs - since that header is the likely origin of the wrong answer being corrected.",
+   "The false-entry enforcement sentence on QB3_F#q10 reduced from a sweeping claim about worldwide practice to 'commonly treated as a distinct and graver matter', per section 12 of the brief.",
+   "Sweep arithmetic corrected from 75 to the figures the patterns actually return, and the AUG-0163 adjudication's '0 hits across 738 cards' negative-search line withdrawn as not reproducible from its own pattern."
+  ]
+ }
+}

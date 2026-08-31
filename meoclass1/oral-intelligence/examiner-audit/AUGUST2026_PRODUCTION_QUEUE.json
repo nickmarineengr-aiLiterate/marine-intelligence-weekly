@@ -265,8 +265,15 @@
      "parent_occurrence_id": null,
      "reason_production_is_needed": "No live card answers this ask; a new card is required.",
      "syllabus": {
-      "mapping_status": "NO_CARD_YET_SO_NO_MAPPING"
-     }
+      "mapping_status": "NODE_LEVEL",
+      "mapping_confidence": "HIGH",
+      "topic_id": "D04",
+      "official_syllabus_node_id": "C49-A3-06",
+      "mapping_note": "C49-A3-06 covers 'monitoring and control of compliance with legislative requirements relating to safety of life at sea and protection of the marine environment...Statutory shipboard certificates and documents, their issuance and validity, and responsibilities under them'. The Oil Record Book is precisely a statutory shipboard document with issuance, validity, retention and signature responsibilities, and it is the primary compliance-monitoring record for MARPOL Annex I. Unlike the incinerator and ODMCS asks queued from the 31-August snapshot - which are equipment subjects with no Annexure III home and were mapped at topic level only - this one lands on the node directly, because the node is about DOCUMENTS and COMPLIANCE MONITORING rather than about machinery."
+     },
+     "produced_question_id": "QB3_F#q10",
+     "produced_by": "batch_h3a_orb_manifest.json (action H3A-ORB-001)",
+     "production_status": "PRODUCED"
     },
     {
      "occurrence_id": "AUG-0180",
@@ -1360,16 +1367,32 @@
    "held": {
     "occurrence": "AUG-0163",
     "ask": "Oil Record Book - in detail, including the operation codes.",
-    "status": "UNBLOCKED_AND_QUEUED",
+    "status": "PRODUCED",
     "gap_is_real": "The bank has no Oil Record Book card. 46 cards mention the ORB and none teaches it. This is a genuine, high-value gap.",
     "why_held": "The code list cannot be published as current. The held base MEPC.117(52) gives Part I sections A-I and Part II sections A-R, but a widely repeated secondary claim attributes a 2016/2018 revision of the ORB entry codes to MEPC.276(70) - and obtaining that resolution showed it amends appendix II Form B only. MEPC.277(70) is Annex V and MEPC.316(74) is Annex VI. The actual ORB amendment is not identified and not held, so the A-to-I list may be superseded. Publishing it would repeat the BMP5 defect exactly: an authoritative base that is stale for the one provision being taught.",
     "registered_as": "RQ-A1 in the shared corpus review queue, against 03-imo-instruments/MARPOL-Annex-I",
     "unblocks_when": "The amending resolution is located from IMO's MEPC index or the depositary list and the Part I / Part II code lists are re-verified against it.",
     "unblocked_on": "2026-08-31",
     "unblocked_by": "The independent reviewer identified MEPC.187(59) - adopted 17 July 2009, deemed accepted 1 July 2010, in force 1 January 2011 - 'Amendments to regulations 1, 12, 13, 17 and 38 of MARPOL Annex I, Supplement to the IOPP Certificate and Oil Record Book Parts I and II'. Verified from the resolution itself, acquired, and filed in the shared corpus. RQ-A1 CLOSED. It was one request away on the same IMO CDN pattern the corpus already documents - the hold was right on the merits and the search behind it was not thorough enough.",
-    "why_not_authored_now": "The blocker is gone but the card is deliberately NOT written in this batch. It would ship without the independent review every other H3A card received, and an Oil Record Book card is exactly the kind a candidate recites verbatim in an oral. It is queued for the next batch, where it must be built from MEPC.187(59) and checked against MEPC.314(74) (electronic record books, in force 1 October 2020, RQ-A2, not held)."
+    "why_not_authored_now": "The blocker is gone but the card is deliberately NOT written in this batch. It would ship without the independent review every other H3A card received, and an Oil Record Book card is exactly the kind a candidate recites verbatim in an oral. It is queued for the next batch, where it must be built from MEPC.187(59) and checked against MEPC.314(74) (electronic record books, in force 1 October 2020, RQ-A2, not held).",
+    "produced_question_id": "QB3_F#q10",
+    "produced_by": "batch_h3a_orb_manifest.json, run H3A-ORB",
+    "closure_note": "CLOSED 2026-08-31 in run H3A-ORB. The hold protected a real defect: MEPC.187(59) replaced Part I sections (A)-(H) and Part II section (J) with effect from 1 January 2011 WITHOUT changing the section letters, so the 2004 list the corpus held would have read as current and would never have been challenged in an oral. (C) gained 'transfer'; (D) and (E) became 'starting of' discharge, transfer or disposal; reg. 17.2.3 gained the defined term 'oil residue (sludge)' and lost 'and other oil residues'. RQ-A2 was closed in the same pass by acquiring MEPC.314(74), which is what lets the card state that an electronic ORB must be APPROVED by the Administration rather than hedge."
    },
    "local_corpus_demonstration": "The Form A / Form B card needed NO web research for its substance. The allocation rule is quoted from the Notes to both forms in Appendix II of the Revised MARPOL Annex I (MEPC.117(52)), already held in the shared desktop corpus with a full text layer - and it is SHARPER than the shorthand every summary repeats: Form B covers oil tankers AND non-tankers with regulation 2.2 cargo tanks, keyed to the three ship types the IOPP Certificate itself categorises. Only the currentness check went outside, and it returned MEPC.276(70), which is now preserved in that corpus and added to its amendment chain."
+  },
+  "H3A-ORB": {
+   "run": "H3A-ORB closure - the Oil Record Book root only",
+   "date": "2026-08-31",
+   "occurrence": "AUG-0163",
+   "examiner_wording": "ORB : in detail about the codes",
+   "attribution": "INDIVIDUALLY_ATTRIBUTED to Senthil (internal), via ROLE_MARKER_SOLE_HOLDER - the only H2/H3A card whose examiner is named on evidence rather than left PANEL_LEVEL_ONLY",
+   "produced": "QB3_F#q10",
+   "new_cards": 1,
+   "companion_correction": "CORR-ORB-APPLICABILITY-20260831 corrects QB1_F#q2, the only card in the bank that asserted ORB applicability and signature rules, and asserted both wrongly.",
+   "duplicate_check": "Re-swept the current 746-card corpus: no card carries the Oil Record Book in its title, 75 mention it, ZERO carry any section-code structure. The four heaviest mentioners were read in full and each uses the ORB as a list item or a scenario consequence.",
+   "rq_status": "RQ-A1 closed in H3A when MEPC.187(59) was identified; RQ-A2 CLOSED in this run by acquiring MEPC.314(74). Both resolutions are now held in the shared corpus and recorded in its Annex I amendment chain.",
+   "recurrence": "First and so far only occurrence of the Oil Record Book as a ROOT ask in the August 2026 intake. It sits in AUG2026-S016 alongside IMSBC, liquefaction, UNCLOS, Maslow, CII technologies, alternative fuels and an ISM audit - a wide-ranging session, which is consistent with the ORB being asked as a documents-and-compliance probe rather than as a machinery question."
   }
  },
  "batches": {
@@ -1425,6 +1448,15 @@
     "AUG-0148"
    ],
    "held": [
+    "AUG-0163"
+   ]
+  },
+  "H3A-ORB": {
+   "action_ids": [
+    "H3A-ORB-001"
+   ],
+   "manifest": "tools/oral/batch_h3a_orb_manifest.json",
+   "occurrences": [
     "AUG-0163"
    ]
   }
