@@ -864,6 +864,87 @@ Do not persist a lesson that is specific to one batch's content.
 
 ---
 
+## 14. Rolling intake — a mutable inbox is not a carrier
+
+`ingest_carriers()` re-walks **every** registered carrier from the first on each run and
+reproduces the earlier records byte-for-byte; `M4-BYTE-STABLE` checks exactly that. Identities
+are allocated by position in that walk. So a registered carrier that **changes between runs
+renumbers identities that have already been issued, adjudicated and published.**
+
+That is fine while carriers arrive complete. It breaks the moment the Founder is collecting
+reports *during* the day — which is the normal case, not an edge one. The 31-August inbox stood
+at **842 bytes at 16:27** and **2,617 bytes at 19:48**, with more expected. Registering it would
+have been registering a file guaranteed to change.
+
+**The contract:**
+
+```
+mutable human inbox   →   immutable snapshot carrier   →   governed ingestion
+(one file per day,        (_snapshots/<day> - snapshot     (registry order
+ grows all day)            NN.txt, hash-pinned)             allocates identities)
+```
+
+1. **Never register the inbox.** Copy it to `_snapshots/… - snapshot NN.txt` and register the
+   snapshot, with its SHA-256 and byte count.
+2. **A later tranche is a NEW snapshot carrying only its own increment** — never a fresh full
+   copy of the inbox, or its earlier submissions are ingested twice. Append it after the
+   previous snapshot; identities continue and nothing already allocated moves.
+3. **Prove it, do not assert it.** `S5-EXISTING-IDS-IMMOVABLE` simulates appending the next
+   snapshot and checks that every existing occurrence keeps its id, text and submission;
+   `S5-INBOX-NOT-A-CARRIER` checks the inbox is not registered; `S5-SNAPSHOT-IMMUTABLE`
+   re-hashes what is.
+4. **Say the window is open.** The carrier registry carries `intake_window.status =
+   OPEN_EXPECTING_MORE_INPUT`. *A completely adjudicated snapshot is not a closed day*, and
+   `intake count == adjudication count` is green while the window stays open. Do not report a
+   day's count as final because the validator is green.
+5. **Do not pin a day's total in a control.** `M5-ALL-REGISTERED` asserted the registry equalled
+   exactly three named carriers and went red the moment a fourth was appended — guard expiry,
+   for the sixth time. It now asserts the historical carriers are still the registry's ordered
+   **prefix**, which stays true however many snapshots follow.
+
+### 14a. Grammar is per-carrier evidence, never assumed from the last one
+
+Each carrier has arrived with grammar the previous ones did not have, and every time the parser
+has **failed silently** — a lost occurrence raises no error, it simply is not counted. 24 August
+lost a whole submission to `1.`-only recognition; 27 August lost five starred probes; 31 August
+lost **four lettered root asks and one unnumbered question**, and reported `unparsed_blocks: []`
+while doing it.
+
+Read the source before ingesting, and add a RED control per defect **before** touching the
+parser. What 31 August added: lettered roots (`A.` `B.`) with `Cross questions:` beneath and
+numbering restarting under each letter; a question mark as the only signal that an unnumbered
+line is a question; `2nd attempt` where `ATTEMPT_RE` expects `Attempt 2`; and honorifics
+(`Mr. Simon,`) that the alias register must carry as observed forms rather than the normaliser
+guess at.
+
+Two rules that generalise:
+
+* **A structural branch that links a child to a parent needs a fallback.** The starred-probe
+  branch takes "the most recent non-starred occurrence" when no explicit parent exists; the
+  cross-question branch first shipped without that fallback and orphaned a probe the candidate
+  had plainly marked. If one branch has the rule, ask why the other does not.
+* **Nothing examinable may reach `context_comments` alone.** Metadata consumed into a field is
+  accounted for by the value it produced; a *question* is not. `S4-NO-SILENT-LINE-LOSS` walks
+  every non-rule source line and requires each to be an occurrence, a preserved comment, or a
+  recognised metadata match.
+
+### 14b. A rejection reason must quote the card it rejects
+
+Adjudication rejects candidate cards by the dozen, and the failure mode is specific: **the card
+is returned by the search and then rejected on its TITLE.** Two of six `GENUINE_NEW_QUESTION`
+calls on 31 August were wrong that way, and both would have commissioned an answer the bank
+already held — `QB3_J#q6` reads as a UV-technology question and carries the full USCG-versus-IMO
+approval comparison; `QB9_H#q1` reads as an India-ratification question and carries the Article
+253 route by which a convention reaches the Merchant Shipping Act.
+
+So a `negative_search` rejection must quote the body text it is rejecting, and the record must be
+**generated from its own pattern** — the same run also produced a `negative_search` whose stated
+hit count and reject list matched only by coincidence: five listed ids were not hits at all and
+five real hits were missing, one of them the nearest miss in the bank. A hand-picked relevance
+list wearing a regex's clothes is worse than no evidence, because it reads as a sweep.
+
+---
+
 ## 12. Product invariants (assert, never assume)
 
 | Invariant | Value |
