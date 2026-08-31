@@ -263,6 +263,7 @@ uncommitted corruption, where local mode must see it and ref mode must not.
 | **A killed mutating gate leaves product bytes** | `test_oral_supersession.py` and every `mutate_batch_*.py` restore in a `finally:`, which does **not** run when the process is killed by a timeout. Run them through `run_oral_release.py`, which owns a byte snapshot and an exact-path restore. Invoked bare and killed at 2 minutes, the supersession control left `QB1_A.html` mutated on disk and `validate_batch_e1.py` red — a "failure" that was purely the leftover. Check `git status` before believing a validator that suddenly went red. |
 | **Never run two gates concurrently** | The runner enforces serial ownership for a reason. A validator run while a mutating control was live in the background read a transiently-probed `QB3_I.html` and reported a card as changed that was byte-identical to `HEAD`. |
 | **`process.exit()` after a fetch** | Crashes libuv on Windows (0xC0000409). |
+| **A currency check that cannot find the next edition** | Asking *"does X supersede Y?"* answers **yes**, truthfully, and is structurally blind to a later edition of X. The card shipped teaching a first edition that was already a year stale. Ask the publisher-anchored form instead — *"what has the authoritative publisher said MOST RECENTLY about this subject?"* — and record the answer in the source registry (§8.2b). |
 
 ---
 
@@ -674,6 +675,53 @@ Two rules learned building the first one:
 Naming a correction in the **delegation** path is still bypassing the model.
 Naming one in a **content** gate is not — see the MAINTENANCE note in
 `oral_release_gates.py`.
+
+---
+
+### 8.2b Currency: ask what the publisher said LAST, not whether a known supersession happened
+
+`CORR-BMP-MS-CURRENCY-20260831` was **rejected by independent review on its first
+round**, and the reason is a process defect worth more than the card was.
+
+Five live cards taught **BMP5** as the current maritime-security guidance. The
+currency record built to check them asked exactly one question:
+
+> *does BMP MS supersede BMP5?*
+
+It answers **yes**. It is **true**. And it is **structurally incapable** of
+returning the fact that mattered: BMP MS had itself moved to a **2026 second
+edition**. A question shaped as *"did the supersession I already suspect exist?"*
+can only ever confirm or deny the supersession you named. It cannot see one you
+did not.
+
+**The question that finds it** is anchored on the publisher, not on the pair:
+
+> *what has the authoritative publisher said MOST RECENTLY about this subject?*
+
+Rules this produced, all now enforced in
+`docs/sources/MIW_SOURCE_REGISTRY.json`:
+
+1. **`SEARCH ONCE → VERIFY → PRESERVE → REUSE → REVALIDATE WHEN DUE`.** A primary
+   source that cost a verification pass is registered, not re-found. The registry
+   is the reuse surface; a second answer on the same subject starts there.
+2. **Every registered source carries a currentness STATE**, not a date alone —
+   `CURRENT_VERIFIED`, `HISTORICAL_SUPERSEDED`, `ACCESS_LIMITED`,
+   `CURRENTNESS_UNVERIFIED` — plus the trigger that makes it due for
+   revalidation. `CURRENTNESS_UNVERIFIED` is a legitimate, shippable state; a
+   silently assumed `CURRENT` is not.
+3. **A source cited candidate-facing with a date must be registered.** Round 2
+   caught MISTO quoted with a date and no registry row; it is now
+   `SRC-MISTO-2025-11`.
+4. **An access limit is stated, never worked around and never hidden.** The BMP MS
+   bytes sit behind an HTTP 403 that was **not** defeated. The card therefore
+   asserts **no** chapter, page or phase structure, and says so to the candidate
+   in its source-confidence line. Registered `ACCESS_LIMITED`, with the
+   co-publisher releases carrying whatever the card does claim.
+
+The wider shape, and why this sits beside §8.2a: a digest pin cannot tell you the
+content is right, and a **content** gate cannot tell you the content is still
+current. Correctness and currency fail independently, and only a source with a
+state and a revalidation trigger catches the second.
 
 ---
 
