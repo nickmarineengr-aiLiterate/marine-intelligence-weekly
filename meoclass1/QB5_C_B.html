@@ -142,7 +142,7 @@ a{color:var(--teal-dark);text-decoration:none;}a:hover{text-decoration:underline
 <button class="filter-btn" onclick="filterTag('ism',this)">ISM</button>
 <button class="filter-btn" onclick="filterTag('survey',this)">SURVEY</button>
 <button class="filter-btn" onclick="filterTag('solas',this)">SOLAS</button>
-  <span id="q-count-label">Showing 8 of 8</span>
+  <span id="q-count-label">Showing 9 of 9</span>
 </div>
 <div class="main-layout">
   <div class="sidebar">
@@ -155,6 +155,7 @@ a{color:var(--teal-dark);text-decoration:none;}a:hover{text-decoration:underline
 <a class="toc-link" href="#q6">Q6. Engine Resource Management (ERM)</a>
 <a class="toc-link" href="#q7">Q7. Occupational Health &amp; Safety — CE Obligations</a>
 <a class="toc-link" href="#q8">Q8. CSR Types — SOLAS vs IACS &amp; E-CSR</a>
+          <a class="toc-link" href="#q9">Q9. Pareto analysis</a>
     <div class="divider"></div>
     <div class="upcoming-note">Next: <strong>QB6 — Electrical &amp; Machinery</strong></div>
   </div>
@@ -819,7 +820,84 @@ The <strong>E-CSR</strong> is the modern <strong>Electronic Continuous Synopsis 
     </div>
   </div><!-- /#q-feed -->
 </div><!-- /.main-layout -->
-<div id="no-results"><p>No questions match your search/filter.</p></div>
+<div class="q-card" id="q9" data-tags="ism">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">9</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What is Pareto analysis, and how would you use it as Chief Engineer?</div>
+          <div class="q-tags"><span class="q-tag tag-ism">ISM</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span><p>Pareto analysis <strong>ranks causes by how much each actually contributes</strong>, so you fix the <strong>vital few</strong> rather than the trivial many. Plot the categories as descending bars with a <strong>cumulative line</strong>. It is called the <strong>80/20 rule</strong>, but that is a <strong>rule of thumb, not a law</strong> &mdash; the analysis tells you your own split. As CE I run it on <strong>repeat defects, alarm counts, breakdown hours and lube oil consumption</strong>.</p></div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span><p>The principle is Vilfredo Pareto&rsquo;s observation, brought into quality management by <strong>Juran</strong> as the <em>&ldquo;vital few and the trivial many&rdquo;</em>. The technique: take a defined problem over a defined period &mdash; unplanned machinery stoppages over twelve months &mdash; categorise every occurrence by cause, weight them by <strong>consequence</strong> such as downtime hours rather than by count, sort <strong>descending</strong>, draw the bars, and overlay a <strong>cumulative percentage line</strong>. The categories left of where that line flattens are where the effort belongs. The discipline is that you stop fixing whatever complained loudest and start fixing whatever costs most in total. The two judgements that make it useful or useless are the <strong>choice of category</strong> and the <strong>choice of measure</strong> &mdash; count by frequency and a hundred nuisance alarms outrank one main engine failure. Under <strong>ISM &sect;9</strong> it fits non-conformity analysis directly: it makes the choice of corrective action defensible, because it is evidence rather than opinion.</p></div>
+        <div class="answer-body">
+<h4>The principle, stated honestly</h4>
+<ul>
+<li><strong>Pareto principle:</strong> for many populations a <strong>small proportion of the causes accounts for a large proportion of the effect</strong>. Vilfredo Pareto, an Italian economist, observed the pattern in land ownership; <strong>Joseph Juran</strong> generalised it into quality management as the <em>vital few and the trivial many</em>.</li>
+<li><strong>&ldquo;80/20&rdquo; is a label, not a constant.</strong> It is an empirical rule of thumb. Your data may give 75/25 or 90/10, and if you say &ldquo;exactly eighty percent&rdquo; as though it were a physical law the examiner has a free follow-up. The correct claim is that the distribution is typically <strong>heavily skewed</strong>, and Pareto analysis is how you find out how skewed <em>yours</em> is.</li>
+<li><strong>Pareto analysis</strong> is the act of doing it: categorise, measure, rank, and read off the vital few. <strong>The Pareto chart</strong> is the output: descending bars plus a cumulative percentage curve on a secondary axis.</li>
+</ul>
+<h4>How to construct one &mdash; the six steps</h4>
+<ul>
+<li><strong>1. Define the problem and the period.</strong> &ldquo;Unplanned stoppages, main and auxiliary machinery, last twelve months.&rdquo; A Pareto chart over an undefined period is decoration.</li>
+<li><strong>2. Choose the categories.</strong> Mutually exclusive causes &mdash; fuel system, cooling water, lubrication, automation and sensors, electrical, human error. Too few and everything lands in one bar; too many and nothing stands out.</li>
+<li><strong>3. Choose the measure &mdash; this is the decision that matters.</strong> Frequency is easy and often misleading. <strong>Weight by consequence</strong>: downtime hours, spares cost, or crew hours expended. A single turbocharger failure and forty repeated low-level alarms are not comparable by count.</li>
+<li><strong>4. Sort descending</strong> and compute each category as a percentage of the total.</li>
+<li><strong>5. Compute the running cumulative percentage</strong> and plot it as a line across the tops of the bars.</li>
+<li><strong>6. Read the vital few</strong> &mdash; the categories left of where the cumulative line flattens &mdash; and direct the corrective action there.</li>
+</ul>
+<h4>Where a Chief Engineer actually uses it</h4>
+<ul>
+<li><strong>Repeat defects.</strong> Twelve months of the defect list, categorised by system and weighted by downtime. This is the classic use and the one to give first.</li>
+<li><strong>Alarm management.</strong> Rank alarms by frequency to find the handful of nuisance points generating most of the noise. Alarm flooding is a safety problem because it trains watchkeepers to acknowledge without reading; a Pareto on alarm tags usually shows a very small number of sensors responsible for most activations.</li>
+<li><strong>Lubricating oil consumption</strong> by unit, and <strong>fuel losses</strong> by cause &mdash; leakage, purifier losses, incomplete combustion, sludge &mdash; to find where the money is actually going before ordering anything.</li>
+<li><strong>Planned maintenance overdue items</strong> ranked by criticality, to decide what the next port call must clear.</li>
+<li><strong>Spares consumption</strong> to rationalise the inventory: a small number of line items usually accounts for most of the stock value.</li>
+<li><strong>Non-conformities and near-misses</strong> across the department, feeding ISM corrective action.</li>
+</ul>
+<h4>Its limits &mdash; say these before the examiner does</h4>
+<ul>
+<li>It ranks, it does not <strong>explain</strong>. Pareto tells you <em>where</em> to look; <strong>root cause analysis</strong> &mdash; five whys, fishbone, fault tree &mdash; tells you <em>why</em>. The two are used together, and saying so is what separates a memorised answer from a used one.</li>
+<li>It is <strong>backward-looking</strong>. A new failure mode with one occurrence sits at the far right of the chart and is invisible, which is exactly where a serious emerging problem starts.</li>
+<li><strong>Frequency hides severity.</strong> A category with one occurrence and catastrophic potential will never rank. Pareto is a tool for allocating routine effort, <strong>not</strong> a substitute for risk assessment.</li>
+<li>It is only as honest as the <strong>data</strong>. If defects are under-reported because reporting is punished, the chart faithfully ranks the reporting culture rather than the machinery.</li>
+</ul>
+<h4>CE Relevance</h4>
+<p>The practical value to a Chief Engineer is that it converts an argument into a chart. When you ask the superintendent for money, dry-dock time or a design change, &ldquo;this keeps failing&rdquo; is an opinion and a ranked twelve-month chart with downtime hours on the axis is evidence. Internally it does the same job with your own department: it settles the question of what the next planned maintenance cycle prioritises without it becoming a matter of whose watch complained loudest. It also protects you in the opposite direction &mdash; when something spectacular but singular happens, the chart is what stops the whole maintenance programme being redirected at a one-off.</p>
+<h4>Trap Questions</h4>
+<ul>
+<li><strong>&ldquo;Is it always eighty-twenty?&rdquo;</strong> &mdash; No. It is an empirical heuristic; the actual ratio comes out of your data. This is the trap, and it is the whole reason the question is asked.</li>
+<li><strong>&ldquo;Which regulation requires Pareto analysis?&rdquo;</strong> &mdash; None. It is a management technique. The nearest genuine hook is the <strong>ISM Code</strong> requirement to analyse non-conformities and to improve, and Pareto is one accepted way of doing that. Do not invent a regulation.</li>
+<li><strong>&ldquo;Difference between a Pareto chart and a histogram?&rdquo;</strong> &mdash; A histogram shows the distribution of a continuous variable across intervals; a Pareto chart shows <strong>categorical</strong> data sorted in descending order with a cumulative line. Order matters in one and not the other.</li>
+<li><strong>&ldquo;Would you count or weight?&rdquo;</strong> &mdash; Weight by consequence wherever you can, and say why: counting makes nuisance alarms outrank a main engine failure.</li>
+<li><strong>&ldquo;What does it not tell you?&rdquo;</strong> &mdash; The cause, the emerging risk, and anything about severity of a rare event.</li>
+</ul>
+<h4>Common CE Failures</h4>
+<p>Reciting &ldquo;eighty percent of problems come from twenty percent of causes&rdquo; and nothing further. Presenting 80/20 as a law. Not being able to describe the chart &mdash; descending bars, cumulative line, secondary axis. Confusing it with root cause analysis, or offering it as a substitute for one. Giving a generic business example instead of an engine-room one when the examiner is a marine engineer. Claiming an ISM or class requirement for it. Forgetting that the choice of measure decides the result, which is the only part of the technique with any judgement in it.</p>
+<h4>Numbers &amp; Names to Memorise</h4>
+<p><strong>Vilfredo Pareto</strong> &mdash; economist, original observation on distribution. <strong>Joseph Juran</strong> &mdash; brought it into quality management as the <strong>&ldquo;vital few and the trivial many&rdquo;</strong>, and he sits alongside Deming and Crosby among the quality theorists. His <strong>Quality Trilogy</strong> is <strong>Planning, Control, Improvement</strong> &mdash; Pareto is a separate contribution, not one of the three. See <a href="QB5_A.html#q7">QB5_A Q7 on TQM</a>. <strong>80/20</strong> &mdash; a heuristic label, not a constant. Chart elements: <strong>descending bars, cumulative percentage line, secondary axis</strong>. Companion tools: <strong>five whys, Ishikawa fishbone, fault tree</strong> for cause; <strong>risk assessment</strong> for severity.</p>
+<h4>Examiner Chain</h4>
+<p>Asked at Kochi in the August 2026 sittings simply as &ldquo;Pareto analysis&rdquo;. A bare two-word ask nearly always wants <strong>definition, then application</strong>, so give the principle in one sentence and move straight to an engine-room example rather than waiting to be asked. The natural follow-ups are whether it is always 80/20, how you would draw the chart, what it does not tell you, and how it relates to root cause analysis. Management-theory questions travel in company: expect <strong>TQM</strong>, <strong>SWOT</strong> (<a href="QB5_C_B.html#q2">Q2</a>), PDCA or root cause methods in the same conversation.</p>
+<h4>On My Vessel</h4>
+<p>Answer with a real ranking you have actually seen. On a container vessel a twelve-month defect list weighted by downtime typically puts <strong>fuel and lubricating oil system</strong> items and <strong>automation and sensor</strong> faults well ahead of everything else by count, while a single turbocharger or governor failure dominates on hours &mdash; and that contrast is itself the lesson about choosing the measure. If your PMS or defect-reporting system produces the data, say which system it is and what period you would pull. If you have not personally built a Pareto chart on board, say that honestly and describe the ranking you <em>would</em> run and why &mdash; that is a stronger answer than a fabricated result.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">&#9878; Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">No IMO instrument</span><span class="reg-desc"><strong>Pareto analysis is a management technique and no IMO instrument requires it.</strong> Saying so is the correct answer; naming a regulation for it is a fabrication the examiner can test.</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code &sect;9</span><span class="reg-desc">Reports and analysis of non-conformities, accidents and hazardous occurrences &mdash; the Company must implement corrective action. Pareto is one accepted method of deciding <em>which</em> corrective action to take first.</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code &sect;10</span><span class="reg-desc">Maintenance of the ship and equipment, including identification of equipment whose sudden failure may result in hazardous situations &mdash; the criticality judgement Pareto informs but does not replace.</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code &sect;12</span><span class="reg-desc">Company verification, review and evaluation &mdash; the management-review setting in which a ranked analysis is the natural evidence.</span></div>
+        </div>
+        <div class="ce-tip"><strong>CE Oral Tip:</strong> Two sentences win this question. First: <em>&ldquo;Pareto analysis ranks causes by their actual contribution so you fix the vital few rather than the trivial many.&rdquo;</em> Second, immediately and without being asked: <em>&ldquo;Eighty-twenty is a rule of thumb, not a law &mdash; the analysis tells you what your own split really is.&rdquo;</em> That second sentence is the whole trap, disarmed before it is set. Then give <strong>one</strong> engine-room example with a measure attached &mdash; twelve months of unplanned stoppages weighted by downtime hours &mdash; and close by saying Pareto finds <em>where</em> and root cause analysis finds <em>why</em>. Do not attach a regulation to it; if pressed, ISM &sect;9 is the honest home, as a method of analysis and not as a requirement.</div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB5_C_B, Q9, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB5_C_B &middot; Q9 &middot; v1.1</span>
+        </div>
+      </div>
+    </div>
+    <div id="no-results"><p>No questions match your search/filter.</p></div>
 <div class="page-footer">
   <p>Marine Intelligence Weekly · MEO Class 1 Question Bank · QB5_C_B — Management, Leadership &amp; Human Element — Part B</p>
   <p>Compiled by Nixon Antony, Second Engineer, Maersk A/S · <a href="https://marineintelligenceweekly.com/meoclass1/">Back to MEO Class 1 Hub</a></p>
