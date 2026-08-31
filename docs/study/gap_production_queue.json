@@ -1,0 +1,985 @@
+{
+  "schema": "miw.study.gap_production_queue.v1",
+  "schema_version": "1.0",
+  "generated_by": "tools/study/build_syllabus_gap_register.py",
+  "hand_editable": false,
+  "authority": "Derived from docs/study/syllabus_gap_register.json and from nothing else. No priority in this file is hand-asserted. A node whose mapping state is AMBIGUOUS_MAPPING is in the review lane and in no production lane, because a priority derived from topic-smeared evidence would be a fabricated priority.",
+  "derived_from": {
+    "register": "docs/study/syllabus_gap_register.json",
+    "register_schema": "miw.study.syllabus_gap_register.v1",
+    "official_source_sha256": "07170f572c99064fad25eedb0fe985886248a81a49b4eb5d4711fd38d186f44d"
+  },
+  "rules": {
+    "REVIEW": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first.",
+    "P0": "mapping_state != AMBIGUOUS_MAPPING and coverage_state == NO_EVIDENCE. The governed corpus is not yet useful to a candidate for this official node at all.",
+    "P1": "coverage_state == NODE_EVIDENCED_NO_GOVERNED_ANSWER. There is node-level question evidence and no adequate governed answer.",
+    "P2": "coverage_state == GOVERNED_ANSWER_WITHOUT_NODE_EVIDENCE, or a governed answer exists alongside topic-level or hypothesis-only evidence. The coverage is legacy or misaligned with the final syllabus.",
+    "P3": "node-level question evidence and a governed answer, with no unaligned residue. Coverage strengthening."
+  },
+  "counts": {
+    "P0": 0,
+    "P1": 3,
+    "P2": 0,
+    "P3": 0,
+    "REVIEW": 22
+  },
+  "lanes": {
+    "P0": [],
+    "P1": [
+      {
+        "official_node_id": "C49-A3-04",
+        "official_number": 4,
+        "official_label": "Principles of ship stability including stability during dry docking, damage stability in cases of flooding or grounding, and countermeasures to maintain adequat...",
+        "coverage_state": "NODE_EVIDENCED_NO_GOVERNED_ANSWER",
+        "mapping_state": "RESOLVED_MAPPING",
+        "evidence_granularity": "NODE_LEVEL",
+        "review_required": false,
+        "tallies": {
+          "oral": {
+            "resolved": 33,
+            "topic_level": 0,
+            "ambiguous": 15
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 6
+          }
+        },
+        "lane": "P1",
+        "rule": "coverage_state == NODE_EVIDENCED_NO_GOVERNED_ANSWER. There is node-level question evidence and no adequate governed answer."
+      },
+      {
+        "official_node_id": "C49-A3-12",
+        "official_number": 12,
+        "official_label": "Knowledge of emergency preparedness and response for shipboard emergencies such as oil spill, fire, flooding, collision, grounding, and personnel accidents. Mus...",
+        "coverage_state": "NODE_EVIDENCED_NO_GOVERNED_ANSWER",
+        "mapping_state": "RESOLVED_MAPPING",
+        "evidence_granularity": "NODE_LEVEL",
+        "review_required": false,
+        "tallies": {
+          "oral": {
+            "resolved": 27,
+            "topic_level": 197,
+            "ambiguous": 10
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 69,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 23,
+            "ambiguous": 4
+          }
+        },
+        "lane": "P1",
+        "rule": "coverage_state == NODE_EVIDENCED_NO_GOVERNED_ANSWER. There is node-level question evidence and no adequate governed answer."
+      },
+      {
+        "official_node_id": "C49-A3-25",
+        "official_number": 25,
+        "official_label": "Underwater noise; ship designs and operations to reduce such noise and allied areas....",
+        "coverage_state": "NODE_EVIDENCED_NO_GOVERNED_ANSWER",
+        "mapping_state": "RESOLVED_MAPPING",
+        "evidence_granularity": "NODE_LEVEL",
+        "review_required": false,
+        "tallies": {
+          "oral": {
+            "resolved": 61,
+            "topic_level": 0,
+            "ambiguous": 9
+          },
+          "written": {
+            "resolved": 43,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 13,
+            "topic_level": 0,
+            "ambiguous": 1
+          }
+        },
+        "lane": "P1",
+        "rule": "coverage_state == NODE_EVIDENCED_NO_GOVERNED_ANSWER. There is node-level question evidence and no adequate governed answer."
+      }
+    ],
+    "P2": [],
+    "P3": [],
+    "REVIEW": [
+      {
+        "official_node_id": "C49-A3-01",
+        "official_number": 1,
+        "official_label": "Knowledge of national maritime legislation, including the Indian Merchant Shipping Act, 2025, Rules framed thereunder; and, understanding of international marit...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 4,
+            "ambiguous": 7
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 19,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 6,
+            "ambiguous": 6
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-02",
+        "official_number": 2,
+        "official_label": "Overview of Quality, Safety and Energy Management Systems in maritime organizations with reference to the International Safety Management Code (ISM Code) and IS...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 197,
+            "ambiguous": 7
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 69,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 23,
+            "ambiguous": 6
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-03",
+        "official_number": 3,
+        "official_label": "Overview of Classification Societies and their functions in ensuring the safety, structural integrity and seaworthiness of ships, including statutory certificat...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 76,
+            "ambiguous": 7
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 96,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 36,
+            "ambiguous": 6
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-05",
+        "official_number": 5,
+        "official_label": "Overview of Official Log Books, including their purpose, statutory significance and maintenance in accordance with the Merchant Shipping Act, 2025 and relevant...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 4,
+            "ambiguous": 7
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 19,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 6,
+            "ambiguous": 6
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-06",
+        "official_number": 6,
+        "official_label": "Monitoring and control of compliance with legislative requirements relating to safety of life at sea and protection of the marine environment, including knowled...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 76,
+            "ambiguous": 7
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 96,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 36,
+            "ambiguous": 7
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-07",
+        "official_number": 7,
+        "official_label": "Knowledge of ship security systems in accordance with the International Ship and Port Facility Security (ISPS) Code, including mandatory requirements and guidan...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 76,
+            "ambiguous": 7
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 96,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 36,
+            "ambiguous": 6
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-08",
+        "official_number": 8,
+        "official_label": "Knowledge of the role of the World Health Organization in global public health, including monitoring disease outbreaks and health systems, and the provisions of...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 197,
+            "ambiguous": 7
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 69,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 23,
+            "ambiguous": 6
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-09",
+        "official_number": 9,
+        "official_label": "Knowledge of Port State Control as the inspection of foreign ships in national ports to verify compliance with international regulations relating to ship condit...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 76,
+            "ambiguous": 7
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 96,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 36,
+            "ambiguous": 6
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-10",
+        "official_number": 10,
+        "official_label": "Knowledge of ship survey and certification requirements, including the principles of the Harmonized System of Survey and Certification (HSSC). Types of statutor...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 76,
+            "ambiguous": 7
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 96,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 36,
+            "ambiguous": 6
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-11",
+        "official_number": 11,
+        "official_label": "Knowledge of marine insurance including Hull and Machinery Insurance and the role and operation of Protection and Indemnity Clubs, covering principles of indemn...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 113,
+            "ambiguous": 1
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 70,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 26,
+            "ambiguous": 3
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-13",
+        "official_number": 13,
+        "official_label": "Study of human relations and modern management principles, including organizational behaviour and the influence of individual and group behaviour within organiz...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 197,
+            "ambiguous": 0
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 69,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 23,
+            "ambiguous": 4
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-14",
+        "official_number": 14,
+        "official_label": "Study of training and instructional responsibilities of the Chief Engineer as a trainer for engine room personnel. The syllabus shall cover the skills required...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 197,
+            "ambiguous": 0
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 69,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 23,
+            "ambiguous": 4
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-15",
+        "official_number": 15,
+        "official_label": "Study of inventory management on board ships, including management of spares and stores, safety stock levels, and re-order planning using the Re-Order Point (RO...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 197,
+            "ambiguous": 1
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 69,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 23,
+            "ambiguous": 4
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-16",
+        "official_number": 16,
+        "official_label": "Study of Management Information Systems (MIS) in ship management, including computer system resources and computer-based information systems. The syllabus shall...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 197,
+            "ambiguous": 1
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 69,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 23,
+            "ambiguous": 4
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-17",
+        "official_number": 17,
+        "official_label": "Study of record management in the engine room, including preparation, maintenance, and interpretation of records relating to machinery operation and maintenance...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 197,
+            "ambiguous": 0
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 69,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 23,
+            "ambiguous": 5
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-18",
+        "official_number": 18,
+        "official_label": "Study of economising fuel consumption on board ships, including effective power balancing and propulsive characteristics of diesel engines in relation to speed,...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 64,
+            "ambiguous": 1
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 50,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 19,
+            "ambiguous": 0
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-19",
+        "official_number": 19,
+        "official_label": "Study of budgeting and cost control in ship operations, including principles of cost value analysis for cost reduction and the classification of fixed and consu...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 113,
+            "ambiguous": 1
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 70,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 26,
+            "ambiguous": 7
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-20",
+        "official_number": 20,
+        "official_label": "Study of practical electricity and electronics including power electronics on board ships, including high voltage (HV) systems, their definition, applications,...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 22,
+            "ambiguous": 1
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-21",
+        "official_number": 21,
+        "official_label": "Study of recent developments in marine diesel engines and propulsion systems including dual fuel engines and contemporary technologies as may be adopted from ti...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 22,
+            "ambiguous": 1
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-22",
+        "official_number": 22,
+        "official_label": "Study of greenhouse gas (GHG) emissions from ships, including statutory restrictions on EU waters; methods for monitoring, controlling, and reducing emissions i...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 64,
+            "ambiguous": 0
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 50,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 19,
+            "ambiguous": 1
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-23",
+        "official_number": 23,
+        "official_label": "General understanding of Artificial Intelligence (AI) and its emerging applications in the maritime industry. The use of AI in ship navigation support systems,...",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 22,
+            "ambiguous": 1
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 4
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      },
+      {
+        "official_node_id": "C49-A3-24",
+        "official_number": 24,
+        "official_label": "The study of Classic maritime casualties; Practices related to Casualty Investigations, related IMO guidelines and procedures....",
+        "coverage_state": "TOPIC_LEVEL_EVIDENCE_ONLY",
+        "mapping_state": "AMBIGUOUS_MAPPING",
+        "evidence_granularity": "TOPIC_LEVEL",
+        "review_required": true,
+        "tallies": {
+          "oral": {
+            "resolved": 0,
+            "topic_level": 76,
+            "ambiguous": 7
+          },
+          "written": {
+            "resolved": 0,
+            "topic_level": 96,
+            "ambiguous": 0
+          },
+          "current_answers": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "notes": {
+            "resolved": 0,
+            "topic_level": 0,
+            "ambiguous": 0
+          },
+          "written_qi_families": {
+            "resolved": 0,
+            "topic_level": 36,
+            "ambiguous": 6
+          }
+        },
+        "lane": "REVIEW",
+        "rule": "mapping_state == AMBIGUOUS_MAPPING. The node has evidence, but none of it pinpoints the node, so no production priority can be derived from it honestly. Adjudication first."
+      }
+    ]
+  }
+}

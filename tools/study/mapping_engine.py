@@ -156,6 +156,43 @@ OFFICIAL_EFFECTIVE_FROM = '2027-01-01'
 ALIGNMENT = ('CROSSWALK_ALIGNED', 'SUPPORTING_ONLY',
              'ORPHANED_IN_ADOPTED_SYLLABUS', 'UNRESOLVED')
 
+# --------------------------------------------------------------------------- #
+# EVIDENCE GRANULARITY -- what a coverage contribution is evidence *of*
+# --------------------------------------------------------------------------- #
+# The resolution rule above is correct and is unchanged. What was missing was a
+# way for a DOWNSTREAM READER to tell the three kinds of contribution apart.
+# Without it, a coverage builder that loops over
+# `official_syllabus_node_candidates` credits every candidate node with a full
+# unit of evidence, and one topic-level question becomes seven node-level
+# claims. That is precisely how Annexure III nodes 02, 08, 13, 14, 15, 16 and
+# 17 all came to report oral=197 / written=69: all seven sit under D03, so all
+# seven inherited D03's whole question count as if each had been evidenced
+# individually. The numbers were identical because they were the same number.
+#
+#   NODE_LEVEL   the governed join pinpointed EXACTLY ONE official node. This
+#                is the only kind that may raise a node's node-level tally.
+#   TOPIC_LEVEL  the governed join produced a candidate SET. The evidence
+#                belongs to the set as a whole and stays attached to it. It may
+#                raise the topic-level tally of every node in the set and may
+#                NEVER raise any node's node-level tally.
+#   AMBIGUOUS    the governed join produced no official node at all. Any
+#                candidate nodes carried alongside are cue-derived HYPOTHESES,
+#                not a governed set, and are the weakest tier of all.
+#
+# The three are mutually exclusive and exhaustive, so resolved, candidate-set
+# and unresolved are three separately readable quantities and never one blended
+# score.
+EVIDENCE_GRANULARITY = ('NODE_LEVEL', 'TOPIC_LEVEL', 'AMBIGUOUS')
+
+GRANULARITY_BASIS = {
+    'NODE_LEVEL': 'the governed topic maps to exactly one Annexure III node',
+    'TOPIC_LEVEL': ('the governed topic maps to several Annexure III nodes; '
+                    'the evidence is attached to the candidate set, not to any '
+                    'one node in it'),
+    'AMBIGUOUS': ('no governed Annexure III node; any candidate node is a '
+                  'cue-derived hypothesis awaiting adjudication'),
+}
+
 _CROSSWALK_PATH = os.path.join(ROOT, 'docs', 'study', 'official_crosswalk.json')
 _official_cache = None
 
@@ -179,8 +216,25 @@ def official_nodes_for_topic(topic_id, role='PRIMARY'):
     return [e['official_node_id'] for e in edges]
 
 
+def granularity_for(rec):
+    """What is this record evidence OF? -> one of EVIDENCE_GRANULARITY.
+
+    Derived only from the governed join that `attach_official` already made,
+    so it can never disagree with the resolution rule it describes.
+    """
+    if rec.get('official_syllabus_node_id') is not None:
+        return 'NODE_LEVEL'
+    if len(rec.get('official_syllabus_node_candidates') or []) > 1:
+        return 'TOPIC_LEVEL'
+    return 'AMBIGUOUS'
+
+
 def attach_official(rec):
-    """Add the adopted-syllabus join to a mapping record, in place."""
+    """Add the adopted-syllabus join to a mapping record, in place.
+
+    Also stamps `evidence_granularity`, so no downstream reader has to infer
+    from the shape of the candidate list what kind of evidence it is holding.
+    """
     topic = rec.get('topic_id')
     rec['official_syllabus_version'] = OFFICIAL_VERSION
     rec['official_effective_from'] = OFFICIAL_EFFECTIVE_FROM
@@ -191,6 +245,8 @@ def attach_official(rec):
         rec['official_mapping_confidence'] = 'UNRESOLVED'
         rec['official_mapping_basis'] = 'question has no MIW topic to cross from'
         rec['official_alignment_status'] = 'UNRESOLVED'
+        rec['evidence_granularity'] = 'AMBIGUOUS'
+        rec['evidence_granularity_basis'] = GRANULARITY_BASIS['AMBIGUOUS']
         return rec
 
     primary = official_nodes_for_topic(topic)
@@ -202,6 +258,17 @@ def attach_official(rec):
     # overstate the gap -- D08 (fire/LSA) sits under the emergency-response
     # node, whereas D07 (cargo) has no Annexure III edge of any kind because
     # cargo is a Class II subject.
+    #
+    # THE TRAILING "BECAUSE" IN THE SENTENCE ABOVE IS AN UNADJUDICATED
+    # HYPOTHESIS, NOT A GOVERNED FINDING. The observable fact is only that D07
+    # carries no Annexure III edge of any role in the governed crosswalk. The
+    # explanation offered for that absence -- that cargo is a Class II subject
+    # -- is a substantive claim about the syllabus which no adjudication record
+    # in this repository supports. It is preserved here verbatim because it is
+    # the reasoning that was actually used, and it is labelled here because no
+    # output of this repository may present it as settled. D07 evidence is
+    # therefore carried as AMBIGUOUS_MAPPING pending adjudication. The durable
+    # note is docs/study/SYLLABUS_SOURCE_STATUS.md section 9.
     if primary:
         nodes, status = primary, 'CROSSWALK_ALIGNED'
         role_note = 'Annexure III node'
@@ -231,7 +298,75 @@ def attach_official(rec):
         rec['official_mapping_basis'] = (
             f'topic {topic} maps to {len(nodes)} Annexure III nodes; '
             'aligned to the set, not pinpointed to one')
+
+    g = granularity_for(rec)
+    rec['evidence_granularity'] = g
+    rec['evidence_granularity_basis'] = GRANULARITY_BASIS[g]
     return rec
+
+
+# --------------------------------------------------------------------------- #
+# Granularity-aware coverage tallies
+# --------------------------------------------------------------------------- #
+def coverage_contribution(rec, *, hypothesis_nodes=None):
+    """One record -> one coverage contribution, granularity made explicit.
+
+    `hypothesis_nodes` lets a caller carry cue-derived candidate nodes for an
+    AMBIGUOUS record (the 39 ACCIDENTALLY_UNMAPPED questions have no governed
+    topic but a reviewer still needs to see where they might land). They are
+    recorded in their own field so they can never be mistaken for the governed
+    candidate set.
+    """
+    g = rec.get('evidence_granularity') or granularity_for(rec)
+    return {
+        'canonical_question_id': rec.get('canonical_question_id'),
+        'content_type': rec.get('content_type'),
+        'topic_id': rec.get('topic_id'),
+        'evidence_granularity': g,
+        'evidence_granularity_basis': GRANULARITY_BASIS[g],
+        'resolved_official_node_id': rec.get('official_syllabus_node_id'),
+        'candidate_official_node_ids':
+            list(rec.get('official_syllabus_node_candidates') or []),
+        'hypothesis_official_node_ids': sorted(hypothesis_nodes or []),
+        'official_mapping_confidence': rec.get('official_mapping_confidence'),
+        'official_alignment_status': rec.get('official_alignment_status'),
+        'mapping_status': rec.get('mapping_status'),
+        'review_required': g != 'NODE_LEVEL',
+    }
+
+
+def empty_tally():
+    """The three quantities, always present, never summed by this module."""
+    return {'resolved': 0, 'topic_level': 0, 'ambiguous': 0}
+
+
+def tally_contributions(contributions, node_ids):
+    """Fold contributions into per-node tallies plus an unattributed pool.
+
+    THE INVARIANT THIS FUNCTION EXISTS TO HOLD: a TOPIC_LEVEL contribution
+    raises `topic_level` for every node in its candidate set and raises
+    `resolved` for none of them. An AMBIGUOUS contribution raises `ambiguous`
+    only for nodes it names as a hypothesis, and is additionally counted in the
+    unattributed pool so nothing is silently dropped.
+    """
+    by_node = {n: empty_tally() for n in node_ids}
+    totals = empty_tally()
+    unattributed = []
+    for c in contributions:
+        g = c['evidence_granularity']
+        totals[{'NODE_LEVEL': 'resolved', 'TOPIC_LEVEL': 'topic_level',
+                'AMBIGUOUS': 'ambiguous'}[g]] += 1
+        if g == 'NODE_LEVEL':
+            by_node[c['resolved_official_node_id']]['resolved'] += 1
+        elif g == 'TOPIC_LEVEL':
+            for n in c['candidate_official_node_ids']:
+                by_node[n]['topic_level'] += 1
+        else:
+            for n in c['hypothesis_official_node_ids']:
+                by_node[n]['ambiguous'] += 1
+            unattributed.append(c['canonical_question_id'])
+    return {'by_node': by_node, 'totals': totals,
+            'unattributed_ids': sorted(x for x in unattributed if x)}
 
 
 # --------------------------------------------------------------------------- #
@@ -439,6 +574,19 @@ def validate_mapping(rec):
         if rec['official_alignment_status'] == 'ORPHANED_IN_ADOPTED_SYLLABUS' \
                 and cands:
             e.append('ORPHANED_IN_ADOPTED_SYLLABUS but candidates exist')
+        # --- granularity: explicit, and never disagreeing with the join ---- #
+        g = rec.get('evidence_granularity')
+        if g not in EVIDENCE_GRANULARITY:
+            e.append(f'evidence_granularity {g!r} invalid')
+        elif g != granularity_for(rec):
+            e.append(f'evidence_granularity {g!r} disagrees with the official '
+                     f'join, which is {granularity_for(rec)!r}')
+        if g == 'NODE_LEVEL' and single is None:
+            e.append('NODE_LEVEL granularity without a pinpointed node')
+        if g == 'TOPIC_LEVEL' and len(cands) < 2:
+            e.append('TOPIC_LEVEL granularity without a candidate set')
+        if g == 'AMBIGUOUS' and single is not None:
+            e.append('AMBIGUOUS granularity but a node is pinpointed')
     return e
 
 

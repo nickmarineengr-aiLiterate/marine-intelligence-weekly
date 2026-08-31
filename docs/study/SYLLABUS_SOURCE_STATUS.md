@@ -154,3 +154,64 @@ oral + written questions → examiner & question intelligence → study packs
 Official wording lives only in `official_syllabus.json` and is never
 paraphrased. MIW topic labels are normalized study headings and are **not**
 required to match DGMA headings — they answer different questions.
+
+## 8. Draft source — ABSENT, AND THE DRAFT-TO-FINAL CROSSWALK IS UNVERIFIED
+
+`docs/study/official_change_crosswalk.json` now exists as the machine-readable
+draft-to-final relationship layer. It is **distinct** from
+`docs/study/official_crosswalk.json`, which remains the official-node to
+MIW-topic layer and is untouched by it.
+
+**The 28-Jul-2026 draft PDF is not in this repository.** Only its digest
+(`b6365d2205428f34283b9e259c8a130b4b4dfd2072f52cd1d96141348a21d09c`), its
+issuing date, its source listing and its item count of 23 are pinned. No draft
+text has been extracted, so **no tool in this repository has performed an
+item-to-item comparison between the draft and the final.**
+
+The draft side of every record in the change crosswalk therefore rests on the
+narrative table in section 3 above, and on nothing else. Consequently every
+record carries:
+
+| Field | Value |
+|---|---|
+| `classification` | `AMBIGUOUS` |
+| `provenance` | `NARRATIVE_UNVERIFIED` |
+| `review_required` | `true` |
+| `source_verified` | `false` |
+
+The narrative counts in section 3 — 8 unchanged, 5 minor, 12 substantive, 2 new
+— are reproduced in that file but are **not adopted**. They are also internally
+unreconciled: 8 + 5 + 12 = 25, with 2 new listed in addition, which matches
+neither 23 draft items nor 25 final items. That discrepancy is reported rather
+than repaired, because only the draft source can settle it.
+
+**This layer awaits source acquisition.** Acquiring the draft was explicitly
+out of scope for the job that built this file, and no network request was made.
+When the draft is acquired, `tools/study/build_official_change_crosswalk.py` is
+where the real comparison belongs, and the classification vocabulary
+(`UNCHANGED / RENAMED / MOVED / MERGED / SPLIT / EXPANDED / REDUCED / NEW /
+REMOVED`) is already declared there for it.
+
+## 9. D07 (Cargo Operations & Bulk Carriage) — UNADJUDICATED HYPOTHESIS
+
+**Observable fact.** Domain D07 carries no Annexure III edge of any role in
+`docs/study/official_crosswalk.json`. That is a property of the governed
+crosswalk and it is checkable.
+
+**Unadjudicated hypothesis.** A comment in `tools/study/mapping_engine.py`
+explains that absence by asserting that cargo is a Class II subject. That is a
+substantive claim about the DGMA syllabus. **No adjudication record in this
+repository supports it, and nothing here establishes it.** It is carried in a
+code comment, which is not a governed decision surface.
+
+The comment has deliberately **not been deleted** — it is the reasoning that
+was actually used and removing it would hide the provenance of a decision. It
+has been labelled in place instead. Accordingly:
+
+- no output of this repository asserts as governed truth that cargo has no
+  Annexure III home because it is a Class II subject;
+- D07-related mappings are carried as `AMBIGUOUS_MAPPING` pending
+  adjudication, and appear under `domains_without_official_home` in
+  `docs/study/syllabus_gap_register.json` with `review_required: true`;
+- settling this requires a human adjudication against the circular, not a
+  build.

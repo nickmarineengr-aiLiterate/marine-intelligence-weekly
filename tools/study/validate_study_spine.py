@@ -409,6 +409,544 @@ def main():
                   horizon['public_claim']['derived_sentence'].lower(),
                   f'derived public sentence contains {phrase!r}')
 
+    # ======================================================================= #
+    # R-GRAN / R-GAP / R-QUEUE-GAP / R-CHANGE
+    # The granularity-aware syllabus coverage and gap layer (job AC-000022).
+    #
+    # Nothing below replaces or relaxes any check above. These are additional
+    # invariants for a layer that did not previously exist, plus non-mutation
+    # gates over the stores that layer only READS.
+    # ======================================================================= #
+    D = os.path.join(ROOT, 'docs', 'study')
+    FINAL_DIGEST = ('07170f572c99064fad25eedb0fe985886248a81a49b4eb5d4711fd38'
+                    'd186f44d')
+
+    # Recurrence quantities as they stood BEFORE this classification layer was
+    # built. Classification is not recurrence: if any of these move, something
+    # wrote to a store that is supposed to be read-only here.
+    PRE_JOB_QI = {'families': 270, 'entities_in_families': 629,
+                  'entities_with_no_recurrence_value': 185}
+    PRE_JOB_OCC = {'recurrence_bearing': 1584, 'limb_records_not_counted': 698,
+                   'total_records': 2282}
+    PRE_JOB_CORPUS = {'oral': 738, 'written': 360, 'mappings': 1098,
+                      'accidentally_unmapped': 39, 'current_answers': 8,
+                      'notes_units': 992, 'crosswalk_edges': 43,
+                      'official_nodes': 25}
+
+    official_path = os.path.join(D, 'official_syllabus.json')
+    check('R-GRAN-OFFICIAL-EXISTS', os.path.exists(official_path),
+          'docs/study/official_syllabus.json is missing')
+    official = json.load(open(official_path, encoding='utf-8'))
+    onodes = official['nodes']
+    onode_ids = [n['official_node_id'] for n in onodes]
+
+    # ---- the canonical node set -------------------------------------------
+    check('R-GRAN-NODE-COUNT', len(onodes) == 25,
+          f'official syllabus carries {len(onodes)} nodes, not 25')
+    check('R-GRAN-NODE-UNIQUE', len(set(onode_ids)) == len(onode_ids),
+          'official node ids are not unique')
+    check('R-GRAN-NODE-SEQUENCE',
+          onode_ids == [f'C49-A3-{i:02d}' for i in range(1, 26)],
+          f'official node ids are not C49-A3-01..25: {sorted(onode_ids)[:3]}')
+    for nid in onode_ids:
+        check('R-GRAN-NODE-STABLE-ID', nid.startswith('C49-A3-'),
+              f'{nid!r} is not a stable Annexure III node id')
+
+    # ---- the final digest governs -----------------------------------------
+    check('R-GRAN-DIGEST-SYLLABUS',
+          official['source']['sha256'] == FINAL_DIGEST,
+          'official_syllabus.json does not carry the governing final digest')
+    check('R-GRAN-DIGEST-XWALK',
+          xwalk['official_source']['sha256'] == FINAL_DIGEST,
+          'official_crosswalk.json does not carry the governing final digest')
+
+    # ---- every crosswalk target names a real node -------------------------
+    for e in xwalk['edges']:
+        check('R-GRAN-XWALK-TARGET', e['official_node_id'] in set(onode_ids),
+              f"crosswalk edge names unknown node {e['official_node_id']!r}")
+    check('R-GRAN-XWALK-EDGES',
+          len(xwalk['edges']) == PRE_JOB_CORPUS['crosswalk_edges'],
+          f"crosswalk holds {len(xwalk['edges'])} edges, not "
+          f"{PRE_JOB_CORPUS['crosswalk_edges']}")
+
+    # ---- granularity is explicit, agrees with the join, and never fans out -
+    gstore = json.load(open(os.path.join(D, 'study_mappings.json'),
+                            encoding='utf-8'))['mappings']
+    check('R-GRAN-CORPUS-STABLE',
+          len(gstore) == PRE_JOB_CORPUS['mappings'],
+          f'mapping store holds {len(gstore)} records, not '
+          f"{PRE_JOB_CORPUS['mappings']} -- classification must create no "
+          f'question')
+    bad_gran = [q for q, r in gstore.items()
+                if r.get('evidence_granularity') not in ME.EVIDENCE_GRANULARITY]
+    check('R-GRAN-PRESENT', not bad_gran,
+          f'{len(bad_gran)} records carry no valid evidence_granularity: '
+          f'{sorted(bad_gran)[:3]}')
+    disagree = [q for q, r in gstore.items()
+                if r.get('evidence_granularity') != ME.granularity_for(r)]
+    check('R-GRAN-AGREES', not disagree,
+          f'{len(disagree)} records carry a granularity that disagrees with '
+          f'their official join: {sorted(disagree)[:3]}')
+    # A resolved node id implies exactly one deterministic mapping.
+    nondet = [q for q, r in gstore.items()
+              if r.get('official_syllabus_node_id') is not None
+              and len(r.get('official_syllabus_node_candidates') or []) != 1]
+    check('R-GRAN-RESOLVED-IS-DETERMINISTIC', not nondet,
+          f'{len(nondet)} records pinpoint a node from a non-singleton '
+          f'candidate set: {sorted(nondet)[:3]}')
+    unreal = sorted({n for r in gstore.values()
+                     for n in ((r.get('official_syllabus_node_candidates') or [])
+                               + ([r['official_syllabus_node_id']]
+                                  if r.get('official_syllabus_node_id') else []))
+                     if n not in set(onode_ids)})
+    check('R-GRAN-MAP-TARGET', not unreal,
+          f'mappings name official node ids that do not exist: {unreal[:3]}')
+
+    # THE FAN-OUT GATE. Fold every TOPIC_LEVEL record and require that not one
+    # node-level tally moved. This is the invariant
+    # tools/study/test_syllabus_fanout.py pins, checked here over the whole
+    # live corpus rather than one record.
+    topic_level = [ME.coverage_contribution(r) for r in gstore.values()
+                   if r.get('evidence_granularity') == 'TOPIC_LEVEL']
+    fan = ME.tally_contributions(topic_level, onode_ids)
+    inflated = sorted(n for n, t in fan['by_node'].items() if t['resolved'])
+    check('R-GRAN-NO-FANOUT', not inflated,
+          f'{len(inflated)} nodes gained node-level evidence from topic-level '
+          f'records: {inflated[:5]}')
+    check('R-GRAN-FANOUT-TOTALS', fan['totals']['resolved'] == 0
+          and fan['totals']['topic_level'] == len(topic_level),
+          f"topic-level fold reports {fan['totals']}")
+
+    # ---- the register ------------------------------------------------------
+    reg_path = os.path.join(D, 'syllabus_gap_register.json')
+    check('R-GAP-EXISTS', os.path.exists(reg_path),
+          'docs/study/syllabus_gap_register.json is missing')
+    if os.path.exists(reg_path):
+        import build_syllabus_gap_register as GAP
+        reg = json.load(open(reg_path, encoding='utf-8'))
+        recs = reg['nodes']
+        check('R-GAP-25', len(recs) == 25,
+              f'register carries {len(recs)} records, not 25')
+        rids = [r['official_node_id'] for r in recs]
+        check('R-GAP-IDS', rids == sorted(onode_ids),
+              'register node ids are not exactly the 25 official ids in order')
+        check('R-GAP-NO-DUPLICATE', len(set(rids)) == len(rids),
+              'register carries a duplicate official node id')
+        check('R-GAP-DIGEST',
+              reg['official_source']['sha256'] == FINAL_DIGEST,
+              'register does not cite the governing final digest')
+        check('R-GAP-NOT-DIAGNOSTIC-PROMOTION',
+              'diagnostic only' in reg['authority'].lower(),
+              'register does not restate that coverage_matrix stays DIAGNOSTIC')
+        for r in recs:
+            nid = r['official_node_id']
+            for f in ('official_label', 'miw_topic_edges', 'tallies',
+                      'coverage_state', 'evidence_granularity',
+                      'review_required', 'provenance', 'mapping_state'):
+                check('R-GAP-FIELDS', f in r, f'{nid} has no {f}')
+            t = r['tallies']
+            check('R-GAP-STREAMS', set(t) == set(GAP.STREAMS),
+                  f'{nid} tallies cover {sorted(t)}')
+            check('R-GAP-THREE-QUANTITIES',
+                  all(set(v) == {'resolved', 'topic_level', 'ambiguous'}
+                      for v in t.values()),
+                  f'{nid} does not expose the three quantities separately')
+            check('R-GAP-STATE-DERIVED',
+                  r['coverage_state'] == GAP.coverage_state(t),
+                  f"{nid} coverage_state {r['coverage_state']!r} is not what "
+                  f'its own tallies compute')
+            check('R-GAP-MAPPING-DERIVED',
+                  r['mapping_state'] == GAP.mapping_state(t),
+                  f"{nid} mapping_state is not what its tallies compute")
+            check('R-GAP-GRAN-DERIVED',
+                  r['evidence_granularity'] == GAP.node_granularity(t),
+                  f'{nid} evidence_granularity is not what its tallies compute')
+            check('R-GAP-REVIEW-FLAG',
+                  r['review_required'] == (r['evidence_granularity']
+                                           != 'NODE_LEVEL'),
+                  f'{nid} review_required disagrees with its granularity')
+            check('R-GAP-EDGE-TARGETS',
+                  all(ed['topic_id'] in set(SP.DOMAIN_IDS)
+                      for ed in r['miw_topic_edges']),
+                  f'{nid} cites a topic id that is not a registered domain')
+
+        # classification created nothing
+        ins = reg['inputs']
+        check('R-GAP-NO-NEW-QUESTIONS',
+              ins['oral_questions'] == PRE_JOB_CORPUS['oral']
+              and ins['written_questions'] == PRE_JOB_CORPUS['written'],
+              f'register consumed {ins["oral_questions"]} oral / '
+              f'{ins["written_questions"]} written, expected '
+              f"{PRE_JOB_CORPUS['oral']}/{PRE_JOB_CORPUS['written']}")
+        check('R-GAP-NO-NEW-ANSWERS',
+              ins['current_answer_specs'] == PRE_JOB_CORPUS['current_answers'],
+              f"register consumed {ins['current_answer_specs']} answer specs")
+        check('R-GAP-NO-NEW-NOTES',
+              ins['notes_units'] == PRE_JOB_CORPUS['notes_units'],
+              f"register consumed {ins['notes_units']} notes units")
+        check('R-GAP-NO-NEW-FAMILIES',
+              ins['written_qi_families'] == PRE_JOB_QI['families'],
+              f"register consumed {ins['written_qi_families']} QI families")
+
+        # the 39 stay visible, unresolved, and uncounted as coverage
+        au = reg['accidentally_unmapped']
+        live39 = sorted(q for q, r in gstore.items()
+                        if r.get('mapping_status') == 'ACCIDENTALLY_UNMAPPED')
+        check('R-GAP-UNMAPPED-COUNT',
+              au['count'] == PRE_JOB_CORPUS['accidentally_unmapped'],
+              f"register reports {au['count']} accidentally-unmapped "
+              f"questions, not {PRE_JOB_CORPUS['accidentally_unmapped']}")
+        check('R-GAP-UNMAPPED-MATCHES-STORE',
+              [q['canonical_question_id'] for q in au['questions']] == live39,
+              'the register unmapped list disagrees with the mapping store')
+        for q in au['questions']:
+            check('R-GAP-UNMAPPED-AMBIGUOUS',
+                  q['mapping_state'] == 'AMBIGUOUS_MAPPING'
+                  and q['review_required'] is True
+                  and q['evidence_granularity'] == 'AMBIGUOUS',
+                  f"{q['canonical_question_id']} is not carried as ambiguous")
+        resolved_ids = {r['official_node_id'] for r in recs}
+        check('R-GAP-UNMAPPED-NOT-COVERAGE',
+              all(not q.get('candidate_official_node_ids')
+                  for q in au['questions']),
+              'an accidentally-unmapped question carries a governed candidate '
+              'set, which would count it as coverage')
+        check('R-GAP-UNMAPPED-HYPOTHESIS-REAL',
+              all(n in resolved_ids for q in au['questions']
+                  for n in q.get('hypothesis_official_node_ids') or []),
+              'an unmapped question names a hypothesis node that does not exist')
+
+        # D07 keeps an unresolved status
+        d07 = reg['domains_without_official_home']
+        check('R-GAP-D07-UNRESOLVED', 'D07' in d07['domain_ids'],
+              'D07 is no longer reported as having no official home')
+        check('R-GAP-D07-AMBIGUOUS',
+              d07['mapping_state'] == 'AMBIGUOUS_MAPPING'
+              and d07['review_required'] is True,
+              'D07 is not carried as AMBIGUOUS_MAPPING pending adjudication')
+        check('R-GAP-D07-NO-CANON',
+              'adjudication' in d07['what'].lower(),
+              'the D07 entry does not say the question is unadjudicated')
+        eng_src = open(os.path.join(HERE, 'mapping_engine.py'),
+                       encoding='utf-8').read()
+        check('R-GAP-D07-COMMENT-KEPT',
+              'cargo is a Class II subject' in eng_src,
+              'the original D07 source comment has been deleted')
+        check('R-GAP-D07-COMMENT-LABELLED',
+              'UNADJUDICATED' in eng_src and 'HYPOTHESIS' in eng_src,
+              'the D07 comment is not labelled as an unadjudicated hypothesis')
+        status_src = open(os.path.join(D, 'SYLLABUS_SOURCE_STATUS.md'),
+                          encoding='utf-8').read()
+        check('R-GAP-D07-NOTE',
+              'UNADJUDICATED HYPOTHESIS' in status_src,
+              'SYLLABUS_SOURCE_STATUS.md carries no durable D07 note')
+        check('R-GAP-DRAFT-ABSENT-NOTE',
+              'DRAFT SOURCE — ABSENT' in status_src.upper()
+              and 'SOURCE ACQUISITION' in status_src.upper()
+              and 'official_change_crosswalk.json' in status_src,
+              'SYLLABUS_SOURCE_STATUS.md does not record the absent draft and '
+              'the unverified crosswalk basis')
+
+    # ---- the coverage matrix keeps its place and its baseline --------------
+    cm_path = os.path.join(D, 'coverage_matrix.json')
+    check('R-GAP-COVER-EXISTS', os.path.exists(cm_path),
+          'docs/study/coverage_matrix.json is missing')
+    if os.path.exists(cm_path):
+        cm = json.load(open(cm_path, encoding='utf-8'))
+        check('R-GAP-COVER-ORAL-BASELINE',
+              cm['method']['oral_corpus'] == PRE_JOB_CORPUS['oral'],
+              f"coverage matrix oral baseline is "
+              f"{cm['method']['oral_corpus']}, not {PRE_JOB_CORPUS['oral']}")
+        check('R-GAP-COVER-DIAGNOSTIC',
+              cm['authority'].strip().upper().startswith('DIAGNOSTIC ONLY'),
+              'coverage_matrix.json no longer declares itself DIAGNOSTIC ONLY')
+        check('R-GAP-COVER-DIGEST',
+              cm['official_source']['sha256'] == FINAL_DIGEST,
+              'coverage matrix does not cite the governing final digest')
+
+    # ---- the queue derives from the register, and only from it -------------
+    q_path = os.path.join(D, 'gap_production_queue.json')
+    check('R-QUEUE-GAP-EXISTS', os.path.exists(q_path),
+          'docs/study/gap_production_queue.json is missing')
+    if os.path.exists(q_path) and os.path.exists(reg_path):
+        import build_syllabus_gap_register as GAP
+        gq = json.load(open(q_path, encoding='utf-8'))
+        rebuilt = GAP.build_queue(json.load(open(reg_path, encoding='utf-8')))
+        check('R-QUEUE-GAP-DERIVED', gq == rebuilt,
+              'the queue on disk is not what the register alone derives')
+        check('R-QUEUE-GAP-SOURCE',
+              gq['derived_from']['register']
+              == 'docs/study/syllabus_gap_register.json',
+              'the queue does not declare the register as its only source')
+        placed = [n['official_node_id']
+                  for lane in gq['lanes'].values() for n in lane]
+        check('R-QUEUE-GAP-ACCOUNT', sorted(placed) == sorted(onode_ids),
+              'the queue does not place every official node exactly once')
+        check('R-QUEUE-GAP-COUNTS',
+              gq['counts'] == {k: len(v) for k, v in gq['lanes'].items()},
+              'the queue counts disagree with its own lanes')
+        for lane in ('P0', 'P1', 'P2', 'P3'):
+            offenders = [n['official_node_id'] for n in gq['lanes'][lane]
+                         if n['mapping_state'] == 'AMBIGUOUS_MAPPING']
+            check('R-QUEUE-GAP-NO-AMBIGUOUS-IN-P',
+                  not offenders,
+                  f'{lane} holds AMBIGUOUS_MAPPING nodes {offenders[:3]}')
+        review = {n['official_node_id'] for n in gq['lanes']['REVIEW']}
+        expect_review = {r['official_node_id']
+                         for r in json.load(open(reg_path, encoding='utf-8'))['nodes']
+                         if r['mapping_state'] == 'AMBIGUOUS_MAPPING'}
+        check('R-QUEUE-GAP-REVIEW-LANE', review == expect_review,
+              'the review lane is not exactly the AMBIGUOUS_MAPPING nodes')
+        for lane in ('P0', 'P1', 'P2', 'P3', 'REVIEW'):
+            check('R-QUEUE-GAP-RULE-STATED',
+                  bool(gq['rules'].get(lane)),
+                  f'{lane} has no stated derivation rule')
+
+    # ---- recurrence is untouched by classification -------------------------
+    qi_fam_path = os.path.join(D, 'qi', 'qi_families.json')
+    qi_occ_path = os.path.join(D, 'qi', 'qi_occurrences.json')
+    check('R-GAP-QI-FAM-EXISTS', os.path.exists(qi_fam_path),
+          'docs/study/qi/qi_families.json is missing')
+    if os.path.exists(qi_fam_path):
+        qfc = json.load(open(qi_fam_path, encoding='utf-8'))['counts']
+        for k, v in PRE_JOB_QI.items():
+            check('R-GAP-QI-RECURRENCE-HELD', qfc.get(k) == v,
+                  f'qi_families counts.{k} is {qfc.get(k)}, was {v} before '
+                  f'classification')
+    check('R-GAP-QI-OCC-EXISTS', os.path.exists(qi_occ_path),
+          'docs/study/qi/qi_occurrences.json is missing')
+    if os.path.exists(qi_occ_path):
+        qoc = json.load(open(qi_occ_path, encoding='utf-8'))['counts']
+        for k, v in PRE_JOB_OCC.items():
+            check('R-GAP-OCC-RECURRENCE-HELD', qoc.get(k) == v,
+                  f'qi_occurrences counts.{k} is {qoc.get(k)}, was {v} before '
+                  f'classification')
+
+    # ---- the draft-to-final crosswalk declares its own weakness ------------
+    cx_path = os.path.join(D, 'official_change_crosswalk.json')
+    check('R-CHANGE-EXISTS', os.path.exists(cx_path),
+          'docs/study/official_change_crosswalk.json is missing')
+    if os.path.exists(cx_path):
+        cx = json.load(open(cx_path, encoding='utf-8'))
+        check('R-CHANGE-DISTINCT',
+              cx['schema'] != xwalk.get('schema')
+              and 'edges' not in cx,
+              'the change crosswalk has been conflated with the topic '
+              'crosswalk')
+        check('R-CHANGE-AUTHORITY-ABSENT',
+              'absent' in cx['authority'].lower(),
+              'the change crosswalk does not state that the draft is absent')
+        check('R-CHANGE-AUTHORITY-SECTION3',
+              'section 3' in cx['authority'].lower()
+              and 'SYLLABUS_SOURCE_STATUS.md' in cx['authority'],
+              'the change crosswalk does not name its narrative basis')
+        check('R-CHANGE-DRAFT-UNACQUIRED',
+              cx['draft_source']['text_extracted'] is False
+              and cx['draft_source']['item_count'] == 23,
+              'the change crosswalk claims draft text it does not have')
+        check('R-CHANGE-FINAL-DIGEST',
+              cx['final_source']['sha256'] == FINAL_DIGEST,
+              'the change crosswalk does not cite the governing final digest')
+        check('R-CHANGE-RECORDS', len(cx['records']) == 25,
+              f"the change crosswalk carries {len(cx['records'])} records")
+        check('R-CHANGE-NARRATIVE-UNCONFIRMED',
+              cx['narrative_counts']['confirmed_by_source_comparison'] is False,
+              'the change crosswalk claims its narrative counts are confirmed')
+        for r in cx['records']:
+            check('R-CHANGE-UNVERIFIED',
+                  r['provenance'] == 'NARRATIVE_UNVERIFIED'
+                  and r['classification'] == 'AMBIGUOUS'
+                  and r['review_required'] is True
+                  and r['source_verified'] is False,
+                  f"{r['final_official_node_id']} is not carried as unverified")
+            check('R-CHANGE-TARGET',
+                  r['final_official_node_id'] in set(onode_ids),
+                  f"{r['final_official_node_id']} is not a real official node")
+
+    # ======================================================================= #
+    # R-ROOT / R-ORAL-NONMUT / R-QUEUE-GAP-BYTES
+    #
+    # These do not restate anything above. They exist because three properties
+    # this layer depends on were previously only ARGUED and never MEASURED:
+    #   * that every tool here resolves the same repository root, and that the
+    #     Notes input is addressed through tools/notes/miw_paths.REPO_ROOT
+    #     rather than through a root a study tool guessed for itself;
+    #   * that the Oral occurrence, examiner-attribution and recurrence
+    #     quantities this classification layer READ are the same quantities
+    #     that were present before it ran -- compared against the pre-job blob
+    #     in git, not against a number typed into this file;
+    #   * that the production queue on disk is byte-identical to what the
+    #     register alone re-derives.
+    # Every one FAILS CLOSED: if git cannot answer, that is a failure here, not
+    # a skip, because an unmeasurable non-mutation claim is not a passing one.
+    # ======================================================================= #
+    sys.path.insert(0, os.path.join(ROOT, 'tools', 'notes'))
+    import miw_paths as MP
+    import build_syllabus_gap_register as GAPR
+
+    def _same_root(a, b):
+        return (os.path.normcase(os.path.abspath(a))
+                == os.path.normcase(os.path.abspath(b)))
+
+    print('resolved roots:')
+    print('  validate_study_spine.ROOT        = ' + ROOT)
+    print('  mapping_engine.ROOT              = ' + ME.ROOT)
+    print('  build_syllabus_gap_register.ROOT = ' + GAPR.ROOT)
+    print('  miw_paths.REPO_ROOT              = ' + MP.REPO_ROOT)
+    print('  notes input (via REPO_ROOT)      = ' + GAPR.NOTES)
+    check('R-ROOT-MIWPATHS', _same_root(MP.REPO_ROOT, ROOT),
+          f'miw_paths.REPO_ROOT {MP.REPO_ROOT!r} is not this tool root {ROOT!r}')
+    check('R-ROOT-ENGINE', _same_root(ME.ROOT, ROOT),
+          f'mapping_engine resolved root {ME.ROOT!r}')
+    check('R-ROOT-BUILDER', _same_root(GAPR.ROOT, ROOT),
+          f'the gap-register builder resolved root {GAPR.ROOT!r}')
+    check('R-ROOT-NOTES-VIA-MIWPATHS',
+          GAPR.NOTES == os.path.join(
+              MP.REPO_ROOT, 'meoclass1', 'oral-intelligence', 'examiner-audit',
+              'ORAL_NOTES_UNITS.jsonl'),
+          f'the Notes input {GAPR.NOTES!r} is not resolved through '
+          f'miw_paths.REPO_ROOT')
+
+    # ---- the pre-job baseline, read back out of git ------------------------
+    def _pre_job_blob(rel):
+        """The bytes of `rel` at HEAD -- i.e. before this job wrote anything."""
+        import subprocess
+        try:
+            r = subprocess.run(['git', 'show', 'HEAD:' + rel], cwd=ROOT,
+                               stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                               timeout=180)
+        except Exception as exc:                                # noqa: BLE001
+            return None, f'git could not be run: {exc}'
+        if r.returncode != 0:
+            return None, r.stderr.decode('utf-8', 'replace').strip()[:200]
+        return r.stdout, ''
+
+    ORAL_SOURCES = [
+        ('oral mapping store', 'docs/study/study_mappings.json'),
+        ('oral examiner attribution',
+         'meoclass1/oral-intelligence/examiner-audit/'
+         'CURRENT_EXAMINER_RELATIONSHIPS.jsonl'),
+        ('oral recurrence families',
+         'meoclass1/oral-intelligence/examiner-audit/'
+         'CROSS_EXAMINER_FAMILIES.json'),
+        ('oral QB index', 'meoclass1/qb_content_index.json'),
+        ('oral notes units',
+         'meoclass1/oral-intelligence/examiner-audit/ORAL_NOTES_UNITS.jsonl'),
+    ]
+
+    def _oral_quantities(raw, rel):
+        """The Oral quantities this job reads, computed from raw file bytes."""
+        text = raw.decode('utf-8')
+        if rel.endswith('study_mappings.json'):
+            m = json.loads(text)['mappings']
+            oral = {q: r for q, r in m.items()
+                    if r.get('content_type') == 'ORAL'}
+            return {'oral_occurrence_records': len(oral),
+                    'oral_with_topic': sum(1 for r in oral.values()
+                                           if r.get('topic_id')),
+                    'oral_accidentally_unmapped':
+                        sum(1 for r in oral.values()
+                            if r.get('mapping_status')
+                            == 'ACCIDENTALLY_UNMAPPED'),
+                    'store_records_total': len(m)}, oral
+        if rel.endswith('CURRENT_EXAMINER_RELATIONSHIPS.jsonl'):
+            rows = [json.loads(l) for l in text.splitlines() if l.strip()]
+            return {'examiner_attribution_records': len(rows),
+                    'distinct_examiners':
+                        len({r.get('examiner') for r in rows}),
+                    'distinct_attributed_questions':
+                        len({r.get('question_id') for r in rows}),
+                    'evidence_id_total':
+                        sum(len(r.get('evidence_ids') or []) for r in rows)}, None
+        if rel.endswith('CROSS_EXAMINER_FAMILIES.json'):
+            fams = json.loads(text)
+            return {'oral_recurrence_families': len(fams),
+                    'independent_source_occurrences':
+                        sum(f.get('independent_source_occurrences') or 0
+                            for f in fams),
+                    'distinct_wordings':
+                        sum(f.get('distinct_wordings') or 0 for f in fams),
+                    'matched_question_ids':
+                        sum(len(f.get('matched_question_ids') or [])
+                            for f in fams)}, None
+        if rel.endswith('qb_content_index.json'):
+            idx = json.loads(text)
+            files = idx.get('files') if isinstance(idx, dict) else None
+            return {'qb_index_bytes': len(raw),
+                    'qb_index_files': (len(files) if files is not None
+                                       else None)}, None
+        return {'lines': len([l for l in text.splitlines() if l.strip()]),
+                'bytes': len(raw)}, None
+
+    print('ORAL NON-MUTATION EVIDENCE (pre-job = blob at HEAD, '
+          'post-job = worktree):')
+    live_oral, base_oral = None, None
+    for label, rel in ORAL_SOURCES:
+        pre, err = _pre_job_blob(rel)
+        check('R-ORAL-BASELINE-READABLE', pre is not None,
+              f'the pre-job blob of {rel} could not be read from git ({err}); '
+              f'non-mutation cannot be measured, so it is not claimed')
+        with open(os.path.join(ROOT, *rel.split('/')), 'rb') as fh:
+            post = fh.read()
+        if pre is None:
+            continue
+        before, before_recs = _oral_quantities(pre, rel)
+        after, after_recs = _oral_quantities(post, rel)
+        if rel.endswith('study_mappings.json'):
+            base_oral, live_oral = before_recs, after_recs
+        for k in sorted(before):
+            print(f'  {label:26s} {k:32s} before={before[k]} after={after[k]}')
+            check('R-ORAL-NONMUT-QUANTITY', before[k] == after[k],
+                  f'{rel} {k} moved from {before[k]} to {after[k]} during '
+                  f'classification')
+        if not rel.endswith('study_mappings.json'):
+            check('R-ORAL-NONMUT-BYTES', pre == post,
+                  f'{rel} is not byte-identical to its pre-job blob '
+                  f'({len(pre)} -> {len(post)} bytes)')
+
+    # The mapping store IS rewritten by this job (it gains the granularity
+    # fields). So it gets the strict test: every Oral record that existed keeps
+    # every field it had, at the same value, and only granularity fields appear.
+    if base_oral is not None and live_oral is not None:
+        CLASSIFICATION_ONLY_KEYS = {'evidence_granularity',
+                                    'evidence_granularity_basis',
+                                    'official_supporting_nodes'}
+        check('R-ORAL-NONMUT-IDS', sorted(base_oral) == sorted(live_oral),
+              'the set of Oral question ids changed during classification')
+        moved, added = [], set()
+        for qid, before_rec in base_oral.items():
+            after_rec = live_oral.get(qid) or {}
+            for k, v in before_rec.items():
+                if after_rec.get(k) != v:
+                    moved.append(f'{qid}.{k}')
+            added |= set(after_rec) - set(before_rec)
+        check('R-ORAL-NONMUT-FIELDS', not moved,
+              f'{len(moved)} pre-existing Oral record values changed: '
+              f'{sorted(moved)[:5]}')
+        check('R-ORAL-NONMUT-ONLY-GRANULARITY-ADDED',
+              added <= CLASSIFICATION_ONLY_KEYS,
+              f'classification added non-granularity fields to Oral records: '
+              f'{sorted(added - CLASSIFICATION_ONLY_KEYS)}')
+        print(f'  oral mapping store         fields_changed                   '
+              f'{len(moved)}  fields_added={sorted(added)}')
+
+    # ---- the queue is byte-identical to what the register alone derives ----
+    if os.path.exists(q_path) and os.path.exists(reg_path):
+        import hashlib
+        with open(q_path, 'rb') as fh:
+            on_disk = fh.read()
+        rederived = (json.dumps(
+            GAPR.build_queue(json.load(open(reg_path, encoding='utf-8'))),
+            indent=2, ensure_ascii=False) + '\n').encode('utf-8')
+        print('QUEUE BYTE IDENTITY:')
+        print(f'  on-disk    {len(on_disk):6d} bytes '
+              f'sha256={hashlib.sha256(on_disk).hexdigest()}')
+        print(f'  re-derived {len(rederived):6d} bytes '
+              f'sha256={hashlib.sha256(rederived).hexdigest()}')
+        check('R-QUEUE-GAP-BYTE-IDENTICAL', on_disk == rederived,
+              'the queue file on disk is not byte-identical to the bytes the '
+              'register alone re-derives')
+
     # ---- report ------------------------------------------------------------
     print(f'study spine validator -- {checks} checks')
     if fails:
