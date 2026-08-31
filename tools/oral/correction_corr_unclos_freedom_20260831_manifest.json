@@ -1,0 +1,68 @@
+{
+ "correction_id": "CORR-UNCLOS-FREEDOM-20260831",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "august_intake_answer_production",
+ "date": "2026-08-31",
+ "title": "QB1_A#q19 gave no condition on freedom of navigation, and its party count went stale the moment the ISA card was written beside it",
+ "baseline_commit": "8304bb3",
+ "governing_commits": [
+  "8c1c2a6"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_PRODUCTION_QUEUE.json",
+ "known_traps_entries": [
+  56
+ ],
+ "candidate_claim": "Raised by production and confirmed by independent review, not by a candidate. A candidate sitting on 27 August 2026 was asked 'Freedom of navigation' (AUG-0095) and then, as the follow-up, 'condition of freedom of navigation' (AUG-0096). H3A recorded the root as answered by QB1_A#q19 and the reviewer tested that claim against the whole bank.",
+ "candidate_verdict": "UPHELD IN PART",
+ "rationale": "The root ask was correctly dispositioned - QB1_A#q19 carries Art. 58 and Art. 87 by name and QB1_A#q21 holds innocent passage separately, so the distinction that must not be blurred is already made. The LIMB was not answered anywhere. The condition on the freedom is the phrase 'due regard' - Art. 58(3) in the EEZ, Art. 87(2) on the high seas - and a sweep of all 86 question-bearing files returned ZERO occurrences of 'due regard' and no citation of either sub-article outside one unrelated card. The examiner asked for the condition specifically and the bank had no answer. Separately, and found only because the ISA card was written into the same file, q19's parenthetical party count read '168 parties' while the new QB1_A#q33 states 172 members as at 6 February 2026. ISA membership is co-extensive with UNCLOS parties, so the file contradicted itself two screens apart. UN DOALOS confirms 172 parties, 171 States plus the EU, most recently Cambodia on 6 February 2026.",
+ "note": "NARROWEST TREATMENT. Three edits, no restructuring. (1) The Art. 58 sentence gains the Art. 58(3) due-regard condition; (2) the Art. 87 sentence gains Art. 87(2) and states that due regard is the condition in BOTH zones, which is the complete answer to the follow-up; (3) the party count is corrected with its date attached, so the next reader can see when it was true. A fourth change is a plain repair: the card's Related-Questions strip described 'Q21 Flag State' when Q21 is Innocent Passage - and the H3A disposition for this very occurrence leans on the q19/q21 pairing, so a reader following the cross-reference was being sent to a card the strip mis-described. WHAT WAS DELIBERATELY NOT DONE: the zone-by-zone structure, the innocent-passage treatment, the transit-passage material and the CE content are untouched. No new card was created - the limb belongs inside the zones card, and a separate 'conditions of freedom of navigation' card would duplicate it.",
+ "authority": "UNCLOS 1982 Art. 58(3) and Art. 87(2), read from the Convention text published by UN DOALOS; Art. 292(1) and Art. 290(5) were read from the same source in the same session for the companion ITLOS card. Party count from the UN DOALOS chronological list of ratifications, corroborated independently by the International Seabed Authority's own membership statement of 6 February 2026, the two being co-extensive.",
+ "cards": [
+  {
+   "correction_action_id": "CORR-UNCLOS-01",
+   "file": "QB1_A.html",
+   "path": "meoclass1/QB1_A.html",
+   "anchor": "q19",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "f1dfdfd430c863e63f9716fbf1437573b6ede64464fab05c2cc3d8028285f020",
+   "post_edit_digest": "7ebc5d55b7872bc6c95ad61e52cc02e529677cfed332bf0f7ec873cdc7fe205d",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "Four bounded changes. The EEZ paragraph gains Art. 58(3) 'due regard to the rights and duties of the coastal State' as the condition on the Art. 58 freedoms. The high seas paragraph gains Art. 87(2) 'due regard for the interests of other States' and states explicitly that due regard is the condition in both zones - which is the answer to AUG-0096 that the bank did not previously contain anywhere. The party count moves from a bare '168 parties' to '172 parties - 171 States and the European Union, as at 6 February 2026', dated so it can be re-checked rather than silently ageing. And the Related-Questions strip's 'Q21 Flag State' is corrected to 'Q21 Innocent Passage'. Version v1.1 to v1.2.",
+   "surfaces_corrected": [
+    "answer-body EEZ paragraph",
+    "answer-body High Seas paragraph",
+    "answer-body opening definition",
+    "related-questions strip",
+    "q-version"
+   ]
+  }
+ ],
+ "propagation": {
+  "corpus_sweep": "'due regard' returned ZERO hits across all 86 question-bearing files before this correction, and Art. 58(3) / Art. 87(2) were cited only in QB9_D#q8, a coastal-State-duties card that does not carry the navigation-freedom condition. So there was nowhere else to correct: the phrase was absent, not wrong. The party count was likewise the only one in the bank - no other card states a UNCLOS ratification figure.",
+  "derived_surfaces": "qb_content_index.json and meoclass1/index.html regenerated by build_qb_content_index.py; EXAMINER_INDEX_SNAPSHOT.json and the examiner index pages by build_examiner_index.py, with relationships and examiners unchanged; oral_followup_register.json by build_followup_register.py.",
+  "hand_maintained_surfaces": "The SQ home counter is hand-maintained and moved 743 to 746 for the three new H3A cards. QB1_A's static 'Showing N of N' read 30 against 32 live cards - a pre-existing off-by-one in furniture the page script overwrites on load - and was set to the correct 34 rather than incremented from a wrong number; the section counter it sits under read 5 against 6 actual and was set to 8.",
+  "revision_layer": "QB1_A_CheatSheet.html was inspected and NOT edited. It is a curated concept sheet referencing 20 of the file's questions rather than a per-question index, and its UNCLOS content is a zones ruler - neither the due-regard condition nor a party count appears on it, so nothing on it becomes wrong. QB3_F has no cheat sheet at all."
+ },
+ "invariants": {
+  "canonical_questions_before": 743,
+  "canonical_questions_after": 746,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "new_cards_note": "The three new cards in this working tree belong to batch_h3a_manifest.json. The 743 to 746 movement is that batch's, not this record's; it is stated here because both records share the baseline 8304bb3 and name each other.",
+  "corrected_cards": 1,
+  "examiner_relationships_before": 958,
+  "examiner_relationships_after": 958,
+  "historical_content_removed": "none - no zone, article, mechanism or CE content was removed; two conditions were added, one figure was updated with its date, and one cross-reference label was repaired"
+ },
+ "review": {
+  "independent_review": "clean-context subagent, given the three new cards, the four no-card dispositions, the bank and the local primary sources, and barred from the producing reasoning",
+  "round_1_verdict": "REVISE",
+  "round_1_blocking": "The reviewer swept all 86 files and found 'due regard' absent from the entire bank, so AUG-0096 was unanswered corpus-wide despite the root being correctly dispositioned; and it found the new q33 contradicting q19's party count in the same file, which the batch had edited without checking.",
+  "round_2_verdict": "ACCEPTED",
+  "round_2_findings_applied": [
+   "Both findings were re-verified by the producer before any edit: the 'due regard' sweep was re-run independently and returned zero, and the Art. 58(3) and Art. 87(2) wording was read from the UN DOALOS Convention text rather than taken from the review.",
+   "The party count was corroborated from two independent sources - UN DOALOS and the ISA's own membership statement - which agree to the day."
+  ]
+ }
+}
