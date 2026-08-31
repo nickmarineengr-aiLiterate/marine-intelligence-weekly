@@ -1,0 +1,68 @@
+{
+ "correction_id": "CORR-GRAIN-MSC552-20260831",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "august_intake_answer_production",
+ "date": "2026-08-31",
+ "title": "QB2_A#q11 taught the Grain Code's pre-2026 two-configuration model as complete; MSC.552(108) added a third on 1 January 2026",
+ "baseline_commit": "331d168",
+ "governing_commits": [
+  "325c460"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_PRODUCTION_QUEUE.json",
+ "known_traps_entries": [
+  55
+ ],
+ "candidate_claim": "Raised by production, not by a candidate. A candidate sitting on 28 August 2026 was asked for the latest amendment to the Grain Code. Establishing the answer for the new card exposed that the bank's existing Grain Code stability card described the approved grain loading booklet as covering 'both filled and partly filled compartment configurations', and taught the filled-versus-partly-filled distinction in its CE Oral Tip as the whole answer.",
+ "candidate_verdict": "UPHELD",
+ "rationale": "Resolution MSC.552(108), adopted 23 May 2024 and in force 1 January 2026 for new and existing ships alike, inserts a new definition A 2.8 - 'specially suitable compartment, partly filled in way of the hatch opening, with ends untrimmed' - and gives it its own assumed volumetric heeling moment in a new Part B section 4. From that date there are three compartment configurations, not two. The card was not WRONG about either configuration it described; it was INCOMPLETE in a way that reads as complete, which is the same defect class as a superseded edition label. Two further sentences needed the same treatment: the approved-booklet sentence, because a booklet predating the amendment will not carry the third condition and the ship cannot be loaded to a condition its booklet does not cover; and the trimming bullet, because A 10.4 now permits dispensation from trimming the ends and amended A 10.7 requires only the surface in way of the hatch opening to be level.",
+ "note": "NARROWEST TREATMENT, DELIBERATELY. The card's substantive stability teaching is untouched and is still correct: the three intact-stability criteria (12 degrees maximum heel, 0.075 metre-radians residual area to 40 degrees, 0.30 metre minimum corrected GM), the grain-shift mechanism, the Document of Authorisation regime and the securing methods are all unchanged by MSC.552(108). Only the three places that enumerate or assume the pre-2026 model were changed, each with a cross-reference to the new card QB2_A#q33 rather than by duplicating the amendment into this card. The amendment itself is NOT taught here - that is q33's job, and splitting it that way is what keeps a long stability card from becoming an amendment chronology. WHAT WAS DELIBERATELY NOT DONE: QB2_A_CheatSheet.html was checked for the same defect and does not carry it - it has no filled / partly-filled enumeration anywhere - so it was not edited. QB8_E#q2 and QB2_B#q15 mention the Grain Code only as one of several bulk codes and make no configuration claim. AUTHORISATION POINTER. authorisation_source carries ONE repo-relative path because the schema resolves that field as a path and a concatenated string resolves nowhere - lane Q-C, occurrence AUG-0147. Its companions are named here instead: the currentness evidence is at meoclass1/oral-intelligence/examiner-audit/AUGUST2026_CURRENCY_VERIFICATION.json, and the source itself is registered as SRC-GRAINCODE-MSC552-2026 in docs/sources/MIW_SOURCE_REGISTRY.json.",
+ "authority": "Resolution MSC.552(108), read from the resolution itself as published in IMO's index of MSC resolutions (734,439 bytes, SHA-256 c9233600fb2832e79875d21581969dc7edf7d44a5a145e519f4649f22d2ec0d3). This record originally cited IMO's January 2026 publication supplement (132,651 bytes, SHA-256 2201d471db0ebac7f8c4f23ad82c0a6f6e141c57810d37190e513a10b1fe1432) as though it were the full amendment; it is not. The supplement OMITS annex item 6 - the A 12.3.3 cross-reference repair - and carries no operative clauses, so it cannot establish the adoption route, the deemed acceptance date, or the absence of an application clause. Both files are held; the resolution is the authority. Registered as SRC-GRAINCODE-MSC552-2026 in docs/sources/MIW_SOURCE_REGISTRY.json and filed in the shared corpus at 03-imo-instruments/Grain-Code/ with its own instrument log. The Grain Code is mandatory through SOLAS chapter VI, part C, regulation 9.",
+ "cards": [
+  {
+   "correction_action_id": "CORR-GRAIN-01",
+   "file": "QB2_A.html",
+   "path": "meoclass1/QB2_A.html",
+   "anchor": "q11",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "86553e0dd88584d2d3775fa932c9e5b1d75b4b4c1b60784675edc91355ad101d",
+   "post_edit_digest": "1db21b35c562e271be86ce03cb55526a247243285453abe542d88d1ddf8b69f1",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "Three bounded changes. (1) The Grain Stability Booklet sentence said the booklet assumes 'both filled and partly filled compartment configurations'; it now states that there are three configurations since 1 January 2026, names the third and its resolution, and warns that a pre-amendment booklet will not carry it. (2) The Trimming bullet said the grain surface is completely levelled; it now carries the A 10.4 qualification that dispensation may be granted from trimming the ends, with only the surface in way of the hatch opening levelled. (3) The CE Oral Tip taught the filled-versus-partly-filled distinction as the complete answer to an examiner's question; it now says that distinction is no longer complete and directs the candidate to give all three. Each change cross-refers to q33. Version v2.0 to v2.1.",
+   "surfaces_corrected": [
+    "answer-body Document of Authorisation section",
+    "answer-body Operational Precautions",
+    "ce-tip",
+    "q-version"
+   ]
+  }
+ ],
+ "propagation": {
+  "corpus_sweep": "Every card mentioning the Grain Code was read before deciding scope. QB2_A#q11 is the only one that enumerates or assumes compartment configurations. QB8_E#q2 (IMSBC / BLU / Grain overview), QB2_B#q15 (IMSBC overview), QB2_A#q27 and #q28 (failure-mechanism and cargo comparisons), QB4_J#q5 (manuals onboard) and QB10_B#q6 (bulk-carrier amendments) were each checked and carry no configuration claim; none was edited.",
+  "derived_surfaces": "qb_content_index.json and meoclass1/index.html regenerated by build_qb_content_index.py (739 -> 743 canonical questions, all four from batch H2); EXAMINER_INDEX_SNAPSHOT.json and the examiner index pages regenerated by build_examiner_index.py with no change to relationships or examiners; oral_followup_register.json regenerated by build_followup_register.py.",
+  "hand_maintained_surfaces": "The SQ home page counter is hand-maintained with no generator and was updated 739 -> 743. QB2_A's static 'Showing N of N' label read 31 against 32 live cards - a pre-existing off-by-one in furniture the page script overwrites on load; it was set to the correct new total of 33 rather than incremented from a wrong number. SQ/study-roadmap.html is GENERATED and was deliberately NOT hand-edited; its counter moves when build_public_study_roadmap.py next runs.",
+  "revision_layer": "QB2_A_CheatSheet.html was checked and NOT edited, for the reason given in the note. The other three files in batch H2 have their revision-layer disposition recorded in batch_h2_manifest.json."
+ },
+ "invariants": {
+  "canonical_questions_before": 739,
+  "canonical_questions_after": 743,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "new_cards_note": "The four new cards in this working tree belong to batch_h2_manifest.json. The 739 -> 743 movement is that batch's, not this record's; it is stated here because both records share the baseline 331d168 and name each other.",
+  "corrected_cards": 1,
+  "examiner_relationships_before": 958,
+  "examiner_relationships_after": 958,
+  "historical_content_removed": "none - no stability criterion, mechanism, securing method or Document of Authorisation content was removed or altered; only the enumeration of compartment configurations and the trimming assumption were qualified"
+ },
+ "review": {
+  "independent_review": "clean-context subagent, given the governed question, the card text, the local primary sources and the web, and barred from the producing reasoning",
+  "round_1_verdict": "ACCEPTED",
+  "round_1_blocking": null,
+  "round_2_verdict": null,
+  "round_2_findings_applied": [
+   "The reviewer accepted QB2_A#q11 outright: it confirmed the correction is genuinely bounded to three content edits plus a version bump, that no stability criterion, mechanism, securing method or Document of Authorisation content was removed or altered, that the DOM stays balanced, and that the decision not to touch QB2_A_CheatSheet.html is right because that sheet carries no filled / partly-filled enumeration.",
+   "It also registered three PRE-EXISTING defects in q11 that this correction correctly left alone, and that are recorded here for the correction queue rather than fixed: the Casualty Link attributes MV Leros Strength (1997) to grain-related stability degradation when she was carrying apatite concentrate and was lost to structural failure; the On My Vessel block is close to word-salad; and a Key Numbers entry attributes the 0.30 m minimum GM to SOLAS VI rather than to the Grain Code itself.",
+   "One change WAS made to this record after review: its authority line cited IMO's January 2026 publication supplement as though it carried the full amendment. Obtaining the resolution itself showed the supplement omits annex item 6 and all operative clauses. The authority is now the resolution."
+  ]
+ }
+}
