@@ -557,6 +557,75 @@ def t_accounting():
               f"{len(r['unparsed_source_blocks'])} block(s) yielded no submission")
 
 
+# ── S6: a sitting reported later than it happened ───────────────────────────
+
+def t_s6_late_report():
+    """The 31-August day received a second snapshot on 1 September, because a
+    candidate who sat on 31 August only shared his report the following day.
+
+    verify_carriers() used to require received_date == carrier_date, which made
+    a late report unrepresentable and refused the whole ingest. The exam date and
+    the report date are different facts and the registry has always carried both;
+    the invariant is that a report cannot arrive BEFORE the sitting.
+    """
+    import copy
+    from ingest_august_intake import verify_carriers
+    print("\nS6  a report may arrive after the sitting, never before it")
+    regs = carriers()
+
+    ok, why = verify_carriers(regs)
+    check("S6-LATE-REPORT-ACCEPTED", ok,
+          f"the registry as it stands must verify; got: {why}")
+
+    late = [c for c in regs if c["received_date"] > c["carrier_date"]]
+    check("S6-LATE-REPORT-PRESENT", bool(late),
+          "snapshot 02 is a 31-August carrier received on 1 September; if no carrier "
+          "has received_date after carrier_date this control is no longer exercising "
+          "anything")
+
+    for c in late:
+        check(f"S6-EXAM-DATE-HELD {c['source_file'][-13:]}",
+              c["attempt_date"] == c["carrier_date"] == "2026-08-31",
+              f"a late report must NOT move the exam date; got carrier={c['carrier_date']} "
+              f"attempt={c['attempt_date']}")
+
+    # A report dated before its sitting is impossible and must be refused.
+    bad = copy.deepcopy(regs)
+    bad[-1]["received_date"] = "2026-08-30"
+    ok2, why2 = verify_carriers(bad)
+    check("S6-REPORT-BEFORE-EXAM-REFUSED", not ok2,
+          "a received_date earlier than the carrier_date must be refused; "
+          f"verify_carriers said: {why2}")
+
+    # The exam date itself is still pinned to the carrier.
+    bad2 = copy.deepcopy(regs)
+    bad2[-1]["attempt_date"] = "2026-09-01"
+    ok3, why3 = verify_carriers(bad2)
+    check("S6-ATTEMPT-DATE-STILL-PINNED", not ok3,
+          "attempt_date must still be required to equal carrier_date; "
+          f"verify_carriers said: {why3}")
+
+
+def t_s6_no_september_identities():
+    """A 31-August late report must not create September identities."""
+    print("\nS6  a late 31-August report creates AUG identities, never SEP")
+    subs, occ, _ = ingest_all()
+    bad_sub = [s["submission_id"] for s in subs if not s["submission_id"].startswith("AUG2026-S")]
+    bad_occ = [o["occurrence_id"] for o in occ if not o["occurrence_id"].startswith("AUG-")]
+    check("S6-NO-SEP-SUBMISSION-IDS", not bad_sub, f"non-August submission ids: {bad_sub[:5]}")
+    check("S6-NO-SEP-OCCURRENCE-IDS", not bad_occ, f"non-August occurrence ids: {bad_occ[:5]}")
+
+    s02 = [s for s in subs if s["source_file"].endswith("snapshot 02.txt")]
+    check("S6-SNAPSHOT02-IS-31AUG",
+          bool(s02) and all(s["attempt_date"] == "2026-08-31" for s in s02),
+          "snapshot 02 submissions must carry the 31-August exam date; got "
+          f"{[s.get('attempt_date') for s in s02]}")
+    check("S6-SNAPSHOT02-REPORTED-LATE",
+          bool(s02) and all(s["received_date"] == "2026-09-01" for s in s02),
+          "snapshot 02 submissions must carry the 1-September report date; got "
+          f"{[s.get('received_date') for s in s02]}")
+
+
 def main() -> int:
     print("multi-carrier August intake -- Stage 0 controls")
     for fn in (t_m1_dates, t_m2_m3_identities, t_m4_preservation, t_m5_check,
@@ -564,7 +633,8 @@ def main() -> int:
                t_s4_lettered_roots, t_s4_cross_questions,
                t_s4_unnumbered_question, t_s4_honorifics, t_s4_commentary,
                t_s4_duplicate_numbering, t_s4_attempt_ordinal,
-               t_s4_line_accounting, t_s5_rolling_snapshot, t_accounting):
+               t_s4_line_accounting, t_s5_rolling_snapshot,
+               t_s6_late_report, t_s6_no_september_identities, t_accounting):
         try:
             fn()
         except Exception as e:  # a missing hook is a RED result, not a crash

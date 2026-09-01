@@ -611,10 +611,21 @@ def verify_carriers(regs: list):
         if got != c["sha256"]:
             return False, (f"{c['source_file']} sha256 {got[:16]} does not match the "
                            f"registered {c['sha256'][:16]}")
-        for f in ("received_date", "attempt_date"):
-            if c[f] != c["carrier_date"]:
-                return False, (f"{c['source_file']} {f} {c[f]} disagrees with its "
-                               f"carrier_date {c['carrier_date']}")
+        # The EXAM date is the carrier's identity: a carrier is one day's
+        # sitting, so attempt_date must equal carrier_date.
+        if c["attempt_date"] != c["carrier_date"]:
+            return False, (f"{c['source_file']} attempt_date {c['attempt_date']} disagrees "
+                           f"with its carrier_date {c['carrier_date']}")
+        # The REPORT date is a different fact and may be later. A candidate who
+        # sat on 31 August can share his questions on 1 September, and the
+        # registry has always carried the two dates separately precisely so they
+        # can differ. Requiring them equal made a late report unrepresentable and
+        # refused the whole ingest. What is genuinely impossible is a report that
+        # predates the sitting it reports.
+        if c["received_date"] < c["carrier_date"]:
+            return False, (f"{c['source_file']} received_date {c['received_date']} is "
+                           f"BEFORE its carrier_date {c['carrier_date']} - a sitting "
+                           f"cannot be reported before it happened")
     return True, "every registered carrier is present, unmodified and self-consistent"
 
 
