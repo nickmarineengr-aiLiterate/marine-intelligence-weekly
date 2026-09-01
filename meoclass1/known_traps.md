@@ -1533,3 +1533,35 @@ same batch, had a DGS notice recorded as unretrievable while a scan of it sat in
 
 GREP: `150+ member` / `200+ member` / `% of global tonnage` - all wrong for MACN.
 
+### 62. SOLAS II-2/10.7.3 has TWO triggers, and both directions of the error have now been made
+
+Regulation 10.7.3 applies to ships **constructed on or after 1 January 2016** designed to carry
+containers on or above the weather deck. Inside it are two different requirements with two
+different conditions:
+
+* **10.7.3.1 — water mist lance.** Every such ship carries **at least one**. The only condition is
+  the build date.
+* **10.7.3.2 — mobile water monitors.** Only ships **designed to carry five or more tiers on or
+  above the weather deck** carry them as well: at least two if breadth is under 30 m, at least
+  four if breadth is 30 m or more.
+
+**Both directions of this error have been made in this corpus, a year apart.** An earlier version
+of the QB2_A container-fire card told candidates that lances and monitors were *company practice
+rather than SOLAS* — understating a live requirement. The CE Oral Tip written for that same card in
+September 2026 then made the opposite error, sweeping the monitors under the lance's build-date
+condition and dropping the five-tier precondition entirely. An independent reviewer caught it
+before it shipped.
+
+The two failures look like opposites and are the same failure: **a compound regulation summarised
+down to one condition**. When a regulation carries more than one trigger, a summary that keeps only
+the trigger you happened to be thinking about is not a shorter answer, it is a different rule.
+
+**And keep the third boundary separate.** The firefighting equipment above is *in force*. What is
+still **draft** is the separate IMO workstream on enhanced **detection and control** of container
+fires. Sweeping the in-force equipment into the draft bucket is the failure the earlier card made;
+answering *"not mandatory"* to a live SOLAS requirement is the version of it a panel will punish
+hardest.
+
+GREP: SKIP for this entry's own prose, which states the wrong readings in order to reject them.
+Elsewhere: mobile water monitors asserted without the five-tier condition, or 10.7.3 cited as a
+single undifferentiated requirement, is wrong.
