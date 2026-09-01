@@ -438,6 +438,23 @@ GATES = (
     #
     # It is a standing detector for release-caused target drift, which is
     # exactly the failure the register exists to prevent.
+    _gate("validate_correction_annexvi_eif",
+          ["python", "%s/validate_correction_annexvi_eif.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="asserts the PROPOSITION rather than banning a string: every "
+               "entry-into-force claim made about MEPC.328(76) anywhere in the "
+               "corpus must give 1 November 2022, and both limbs must be "
+               "taught. A blacklist could not have worked -- the trap register "
+               "already banned one wrong rendering and the corpus held two "
+               "others, one of them spelled 'MEPC 76'"),
+    _gate("correction_annexvi_eif_mutate",
+          ["python", "%s/mutate_correction_annexvi_eif.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1800,
+          historical_39=False,
+          depends_on=("validate_correction_annexvi_eif",),
+          note="7 mutations; includes reintroducing the defect on a page the "
+               "correction never touched, which is what proves the check is "
+               "closed-world and not a fix-up of the pages it happened to see"),
     _gate("validate_followup_register",
           ["python", "%s/validate_followup_register.py" % _ORAL],
           CAT_AUTHORISATION, PARSER_VALIDATOR, timeout=600, historical_39=False,

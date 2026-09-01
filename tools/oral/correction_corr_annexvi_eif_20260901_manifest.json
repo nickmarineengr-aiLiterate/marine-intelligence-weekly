@@ -1,0 +1,51 @@
+{
+ "correction_id": "CORR-ANNEXVI-EIF-20260901",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "h5_integration_sweep",
+ "date": "2026-09-01",
+ "title": "MEPC.328(76) entry into force corrected from 1 January 2023 to 1 November 2022, with the application date kept as its own limb",
+ "baseline_commit": "997f524",
+ "governing_commits": [
+  "9f85f16"
+ ],
+ "authorisation_source": "meoclass1/known_traps.md",
+ "known_traps_entries": [
+  59
+ ],
+ "rationale": "H5's source-corpus consistency pass (brief section 30) compared every MIW card citing MEPC.328(76) and found the product contradicting itself. QB3_C, QB6 and QB7_C state the revised MARPOL Annex VI is in force 1 November 2022. QB7_A#q1 and QB7_A_CheatSheet.html stated 1 January 2023, in six places between them, three of which called it the 'entry into force' outright. Two pages of one product giving different entry-into-force dates for one resolution is a candidate-facing contradiction, and a candidate revising from QB7_A would have quoted the wrong one to a panel that asks this verbatim. Verified at primary source: MEPC.328(76) operative paragraph 2 determines deemed acceptance on 1 May 2022 and operative paragraph 3 states the amendments 'shall enter into force on 1 November 2022', read from the held PDF (SHA-256 1EE317601C6C44EBFDD4144A6E8CCE59CD2455C939EE40FB1390103A8C50BF08) recorded in the shared true-source corpus at 7441cc0. The resolution was adopted 17 June 2021. 1 January 2023 is not a fabricated date and is not deleted: it is the date the CII and SEEMP Part III OBLIGATIONS begin to apply, the first data-collection year. The defect was collapsing two limbs into one, which is the same shape as CORR-LSA-LIFEBOAT-VENTILATION-20260822, where a two-limb application rule was reduced to its new-build limb and thereby inverted for the existing fleet. All six statements now carry both dates as two distinct facts.",
+ "note": "Known trap 59 already recorded this exact proposition - it was registered during the H series - and it did not catch these six statements, because its GREP named one spelling of the wrong value, '1 November 2023'. QB7_A carried a different wrong rendering of the same fact. The shared corpus independently hit a third, 'EIF 2023-01-01', in its own amendment register. Entry 59 is extended here with the second variant, with the two-limb statement, and with the general rule: a banned-phrase guard protects against the spelling you saw, not the fact you got wrong, so where a date is the subject the guard must assert the PROPOSITION and fail on any other value. That is what validate_correction_annexvi_eif.py does - it does not list wrong dates, it requires the right one and rejects any entry-into-force claim for this resolution that gives another. It earned that shape immediately: its closed-world pass found an eighth occurrence in QB7_C spelled 'MEPC 76', which no search for 'MEPC.328(76)' could have found. The rest of QB7_A#q1 was rechecked while open: the 5,000 GT threshold, Regulation 26 as the SEEMP basis, Regulation 28 as the CII rating framework, MEPC.346(78) as the SEEMP development guidelines, MEPC.347(78) as the flag-State verification guidelines, the 3-consecutive-years-at-D and 1-year-at-E corrective-action triggers, and the EU ETS (1 January 2024 for shipping) and FuelEU Maritime (Regulation 2023/1805, 1 January 2025) dates all verified correct and are unchanged.",
+ "content_index_effect": "None. Question text, anchors and card positions are unchanged; only answer-body and reference-table wording moved. build_qb_content_index --check is a no-op across this correction.",
+ "artefacts": [
+  {
+   "path": "meoclass1/QB7_A_CheatSheet.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "known_traps_entry": 59,
+   "rationale": "Carries no q-card, so it takes no digest pin, but it held two of the six wrong statements - one in the SEEMP Part III card body and one in the Master Numbers reference table - and a candidate memorises a cheat sheet before reading the card behind it. Leaving it stale would have reproduced exactly the failure CORR-DEFN-TREATY-20260825 found, where a correction fixed the card and left four candidate-facing copies of the wrong model on the sheet beside it. Both statements now carry the entry-into-force date and the application date as two things."
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "CORR-ANNEXVI-EIF-01",
+   "file": "QB7_A.html",
+   "path": "meoclass1/QB7_A.html",
+   "anchor": "q1",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "d19570bfb50cf2144c4b615d768026e3ace72770c79597e8ead12eb35180e27b",
+   "post_edit_digest": "1fe90e7119aeaaecf4a965e9a1950997f3f1f43393ebb73de9b09e0e25f2ba2b",
+   "known_traps_entry": 59,
+   "rationale": "Four surfaces of this one card carried the defect and were corrected together: the answer body's SEEMP Part III paragraph, the Key Numbers list, the reference table's MEPC.328(76) row, and the Deep Dive numbers list. Each now states 1 November 2022 as the entry into force of the amendments and 1 January 2023 as the first year the obligations apply. Question text, anchor and card position are unchanged."
+  },
+  {
+   "correction_action_id": "CORR-ANNEXVI-EIF-02",
+   "file": "QB7_C.html",
+   "path": "meoclass1/QB7_C.html",
+   "anchor": "q1",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "d8b251eb933977d688d08c4452ab8fc443e95daf5b81f3db3e73d458c38affd9",
+   "post_edit_digest": "1c2436cc1677b5351546ecf82ae36924ec9eb015a8ddb3485aacfcdfec609fde",
+   "known_traps_entry": 59,
+   "rationale": "An EIGHTH occurrence, and it was found by this correction's own content gate rather than by the sweep that opened the correction. QB7_C's 'Numbers to Memorise' line read 'MEPC 76 - June 2021, in force 1 Jan 2023'. Every targeted search for this defect had looked for 'MEPC.328(76)'; this page spells the resolution 'MEPC 76', so no such search could ever have found it - which is precisely why the gate asserts the PROPOSITION over every citing page instead of grepping for a wrong string. The page in fact carried FOUR statements of the fact, and the gate found the other three only once a control byte was removed from its own regex -- a literal 0x08 where a word boundary belonged, which is trap 1 of SKILL section 6 and made the pattern silently unmatchable. Three were wrong (the 15-second answer, the Key Dates block and the Numbers to Memorise line) and one was already right (the regulatory-reference row). The three now name the resolution in full, gives adoption June 2021, entry into force 1 Nov 2022, and application from 1 Jan 2023. Elsewhere on the same page the card already stated 'in force 1 Nov 2022' correctly, so this page had been contradicting itself internally as well."
+  }
+ ]
+}
