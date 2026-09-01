@@ -85,7 +85,12 @@ def audit_content_index(inv):
     return {
         "path": str(path.relative_to(L.REPO)).replace("\\", "/"),
         "manifest_version": d["manifest_version"],
-        "generated": d["generated"],
+        # `generated` is legitimately ABSENT: qb_content_index.json carries no
+        # timestamp, because a timestamp would break the byte-determinism the
+        # content-index check depends on. This auditor had kept reading it as a
+        # required key and crashed with KeyError on every run since. Reported
+        # as null rather than dropped, so the field's absence stays visible.
+        "generated": d.get("generated"),
         "generated_by": d["generated_by"],
         "headline_total_questions": d["total_questions"],
         "headline_total_files": d["total_files"],

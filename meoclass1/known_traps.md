@@ -1445,8 +1445,31 @@ frozen and qualified — and it was still wrong on a date that the underlying PD
 A corpus record is a pointer to a source, never a substitute for it, **including when the corpus is
 your own**.
 
+**A second wrong variant, and why this entry did not catch it.** This trap was registered during
+the H series with a GREP naming one spelling: `1 November 2023`. QB7_A and its cheat sheet carried
+a *different* wrong value for the same fact — **1 January 2023** — in six places, and the guard was
+blind to all six. The shared corpus independently hit a third form, `EIF 2023-01-01`, in its own
+amendment register. One fact, three wrong renderings, and a guard written for one of them.
+
+`1 January 2023` is the more dangerous variant because it is a REAL date in this subject: it is
+when the CII and SEEMP Part III **obligations apply** — the first data-collection year. So the card
+was not inventing a date, it was **collapsing two limbs into one**, exactly as the MSC.535(107)
+ventilation card did. State them as two things:
+
+* **1 November 2022** — MEPC.328(76) enters into force (adopted 17 June 2021, deemed accepted
+  1 May 2022).
+* **1 January 2023** — the first year the CII and SEEMP Part III obligations apply.
+
+**The rule.** A banned-phrase guard protects against the spelling you happened to see, not against
+the fact you got wrong. Where a date is the subject, assert the PROPOSITION — this instrument
+entered into force on this date — and let the guard fail on any other value, rather than listing
+the wrong ones.
+
 GREP: `1 November 2023` — legitimate only where an instrument genuinely entered into force on that
-date. Paired with MEPC.328(76) or with "Annex VI", it is wrong.
+date. Paired with MEPC.328(76) or with "Annex VI", it is wrong. Likewise any entry-into-force or
+"effective" claim for MEPC.328(76) that gives **1 January 2023**: that is the application date of
+the obligations, never the entry into force of the amendments. GREP: SKIP for this entry's own
+prose, which quotes both wrong forms in order to reject them.
 
 ### 60. MEPC.333(76) is EEXI. The CII guidelines are the 336-339 series
 

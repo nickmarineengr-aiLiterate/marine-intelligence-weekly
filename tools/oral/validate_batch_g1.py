@@ -382,8 +382,18 @@ def main(manifest_path=None, review_path=None, label="g1") -> int:
         except (OSError, ValueError):
             continue
         for c in rec.get("cards", []):
-            if c.get("action_kind") != "NEW_CARD":
-                continue
+            # ANY action that names the occurrence discharges it, not only a
+            # NEW_CARD. H3B1-006 answered AUG-0146 -- an adjudicated
+            # GENUINE_NEW_QUESTION -- by EXPANDING QB2_B#q15 rather than
+            # creating a card, which is a legitimate production choice: the
+            # adjudication says no card answered the ask AT THAT MOMENT, not
+            # that the answer must arrive in a new card. Filtering on
+            # NEW_CARD left AUG-0146 reported as outstanding forever, with a
+            # card that answers it live in the corpus.
+            #
+            # Safe to widen because the set is intersected with `all_new`
+            # below, so only occurrences adjudicated GENUINE_NEW_QUESTION can
+            # ever be counted as discharged here.
             produced.update(list(c.get("source_occurrence_ids") or [])
                             + list(c.get("supporting_occurrence_ids") or []))
     outstanding = sorted(all_new - produced)
