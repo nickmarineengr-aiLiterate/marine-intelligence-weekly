@@ -1,0 +1,77 @@
+{
+ "correction_id": "CORR-CETIP-H3B1-20260901",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "release_gate_finding",
+ "date": "2026-09-01",
+ "title": "Three H3B-1 cards shipped without the mandatory CE Oral Tip layer - authored, independently reviewed, and one direct contradiction the review exposed",
+ "baseline_commit": "e0a553c",
+ "governing_commits": [
+  "cdfdd5c"
+ ],
+ "authorisation_source": "meoclass1/known_traps.md",
+ "known_traps_entries": [
+  62
+ ],
+ "rationale": "H5's release qualification left one gate red: qb_health_check reported three cards missing a ce-tip. All three are MIW-created H3B-1 cards (15f7f19). The Founder ruled that a CE Oral Tip is a required candidate-facing layer and that an older published card lacking one (QB1_D#q7) is not authority to propagate the defect. The product contract agrees independently of the ruling: qb_health_check's MANDATORY_CLASSES requires exactly one reg-box, one ce-tip and one q-footer per numeric card, which is the check that reported these. Each tip is written as DELIVERY coaching rather than a second trap list, because the deep-dive on all three already carries CE Relevance, Trap Questions and Common CE Failures; the model is the sibling tip on QB7_D#q13. The card is the technical authority: no tip asserts an instrument, date or figure the card does not carry, and none names an examiner - which matters mechanically as well as editorially, because the examiner extractor mints ce_tip-tier relationships from a parenthesised name after 'CE Oral Tip', so naming one would have manufactured attribution out of a card edit. build_examiner_index --check reports zero delta across this correction, which is the proof rather than the claim.",
+ "note": "An independent clean-context review of all three tips against all four cards returned five defects, every one verified against the card before being acted on. MATERIAL: QB2_A#q34 collapsed both limbs of SOLAS II-2/10.7.3 into a single build-date condition - 10.7.3.1 requires a water mist lance on every container ship constructed on or after 1 January 2016, while 10.7.3.2 requires mobile water monitors only where the ship is designed to carry five or more tiers on or above the weather deck, two if breadth is under 30 m and four if 30 m or more. The card makes that tier condition an explicit trap answer, so the tip as first written would have coached candidates into the precise follow-up the card warns about. MINOR: QB7_D#q14 said the 'only' habit carrying across from oil bunkering is bonding where the card says 'one of the few places'; called the ERC/ERS mandatory without IGF 8.4.3's carve-out 'unless fitted on the bunkering supply side'; and phrased 'the written agreement is five items' in a way that could swallow the emergency actions, which 18.4.1.1.2 requires separately and also in writing. All corrected. The reviewer's length statistics were independently re-derived and are accurate - across 762 ce-tip blocks the median is 67 words, p75 84, p90 112, max 205 - and the three tips sit at 127, 123 and 127, about p92. They are kept at that length deliberately: every clause maps to a focus point the ruling required, so trimming further would drop requested content rather than fat. H3B-1 pinned all three cards in their pre-tip state, so adding the tips legitimately moved every pin. The historical record is NOT rebaselined: each card declares `supersedes` naming batch_h3b1_manifest.json and the exact state it descends from, so H3B-1's claim becomes strictly stronger -- not 'my state is live' but 'my state is the ancestor of what is live'. The chain stays in the root's convention (full sha256), and each pre_edit_digest here is byte-identical to its predecessor's post_edit_digest, which is what makes the chain resolve rather than break.",
+ "content_index_effect": "None. Question text, anchors and card positions are unchanged; only answer-region content moved. build_qb_content_index --check is a no-op across this correction, at 86 files / 759 questions.",
+ "artefacts": [
+  {
+   "path": "meoclass1/known_traps.md",
+   "classification": "INDEX_METADATA",
+   "known_traps_entry": 62,
+   "rationale": "Entry 62 records that BOTH directions of the SOLAS II-2/10.7.3 error have now been made in this corpus a year apart - an earlier version of the QB2_A card understated the lance and monitors as company practice rather than SOLAS, and this correction's first draft overstated the monitors' scope by dropping the five-tier precondition. They look like opposites and are the same failure: a compound regulation summarised down to whichever one of its conditions the author had in mind. The entry keeps the separate mandatory-versus-draft boundary distinct, because the enhanced detection and control package IS still draft while the equipment above it is in force."
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "CORR-CETIP-01",
+   "file": "QB7_D.html",
+   "path": "meoclass1/QB7_D.html",
+   "anchor": "q14",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "ecc231e5a4329492f81d02416fab183c5c6d4912f437d8c47c041c641bc72b70",
+   "post_edit_digest": "13fbe727ed83eb86f9a615e8d41a439968dd3c0f38f9a420c41612ceae44b233",
+   "known_traps_entry": 62,
+   "rationale": "LNG bunkering. The tip gives the answer a single deliverable spine - agree in writing, verify, cool down, ramp in stages, stop, drain, purge, sign the BDN - which the card contains only as prose spread across two sections, and points the mark at currency: since 1 January 2026 the TRANSFER agreement under 18.4.1.1.1 is five items rather than three, with the emergency actions agreed separately under 18.4.1.1.2, and the same MSC.551(108) amendment made an ERC/ERS mandatory unless it sits on the bunkering supply side. It separates ESD from ERC in one line and warns against reciting an oil-bunkering procedure with the word LNG in it. Question text, anchor and card position unchanged. Version badge Q14 v1.1 -> v1.2.",
+   "supersedes": {
+    "manifest": "batch_h3b1_manifest.json",
+    "action_id": "H3B1-001",
+    "post_edit_digest": "ecc231e5a4329492f81d02416fab183c5c6d4912f437d8c47c041c641bc72b70"
+   }
+  },
+  {
+   "correction_action_id": "CORR-CETIP-02",
+   "file": "QB7_D.html",
+   "path": "meoclass1/QB7_D.html",
+   "anchor": "q15",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "31e3195d713e4f4290cbe74fc2f59676f38bd0531dfa87698a454c224847aa9c",
+   "post_edit_digest": "b7a1f3e333f75d56fc8173f12bf04a15e97280881ac36ba1f950f468d75c71f9",
+   "known_traps_entry": 62,
+   "rationale": "TWO changes to this card, and the second is why the classification is a scope pass rather than a second primary. (1) The missing CE Oral Tip: kill ISO 8217 in the first clause, name ISO 23306, and immediately say that it sets no minimum methane number, leaving that to supplier and user by reference to the engine maker - then give the statutory list as the BDN annex to part C-1 under 18.4.1.2, and attribute any methane number to the engine maker rather than to IMO. The tip introduces no numbers at all, which is the right call on a card whose own footer records that ISO 23306 was not read at source. (2) A DIRECT CONTRADICTION the tip review exposed: the Examiner Chain listed a natural follow-up as 'why there is no ISO standard', while the entire card teaches that there IS one and that what it lacks is a minimum methane number. It is a survival from a pre-correction draft, and it sat in the card the new tip now opens. Corrected to 'why the ISO standard sets no methane number', the follow-up the card actually supports. Bounded scope forbids reopening a card's technical answer unless the tip review exposes a direct contradiction; this is that exception, and nothing else in the answer was touched. Version badge Q15 v1.1 -> v1.2.",
+   "supersedes": {
+    "manifest": "batch_h3b1_manifest.json",
+    "action_id": "H3B1-002",
+    "post_edit_digest": "31e3195d713e4f4290cbe74fc2f59676f38bd0531dfa87698a454c224847aa9c"
+   }
+  },
+  {
+   "correction_action_id": "CORR-CETIP-03",
+   "file": "QB2_A.html",
+   "path": "meoclass1/QB2_A.html",
+   "anchor": "q34",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "ad805c285dea0d0aa4438eb0dc6dc719dfd7db54dbe3ed96c5c24701532a8776",
+   "post_edit_digest": "2f398a19a41fcfa6c43d66d74e3549645444efa72d3301011a8cb34eadfe3023",
+   "known_traps_entry": 62,
+   "rationale": "Container-fire prevention. The tip opens with the four words - prevention, detection, containment, response - and instructs the candidate to say aloud that prevention was what was asked, so the firefighting answer is visibly not coming; it concedes early that a sealed box cannot be analysed, which buys the ground for the reefer electrical estate that the CE genuinely owns; and it puts the mark on the boundary between law and what is coming. That boundary is stated in the form the card supports and the independent review corrected: the water mist lance is already SOLAS under II-2/10.7.3.1 for ships constructed on or after 1 January 2016, and mobile water monitors under 10.7.3.2 once the ship is designed to carry five or more tiers on deck - while the separate enhanced detection and control package remains draft. It closes on the failure the card's own correction history records: never answer 'not mandatory' to a live SOLAS requirement. Question text, anchor and card position unchanged. Version badge Q34 v1.1 -> v1.2.",
+   "supersedes": {
+    "manifest": "batch_h3b1_manifest.json",
+    "action_id": "H3B1-003",
+    "post_edit_digest": "ad805c285dea0d0aa4438eb0dc6dc719dfd7db54dbe3ed96c5c24701532a8776"
+   }
+  }
+ ]
+}
