@@ -297,6 +297,20 @@ GATES = (
                  note="carries the line_endings_homogeneous_per_file evidence "
                       "debt; its baseline is DERIVED, never declared"),
 
+    # ---- the H-series, gated by H5 (closes H4-RES-01) ---------------------
+    # One pair for seven manifests, not seven pairs. They share one schema, and
+    # the validator iterates the series the way validate_corrections iterates
+    # every correction record -- so a future H manifest adds a manifest, not a
+    # gate. It is registered here as a post-E6 gate (historical_39=False): it
+    # did not exist when the count of 39 was fixed.
+    *_batch_pair("batch_h_series", "validate_batch_h_series.py",
+                 "mutate_batch_h_series.py", 1800, historical_39=False,
+                 note="seven H manifests, twenty-three cards: pins verified "
+                      "through the supersession resolver, pre-edit states "
+                      "checked in BOTH directions, and an undeclared card on a "
+                      "touched page caught by the baseline comparison a digest "
+                      "pin is structurally blind to"),
+
     # ---- examiner index ----------------------------------------------------
     _gate("examiner_check",
           ["python", "%s/build_examiner_index.py" % _ORAL, "--check"],

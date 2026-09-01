@@ -293,6 +293,20 @@ EXPECTED_BATCH_MANIFESTS = [
     "batch_g1_manifest.json",
     "batch_g2_manifest.json",
     "batch_g3_manifest.json",
+    "batch_g4_manifest.json",
+    # The H-series. Registered by H5 closing H4-RES-01: all seven shipped with
+    # digest pins that no validator, mutator or gate read, and G4 shipped
+    # unregistered here for the same reason G1/G2 did. They are gated by
+    # validate_batch_h_series.py / mutate_batch_h_series.py, which read THIS
+    # list as their expectation -- so a future H manifest that is not added
+    # here is not silently ungated: it fails h_manifests_none_undeclared.
+    "batch_h1_manifest.json",
+    "batch_h2_manifest.json",
+    "batch_h3a_manifest.json",
+    "batch_h3a_orb_manifest.json",
+    "batch_h3b1_manifest.json",
+    "batch_h3b2_manifest.json",
+    "batch_h4_manifest.json",
 ]
 manifests = sorted(HERE.glob("batch_*manifest.json"))
 check("every batch manifest on disk is audited, and no other",
