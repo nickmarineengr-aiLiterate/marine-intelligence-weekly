@@ -1401,3 +1401,50 @@ most able to teach the wrong answer — it carried the pre-2011 headings for (B)
 (F) under the instruction “know all ORB code letters by memory”. It has been corrected to the MEPC.187(59)
 wording; the guard must stay armed over it so that a future edit cannot quietly restore the old
 list. A blanket skip on a currency trap protects the defect it was written to catch.
+
+### 58. IACS UR Z7 is HULL. Machinery surveys are Z18, and the PMS alternative is Z20
+
+The Oral bank stated in four places that Continuous Machinery Survey is governed by
+**"IACS UR Z7/Z7.1"**. It is not. From IACS's own consolidated Unified Requirements Z contents
+page:
+
+* **Z7** — *Hull classification surveys*
+* **Z18** — *Survey of machinery* (1.3 continuous surveys, 1.5 planned maintenance scheme,
+  1.6 condition monitoring / CBM)
+* **Z19** — *Calibration of measuring equipment*
+* **Z20** — *Planned maintenance scheme (PMS) for machinery*
+* **Z27** — *Condition Monitoring and Condition Based Maintenance*
+
+**And the certificate has a name.** UR Z20 2.3.1: *"When the PMS is approved a 'Certificate of
+Approval for Planned Maintenance Scheme' is issued. However, other equivalent certification or
+class notation may be issued according to the procedure in use in each individual Member Society.
+In any case, the certification is to be kept on board."* It is a **class** document. There is no
+statutory or IMO PMS certificate — ISM section 10 requires the maintenance system and certifies
+nothing.
+
+**How the error survived.** The corpus area for class material held only a notes file. A note
+asserting what a Unified Requirement says is not evidence of what it says, and an unsourced area of
+a corpus does not announce its own errors — the mistake surfaced only when a new card needed the
+real citation and the publisher's document was finally acquired.
+
+GREP: `UR Z7` — the only legitimate uses are statements that Z7 is hull classification surveys.
+Any sentence pairing Z7 with machinery, CMS, CSM or continuous survey is wrong.
+
+### 59. MEPC.328(76) entered into force 1 November 2022 — not 2023
+
+The revised MARPOL Annex VI adopted by **resolution MEPC.328(76)** was **deemed accepted 1 May
+2022** and **entered into force 1 November 2022**, per the resolution's own operative paragraphs 2
+and 3. **Secondary summaries circulate with the year wrong, giving 1 November 2023**, and a card in
+this batch inherited that wrong year.
+
+**It was inherited from our own corpus, which is the point.** The MARPOL Annex VI canonical layer
+in the shared true-source corpus records the entry into force as `2023-11-01`, and the card author
+trusted that record rather than the resolution. This is the *"an index row is not evidence"* rule
+biting from an unexpected direction: the derived record was ours, it was carefully built, it was
+frozen and qualified — and it was still wrong on a date that the underlying PDF states in one line.
+A corpus record is a pointer to a source, never a substitute for it, **including when the corpus is
+your own**.
+
+GREP: `1 November 2023` — legitimate only where an instrument genuinely entered into force on that
+date. Paired with MEPC.328(76) or with "Annex VI", it is wrong.
+
