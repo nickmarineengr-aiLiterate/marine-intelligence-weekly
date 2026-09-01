@@ -1448,3 +1448,65 @@ your own**.
 GREP: `1 November 2023` — legitimate only where an instrument genuinely entered into force on that
 date. Paired with MEPC.328(76) or with "Annex VI", it is wrong.
 
+### 60. MEPC.333(76) is EEXI. The CII guidelines are the 336-339 series
+
+The Oral bank stated in four places on one card, and once on its cheat sheet, that the required
+CII reference values and the **A-E rating bands** come from **MEPC.333(76)**. They do not. From
+IMO's own published resolution, first page:
+
+> *RESOLUTION MEPC.333(76) (adopted on 17 June 2021) 2021 GUIDELINES ON THE METHOD OF CALCULATION
+> OF THE ATTAINED ENERGY EFFICIENCY EXISTING SHIP INDEX (EEXI)*
+
+It is an **EEXI** instrument. The operational carbon intensity guidelines adopted at the same
+session are a different run of numbers:
+
+* **MEPC.336(76)** - CII Guidelines, **G1** (calculation methods)
+* **MEPC.337(76)** - CII **Reference Lines** Guidelines, **G2**
+* **MEPC.338(76)** - CII **Reduction Factors** Guidelines, **G3**
+* **MEPC.339(76)** - CII **Rating** Guidelines, **G4** - the A-E bands
+* **MEPC.364(79)** - the carbon conversion factors C_F (HFO 3.114, MDO/MGO 3.206, LNG 2.750,
+  methanol 1.375)
+
+**Why this one was expensive.** The wrong number was not a passing citation. It sat in that card's
+*Numbers & Regulations to Memorise* list **and** in its *Common CE Failures* list, as the
+distinction a candidate must be able to draw against MEPC.364(79) - so the corpus was drilling it.
+The same card's CE Oral Tip records that Nair asks for these numbers verbatim. And the card
+separately, and correctly, warns against *"confusing EEXI (one-time, technical) with CII (annual,
+operational)"* - which is precisely the error it was making one paragraph away.
+
+**How it survived.** It was found only because a new card on CII-improvement technologies needed
+the reference-line and rating instruments by name, inherited the citation from the corpus, and an
+independent reviewer checked it at IMO rather than against the bank. A number repeated confidently
+in three places on the same page reads as verified; repetition is not corroboration.
+
+GREP: `MEPC.333(76)` - legitimate only where the subject is **EEXI calculation**. Paired with CII,
+with rating bands, or with reference lines, it is wrong.
+
+
+### 61. A membership count is a dated claim, and ours disagreed with itself three ways
+
+Three Oral cards carry MACN. Before this correction they said, between them, **"150+ member
+companies"**, **"200+ member companies, >50% of global tonnage, active in 50+ countries"**, and no
+figure at all. MACN's own site says **"Over 225"** members across **"Over 45"** countries. A
+candidate who revised from two of our pages would have walked in with two different numbers for one
+organisation, and a share-of-global-tonnage figure that **MACN does not state anywhere we could
+find** - it comes from secondary maritime reporting.
+
+**The rule for any organisation-scale number.** Quote the issuer's own figure, **say the date you
+read it**, and stop. *"Over 225 members across more than 45 countries, as of my last reading"* is a
+better answer than a confident bare number, because the examiner asking about a network's scale is
+usually testing whether you know it moves.
+
+**And the currency question this sits under.** *"MACN, latest outcome?"* is not an identity
+question. MACN is a private network - it issues no certificates and adopts no instruments, so there
+is no resolution to cite. Date your answer and name a development you can actually stand behind.
+
+**How the corpus's own hedge went wrong.** Production first recorded "which annual report is
+current" as **unverifiable**, having read MACN's front page (still leading on the 2024 report) and
+its news listing (which names no report at all). The issuer's **publications index** answers
+outright: *MACN 2025 Annual Report*, posted May 2026. Two surfaces of a publisher disagreeing is
+not evidence that the publisher is silent - go to its index. This is the same failure that, in the
+same batch, had a DGS notice recorded as unretrievable while a scan of it sat in the repository.
+
+GREP: `150+ member` / `200+ member` / `% of global tonnage` - all wrong for MACN.
+
