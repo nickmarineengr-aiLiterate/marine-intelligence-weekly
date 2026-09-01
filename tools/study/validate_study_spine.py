@@ -44,6 +44,26 @@ def check(rule, ok, detail=''):
         fails.append(f'{rule}: {detail}')
 
 
+def _live_corpus_counts(root):
+    """(oral, written) canonical question counts, read from the CORPUS.
+
+    Deliberately the same two inputs `build_study_mappings.corpus_items()`
+    consumes, and deliberately NOT the mapping store: comparing the store
+    against a count derived from the store would pass for any store.
+    """
+    import glob as _glob
+    idx = json.load(open(os.path.join(root, 'meoclass1',
+                                      'qb_content_index.json'),
+                         encoding='utf-8'))
+    oral = sum(len(f['questions']) for f in idx['files'].values())
+    written = 0
+    for spec_path in _glob.glob(os.path.join(root, 'meoclass1', 'pastpapers',
+                                             'specs', '*.json')):
+        with open(spec_path, encoding='utf-8') as fh:
+            written += len(json.load(fh)['questions'])
+    return oral, written
+
+
 def main():
     if not os.path.exists(SPINE):
         print('FAIL R-EXISTS: docs/study/study_spine.json is missing')
@@ -428,8 +448,27 @@ def main():
                   'entities_with_no_recurrence_value': 185}
     PRE_JOB_OCC = {'recurrence_bearing': 1584, 'limb_records_not_counted': 698,
                    'total_records': 2282}
-    PRE_JOB_CORPUS = {'oral': 738, 'written': 360, 'mappings': 1098,
-                      'accidentally_unmapped': 39, 'current_answers': 8,
+    # Four of these were CORPUS SIZES frozen at the moment the classification
+    # layer was built: oral 738, written 360, mappings 1098, unmapped 39.
+    # August 2026 Oral production legitimately took the corpus to 759, and all
+    # four went red -- not because anything created a question, but because a
+    # guard had pinned a TOTAL. That is a confirmed defect class here ("pin
+    # identities, not totals"), and it expires in the dangerous direction too:
+    # had the corpus SHRUNK to 738 by losing a question, these checks would
+    # have stayed silent.
+    #
+    # The PROPOSITION is untouched and is not stood down: classification must
+    # create no question. It is now asserted against the LIVE corpus instead
+    # of against a number -- the same corpus the mapper itself consumes
+    # (qb_content_index.json + pastpapers/specs/*.json), read here
+    # independently of the mapping store so the comparison is not circular.
+    # Any question the classification layer invented still fails, at any
+    # corpus size, forever.
+    _live_oral, _live_written = _live_corpus_counts(ROOT)
+    PRE_JOB_CORPUS = {'oral': _live_oral, 'written': _live_written,
+                      'mappings': _live_oral + _live_written,
+                      'accidentally_unmapped': None,   # derived below
+                      'current_answers': 8,
                       'notes_units': 992, 'crosswalk_edges': 43,
                       'official_nodes': 25}
 
@@ -592,10 +631,13 @@ def main():
         au = reg['accidentally_unmapped']
         live39 = sorted(q for q, r in gstore.items()
                         if r.get('mapping_status') == 'ACCIDENTALLY_UNMAPPED')
+        # Register vs STORE, never vs a frozen 39. The identity comparison
+        # immediately below (R-GAP-UNMAPPED-MATCHES-STORE) is the strong one;
+        # this keeps the count check meaningful rather than expiring with it.
         check('R-GAP-UNMAPPED-COUNT',
-              au['count'] == PRE_JOB_CORPUS['accidentally_unmapped'],
+              au['count'] == len(live39),
               f"register reports {au['count']} accidentally-unmapped "
-              f"questions, not {PRE_JOB_CORPUS['accidentally_unmapped']}")
+              f"questions, store holds {len(live39)}")
         check('R-GAP-UNMAPPED-MATCHES-STORE',
               [q['canonical_question_id'] for q in au['questions']] == live39,
               'the register unmapped list disagrees with the mapping store')
