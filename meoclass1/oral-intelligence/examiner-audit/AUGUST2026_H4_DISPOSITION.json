@@ -211,10 +211,82 @@
    "id": "H4-RES-09",
    "severity": "INFORMATIONAL",
    "what": "authorisation_commit in the H-series names a commit that does not yet contain the batch's own queue row - batch_h3b2 names 4a24868, which lacks H3B-2, and H4 names bd7e076, which lacks H4. The check passes because it reads the working tree. In this series the queue is a production RECORD, not a prior authorisation; SKILL 3.1 describes the other regime. Related to standing debt item 2."
+  },
+  {
+   "id": "H4-RES-10",
+   "severity": "MATERIAL",
+   "what": "qb_health_check compares local against origin/main, which is 35 commits stale, so every 'NEW finding' it reports spans the whole unpushed H series rather than the batch under test.",
+   "why_it_matters": "Same shape as the vacuous-health-evidence defect at SKILL section 5 - there both sides read remote main and neither could see the change under test; here one side can, but the other is months old, so a real delta is attributed to the wrong batch.",
+   "fix": "Either push, or compare against the batch's own baseline_commit. H4 measured itself against bd7e076: 83 findings before and after, zero new."
+  },
+  {
+   "id": "H4-RES-11",
+   "severity": "MATERIAL",
+   "what": "A default --full run stops at gate 5 of 66 while study_spine_validate and qb_question_text carry inherited debt.",
+   "why_it_matters": "'A guard that cannot run has silently expired' is a confirmed defect class here - it is what SKILL 7.4a records about batch_e6_mutate. Sixty-one gates going unrun is a larger version of the same failure.",
+   "fix": "Mark both gates baseline_derivable, as validate_batch_e6 is - that reports PRE_EXISTING_BASELINE, never PASS, and still FAILs on any NEW failing check. It ALSO needs a sixth dialect in the shared summary parser, because validate_study_spine.py prints 'N FAILED' and its failing check names are not extracted today. NOT done in H4: release infrastructure should not be rewritten unreviewed at the end of a long batch."
   }
  ],
  "study_spine": {
   "status": "H5_REBUILD_REQUIRED",
   "delta": "Three new canonical questions (QB7_I#q10, QB4_C#q18, QB4_H#q15) are unmapped against the frozen spine. No spine repair attempted in H4."
+ },
+ "validation": {
+  "runner": "python tools/oral/run_oral_release.py --full --keep-going",
+  "executed": "66 of 66 gates",
+  "result": {
+   "PASS": 50,
+   "PRE_EXISTING_BASELINE": 2,
+   "FAIL": 6,
+   "UNAVAILABLE": 4,
+   "SKIPPED": 4
+  },
+  "mutations": "20 suites, 359 mutations, 0 escapes, 0 no-ops, 0 crashes",
+  "determinism": "PASS",
+  "note": "--keep-going was used deliberately. The default run stops at the first release-critical failure, and with two inherited reds at gates 5 and 6 that meant 61 gates never executed and H4 could not report coverage at all. Every failure was then classified by DERIVING the baseline in a clean worktree of bd7e076 - identity of failing check names, never counts.",
+  "h4_owned_failures_found_and_closed": [
+   {
+    "gate": "validate_corrections",
+    "failing": "known_traps_entries_exist",
+    "cause": "Both new correction records declared no known_traps entry; the check requires a non-empty list resolving to a numbered heading in meoclass1/known_traps.md.",
+    "fix": "Entries 60 and 61 added and pinned.",
+    "after": "137 checks, 0 FAIL"
+   },
+   {
+    "gate": "validate_followup_register",
+    "failing": "register_is_byte_current_with_its_generator",
+    "cause": "The generated register had gone stale. It is a standing target-drift detector and fired correctly.",
+    "fix": "Regenerated with its own builder. The ONLY field that moved was live_corpus_at_generation.canonical_questions 756 -> 759; none of the 35 pinned parent cards drifted, although H4 edited six pages.",
+    "after": "32 checks, 0 FAIL"
+   }
+  ],
+  "inherited_failures_proven_by_derivation": [
+   {
+    "gate": "study_spine_validate",
+    "evidence": "The SAME four checks fail at bd7e076 in a clean worktree - R-ACCOUNT-ORAL, R-STORE-AGREES-SPINE, R-GRAN-CORPUS-STABLE, R-GAP-UNMAPPED-MATCHES-STORE. The spine is frozen at a 738-question corpus; the numbers descend with the corpus but the debt does not change shape.",
+    "disposition": "H5_REBUILD_REQUIRED. The handover forbids repairing the frozen spine in H4."
+   },
+   {
+    "gate": "qb_question_text",
+    "evidence": "The same three cards fail identically at bd7e076 - QB1_F#q22, QB1_F#q23, QB5_C_B#q9, each 'q-card is a direct child of #q-feed'. H4's three new cards add 30 controls to this gate and ALL PASS, which is independent evidence they are correctly nested.",
+    "disposition": "Residue - a nesting repair to three cards H4 does not own."
+   },
+   {
+    "gate": "node_security_tests",
+    "evidence": "Fails at bd7e076. The assertion expects a three-letter month and the fixture renders '1 Sept 2026 16:33 IST'. Latent all year; can only manifest in September.",
+    "disposition": "Residue, and time-boxed - it will fire all month."
+   },
+   {
+    "gate": "batch_g2_mutate",
+    "evidence": "UNAVAILABLE at bd7e076 too. Preflight refuses to launch because mutations I, J and K target GIT-IGNORED generated workbooks under docs/MIW-master-Question-bank/, absent from any clean worktree. G2's cards are QB2_A#q31 and QB7_D#q13 - H4 touched neither file, nor any workbook or exporter.",
+    "disposition": "Residue. A mutation targeting a git-ignored generated artefact cannot run in a clean tree."
+   },
+   {
+    "gate": "qb_health_check",
+    "evidence": "THE FAIL IS AN ARTEFACT OF THE BASELINE, NOT OF H4. It compares local against 'ref origin/main', and origin/main is THIRTY-FIVE COMMITS BEHIND local at 436f665, before the entire unpushed H series, so its NEW=7 / GONE=2 spans H1 through H4. Re-measured against H4's actual baseline bd7e076 and compared as SETS per the skill's evidence contract: 83 findings before, 83 after, ZERO new, ZERO gone.",
+    "disposition": "H4 introduces no new health findings. Stale-origin caveat registered as H4-RES-10."
+   }
+  ],
+  "confirmation_run": "The eleven affected gates were re-run after the fixes: 10 PASS, 66 mutations, 0 escapes, 0 no-ops, 0 crashes. The four mutators that had reported UNAVAILABLE were downstream of validate_corrections and all now PASS. Only batch_g2_mutate remains UNAVAILABLE, for the inherited reason above."
  }
 }
