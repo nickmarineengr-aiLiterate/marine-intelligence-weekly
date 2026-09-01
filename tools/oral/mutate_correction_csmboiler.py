@@ -40,6 +40,16 @@ import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 REPO = HERE.parents[1]
+
+sys.path.insert(0, str(HERE))
+
+# Reach the shared UTF-8 stdio contract in THIS file's source. Inheriting it
+# as a side effect of somebody else's import is a contract satisfied only at
+# runtime, and it stops being true the moment that import moves -- which is
+# why test_oral_release_infra scans sources rather than processes.
+from oral_bytes import enable_utf8_stdio  # noqa: E402
+
+enable_utf8_stdio()
 VALIDATOR = HERE / "validate_correction_csmboiler.py"
 PAGE = REPO / "meoclass1" / "QB1_G.html"
 MANIFEST = HERE / "correction_corr_csm_india_authority_20260823_manifest.json"

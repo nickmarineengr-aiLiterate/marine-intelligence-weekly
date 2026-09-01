@@ -58,6 +58,15 @@ sys.path.insert(0, str(HERE))
 import export_question_bank_xlsx as X  # noqa: E402
 import oral_monthly as MM  # noqa: E402
 
+# Reach the shared UTF-8 stdio contract in THIS file's source. Inheriting it
+# as a side effect of somebody else's import is a contract satisfied only at
+# runtime, and it stops being true the moment that import moves -- which is
+# why test_oral_release_infra scans sources rather than processes.
+from oral_bytes import enable_utf8_stdio  # noqa: E402
+
+enable_utf8_stdio()
+
+
 URL_RE = re.compile(r"^https://marineintelligenceweekly\.com/meoclass1/([A-Za-z0-9_]+\.html)#(q\d+)$")
 
 LEAK_RE = re.compile(

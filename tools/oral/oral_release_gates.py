@@ -241,7 +241,11 @@ GATES = (
           ["python", "tools/study/validate_study_spine.py"],
           CAT_INDEX, PARSER_VALIDATOR, timeout=600, historical_39=False,
           depends_on=("study_mapping_check",),
-          note="official syllabus, coverage and Topic 01 references must resolve"),
+          baseline_derivable=True,
+          note="official syllabus, coverage and Topic 01 references must "
+               "resolve; baseline DERIVED, because this gate sits at position "
+               "5 and a bare FAIL here stopped a --full run before sixty-one "
+               "later guards ever ran"),
 
     # ---- study surfaces must regenerate from the corpus that just changed --
     # A new oral question reaches a topic (above) but would still be invisible
@@ -266,7 +270,10 @@ GATES = (
 
     # ---- corpus-wide unit controls ----------------------------------------
     _gate("qb_question_text", ["python", "%s/test_qb_question_text.py" % _ORAL],
-          CAT_UNIT, PARSER_VALIDATOR, timeout=600),
+          CAT_UNIT, PARSER_VALIDATOR, timeout=600, baseline_derivable=True,
+          note="corpus-wide page structure; baseline DERIVED for the same "
+               "reason as study_spine_validate -- an early unclassifiable "
+               "FAIL must not cost the rest of the suite"),
     _gate("oral_controls", ["python", "%s/test_oral_controls.py" % _ORAL],
           CAT_UNIT, PARSER_VALIDATOR, timeout=600),
     _gate("notes_controls", ["python", "%s/test_notes_controls.py" % _ORAL],
@@ -315,7 +322,7 @@ GATES = (
     _gate("examiner_check",
           ["python", "%s/build_examiner_index.py" % _ORAL, "--check"],
           CAT_EXAMINER, PARSER_CHECK, timeout=600,
-          note="960 relationships / 7 examiners, zero delta"),
+          note="958 relationships / 7 examiners, zero delta -- 958 is distinct (examiner, question) PAIRS across five tiers; the 860 in CURRENT_EXAMINER_RELATIONSHIPS.jsonl is the recovery layer, one of four inputs, and is a different denominator"),
     _gate("validate_examiner_index",
           ["python", "%s/validate_examiner_index.py" % _ORAL],
           CAT_EXAMINER, PARSER_VALIDATOR, timeout=600,

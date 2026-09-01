@@ -384,8 +384,25 @@ def validator_failing(text: str) -> set:
     One definition, used by the runner's gate classification and by every
     mutation harness's control check, so "which checks are failing" cannot come
     to mean two different things in the two places that compare it.
+
+    SIX dialects, not five. `validate_study_spine.py` INDENTS its failures and
+    suffixes the check name with a colon::
+
+          FAIL R-ACCOUNT-ORAL: mapped 699 + unresolved 39 != corpus 759
+
+    An anchored `^FAIL` matched none of them, so that gate had no derivable
+    baseline: it could only ever be classified FAIL, and a default --full run
+    stopped at gate 5 of 66 with sixty-one guards unrun. "A guard that cannot
+    run has silently expired" is a confirmed defect class here, and sixty-one
+    of them is the largest instance of it this repository has had.
+
+    Leading whitespace is now allowed and one trailing colon is stripped.
+    Deliberately NOT widened to `FAIL:` with no space -- a mutator log's own
+    `FAIL:` evidence lines must keep failing to match, because they are
+    caught-evidence, not failures.
     """
-    return set(re.findall(r"^FAIL\s+(\S+)", text, re.M))
+    return {name.rstrip(":")
+            for name in re.findall(r"^[ \t]*FAIL\s+(\S+)", text, re.M)}
 
 
 def worktree_env(work) -> dict:

@@ -28,7 +28,8 @@ sys.path.insert(0, str(HERE))
 
 from oral_bytes import enable_utf8_stdio      # noqa: E402
 import oral_lib as L                          # noqa: E402
-from oral_manifest import audit_manifest, sibling_owned_cards  # noqa: E402
+from oral_manifest import (audit_manifest, authorisation_manifest_paths,
+                           sibling_owned_cards)  # noqa: E402
 from oral_supersession import resolve_authorised_card_state  # noqa: E402
 
 enable_utf8_stdio()
@@ -367,8 +368,15 @@ def main(manifest_path=None, review_path=None, label="g1") -> int:
     # line answers is "which reported new asks still have no card anywhere?",
     # and answering it from one manifest would list a later batch's work as
     # outstanding forever.
+    # Through the SHARED authorisation surface, never a private glob. Ten batch
+    # validators each grew their own copy of that glob, and widening it in ten
+    # places is how the batch and correction record families drifted apart.
+    # The surface is strictly wider than the old glob -- it includes correction
+    # records -- and that is correct rather than merely harmless: the loop
+    # counts NEW_CARD actions, so a correction that ever created one would now
+    # be seen, where before it would have read as outstanding work forever.
     produced = set()
-    for mp in list(HERE.glob("batch_*_manifest.json")):
+    for mp in authorisation_manifest_paths(HERE):
         try:
             rec = json.loads(mp.read_text(encoding="utf-8"))
         except (OSError, ValueError):

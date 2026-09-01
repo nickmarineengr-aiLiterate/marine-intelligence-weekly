@@ -287,9 +287,25 @@ check("--full adds the determinism phase",
 # commit it certified. That is evidence debt, not a regression -- but it must
 # never be reported as PASS, and it must never be hardcoded, because a
 # hardcoded baseline absorbs the next real failure silently.
+#
+# H5 adds two more, and for a different reason than E6's. Both sit EARLY --
+# study_spine_validate at position 5, qb_question_text at 8 -- and a bare FAIL
+# at either stopped a default --full run before sixty-one later guards ever
+# ran. Derivation is what turns an early inherited failure into
+# PRE_EXISTING_BASELINE (not green, not blocking) instead of a full stop.
+# Both are green today; the classification is what keeps the suite complete
+# the next time one is not.
+#
+# Enumerated, not counted, and in registry order: adding a third derivable
+# gate is a reviewable one-line edit, exactly like POST_E6_GATES.
+BASELINE_DERIVABLE_GATES = [
+    "study_spine_validate",
+    "qb_question_text",
+    "validate_batch_e6",
+]
 _derivable = [g["id"] for g in REG.ALL_GATES if g.get("baseline_derivable")]
 check("only gates with known evidence debt derive a baseline",
-      _derivable == ["validate_batch_e6"], str(_derivable))
+      _derivable == BASELINE_DERIVABLE_GATES, str(_derivable))
 check("a derived baseline is compared by check NAME, not by count",
       "baseline_failing" in _runner_src and "validator_failing" in _runner_src,
       "a swapped-out failure must not read as the same failure")

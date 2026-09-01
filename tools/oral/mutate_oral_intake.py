@@ -21,6 +21,16 @@ import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+# Reach the shared UTF-8 stdio contract in THIS file's source. Inheriting it
+# as a side effect of somebody else's import is a contract satisfied only at
+# runtime, and it stops being true the moment that import moves -- which is
+# why test_oral_release_infra scans sources rather than processes.
+from oral_bytes import enable_utf8_stdio  # noqa: E402
+
+enable_utf8_stdio()
 REL_AUDIT = Path("meoclass1/oral-intelligence/examiner-audit")
 
 SRC = REL_AUDIT / "ALL_SURVEYORS_SOURCE_RECORDS.jsonl"

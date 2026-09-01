@@ -737,6 +737,32 @@ for path in sorted(list(HERE.glob("validate_*.py")) + list(HERE.glob("mutate_*.p
     src = B.read_text(path)
     if not any(name in src for name in SHARED):
         unreached.append(path.name)
+# --- validator_failing must read every dialect on the gate list -----------
+# H4-RES-11: validate_study_spine.py INDENTS its failures and suffixes the
+# check name with a colon, so an anchored ^FAIL matched none of them. That
+# gate therefore had no derivable baseline, could only be classified FAIL,
+# and a default --full run stopped at gate 5 of 66 with sixty-one guards
+# unrun. Pinned here as a fixture rather than harvested from live output: a
+# self-test that reads the live corpus stops testing anything the moment the
+# corpus changes.
+_DIALECTS = [
+    ("batch/unit      ", "FAIL  QB1_F.html#q22 q-card is a direct child of #q-feed",
+     {"QB1_F.html#q22"}),
+    ("study spine     ", "  FAIL R-ACCOUNT-ORAL: mapped 699 + unresolved 39 != 759",
+     {"R-ACCOUNT-ORAL"}),
+    ("indented tagged ", "   FAIL batch_h1/H1-001:manifest_digest_matches detail",
+     {"batch_h1/H1-001:manifest_digest_matches"}),
+    ("mutator evidence", "FAIL: this line is CAUGHT-evidence inside a mutator log",
+     set()),
+]
+for _name, _line, _want in _DIALECTS:
+    check("validator_failing reads the %s dialect" % _name.strip(),
+          X.validator_failing(_line) == _want,
+          "got %s wanted %s" % (sorted(X.validator_failing(_line)), sorted(_want)))
+check("validator_failing still ignores a bare FAIL: evidence line",
+      X.validator_failing("FAIL: caught") == set(),
+      "a mutator's own FAIL: output is evidence, not a failure")
+
 check("every validator and mutation harness reaches the UTF-8 contract",
       not unreached, "unreached=%s" % (unreached or "none"))
 
