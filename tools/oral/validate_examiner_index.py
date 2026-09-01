@@ -357,6 +357,39 @@ def main(argv):
     except Exception as e:  # git absent: name it, do not pass silently
         check("no raw question-bank source file is tracked by git", False, repr(e))
 
+    # -------------------- 10. the QB hub agrees with the examiner universe
+    # meoclass1/index.html is HAND-MAINTAINED -- no generator writes it -- and
+    # it advertised "6 Examiners Covered" with six name pills while
+    # examiner-index.html, one click away and fully generated, published seven
+    # including John. That is a candidate-facing contradiction between two
+    # pages of the same product, and nothing owned it.
+    #
+    # Guarded here rather than generated: the hub is a curated marketing
+    # surface and turning it into a build artefact is a larger change than
+    # this release should make. A bounded, validator-guarded hand-update is
+    # what SKILL section 20 asks for. The check derives BOTH sides -- the
+    # expected count and the expected names come from the generator, never
+    # from a literal here, so it cannot expire when an eighth examiner
+    # arrives.
+    hub = L.MEO / "index.html"
+    if not hub.is_file():
+        check("the QB hub states the examiner count", False, "index.html absent")
+    else:
+        hub_text = hub.read_text(encoding="utf-8")
+        expected = sorted(sec["name"] for sec in snap["sections"])
+        m = re.search(r'<span class="stat-val">(\d+)</span>'
+                      r'<span class="stat-label">Examiners Covered</span>',
+                      hub_text)
+        check("the QB hub states the examiner count",
+              m is not None and int(m.group(1)) == len(expected),
+              "hub says %s, generator publishes %d"
+              % (m.group(1) if m else "<absent>", len(expected)))
+        pills = sorted(set(re.findall(r'<span class="ex-pill">([^<]+)</span>',
+                                      hub_text)))
+        check("the QB hub names every published examiner",
+              pills == expected,
+              "hub=%s generator=%s" % (pills, expected))
+
     return finish(argv)
 
 

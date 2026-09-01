@@ -244,6 +244,19 @@ def check_page(path, is_qb2c):
        str([i for i in w.ids if w.ids.count(i) > 1][:5]))
     ok("%s has q-cards" % fname, bool(cards))
 
+    # The toolbar's "Showing N of N" is SERVER-RENDERED text, and
+    # applyFilters() -- the only thing that rewrites it -- is wired to
+    # oninput and filterTag() alone. It never runs on load. So whatever this
+    # literal says is exactly what a candidate reads when the page opens, and
+    # on 23 pages it said one fewer than the page carried: a card was added
+    # and the counter was not. Off-by-one is the worst size for this defect,
+    # because it looks like a rendering nicety rather than a miscount.
+    text = path.read_text(encoding="utf-8")
+    shown = re.findall(r"Showing\s+(\d+)\s+of\s+(\d+)", text)
+    ok("%s initial question counter matches the corpus" % fname,
+       all(int(a) == len(cards) and int(b) == len(cards) for a, b in shown),
+       "cards=%d page says %s" % (len(cards), shown))
+
     for c in cards:
         cid = c["id"]
         ok("%s#%s q-card is a direct child of #q-feed" % (fname, cid),
