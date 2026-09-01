@@ -80,6 +80,16 @@ UPDATE_KINDS = {
     "SCOPE_PASS_CORRECTION",
     "DEPENDENCY_CORRECTION",
     "PROPAGATED_FACT_CORRECTION",
+    # The two H-series words. Both are UPDATES, and that is evidence rather
+    # than judgement: each of the two cards carrying them has a real
+    # pre_edit_digest matching its batch's baseline commit, so the card
+    # demonstrably existed before the action ran. EXPANSION is H3B1-006's
+    # bounded widening of QB2_B#q15; CURRENCY_EXPANSION is H4-004's currency
+    # limb on QB5_E#q4. Classifying either as a CREATE would mint a new
+    # candidate-facing "new question" out of a card the corpus already held,
+    # and over-claiming new is the dangerous direction in a marketing artefact.
+    "EXPANSION",
+    "CURRENCY_EXPANSION",
 }
 
 # Below this token overlap a rewritten stem is treated as a different question.
