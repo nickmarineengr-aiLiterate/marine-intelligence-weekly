@@ -1,0 +1,50 @@
+{
+ "record_class": "EXTERNAL_SHARED_CORPUS_RECONCILIATION_QUEUE",
+ "date": "2026-09-01",
+ "raised_by": "MIW Oral H5 final bounded closure",
+ "authority": "A RECORD of shared-corpus items MIW has observed and cannot itself resolve. It makes NO claim about the state of the shared repository, and it is not authority to merge anything. Each item names what MIW verified independently, and what remains owed to the corpus owner.",
+
+ "why_this_file_exists": "H5 found that the shared corpus at F:/RulesApp-Local-Input has genuinely diverged from its origin, and that one of the upstream commits MIW has never seen appears to dispose of a referral MIW's own H3B-2 raised against it. That is a reconciliation question for the corpus owner, not something a consuming product may settle by merging another team's branch. Recording it here keeps the observation findable without pretending it is resolved.",
+
+ "no_merge_confirmation": {
+  "merged": false,
+  "rebased": false,
+  "reset": false,
+  "cherry_picked": false,
+  "pushed": false,
+  "note": "No write of any kind was made to F:/RulesApp-Local-Input during H5 or this closure. Its working tree carries one untracked file (LAPTOP_ACTIVATION_REPORT.md) that predates this work and was not touched."
+ },
+
+ "items": [
+  {
+   "id": "SCR-001",
+   "subject": "RQ-VI-EIF-1 - MARPOL Annex VI canonical layer entry-into-force date",
+   "status": "APPEARS SUPERSEDED BY UPSTREAM EVIDENCE - NOT CLOSED BY MIW",
+   "classification": "EXTERNAL_SHARED_CORPUS_RECONCILIATION",
+   "owner": "shared corpus / desktop team",
+
+   "what_miw_raised": "H3B-2 raised RQ-VI-EIF-1 in the shared corpus at commit c234e4d (2026-09-01): the canonical layer under 03-imo-instruments/MARPOL-Annex-VI/_agent-run/canonical/ records the entry into force of the revised MARPOL Annex VI, adopted by MEPC.328(76), as 2023-11-01. It reported 47 canonical files containing that date, 168 occurrences in total, and zero occurrences of 2022-11-01.",
+
+   "what_h5_found": "The referral appears to have been raised against a STALE CHECKOUT rather than against a live defect. F:/RulesApp-Local-Input has diverged from its origin: six local commits (all H-series evidence work dated 2026-09-01) against six upstream commits the local branch has never seen, from a merge base of 64977b8. One of those upstream commits, 7441cc0 dated 2026-08-15, is titled 'fix(true-source): correct MEPC.328(76) EIF and the MEPC.376(80) revocation state' and corrects exactly this value: 2023-11-01 -> 2022-11-01 across 251 occurrences in 60 files. Its changed-file list includes 47 files under MARPOL-Annex-VI/_agent-run/canonical/ - the same layer and the same file count the referral names. The local branch diverged BEFORE that fix landed, which is why the defect is still visible locally.",
+
+   "how_that_was_verified": "By reading the upstream commit's own changed-file list and grepping both sides, not by trusting either commit message. Under 7441cc0 the canonical layer retains only a handful of 2023-11-01 occurrences, which that commit documents as deliberately preserved: 2023-11-01 is the correct deemed-acceptance date of MEPC.361(79) and MEPC.362(79), and the commit records that adjacency as the likely origin of the original error.",
+
+   "what_miw_does_NOT_claim": [
+    "That the shared repository is reconciled. It is not: it remains 6 ahead and 6 behind its origin.",
+    "That RQ-VI-EIF-1 is formally closed. Closing a referral raised in another team's corpus is that team's act, not MIW's.",
+    "That the local shared-corpus checkout is currently correct. On the evidence it is not - it still carries the pre-fix value.",
+    "That the upstream fix is complete or correct beyond the specific value checked here."
+   ],
+
+   "why_it_does_not_block_the_MIW_Oral_release": "MIW's candidate-facing truth on this point was established independently of the shared corpus and does not rest on it. CORR-ANNEXVI-EIF-20260901 verified the date at PRIMARY SOURCE - MEPC.328(76) operative paragraph 2 determines deemed acceptance on 1 May 2022 and operative paragraph 3 states the amendments 'shall enter into force on 1 November 2022' - and corrected ten statements across QB7_A, QB7_A_CheatSheet and QB7_C. That correction is gated by validate_correction_annexvi_eif.py, which asserts the PROPOSITION over every citing page rather than banning a string, and is mutation-proved 7 of 7. So the divergence is a corpus-hygiene question, not a candidate-facing one.",
+
+   "what_is_owed_to_the_corpus_owner": [
+    "A reconciliation decision on the 6/6 divergence of F:/RulesApp-Local-Input, taken as its own task with its own authority.",
+    "Formal disposition of RQ-VI-EIF-1 once that reconciliation happens - most likely withdrawal as raised against a stale checkout, but that is the owner's call to make on the merged tree.",
+    "A check of whether any OTHER H-series corpus referral was raised against the same stale base. H5 did not sweep for this and does not claim there are none."
+   ],
+
+   "lesson": "A corpus record is a pointer to a source, never a substitute for it - including when the corpus is your own, and including when the thing it is stale about is a fix somebody already made. Known trap 59 records the first half of this lesson; this is the second half. Before raising a referral against a shared corpus, establish that the checkout being read is current with its origin."
+  }
+ ]
+}
