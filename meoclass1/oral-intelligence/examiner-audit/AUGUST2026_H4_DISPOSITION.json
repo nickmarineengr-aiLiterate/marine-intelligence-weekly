@@ -1,0 +1,220 @@
+{
+ "record_class": "BATCH_DISPOSITION_AND_RESIDUE_REGISTER",
+ "batch_id": "H4",
+ "date": "2026-09-01",
+ "baseline_commit": "bd7e076",
+ "authority": "A RECORD of what H4 decided and what it leaves owed. It is not answer authority: the cards are the product, batch_h4_manifest.json is the authorisation, and MIW_SOURCE_REGISTRY.json holds the sources.",
+ "scope": "The five currentness/identity-sensitive roots held back from H3B-2 by instruction: CII improvement technologies, FAST, MACN latest outcome, the India health-declaration form, and the APEX manual.",
+ "corpus": {
+  "before": 756,
+  "after": 759,
+  "question_bearing_files": 86,
+  "intake": 263,
+  "adjudications": 263
+ },
+ "root_dispositions": [
+  {
+   "root": "CII improvement technologies",
+   "occurrences": [
+    "AUG-0160"
+   ],
+   "examiner_wording": "Latest technologies to improve CII ratings",
+   "panel": [
+    "Paul",
+    "Senthil"
+   ],
+   "attribution": "PANEL_LEVEL_ONLY",
+   "disposition": "MERGED_CANONICAL_ROOT",
+   "canonical_target": "QB7_I#q10",
+   "why": "The five CII cards explain the metric; QB7_I#q7/q8/q9 each carry ONE technology. The SET-level ask was uncovered. Re-verified against the live 759-card bank, where '\\bCII\\b' returns 92 hits over markup-stripped bodies and the nearest miss, QB1_F#q9, is an engine-room SFOC/WHR/hull card that mentions CII only in its CE-relevance paragraph."
+  },
+  {
+   "root": "FAST",
+   "occurrences": [
+    "AUG-0211 (limb)"
+   ],
+   "examiner_wording": "Latest technologies - FAST valves, OCC, WAPS.",
+   "disposition": "MERGED_INTO_THE_CII_ROOT",
+   "canonical_target": "QB7_I#q10",
+   "why": "Same examiner intent as AUG-0160 asked from the other side, and two of the three named technologies already had cards. One root answers both and carries FAST as a named maker example; a second card would have overlapped it entirely.",
+   "identity": "Wartsila Fuel Activated Sacless Technology - an INJECTOR upgrade, not a valve family. Verified at the maker's service catalogue, which also corrected two claims in MIW's own committed H4 evidence: the engine list includes RTA96C so it is not RT-flex only, and the page makes NO CII claim at all."
+  },
+  {
+   "root": "APEX manual",
+   "occurrences": [
+    "AUG-0193",
+    "AUG-0194"
+   ],
+   "examiner_wording": "Apex manual? / Why apex?",
+   "panel": [
+    "Simon",
+    "Senthil"
+   ],
+   "attribution": "PANEL_LEVEL_ONLY",
+   "disposition": "IDENTITY_RESOLVED_NEW",
+   "canonical_target": "QB4_C#q18",
+   "why": "'apex' returns 6 hits on the live bank and every one is a false positive - CAPEX twice, Bloom's taxonomy twice, NOS-DCP as India's 'apex framework'. The pattern demonstrably finds the word, which is what makes the negative on the ISM sense credible. AUG-0194 is the 'why' limb of the same card, as its adjudication anticipated."
+  },
+  {
+   "root": "India health-declaration form",
+   "occurrences": [
+    "AUG-0135"
+   ],
+   "examiner_wording": "Name of Health declaration form used before arrival India",
+   "panel": [
+    "Nair",
+    "Srivastava"
+   ],
+   "attribution": "PANEL_LEVEL_ONLY",
+   "disposition": "IDENTITY_RESOLVED_NEW",
+   "canonical_target": "QB4_H#q15",
+   "why": "The Maritime Declaration of Health, prescribed by the Indian Port Health Rules, 1955 - rule 5, form at Appendix 5 - read verbatim from the Ministry of Health's own portal. No card in the corpus names that instrument."
+  },
+  {
+   "root": "MACN latest outcome",
+   "occurrences": [
+    "AUG-0195"
+   ],
+   "examiner_wording": "Macn, latest outcome?",
+   "panel": [
+    "Simon",
+    "Senthil"
+   ],
+   "attribution": "PANEL_LEVEL_ONLY",
+   "disposition": "EXISTING_CARD_EXPANSION",
+   "canonical_target": "QB5_E#q4",
+   "collateral": "QB5_B#q8 currency alignment",
+   "why": "The identity card existed and carried no currency limb at all. The ask is a currentness cross-question, not a new root."
+  }
+ ],
+ "held_limbs": [
+  {
+   "id": "H4-HOLD-001",
+   "status": "HOLD_CURRENTNESS_UNVERIFIED",
+   "target": "QB4_H.html#q15",
+   "unknown": "The commencement date of the Indian Ports Act, 2025 (s.1(2), by Gazette notification).",
+   "candidate_facing_card_produced": true,
+   "why_it_does_not_block": "The answer to the examiner's question does not depend on it: s.85(2)(a) continues the 1955 Rules either way. The card gives assent 21 August 2025 and tells the candidate not to quote a commencement date.",
+   "evidence_needed": "The commencement notification in the Gazette of India.",
+   "supporting": "The 22 April 2026 draft rules G.S.R. 304(E) are framed as made 'on or after the date of coming into force of the Act', which is consistent with the Act not having commenced by then."
+  }
+ ],
+ "dissolved_holds": [
+  {
+   "id": "H4-HOLD-002",
+   "was": "which MACN annual report is current",
+   "outcome": "DISSOLVED_BEFORE_SHIP",
+   "why": "The hold was wrong. I checked MACN's front page and news listing, found them inconsistent with third-party reporting, and held the limb. The issuer's PUBLICATIONS INDEX settles it: MACN 2025 Annual Report, posted May 2026. The card now names it."
+  }
+ ],
+ "defects_found_in_our_own_records": [
+  {
+   "id": "H4-EV-01",
+   "where": "AUGUST2026_INTAKE_ADJUDICATIONS.json, AUG-0135 negative_search",
+   "what": "Recorded 0 hits for 'declaration of health|health declaration' and for 'maritime declaration|pratique|quarantine'. Both return hits against markup-stripped card BODIES on the live bank - the first returns 10, including QB1_A#q18 and QB4_H#q9, which both name the Maritime Declaration of Health.",
+   "diagnosis": "A title-scoped search reported as though corpus-wide.",
+   "effect_on_classification": "NONE. GENUINE_NEW_QUESTION stands - no card names the Indian instrument, and QB4_H#q9's subject is WHO-linked certificates.",
+   "disposition": "Recorded here and in the H4 manifest; the intake record is left as what was decided on the day."
+  },
+  {
+   "id": "H4-EV-02",
+   "where": "AUGUST2026_INTAKE_ADJUDICATIONS.json, AUG-0195",
+   "what": "Named two MACN cards; the corpus holds three. QB5_B#q8 was missed.",
+   "disposition": "QB5_B#q8 aligned in this batch."
+  },
+  {
+   "id": "H4-EV-03",
+   "where": "AUGUST2026_PRODUCTION_QUEUE.json, h4_identity_evidence.FAST",
+   "what": "Said FAST 'applies to Wartsila RT-flex 2-stroke families'. The maker's catalogue lists RTA96C as well. Also attributed a 5% CII improvement to FAST; the FAST page makes no CII claim, and the figure belongs to the combined WPLO+ICC+FAST package on two named vessels in an April 2025 project.",
+   "disposition": "Card teaches the corrected position and makes the over-claim a trap question."
+  },
+  {
+   "id": "H4-EV-04",
+   "where": "AUGUST2026_PRODUCTION_QUEUE.json, h4_identity_evidence.APEX",
+   "what": "Said the file number ENG/ISM/59(4)/97 belongs to MS Notice 28 of 2003 and not to the 2014 notice, and recorded MIW's oralnotes as defective for citing it. BOTH WRONG. The number is printed on page 1 of the 2014 notice. It is a standing DGS ISM file number opened in 1997 and borne by the whole series - s.4.3 lists MS Notice 28 of 2003 and some thirty Engineering Circulars carrying the same number with different dates.",
+   "disposition": "The oralnotes are CORRECT and no correction is owed against them. The card now gives the number and explains that it identifies the file, not the notice."
+  },
+  {
+   "id": "H4-EV-05",
+   "where": "meoclass1/QB4_H.html",
+   "what": "Section counter stale at 13 against 14 live cards, inherited from H3B-2; and the prose '13 questions exceeds the 6-question inline threshold' beside the cheat-sheet link.",
+   "disposition": "Both repaired to 15."
+  },
+  {
+   "id": "H4-EV-06",
+   "where": "meoclass1/QB6.html and QB6_cheatsheet.html",
+   "what": "Attributed the CII reference lines and A-E rating bands to MEPC.333(76), which is the 2021 EEXI calculation guidelines. Worse than a stray citation: the card carried it in 'Numbers to Memorise' AND in 'Common CE Failures' as the distinction a candidate must make - it was drilling the wrong number, at a card whose own CE tip records that Nair asks for these verbatim.",
+   "disposition": "CORR-CII-G2G4-20260901."
+  },
+  {
+   "id": "H4-EV-07",
+   "where": "this batch's own first-round manifest note",
+   "what": "I wrote that neither MACN sibling repeated the stale membership figure and that this had been checked. False - QB5_B#q8 carried a third figure. Found by re-verifying my own claim before the reviewers reported.",
+   "disposition": "Note corrected in the manifest; QB5_B#q8 aligned."
+  }
+ ],
+ "independent_review": {
+  "reviewers": 4,
+  "shape": "Clean-context, one per root group plus a structural/governance reviewer.",
+  "producer_discipline": "Every material finding was re-verified by the producer at primary source before any product change. Two reviewer claims were corrected in that process: the successor rule-set named in G.S.R. 304(E) is the Indian Port PUBLIC Health Rules, 2026; and the oralnotes file number is correct, not defective.",
+  "most_valuable_finding": "MS Notice 9 of 2014 was HELD LOCALLY the whole time, at meoclass1/oralnotes/assets/. I had grepped the oralnotes HTML, found nothing, gone to the network, been refused by two hosts, and recorded an access limit that did not exist. Reading the held scan produced three improvements no web source gave: the full 6.2.1.4 clause 'but not the other way round', s.6.2.1.5 on integrated systems, and s.8.1.1.5's own DOC-application requirement.",
+  "second_most_valuable": "The India card answered a 'before arrival' question without rule 4(1), the only genuinely pre-arrival duty in the instrument it cites - the 12-to-4-hours-out Standard Quarantine Message that supports radio pratique. Now the lead of the answer."
+ },
+ "residues_for_h5": [
+  {
+   "id": "H4-RES-01",
+   "severity": "MATERIAL",
+   "what": "NO H-SERIES BATCH HAS A VALIDATOR, A MUTATOR OR A GATE. tools/oral/ holds validate_batch_{a..d,e1..e6,f1,f1b,g1..g4} and nothing for H1, H2, H3A, H3A-ORB, H3B-1, H3B-2 or H4. The seven H manifests' digest pins are asserted by nothing in the toolchain, and test_oral_release_infra.py's EXPECTED_BATCH_MANIFESTS names all seven plus batch_g4 as unexpected - it has been red since G4 shipped.",
+   "why_not_fixed_here": "Building gates for H4 alone would leave H1-H3B ungated while implying the series is covered. This is release qualification, which the handover already places in H5.",
+   "scope": "8 manifests: batch_g4 plus the seven H-series."
+  },
+  {
+   "id": "H4-RES-02",
+   "severity": "MATERIAL",
+   "what": "held_limbs is read only by oral_manifest.py. H4 hardened it to six checks after an independent reviewer demonstrated three escapes, but nothing binds how_the_hold_is_expressed_to_the_candidate to the product - a per-batch validator would close that, and H4 has none (see H4-RES-01).",
+   "also": "Batch manifests never receive card_path_matches_file or card_digests_well_formed; those are correction-manifest-only. A phantom card and a malformed digest pass the bare auditor."
+  },
+  {
+   "id": "H4-RES-03",
+   "severity": "MATERIAL",
+   "what": "QB5_E#q4 and its cheat sheet name a 'Port Corruption Index' and a 'Bridging the Gap' government-engagement framework. MACN's own named data product is the Global Port Integrity Platform (GPIP). Neither name could be confirmed on MACN's pages; the what-we-do page returned HTTP 404 on 2026-09-01.",
+   "why_not_fixed_here": "Pre-existing content, outside the AUG-0195 currency limb, and deleting candidate-facing content on an unverified negative is exactly the discipline this batch spent its day defending. Needs a positive check against MACN's programme pages.",
+   "also": "QB5_E#q4's founder list 'Maersk, Stena, Grieg and Odfjell' is unattributed; MACN's own history says only 'a small group of committed maritime companies'."
+  },
+  {
+   "id": "H4-RES-04",
+   "severity": "MINOR",
+   "what": "QB7_I has no cheat sheet at all, at 10 questions. One of 12 files over the 6-question threshold without one."
+  },
+  {
+   "id": "H4-RES-05",
+   "severity": "MINOR",
+   "what": "QB5_E.html hardcodes 'Showing 7 of 7' against 8 cards, and QB5_E_cheatsheet.html covers Q1-Q7 only - q8 has never had an entry. Both predate bd7e076."
+  },
+  {
+   "id": "H4-RES-06",
+   "severity": "MINOR",
+   "what": "meoclass1/index.html advertises '6 Examiners Covered'; build_examiner_index.py reports 7."
+  },
+  {
+   "id": "H4-RES-07",
+   "severity": "MINOR",
+   "what": "Examiner relationships were NOT ingested for the three new cards. Each carries panel attribution in its Examiner Chain prose (Paul and Senthil; Simon and Senthil; Nair and Srivastava) that the current extractor does not harvest, because it keys on a parenthesised name after 'CE Oral Tip'. examiner_relationship_delta is 0 and the index still reports 958/7.",
+   "why_not_fixed_here": "Examiner/index regeneration is an H5 step in the handover."
+  },
+  {
+   "id": "H4-RES-08",
+   "severity": "MINOR",
+   "what": "meoclass1/oralnotes/assets/MS_Notice_09_of_2014_Reference.pdf is 2 bytes - the 'condensed reference extract' download link in simon-notes-p3.html serves an empty file. The full scan beside it is intact."
+  },
+  {
+   "id": "H4-RES-09",
+   "severity": "INFORMATIONAL",
+   "what": "authorisation_commit in the H-series names a commit that does not yet contain the batch's own queue row - batch_h3b2 names 4a24868, which lacks H3B-2, and H4 names bd7e076, which lacks H4. The check passes because it reads the working tree. In this series the queue is a production RECORD, not a prior authorisation; SKILL 3.1 describes the other regime. Related to standing debt item 2."
+  }
+ ],
+ "study_spine": {
+  "status": "H5_REBUILD_REQUIRED",
+  "delta": "Three new canonical questions (QB7_I#q10, QB4_C#q18, QB4_H#q15) are unmapped against the frozen spine. No spine repair attempted in H4."
+ }
+}

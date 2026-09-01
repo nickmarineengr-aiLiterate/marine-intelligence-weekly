@@ -116,6 +116,24 @@ FIELD_CLASSES: dict[str, str] = {
     # "Is FUP-006 still owed?" is then answerable from repository data rather
     # than by arithmetic over handoffs.
     "discharges_hold": LOAD_BEARING,
+    # A LIMB-level hold, which is NOT held_actions. held_actions says "this
+    # action was authorised and was NOT produced"; held_limbs says "the action
+    # WAS produced, and inside it one sub-claim could not be verified". H4 was
+    # the first batch to need it: the India health-declaration card ships a
+    # complete answer while declining to state a commencement date nobody could
+    # find in the Gazette, and the MACN currency limb ships dated developments
+    # while declining to name an annual-report year the issuer's own surfaces
+    # disagreed about. Recording either as a held ACTION would have been false
+    # -- the card exists -- and recording neither would have let an unverified
+    # limb ship silently, which is the failure this whole file exists to stop.
+    "held_limbs": LOAD_BEARING,
+    # A limb this batch DECLARED as held and then resolved before shipping.
+    # Load-bearing because deleting a hold silently and recording its dissolution
+    # are the same edit to the reader, and only one of them is honest: H4 held
+    # the MACN annual-report limb, independent review found the issuer's
+    # publications index settled it, and the record has to show that the hold was
+    # WRONG rather than that it never existed.
+    "dissolved_holds": LOAD_BEARING,
     "authorisation_count_key": LOAD_BEARING,
     "actual_new_card_count": LOAD_BEARING,
     "examiner_relationship_delta": LOAD_BEARING,
@@ -142,6 +160,9 @@ FIELD_CLASSES: dict[str, str] = {
     # so INFORMATIONAL; the digests themselves stay LOAD_BEARING and are
     # compared against the live pages regardless of what this says.
     "review_round_note": INFORMATIONAL,
+    # Why an examiner-relationship delta is what it is. The delta itself stays
+    # LOAD_BEARING; this only records the reasoning.
+    "examiner_relationship_delta_note": INFORMATIONAL,
 
     # ---- the payload ----
     "cards": LOAD_BEARING,
@@ -162,6 +183,15 @@ HELD_STATUSES = (
     "HELD_GOVERNANCE",   # blocked by the authorisation/guard contract itself
     "HELD_AUTHORITY",    # blocked by unresolved primary authority
     "HELD_TARGET",       # blocked by unresolved target adjudication
+)
+
+# Why a LIMB inside a produced card is unverified. Separate vocabulary from
+# HELD_STATUSES on purpose: those describe why work was NOT DONE, these
+# describe a bounded gap inside work that WAS done and shipped.
+HELD_LIMB_STATUSES = (
+    "HOLD_CURRENTNESS_UNVERIFIED",   # the fact perishes and could not be dated
+    "HOLD_IDENTITY_UNRESOLVED",      # the thing named could not be pinned down
+    "HOLD_SOURCE_AUTHORITY_LIMITED", # the authority exists but could not be read
 )
 
 # Generation 1 (batches A-D, gap0609) creates new cards and names the action
@@ -655,6 +685,85 @@ def audit_manifest(path) -> list[Finding]:
                       if h.get("followup_id") in produced)
         add("held_actions_are_not_also_produced", not both,
             "both=%s" % (both or "none"))
+
+    # 5b-ii. Limb-level holds. The asymmetry with held_actions is the whole
+    # point and is asserted, not assumed: a held ACTION must NOT appear in
+    # cards[], whereas a held LIMB MUST name an action that cards[] actually
+    # produced. Without that second assertion held_limbs would be a way to
+    # declare a hold on work that was never done -- the softer-sounding word
+    # doing the job the governed vocabulary refuses to do.
+    held_limbs = manifest.get("held_limbs")
+    if held_limbs is not None:
+        produced_ids = {action_id_of(c) for c in cards}
+        bad_shape = [h.get("held_limb_id") or "?" for h in held_limbs
+                     if not (isinstance(h, dict) and h.get("held_limb_id")
+                             and h.get("target") and h.get("exact_unknown")
+                             and h.get("evidence_needed"))]
+        add("held_limbs_well_formed", not bad_shape,
+            "malformed=%s" % (bad_shape or "none"))
+
+        bad_status = ["%s=%s" % (h.get("held_limb_id"), h.get("status"))
+                      for h in held_limbs
+                      if h.get("status") not in HELD_LIMB_STATUSES]
+        add("held_limb_status_governed", not bad_status,
+            "unknown=%s" % (bad_status or "none"))
+
+        orphan = sorted(h.get("held_limb_id") for h in held_limbs
+                        if h.get("action_id") not in produced_ids)
+        add("held_limbs_belong_to_a_produced_action", not orphan,
+            "orphan=%s" % (orphan or "none"))
+
+        # An independent review demonstrated three escapes in the first cut of
+        # this mechanism, and all three had the same shape: a field the record
+        # asserts and no code contradicts. They are closed here.
+        #
+        # (a) TARGET CORRESPONDENCE. `target` was checked for presence only, so
+        #     a hold could name action H4-003 and point at a card that action
+        #     never touched -- which reads as a disclosure while describing the
+        #     wrong page.
+        by_id = {action_id_of(c): c for c in cards}
+        mismatched = []
+        for h in held_limbs:
+            card = by_id.get(h.get("action_id"))
+            if not card:
+                continue                      # already reported as an orphan
+            want = "%s#%s" % (card.get("file"), card.get("anchor"))
+            if (h.get("target") or "").strip() != want:
+                mismatched.append("%s->%s(want %s)"
+                                  % (h.get("held_limb_id"), h.get("target"), want))
+        add("held_limb_target_matches_its_action", not mismatched,
+            "mismatched=%s" % (mismatched or "none"))
+
+        # (b) THE OWED FLAG. `held_actions` has a dedicated mutation for exactly
+        #     this laundering -- "mark the work no longer owed" -- and the limb
+        #     form inherited none. A limb whose work is not owed is not held; it
+        #     is resolved, and the record should say so by removing the entry,
+        #     not by flipping a boolean inside one.
+        not_owed = sorted(h.get("held_limb_id") for h in held_limbs
+                          if h.get("work_still_owed") is not True)
+        add("held_limb_work_is_still_owed", not not_owed,
+            "not_owed=%s" % (not_owed or "none"))
+
+        # (c) INTERNAL AGREEMENT. `held_limbs_belong_to_a_produced_action` has
+        #     already established that a card exists, so a record claiming
+        #     otherwise contradicts a check that passed in the same run.
+        contra = sorted(h.get("held_limb_id") for h in held_limbs
+                        if h.get("candidate_facing_card_produced") is not True)
+        add("held_limb_agrees_a_card_was_produced", not contra,
+            "contradicting=%s" % (contra or "none"))
+
+    # 5b-iii. A dissolved hold is the opposite of a held one, so a record may
+    # not claim both about the same limb, and it must say why the hold fell.
+    dissolved = manifest.get("dissolved_holds")
+    if dissolved is not None:
+        still_held = {h.get("held_limb_id") for h in (manifest.get("held_limbs") or [])}
+        both = sorted(x.get("held_limb_id") for x in dissolved
+                      if x.get("held_limb_id") in still_held)
+        add("dissolved_holds_are_not_still_held", not both, "both=%s" % (both or "none"))
+        bad = [x.get("held_limb_id") or "?" for x in dissolved
+               if not (isinstance(x, dict) and x.get("held_limb_id")
+                       and x.get("outcome") and x.get("why"))]
+        add("dissolved_holds_well_formed", not bad, "malformed=%s" % (bad or "none"))
 
     # 5c. Discharged holds -- the mirror of 5b, and asserted for the same
     # reason. A batch may not claim to have closed an earlier batch's hold

@@ -1,0 +1,50 @@
+{
+ "correction_id": "CORR-CII-G2G4-20260901",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "h4_independent_review",
+ "date": "2026-09-01",
+ "title": "QB6#q1 attributed the CII reference lines and A-E rating bands to MEPC.333(76); that resolution is the 2021 EEXI calculation guidelines. The CII G-series is MEPC.337(76) G2, MEPC.338(76) G3 and MEPC.339(76) G4",
+ "baseline_commit": "bd7e076",
+ "governing_commits": [
+  "fe0dcf5"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_PRODUCTION_QUEUE.json",
+ "candidate_claim": "Raised by an independent reviewer of the new H4 card QB7_I#q10, which had copied the same wrong citation from the corpus. Not raised by a candidate.",
+ "candidate_verdict": "UPHELD",
+ "rationale": "VERIFIED AT THE RESOLUTION ITSELF, not from the reviewer's report. IMO's published PDF of MEPC.333(76) reads on its first page: 'RESOLUTION MEPC.333(76) (adopted on 17 June 2021) 2021 GUIDELINES ON THE METHOD OF CALCULATION OF THE ATTAINED ENERGY EFFICIENCY EXISTING SHIP INDEX (EEXI)'. It is an EEXI instrument and has nothing to do with operational carbon intensity. The CII G-series adopted at the same session is MEPC.336(76) G1 calculation methods, MEPC.337(76) G2 reference lines, MEPC.338(76) G3 reduction factors and MEPC.339(76) G4 rating.",
+ "note": "WHY THIS IS IN BOUND, AND WHY IT IS WORSE THAN A STRAY CITATION. H4's new card QB7_I#q10 needed the correct CII reference-line and rating instruments, and reproduced the corpus's error in its own reg box. Fixing only the new card would have left the corpus contradicting itself while the H4 card silently corrected an error nobody had recorded. The live defect is not a passing mention: QB6#q1 puts MEPC.333(76) in its 'Numbers & Regulations to Memorise' list AND in 'Common CE Failures' as the thing a candidate must be able to distinguish from MEPC.364(79). The card was DRILLING the wrong resolution number - and QB6#q1's own CE Oral Tip records that examiner Nair asks for these numbers verbatim, so the error was aimed precisely at the moment it would cost a mark. Its cheat sheet repeated it. The correction states the EEXI/CII split explicitly at every site rather than silently swapping numbers, because the same card lists 'Confusing EEXI with CII' as a common failure - the candidate needs to see that the corpus itself had made exactly that error.",
+ "authority": "Resolution MEPC.333(76), IMO's own published PDF, first page. Corroborated for the G-series numbering by the published titles of MEPC.337(76) (CII Reference Lines Guidelines, G2) and MEPC.338(76) (CII Reduction Factors Guidelines, G3).",
+ "cards": [
+  {
+   "correction_action_id": "CORR-CII-G2G4-01",
+   "file": "QB6.html",
+   "path": "meoclass1/QB6.html",
+   "anchor": "q1",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "cc48fc8ead7671fbc86923a7b127823256ba5fcdbd7207ee5a74330f032282e8",
+   "post_edit_digest": "33576a410acb6b312274c2019225e13b8058386cd2e50719232aea91f48a97c0",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "Four sites corrected. (1) The 60-second answer's 'Required CII - a ship-type specific target from MEPC.333(76)' now reads reference lines G2 MEPC.337(76) reduced by the G3 factors MEPC.338(76). (2) The Common CE Failures entry, which taught the wrong distinction, now names citing MEPC.333(76) for CII rating bands AS the failure. (3) The Numbers to Memorise line now gives G2/G3/G4 with an explicit 'MEPC.333(76) is EEXI, not CII'. (4) The reg-box row is replaced by MEPC.337(76)/MEPC.339(76) with the same warning.",
+   "surfaces_corrected": [
+    "60-second answer",
+    "Common CE Failures",
+    "Numbers & Regulations to Memorise",
+    "reg-box reg-code and reg-desc"
+   ]
+  }
+ ],
+ "propagation": "Corpus sweep for the literal 'MEPC.333(76)' across all 86 question-bearing pages plus cheat sheets returned SIX sites in three files: four in QB6.html#q1, one in QB6_cheatsheet.html, and one in the H4 card QB7_I#q10. All six are corrected. The QB7_I one is H4-owned and is recorded in batch_h4_manifest.json, not here, because that card was created by H4 and never shipped with the error. QB6_cheatsheet.html is a revision surface, not a card, so it carries no digest pin - its row now reads MEPC.337(76)/MEPC.339(76) with the EEXI warning. A guard is included in the producing script: every surviving mention of MEPC.333(76) in these files must have 'EEXI' within a 200-character window, so the string cannot return as a CII citation.",
+ "invariants": {
+  "canonical_questions_before": 756,
+  "canonical_questions_after": 759,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "new_cards_note": "The three new cards in this working tree belong to batch_h4_manifest.json. The 756 to 759 movement is that batch's, not this record's; both share the baseline bd7e076."
+ },
+ "review": {
+  "independent_review": "complete",
+  "round_1_verdict": "The defect was FOUND by the independent CII/FAST reviewer as its single MATERIAL finding against the new H4 card, and traced by the producer back into the shipped corpus.",
+  "producer_verification": "The producer did not act on the reviewer's report. MEPC.333(76) was downloaded from IMO and its first page read before any edit, and the G-series titles were confirmed independently."
+ }
+}

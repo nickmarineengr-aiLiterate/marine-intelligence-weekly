@@ -1,0 +1,47 @@
+{
+ "correction_id": "CORR-MACN-MEMBERSHIP-20260901",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "h4_currency_expansion",
+ "date": "2026-09-01",
+ "title": "QB5_B#q8 taught a third, different MACN membership figure and an unsourced share of global tonnage",
+ "baseline_commit": "bd7e076",
+ "governing_commits": [
+  "fe0dcf5"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_PRODUCTION_QUEUE.json",
+ "candidate_claim": "Raised by production. H4 expanded the MACN identity card QB5_E#q4 for AUG-0195 and corrected its membership figure from '150+' to MACN's own 'over 225 members across more than 45 countries'. Verifying my own claim that the sibling cards carried no stale figure showed that claim was FALSE.",
+ "candidate_verdict": "UPHELD",
+ "rationale": "QB5_B#q8 taught 'Scale 200+ member companies, >50% of global tonnage, active in 50+ countries'. With QB5_E#q4 corrected to 225/45+, the corpus would have asserted THREE different membership figures for one organisation across three MACN cards. MACN's own site states 'Over 225' members 'Across Over 45' countries. No share-of-global-tonnage figure appears on the MACN pages read; that limb is unsourced and is removed rather than restated.",
+ "note": "WHY THIS IS A CORRECTION AND NOT PART OF THE BATCH. QB5_B#q8 was shipped by an earlier batch and is not an AUG-0195 target - the adjudication named QB5_E#q4 and QB1_B#q9 and missed this card entirely. A batch closes when it publishes, so a repair to someone else's shipped card gets its own record. QB1_B#q9 was checked and carries no membership figure, so it is untouched.",
+ "authority": "macn.dk front page and About page, read 2026-09-01. Registered as SRC-MACN-2026-09.",
+ "cards": [
+  {
+   "correction_action_id": "CORR-MACN-MEMBERSHIP-01",
+   "file": "QB5_B.html",
+   "path": "meoclass1/QB5_B.html",
+   "anchor": "q8",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "d989d847c0c75d140b3182b291def13da3bb08e128e49e55d50d82e234371403",
+   "post_edit_digest": "cb53208ef72ff347b7881a3d942f4d4da7fced8f39bcdcb98f2802bd5d46065a",
+   "digest_pinned_by_earlier_manifest": false,
+   "rationale": "The Scale row now gives MACN's own figure with its date and an explicit instruction not to quote a tonnage share.",
+   "surfaces_corrected": [
+    "answer-body scale table row"
+   ]
+  }
+ ],
+ "propagation": "Sweep for membership figures across all three MACN cards. QB5_E#q4 corrected under batch H4 (150+ -> 225/45+), QB5_B#q8 corrected here (200+/tonnage/50+ -> 225/45+), QB1_B#q9 carries no figure. QB5_E_cheatsheet.html carries the corrected figure. No other card in the 86-file bank states a MACN membership count.",
+ "invariants": {
+  "canonical_questions_before": 756,
+  "canonical_questions_after": 759,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "new_cards_note": "The three new cards belong to batch_h4_manifest.json; both share baseline bd7e076."
+ },
+ "review": {
+  "independent_review": "complete",
+  "round_1_verdict": "Independently confirmed: a reviewer read macn.dk and reported 'Over 225' members across 'Over 45' countries, and separately flagged that the card claims no tonnage share it can support.",
+  "producer_verification": "The producer found the QB5_B#q8 contradiction before the reviewers reported, while re-checking a claim made in the H4 manifest."
+ }
+}
