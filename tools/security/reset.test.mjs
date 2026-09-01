@@ -33,6 +33,18 @@ const { userKey, entKey } = await import("../../api/_lib/entitlements.js");
 const { buildResetEmail, buildRotationEmail, buildAccessEmail, issuedStamp } =
   await import("../../api/_lib/email.js");
 
+// The month abbreviation is produced by Intl (en-GB), where September renders
+// as "Sept" — FOUR letters. A hardcoded \w{3} therefore passed for eleven
+// months of the year and failed through the whole of September 2026, in a
+// test whose subject is the default clock. Derive the alternation from the
+// formatter under test so it can never disagree with what production emits,
+// in any month, locale or ICU version. The 15th at 06:00 UTC is 11:30 IST on
+// the same day, so no month index can slip across a boundary.
+const MONTH_ABBRS = Array.from({ length: 12 }, (_, m) =>
+  issuedStamp(new Date(Date.UTC(2026, m, 15, 6, 0, 0))).split(" ")[1]);
+const ISSUED_STAMP_RE = new RegExp(
+  `\\d{1,2} (?:${MONTH_ABBRS.join("|")}) \\d{4} \\d{2}:\\d{2} IST`);
+
 const EMAIL = "customer@example.com";
 const OLD_PW = "OLDPASSWORD23456";
 const TTL = 30 * 24 * 60 * 60;
@@ -376,8 +388,19 @@ describe("issued timestamp — which email is the live one", () => {
       buildRotationEmail(EMAIL, "NEWPASSWORD23456").html,
     ]) {
       assert.doesNotMatch(html, /Invalid Date/);
-      assert.match(html, /\d{1,2} \w{3} \d{4} \d{2}:\d{2} IST/);
+      assert.match(html, ISSUED_STAMP_RE);
     }
+  });
+
+  test("POSITIVE CONTROL: the derived month alternation is twelve real abbreviations", () => {
+    // Guards the derivation itself: without this, ISSUED_STAMP_RE would still
+    // match if issuedStamp started emitting garbage in the month slot.
+    assert.equal(MONTH_ABBRS.length, 12);
+    assert.equal(new Set(MONTH_ABBRS).size, 12, MONTH_ABBRS.join(","));
+    for (const a of MONTH_ABBRS) assert.match(a, /^[A-Za-z]{3,5}$/, a);
+    assert.ok(MONTH_ABBRS.some((a) => a.length !== 3),
+      "en-GB renders at least one month with more than three letters; if this " +
+      "ever stops being true the \w{3} bug can no longer be detected here");
   });
 
   test("POSITIVE CONTROL: two different instants must not format identically", () => {

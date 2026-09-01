@@ -24,6 +24,30 @@ MEO = REPO / "meoclass1"
 OUT = MEO / "oral-intelligence" / "examiner-audit"
 
 # --------------------------------------------------------------------------
+# examiner tier vocabulary -- ONE definition, read from the governed config
+# --------------------------------------------------------------------------
+# tools/oral/examiner_index_config.json is what build_examiner_index.py renders
+# from, so it is the only authority on which tier literals exist. Three
+# auditors (validate_audit, audit_index, recover_relationships) each carried a
+# private four-value copy -- {confirmed, ce_tip, header, inferred} -- written
+# before the `reported` tier was introduced for external surveyor
+# compilations. The index legitimately renders `reported`, so every one of
+# those rows read as an invalid literal: 43 on origin/main and 44 live, the
+# difference being one row the H series added. The data was never wrong;
+# normalising it would have destroyed a governed attribution-quality
+# distinction to make a stale validator green.
+#
+# Derived, never declared -- the same rule the mutation baselines follow. A
+# sixth tier added to the config cannot silently fail three auditors again.
+EXAMINER_INDEX_CONFIG = Path(__file__).resolve().parent / "examiner_index_config.json"
+
+
+def examiner_tier_literals():
+    """The set of tier literals the examiner index is governed to render."""
+    with EXAMINER_INDEX_CONFIG.open(encoding="utf-8") as fh:
+        return set(json.load(fh)["tiers"])
+
+# --------------------------------------------------------------------------
 # text normalisation
 # --------------------------------------------------------------------------
 _TAG = re.compile(r"<[^>]+>")

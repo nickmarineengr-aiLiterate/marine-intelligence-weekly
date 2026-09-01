@@ -27,7 +27,8 @@ import oral_lib as L  # noqa: E402
 OUT = L.OUT
 INDEX = L.MEO / "examiner-index.html"
 
-VALID_TIERS = {"confirmed", "ce_tip", "header", "inferred"}
+# Derived from the governed config -- see oral_lib.examiner_tier_literals.
+VALID_TIERS = L.examiner_tier_literals()
 # invalid literals seen in the wild -> the tier the row was meant to carry
 TIER_REPAIR = {"cetip": "ce_tip"}
 

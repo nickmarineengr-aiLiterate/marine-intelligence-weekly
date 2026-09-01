@@ -18,7 +18,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import oral_lib as L  # noqa: E402
 
 
-VALID_TIERS = {"confirmed", "ce_tip", "header", "inferred"}
+# Derived from the governed config -- see oral_lib.examiner_tier_literals.
+VALID_TIERS = L.examiner_tier_literals()
 
 
 def main():
