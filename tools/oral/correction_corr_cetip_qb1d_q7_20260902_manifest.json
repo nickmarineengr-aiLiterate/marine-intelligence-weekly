@@ -1,0 +1,39 @@
+{
+ "correction_id": "CORR-CETIP-QB1D-Q7-20260902",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "release_gate_finding",
+ "date": "2026-09-02",
+ "title": "QB1_D#q7 (Bonjean curves) shipped without the mandatory CE Oral Tip - the last such card in the corpus, closed",
+ "baseline_commit": "191441f",
+ "governing_commits": [
+  "9a65d7c"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_H5_DISPOSITION.json",
+ "known_traps_entries": [
+  63
+ ],
+ "rationale": "H5 closed with three residues. H5C-RES-01 recorded that QB1_D#q7 still had no CE Oral Tip: the fourth and last instance, the only NUMERIC card without one, predating the H series and already shipping in published origin/main, and therefore outside the three cards the H5 ruling named. The product contract requires it independently of that ruling - qb_health_check's MANDATORY_CLASSES requires exactly one reg-box, one ce-tip and one q-footer per numeric card. The tip is written as DELIVERY coaching rather than a second trap list, on the model established by CORR-CETIP-H3B1-20260901, because the card's own deep-dives already carry CE Relevance, Trap Questions and Common CE Failures. It asserts no instrument, date or figure the card does not already carry: the even-keel limitation of the hydrostatic tables, immersed sectional area against draught per station, the four use cases (longitudinal strength, launching, grounding, flooded conditions) and Simpson's Rules are all in the card body. It names NO examiner, using the corpus-standard non-attributing label 'CE Oral Tip (Kochi MMD):' which is already carried by 58 live cards across ten files - so no ce_tip-tier relationship can be minted from it, and build_examiner_index reports 958/7 with every tier count identical before and after.",
+ "note": "NO SUPERSESSION CHAIN IS DECLARED, and that is a finding rather than an omission. QB1_D#q7 was created by batch D as PROMNEW-004 (family GAP-0231), and batch_d_manifest.json is a generation-1 record: it carries baseline_card_digests - PRE-edit pins - and no per-card post_edit_digest. Its QB1_D pins cover q1 through q6 only, the cards that existed before batch D appended q7, so q7 has never been pinned by any manifest and there is no earlier post-edit state for this correction to descend from. All six of batch D's QB1_D pins were verified byte-identical after this edit. The card boundary is read by the balanced-div extractor, so appending nothing and editing only the answer region left every sibling digest in the file unchanged. Question text, anchor, card position and all other content are unmodified; the only bytes that moved are the inserted ce-tip block and the version badge.",
+ "content_index_effect": "None from this correction. Question text, anchors and card positions are unchanged and QB1_D still reports 7 cards. The corpus moved 759 -> 761 in the same working tree, but that is batch H6's two new cards, not this record's.",
+ "invariants": [
+  "No examiner relationship created, removed or retiered: 958 relationships across 7 examiners, tier-for-tier identical (confirmed 459 / reported 44 / ce_tip 214 / header 30 / inferred 211).",
+  "Question text, anchor and card position of QB1_D#q7 unchanged.",
+  "QB1_D#q1..q6 digests byte-identical to batch D's baseline pins.",
+  "No regulatory instrument, date or figure introduced that the card body did not already carry.",
+  "QB1_D card count unchanged at 7."
+ ],
+ "cards": [
+  {
+   "correction_action_id": "CORR-CETIP-Q7-01",
+   "file": "QB1_D.html",
+   "path": "meoclass1/QB1_D.html",
+   "anchor": "q7",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "27c4ee371d3b5dc2fa2d2673403844bb9b3ed24201e36a990e09f764f746be85",
+   "post_edit_digest": "f337a4d59d3ca5a6dfc97e567e3f39007eda92c709382e3ebf7779b28b50a5ff",
+   "known_traps_entry": 63,
+   "rationale": "Bonjean curves. The tip gives the answer a single deliverable spine the card contains only as prose: lead with the LIMITATION (the hydrostatic tables assume even keel and stop being valid the moment the waterline is inclined), then say what the curve plots (immersed sectional area against draught, one curve per station), then name where it is used (longitudinal strength, launching, grounding, flooded conditions). It names the two failure modes the corpus has seen on this topic - describing the curve without saying what it is plotted against, and stopping before Simpson's Rules - and tells the candidate to let the examiner ask for the arithmetic rather than volunteering it. 89 words, against a corpus median of 67 and p75 of 84; deliberately shorter than the three H3B-1 tips, which sat at about p92 and were recorded as observation H5C-RES-03. Question text, anchor and card position unchanged. Version badge Q7 v1.0 -> v1.1."
+  }
+ ]
+}

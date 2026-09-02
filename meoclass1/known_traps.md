@@ -1565,3 +1565,32 @@ hardest.
 GREP: SKIP for this entry's own prose, which states the wrong readings in order to reject them.
 Elsewhere: mobile water monitors asserted without the five-tier condition, or 10.7.3 cited as a
 single undifferentiated requirement, is wrong.
+
+### 63. An intake CLASSIFICATION is not a production DISPOSITION
+
+`AUGUST2026_INTAKE_ADJUDICATIONS.json` records, per occurrence, a
+`classification` such as `GENUINE_NEW_QUESTION`. That field is frozen at intake
+and answers exactly one question: **did a matching card exist when this ask was
+first scored?** It is not, and was never, the decision about what gets built.
+
+The decision lives somewhere else — in
+`AUGUST2026_PRODUCTION_QUEUE.json` under `production_outcomes`, written after
+the reuse-first pass and after independent review. Three August occurrences make
+the gap concrete. AUG-0095 (freedom of navigation), AUG-0140 (crew entitlements
+onboard) and AUG-0148 (grain loading booklet) are all `GENUINE_NEW_QUESTION` in
+the adjudication file **and all three were disposed without a new card**:
+`QB1_A#q19` already carried the UNCLOS zones and, after
+`CORR-UNCLOS-FREEDOM-20260831`, the Art. 58(3)/87(2) "due regard" condition;
+`QB9_H#q10` carried the SEA under Std A2.1; `QB2_A#q11` carried the Grain
+Stability Booklet and its Document of Authorisation.
+
+**A reader who takes `classification` as the work order will commission
+duplicate roots against live cards** — and, in the AUG-0095 case, against a
+correction that had already shipped to answer the very limb being re-asked. A
+production brief written from the adjudication file alone did exactly that on
+2026-09-02, scoping five cards where two were owed.
+
+GREP: SKIP for this entry's own prose, which quotes the superseded readings in
+order to reject them. Elsewhere: citing an occurrence's `classification` as
+authority to build, without reading its `production_outcomes` disposition, is
+wrong.
