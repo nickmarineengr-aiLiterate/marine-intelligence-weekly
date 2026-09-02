@@ -307,6 +307,12 @@ EXPECTED_BATCH_MANIFESTS = [
     "batch_h3b1_manifest.json",
     "batch_h3b2_manifest.json",
     "batch_h4_manifest.json",
+    # H6 (2026-09-02): the two genuine new roots from the 31-August LPG
+    # carrier report. There is no H5 manifest -- H5 was a closure phase
+    # whose product edits were CE Oral Tips shipped as a correction, not a
+    # card batch -- so the series numbering skips it by design rather than
+    # by omission.
+    "batch_h6_manifest.json",
 ]
 manifests = sorted(HERE.glob("batch_*manifest.json"))
 check("every batch manifest on disk is audited, and no other",
