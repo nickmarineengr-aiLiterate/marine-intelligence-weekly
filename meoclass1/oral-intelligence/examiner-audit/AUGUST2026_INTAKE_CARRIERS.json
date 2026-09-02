@@ -70,14 +70,31 @@
    "live_inbox_sha256_at_capture": "f0f4672edd89b95e43218d06caec518eb3ddb1f4c0beaac6e271477667285503",
    "live_inbox_bytes_at_capture": 3337,
    "reconstruction": "snapshot01 bytes [0:2615] + snapshot02 == live inbox, verified at capture time"
+  },
+  {
+   "source_file": "_snapshots/31 Aug 2026 oral questions - snapshot 03.txt",
+   "sha256": "9e782ca4f2a9d543ebee973e39a6625fdf6578d526d4fe144a98c8105cdba77f",
+   "bytes": 994,
+   "carrier_date": "2026-08-31",
+   "received_date": "2026-09-02",
+   "attempt_date": "2026-08-31",
+   "source_type": "CANDIDATE_SITTING_REPORT",
+   "status": "INGESTED",
+   "note": "SNAPSHOT 03 OF THE 31-AUGUST DAY. A candidate who sat on 31 AUGUST 2026 shared his report on 2 SEPTEMBER 2026 and the Founder appended it to the same live inbox. This is 31-AUGUST EVIDENCE: the exam date is 2026-08-31 and only the report date is 2026-09-02, so carrier_date and attempt_date stay on the exam date and only received_date moves. No September intake and no SEP identifiers were created. THIS CARRIER HOLDS ONLY THE INCREMENT, per SKILL.md 14.2. APPEND CHARACTERISATION: unlike snapshot 02, the previously governed body IS a STRICT BYTE PREFIX of the live inbox - live[0:3337] is byte-identical to snapshot01[0:2615] + snapshot02[0:722] - so this carrier is exactly live[3337:]. At line level the governed lines 0-97 are byte-identical to the live file's lines 0-97 and 33 lines were appended; no existing line was edited, inserted, reordered or deleted. The report is a 31-08-2026 LPG-carrier sitting, external NAIR and internal Srivastava, attempt 3, result Repeat, with seven numbered questions and an 'Internal: No questions' sentinel.",
+   "append_characterisation": "APPEND_ONLY_STRICT_PREFIX",
+   "predecessor_snapshot": "_snapshots/31 Aug 2026 oral questions - snapshot 02.txt",
+   "predecessor_sha256": "761f8996c8c9e4703ce7eef68133876da6a3f13763f1579249c6e251066dfbca",
+   "live_inbox_sha256_at_capture": "d4d5b1df6a64b308f55666a89289f54b775de90cb171e9cfd3bc5d6ec4d71cfc",
+   "live_inbox_bytes_at_capture": 4331,
+   "reconstruction": "snapshot01 bytes [0:2615] + snapshot02 + snapshot03 == live inbox, verified at capture time; residual 0 bytes"
   }
  ],
  "intake_window": {
   "status": "OPEN_EXPECTING_MORE_INPUT",
-  "as_at": "2026-09-01",
+  "as_at": "2026-09-02",
   "day": "2026-08-31",
-  "snapshots_taken": 2,
-  "note": "31 AUGUST SNAPSHOT 02 TAKEN ON 1 SEPTEMBER. The window is still OPEN. The calendar has turned but the 31-August day has not closed: this very snapshot exists because a candidate who sat on 31 August reported a day late, which is direct evidence that late reports for that sitting do arrive. The status vocabulary in the current architecture is OPEN_EXPECTING_MORE_INPUT and it is retained rather than a new close-state being invented. A completely adjudicated snapshot is not a closed day, and intake count == adjudication count is green while the window stays open.",
+  "snapshots_taken": 3,
+  "note": "31 AUGUST SNAPSHOT 03 TAKEN ON 2 SEPTEMBER. The window is still OPEN. This is the SECOND late report for the 31-August sitting: snapshot 02 arrived a day late on 1 September and snapshot 03 two days late on 2 September, which is direct, repeated evidence that late reports for that sitting keep arriving. The status vocabulary in the current architecture is OPEN_EXPECTING_MORE_INPUT and it is retained rather than a close-state being invented. A completely adjudicated snapshot is not a closed day, and intake count == adjudication count is green while the window stays open. Snapshot 03 arrived AFTER the H5 release qualification had already recorded the day's source set as complete at that time; see AUGUST2026_H5_DISPOSITION.json and its supersession record.",
   "how_the_next_tranche_is_absorbed": "The live inbox file 'docs/MIW-master-Question-bank/New questions from August orals/31 Aug 2026 oral questions.txt' is a MUTABLE HUMAN INBOX and is never itself a carrier. When more material arrives: (1) diff the inbox against snapshot 01; (2) copy ONLY the new material into '_snapshots/31 Aug 2026 oral questions - snapshot 02.txt'; (3) APPEND that snapshot to this registry after snapshot 01; (4) re-run the ingest. Identities are allocated by walking the registry in order, so snapshot 02's submissions start at AUG2026-S026 and its occurrences at AUG-0256, and NOTHING allocated in snapshot 01 moves. A snapshot carries only its own increment - never a fresh full copy of the inbox - or its submissions would be ingested twice."
  }
 }
