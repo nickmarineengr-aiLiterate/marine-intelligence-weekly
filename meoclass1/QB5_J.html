@@ -99,22 +99,23 @@ body{-webkit-user-select:none;user-select:none}
   <span class="qb-badge">QB5_J</span>
   <h1>QB5_J — Main Engine, Fuel &amp; Turbocharger</h1>
   <p>MEO Class 1 Oral Exam Question Bank — Kochi MMD-focused, Examiner: Simon, Jul 2026 batch</p>
-  <div class="header-meta"><span>1 Question</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span><span>v1.0</span></div>
+  <div class="header-meta"><span>2 Questions</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span><span>v1.0</span></div>
 </div>
 <div class="controls-bar">
   <input id="search-input" placeholder="Search questions..." oninput="applyFilters()">
   <button class="filter-btn active" onclick="filterTag('all',this)">All</button><button class="filter-btn" onclick="filterTag('machinery',this)">Machinery</button>
-  <span id="q-count-label">Showing 1 of 1</span>
+  <span id="q-count-label">Showing 2 of 2</span>
 </div>
 <div class="main-layout">
   <div class="sidebar">
     <div style="font-weight:700;font-size:11px;text-transform:uppercase;color:#64748b;margin-bottom:6px">Contents</div>
     <a class="toc-link" href="#q1">1. Lower Calorific Value</a>
+    <a class="toc-link" href="#q2">2. Deciding the main engine is underperforming</a>
     <div style="border-top:1px solid #e2e8f0;margin:10px 0"></div>
     <div style="font-size:11px;color:#64748b">More QB files at <a href="/meoclass1/" style="color:#0d9488">/meoclass1/</a></div>
   </div>
   <div id="q-feed">
-    <div class="section-head"><h2>🔧 QB5_J — Main Engine, Fuel &amp; Turbocharger</h2><span class="sec-count">1 question</span></div>
+    <div class="section-head"><h2>🔧 QB5_J — Main Engine, Fuel &amp; Turbocharger</h2><span class="sec-count">2 questions</span></div>
     <div class="q-card" id="q1" data-tags="machinery">
   <div class="q-header" onclick="toggleCard(this)">
     <div class="q-num-badge">1</div>
@@ -180,6 +181,87 @@ body{-webkit-user-select:none;user-select:none}
     <span class="q-version">QB5_J · Q1 · v1.0</span>
   </div>
 </div>
+<div class="q-card" id="q2" data-tags="machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">As Chief Engineer, how will you decide that your main engine is not performing well?</div>
+      <div class="q-tags"><span class="q-tag">MACHINERY</span><span class="q-tag">PERFORMANCE</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Never on a single reading. I decide by comparing the engine against <strong>its own shop-trial and sea-trial baseline</strong>, after correcting the measurement to reference conditions and after eliminating hull, propeller, weather and draught effects. The engine is underperforming when, at the same corrected power, it needs <strong>more fuel index and more fuel — a rising SFOC</strong> — or when it can no longer reach its rated power while still inside its own limiters.</p>
+      <h4>60-Second Answer</h4>
+      <p>&ldquo;Sir, performance is a <strong>comparison, not a measurement</strong>. A single exhaust temperature or a slow passage tells me nothing on its own, so I work through a fixed sequence. First I fix the <strong>reference</strong> — the shop-trial and sea-trial curves and the ship&rsquo;s own steady-state record taken after the last drydock. Second I <strong>normalise</strong>: correct the readings to ISO 3046-1 standard reference conditions and correct SFOC to the reference LCV of <strong>42,700 kJ/kg</strong>, then strip out displacement, draught and trim, weather, current and hull and propeller fouling — otherwise I will blame the engine for the hull. Third I read the <strong>engine&rsquo;s own parameters</strong>, which do not depend on the sea: fuel index at a given power, Pcomp and Pmax from indicator or draw cards, exhaust temperature and its deviation across cylinders, scavenge pressure and temperature, turbocharger speed, and back pressure. Fourth I <strong>localise</strong> — one cylinder out of line is a unit fault, all cylinders drifting together is a system fault on the air side, the fuel side or the load. Only then, fifth, do I <strong>confirm</strong>: check the instrument before the engine, repeat at steady state, and make sure the engine is not simply sitting on a limiter. A limiter is protection, not a defect.&rdquo;</p>
+      <h4>Governing instrument</h4>
+      <p>There is no IMO regulation that defines &ldquo;good performance&rdquo; — the reference is contractual and technical. <strong>ISO 3046-1 / ISO 15550</strong> govern declared engine power and the correction to standard reference conditions; the <strong>maker&rsquo;s shop-trial and sea-trial records and project guide</strong> are the baseline the ship was bought against; <strong>ISO 19030</strong> is the standard method for separating hull and propeller deterioration from engine deterioration. The <strong>NOx Technical File</strong> then constrains what you may lawfully change in response, and <strong>ISM Code 10</strong> makes the monitoring and the follow-up a maintenance obligation rather than a matter of judgement.</p>
+      <h4>Step 1 — Fix the reference before you measure anything</h4>
+      <ul>
+        <li><strong>Shop trial:</strong> the bed-test curves at the maker&rsquo;s works — the cleanest reference, taken with a new engine on a controlled fuel and a dynamometer load.</li>
+        <li><strong>Sea trial:</strong> the same engine in the actual installation, with the actual propeller — this is the reference that includes the hull and shafting the engine must work through.</li>
+        <li><strong>Post-drydock steady-state record:</strong> the ship&rsquo;s own working baseline, re-taken after every drydock so that hull condition is a known quantity.</li>
+      </ul>
+      <p><em>A baseline taken with a fouled hull is worthless — it hides the very deterioration you are trying to detect, and every later comparison inherits the error.</em></p>
+      <h4>Step 2 — Normalise, or you will convict the wrong component</h4>
+      <ul>
+        <li><strong>Reference conditions:</strong> ISO 3046-1 corrects for ambient air temperature, charge-air coolant temperature and barometric pressure. A hot day in the Gulf lifts exhaust temperatures and lowers air density without anything being wrong.</li>
+        <li><strong>Fuel energy:</strong> SFOC is only comparable when corrected to the reference LCV of <strong>42,700 kJ/kg</strong>. A low-energy stem shows an apparently worse SFOC on a perfectly healthy engine (see Q1).</li>
+        <li><strong>Ship and sea:</strong> displacement, draught and trim, wind and sea state, current and shallow-water effect all change the power the propeller demands.</li>
+        <li><strong>Hull and propeller:</strong> separated by the <strong>ISO 19030</strong> method. Fouling raises the power needed for a given speed — that is a hull problem presenting as an engine complaint.</li>
+      </ul>
+      <h4>Step 3 — Read the parameters that belong to the engine alone</h4>
+      <ul>
+        <li><strong>Fuel index / rack position at a given power:</strong> the single best first indicator. If the index has risen for the same corrected power, the engine is taking more fuel to do the same work.</li>
+        <li><strong>Pcomp and Pmax</strong> from indicator or draw cards, or an electronic pressure analyser. <strong>Low Pcomp</strong> points to compression loss — piston rings, liner wear, a leaking exhaust valve, or simply low scavenge pressure. <strong>Low Pmax with a normal Pcomp</strong> points to the injection side: timing, quantity, or atomisation.</li>
+        <li><strong>Mean indicated pressure</strong> gives indicated power per cylinder and therefore the power balance between units.</li>
+        <li><strong>Exhaust temperature after each cylinder</strong>, read as deviation from the mean rather than as an absolute value.</li>
+        <li><strong>Scavenge air pressure and temperature</strong>, air-cooler air-side pressure drop and cooling-water temperature rise, and the air-filter condition.</li>
+        <li><strong>Turbocharger speed read together with scavenge pressure</strong> — the pairing is what diagnoses, not either alone.</li>
+        <li><strong>Back pressure</strong> after the turbine, across the economiser and the uptakes.</li>
+        <li><strong>Corrected SFOC</strong> and <strong>slip</strong>, as the two whole-ship cross-checks.</li>
+      </ul>
+      <p class="formula">Indicated power: Pi = pmi × L × A × n &nbsp;&nbsp;|&nbsp;&nbsp; SFOC = fuel mass flow ÷ power, corrected to 42,700 kJ/kg</p>
+      <p class="formula">Apparent slip % = (engine distance − observed distance) ÷ engine distance × 100 &nbsp;(engine distance = propeller pitch × revolutions)</p>
+      <h4>Step 4 — Localise: one cylinder, or all of them?</h4>
+      <ul>
+        <li><strong>One unit out of line</strong> — the fault is in that unit: fuel valve, fuel pump timing or plunger wear, exhaust valve, piston rings, or that cylinder&rsquo;s instrumentation.</li>
+        <li><strong>All units drifting together</strong> — the fault is common to the engine. Work the three shared systems in order: the <strong>air side</strong> (fouled turbocharger, dirty air cooler, blocked filters, high back pressure), the <strong>fuel side</strong> (viscosity, temperature, quality, calorific value), and the <strong>load side</strong> (the propeller is simply demanding more).</li>
+        <li><strong>Turbocharger speed against scavenge pressure</strong> is the clearest single pairing: speed up with boost down suggests a fouled or damaged compressor; speed down with boost down suggests the turbine side is fouled or the exhaust energy reaching it has fallen.</li>
+      </ul>
+      <h4>Step 5 — Confirm before you declare a fault</h4>
+      <ol>
+        <li><strong>Suspect the instrument before the engine.</strong> Calibrate the indicator or pressure transducer, check the thermocouples, and prove the flowmeter against tank soundings. A failed sensor is the most common &ldquo;engine fault&rdquo;.</li>
+        <li><strong>Repeat at steady state</strong> — steady load, steady weather, after the maker&rsquo;s stabilisation period. A reading taken while the engine is still settling is not evidence.</li>
+        <li><strong>Check the engine is not on a limiter</strong> — torque/load limiter, scavenge-pressure limiter, or an operator-selected economy or de-rated mode. An engine held down by its own protection is behaving correctly.</li>
+        <li><strong>Then trend it</strong> across several days and compare like corrected condition with like before raising a defect.</li>
+      </ol>
+      <h4>Trap point</h4>
+      <p>A slow ship is not the same thing as a sick engine. Speed loss is most often <strong>hull and propeller fouling, weather or draught</strong> — and the way you prove it is that the engine reaches its rated power at its normal fuel index while the ship still fails to make speed. Equally, remember that you may not simply re-time the engine to chase a number: the components and settings identified in the <strong>NOx Technical File</strong> bound what may be adjusted, and going outside them invalidates the EIAPP certificate.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">ISO 3046-1 / ISO 15550</span><span class="reg-desc">Reciprocating IC engine performance — declared power and the correction of measurements to standard reference conditions</span></div>
+      <div class="reg-item"><span class="reg-code">ISO 19030</span><span class="reg-desc">Measurement of changes in hull and propeller performance — the standard method for separating hull fouling from engine deterioration</span></div>
+      <div class="reg-item"><span class="reg-code">ISO 8217</span><span class="reg-desc">Marine fuel specification — net specific energy, viscosity and quality, the fuel-side variables that must be normalised before blaming the engine</span></div>
+      <div class="reg-item"><span class="reg-code">NOx Technical Code 2008 / Technical File</span><span class="reg-desc">Bounds the identified components, settings and operating values that may be adjusted; going outside them invalidates the EIAPP certificate</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 26 &amp; 28</span><span class="reg-desc">SEEMP and the CII rating — sustained performance deterioration shows up directly in the ship's annual carbon intensity</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code, Element 10</span><span class="reg-desc">Maintenance of ship and equipment — inspection, reporting of non-conformity and the PMS through which a performance defect is actioned</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Kochi MMD):</strong> The examiner is testing your <em>method</em>, not your vocabulary. Do not open with a list of parameters — open with &ldquo;against what baseline?&rdquo; and give the sequence: baseline, normalise, read the engine&rsquo;s own parameters, localise, confirm. Say early that you would correct to ISO reference conditions and eliminate hull, weather and draught first, because that is the sentence that separates a Chief Engineer from a watchkeeper. The answer that fails is a confident recital of exhaust temperatures and scavenge pressures with nothing to compare them to.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Performance judgement is where the CE's technical and commercial roles meet. The same evidence that identifies a fouled turbocharger also answers a charter-party speed-and-consumption claim, feeds the SEEMP, and moves the ship's CII band. Getting the attribution wrong is expensive in both directions: a hull problem treated as an engine problem wastes a decarbonisation opportunity and an opening-up, while an engine problem written off as fouling runs a deteriorating unit until it fails.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: &ldquo;Your ship is two knots slow — is the engine bad?&rdquo; A: Not necessarily; if the engine makes rated power at normal fuel index, the loss is in the hull, propeller, weather or draught. Q: &ldquo;Exhaust temperature on number three is high — what is wrong?&rdquo; A: Nothing yet; a single absolute reading is not evidence. I want the deviation from the mean, the corrected condition, and the thermocouple checked. Q: &ldquo;The engine will not take more load — is it defective?&rdquo; A: First establish whether it is on a torque or scavenge-pressure limiter; a limiter is protection working, not a fault. Q: &ldquo;Can you advance the timing to recover performance?&rdquo; A: Only within the NOx Technical File — outside it the EIAPP is invalidated.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Reciting parameters with no baseline to compare them against. Quoting a raw SFOC without correcting for calorific value or reference conditions. Blaming the engine for hull and propeller fouling. Trusting a single reading, or a single sensor, without calibration. Forgetting that a limiter or an economy mode explains a power shortfall. Treating turbocharger speed in isolation instead of reading it together with scavenge pressure.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p><strong>42,700 kJ/kg</strong> — the ISO reference LCV to which SFOC is corrected. <strong>ISO 3046-1</strong> standard reference conditions for correcting declared power. <strong>ISO 19030</strong> — hull and propeller performance monitoring. <em>There is deliberately no universal threshold here:</em> the maker's project guide sets the alarm and deviation bands for your engine — quote your ship's figures, never a remembered percentage, and say so if the examiner presses for a number.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>No single named casualty attaches to performance monitoring itself. The operational link runs the other way: undiagnosed deterioration is the common root behind scavenge fires, turbocharger surge and severe liner and ring wear, all of which announce themselves first as a drift in exhaust temperature spread, scavenge pressure or fuel index — which is precisely why the trend, not the alarm, is the CE's instrument.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>On a container vessel with a low-speed two-stroke main engine, performance is taken at a fixed load in steady weather, logged against the shop and sea-trial curves, and corrected to ISO reference conditions and reference LCV before comparison. Indicator or electronic pressure cards are taken at the same interval, and the exhaust deviation across units is reviewed with the second engineer before any unit is opened up.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB5_J','Q2 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB5_J · Q2 · v1.0</span>
+  </div>
+</div>
   </div>
 </div>
 <div id="no-results" style="display:none;text-align:center;color:#64748b;padding:30px">No questions match your search/filter.</div>
@@ -191,11 +273,19 @@ body{-webkit-user-select:none;user-select:none}
 <div class="memcard"><strong>LCV definition</strong> → heat of complete combustion of 1 kg fuel with product water left as <strong>vapour</strong>. Exhaust at 250–400 °C &gt; dew point → latent heat unrecoverable → LCV = usable energy.</div>
 <div class="memcard"><strong>Why not condense exhaust?</strong> → sulphuric-acid dew-point corrosion of economiser/uptakes with sulphur-bearing fuels.</div>
 <div class="memcard"><strong>Typical LCVs</strong> → HFO/VLSFO ≈ 40–41 · MGO ≈ 42.7 · LNG ≈ 48–50 MJ/kg (mass basis). ISO 8217 net specific energy = calculated from density/S/water/ash, not a spec limit.</div>
+<div class="flow"><span class="node">Baseline (shop/sea trial)</span><span class="arrow">→ normalise →</span><span class="node">Engine’s own parameters</span><span class="arrow">→ localise →</span><span class="node">Confirm</span></div>
+<div class="memcard"><strong>Deciding the ME is underperforming</strong> → it is a <strong>comparison, not a measurement</strong>. Rising <strong>fuel index and SFOC at the same corrected power</strong>, or rated power unreachable while still inside the limiters.</div>
+<div class="memcard"><strong>One cylinder vs all cylinders</strong> → one unit out of line = unit fault (fuel valve, pump timing, exhaust valve, rings). All drifting together = system fault — air side, fuel side, or load.</div>
+<div class="memcard"><strong>Before you blame the engine</strong> → correct to <strong>ISO 3046-1</strong> reference conditions and <strong>42,700 kJ/kg</strong>, then strip out draught, weather and hull/propeller fouling (<strong>ISO 19030</strong>). A slow ship is not a sick engine.</div>
 <table><tr><th>Trigger phrase</th><th>Must-say term</th></tr>
 <tr><td>"reference LCV for SFOC"</td><td>42,700 kJ/kg — ISO 3046-1</td></tr>
 <tr><td>"what the calorimeter measures"</td><td>Gross (HCV) — LCV is derived</td></tr>
 <tr><td>"latent heat number"</td><td>≈2,442 kJ/kg of water at 25 °C; ~9 kg H₂O per kg H</td></tr>
 <tr><td>"fuel spec standard"</td><td>ISO 8217 (net specific energy annex formula)</td></tr>
+<tr><td>"how you decide performance is poor"</td><td>Against the shop/sea-trial baseline — comparison, not measurement</td></tr>
+<tr><td>"low Pcomp vs low Pmax"</td><td>Pcomp low = compression loss; Pmax low with normal Pcomp = injection side</td></tr>
+<tr><td>"T/C speed on its own"</td><td>Read it WITH scavenge pressure — the pairing diagnoses, not either alone</td></tr>
+<tr><td>"engine will not take load"</td><td>Check the limiter first — protection is not a defect</td></tr>
 </table>
 <p style="font-size:11px;color:#64748b;margin-top:10px">Self-test protocol: cover the right-hand column, recall the term aloud, then check — retrieval practice beats passive re-reading before the oral.</p>
 </div>
