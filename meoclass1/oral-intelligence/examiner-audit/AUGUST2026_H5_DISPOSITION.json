@@ -360,5 +360,37 @@
    "how_it_was_settled": "By the SKILL's own remedy - check git status before believing a validator that suddenly went red - and by the isolated run, which reported 153 checks / 0 FAIL on a clean tree, and by the suite's own serial gate 45, which reported 153 checks / 0 FAIL.",
    "lesson": "This is trap 'never run two gates concurrently' reproduced by a session that had read it, for the same reason as the 0x08 control byte earlier in H5: reading a rule is not the same as having encoded it. Serial ownership has to be enforced by the harness, not remembered by the operator."
   }
+ },
+ "source_set_supersession_2026_09_02": {
+  "record_class": "SOURCE_SET_SUPERSESSION_ADDENDUM",
+  "supersedes": "source_set_status",
+  "why_the_original_is_not_edited": "source_set_status recorded what was true at H5 closure: at that moment the live inbox was exactly snapshot 01 minus its two trailing CRLF bytes followed by snapshot 02, and no further late report was present. That observation was correct when it was made and is preserved verbatim. Editing it to read false would destroy the provenance of the H5 qualification rather than record what happened after it.",
+  "what_happened": "On 2026-09-02 at 08:46 local, AFTER the H5 release qualification and after the bounded CE Oral Tip closure, the Founder appended a further candidate report for the SAME 31-August 2026 sitting to the same live inbox. The inbox grew from 3,337 bytes to 4,331 bytes.",
+  "governed_by": "_snapshots/31 Aug 2026 oral questions - snapshot 03.txt",
+  "snapshot_03": {
+   "bytes": 994,
+   "sha256": "9e782ca4f2a9d543ebee973e39a6625fdf6578d526d4fe144a98c8105cdba77f",
+   "append_characterisation": "APPEND_ONLY_STRICT_PREFIX",
+   "proof": "live[0:3337] is byte-identical to snapshot01[0:2615] + snapshot02[0:722], so unlike snapshot 02 the previously governed body IS a strict byte prefix of the live inbox and this carrier is exactly live[3337:]. At line level the governed lines 0-97 are byte-identical to the live file's lines 0-97 and 33 lines were appended; no existing line was edited, inserted, reordered or deleted.",
+   "received_date": "2026-09-02",
+   "carrier_date": "2026-08-31",
+   "attempt_date": "2026-08-31"
+  },
+  "current_source_set_claim": "SUPERSEDED. Snapshot 01 and Snapshot 02 are NO LONGER the complete present source set for the 31-August day. The complete present source set is Snapshot 01 + Snapshot 02 + Snapshot 03, and that reconstruction is exact: snapshot01 bytes [0:2615] + snapshot02 + snapshot03 == the live inbox, residual 0 bytes.",
+  "no_new_late_report_current_value": false,
+  "window_status": "OPEN_EXPECTING_MORE_INPUT",
+  "why_the_window_is_still_not_closed": "Snapshot 02 arrived one day late and snapshot 03 two days late, both for the 31-August sitting. That is now repeated evidence that late reports for that day keep arriving, which is a stronger reason to keep the window open than existed at H5, not a weaker one. The architecture still has no close state and none was invented.",
+  "current_denominator": {
+   "intake_occurrences": 270,
+   "intake_submissions": 27,
+   "adjudications": 270,
+   "carriers": 6,
+   "canonical_oral_questions": 759,
+   "question_bearing_files": 86,
+   "examiner_relationships": 958,
+   "examiners": 7,
+   "note": "The intake denominator advanced by seven occurrences (AUG-0264..AUG-0270) in one new submission (AUG2026-S027). The CANONICAL corpus did not move: five of the seven resolved onto live cards and the two adjudicated GENUINE_NEW_QUESTION were queued for production rather than authored, which is the same disposition H5 itself shipped for AUG-0095, AUG-0140 and AUG-0148. Examiner intelligence is unchanged because it derives from cards, and no card moved; Nair and Srivastava were both already governed examiners, so no identity was minted."
+  },
+  "effect_on_the_h5_qualification": "None of the H5 gate results are invalidated. The 70-gate qualification ran against the canonical corpus and its derived surfaces, and the canonical corpus is byte-unchanged by this absorption. What changed is the intake denominator and the source-set completeness claim, which is why this addendum exists."
  }
 }
