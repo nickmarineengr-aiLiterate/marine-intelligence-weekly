@@ -1,0 +1,83 @@
+{
+ "correction_id": "CORR-ISM-SPARES-20260902",
+ "title": "QB5_I#q8 overstated the legal effect of ISM Code 10.3 and ISM 9, and filed 10.3's reliability limbs under 10.4",
+ "date": "2026-09-02",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "gpt_content_review",
+ "baseline_commit": "d0a188f",
+ "governing_commits": [
+  "897555c"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_AUGUST_FINAL_H6_PLUS_CETIP_20260902.md",
+ "candidate_claim": "The GPT review of the H6 qualification packet accepted the card and its leadership structure but found that it overstated ISM 10.3 in three places: that the 10.3 critical-equipment list DRIVES / DERIVES the critical-spares list, that 10.3 stands behind a minimum stock and a reorder point, and that an unavailable critical spare is automatically a non-conformity under ISM 9.",
+ "candidate_verdict": "UPHELD, AND WIDER THAN REPORTED. The overstatement was real and appeared in the 15-second block, the 60-second block, the body heading and lead paragraph, the leadership limb, the reg-box, three deep-dives, the page cheat-sheet flow diagram, its memory card and two self-test rows. The scope pass ALSO found a separate mis-attribution the review did not name: 10.3's second and third limbs - the SMS reliability measures and the regular testing of stand-by arrangements - were attributed to 10.4 in the Governing-instrument paragraph, the reg-box, the stand-by bullet, the Casualty-Link deep-dive and the cheat-sheet memory card, while 10.4's actual content (integration into the operational maintenance routine) appeared nowhere on the card.",
+ "authority": {
+  "instrument": "International Safety Management (ISM) Code",
+  "primary_sources_read": [
+   "Resolution A.741(18), 4 November 1993 - the Code as adopted, sections 9, 10.1-10.4 and 11, read in full from the held PDF at 03-imo-instruments/ISM-Code/_base-and-amendments/A.741(18).pdf",
+   "Resolution MSC.273(85) - amendment item 6 replaces paragraph 9.2 ('...including measures intended to prevent recurrence'); amendment item 7 deletes the words 'establish procedures in its safety management system to' from paragraph 10.3. Read from the held PDF in the same directory.",
+   "Resolution MSC.104(73) - definitions 1.1.9 'Non-conformity means an observed situation where objective evidence indicates the non-fulfilment of a specified requirement' and 1.1.10 major non-conformity. Read from the held PDF in the same directory.",
+   "Resolutions MSC.195(80), MSC.353(92) and A.1184(33) were also scanned: none touches section 9 or section 10."
+  ],
+  "operative_text_10_3": "The Company should identify equipment and technical systems the sudden operational failure of which may result in hazardous situations. The SMS should provide for specific measures aimed at promoting the reliability of such equipment or systems. These measures should include the regular testing of stand-by arrangements and equipment or technical systems that are not in continuous use.",
+  "operative_text_10_4": "The inspections mentioned in 10.2 as well as the measures referred to 10.3 should be integrated in the ship's operational maintenance routine.",
+  "what_10_3_does_NOT_say": [
+   "It does not prescribe a statutory critical-spares list.",
+   "It does not prescribe a universal minimum stock.",
+   "It does not prescribe a reorder point or any stock arithmetic.",
+   "It does not make an unavailable spare a non-conformity."
+  ],
+  "ism_9_position": "Section 9 is the reporting and analysis route for non-conformities, accidents and hazardous occurrences. Whether an unobtainable spare produces a non-conformity is answered by ISM 1.1.9 - is there objective evidence of the non-fulfilment of a SPECIFIED requirement (the SMS's, or a statutory or class one) - not by the fact that procurement failed.",
+  "solas_ii2_10_3_3": {
+   "claim_retained": "Spare charges for 100% of the first ten and 50% of the remaining portable fire extinguishers capable of being recharged on board, not more than 60 in total; for extinguishers that cannot be recharged on board, additional extinguishers of the same quantity, type, capacity and number are provided in lieu.",
+   "verdict": "CONFIRMED - RETAINED UNCHANGED",
+   "verification_basis": "The consolidated SOLAS chapter II-2 base text is NOT held in the local primary-source corpus (only amendment resolutions are), so this is verified by concordant reproductions from competent authorities rather than from the instrument's own bytes: Barbados Maritime Ship Registry Bulletin 012 sections 14.12 and 14.13 (flag administration) reproduces 100% of the first ten, 50% of the remainder up to a maximum of sixty, and additional extinguishers in lieu where recharging on board is not possible; the Netherlands Regulatory Framework (NeRF) SOLAS chapter II-2 pages and the National Cargo Bureau material return the same rule against II-2/10.3.3.",
+   "currency_check": "Asked publisher-anchored, per SKILL.md 8.2b: what has IMO most recently done to SOLAS II-2 regulation 10? The two reg-10 amendment resolutions held locally - MSC.520(106) and MSC.550(108) - were opened and neither touches 10.3.3. The most recent publicised change to regulation 10 is the new PFOS paragraph in force 1 January 2026, which does not touch spare charges.",
+   "access_limit_stated": "Yes - recorded here rather than worked around. The claim is therefore carried at the level the reproductions support and no sub-paragraph structure below 10.3.3 is asserted to the candidate."
+  }
+ },
+ "cards": [
+  {
+   "correction_action_id": "CORR-ISM-01",
+   "file": "QB5_I.html",
+   "path": "meoclass1/QB5_I.html",
+   "anchor": "q8",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "4d3f86175f399f9db8951f9cb1cc2a7324c598900dbf55b8e83a73ff961c98bb",
+   "post_edit_digest": "b4e93098e30e27aa7c6ee70bfb928dcb233a4cace562a2ab5966ea9804cb8db3",
+   "supersedes": {
+    "manifest": "batch_h6_manifest.json",
+    "action_id": "H6-002",
+    "post_edit_digest": "4d3f86175f399f9db8951f9cb1cc2a7324c598900dbf55b8e83a73ff961c98bb"
+   },
+   "supersession_note": "H6 produced this card and its pin is release evidence. It is NOT rebaselined. This record declares that the live state descends from H6's pinned state, so validate_batch_h_series keeps its claim and that claim becomes strictly stronger: not 'my state is live' but 'my state is the ancestor of what is live'. Same digest convention throughout - full sha256 over the balanced card block, LF-normalised. H6's own topic field still describes what H6 shipped, including the wording this record corrects; that is what H6 did and it is left alone."
+  }
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/QB5_I.html",
+   "what": "The page-level cheat sheet, which carries no q-card and is pinned by no guard: the ISM 10.3 flow diagram ('Critical equipment -> drives -> Critical spares list'), the Q538 memory card ('the critical-spares list is DERIVED from the critical-equipment list ... Refused critical spare -> ISM 9 non-conformity'), and two self-test rows. All four repeated the corrected-away propositions verbatim.",
+   "why_it_matters": "known_traps entry 51 and the correction workflow section 2a: a corrected paragraph beside a stale mnemonic still fails, and after any repair you search the whole file rather than the block you were looking at. These four were found by the section 3 scope pass, not by the review."
+  }
+ ],
+ "propagation": {
+  "scope_pass": "Reproducible sweep across all 234 meoclass1/ and SQ/ HTML files for four patterns: critical-spares derivation language, spare-to-ISM-9 inference, 10.4 attributed reliability/stand-by content, and DoA invalidity. Inside QB5_I.html it returned the six residues corrected here and in the card. Outside it, two families were found and DELIBERATELY NOT SWEPT.",
+  "found_and_not_swept": [
+   "QB3_F#q7 (approx.) states that because the oily-water separator is critical equipment under ISM 10.3, a defect is raised 'as a non-conformity under ISM 9'. This is the same inferential shape, but the card is a different subject and outside the three-item authorisation; a defective 15 ppm separator plausibly does breach a specified requirement, so it is loose rather than plainly wrong. Reported, not edited.",
+   "meoclass1/pastpapers/QP2312.html and QP2402.html carry 'never for ISM 10.3 critical spares' in a just-in-time context. That phrasing means 'spares for equipment identified under 10.3' and does not assert the derivation claim; the Solved QP pipeline is also a different product with its own generators. Reported, not edited."
+  ]
+ },
+ "invariants": [
+  "The strong leadership line is preserved verbatim: 'I own the standard, the 2/E owns the record, I verify by sampling', with delegation under ISM 3.2 and personal accountability intact.",
+  "The practical CE usefulness is preserved: minimum stock, reorder point, safety stock, obsolescence, receipt/location/issue/preservation/verification discipline and the IHM trap all remain - the reorder-point arithmetic now says in terms that it is how a company's SMS and PMS deliver 10.3's reliability measures, not something the Code prescribes.",
+  "The SOLAS II-2 Reg. 10.3.3 spare-charge figures are unchanged in the body, the reg-box, the numbers deep-dive and the cheat-sheet self-test row.",
+  "The CE Oral Tip is UNCHANGED. It tells the candidate to get ISM 10.3 into the first sentence, which remains correct advice and carried no overstatement.",
+  "ISM 3.2, 6.3, 10.1 and 10.2 references are unchanged; ISM 10.4 now carries its real content."
+ ],
+ "content_index_effect": "None on counts. QB5_I#q8 keeps its id, anchor, question text and topic; only answer body, reg-box, deep-dives and the page cheat sheet changed.",
+ "known_traps_entries": [
+  64
+ ],
+ "note": "A DIGEST PIN CANNOT TELL YOU THE CONTENT IS RIGHT (SKILL.md 8.2a). H6's pin on this card was green throughout, and it was green over a regulatory overstatement, because a pin is perfectly happy with wrong text. This correction turns on a regulatory proposition a later well-meaning edit could quietly re-introduce - the hierarchy ISM 10.3 identifies -> the SMS and PMS translate -> the CE manages stock - which is why the propositions are enumerated in this record rather than only implied by the new bytes."
+}

@@ -1115,6 +1115,7 @@ may **liquefy or undergo dynamic separation**.
 | 2026-08-24 | Entries 50-51: `QB1_G` Q32 carried a truncated Merchant Shipping Notice citation, "1 of 202" -- verified against the DGMA Nautical Wing source as **MS Notice 01 of 2026** (15 Jan 2026, empanelment and retention of salvors, s.255 MS Act 2025) rather than reconstructed from the truncation; and `QB8_A` Q3 shipped raw draft scaffolding to candidates, where two of the four `[cite: 1]` markers turned out to be inside the REAL reg-box rather than the `<pre>` duplicate, so deleting the obvious artefact alone would have left them live. Class-wide artefact scope enumerated and registered as OPEN-G1-008. | OPEN-G1-006 and OPEN-G1-007, closed from the August intake open-items register |
 | 2026-08-25 | Entry 52: `QB2_F` Q3 credited the ro-ro / vehicle / special-category fire-safety package to **MSC.532(107)** across three blocks; the package is **MSC.550(108)** with FSS Code amendments in **MSC.555(108)**, and `QB10_B` Q1 already had it right, so two paid cards disagreed. Root cause is a shared 1 Jan 2026 entry-into-force date, not carelessness - identify a package by the regulation it AMENDS. Two further defects found in the same card: the 10 mg/kg PFOS threshold is MSC.1/Circ.1694, not SOLAS (II-2/10.11.2 is an unqualified prohibition); and SOLAS II-2/20 states application in each section chapeau, so summarising the requirements gave cargo ships the entire passenger-ship package. The last of these was found only by independent clean-context review. | OPEN-G1-010, and the AUG-0015 ro-ro ask it was blocking |
 | 2026-08-25 | Entry 53: `QB9_G` Q6 taught a legal hierarchy Treaty → Convention → Protocol that international law does not recognise (VCLT Art.2(1)(a): a treaty “whatever its particular designation”), defined a Protocol as only an amendment, claimed every Protocol needs its own ratification (disproved by MARPOL Protocol of 1978 Art.IV(1)) and dismissed an IMO Resolution as committee guidance (SOLAS Art.VIII(b) amendments are adopted BY MSC resolution). Q3’s instrument ladder carried the same resolution defect. All three `QB9_G_CheatSheet` copies reconciled. Definition-source rule recorded once at `Claude skill/miw-correction-workflow_SKILL.md` §2a. | Founder review while studying from the MIW study roadmap |
+| 2026-09-02 | Entry 64: three cards taught a consequence their instrument does not carry. `QB5_I` Q8 said ISM 10.3 *drives*/*derives* the critical-spares list and that an unobtainable spare *is* an ISM 9 non-conformity, and had filed 10.3's reliability and stand-by-testing limbs under 10.4 - corrected against A.741(18) as amended by MSC.273(85), with ISM 9 made conditional on ISM 1.1.9. `QB2_A` Q11 and Q33 said the Document of Authorisation is *invalid* without the booklet - corrected to Grain Code A 3.1/3.2/3.5 and A 6.1, closing the H6 terminology limitation. `QB9_H` Q10 shipped five candidate-visible editorial placeholders - removed by RETRIEVING the MS Act 2025 corrigenda (three typographical fixes, no renumbering) and citing Part V s.63/64/83(1)/94(1) from the Act itself. Raised by GPT content review of the H6 packet; the 10.3/10.4 mis-citation and the Q33 sibling were found by the scope pass, not reported. | H6 terminology limitation on the grain loading booklet |
 
 ### 50. A truncated citation is worse than no citation
 
@@ -1594,3 +1595,93 @@ GREP: SKIP for this entry's own prose, which quotes the superseded readings in
 order to reject them. Elsewhere: citing an occurrence's `classification` as
 authority to build, without reading its `production_outcomes` disposition, is
 wrong.
+
+
+### 64. What a regulation REQUIRES, what an SMS DERIVES from it, and what a candidate is told is mandatory
+
+Three cards taught a consequence their governing instrument does not carry. The
+shape is identical in all three, and it is not carelessness: each began from a
+true proposition and then travelled one step further than the text supports.
+
+**`QB5_I#q8` - ISM Code 10.3.** The card said the critical-equipment list under
+10.3 *drives* the critical-spares list, that the spares list is *derived* from
+it, and that an unobtainable critical spare *is* a non-conformity under ISM 9.
+Read from resolution A.741(18) as amended by MSC.273(85) item 7, 10.3 says only
+this: the Company should **identify** equipment whose sudden operational failure
+may result in hazardous situations; the SMS **should provide for specific
+measures** aimed at promoting the reliability of that equipment; those measures
+**should include the regular testing of stand-by arrangements** and equipment not
+in continuous use. There is no statutory spares list, no minimum stock and no
+reorder point in it. The correct hierarchy is
+**10.3 identifies -> the SMS and PMS translate -> the CE manages stock**, and the
+spares list is *informed by* 10.3 and then built from maker recommendations,
+class and statutory requirements, PMS scope, failure consequence, redundancy,
+lead time, consumption and trading pattern.
+
+ISM 9 is the reporting and analysis route for non-conformities, accidents and
+hazardous occurrences. Whether procurement failure produces one is answered by
+**ISM 1.1.9** - objective evidence of the non-fulfilment of a *specified*
+requirement - not by the fact that the spare is missing. The defensible oral
+answer is conditional: assess against the SMS and the critical-equipment
+requirements, weigh redundancy and operational risk, escalate, impose an
+operational limitation or repair plan, and report under ISM 9 where the
+condition meets the company's own definition.
+
+**The same card also mis-filed the Code.** 10.3's second and third limbs - the
+reliability measures and the stand-by testing - were attributed to **10.4** in
+the body, the reg-box, the Casualty-Link deep-dive and the page cheat sheet,
+while 10.4's actual content (*the 10.2 inspections and the 10.3 measures are
+integrated in the ship's operational maintenance routine*) appeared nowhere.
+Nobody reported that; the scope pass found it. **An overstatement and a
+mis-citation travel together**, because both come from paraphrasing an
+instrument instead of reading it.
+
+**`QB2_A#q11` and `#q33` - International Grain Code.** The card said *"The DoA is
+invalid unless accompanied by an approved Grain Stability Booklet"*. The Code
+attaches no such invalidity. **A 3.2**: the document *"shall accompany or be
+incorporated into the grain loading manual"*. **A 6.1**: the information is
+provided *"in printed booklet form"*. **A 3.5** handles the no-document case - the
+ship *shall not load grain* until the master demonstrates compliance to the
+Administration or the port-State Contracting Government. **A 3.1** gives the
+document's real effect: it *"shall be accepted as evidence that the ship is
+capable of complying"*. Four terms, four different jobs: *grain loading manual*
+is the Code's term for the document, *printed booklet form* is the required
+format, *grain loading booklet* is acceptable shorthand, and the *Document of
+Authorization* is separate authorisation evidence. Naming the consequence
+("invalid") is what a candidate repeats to a panel, so it is the part that must
+match the instrument.
+
+**`QB9_H#q10` - a placeholder is not a caveat.** The live paid card carried
+*"[cite the 2025 Act at Part level; the 1958 sections must not be quoted as
+current]"* - an instruction addressed to the author - inside the 60-second
+answer, plus four *"[Part-level, sections pending verification]"* instances. The
+hold behind them was real and recorded: `SRC-MSACT-2025` said section numbers
+outside s.4 and s.5 were not established until the 30 September 2025 corrigenda
+was held. **The fix was to close the hold, not to soften the wording.** The
+corrigenda was retrieved from DGMA and is three typographical corrections with
+no renumbering, so Part V could be read directly: s.63 (agreement with
+seafarers, copy to the shipping master, examine-and-advise before signing),
+s.64 (wages, monthly account), s.83(1) (disputes), s.94(1).
+
+**Distinguish the two things that look alike.** An imperative addressed to the
+author is scaffolding and must never ship. *"(exact 2025 section pending
+verification)"* is an honest candidate-facing currentness caveat and is a
+legitimate shippable state - the same principle as `CURRENTNESS_UNVERIFIED` in
+the source registry. The corpus carries 22 further instances of the second kind
+and they are reported for sizing, not swept.
+
+Files affected: `meoclass1/QB5_I.html` (q8 and the page cheat sheet),
+`meoclass1/QB2_A.html` (q11 and q33), `meoclass1/QB9_H.html` (q10). Governed by
+`CORR-ISM-SPARES-20260902`, `CORR-GRAIN-TERMINOLOGY-20260902` and
+`CORR-MSACT-SEA-20260902`, each declaring supersession from the record that
+previously pinned the card rather than rebaselining it.
+
+**And the reason a digest pin did not catch any of it:** H6's pin on `QB5_I#q8`
+and `CORR-GRAIN-MSC552-20260831`'s pin on `QB2_A#q11` were both green
+throughout. A pin answers *"are these the bytes we authorised?"*, never *"is what
+we authorised correct?"* - SKILL.md section 8.2a, now demonstrated on a card the
+same session had just shipped.
+
+GREP: SKIP. This entry quotes every rejected formulation - "drives", "derived
+from", "invalid unless accompanied", "pending verification" - in order to reject
+them, so a phrase scan matches the correction itself.

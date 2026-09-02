@@ -1,0 +1,77 @@
+{
+ "correction_id": "CORR-GRAIN-TERMINOLOGY-20260902",
+ "title": "QB2_A#q11 and #q33 asserted that the Document of Authorisation is invalid without the booklet, and used 'Grain Stability Booklet' where the Code says 'grain loading manual'",
+ "date": "2026-09-02",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "gpt_content_review",
+ "baseline_commit": "d0a188f",
+ "governing_commits": [
+  "897555c"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_AUGUST_FINAL_H6_PLUS_CETIP_20260902.md",
+ "candidate_claim": "The H6 review packet recorded a remaining limitation: the Grain Code's own naming of booklet / manual / Document of Authorization had not been verified. The GPT review then produced the official terminology and asked that the sentence 'The DoA is invalid unless accompanied by an approved Grain Stability Booklet' not be preserved unless the Code supports 'invalid' as the legal effect.",
+ "candidate_verdict": "UPHELD. The Code does not attach invalidity to the document. It states a different relationship, and the card had substituted a consequence the instrument does not carry.",
+ "authority": {
+  "instrument": "International Code for the Safe Carriage of Grain in Bulk (International Grain Code), Part A",
+  "verbatim_A_3_1": "A document of authorization shall be issued for every ship loaded in accordance with the regulations of this Code either by the Administration or an organization recognized by it or by a Contracting Government on behalf of the Administration. It shall be accepted as evidence that the ship is capable of complying with the requirements of these regulations.",
+  "verbatim_A_3_2": "The document shall accompany or be incorporated into the grain loading manual provided to enable the master to meet the requirements of A 7. The manual shall meet the requirements of A 6.3.",
+  "verbatim_A_3_5": "A ship without such a document of authorization shall not load grain until the master demonstrates to the satisfaction of the Administration, or of the Contracting Government of the port of loading acting on behalf of the Administration, that, in its loaded condition for the intended voyage, the ship complies with the requirements of this Code.",
+  "verbatim_A_6_1": "Information in printed booklet form shall be provided to enable the master to ensure that the ship complies with this Code when carrying grain in bulk on an international voyage. This information shall include that which is listed in A 6.2 and A 6.3.",
+  "terminology_settled": {
+   "grain loading manual": "the Code's own term for the document (A 3.2, A 6.3) - use it where precision matters",
+   "printed booklet form": "the Code's required FORMAT for the stability and grain-loading information (A 6.1)",
+   "grain loading booklet": "common and examiner shorthand; acceptable descriptive wording, but it does not replace the formal term",
+   "Document of Authorization": "separate authorisation evidence (A 3.1) that accompanies, or may be incorporated into, the grain loading manual (A 3.2)"
+  },
+  "source": "West of England P&I reproduction of International Grain Code Part A sections 3 to 6, retrieved 2026-09-02. This is a tier-2 reproduction, and it is relied on because the 1991 base publication is NOT held in the local primary-source corpus - that gap is already registered as RQ-G01 against SRC-GRAINCODE-MSC552-2026. It is treated as reliable because it is verbatim rather than paraphrased and carries the Code's own internal cross-references (A 6.3, A 7, A 8.3, A 9) which a restatement would not reproduce, and because IMO's own Grain Code page returns the same substance for A 3.2 and A 6.1.",
+  "access_limit_stated": "Yes. No claim is made here about any Part A section not reproduced in that source."
+ },
+ "cards": [
+  {
+   "correction_action_id": "CORR-GRAINT-01",
+   "file": "QB2_A.html",
+   "path": "meoclass1/QB2_A.html",
+   "anchor": "q11",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "1db21b35c562e271be86ce03cb55526a247243285453abe542d88d1ddf8b69f1",
+   "post_edit_digest": "44a592d6af94e47d68a113e03ecae0a8273be66825c9fb0347e62dc23aee1c3c",
+   "supersedes": {
+    "manifest": "correction_corr_grain_msc552_20260831_manifest.json",
+    "action_id": "CORR-GRAIN-01",
+    "post_edit_digest": "1db21b35c562e271be86ce03cb55526a247243285453abe542d88d1ddf8b69f1"
+   },
+   "supersession_note": "CORR-GRAIN-MSC552-20260831 owns the current post-state of this card and is NOT rewritten. Its MSC.552(108) content - the third loading configuration, the A 10.4 trimming dispensation and the 1 January 2026 date - is preserved verbatim and re-read against SRC-GRAINCODE-MSC552-2026 before this edit; only the DoA / manual relationship changed."
+  },
+  {
+   "correction_action_id": "CORR-GRAINT-02",
+   "file": "QB2_A.html",
+   "path": "meoclass1/QB2_A.html",
+   "anchor": "q33",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "84050473a1949132857a24dced9787910ce6866b762b08578f081a51a53180de",
+   "post_edit_digest": "9dcfa3aead962dded1989ce38a5105996f84aefa09aa5acde6c6421b600a30a7",
+   "supersedes": {
+    "manifest": "batch_h2_manifest.json",
+    "action_id": "H2-002",
+    "post_edit_digest": "84050473a1949132857a24dced9787910ce6866b762b08578f081a51a53180de"
+   },
+   "supersession_note": "The section 3 scope pass found the same 'the Document of Authorisation is invalid without that booklet' proposition in the sibling card that q11 cross-references. q33 was already careful in one respect - it correctly says the grain-manual update requirement is class and P&I guidance rather than MSC.552(108) text - so this is a narrow repair of the invalidity clause only, with A 3.2 and A 3.5 named. Declared SCOPE_PASS_CORRECTION rather than folded into the primary: it is the same proposition but a card the review did not report, and correcting q11 while leaving q33 saying the opposite is exactly the half-finished repair of known_traps entry 51."
+  }
+ ],
+ "artefacts": [],
+ "propagation": {
+  "scope_pass": "Swept all 234 meoclass1/ and SQ/ HTML files for 'Grain Stability Booklet', 'grain loading booklet', and DoA-invalidity phrasing. 'Grain Stability Booklet' now returns ZERO occurrences corpus-wide. 'grain loading booklet' survives in two places in QB2_A.html - a reg-box row for A 7 and the 'On My Vessel' deep-dive - and is left standing deliberately: the corrected q11 paragraph now teaches that the shorthand is acceptable descriptive wording, so removing every instance of it would contradict the fix. The DoA-invalidity phrasing returns zero."
+ },
+ "invariants": [
+  "The MSC.552(108) content is unchanged: three compartment configurations since 1 January 2026, the 'specially suitable compartment, partly filled in way of the hatch opening, with ends untrimmed' category, the A 10.4 trimming dispensation, and the cross-reference to Q33.",
+  "The quantitative Grain Code criteria are unchanged: 12 degrees maximum heel, 0.075 metre-radians residual area to 40 degrees, 0.30 m minimum GM.",
+  "The CE Oral Tip is unchanged, including its filled / partly filled / third-configuration answer.",
+  "q33's correct statement that the grain-manual update requirement is class and P&I guidance and NOT in the text of MSC.552(108) is preserved - that distinction was already right and is the reason q33 is a narrow repair rather than a rewrite."
+ ],
+ "content_index_effect": "None on counts. Both cards keep their ids, anchors, question text and topics.",
+ "known_traps_entries": [
+  64
+ ],
+ "note": "TERMINOLOGY LIMITATION CLOSED. The H6 packet's open limitation was that the Code's own naming of booklet / manual / Document of Authorization was unverified. It is now verified verbatim at A 3.1, A 3.2, A 3.5 and A 6.1 and the four terms are separated in this record and on the card. This is a bounded terminology and legal-precision correction; no new card was created and no new root was opened."
+}

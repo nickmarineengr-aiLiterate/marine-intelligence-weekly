@@ -662,3 +662,484 @@ class-versus-statutory certificate extension (`AUG-0267`).
 
 *Prepared for GPT content review. No push, no deploy, no publication, no
 workbook distribution until the Founder gives authority.*
+
+
+---
+---
+
+# GPT CONTENT REVIEW CORRECTIONS
+
+*Addendum, 2 September 2026. This section SUPERSEDES every statement earlier in
+this packet about the wording of `QB5_I#q8`, `QB2_A#q11`/`#q33` and
+`QB9_H#q10`. The rest of the packet stands. The two-card H6 production scope was
+NOT reopened: no card was created, no card was deleted, the corpus is unmoved at
+761, and examiner relationships are unmoved at 958 across 7 examiners.*
+
+Three bounded content items were raised by GPT's review of this packet and of
+`AUGUST2026_H6_QUALIFICATION.json`. All three are resolved. The scope pass that
+each one triggered found three further instances the review did not name, and
+those are declared here rather than shipped silently.
+
+| # | Card | Problem | Correction id | Supersedes |
+|---|---|---|---|---|
+| A | `QB5_I#q8` | ISM 10.3 / ISM 9 overstated; 10.3's limbs mis-filed under 10.4 | `CORR-ISM-SPARES-20260902` | `batch_h6_manifest.json` / `H6-002` |
+| B | `QB2_A#q11` | DoA declared "invalid" without the booklet; Code terminology unverified | `CORR-GRAIN-TERMINOLOGY-20260902` | `correction_corr_grain_msc552_20260831_manifest.json` / `CORR-GRAIN-01` |
+| B' | `QB2_A#q33` | same proposition, sibling card, found by the scope pass | `CORR-GRAIN-TERMINOLOGY-20260902` | `batch_h2_manifest.json` / `H2-002` |
+| C | `QB9_H#q10` | five candidate-visible editorial placeholders | `CORR-MSACT-SEA-20260902` | none — the card was pinned by no manifest |
+
+Baseline commit `d0a188f`; governing commit `897555c`.
+
+---
+
+## A. `QB5_I#q8` — ISM Code 10.3 and ISM 9
+
+### A.1 The exact overstatement found
+
+Four propositions, none supported by the Code:
+
+1. *"The critical-equipment list under ISM 10.3 **drives** the critical-spares list"* — 60-second answer.
+2. *"the critical-spares list **is derived from** the critical-equipment list, and that list comes out of ISM 10.3"* — body, and repeated in the cheat-sheet memory card, a self-test row and the trap-questions deep-dive.
+3. ISM 10.3 standing behind *"a minimum stock and a reorder point"* — 15-second and 60-second answers.
+4. *"If a critical spare cannot be obtained ... **I raise it as a non-conformity under ISM 9** and it goes on the record"* — 60-second answer, repeated in the leadership limb, two deep-dives, the reg-box and the cheat sheet.
+
+**A fifth defect the review did not name, found by the scope pass.** ISM 10.3's
+second and third limbs — the SMS reliability measures and the regular testing of
+stand-by arrangements — were attributed to **10.4** in the Governing-instrument
+paragraph, the reg-box, the stand-by bullet, the Casualty-Link deep-dive and the
+cheat-sheet memory card. 10.4's actual content appeared nowhere on the card.
+
+### A.2 The corrected interpretation
+
+**ISM 10.3**, verbatim, as amended by MSC.273(85) item 7:
+
+> The Company should identify equipment and technical systems the sudden operational failure of which may result in hazardous situations. The SMS should provide for specific measures aimed at promoting the reliability of such equipment or systems. These measures should include the regular testing of stand-by arrangements and equipment or technical systems that are not in continuous use.
+
+It does **not** prescribe a statutory critical-spares list, a universal minimum
+stock, a reorder point, or automatic ISM 9 consequences.
+
+**ISM 10.4**, verbatim:
+
+> The inspections mentioned in 10.2 as well as the measures referred to 10.3 should be integrated in the ship's operational maintenance routine.
+
+**ISM 9** is the reporting and analysis route for non-conformities, accidents
+and hazardous occurrences (9.1), with corrective action including measures
+intended to prevent recurrence (9.2, as amended by MSC.273(85) item 6). Whether
+an unobtainable spare produces a non-conformity is answered by **ISM 1.1.9** —
+*"an observed situation where objective evidence indicates the non-fulfilment of
+a specified requirement"* — not by the fact that procurement failed.
+
+**The hierarchy the card now teaches:** ISM 10.3 identifies reliability-critical
+equipment → the company's SMS and PMS translate that risk into maintenance,
+testing and, where appropriate, spare-parts control → the CE manages stock
+accordingly. The list is *informed by* 10.3 and built from maker recommendations,
+class and statutory requirements where applicable, PMS maintenance scope, failure
+consequence and risk, redundancy, lead time, consumption, trading pattern and the
+company's SMS and procurement rules.
+
+**Sources read:** `A.741(18)`, `MSC.104(73)`, `MSC.195(80)`, `MSC.273(85)`,
+`MSC.353(92)` and `A.1184(33)`, all held locally with full text layers. Only
+MSC.273(85) touches sections 9 or 10. Registered as `SRC-ISMCODE-CONSOLIDATED`.
+
+### A.3 Old wording → new wording
+
+| Where | Old | New |
+|---|---|---|
+| 15-sec | "The **ISM Code, element 10** requires the company to identify equipment whose sudden failure could create a hazardous situation, so the spares that support that equipment are a **safety-management obligation, not a purchasing convenience**." | "The **ISM Code, element 10.3** requires the company to identify equipment whose sudden operational failure may result in a hazardous situation and to provide specific measures promoting its reliability, so the spares that keep that equipment reliable sit inside the **safety-management system, not in purchasing convenience**." |
+| 60-sec, limb 1 | "The critical-equipment list under ISM 10.3 drives the critical-spares list; from that I set a minimum stock and a reorder point..." | "ISM 10.3 makes the company identify the equipment whose sudden failure could be hazardous and provide measures to keep it reliable; the company's SMS and PMS then translate that risk into maintenance, testing and, where the company requires it, spare-parts control. From that I set a minimum stock and a reorder point..." |
+| 60-sec, close | "If a critical spare cannot be obtained, that is not a stores problem — I raise it as a non-conformity under ISM 9 and it goes on the record." | "If a safety-critical spare cannot be obtained, that is not a stores problem: I assess it against the SMS and the critical-equipment requirements, weigh redundancy and operational risk, escalate it to the company, and impose an operational limitation or a repair plan — and where the resulting condition meets the company's own definition of a non-conformity, it is reported and analysed under ISM 9 rather than absorbed." |
+| Body heading | "Where the spares list actually comes from" | "How the critical-spares list is actually built" |
+| Governing instrument | "**10.3** requires identification ...; **10.4** requires measures to promote reliability of that equipment, including regular testing of stand-by arrangements." | "**10.3** requires the Company to identify ..., and requires the SMS to provide *specific measures aimed at promoting the reliability* ... including the *regular testing of stand-by arrangements* ...; **10.4** requires those measures, and the 10.2 inspections, to be integrated into the ship's operational maintenance routine." |
+| Stand-by bullet | "ISM 10.4 also brings in what must be *proved* to work" | "ISM 10.3's third limb requires the *regular testing of stand-by arrangements ...*, and 10.4 puts that testing into the operational maintenance routine" |
+| Casualty deep-dive | "That is precisely the failure ISM 10.4 is written to prevent" | "That is precisely the failure ISM 10.3 is written to prevent: it is 10.3 that names the regular testing ... and 10.4 that puts those measures into the ship's operational maintenance routine" |
+| Reorder point | (formula alone) | formula + "*None of this arithmetic is prescribed by the ISM Code.* ISM 10.3 requires reliability measures; the minimum stock, the reorder point and the safety stock are how a company's SMS, PMS and procurement rules deliver them" |
+| Cheat-sheet flow | "ISM 10.3 Critical equipment → drives → Critical spares list" | "ISM 10.3 Critical equipment → SMS / PMS reliability measures → Critical spares control" |
+| Cheat-sheet memcard | "the critical-spares list is DERIVED from the critical-equipment list ... Refused critical spare → ISM 9 non-conformity" | rewritten to the identify → translate → manage hierarchy, with ISM 9 conditional |
+
+### A.4 Corrected 15-Second Answer — full text
+
+> Inventory is not storekeeping — it is my control of the ship's ability to keep
+> **critical machinery** running. The **ISM Code, element 10.3** requires the
+> company to identify equipment whose sudden operational failure may result in a
+> hazardous situation and to provide specific measures promoting its reliability,
+> so the spares that keep that equipment reliable sit inside the
+> **safety-management system, not in purchasing convenience**. My job is to set
+> the minimum stock, own the requisition and budget cycle, verify the record
+> against the shelf, and hold the second engineer accountable for the system —
+> **not to count every item myself**.
+
+### A.5 Corrected 60-Second Answer — full text
+
+> "Sir, I own four things. **First, what must be in stock.** ISM 10.3 makes the
+> company identify the equipment whose sudden failure could be hazardous and
+> provide measures to keep it reliable; the company's SMS and PMS then translate
+> that risk into maintenance, testing and, where the company requires it,
+> spare-parts control. From that I set a minimum stock and a reorder point built
+> on consumption rate and lead time for our trading pattern. **Second, that the
+> record is true.** A planned-maintenance system that says a spare is on board
+> when it is not is worse than no record at all, so I verify by physical
+> stocktaking and sample checks, and I insist on part-number discipline on
+> receipt. **Third, closing the loop with maintenance and budget.** Requisitions
+> must be raised early enough that lead time is not an emergency, and I must be
+> able to defend a critical item to the office on safety grounds rather than
+> price. **Fourth — and this is the part you are really asking — I lead it rather
+> than do it.** The second engineer owns the day-to-day record and the
+> storekeeping discipline; each engineer owns the spares for his own machinery; I
+> set the standard, verify by sampling, review it at the monthly maintenance
+> meeting, and make the critical-spares status an explicit item in my handover.
+> If a safety-critical spare cannot be obtained, that is not a stores problem: I
+> assess it against the SMS and the critical-equipment requirements, weigh
+> redundancy and operational risk, escalate it to the company, and impose an
+> operational limitation or a repair plan — and where the resulting condition
+> meets the company's own definition of a non-conformity, it is reported and
+> analysed under ISM 9 rather than absorbed."
+
+### A.6 Corrected REG-BOX
+
+| Code | Description |
+|---|---|
+| ISM Code 10.1 / 10.2 | Maintenance of the ship and equipment — inspections, defect reporting and corrective action within the SMS *(unchanged)* |
+| **ISM Code 10.3** | **Identification of equipment and technical systems whose sudden operational failure may result in hazardous situations, and SMS measures aimed at promoting their reliability, including the regular testing of stand-by arrangements and equipment not in continuous use** |
+| **ISM Code 10.4** | **Integration of the 10.2 inspections and the 10.3 reliability measures into the ship's operational maintenance routine** |
+| ISM Code 3.2 / 6.3 | Defined responsibility and authority, and the company's duty to provide adequate resources *(unchanged)* |
+| **ISM Code 9** | **Reports and analysis of non-conformities, accidents and hazardous occurrences — the route where an unobtainable critical spare produces a condition meeting the SMS's definition of a non-conformity** |
+| SOLAS II-2, Reg. 10.3.3 | Spare charges for portable fire extinguishers — 100% of the first ten, 50% of the remainder, maximum 60; additional extinguishers where recharging on board is not possible *(unchanged)* |
+| Classification society rules | Spare parts to be carried for propulsion and essential auxiliary machinery, verifiable at survey *(unchanged)* |
+
+### A.7 CE Oral Tip — UNCHANGED
+
+The tip tells the candidate to get **ISM 10.3** into the first sentence, then to
+give the leadership limb in one line and to expect the pivot to the Inventory of
+Hazardous Materials. It carried no overstatement and is not reproduced here
+because it did not change.
+
+### A.8 SOLAS II-2 Reg. 10.3.3 — independently re-verified, RETAINED
+
+GPT's independent confirmation is upheld and the claim stays on the card
+unchanged. Verification basis, stated with its limit:
+
+* **The consolidated SOLAS chapter II-2 base text is NOT held** in the local
+  primary-source corpus — only amendment resolutions are. The rule is therefore
+  carried on concordant reproductions by competent authorities, not on the
+  instrument's own bytes, and **no sub-paragraph structure below 10.3.3 is
+  asserted to the candidate**.
+* **Barbados Maritime Ship Registry, Bulletin 012 §§14.12–14.13** (flag
+  administration): 100% for the first ten, 50% of the remaining up to a maximum
+  of sixty; additional extinguishers of the same type and capacity in lieu where
+  recharging on board is not possible.
+* **Netherlands Regulatory Framework (NeRF) Maritime**, SOLAS chapter II-2, and
+  National Cargo Bureau grain/fire material return the same rule against
+  II-2/10.3.3.
+* **Currency, asked publisher-anchored** (SKILL.md §8.2b): the two reg-10
+  amendment resolutions held locally — `MSC.520(106)` and `MSC.550(108)` — were
+  opened and **neither touches 10.3.3**. The most recent publicised change to
+  regulation 10 is the new PFOS paragraph in force 1 January 2026, which does not
+  touch spare charges.
+* Registered as `SRC-SOLAS-II2-REG10-SPARECHARGES`, `ACCESS_LIMITED`,
+  `CURRENT_VERIFIED`.
+
+### A.9 Digest / correction / governance
+
+| | |
+|---|---|
+| Pre-edit digest | `4d3f86175f399f9db8951f9cb1cc2a7324c598900dbf55b8e83a73ff961c98bb` |
+| Post-edit digest | `b4e93098e30e27aa7c6ee70bfb928dcb233a4cace562a2ab5966ea9804cb8db3` |
+| Correction id | `CORR-ISM-SPARES-20260902`, action `CORR-ISM-01`, `PRIMARY_CORRECTION` |
+| Supersedes | `batch_h6_manifest.json` / `H6-002`, whose pinned post-state `4d3f86…` is the chain root |
+| Convention | full `sha256` over the balanced card block, LF-normalised — same throughout the chain |
+
+**H6's manifest is not rewritten.** Its pin, its `topic` field and its note still
+record what H6 shipped, including the wording corrected here. `validate_batch_h_series`
+keeps its claim and that claim becomes strictly stronger: not *"my state is
+live"* but *"my state is the ancestor of what is live"*. The page cheat sheet
+carries no `q-card` and is pinned by no guard, so it is recorded in the
+correction's `artefacts[]` rather than given a digest.
+
+---
+
+## B. `QB2_A#q11` and `#q33` — the Grain Code
+
+### B.1 Old terminology
+
+> "**Accompanying Stability Booklet:** The DoA is **invalid unless accompanied by
+> an approved Grain Stability Booklet**. This booklet provides the Master with
+> pre-calculated volumetric heeling moments for every hold."
+
+*"Grain Stability Booklet"* is not the Code's term, and *"invalid"* is not the
+Code's legal effect. The H6 packet recorded the naming as an open limitation.
+
+### B.2 Official Grain Code terminology — verbatim
+
+| Section | Text |
+|---|---|
+| **A 3.1** | "A document of authorization shall be issued for every ship loaded in accordance with the regulations of this Code either by the Administration or an organization recognized by it or by a Contracting Government on behalf of the Administration. It shall be accepted as evidence that the ship is capable of complying with the requirements of these regulations." |
+| **A 3.2** | "The document shall accompany or be incorporated into the grain loading manual provided to enable the master to meet the requirements of A 7. The manual shall meet the requirements of A 6.3." |
+| **A 3.5** | "A ship without such a document of authorization shall not load grain until the master demonstrates to the satisfaction of the Administration, or of the Contracting Government of the port of loading acting on behalf of the Administration, that, in its loaded condition for the intended voyage, the ship complies with the requirements of this Code." |
+| **A 6.1** | "Information in printed booklet form shall be provided to enable the master to ensure that the ship complies with this Code when carrying grain in bulk on an international voyage. This information shall include that which is listed in A 6.2 and A 6.3." |
+
+**Four terms, four jobs.** *Grain loading manual* is the Code's own term for the
+document (A 3.2, A 6.3). *Printed booklet form* is the required **format** of the
+information (A 6.1). *Grain loading booklet* is common and examiner shorthand —
+acceptable descriptive wording, but it does not replace the formal term where
+precision matters. *Document of Authorization* is separate authorisation
+evidence (A 3.1) that accompanies, or may be incorporated into, the manual.
+
+### B.3 Final wording — `#q11`, the corrected paragraph
+
+> **Relationship to the grain loading manual:** The Code does not make the DoA
+> "invalid" on its own terms. Under Grain Code **A 3.2** the document *"shall
+> accompany or be incorporated into the grain loading manual"* provided to enable
+> the master to meet the requirements of A 7, and that manual must meet A 6.3.
+> Under **A 6.1** the stability and grain-loading information is to be provided
+> *"in printed booklet form"* — which is why examiners and crews say *grain
+> loading booklet*, while **grain loading manual** is the Code's own term for the
+> document and **printed booklet form** is its required format. The manual
+> provides the Master with pre-calculated volumetric heeling moments for every
+> hold. **Since 1 January 2026 there are three compartment configurations, not
+> two**: "filled", "partly filled", and the category added by **resolution
+> MSC.552(108)** — "specially suitable compartment, partly filled in way of the
+> hatch opening, with ends untrimmed". A booklet that predates the amendment will
+> not carry the third condition, and the ship cannot be loaded to a condition its
+> approved booklet does not cover. See Q33.
+
+Two further `#q11` limbs were re-based on the Code's own words: **Definition &
+Issuance** now quotes A 3.1's *"shall be accepted as evidence that the ship is
+capable of complying"*; **Carriage Without a DoA** now states A 3.5's actual
+mechanism. The trap-questions deep-dive answer, which had said a ship without the
+DoA "will be detained by Port State Control, unless an explicit emergency
+dispensation is issued by the flag administration", now gives A 3.5's route
+instead. Two new reg-box rows name A 3.1/A 3.2 and A 6.1/A 3.5.
+
+### B.4 Final wording — `#q33`, the scope-pass repair
+
+`#q33` carried the same proposition. It was already right about one thing —
+that the grain-manual update requirement is class and P&I guidance and **not** in
+the text of MSC.552(108) — and that distinction is preserved. Corrected clause:
+
+> ... the ship can only load to a condition its approved booklet actually covers.
+> Say it precisely: the Code does not declare the **Document of Authorisation**
+> "invalid" without the booklet — under **A 3.2** the document *shall accompany
+> or be incorporated into the grain loading manual*, and under **A 3.5** a ship
+> without the document shall not load grain until the master demonstrates
+> compliance. And the requirement to update the manual for the new option is
+> **class-society and P&I practical guidance**; it is **not** in the text of
+> MSC.552(108).
+
+### B.5 Terminology limitation — **CLOSED: YES**
+
+The H6 packet's open limitation was that the Code's own naming of
+booklet / manual / Document of Authorization was unverified. It is now verified
+verbatim at A 3.1, A 3.2, A 3.5 and A 6.1 and the four terms are separated on
+the card and in `CORR-GRAIN-TERMINOLOGY-20260902`. `"Grain Stability Booklet"`
+now returns **zero** occurrences corpus-wide.
+
+**Source and its limit, stated.** The IMO base publication is **not held** —
+that gap is already `RQ-G01` against `SRC-GRAINCODE-MSC552-2026` and is **not**
+closed by this pass. The wording was read from a West of England P&I **verbatim**
+reproduction of Part A, corroborated against IMO's own Grain Code page. Registered
+as `SRC-GRAINCODE-PARTA-TEXT`, tier 2, **`CURRENTNESS_UNVERIFIED`** — deliberately
+not `CURRENT_VERIFIED`, because a tier-2 reproduction cannot establish that Part A
+has not been amended by something this corpus has not seen. The MSC.552(108)
+content is unchanged and was re-read against `SRC-GRAINCODE-MSC552-2026` first.
+
+### B.6 Digests / correction / supersession
+
+| Card | Pre-edit | Post-edit | Class | Supersedes |
+|---|---|---|---|---|
+| `#q11` | `1db21b35c562e271be86ce03cb55526a247243285453abe542d88d1ddf8b69f1` | `44a592d6af94e47d68a113e03ecae0a8273be66825c9fb0347e62dc23aee1c3c` | `PRIMARY_CORRECTION` | `correction_corr_grain_msc552_20260831_manifest.json` / `CORR-GRAIN-01` |
+| `#q33` | `84050473a1949132857a24dced9787910ce6866b762b08578f081a51a53180de` | `9dcfa3aead962dded1989ce38a5105996f84aefa09aa5acde6c6421b600a30a7` | `SCOPE_PASS_CORRECTION` | `batch_h2_manifest.json` / `H2-002` |
+
+`CORR-GRAIN-MSC552-20260831` is **not** rewritten — it owned the previous
+post-state of `#q11`, and the new record descends from it. `validate_corrections`
+reports that predecessor `PASS live_matches_authorised_post_state` through the
+resolved chain.
+
+---
+
+## C. `QB9_H#q10` — the candidate-visible placeholders
+
+### C.1 Placeholders found — five, all inside the `#q10` card block
+
+| Where | Text |
+|---|---|
+| 15-Second Answer | `[2025 Act — Part-level, sections pending verification]` |
+| 60-Second Answer | `[cite the 2025 Act at Part level; the 1958 sections must not be quoted as current]` |
+| Governing instrument | `[Part-level, sections pending verification]` |
+| Key Numbers | "current statute; sections pending verification" |
+| REG-BOX | "Part-level, sections pending verification" |
+
+### C.2 Outcome — **A, not B**
+
+The hold behind the placeholders was real and recorded: `SRC-MSACT-2025` listed
+*"Section numbers outside s.4 and s.5"* under `claims_NOT_established`, with the
+instruction *"Obtain [the 30 September 2025 corrigenda] before quoting any
+section verbatim beyond s.4."*
+
+**The corrigenda was retrieved rather than the wording softened.** Fetched by
+direct HTTPS GET from DGMA's own endpoint (HTTP 200, no workaround),
+sha256 `4a28b152426b0cd709be37a4bc0c176be059f56eed97566fe96ed0b1bedcf818`,
+273,992 bytes. It makes **exactly three corrections, all typographical, with no
+renumbering**: page 33 line 19 "matter"→"matters"; page 69 line 24 "himself
+such"→"himself of such"; page 71 line 12 "sea borne"→"seaborne". The hold is
+therefore discharged **on evidence, not waived**, and Part V was read directly
+from the Act's own text layer (`SRC-MSACT-2025`, sha256 `6fb38616…`, DGMA's own
+copy of the Gazette text). Registered as `SRC-MSACT-2025-CORRIGENDA`.
+
+### C.3 Verified statutory references now on the card
+
+| Section | Content |
+|---|---|
+| **s.63(1)** | Master, owner or recruitment-and-placement agency shall enter into a seafarers' employment agreement in the prescribed form with every seafarer engaged, and submit a copy to the shipping master |
+| **s.63(3)** | The seafarer shall, before signing, be given an opportunity to examine and seek advice on the agreement |
+| **s.64** | Payment at intervals not later than monthly, with a monthly account of sums due and paid |
+| **s.83(1)** | A dispute arising under the agreement goes to the shipping master |
+| **s.94(1)** | Serving-seafarer period: from the date of the agreement to thirty days after final discharge |
+
+**Deliberately omitted:** any section outside Part V, and s.78(1)(e) (the MLC
+rule-making hook) — the card is about where entitlement lives, not delegated
+legislation. Nothing was reconstructed from the 1958 Act, and the standing
+warning not to carry 1958 numbering across is retained.
+
+### C.4 Exact final Indian-law paragraph — no placeholder remains
+
+60-Second Answer, closing limb:
+
+> India retains the Shipping Master institution and the agreement/engagement
+> machinery within the Merchant Shipping Act framework, aligned to MLC. In the
+> **Merchant Shipping Act 2025** (Part V, Seafarers) that machinery is **s.63** —
+> the master, owner or recruitment-and-placement agency must enter into a
+> seafarers' employment agreement in the prescribed form with every seafarer
+> engaged and submit a copy to the shipping master (s.63(1)), and the seafarer
+> must be given the opportunity to *examine and seek advice* on it before signing
+> (s.63(3)); **s.64** requires payment at intervals not later than monthly with a
+> monthly account of sums due and paid; and **s.83(1)** sends a dispute arising
+> under the agreement to the shipping master. Do not carry 1958 numbering across.
+
+15-Second Answer, closing limb:
+
+> ... Indian ships continue equivalent engagement machinery under the **Merchant
+> Shipping Act 2025, Part V (Seafarers)** — **s.63**, the seafarers' employment
+> agreement in the prescribed form, a copy of which is submitted to the
+> **shipping master**.
+
+**Placeholder removed: YES.** A machine sweep of the `#q10` balanced card block
+for `pending verification`, `[cite`, `TODO`, `FIXME` and any bracketed editorial
+span returns **0** for every pattern.
+
+### C.5 Digest / correction
+
+| | |
+|---|---|
+| Pre-edit digest | `63df258cd94128b26192727fff37580bd400279b7a196e966d5398a5b6c08845` |
+| Post-edit digest | `59f58ba9ee1bf3921d5dad020884f1d58086c5c4121c2c16f2e44eaf63beea40` |
+| Correction id | `CORR-MSACT-SEA-20260902`, action `CORR-MSACT-01`, `PRIMARY_CORRECTION` |
+| Supersedes | **none required** — `QB9_H#q10` is pinned by no manifest. It is named in the prose of `batch_h3a_manifest.json` and `batch_h6_manifest.json` as the card that already answers AUG-0140, but neither carries a digest for it |
+
+The card's core answer is unchanged: the SEA as the individual employment
+instrument, any CBA incorporated or referenced, the onboard copy and PSC access
+under MLC Std A2.1, wage accounts under Std A2.2, the neutral discharge record
+under A2.1.3, and the SEA distinguished from the DMLC and company procedure. It
+was **not** expanded into a new MLC card.
+
+---
+
+## D. Candidate-facing placeholder sweep — the whole Oral product
+
+**Scanned:** 234 HTML files (`meoclass1/**` and `SQ/**`), visible text only —
+comments, `<script>`, `<style>` and HTML attributes stripped, so `placeholder="…"`
+form attributes (219 raw hits) correctly return **0**.
+
+| Class | Count | Verdict |
+|---|---|---|
+| `[cite the 2025 Act …]` / `[…pending verification]` in `QB9_H#q10` | 5 | **RESOLVED** — this pass |
+| `[cite: N]` raw drafting markers | 62 across `QB3_C`, `QB8_A`, `QB9_A`, `QB9_B` | **PRE-EXISTING, REGISTERED** as `OPEN-G1-008`, `OPEN_AWAITING_FOUNDER_SIZING` |
+| "pending verification" elsewhere | 22 — `QB9_H` (15 more), `QB1_I` (3), `QB3_J` (1), `QB5_B_CheatSheet` (1), `QB9_D` (1), `QB9_H_CheatSheet` (1) | **NOT a placeholder in kind** — see below. Reported for Founder sizing |
+| `TODO` / `FIXME` / `TBD` / lorem ipsum | 0 | clean |
+| `XXX` | 3 | all legitimate — `MOC No. XXX` as a form-field example, MMSI block `419XXXXXX`, container ID `XXXU-123456-7` |
+
+**The distinction that matters.** An **imperative addressed to the author** —
+`[cite the 2025 Act at Part level; …]` — is scaffolding and must never ship.
+`(exact 2025 section pending verification)` is an **honest candidate-facing
+currentness caveat**, the same species as `CURRENTNESS_UNVERIFIED` in the source
+registry, and is a legitimate shippable state. The 22 remaining instances are all
+of the second kind and all concern MS Act 2025 section mapping.
+
+**Two of them are now closable cheaply and were deliberately left alone**, because
+the authorisation is three items: the corrigenda retrieved here removes the exact
+blocker those 22 cite. That is a bounded, well-scoped follow-up, not a defect.
+`QB9_H_CheatSheet`'s line telling the candidate to cite the Act at Part level with
+sections pending verification is **correct as it stands** — it describes the whole
+`QB9_H` page, of which only `#q10` is resolved.
+
+**Nothing else was expanded.** `QB3_F` carries the same "critical under ISM 10.3
+→ non-conformity under ISM 9" inference for the oily-water separator; the Solved
+QP pipeline carries "never for ISM 10.3 critical spares" in `QP2312` and `QP2402`.
+Both are reported, neither is edited — the first is a different card outside the
+three-item authorisation, the second is a different product with its own
+generators and does not assert the derivation claim.
+
+---
+
+## E. Derived surfaces — measured, not assumed
+
+| Surface | Result |
+|---|---|
+| `qb_content_index` | regenerated: **86 files, 761 canonical questions**; `--check` reports outputs already match the live derivation |
+| `validate_qb_content_index` | **24 checks / 0 FAIL** — hygiene, note quality, renderer, corrections preserved, determinism |
+| meoclass1 hub | rewritten by the same generator (`Q_INDEX` line, card qcounts, hero counter) |
+| SQ home | unchanged — no question identity moved |
+| examiner index | `--check` **PASS**, 4/4 generated artefacts current, semantic validation PASS. **958 relationships / 7 examiners**, tiers `{confirmed 459, reported 44, ce_tip 214, header 30, inferred 211}` — identical to the H6 snapshot |
+| SHARE workbook | **761 rows** |
+| INTERIM workbook | **761 rows** |
+| WORKING master | **761 rows** |
+| August month sheet | **134 NEW + 92 UPDATED = 226**, derived against baseline `2c0fd8b` — unchanged, and not manually adjusted |
+| `validate_question_bank_xlsx` × 3 | **PASS** each: 761 == 761 canonical, 0 dup, 0 missing, 0 phantom, 0 dead files, 0 dead anchors, 761 hyperlinks, text/topic/qb/examiner exact, no leakage |
+| `test_qb_question_text` | **7,974 controls / 0 failures** over 86 pages |
+| `validate_oral_intake` | **32 PASS / 0 FAIL** |
+| `validate_examiner_index` | **54 PASS / 0 FAIL** |
+| `oral_manifest.py` (bare auditor) | **702 checks / 702 passed / 0 failed** |
+| `validate_corrections` | **185 checks**, all PASS after known_traps entry 64 was written |
+| `oral_bytes.py` | 0 control-byte or EOL hits across every file touched |
+
+**Corpus did not move:** 761 canonical questions, 86 question-bearing files, 958
+examiner relationships, 7 examiners — before and after.
+
+---
+
+## F. Source state
+
+| | |
+|---|---|
+| Live 31-August inbox | 4,331 bytes, sha256 `d4d5b1df6a64b308f55666a89289f54b775de90cb171e9cfd3bc5d6ec4d71cfc`, mtime 2026-09-02 08:46:42 |
+| Reconstruction | snapshot 01 minus its two trailing CRLF bytes + snapshot 02 + snapshot 03 = 2,615 + 722 + 994 = **4,331** |
+| Verdict | **BYTE-EXACT MATCH.** Source residual **0**. No new bytes since Snapshot 03; no Snapshot 04 created or needed |
+
+New registry rows: `SRC-MSACT-2025-CORRIGENDA`, `SRC-GRAINCODE-PARTA-TEXT`,
+`SRC-SOLAS-II2-REG10-SPARECHARGES`, `SRC-ISMCODE-CONSOLIDATED`. Registry now
+holds 30 sources. `SRC-MSACT-2025` updated: nine Part V claims added to
+`verified_claims`, `claims_NOT_established` narrowed, `checked_on` 2026-09-02.
+
+---
+
+## G. Declared follow-up — content gates for these three corrections
+
+SKILL.md §8.2a: a correction that turns on a **regulatory proposition** a later
+well-meaning edit could quietly drop earns its own named content gates, as
+`CORR-LSA-LIFEBOAT-VENTILATION-20260822` did. All three of these qualify:
+
+* the ISM `10.3 identifies → SMS/PMS translates → CE manages` hierarchy, and the
+  conditional ISM 9 limb;
+* the Grain Code A 3.2 accompany-or-incorporate relationship and the four-term
+  separation;
+* the absence of any editorial placeholder in `QB9_H#q10`.
+
+Each proposition is **enumerated in its correction manifest** so it is
+recoverable, but **no `validate_correction_*.py` / `mutate_correction_*.py` pair
+was written in this pass**. Writing six new gates would add gate ids to
+`oral_release_gates.py`, `POST_E6_GATES` and `POST_E6_MUTATION_SUITES`, moving
+totals that other controls pin — that is a sized job of its own and beyond a
+three-item authorisation. **Recommended as the next bounded work order.** Until
+then these three corrections are protected by their digest pins and by
+`validate_corrections` / `mutate_corrections`, which is what every other
+correction on main has, but not by content assertions.
+
+---
