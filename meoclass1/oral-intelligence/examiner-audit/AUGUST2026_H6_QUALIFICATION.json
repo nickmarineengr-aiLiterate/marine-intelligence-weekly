@@ -1,0 +1,162 @@
+{
+ "record_class": "release_qualification_record",
+ "batch_id": "H6 + CORR-CETIP-QB1D-Q7-20260902",
+ "phase": "BOUNDED_REQUALIFICATION",
+ "date": "2026-09-02",
+ "baseline_commit": "191441f",
+ "authority": "Founder ruling 2026-09-02: build AUG-0266 and AUG-0268 plus the QB1_D#q7 CE Oral Tip; accept the existing dispositions for AUG-0095, AUG-0140 and AUG-0148; no push, no deploy, no publication until GPT content review.",
+ "corpus": {
+  "canonical_questions_before": 759,
+  "canonical_questions_after": 761,
+  "question_bearing_files_before": 86,
+  "question_bearing_files_after": 86,
+  "examiner_relationships_before": 958,
+  "examiner_relationships_after": 958,
+  "examiners_before": 7,
+  "examiners_after": 7
+ },
+ "qualification_level": "BOUNDED",
+ "qualification_level_policy_reason": "The full 69-gate suite is the PUBLICATION qualification: SKILL section 4 registers it as what a release runs before it is pushed, and SKILL section 5 records that health evidence is not load-bearing once the tree moves. The Founder has explicitly withheld push, deploy and publication authority pending GPT content review of the new answers, and that review can change card content. Running the four-hour suite now would qualify bytes that the review may move, and the result would then be stale evidence for the state actually published - which is the precise failure mode SKILL section 5 warns against. So the suite is DEFERRED to immediately before the authorised push, and what has been run instead is every gate that OWNS a surface this batch touched, plus both mutators that prove the two NEW guards are non-vacuous. No gate was skipped because it was slow or inconvenient, and no incremental skip logic was invented: the deferred set is the whole suite, run in full, later.",
+ "gates_run": [
+  {
+   "gate": "oral_manifest audit (batch H6)",
+   "result": "12 checks, 0 FAIL"
+  },
+  {
+   "gate": "oral_manifest audit (correction)",
+   "result": "20 checks, 0 FAIL"
+  },
+  {
+   "gate": "validate_batch_h_series",
+   "result": "154 checks, 0 FAIL"
+  },
+  {
+   "gate": "mutate_batch_h_series",
+   "result": "11 caught of 11; 0 escapes, 0 no-ops, 0 crashes; residue probe clean"
+  },
+  {
+   "gate": "H6 pin non-vacuity probe",
+   "result": "corrupting H6-001 post_edit_digest fails batch_h6/H6-001:manifest_digest_matches (PIN_MISMATCH); restore returns 154 checks 0 FAIL"
+  },
+  {
+   "gate": "validate_corrections",
+   "result": "161 checks, 0 FAIL"
+  },
+  {
+   "gate": "mutate_corrections",
+   "result": "13 mutations, 0 escapes, 0 no-ops, 0 crashes; all CAUGHT"
+  },
+  {
+   "gate": "validate_qb_content_index",
+   "result": "24 checks, 0 FAIL; determinism fresh==disk"
+  },
+  {
+   "gate": "validate_examiner_index",
+   "result": "54 PASS / 0 FAIL (3 FAIL found and fixed - see findings)"
+  },
+  {
+   "gate": "validate_oral_intake",
+   "result": "32 PASS / 0 FAIL"
+  },
+  {
+   "gate": "test_oral_release_infra",
+   "result": "104 checks, 0 FAIL"
+  },
+  {
+   "gate": "test_oral_release_runner",
+   "result": "123 checks, 0 FAIL"
+  },
+  {
+   "gate": "validate_question_bank_xlsx (SHARE, --month 2026-08)",
+   "result": "PASS; 761 rows; month sheet re-derived independently"
+  },
+  {
+   "gate": "validate_question_bank_xlsx (INTERIM)",
+   "result": "PASS; 761 rows"
+  },
+  {
+   "gate": "validate_question_bank_xlsx (WORKING)",
+   "result": "PASS; 761 rows"
+  },
+  {
+   "gate": "test_question_bank_xlsx",
+   "result": "32 checks, 0 failed"
+  },
+  {
+   "gate": "qb_health_check --source local, multiset diff vs 191441f",
+   "result": "NEW=0, GONE=1 (QB1_D q7: missing ce-tip)"
+  }
+ ],
+ "health_check_adjudication": "The runner's health gate compares LOCAL against origin/main and reported NEW=3 GONE=4, net -1, and BLOCKED. origin/main is 436f665, fifty-five commits behind this head, so that delta is the accumulated window and not this batch. The batch's own contribution was measured the way the runner measures - the same tool, the same machine, findings as a multiset - against the TRUE pre-batch head 191441f: NEW=0 and exactly one finding GONE, QB1_D.html q7 missing ce-tip. Since no finding at this head is absent at 191441f, every one of the three NEW-versus-origin/main findings is also NEW at 191441f and therefore pre-dates this work. H5C-RES-02 stands unchanged: the gate treats any multiset increase as blocking without separating REVIEW class from error class, and it was deliberately not changed here.",
+ "findings_found_and_fixed": [
+  {
+   "id": "F1",
+   "gate": "validate_examiner_index",
+   "severity": "BLOCKING",
+   "what": "SQ/index.html still claimed 759 solved oral Q&As in eight hand-owned places - a data-oral-questions attribute, its visible stat, the meta description, three prose claims, the exit modal and a payment-confirmation string.",
+   "why_it_was_invisible": "build_examiner_index rewrites SQ/index.html and returned it byte-identical, so the file looked generated and current. No generator owns those counters.",
+   "fix": "All eight updated to 761. Gate went 51 PASS/3 FAIL to 54 PASS/0 FAIL."
+  },
+  {
+   "id": "F2",
+   "gate": "validate_batch_h_series",
+   "severity": "BLOCKING",
+   "what": "batch_h6_manifest.json on disk but not in EXPECTED_BATCH_MANIFESTS, so h_manifests_none_undeclared would fail.",
+   "why": "By design - the registry asserts both directions so a new H manifest can never ship silently ungated.",
+   "fix": "H6 registered, with a comment recording why there is no H5 manifest. 154 checks, 0 FAIL."
+  },
+  {
+   "id": "F3",
+   "gate": "independent length/structure review",
+   "severity": "MATERIAL",
+   "what": "QB5_I#q8 carried two near-mirror sections whose items paired one-to-one.",
+   "fix": "Merged into one section stating each discipline with the failure it prevents; the one unique failure retained. H6-002 pin refreshed, reasoning in review_round_note."
+  },
+  {
+   "id": "F4",
+   "gate": "hub statistics",
+   "severity": "CANDIDATE_FACING",
+   "what": "meoclass1/index.html prose said 9 topic clusters (QB1-QB9) while the hero stat said 10 Topics.",
+   "adjudication": "The STAT was right and the PROSE was stale. QB10_A and QB10_B are live, hold 16 questions, and appear 26 times on the hub. Prose corrected to 10 clusters (QB1-QB10) and names what the tenth covers."
+  }
+ ],
+ "process_incident": "Two mutate_corrections processes were briefly alive at once: the first was launched through a shell pipeline whose reader exited, which reported the task complete while the python process kept running and kept mutating. Detected by enumerating Win32_Process rather than trusting the task notification. Both were killed, the worktree was restored by exact path from git, and QB1_D#q7's digest was re-verified byte-identical to its pinned post-edit state before a single clean run was started. The clean run is the one recorded above. Lesson: a background task's completion notification reports the PIPELINE, not the process, so a mutator must be confirmed dead by process enumeration before the worktree is touched.",
+ "deep_suite_required": true,
+ "deep_suite_status": "DEFERRED - to be run in full, serially, immediately before the push the Founder authorises, and after any GPT-review-driven content change has landed.",
+ "deferred_untouched": [
+  {
+   "card": "QB9_B#q4",
+   "item": "downtime clause vocabulary",
+   "digest_unchanged": "772dae08541f96d6"
+  },
+  {
+   "card": "QB4_H#q10",
+   "item": "class vs statutory certificate extension limb",
+   "digest_unchanged": "83a150beb65226b7"
+  },
+  {
+   "card": "QB3_C#q7",
+   "item": "optional incinerator standard-specification circular",
+   "digest_unchanged": "ac449506e9507522"
+  },
+  {
+   "card": "QB1_G#q34",
+   "item": "IBC/chemical scope in title",
+   "digest_unchanged": "aa3956897e67891a"
+  }
+ ],
+ "source_state": {
+  "live_inbox": "docs/MIW-master-Question-bank/New questions from August orals/31 Aug 2026 oral questions.txt",
+  "live_bytes": 4331,
+  "live_sha256_16": "d4d5b1df6a64b308",
+  "live_mtime": "2026-09-02T08:46:42",
+  "snapshots": {
+   "01": "2617 b, 79c9f26988bf072b",
+   "02": "722 b, 761f8996c8c9e470",
+   "03": "994 b, 9e782ca4f2a9d543"
+  },
+  "residual": 0,
+  "method": "The three snapshots are DELTAS, not cumulative prefixes. Each snapshot's content was located in the live file and removed; the remainder was empty apart from whitespace. Snapshots 01+02+03 therefore account for the live 31-August inbox completely. No new bytes appeared during this production session and no Snapshot 04 was created."
+ },
+ "publication_status": "NOT PUSHED. NOT DEPLOYED. NOT PUBLISHED. No workbook distributed. Awaiting GPT content review and Founder authority."
+}
