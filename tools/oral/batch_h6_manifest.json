@@ -1,0 +1,70 @@
+{
+ "batch_id": "H6",
+ "title": "August 2026 closure production - batch H6, the two genuine new roots from the 31-August LPG-carrier report (Snapshot 03)",
+ "kind": "CURRENT_INTAKE_PRODUCTION",
+ "note": "TWO CARDS, NOT FIVE. The Founder brief that opened this batch named five asks. Three of them - AUG-0095 freedom of navigation, AUG-0140 crew entitlements onboard, AUG-0148 grain loading booklet - carry classification GENUINE_NEW_QUESTION in AUGUST2026_INTAKE_ADJUDICATIONS.json, and the brief read that field as the work order. It is not: classification is frozen at INTAKE and answers only 'did a matching card exist when this ask was first scored'. The DISPOSITION lives in AUGUST2026_PRODUCTION_QUEUE.json under production_outcomes.H3A, written after the reuse-first pass and after independent review, and it disposed of all three WITHOUT a new card. Each was re-verified here against the live card BODY, not against the summary: QB1_A#q19 carries the UNCLOS zones and, since CORR-UNCLOS-FREEDOM-20260831, the Art. 58(3) and Art. 87(2) 'due regard' condition that AUG-0096 asked for; QB9_H#q10 carries the Seafarer Employment Agreement under MLC Std A2.1, the copy carried onboard with any CBA incorporated and available to PSC in English, and the Std A2.2 wage accounts; QB2_A#q11 states that the Document of Authorisation is invalid unless accompanied by an approved Grain Stability Booklet, describes its contents, and carries the three post-MSC.552(108) loading configurations. Building standalone roots for those three would have created DUPLICATE ROOTS against live cards and, for AUG-0095, would have contradicted a correction that had already shipped to answer that exact limb. The Founder ruled on 2026-09-02 that the dispositions stand. Recorded as known_traps entry 63 so the next reader of the adjudication file does not repeat it. NO EXAMINER ATTRIBUTION WAS MINTED. Both occurrences are PANEL_LEVEL_ONLY (Nair external, Srivastava internal): neither card carries a data-examiner attribute, neither CE Oral Tip names an individual, and no STRONG_CE_TIP_REVIEW decision row was added. build_examiner_index reports 958 relationships across 7 examiners, tier-for-tier identical to the pre-batch snapshot. NO UNIVERSAL THRESHOLD WAS INVENTED. The AUG-0266 card is explicit that deviation and alarm bands are the engine maker's and the ship's, not a remembered percentage, and its Numbers deep-dive says so in terms; the only figures it fixes are the ISO ones already carried by its sibling QB5_J#q1.",
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/AUGUST2026_PRODUCTION_QUEUE.json",
+ "authorisation_batch_key": "batches.H6",
+ "authorisation_commit": "191441f",
+ "baseline_commit": "191441f",
+ "baseline_canonical_questions": 759,
+ "expected_canonical_questions": 761,
+ "expected_question_bearing_files": 86,
+ "expected_examiner_relationships": 958,
+ "expected_examiners": 7,
+ "creates_new_cards": true,
+ "actual_new_card_count": 2,
+ "distinct_target_cards": 2,
+ "examiner_relationship_delta": 0,
+ "examiner_relationship_delta_note": "Zero by construction, not by luck. The examiner index is built from committed evidence records (RELEASE_A_PUBLICATION.json, STRONG_CE_TIP_REVIEW_DECISIONS.json) and from data-examiner attributes on q-cards. Neither new card carries that attribute and no decision row was added, so a new card cannot mint a relationship. PANEL_LEVEL_ONLY attribution in the intake record is exactly why that was the correct construction.",
+ "held_actions": [],
+ "cards": [
+  {
+   "action_id": "H6-001",
+   "file": "QB5_J.html",
+   "path": "meoclass1/QB5_J.html",
+   "anchor": "q2",
+   "action_kind": "NEW_CARD",
+   "source_occurrence_ids": [
+    "AUG-0266"
+   ],
+   "post_edit_digest": "9a73504bc93c782676eeb87e38714ec51e15d7b86ac98f00b33105e7a6bd478d",
+   "topic": "How a Chief Engineer decides the main engine is underperforming - performance as a COMPARISON against the shop-trial and sea-trial baseline, correction to ISO 3046-1 reference conditions and reference LCV 42,700 kJ/kg, elimination of hull, propeller, weather and draught via ISO 19030, then the engine's own parameters (fuel index at given power, Pcomp/Pmax from indicator or draw cards, exhaust deviation from mean, scavenge pressure and temperature, turbocharger speed READ WITH scavenge pressure, back pressure, corrected SFOC and slip), cylinder-versus-system localisation, and a confirmation sequence that suspects the instrument before the engine and checks for a limiter before declaring a fault",
+   "adjudication": "GENUINE_NEW_QUESTION",
+   "placement_rationale": "QB5_J.html is titled 'Main Engine, Fuel & Turbocharger' and is the topic owner. Its only existing card, QB5_J#q1, is Lower Calorific Value and why engine performance is quoted against LCV - which is precisely the normalisation basis this card depends on, and the card cross-references it. No new file was created; the adjudication's own production_note named QB5_C_A#q3 and QB5_J#q1 as the adjacent material, and QB5_C_A#q3 was rejected in that adjudication as a VOYAGE performance card that never sets out how the engine itself is judged.",
+   "reg_box_instruments": [
+    "ISO 3046-1 / ISO 15550",
+    "ISO 19030",
+    "ISO 8217",
+    "NOx Technical Code 2008 / Technical File",
+    "MARPOL Annex VI Reg. 26 & 28",
+    "ISM Code Element 10"
+   ],
+   "examiner_attribution": "PANEL_LEVEL_ONLY - no data-examiner attribute, no named examiner in the CE Oral Tip, no Examiner Chain deep-dive."
+  },
+  {
+   "action_id": "H6-002",
+   "file": "QB5_I.html",
+   "path": "meoclass1/QB5_I.html",
+   "anchor": "q8",
+   "action_kind": "NEW_CARD",
+   "source_occurrence_ids": [
+    "AUG-0268"
+   ],
+   "post_edit_digest": "b62f6ca12503e8de05609e6f6f3aed5dc7d63faaea9ec0f0a78d697e852fae5a",
+   "topic": "The Chief Engineer's responsibility for engine-room spares and stores inventory - the critical-spares list DERIVED from the ISM 10.3 critical-equipment list rather than chosen, ISM 10.4 stand-by arrangements, minimum stock and reorder point from consumption and lead time, the prescribed stock that carries a number (SOLAS II-2 Reg. 10.3.3 extinguisher spare charges and class-required spares for essential services), record-truth discipline, five named failure modes, and the leadership limb the panel pressed - delegation with defined authority under ISM 3.2, ownership, verification by sampling rather than counting, and ISM 9 escalation when a critical spare is refused",
+   "adjudication": "GENUINE_NEW_QUESTION",
+   "placement_rationale": "QB5_I.html is 'Management, Leadership & Human Element' and carries the broadest tag set in the QB5 management family (human-element, iacs, ism, management, mlc, solas, stcw). It already holds QB5_I#q4 'CE as leader vs manager', which is the card the leadership limb of this ask chains to. QB5_G was rejected as an undifferentiated 'Additional Questions' file and QB5_D/QB5_H duplicate the leader question rather than owning management systems. No new file was created.",
+   "reg_box_instruments": [
+    "ISM Code 10.1 / 10.2",
+    "ISM Code 10.3",
+    "ISM Code 10.4",
+    "ISM Code 3.2 / 6.3",
+    "ISM Code 9",
+    "SOLAS II-2 Reg. 10.3.3",
+    "Classification society rules"
+   ],
+   "examiner_attribution": "PANEL_LEVEL_ONLY - no data-examiner attribute, no named examiner in the CE Oral Tip, no Examiner Chain deep-dive."
+  }
+ ]
+}

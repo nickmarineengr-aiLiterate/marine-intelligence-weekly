@@ -1529,6 +1529,21 @@
    ],
    "held_limbs_note": "Both are LIMB-level currentness holds inside cards that shipped, not withheld actions. Neither prevented the examiner's question from being answered; each is declared to the candidate on the card itself.",
    "evidence_corrections": "The AUG-0135 negative_search in AUGUST2026_INTAKE_ADJUDICATIONS.json recorded 0 hits for patterns that return 10 against markup-stripped card bodies on the live bank. The classification stands; the evidence was title-scoped and reported as corpus-wide. Recorded in the H4 manifest against action H4-003 rather than by rewriting the adjudication, which is an intake record of what was decided on the day."
+  },
+  "H6": {
+   "action_ids": [
+    "H6-001",
+    "H6-002"
+   ],
+   "manifest": "tools/oral/batch_h6_manifest.json",
+   "occurrences": [
+    "AUG-0266",
+    "AUG-0268"
+   ],
+   "authorisation": "snapshot_03_outcome.authorised_for_production",
+   "scope_ruling_note": "The Founder brief that opened this batch listed FIVE asks - adding AUG-0095, AUG-0140 and AUG-0148. All three were verified against the live card bodies and against production_outcomes.H3A, which had already disposed of them as answered by QB1_A#q19, QB9_H#q10 and QB2_A#q11 respectively. The Founder ruled on 2026-09-02 that those dispositions STAND and that no duplicate standalone roots be created. The batch is therefore two cards, not five. Recorded as known_traps entry 63.",
+   "held": [],
+   "examiner_relationship_delta_note": "Zero. Both occurrences are PANEL_LEVEL_ONLY, so neither card carries a data-examiner attribute, no CE Oral Tip names an individual, and no STRONG_CE_TIP_REVIEW decision row was added. build_examiner_index reports 958/7 unchanged across the batch."
   }
  },
  "snapshot_02_outcome": {
@@ -1617,5 +1632,30 @@
    "occurrence": "AUG-0135",
    "status": "Absent from the bank entirely on the recorded searches. QB4_H#q9 carries the Maritime Declaration of Health under IHR 2005 as a WHO-linked document, which is the likely identity, but the ask is for the NAME OF THE FORM USED BEFORE ARRIVAL IN INDIA specifically, which is an Indian port-health question and needs Indian authority."
   }
+ },
+ "snapshot_03_outcome": {
+  "carrier": "_snapshots/31 Aug 2026 oral questions - snapshot 03.txt",
+  "exam_date": "2026-08-31",
+  "report_date": "2026-08-31",
+  "submission": "AUG2026-S027",
+  "occurrences": "AUG-0264..AUG-0270",
+  "ship_type": "LPG carrier",
+  "examiners": [
+   "Nair (external)",
+   "Srivastava (internal)"
+  ],
+  "attribution": "PANEL_LEVEL_ONLY",
+  "adjudicated_against": "The full 759-question corpus at the qualified H5 closure head (6e568fe), recorded in AUGUST2026_INTAKE_ADJUDICATIONS.json under live_corpus_at_adjudication_02_september.",
+  "headline": "TWO GENUINE NEW QUESTIONS out of seven. AUG-0266 (how a Chief Engineer decides the main engine is underperforming) and AUG-0268 (the Chief Engineer's responsibility for spares and stores inventory, with leadership cross-questions) are the only occurrences in this tranche with no live card. Both carry a negative search whose rejections quote the BODY of every card rejected, per SKILL 14b.",
+  "authorised_for_production": [
+   "AUG-0266",
+   "AUG-0268"
+  ],
+  "reuse_or_limb_only": {
+   "AUG-0269": "Reuse. QB5_B#q6 carries the MLC 2006 Regulation 2.3 and STCW A-VIII/1 rest-hour ground the panel kept pressing.",
+   "AUG-0265": "Reuse with a LIMB gap registered as a bounded expansion candidate: the incinerator type-approval circular number. NOT authorised as a new question.",
+   "AUG-0267": "Reuse with a LIMB gap registered as a bounded expansion candidate: class-versus-statutory certificate extension. NOT authorised as a new question."
+  },
+  "queue_lag_note": "This block is the queue catching up to an adjudication that was already governed, not new authority. AUG-0264..0270 fall outside the queue's declared scope (AUG-0088..AUG-0218), so they follow the snapshot_02_outcome convention of a dedicated top-level block rather than a lanes[] entry. The authorisation for the two productions is the 2-September adjudication itself; recording it here is what gives batch H6 a checkable authorisation_batch_key, exactly as batches._note requires."
  }
 }
