@@ -3716,6 +3716,143 @@
    "additional_matched_question_ids": [
     "QB2_A#q31"
    ]
+  },
+  {
+   "occurrence_id": "AUG-0264",
+   "classification": "PARAPHRASE_EXISTING",
+   "matched_question_id": "QB8_D#q3",
+   "additional_matched_question_ids": [
+    "QB8_D#q1",
+    "QB8_G#q2"
+   ],
+   "ask": "Which certificate is specific to an LPG ship, and what is the full set of certificates an LPG carrier must hold; with cross questions on ship types and tank types.",
+   "evidence": "QB8_D#q3 'Which conventions and codes apply to an LPG carrier?' answers this ask in its BODY, not merely by title: its 15-Second Answer states 'SOLAS Chapter VII Part C, which makes the IGC Code mandatory and produces the Certificate of Fitness', and it lists the base statutory set applying to any ship (SOLAS, MARPOL, Load Lines, COLREG, STCW, ISM, ISPS, MLC, Tonnage, AFS, BWM) plus the gas overlay and the liability regime. That is precisely 'the specific certificate' plus 'all the certificates required'. The two recorded cross-question limbs have co-targets: 'Types' by QB8_D#q1, which sets out the IGC ship-type standards 1G / 2G / 2PG / 3G by cargo hazard, and 'Tanks' by QB8_G#q2, which explains Type A, B and C and membrane tanks. NOT QB1_G#q34: its title reads 'Certificate of fitness details and content' and it is returned by every certificate search, but its body is the Certificate of Fitness for the Carriage of Dangerous CHEMICALS in Bulk, 'certifying that a ship's structure, equipment, and fittings comply with the IBC Code' - the chemical-tanker certificate, not the gas one. Rejected on its body per SKILL 14b."
+  },
+  {
+   "occurrence_id": "AUG-0265",
+   "classification": "PARAPHRASE_EXISTING",
+   "matched_question_id": "QB1_F#q2",
+   "additional_matched_question_ids": [
+    "QB3_C#q7"
+   ],
+   "ask": "Which MARPOL Annex documents and certificates must be carried; with cross questions on VOC management plan contents, the ODS record book, the NOx technical file and incinerator type approval.",
+   "evidence": "QB1_F#q2 'All marpol related documents on your type of vessel' is the governed home for this ask and is the ONLY card in the live 759 whose body contains 'VOC management plan'. Its body enumerates the Annex-by-Annex set the examiner drilled: IOPP with Form A and the Oil Record Book Part I under Annex I, ISPP under Annex IV, the Garbage Management Plan and Record Book under Annex V, and under Annex VI the IAPP with its Supplement, the EIAPP certificate for each engine above 130 kW 'accompanied by its approved Technical File' - the NOx technical file the examiner asked for - the IEE Certificate, SEEMP Parts I-III, and the Bunker Delivery Notes. It also carries the Engine Room Ozone-Depleting Substances log, which is the ODS record book limb. The incinerator limb is carried by the co-target QB3_C#q7, whose body gives MARPOL Annex VI regulation 16, appendix IV approval by the Administration, and the IMO Type Approval Certificate condition for PVC.",
+   "limb_gap": "The recorded cross question asked for the incinerator type-approval guideline's 'exact guideline/circular number'. QB3_C#q7 carries the type-approval CONCEPT and regulation 16 but names no MEPC resolution or circular number for the shipboard incinerator standard specification. Registered as a bounded expansion candidate on QB3_C#q7; not authored here."
+  },
+  {
+   "occurrence_id": "AUG-0266",
+   "classification": "GENUINE_NEW_QUESTION",
+   "matched_question_id": null,
+   "ask": "As Chief Engineer, how do you decide that your main engine is not performing well.",
+   "evidence": "No live card asks how a Chief Engineer DIAGNOSES main-engine underperformance. The nearest returns were read in full and rejected on their bodies, never on their titles.",
+   "negative_search": [
+    {
+     "pattern": "main engine.{0,60}(performing|performance)",
+     "field": "body",
+     "hits": 2,
+     "rejected": [
+      {
+       "id": "QB4_B#q17",
+       "why": "Body is confined-water sailing precautions: 'Adjusting main engine control settings to favour immediate maneuvering performance over fuel economy, ensuring the bridge...'. Manoeuvring readiness, not condition diagnosis."
+      },
+      {
+       "id": "QB5_C_A#q3",
+       "why": "Body is VOYAGE performance: 'hull fouling, a damaged propeller blade, or declining thermodynamic efficiency in the main engine or turbocharger', and its stated missing basic check is 'fuel oil tank soundings vs. flow-meter integration'. It diagnoses the VOYAGE against weather and slip and names engine deterioration only as one candidate cause; it never sets out how the engine itself is judged."
+      }
+     ]
+    },
+    {
+     "pattern": "(decide|determine|assess|judge).{0,40}engine.{0,40}(perform|condition)",
+     "field": "body",
+     "hits": 1,
+     "rejected": [
+      {
+       "id": "QB5_A#q3",
+       "why": "Johari Window. The match is human, not machinery: 'invite the 2E and 4E to give their honest assessment of how the engine room team performed'."
+      }
+     ]
+    },
+    {
+     "pattern": "engine.{0,25}(deteriorat|underperform|poor performance)",
+     "field": "body",
+     "hits": 0,
+     "rejected": []
+    }
+   ],
+   "production_note": "The examinable answer is the CE's diagnostic set - indicator and draw cards with Pmax/Pcomp, exhaust temperature spread, turbocharger speed with scavenge pressure and temperature, SFOC corrected to LCV and reference conditions, and slip - each compared against shop and sea trial curves. Adjacent material exists in QB5_C_A#q3 and QB5_J#q1 but no card owns the ask."
+  },
+  {
+   "occurrence_id": "AUG-0267",
+   "classification": "PARAPHRASE_EXISTING",
+   "matched_question_id": "QB4_H#q10",
+   "additional_matched_question_ids": [
+    "QB1_supplementary#q4"
+   ],
+   "ask": "Your certificate is expiring and a surveyor is not available - your action as Chief Engineer.",
+   "evidence": "QB4_H#q10 'What is the procedure for extending the validity of a statutory certificate when a survey cannot be completed on time?' is the same examinable ask, and its body gives the procedure: application to the Flag Administration routed through the RO before expiry under the Harmonized System of Survey and Certification and SOLAS Chapter I Regulation 14, 'capped at 3 months (or 1 month for short-voyage vessels) purely to allow the vessel to reach the survey location, never to extend trading'. The 'surveyor not available' limb is carried by the co-target QB1_supplementary#q4, whose body sets out under IACS UR Z18 which machinery items an approved Chief Engineer may credit himself under CMS, and which - crankshaft, thrust bearing, steering gear, and statutory items such as the OWS and boilers - stay reserved for a class surveyor.",
+   "limb_gap": "The candidate said CLASS certificate; QB4_H#q10 is scoped to STATUTORY certificates, and class-survey postponement is a different instrument. A regex over the live 759 for postponement/extension returns no card owning class-certificate extension. Registered as a bounded expansion candidate on QB4_H#q10; not authored here."
+  },
+  {
+   "occurrence_id": "AUG-0268",
+   "classification": "GENUINE_NEW_QUESTION",
+   "matched_question_id": null,
+   "ask": "What does a Chief Engineer have to do with inventory - with leadership cross questions.",
+   "evidence": "No live card owns shipboard spares and stores inventory as the CE's management responsibility. The single question-title hit uses 'inventory' in an unrelated statutory sense, and every body hit is an incidental mention inside another subject.",
+   "negative_search": [
+    {
+     "pattern": "\\binventory\\b",
+     "field": "question_text",
+     "hits": 1,
+     "rejected": [
+      {
+       "id": "QB3_D#q1",
+       "why": "'Green passport (Inventory of Hazardous Materials)' - the IHM is a statutory record of hazardous materials built into the ship under the Hong Kong Convention. A different sense of the word; not stores or spares management."
+      }
+     ]
+    },
+    {
+     "pattern": "spare parts? (management|control|inventory)|stores management|inventory (control|management)",
+     "field": "body",
+     "hits": 4,
+     "rejected": [
+      {
+       "id": "QB3_B#q14",
+       "why": "O2 analyser assurance; 'Spare Parts Management' appears only as the last item of that card's own routine."
+      },
+      {
+       "id": "QB4_G#q5",
+       "why": "Dry dock preparation; the mention is a failure mode - 'Failing to update the spare parts inventory prior to arrival, resulting in delays when critical seals are found missing.'"
+      },
+      {
+       "id": "QB5_C_B#q2",
+       "why": "SWOT analysis; the mention is an illustrative step - 'utilize our spare parts inventory to rectify the defect'."
+      },
+      {
+       "id": "QB7_D#q1",
+       "why": "CO2 sequestration; 'Inventory Management: Monitoring LCO2 tank levels, pressures, and temperatures' is cryogenic cargo tank inventory, not stores."
+      }
+     ]
+    }
+   ],
+   "production_note": "The examinable answer is critical-spares identification and minimum stock under the ISM Code maintenance requirement, the requisition and budget cycle, ROB verification and stocktaking, class and statutory required spares, and the leadership limb the examiner pressed - delegation to the 2/E and storekeeping discipline."
+  },
+  {
+   "occurrence_id": "AUG-0269",
+   "classification": "EXACT_EXISTING",
+   "matched_question_id": "QB5_B#q6",
+   "additional_matched_question_ids": [
+    "QB4_A#q17"
+   ],
+   "ask": "Fatigue - with the examiner insisting throughout that it is an MLC and STCW requirement.",
+   "evidence": "QB5_B#q6 'Fatigue as per IMO and Fatigue Mitigation' is the same ask, and its body already carries the exact ground the examiner refused to concede: 'under STCW Section A-VIII/1 (rest hours - minimum 10 hours in any 24-hour period; minimum 77 hours in any 7-day period) and MLC 2006 Regulation 2.3, you are legally required to prevent fatigue in the engine department'. The candidate's parenthetical - that whatever was said the examiner would not agree and kept returning to MLC and STCW - is answered by that sentence. QB4_A#q17 covers the STCW Chapter VIII fitness-for-duty limb."
+  },
+  {
+   "occurrence_id": "AUG-0270",
+   "classification": "PARAPHRASE_EXISTING",
+   "matched_question_id": "QB9_B#q4",
+   "ask": "Downtime clauses.",
+   "evidence": "QB9_B#q4 'Off-hire clause in a charter party - when does it apply and what are the implications for the CE?' is the same examinable ask under the charter-party name for it. Its body: 'Off-hire is a protective clause in a time charter party that suspends charter hire payments to the owner when the vessel is prevented from performing the contracted service. It applies during machinery breakdowns (e.g., main engine failure), drydocking, crew deficiencies, or deviations for repairs.' A machinery breakdown that stops the ship earning is exactly what a candidate means by a downtime clause.",
+   "vocabulary_note": "The card body does not use the word 'downtime' - 0 occurrences in the live card. The match is on the examinable ask, not on shared vocabulary; 'downtime clause' is the commercial synonym for the off-hire clause. Recorded so the reuse call is not mistaken for a keyword hit."
   }
  ],
  "existing_card_defects": [
@@ -3795,5 +3932,20 @@
   ],
   "producer_verification": "Every finding was verified by the producer against the artefacts before being applied: the schema-addition note and the 57 existing users of the field; AUG-0035, AUG-0050 and AUG-0056 read for the recurrence count; QB1_A#q9 opened to confirm the Simon sentence sits in the CE Oral Tip and that the card has no Examiner Chain heading; and the peril line read verbatim. Nothing was accepted on the reviewer's assertion and nothing was rejected.",
   "observation_recorded_against_the_producer": "The reviewer noted that at 12:22 the production queue contained no reference to AUG-0256..0263 while two adjudications already claimed it did, and that the queue was written two minutes later. The claims verify now, but the adjudication write ran ahead of the queue write and a review timed two minutes earlier would have raised a false blocking finding. The ordering should be queue-then-claim, not claim-then-queue."
+ },
+ "live_corpus_at_adjudication_02_september": {
+  "canonical_questions": 759,
+  "question_bearing_files": 86,
+  "head_commit": "6e568fe",
+  "adjudicated_on": "2026-09-02",
+  "applies_to": "AUG-0264..AUG-0270, the 31-August Snapshot 03 tranche",
+  "panel": {
+   "EXTERNAL": "Nair",
+   "INTERNAL": "Srivastava"
+  },
+  "attempt": 3,
+  "result": "Repeat",
+  "ship_type": "LPG carrier",
+  "note": "The bank these seven were scored against is the full 759-question corpus at the qualified H5 closure head, which already contains H1 through H5 and the three CE Oral Tips. That matters for AUG-0269: QB5_B#q6 carries the MLC 2006 Regulation 2.3 and STCW A-VIII/1 rest-hour ground the examiner kept pressing, so it is reuse evidence rather than a gap. Two of the seven are GENUINE_NEW_QUESTION - AUG-0266 main-engine performance diagnosis and AUG-0268 spares and stores inventory - and both carry a negative search whose rejections quote the body of every card rejected, per SKILL 14b. Two further limb gaps are registered inside otherwise-reuse rows (the incinerator type-approval circular number on AUG-0265, and class-versus-statutory certificate extension on AUG-0267) as bounded expansion candidates, not as new questions."
  }
 }
