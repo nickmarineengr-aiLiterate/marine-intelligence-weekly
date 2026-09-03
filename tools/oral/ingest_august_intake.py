@@ -42,7 +42,21 @@ ROLE_RE = re.compile(r"^(Ext|Int|External|Internal)\s*[-:]\s*(.+?)\s*$", re.I)
 Q_RE = re.compile(r"^(\d+)\s*[.)]\s*(.*)$", re.S)
 # "Attempt 1" / "Attempt-1" / "Attempt : 2" - candidates punctuate this freely
 # and the attempt number is evidence about the sitting, not decoration.
-ATTEMPT_RE = re.compile(r"^Attempt\s*[-:]?\s*(\d+)\s*$", re.I)
+#: Candidates punctuate this line four ways the original pattern could not read,
+#: and each one silently produced `attempt_number: null` on a report that plainly
+#: states it. Found by an empirical sweep of every carrier rather than by reading
+#: the regex: four submissions state an attempt and lost it --
+#:     Attempt-1st    (ordinal suffix after the label)   AUG2026-S013
+#:     Attempt 1.     (trailing full stop)               AUG2026-S014
+#:     Attempt - 3    with an EN DASH, not a hyphen      AUG2026-S022
+#:     Attempt -3rd   (hyphen and ordinal suffix)        AUG2026-S028
+#: A dropped field raises no error, it just is not counted -- the same failure
+#: shape as a dropped occurrence. So the separator class now includes the
+#: Unicode dashes, the ordinal suffix is optional, and trailing punctuation is
+#: allowed. The number itself is still the only thing captured.
+ATTEMPT_RE = re.compile(
+    r"^Attempt\s*[-:\u2010-\u2015]?\s*(\d+)\s*(?:st|nd|rd|th)?\s*[.)]?\s*$",
+    re.I)
 #: The same fact written the other way round. The 31-August product-tanker
 #: candidate wrote "2nd attempt", which ATTEMPT_RE does not match, so the
 #: number went to the preamble as prose. A resit report is a different kind
