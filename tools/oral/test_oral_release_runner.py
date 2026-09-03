@@ -74,10 +74,14 @@ _correction = [g for g in REG.ALL_GATES if g["category"] == REG.CAT_CORRECTION]
 check("the correction gates are registered",
       sorted(g["id"] for g in _correction)
       == ["correction_annexvi_eif_mutate", "correction_defntreaty_mutate",
-          "correction_g1_010_mutate", "correction_lsavent_mutate",
+          "correction_g1_010_mutate", "correction_grainterm_mutate",
+          "correction_ismspares_mutate", "correction_lsavent_mutate",
+          "correction_msactsea_mutate",
           "corrections_mutate", "validate_correction_annexvi_eif",
           "validate_correction_defntreaty", "validate_correction_g1_010",
-          "validate_correction_lsavent", "validate_corrections"],
+          "validate_correction_grainterm", "validate_correction_ismspares",
+          "validate_correction_lsavent", "validate_correction_msactsea",
+          "validate_corrections"],
       str(sorted(g["id"] for g in _correction)))
 check("correction gates are post-E6, so not part of the historical 39",
       all(g["historical_39"] is False for g in _correction))
@@ -125,9 +129,15 @@ POST_E6_GATES = [
     "correction_annexvi_eif_mutate",
     "correction_defntreaty_mutate",
     "correction_g1_010_mutate",
+    "correction_grainterm_mutate",
+    "correction_ismspares_mutate",
     "correction_lsavent_mutate",
+    "correction_msactsea_mutate",
     "corrections_mutate",
     "followup_register_mutate",
+    # The shared-module controls, moved INTO the suite: a guard that never runs
+    # has silently expired, which is why this is a gate and not a README line.
+    "release_infra_controls",
     # The study-spine hook: a new oral question cannot ship unmapped.
     "study_mapping_check",
     # ...and cannot ship mapped-but-invisible: both study surfaces must
@@ -147,7 +157,10 @@ POST_E6_GATES = [
     "validate_correction_annexvi_eif",
     "validate_correction_defntreaty",
     "validate_correction_g1_010",
+    "validate_correction_grainterm",
+    "validate_correction_ismspares",
     "validate_correction_lsavent",
+    "validate_correction_msactsea",
     "validate_corrections",
     "validate_followup_register",
 ]
@@ -158,7 +171,11 @@ POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
                            "correction_annexvi_eif_mutate",
                            "correction_defntreaty_mutate",
                            "correction_g1_010_mutate",
-                           "correction_lsavent_mutate", "corrections_mutate",
+                           "correction_grainterm_mutate",
+                           "correction_ismspares_mutate",
+                           "correction_lsavent_mutate",
+                           "correction_msactsea_mutate",
+                           "corrections_mutate",
                            "followup_register_mutate"]
 
 # E6 reported 266 mutations across 15 suites. That number is HISTORY and stays

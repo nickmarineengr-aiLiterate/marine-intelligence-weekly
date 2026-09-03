@@ -404,6 +404,63 @@ GATES = (
           note="includes the second-pass mutation: prose corrected, REG-BOX left "
                "wrong - the shape that has escaped this repo's corrections before"),
 
+    # Content gates for the three 2026-09-02 GPT content-review corrections.
+    # Same shape and same reason as the two pairs above. All three cards were
+    # under a green digest pin while carrying the defect being corrected --
+    # H6's pin on QB5_I#q8, CORR-GRAIN-MSC552's on QB2_A#q11, batch H2's on
+    # QB2_A#q33 -- which is the standing demonstration that a pin answers
+    # "still the authorised bytes" and never "the authorised bytes are right".
+    # QB9_H#q10 had no pin at all, and shipped five author-facing placeholders.
+    _gate("validate_correction_ismspares",
+          ["python", "%s/validate_correction_ismspares.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="asserts what ISM 10.3 does and does NOT require, that 10.4 keeps "
+               "its own content, and that ISM 9 stays conditional on the SMS "
+               "definition - none of which a digest pin can see"),
+    _gate("correction_ismspares_mutate",
+          ["python", "%s/mutate_correction_ismspares.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1800,
+          historical_39=False, depends_on=("validate_correction_ismspares",),
+          note="11 mutations; includes reinstating the defect in the page CHEAT "
+               "SHEET only, which a card-scoped guard cannot see"),
+
+    _gate("validate_correction_grainterm",
+          ["python", "%s/validate_correction_grainterm.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="asserts the Grain Code's own A 3.1/3.2/3.5/6.1 wording and that "
+               "the DoA-invalidity claim is never ASSERTED on either card"),
+    _gate("correction_grainterm_mutate",
+          ["python", "%s/mutate_correction_grainterm.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1800,
+          historical_39=False, depends_on=("validate_correction_grainterm",),
+          note="11 mutations; includes reinstating the claim in the SIBLING card "
+               "only - the half-finished repair that actually happened here"),
+
+    _gate("validate_correction_msactsea",
+          ["python", "%s/validate_correction_msactsea.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="no author-facing placeholder may reach a paid card, and the MS "
+               "Act 2025 sections are asserted as a CLOSED set - only what was "
+               "actually read out of the Gazette text"),
+    _gate("correction_msactsea_mutate",
+          ["python", "%s/mutate_correction_msactsea.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1800,
+          historical_39=False, depends_on=("validate_correction_msactsea",),
+          note="11 mutations; includes adding ONE plausible neighbouring section, "
+               "which nothing about the card would look wrong after"),
+
+    # The shared-module controls. These were runnable but were NOT in the suite,
+    # so the guard for the health-comparison contract could rot without any
+    # release noticing -- the expired-guard defect class this repository has
+    # hit at least four times. Registered as a plain unit-control gate: it uses
+    # temporary directories and never touches product bytes.
+    _gate("release_infra_controls",
+          ["python", "%s/test_oral_release_infra.py" % _ORAL],
+          CAT_UNIT, PARSER_VALIDATOR, timeout=900, historical_39=False,
+          note="byte/mutation/manifest module contracts, and the section-6 proof "
+               "that the health gate ignores structural summary lines while still "
+               "blocking on a real finding"),
+
     # Content gates for CORR-DEFN-TREATY-20260825. Third pair of this shape,
     # and the one that shows why the shape is needed: QB9_G#q6 shipped a legal
     # HIERARCHY -- Treaty then Convention then Protocol -- under its own
