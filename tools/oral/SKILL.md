@@ -1014,6 +1014,24 @@ carry all the weight, and each exists because the obvious alternative is wrong:
   renumbered old ones — on August 2026 it claimed 109 new anchors against 50
   governed `NEW_CARD` actions. The module instead reconstructs the corpus from
   the git tree at the last commit BEFORE the month and compares wording.
+* **Bound the month at BOTH ends.** Until 2026-09-04 only the left end was
+  bounded: the wording test compared the baseline against the LIVE corpus at
+  HEAD, and `manifest_actions()` globbed every manifest on disk with no date
+  filter at all. Exported from a 3 September HEAD, the August sheet therefore
+  carried 14 cards built on 1–2 September as August NEW and 8 September
+  corrections as August UPDATED — 227 rows where 205 were August's. The month is
+  now the half-open interval `[first, first-of-next)`, and each limb declares its
+  event date: NEW and the wording-rewrite limb of UPDATED are owned by the
+  CORPUS (baseline tree vs the tree at the month's CLOSING commit), the governed
+  non-wording limb of UPDATED by the MANIFEST EVENT DATE. A later event never
+  rewrites an earlier one — a card created in August and corrected in September
+  stays an August NEW row.
+* **A manifest's event date is its own `date`, else its first commit.** Batch
+  manifests declare no `date`; corrections do. Where both exist they are
+  cross-checked to the MONTH only — a record dated the 30th and committed on the
+  1st is normal, a record whose two dates straddle a month boundary is refused,
+  because that is the only disagreement that can move a row onto the wrong sheet.
+  A manifest neither dated nor committed fails closed.
 * **Occupancy beats wording.** A card sitting on an anchor the baseline already
   carried existed then, whatever its text now says, so it is capped at UPDATED.
   This demoted five August cards (the four QB2_C slots whose July q-text was
@@ -1032,11 +1050,20 @@ silently out of the candidate-facing view. Derived-index regeneration, CSS/TOC
 repair and validator-only edits are deliberately NOT updates.
 
 `validate_question_bank_xlsx.py --month YYYY-MM` re-derives the projection
-INDEPENDENTLY rather than reading the exporter's answer back, and
+INDEPENDENTLY rather than reading the exporter's answer back;
 `test_question_bank_xlsx.py` mutation-proves each month control (deleted row,
 flipped status, duplicate, phantom id, wrong link, inflated headline, buried
-sheet). August 2026 baseline: `2c0fd8b` (2026-07-31, 627 questions) → 738 today,
-111 NEW + 71 UPDATED = 182 rows.
+sheet); and `test_oral_monthly.py` proves the eight calendar-boundary cases
+against `oral_monthly.project()`, the pure algebra. Each boundary case is run a
+second time through a faithful reimplementation of the OLD unbounded semantics
+and the two must disagree — a case both answer identically is reported VACUOUS
+and fails, so a boundary control can never pass by never reaching the boundary.
+
+August 2026: baseline `2c0fd8b` (2026-07-31, 627 questions) → closing `72d01f5`
+(2026-08-31, 747 questions) → 761 live today. **120 NEW + 85 UPDATED = 205
+rows.** The superseded figures are 738/111/71/182 (pre-H-series corpus) and
+134/93/227 (the unbounded read of the 761 corpus). Never carry a row count
+forward from a handoff; re-derive it.
 
 Exporting changes no product content, so it does NOT trigger the full release
 runner. The protected names (`MEO_QB_master_v26.xlsx`,

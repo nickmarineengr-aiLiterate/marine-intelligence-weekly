@@ -39,9 +39,12 @@ Sources and what each is trusted for:
 The group-facing workbook additionally carries a "<Month> <Year> - New & Updated"
 sheet, placed second so it is the first thing a candidate sees. Its rows are a
 projection of tools/oral/oral_monthly.py over governed provenance -- the corpus
-as it stood at the last commit before the month opened, cross-checked against
-the batch and correction manifests. Nothing on that sheet is hand-curated, and
-a row that cannot name its evidence fails the export.
+as it stood at the last commit before the month opened, compared with the corpus
+at the last commit before it closed, cross-checked against the batch and
+correction manifests DATED INSIDE THAT MONTH. The month is bounded at BOTH ends:
+a workbook exported in September must not sell September's work as August's.
+Nothing on that sheet is hand-curated, and a row that cannot name its evidence
+fails the export.
 
 Usage:
   PYTHONIOENCODING=utf-8 python tools/oral/export_question_bank_xlsx.py --candidate-share
