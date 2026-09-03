@@ -449,6 +449,29 @@ GATES = (
           note="11 mutations; includes adding ONE plausible neighbouring section, "
                "which nothing about the card would look wrong after"),
 
+    # Content gate for the 2026-09-03 CIC stem correction. The precedent above
+    # is a pin that was green over wrong content; this one is stronger still.
+    # QB8_C#q4 had NO pin at any point -- no batch or correction record had
+    # ever declared the file -- and it shipped a question stem that named a
+    # campaign that does not exist while its own answer body named the real one
+    # correctly, four times. So the card contradicted itself and passed a clean
+    # full-suite qualification, because nothing in the suite compared a stem
+    # against its own body. `stem_and_body_agree` is that missing control.
+    _gate("validate_correction_cicstem",
+          ["python", "%s/validate_correction_cicstem.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="asserts the PSC term is Concentrated and never Consolidated, "
+               "that the stem's expansion agrees with the body's, and that the "
+               "corrected term SURVIVES REGENERATION on all five derived "
+               "surfaces a stem is copied into (known_traps entry 50)"),
+    _gate("correction_cicstem_mutate",
+          ["python", "%s/mutate_correction_cicstem.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1800,
+          historical_39=False, depends_on=("validate_correction_cicstem",),
+          note="16 mutations; includes regressing each generated surface "
+               "independently, and planting the rejected term on a DIFFERENT "
+               "candidate page that the reported card's own guard cannot see"),
+
     # The shared-module controls. These were runnable but were NOT in the suite,
     # so the guard for the health-comparison contract could rot without any
     # release noticing -- the expired-guard defect class this repository has

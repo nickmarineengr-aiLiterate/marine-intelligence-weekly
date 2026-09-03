@@ -1685,3 +1685,48 @@ same session had just shipped.
 GREP: SKIP. This entry quotes every rejected formulation - "drives", "derived
 from", "invalid unless accompanied", "pending verification" - in order to reject
 them, so a phrase scan matches the correction itself.
+
+### 65. "Consolidated" is not the C in CIC — and the copy that had been right all along was the one nobody read
+
+`QB8_C.html#q4` asked the candidate to explain CIC and expanded it in the question
+stem as **"Consolidated Inspection Campaign"**. There is no such thing. The port
+State control term is the **Concentrated Inspection Campaign**, and the Paris MoU
+and Tokyo MOU name it themselves in their joint press release of 3 August 2026:
+*"The Member Authorities of the Tokyo MOU and Paris MoU will undertake a
+Concentrated Inspection Campaign (CIC) on Cargo Securing of Cargo Units and Cargo
+Transport Units. This CIC will be conducted from 1 September to 30 November 2026."*
+
+**The card's own answer body was already correct.** Its second heading reads
+"CIC Type 2: PSC Concentrated Inspection Campaign (Tokyo MOU / Paris MOU)", and
+the three-month window it teaches is the window the press release states. So the
+page contradicted itself, and the wrong half was the half a candidate reads first
+and the half every generated surface copies.
+
+Three lessons.
+
+* **A card can disagree with itself, and a self-consistency check would have found
+  this in a second.** Nothing in the release suite compares a stem against its own
+  body. The defect survived a clean 77-gate qualification because every gate asked
+  whether the bytes were the authorised bytes, never whether the two halves of one
+  card agree — SKILL.md section 8.2a, again.
+* **It was found by reading a candidate report, not by a sweep.** A candidate wrote
+  only "Cic code." Adjudicating that three-word ask against the card is what put a
+  human eye on the stem. Intake is a content-review surface, not just a coverage
+  surface.
+* **The rest of the corpus already knew.** Every other candidate-facing MIW page —
+  the solved written papers, the oral notes, the past-paper pages — says
+  "concentrated". A term that is wrong in exactly one place and right in twenty is
+  a defect a corpus-wide vocabulary check finds trivially, and we did not have one.
+
+**And a derived store can stay stale after its correction shipped.** Regenerating
+`docs/study/study_mappings.json` for this fix required `--force`, because that
+store's incremental cache key is the taxonomy digest and a question-text change
+does not move it. The forced re-derive also picked up `QB1_G#q32`, still carrying
+the truncated **"( ms notice 1 of 202)"** stem that entry 50 corrected on the card
+— the card was fixed, the mapping store was never re-derived, and nothing failed.
+**A generator with a cache key narrower than its inputs will silently serve the
+old value forever.**
+
+GREP: SKIP. This entry quotes the rejected expansion "Consolidated Inspection
+Campaign" and the truncated citation in order to reject them, so a phrase scan
+matches the correction itself.
