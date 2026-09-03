@@ -484,6 +484,144 @@ _changed = R.health_findings(
 check("a real finding difference is still detected (filter is not vacuous)",
       bool(_changed - _base), "new=%s" % sorted(_changed - _base))
 
+# ---------------------------------------------------------------------------
+# A LINE THAT IS A FUNCTION OF THE FINDINGS IS NOT ITSELF A FINDING.
+#
+# `Files with errors: N` and `Clean <kind> files: <list>` restate the finding
+# set the report is already printing. Compared verbatim they blocked the gate
+# on every IMPROVEMENT: fixing QB1_D#q7 moved the count 80 -> 79 and moved
+# QB1_D into the clean list, and both showed up as NEW. Proved pre-existing --
+# the identical pair was NEW at d0a188f, before any of that day's edits.
+#
+# They are not dropped. Each becomes the invariant it should satisfy, so the
+# gate now catches two things the raw numbers never could: a report whose
+# declared count disagrees with the file blocks it emitted, and a file listed
+# as clean AND erroring at once.
+#
+# `Files scanned: N` is deliberately left alone -- it is corpus inventory, not
+# a function of the findings, and it is the only line that would turn a
+# collapsed scan into a NEW line instead of a silent mass GONE.
+#
+# Both directions are asserted below, and the classifier under test is the SAME
+# function run_health calls.
+# ---------------------------------------------------------------------------
+
+
+def _health_report(declared, blocks, clean_qb):
+    """A report in the real emitter's grammar (qb_health_check.build_report)."""
+    L = ["MIW QB + Notes Health Check - x", "=" * 50, "--- QB SERIES ---",
+         "Files scanned: 180",
+         "Questions found on disk: 761  |  Manifest total: 761",
+         "Files with errors: %d" % declared, ""]
+    if blocks:
+        L += ["QB FILE-LEVEL ISSUES", "-" * 30]
+        for f, errs in blocks:
+            L += ["", "\u25b6 %s  (12 questions)" % f]
+            L += ["    \u2717 %s" % e for e in errs]
+    L += ["", "-" * 50, "Clean QB files: " + ", ".join(clean_qb)]
+    return "\n".join(L) + "\n"
+
+
+def _health_new(cand, base):
+    """(blocking, review) exactly as the runner classifies them."""
+    new = R.health_findings(cand) - R.health_findings(base)
+    blocking, reviews, _attr = R.classify_health_new(new)
+    return blocking, reviews, new
+
+
+_H_BASE = _health_report(
+    2, [("QB1_A.html", ["q3: missing reg-box"]),
+        ("QB1_D.html", ["q7: missing ce-tip"])],
+    ["QB2_A.html", "QB3_A.html"])
+
+# A. a pure improvement (QB1_D fixed) must not block
+_H_BETTER = _health_report(
+    1, [("QB1_A.html", ["q3: missing reg-box"])],
+    ["QB1_D.html", "QB2_A.html", "QB3_A.html"])
+_blk, _rev, _new = _health_new(_H_BETTER, _H_BASE)
+check("a health IMPROVEMENT is not a blocking regression", not _blk,
+      "blocking=%s" % sorted(_blk))
+check("the improvement is still reported as GONE",
+      bool(R.health_findings(_H_BASE) - R.health_findings(_H_BETTER)),
+      "gone present")
+
+# B. genuine regressions must still block -- four shapes
+_H_NEWFILE = _health_report(
+    3, [("QB1_A.html", ["q3: missing reg-box"]),
+        ("QB1_D.html", ["q7: missing ce-tip"]),
+        ("QB2_A.html", ["q11: malformed q-card"])], ["QB3_A.html"])
+_blk, _rev, _new = _health_new(_H_NEWFILE, _H_BASE)
+check("a finding on a newly-erroring file BLOCKS", bool(_blk),
+      "blocking=%s" % sorted(x[:44] for x in _blk))
+
+_H_EXTRA = _health_report(
+    2, [("QB1_A.html", ["q3: missing reg-box", "q9: stale regulatory text"]),
+        ("QB1_D.html", ["q7: missing ce-tip"])],
+    ["QB2_A.html", "QB3_A.html"])
+_blk, _rev, _new = _health_new(_H_EXTRA, _H_BASE)
+check("an extra finding on an already-erroring file BLOCKS", bool(_blk),
+      "blocking=%s" % sorted(x[:44] for x in _blk))
+
+# STALE-LAW DETECTION IS NOT WEAKENED: the error-class trap still blocks.
+_H_TRAP = _health_report(
+    3, [("QB1_A.html", ["q3: missing reg-box"]),
+        ("QB1_D.html", ["q7: missing ce-tip"]),
+        ("QB9_H.html", ['KNOWN TRAP resurfaced: "Merchant Shipping Act, 1958"'
+                        ' found in visible text'])],
+    ["QB2_A.html", "QB3_A.html"])
+_blk, _rev, _new = _health_new(_H_TRAP, _H_BASE)
+check("an error-class KNOWN TRAP (stale law) still BLOCKS", bool(_blk),
+      "blocking=%s" % sorted(x[:56] for x in _blk))
+check("...and is never reclassified as a review note", not _rev,
+      "reviews=%s" % sorted(_rev))
+
+# C. the emitting tool's own downgrade is honoured: [REVIEW] reports, not blocks
+_H_REVIEW = _health_report(
+    3, [("QB1_A.html", ["q3: missing reg-box"]),
+        ("QB1_D.html", ["q7: missing ce-tip"]),
+        ("QB9_H.html", ['[REVIEW] KNOWN TRAP phrase present but in negation/'
+                        'correction context: "Merchant Shipping Act, 1958"'])],
+    ["QB2_A.html", "QB3_A.html"])
+_blk, _rev, _new = _health_new(_H_REVIEW, _H_BASE)
+check("a [REVIEW] note does not block (check_known_traps downgrades it)",
+      not _blk, "blocking=%s" % sorted(_blk))
+check("...but a [REVIEW] note is still surfaced", bool(_rev),
+      "reviews=%d" % sum(_rev.values()))
+
+# D. the replacement invariants must themselves bite
+_H_MISCOUNT = _health_report(
+    0, [("QB1_A.html", ["q3: missing reg-box"]),
+        ("QB1_D.html", ["q7: missing ce-tip"])],
+    ["QB2_A.html", "QB3_A.html"])
+_blk, _rev, _new = _health_new(_H_MISCOUNT, _H_BASE)
+check("a declared error count that disagrees with the emitted blocks BLOCKS",
+      any("EMITTED FILE BLOCKS" in k for k in _blk),
+      "blocking=%s" % sorted(x[:56] for x in _blk))
+
+_H_OVERLAP = _health_report(
+    2, [("QB1_A.html", ["q3: missing reg-box"]),
+        ("QB1_D.html", ["q7: missing ce-tip"])],
+    ["QB1_D.html", "QB2_A.html", "QB3_A.html"])
+_blk, _rev, _new = _health_new(_H_OVERLAP, _H_BASE)
+check("a file reported as clean AND erroring BLOCKS",
+      any("ALSO REPORTED AS ERRORING" in k for k in _blk),
+      "blocking=%s" % sorted(x[:56] for x in _blk))
+
+check("a healthy report satisfies both invariants",
+      all(("==" in k or "disjoint" in k)
+          for k in R.health_findings(_H_BASE)
+          if k.startswith(("Files with errors:", "Clean "))),
+      "%s" % [k for k in R.health_findings(_H_BASE)
+              if k.startswith(("Files with errors:", "Clean "))])
+
+# The notes series counts its blocks in `topic-blocks`, not `questions`, and
+# was missed when the per-file header normalisation was first written.
+check("a notes file header is normalised like a QB one",
+      "\u25b6 miw-notes-mgmt-p1.html" in R.health_findings(
+          "\u25b6 miw-notes-mgmt-p1.html  (7 topic-blocks)\n"),
+      "kept=%s" % sorted(R.health_findings(
+          "\u25b6 miw-notes-mgmt-p1.html  (7 topic-blocks)\n")))
+
 CLEAN = "<div class=\"q-card\" id=\"q1\"><p>clean</p></div>\n"
 DIRTY = "<div class=\"q-card\" id=\"q1\"><p>CORRUPTED-BY-TEST</p></div>\n"
 
@@ -737,7 +875,12 @@ check("an unencodable character degrades to text, never to an exception",
 # shared module or by importing it explicitly. A tool that reaches neither is
 # exactly mutate_batch_a before the fix.
 SHARED = ("oral_bytes", "oral_manifest", "oral_mutation", "oral_supersession",
-          "oral_lib", "oral_text", "oral_notes", "validate_batch_b")
+          "oral_lib", "oral_text", "oral_notes", "validate_batch_b",
+          # The content-gate harness (2026-09-03). It imports oral_bytes, so a
+          # suite built on it reaches the contract transitively -- but this list
+          # is what makes that reachability CHECKABLE, so a new shared module
+          # has to be named here or every suite using it reads as unreached.
+          "oral_content_mutation")
 unreached = []
 for path in sorted(list(HERE.glob("validate_*.py")) + list(HERE.glob("mutate_*.py"))):
     src = B.read_text(path)

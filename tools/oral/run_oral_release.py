@@ -396,6 +396,38 @@ _HEALTH_NOISE = re.compile(
     r"|MIW QB \+ Notes Health Check|^\s*$")
 
 
+# A LINE THAT IS A FUNCTION OF THE FINDINGS IS NOT ITSELF A FINDING.
+#
+# The report restates its own finding set three ways: `Files with errors: N` is
+# the number of file blocks it is about to print, and `Clean QB files: <list>` /
+# `Clean notes files: <list>` are the complement of the erroring set. Compared
+# verbatim they carry no information the finding lines do not already carry --
+# but they change on every IMPROVEMENT, so fixing a card turned the gate red.
+# That is the same defect as the `Loading source:` leak above: a gate that goes
+# red when health gets better is not a regression detector.
+#
+# They are NOT simply dropped. Each is replaced by the internal-consistency
+# property it should satisfy, which a raw count never asserted:
+#
+#   `Files with errors: N`      -> does the declared total equal the number of
+#                                  file blocks actually emitted?
+#   `Clean <kind> files: <list>`-> is the clean set disjoint from the erroring
+#                                  set?
+#
+# So a health check that silently stopped emitting file blocks, or that listed
+# a file as both clean and erroring, now FAILS this gate -- neither of which the
+# original absolute numbers could detect. Both directions are guarded in
+# test_oral_release_infra.py section 6.
+#
+# `Files scanned: N` is deliberately NOT normalised. It is corpus inventory,
+# not a function of the findings, and it is the only line that would turn a
+# collapsed scan ("scanned 0 files") into a NEW line rather than a silent mass
+# GONE. Removing it would weaken the gate.
+_HEALTH_ERR_COUNT = re.compile(r"^\s*Files with errors:\s*(\d+)\s*$")
+_HEALTH_CLEAN_LIST = re.compile(r"^\s*Clean (QB|notes) files:\s*(.*)$")
+_HEALTH_FILE_BLOCK = re.compile(r"^\s*\u25b6\s*(\S+)")
+
+
 def health_findings(text):
     """Reduce a health report to a comparable multiset of finding lines.
 
@@ -406,6 +438,9 @@ def health_findings(text):
     and read its own 481 extra blank lines as new findings.
     """
     lines = []
+    declared_error_files = 0
+    emitted_error_files = []
+    clean_sets = {}
     for raw in normalise_eol(text).split("\n"):
         line = raw.rstrip()
         if not line or _HEALTH_NOISE.match(line):
@@ -417,9 +452,28 @@ def health_findings(text):
         # not findings, and comparing them verbatim means every legitimate
         # addition to the corpus shows up as NEW+GONE and blocks the release.
         # The per-file header is still needed for attribution - finding lines
-        # carry no filename - so it keeps the file and loses the count.
-        line = re.sub(r"^(\s*\u25b6\s*\S+)\s*\(\d+\s+questions?\)\s*$",
-                      r"\1", line)
+        # carry no filename - so it keeps the file and loses the count. Notes
+        # blocks are counted in `topic-blocks`, not `questions`, and were left
+        # out of this normalisation when it was first written.
+        line = re.sub(
+            r"^(\s*\u25b6\s*\S+)\s*\(\d+\s+(?:questions?|topic-blocks?)\)\s*$",
+            r"\1", line)
+
+        block = _HEALTH_FILE_BLOCK.match(line)
+        if block:
+            emitted_error_files.append(block.group(1))
+
+        m = _HEALTH_ERR_COUNT.match(line)
+        if m:
+            declared_error_files += int(m.group(1))
+            continue
+
+        m = _HEALTH_CLEAN_LIST.match(line)
+        if m:
+            names = {n.strip() for n in m.group(2).split(",") if n.strip()}
+            clean_sets.setdefault(m.group(1), set()).update(names)
+            continue
+
         # The disk-vs-manifest line exists to assert that the two AGREE. Keep
         # that property and drop the absolute numbers, so a real divergence
         # still changes the line and still fails.
@@ -429,7 +483,36 @@ def health_findings(text):
             line = ("Questions on disk == manifest total" if m.group(1) == m.group(2)
                     else "Questions on disk != manifest total")
         lines.append(line)
+
+    # The derived lines, re-expressed as the invariants they should satisfy.
+    lines.append(
+        "Files with errors: declared total == emitted file blocks"
+        if declared_error_files == len(emitted_error_files)
+        else "Files with errors: DECLARED %d != %d EMITTED FILE BLOCKS"
+             % (declared_error_files, len(emitted_error_files)))
+    erroring = set(emitted_error_files)
+    for kind in sorted(clean_sets):
+        overlap = sorted(clean_sets[kind] & erroring)
+        lines.append(
+            "Clean %s files: disjoint from the erroring set" % kind
+            if not overlap
+            else "Clean %s files: ALSO REPORTED AS ERRORING: %s" % (kind, overlap))
     return collections.Counter(lines)
+
+
+def classify_health_new(new):
+    """Split a NEW finding multiset into (blocking, review, attribution).
+
+    ONE implementation, called by run_health and by the section-6 control, so
+    the gate and its guard can never drift into two different ideas of what
+    blocks -- the same reason authorisation_manifest_paths() is a single
+    function rather than ten copies of a glob.
+    """
+    reviews = collections.Counter(
+        {k: v for k, v in new.items() if "[REVIEW]" in k})
+    attribution = collections.Counter(
+        {k: v for k, v in new.items() if _HEALTH_FILE_BLOCK.match(k)})
+    return new - reviews - attribution, reviews, attribution
 
 
 def run_health(gate, log):
@@ -457,20 +540,57 @@ def run_health(gate, log):
     cand, base = health_findings(out_c), health_findings(out_b)
     new = cand - base
     gone = base - cand
+
+    # HONOUR THE EMITTING TOOL'S OWN CLASSIFICATION.
+    #
+    # check_known_traps() already splits its output two ways, and says so in
+    # its docstring: a trap phrase in a negation/supersession sentence is
+    # "downgrade[d] to a review note instead of an error, so it's still visible
+    # but doesn't count as a structural fault requiring urgent fix", while a
+    # bare hit stays `KNOWN TRAP resurfaced:` and IS an error.
+    #
+    # The gate was reading both as release-blocking regressions, which
+    # contradicts the contract of the tool producing them: writing a correct
+    # "X was superseded by Y" sentence became a release blocker. QB1_A#q-level
+    # prose citing the repealed Merchant Shipping Act 1958 in order to say it
+    # has been re-enacted as the 2025 Act is exactly the case the downgrade
+    # exists for.
+    #
+    # REVIEW findings are therefore REPORTED but do not block; every other
+    # finding, INCLUDING `KNOWN TRAP resurfaced:`, still blocks. Stale-law
+    # detection is untouched - only the tool's own negation-context downgrade
+    # is honoured. Guarded both ways in test_oral_release_infra.py section 6.
+    # A `▶ file` line is ATTRIBUTION, not a finding: finding lines carry no
+    # filename, so the header exists only to say which file the ticks below
+    # belong to. It must not block on its own - otherwise a file that becomes
+    # listed solely because of a non-blocking [REVIEW] note would block through
+    # its header instead. Every real defect still blocks through its own
+    # ✗/⚠ line, and the header stays in `new`/`gone` and in the report.
+    new_blocking, new_reviews, new_attribution = classify_health_new(new)
+
     detail = {
         "candidate_source": "local (working tree)",
         "baseline_source": "ref %s" % REG.BASELINE_REF,
         "candidate_findings": sum(cand.values()),
         "baseline_findings": sum(base.values()),
         "new": sum(new.values()),
+        "new_blocking": sum(new_blocking.values()),
+        "new_review_nonblocking": sum(new_reviews.values()),
+        "new_attribution_headers": sum(new_attribution.values()),
         "gone": sum(gone.values()),
-        "new_sample": [l[:120] for l in list(new)[:5]],
+        "new_sample": [l[:120] for l in list(new_blocking)[:5]],
+        "new_review_sample": [l[:160] for l in list(new_reviews)[:5]],
         "gone_sample": [l[:120] for l in list(gone)[:5]],
     }
-    status = PASS if not new else FAIL
-    log("      candidate(local)=%d  baseline(%s)=%d  NEW=%d  GONE=%d"
+    status = PASS if not new_blocking else FAIL
+    log("      candidate(local)=%d  baseline(%s)=%d  NEW=%d "
+        "(blocking=%d, review=%d)  GONE=%d"
         % (detail["candidate_findings"], REG.BASELINE_REF,
-           detail["baseline_findings"], detail["new"], detail["gone"]))
+           detail["baseline_findings"], detail["new"],
+           detail["new_blocking"], detail["new_review_nonblocking"],
+           detail["gone"]))
+    for line in detail["new_review_sample"]:
+        log("      REVIEW (non-blocking, adjudicate manually): %s" % line)
     return status, detail, out_c + out_b, secs_c + secs_b
 
 
