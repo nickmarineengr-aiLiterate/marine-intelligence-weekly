@@ -336,3 +336,44 @@ No 15s/60s content was written.
 No other P0 card; no prose regenerated for style; no new cards; no deep-dives added; no
 examiner attribution altered; no syllabus mapping changed; no written bank; no shared
 RulesApp source; no Excel distribution; no full release suite; **no push and no deploy.**
+
+---
+
+## 10. A latent defect in the supersession layer, exposed by this correction
+
+Declaring the chain on `QB1_D#q7` turned `validate_corrections.py` red — not on
+this record's content, but on `AMBIGUOUS_ROOT`:
+
+```
+QB1_D.html#q7 AMBIGUOUS_ROOT: 2 states have no predecessor:
+  batch_d_manifest.json/PROMNEW-004
+  correction_corr_cetip_qb1d_q7_20260902_manifest.json/CORR-CETIP-Q7-01
+```
+
+**Cause.** `oral_supersession.load_card_records()` ingests every card entry on the
+authorisation surface, including generation-1 production records that name a card and
+pin **no digests at all** — `batch_d`'s `PROMNEW-*` entries are shaped this way. Such a
+record became a state `(batch_d_manifest.json, None, None)` with no parent, i.e. a
+**phantom second root**, so `build_chain()` could not identify a single root.
+
+**Why it had never fired.** Chain resolution is dormant until some record declares
+descent. `QB1_D#q7` is the first card in this corpus to have *both* a digestless
+generation-1 record *and* a supersession chain. The guard failed closed, exactly as
+designed — on the wrong cause.
+
+**Fix.** One filter in `_states_for()`: a record that pins no post-edit digest is not a
+*pinned state* — it authorises the card's existence but makes no claim about its bytes,
+so it can be neither an ancestor nor a root. A record that pins nothing **and** claims
+descent is malformed rather than dormant, and is deliberately kept so it fails loudly.
+
+**Evidence.** `test_oral_supersession.py` — the module's own control suite, which drives
+the real E1 and F1 validators against the live corpus — **62 checks, 0 FAIL**.
+`validate_corrections.py` across every correction record: **0 FAIL**.
+
+**One process note worth keeping.** Two intermediate runs of that suite reported a
+failure that was not real. The suite mutates `QB1_A#q9` and restores it, so it must run
+**serially**; an earlier run was killed by a two-minute timeout and left its probe
+paragraphs in place, and a later run then snapshotted that dirty state and restored it.
+`validate_batch_e1.py` read 1 FAIL on `manifest_digests_match` purely as crossfire. On a
+clean tree, run serially, it is **25 checks, 0 FAIL**. A validator result taken while
+another suite is mutating the tree is not evidence.

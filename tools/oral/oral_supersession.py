@@ -265,6 +265,24 @@ def _states_for(records: Iterable[CardRecord], target: tuple):
     for rec in records:
         if rec.target != target:
             continue
+        # A record that pins NO post-edit digest is not a PINNED STATE. It
+        # authorises the card's existence but makes no claim about its bytes,
+        # so it can be neither an ancestor nor a root. Generation-1 production
+        # records are shaped this way -- batch D's PROMNEW-* entries name their
+        # cards and carry no digests at all.
+        #
+        # Left in, such a record becomes a phantom second root and EVERY chain
+        # declared on that card fails AMBIGUOUS_ROOT. That is latent rather
+        # than theoretical: resolution is dormant until someone declares a
+        # chain, so the defect sleeps until the first correction that needs
+        # one. QB1_D#q7 is the first card in this corpus to have both a
+        # digestless generation-1 record and a supersession chain, and it
+        # failed closed exactly as designed -- on the wrong cause.
+        #
+        # A record that pins nothing AND claims descent is malformed, not
+        # dormant, so it is deliberately kept in order to fail loudly.
+        if not rec.post_edit_digest and rec.supersedes is None:
+            continue
         slot = grouped.setdefault(rec.state_key, {"ids": [], "claims": []})
         slot["ids"].append(rec.action_id)
         if rec.supersedes is not None:
