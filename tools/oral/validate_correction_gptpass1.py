@@ -84,6 +84,8 @@ sys.path.insert(0, str(HERE))
 
 from oral_bytes import read_text                       # noqa: E402
 from validate_batch_b import card_digests              # noqa: E402
+from oral_supersession import (                        # noqa: E402
+    resolve_authorised_card_state)
 
 CORRECTION_ID = "CORR-GPT-PASS1-20260904"
 MANIFEST = HERE / "correction_corr_gpt_pass1_20260904_manifest.json"
@@ -216,9 +218,22 @@ def main() -> int:
         page = read_text(REPO / rel)
         pages[fname] = page
         live = card_digests(page)[anchor]
+        entry = declared[(fname, anchor)]
+        # RESOLVED THROUGH THE CHAIN, NOT COMPARED RAW. `live == my pin` asks
+        # "is my state live?", and that stopped being true on 2026-09-04 when
+        # CORR-GPT-T1-EIAPP-20260904 corrected one surviving EIAPP site in
+        # QB5_J#q2 -- a legitimate, authorised, declared successor. The claim
+        # this record can make forever is the stronger one: my state is the
+        # ANCESTOR of what is live, with a continuous chain in between. With no
+        # successor declared this is byte-for-byte the original comparison.
+        res = resolve_authorised_card_state(
+            manifest=MANIFEST.name, action_id=entry["correction_action_id"],
+            file=fname, anchor=anchor,
+            pinned_post_digest=entry.get("post_edit_digest"),
+            live_digest=live, directory=MANIFEST.parent)
         report("digest_matches_manifest_%s" % fname.split(".")[0].lower(),
-               live == declared[(fname, anchor)].get("post_edit_digest"),
-               "live=%s" % live[:16])
+               bool(getattr(res, "ok", False)),
+               "%s live=%s" % (getattr(res, "status", res), live[:16]))
 
     jt = card_text(pages["QB5_J.html"], "q2")
     dt = card_text(pages["QB1_D.html"], "q7")

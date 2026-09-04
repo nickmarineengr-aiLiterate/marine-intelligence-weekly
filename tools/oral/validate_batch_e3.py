@@ -200,6 +200,32 @@ def digest16(s):
     return hashlib.sha256(s.encode("utf-8")).hexdigest()[:16]
 
 
+def _own_post_state(fname, anchor, base, pinned_post, limit=400):
+    """This batch's own shipped card bytes, derived from history.
+
+    Walks the commits that touched the file, oldest first from the baseline,
+    and returns the first card block whose 16-character digest equals the
+    pinned post state. The pin verifies the reconstruction: there is no way to
+    return the wrong bytes and be believed. Returns None when nothing matches,
+    in which case the caller keeps comparing against the live card.
+    """
+    rng = base + "..HEAD"
+    out = subprocess.run(
+        ["git", "rev-list", "--reverse", rng, "--", "meoclass1/" + fname],
+        capture_output=True, cwd=str(REPO))
+    for ref in out.stdout.decode("utf-8", "replace").split()[:limit]:
+        raw = git_show(ref, "meoclass1/" + fname)
+        if not raw:
+            continue
+        blk = cards_of(raw).get(anchor)
+        if blk is None:
+            continue
+        blk = blk.replace("\r\n", "\n")
+        if digest16(blk) == pinned_post:
+            return blk
+    return None
+
+
 def main():
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     cards = manifest["cards"]
@@ -387,11 +413,41 @@ def main():
             if leak:
                 dirty.append("%s#%s %s" % (fname, a, sorted(set(leak))))
 
-            # purely additive, at character level
+            # purely additive, at character level.
+            #
+            # THE COMPARISON TARGET IS *THIS BATCH'S* POST STATE, NOT LIVE.
+            # E3's claim is "MY edit added and deleted nothing". Comparing the
+            # baseline against the LIVE card silently widens that into "this
+            # card has only ever grown", which stops being true the first time
+            # any later authorised record legitimately deletes a sentence --
+            # and it did, on 2026-09-04, when CORR-GPT-T1-LIION-20260904
+            # replaced QB2_A#q7's CO2 trap wording. That is the guard-expiry
+            # defect class this file was already patched for twice above,
+            # arriving in a third disguise.
+            #
+            # So where the live card no longer matches this batch's pin, E3's
+            # OWN shipped state is DERIVED from history -- the first commit
+            # after the baseline whose card hashes to that pin -- and the
+            # additive claim is checked against that instead. The pin verifies
+            # the reconstruction, so wrong bytes cannot pass; and if nothing
+            # matches, the check falls back to live and is byte-for-byte as
+            # strict as it was before.
             if a in based:
                 bb = based[a].replace("\r\n", "\n")
                 ll = card.replace("\r\n", "\n")
-                sm = difflib.SequenceMatcher(None, bb, ll, autojunk=False)
+                # `ll` stays LIVE -- the digest resolve below reads it.
+                # Only the additive comparison is retargeted, into its
+                # own name, because reusing `ll` here silently changed
+                # what the pin check was comparing and turned
+                # manifest_digests_match red on a sound chain.
+                cmp_to = ll
+                if digest16(ll) != c.get("post_edit_digest"):
+                    shipped = _own_post_state(fname, a, base,
+                                              c.get("post_edit_digest"))
+                    if shipped is not None:
+                        cmp_to = shipped
+                sm = difflib.SequenceMatcher(None, bb, cmp_to,
+                                             autojunk=False)
                 bad = [o for o in sm.get_opcodes()
                        if o[0] not in ("equal", "insert")]
                 if bad:

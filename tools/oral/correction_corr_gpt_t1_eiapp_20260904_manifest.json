@@ -1,0 +1,60 @@
+{
+ "correction_id": "CORR-GPT-T1-EIAPP-20260904",
+ "title": "One deep-dive site in QB5_J#q2 still asserted automatic EIAPP invalidation after Pass 1 corrected the rule above it",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "gpt_content_review",
+ "date": "2026-09-04",
+ "baseline_commit": "e0fc2aa",
+ "governing_commits": [
+  "32d2770"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_HIGHRISK_TRANCHE1_20260904.md",
+ "candidate_claim": "Founder/GPT independent high-risk review. Pass 1 (CORR-GPT-PASS1-20260904) corrected the absolute proposition 'going outside Technical File settings invalidates the EIAPP certificate' to the proper conditional / verification wording. Tranche 1 found one surviving candidate-facing site in the same card, equivalent to 'outside it the EIAPP is invalidated'.",
+ "candidate_verdict": "UPHELD. The site is the Deep-Dive Trap Questions block: 'Q: Can you advance the timing to recover performance? A: Only within the NOx Technical File - outside it the EIAPP is invalidated.' It is the same rejected proposition, in the same card, in the answer to a question a candidate will actually be asked. This is known_traps entry 66 firing again in the card that produced it: correcting a rule does not correct the illustration that follows it. THE REST OF THE ANSWER WAS NOT REOPENED.",
+ "authority": {
+  "governing_record": "CORR-GPT-PASS1-20260904, whose authority block carries the NOx Technical Code 2008 operative text at 2.4.1, 2.4.3.1, 2.4.4, 6.2.1.1, 6.2.1.2 and 6.2.1.4 and the reasoning why the absolute form is impossible. NOTHING NEW IS ESTABLISHED HERE. This record propagates an already-governed proposition to a site the earlier scope pass missed, and the corrected text is the Pass-1 wording.",
+  "corrected_proposition": "'Only within the full range of adjustments the NOx Technical File identifies as allowable. Working outside the approved configuration has to go down the applicable approved route - amendment of the technical file, and verification at survey by the engine parameter check method - and an unapproved departure can leave the engine no longer compliant with its certified NOx configuration.' Word-for-word the modality Pass 1 established in the body Trap point and the REG-BOX."
+ },
+ "cards": [
+  {
+   "correction_action_id": "CORR-GPT-T1-EIAPP-01",
+   "file": "QB5_J.html",
+   "path": "meoclass1/QB5_J.html",
+   "anchor": "q2",
+   "classification": "PRIMARY_CORRECTION",
+   "classification_note": "SUBSTANTIVELY this is a propagation: the proposition, the authority and the corrected wording all come from CORR-GPT-PASS1-20260904 and nothing new is established. It is recorded as PRIMARY_CORRECTION because it is this record's only card and the schema requires exactly one primary per record; classifying it PROPAGATED_FACT_CORRECTION would leave the record with no primary and fail the manifest audit. The propagation character is carried by the supersession chain and by this record's propagation block, not by the label.",
+   "pre_edit_digest": "369ef405a38c377e47e42e1fc031f6d175756a8c4642bb7cca15ea5f387eec11",
+   "post_edit_digest": "d7574e7e349cbfaa9cacfc22ca6e880c46dfcf18126721fc4028d157d1b92f8f",
+   "supersedes": {
+    "manifest": "correction_corr_gpt_pass1_20260904_manifest.json",
+    "action_id": "CORR-GPT-P1-01",
+    "post_edit_digest": "369ef405a38c377e47e42e1fc031f6d175756a8c4642bb7cca15ea5f387eec11"
+   },
+   "supersession_note": "Third link in the chain H6-001 -> CORR-GPT-P1-01 -> this record. Pass 1's pin stands unaltered and its claim becomes strictly stronger. Note what this chain records: a correction record SUPERSEDED ONE DAY LATER by a further correction to the same card for the same defect family, which is exactly the history the record family exists to keep legible.",
+   "changed_propositions": [
+    "Deep-Dive Trap Questions: 'A: Only within the NOx Technical File - outside it the EIAPP is invalidated.' -> the governed Pass-1 proposition: the full range of allowable adjustments, the approved route (technical-file amendment and verification at survey by the engine parameter check method), and the conditional consequence."
+   ],
+   "deliberately_unchanged": [
+    "Every other proposition in the card. The diagnostic spine, the ISO 19030 scope wording, the 42,700 kJ/kg reference LCV, the REG-BOX and the body Trap point are all Pass-1 governed and all correct.",
+    "The other three trap questions in the same block, which are sound as written."
+   ]
+  }
+ ],
+ "propagation": {
+  "scope_pass": "CARD-SCOPED SWEEP, as the review directed. After the fix, QB5_J.html contains zero occurrences of 'EIAPP is invalidated' and zero candidate-facing positive assertions of automatic EIAPP invalidation. The card's surviving EIAPP mentions are the REG-BOX and body Trap point, both of which state the conditional form.",
+  "found_and_not_swept": [
+   "QB3_F carries EIAPP language in two places - a CE-relevance line and a trap answer. Pass 1 examined both and left them, because the trap is already conditional in both directions ('can', 'if') and the CE line is qualified by 'unauthorised'. That adjudication is UNCHANGED and re-asserted here: neither states the absolute claim, and the card is a different subject outside this tranche's authorisation."
+  ]
+ },
+ "invariants": [
+  "This is a propagation correction under an existing ancestry. No new legal effect is asserted and no new authority is cited.",
+  "The answer was not reopened: one sentence changed.",
+  "Corpus totals unmoved: 761 canonical questions across 86 files."
+ ],
+ "content_index_effect": "None. The card keeps its id, anchor and question text.",
+ "known_traps_entries": [
+  72
+ ],
+ "note": "SURGICAL. One sentence, under an ancestry one day old."
+}

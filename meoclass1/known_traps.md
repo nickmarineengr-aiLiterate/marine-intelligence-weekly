@@ -1926,3 +1926,131 @@ false §6.3 hook is the same error with a better number.
 GREP: SKIP. This entry quotes the rejected wording — "ISM Code §5" as a CE
 handover basis — in order to reject it, so a flat phrase scan matches the
 correction rather than the defect.
+
+
+### 70. A criterion with three limits is not the same criterion with one
+
+`QB2_A#q11` and `#q33` taught the Grain Code residual-area criterion as, in
+substance, **"the area up to 40°"**. Read from the Code as adopted, in the annex
+to **MSC.23(59)**, **A 7.1.2** takes that area *"up to the angle of heel of
+maximum difference between the ordinates of the two curves, or 40° or the angle
+of flooding (θf), **whichever is the least**"*.
+
+**Why dropping two limbs is not a rounding error.** The three limits are joined
+by *whichever is the least*, so the required area is the **smallest** of the
+three — and on a great many grain loading conditions the governing limit is the
+**maximum-difference angle**, which falls well before 40°. A candidate taught the
+short form integrates too far and gets a number that passes when the ship does
+not. This is entry 66's family — a claim's **shape** carries meaning the numbers
+in it do not — but it is a distinct case, because here no word was absolute or
+conditional: an enumeration simply lost two of its three members.
+
+**The same card, the same day, in the opposite direction.** `#q11` also described
+the shifted grain surface as *"an angle matching the rolling amplitude"*. Part B
+never models the roll. It prescribes an **assumed** surface after shifting, and
+the value depends on the compartment: **15°** filled and trimmed (B 2.3); **25°**
+partly filled and unsecured (B 5.1); **25°, but 15° in sections where the void
+area is small enough**, filled and untrimmed under A 10.3.1 (B 3.2.1); and
+**15° abreast, 25° in the ends** under A 10.3.2 (B 3.3). Two of those live inside
+one compartment. So the failure mode is not just "wrong angle" — it is believing
+there is **one** angle to be right about.
+
+**The instrument was on disk the whole time.** `SRC-GRAINCODE-MSC23-59` was
+registered on 4 September 2026 by the previous pass, and both defects are visible
+on pages 5, 24, 27 and 28 of it. Nothing was inferred, and nothing needed to be:
+the correction cost one PDF read. Register a source and then actually open it.
+
+GREP: SKIP. This entry quotes the rejected wording in order to reject it.
+
+
+### 71. Two mechanisms, one agent, and an unsafe conclusion in between
+
+`QB2_A#q7` told the candidate the answer *"must be: **No, CO₂ will not extinguish
+a Li-ion thermal runaway**"*, and that releasing it *"can waste your fixed
+extinguishing agent"*.
+
+**Half of that was right, and the half that was right is what made the rest
+persuasive.** CO₂ genuinely does not remove heat from the cells, does not stop
+the internal electrochemical self-heating, and cannot by itself prevent
+propagation or re-ignition. From that true premise the card drew a conclusion
+about a **different** mechanism: flaming combustion in an enclosed space is
+oxygen-dependent, and suppressing it is exactly what a fixed gaseous installation
+in a protected space is for.
+
+**The operational conclusion is the dangerous part, not the chemistry.** A card
+that tells a Chief Engineer to hold back an installed fixed system because
+lithium is involved is not making an academic error — it is advice he may one day
+act on. The release decision belongs to the **Master** under the ship's fire
+control plan, and it turns on the location and accessibility of the fire, whether
+the space is enclosed and sealable, whether anybody is unaccounted for inside,
+and what is actually installed. Not on the cargo's chemistry.
+
+**A universal sequence is its own defect.** The old 60-second answer gave one
+fixed action list with no reference to any of those variables. Correcting the CO₂
+proposition while leaving that intact would have left the card teaching the same
+shape of error.
+
+**And a circular can be cited at the wrong scope while being perfectly real.**
+The same reg-box carried **MSC.1/Circ.1615** described as *"Guidelines for
+preventing and mitigating lithium battery fires"*. The circular exists, it is
+IMO's, and it does carry material on alternatively powered vehicles — but it is
+the *Interim guidelines for minimizing the incidence and consequences of fires in
+ro-ro spaces and special category spaces of new and existing **ro-ro passenger
+ships***. A wrong-scope citation survives every check that asks "does this
+instrument exist?" and fails only the one that asks "does it govern *this*?".
+
+GREP: SKIP. This entry quotes the rejected wording in order to reject it.
+
+
+### 72. Correcting the rule does not correct the illustration — twice, in the same card, one day apart
+
+Entry 66 recorded that `CORR-GPT-PASS1-20260904` corrected three cards which had
+stated conditional rules absolutely, and that a scope pass has to reach the
+**illustration** as well as the rule. `QB5_J#q2` was one of those cards.
+
+Twenty-four hours later, the next independent review found that its **Deep-Dive
+Trap Questions** block still read: *"Q: Can you advance the timing to recover
+performance? **A: Only within the NOx Technical File — outside it the EIAPP is
+invalidated.**"* The body Trap point and the REG-BOX had both been corrected. The
+worked example underneath them had not.
+
+**What makes this worth its own entry rather than a footnote to 66.** Pass 1
+*knew* the lesson — it is the entry Pass 1 itself wrote — and the sweep still
+missed the site, because the surviving text does not repeat the phrase the sweep
+was built around. It is a **question-and-answer pair**, in a collapsed deep-dive,
+phrased as dialogue rather than as a rule. A grep shaped like the rule finds the
+rule.
+
+**The cheap defence.** After a modality correction, enumerate every block in the
+card by name — short answers, body, numbers, reg-box, CE tip, each deep-dive
+block — and read the ones a phrase sweep would not match. There are usually eight
+or nine, and the whole exercise is minutes.
+
+GREP: SKIP. This entry quotes the rejected wording in order to reject it.
+
+
+### 73. A defect found in one card is a defect measured in one card
+
+`QB5_C_B#q5`'s 15-second answer was reported empty, and it was. The obvious fix
+is a whole-file string replace of the empty block. That replace would have
+matched **eight** times: seven other cards in the same file carry the identical
+empty block, and none of them was authorised by anything.
+
+**So the edit was card-scoped by balanced-div extraction**, with an assertion that
+each replacement matches exactly once *inside the q5 block*. The seven others are
+recorded in the manifest's `found_and_not_swept` and reported, not fixed.
+
+**The same shape, in the other direction, in the same card.** The reg-box was
+reported malformed — four `reg-desc` cells with no `reg-code`. Repairing it
+surfaced a second defect nobody had reported: **STCW Table A-III/2** sitting in a
+casualty-investigation reference box, a competence standard supporting no
+proposition the card makes. That is the same class as the **SOLAS V/14** hook
+deleted from the `QB5_B` cheat-sheet pre-arrival row in the same pass. One was
+authorised and one was not, so one was fixed and one was described accurately and
+reported. **Finding an eighth defect while fixing seven is not authorisation to
+fix the eighth.**
+
+**And an empty block is a scope trap of its own.** A blank answer has no wording
+to sweep for, no digest that looks wrong and no proposition to contradict. It is
+invisible to every content gate in the toolchain and visible to any candidate who
+opens the card.

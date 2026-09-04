@@ -1,0 +1,90 @@
+{
+ "correction_id": "CORR-GPT-T1-QB5CB-20260904",
+ "title": "QB5_C_B#q5 bounded quality repair - an empty short answer, a malformed reg-box built on the wrong ISM section, a truncated instrument title, a CE tip answering a different question, a seizure power the Chief Engineer does not have, and an automatic legal consequence no law imposes",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "gpt_content_review",
+ "date": "2026-09-04",
+ "baseline_commit": "e0fc2aa",
+ "governing_commits": [
+  "32d2770"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_HIGHRISK_TRANCHE1_20260904.md",
+ "candidate_claim": "Founder/GPT independent high-risk review found QB5_C_B#q5 the weakest reviewed card, with seven reported defects: (A) empty 15-second answer; (B) bare 'ISM Code Section 5' used as casualty-investigation authority; (C) malformed REG-BOX, four reg-desc elements with no reg-code; (D) truncated Casualty Investigation Code title; (E) a hostage/piracy CE tip on a casualty-investigation question; (F) 'physically seize and lock away' the Oil Record Book; (G) 'will result in immediate criminal prosecution, cancellation of the Certificate of Competency'. The review also reported an unsupported SOLAS V/14 hook on a QB5_B cheat-sheet pre-arrival row.",
+ "candidate_verdict": "ALL SEVEN CONFIRMED, PLUS THE CHEAT-SHEET HOOK. Each was checked against the live card and its governing source before anything was changed, and the corrections are bounded to the confirmed defects - the card was NOT rewritten. Two findings turned out to be larger than reported and are recorded rather than silently widened: the empty 15-second block is one of EIGHT in this file, and the REG-BOX also carries STCW Table A-III/2, which is a competence standard rather than an investigation provision and is the same defect class as the SOLAS V/14 hook.",
+ "authority": {
+  "A_empty_short_answer": "CONFIRMED by inspection: the block was literally '<span class=\"pb-label\">15-Second Answer</span></div>' with no content. Written from the card's OWN already-verified substance - stabilise, preserve, report through the Master and DPA, the flag State's marine safety investigation Authority conducts the investigation, the company's runs under ISM 9. NO NEW DOCTRINE IS INTRODUCED; every proposition in it already appeared in the 60-second answer or the body.",
+  "B_ism_section_5": "CONFIRMED AND REMOVED. ISM Code section 5 is 'Master's Responsibility and Authority'. That was established by CORR-ISMSEC5-20260904 in Pass 3 and is unchanged. It is not a casualty-investigation provision and cannot support anything this card says, so the row is removed rather than re-described. The actual applicable sources were used: the Casualty Investigation Code for the investigation, and ISM section 9 - already cited twice elsewhere in this card - for the company's own investigation. No citation was created to fill a slot.",
+  "C_malformed_regbox": "CONFIRMED: all four reg-item elements carried a reg-desc holding a bare instrument name in <strong> tags and no reg-code at all, so the rendered box showed four descriptions and no codes. Repaired to the house shape: every row now has a reg-code naming the instrument and a reg-desc stating the proposition it supports. THE ROW COUNT IS UNCHANGED AT FOUR.",
+  "D_cic_title": "CONFIRMED. The body read 'the IMO Code of the International Standards and Recommended Practices for a Safety Investigation into a Marine Casualty.' - truncated. The instrument is the Code of the International Standards and Recommended Practices for a Safety Investigation into a Marine Casualty OR MARINE INCIDENT (Casualty Investigation Code), adopted by resolution MSC.255(84). The concise display term 'Casualty Investigation Code' is used in the running text with the full identity given once.",
+  "E_ce_tip": "CONFIRMED. The question is a war-zone fatality investigation; the tip taught hostage/piracy posture - 'never independently negotiate with an armed party'. The card's own Trap Warning does involve armed boarders demanding documents, which is why the tip was not simply deleted, but that is not the examiner discriminator. The discriminator is WHO INVESTIGATES, and the tip now gives it: the flag State's marine safety investigation Authority under the Casualty Investigation Code, the company under ISM 9 through the Master and DPA, and the Chief Engineer stabilising, preserving and giving a factual account. The refuse-unilateral-disclosure substance is retained in the form the card's own Trap Warning supports - release records only through the Master to those authorised to receive them.",
+  "F_seizure": "CONFIRMED. No investigation or evidence procedure gives the Chief Engineer a power to seize statutory records, and the Oil Record Book in particular must remain available for inspection by the flag State, the port State and the investigating authority - impounding it would obstruct the very inspection regime it exists for. The bullet now teaches the safer principle the review specified: preserve, prevent alteration or destruction, make available to authorised investigators, and maintain a documented chain of custody as directed by the company, the Master and the investigating authority. The practical protection the card already had - open a fresh supplementary logbook so the originals are not written into - is kept.",
+  "G_automatic_consequence": "CONFIRMED. No governing law makes prosecution or CoC cancellation an automatic consequence of failing to preserve data or of altering a logbook. What follows depends on the facts, the jurisdiction and the authority seized of the case. The claim is now conditional - may lead to investigation and, depending on those things, to administrative or criminal proceedings, action against the certificate, and civil liability - and says in terms that it is decided by the competent authority on the evidence and is not automatic. This is known_traps entry 66's defect class again. The professional warning is NOT weakened.",
+  "cheatsheet_solas_v14": "CONFIRMED. SOLAS chapter V, regulation 14 is 'Ships' manning'. The QB5_B_CheatSheet 'Taking Over as CE' Pre-arrival row - review vessel history, outstanding defect list, SMS documents, previous PSC reports, class certificate validity - is not governed by it. THE HOOK IS DELETED AND NOTHING IS SUBSTITUTED; the ISM 6.3 hook that does govern the row remains. The Manning check row's SOLAS V/14 was examined and DELIBERATELY LEFT ALONE, because manning is exactly what V/14 governs."
+ },
+ "cards": [
+  {
+   "correction_action_id": "CORR-GPT-T1-QB5CB-01",
+   "file": "QB5_C_B.html",
+   "path": "meoclass1/QB5_C_B.html",
+   "anchor": "q5",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "6fac9a64960f6e445a4cbafae3a954f64cdd60d070351a84bdf822329e489f07",
+   "post_edit_digest": "7480390d370a011b1fc90a0ce6621c8cae1547a30f7e3c2d51a427b7164c8f14",
+   "supersedes": {
+    "manifest": "correction_corr_cicterm_20260904_manifest.json",
+    "action_id": "CORR-CICTERM-01",
+    "post_edit_digest": "6fac9a64960f6e445a4cbafae3a954f64cdd60d070351a84bdf822329e489f07"
+   },
+   "supersession_note": "Fourth link in the chain: CORR-MSACT2B-C-03 -> CORR-CICTERM-01 -> this record. Every predecessor pin stands unaltered. The 'marine safety investigation' terminology CORR-CICTERM-01 established in the 60-second answer is UNCHANGED here and is re-asserted by this record's content gate; what is corrected here is a different set of defects in the same card.",
+   "changed_propositions": [
+    "15-second answer: EMPTY -> stabilise the technical platform, preserve records and data unaltered, report through the Master to the DPA and flag State, with the marine safety investigation conducted by the flag State's Authority and the company's own under ISM 9, and the CE's role stated as stabilise, preserve and account - not investigate.",
+    "Body: 'Logbook Securing: Physically seize and lock away the active Engine Room Logbook, Bell Book, and Oil Record Book' -> 'Logbook Preservation', preserving exactly as they stand with nothing altered, erased or back-dated, secured on the Master's authority under the SMS, an express 'the records are not mine to impound', statutory records remaining available for inspection, release through the Master to those authorised, and a documented chain of custody.",
+    "Body: 'the IMO Code of the International Standards and Recommended Practices for a Safety Investigation into a Marine Casualty.' -> the full instrument identity including 'or Marine Incident', with resolution MSC.255(84).",
+    "CE Relevance: 'will result in immediate criminal prosecution, cancellation of the Certificate of Competency (CoC), and massive international legal liability' -> a conditional consequence expressly stated to be decided by the competent authority on the evidence and not automatic.",
+    "REG-BOX: four code-less reg-desc rows -> four code + description rows; ISM Code Section 5 REMOVED and replaced by the Casualty Investigation Code (MSC.255(84)); MLC 4.3, SOLAS XI-2 / ISPS and STCW Table A-III/2 given accurate descriptions of what they actually govern.",
+    "CE Oral Tip: hostage/piracy posture -> the real examiner discriminator, who investigates, with the flag State Authority, the ISM 9 company investigation and the CE's own role named."
+   ],
+   "deliberately_unchanged": [
+    "The 60-second answer's 'marine safety investigation' terminology and its statement that the investigation is conducted by the flag State's Authority and not by the Chief Engineer - governed by CORR-CICTERM-01 and CORR-MSACT2B-C-03 and correct.",
+    "The Merchant Shipping Act, 2025 Part XI ss.231-232 treatment in Numbers / Regs, governed by CORR-MSACT2B-C-03.",
+    "The True Confidence casualty link and its explicit note that the question's 'three Indian crew died' premise is a training scenario that does not match her actual crew nationalities.",
+    "The Trap Warning about armed boarders demanding original documents. It is consistent with the corrected preservation principle - refuse to surrender ORIGINALS to non-statutory entities, offer certified copies, escalate - and was not reopened.",
+    "The whole crisis-stabilisation, digital-telemetry, VDR, documentation and interview structure of the answer.",
+    "STCW Table A-III/2 in the REG-BOX. It is thin for this question and is the same defect class as the deleted SOLAS V/14 hook, but it was NOT a reported finding, so under the review's own report-only rule for new discoveries it is described accurately and REPORTED rather than removed."
+   ]
+  }
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/QB5_B_CheatSheet.html",
+   "what": "The 'Taking Over as CE' checklist Pre-arrival row. Regulatory hook 'Company SMS handover procedure; ISM Code 6.3 (familiarisation on a new assignment) / SOLAS V/14' -> the same hook with '/ SOLAS V/14' DELETED and nothing put in its place. Thirteen bytes removed. The Manning check row's SOLAS V/14 is untouched and correct.",
+   "why_it_matters": "A cheat sheet carries no q-card, so no release guard pins it and no digest can be taken over it. It is declared here so the event's scope is complete, and its substance is asserted instead by this record's named content gate - the same treatment CORR-MSACT2B-CEHANDOVER-20260904 gave the Formal declaration row of this same table. It rides on this record rather than standing alone because the schema makes 'cards' load-bearing and a record with an empty cards list passes every card-oriented check vacuously; it is grouped here because it is the same defect class as finding B - an authority attached to a proposition it does not govern."
+  },
+  {
+   "path": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_HIGHRISK_TRANCHE1_20260904.md",
+   "what": "The authorisation record and full findings report for the whole tranche, including the per-finding confirmed/not-confirmed adjudication for this card and the report-only list.",
+   "why_it_matters": "Named as every family's authorisation_source."
+  }
+ ],
+ "propagation": {
+  "scope_pass": "Every edit in this family was CARD-SCOPED by balanced-div extraction rather than by whole-file string replacement, and the edit script asserts exactly one match INSIDE the q5 block for each replacement. That is not defensive habit: the empty 15-second block string occurs EIGHT times in this file, so a whole-file replace would have silently authored seven cards nobody authorised.",
+  "found_and_not_swept": [
+   "QB5_C_B.html has SEVEN remaining empty 15-second answer blocks - q1, q2, q3, q4, q6, q7 and q8 (q9 has content). Outside this tranche's authorisation. REPORTED, not fixed.",
+   "The bare-reg-desc REG-BOX shape may not be unique to q5. Not swept, because the review's scope is this card and expansion is barred. REPORTED."
+  ]
+ },
+ "invariants": [
+  "The card's substance is unchanged except at the seven confirmed defects. No section was rewritten for style.",
+  "Nothing was invented: the 15-second answer is assembled from propositions already present and already governed elsewhere in the card, and no citation was created to fill an empty reg-box slot.",
+  "The REG-BOX row count is unchanged at four.",
+  "The professional warning about altering records is not weakened - only its modality is corrected.",
+  "No new card, no examiner attribution altered, no syllabus mapping changed, no past paper touched.",
+  "Corpus totals unmoved: 761 canonical questions across 86 files."
+ ],
+ "content_index_effect": "None on counts. The card keeps its id, anchor and question text; the cheat sheet carries no q-card.",
+ "known_traps_entries": [
+  73
+ ],
+ "note": "SURGICAL. One card, one cheat-sheet cell. Two findings were larger than reported and are recorded in propagation.found_and_not_swept rather than acted on."
+}
