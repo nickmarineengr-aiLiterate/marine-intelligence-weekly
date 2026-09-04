@@ -1801,3 +1801,60 @@ GREP: SKIP. This entry quotes the rejected wordings — "invalidates the EIAPP
 certificate", "the standard method for separating hull fouling from engine
 deterioration" and "stop being valid" — in order to reject them, so a flat phrase
 scan matches the correction itself rather than the defect.
+
+### 67. A repealed statute's vocabulary outlives it, and the caveat that admits this is the one nobody removes
+
+GPT review pass 2B mapped the **Merchant Shipping Act 2025** against the held
+Gazette text and found two distinct failures on the same subject, neither of
+which any existing gate could see.
+
+**The stale word.** Twelve candidate-facing places taught the Indian casualty
+machinery as *report → preliminary inquiry → formal investigation before a court
+with assessors*. That is the **1958** structure. The expression "formal
+investigation" occurs **zero times** in the 2025 Act. Part XI is two sections —
+notice within twenty-four hours (`s.231(2)`), preliminary inquiry
+(`s.231(3)-(4)`), **marine safety investigation** (`s.231(5)-(6)`), administrative
+action or proceedings (`s.232`) — and the certificate power the old "formal
+investigation" carried now sits separately at `s.312`. One page called the change
+a *"2025 renumbering"*. It is a **restructure**: a limb was dropped, not
+renumbered. Never describe a consolidating statute as a renumbering unless the
+limbs actually survive.
+
+**The caveat that became furniture.** Twenty places carried
+*"sections pending verification"* or *"cite at Part level"*. Written honestly, it
+is the right thing to publish while evidence is missing. But a caveat is a
+**debt**, and this one had been silently rolled forward until a cheat sheet was
+instructing candidates, as house doctrine, to cite the Act at Part level forever.
+An unverified claim that announces itself is safe; an unverified claim that has
+been **institutionalised as a style rule** is not. Any placeholder of this shape
+needs an owner and a due date, or it becomes the standard.
+
+**Three things the mapping caught that a summary would not have.**
+
+* **`s.324(1)` is narrower than "except Part XIV".** The text is *"except Part XIV
+  **but not including section 411A therein**"* — the saving is Part XIV **minus**
+  s.411A. Every card stating the saving must carry that limb.
+* **The Act names "very serious marine casualty" exactly once, and does not define
+  it.** It appears only inside the `s.224(a)` inclusion list for *marine incident*.
+  A card saying "the Act defines it" is wrong; a card saying "the term does not
+  appear" is also wrong. The true claim is narrower than either, and only reading
+  the provision produces it.
+* **A wrong locator can carry a right proposition for weeks.** The source registry
+  had the shipping-master definition at `s.93(c)`. s.93 has no clause (c) — the
+  definition is in the **Explanation to s.91, clause (c)**. Nothing candidate-facing
+  was wrong, so nothing candidate-facing could ever have flagged it. Registry
+  locators need the same re-read as the claims they carry.
+
+**An extraction hazard that under-reports silently.** The Act's PDF separates a
+section number from its text with a `0x03` control byte as well as with a space.
+A `^[0-9]+[.]\s` scan therefore misses sections — `s.319` was reported "NOT FOUND"
+on the first pass and is present. The `s.281(2)` penalty table also renumbers its
+rows `1..N`, so a naive scan resolves "section 15" to a table row about s.139.
+**A negative result from a text scan is only evidence once the scan is proved
+able to find a positive.** This is the same family as entry 66's image-only scan:
+a file you hold is not a file you have read, and a scan that returns nothing may
+simply be blind.
+
+GREP: SKIP. This entry quotes the rejected wording — "formal investigation",
+"sections pending verification", "2025 renumbering" — in order to reject it, so a
+flat phrase scan matches the correction rather than the defect.
