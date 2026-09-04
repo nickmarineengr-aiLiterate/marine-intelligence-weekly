@@ -53,5 +53,8 @@
     "The Code's full title as printed elsewhere on the card was not touched, although it omits 'or Marine Incident'. Reported, not corrected.",
     "The card's REG-BOX 'ISM Code Section 5' row was not touched. It is the same misattribution family as CORR-ISMSEC5-20260904 but a different file and outside that record's stated scope. Reported."
   ],
+  "known_traps_entries": [
+    68
+  ],
   "note": "This record RETIRES two entries from validate_correction_msact2b.ADJUDICATED. Pass 2B could see these two surfaces but was not authorised to correct them, so it enumerated them honestly as 'reported, not corrected'. Correcting them turns those entries into stale no-ops - lines that can never match, and that would therefore silently re-license their own phrasings if anyone reinstated them. Removing them is what RESTORES that gate's reach, and mutate_correction_pass3.py mutations A and B require the Pass 2B gate to be the one that catches a reinstatement."
 }

@@ -1858,3 +1858,71 @@ simply be blind.
 GREP: SKIP. This entry quotes the rejected wording — "formal investigation",
 "sections pending verification", "2025 renumbering" — in order to reject it, so a
 flat phrase scan matches the correction rather than the defect.
+### 68. The Code's own term, and the fact that the investigation is not yours
+
+`QB5_C_B#q5` told the candidate that once the ship is secure he *"transitions to
+the formal investigation phase under the IMO Casualty Investigation Code"*, under
+a heading reading *"Formal Investigation & Evidence Preservation Procedure"*.
+Entry 67 removed that expression wherever it was attributed to the **Merchant
+Shipping Act 2025**. This is the same word attributed to a different
+instrument, and it is wrong there too.
+
+**The term.** MSC.255(84) para **2.11** defines **marine safety investigation**:
+*"an investigation or inquiry (however referred to by a State), into a marine
+casualty or marine incident, conducted with the objective of preventing marine
+casualties and marine incidents in the future"*. The expression "formal
+investigation" occurs **zero times** anywhere in the Code, while "marine safety
+investigation" is its term throughout. The parenthesis *"however referred to by a
+State"* is permission for a **State** to name its own procedure differently. It
+is not licence to attribute a different name to the Code.
+
+**The larger half.** Swapping the term alone would have left a worse claim
+standing. A Chief Engineer does not conduct a marine safety investigation at
+all: para **2.13** gives it to a *"marine safety investigation Authority"* —
+*"an Authority in a State"* — and paras 6.1 and 6.2 place the duty on the flag
+State. What the CE actually does is **preserve evidence for** that investigation
+and run the **company's** investigation under **ISM Code §9**. In the room, a
+candidate who says he will "conduct the formal investigation" has claimed a
+statutory function that is not his, which is a worse error than the vocabulary.
+
+Past papers, and any table headed as the 1958 structure, keep "formal
+investigation" and are correct: those sittings predate the 2025 Act's
+commencement, and a present-day term must never be written into a
+sitting-anchored answer.
+
+GREP: SKIP. This entry quotes the rejected wording — "formal investigation
+phase under the IMO Casualty Investigation Code" — in order to reject it, so a
+flat phrase scan matches the correction rather than the defect.
+
+### 69. ISM section 5 belongs to the Master, and a reg-box row is not an analogy
+
+`QB5_B#q1`'s Regulatory References box cited **ISM Code §5 — Master's
+Responsibility and Authority** and described it as *"CE assuming CE role must
+review and understand the vessel's SMS immediately"*. The cheat sheet's
+pre-arrival row carried the same hook.
+
+**What §5 says.** Read from A.741(18) with every held amendment resolution
+re-scanned for sections 5 to 7: §5.1 requires the **Company** to define and
+document **the master's** responsibility, and §5.1.5 — *"periodically reviewing
+the SMS and reporting its deficiencies to the shore based management"*, the word
+"periodically" added by MSC.273(85) — is the **Master's** SMS-review limb. The
+section does not mention the chief engineer, a handover, or a takeover. The card
+had transposed the Master's duty onto the incoming CE.
+
+**Why "it is only an analogy" does not survive contact with the format.** The row
+sits inside a box headed *Regulatory References*: the `reg-code` cell names the
+clause and the `reg-desc` cell states a CE duty in the imperative. In that
+position the pairing asserts §5 as the regulatory **basis** for the duty. A
+citation format carries a claim the prose around it does not get to withdraw.
+
+**And do not over-correct.** ISM **§6.3** — familiarisation for *"personnel
+transferred to new assignments"*, unamended — and **§7**, replaced by
+MSC.273(85) as *"SHIPBOARD OPERATIONS"*, are what actually support a CE takeover,
+together with the **Company's own SMS handover procedure**. But **no ISM clause
+prescribes a CE takeover certificate**: "handover", "takeover", "taking over" and
+"chief engineer" occur zero times in the Code. Replacing a false §5 hook with a
+false §6.3 hook is the same error with a better number.
+
+GREP: SKIP. This entry quotes the rejected wording — "ISM Code §5" as a CE
+handover basis — in order to reject it, so a flat phrase scan matches the
+correction rather than the defect.
