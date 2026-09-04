@@ -1,0 +1,64 @@
+{
+  "correction_id": "CORR-ISMSEC5-20260904",
+  "title": "ISM section 5 is the Master's responsibility and authority, and was cited as the incoming CE's",
+  "date": "2026-09-04",
+  "kind": "POST_RELEASE_CORRECTION",
+  "status": "AUTHORISED",
+  "origin": "gpt_content_review",
+  "baseline_commit": "c4420f8",
+  "governing_commits": [
+    "77c5591"
+  ],
+  "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_PASS3_20260904.md",
+  "candidate_claim": "GPT review pass 3 directed that every remaining ISM section 5 reference in QB5_B#q1 and QB5_B_CheatSheet be inspected and classified: (A) a literal claim that section 5 governs CE takeover, (B) an analogy explaining command and responsibility, or (C) an unrelated Master-specific reference; that class A be removed or corrected and class B preferably reworded; and that the replacement must NOT claim section 6.3 or section 7 literally mandates a CE takeover certificate.",
+  "candidate_verdict": "UPHELD. Two occurrences remain, and BOTH are class A. CORR-MSACT2B-CEHANDOVER-20260904 had listed the QB5_B#q1 row under deliberately_unchanged on the reading that it 'draws an analogy rather than asserting a CE obligation'. That reading is rejected here: the row sits inside a box headed Regulatory References, its reg-code cell names the clause and its reg-desc cell states a CE duty in the imperative - 'CE assuming CE role MUST review and understand the vessel's SMS immediately'. That duty is ISM 5.1.5, the MASTER's SMS-review limb, transposed onto the Chief Engineer. In that position the pairing does not draw an analogy; it asserts section 5 as the regulatory basis for a CE obligation, and it is contradicted by the card's own body. Under either classification the review directs the same edit, so the disagreement changes this record, not the outcome.",
+  "authority": {
+    "instrument": "ISM Code, resolution A.741(18) adopted 4 November 1993 as amended, SRC-ISMCODE-CONSOLIDATED, held at F:/RulesApp-Local-Input/true-source/03-imo-instruments/ISM-Code/_base-and-amendments/. Base text sha256 4aa9ebfe484f579c05d5cc58ea09bbc15d03f6d6a6a48736fb744854db1c3e9c, hashed before use.",
+    "how_read": "The base resolution's text layer was extracted and read, and then EVERY held amendment resolution was re-scanned for sections 5, 6 and 7. That re-scan was necessary rather than optional: the source registry's own checked_how field records that its earlier scan was scoped to sections 9 and 10, so that row could not answer this question and was not relied on to. Every claim below was re-derived from the held source in this pass. Pass 2B's findings were treated as an AUTHORISATION, not as evidence.",
+    "amendment_history_5_to_7": "MSC.273(85) item 3 adds the word 'periodically' at the beginning of paragraph 5.1.5; section 5 otherwise stands as adopted. MSC.273(85) item 4 REPLACES the whole of section 7, which is now titled 'SHIPBOARD OPERATIONS' and reads 'The Company should establish procedures, plans and instructions, including checklists as appropriate, for key shipboard operations concerning the safety of the personnel, ship and protection of the environment. The various tasks should be defined and assigned to qualified personnel.' MSC.353(92) replaces paragraph 6.2 (manning). Paragraph 6.3 is UNAMENDED. MSC.104(73), MSC.179(79) and MSC.195(80) touch none of sections 5 to 7.",
+    "section_5": "'5 MASTER'S RESPONSIBILITY AND AUTHORITY'. 5.1: the Company should clearly define and document THE MASTER'S responsibility with regard to five limbs, of which .5 is 'periodically reviewing the SMS and reporting its deficiencies to the shore based management'. 5.2: the SMS must contain a clear statement emphasizing the Master's authority, and the master has overriding authority. The section does not mention the chief engineer, a handover or a takeover.",
+    "section_6_3": "Verbatim and unamended: 'The Company should establish procedures to ensure that new personnel and personnel transferred to new assignments related to safety and protection of the environment are given proper familiarization with their duties. Instructions which are essential to be provided prior to sailing should be identified, documented and given.'",
+    "the_boundary": "NO ISM CLAUSE PRESCRIBES A CE TAKEOVER CERTIFICATE, and the corrected surfaces do not claim one. CORR-MSACT2B-CEHANDOVER-20260904 established the whole-document negative behind that: the ISM Code contains zero occurrences of 'handover', 'takeover', 'taking over' and 'chief engineer', its single 'take over' being inside the 1.1.2 definition of 'Company'. The governing principle written into both surfaces is: the Company's SMS and its own handover procedure, SUPPORTED BY ISM familiarisation (6.3) and documented operating procedures (7)."
+  },
+  "cards": [
+    {
+      "correction_action_id": "CORR-ISMSEC5-01",
+      "file": "QB5_B.html",
+      "path": "meoclass1/QB5_B.html",
+      "anchor": "q1",
+      "classification": "PRIMARY_CORRECTION",
+      "pre_edit_digest": "d3ee49b93849eecad1cfe402f7f6c84915149292edffa304c96aeecd45ba15d3",
+      "post_edit_digest": "7fd1a5bd6d1ed492931d02a4e7c825ee7771a30678e2773ae13da167c6740756",
+      "supersedes": {
+        "manifest": "correction_corr_msact2b_cehandover_20260904_manifest.json",
+        "action_id": "CORR-MSACT2B-A-01",
+        "post_edit_digest": "d3ee49b93849eecad1cfe402f7f6c84915149292edffa304c96aeecd45ba15d3"
+      },
+      "supersession_note": "CORR-MSACT2B-A-01 corrected this card's MS Act row hours earlier and listed THIS row under deliberately_unchanged, flagging it for review. This record is that review, so it descends from it explicitly rather than quietly overwriting a state another record still pins. Same digest convention throughout - full sha256 over the balanced card block, LF-normalised.",
+      "changed_propositions": [
+        "REG-BOX: 'ISM Code s.5 - Master's Responsibility and Authority - CE assuming CE role must review and understand the vessel's SMS immediately' -> 'ISM Code s.6.3 - Familiarisation on a new assignment', stating 6.3's actual subject, naming s.7 (procedures, plans and instructions for key shipboard operations) and the Company's own SMS handover procedure as what governs a CE takeover, stating expressly that no ISM clause prescribes a CE takeover certificate, and naming s.5 as the MASTER's Responsibility and Authority rather than the Chief Engineer's."
+      ],
+      "deliberately_unchanged": [
+        "The card's own sentence 'The ISM Code does not specify a detailed handover procedure, but ISM Sec. 3 (company responsibilities), Sec. 6 (resources and personnel), and Sec. 9 (non-conformity reporting) collectively require...'. It was already correct and is the formulation the reg-box has now been brought into line with.",
+        "Numbers to Memorise, which already names 'ISM Sec. 3, 6, 9, 10 - the four sections most relevant to handover' and never named s.5.",
+        "The MS Act 2025 s.46(1) row as corrected by CORR-MSACT2B-A-01, the ISM Code s.6 row, SOLAS Ch. V Reg. 14, MLC 2006 Reg. 2.3 and STCW 2010 Reg. VIII/1.",
+        "All seven handover phases, the deep dive, the Erika casualty link and the CE Oral Tip."
+      ]
+    }
+  ],
+  "artefacts": [
+    {
+      "path": "meoclass1/QB5_B_CheatSheet.html",
+      "what": "The 'Pre-arrival' row of the 'Taking Over as CE' checklist. Regulatory Hook 'ISM Code s.5 / SOLAS V/14' -> 'Company SMS handover procedure; ISM Code s.6.3 (familiarisation on a new assignment) / SOLAS V/14'. This is a SECOND occurrence that CORR-MSACT2B-CEHANDOVER-20260904 did not reach: that record corrected the 'Formal declaration' row, which is a different row of the same table, and the pre-arrival hook was not in its scope.",
+      "why_it_matters": "A cheat sheet carries no q-card, so no release guard pins it and no digest can be taken over it. It is declared here so the event's scope is complete, and its substance is asserted instead by the named content gate - both the positive (6.3 and the Company SMS are named) and the invariants (the two STCW Reg. VIII/2 s.5 alcohol-limit citations survive, and the Pass 2B 'Formal declaration' correction survives)."
+    }
+  ],
+  "propagation": "Every remaining ISM section 5 reference in the two named files was inspected and classified. QB5_B.html: exactly one, the q1 reg-box row - class A, corrected. QB5_B_CheatSheet.html: exactly one, the pre-arrival hook - class A, corrected. No occurrence in either file was class B or class C. The other 's.5' strings in the cheat sheet are STCW Reg. VIII/2 s.5, the 0.05% BAC limit - a different instrument, correct, and deliberately left, which is what a blind global substitution would have destroyed. OUT OF SCOPE AND REPORTED ONLY: QB5_C_B#q5's REG-BOX carries a bare 'ISM Code Section 5' row with no description on a casualty-investigation card - same family, different file, outside this record's stated scope.",
+  "invariants": [
+    "No claim is made that section 6.3 or section 7 mandates a CE takeover certificate; the card states the opposite expressly.",
+    "The two STCW Reg. VIII/2 s.5 citations in the cheat sheet are untouched.",
+    "The Pass 2B 'Formal declaration' row correction is untouched.",
+    "The card's own ISM Sec. 3 / 6 / 9 sentence is untouched."
+  ],
+  "note": "This record supersedes a state that CORR-MSACT2B-CEHANDOVER-20260904 still pins, and it changes the SUBJECT of that card's correction from the MS Act row to the ISM row. The earlier record's own content checks therefore have to keep passing against the new bytes, which is why its MS Act s.46(1) row is listed above as deliberately unchanged rather than merely assumed to be safe."
+}

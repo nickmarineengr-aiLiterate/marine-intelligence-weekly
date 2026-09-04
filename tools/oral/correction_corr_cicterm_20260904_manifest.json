@@ -1,0 +1,57 @@
+{
+  "correction_id": "CORR-CICTERM-20260904",
+  "title": "The card attributed \"formal investigation\" to a Code that does not use the expression",
+  "date": "2026-09-04",
+  "kind": "POST_RELEASE_CORRECTION",
+  "status": "AUTHORISED",
+  "origin": "gpt_content_review",
+  "baseline_commit": "c4420f8",
+  "governing_commits": [
+    "77c5591"
+  ],
+  "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_PASS3_20260904.md",
+  "candidate_claim": "GPT review pass 3 reported that QB5_C_B#q5 still carries candidate-facing text equivalent to 'formal investigation phase under the IMO Casualty Investigation Code' and a body heading 'Formal Investigation & Evidence Preservation Procedure', and directed that the exact Code terminology be determined from source and the candidate-facing wording replaced narrowly.",
+  "candidate_verdict": "UPHELD, AND THE TERM IS NOT THE WHOLE DEFECT. The expected concept - 'marine safety investigation' - is confirmed from MSC.255(84) para 2.11 and is the term the Code uses throughout. But reading the provision also settled WHOSE investigation it is: CIC 2.13 gives it to a State's marine safety investigation Authority, so the corrected sentence had to fix the ATTRIBUTION as well as the term. A bare swap - 'the marine safety investigation phase, which I conduct' - would have left a worse claim standing than the one it replaced, because it would have taught a Chief Engineer that he runs the flag State's statutory investigation.",
+  "authority": {
+    "instrument": "IMO resolution MSC.255(84), Code of the International Standards and Recommended Practices for a Safety Investigation into a Marine Casualty or Marine Incident (Casualty Investigation Code). Adopted 16 May 2008, in force 1 January 2010, made mandatory by SOLAS XI-1/6 (inserted by MSC.257(84)); Part III amended by MSC.390(94).",
+    "how_read": "Read from the structured extraction of the Code held in the casualty-investigation package: CASUALTY_DEFINITIONS.json, whose verification_status records 'VERIFIED (all 22 captured from official IMO PDF)' and whose every entry carries its own page locator into the MSC.255(84) annex; CASUALTY_PROVISION_MATRIX.md; and CASUALTY_INSTRUMENT_REGISTER.md. The definitions and the provision matrix were both opened. An index row is not evidence, so the register was not relied on alone. Every claim below was re-derived from the held source in this pass. Pass 2B's findings were treated as an AUTHORISATION, not as evidence.",
+    "the_term": "CIC 2.11, Annex Part I ch.2 p.8, verbatim: 'marine safety investigation' means 'an investigation or inquiry (however referred to by a State), into a marine casualty or marine incident, conducted with the objective of preventing marine casualties and marine incidents in the future; includes collection and analysis of evidence, identification of causal factors and making of safety recommendations as necessary'.",
+    "whose_investigation": "CIC 2.13: 'marine safety investigation Authority' means 'an Authority in a State, responsible for conducting investigations in accordance with this Code'. CIC 6.1 requires an investigation into every very serious marine casualty and 6.2 places responsibility on the flag State. The investigation is a State function throughout the Code. It is never a ship's officer's.",
+    "the_negative": "The expression 'formal investigation' occurs ZERO times anywhere in the held casualty-investigation package - definitions, provision matrix, instrument register and relationship objects alike - while 'marine safety investigation' occurs 106 times. CIC 2.11's parenthesis 'however referred to by a State' is a permission for a STATE to name its own procedure differently; it is not licence to attribute a different name to the Code.",
+    "why_not_a_flat_ban": "The card's own MS Act bullet, corrected by CORR-MSACT2B-CASUALTY-20260904, must remain free to tell the candidate that the 2025 Act does NOT use the expression. The gate is therefore an enumerated negative over the two adjudicated surfaces, not a phrase ban - the same conclusion Pass 2B reached after a proximity heuristic failed OPEN against its own mutations."
+  },
+  "cards": [
+    {
+      "correction_action_id": "CORR-CICTERM-01",
+      "file": "QB5_C_B.html",
+      "path": "meoclass1/QB5_C_B.html",
+      "anchor": "q5",
+      "classification": "PRIMARY_CORRECTION",
+      "pre_edit_digest": "117d0055981395d55da8d8bc8c2455d8c057062adf631b21c0dd8f4be80a1e31",
+      "post_edit_digest": "6fac9a64960f6e445a4cbafae3a954f64cdd60d070351a84bdf822329e489f07",
+      "supersedes": {
+        "manifest": "correction_corr_msact2b_casualty_20260904_manifest.json",
+        "action_id": "CORR-MSACT2B-C-03",
+        "post_edit_digest": "117d0055981395d55da8d8bc8c2455d8c057062adf631b21c0dd8f4be80a1e31"
+      },
+      "supersession_note": "CORR-MSACT2B-C-03 corrected this card's MS Act limb hours earlier and its pin is release evidence, unaltered here. Same digest convention throughout - full sha256 over the balanced card block, LF-normalised, exactly as validate_batch_b.card_digests computes it - so this chain engages no part of the 16/64 widening. This is the corpus's first correction-to-correction chain.",
+      "changed_propositions": [
+        "60-second: 'Once the vessel is secure, I transition to the formal investigation phase under the IMO Casualty Investigation Code and the ISM Code' -> evidence preservation for the flag State's MARINE SAFETY INVESTIGATION, named as the term the Code actually uses, with the express statement that under the Code it is conducted by the flag State's marine safety investigation Authority and not by the candidate, and with the company's own investigation attributed to ISM Code s.9.",
+        "Body heading: 'Formal Investigation & Evidence Preservation Procedure' -> 'Evidence Preservation & Company Investigation Procedure', so the heading names what the Chief Engineer actually does under it."
+      ],
+      "deliberately_unchanged": [
+        "The Numbers/Regs bullet 'IMO Resolution MSC.255(84): Casualty Investigation Code (Mandatory standard for marine safety investigations)'. Already correct.",
+        "The MS Act 2025 bullet in full, including its closing sentence that the 2025 Act does not use 'formal investigation' for this machinery. That is CORR-MSACT2B-CASUALTY-20260904's text and it is the one place on this card where the phrase must survive.",
+        "The Part XI machinery, s.231(2)/(3)-(4)/(5)-(6)/s.232, the Trap Warning, the CE Relevance paragraph, the Casualty Link and its True Confidence nationality caveat, the Examiner Chain, On My Vessel, and the REG-BOX."
+      ]
+    }
+  ],
+  "propagation": "Corpus-wide sweep for 'formal investigation' returns eight further files, every one dispositioned rather than assumed. QB9_H q1/q4/q11 and QB9_H_CheatSheet already teach 'marine safety investigation' and state the 2025 Act does not use the phrase - no action. pastpapers QP2304, QP2307, QP2503, QP2507 and QP2512 are sitting-anchored answers to MS Act 1958-era questions and are historically correct - a present-day term cannot be written into a past paper. oralnotes/miw-notes-mgmt-p15 heads its table '(Historical MS Act, 1958 Structure)' and oralnotes/simon-notes-p6 introduces its section list as '1958 numbering, for legacy reference' - both explicitly historical, no action. QB4_B's MV El Faro paragraph describes a US casualty investigation and attributes nothing to the IMO Code; it is outside this defect's family and is REPORTED, not changed. The propagation surface of this defect is therefore exactly the two sites declared above.",
+  "invariants": [
+    "No past paper was modified.",
+    "The card's 15-second block was NOT filled. It is EMPTY on this card, which is reported as a finding; the review bars adding 15/60 layers to a legacy file.",
+    "The Code's full title as printed elsewhere on the card was not touched, although it omits 'or Marine Incident'. Reported, not corrected.",
+    "The card's REG-BOX 'ISM Code Section 5' row was not touched. It is the same misattribution family as CORR-ISMSEC5-20260904 but a different file and outside that record's stated scope. Reported."
+  ],
+  "note": "This record RETIRES two entries from validate_correction_msact2b.ADJUDICATED. Pass 2B could see these two surfaces but was not authorised to correct them, so it enumerated them honestly as 'reported, not corrected'. Correcting them turns those entries into stale no-ops - lines that can never match, and that would therefore silently re-license their own phrasings if anyone reinstated them. Removing them is what RESTORES that gate's reach, and mutate_correction_pass3.py mutations A and B require the Pass 2B gate to be the one that catches a reinstatement."
+}
