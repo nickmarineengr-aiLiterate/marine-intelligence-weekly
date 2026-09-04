@@ -1730,3 +1730,74 @@ old value forever.**
 GREP: SKIP. This entry quotes the rejected expansion "Consolidated Inspection
 Campaign" and the truncated citation in order to reject them, so a phrase scan
 matches the correction itself.
+
+### 66. An absolute consequence is a different claim from a conditional one, and three cards had made the swap
+
+An independent GPT review of the published corpus at `9e26f02` accepted the
+substance of three P0 cards and rejected the **strength** of one proposition in
+each. None of the three was a wrong fact. All three were a conditional rule
+taught as an absolute one, which is the shape that survives every gate this
+toolchain has, because a digest pin is equally happy with "may" and with "must".
+
+**`QB5_J#q2` — NOx.** The card said that going outside the components and
+settings identified in the NOx Technical File *"invalidates the EIAPP
+certificate"*. The held instrument says otherwise, and says it twice. NTC 2008
+**2.4.1.2** requires the technical file to identify *"the full range of allowable
+adjustments or alternatives for the components of the engine"* — so an adjustment
+inside that range is expressly contemplated, and cannot invalidate anything. NTC
+2008 **6.2.1.1.2** then makes engines *"that have undergone modifications or
+adjustments to the designated engine components and adjustable features since
+they were last surveyed"* **eligible for the engine parameter check method**, and
+**6.2.1.2** explains why: the limit *"may, however, be contravened by adjustments
+or modification to the engine. Therefore, an engine parameter check method shall
+be used to verify whether the engine is still within the applicable NOx emission
+limit."* The consequence of departure is **verification against the limit at
+survey**, not automatic loss of the certificate. Teaching the absolute version
+tells a candidate the wrong thing about what a surveyor will actually do.
+
+**`QB5_J#q2` — ISO 19030.** The card called it *"the standard method for
+separating hull fouling from engine deterioration"*. It is not a method for
+assessing engine condition at all. It measures **changes in hull and propeller
+performance**; the separation only exists when that measurement is read against
+corrected engine-performance data. Naming one input as the whole method quietly
+promotes a standard beyond its own scope.
+
+**`QB1_D#q7` — Bonjean.** The 60-second answer said that the moment the waterline
+is not parallel to the baseline, the hydrostatic tables *"stop being valid"*.
+Tabulated hydrostatics do not become invalid; they were computed upright and on
+even keel and are simply **not sufficient by themselves** for an arbitrary
+inclined or trimmed waterline, because every station is then at a different
+draught. The distinction matters in the room: an examiner who hears "invalid"
+hears a candidate who does not know what the tables are.
+
+**`QB5_I#q8` — the universal list.** Entry 64 corrected this card's claim that
+ISM 10.3 *derives* the critical-spares list. What entry 64 did not catch is that
+the card then printed a list of critical equipment and critical spares in a way
+that read as though the Code prescribes it. The regulatory logic was right and
+the presentation smuggled the old error back in one layer down.
+
+Two lessons worth more than the four fixes.
+
+* **Check the modality, not only the fact.** Every one of these cards would pass a
+  fact check. "Invalidates" versus "can render non-compliant", "the standard
+  method" versus "a framework", "stop being valid" versus "are not sufficient by
+  themselves", "critical equipment is X" versus "a company's SMS may designate X"
+  — the noun is identical in each pair and the claim is not. A corpus that only
+  ever asks *is this true?* cannot see the difference.
+* **Correcting the rule does not correct the illustration.** `QB5_I#q8` had
+  already been through a full correction that fixed its ISM reasoning. The example
+  list underneath survived untouched and carried the same over-claim in concrete
+  form. After correcting a proposition, read the examples that follow it — they
+  are where the corrected-away version hides.
+
+**A held file is not a legible source.** The NOx Technical Code was recorded as
+held, and it is: 535 pages of it. Every page is an image with **no text layer at
+all**, so the instrument that decided this entry could not be read by any tool
+that had ever "checked" it. It took an OCR pass to get to 2.4.1 and 6.2. This is
+the sibling of section 8.2c's rule that an index row is not evidence — a
+*filename* is not evidence either, and neither is a `sha256`.
+
+GREP: SKIP. This entry quotes the rejected wordings — "invalidates the EIAPP
+certificate", "the standard method for separating hull fouling from engine
+deterioration" and "stop being valid" — in order to reject them, so a flat phrase
+scan matches the correction itself rather than the defect.
