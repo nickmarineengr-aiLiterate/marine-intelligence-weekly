@@ -251,14 +251,48 @@ r = resolve(broken3, "batch_e1_enrichment_manifest.json", "ENRICH-A003", D[2], D
 check("M. H2->H3 continuity broken -> the whole chain FAILS",
       not r.ok and r.status == CHAIN_BREAK, r.describe())
 
-# Digest conventions are not interchangeable. sha256(x)[:16] and sha256(x) of
-# the SAME card differ as strings, so a mixed-convention chain must say so
-# rather than report a break that reads as tampering.
+# Digest conventions and truncation. THE RULE NARROWED on 2026-09-04, for
+# CORR-MSACT2B-GREEN-20260904, and these three cases pin the new shape.
+#
+# The old rule was width-equality alone, and it made a correction that
+# supersedes an E1-E5 card IMPOSSIBLE TO RECORD: E5 pins
+# sha256(balanced_block)[:16] and a correction pins the same block in full, so
+# the two are ONE FUNCTION AT TWO TRUNCATIONS, yet every option was red. What
+# the old rule was right about is that a digest of DIFFERENT CONTENT must never
+# be compared; what it could not distinguish is a truncation of the SAME digest.
+#
+# (a) 16 vs 64 that DISAGREE on the common prefix is a CHAIN_BREAK -- which is
+#     the accurate verdict, and a stronger one than "mismatched conventions":
+#     it says the successor did not continue the predecessor.
 mixed = [H1, rec("correction_x_manifest.json", "CORR-1",
                  hashlib.sha256(b"x").hexdigest(), D[3],
                  claim("batch_e1_enrichment_manifest.json", "ENRICH-A003", D[2]))]
 r = resolve(mixed, "batch_e1_enrichment_manifest.json", "ENRICH-A003", D[2], D[3])
-check("a successor recording another family's digest convention -> FAIL",
+check("a successor whose 64-char pre-digest does not continue a 16-char pin -> FAIL",
+      not r.ok and r.status == CHAIN_BREAK, r.describe())
+
+# (b) 16 vs 64 that AGREE on the common prefix is the real E5 case and must be
+#     ACCEPTED. This is the capability the old rule lacked, and the reason the
+#     correction could not be recorded at all.
+_full = hashlib.sha256(b"same-card").hexdigest()
+_trunc = _full[:16]
+_pred = rec("batch_e1_enrichment_manifest.json", "ENRICH-A003", D[1], _trunc)
+_succ = rec("correction_y_manifest.json", "CORR-2", _full, D[3],
+            claim("batch_e1_enrichment_manifest.json", "ENRICH-A003", _trunc))
+r = resolve([_pred, _succ], "batch_e1_enrichment_manifest.json", "ENRICH-A003",
+            _trunc, D[3])
+check("a 64-char successor continuing a 16-char pin of the SAME digest -> OK",
+      r.ok and r.status == SUPERSEDED_OK, r.describe())
+
+# (c) A width that is neither of the two documented conventions is still a
+#     convention mismatch. The rule narrowed; it did not disappear.
+_odd = hashlib.sha256(b"x").hexdigest()[:32]
+_pred32 = rec("batch_e1_enrichment_manifest.json", "ENRICH-A003", D[1], _odd)
+_succ32 = rec("correction_z_manifest.json", "CORR-3", D[2], D[3],
+              claim("batch_e1_enrichment_manifest.json", "ENRICH-A003", _odd))
+r = resolve([_pred32, _succ32], "batch_e1_enrichment_manifest.json",
+            "ENRICH-A003", _odd, D[3])
+check("a successor recording an undocumented digest width -> FAIL",
       not r.ok and r.status == DIGEST_CONVENTION_MISMATCH, r.describe())
 
 # Malformed and decorative claims.
@@ -614,15 +648,26 @@ if _superseded:
 
     # A record with NO successor must resolve to None, or every validator
     # would silently switch subject and stop testing the live card at all.
+    # The set of "unsuperseded" E6 cards is DERIVED from the records on disk,
+    # never assumed to be "all of them but the fixture". CORR-MSACT2B-GREEN-
+    # 20260904 legitimately supersedes an E6 card (QB3_J#q5, from ENRICH-A048),
+    # and with the old hardcoded exclusion this check went red on correct work
+    # -- the batch-guard-expiry shape, inside a self-test. Any card some record
+    # actually claims to supersede is excluded here and reported.
+    _claimed = {(r.file, r.anchor) for r in _records
+                if getattr(r, "supersedes", None)}
     _virgin = [r for r in _records
                if r.manifest == "batch_e6_enrichment_manifest.json"
-               and (r.file, r.anchor) != (_file, _anchor)]
+               and (r.file, r.anchor) != (_file, _anchor)
+               and (r.file, r.anchor) not in _claimed]
     _none = [r for r in _virgin
              if successor_claim_for(manifest=r.manifest, action_id=r.action_id,
                                     file=r.file, anchor=r.anchor,
                                     directory=HERE) is not None]
     check("an unsuperseded E6 card still resolves to NO successor",
-          not _none, "unexpectedly superseded=%s" % ([r.action_id for r in _none] or "none"))
+          not _none,
+          "checked=%d unexpectedly superseded=%s legitimately superseded=%d"
+          % (len(_virgin), [r.action_id for r in _none] or "none", len(_claimed)))
 
     # NON-VACUITY, the point of the whole section. Strip the declaration and
     # the real validator must go red on the very checks the subject change

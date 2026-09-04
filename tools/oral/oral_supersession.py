@@ -236,15 +236,52 @@ class Resolution:
         return "%s: %s [%s]" % (self.status, self.reason, path)
 
 
-def _same_convention(a, b) -> bool:
-    """Two digests are comparable only if they are the same width.
+# The two widths this repo actually uses, both legitimate release evidence.
+_TRUNCATED, _FULL = 16, 64
 
-    Not a cosmetic check.  ``sha256(text)[:16]`` and ``sha256(text)`` of the
-    SAME card differ as strings, so comparing them would produce a chain break
-    that reads as tampering when the real fault is that the successor recorded
-    its card in another family's convention.
+
+def _same_convention(a, b) -> bool:
+    """Two digests are comparable if they are the same width, OR if one is the
+    other TRUNCATED to 16 characters.
+
+    The original rule was width-equality alone, and it was right about the
+    danger: ``sha256(text)[:16]`` and ``sha256(text)`` differ as strings, so a
+    naive ``==`` would read as tampering. But it was too strong, and
+    CORR-MSACT2B-GREEN-20260904 proved it by being IMPOSSIBLE TO RECORD.
+
+    QB9_H#q4 is pinned by E5 and corrected by that record. E5's ``digest16`` is
+    ``sha256(s)[:16]`` over the SAME balanced card block that the correction
+    convention hashes in full -- verified, not assumed: the live 64-character
+    digest begins with E5's exact 16 characters. The two "conventions" are one
+    function at two truncations, so for this pair width-equality rejects digests
+    that genuinely agree.
+
+    Every way out was red before this change. Pinning the successor at 64 gave
+    DIGEST_CONVENTION_MISMATCH here; pinning it at 16 satisfied this module but
+    broke ``validate_corrections``, which computes live and baseline digests in
+    the 64-character convention; and omitting the chain left E5's own
+    ``manifest_digests_match`` red on a legitimately corrected card.
+
+    Comparison is on the COMMON PREFIX (see ``_digests_agree``), which is what
+    makes this safe: a tampered card does not produce a matching 16-character
+    prefix. Two DIFFERENT-content conventions -- were one ever introduced --
+    still fail, because their prefixes would not agree.
     """
-    return (isinstance(a, str) and isinstance(b, str) and len(a) == len(b))
+    if not (isinstance(a, str) and isinstance(b, str)):
+        return False
+    if len(a) == len(b):
+        return True
+    short, long_ = sorted((a, b), key=len)
+    return len(short) == _TRUNCATED and len(long_) == _FULL
+
+
+def _digests_agree(a, b) -> bool:
+    """Equality at the narrower of the two widths. Only ever called after
+    ``_same_convention`` has established the pair is comparable."""
+    if not (isinstance(a, str) and isinstance(b, str) and a and b):
+        return False
+    n = min(len(a), len(b))
+    return a[:n] == b[:n]
 
 
 def _claim_problem(claim) -> str | None:
@@ -386,7 +423,7 @@ def build_chain(target, records=None, directory=None):
                           "%s pins a %s-char pre-digest, %s pins a %s-char post-digest"
                           % (state.describe(), len(state.pre or ""),
                              pred.describe(), len(pred.post or "")))
-        if state.pre != pred.post:
+        if not _digests_agree(state.pre, pred.post):
             return None, (CHAIN_BREAK,
                           "%s starts at %s but %s ended at %s"
                           % (state.describe(), state.pre,
@@ -493,7 +530,7 @@ def resolve_authorised_card_state(*, manifest, action_id, file, anchor,
                           "terminal %s pins a %s-char digest, live digest is %s chars"
                           % (terminal.describe(), len(terminal.post or ""),
                              len(live_digest or "")), path)
-    if terminal.post != live_digest:
+    if not _digests_agree(terminal.post, live_digest):
         return Resolution(False, TERMINAL_NOT_LIVE,
                           "chain ends at %s (%s) but live is %s"
                           % (terminal.describe(), terminal.post, live_digest), path)

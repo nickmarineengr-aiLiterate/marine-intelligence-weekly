@@ -501,6 +501,7 @@ def main():
 
     # ---- the limb is actually there, and its authority with it ----
     additive_bad, digest_bad, claim_bad, qual_bad, ab_bad = [], [], [], [], []
+    additive_elsewhere = []
     for page, wanted in sorted(by_file.items()):
         raw = (QB_DIR / page).read_text(encoding="utf-8", newline="")
         live = cards_of(raw)
@@ -547,7 +548,19 @@ def main():
                 sm = difflib.SequenceMatcher(None, bb, ll, autojunk=False)
                 bad = [o for o in sm.get_opcodes()
                        if o[0] not in ("equal", "insert")]
-                if bad:
+                # A card that a LATER authorisation record owns is that
+                # record's business, exactly as for q_text_and_anchors_stable
+                # above. Compared against LIVE, this check silently asserts
+                # "no correction has ever edited one of my cards", which stops
+                # being true the first time one does -- and a correction
+                # REPLACES text by definition, so it can never be additive.
+                # E5's real claim is historical: the edit E5 SHIPPED was
+                # additive, and the supersession chain is what carries its
+                # state forward from there. An unowned non-additive edit still
+                # fails, which is what the check is for.
+                if bad and ("%s#%s" % (page, a)) in sibling_owned:
+                    additive_elsewhere.append("%s#%s" % (page, a))
+                elif bad:
                     additive_bad.append("%s#%s %d non-insert op(s)"
                                         % (page, a, len(bad)))
                 if digest16(bb) != c.get("pre_edit_digest"):
@@ -576,7 +589,9 @@ def main():
     report("target_cards_under_q_feed", not outside, "%s" % (outside or "-"))
     report("missing_limb_supplied", not limb_missing, "%s" % (limb_missing or "-"))
     report("required_authority_cited", not auth_missing, "%s" % (auth_missing or "-"))
-    report("edits_purely_additive", not additive_bad, "%s" % (additive_bad or "-"))
+    report("edits_purely_additive", not additive_bad,
+           "%s authorised-elsewhere=%s"
+           % (additive_bad or "-", additive_elsewhere or "-"))
     report("manifest_digests_match", not digest_bad, "%s" % (digest_bad or "-"))
     report("unsubstantiated_claims_absent", not claim_bad, "%s" % (claim_bad or "-"))
     report("mlc_part_a_and_b_not_conflated", not ab_bad, "%s" % (ab_bad or "-"))

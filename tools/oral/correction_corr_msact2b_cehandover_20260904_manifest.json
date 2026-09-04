@@ -1,0 +1,72 @@
+{
+ "correction_id": "CORR-MSACT2B-CEHANDOVER-20260904",
+ "title": "The CE handover was hung on a Merchant Shipping Act provision that does not exist",
+ "date": "2026-09-04",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "gpt_content_review",
+ "baseline_commit": "4784b9c",
+ "governing_commits": [
+  "2f4422c"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_PASS2B_MSACT_20260904.md",
+ "candidate_claim": "GPT review pass 2A, mapping the corpus against the enacted Merchant Shipping Act 2025, reported that the CE-takeover teaching point rested on 'MS Act 2025 (formerly 1958 s.77; exact 2025 section pending verification)'. It found that no CE handover provision exists in the 2025 Act, and that the 1958 s.77 assertion cannot be verified from held primary evidence.",
+ "candidate_verdict": "UPHELD, AND STRONGER THAN REPORTED. The absence is not merely 'no provision found' - it was established by whole-document search of the held Gazette text: 'handover', 'hand over', 'taking over', 'taking-over', 'delivery of charge' and 'chief engineer' each occur ZERO times in the Merchant Shipping Act 2025. The 1958 s.77 limb cannot be checked at all, because the 1958 Act is not held, which is itself the reason it must not be asserted. The hook is REMOVED and deliberately NOT replaced with another statutory section.",
+ "authority": {
+  "instrument": "Merchant Shipping Act, 2025 (Act No. 24 of 2025), SRC-MSACT-2025, held at F:/RulesApp-Local-Input/true-source/06-india-law-and-dg-shipping/Merchant-Shipping-Act-2025/_base/MS_Act_2025_A2025-24.pdf, sha256 6fb38616ed8b82ae7e831e5589ffd59a7b27e13d55b1728940fe25892f758f63, re-hashed before use and identical to the registered digest.",
+  "corrigenda": "SRC-MSACT-2025-CORRIGENDA, sha256 4a28b152426b0cd709be37a4bc0c176be059f56eed97566fe96ed0b1bedcf818, read in full. It makes exactly three typographical corrections - page 33 line 19 'matter' to 'matters', page 69 line 24 'himself such' to 'himself of such', page 71 line 12 'sea borne' to 'seaborne'. NONE touches any provision mapped by this pass.",
+  "how_read": "The Act's text layer was extracted in full: 118 pages, 393,583 characters. Every section cited below was resolved and read directly from that text and occurs exactly once as an operative section. Pass 2A's mapping was treated as an AUTHORISATION, not as evidence, and independently re-verified before anything was written candidate-facing.",
+  "extraction_hazards": "TWO, recorded because one produced a false negative. (1) The Act's PDF separates a section number from its text with a 0x03 CONTROL BYTE as well as with a space, so a '^[0-9]+[.]\\s' scan under-reports: s.319 was reported NOT FOUND on the first pass and is present exactly as authorised. A negative from a text scan is only evidence once the scan is proved able to find a positive. (2) The s.281(2) penalty table renumbers its rows 1..N, so a naive scan resolves 'section 15' to a table row about s.139; table rows must be excluded before a section number is resolved.",
+  "part_structure": "Verified from the Act: I ss.1-3; II ss.4-13; III ss.14-44; IV ss.45-53; V ss.54-113; VI ss.114-130; VII ss.131-143; VIII ss.144-152; IX ss.153-222; X ss.223-230; XI ss.231-232; XII ss.233-260; XIII ss.261-280; XIV ss.281-292; XV ss.293-324; XVI s.325.",
+  "ms_act_negative": "Whole-document search of the held PDF: handover 0, hand over 0, taking over 0, taking-over 0, delivery of charge 0, chief engineer 0. There is no CE handover or takeover provision in the Merchant Shipping Act 2025.",
+  "ism_position": "Checked from the held ISM Code text, A.741(18), so that the replacement basis is not itself an invention. The ISM Code contains ZERO occurrences of 'handover', 'takeover', 'taking over' and 'chief engineer'; its single 'take over' is inside the 1.1.2 definition of 'Company'. ISM section 5 is 'MASTER'S RESPONSIBILITY AND AUTHORITY' and concerns the master, not the chief engineer. What IS supported is ISM 6.3 - 'the Company should establish procedures to ensure that new personnel and personnel transferred to new assignments related to safety and protection of the environment are given proper familiarization with their duties' - and ISM 7, procedures for key shipboard operations. NO ISM CLAUSE PRESCRIBES A CE TAKEOVER CERTIFICATE, and neither corrected surface claims one.",
+  "what_survives": "s.46(1) is retained on the card and is CORRECT: the officer notified as issuing authority grants the certificate of competency, subject to the STCW Convention, and the CE must hold a valid CoC for the vessel assumed. What was removed from that row is only the unverifiable equivalence 'replaces the repealed 1958 Act, s.77'."
+ },
+ "cards": [
+  {
+   "correction_action_id": "CORR-MSACT2B-A-01",
+   "file": "QB5_B.html",
+   "path": "meoclass1/QB5_B.html",
+   "anchor": "q1",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "6daea86d95143324c2ad2f9cbd2b387befa086d7b7b6a104e572cf953dbf2d20",
+   "post_edit_digest": "d3ee49b93849eecad1cfe402f7f6c84915149292edffa304c96aeecd45ba15d3",
+   "classification_note": "This card, 'Taking Over as CE - Procedure.', is the card QB5_B_CheatSheet's 'Q21 - Taking Over as CE' page summarises, and it carried the SAME unverifiable 1958 equivalence. The defect reported against the cheat sheet is therefore corrected at its source as well as on the summary. Recorded because the RED item first presented as cheat-sheet-only: the card was found by sweeping for the hook, not assumed to exist.",
+   "changed_propositions": [
+    "REG-BOX: 'Merchant Shipping Act, 2025, Sec 46 (Part IV) - Certificate of Competency - CE must hold valid CoC for the class of vessel assumed; in force 15 March 2026, replaces the repealed 1958 Act, s.77' -> 's.46(1) (Part IV) - the officer notified as the issuing authority grants it, subject to the STCW Convention, and the CE must hold a valid CoC for the vessel assumed; in force 15 March 2026. The 2025 Act contains NO CE handover or takeover provision: the handover itself is governed by the company's SMS and procedures, not by statute.'"
+   ],
+   "deliberately_unchanged": [
+    "The card's own sentence 'The ISM Code does not specify a detailed handover procedure, but ISM Sec. 3, Sec. 6 and Sec. 9 collectively require that the incoming CE assumes responsibility for a documented, auditable system'. It is CORRECT as written and is the formulation the cheat sheet was brought into line with.",
+    "The ISM Code section 5 reg-box row. Its description names the clause correctly as 'Master's Responsibility and Authority' and draws an analogy rather than asserting a CE obligation, so it states nothing false. It is REPORTED in the authorisation record as worth review, and not edited, because the review's own scope bars expansion."
+   ]
+  }
+ ],
+ "propagation": {
+  "scope_pass": "Reproducible sweep of every candidate-facing meoclass1/ and SQ/ HTML for a CE takeover or handover claim carrying a Merchant Shipping Act hook. It returned exactly two sites, both corrected here: QB5_B#q1's reg-box and QB5_B_CheatSheet's 'Formal declaration' row. QB5_B has no q21; the cheat sheet's 'Q21' is a session numbering, and the underlying card is q1.",
+  "found_and_not_swept": [
+   "QB4_D, QB4_F#q4, QB5_E#q7 and QB5_F all teach CE takeover or ISM takeover documents. NONE of them carries a Merchant Shipping Act hook for the handover, so none states the corrected proposition. Reported, not edited.",
+   "QB5_B_CheatSheet's 'Pre-arrival' row cites 'ISM Code section 5 / SOLAS V/14' for reviewing vessel history. Section 5 is the master's authority. This is the same latent weakness as the reg-box row left in place above, is outside the three-item authorisation, and is reported rather than swept."
+  ]
+ },
+ "invariants": [
+  "No new card, no new 15-second or 60-second layer, no deep-dive added, no examiner attribution altered, no syllabus mapping changed, no written bank and no shared RulesApp source touched.",
+  "No past paper was touched. QP2304, QP2307, QP2503, QP2507 and QP2512 all carry 'formal investigation' correctly for their own sittings, every one of which predates the 2025 Act's commencement on 15 March 2026.",
+  "No new 1958 section-number assertion is authored anywhere in this pass. The Merchant Shipping Act 1958 is NOT held.",
+  "Corpus totals are unmoved: 761 canonical questions across 86 question-bearing files.",
+  "meoclass1/index.html still reads 'Last Updated: 2 Sep 2026' and was DELIBERATELY not patched - the brief directs that the date be reported, not changed, while further GPT review may still arrive. The required final value is 4 Sep 2026.",
+  "The operational content of the takeover checklist is untouched. Every phase, every check and the CE Trap warning about not signing a handover before a discovered defect is documented and disclosed all survive verbatim.",
+  "No replacement statutory section was invented. The corrected surfaces cite NO Act provision for the handover at all."
+ ],
+ "content_index_effect": "None on counts. The card keeps its id, anchor and question text; only a reg-box row changed.",
+ "known_traps_entries": [
+  67
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/QB5_B_CheatSheet.html",
+   "what": "The 'Formal declaration' row of the 'Taking Over as CE' checklist. Regulatory hook 'MS Act 2025 (formerly 1958 s.77; exact 2025 section pending verification) / ISM Code s.5' -> 'Company SMS and the company's own handover procedure; ISM Code s.6.3 (familiarisation on transfer to a new assignment) and s.7 (procedures for key shipboard operations) - no MS Act 2025 provision governs CE handover, and no ISM clause prescribes a takeover certificate'. The action cell no longer names a 'CE Takeover Certificate' as a thing law requires; it names the company's own form and the SMS record of acceptance of charge.",
+   "why_it_matters": "A cheat sheet carries no q-card, so no release guard pins it and no digest can be taken over it. It is declared here so the event's scope is complete, and its substance is asserted instead by the named content gate."
+  }
+ ],
+ "note": "SURGICAL. One card, one cheat sheet, one removed hook. The removal is deliberately not backfilled with another statutory citation: the brief bars replacing an invented section with another invented section, and the honest position is that this process is contractual and SMS-governed, not statutory."
+}

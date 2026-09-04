@@ -1,0 +1,66 @@
+{
+ "correction_id": "CORR-MSACT2B-COC-20260904",
+ "title": "Certificate of competency: three distinct statutory powers had been merged into one Part IV citation",
+ "date": "2026-09-04",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "gpt_content_review",
+ "baseline_commit": "4784b9c",
+ "governing_commits": [
+  "2f4422c"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_PASS2B_MSACT_20260904.md",
+ "candidate_claim": "GPT review pass 2A authorised a multi-Part answer for QB9_D#q6's certificate-of-competency limb, directing that grant, issuing-authority withdrawal and Central Government suspension be distinguished rather than forced into Part IV, and that the powers be described separately rather than merged.",
+ "candidate_verdict": "UPHELD. The card cited 'MS Act 2025, Part IV (formerly 1958 Sec 76 & 87) ... exact 2025 section numbers pending verification' for the whole of issuance, control and suspension. Two defects follow. Part IV does not contain the Central Government's suspension power at all - that is s.312, in Part XV - so a Part IV citation cannot reach it. And the card's CE Relevance paragraph attributed the inquiry-and-suspend power to 'the DGS' under 'the broad powers of the MS Act', which is neither of the two authorities the Act actually names.",
+ "authority": {
+  "instrument": "Merchant Shipping Act, 2025 (Act No. 24 of 2025), SRC-MSACT-2025, held at F:/RulesApp-Local-Input/true-source/06-india-law-and-dg-shipping/Merchant-Shipping-Act-2025/_base/MS_Act_2025_A2025-24.pdf, sha256 6fb38616ed8b82ae7e831e5589ffd59a7b27e13d55b1728940fe25892f758f63, re-hashed before use and identical to the registered digest.",
+  "corrigenda": "SRC-MSACT-2025-CORRIGENDA, sha256 4a28b152426b0cd709be37a4bc0c176be059f56eed97566fe96ed0b1bedcf818, read in full. It makes exactly three typographical corrections - page 33 line 19 'matter' to 'matters', page 69 line 24 'himself such' to 'himself of such', page 71 line 12 'sea borne' to 'seaborne'. NONE touches any provision mapped by this pass.",
+  "how_read": "The Act's text layer was extracted in full: 118 pages, 393,583 characters. Every section cited below was resolved and read directly from that text and occurs exactly once as an operative section. Pass 2A's mapping was treated as an AUTHORISATION, not as evidence, and independently re-verified before anything was written candidate-facing.",
+  "extraction_hazards": "TWO, recorded because one produced a false negative. (1) The Act's PDF separates a section number from its text with a 0x03 CONTROL BYTE as well as with a space, so a '^[0-9]+[.]\\s' scan under-reports: s.319 was reported NOT FOUND on the first pass and is present exactly as authorised. A negative from a text scan is only evidence once the scan is proved able to find a positive. (2) The s.281(2) penalty table renumbers its rows 1..N, so a naive scan resolves 'section 15' to a table row about s.139; table rows must be excluded before a section number is resolved.",
+  "part_structure": "Verified from the Act: I ss.1-3; II ss.4-13; III ss.14-44; IV ss.45-53; V ss.54-113; VI ss.114-130; VII ss.131-143; VIII ss.144-152; IX ss.153-222; X ss.223-230; XI ss.231-232; XII ss.233-260; XIII ss.261-280; XIV ss.281-292; XV ss.293-324; XVI s.325.",
+  "grant": "s.46(1): 'An officer notified by the Central Government as the issuing authority shall, subject to the provisions of the Standards of Training, Certification and Watchkeeping for Seafarers Convention, grant a certificate of competency or certificate of proficiency for different grades of seafarers with such requirements and procedures as may be prescribed.' Part IV, verified as ss.45-53.",
+  "issuing_authority_withdrawal": "s.48(6): if it appears to the issuing authority that a holder obtained the certificate on false or erroneous information, or is guilty of indiscipline or misconduct, incompetency, or any act of omission or commission or compromise to safety, security or prevention of pollution, it may AFTER DUE INVESTIGATION, by order, withdraw, suspend or cancel it; the proviso requires a reasonable opportunity of being heard. s.48(7): appeal before the officer the Central Government notifies as appellate authority.",
+  "central_government_suspension": "s.312, PART XV: the Central Government may by order cancel or suspend any certificate granted under the Act to any seafarer for a specified period where (a) an inquiry report or investigation report reveals incompetency or misconduct, (b) in a case of collision the seafarer failed to render assistance, (c) the seafarer has been convicted of an offence under the Act or a non-bailable offence under any other law in or outside India, (d) a casualty was caused by the seafarer's wrongful act or default, or (e) the seafarer contravenes the Act; proviso requires an opportunity of being heard. Part XV is ss.293-324, so this is NOT reachable by a Part IV citation.",
+  "s62_5_not_used": "The brief permitted s.62(5) to be mentioned only if already directly relevant to an engagement-rule discussion on this card. The card's s.62 treatment concerns the RPSL delegation, not engagement-rule violations, so s.62(5) was NOT introduced."
+ },
+ "cards": [
+  {
+   "correction_action_id": "CORR-MSACT2B-D-01",
+   "file": "QB9_D.html",
+   "path": "meoclass1/QB9_D.html",
+   "anchor": "q6",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "3baf4eda3c491373387309bdff4be4b6f280b0b03a58108cba3e14287bafcbfc",
+   "post_edit_digest": "ea0ece73776c25eefd65f0c77d9115f905bdbb5c241624c121a254950170d903",
+   "changed_propositions": [
+    "REG-BOX: 'MS Act 2025, Part IV (formerly 1958 Sec 76 & 87) - Regulates the legal issuance, control, and potential suspension of Certificates of Competency (CoC); exact 2025 section numbers pending verification.' -> 'MS Act 2025 - s.46(1), s.48(6)-(7) (Part IV); s.312 (Part XV)', described as THREE DISTINCT POWERS: grant, issuing-authority withdrawal with its hearing and appeal, and Central Government suspension with its five grounds. The unverifiable 1958 Sec 76 & 87 equivalence is dropped rather than strengthened.",
+    "CE Relevance paragraph, in BOTH of its copies on this card - the answer body and the deep-dive block: 'under the broad powers of the MS Act, the DGS retains the statutory right to conduct inquiries, suspend, or cancel a Chief Engineer's Certificate of Competency (CoC) if found guilty of gross negligence or professional misconduct during a maritime casualty' -> the two separate powers named and attributed correctly, to the ISSUING AUTHORITY under s.48(6)-(7) and to the CENTRAL GOVERNMENT under s.312, with the express warning that merging them is a common oral error."
+   ],
+   "classification_note": "The CE Relevance paragraph is DUPLICATED verbatim on this card, once in the answer body and once inside the deep-dive details block. Both copies are candidate-facing and both were corrected. The duplication was found by an assert-once guard on the edit rather than by reading, and is recorded because a single-replacement edit would have left the deep-dive copy stating the corrected-away claim.",
+   "deliberately_unchanged": [
+    "The whole RPSL-versus-parent-Act architecture, which is the card's actual subject: the s.62 (Part V) delegation, the ultra vires reasoning, MLC 2006 Std A1.4 and Reg 1.4, the RPSL 2018 licensing, bank guarantees and audits, and the abandonment casualty link.",
+    "The card's existing 's.62 (Part V)' citation, verified correct in this pass - s.62 governs engagement and RPS agency licensing, and Part V is ss.54-113."
+   ]
+  }
+ ],
+ "propagation": {
+  "scope_pass": "Reproducible sweep for candidate-facing claims about who may suspend or cancel a certificate of competency under the Merchant Shipping Act. Inside this card it returned the reg-box row and both copies of the CE Relevance paragraph, all corrected above.",
+  "found_and_not_swept": [
+   "QB9_H#q2 and #q11 also touch certificate powers, and both were corrected under CORR-MSACT2B-CASUALTY-20260904 - which is where they belong, because there the defect is the stale casualty machinery and the certificate power is a consequence of it. Both now point at s.312, so the two records agree on the same provision without either being folded into the other."
+  ]
+ },
+ "invariants": [
+  "No new card, no new 15-second or 60-second layer, no deep-dive added, no examiner attribution altered, no syllabus mapping changed, no written bank and no shared RulesApp source touched.",
+  "No past paper was touched. QP2304, QP2307, QP2503, QP2507 and QP2512 all carry 'formal investigation' correctly for their own sittings, every one of which predates the 2025 Act's commencement on 15 March 2026.",
+  "No new 1958 section-number assertion is authored anywhere in this pass. The Merchant Shipping Act 1958 is NOT held.",
+  "Corpus totals are unmoved: 761 canonical questions across 86 question-bearing files.",
+  "meoclass1/index.html still reads 'Last Updated: 2 Sep 2026' and was DELIBERATELY not patched - the brief directs that the date be reported, not changed, while further GPT review may still arrive. The required final value is 4 Sep 2026.",
+  "The card's parent-versus-delegated-legislation teaching, which is what the examiner actually asks, is entirely unchanged.",
+  "No claim is made that the Director-General holds the suspension power. The Act gives it to the issuing authority under s.48(6) and to the Central Government under s.312; the DG's role on this subject is the appellate authority for penalties under s.282(2), which this card does not discuss."
+ ],
+ "content_index_effect": "None on counts. The card keeps its id, anchor and question text; only a reg-box row and one duplicated paragraph changed.",
+ "known_traps_entries": [
+  67
+ ],
+ "note": "SURGICAL. One card, one reg-box row, one paragraph in two copies. Governed separately from the GREEN batch because this is not a caveat closure: the previous citation was structurally incapable of reaching the power it claimed to cover."
+}

@@ -1,0 +1,155 @@
+{
+ "correction_id": "CORR-MSACT2B-GREEN-20260904",
+ "title": "Twelve 'sections pending verification' caveats closed against the enacted MS Act 2025 text",
+ "date": "2026-09-04",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "gpt_content_review",
+ "baseline_commit": "4784b9c",
+ "governing_commits": [
+  "2f4422c"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_PASS2B_MSACT_20260904.md",
+ "candidate_claim": "GPT review pass 2A mapped the corpus's Merchant Shipping Act 2025 citations against the enacted text and authorised the closure of twelve caveats that read 'sections pending verification', 'cite at Part level' or 'exact 2025 section pending verification', each against a named section.",
+ "candidate_verdict": "UPHELD ON EVERY MAPPING, AND THE CAVEAT ITSELF IS THE DEEPER FINDING. Each of the 23 authorised mappings was re-verified against the held text and confirmed. But a caveat is a DEBT, and this one had been rolled forward until QB9_H_CheatSheet was instructing candidates, as house doctrine, to 'cite the 2025 Act at Part level with sections pending verification'. An unverified claim that announces itself is safe; an unverified claim institutionalised as a style rule is not.",
+ "authority": {
+  "instrument": "Merchant Shipping Act, 2025 (Act No. 24 of 2025), SRC-MSACT-2025, held at F:/RulesApp-Local-Input/true-source/06-india-law-and-dg-shipping/Merchant-Shipping-Act-2025/_base/MS_Act_2025_A2025-24.pdf, sha256 6fb38616ed8b82ae7e831e5589ffd59a7b27e13d55b1728940fe25892f758f63, re-hashed before use and identical to the registered digest.",
+  "corrigenda": "SRC-MSACT-2025-CORRIGENDA, sha256 4a28b152426b0cd709be37a4bc0c176be059f56eed97566fe96ed0b1bedcf818, read in full. It makes exactly three typographical corrections - page 33 line 19 'matter' to 'matters', page 69 line 24 'himself such' to 'himself of such', page 71 line 12 'sea borne' to 'seaborne'. NONE touches any provision mapped by this pass.",
+  "how_read": "The Act's text layer was extracted in full: 118 pages, 393,583 characters. Every section cited below was resolved and read directly from that text and occurs exactly once as an operative section. Pass 2A's mapping was treated as an AUTHORISATION, not as evidence, and independently re-verified before anything was written candidate-facing.",
+  "extraction_hazards": "TWO, recorded because one produced a false negative. (1) The Act's PDF separates a section number from its text with a 0x03 CONTROL BYTE as well as with a space, so a '^[0-9]+[.]\\s' scan under-reports: s.319 was reported NOT FOUND on the first pass and is present exactly as authorised. A negative from a text scan is only evidence once the scan is proved able to find a positive. (2) The s.281(2) penalty table renumbers its rows 1..N, so a naive scan resolves 'section 15' to a table row about s.139; table rows must be excluded before a section number is resolved.",
+  "part_structure": "Verified from the Act: I ss.1-3; II ss.4-13; III ss.14-44; IV ss.45-53; V ss.54-113; VI ss.114-130; VII ss.131-143; VIII ss.144-152; IX ss.153-222; X ss.223-230; XI ss.231-232; XII ss.233-260; XIII ss.261-280; XIV ss.281-292; XV ss.293-324; XVI s.325.",
+  "s_319_320_301": "s.319(1): 'Without prejudice to any other power to make rules contained elsewhere in this Act, the Central Government may make rules generally to carry out the provisions of this Act.' s.320(1): all rules shall be published in the Official Gazette; s.320(3): every rule shall be laid before each House of Parliament for a total of thirty days, subject to modification or annulment. s.301: the Director-General may give BY NOTICE, CIRCULAR, ORDER OR GUIDELINES in writing such directions as he thinks fit to any vessel, seafarer, tindal, ship owner or agent, maritime training institute, recruitment placement service provider, port, or person or body of persons.",
+  "s_324_the_narrow_limb": "VERBATIM: 'The Merchant Shipping Act, 1958 (except Part XIV but not including section 411A therein) and the Coasting Vessels Act, 1838 is hereby repealed.' THIS IS NARROWER THAN 'EXCEPT PART XIV' - the saving is Part XIV MINUS s.411A, and s.411A is itself repealed. The authorisation said only 'the saved Part XIV limb as actually stated'; reading the provision is what produced the limb. Quoting s.411A is NOT a new 1958 assertion: it is quoted from inside s.324(1) of the 2025 Act. s.324(2) saves rules, offices, appointments, documents, fines, prosecutions and registrations made under the repealed enactments.",
+  "s_83_62_12": "s.83: a dispute under the seafarer's agreement is submitted to the shipping master, who must hear the parties and pass a reasoned written award within thirty days, extendable once by a further thirty for sufficient cause, conclusive as to the parties' rights, enforceable under the Code of Civil Procedure 1908 as if it were a decree of court, with the Arbitration and Conciliation Act 1996 expressly disapplied. s.62: seafarers may be engaged only by a licensed recruitment and placement service agency or by the owner of an Indian vessel; s.62(2) bars unlicensed business, engagement without a CDC and identity documents, and any fee charged to a seafarer. s.12(1): the Central Government may establish a shipping office and appoint thereto a shipping master and deputy/assistant shipping masters.",
+  "part_xiv_penalties": "s.281(1) residual penalty up to fifty thousand rupees where none is specially provided; s.281(2) the tabulated contravention and penalty schedule; s.282(1) the PRINCIPAL OFFICER is the authority for imposing the s.281(2) penalty, with appeal to the Director-General within thirty days under s.282(2); s.287(1) liability of the person in charge of and responsible to a company as well as the company; s.290(1) detention. Part XIV is ss.281-292, confirmed by Part XV beginning at s.293.",
+  "registration": "s.15(1): no vessel shall be an Indian vessel unless owned by (a) a citizen of India including an NRI or OCI, (b) a company or body established by or under a Central or State Act having its registered office or principal place of business in India, or (c) such other person or body as the Central Government may notify. THE ACT'S TERM OF ART IS 'INDIAN VESSEL', NOT 'INDIAN SHIP'. s.18: the principal officer of the Mercantile Marine Department, or such person as the Central Government authorises, shall be the Registrar of Indian vessels. s.20(9): 'Every Registrar shall keep a register book, make entries in that book and maintain the records of vessels registered under the provisions of this Act, in such manner as may be prescribed.'",
+  "pollution": "s.131 sets what Part VII applies to, including at (e) any incident of marine casualty or act relating to such casualty occurring with grave and imminent danger to the Indian coastline, coastal waters or related interests, including on the high seas. s.133(1): all vessels are under an obligation to prevent discharge or emission of harmful substances. s.138(1): the master shall report the particulars of an escape or likely escape; s.138(2): the Central Government may direct prevention of escape, removal of cargo or substances, movement of the vessel and removal of slicks. IMPORTANT NEGATIVE: 'contingency plan' 0 occurrences, 'OPRC' 0, 'NOS-DCP' 0, 'national oil spill' 0. The Act does NOT name or create the National Oil Spill Disaster Contingency Plan.",
+  "registry_locator_defect": "SRC-MSACT-2025 carried the shipping-master definition at 's.93(c)'. THAT LOCATOR DOES NOT EXIST: s.93 is 'Inspection by shipping master, etc.', with clauses (a) and (b), sub-clauses (i)-(iv) and an Explanation defining 'international voyage'. The definition is the Explanation to s.91, clause (c) - 'For the purposes of this section ... (c) shipping master means a shipping master, (i) for the port at which the seafarer entered into, or is believed to have entered into, an agreement; or (ii) where the seafarer did not enter into an agreement in India, for the port to which the seafarer has returned, or is expected to return, on the completion of his latest voyage.' The PROPOSITION was correct; only the LOCATOR was wrong, which is why no candidate-facing gate could ever have caught it."
+ },
+ "cards": [
+  {
+   "correction_action_id": "CORR-MSACT2B-B-01",
+   "file": "QB9_H.html",
+   "path": "meoclass1/QB9_H.html",
+   "anchor": "q1",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "fb98b7c1797191b467fb860838c148e01f2da99bc845e78997074cae8d44bd96",
+   "post_edit_digest": "43bd6f8cab1ca859a086d7987b5111ef3bc41d3cdc67c443544edd3ee4e39ad4",
+   "changed_propositions": [
+    "60-second: 'replacing the 1958 Act; detailed technical content flows through rules and DGMA circulars/notifications under the Act [Part-level reference - exact section numbers pending verification against the 2025 Act text]' -> s.324(1) named as the repealing provision WITH the 'except Part XIV but not including s.411A therein' limb and s.324(2)'s savings; rules under s.319(1); publication and laying under s.320; DG directions by notice, circular, order or guideline under s.301.",
+    "REG-BOX: the single row 'Merchant Shipping Act 2025 - Domestic implementing statute (in force 15 Mar 2026) - replaces MS Act 1958; sections pending verification' -> TWO rows, 's.319(1), s.320, s.301' for the rule-making and directions chain and 's.324' for repeal and savings with the s.411A limb.",
+    "Key Numbers: the MS Act bullet now carries s.324, s.319(1), s.320 and s.301 rather than only the Act number and commencement date."
+   ]
+  },
+  {
+   "correction_action_id": "CORR-MSACT2B-B-02",
+   "file": "QB9_H.html",
+   "path": "meoclass1/QB9_H.html",
+   "anchor": "q4",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "1d4ea7d5216d503e978cc2cfdc270ab4838d2c89214fda77305aae533668a8cc",
+   "post_edit_digest": "e768eb787d60dd091ad1569ef47b3456a0a5d131ade79557daf521302936b148",
+   "supersession_note": "E5 enriched this card and its pin is release evidence, unaltered here. E5 pins sha256(balanced_block_lf)[:16] = 1d4ea7d5216d503e; this record pins the same block in full, and the full digest BEGINS with E5's exact sixteen characters - the two conventions are one function at two truncations, verified rather than assumed. THIS IS THE FIRST CORRECTION IN THE CORPUS TO DESCEND FROM A TRUNCATED PIN, and recording it required a governance fix. oral_supersession._same_convention accepted only EQUAL widths, so every option was red: pinning at 64 gave DIGEST_CONVENTION_MISMATCH in the chain; pinning at 16 satisfied the chain but broke validate_corrections, which computes live and baseline digests in the 64-character convention; and omitting the claim left E5's own manifest_digests_match red on a legitimately corrected card. All three were tested, not assumed. The comparison is now prefix-tolerant across the two documented widths and compares on the common prefix, which a tampered card cannot satisfy.",
+   "changed_propositions": [
+    "15-second: 'the Indian Shipping Master/DGMA machinery [MS Act 2025 - Part-level, sections pending verification]' -> 'the Indian Shipping Master's dispute machinery (MS Act 2025 s.83) and DGMA's recruitment-and-placement powers (s.62, with directions under s.301)'.",
+    "60-second: 'the Shipping Master's office handles wage disputes under the Merchant Shipping Act machinery [2025 Act - Part-level pending verification]' -> the office established and the shipping master appointed under s.12, the dispute submitted under s.83, a reasoned award within thirty days extendable once by thirty, conclusive as to rights, enforceable as a civil decree, with the Arbitration and Conciliation Act 1996 expressly disapplied.",
+    "REG-BOX: a new row 'MS Act 2025 - s.83, s.62, s.12, s.301' added; the card previously carried no MS Act row at all despite citing the Act twice in its answer."
+   ],
+   "supersedes": {
+    "manifest": "batch_e5_enrichment_manifest.json",
+    "action_id": "ENRICH-A039",
+    "post_edit_digest": "1d4ea7d5216d503e"
+   }
+  },
+  {
+   "correction_action_id": "CORR-MSACT2B-B-03",
+   "file": "QB9_H.html",
+   "path": "meoclass1/QB9_H.html",
+   "anchor": "q8",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "5d2a2e28d768ea62bfc6c7b44842ef8dc432c2f566436a07d3fce9436aea7e03",
+   "post_edit_digest": "26bbab6b9d5f8d96c68bda09027684fff9c3c5df2361a43ddbbea9fdfef326f1",
+   "changed_propositions": [
+    "60-second statutory limb: 'pollution statutes (India: the MS Act 2025 and rules [Part-level, sections pending verification])' -> Part XIV ss.281-292 named, with s.281(1) residual penalty, s.281(2) table, s.282(1) principal officer with appeal to the DG, s.287 company-officer liability and s.290 detention.",
+    "Governing instrument: 'MS Act 2025 statutory duties [Part-level]' -> 'MS Act 2025 statutory duties and penalties - Part XIV, ss.281-292'.",
+    "REG-BOX: 'Merchant Shipping Act 2025 (India) - Statutory duties and penalties - Part-level, sections pending verification' -> 'MS Act 2025 - Part XIV, ss.281-292' with the five named limbs."
+   ]
+  },
+  {
+   "correction_action_id": "CORR-MSACT2B-B-04",
+   "file": "QB1_I.html",
+   "path": "meoclass1/QB1_I.html",
+   "anchor": "q2",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "c23a0ab6d27951af8e6a8a4ea41dc86bd722903bcfd2c0ff899faeb2aa2fbab9",
+   "post_edit_digest": "0fc998f7861fb39b0f1f5f24ee7e97cc59a11ed6affdb6436df16ef3ad19d7b8",
+   "classification_note": "The card's own v1.2 line records an earlier correction that re-based these rows from MS Act 1958 Sec 24/34 to MS Act 2025 Part III with the caveat this record now discharges. That HISTORICAL LINE IS NOT EDITED: the new v1.3 entry is APPENDED in front of it and the v1.2 text, including its own mention of 1958 Sec 24/34, stands verbatim. Rewriting it would launder the record of what was actually published between 3 August and today.",
+   "changed_propositions": [
+    "REG-BOX row 1: 'M.S. Act 2025, Part III (formerly 1958 Sec 24) - Defines what constitutes an Indian ship eligible for national flag registration (exact 2025 section pending verification)' -> 'M.S. Act 2025, s.15(1) (Part III)' with the three ownership limbs, and the candidate term changed from 'Indian ship' to the Act's own 'Indian vessel'.",
+    "REG-BOX row 2: 'M.S. Act 2025, Part III (formerly 1958 Sec 34) - Directs the mandatory compilation and custody of the Register Book by the Registrar (exact 2025 section pending verification)' -> 'M.S. Act 2025, s.20(9) (Registrar: s.18)' with s.20(9) stated and the Registrar constituted under s.18.",
+    "Key Numbers: 'Part III: The current section of the Merchant Shipping Act, 2025 ... formerly Part V of the repealed 1958 Act' -> 'Part III (ss.14-44)' with s.15(1), s.18 and s.20/s.20(9) named. The unverifiable 1958 Part V equivalence is dropped rather than strengthened.",
+    "Version footer: v1.3 entry appended, recording the section resolution and the terminology alignment."
+   ],
+   "deliberately_unchanged": [
+    "The v1.2 correction line of 3 Aug 2026, verbatim, including its reference to MS Act 1958 Sec 24/34.",
+    "Every DGS Order 01 of 2026 proposition, the 31.03.2029 transition ceiling, the examiner trap and the CE Oral Tip. Only the word 'Indian ship' inside the corrected row changed; it is the file's ONLY occurrence of that phrase, so no global substitution was performed or needed."
+   ]
+  },
+  {
+   "correction_action_id": "CORR-MSACT2B-B-05",
+   "file": "QB3_J.html",
+   "path": "meoclass1/QB3_J.html",
+   "anchor": "q5",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "6ca6b199d733b246b867be50f26b39bdcb93b6c39ca75f9f68d887f642e99335",
+   "post_edit_digest": "c368165b0041250cbc8dd19cf7b3059b7a243ff13dcb7248f296326f1d018490",
+   "supersedes": {
+    "manifest": "batch_e6_enrichment_manifest.json",
+    "action_id": "ENRICH-A048",
+    "post_edit_digest": "6ca6b199d733b246b867be50f26b39bdcb93b6c39ca75f9f68d887f642e99335"
+   },
+   "supersession_note": "E6 enriched this card and its pin is release evidence, unaltered here. E6 used the full sha256 over the balanced block, which is byte-identical to this record's pre_edit_digest. Same digest convention throughout - full sha256 over the balanced card block, LF-normalised, exactly as validate_batch_b.card_digests computes it.",
+   "changed_propositions": [
+    "REG-BOX: 'Merchant Shipping Act 2025 (India) - In force 15 Mar 2026 - the statutory frame for pollution jurisdiction in Indian waters (Part-level citation; section mapping pending verification)' -> 'MS Act 2025 - s.131, s.133(1), s.138', with the Part VII application limb, the general duty to prevent discharge or emission, and the master's report plus the Central Government's direction power, AND an express statement that the Act does not name NOS-DCP."
+   ],
+   "deliberately_unchanged": [
+    "The card's 'A Nuance Worth Knowing' paragraph, which already said the NOS-DCP operates as an executive or administrative plan rather than under a dedicated statute. That is CORRECT and is confirmed by this pass's whole-document negative; it is the formulation the reg-box was brought into line with.",
+    "The existing 'sections 133 to 143' block citation in the Indian Statutory Frame section, which is within Part VII (ss.131-143) as verified."
+   ]
+  }
+ ],
+ "propagation": {
+  "scope_pass": "Reproducible sweep of all candidate-facing HTML for 'pending verification', 'section pending', 'exact 2025 section' and 'Part-level'. Inside the declared cards it returned exactly the locations closed above. Zero occurrences of 'pending verification' now remain in QB9_H, QB1_I, QB3_J, QB9_D or QB5_C_B.",
+  "found_and_not_swept": [
+   "Nothing. Every 'pending verification' occurrence in the corpus was inside a card declared by this record or by CORR-MSACT2B-CASUALTY-20260904, or on the QB9_H cheat sheet declared as an artefact below."
+  ]
+ },
+ "invariants": [
+  "No new card, no new 15-second or 60-second layer, no deep-dive added, no examiner attribution altered, no syllabus mapping changed, no written bank and no shared RulesApp source touched.",
+  "No past paper was touched. QP2304, QP2307, QP2503, QP2507 and QP2512 all carry 'formal investigation' correctly for their own sittings, every one of which predates the 2025 Act's commencement on 15 March 2026.",
+  "No new 1958 section-number assertion is authored anywhere in this pass. The Merchant Shipping Act 1958 is NOT held.",
+  "Corpus totals are unmoved: 761 canonical questions across 86 question-bearing files.",
+  "meoclass1/index.html still reads 'Last Updated: 2 Sep 2026' and was DELIBERATELY not patched - the brief directs that the date be reported, not changed, while further GPT review may still arrive. The required final value is 4 Sep 2026.",
+  "QB9_H#q1's constitutional treatment is unchanged: Arts. 73 and 253, ratification as a Union executive act, the Cabinet as the deciding authority, dualism, and tacit acceptance under SOLAS Art. VIII.",
+  "QB9_H#q4's MLC ladder is unchanged in every rung, including Reg 5.1.5, Reg 5.2.2, Stds A2.1/A2.2/A2.5.2, the two-month abandonment limb, the maritime lien, and the entire MS Notice No. 03 of 2013 Grievance Redressal section with its three-day and thirty-working-day limits.",
+  "QB9_H#q8's liability taxonomy is unchanged: fault, strict, contractual, vicarious, statutory and criminal, with CLC 1992, Bunkers 2001, WRC 2007, HNS, LLMC and the Collision Convention 1910 intact.",
+  "QB3_J#q5's NOS-DCP substance is unchanged: the Indian Coast Guard as Central Coordinating Authority, OPRC 1990, Tier I/II/III, the SOPEP interface, no reporting threshold, and the MSC Chitra casualty link."
+ ],
+ "content_index_effect": "None on counts. All five cards keep their id, anchor and question text; only answer body, reg-box, key-number and version-footer prose changed.",
+ "known_traps_entries": [
+  67
+ ],
+ "artefacts": [
+  {
+   "path": "docs/sources/MIW_SOURCE_REGISTRY.json",
+   "what": "SRC-MSACT-2025 source-governance tranche. (1) The LOCATOR DEFECT is corrected: the shipping-master definition moves from the non-existent 's.93(c)' to 's.91, Explanation, clause (c)'. The correction is made TRANSPARENTLY - the claim now states what it previously said, why it was wrong and that the proposition itself never changed - rather than silently overwriting the error. (2) Twenty-nine new verified_claims record the full section mapping, the sixteen-Part structure, the four IMPORTANT NEGATIVES and the corrigenda check. (3) claims_NOT_established is NARROWED to match, and now states explicitly that NO 2025-to-1958 section correspondence is asserted anywhere, with s.411A as the single exception because it is quoted from inside s.324(1) of the 2025 Act itself. (4) checked_on advances to 2026-09-04 and checked_how records the re-hash, the 118-page extraction and the locator correction.",
+   "why_it_matters": "SKILL.md 8.2b: a source carries a currentness STATE and its claims are the reuse surface. Leaving claims_NOT_established saying 'section numbers outside s.4, s.5 and Part V' while production cites twenty-four sections would have made the registry contradict the product it governs - an index row that is not evidence, in the opposite direction."
+  },
+  {
+   "path": "meoclass1/QB9_H_CheatSheet.html",
+   "what": "SECTION 7 OF THE BRIEF, and sequenced LAST as it directs - applied only after every QB9_H card change above was complete and verified. The umbrella instruction 'Cite the 2025 Act at Part level with sections pending verification - quoting 1958 numbering is the stale-law trap' -> 'Cite the VERIFIED 2025 sections: repeal and continuity at s.324 (the 1958 Act repealed except Part XIV, but not including s.411A therein), casualty machinery at ss.231-232. Quoting 1958 numbering is still the stale-law trap.' The stale-law warning is deliberately RETAINED, and no section catalogue was created - two anchors only, exactly as authorised.",
+   "why_it_matters": "This line was the mechanism by which the caveat had become house doctrine: it did not merely carry an unverified claim, it INSTRUCTED candidates to reproduce one. Its casualty limb is separately corrected under CORR-MSACT2B-CASUALTY-20260904."
+  }
+ ],
+ "note": "SURGICAL. Five cards, twelve caveats, one source tranche. The s.324 saving is stated with its 'but not including section 411A therein' limb wherever the repeal is claimed, because 'except Part XIV' alone overstates what survives."
+}
