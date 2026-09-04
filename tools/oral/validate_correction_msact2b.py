@@ -155,10 +155,18 @@ ADJUDICATED = (
     'assigns an inquiry officer, who may pursue a Preliminary Inquiry',
     # -- search metadata, not a claim --
     'Nairobi Wreck Removal Convention, preliminary inquiry, formal investigation, SOLAS',
-    # -- REPORTED, NOT CORRECTED: an IMO Casualty Investigation Code claim, not
-    #    an MS Act one. Outside this authorisation; see the pass 2B report.
-    'I transition to the formal investigation phase under the IMO Casualty Investigation Cod',
-    'Formal Investigation & Evidence Preservation Procedure',
+    # -- RETIRED 2026-09-04 by CORR-CICTERM-20260904 --------------------------
+    # Two entries stood here for the QB5_C_B#q5 surfaces this gate could see but
+    # was not authorised to correct: the 60-second sentence attributing "formal
+    # investigation" to the IMO Casualty Investigation Code, and the body
+    # heading. GPT REVIEW PASS 3 corrected both, which turns those entries into
+    # STALE NO-OPS -- lines that can never match, and that therefore silently
+    # re-license their own phrasings the moment anyone reinstates them. Removing
+    # them is what RESTORES this gate's reach over those two surfaces, and
+    # mutate_correction_pass3.py mutations A and B require exactly that: a
+    # reinstatement must trip no_msact2025_claim_says_formal_investigation here.
+    # validate_correction_pass3.no_adjudicated_entry_is_a_dead_noop keeps every
+    # surviving entry honest on the same terms.
 )
 
 
