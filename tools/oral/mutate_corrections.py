@@ -54,6 +54,8 @@ REPO = HERE.parents[1]
 sys.path.insert(0, str(HERE))
 
 from oral_bytes import read_text, write_text                    # noqa: E402
+from oral_custody import (Custodian, CustodyError, discard,     # noqa: E402
+                          recover, stale_runs)
 from oral_manifest import authorisation_manifest_paths          # noqa: E402
 from validate_batch_b import CARD_OPEN, card_digests, _balanced_end  # noqa: E402
 
@@ -95,33 +97,6 @@ def run_probe(key: str) -> tuple[int, set]:
     for payload in re.findall(r"violations=\[([^\]]*)\]", text):
         failing.update(re.findall(r"'([^']+)'", payload))
     return out.returncode, failing
-
-
-class Snapshot:
-    """Byte-exact custody of every file a mutation touches.
-
-    Restores from what this object personally read, never from git:
-    `git checkout <ref> -- <file>` destroys uncommitted work, which has already
-    cost real edits in this repository.
-    """
-
-    def __init__(self, paths):
-        self.data = {}
-        for path in paths:
-            p = pathlib.Path(path)
-            self.data[p] = p.read_bytes() if p.is_file() else None
-
-    def restore(self) -> list[str]:
-        bad = []
-        for path, blob in self.data.items():
-            if blob is None:
-                if path.is_file():
-                    path.unlink()
-                continue
-            path.write_bytes(blob)
-            if path.read_bytes() != blob:
-                bad.append(str(path))
-        return bad
 
 
 def mutate_card(rel: str, anchor: str) -> None:
@@ -253,13 +228,99 @@ def _drop_qb5a_q4(d):
     d["cards"] = [c for c in d["cards"] if c["anchor"] != "q4"]
 
 
+# ------------------------------------------------------- tree custody / recovery
+
+def tree_dirt() -> str:
+    """`git status --porcelain`, as bytes-faithful text.
+
+    Used as the closing integrity assertion.  Restoring each mutation as it
+    goes and never checking the aggregate is exactly how the 4 September
+    incident reported a tidy summary over a tree that still had a manifest
+    deleted in it.
+    """
+    out = subprocess.run(["git", "status", "--porcelain"], cwd=str(REPO),
+                         capture_output=True, check=False)
+    return out.stdout.decode("utf-8", "replace").strip()
+
+
+def refuse_on_stale_journal() -> int | None:
+    """A journal left behind means a previous run was killed mid-mutation.
+
+    Running again on top of it is how a recoverable interruption turns into a
+    committed corruption: the new run would capture the DAMAGED bytes as its
+    own 'original' and faithfully restore the damage.  So this fails closed and
+    names the recovery command.
+    """
+    stale = stale_runs(REPO)
+    if not stale:
+        return None
+    print("REFUSING TO RUN -- %d unrecovered mutation journal(s) present." % len(stale))
+    for run_dir in stale:
+        entries = json.loads((run_dir / "journal.json").read_text(encoding="utf-8"))
+        print("  %s  (%d file(s) under custody)"
+              % (run_dir.name, len(entries["files"])))
+        for entry in entries["files"]:
+            print("      %s" % entry["path"])
+    print("\nA previous run was terminated before it could restore these files.")
+    print("Recover with:  python tools/oral/mutate_corrections.py --recover")
+    return 2
+
+
+def recover_main() -> int:
+    stale = stale_runs(REPO)
+    if not stale:
+        print("no unrecovered mutation journals; nothing to do")
+        return 0
+    failures = []
+    for run_dir in stale:
+        restored, failed = recover(run_dir)
+        print("%s: restored %d file(s)%s"
+              % (run_dir.name, len(restored),
+                 "; FAILED %s" % failed if failed else ""))
+        for path in restored:
+            print("    %s" % path)
+        if failed:
+            failures.extend(failed)
+        else:
+            discard(run_dir)
+    if failures:
+        print("\nRECOVERY INCOMPLETE: %s" % failures)
+        return 2
+    print("\ngit status after recovery:\n%s" % (tree_dirt() or "(clean)"))
+    return 0
+
+
 # ---------------------------------------------------------------------- main
 
-def main() -> int:
+def main(argv=None) -> int:
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if "--recover" in argv:
+        return recover_main()
+
     if not MANIFEST.is_file():
         print("correction record missing: %s" % MANIFEST_REL)
         return 2
 
+    refused = refuse_on_stale_journal()
+    if refused is not None:
+        return refused
+
+    dirt_before = tree_dirt()
+    cust = Custodian(REPO, name="corrections")
+    try:
+        return _run(cust, dirt_before)
+    finally:
+        # Layer 1 at suite scope.  Every per-mutation guard has already
+        # restored, so this is normally a no-op -- but a raise between guards
+        # (build_mutations, a probe helper, an assertion) has no guard of its
+        # own, and this is what covers it.
+        leftover = cust.restore_all()
+        if leftover:
+            print("SUITE-LEVEL RESTORE FAILED: %s" % leftover)
+        cust.close()
+
+
+def _run(cust, dirt_before) -> int:
     mutations = build_mutations()
 
     # ---- preflight: every mutation must really change something ------------
@@ -273,24 +334,23 @@ def main() -> int:
     print("\n--- preflight: every mutation must change bytes ---")
     no_ops = []
     for mid, desc, files, apply, _probe, _check in mutations:
-        snap = Snapshot(files)
-        before = {p: snap.data[p] for p in snap.data}
-        try:
-            apply()
-        except Exception as exc:
-            print("%-3s ERROR %s: %s" % (mid, type(exc).__name__, exc))
-            no_ops.append(mid)
-            snap.restore()
-            continue
-        after = {p: (p.read_bytes() if p.is_file() else None) for p in snap.data}
-        changed = any(before[p] != after[p] for p in before)
-        print("%-3s %-52s %s" % (mid, desc, "applied" if changed else "NO-OP"))
-        if not changed:
-            no_ops.append(mid)
-        bad = snap.restore()
-        if bad:
-            print("    RESTORE FAILED: %s" % bad)
-            return 2
+        # try/finally, not try/except: KeyboardInterrupt and SystemExit are
+        # BaseException, so the old `except Exception` let both walk past the
+        # restore with the mutation still applied.  This is the incident.
+        with cust.guard(files):
+            try:
+                apply()
+            except Exception as exc:
+                print("%-3s ERROR %s: %s" % (mid, type(exc).__name__, exc))
+                no_ops.append(mid)
+                continue
+            changed = any(
+                cust.original(p) != (pathlib.Path(p).read_bytes()
+                                     if pathlib.Path(p).is_file() else None)
+                for p in files)
+            print("%-3s %-52s %s" % (mid, desc, "applied" if changed else "NO-OP"))
+            if not changed:
+                no_ops.append(mid)
 
     if no_ops:
         print("\npreflight FAILED -- these mutations change no bytes: %s"
@@ -316,20 +376,17 @@ def main() -> int:
     print("\n--- mutations ---")
     caught = 0
     for mid, desc, files, apply, probe, want in mutations:
-        snap = Snapshot(files)
-        try:
-            apply()
-            rc, failing = run_probe(probe)
-        except Exception as exc:
-            print("%-3s %-52s CRASH %s" % (mid, desc, exc))
-            crashes.append(mid)
-            snap.restore()
-            continue
-        finally:
-            restore_failed = snap.restore()
-        if restore_failed:
-            print("    RESTORE FAILED: %s" % restore_failed)
-            return 2
+        # The probe is a subprocess that runs for tens of seconds; that window
+        # is where an interrupt actually lands.  The guard's __exit__ covers it
+        # for a catchable signal, and the on-disk journal covers it for a kill.
+        with cust.guard(files):
+            try:
+                apply()
+                rc, failing = run_probe(probe)
+            except Exception as exc:
+                print("%-3s %-52s CRASH %s" % (mid, desc, exc))
+                crashes.append(mid)
+                continue
 
         # The named check must be the one that broke. Failing for another
         # reason is not evidence that this mutation was detected.
@@ -365,8 +422,34 @@ def main() -> int:
           % (total, len(escapes), len(crashes)))
     if escapes:
         print("escaped: %s" % ", ".join(escapes))
+
+    # ---- closing integrity assertion --------------------------------------
+    #
+    # Two independent proofs, because they can fail apart: custody proves every
+    # file it touched is byte-identical to capture, and `git status` proves the
+    # suite did not leave something custody never knew about.  A HARD FAIL here
+    # outranks the mutation verdict -- a suite that cannot put the repository
+    # back has not passed, whatever it caught.
+    print("\n--- closing integrity ---")
+    drift = cust.verify_pristine()
+    print("custody: %d file(s) under custody, drift=%s"
+          % (len(cust._order), drift or "none"))
+    dirt_after = tree_dirt()
+    print("git status: %s" % (dirt_after or "(clean)"))
+    if drift or dirt_after != dirt_before:
+        print("HARD FAIL -- the working tree was NOT restored.")
+        if dirt_after != dirt_before:
+            print("  before: %s\n  after:  %s"
+                  % (dirt_before or "(clean)", dirt_after or "(clean)"))
+        return 2
+
     return 1 if (escapes or crashes) else 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except CustodyError as exc:
+        # Never let this surface as a traceback among other tracebacks.
+        print("\nHARD FAIL -- custody: %s" % exc)
+        sys.exit(2)
