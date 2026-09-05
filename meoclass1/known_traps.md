@@ -1270,9 +1270,11 @@ sentence: every mention must be **negated or quoted**.
 Five live cards taught **BMP5** as the standard in force. It is not. **BMP Maritime Security
 (BMP MS)** was published on **31 March 2025** by **BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO and
 OCIMF**, and it states that it **replaces all the existing versions of the BMP** — BMP5, the
-Global Counter Piracy Guidance and BMP West Africa. A **second edition followed in 2026**. An
-examiner who asks “what do you follow for a Red Sea transit?” in a 2026 oral is asking about a
-publication that has now superseded its own first edition twice over the guidance the card named.
+Global Counter Piracy Guidance and BMP West Africa. It remains the **1st Edition (2025)**,
+updated during 2026 with the activist-boarding guidance; **the publishers label no second
+edition**, so “the 2026 edition” is itself a trap — see entry 80. An examiner who asks “what do you
+follow for a Red Sea transit?” in a 2026 oral is asking about a publication that superseded the
+guidance the card named.
 
 * **Say the supersession before the technique.** BMP5's hardening, citadel, lookout and
   reporting content is still examinable and is still correct as technique — it is the
@@ -2263,9 +2265,12 @@ which is exactly why nothing in the corpus would ever have flagged them.
   sites. OCIMF labels it **1st Edition, 2025**, updated during 2026. **There is
   no second edition.** One *Common CE Failures* entry — "Teaching BMP5, **or the
   2025 first edition**, as current" — was FALSIFIED BY THE CORRECTION ITSELF and
-  had to be rewritten in the same act. **The label is still wrong in six cards
-  outside q13** (`QB4_H#q2`, `QB4_H#q11`, `QB4_B#q16`, `QB9_A#q9`, `QB9_B#q5`)
-  and is REPORTED, not swept. See trap 54.
+  had to be rewritten in the same act. The label was **also wrong at nine sites across the
+  five cards outside q13** (`QB4_H#q2`, `QB4_H#q11`, `QB4_B#q16`,
+  `QB9_A#q9`, `QB9_B#q5`); that was REPORTED, not swept, and the sweep was
+  carried out on **5 September 2026** under `CORR-BMP-EDITION-PROP-20260905`.
+  *A report of a defect is not a repair of it, and the gap between the two is
+  where a corpus contradicts itself.* See trap 54.
 * **`QB7_D#q15`** cited **ISO 23306:2020** with no currency statement at all —
   not a false claim, a claim with no date-of-check. It is still the **CURRENT
   PUBLISHED** standard as at September 2026, but ISO has flagged it *"to be
@@ -2281,3 +2286,41 @@ which is exactly why nothing in the corpus would ever have flagged them.
 
 GREP: SKIP `the 2026 edition` — q13 QUOTES it to teach against it. Test for
 assertion outside a quote span.
+
+### 81. A closure claim is only as good as the corpus behind it — and the count is the part that rots first
+
+`QB7_D#q15` told the candidate that **"the five IGF amendments in force or
+adopted were each opened and read"** and then listed five. **The chain has six.**
+The missing one was **`MSC.458(101)`** — in force since 1 January 2024, and sitting
+in the shared true-source corpus since 3 August 2026. *The omission was in the
+reading, not in the holding.*
+
+* **The count was wrong first and the list was edited to agree with it.** The
+  sibling card `QB7_D#q14` says "All five IGF amendments" and then lists **six**,
+  because its five counts the five then **IN FORCE** and adds `MSC.567(109)` with
+  "plus" — defensible in isolation. q15 inherited that **count word** into a
+  sentence scoped "in force **or adopted**", where six is the only right answer,
+  and dropped a resolution to make the list match the number. **When a number and
+  a list disagree, find out which one was written first.**
+* **This footer had already been corrected once, and was still wrong.** An earlier
+  version claimed closure over **four**; independent review found that
+  `MSC.475(102)` and `MSC.524(106)` had never been looked for, and the count went
+  to five. It should have gone to six. *A correction that moves a number without
+  re-deriving the set has not checked the set.*
+* **Name the base separately.** `MSC.391(95)` **adopts** the IGF Code and is not
+  one of the six amendments. Counting it gives seven, and that is the error a
+  reader correcting "five" in a hurry will make next. Both footers now say so.
+* **Hold what you cite.** A footer naming six resolutions the corpus does not hold
+  is no more reproducible than one naming five — which is exactly how the
+  four-to-five correction passed, with two of the five named but unheld. All six
+  are now held with recorded SHA-256 digests and registered in
+  `docs/sources/MIW_SOURCE_REGISTRY.json`.
+* **The substantive conclusion survived.** No IGF amendment amends the annex to
+  part C-1, the LNG Bunker Delivery Note — re-established by reading all six end
+  to end, including the omitted one. *An enumeration can be wrong while the
+  proposition it supports is right; that is why the enumeration needs its own
+  check.* See traps 54 and 80.
+
+GREP: SKIP `five IGF amendments` — the version stamps and this entry QUOTE the
+wrong claim in order to record it. Test the ENUMERATION, not the whole footer:
+q15 legitimately names `MSC.458(101)` three times outside the list.
