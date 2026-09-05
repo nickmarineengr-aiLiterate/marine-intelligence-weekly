@@ -1,0 +1,282 @@
+{
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "tranche_4a",
+ "date": "2026-09-06",
+ "baseline_commit": "0ca4210",
+ "authorisation_source": "GPT HIGH-RISK CONTENT REVIEW - TRANCHE 4 READ-ONLY REPORT (2026-09-06), adjudicated by GPT in the Tranche 4A brief. The brief resolved the two external questions the review could not close from held bytes (CII G2/G4 supersession; BMP MS threat-based muster and citadel endurance) and authorised the corrections below.",
+ "review": {
+  "gate": "tools/oral/validate_tranche4a.py",
+  "mutation_suite": "tools/oral/mutate_tranche4a.py",
+  "independent_review": "NOT YET - these records are produced by the same session that made the edits."
+ },
+ "propagation": {
+  "derived_surfaces": "NONE. No <div class=\"q-text\"> stem changed in any edited file - proven by diffing the stem list against HEAD for all ten files. build_qb_content_index.py --check reports the on-disk outputs already match the live derivation at 761 questions / 86 files, so qb_content_index.json, the hub, search, the examiner index, topics and study_mappings are byte-identical and were deliberately not regenerated. No XLSX regeneration or distribution is required or performed.",
+  "hub_date": "NOT ADVANCED. The pre-Tranche-3 cleanup instruction forbids it and the Tranche 4A brief repeats it.",
+  "files_touched": [
+   "meoclass1/QB3_C.html",
+   "meoclass1/QB8_A.html",
+   "meoclass1/QB9_A.html",
+   "meoclass1/QB9_B.html"
+  ]
+ },
+ "invariants": {
+  "canonical_questions_before": 761,
+  "canonical_questions_after": 761,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "corrected_cards": 20,
+  "artefact_census": {
+   "method": "Occurrence counts, not line counts. The Tranche 4 report quoted 101 [cite: tokens (correct, occurrences) alongside per-file numbers 2/15/30/15 which were grep LINE counts; the per-file OCCURRENCE counts are 6/24/47/24. Same total, different denominator - recorded here so the difference is not silently absorbed.",
+   "cite_tokens_before": {
+    "QB3_C.html": 6,
+    "QB8_A.html": 24,
+    "QB9_A.html": 47,
+    "QB9_B.html": 24,
+    "TOTAL": 101
+   },
+   "cite_tokens_after": 0,
+   "cite_distinct_shapes": {
+    "[cite: 1]": 101
+   },
+   "scaffold_blocks_before": {
+    "QB8_A.html": 5,
+    "QB9_A.html": 9,
+    "QB9_B.html": 7,
+    "TOTAL": 21
+   },
+   "scaffold_blocks_after": 0,
+   "scaffold_correction_footer_stamps_before": 21,
+   "scaffold_correction_footer_stamps_after": 0,
+   "classification": {
+    "A_generation_token": "101 occurrences of exactly \"[cite: 1]\" - removed",
+    "B_scaffold_block": "21 blocks - removed. Each was verified BEFORE removal to duplicate its card's rendered reg-box and CE tip, so no unique candidate content was lost; 20 of 21 matched one structural pattern and the 21st differed only in lacking a trailing rule.",
+    "C_legitimate": "Bare <p>---</p> markdown horizontal-rule residue (about 9-10 per affected card) was NOT removed: it is cosmetic, it was not part of the Tranche 4 census, and sweeping it would be the broad style cleanup the brief forbids. Carried forward."
+   },
+   "wrong_card_identity_stamps_found": "All 7 scaffold stamps in QB9_B.html carried QB8 identities (QB8 Q10, Q11, Q12, Q13, Q20, Q21, Q22) and all 9 in QB9_A.html carried stale v1.1/v1.2 versions. Removed with the blocks."
+  },
+  "structural_proof": "After excision every affected file has balanced <div> and <details>, and every card retains a rendered reg-box and CE tip: QB3_C 7 cards/7/7, QB8_A 7/7/7, QB9_A 10/10/11, QB9_B 9/9/9. QB9_A carries one extra rendered ce-tip at q5; that duplicate PRE-EXISTS this pass and is carried forward."
+ },
+ "correction_id": "CORR-T4A-ARTEFACT-HYGIENE-20260906",
+ "title": "Candidate-facing authoring residue: 101 raw \"[cite: 1]\" generation tokens and 21 plain-text scaffold blocks, each duplicating its card's rendered reg-box and CE tip and closing with a stale or wrong-card CORRECTION FOOTER stamp.",
+ "candidate_claim": "Not a candidate report. Tranche 4 findings P1-09, P1-12, P1-17 and the propagation census.",
+ "candidate_verdict": "UPHELD. Both classes are machine residue served to candidates.",
+ "authority": "Not a regulatory question. The evidence is the census below and the structural proof after excision.",
+ "cards": [
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-01",
+   "file": "QB3_C.html",
+   "path": "meoclass1/QB3_C.html",
+   "anchor": "q5",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "a87b1d77af4b8dd8b78b8f8cff0562af15f66ae2212f7dcce36424014af64a88",
+   "post_edit_digest": "6fb6f99812b1c428e4b4ddc54ab774641f037822bc7ea9eda0e1f5dc65f77490",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-02",
+   "file": "QB8_A.html",
+   "path": "meoclass1/QB8_A.html",
+   "anchor": "q1",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "99b859f4d58126a09a6c711d84cd75a48e2c6b8c5472f76d002c2a22bd31defe",
+   "post_edit_digest": "97940fa0aac79278392be1544aa0313cbc8517d04eed46610c908ea79ef05575",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-03",
+   "file": "QB8_A.html",
+   "path": "meoclass1/QB8_A.html",
+   "anchor": "q2",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "570a5ce03fca68d8e9c9a3cca9d082cd2d6e246cf083f47488877bf007c06707",
+   "post_edit_digest": "18f1f8742081f64c78a298321bd6abc70f38277a5f3898fb2ca0ac0eca40eb5c",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-04",
+   "file": "QB8_A.html",
+   "path": "meoclass1/QB8_A.html",
+   "anchor": "q4",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "0de04b32a52f212fac9316ae3ec54919f09d17c8c16a2515614857833ce7d1b8",
+   "post_edit_digest": "d7304e94d833f55ca2db1852d6afbfcc168497f2f52327fe266fbf40488807c2",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-05",
+   "file": "QB8_A.html",
+   "path": "meoclass1/QB8_A.html",
+   "anchor": "q5",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "34903e50db90d97daa2fb3092f66df9debd55a6d92efb996da4c4408d31d6fd0",
+   "post_edit_digest": "4b1042c558f8e431c9fc0f07d0564f04940973b65bad21cacdef9e0b238d0d8e",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-06",
+   "file": "QB8_A.html",
+   "path": "meoclass1/QB8_A.html",
+   "anchor": "q6",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "0d41eab88a24d6901d7f89058de352ce20c5585f1981c85d524aa53028f966fe",
+   "post_edit_digest": "e541423108fdb5992f8083b5dc5955546f0f7af28d80048cdcb2de9e126511b4",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-07",
+   "file": "QB9_A.html",
+   "path": "meoclass1/QB9_A.html",
+   "anchor": "q1",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "12355e25ecb5c64f068be20dcbf0dc7802b3c33b24997852df9e061d6749d4ea",
+   "post_edit_digest": "c35c90b38d807194f63b04e0a6da7e6b7e2bdde279ba9dccf3eb4a4cd49e838b",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-08",
+   "file": "QB9_A.html",
+   "path": "meoclass1/QB9_A.html",
+   "anchor": "q2",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "b19d5787c52e195e73adc2d03e9bd69191f0e714276007ff477395346a7ffd30",
+   "post_edit_digest": "5a9552e7b424f3836b19c2876f73ad0ffd02c9a0eebe6d766a1ad76c16494ec3",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-09",
+   "file": "QB9_A.html",
+   "path": "meoclass1/QB9_A.html",
+   "anchor": "q3",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "740c7cfd5573a518cdd79e1bf9a1ee1ad0b9e1ea8be9fa376ec87c196ec0a62b",
+   "post_edit_digest": "b081fa98a54fe9a982f4cb831850a68acc545ec595ca43d9688208237f498830",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-10",
+   "file": "QB9_A.html",
+   "path": "meoclass1/QB9_A.html",
+   "anchor": "q4",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "8c029654f7a75f7a64067fb8373aee3e373e557bedd98e17a27b3334e9905b54",
+   "post_edit_digest": "cf5e9ce665dd9e1758f36b2a523999e17cc848a0c060d80afec8ba5349490bc6",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-11",
+   "file": "QB9_A.html",
+   "path": "meoclass1/QB9_A.html",
+   "anchor": "q5",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "b5d1f6cf055480d83e18bac73ea7ef861004aa8b6f271aa210d69300e3a7a7a6",
+   "post_edit_digest": "e0085ef206207cf411b4a2b5be7a95b79ba316ad7536060aabced70583c8cc61",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-12",
+   "file": "QB9_A.html",
+   "path": "meoclass1/QB9_A.html",
+   "anchor": "q6",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "341bff5f6e99fa8454dac1c837179023c2d30b9499dac66cca18f597ee465755",
+   "post_edit_digest": "411f980a9441cbc829641b19337b88b93b41967740ed4914f9b5e0f4d47ac8f2",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-13",
+   "file": "QB9_A.html",
+   "path": "meoclass1/QB9_A.html",
+   "anchor": "q7",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "76972e697e829c7545970da114ea10bfc8698eb16a4e5798feadf8ddd05e5927",
+   "post_edit_digest": "d4dfe75437dba664078a783779942415e8107c8f3a2987ddef8520fc62a4afdc",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-14",
+   "file": "QB9_A.html",
+   "path": "meoclass1/QB9_A.html",
+   "anchor": "q8",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "f7b91dfb12afc35aee125405919329ae4c2c16af7257873e0032f90f4d758b45",
+   "post_edit_digest": "edc479bc20441a274b5ccf44a2b6aab0273a7d87c144f5819acd4c3b6945fc99",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-15",
+   "file": "QB9_B.html",
+   "path": "meoclass1/QB9_B.html",
+   "anchor": "q1",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "444d5ba8118a176618a709ac8305d82d6c4e17e0a99f8cd6fb1ccab91b55cddf",
+   "post_edit_digest": "367f03d570cf361cba384d50217120db3e7afd05ce07046e24ba8ad2fe69a39e",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-16",
+   "file": "QB9_B.html",
+   "path": "meoclass1/QB9_B.html",
+   "anchor": "q2",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "23f10b7f30a3f2f85db157ee53b8bb9370c6348e9fe91534159b1095d41b13b0",
+   "post_edit_digest": "e1214ec3127debef79882311946d32f2304e6a256b1c8de804b84eb509f4519e",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered.",
+   "supersedes": {
+    "manifest": "batch_e6_enrichment_manifest.json",
+    "action_id": "ENRICH-A049",
+    "post_edit_digest": "23f10b7f30a3f2f85db157ee53b8bb9370c6348e9fe91534159b1095d41b13b0",
+    "note": "ENRICH-A049 pinned the state this record corrects. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-17",
+   "file": "QB9_B.html",
+   "path": "meoclass1/QB9_B.html",
+   "anchor": "q3",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "3022482172239986ce77bfb099f8caec40d8db76a1f456f252414e5a857e1ced",
+   "post_edit_digest": "b771e2f4fd7649cb0f4bead27f7cc6ab93b5892fad6b44bd57393a8c779da87f",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-18",
+   "file": "QB9_B.html",
+   "path": "meoclass1/QB9_B.html",
+   "anchor": "q4",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "772dae08541f96d670392e5a9e7283adbf6e82912279244ce5d970231c651672",
+   "post_edit_digest": "c98882c794c8a295e8e563b0ed67c4788e2f606acac40a423239730d4019ca10",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-19",
+   "file": "QB9_B.html",
+   "path": "meoclass1/QB9_B.html",
+   "anchor": "q6",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "ce030887d06c0101550a908f95f3f4461a316a97424aace507e3102031d940a0",
+   "post_edit_digest": "fed1e02e2d9969d2a1ea7bf2da9d47922d1e5ceda6a062b18f88adf10405cda8",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  },
+  {
+   "correction_action_id": "T4A-ARTEFACT-HYGIENE-20260906-20",
+   "file": "QB9_B.html",
+   "path": "meoclass1/QB9_B.html",
+   "anchor": "q7",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "6f7067f05ceafe8ddf867761638b0446d1063f455d5e9edf4553404498f99773",
+   "post_edit_digest": "f7e46dbd543bb4f6be14e1413193f3aba9ed3f520c43984c028884904f0d0480",
+   "what_changed": "Removed candidate-facing authoring residue: raw \"[cite: 1]\" generation tokens and/or the plain-text scaffold block duplicating this card's rendered reg-box and CE tip and carrying a stale or wrong-card CORRECTION FOOTER stamp. No candidate teaching was altered."
+  }
+ ],
+ "note": "SCOPE. The two named classes only, across the four files the Tranche 4 census identified. All 101 tokens and all 21 blocks were inside q-cards; none sat in page furniture.\n\nCARRIED FORWARD (recorded, not swept): <p>---</p> markdown-rule residue; the duplicated ce-tip at QB9_A#q5.",
+ "governing_commits": [
+  "9506aec"
+ ],
+ "known_traps_entries": [
+  89
+ ],
+ "rationale": "Tranche 4A is the correction half of the Tranche 4 read-only review. Each family closes findings the review raised and the GPT brief adjudicated; nothing outside those findings was reopened."
+}

@@ -1,0 +1,56 @@
+{
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "tranche_4a",
+ "date": "2026-09-06",
+ "baseline_commit": "0ca4210",
+ "authorisation_source": "GPT HIGH-RISK CONTENT REVIEW - TRANCHE 4 READ-ONLY REPORT (2026-09-06), adjudicated by GPT in the Tranche 4A brief. The brief resolved the two external questions the review could not close from held bytes (CII G2/G4 supersession; BMP MS threat-based muster and citadel endurance) and authorised the corrections below.",
+ "review": {
+  "gate": "tools/oral/validate_tranche4a.py",
+  "mutation_suite": "tools/oral/mutate_tranche4a.py",
+  "independent_review": "NOT YET - these records are produced by the same session that made the edits."
+ },
+ "propagation": {
+  "derived_surfaces": "NONE. No <div class=\"q-text\"> stem changed in any edited file - proven by diffing the stem list against HEAD for all ten files. build_qb_content_index.py --check reports the on-disk outputs already match the live derivation at 761 questions / 86 files, so qb_content_index.json, the hub, search, the examiner index, topics and study_mappings are byte-identical and were deliberately not regenerated. No XLSX regeneration or distribution is required or performed.",
+  "hub_date": "NOT ADVANCED. The pre-Tranche-3 cleanup instruction forbids it and the Tranche 4A brief repeats it."
+ },
+ "invariants": {
+  "canonical_questions_before": 761,
+  "canonical_questions_after": 761,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "corrected_cards": 1
+ },
+ "correction_id": "CORR-T4A-GRAIN-DOA-20260906",
+ "title": "QB2_A#q33 cited Grain Code A 7 for the Document of Authorisation. A 3 is the document, A 6 the booklet, A 7 the stability criteria - and the card was already citing A 7.1.2 correctly for the residual-area criterion two paragraphs earlier, so it contradicted itself.",
+ "candidate_claim": "Not a candidate report. Tranche 4 finding P1-01, with coupled P2-01.",
+ "candidate_verdict": "UPHELD from held primary bytes. Resolution MSC.23(59), the Grain Code as adopted, is held: section 3 is DOCUMENT OF AUTHORIZATION, section 6 is INFORMATION REGARDING SHIP'S STABILITY AND GRAIN LOADING (\"Information in printed booklet form\"), section 7 is STABILITY REQUIREMENTS. The registry row for SRC-GRAINCODE-PARTA-TEXT independently records reliance on A 3.1, A 3.2, A 3.5 and A 6.1 for exactly these propositions.",
+ "authority": "MSC.23(59) A 3, A 6, A 7 read in full from the held resolution. A 7.1.1 verbatim: \"the angle of heel due to the shift of grain shall not be greater than 12 degrees or in the case of ships constructed on or after 1 January 1994 the angle at which the deck edge is immersed, whichever is the lesser\".\n\nSOURCES RELIED ON: SRC-GRAINCODE-MSC23-59, SRC-GRAINCODE-MSC552-2026, SRC-GRAINCODE-PARTA-TEXT.",
+ "cards": [
+  {
+   "correction_action_id": "T4A-GRAIN-DOA-20260906-01",
+   "file": "QB2_A.html",
+   "path": "meoclass1/QB2_A.html",
+   "anchor": "q33",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "5e18d8b2d23febaad92e689b3c598bac31268550181ca1e0d71e38a5c6724220",
+   "post_edit_digest": "530c7fc429e58d6fc60d994eebc307da740b913f5a3bfbd0e1e194d9d81fbd03",
+   "what_changed": "REG-BOX row retargeted from \"International Grain Code, A 7\" to \"A 3 / A 6\" and made to say positively that A 7 is the stability criteria; the 12 degree criterion now carries its \"constructed on or after 1 January 1994\" applicability limb in both the body and the Numbers to Memorise layer.",
+   "supersedes": {
+    "manifest": "correction_corr_gpt_t1_grain_20260904_manifest.json",
+    "action_id": "CORR-GPT-T1-GRAIN-02",
+    "post_edit_digest": "5e18d8b2d23febaad92e689b3c598bac31268550181ca1e0d71e38a5c6724220",
+    "note": "CORR-GPT-T1-GRAIN-02 pinned the state this record corrects. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  }
+ ],
+ "note": "SCOPE. P1-01 and its coupled P2-01 only. No other grain teaching was reopened: the residual-area criterion, the 0.30 m GM, the MSC.552(108) amendment list and the untouched-criteria framing are unchanged and are pinned by retention checks G-09.\n\nCARRIED FORWARD (recorded, not swept): P2-02 (the card's consequential-amendment list omits A 12.3.3, and its source-confidence footer names IMO's January 2026 supplement, which the registry itself records as INCOMPLETE on exactly that item). Not in the Tranche 4A brief; carried to the next pass.",
+ "governing_commits": [
+  "9506aec"
+ ],
+ "known_traps_entries": [
+  86
+ ],
+ "rationale": "Tranche 4A is the correction half of the Tranche 4 read-only review. Each family closes findings the review raised and the GPT brief adjudicated; nothing outside those findings was reopened."
+}

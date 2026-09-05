@@ -1,0 +1,74 @@
+{
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "tranche_4a",
+ "date": "2026-09-06",
+ "baseline_commit": "0ca4210",
+ "authorisation_source": "GPT HIGH-RISK CONTENT REVIEW - TRANCHE 4 READ-ONLY REPORT (2026-09-06), adjudicated by GPT in the Tranche 4A brief. The brief resolved the two external questions the review could not close from held bytes (CII G2/G4 supersession; BMP MS threat-based muster and citadel endurance) and authorised the corrections below.",
+ "review": {
+  "gate": "tools/oral/validate_tranche4a.py",
+  "mutation_suite": "tools/oral/mutate_tranche4a.py",
+  "independent_review": "NOT YET - these records are produced by the same session that made the edits."
+ },
+ "propagation": {
+  "derived_surfaces": "NONE. No <div class=\"q-text\"> stem changed in any edited file - proven by diffing the stem list against HEAD for all ten files. build_qb_content_index.py --check reports the on-disk outputs already match the live derivation at 761 questions / 86 files, so qb_content_index.json, the hub, search, the examiner index, topics and study_mappings are byte-identical and were deliberately not regenerated. No XLSX regeneration or distribution is required or performed.",
+  "hub_date": "NOT ADVANCED. The pre-Tranche-3 cleanup instruction forbids it and the Tranche 4A brief repeats it.",
+  "hand_maintained_surfaces": "meoclass1/QB6_cheatsheet.html - one table row corrected to the 2022 pair. Cheat sheets are hand maintained, not generated, so this is an edit and not a regeneration."
+ },
+ "invariants": {
+  "canonical_questions_before": 761,
+  "canonical_questions_after": 761,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "corrected_cards": 2
+ },
+ "correction_id": "CORR-T4A-CII-G2G4-20260906",
+ "title": "Three sites taught the REVOKED 2021 CII Guidelines MEPC.337(76)/MEPC.339(76) as the current G2/G4 pair, while two other cards in the same corpus cited MEPC.354(78) for the same thing. The corpus contradicted itself; the 2022 pair is correct.",
+ "candidate_claim": "Not a candidate report. Tranche 4 finding P1-02 and coupled P2-05, with K-7 resolved.",
+ "candidate_verdict": "UPHELD and now closed from IMO primary bytes rather than from adjudication alone. MEPC.353(78) and MEPC.354(78) were retrieved from IMO's own resolutions CDN and their operative clause 5 read: each expressly REVOKES its 2021 predecessor, MEPC.354(78) naming MEPC.339(76) in terms.",
+ "authority": "MEPC.353(78) clause 5 revokes the 2021 G2 (MEPC.337(76)); MEPC.354(78) clause 5 revokes the 2021 G4 \"adopted by resolution MEPC.339(76)\". Separately, MEPC.352(78) (G1) section 4.1 shows the CF chain: G1 does not tabulate CF, it adopts the EEDI calculation guidelines by reference. That REFINES the Tranche 4 P2-05 finding: the card's CF numbers were right and its citation was a real link in a real chain, one step short - so the correction states the chain rather than swapping the citation.\n\nSOURCES RELIED ON: SRC-CII-G1-MEPC352-78, SRC-CII-G2-MEPC353-78, SRC-CII-G4-MEPC354-78, SRC-IMO-MEPC412-84-CII-G1.",
+ "cards": [
+  {
+   "correction_action_id": "T4A-CII-G2G4-20260906-01",
+   "file": "QB7_I.html",
+   "path": "meoclass1/QB7_I.html",
+   "anchor": "q10",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "abf64b87190fc96f1169ec3463c8ade1418e07e7730069fe663ebd640742e24e",
+   "post_edit_digest": "92f9825bc143475af77fd1bb6c37092c608d87e2a2ddbe447a27851f56090cb1",
+   "what_changed": "REG-BOX G2/G4 row moved to MEPC.353(78)/MEPC.354(78) with the revocations stated; the CF row rewritten as the two-step chain (G1 MEPC.352(78) -> EEDI guidelines, currently MEPC.364(79)); the body CF sentence given the same attribution. G3 MEPC.338(76) and the MEPC.333(76) EEXI trap left in place.",
+   "supersedes": {
+    "manifest": "correction_corr_gpt_t3c_cii_20260905_manifest.json",
+    "action_id": "CORR-GPT-T3C-CII-02",
+    "post_edit_digest": "abf64b87190fc96f1169ec3463c8ade1418e07e7730069fe663ebd640742e24e",
+    "note": "CORR-GPT-T3C-CII-02 pinned the state this record corrects. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T4A-CII-G2G4-20260906-02",
+   "file": "QB6.html",
+   "path": "meoclass1/QB6.html",
+   "anchor": "q1",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "df17e48937c1b70f1650a2180447997884857aff2405b66ff45fbcc9bc950059",
+   "post_edit_digest": "76a133f91964c383af190e37cfe81baf04fa74cdec1c23c1e1109a3213be0ad3",
+   "what_changed": "Four sites corrected: the required-CII sentence, the Common-Failures line, the Numbers list and the REG-BOX row. Three further CF-attribution sites in the same card given the G1 chain.",
+   "supersedes": {
+    "manifest": "correction_corr_gpt_t3c_cii_20260905_manifest.json",
+    "action_id": "CORR-GPT-T3C-CII-01",
+    "post_edit_digest": "df17e48937c1b70f1650a2180447997884857aff2405b66ff45fbcc9bc950059",
+    "note": "CORR-GPT-T3C-CII-01 pinned the state this record corrects. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  }
+ ],
+ "note": "SCOPE. The G2/G4 currentness claim and the CF attribution inside the two cards already being corrected. The brief bounded propagation to QB6.html#q1 and QB6_cheatsheet.html and no general CII review was launched. CF citations in OTHER QB6 cards were deliberately NOT touched.\n\nCARRIED FORWARD (recorded, not swept): MEPC.364(79) is cited as a standalone CF source in several QB6 cards outside q1 and in QB7_E. Those are outside the bounded propagation and are not defects of the same class as P1-02 - they are attribution polish. Recorded, not swept. | Whether MEPC 84 further amended G2 or G4 was not searched; only G1 (MEPC.412(84)) is known amended.",
+ "governing_commits": [
+  "9506aec"
+ ],
+ "known_traps_entries": [
+  87
+ ],
+ "rationale": "Tranche 4A is the correction half of the Tranche 4 read-only review. Each family closes findings the review raised and the GPT brief adjudicated; nothing outside those findings was reopened."
+}

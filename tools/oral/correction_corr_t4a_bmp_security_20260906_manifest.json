@@ -1,0 +1,107 @@
+{
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "tranche_4a",
+ "date": "2026-09-06",
+ "baseline_commit": "0ca4210",
+ "authorisation_source": "GPT HIGH-RISK CONTENT REVIEW - TRANCHE 4 READ-ONLY REPORT (2026-09-06), adjudicated by GPT in the Tranche 4A brief. The brief resolved the two external questions the review could not close from held bytes (CII G2/G4 supersession; BMP MS threat-based muster and citadel endurance) and authorised the corrections below.",
+ "review": {
+  "gate": "tools/oral/validate_tranche4a.py",
+  "mutation_suite": "tools/oral/mutate_tranche4a.py",
+  "independent_review": "NOT YET - these records are produced by the same session that made the edits."
+ },
+ "propagation": {
+  "derived_surfaces": "NONE. No <div class=\"q-text\"> stem changed in any edited file - proven by diffing the stem list against HEAD for all ten files. build_qb_content_index.py --check reports the on-disk outputs already match the live derivation at 761 questions / 86 files, so qb_content_index.json, the hub, search, the examiner index, topics and study_mappings are byte-identical and were deliberately not regenerated. No XLSX regeneration or distribution is required or performed.",
+  "hub_date": "NOT ADVANCED. The pre-Tranche-3 cleanup instruction forbids it and the Tranche 4A brief repeats it."
+ },
+ "invariants": {
+  "canonical_questions_before": 761,
+  "canonical_questions_after": 761,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "corrected_cards": 4
+ },
+ "correction_id": "CORR-T4A-BMP-SECURITY-20260906",
+ "title": "The 31 Aug 2026 correction added a supersession banner to four BMP cards and, by its own declared scope, left \"every BMP5 technique block deliberately untouched\". Three of the four therefore went on teaching in their body and Numbers layers that BMP5 is the current active edition - contradicting the banner two screens above. This closes that, plus the security and provenance findings in the same four cards.",
+ "candidate_claim": "Not a candidate report. Tranche 4 findings P1-03 to P1-08, P1-10, P1-11, P1-13 to P1-16, P1-18, P1-19, with coupled P2-06, P2-13, P2-14, P2-15, P2-16, P2-17, P2-18.",
+ "candidate_verdict": "UPHELD. BMP Maritime Security primary bytes are now held for the first time, and every migrated proposition is quoted from them rather than adjudicated.",
+ "authority": "BMP Maritime Security, 1st Edition 2025 as updated June 2026, held and read. Its version-control table gives Edition \"First\" for BOTH rows, which is primary proof there is no second edition. Threat-based muster verbatim: locations \"will vary depending on the threat, i.e. threat from piracy (citadel), threat from WBIED/UAV (above waterline)\"; a security muster point's \"location should be above the waterline if there's a risk of hull breach\"; a citadel \"should accommodate the entire crew and any extra staff for 3-5 days\". Escape routes: where a door on an escape route is locked, \"it is essential a means of opening the door from the inside is available\". Illegal-boarding response: \"increase to maximum to open the distance\" and \"steer straight\". SOLAS Consolidated Edition 2024 for II-2/10.2.1.6, II-2/13.4.2.1 and XI-2/8. ISM Code A.741(18) as amended by MSC.273(85) for 5.1.5 and 12.1.\n\nSOURCES RELIED ON: SRC-BMPMS-2026, SRC-BMPMS-2025, SRC-SOLAS-CONSOLIDATED-2024, SRC-ISMCODE-CONSOLIDATED.",
+ "cards": [
+  {
+   "correction_action_id": "T4A-BMP-SECURITY-20260906-01",
+   "file": "QB4_B.html",
+   "path": "meoclass1/QB4_B.html",
+   "anchor": "q16",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "26b810222a4a9dd01778b3d50eaf6d0688b7ac7a37797eb8d2f33da839c86247",
+   "post_edit_digest": "d26b72e129436898b99cd5a678aab1de286559dff1cb7c3175b1b00898f85960",
+   "what_changed": "BMP5-as-current removed from six layers and migrated to BMP Maritime Security; IMO removed from the publisher list and the six industry associations named; the 18-knot threshold replaced with the current increase-speed/steer-straight guidance (the string \"18 knots\" appears nowhere in either held BMP MS file); the CE tip keeps the maintain-propulsion point but gains a machinery-safety boundary and no longer claims SOLAS XI-2/8 as CE authority; two unsupported company claims genericised; Maersk Alabama operational particulars removed as unsourced.",
+   "supersedes": {
+    "manifest": "correction_corr_bmp_edition_prop_20260905_manifest.json",
+    "action_id": "CORR-BMP-EDITION-PROP-03",
+    "post_edit_digest": "26b810222a4a9dd01778b3d50eaf6d0688b7ac7a37797eb8d2f33da839c86247",
+    "note": "CORR-BMP-EDITION-PROP-03 pinned the state this record corrects. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T4A-BMP-SECURITY-20260906-02",
+   "file": "QB4_H.html",
+   "path": "meoclass1/QB4_H.html",
+   "anchor": "q2",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "ed14a6285fbdf927ab1fe7280a135975783fa12d35b7fcf50005591b3015fc0d",
+   "post_edit_digest": "2e044dd85b42ac0e6d7fbc5f1e7332395af27e43394a66650461a60ea383e2cc",
+   "what_changed": "The unverifiable \"BMP5 Section 5\" citation replaced by the current BMP MS muster-point text now held; company security-management-system claim genericised; reporting body harmonised to the EU MSCIO, which BMP MS lists as covering the Persian Gulf; the conflicting 24 h / 24-48 h notice figures removed because BMP MS fixes no period and directs the reader to the reporting centres; named candidate de-identified.",
+   "supersedes": {
+    "manifest": "correction_corr_bmp_edition_prop_20260905_manifest.json",
+    "action_id": "CORR-BMP-EDITION-PROP-01",
+    "post_edit_digest": "ed14a6285fbdf927ab1fe7280a135975783fa12d35b7fcf50005591b3015fc0d",
+    "note": "CORR-BMP-EDITION-PROP-01 pinned the state this record corrects. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T4A-BMP-SECURITY-20260906-03",
+   "file": "QB9_A.html",
+   "path": "meoclass1/QB9_A.html",
+   "anchor": "q9",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "e6065008b029acb9fab4f5ab3d8a749470d7fe5c5f16dac48d4b5b6ee142de4d",
+   "post_edit_digest": "bebf464fd05893c08694d78942a53c5e39e9ca8719d799afd265bcd6f647abe5",
+   "what_changed": "The 60-second layer no longer requires SSAS ACTIVATION on entering a war-risk zone - it is tested before entry and activated only as an incident action under the SSP; Key Numbers no longer calls BMP5 the current active edition; muster location now chosen by threat; ISM 5.1.5 stated as periodic with no Code interval and 12.1 quoted with its twelve-month interval and three-month relief; unsourced 7-day underwriting figure removed; the unusable MSC.1/Circ.1606 row replaced; company claims genericised; casualty particulars removed; a split reg-code markup defect repaired.",
+   "supersedes": {
+    "manifest": "correction_corr_bmp_edition_prop_20260905_manifest.json",
+    "action_id": "CORR-BMP-EDITION-PROP-04",
+    "post_edit_digest": "e6065008b029acb9fab4f5ab3d8a749470d7fe5c5f16dac48d4b5b6ee142de4d",
+    "note": "CORR-BMP-EDITION-PROP-04 pinned the state this record corrects. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T4A-BMP-SECURITY-20260906-04",
+   "file": "QB9_B.html",
+   "path": "meoclass1/QB9_B.html",
+   "anchor": "q5",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "894efd76d5e10ea430da31b429f4344737630c0a525759c05cea146ce9b41f15",
+   "post_edit_digest": "2a34412e61acbf90f16383ae9ebd5b0bcc42685344d6580dfee1dd8cff1431a3",
+   "what_changed": "The invented \"72 Hours\" citadel baseline replaced with BMP MS's own 3-5 days; the invented \"6 Bar\" SOLAS fire-main minimum replaced with the actual II-2/10.2.1.6 hydrant pressures; the LSA Code replaced by SOLAS II-2/13.4.2.1 as the machinery-space escape authority; citadel location scoped by threat in three places; BMP5-as-current migrated in four layers; company claim genericised; Marlin Luanda firefighting no longer attributed to ISPS/BMP and its unsourced particulars removed.",
+   "supersedes": {
+    "manifest": "correction_corr_bmp_edition_prop_20260905_manifest.json",
+    "action_id": "CORR-BMP-EDITION-PROP-05",
+    "post_edit_digest": "894efd76d5e10ea430da31b429f4344737630c0a525759c05cea146ce9b41f15",
+    "note": "CORR-BMP-EDITION-PROP-05 pinned the state this record corrects. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  }
+ ],
+ "note": "SCOPE. The four selected cards. Occurrences of \"BMP5\" were classified, not replaced mechanically: question stems and the supersession banners were retained as historical/pedagogical (classes B and C) and only current-authority teaching was migrated (class A), with the one unverifiable section-number citation rewritten against current BMP MS concept rather than given an invented replacement number (class D). Company claims elsewhere in QB4_B.html and the \"Compiled by ... Maersk A/S\" byline are authorship attribution and were NOT touched.\n\nCARRIED FORWARD (recorded, not swept): BMP5 is still presented without a supersession banner at meoclass1/QB1_F.html#q10 and in meoclass1/QB5_B_CheatSheet.html - same defect family, outside the four cards the brief named. | The question stems of QB4_B#q16 (\"BMP5\") and QB9_B#q5 (an authoring rubric rather than a question) were deliberately left alone: a stem change moves derived surfaces and must be scoped separately. | MSC.1/Circ.1606 was never identified. The row was removed rather than guessed; the only corroboration found points to IGC Code unified interpretations, i.e. not a security circular at all.",
+ "governing_commits": [
+  "9506aec"
+ ],
+ "known_traps_entries": [
+  88
+ ],
+ "rationale": "Tranche 4A is the correction half of the Tranche 4 read-only review. Each family closes findings the review raised and the GPT brief adjudicated; nothing outside those findings was reopened."
+}
