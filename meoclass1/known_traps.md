@@ -2477,3 +2477,119 @@ and the verification was handed to the candidate. Verify it, or remove it.
 GREP: SKIP `UR Z7` — UR Z7 is a real and correctly cited requirement in its own right, and
 this entry plus the corrected cards QUOTE the rejected attribution in order to reject it.
 Test that `Z7` is not bound to `ESP` / `Enhanced Survey Programme`, never that `Z7` is absent.
+
+### 86. The Grain Code's Document of Authorisation is **A 3**, not A 7
+
+**A 3** is DOCUMENT OF AUTHORIZATION. **A 6** is INFORMATION REGARDING SHIP'S STABILITY AND
+GRAIN LOADING — the printed booklet. **A 7** is STABILITY REQUIREMENTS: the 12° heel, the
+0.075 m·rad residual area and the 0.30 m corrected GM. All three read verbatim from
+**MSC.23(59)**, the Grain Code as adopted, held locally.
+
+`QB2_A#q33` cited "International Grain Code, A 7" in its reg box for the Document of
+Authorisation while, two paragraphs above, correctly citing **A 7.1.2** for the residual-area
+criterion. The card contradicted itself on one screen. A prior correction (T1-GRAIN) had
+touched the same card and left this untouched — **CORRECTED ≠ REVIEWED**.
+
+**Also in A 7.1.1:** the deck-edge alternative to the 12° limit applies only "in the case of
+ships constructed on or after 1 January 1994". Teaching "12°, or deck-edge immersion if less"
+without that limb drops an applicability condition.
+
+GREP: test that `A 7` is not bound to `Document of Authorisation`, never that `A 7` is absent
+— A 7 is the correct and necessary citation for the stability criteria.
+
+### 87. The current CII G2/G4 pair is **MEPC.353(78) / MEPC.354(78)**, not the 2021 pair
+
+Both 2022 resolutions were retrieved from IMO's own resolutions CDN and their **operative
+clause 5** read directly: MEPC.353(78) **REVOKES** the 2021 reference-lines Guidelines
+(MEPC.337(76)); MEPC.354(78) **REVOKES** the 2021 rating Guidelines "adopted by resolution
+**MEPC.339(76)**". Reduction factors (G3) remain **MEPC.338(76)** — there is no 2022 G3.
+
+The corpus contradicted itself: `QB7_I#q10`, `QB6#q1` and `QB6_cheatsheet.html` taught the
+revoked 2021 pair as current while `QB6_E` and `QB7_E` cited MEPC.354(78) for the same thing.
+
+**C_F attribution is a two-step chain, and the one-step version is not simply wrong.**
+**MEPC.352(78)** (G1) §4.1 does not tabulate C_F: it defines it "in line with those specified
+in the 2018 Guidelines on the method of calculation of the attained EEDI for new ships
+(resolution MEPC.308(73)), as may be further amended". So the numbers really are read from the
+EEDI guidelines — currently **MEPC.364(79)** — but the **CII authority is G1**. Cite the chain.
+Naming the EEDI resolution alone on a card whose own trap section punishes EEDI/CII confusion
+is the specific slip to avoid.
+
+GREP: test that `MEPC.337(76)` and `MEPC.339(76)` are not bound to a *current* G2/G4 claim,
+never that they are absent — the corrected cards name them in order to reject them.
+
+### 88. BMP: the current publication, and what it actually says about muster, citadels and speed
+
+**BMP Maritime Security, 1st Edition 2025, updated June 2026** — held from OCIMF's own
+publication endpoint. Its **version-control table gives the Edition column as "First" for BOTH
+the March 2025 and June 2026 rows**, which is primary proof from the document itself that there
+is **no second edition**. "The 2026 edition" and "Version 2 (2026)" are both wrong. The June
+2026 change is one thing: activist-boarding content in Section 6.
+
+**Two endpoints do not serve the same bytes.** maritimeglobalsecurity.org's
+`/media/t4jccjou/bmp-ms_lo-res_s.pdf` serves the **pre-update** March 2025 file with no activist
+content. Check the version-control table on any re-acquisition.
+
+**Muster location is chosen BY THREAT** — verbatim: locations "will vary depending on the
+threat, i.e. threat from piracy (citadel), threat from WBIED/UAV (above waterline)". A
+**security muster point**'s "location should be above the waterline if there's a risk of hull
+breach". A **citadel** is where the crew retreat "if intruders board", and "should accommodate
+the entire crew and any extra staff for **3-5 days**". A steering-gear-room citadel is a sound
+answer for a *boarding*; it is the wrong answer for a missile or WBIED, and the error is
+failing to distinguish the threat rather than the space itself.
+
+**Numbers BMP MS does NOT support.** There is **no 72-hour** citadel provisioning standard —
+it is 3-5 days, and it is guidance. There is **no 18-knot threshold**: the string "18 knots"
+appears nowhere in either held file. BMP MS gives an action — "increase to maximum to open the
+distance" and "steer straight" — not a speed threshold.
+
+**BMP is not an IMO instrument.** Six industry publishers: BIMCO, ICS, IMCA, INTERCARGO,
+INTERTANKO, OCIMF. Listing **IMO** as a publisher misstates the document's authority. BMP
+mandates nothing; it binds through the **Ship Security Plan**.
+
+**Adjacent authority slips found in the same family.** **SOLAS XI-2/8** is the *Master's*
+discretion against constraint by the Company or charterer — it is not a Chief Engineer's
+authority to bypass a protective trip. Machinery-space escape is **SOLAS II-2/13.4.2.1** ("a
+steel door capable of being operated from each side"), **not** the LSA Code. Fire-main minima
+are **SOLAS II-2/10.2.1.6** at hydrants — cargo ships 0.27 / 0.25 N/mm² — and there is no
+6-bar figure and none expressed for deck monitors. The **ISM** master's review is
+*periodically* (5.1.5, as amended by MSC.273(85)) with **no** Code interval; internal audits
+are 12.1's "intervals not exceeding twelve months", exceedable "by not more than three months".
+
+**The scoping lesson.** The 31 Aug 2026 correction added a supersession banner to four cards
+and, by its own declared scope, left "every BMP5 technique block deliberately untouched".
+Three of the four then went on teaching BMP5 as the current active edition in the layer
+candidates memorise, two screens below a banner saying the opposite. **A banner is not a
+migration.**
+
+GREP: test that `BMP5` is not bound to a *current-publication* claim, never that `BMP5` is
+absent — the stems, the banners and the replacement history all name it legitimately.
+
+### 89. Authoring artefacts served to candidates, and the guard that flagged its own audit trail
+
+Two classes of machine residue were live in the published corpus: **101 occurrences of exactly
+`[cite: 1]`** across four files, and **21 plain-text scaffold blocks** — a `<pre>` "REGULATORY
+REFERENCE BOX", a duplicate CE ORAL TIP and a `CORRECTION FOOTER:` stamp — each duplicating
+its card's rendered reg box and CE tip. Twelve of those stamps carried a **wrong card's
+identity** (every one in `QB9_B.html` said `QB8 · Q…`) and nine carried a stale version.
+
+**Count occurrences, not lines.** The census was quoted per file as 2/15/30/15 from `grep -c`,
+which counts *matching lines*; the occurrence counts are 6/24/47/24. Same total, different
+denominator.
+
+**Verify duplication before excising.** Each block was checked to duplicate its card's rendered
+reg box and CE tip *before* removal, so no unique candidate content was lost; balance and
+per-card reg-box/CE-tip counts were re-proved after.
+
+**AUTHORING RULE — a content guard must not read the provenance it creates.** A correction
+stamp necessarily quotes the defect it removed ("no longer claims XI-2/8…", "the invented 72
+hours…"). Three Tranche 4A gates went red on their own `q-version` audit trail until `flat()`
+stripped it. The same lesson as the PIL sweep: **provenance fields sit outside the sweep.**
+
+**AUTHORING RULE — scope a check to its element, not to a character window.** Guards written as
+"needle within N chars of keyword" passed mutations because an adjacent bullet supplied the
+keyword. Element scoping (the enclosing `<li>`, reg row or paragraph) is what makes them bind;
+a wrong **reg-code** likewise hid behind a right **reg-desc** until the code slot was checked
+on its own.
+
+GREP: `[cite:` and `REGULATORY REFERENCE BOX` must both be absent from `meoclass1/*.html`.
