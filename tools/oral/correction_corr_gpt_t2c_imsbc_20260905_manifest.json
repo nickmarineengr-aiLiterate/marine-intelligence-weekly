@@ -1,0 +1,60 @@
+{
+ "correction_id": "CORR-GPT-T2C-IMSBC-20260905",
+ "title": "QB2_B#q15 short layers made SOLAS chapter VII alone the mandatory basis of the whole IMSBC Code, when chapter VI carries it generally and chapter VII part A-1 carries only the dangerous-goods-in-solid-form-in-bulk subset",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "gpt_content_review",
+ "date": "2026-09-05",
+ "baseline_commit": "318d324",
+ "governing_commits": [
+  "9fd4530"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_HIGHRISK_TRANCHE2C_20260905.md",
+ "candidate_claim": "Tranche 2C section 6. Both the 15-second and the 60-second layers cite chapter VII for the IMSBC Code generally. SOLAS chapter VI is the general carriage-of-cargo and solid-bulk mandatory basis; chapter VII part A-1 is the dangerous goods in solid form in bulk subset. A short layer describing the IMSBC generally must anchor primarily to VI; one that explicitly includes dangerous goods in solid form in bulk may mention VI plus VII part A-1. Do not imply chapter VII alone makes the whole IMSBC Code mandatory. Make the smallest correction.",
+ "candidate_verdict": "UPHELD, AND THE DEFECT WAS CONFINED TO THE TWO SHORT LAYERS, WHICH IS THE WORST PLACE FOR IT. The deep-dive body of this card already cited SOLAS chapter VI part B correctly, so the card contradicted itself between the layer a candidate memorises and the layer a candidate studies - and the memorised one was the wrong one. Both layers describe the Code GENERALLY (they define the three cargo groups and the schedule format), so under the brief own rule both anchor primarily to chapter VI, with part A-1 named for the dangerous-goods subset because group B is one of the three groups each layer goes on to define. Nothing else in either layer was opened, and the deep-dive body was not touched at all.",
+ "authority": {
+  "solas_vi": "SOLAS chapter VI, Carriage of cargoes and oil fuels, is the general mandatory basis for solid bulk cargoes and is what the card own deep-dive body already cited at chapter VI part B. This is the anchor a general description of the IMSBC Code takes.",
+  "solas_vii_part_a1": "SOLAS chapter VII part A-1, Carriage of dangerous goods in solid form in bulk, is the subset regime. It is real and it is named - the correction does not delete chapter VII, it stops chapter VII standing alone for the whole Code.",
+  "why_smallest": "The brief said make the smallest correction. Each layer received one restructured opening clause and no other change: the three cargo groups, the TML and liquefaction material, the chemical-hazard material and the group C material are all byte-identical within the layers."
+ },
+ "cards": [
+  {
+   "correction_action_id": "CORR-GPT-T2C-IMSBC-01",
+   "file": "QB2_B.html",
+   "path": "meoclass1/QB2_B.html",
+   "anchor": "q15",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "9051ccaa9194e5b74bd9af04cc7d06b205fbccceb9fe4e8a0e2e8451a44d4cd3",
+   "post_edit_digest": "25075c8555c88dc5eb421c687bbcf6e848749ee74426fc0610acf0ab272a73d7",
+   "supersedes": {
+    "manifest": "correction_corr_gpt_t2a_imsbc_20260905_manifest.json",
+    "action_id": "CORR-GPT-T2A-IMSBC-01",
+    "post_edit_digest": "9051ccaa9194e5b74bd9af04cc7d06b205fbccceb9fe4e8a0e2e8451a44d4cd3",
+    "note": "CORR-GPT-T2A-IMSBC-20260905 corrected this card on the flexitanks-comply-with scope defect. It REPORTED the chapter VII attribution rather than implementing it, because the brief made implementation conditional on it being a direct consequence of the scope correction and it is not. Tranche 2C is the authorisation that closes it."
+   },
+   "changed_propositions": [
+    "15-second answer: The IMSBC Code provides a mandatory framework under SOLAS Chapter VII to manage the risks of transporting solid bulk cargo -> a mandatory framework for solid bulk cargoes under SOLAS Chapter VI, the carriage-of-cargoes chapter that gives it force generally, with Chapter VII Part A-1 adding the regime for the subset that is dangerous goods in solid form in bulk.",
+    "60-second answer: is a mandatory framework under SOLAS Chapter VII designed to ensure the safe stowage and carriage of solid bulk materials, excluding grain -> is made mandatory for solid bulk cargoes generally by SOLAS Chapter VI, with Chapter VII Part A-1 governing the subset that is dangerous goods in solid form in bulk, followed by the unchanged safe-stowage-and-carriage clause."
+   ],
+   "deliberately_unchanged": [
+    "Every group A, B and C definition in both short layers, the TML and liquefaction material, and the schedule-format sentence.",
+    "The deep-dive body, which already cited SOLAS Chapter VI Part B correctly and is byte-identical.",
+    "The reg-box, CE Oral Tip, Trap Questions, Common CE Failures, Numbers to Memorise, Casualty Link and Examiner Chain.",
+    "Every proposition CORR-GPT-T2A-IMSBC-20260905 wrote into this card. That record corrected the flexitank scope question and did not touch the chapter attribution."
+   ]
+  }
+ ],
+ "propagation": {
+  "scope_pass": "QB2_B swept for Chapter VII, Chapter VI, IMSBC and Part A-1, every hit mapped to its owning card. Within q15 the only chapter-attribution sites were the two short layers, both corrected, plus the deep-dive Chapter VI Part B citation, which was already right.",
+  "found_and_not_swept": []
+ },
+ "invariants": [
+  "SOLAS chapter VII is NOT deleted from the card. It is scoped to part A-1 and to the dangerous-goods subset, which is what it governs.",
+  "No IMSBC cargo-group definition, TML proposition or schedule proposition is altered.",
+  "No IMSBC amendment number is introduced anywhere by this record.",
+  "The deep-dive body is byte-identical.",
+  "Corpus totals unmoved: 761 / 86."
+ ],
+ "content_index_effect": "None. The card keeps its id, anchor and question text, so meoclass1/qb_content_index.json regenerates identically at 761 / 86.",
+ "note": "Two clauses in two layers. Recorded separately from the other tranche-2C records because the subject is a regulatory attribution and merging it into a currentness or wording record would have made the event unfindable by subject."
+}

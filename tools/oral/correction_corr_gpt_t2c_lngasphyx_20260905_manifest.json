@@ -1,0 +1,61 @@
+{
+ "correction_id": "CORR-GPT-T2C-LNGASPHYX-20260905",
+ "title": "QB7_D#q14 taught nitrogen purging and inerting as procedure and never taught that the purge medium is a simple asphyxiant, so the card danger list omitted the only hazard on it that kills without warning",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "gpt_content_review",
+ "date": "2026-09-05",
+ "baseline_commit": "318d324",
+ "governing_commits": [
+  "9fd4530"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_HIGHRISK_TRANCHE2C_20260905.md",
+ "candidate_claim": "Tranche 2C section 3. The card already teaches purge/inert of the transfer line, drain/purge of the hose, cryogenic hazard, vapour cloud, RPT, rollover and PPE / essential personnel - but it omits oxygen deficiency and asphyxiation. Add ONE concise people-safety danger tied to purging and inerting: nitrogen displaces oxygen, an oxygen-deficient atmosphere can asphyxiate without warning, methane itself can act as a simple asphyxiant where it displaces air, and this is why gas detection, controlled access and essential-personnel rules matter. Do NOT import enclosed-space entry permits, rescue procedures, a full atmosphere-testing regime or unrelated confined-space material.",
+ "candidate_verdict": "UPHELD, AND THE OMISSION WAS STRUCTURAL RATHER THAN ACCIDENTAL. The card danger list was organised around what the CARGO does - it goes cryogenic, it expands, it flashes on water, it stratifies - and every entry is a property of the LNG. The purge medium is not the cargo, so a list built on that principle has no slot for it, and the two entries that come closest (essential personnel, PPE) were present as CONTROLS with their hazard never named. The new entry is placed inside the same physics-first frame the heading demands - say them as physics, not as a list - and is attributed to displacement, not to a clause. NO ENCLOSED-SPACE MATERIAL WAS IMPORTED: the card describes an open-deck bunkering operation and involves no entry, so an entry permit would have been a different regime answering a question nobody asked.",
+ "authority": {
+  "physics_not_clause": "The proposition is asserted as physics and is deliberately NOT attributed to a single IGF paragraph. Nitrogen and methane are both simple asphyxiants: neither is toxic at the concentrations that matter, and both kill by displacing air. An oxygen-deficient atmosphere gives no reliable sensory warning, which is what separates it from the vapour-cloud entry immediately above it, where the hazard is flammability and the control is dispersion.",
+  "why_it_belongs_where_it_is": "Inserted immediately AFTER the RPT entry and BEFORE Rollover, as authorised. RPT and asphyxiation are the two entries on the list that are not about combustion; Rollover is a containment-system entry and closes the list. The ordering is the brief own, and the record says so.",
+  "existing_controls_now_have_their_hazard": "18.4.3 gas detection, 18.4.6 essential personnel in PPE and the upwind rule were all already in the card as REQUIREMENTS. The new entry does not restate them as requirements; it names the hazard they exist for. That is the difference between a card that lists controls and a card that explains them."
+ },
+ "cards": [
+  {
+   "correction_action_id": "CORR-GPT-T2C-LNGASPHYX-01",
+   "file": "QB7_D.html",
+   "path": "meoclass1/QB7_D.html",
+   "anchor": "q14",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "13fbe727ed83eb86f9a615e8d41a439968dd3c0f38f9a420c41612ceae44b233",
+   "post_edit_digest": "0548dc33b164e7deb0083493c2bd587a397e74f9cc565a363281d128b5f37d35",
+   "supersedes": {
+    "manifest": "correction_corr_cetip_h3b1_20260901_manifest.json",
+    "action_id": "CORR-CETIP-01",
+    "post_edit_digest": "13fbe727ed83eb86f9a615e8d41a439968dd3c0f38f9a420c41612ceae44b233",
+    "note": "CORR-CETIP-H3B1-20260901 rewrote this card CE Oral Tip. It did not open the dangers list or either short layer."
+   },
+   "changed_propositions": [
+    "Dangers list: ONE new list item inserted between the RPT entry and the Rollover entry - Oxygen deficiency and asphyxiation - naming purge and inerting nitrogen and LNG vapour as simple asphyxiants that displace air, stating that the atmosphere can become life-threatening with no useful warning, and tying gas detection, upwind positioning and essential-personnel control to it as the reason those controls exist.",
+    "15-second answer: the danger clause and RPT on water becomes RPT on water, and oxygen deficiency from purge nitrogen and from the vapour itself. One clause, no other change to the layer.",
+    "60-second answer: the danger list gains oxygen deficiency where purge nitrogen or the vapour displaces air, inserted before rollover. One clause, no other change to the layer."
+   ],
+   "deliberately_unchanged": [
+    "Every other entry in the dangers list: Cryogenic, Vapour cloud, RPT, Rollover, and Pressure excursion and cold burns are byte-identical.",
+    "The whole procedure spine - agree in writing, verify, cool down, ramp, stop, drain, purge, disconnect, BDN - is untouched.",
+    "Every IGF Code citation in the card: 18.2.3, 18.4.1.1.1, 18.4.1.1.2, 18.4.1.2, 18.4.2.2, 18.4.3, 18.4.4.1, 18.4.5, 18.4.6, 8.4.1, 8.4.2 and 8.4.3.",
+    "The MSC.551(108) and MSC.567(109) currency block, the reg-box, the CE Oral Tip, Trap Questions, Common CE Failures, Numbers to Memorise, Examiner Chain and the source-confidence footer. The K-4 count language was ADJUDICATED and deliberately not edited - see the authorisation source, section 9.",
+    "No enclosed-space entry permit, rescue procedure, atmosphere-testing regime or confined-space material anywhere in the card."
+   ]
+  }
+ ],
+ "propagation": {
+  "scope_pass": "QB7_D swept for asphyxi, oxygen defici, nitrogen and inert. The nitrogen and inerting hits are procedural and were already correct; no other card in QB7_D teaches an LNG bunkering danger list, so there is no sibling to equalise.",
+  "found_and_not_swept": []
+ },
+ "invariants": [
+  "The card gains no enclosed-space entry procedure, no permit, no rescue procedure and no atmosphere-testing regime. This is asserted as a NEGATIVE check, because the failure mode the brief guarded against is over-import, not under-import.",
+  "The 15-second and 60-second layers each gained one clause and are otherwise unchanged; neither is bloated.",
+  "No IGF paragraph number is added, moved or altered, and the new danger is attributed to physics rather than to a clause.",
+  "Corpus totals unmoved: 761 / 86."
+ ],
+ "content_index_effect": "None. The card keeps its id, anchor and question text, so meoclass1/qb_content_index.json regenerates identically at 761 / 86.",
+ "note": "One card, one inserted danger, two one-clause short-layer additions. The negative half of this correction - what was NOT imported - is the half a digest cannot see, and it is asserted by name in validate_correction_gptt2c.py."
+}
