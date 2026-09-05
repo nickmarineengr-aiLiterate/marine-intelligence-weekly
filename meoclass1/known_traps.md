@@ -2324,3 +2324,97 @@ reading, not in the holding.*
 GREP: SKIP `five IGF amendments` — the version stamps and this entry QUOTE the
 wrong claim in order to record it. Test the ENUMERATION, not the whole footer:
 q15 legitimately names `MSC.458(101)` three times outside the list.
+
+### 82. CII is per CAPACITY-nautical-mile, and the capacity measure is ship-type specific
+
+Nine layers of `QB6#q1` taught **`gCO₂/DWT·nm`** as the CII unit, and one layer of
+`QB7_I#q10` said **"per DWT-mile"** while its own body said "capacity times distance".
+Both are wrong for a whole class of ships, not merely imprecise.
+
+**The rule.** MARPOL Annex VI reg. 28.1 requires the attained annual operational CII to be
+calculated taking the **G1 Guidelines** into account. G1 section 4.2 — replaced by
+**MEPC.412(84)**, adopted **1 May 2026** — defines supply-based transport work as
+`Ws = C × Dt`, where **C is the ship's capacity** and:
+
+* **DWT** — bulk carriers, tankers, container ships, gas carriers, LNG carriers, general
+  cargo ships, refrigerated cargo carrier, combination carriers;
+* **GT** — cruise passenger ships, ro-ro cargo ships (vehicle carriers), ro-ro cargo ships,
+  ro-ro passenger ships.
+
+`Dt` is the total distance travelled in the calendar year, **under way and not under way**,
+as reported under the IMO DCS.
+
+**Why this is not pedantry.** A ro-ro passenger ship's attained CII is not a DWT figure at
+all. A candidate taught the universal form answers confidently and wrongly the moment the
+panel changes the ship type — which is what a panel does. Say **capacity** first, then name
+yours.
+
+**AUTHORING RULE.** Never write `gCO₂/DWT·nm` as *the* CII unit. Write
+`gCO₂ per capacity·nm` and state the ship-type split. Twenty-four occurrences of the DWT
+form existed across six files when this was found; `QB6#q1` and `QB7_I#q10` are corrected,
+and **`QB6#q2`, `QB6_cheatsheet.html`, `QB3_J` and `QB1_K` still carry it** pending
+authorisation. `QB7_A` already says "gCO₂/DWT·nm or gCO₂/GT·nm" and is the model.
+
+GREP: SKIP `gCO₂/DWT·nm` — this entry and the corrected cards' trap blocks QUOTE the
+rejected form in order to reject it. Test that each occurrence is **negated or quoted**,
+never that it is absent.
+
+
+### 83. MARPOL Annex I reg. 34.1.5 has TWO limbs, split on 31 December 1979
+
+Seven candidate-facing sites in `QB3_F` taught the total-quantity limit as a single
+universal **1/30,000**, and **`1/15,000` appeared nowhere in the 86-file bank** — so a
+candidate revising the whole corpus could never have met the other limb.
+
+**The rule, from MEPC.117(52) reg. 34.1.5.** The total quantity of oil discharged into the
+sea shall not exceed, of the total quantity of the particular cargo of which the residue
+formed a part:
+
+* tanker **delivered on or before 31 December 1979** (reg. 1.28.1) — **1/15,000**;
+* tanker **delivered after 31 December 1979** (reg. 1.28.2) — **1/30,000**.
+
+**AUTHORING RULE.** Never write one number. Where a short or memorisation layer cannot
+carry the sentence, use the compact split — `1/15,000 (delivered on or before 31 Dec 1979)
+or 1/30,000 (delivered after 31 Dec 1979)` — and keep the boundary **exact**. "Before
+1980" is NOT the same rule: it moves every tanker delivered *on* 31 December 1979 into the
+wrong limb. The other reg. 34.1 criteria — outside a special area, en route, >50 NM,
+≤30 L/NM, ODMCS and slop tank in operation — are correct and must not be altered.
+
+**And count the sites by DOCUMENT POSITION, not by report.** The finding was reported as
+"q3 ×5, q11 ×2". q11 owns **one**; the seventh lives in the page's *Rapid Recall*
+cheat-grid, **outside every q-card**, where no card digest can reach it.
+
+GREP: SKIP `1/30,000 alone is wrong` — the corrected body bullet quotes the rejected form.
+
+
+### 84. A vessel specification can be TRUE and still be a provenance failure
+
+`QB6#q1` told candidates its ship had a *MAN B&W 11G90ME-C main engine at ~35,000 kW MCR*;
+`QB2_A#q31` described a personal **fine-ore pre-loading routine** on a candidate whose
+service is container vessels. Neither was corrected because it was inaccurate.
+
+**The rule.** *"On My Vessel"* asserts the candidate's **own experience**. A ship
+specification or fleet fact may be factually true and still be inappropriate there if it is
+presented as the candidate's own without grounding. **Source proof does not rescue a
+provenance failure**, so the cure is to **delete or genericise** — never to substitute a
+sourced replacement, which is the same failure with better footnotes.
+
+The pattern that scores: *"This is not a cargo operation from my container-vessel
+experience. In an oral I would say so directly, then answer from the applicable
+requirements rather than invent a bulk-carrier routine."* Answering the half you own and
+naming the half you do not beats claiming both.
+
+**Corollary — a hedge must span the real disagreement.** The same card hedged the casualty
+position as *"230 to 240 nautical miles"* and told the candidate they *"cannot be caught
+out"*. **No source supported 240**; the reported spread was 230 to 290. A hedge on the
+wrong side of a disagreement is worse than no hedge, because it advertises a safety it does
+not have. Same defect class as the National Shipping Board date. See trap 83 for the
+document-position rule and `docs/sources/MIW_SOURCE_REGISTRY.json` for the evidence set.
+
+**Corollary — a recent named casualty needs a registered source before release.** Verify
+every published fact **individually**. `QB2_A#q31` carried three wrong facts (cargo tonnage,
+distance, rescuing vessel) and two unverifiable ones (beam, and an implied destination) in a
+card that read as careful. Where no flag-State or coastal-State report exists, say so to the
+candidate and name what is therefore **not claimed**.
+
+GREP: SKIP `230 to 240` and `72,100` — this entry quotes the withdrawn figures.

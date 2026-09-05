@@ -1,0 +1,110 @@
+{
+ "correction_id": "CORR-GPT-T3C-CII-20260905",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "gpt_content_review",
+ "date": "2026-09-05",
+ "title": "QB6#q1 taught DWT as the universal CII capacity measure in nine layers and carried an unsupported Maersk TRIPLE-E engine specification; QB7_I#q10's 15-second answer contradicted its own body with 'per DWT-mile'",
+ "baseline_commit": "faebcd4",
+ "governing_commits": [
+  "5fbb538"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_HIGHRISK_TRANCHE3C_20260905.md",
+ "candidate_claim": "Founder/GPT Tranche-3 independent review, findings F-1, F-2 and F-3. F-1: QB6#q1's 'On My Vessel' block asserted a MAN B&W 11G90ME-C main engine at about 35,000 kW MCR on a Maersk TRIPLE-E - not a safe generic Triple-E descriptor, and presented as the candidate's own ship. F-2: the same card taught an unqualified gCO2/DWT.nm in the 15-second answer, the 60-second answer, the formula block, a trap, the common-failures list, the numbers block, the examiner chain and the CE tip, with only ONE body occurrence carrying a qualifier. F-3: QB7_I#q10's body and trap correctly say 'capacity x distance' while its 15-second answer says 'per DWT-mile'.",
+ "candidate_verdict": "UPHELD ON ALL THREE, AND THE INSTRUMENT WAS ACQUIRED RATHER THAN THE CLAIM ASSUMED. The brief named MEPC.412(84) as the 2026 amendment to the G1 CII calculation-method guidelines and required the current wording to be determined as of September 2026. The registry held a row for MEPC 84 but its own access_note recorded that THE RESOLUTIONS THEMSELVES WERE NOT READ - local_path and sha256 were both null. The resolution has now been retrieved from IMO's resolutions CDN, hash-pinned and read in full, and it is the authority for every capacity proposition below. ONE CORRECTION TO THE BRIEF'S OWN PREMISE, recorded rather than worked around: the brief reported the defect in eight layers. The exhaustive in-card sweep returns NINE candidate-facing sites in QB6#q1 - the eight named plus the Key Numbers block, whose 'capacity-based; for cargo ships' parenthetical is the single qualified occurrence Tranche 3 counted. That occurrence was qualified but still wrong: it named DWT as the unit and relegated the capacity concept to a parenthesis, so it too was corrected rather than left as the one acceptable form.",
+ "authority": {
+  "instrument": "Resolution MEPC.412(84), Amendments to the 2022 Guidelines on operational carbon intensity indicators and the calculation methods (CII Guidelines, G1), adopted 1 May 2026 at MEPC 84. Held at docs/sources/MEPC.412-84.pdf, sha256 f7288ea29f59597f3c7a6c74be51e0d88395d34762ab926a697723afb30d2b7a, 749,520 bytes, 4 pages. Registered SRC-IMO-MEPC412-84-CII-G1.",
+  "operative_text_section_4_2": "The resolution REPLACES section 4.2 of MEPC.352(78) with, in relevant part: 'The supply-based transport work (Ws) is defined as the product of a ship's capacity and the total distance travelled (both under way and not under way) in a given calendar year, as follows: Ws = C x Dt ... C represents the ship's capacity: - For bulk carriers, tankers, container ships, gas carriers, LNG carriers, general cargo ships, refrigerated cargo carrier and combination carriers, deadweight tonnage (DWT) should be used as Capacity; - For cruise passenger ships, ro-ro cargo ships (vehicle carriers), ro-ro cargo ships and ro-ro passenger ships, gross tonnage (GT) should be used as Capacity; and Dt represents the total distance travelled (in nautical miles), as reported under IMO DCS.'",
+  "currency": "PUBLISHER-ANCHORED, per the rule that 'does X supersede Y?' cannot see an edition you did not name. IMO's own Index of MEPC Resolutions and Guidelines related to MARPOL Annex VI was opened and the whole G1 lineage read from it: MEPC.336(76) revoked by MEPC.352(78); MEPC.352(78) the 2022 Guidelines; MEPC.412(84) amending MEPC.352(78) and LAST on the issuer's list. Independently, MEPC 85 sits 30 November - 3 December 2026, so no session has met since MEPC 84 that could have moved it. Revalidation is due at MEPC 85, and phase 2 of the short-term measure review is expressly revising CII metrics, so this is expected to MOVE rather than merely be reconfirmed.",
+  "why_the_old_wording_is_wrong": [
+   "It is not a rounding or an approximation - it is wrong for a whole class of ships. A ro-ro passenger ship's attained CII is not a DWT figure at all; the guidelines prescribe GT. A candidate taught the universal form gives a confidently wrong answer the moment the panel changes the ship type, which is exactly what a panel does.",
+   "'gCO2/DWT.nm' also mis-states the QUANTITY, not merely its units: the denominator is capacity x distance, and 'DWT' names one particular capacity measure as though it were the definition.",
+   "F-1 is a PROVENANCE failure, not an accuracy failure, and the two are cured differently. Substituting a different Triple-E engine specification would have left the card still claiming a vessel specification the Founder cannot ground. The CII teaching needs no vessel-class propulsion example, so the example was deleted and NOT replaced."
+  ]
+ },
+ "cards": [
+  {
+   "correction_action_id": "CORR-GPT-T3C-CII-01",
+   "file": "QB6.html",
+   "path": "meoclass1/QB6.html",
+   "anchor": "q1",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "33576a410acb6b312274c2019225e13b8058386cd2e50719232aea91f48a97c0",
+   "post_edit_digest": "df17e48937c1b70f1650a2180447997884857aff2405b66ff45fbcc9bc950059",
+   "supersedes": {
+    "manifest": "correction_corr_cii_g2g4_20260901_manifest.json",
+    "action_id": "CORR-CII-G2G4-01",
+    "post_edit_digest": "33576a410acb6b312274c2019225e13b8058386cd2e50719232aea91f48a97c0",
+    "note": "CORR-CII-G2G4-20260901 pinned this card on 1 September 2026 for the G2/G3/G4 resolution mix-up. That pin is NOT rewritten and that record is not rebaselined: its claim becomes the stronger one, that its state is the ANCESTOR of what is live. Same digest convention throughout - full sha256 of the balanced-tag card block - so the chain does not cross conventions. Its own subject matter, the G2/G3/G4 citations, is untouched here."
+   },
+   "changed_propositions": [
+    "15-second answer: 'measured in gCO2/DWT.nm ... the product of deadweight tonnage and distance sailed' -> 'gCO2 per capacity-nautical-mile ... the product of the ship's capacity and the distance travelled', with ONE clause naming the ship-type split. Deliberately one clause: the brief forbade turning the short layer into a taxonomy lecture, and the short layer's duty is to be accurate first.",
+    "60-second answer: 'The denominator uses design DWT and actual nautical miles sailed' -> capacity x total distance travelled under way and not under way as reported under the IMO DCS, with both capacity lists in full and the G1 chain cited (MEPC.352(78) section 4.2 as replaced by MEPC.412(84)).",
+    "Formula block: 'Attained CII (gCO2/DWT.nm) = SUM(M_fuel x Cf) / (DWT x Distance_nm)' -> 'Attained CII (gCO2 per capacity.nm) = SUM(M_fuel x Cf) / (C x Dt)', with C and Dt defined from the resolution's own text.",
+    "Key Numbers: 'Unit: gCO2/DWT.nm (capacity-based; for cargo ships)' -> the capacity form with the DWT/GT split. THIS IS THE OCCURRENCE TRANCHE 3 COUNTED AS QUALIFIED; it was corrected too, because naming DWT as the unit is the defect.",
+    "Trap block: the 'gCO2/tonne.nm' trap's PASS answer moved to the capacity form; and a NEW trap added that quotes and REJECTS the universal DWT form directly, so the corpus states the error it is correcting rather than merely ceasing to make it.",
+    "Common CE Failures: the unit-confusion bullet moved to the capacity form, and a new bullet added naming DWT-as-universal as a failure in its own right.",
+    "Numbers to Memorise: the unit bullet moved to the capacity form; a new bullet added carrying MEPC.352(78) as the G1 calculation method and MEPC.412(84), adopted 1 May 2026, as where the DWT/GT split is stated.",
+    "Examiner Chain steps 1 and 2 moved to the capacity form.",
+    "CE Oral Tip: 'state gCO2/DWT.nm without pause' -> state the capacity form without pause and add the ship-type split in the same breath.",
+    "Regulatory References: a new reg-item added for MEPC.352(78) / MEPC.412(84) carrying the section 4.2 rule, the adoption date, and an explicit currentness statement naming the issuer index the currency check used.",
+    "F-1: the 'On My Vessel' bullet 'DWT ~165,000 t (TRIPLE-E); MAN B&W 11G90ME-C main engine ~35,000 kW MCR' DELETED in full and not replaced.",
+    "F-1 duplicate: the CE Relevance worked example 'On a Maersk TRIPLE-E (DWT ~165,000 t), at 80 t/day HFO...' -> 'On a large container ship, at 80 t/day HFO...'. This is the SAME unsupported Triple-E specification in a second block, so it is within the authorised 'direct duplicate of the same proposition'. The deleted figure took no part in the arithmetic shown - 80 x 3.114 = 249 and 5 x 3.114 x 60 = 934 both stand without it - so the removal is purely subtractive and the teaching is intact.",
+    "Version v1.3 -> v1.4."
+   ],
+   "deliberately_unchanged": [
+    "The rating bands, the D/E trigger, the 31 March deadline, the 1 November 2022 entry into force, the 5,000 GT threshold, the ~2%/year trajectory and every Cf value. MEPC.412(84) amends section 4.2 only, and this correction asserts no change to anything else.",
+    "The G2/G3/G4 citations and the MEPC.333(76)-is-EEXI warning, which are CORR-CII-G2G4-20260901's subject and are correct.",
+    "The 'On My Vessel' bullets on slow steaming, the flag-State data route and the Maersk internal CII target. These are operational and company-process statements, not vessel technical specifications, and F-1 authorised the specification only.",
+    "The casualty block and the water-vapour trap."
+   ]
+  },
+  {
+   "correction_action_id": "CORR-GPT-T3C-CII-02",
+   "file": "QB7_I.html",
+   "path": "meoclass1/QB7_I.html",
+   "anchor": "q10",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "6fedce81f18f3c35edb3866f6a0d64daac464d1c9c5a2c670b797da0b229810f",
+   "post_edit_digest": "abf64b87190fc96f1169ec3463c8ade1418e07e7730069fe663ebd640742e24e",
+   "supersedes": {
+    "manifest": "batch_h4_manifest.json",
+    "action_id": "H4-001",
+    "post_edit_digest": "6fedce81f18f3c35edb3866f6a0d64daac464d1c9c5a2c670b797da0b229810f",
+    "note": "Batch H4 produced this card and pinned it. The pin is not rewritten; H4's claim becomes 'my state is the ancestor of what is live'. Full-sha256 convention on both sides, so no convention crossing."
+   },
+   "changed_propositions": [
+    "15-second answer only: 'grams of CO2 per DWT-mile' -> 'grams of CO2 per unit of capacity per nautical mile, capacity being DWT for cargo ships and GT for the ro-ro and cruise passenger categories'."
+   ],
+   "deliberately_unchanged": [
+    "Everything else in the card, on the brief's explicit instruction not to rewrite it. The body already says the denominator is 'capacity times distance, not cargo carried' and the trap block says it again; both were read and are correct. The card was the ONLY one of the two whose deeper layers were already right, which is why F-3 is a one-line fix and F-2 is a nine-layer one.",
+    "Its Wartsila FAST content, its LNG/methane-slip trap and its shore-power limb."
+   ]
+  }
+ ],
+ "propagation": {
+  "scope_pass": "Reproducible corpus-wide census, run BEFORE the edit and repeated after: grep -c 'DWT.nm|DWT-mile' over meoclass1/*.html, every hit mapped to its owning card by document position. 24 candidate-facing occurrences across 6 files: QB6.html 14 (9 in q1, 5 in q2), QB6_cheatsheet.html 5, QB3_J.html 2, QB1_K.html 1, QB7_A.html 1, QB7_I.html 1. Two files are IN SCOPE for this pass (QB6#q1 and QB7_I#q10) and were corrected. The rest are recorded below, NOT swept.",
+  "found_and_not_swept": [
+   "QB6#q2 (the GFI card) carries the universal DWT form at 4 sites, including in a GFI-versus-CII contrast table where the wrong unit is the whole point of the row. It is in the SAME FILE as the corrected q1, so QB6.html now teaches two versions of one unit. This is a direct and foreseeable consequence of a card-scoped authorisation and is recorded rather than silently equalised. REPORTED to GPT as the highest-priority carry-forward of this family.",
+   "QB6_cheatsheet.html carries it at 5 sites and is the PAIRED REVISION LAYER for QB6 - a candidate revising from the cheat sheet gets the uncorrected form. Not a generated surface, so it does not regenerate. REPORTED.",
+   "QB3_J.html (2 sites) and QB1_K.html (1 site) carry it incidentally. REPORTED.",
+   "QB7_A.html's single occurrence reads 'gCO2/DWT.nm or gCO2/GT.nm' and is ALREADY CORRECT - it names both capacity measures. Recorded because a sweep that reports only defects cannot be checked, and because it shows the corpus already knew the distinction somewhere."
+  ],
+  "derived_surfaces": "None owed. Question identity, anchors and stems are unchanged, so meoclass1/qb_content_index.json regenerates byte-identically.",
+  "revision_layer": "QB6_cheatsheet.html is the revision layer for QB6 and is NOT corrected by this record - see found_and_not_swept. QB7_I has no cheat sheet."
+ },
+ "invariants": [
+  "Corpus totals unmoved: 761 canonical questions across 86 question-bearing files, re-derived by tools/oral/audit_sources.py after the edits.",
+  "No card created, no card deleted, no question stem or anchor changed, so meoclass1/qb_content_index.json regenerates byte-identically and no workbook is owed.",
+  "No examiner attribution, syllabus mapping, past paper or written bank touched.",
+  "meoclass1/index.html still reads 'Last Updated: 2 Sep 2026' and was DELIBERATELY not patched, on the brief's own instruction. No push, no deploy, no Excel distribution, no full release suite, no release-gate registration.",
+  "MEPC.412(84) amends section 4.2 of the G1 Guidelines and nothing else; no claim about the rating bands, reference lines or reduction factors is altered or implied.",
+  "No entry-into-force or application date is attributed to MEPC.412(84). It states none."
+ ],
+ "content_index_effect": "None. Card ids, anchors and question text are unchanged, so meoclass1/qb_content_index.json regenerates byte-identically: 761 canonical questions across 86 question-bearing files, confirmed by tools/oral/audit_sources.py reporting DERIVED_AND_CURRENT after the edits. NO recently_updated correction-log entry was added, deliberately: a log entry is candidate-facing published editorial content and the brief authorised no deploy and no hub-date change. The entry is OWED and is referred to GPT to be written in the same act that publishes these corrections.",
+ "note": "Family A of four. Kept separate from families B, C and D on the brief's instruction that coherent families stay separate rather than being merged into one giant manifest. Content gates in tools/oral/validate_correction_gptt3c.py; mutation proof in tools/oral/mutate_correction_gptt3c.py.",
+ "known_traps_entries": [
+  82,
+  84
+ ]
+}

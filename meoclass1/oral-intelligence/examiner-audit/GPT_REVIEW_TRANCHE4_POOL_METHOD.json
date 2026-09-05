@@ -1,0 +1,109 @@
+{
+ "schema": "miw.review.pool_method.v1",
+ "record_id": "GPT-REVIEW-TRANCHE4-POOL-METHOD",
+ "written_by": "GPT high-risk content review, Tranche 3C",
+ "date": "2026-09-05",
+ "status": "METHOD_PRESERVED_NOT_IMPLEMENTED",
+ "why_this_exists": "The Tranche 3C brief forbade building a pool-generation tool and forbade starting Tranche 4, but required the REPRODUCIBLE METHOD to be preserved so the next tranche does not reconstruct a pool from prose. This file is that method. It is deliberately NOT a tool: a tool would have to be written, reviewed and mutation-proved, which is the work the brief excluded.",
+ "not_a_tool_note": "Do not treat this as a specification to implement blindly. When it IS implemented, the first thing to prove is that the derived pool is non-vacuous - that removing an exclusion rule changes the pool. A selection rule that excludes nothing has expired, and guard expiry is a confirmed defect class in this repository.",
+
+ "method": {
+  "step_1_universe": {
+   "what": "Every candidate-facing q-card in the 86 question-bearing files.",
+   "how": "The canonical extractor, never a count of '.q-card' divs - that gives 723 against a canonical 721 and would give a wrong number here too. Use tools/oral/build_qb_content_index.py, or validate_batch_b.card_digests() for the balanced-tag spans.",
+   "identity_key": "file + anchor, e.g. 'QB6.html#q1'. NEVER the anchor alone: anchors are renumbered, and an anchor-only key invents new cards out of renumbered old ones - the exact defect that made the August monthly sheet claim 109 new cards against 50 governed ones."
+  },
+  "step_2_risk_ranking": {
+   "what": "Rank the universe by change recency and by governed-record density.",
+   "how": "Glob tools/oral/*_manifest.json - BOTH batch_*_manifest.json and correction_*_manifest.json - and read every cards[] entry's file+anchor. A card touched recently, or touched by several records, is where a review finds most.",
+   "trap": "A manifest glob is a pointer, not evidence. An index row tells you WHERE TO LOOK and is not what you cite. Open the card."
+  },
+  "step_3_hard_exclusions": {
+   "rule": "PRIOR EXPLICIT ACCEPT. A card a previous tranche examined and explicitly ACCEPTED is excluded from the pool.",
+   "why": "Re-reviewing an accepted card spends the tranche's budget re-deriving a decision already made, and produces the appearance of new coverage.",
+   "requirement": "The exclusion must name the tranche and the accept record. An exclusion with no citation is not an exclusion, it is an omission."
+  },
+  "step_4_soft_exclusions": {
+   "rule": "CORRECTION-FAMILY SOFT EXCLUSION. A card corrected by a family in the immediately preceding tranche is de-prioritised, not removed.",
+   "why": "Soft, because a correction is evidence the card was WORTH looking at. The three grain cards were corrected in three successive tranches and each pass found something the last did not.",
+   "requirement": "Record which cards were soft-excluded and why, so the next tranche can see what was set aside rather than what was never considered."
+  },
+  "step_5_reopen_rule": {
+   "rule": "A NARROWLY-CORRECTED card is reopened ONLY for a NEW EXPLICIT RISK REASON, stated before the card is read.",
+   "why": "Otherwise every tranche re-reads the last tranche's output and the pool never advances. Stating the reason first is what stops the reason being invented to justify what was found.",
+   "examples_of_a_valid_reason": [
+    "A source the card depends on has moved (a revalidation trigger fired).",
+    "A sibling card in the same file was found defective on the same proposition.",
+    "The card carries a class of claim a NEW standing rule now governs - e.g. Tranche 3C's vessel-specific 'On My Vessel' provenance rule, or its recent-named-casualty ruling."
+   ]
+  },
+  "step_6_report_the_residue": {
+   "rule": "The unselected remainder is stated with its size and its selection reason, every time.",
+   "why": "A review that reports only what it looked at cannot be checked. Reporting 'N unselected, by rule X' is what makes the next tranche's starting pool derivable rather than remembered."
+  }
+ },
+
+ "carried_forward_to_tranche_4": {
+  "starting_pool": "The ~16 cards Tranche 3 identified and did not select. Tranche 3C did NOT re-derive this list, because the brief forbade starting Tranche 4 and a list re-derived from a different method would not be the same list.",
+  "named_findings_this_pass_reported_and_did_not_fix": [
+   {
+    "id": "T3C-CF-01",
+    "priority": "HIGH",
+    "where": "meoclass1/QB6.html#q2",
+    "what": "The GFI card teaches the universal 'gCO2/DWT.nm' CII unit at 4 sites, including in a GFI-versus-CII contrast table where the unit IS the row. QB6.html therefore now teaches two versions of one unit, because F-2 was authorised card-scoped.",
+    "why_not_fixed": "Out of the authorised scope of F-2, which named QB6#q1."
+   },
+   {
+    "id": "T3C-CF-02",
+    "priority": "HIGH",
+    "where": "meoclass1/QB6_cheatsheet.html",
+    "what": "5 sites of the same universal DWT unit. This is QB6's PAIRED REVISION LAYER - a candidate revising from the cheat sheet gets the uncorrected form. It is hand-maintained, so it does not regenerate.",
+    "why_not_fixed": "A separate file and a separate card surface; not named by F-2."
+   },
+   {
+    "id": "T3C-CF-03",
+    "priority": "HIGH",
+    "where": "meoclass1/QB4_E.html",
+    "what": "Teaches 'UR Z7: ESP for Bulk Carriers and Tankers' and 'IACS UR Z7 for the Enhanced Survey Programme' at 4 sites. The held UR Z7 is 'Hull Classification Surveys'; Z7.1 is dry cargo ship hull surveys and Z7.2 is liquefied gas carrier hull surveys; ESP for bulk carriers and oil tankers is the Z10 series. This is the SAME defect CORR-URZ7-20260901 fixed in QB1_supplementary, surviving because that correction's sweep was FILTERED to hits mentioning machinery, CMS, CSM or continuous - and QB4_E's hits mention none of those.",
+    "why_not_fixed": "The brief scoped Z7 verification to propositions relied on by Z7-CORRECTED cards, and forbade a general IACS audit.",
+    "reusable_lesson": "A FILTERED SWEEP IS NOT A SWEEP. The filter that made the first correction tractable is the same filter that hid its sibling."
+   },
+   {
+    "id": "T3C-CF-04",
+    "priority": "MEDIUM",
+    "where": "meoclass1/QB3_J.html (2 sites), meoclass1/QB1_K.html (1 site)",
+    "what": "Incidental occurrences of the universal DWT CII unit.",
+    "why_not_fixed": "Out of scope."
+   },
+   {
+    "id": "T3C-CF-05",
+    "priority": "MEDIUM",
+    "where": "meoclass1/QB1_F.html#q23 reg-box; corpus-wide",
+    "what": "IACS UR Z27 (Condition Monitoring / Condition Based Maintenance) is cited candidate-facing but was NOT acquired. The brief bounded acquisition to Z7, Z18 and Z20.",
+    "why_not_fixed": "Explicit scope boundary."
+   },
+   {
+    "id": "T3C-CF-06",
+    "priority": "MEDIUM",
+    "where": "meoclass1/QB2_A.html#q31 question stem",
+    "what": "The stem still reads 'sank off Paradip on 21/22 August 2026' while the corrected body resolves the sinking to 21 August. The stem is a hedge, not an error.",
+    "why_not_fixed": "Changing a stem moves the content-index display text and the workbook projection, which the brief's 'no Excel regeneration unless question identity or text changes require it' discourages. Recorded as a DECISION."
+   },
+   {
+    "id": "T3C-CF-07",
+    "priority": "OPEN QUESTION FOR THE FOUNDER",
+    "where": "corpus-wide",
+    "what": "The recent-named-casualty governance ruling was applied ONLY to Ocean Winner, on instruction. Other cards publish named casualties (MOL Comfort, Ever Given and others) with factual claims and no registered supporting source.",
+    "why_not_fixed": "The brief expressly forbade a corpus-wide casualty audit.",
+    "the_question": "Does the ruling extend to older, non-recent casualties, or is 'recent' load-bearing? The answer decides whether this is a 3-card job or a corpus sweep."
+   },
+   {
+    "id": "T3C-CF-08",
+    "priority": "LOW",
+    "where": "meoclass1/QB1_E.html",
+    "what": "'UR Z7 for dry cargo ships' - strictly UR Z7.1. Defensible as a family reference.",
+    "why_not_fixed": "Not a mismatch worth a correction on its own."
+   }
+  ]
+ }
+}
