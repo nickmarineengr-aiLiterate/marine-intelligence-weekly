@@ -1,0 +1,189 @@
+{
+ "correction_id": "CORR-BMP-EDITION-PROP-20260905",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "pre_tranche_3_cleanup",
+ "date": "2026-09-05",
+ "title": "Tranche 2C corrected the BMP Maritime Security edition label on q13 and REPORTED that it was still wrong everywhere else. This is the sweep it deferred: nine sites across five cards stop teaching a 2026 edition that the publishers do not label",
+ "baseline_commit": "65f80da",
+ "governing_commits": [
+  "49dfa79"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_HIGHRISK_TRANCHE2C_20260905.md (section K-8, whose finding is recorded in CORR-GPT-T2C-CURRENCY-20260905 under propagation.bmp_propagation_reported_not_swept and in known_traps entry 80 as REPORTED, not swept), read with the pre-Tranche-3 cleanup instruction of 5 September 2026 which authorises exactly this propagation and the IGF source-custody repair, and nothing else",
+ "candidate_claim": "Not a candidate report. This is the deferred half of an adjudicated correction. CORR-GPT-T2C-CURRENCY-20260905 established from OCIMF that the publication is BMP Maritime Security, 1st Edition, 2025, updated during 2026, and that there is no second edition. It corrected nine sites inside QB4_H#q13 and recorded, rather than swept, the same wrong label surviving outside that card.",
+ "candidate_verdict": "UPHELD - the propagation is a direct consequence of a fact already adjudicated and externally verified. No new factual theory is advanced here.",
+ "authority": "OCIMF identifies the publication as BMP Maritime Security, 1st Edition, 2025, updated during 2026 with the activist-boarding guidance. Six co-publishers: BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO and OCIMF. No second edition has been established. Registered as SRC-BMPMS-2026 in docs/sources/MIW_SOURCE_REGISTRY.json, where the id encodes the RETRIEVAL YEAR and not an edition number. THIS RECORD ADDS NO SOURCE EVIDENCE OF ITS OWN. It carries the T2C finding to the cards T2C did not touch, which is why it is a propagation family and not an investigation.",
+ "cards": [
+  {
+   "correction_action_id": "CORR-BMP-EDITION-PROP-01",
+   "file": "QB4_H.html",
+   "path": "meoclass1/QB4_H.html",
+   "anchor": "q2",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "0958d35ca0abc3a251629dbc300e2d84a87f1ff9fedd7e7abe6917017e62f53e",
+   "post_edit_digest": "ed14a6285fbdf927ab1fe7280a135975783fa12d35b7fcf50005591b3015fc0d",
+   "digest_pinned_by_earlier_manifest": true,
+   "supersedes": {
+    "manifest": "correction_corr_bmp_ms_currency_20260831_manifest.json",
+    "action_id": "CORR-BMP-MS-02",
+    "post_edit_digest": "0958d35ca0abc3a251629dbc300e2d84a87f1ff9fedd7e7abe6917017e62f53e",
+    "note": "CORR-BMP-MS-02 wrote the currentness note and the reg-box entry this record corrects. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "changed_propositions": [
+    "Currentness note: 'the current edition is 2026' -> 'the current edition is the 1st Edition (2025), updated during 2026 - the publishers label no second edition'.",
+    "Currentness note heading re-dated 31 Aug 2026 -> 5 Sep 2026. The note now carries a fact established on 5 September; a note dated 31 August that carries it would be misdated. The 31 August supersession check survives in CORR-BMP-MS-CURRENCY-20260831 and in known_traps entry 54.",
+    "Reg-box: 'Industry guidance, current edition 2026' -> 'Industry guidance, 1st Edition (2025) as updated in 2026'.",
+    "q-version v1.4 -> v1.5, with the 31 August note retained and the 5 September edition-label correction appended."
+   ],
+   "surfaces_corrected": [
+    "currentness note",
+    "reg-box",
+    "q-version"
+   ]
+  },
+  {
+   "correction_action_id": "CORR-BMP-EDITION-PROP-02",
+   "file": "QB4_H.html",
+   "path": "meoclass1/QB4_H.html",
+   "anchor": "q11",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "1eb7d80f7e14149e7c0b32c0d8860613f795f4576226dd776784a1f1e224549c",
+   "post_edit_digest": "9e0b6c6b29abe50524dfd06c1f93eaa19245429db724cb6237a7f1f676440bf5",
+   "digest_pinned_by_earlier_manifest": true,
+   "supersedes": {
+    "manifest": "correction_corr_bmp_ms_currency_20260831_manifest.json",
+    "action_id": "CORR-BMP-MS-01",
+    "post_edit_digest": "1eb7d80f7e14149e7c0b32c0d8860613f795f4576226dd776784a1f1e224549c",
+    "note": "CORR-BMP-MS-01 was the primary of the 31 August family and wrote all three sites corrected here."
+   },
+   "changed_propositions": [
+    "Reg-box: 'replaced 2025 by BMP Maritime Security, current edition 2026 (see Q13)' -> '... 1st Edition (2025) as updated in 2026 (see Q13)'.",
+    "Source-confidence footer: 'the current BMP MS edition is 2026.' -> 'the current BMP MS edition is the 1st Edition (2025) as updated in 2026 - there is no second edition.'",
+    "q-version v1.1 -> v1.2. The parenthetical '(current edition 2026)' inside the 31 August note is removed rather than corrected, because a version stamp records what an edit did and the edition label is not what CORR-BMP-MS-01 established; the 5 September correction is appended as its own clause."
+   ],
+   "surfaces_corrected": [
+    "reg-box",
+    "source-confidence",
+    "q-version"
+   ],
+   "deliberately_unchanged": [
+    "The BMP5 technique content - hardening, citadel, muster, reporting - which examiners still ask about by name and which this card exists to preserve as the predecessor record.",
+    "The 'BMP5 Publication (superseded)' reg-code, which is correct."
+   ],
+   "classification_note": "PRIMARY because it is the card that stated the edition label in its own voice in a source-confidence footer, and because CORR-BMP-MS-01 made the same card the primary of the predecessor family. The other four carry the same fact and are propagations."
+  },
+  {
+   "correction_action_id": "CORR-BMP-EDITION-PROP-03",
+   "file": "QB4_B.html",
+   "path": "meoclass1/QB4_B.html",
+   "anchor": "q16",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "fa5f94f89821d65769a2b970b84ed7fc613cf24ddef5820f375eefcf68b6711b",
+   "post_edit_digest": "26b810222a4a9dd01778b3d50eaf6d0688b7ac7a37797eb8d2f33da839c86247",
+   "digest_pinned_by_earlier_manifest": true,
+   "supersedes": {
+    "manifest": "correction_corr_bmp_ms_currency_20260831_manifest.json",
+    "action_id": "CORR-BMP-MS-03",
+    "post_edit_digest": "fa5f94f89821d65769a2b970b84ed7fc613cf24ddef5820f375eefcf68b6711b",
+    "note": "CORR-BMP-MS-03 prepended the currentness note and stamped the version; both are corrected here."
+   },
+   "changed_propositions": [
+    "Currentness note: the same edition-label replacement, and the same re-dating to 5 Sep 2026.",
+    "q-version v1.1 -> v1.2; the stamp's own '(2026 ed.)' shorthand corrected to '1st Ed. 2025 as updated 2026'."
+   ],
+   "surfaces_corrected": [
+    "currentness note",
+    "q-version"
+   ]
+  },
+  {
+   "correction_action_id": "CORR-BMP-EDITION-PROP-04",
+   "file": "QB9_A.html",
+   "path": "meoclass1/QB9_A.html",
+   "anchor": "q9",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "713247b0d3314ec7adc3bb786afe825c664dd33e9b7a958ba142dfbd00e5e441",
+   "post_edit_digest": "e6065008b029acb9fab4f5ab3d8a749470d7fe5c5f16dac48d4b5b6ee142de4d",
+   "digest_pinned_by_earlier_manifest": true,
+   "supersedes": {
+    "manifest": "correction_corr_bmp_ms_currency_20260831_manifest.json",
+    "action_id": "CORR-BMP-MS-04",
+    "post_edit_digest": "713247b0d3314ec7adc3bb786afe825c664dd33e9b7a958ba142dfbd00e5e441",
+    "note": "Same treatment as CORR-BMP-MS-03; same two surfaces."
+   },
+   "changed_propositions": [
+    "Currentness note: the same edition-label replacement, and the same re-dating to 5 Sep 2026.",
+    "q-version v1.2 -> v1.3; the stamp's own '(2026 ed.)' shorthand corrected."
+   ],
+   "surfaces_corrected": [
+    "currentness note",
+    "q-version"
+   ]
+  },
+  {
+   "correction_action_id": "CORR-BMP-EDITION-PROP-05",
+   "file": "QB9_B.html",
+   "path": "meoclass1/QB9_B.html",
+   "anchor": "q5",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "f822a6a56cca6ef8f7ea905d187fe926be8488e5e5748840237b146c86298364",
+   "post_edit_digest": "894efd76d5e10ea430da31b429f4344737630c0a525759c05cea146ce9b41f15",
+   "digest_pinned_by_earlier_manifest": true,
+   "supersedes": {
+    "manifest": "correction_corr_bmp_ms_currency_20260831_manifest.json",
+    "action_id": "CORR-BMP-MS-05",
+    "post_edit_digest": "f822a6a56cca6ef8f7ea905d187fe926be8488e5e5748840237b146c86298364",
+    "note": "Same treatment as CORR-BMP-MS-03; same two surfaces."
+   },
+   "changed_propositions": [
+    "Currentness note: the same edition-label replacement, and the same re-dating to 5 Sep 2026.",
+    "q-version v1.1 -> v1.2; the stamp's own '(2026 ed.)' shorthand corrected."
+   ],
+   "surfaces_corrected": [
+    "currentness note",
+    "q-version"
+   ]
+  }
+ ],
+ "propagation": {
+  "derived_surfaces": "NONE. No question stem, question identity or .q-text div changed, so oral_lib.parse_qb_file sees no difference and no generator output moves: qb_content_index.json, meoclass1/index.html, the examiner index, the topic pages and docs/study/study_mappings.json are all byte-identical and were deliberately not regenerated.",
+  "hand_maintained_surfaces": "NONE. No TOC entry, showing-count, section count or cheat-sheet row is affected - the edits are confined to answer-layer prose, one reg-box description, one source-confidence footer and five version stamps.",
+  "hub_date": "NOT ADVANCED. The pre-Tranche-3 cleanup instruction forbids it."
+ },
+ "invariants": {
+  "canonical_questions_before": 761,
+  "canonical_questions_after": 761,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "corrected_cards": 5,
+  "sites_corrected": 9,
+  "historical_content_removed": "none - every BMP5 technique block, the activist-boarding content and the 2026-update substance are retained; only the EDITION LABEL changed",
+  "q13_untouched_digest": "d4b38a82c810762f8634aabe926b6e4a31e8b71b65b4ea0d46bb61b247911e39"
+ },
+ "review": {
+  "gate": "tools/oral/validate_correction_bmpprop.py",
+  "mutation_suite": "tools/oral/mutate_correction_bmpprop.py",
+  "independent_review": "NOT YET - this record is produced by the same session that made the edits"
+ },
+ "note": "SCOPE. PROPAGATION ONLY. The activist-boarding content of the 2026 update, the six-publisher list, the three replaced publications, the 31 March 2025 launch facts, the global-not-region-locked proposition and every BMP5 technique block are deliberately untouched. QB4_H#q13 is NOT declared here and is byte-identical across this change: it is CORR-GPT-T2C-CURRENCY-20260905's card, and this record does not claim its bytes. PREDECESSOR GUARDS. NEITHER EXPIRED, and the reason is worth keeping. Both are written to assert that the T2C RECORD still reports the open defect, not that the defect is still live in the corpus: they read the manifest's propagation block and the review document, and this sweep changes neither. That is the correct shape for a guard over a deferred item, and it is what the batch-guard expiry defect class on this repository's record is the counter-example to. A guard that had instead asserted 'QB4_H#q2 still says 2026' would have turned red the moment the repair landed, and a reader could not then tell a repair from a regression. Checked: tools/oral/validate_correction_gptt2c.py, 72 checks, 0 FAIL after this sweep; action taken: NONE. No predecessor gate was edited by this record.",
+ "artefacts": [
+  {
+   "path": "meoclass1/known_traps.md",
+   "classification": "GOVERNANCE_RECORD",
+   "known_traps_entry": 54,
+   "rationale": "The entry asserted 'A second edition followed in 2026' and that the publication 'has now superseded its own first edition twice over'. Both are the defect this family exists to remove, stated in the study document that teaches candidates about it. Replaced with the publisher label, a cross-reference to entry 80, and the statement that 'the 2026 edition' is itself a trap. THE ENTRY'S OWN GREP: SKIP DISCIPLINE IS WHY THIS SURVIVED: entry 54 is marked GREP: SKIP for a different reason - it quotes wording it rejects - and a phrase scan that trusts that marker walks past a live assertion sitting three lines above the quoted one.",
+   "guarded_by": "no release guard pins this file; validate_corrections asserts the declared entry exists, and validate_correction_bmpprop asserts its content"
+  },
+  {
+   "path": "meoclass1/known_traps.md",
+   "classification": "GOVERNANCE_RECORD",
+   "known_traps_entry": 80,
+   "rationale": "Its third bullet said the label 'is still wrong in six cards outside q13' and 'is REPORTED, not swept', naming five cards for a count of six. Rewritten to record that the sweep happened on 5 September 2026 under this correction id, and to say nine sites across five cards - the count the sweep actually found. The six/five mismatch in the original wording is the reason the sweep found more sites than the report predicted.",
+   "guarded_by": "no release guard pins this file; validate_corrections asserts the declared entry exists, and validate_correction_bmpprop asserts its content"
+  }
+ ],
+ "known_traps_entries": [
+  54,
+  80
+ ]
+}
