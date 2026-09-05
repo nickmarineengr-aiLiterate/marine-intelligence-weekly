@@ -2137,3 +2137,147 @@ GREP: SKIP — the corrected block names flexitanks and containers repeatedly wh
 placing them **outside** the Code, so a keyword scan fires on the fix. Verify at
 sentence level: every flexitank sentence must carry *not*, *excluded* or
 *outside*.
+
+
+### 76. A capability asserted at fleet scale from a position that cannot know it
+
+Two *On My Vessel* blocks claimed things nothing in the corpus establishes, and
+both read as authoritative because they were specific.
+
+* `QB5_C_B#q5` said *"I maintain an automated, remote cloud-sync backup for our
+  critical machinery logs via our fleet telemetry"*, and that this preserved
+  records **"for international maritime tribunals"**. That is TWO claims: a
+  company IT estate, and an evidentiary standing for its output. A Chief
+  Engineer is in no position to warrant either.
+* `QB2_A#q27` inferred a universal requirement from a corporate profile — *any*
+  specialised dry bulk charter *requires* the loading computer to carry approved
+  IMSBC and Grain modules. No instrument says so.
+* **THE FIX IS NOT A BETTER-SOURCED SYSTEM.** Neither claim was replaced with
+  another invented company arrangement. q5 now promises only what is in the
+  CE's own hands — preserve the **originals** unaltered, protect them against
+  alteration, back-dating or loss, secure them under the **Master's authority**
+  and the **SMS procedure** with a documented **chain of custody**, and release
+  them through the Master to the flag State, the port State and the **marine
+  safety investigation Authority**. Shore replication, where a ship has it, is
+  **system-specific** and **never a substitute for the originals**.
+* **The authoring lesson.** *On My Vessel* is the block where a writer is most
+  tempted to make his employer's scale answer the question. The candidate's
+  authority ends at his own ship: say what you do, say what you do not know, and
+  let the instrument carry the rest.
+
+GREP: `cloud-sync`, `fleet telemetry`, `maritime tribunal`, `dry bulk charter`,
+`loading computer.{0,120}module`. All five must return zero.
+
+### 77. The purge medium is not the cargo, so a cargo-shaped danger list has no slot for it
+
+`QB7_D#q14` taught purge and inert as *procedure*, cryogenic, vapour cloud, RPT
+and rollover as *dangers*, and PPE and essential-personnel as *controls* — and
+never taught that the purge medium itself kills.
+
+* **THE OMISSION WAS STRUCTURAL, NOT CARELESS.** Every entry on that list was a
+  property of the LNG: it goes cryogenic, it expands 600-fold, it flashes on
+  water, it stratifies. Nitrogen is not the cargo, so a list organised on that
+  principle has nowhere to put it.
+* **The physics, stated as physics.** **Nitrogen** used for purging and inerting,
+  and **LNG vapour** itself, are **simple asphyxiants**: neither is toxic at the
+  concentrations that matter, and both kill by **displacing air**. An
+  oxygen-deficient atmosphere gives **no useful warning**. That is what separates
+  it from the vapour-cloud entry above it, where the hazard is flammability and
+  the control is dispersion.
+* **Controls that had lost their hazard.** 18.4.3 gas detection, 18.4.6
+  essential personnel in PPE and the upwind rule were all already on the card as
+  REQUIREMENTS. Naming the hazard is what turns a list of controls into an
+  explanation of them.
+* **DO NOT IMPORT ENCLOSED-SPACE ENTRY.** Bunkering is an open-deck operation
+  and involves no entry. A permit-to-work, a stand-by man and a rescue team are
+  a different regime answering a question nobody asked, and reaching for them is
+  the over-correction this trap exists to prevent.
+
+GREP: SKIP a keyword scan for `nitrogen` — the card is full of legitimate
+procedural nitrogen. Verify instead that the DANGERS list carries an
+asphyxiation entry, and that `enclosed space`, `permit to work`, `confined
+space` and `rescue team` all return zero.
+
+### 78. A heading is a claim, and it outlives the sentence beneath it
+
+`QB2_A#q11` had its criterion text corrected to *"the net or residual area
+**between** the heeling arm curve and the righting arm curve"* — and kept the
+heading **"Net Residual Area on GZ Curve (A 7.1.2)"** above it.
+
+* **The card taught the right proposition under the wrong label.** A heading is
+  what a candidate reads for structure and carries away as the name of the
+  thing. Correcting the body and leaving the label is a half-correction that
+  looks complete in a diff.
+* **A 7.1.2 STATES ONLY THE UPPER BOUND.** The lower bound is **figure A7**,
+  which shades the *"residual dynamic stability"* area from the **first
+  intersection** of the heeling arm line with the righting arm curve. The word
+  **"equilibrium" appears NOWHERE in the Code as adopted** — a full-text search
+  of all 31 pages of MSC.23(59) returns zero hits.
+* **So the card must state the limit of its own evidence.** It teaches the lower
+  bound, names figure A7 as where it comes from, and says in terms that *"from
+  the angle of equilibrium"* must **not** be offered as clause text. A corpus
+  that quietly upgrades a figure to a quotation has acquired a citation the
+  instrument does not contain — which is the same class of error as the wording
+  it was fixing.
+* **q33 is ACCEPTED on this issue and was deliberately NOT equalised.** Symmetry
+  is not a reason to open a card an authorisation does not name.
+
+GREP: SKIP `area under the GZ curve` — q11 and q27 both QUOTE it to teach
+against it. Test whether it is ASSERTED, by checking containment inside a paired
+quote span. See trap 70.
+
+### 79. Chapter VII is a subset, not the basis — and the short layer had the wrong one
+
+`QB2_B#q15` cited **SOLAS chapter VII** for the IMSBC Code generally, in BOTH
+the 15-second and the 60-second layers, while its own deep-dive body cited
+**chapter VI part B** correctly.
+
+* **SOLAS chapter VI** — *Carriage of cargoes and oil fuels* — is the general
+  mandatory basis for solid bulk cargoes.
+* **SOLAS chapter VII part A-1** — *Carriage of dangerous goods in solid form in
+  bulk* — is the SUBSET regime. Real, and named, but it does not carry the whole
+  Code.
+* **THE CARD CONTRADICTED ITSELF, AND THE MEMORISED LAYER WAS THE WRONG ONE.**
+  That is the worst possible distribution of an attribution error: a candidate
+  studies the deep dive once and recites the 15-second layer in the room.
+* **The authoring lesson.** When a Code sits under two chapters, the short layer
+  must anchor to the one that makes it mandatory *generally*, and name the other
+  as what it actually governs. Deleting chapter VII would have been the opposite
+  error.
+
+GREP: `mandatory framework under SOLAS Chapter VII` must return zero. Both short
+layers must contain `Chapter VI` and `Part A-1`.
+
+### 80. A currency claim that carries no date cannot be seen to have aged
+
+Four cards carried claims about what is CURRENT. Three were TRUE WHEN WRITTEN,
+which is exactly why nothing in the corpus would ever have flagged them.
+
+* **`QB5_E#q4`** called Maersk **"a founding MACN member"**. Maersk's own
+  publication says only that it **helped establish** MACN in 2011 — participation
+  in establishment, not a status. **The claim was live in TWO blocks**, On My
+  Vessel and the CE Oral Tip, and the first sweep found only one because it read
+  a **truncated listing** of the card's hits. *A sweep you have not seen the end
+  of is not a sweep.*
+* **`QB4_H#q13`** called BMP Maritime Security **"the 2026 edition"** at nine
+  sites. OCIMF labels it **1st Edition, 2025**, updated during 2026. **There is
+  no second edition.** One *Common CE Failures* entry — "Teaching BMP5, **or the
+  2025 first edition**, as current" — was FALSIFIED BY THE CORRECTION ITSELF and
+  had to be rewritten in the same act. **The label is still wrong in six cards
+  outside q13** (`QB4_H#q2`, `QB4_H#q11`, `QB4_B#q16`, `QB9_A#q9`, `QB9_B#q5`)
+  and is REPORTED, not swept. See trap 54.
+* **`QB7_D#q15`** cited **ISO 23306:2020** with no currency statement at all —
+  not a false claim, a claim with no date-of-check. It is still the **CURRENT
+  PUBLISHED** standard as at September 2026, but ISO has flagged it *"to be
+  revised"* and **ISO/AWI 23306** edition 2 is **UNDER DEVELOPMENT**, registered
+  3 August 2026. **An AWI is a work item, not a published standard.**
+* **`QB3_C#q7`** said regulation 16 is *"unamended ... in the held in-force
+  chain"* — properly scoped to its evidence, and **undated**. It now says *as at
+  September 2026*, and names what the recent amendments DO concern.
+* **The authoring lesson.** Prefer the publisher's own label over a year you
+  inferred; distinguish **CURRENT PUBLISHED** from **UNDER DEVELOPMENT**; and
+  give every negative a **date and a scope**, because an exhaustive negative you
+  cannot re-run is a claim you cannot maintain. See traps 50, 52 and 61.
+
+GREP: SKIP `the 2026 edition` — q13 QUOTES it to teach against it. Test for
+assertion outside a quote span.
