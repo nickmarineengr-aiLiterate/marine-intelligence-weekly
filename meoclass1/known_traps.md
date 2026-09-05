@@ -2350,10 +2350,28 @@ panel changes the ship type — which is what a panel does. Say **capacity** fir
 yours.
 
 **AUTHORING RULE.** Never write `gCO₂/DWT·nm` as *the* CII unit. Write
-`gCO₂ per capacity·nm` and state the ship-type split. Twenty-four occurrences of the DWT
-form existed across six files when this was found; `QB6#q1` and `QB7_I#q10` are corrected,
-and **`QB6#q2`, `QB6_cheatsheet.html`, `QB3_J` and `QB1_K` still carry it** pending
-authorisation. `QB7_A` already says "gCO₂/DWT·nm or gCO₂/GT·nm" and is the model.
+`gCO₂ per capacity·nm` and state the ship-type split.
+
+**Propagation CLOSED 5 September 2026.** `QB6#q1` and `QB7_I#q10` were corrected first;
+`QB6#q2` (five sites) and `QB6_cheatsheet.html` (five sites) followed. For the four hours
+between them **`QB6.html` taught two versions of one unit**, which is the real cost of a
+card-scoped authorisation and the reason a revision layer must be corrected in the same
+breath as its cards — a candidate revising from the cheat sheet gets the uncorrected form.
+
+**Not every DWT occurrence is this defect — read the scope before you edit.** The
+following are **CORRECT and must be kept**:
+
+* `QB3_J` — "attained CII = CO₂ emitted ÷ (capacity × distance sailed), in
+  `gCO₂/DWT·nm` **for my ship type**" and "CII units **for container ships**". The scope
+  clause is what makes it right; a pattern-only sweep would eat the clause and keep the unit.
+* `QB1_K` — "the capacity term **C** in the **container-ship** CII". The unit is being used
+  as *evidence* in a tonnage-definitions card about what DWT is.
+* `QB6#q13` — a worked example opening "**A container vessel** with 12% propeller slip".
+  Scoped by the sentence *before* the unit, so it cannot be adjudicated from a grep line.
+* `QB7_A` — "gCO₂/DWT·nm **or** gCO₂/GT·nm". Names both measures; the model form.
+
+The EEDI/EEXI reference line `a × DWT^−c` is a **different proposition** and is genuinely
+DWT-based. Do not sweep it.
 
 GREP: SKIP `gCO₂/DWT·nm` — this entry and the corrected cards' trap blocks QUOTE the
 rejected form in order to reject it. Test that each occurrence is **negated or quoted**,
@@ -2418,3 +2436,44 @@ card that read as careful. Where no flag-State or coastal-State report exists, s
 candidate and name what is therefore **not claimed**.
 
 GREP: SKIP `230 to 240` and `72,100` — this entry quotes the withdrawn figures.
+
+
+### 85. IACS UR Z7 is Hull Classification Surveys — it is NOT the Enhanced Survey Programme
+
+`QB4_E` taught **"IACS UR Z7: ESP for Bulk Carriers and Tankers"** in seven places across
+two cards, and `oralnotes/simon-notes-p3.html` taught the same thing under a *different*
+number — **"mandatory under IACS UR Z7.1"**. Both are false.
+
+**The rule, from the instrument itself** (UR Z7 Rev.29 Corr.1, held and hash-pinned at
+`docs/sources/IACS-UR-Z7-Rev29-Corr1.pdf`):
+
+* its title is **Hull Classification Surveys**;
+* **§1.1.1** — "These requirements apply to **all self-propelled vessels**." It is the
+  baseline hull survey requirement for every ship, not a two-ship-type regime;
+* **§1.1.3** — the *additional* hull, piping and ballast-tank requirements for tankers,
+  bulk carriers, chemical tankers, double-hull tankers and double-side-skin bulk carriers
+  are in the **Z10 series**. Z7 itself routes ESP-type work out of Z7;
+* **§1.1.5** — **UR Z7.1** is the **water level detector** requirement for single-hold
+  cargo ships. Not ESP either.
+
+**ESP's authority is STATUTORY, not class.** The International Code on the Enhanced
+Programme of Inspections during Surveys of Bulk Carriers and Oil Tankers, 2011 (**ESP
+Code**), **IMO res. A.1049(27)**, made mandatory by **SOLAS Chapter XI-1, Regulation 2**
+(MSC.325(90), in force 1 January 2014). A Unified Requirement binds IACS member societies'
+own rules; it does not bind a flag State. Citing a UR for why ESP is *mandatory* is a
+category error, not a citation slip. `QB1_I#q1` is the model card.
+
+**AUTHORING RULE — do NOT substitute a guessed Z10 sub-number.** Read strictly, Z7 §1.1.3's
+"respectively" maps **tankers → Z10.1** and **bulk carriers → Z10.2**, which is the
+*opposite* of the widely repeated assumption. Nothing held resolves it and neither
+sub-document is in the repository. Write **"the UR Z10 series"** unless an exact sub-number
+has been verified at the instrument. Replacing one false citation with a plausible second
+one is the same defect with better footnotes.
+
+**A hedge is not a fix.** The `simon-notes-p3` reg box printed the wrong code and appended
+*"verify exact UR number before quoting"*. The wrong number was still in the code column
+and the verification was handed to the candidate. Verify it, or remove it.
+
+GREP: SKIP `UR Z7` — UR Z7 is a real and correctly cited requirement in its own right, and
+this entry plus the corrected cards QUOTE the rejected attribution in order to reject it.
+Test that `Z7` is not bound to `ESP` / `Enhanced Survey Programme`, never that `Z7` is absent.
