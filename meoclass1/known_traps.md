@@ -2064,3 +2064,76 @@ fix the eighth.**
 to sweep for, no digest that looks wrong and no proposition to contradict. It is
 invisible to every content gate in the toolchain and visible to any candidate who
 opens the card.
+
+
+### 74. A reference box row that has to explain it does not govern the question
+
+`QB5_C_B#q5`'s casualty-investigation reg-box carried **STCW Code, Table A-III/2**
+with the description *"the competence behind the technical account the
+investigation relies on. It is a competence standard, not an investigation
+provision."* Trap 73 records that this eighth defect was found while fixing seven
+others and deliberately **reported rather than fixed**, because finding a defect is
+not authorisation to correct it. It has now been authorised and closed.
+
+* **The tell is in the row itself.** A-III/2 is the management-level competence
+  specification for chief engineer and second engineer officers on ships of
+  **3,000 kW propulsion power or more**. It confers no investigatory function on
+  anyone and contains no provision on the conduct, reporting or analysis of a
+  casualty. **When a reference row's own description has to say what it is not,
+  the row is answering a question the card did not ask.** Narrowing the wording,
+  as the previous pass did, made the defect legible; it did not fix it.
+* **What was missing was already load-bearing.** **ISM Code §9** — reports and
+  analysis of non-conformities, accidents and hazardous occurrences, with
+  corrective action under **§9.2** — appears in that card's 15-second answer, its
+  60-second answer, its Numbers/Regs block and its CE Oral Tip, and was **absent
+  from the reg-box entirely**. A replacement is only safe when the incoming
+  instrument is a proposition the answer already rests on. Never add a regulation
+  to keep a box at four rows.
+* **TWO INVESTIGATIONS, AND THEY MUST NOT MERGE.** The **marine safety
+  investigation** is conducted by the **flag State's** marine safety investigation
+  Authority under the **Casualty Investigation Code, MSC.255(84)**. The **company**
+  investigation and learning runs under **ISM §9**, through the Master and the
+  **DPA**. A candidate who answers as though ISM §9 were the statutory regime has
+  merged them, and so has any reference box that lists §9 without saying which one
+  it is.
+
+GREP: SKIP — the corrected row names MSC.255(84) while denying that §9 is the
+statutory regime, so a phrase scan for the resolution number fires on the fix.
+Verify by reading the row that carries the resolution in its **reg-code**, not by
+counting mentions in the box.
+
+### 75. The IMSBC Code excludes a container by DEFINITION, not by a prohibition
+
+`QB2_B#q15` drew the IMSBC / IMDG line correctly in its own trap question and then
+contradicted itself in *On My Vessel*, which put **containerised bulk shipments**
+and **flexitanks** inside IMSBC scope. Nothing prohibits it in the Code, because
+nothing needs to: the definition never reaches them.
+
+* **SOLAS VI/1-1.2**: a **solid bulk cargo** is any cargo, *other than liquid or
+  gas*, consisting of a combination of particles, granules or larger pieces
+  generally uniform in composition, *"which is loaded **directly into the cargo
+  spaces** of a ship **without any intermediate form of containment**"*. **IMSBC
+  1.4.1** anchors the Code's own application to that regulation.
+* **TWO INDEPENDENT LIMBS, EITHER ONE SUFFICIENT.** A **freight container is an
+  intermediate form of containment**, so containerised cargo is outside the Code
+  however bulk-like the commodity looks. A **flexitank is liquid**, so it also
+  fails *other than liquid or gas* — it is excluded **twice over**. This is why
+  the point is a fact and not a judgement call: it is settled by reading a
+  definition, not by weighing a practice.
+* **The regimes that do apply**: **IMDG** for dangerous goods in packaged form,
+  containers included; the applicable **container / CTU** framework; and the
+  approved **Cargo Securing Manual**.
+* **The authoring lesson.** *On My Vessel* blocks are where a container-ship
+  writer is most tempted to make a bulk-carrier regime apply to his own ship. The
+  honest move is to say the regime does **not** govern the ship and explain why
+  from the instrument. **A card that teaches a rule and then breaks it two blocks
+  later is worse than one that never taught the rule.**
+* **Currency, kept off the card.** IMSBC amendment **08-25 (MSC.575(110))** is
+  voluntary from **1 January 2026** and envisaged into force **1 January 2027**.
+  The scope definition above is base-Code and amendment-independent, so **do not
+  reach for 08-25 to answer a scope question** — see trap 55.
+
+GREP: SKIP — the corrected block names flexitanks and containers repeatedly while
+placing them **outside** the Code, so a keyword scan fires on the fix. Verify at
+sentence level: every flexitank sentence must carry *not*, *excluded* or
+*outside*.
