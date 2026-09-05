@@ -1317,10 +1317,20 @@ Every Grain Code answer built before 2026 teaches two compartment configurations
   **30°** from the lower edge of the hatch end beam. New **Part B section 4**: after shifting,
   the surfaces are assumed at **25°** to the horizontal. **B 1.5** carries the
   **1.12 × transverse heeling moment** vertical-shift factor into the new category.
-* **What did NOT change.** The three intact-stability criteria are untouched — **12°** maximum
-  heel, **0.075 m·rad** residual area to 40°, **0.30 m** minimum corrected GM — and so is the
-  Document of Authorisation regime. A candidate who says the criteria were relaxed has inverted
-  the amendment.
+* **What did NOT change.** The three intact-stability criteria are untouched — **A 7.1.1**, heel
+  due to the assumed shift not greater than **12°**, or the deck-edge immersion angle for ships
+  constructed on or after 1 January 1994, whichever is the lesser; **A 7.1.2**, the net or residual
+  area **between the heeling arm curve and the righting arm curve**, taken from the **angle of
+  equilibrium** up to the **least** of the maximum-difference angle, **40°** and the angle of
+  flooding, not less than **0.075 m·rad**; and **A 7.1.3**, **0.30 m** minimum corrected GM — and
+  so is the Document of Authorisation regime. A candidate who says the criteria were relaxed has
+  inverted the amendment.
+* **AUTHORING RULE — never write the A 7.1.2 criterion in the short form.** “0.075 m·rad residual
+  area to 40°” is wrong twice over: **40° is one of three upper limits** and commonly not the
+  governing one, and the area is **between two curves**, not “under the GZ curve”. That short form
+  is the authoring source of the defect corrected in **QB2_A q11, q27 and q33**. Whenever this
+  criterion is written into any card, all three limits and the between-the-curves formulation go
+  with it.
 * **The attribution trap inside the trap.** It is widely and correctly said that an owner using
   the new option must have the **approved grain loading manual updated** — the ship can only be
   loaded to a condition its booklet covers. That is **class-society and P&I guidance**, and it is
