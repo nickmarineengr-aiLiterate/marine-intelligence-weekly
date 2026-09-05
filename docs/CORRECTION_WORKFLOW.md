@@ -68,6 +68,39 @@ For a **content correction**, evidence must include:
 
 For **repository** and **governance corrections**, evidence is the cited repository state itself (a `git ls-files`/`git status`/direct file read showing the inconsistency) — no external primary source applies.
 
+### Named casualties — when the registered-source requirement bites
+
+Ruling recorded 5 September 2026 (Founder / GPT), during the pre-Tranche-4
+propagation cleanup. It settles the *scope* of the registered-source
+requirement for named casualties, which had been read as open-ended.
+
+A named casualty needs a registered supporting source when **any** of the
+following is true:
+
+1. it is being **newly added**, or it is **recent**;
+2. an **older** named casualty is being **reopened for another reason** — the
+   requirement attaches to the edit, not to the casualty's age; or
+3. a **factual or source doubt** has been identified against it.
+
+It does **not** require a retrospective corpus-wide audit of historical named
+casualties, and none is authorised. The requirement is a **trigger**, not a
+sweep.
+
+Why this is written as a trigger. The alternative reading — every named
+casualty in the corpus owes a registered source now — would convert a
+correction discipline into a standing backlog of several hundred items, and a
+backlog that large is one nobody clears, which is how a governance rule stops
+being enforced anywhere. Bounding it to the moment a card is *touched* means
+the requirement is discharged on the cards actually being changed, and cannot
+be silently skipped there.
+
+**No validator implements this.** Deliberately: a detector that scanned the
+corpus for unsourced named casualties would produce exactly the retrospective
+audit this ruling declines to authorise, and would fail on every historical
+card the ruling exempts. Enforcement is at the correction gate, in review of
+the manifest for the edit in hand.
+
+
 ---
 
 ## Founder Review Gates
