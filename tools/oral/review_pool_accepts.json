@@ -1,0 +1,24 @@
+{
+ "schema": "miw-oral-review-pool-accepts/1",
+ "note": "The ONLY source of exclusion authority for the Oral review pool. A card is removed from the pool if and only if it has an entry here with accept_scope WHOLE_CARD that later evidence has not reopened. A card with no entry STAYS IN THE POOL. This file is hand-maintained and is never written by a generator.",
+ "rules": {
+  "CORRECTED_IS_NOT_REVIEWED": "Correction manifests rank a card; they never clear it. A card may carry many corrections and still have never been read end to end.",
+  "NARROW_IS_NOT_WHOLE": "NARROW_SCOPE and NO_PROPAGATION record what was actually checked. They rank only. They must never grow into a whole-card clearance.",
+  "PROSE_HAS_NO_AUTHORITY": "GPT_REVIEW_*.md accept-sections and (NO CHANGE) headings are reviewer hints. Tranche 1's 'Accepted cards - untouched' means no propagation reached those cards within that tranche's scope - not that they were reviewed. Promoting a hint requires adding an entry here by hand, with evidence.",
+  "EVIDENCE_REQUIRED": "Every entry must cite the artefact that justifies it. An acceptance without a citation cannot be audited and is rejected."
+ },
+ "accept_scope_values": {
+  "WHOLE_CARD": "Read end to end and accepted. EXCLUDES the card from the pool.",
+  "NARROW_SCOPE": "One limb or proposition checked. Ranks only; does not exclude.",
+  "NO_PROPAGATION": "A tranche's edits did not reach it. Ranks only; does not exclude."
+ },
+ "entry_shape": {
+  "file": "QB4_H.html  (or 'path': 'meoclass1/QB4_H.html')",
+  "anchor": "q2",
+  "accept_scope": "WHOLE_CARD | NARROW_SCOPE | NO_PROPAGATION",
+  "evidence": "required - the artefact and section that justifies this acceptance",
+  "adjudicated_by": "optional - who decided",
+  "date": "optional ISO-8601 - later evidence than this reopens the acceptance"
+ },
+ "accepts": []
+}
