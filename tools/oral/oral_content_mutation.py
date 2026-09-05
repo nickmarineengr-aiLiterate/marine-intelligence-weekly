@@ -46,6 +46,12 @@ DIGEST_PINS = {
     "card_digest_matches_manifest_q11",
     "card_digest_matches_manifest_q33",
     "live_matches_authorised_post_state",
+    # Tranche 2A's gate resolves three cards' pins through their supersession
+    # chains in ONE aggregate check. It is still a pin: any byte change to any
+    # of the three turns it red, so accepting it as a catch would prove only
+    # that sha256 works. Named here rather than in that validator because this
+    # set is the single place the rule is enforced.
+    "live_cards_match_authorised_state",
 }
 
 

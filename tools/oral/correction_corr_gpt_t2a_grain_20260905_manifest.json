@@ -1,0 +1,84 @@
+{
+ "correction_id": "CORR-GPT-T2A-GRAIN-20260905",
+ "title": "QB2_A#q27 stated the Grain Code residual area as the area under the GZ curve with no upper limit at all, and known_traps.md carried the same criterion in the short form that produced it",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "gpt_content_review",
+ "date": "2026-09-05",
+ "baseline_commit": "419f3c6",
+ "governing_commits": [
+  "77fc842",
+  "44e7d2c"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_HIGHRISK_TRANCHE2A_20260905.md",
+ "candidate_claim": "Founder/GPT independent review of the Tranche 2 adjudication packet. QB2_A#q27 teaches the Grain Code stability criterion as 'the net residual area under the GZ curve above 0.075 meter-radians'. That terminology belongs to a different intact-stability criterion family and is misleading here, and the upper bound must not be reduced to 'to 40 degrees'. Pass 2 reported at least two incomplete forms in the card, at the body line and in Numbers to Memorise, and directed that the reported sites not be assumed exhaustive. Separately, meoclass1/known_traps.md carries an authoring-facing proposition equivalent to '0.075 m-rad residual area to 40 degrees'; it is excluded from Vercel deployment and so is not a candidate-facing release defect, but it is an authoring contamination source capable of reintroducing the wrong criterion.",
+ "candidate_verdict": "UPHELD ON BOTH, AND THE INSTRUMENT WAS RE-READ RATHER THAN THE TRANCHE-1 RECORD RE-USED. The held primary was hash-verified before the read and A 7.1.1, A 7.1.2 and A 7.1.3 were read off page 5. TWO CORRECTIONS TO THE BRIEF'S OWN FACTUAL PREMISE, both recorded here rather than quietly worked around. FIRST, the two q27 sites are not two incomplete forms of the 0.075 proposition. An exhaustive nine-pattern sweep of QB2_A, every hit mapped to its owning card by document position, returns exactly ONE 0.075 statement in q27 - the body bullet - and the Numbers to Memorise block carried no 0.075 at all. q27 was therefore WORSE than q11 and q33 were before tranche 1: those stated one of three limits, q27 stated NONE, so a candidate reading it had no bound to integrate to. There is no third site. SECOND, the lower bound the brief required - 'from the angle of equilibrium' - is NOT clause text. The word 'equilibrium' appears nowhere in the Code as adopted; a full-text search of all 31 pages returns zero hits. A 7.1.2 states only the upper bound. The lower bound comes from FIGURE A7 on the same page, read as a rendered page image rather than through the OCR text layer: the shaded region labelled 'residual dynamic stability' begins at the first intersection of heeling arm line AB with the righting arm curve, the vertical the figure annotates 'angle of heel due to grain shift'. The card teaches it and names the figure. Asserting it as A 7.1.2 clause text would have been the same class of error this correction exists to fix.",
+ "authority": {
+  "instrument": "IMO resolution MSC.23(59), Adoption of the International Code for the Safe Carriage of Grain in Bulk, with the Code as adopted in its annex. Held at F:/RulesApp-Local-Input/true-source/03-imo-instruments/Grain-Code/_base-and-amendments/IMO_resolution_MSC.23-59_grain_code_as_adopted.pdf, sha256 5b2107d304bcfd8ad6c5cc080c33a94a9d168b5aaa3895277c61134e6cad8678, registered as SRC-GRAINCODE-MSC23-59. 31 pages. The hash was RE-VERIFIED at the start of this correction, not carried forward from the tranche-1 record.",
+  "access_note": "The PDF is a scan of the 1991 printed resolution with an OCR text layer carrying visible artefacts ('betveen' for 'between', '40 middot' for '40 degrees', 'ahall' for 'shall'). Every clause quoted below was located through the text layer and then read against the page image. Substance is asserted; byte-verbatim OCR strings are not. Figure A7 was read ONLY as a rendered page image, at 220 dpi, because its content is graphical and its OCR is unusable.",
+  "operative_text_A_7_1_1": "p.5: '.1 the angle of heel due to the shift of grain shall not be greater than 12 degrees or in the case of ships constructed on or after 1 January 1994 the angle at which the deck edge is immersed, whichever is the lesser'",
+  "operative_text_A_7_1_2": "p.5: '.2 in the statical stability diagram, the net or residual area between the heeling arm curve and the righting arm curve up to the angle of heel of maximum difference between the ordinates of the two curves, or 40 degrees or the angle of flooding (theta-f), whichever is the least, shall in all conditions of loading be not less than 0.075 metre-radians'",
+  "operative_text_A_7_1_3": "p.5: '.3 the initial metacentric height, after correction for the free surface effects of liquids in tanks, shall be not less than 0.30 m'",
+  "figure_A7_derived_not_quoted": "THE LOWER BOUND IS DERIVED, AND THE RECORD SAYS SO. Figure A7, p.5, read as a page image. The shaded region is labelled 'residual dynamic stability' and begins at the FIRST INTERSECTION of the heeling arm line AB with the righting arm curve, which the figure annotates 'angle of heel due to grain shift'. That intersection is the angle of static equilibrium. The figure's notes define lambda-0 = assumed volumetric heeling moment due to transverse shift / (stowage factor x displacement), lambda-40 = 0.8 x lambda-0, and require the righting arm curve to be derived from cross-curves sufficient in number to define it accurately and to include cross-curves at 12 and 40 degrees. NO CLAUSE OF THE CODE STATES THE LOWER BOUND. The corrected card names figure A7 as its provenance for that limb and does not attribute it to A 7.1.2.",
+  "why_the_old_wording_is_wrong": [
+   "'The area under the GZ curve' names the wrong object. A 7.1.2 measures the area BETWEEN two curves - the residual left after the grain heeling arm is subtracted from the righting arm. 'Area under the GZ curve' is the whole-ship dynamic-stability integral of a different criterion family, and a candidate who computes it answers a different question.",
+   "q27 stated NO upper limit whatsoever. Tranche 1 corrected q11 and q33 from a one-limb form ('up to 40 degrees'); q27 named none of the three, so it is not merely incomplete - it is unbounded, and there is nothing for a candidate to integrate to.",
+   "The Numbers to Memorise 12-degree entry omitted the deck-edge limb A 7.1.1 supplies for ships constructed on or after 1 January 1994. Tranche 1 made exactly this repair on q11's equivalent entry; leaving q27's uncorrected left the same file teaching two different versions of one clause.",
+   "NO NEW LEGAL EFFECT IS ASSERTED. Every figure added is quoted from the instrument with its clause, except the lower bound, which is attributed to figure A7 and labelled as such."
+  ],
+  "known_traps_authoring_defect": "meoclass1/known_traps.md line 1321, inside trap 55 (the MSC.552(108) third grain compartment configuration), stated the criteria that the 2026 amendment did NOT change as '12 degrees maximum heel, 0.075 m-rad residual area to 40 degrees, 0.30 m minimum corrected GM'. The file is excluded from Vercel deployment, so this is NOT a candidate-facing release defect. It is the AUTHORING SOURCE of the short form, sitting in the file authors consult while writing grain cards, and capable of putting the defect into a new card after three have been corrected for it. Corrected to state A 7.1.1 to A 7.1.3 in full, with an appended standing AUTHORING RULE naming the short form, saying why it is wrong twice over, and recording that it is the source of the defect in q11, q27 and q33."
+ },
+ "cards": [
+  {
+   "correction_action_id": "CORR-GPT-T2A-GRAIN-01",
+   "file": "QB2_A.html",
+   "path": "meoclass1/QB2_A.html",
+   "anchor": "q27",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "907305079f536fe59f7e754ee940f06c1156662c33ee5409b9cac2fd77bd5a23",
+   "post_edit_digest": "ba65e8a36236f71fad104f98001f676a5d3402b8618536b0009d213937a36fb8",
+   "supersession_note": "NO SUPERSESSION ANCESTRY, AND THAT IS THE POINT. Every batch and correction manifest on disk was scanned for a card record naming QB2_A.html#q27; there is none. This card has never been owned by a governed record, so the digest resolution here is the ordinary pin == live comparison and no chain machinery engages. CORR-GPT-T1-GRAIN-20260904 SAW this card - it recorded it under propagation.found_and_not_swept as 'incomplete, not wrong ... left alone under the review's no-broad-rewrite instruction and REPORTED' - but recording a card in a propagation note is not owning it, and no digest was ever pinned. Tranche 2A is the authorisation that closes what tranche 1 deliberately left open.",
+   "changed_propositions": [
+    "Risk Mitigations, 'For Grain Shift Risks': 'ensuring the calculated heel angle from an assumed shift stays under 12 degrees, keeping the net residual area under the GZ curve above 0.075 meter-radians, and maintaining an initial GM of at least 0.30 meters' -> the three criteria of A 7.1 stated in full with their clause numbers: A 7.1.1 with the deck-edge limb, A 7.1.2 as the net or residual area BETWEEN the heeling arm curve and the righting arm curve taken FROM the angle of equilibrium (with figure A7 named as the provenance of that limb) up to THE LEAST OF the maximum-difference angle, 40 degrees and the angle of flooding, and A 7.1.3. Followed by an explicit instruction against both rejected forms, saying why the short form makes a candidate integrate too far.",
+    "Numbers to Memorise, 12-degree entry: 'The maximum allowable final calculated angle of heel due to a dynamic grain shift' -> clause-cited to A 7.1.1 and carrying the deck-edge immersion limb for ships constructed on or after 1 January 1994, whichever is the lesser.",
+    "Numbers to Memorise: the A 7.1.2 residual-area entry ADDED - it was absent entirely - with the between-the-curves formulation, the angle of equilibrium as lower bound, all three upper limits as 'the least of', and both rejected forms quoted rather than asserted, and an explicit ban on both 'the area up to 40 degrees' and 'the area under the GZ curve'."
+   ],
+   "deliberately_unchanged": [
+    "The 15-second answer. It states no criterion figure at all ('maintaining robust stability margins'), so it carried nothing to correct. Recorded because the brief required proof that the fix does not live only in one deep block, and the way to prove that is to say which layers carried the claim and which did not.",
+    "The 60-second answer, which says 'keeping the ship's initial GM well above statutory limits' and states no criterion figure.",
+    "The three-mechanism comparison table, the failure-matrix diagram, the Key Form block, the reg-box, the CE Oral Tip, the Trap Questions, the Common CE Failures block, the Casualty Link and the Examiner Chain - none of which state the criterion.",
+    "The On My Vessel block, which claims dry bulk charters need approved IMSBC and Grain loading-computer modules. Not the criterion, and not within the scope authorised for q27. REPORTED to GPT, not swept.",
+    "q26, which Pass 2 independently found clean and which is byte-identical before and after at digest adfa6bbde6599be1dcfccef569cb4ef3c8c3ff982546697f41614ef8507fa567. Its only hit in the criterion vocabulary sweep is a Timber Code CE tip about the righting lever curve at large angles - a correct statement about a different instrument."
+   ]
+  }
+ ],
+ "propagation": {
+  "scope_pass": "Nine-pattern reproducible sweep over meoclass1/QB2_A.html, every occurrence mapped to its owning card by document position rather than by proximity: '0.075', '40 degrees' in all three encodings (&deg;, literal, the word), 'residual area', 'GZ', 'righting arm', 'heeling arm', 'flooding angle' / 'angle of flooding', 'maximum difference', 'equilibrium'. Result: q11 (5 sites, tranche-1 governed, digest unmoved), q33 (2 sites, tranche-1 governed, digest unmoved), q27 (1 criterion site plus the Numbers block - both corrected), and unrelated hits on q13, q20 and q26.",
+  "encoding_note": "THE FIRST EDIT ATTEMPT FAILED CLOSED, AND IT MATTERED. The replacement strings were written with '&deg;' while q27's published bytes carry the literal degree character. Both render identically, so a reader cannot tell them apart, and a sweep written against one encoding is blind to the other - the same defect class as the 'h&m' / 'h&amp;m' guard blindness already on record. It failed with occurrences=0 and refused to write, which is the correct direction to fail. The sweep patterns above match all three encodings for exactly this reason.",
+  "found_and_not_swept": [
+   "QB2_A#q11's body heading still reads 'Net Residual Area on GZ Curve (A 7.1.2)' while the text beneath it is fully correct and says 'between the heeling arm curve and the righting arm curve'. It is the rejected terminology surviving as a label on an otherwise-corrected proposition. q11 is governed by CORR-GPT-T1-GRAIN-20260904 and is not one of Tranche 2A's four authorised items. REPORTED to GPT.",
+   "Neither q11 nor q33 teaches the LOWER bound of the residual area. q27 now does, so the corpus is inconsistent in the opposite direction until GPT authorises. This is a direct and foreseeable consequence of a gate that applies to one card, and is recorded rather than silently equalised. REPORTED to GPT."
+  ]
+ },
+ "invariants": [
+  "The three criteria themselves are unmoved: 12 degrees, 0.075 metre-radians, 0.30 m. Only their statement changed.",
+  "q26 is byte-identical, verified by digest before and after.",
+  "q11 and q33 are byte-identical, verified against the tranche-1 pins 7f09cacd... and 5e18d8b2..., so CORR-GPT-T1-GRAIN-20260904's own guard is untouched by this correction.",
+  "Every MSC.552(108) proposition, in the cards and in known_traps trap 55, is untouched: the 2026 amendment did not change the A 7 criteria and this correction does not say it did.",
+  "No unrelated historical trap in known_traps.md was rewritten. Only the 'What did NOT change' bullet of trap 55 changed, and the authoring rule is appended as a new bullet in the same trap.",
+  "No new card, no new 15-second layer, no examiner attribution altered, no syllabus mapping changed, no past paper and no written bank touched.",
+  "Corpus totals unmoved: 761 canonical questions across 86 question-bearing files.",
+  "No IMSBC amendment 08-25 fact is introduced anywhere by this record."
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/known_traps.md",
+   "why_no_digest": "An authoring file no release guard pins. A digest here would expire on the next unrelated edit to the file, so the correction is asserted on its CONTENT by validate_correction_gptt2a.py instead."
+  }
+ ],
+ "known_traps_entries": [
+  55
+ ],
+ "content_index_effect": "None. The card keeps its id, anchor and question text, so meoclass1/qb_content_index.json regenerates BYTE-IDENTICALLY from the live HTML: 761 canonical questions across 86 question-bearing files, verified by running the generator and finding no diff. NO recently_updated CORRECTION-LOG ENTRY WAS ADDED, AND THAT IS A DECISION, NOT AN OMISSION. Tranche 1 added one; this tranche did not, because a log entry is candidate-facing published editorial content and the brief authorised no deploy, no Excel distribution and no hub-date change - meoclass1/index.html still reads 'Last Updated: 2 Sep 2026'. The entry is therefore OWED and is referred to GPT with the rest of the tranche: it should be written in the same act that publishes these corrections, so the log does not announce a change candidates cannot yet see.",
+ "note": "SURGICAL. One card, one authoring file, one instrument, read from the page and from the figure. The known_traps propagation is recorded here as an artefact plus a trap entry rather than as a separate correction record, because the schema requires cards_present and exactly_one_primary_correction and known_traps.md has no q-card - making it a correction record would mean pretending it is one, which is what the brief forbade. It carries NO digest, by the architecture's own rule that a pin on an unguarded file expires on the next unrelated edit to it; it is asserted instead by this record's content validator. No Excel distribution, no full release suite, no push and no deploy. meoclass1/index.html still reads 'Last Updated: 2 Sep 2026' and was DELIBERATELY not patched, on the brief's own instruction."
+}

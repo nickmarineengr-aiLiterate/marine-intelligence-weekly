@@ -1,0 +1,72 @@
+{
+ "correction_id": "CORR-GPT-T2A-QB5CB-20260905",
+ "title": "The casualty-investigation reg-box on QB5_C_B#q5 cited STCW Table A-III/2, a competence standard, while ISM Code section 9 - which the card teaches in four separate layers - was absent from it",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "gpt_content_review",
+ "date": "2026-09-05",
+ "baseline_commit": "419f3c6",
+ "governing_commits": [
+  "77fc842",
+  "44e7d2c"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_HIGHRISK_TRANCHE2A_20260905.md",
+ "candidate_claim": "Founder/GPT independent review of the Tranche 2 adjudication packet. STCW Table A-III/2 remains in the casualty-investigation REG-BOX on QB5_C_B#q5. It is the management-level competence specification for Chief Engineer and Second Engineer officers on ships of 3,000 kW propulsion power or more; it is not the governing casualty-investigation regime. The card itself teaches ISM section 9 repeatedly, but section 9 is absent from the REG-BOX. Remove the A-III/2 row and put ISM Code section 9 in that slot, without implying that section 9 is the flag-State statutory marine-safety-investigation regime.",
+ "candidate_verdict": "UPHELD. The row's own description had already been narrowed by CORR-GPT-T1-QB5CB-20260904 to a self-qualifying form ending 'It is a competence standard, not an investigation provision', and that record listed the row's survival in its own report-only list. A row whose description has to explain that it does not govern the question is a row that does not belong in that box; the tranche-1 narrowing made the defect legible rather than fixing it. Meanwhile ISM section 9 is load-bearing in this card in FOUR layers - the 15-second answer, the 60-second answer, the Numbers/Regs block and the CE Oral Tip - and was absent from the reg-box entirely. The brief's caution against adding a regulation merely to preserve four rows does not bite: section 9 is already the proposition the card teaches, so the replacement adds nothing the answer does not already rest on.",
+ "authority": {
+  "stcw_a_iii_2": "STCW Code, Table A-III/2 - Specification of minimum standard of competence for chief engineer officers and second engineer officers on ships powered by main propulsion machinery of 3,000 kW propulsion power or more. It is a competence specification at management level. It contains no provision on the conduct, reporting or analysis of a marine casualty, and confers no investigatory function on anyone.",
+  "ism_section_9": "ISM Code section 9, Reports and analysis of non-conformities, accidents and hazardous occurrences. 9.1 requires the safety management system to include procedures ensuring that non-conformities, accidents and hazardous situations are reported to the Company, investigated and analysed with the objective of improving safety and pollution prevention. 9.2 requires the Company to establish procedures for the implementation of corrective action, including measures intended to prevent recurrence. This is the COMPANY limb, discharged through the Master and the Designated Person Ashore.",
+  "the_distinction_the_box_must_carry": "TWO INVESTIGATIONS, TWO INSTRUMENTS, AND THEY MUST NOT MERGE. The flag State's statutory MARINE SAFETY INVESTIGATION is conducted by that State's marine safety investigation Authority under the Casualty Investigation Code - in full, the Code of the International Standards and Recommended Practices for a Safety Investigation into a Marine Casualty or Marine Incident, adopted by resolution MSC.255(84). The COMPANY's own investigation and learning runs under ISM section 9. The corrected row states the company limb and then says in terms that it is NOT the flag-State investigation, naming MSC.255(84) and the row that carries it. No wording anywhere in the box implies ISM section 9 governs the flag-State marine safety investigation.",
+  "why_this_is_a_replacement_and_not_an_addition": "The brief warned against adding a regulation simply to preserve four rows. That warning is honoured by the fact that the replacement is justified independently: section 9 is cited by the card in four layers and was missing from the only block that names the card's governing instruments. The box would have been wrong to omit it even if A-III/2 had never been there."
+ },
+ "cards": [
+  {
+   "correction_action_id": "CORR-GPT-T2A-QB5CB-01",
+   "file": "QB5_C_B.html",
+   "path": "meoclass1/QB5_C_B.html",
+   "anchor": "q5",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "7480390d370a011b1fc90a0ce6621c8cae1547a30f7e3c2d51a427b7164c8f14",
+   "post_edit_digest": "469267fbbc049009d5c5bec904b87ec6f67eb36bd73ffd831515bea865efc4ed",
+   "supersedes": {
+    "manifest": "correction_corr_gpt_t1_qb5cb_20260904_manifest.json",
+    "action_id": "CORR-GPT-T1-QB5CB-01",
+    "post_edit_digest": "7480390d370a011b1fc90a0ce6621c8cae1547a30f7e3c2d51a427b7164c8f14"
+   },
+   "supersession_note": "Fourth link in the chain CORR-CICTERM-01 -> CORR-MSACT2B-C-03 -> CORR-GPT-T1-QB5CB-01 -> this record. Every predecessor pin stands unaltered and each predecessor's claim becomes strictly stronger: not 'my state is live' but 'my state is the ancestor of what is live'. One digest convention throughout the chain - full sha256 over the balanced card block, LF-normalised - verified by re-deriving the tranche-1 pin independently before this record was written.",
+   "changed_propositions": [
+    "REG-BOX row 4: 'STCW Code, Table A-III/2 - Minimum standard of competence for chief engineer officers - the competence behind the technical account the investigation relies on. It is a competence standard, not an investigation provision.' -> 'ISM Code section 9 - Reports and analysis of non-conformities, accidents and hazardous occurrences - the Company's SMS procedures for reporting, investigating and analysing them, with corrective action under 9.2. This is the company SMS investigation and learning limb, run through the Master and the Designated Person Ashore. It is NOT the flag State's statutory marine safety investigation, which is conducted by that State's marine safety investigation Authority under the Casualty Investigation Code (MSC.255(84)) in the first row above.'"
+   ],
+   "deliberately_unchanged": [
+    "The Casualty Investigation Code / MSC.255(84) row, which is BYTE-UNCHANGED and remains the statutory marine-safety-investigation reference. The flag-State versus company-SMS distinction the brief required is carried inside the NEW row, contrasting against this one, rather than by editing a row that is already correct.",
+    "The MLC 2006 Regulation 4.3 row and the SOLAS chapter XI-2 / ISPS row.",
+    "The 15-second answer, the 60-second answer, the answer body, the Trap Warning, the CE Relevance block, the Trap Questions, the Common CE Failures block, the Numbers / Regs block, the Casualty Link, the Examiner Chain, the On My Vessel block and the CE Oral Tip. All of these already teach ISM section 9 and the flag-State / company distinction correctly; the defect was confined to the reg-box, and only the reg-box changed."
+   ]
+  }
+ ],
+ "propagation": {
+  "scope_pass": "The defect is a single reg-box row on a single card. Every other reg-item in this box was read and each names an instrument that genuinely bears on the question. No other card in the corpus carries STCW Table A-III/2 in a casualty-investigation reference block.",
+  "found_and_not_swept": [
+   "CORR-GPT-T1-QB5CB-20260904's report-only list also records seven other cards in QB5_C_B carrying an empty declared 15-second block. That is one of the deferred Tranche-2 findings (the 17 empty declared 15-second layers) and is expressly NOT authorised by Tranche 2A. Untouched."
+  ]
+ },
+ "invariants": [
+  "The reg-box still has four rows; one row was replaced, none added or removed on net.",
+  "MSC.255(84) remains present and byte-unchanged as the statutory casualty-investigation reference.",
+  "STCW Table A-III/2 is gone from this card entirely - it appears nowhere else in QB5_C_B#q5.",
+  "No candidate-facing claim about who conducts a marine safety investigation changed: the card already said the flag State's Authority does, in three layers, and still does.",
+  "No other card in QB5_C_B was touched. No new card, no new 15-second layer, no examiner attribution altered.",
+  "Corpus totals unmoved: 761 canonical questions across 86 question-bearing files."
+ ],
+ "content_index_effect": "None. The card keeps its id, anchor and question text, so meoclass1/qb_content_index.json regenerates BYTE-IDENTICALLY from the live HTML: 761 canonical questions across 86 question-bearing files, verified by running the generator and finding no diff. NO recently_updated CORRECTION-LOG ENTRY WAS ADDED, AND THAT IS A DECISION, NOT AN OMISSION. Tranche 1 added one; this tranche did not, because a log entry is candidate-facing published editorial content and the brief authorised no deploy, no Excel distribution and no hub-date change - meoclass1/index.html still reads 'Last Updated: 2 Sep 2026'. The entry is therefore OWED and is referred to GPT with the rest of the tranche: it should be written in the same act that publishes these corrections, so the log does not announce a change candidates cannot yet see.",
+ "note": "SURGICAL. One reg-box row on one card. No Excel distribution, no full release suite, no push and no deploy. meoclass1/index.html still reads 'Last Updated: 2 Sep 2026' and was DELIBERATELY not patched, on the brief's own instruction.",
+ "known_traps_entries": [
+  74
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/known_traps.md",
+   "why_no_digest": "The authoring trap this correction leaves behind. No release guard pins this file, and a digest here would expire on the next unrelated edit to it, so its content is asserted by validate_correction_gptt2a.py instead."
+  }
+ ]
+}

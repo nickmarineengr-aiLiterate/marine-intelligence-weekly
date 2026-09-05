@@ -1,0 +1,83 @@
+{
+ "correction_id": "CORR-GPT-T2A-IMSBC-20260905",
+ "title": "QB2_B#q15 drew the IMSBC / IMDG line correctly in its own trap question and then contradicted it in On My Vessel by placing containerised cargo and flexitanks inside IMSBC scope",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "gpt_content_review",
+ "date": "2026-09-05",
+ "baseline_commit": "419f3c6",
+ "governing_commits": [
+  "77fc842",
+  "44e7d2c"
+ ],
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/GPT_REVIEW_HIGHRISK_TRANCHE2A_20260905.md",
+ "candidate_claim": "Founder/GPT independent review of the Tranche 2 adjudication packet. QB2_B#q15's card correctly distinguishes IMSBC from IMDG in a Trap Question, but the On My Vessel block contradicts that and places containerised cargo and flexitanks inside IMSBC scope. The IMSBC Code governs solid bulk cargoes carried in bulk. A freight container or flexitank example must not be taught as an IMSBC operation merely because it is cargo. Correct ONLY the contradictory On My Vessel block and direct duplicate copies of that exact scope proposition; do not rewrite the main answer if it is already correct.",
+ "candidate_verdict": "UPHELD, AND SETTLED BY A DEFINITION RATHER THAN BY A PROHIBITION - which is what makes the gate a fact rather than a judgement. SOLAS VI/1-1.2 defines a solid bulk cargo as one 'loaded directly into the cargo spaces of a ship without any intermediate form of containment', and the IMSBC Code's own application clause 1.4.1 anchors the Code to that definition. TWO INDEPENDENT LIMBS each exclude the published claim, and either alone is sufficient: a freight container IS an intermediate form of containment, so containerised cargo falls outside the definition however bulk-like the commodity looks; and a flexitank is LIQUID, so it also fails 'other than liquid or gas'. A flexitank is therefore excluded twice over - neither solid nor uncontained. The card's own Trap Question was already right and is preserved verbatim; the main answer was read in full and needed nothing.",
+ "authority": {
+  "instrument": "IMO resolution MSC.268(85), Adoption of the International Maritime Solid Bulk Cargoes (IMSBC) Code, adopted 4 December 2008, with the Code in its annex. Held at F:/RulesApp-Local-Input/true-source/03-imo-instruments/IMSBC-Code/_base-and-amendments/MSC.268(85).pdf, sha256 690a9dae8ffce1b00d695a4e839d60c3e1bd7c1d10bab3d33f96de85a116d9a5, 372 pages. The resolution reproduces the governing SOLAS regulations, which is where the operative definition below was read.",
+  "operative_text_SOLAS_VI_1_1_2": "p.9: '2 Solid bulk cargo means any cargo, other than liquid or gas, consisting of a combination of particles, granules or any larger pieces of material generally uniform in composition, which is loaded directly into the cargo spaces of a ship without any intermediate form of containment.'",
+  "operative_text_IMSBC_1_4_1": "p.7: '1.4.1 The provisions contained in this Code apply to all ships to which the SOLAS Convention, as amended, applies and that are carrying solid bulk cargoes as defined in regulation 1-1 of part A of chapter VI of the Convention.'",
+  "operative_text_SOLAS_VI_1_2_1": "p.9: 'Regulation 1-2 Requirements for the carriage of solid bulk cargoes other than grain. 1 The carriage of solid bulk cargoes other than grain shall be in compliance with the relevant provisions of the IMSBC Code.'",
+  "why_the_old_wording_is_wrong": [
+   "A freight container is an intermediate form of containment. Cargo carried in boxes is therefore outside the SOLAS VI/1-1.2 definition and outside the Code, however bulk-like the commodity is. 'Containerized bulk shipments' is not an IMSBC category.",
+   "A flexitank is liquid cargo carried inside a freight container. It fails the definition on BOTH limbs - it is not solid, and it is not uncontained - so teaching it as an IMSBC operation is wrong twice over.",
+   "The error is not merely a mis-citation: it contradicts the card's own Trap Question two blocks earlier, which correctly says IMDG covers packaged form including containers while IMSBC governs loose un-packaged material loaded directly into bulk holds. A candidate reading the card in order is taught the rule and then shown it broken."
+  ],
+  "what_actually_governs_the_ship": "The replacement asserts only regimes that genuinely apply to a cellular containership and invents no Maersk procedure: the IMDG Code for dangerous goods in packaged form including in containers; the applicable container / CTU framework for packing and securing practice; and the approved Cargo Securing Manual. It closes by saying the answer comes from the Code and the ship types it governs rather than from bulk-carrier practice the writer does not have - which is true, and is the same truthful direction CORR-GPT-T1-GRAIN-20260904 took on q11's On My Vessel block.",
+  "source_currentness": "THE IMSBC CODE IS AN EVOLVING INSTRUMENT AND THIS RECORD DOES NOT PRETEND OTHERWISE. MSC.268(85) is the base Code; the corpus holds amendments through MSC.500(105). Amendment 08-25 (MSC.575(110)) is NOT held, and its status - voluntary application from 1 January 2026, envisaged entry into force 1 January 2027 - is already recorded in known_traps.md trap 55. IT IS DELIBERATELY NOT INTRODUCED HERE. The proposition written into the card is the base-Code scope definition at SOLAS VI/1-1.2, which no amendment in the held chain alters and which is not amendment-dependent. Nothing in this correction teaches a 2027 amendment as mandatory in September 2026, and nothing relies on amendment-specific text."
+ },
+ "cards": [
+  {
+   "correction_action_id": "CORR-GPT-T2A-IMSBC-01",
+   "file": "QB2_B.html",
+   "path": "meoclass1/QB2_B.html",
+   "anchor": "q15",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "e1db7e32c009eb8d830d0c4e57c9a3586a645aa11394d9be22ed5c47414f43ba",
+   "post_edit_digest": "9051ccaa9194e5b74bd9af04cc7d06b205fbccceb9fe4e8a0e2e8451a44d4cd3",
+   "supersedes": {
+    "manifest": "batch_h3b1_manifest.json",
+    "action_id": "H3B1-006",
+    "post_edit_digest": "e1db7e32c009eb8d830d0c4e57c9a3586a645aa11394d9be22ed5c47414f43ba"
+   },
+   "supersession_note": "The predecessor is a BATCH record, not a correction record - H3B1-006, an EXPANSION that rewrote this card's angle-of-repose entry. The chain contract is indifferent to the family: what it requires is that the predecessor still pins what the successor says it pins, and that the successor starts where the predecessor stopped. Both hold. H3B1 stores a full sha256 over the balanced card block, the same convention this record uses, so the chain stays in one convention as required; that was checked by re-deriving H3B1's stored post digest from the live page before this record was written, not assumed from the digest's length.",
+   "changed_propositions": [
+    "On My Vessel: 'Applied in Maersk container routing when handling containerized bulk shipments, ensuring flexitanks or solid bulk liners inside standard boxes comply with equivalent weight and distribution limits.' -> a block that states the SOLAS VI/1-1.2 definition, applies both exclusion limbs to a freight container and to a flexitank by name, says the IMSBC Code is not the day-to-day cargo regime of a cellular containership, and names the regimes that do govern it: the IMDG Code for packaged dangerous goods including in containers, the container / CTU framework, and the approved Cargo Securing Manual."
+   ],
+   "deliberately_unchanged": [
+    "The Trap Question 'What is the difference between a Group B cargo and a standard IMDG packaged dangerous good?' and its answer, which draw the IMSBC / IMDG line CORRECTLY and are preserved verbatim. This is the proposition the On My Vessel block contradicted, and it is the reason the correction is a contradiction repair rather than a teaching change.",
+    "The whole main answer - scope and regulatory foundations, the Group A / B / C taxonomy, the schedule format, the Chief Engineer responsibilities - which was read in full and is correct. The brief directed that it not be rewritten if already correct; it is, and it was not.",
+    "The Key Numbers / Regs block, including the long angle-of-repose entry governed by H3B1-006, and the reg-box.",
+    "The 15-second and 60-second answers. They carry a SEPARATE defect - both attribute the whole Code's mandatory basis to SOLAS chapter VII alone - which is reported under section 5 of the authorisation record and expressly NOT implemented, because the brief authorised that limb only if it were a direct consequence of this scope correction, and it is not."
+   ]
+  }
+ ],
+ "propagation": {
+  "scope_pass": "Corpus-wide sweep across meoclass1/ and SQ/ for 'flexitank' in any case, and for containerised-cargo-under-IMSBC co-locations in every file that mentions IMSBC. The scope proposition corrected here exists at exactly ONE site in the corpus. There are no direct duplicate copies to sweep.",
+  "found_and_not_swept": [
+   "meoclass1/QB1_F.html carries four flexitank references, all under CSC Annex II structural controls and container stack loading. They are correctly framed under the container framework and never under IMSBC. Not the same proposition; untouched.",
+   "meoclass1/QB2_A.html#q27's On My Vessel block says specialized dry bulk charters require the loading computer to carry approved IMSBC and Grain modules. That concerns dry bulk charters rather than containerised cargo, so it is not the corrected proposition, and it is outside the criterion scope authorised for q27. Untouched and REPORTED to GPT.",
+   "meoclass1/oralnotes/miw-notes-mgmt-p14.html says 'Container tonnage does not carry IMSBC bulk cargoes'. Already correct and independently consistent with this correction - a second author reached the same conclusion."
+  ]
+ },
+ "invariants": [
+  "The card's already-correct IMSBC / IMDG distinction in the Trap Question is preserved, byte for byte.",
+  "The main answer is unchanged.",
+  "No SOLAS chapter attribution anywhere in the card changed. The VI / VII question is reported, not implemented.",
+  "No IMSBC amendment 08-25 fact is introduced. Nothing teaches a 2027 amendment as mandatory in September 2026.",
+  "No Maersk-specific procedure is invented; the block asserts only regimes that apply to the ship type.",
+  "No new card, no new 15-second layer, no examiner attribution altered, no syllabus mapping changed.",
+  "Corpus totals unmoved: 761 canonical questions across 86 question-bearing files."
+ ],
+ "content_index_effect": "None. The card keeps its id, anchor and question text, so meoclass1/qb_content_index.json regenerates BYTE-IDENTICALLY from the live HTML: 761 canonical questions across 86 question-bearing files, verified by running the generator and finding no diff. NO recently_updated CORRECTION-LOG ENTRY WAS ADDED, AND THAT IS A DECISION, NOT AN OMISSION. Tranche 1 added one; this tranche did not, because a log entry is candidate-facing published editorial content and the brief authorised no deploy, no Excel distribution and no hub-date change - meoclass1/index.html still reads 'Last Updated: 2 Sep 2026'. The entry is therefore OWED and is referred to GPT with the rest of the tranche: it should be written in the same act that publishes these corrections, so the log does not announce a change candidates cannot yet see.",
+ "note": "SURGICAL. One On My Vessel block on one card. No Excel distribution, no full release suite, no push and no deploy. meoclass1/index.html still reads 'Last Updated: 2 Sep 2026' and was DELIBERATELY not patched, on the brief's own instruction.",
+ "known_traps_entries": [
+  75
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/known_traps.md",
+   "why_no_digest": "The authoring trap this correction leaves behind. No release guard pins this file, and a digest here would expire on the next unrelated edit to it, so its content is asserted by validate_correction_gptt2a.py instead."
+  }
+ ]
+}
