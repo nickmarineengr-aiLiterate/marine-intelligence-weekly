@@ -1047,8 +1047,24 @@ def control_review_priority_semantics():
     pool = doc["canonical"]
     canon = RP.canonical_json(pool)
 
-    ok("band.live_top_card_is_r1",
-       pool["cards"][0]["review_priority"] == "R1")
+    # The top card carries the band ITS OWN SCORE maps to, and bands never
+    # increase down the queue. This asserted `== "R1"`, which is a claim about
+    # the CORPUS rather than the code: accepting every card scoring 70 or more
+    # legitimately empties R1, and clearing the top of a review queue is what
+    # this tool exists to do. Same guard-expiry class as the old ranking pin -
+    # found the day the first accept batch landed, which is precisely when a
+    # corpus-coupled guard fires.
+    ok("band.live_pool_has_cards_to_band", pool["cards"] != [])
+    if pool["cards"]:
+        top = pool["cards"][0]
+        ok("band.live_top_card_band_matches_its_score",
+           top["review_priority"] == RP.review_priority(top["risk_score"]),
+           "the queue's first card is not banded by its own score")
+        order = [band for _, band in RP.REVIEW_PRIORITY_BANDS]
+        ranks = [order.index(c["review_priority"]) for c in pool["cards"]]
+        ok("band.live_bands_never_increase_down_the_queue",
+           ranks == sorted(ranks),
+           "cards are ordered by score, so their bands must be monotonic")
 
     # C. no queue band is spelled with a P anywhere in the generated payload.
     # Scoped to the FIELD, not to the whole document: a residual finding may
