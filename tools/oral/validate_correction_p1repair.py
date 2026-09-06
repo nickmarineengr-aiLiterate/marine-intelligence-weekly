@@ -259,10 +259,23 @@ def main() -> int:
            tspan is not None
            and "BMP5 Counter-Piracy Architecture" in t10[tspan[0]:tspan[1]],
            "topic-46 is the SUA/BMP5 topic, located by structural id")
+    # SAME TOPIC **and** the direction word agrees with the actual order. The
+    # previous version tested for the literal phrase "…note above", so it was
+    # green while the banner rendered BELOW that sentence - a check that names
+    # locality and is structurally incapable of seeing the one thing about
+    # locality that was wrong.
+    xref = re.search(r"see the currentness note (above|below)",
+                     t10[tspan[0]:tspan[1]] if tspan else "")
+    direction_ok = False
+    if tspan and xref and in_topic:
+        xpos = tspan[0] + xref.start()
+        bpos = in_topic[0].start()
+        direction_ok = ((xref.group(1) == "below" and bpos > xpos)
+                        or (xref.group(1) == "above" and bpos < xpos))
     report("the_note_that_refers_to_the_banner_is_in_the_same_topic",
-           tspan is not None
-           and "see the currentness note above" in t10[tspan[0]:tspan[1]],
-           "the cross-reference and its target are in one block")
+           tspan is not None and xref is not None and direction_ok,
+           "cross-reference and banner in one block, and '%s' matches the "
+           "rendered order" % (xref.group(1) if xref else "-"))
 
     # ================= the newly-visible surface, repaired =================
     p10 = QB_ROOT / "oralnotes/miw-notes-mgmt-p10.html"
