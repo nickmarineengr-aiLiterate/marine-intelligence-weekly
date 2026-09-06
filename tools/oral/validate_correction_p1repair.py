@@ -50,6 +50,11 @@ from validate_batch_h_series import card_digests, _balanced_end   # noqa: E402
 from oral_supersession import resolve_authorised_card_state       # noqa: E402
 from census_known_defect_families import (                        # noqa: E402
     corpus_files, rel_of, surface_family)
+#: The semantic detectors, imported - never re-implemented per gate. Three
+#: escapes in a row came from a guard that knew a spelling or an HTML shape
+#: instead of a proposition; one implementation is what stops the fourth.
+from oral_currentness import (                                    # noqa: E402
+    firemain_scope_defects, bmp5_current_teaching, to_mpa)
 
 CORRECTION_ID = "CORR-P1REPAIR-20260906"
 MANIFEST = HERE / "correction_corr_p1repair_20260906_manifest.json"
@@ -106,6 +111,35 @@ def without_provenance(text: str) -> str:
     text = re.sub(r'<span class="correction-link">.*?</span>', " ", text,
                   flags=re.S)
     return text
+
+
+BANNER_RX = re.compile(r'<div class="notes-callout"[^>]*>.*?</div>', re.S)
+
+
+def topic_span(text: str, topic_id: str):
+    """(start, end) of a notes topic block, by STRUCTURAL ID.
+
+    Never by a text needle. "First occurrence of the anchor in the file" is
+    exactly what put the currentness banner four topics away from the material
+    it warns about, in a topic that never mentions BMP5.
+    """
+    i = text.find('<div class="topic-block" id="%s"' % topic_id)
+    if i < 0:
+        return None
+    depth, j, n = 0, i, len(text)
+    while j < n:
+        if text.startswith("<div", j):
+            depth += 1
+            j += 4
+            continue
+        if text.startswith("</div>", j):
+            depth -= 1
+            j += 6
+            if depth == 0:
+                break
+            continue
+        j += 1
+    return (i, j)
 
 
 def card_block(text: str, anchor: str) -> str:
@@ -166,39 +200,69 @@ def main() -> int:
         t = teaching_text(p)
         if BAR_MINIMUM.search(flat(t)):
             bar_sites.append(rel_of(p))
-        # A two-limb rule stated with ONE limb is not vague, it is wrong for
-        # every ship on the other side of the threshold. The bar check above
-        # cannot see this: 0.27 N/mm2 is the CORRECT figure, and the defect is
-        # the absence of its partner. Element-scoped, so a 0.25 elsewhere on
-        # the page cannot rescue a single-limb bullet.
-        for el in re.finditer(r"<li>.*?</li>|<p>.*?</p>", t, re.S):
-            txt = flat(el.group(0))
-            if "0.27 N/mm" not in txt:
-                continue
-            if not re.search(r"hydrant|fire\s*main", txt, re.I):
-                continue
-            if "0.25 N/mm" not in txt or "6,000 GT" not in txt:
-                single_limb.append("%s :: %s" % (rel_of(p), txt[:70]))
+        # SEMANTIC, unit-normalised, shape-general. The previous versions of
+        # these two checks were defeated by a unit (`0.27 MPa` vs the literal
+        # `0.27 N/mm`), by an element type (`<div>` vs `<li>/<p>`) and by an
+        # HTML class name (`reg-code` only). Both now resolve through
+        # `oral_currentness`, which normalises MPa / N/mm2 / bar / kPa to one
+        # scale and takes the smallest enclosing element of ANY candidate-facing
+        # tag that actually states a claim.
+        raw = read_text(p)
+        for h in firemain_scope_defects(raw):
+            single_limb.append("%s:%s :: missing %s :: %s"
+                               % (rel_of(p), h["line"], h["missing"],
+                                  h["text"][:60]))
+        for h in bmp5_current_teaching(raw):
+            bmp_sites.append("%s:%s :: %s" % (rel_of(p), h["line"],
+                                              h["text"][:60]))
         if fam in ("qcard", "cheatsheet", "oralnotes"):
             if ORPHAN_RUN.search(t):
                 orphan_sites.append(rel_of(p))
-        # BMP5 taught in a reg-code SLOT is the shape corrected as A-6/A-7.
-        for m in re.finditer(r'<span class="reg-code">([^<]*)</span>', t):
-            code = m.group(1)
-            # A slot that labels itself superseded is the QB4_H#q11 predecessor
-            # record, kept on purpose because examiners still ask for BMP5 by
-            # name. The defect is a slot that offers BMP5 as CURRENT.
-            if re.search(r"BMP\s?5\b", code) and "supersed" not in code.lower():
-                bmp_sites.append("%s :: %s" % (rel_of(p), code[:40]))
 
     report("no_bar_hydrant_minimum_anywhere_in_the_corpus", not bar_sites,
            str(bar_sites or "none"))
-    report("no_single_limb_hydrant_figure_anywhere", not single_limb,
+    report("no_incomplete_scope_firemain_claim_anywhere", not single_limb,
            str(single_limb or "none"))
-    report("no_reg_code_slot_names_BMP5_as_current", not bmp_sites,
+    report("no_surface_teaches_BMP5_as_current", not bmp_sites,
            str(bmp_sites or "none"))
     report("no_orphaned_markdown_bullet_run_anywhere", not orphan_sites,
            str(orphan_sites or "none"))
+
+    # ================= unit equivalence, for DETECTION only ===============
+    # A detector-normalisation rule, never an editorial one: a card may print
+    # MPa or N/mm2 as it likes, and the guard must not care which.
+    equivalences = [(("0.27", "MPa"), ("0.27", "N/mm2"), ("2.7", "bar"),
+                     ("270", "kPa"), 0.27),
+                    (("0.25", "MPa"), ("0.25", "N/mm2"), ("2.5", "bar"),
+                     ("250", "kPa"), 0.25)]
+    ok = all(all(to_mpa(v, u) == expect for v, u in forms)
+             for *forms, expect in equivalences)
+    report("pressure_units_normalise_to_one_scale", ok,
+           "0.27 MPa = 0.27 N/mm2 = 2.7 bar = 270 kPa; 0.25 likewise")
+    report("unit_normalisation_is_detection_only",
+           "0.27 MPa" in read_text(QB_ROOT / "QB2_F.html"),
+           "QB2_F still prints MPa - the guard changed, not the card")
+
+    # ================= P1-B : the banner is TOPIC-LOCAL ===================
+    p10 = QB_ROOT / "oralnotes/miw-notes-mgmt-p10.html"
+    t10 = read_text(p10)
+    tspan = topic_span(t10, "topic-46")
+    banners = [m for m in BANNER_RX.finditer(t10)]
+    in_topic = [m for m in banners
+                if tspan and tspan[0] <= m.start() < tspan[1]]
+    report("banner_exists_exactly_once_in_the_intended_topic",
+           len(in_topic) == 1, "topic-46 carries %d banner(s)" % len(in_topic))
+    report("banner_exists_in_no_other_topic",
+           len(banners) == len(in_topic),
+           "%d banner(s) outside topic-46" % (len(banners) - len(in_topic)))
+    report("intended_topic_is_the_BMP_topic",
+           tspan is not None
+           and "BMP5 Counter-Piracy Architecture" in t10[tspan[0]:tspan[1]],
+           "topic-46 is the SUA/BMP5 topic, located by structural id")
+    report("the_note_that_refers_to_the_banner_is_in_the_same_topic",
+           tspan is not None
+           and "see the currentness note above" in t10[tspan[0]:tspan[1]],
+           "the cross-reference and its target are in one block")
 
     # ================= the newly-visible surface, repaired =================
     p10 = QB_ROOT / "oralnotes/miw-notes-mgmt-p10.html"
@@ -229,9 +293,15 @@ def main() -> int:
     report("record_states_the_surface_policy",
            "sitting-anchored" in man["propagation"]["surface_policy"],
            "policy is in the record, not only in the code")
+    # All THREE numbers asserted. The previous version checked 128 and 224 and
+    # printed the 96 without testing it, so a record claiming
+    # `files_previously_invisible: 1` would still have passed - the number that
+    # measures the defect was the one nothing read.
     report("record_declares_the_scope_numbers",
            man["invariants"]["corpus_files_enumerated_pass1"] == 128
-           and man["invariants"]["corpus_files_enumerated_now"] == len(files),
+           and man["invariants"]["corpus_files_enumerated_now"] == len(files)
+           and man["invariants"]["files_previously_invisible"]
+           == len(files) - 128,
            "128 -> %d, %d previously invisible"
            % (len(files), man["invariants"]["files_previously_invisible"]))
     report("record_does_not_rewrite_pass1_history",

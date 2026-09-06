@@ -2752,3 +2752,74 @@ found four checks that passed while asserting nothing:
 > **Rule.** Every check must be able to FAIL on some reachable state, and the mutation that reaches
 > it must be named. A green gate written beside the edit it guards is evidence of nothing until an
 > independent reader has tried to break it.
+
+### 99. Three escapes, one defect: a guard that knows a spelling, a shape or a position
+
+Three independent reviews in a row found the same underlying failure, each time wearing different
+clothes:
+
+| escape | the guard recognised | what defeated it |
+|---|---|---|
+| Pass 1 | the string `"4.0 bar"` | **case** — the corpus carried `4.0 Bar` |
+| Pass-1 repair | the string `"0.27 N/mm"`, in `<li>`/`<p>` | **unit and element** — `QB2_F` writes `0.27 MPa` in a `<div>` |
+| Pass-1 repair | `<span class="reg-code">` | **HTML class** — the `<td>` cell and CE-tip prose it had just corrected |
+
+Every one of those guards was written correctly against the instance in front of it, and every one
+was blind to the next spelling of the same claim.
+
+> **Rule.** Detect the **proposition**, not its rendering. Normalise the units, take the smallest
+> enclosing element of **any** candidate-facing tag, and ask whether the sentence asserts the
+> forbidden thing. `tools/oral/oral_currentness.py` is the single implementation; a gate that
+> re-implements it will drift back into shape-dependence.
+
+**Normalise numerals as well as units.** `0.27 MPa` = `0.27 N/mm²` = `2.7 bar` = `270 kPa`, and
+`two pumps` = `2 pumps`. The cheat-card writes the numeral and the card writes the word; the
+proposition is identical. The first version of the completeness check missed a site it had *just
+corrected* because the card said "2 pumps".
+
+**Unit normalisation is a DETECTOR rule, never an editorial one.** A card may print MPa or N/mm²
+as it likes. The guard changed; the card did not.
+
+**The innermost element is usually too small.** In
+`<li>Minimum fire-main pressure: <strong>0.27 MPa</strong> at monitors</li>` the innermost element
+around the figure is the `<strong>`, whose visible text is `0.27 MPa` — no subject, no modal, and a
+detector reading only that sees nothing. Climb outward and take the **smallest element that carries
+a complete claim**. That keeps element scoping (entry 89) without depending on where the author put
+the emphasis tags.
+
+**A depth counter is not a stack.** The element scanner tracked depth and recorded a start only at
+depth 0, so it yielded the **outermost** element of each tag and never a nested one — a `<div>` inside
+a cheat card resolved to the whole cheat sheet, and the completeness test was then satisfied by
+unrelated text elsewhere on the page. Every open element containing the position is a rung.
+
+**A claim needs all of its parts, or it is a different claim.** A hit requires the subject
+(hydrant / fire-main / monitor), a figure, mandatory framing, **and** incomplete scope. Two of the
+four is not the defect: figure + subject alone fires on `fire main water (typically 5–7 bar)`, a
+HydroPen operating pressure that is correct; figure + modal alone fires on the weathertightness
+hose test, a different quantity with no held source.
+
+### 100. Insert by structural identity, never by the first matching anchor
+
+The BMP currentness banner was inserted at the **first occurrence** of `⚓ Why It Matters (CE
+Perspective)` in `miw-notes-mgmt-p10.html`. That head appears in every topic, so the banner landed
+in the *Marine Environmental Governance (UNCLOS Pt. XII)* topic — about 375 lines and four topics
+away from the BMP material it warns about, in a topic that never mentions BMP5. Topic 46 then said
+"see the currentness note above", pointing across four unrelated topics, and carried no banner of
+its own.
+
+The damage is worse than a no-op: a currentness note **governs its container**, so a misplaced
+banner protects text that needs no protection and leaves the real material unguarded. A gate that
+asks only "does the banner exist in this file?" passes happily.
+
+> **Rule.** Locate an insertion by the **structural identity of its container** — `id="topic-46"`,
+> a card anchor — and bound the search to that block. Never by first-occurrence, global needle, or
+> nearest-heading.
+
+**This is the third wrong-occurrence bug in one session.** A mutation replaced a `dd-block` body by
+string and hit an earlier duplicate of the same text outside any block, exercising nothing; a
+mutation edited a `q-text` stem and hit the JSON-LD copy instead; and this. A `replace()` on text
+that appears more than once is a positional guess wearing the costume of an edit.
+
+**Prove locality in both directions.** The control asserts the banner is in the intended topic
+**and** in no other, that the intended topic is the one whose subject matches, and that the note
+cross-referencing it lives in the same block. "Exists somewhere in the file" is not a location.
