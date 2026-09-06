@@ -354,6 +354,16 @@ CORRECTION_FIELD_CLASSES: dict[str, str] = {
     # showing only "reviewed: PASS" would hide the reason the second pass is
     # mandatory rather than optional.
     "review": INFORMATIONAL,
+    # Added for CORR-P1REPAIR-20260906, on the same terms as every field above:
+    # it is allowed in ONLY because that correction's own content gate asserts
+    # it (`record_does_not_rewrite_pass1_history`). A repair layer has to say
+    # which earlier CLAIMS it falsifies, separately from which digests it
+    # supersedes - `supersedes` answers "does my state descend from yours?",
+    # and this answers "and what did you assert that was not true?". Without
+    # somewhere to record that, the only way to correct a false claim in a
+    # shipped record would be to edit the record, which destroys the evidence
+    # of how the escape happened.
+    "supersedes_summary": INFORMATIONAL,
 }
 
 CORRECTION_CARD_FIELDS = ("file", "path", "anchor",

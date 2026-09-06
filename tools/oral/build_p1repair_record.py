@@ -24,7 +24,11 @@ from validate_batch_h_series import card_digests            # noqa: E402
 from oral_supersession import build_chain, load_card_records  # noqa: E402
 
 BASELINE = "d07591c"
-GOVERNING = ["816b1e3"]
+#: TWO commits. QB2_B#q18 was corrected after the content commit - the
+#: single-limb check found it during gate hardening - so its post state was
+#: produced by the governance commit, and `governing_commits_produced_post_state`
+#: is measured against the LAST commit in this list.
+GOVERNING = ["816b1e3", "93ec182"]
 DATE = "2026-09-06"
 NAME = "correction_corr_p1repair_20260906_manifest.json"
 
@@ -179,6 +183,7 @@ def main() -> int:
         "date": DATE,
         "baseline_commit": BASELINE,
         "governing_commits": GOVERNING,
+        "known_traps_entries": [96, 97, 98],
         "authorisation_source":
             "MIW PASS 1 REPAIR instruction of 6 September 2026, section 0, which "
             "confirms the independent-review block and rules that Pass 1 is NOT "
