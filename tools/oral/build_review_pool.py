@@ -79,13 +79,82 @@ def build():
     accepts = RP.load_accepts(ACCEPTS, set(evidence))
     hints = RP.extract_prose_hints(sorted(PROSE_DIR.glob(PROSE_GLOB))
                                    if PROSE_DIR.is_dir() else [])
-    return RP.build_pool(docs, accepts=accepts, prose_hints=hints)
+
+    # The live canonical digest of every card an acceptance claims to cover.
+    # Computed for the accepted identities only - the digest is what decides
+    # whether an exclusion still holds, so it is needed exactly where an
+    # exclusion could happen and nowhere else. Read with the SAME function the
+    # correction records are validated with, never a local copy.
+    live = RP.live_digests_for(set(accepts), REPO)
+
+    return RP.build_pool(docs, accepts=accepts, prose_hints=hints,
+                         live_digests=live)
+
+
+def explain(pool, target):
+    """Print the acceptance logic for one FILE#ANCHOR. Returns an exit code.
+
+    An exclusion a reviewer cannot interrogate is an exclusion they have to take
+    on trust, and taking exclusions on trust is what let a discarded digest go
+    unnoticed. Every number this prints comes out of the canonical payload.
+    """
+    if "#" not in target:
+        print("EXPLAIN: expected FILE#ANCHOR, got %r" % target)
+        return 2
+    name, anchor = target.rsplit("#", 1)
+    ident = RP.card_identity({"path": name, "anchor": anchor}, "--explain")
+
+    rows = {"pool": pool["cards"], "excluded": pool["excluded"],
+            "out of scope": pool["scope_excluded"]}
+    for where, group in rows.items():
+        for row in group:
+            if tuple(row["identity"]) != ident:
+                continue
+            print("%s#%s   [%s]" % (row["file"], row["anchor"], where))
+            if where == "out of scope":
+                print("  %s" % row["why_out_of_scope"])
+                return 0
+            print("  review_status: %s" % row["review_status"])
+            accept = (row["accept_records"] or [None])[0]
+            if not accept:
+                print("  acceptance:    none on record")
+                print("  no acceptance covers this card, so it stays in the pool")
+            else:
+                print("  acceptance:    %s  (%s, %s, review %s)"
+                      % (accept["accept_scope"], accept["adjudicated_by"],
+                         accept["date"], accept["review_id"]))
+                print("  evidence:      %s" % accept["evidence"])
+                print("  reopen_policy: %s" % accept["reopen_policy"])
+                print("  residuals:     %s" % (accept["residual_findings"] or "none"))
+            state = row["digest_state"]
+            if state:
+                print("  repo_head_reviewed: %s  (provenance only)"
+                      % state["repo_head_reviewed"])
+                print("  accepted_digest:    %s" % state["accepted_digest"])
+                print("  current_digest:     %s" % state["current_digest"])
+                print("  digest_match:       %s" % state["digest_match"])
+            for code in row.get("reopen_codes", []):
+                print("  reopen:        %s" % code)
+            for reason in row.get("reopen_reasons", []):
+                print("    - %s" % reason)
+            if row["review_status"] != "EXPLICITLY_ACCEPTED":
+                print("  why_in_pool:   %s" % row["why_in_pool"])
+            print("  risk_score:    %d (%s)"
+                  % (row["risk_score"], row["recommended_tranche_priority"]))
+            return 0
+
+    print("EXPLAIN: %s#%s is not present in this pool. It carries no manifest "
+          "evidence, so nothing here can say anything about it - which is NOT "
+          "the same as it having been reviewed." % ident)
+    return 1
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--check", action="store_true",
                     help="verify the written pool matches the evidence; write nothing")
+    ap.add_argument("--explain", metavar="FILE#ANCHOR",
+                    help="show the acceptance logic for one card; write nothing")
     args = ap.parse_args(argv)
 
     try:
@@ -93,6 +162,9 @@ def main(argv=None):
     except RP.PoolError as exc:
         print("REVIEW POOL: REFUSED - %s" % exc)
         return 2
+
+    if args.explain:
+        return explain(pool, args.explain)
 
     json_path = OUT_DIR / "review_pool.json"
     digest = RP.content_hash(pool)

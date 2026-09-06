@@ -1,11 +1,15 @@
 {
- "schema": "miw-oral-review-pool-accepts/1",
+ "schema": "miw-oral-review-pool-accepts/2",
  "note": "The ONLY source of exclusion authority for the Oral review pool. A card is removed from the pool if and only if it has an entry here with accept_scope WHOLE_CARD that later evidence has not reopened. A card with no entry STAYS IN THE POOL. This file is hand-maintained and is never written by a generator.",
  "rules": {
   "CORRECTED_IS_NOT_REVIEWED": "Correction manifests rank a card; they never clear it. A card may carry many corrections and still have never been read end to end.",
   "NARROW_IS_NOT_WHOLE": "NARROW_SCOPE and NO_PROPAGATION record what was actually checked. They rank only. They must never grow into a whole-card clearance.",
   "PROSE_HAS_NO_AUTHORITY": "GPT_REVIEW_*.md accept-sections and (NO CHANGE) headings are reviewer hints. Tranche 1's 'Accepted cards - untouched' means no propagation reached those cards within that tranche's scope - not that they were reviewed. Promoting a hint requires adding an entry here by hand, with evidence.",
-  "EVIDENCE_REQUIRED": "Every entry must cite the artefact that justifies it. An acceptance without a citation cannot be audited and is rejected."
+  "EVIDENCE_REQUIRED": "Every entry must cite the artefact that justifies it. An acceptance without a citation cannot be audited and is rejected.",
+  "ACCEPTANCE_COVERS_BYTES": "An acceptance covers the BYTES the reviewer read, not the card's name. canonical_card_digest is mandatory and load-bearing: if the live card's canonical digest differs from it, the acceptance no longer covers what is on the page and the card is REOPENED. Schema/1 could not express this, so /1 files are refused rather than coerced.",
+  "REOPENED_IS_NOT_A_DEFECT_CLAIM": "A moved digest means the prior whole-card acceptance no longer covers the current bytes. It does NOT mean the card is wrong. The card returns to the queue at its evidence-derived rank; nothing is marked P1, incorrect or failed on the strength of a digest change alone.",
+  "HEAD_IS_PROVENANCE_NOT_VALIDITY": "repo_head_reviewed records the tree that was read so an auditor can find it. It is NOT the validity test: unrelated commits move HEAD constantly, and treating that as invalidation would reopen every acceptance daily for a reason no reviewer could act on. The digest decides.",
+  "NO_PARTIAL_RECORDS": "Every field below is required on every entry, and an unrecognised field is a refusal. A half-filled accept, or one carrying a governance-looking key nothing reads, is how a reader comes to believe a check exists that does not."
  },
  "accept_scope_values": {
   "WHOLE_CARD": "Read end to end and accepted. EXCLUDES the card from the pool.",
@@ -17,8 +21,19 @@
   "anchor": "q2",
   "accept_scope": "WHOLE_CARD | NARROW_SCOPE | NO_PROPAGATION",
   "evidence": "required - the artefact and section that justifies this acceptance",
-  "adjudicated_by": "optional - who decided",
-  "date": "optional ISO-8601 - later evidence than this reopens the acceptance"
+  "adjudicated_by": "required - who decided",
+  "date": "required ISO-8601 - evidence dated after this reopens the acceptance",
+  "review_id": "required - the review this acceptance was taken in",
+  "repo_head_reviewed": "required - git object name of the tree that was read; provenance only",
+  "canonical_card_digest": "required - sha256 (64 lowercase hex) over the card's balanced <div> block, LF-normalised; the SAME digest the oral correction records pin",
+  "residual_findings": "required list, may be [] - each item {severity, note} (+ optional id, reference). Shape is validated; severity is NOT adjudicated here",
+  "reopen_policy": "required - the human-readable policy, stored for audit. Enforcement lives in deterministic code, never in parsing this string",
+  "note": "optional free text"
  },
- "accepts": []
+ "accepts": [],
+ "reopen_triggers": {
+  "CARD_DIGEST_CHANGED_AFTER_ACCEPT": "the live card's canonical digest differs from canonical_card_digest",
+  "ACCEPTED_CARD_ABSENT": "the accepted card is no longer present in the corpus",
+  "LATER_EVIDENCE_AFTER_ACCEPT": "a manifest dated after `date` names this card - this is the channel by which later regulatory/currentness evidence, contradicting source-custody evidence, a propagation defect targeting the card, and an explicit Founder/GPT reopen record all arrive"
+ }
 }
