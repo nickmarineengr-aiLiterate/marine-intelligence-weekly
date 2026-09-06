@@ -450,7 +450,10 @@ def main() -> int:
            and close["invariants"]["bmp5_taught_as_current_remaining"] == 0
            and close["invariants"][
                "currentness_banners_outside_intended_topic"] == 0,
-           "and the three checks above re-derive each of those from the corpus")
+           "DECLARED FIGURES ONLY - this check reads the record's own JSON. "
+           "The corpus-derived versions are the three checks above it, which "
+           "are separate; the justification previously printed here claimed "
+           "otherwise and was false.")
     report("closure_artefacts_exist",
            all((REPO / a["path"]).is_file() for a in close["artefacts"]),
            "%d artefact(s)" % len(close["artefacts"]))
@@ -485,9 +488,20 @@ def main() -> int:
     report("guard_record_states_zero_product_change",
            "Product bytes changed: ZERO" in gtext,
            "content was clean before this pass and was not reopened")
-    report("guard_record_states_its_residual_limits",
-           "Residual limits" in gtext and "P3 debt" in gtext,
-           "the limits are stated, not hidden")
+    # This check previously accepted the words "Residual limits" and "P3 debt".
+    # It passed while the record graded four P1 guard escapes as P3 - a gate
+    # that reads its record's headings can be satisfied by a wrong grading as
+    # easily as a right one. It now demands the escapes themselves, by name,
+    # and demands that the record does NOT claim closure while they are open.
+    escapes = ("Known escapes", "and` / `or` / `so`", "BMP-5",
+               "no modal word", "sibling block")
+    report("guard_record_names_its_open_escapes",
+           all(x in gtext for x in escapes)
+           and "Pass 1 is NOT closed on this record" in gtext,
+           "four confirmed escapes named; closure not claimed over them")
+    report("guard_record_withdraws_the_wrong_P3_grading",
+           "That grading was wrong and is withdrawn" in gtext,
+           "an escape that keeps the gate green while the defect is live is P1")
     m101 = re.search(r"### 101\..*?(?=\n### |\Z)", read_text(TRAPS), re.S)
     report("known_traps_entry_101_carries_the_lesson",
            bool(m101) and all(x in m101.group(0) for x in

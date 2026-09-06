@@ -17,6 +17,7 @@ import pathlib
 import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
+QB_ROOT = HERE.parents[1] / "meoclass1"
 sys.path.insert(0, str(HERE))
 
 from oral_currentness import (                       # noqa: E402
@@ -183,9 +184,31 @@ def main() -> int:
           "%d form(s) -> %s" % (len(forms), sorted(texts)))
 
     # ---- sentence scoping ---------------------------------------------
-    s = sentences(normalise("BMP5 replaced BMP4, but BMP5 is what we use today."))
-    check("denial_and_claim_separate_into_propositions", len(s) >= 1,
-          "%d proposition(s)" % len(s))
+    # This asserted `len(s) >= 1`, which is true of every non-empty string. It
+    # was the NAMED guard for clause-scoped denial and it could not fail, so it
+    # certified the escape below as closed. The property is not "how many
+    # propositions came back" but "the denial and the live claim are in
+    # DIFFERENT ones".
+    def _split(sent):
+        parts = sentences(normalise(sent))
+        d = [i for i, x in enumerate(parts) if "replaced" in x]
+        c = [i for i, x in enumerate(parts) if "use today" in x
+             or "remains the current" in x]
+        return bool(d) and bool(c) and set(d) != set(c)
+
+    check("denial_and_claim_separate_into_propositions",
+          _split("BMP5 replaced BMP4, but BMP5 is what we use today."),
+          "subordinating conjunction: denial and claim are separated")
+
+    # OPEN, reported, NOT counted as a pass. `and`/`or`/`so` are absent from
+    # the splitter, so this denial still silences a live claim in the same
+    # sentence. Printing it as a known-open escape is the point: the previous
+    # version of this file hid exactly this behind an unfalsifiable assertion.
+    _and = _split("BMP5 replaced BMP4 and remains the current industry standard.")
+    print("%-4s %-56s %s"
+          % ("OPEN" if not _and else "----",
+             "coordinating_conjunction_split_IS_OPEN_P1",
+             "escape 1 of PASS1_GUARD_CLOSURE.md; not closed, not counted"))
 
     # ---- pressure: must catch -----------------------------------------
     def _missed(cases, fn):
@@ -244,12 +267,27 @@ def main() -> int:
           "a BMP-subject note does govern technique text beneath it")
 
     # ---- the detector NEVER rewrites -----------------------------------
+    # This compared a `str` to itself. Python strings are immutable, so it
+    # could not fail whatever the detectors did - including writing files. The
+    # real risk a "detection only" record must exclude is a detector EDITING
+    # the corpus, so the corpus is what is now hashed.
+    import hashlib
+    import tempfile
+
     probe = "<li>Minimum required hydrant pressure 0.27 MPa</li>"
-    before = probe
-    firemain_scope_defects(probe)
-    bmp5_current_teaching(probe)
-    check("detectors_are_pure_and_rewrite_nothing", probe == before,
-          "detection only - no editorial side effect")
+    with tempfile.TemporaryDirectory() as tmp:
+        f = pathlib.Path(tmp) / "probe.html"
+        f.write_bytes(probe.encode("utf-8"))
+        watched = sorted(QB_ROOT.rglob("*.html")) + [f]
+        before = {w: hashlib.sha256(w.read_bytes()).hexdigest() for w in watched}
+        v1 = (firemain_scope_defects(probe), bmp5_current_teaching(probe))
+        v2 = (firemain_scope_defects(probe), bmp5_current_teaching(probe))
+        after = {w: hashlib.sha256(w.read_bytes()).hexdigest() for w in watched}
+    moved = [w.name for w in watched if before[w] != after[w]]
+    check("detectors_are_pure_and_rewrite_nothing",
+          not moved and v1 == v2,
+          "%d files hashed unchanged; verdict idempotent" % len(watched)
+          if not moved else "MOVED: %s" % moved[:5])
 
     print("\n%d checks, %d FAIL" % (CHECKS, len(FAILS)))
     if FAILS:

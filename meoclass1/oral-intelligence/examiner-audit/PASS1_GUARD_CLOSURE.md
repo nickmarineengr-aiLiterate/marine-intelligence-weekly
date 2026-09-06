@@ -36,7 +36,7 @@ prove the absence it asserts.
 | Finding | What was wrong | How it is closed |
 |---|---|---|
 | **D2** | BMP5 currentness was a fixed `OPERATIVE` phrase list. It missed *"BMP5 is the current industry guidance"* — the plainest form of the proposition it was named for. | Inverted to **default-suspicious**. The question is no longer "does this match a phrasing I listed?" but "is this mention **excused**?" — historical, quoted, a stem, navigation, bibliography, or governed by a supersession statement in its own container. An unlisted phrasing now fails **closed**. |
-| **D4** | A single `DENIAL` keyword anywhere in an element silenced **both** detectors, so *"BMP5 replaced BMP4, but BMP5 is what we use today"* passed. | Denial is **sentence- and clause-scoped**. Coordinating conjunctions end a proposition, so a historical first clause can no longer silence a live second one. |
+| **D4** | A single `DENIAL` keyword anywhere in an element silenced **both** detectors, so *"BMP5 replaced BMP4, but BMP5 is what we use today"* passed. | Denial is **sentence- and clause-scoped** for `but`, `however`, `whereas`, `although`, `though`, `yet`, `while`. **INCOMPLETE — see Known escapes below:** `and`, `or`, `so` are absent, and only `but` and `yet` in that list are coordinating conjunctions at all. |
 | **D3** | The pressure matcher read raw HTML with closed vocabularies: entities, `&nbsp;`, split tags, `kg/cm²`, `psi`, `<dd>`, `<figcaption>` and attribute text were all outside it. Latent — no live instance. | Matching runs on **normalised visible text**. Renderings collapse before comparison; element coverage is by **exclusion** (the inline-tag set is closed, everything else is a block); pressure is compared as a **quantity in MPa** across eleven units. |
 | **D5** | The container currentness exemption ignored subject, so a note about MSC.535(107) would have excused a BMP5 claim beside it. | The exemption requires the container to discuss **BMP5 and its successor** with a supersession verb. Asserted adversarially in the gate. |
 | **D9** | Stem detection used a ±220-character window that could swallow live teaching text. | Replaced by **container identity** — a segment's classes, unioned over the whole segment. |
@@ -87,8 +87,35 @@ remain (inline tags, unit conversions, excused container classes) are closed set
 ## Residual limits, stated not hidden
 
 This is not a natural-language parser, and the agreed closure standard does not ask for one.
-A claim expressed with no modal word and no recognisable unit, or spread across two sibling
-blocks with neither carrying a governed figure, remains outside detection. That is **P3 debt**.
+But four of the limits below are **not** the acceptable P2/P3 debt that standard allows: they
+are ways the guard would stay green while the defect it is named for was live, which is P1.
+An earlier draft of this section graded them P3. That grading was wrong and is withdrawn.
+
+## Known escapes — found by fresh adversarial review of THIS record, and open
+
+Four, all confirmed by reproduction. The content is clean; these are ways the defect could
+**re-enter** without the guard seeing it, so Pass 1 is NOT closed on this record.
+
+1. **Proposition splitting omits `and` / `or` / `so`.** *"BMP5 replaced BMP4 and remains the
+   current industry standard"* is missed — a denial still silences a live claim in the same
+   sentence. The D4 row above overstated the fix.
+2. **`BMP-5` and `BMP&#8209;5` are invisible.** The name pattern accepts a space but not a
+   hyphen, and `normalise` folds every Unicode dash toward the unmatched ASCII form.
+3. **A fire-main claim with no modal word is undetectable at any unit** —
+   `<li>Hydrant pressure - 0.27 N/mm²</li>`. The limit stated here previously required
+   "no modal word **and** no recognisable unit"; the unit is irrelevant, so the real limit is
+   wider than was declared.
+4. **The subject in a sibling block defeats G1** —
+   `<h4>Fire main</h4><li>Minimum 0.27 MPa</li>`. Previously stated as needing *neither* block
+   to carry a governed figure; in fact one block carries it squarely and only the subject is
+   adjacent.
+
+Also open, and previously overstated as evidence: `closure_declares_zero_remaining_defects`
+reads the record's own JSON literals and printed a justification claiming it re-derived them
+from the corpus — it does not, and that text is corrected;
+`denial_and_claim_separate_into_propositions` asserts `len >= 1`, which is true of any
+non-empty string and is unfalsifiable — and it is the named guard for escape 1; and
+`detectors_are_pure_and_rewrite_nothing` compares an immutable `str` to itself.
 Also deferred: `oral_lib.all_anchors()` enumerates top level only — used by the examiner-index
 and matcher validators, by no Pass-1 closure gate, and its subject (q-card anchors) exists only
 on top-level pages.
