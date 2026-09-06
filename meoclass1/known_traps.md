@@ -2961,3 +2961,48 @@ figure and is refused before the question is reached — which is what makes the
 safe, and is worth checking before inverting any default.
 
 Seventh instance of one lesson: a shape and a vocabulary are both open sets.
+
+### 108. A markup choice a reader cannot see must not change what a guard sees
+
+`<th>Fire main hydrant pressure</th><td>0.27 N/mm2</td>` was caught. The identical row
+written `<td>…</td><td>…</td>` was **invisible** — `th` was a label tag and `td` was not.
+
+Two-cell label/value rows are this corpus's dominant numeric idiom: **153 of its 224
+files**. A guard blind to that shape is blind to the most likely place the next defect
+gets typed.
+
+**When a structural rule keys on a tag, ask what the tag means to a reader.** `td` and
+`th` are the same thing to a candidate reading a Numbers table. The rule is now positional
+— the FIRST cell of a row labels the rest of that row — and the scope ends with the row.
+
+### 109. English prefers the pronoun, so the pronoun is the likelier defect
+
+E1 was closed for `BMP5 … and BMP5 …` and for `BMP5 … and <other subject> …`, then reopened
+by the form a person would actually write:
+
+> `BMP5 was superseded in 2025, but it is still the guidance we apply on board.`
+
+`but` is a hard sentence boundary, so the live clause landed in the next group and subject
+inheritance stopped at the boundary. The forms the detector caught are the ones a writer is
+*least* likely to produce, because repeating a proper noun in the second clause is
+unnatural.
+
+**Rank your test cases by how a human would write the sentence, not by how a regex would.**
+A pronoun subject now inherits across one boundary, bounded by an explicit currency claim.
+
+### 110. Two detectors for one policy must excuse the same things
+
+`bmp5_current_teaching` consulted a whole excused-class set — examiner stems, navigation,
+bibliography. `firemain_scope_defects` skipped three provenance classes and nothing else,
+so it would have reported an examiner's own stem, quoting a regulation figure in the
+question, as a defect.
+
+**The direction of a false positive matters.** This one points an operator straight at the
+edit the corpus rule most forbids: modernising anchored historical wording. A guard that
+recommends the prohibited action is worse than a guard that stays quiet.
+
+Also fixed alongside: a dated frame (`Before 2025 the guidance was region-locked — BMP5
+for the Red Sea…`) is a denial. That sentence is live in `QB4_H.html` and survived only
+because its container happened to carry a governing note; on a cheat sheet the same words
+were reported as teaching BMP5 as current. **Correct content must not depend on which
+container it was filed in.**

@@ -86,6 +86,23 @@ set. Both repairs replace one with a property — "two predications" and "a gove
 unless observed" — and both were verified against the live corpus, which stayed at zero
 under the wider rules.
 
+## Second independent review — four more, all fixed
+
+A second clean-context verifier, given the goal and not the implementation, reproduced
+four further guard defects. All four were reproduced here before being accepted, all
+four are inside the declared E1/E3/E4 classes or the §11 false-positive duty, and none
+was a live content defect:
+
+| # | Finding | Repair |
+|---|---|---|
+| 1 | **The corpus's own dominant numeric idiom escaped entirely.** `<td>Fire main hydrant pressure</td><td>0.27 N/mm2</td>` lent no subject to its own value, while the identical row with `<th>` was caught — because `th` was a label tag and `td` was not. Two-cell label/value rows appear in **153 of the 224 files**. | The **first cell of a table row labels the rest of that row**, whatever tag it uses, and the scope ends with the row. A markup choice a reader cannot see must not change what a guard sees. |
+| 2 | **The pronoun escaped.** *"BMP5 was superseded in 2025, **but it** is still the guidance we apply on board."* `but` is a hard boundary, so the live clause landed in the next sentence group and inheritance stopped there. English prefers the pronoun on second mention, so this is the **more** natural way to write the defect, not a rarer one. | A pronoun subject inherits across **one** sentence boundary, and only on an explicit currency claim. A sentence-initial subordinator (*"Although BMP5 was superseded, it is…"*) now splits at its comma. |
+| 3 | **False positive: the fire-main detector had no examiner-stem exemption at all.** It skipped three provenance classes where the BMP5 detector consults the whole excused-class set, so it would have reported an examiner's own stem as a defect — pointing an operator at the one edit the corpus rule forbids, modernising anchored wording. | The two detectors now excuse the same things. The asymmetry was the bug. |
+| 4 | **False positive: correct history flagged.** *"Before 2025 the guidance was region-locked — BMP5 for the Red Sea…"* is **verbatim live in `QB4_H.html`** and survived only because its container happened to carry a governing note; on a cheat sheet it read as teaching BMP5 as current. | A **dated frame is a denial**: `before <year>`, `until <year>`, `region-locked`. It puts a sentence in the past as surely as a verb does. |
+
+Verified after all four: the live corpus stayed at **firemain 0 / BMP5 0** across all 173
+non-past-paper files, so none of the widenings produced a false positive.
+
 ## Two defects found while closing, worth as much as the closure
 
 **A committed regex had two dead alternatives.** `oral_currentness.py` carried a literal
@@ -94,7 +111,9 @@ under the wider rules.
 ate the backslash. Both alternatives could never match. Both fail **closed** (a lost
 excuse makes the detector more suspicious, not less), so no defect escaped through them,
 but a named alternative that cannot fire is a check that is not there. Repaired, and a
-scan now catches the byte class.
+scan now catches the byte class — and found a **third** instance, in
+`tools/oral/validate_tranche4a.py:191`, where `HG1` had become
+`HG1`. Repaired; that gate stays 85/85.
 
 **A control passed for the wrong reason.** `E4_label_does_not_leak_across_containers`
 used an unrelated heading ("Lifeboat davits"), which is refused by the *subject* test
@@ -117,6 +136,10 @@ Each new control names a reachable failing state and one mutation reaches it:
 | `E3_MUST_CATCH_modal_free_governing_figure` | `E3-D` |
 | `E4_label_does_not_leak_across_containers` | `E4-D` |
 | `generated_surface_status_follows_item_provenance` | `G-D` |
+| `E4_first_table_cell_labels_its_row` | `E4-T` |
+| `E1_pronoun_carries_the_subject_one_sentence` | `E1-P` |
+| `firemain_excuses_examiner_wording_like_bmp5_does` | `F-X` |
+| `historical_date_framing_is_a_denial` | `H-D` |
 
 `E1-E` is **two edits in one mutation**, and that is a finding in itself. The noun-list
 rule is defended twice over — the both-sides verb test, and the rule that a verbless
@@ -128,17 +151,19 @@ exist to refuse.
 
 ## Evidence
 
-- **Controls:** `tools/oral/test_currentness_detectors.py` — 22 checks, 0 FAIL, over 70
+- **Controls:** `tools/oral/test_currentness_detectors.py` — 28 checks, 0 FAIL, over 80
   adversarial cases including 6 E1 MUST-CATCH (both the shared-subject and own-subject
   shapes) with 3 MUST-NOT-CATCH, the 3 E2 spellings, 7 E3 MUST-CATCH with 4
-  MUST-NOT-CATCH, and both E4 directions. The four cases an independent verifier used to
-  reopen E1 and E3 are in the set, as cases, not as prose.
+  MUST-NOT-CATCH, and both E4 directions, plus the table-row idiom in both tag spellings,
+  five pronoun sentences with two bounds, the examiner-stem symmetry and the dated frame.
+  Every case two independent verifiers used to reopen this closure is in the set as a
+  case, not as prose.
 - **Mutations:** `tools/oral/mutate_correction_p1guard.py` — **30 of 30 behaved as
-  required, 0 escapes, 0 crashes**, serial, byte-exact restore. 26 must-catch (product
+  required, 0 escapes, 0 crashes**, serial, byte-exact restore. 30 must-catch (product
   and detector) and 4 must-NOT-catch: past-paper wording, a wholly historical
   coordinated sentence, an unrelated heading, and a generated stem echo.
-- **Gates:** p1repair 50, struct 23, reach 42, hydrant 35, scope 10, detectors 22 —
-  0 FAIL.
+- **Gates:** p1repair 50, struct 23, reach 42, hydrant 35, scope 10, detectors 28,
+  tranche4a 85 — 0 FAIL.
 - **Live corpus, recursive, 224 files:** fire-main incomplete-scope claims **0**;
   BMP5-as-current **0**, generated surfaces now included.
 

@@ -156,6 +156,11 @@ DENIAL = re.compile(
     r"supersed|replaced|predecessor|no longer|formerly|former\b|earlier\b|"
     r"revoked|withdrawn|historical|repealed|used to\b|previously|"
     r"not a SOLAS|is not the current|do not (?:offer|use|quote|present)|"
+    # A dated frame puts the whole sentence in the past as surely as a verb
+    # does. "Before 2025 the guidance was region-locked - BMP5 for the Red
+    # Sea..." is the corpus's own correct history, and it survived only by
+    # sitting in a container that happened to carry a governing note.
+    r"before \d{4}|until \d{4}|up to \d{4}|region[- ]locked|"
     r"was the\b|prior\b", re.I)
 
 
@@ -223,7 +228,15 @@ def firemain_scope_defects(raw: str):
         cls = container_classes(stack) | seg["classes"]
         # A version stamp QUOTES what it removed; reading it reports the
         # changelog as the defect (known_traps 89).
-        if cls & {"q-version", "correction-link", "q-footer"}:
+        #
+        # And an EXAMINER'S STEM quotes the examiner. The BMP5 detector has
+        # excused those since it was written; this one skipped only the three
+        # provenance classes, so it would have reported a stem asking "what is
+        # the minimum fire main pressure of 0.27 N/mm2 based on?" as a defect -
+        # pointing an operator at the one edit the corpus rule forbids,
+        # modernising anchored historical wording. The asymmetry was the bug.
+        if cls & ({"q-version", "correction-link", "q-footer"}
+                  | EXCUSED_CLASSES) or _stem_echo(stack):
             continue
         for sent in sentences(text):
             vals = [v for v, _ in pressures_mpa(sent)]
@@ -410,6 +423,12 @@ CURRENT_ASSERTION = re.compile(
     r"reference)|applies\s+today|in\s+force\s+today", re.I)
 
 
+#: A clause whose subject is a back-reference. Anchored: the pronoun has to be
+#: what the clause is ABOUT, not merely a word inside it.
+PRONOUN_SUBJECT = re.compile(
+    r"^(?:and|or|so|but|yet)?\s*(?:it|they|this|these|those)\b", re.I)
+
+
 def bmp5_current_teaching(raw: str):
     """Sentences presenting BMP5 as live guidance.
 
@@ -430,10 +449,24 @@ def bmp5_current_teaching(raw: str):
             named = bool(BMP5.search(sent))
             if named:
                 subject_group = group
-            elif subject_group != group:
-                continue              # a different sentence: no inheritance
-            elif not CURRENT_ASSERTION.search(sent):
-                continue              # inherited subject, no currency claim
+            elif subject_group is None:
+                continue
+            elif group == subject_group:
+                if not CURRENT_ASSERTION.search(sent):
+                    continue          # inherited subject, no currency claim
+            elif group == subject_group + 1 and PRONOUN_SUBJECT.match(sent):
+                # English prefers the PRONOUN on second mention, so this is the
+                # more natural way to write the defect, not a rarer one:
+                # "BMP5 was superseded in 2025, but IT is still the guidance we
+                # apply on board". `but` is a hard boundary, so the clause
+                # landed in the next group and inheritance stopped at the
+                # boundary - the denial silenced the live claim exactly as
+                # before. Bounded to ONE sentence and to an explicit currency
+                # claim, because a pronoun two sentences away is a guess.
+                if not CURRENT_ASSERTION.search(sent):
+                    continue
+            else:
+                continue
             why = _excused(sent, text, cls, stack)
             if why is None:
                 hits.append({"line": line, "text": sent[:160],

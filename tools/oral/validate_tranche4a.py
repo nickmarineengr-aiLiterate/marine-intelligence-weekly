@@ -188,7 +188,7 @@ def gate_cii():
     # An EEDI guideline must not stand alone as the CII authority.
     for label, raw in (("QB7_I#q10", c7), ("QB6#q1", c6)):
         bad = [e for e in elements(raw)
-               if "MEPC.364(79)" in e and not re.search(r"MEPC\.352\(78\)|G1", e)]
+               if "MEPC.364(79)" in e and not re.search(r"MEPC\.352\(78\)|\bG1\b", e)]
         check(g, "C-05:" + label, not bad,
               "%s: no element cites MEPC.364(79) for CII without naming G1/MEPC.352(78)" % label)
     check(g, "C-06", "MEPC.352(78)" in f7, "QB7_I#q10 names G1 as the CII authority")

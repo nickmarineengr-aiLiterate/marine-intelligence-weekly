@@ -356,6 +356,72 @@ def main() -> int:
               + "<li>Minimum 0.27 MPa</li></ul></div>"),
           "a heading does not label the whole rest of a long container")
 
+    # ---- the corpus's own dominant numeric idiom -----------------------
+    # `<td>label</td><td>value</td>`. `<th>` was a label tag and `<td>` was
+    # not, so the same row lent its subject or did not depending on a markup
+    # choice a reader cannot see - in an idiom present in 153 of 224 files.
+    TD_ROW = ('<div class="q-card"><table><tr><%s>Fire main hydrant pressure'
+              '</%s><td class="k">0.27 N/mm2</td></tr></table></div>')
+    check("E4_first_table_cell_labels_its_row",
+          bool(firemain_scope_defects(TD_ROW % ("td", "td")))
+          and bool(firemain_scope_defects(TD_ROW % ("th", "th"))),
+          "td and th label alike; a markup choice is not a semantic one")
+    check("E4_row_label_does_not_reach_the_next_row",
+          not firemain_scope_defects(
+              "<table><tr><td>Fire main</td><td>see below</td></tr>"
+              "<tr><td>Lifeboat davit</td><td>0.27 MPa</td></tr></table>"),
+          "a row is its own label scope and ends with the row")
+
+    # ---- the pronoun is the natural second mention ---------------------
+    PRONOUN_CATCH = [
+        "BMP5 was superseded in 2025, but it is still the guidance we apply "
+        "on board.",
+        "Although BMP5 was superseded, it is still the current industry "
+        "guidance.",
+        "While BMP5 was withdrawn, it remains in force today.",
+        "BMP5 is a predecessor publication, yet it remains the current "
+        "industry standard.",
+        "BMP5 was superseded in 2025; it remains the current industry "
+        "guidance.",
+    ]
+    check("E1_pronoun_carries_the_subject_one_sentence",
+          all(bmp5_current_teaching("<p>%s</p>" % c) for c in PRONOUN_CATCH),
+          "%d case(s); English prefers the pronoun on second mention"
+          % len(PRONOUN_CATCH))
+    check("E1_pronoun_inheritance_is_bounded",
+          not bmp5_current_teaching("<p>BMP5 was superseded. It is no longer "
+                                    "used.</p>")
+          and not bmp5_current_teaching(
+              "<p>Although BMP5 was superseded, BMP Maritime Security now "
+              "applies.</p>"),
+          "one sentence, and only on an explicit currency claim")
+
+    # ---- the two detectors must excuse the same things -----------------
+    # An examiner's stem quotes the examiner. The BMP5 detector excused those
+    # from the start; the fire-main detector skipped only three provenance
+    # classes, so it would have reported a stem as a defect and pointed an
+    # operator at the one edit the corpus rule forbids.
+    check("firemain_excuses_examiner_wording_like_bmp5_does",
+          not firemain_scope_defects(
+              '<div class="q-card"><div class="q-text">What is the minimum '
+              'fire main pressure of 0.27 N/mm2 based on?</div></div>')
+          and not firemain_scope_defects(
+              '<div class="cs-qtitle">Minimum hydrant pressure 0.27 MPa - '
+              'on what is it based?</div>'),
+          "same excused-class set as the currentness detector")
+
+    # ---- a dated frame is a denial -------------------------------------
+    # Verbatim live in QB4_H.html. It survived only because its container
+    # happened to carry a governing note; moved to a cheat sheet it was
+    # reported as teaching BMP5 as current.
+    check("historical_date_framing_is_a_denial",
+          not bmp5_current_teaching(
+              '<div class="cs-body"><p>Before 2025 the guidance was '
+              'region-locked - BMP5 for the Red Sea, Gulf of Aden, Indian '
+              'Ocean and Arabian Sea, BMP West Africa for the Gulf of '
+              'Guinea.</p></div>'),
+          "a dated frame puts a sentence in the past as surely as a verb")
+
     # ---- generated-surface policy (one test, both directions) ----------
     # A generated page gets no blanket exemption: the stem echo is excused by
     # the href that names the card it quotes, and a label the generator wrote

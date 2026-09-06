@@ -266,6 +266,16 @@ def _split_coordinated(piece: str):
     return out or [piece.strip()]
 
 
+#: A subordinate clause that OPENS the sentence. `_SENT` splits on a
+#: subordinator preceded by whitespace, so "BMP5 was superseded, ALTHOUGH it
+#: is current" divides and "ALTHOUGH BMP5 was superseded, it is current" does
+#: not - the same two propositions, in the order English actually prefers when
+#: the concession comes first. Here the comma is the boundary.
+_LEAD_SUB = re.compile(
+    r"^(?:although|though|while|whilst|whereas|even though|despite the fact "
+    r"that)\s+[^,]{1,140},\s+", re.I)
+
+
 def propositions(text: str):
     """[(clause, group)] - clauses, tagged with their hard-sentence group.
 
@@ -273,11 +283,17 @@ def propositions(text: str):
     one sentence and no further: "BMP5 replaced BMP4 and remains current" is
     about BMP5 throughout, but the next sentence is a fresh subject.
     """
-    out = []
-    for g, piece in enumerate(s for s in _SENT.split(text) if s and s.strip()):
-        for clause in _split_coordinated(piece.strip()):
-            if clause:
-                out.append((clause, g))
+    out, g = [], 0
+    for piece in (s for s in _SENT.split(text) if s and s.strip()):
+        piece = piece.strip()
+        lead = _LEAD_SUB.match(piece)
+        pieces = ([piece[:lead.end()].rstrip(), piece[lead.end():]]
+                  if lead else [piece])
+        for sub in pieces:
+            for clause in _split_coordinated(sub.strip()):
+                if clause:
+                    out.append((clause, g))
+            g += 1
     return out
 
 
@@ -290,6 +306,15 @@ def sentences(text: str):
 #: structural - a heading, a definition term, a table header, a caption.
 HEADING_TAGS = frozenset(("h1", "h2", "h3", "h4", "h5", "h6",
                           "dt", "th", "caption", "legend", "summary"))
+
+#: The FIRST cell of a table row labels the cells after it, whatever tag it
+#: uses. `<th>` was covered and `<td>` was not, so
+#: `<td>Fire main hydrant pressure</td><td>0.27 N/mm2</td>` lent no subject to
+#: its own value while the identical row with `<th>` did - and the two-`<td>`
+#: label/value row is the single most common numeric idiom in this corpus,
+#: present in 153 of its 224 files. A markup choice that changes nothing a
+#: reader sees must not change what a guard sees.
+CELL_TAGS = frozenset(("td", "th"))
 
 #: Classes that make a non-heading element behave as one on these pages.
 HEADING_CLASSES = frozenset("""
@@ -330,6 +355,7 @@ def segments_with_context(html: str):
     """
     out = []
     label = None                 # (text, parent_serials, segments_remaining)
+    row = None                   # (row_serial, first_cell_text)
     for text, stack, line, cls, serials in segments_ex(html):
         applies = None
         if label is not None:
@@ -339,6 +365,19 @@ def segments_with_context(html: str):
                 label = (ltext, lparent, left - 1)
             else:
                 label = None
+
+        # A table row is its own label scope, and it ENDS with the row - which
+        # is why it is tracked by the row's serial rather than by a count.
+        cell = next((i for i, (t, _a) in enumerate(stack)
+                     if t in CELL_TAGS), None)
+        if cell is not None:
+            tr = next((serials[i] for i, (t, _a) in enumerate(stack)
+                       if t == "tr"), None)
+            if tr is not None:
+                if row is not None and row[0] == tr:
+                    applies = applies or row[1]
+                else:
+                    row = (tr, text)         # first cell of a new row
         out.append({"text": text, "stack": stack, "line": line,
                     "classes": cls, "label": applies})
         if _is_heading(stack, cls):
