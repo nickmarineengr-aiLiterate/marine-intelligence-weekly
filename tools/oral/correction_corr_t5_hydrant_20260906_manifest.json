@@ -1,0 +1,84 @@
+{
+ "correction_id": "CORR-T5-HYDRANT-20260906",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "known_defect_family_remediation_pass_1",
+ "date": "2026-09-06",
+ "baseline_commit": "464bc3c",
+ "governing_commits": [
+  "4c8dfd6",
+  "e8c2ec7"
+ ],
+ "authorisation_source": "MIW KNOWN-DEFECT-FAMILY REMEDIATION - PASS 1 instruction of 6 September 2026, sections 7 and 8. Section 8 authorises N-3 by name and states the governing provision and both cargo-ship figures. Section 7 authorises correcting a census hit where held primary source directly adjudicates it or where the proposition conflicts with another corrected card; both further sites meet that test.",
+ "title": "A hard number presented to the candidate under regulatory wording for a quantity SOLAS actually fixes, and the number is not SOLAS's. Three sites: a '4 to 6 Bar' required minimum, a '4.0 bar minimum required', and the correct figure with only one of its two limbs.",
+ "candidate_claim": "Not a candidate report. Tranche 5 finding N-3, plus two sites the Pass-1 numeric census added.",
+ "candidate_verdict": "UPHELD. The 4-6 bar and 4.0 bar figures are unsupported and contradict held SOLAS text; they also contradicted QB9_B#q5, which was corrected to the governing figures on 6 September 2026. A single-limb version of a two-limb rule is not a blurred rule - it is simply wrong for every ship on the other side of the threshold, the same shape as the MSC.535(107) lifeboat-ventilation defect.",
+ "authority": "SOLAS II-2/10.2.1.6 (Consolidated Edition 2024, held): minimum pressure at the hydrants with the two required pumps delivering simultaneously - for cargo ships 0.27 N/mm2 at 6,000 GT and upwards and 0.25 N/mm2 below 6,000 GT. SOURCE RELIED ON: SRC-SOLAS-CONSOLIDATED-2024. The passenger-ship limbs are deliberately NOT introduced: these are container and cargo cards, and importing a limb the card never addressed would be authoring rather than correcting.",
+ "propagation": {
+  "derived_surfaces": "NONE. No question stem changed; 761 / 86 unchanged.",
+  "hub_date": "NOT ADVANCED.",
+  "deferred_to_k_items": "The census also found the weathertightness hose test stated as 'at least 1 bar (100 kPa)' on QB2_B#q16 and as '0.2 N/mm2 (2 bar)' on QB2_B#q13 and QB2_A#q21 - an internal contradiction inside one file. No governing source for the hose test is held in the repository, so it is raised as a source-acquisition item and NOT guessed. QB2_F#q2's '0.27 MPa at deck monitors' applies the hydrant figure to a different location and is reported as AMBIGUOUS."
+ },
+ "invariants": {
+  "canonical_questions_before": 761,
+  "canonical_questions_after": 761,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "corrected_cards": 3
+ },
+ "review": {
+  "gate": "tools/oral/validate_correction_t5hydrant.py",
+  "mutation_suite": "tools/oral/mutate_correction_t5hydrant.py",
+  "independent_review": "NOT YET - this record is produced by the same session that made the edits."
+ },
+ "known_traps_entries": [
+  93
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/known_traps.md",
+   "classification": "GOVERNANCE_RECORD",
+   "known_traps_entry": 93,
+   "rationale": "Entry 93 records the governing figures and their 6,000 GT scope, that internal contradiction against a corrected sibling is what promotes a numeric hit out of a 1,034-hit census, and that a single-limb version of a two-limb rule is wrong rather than vague.",
+   "guarded_by": "validate_correction_t5hydrant.py"
+  },
+  {
+   "path": "tools/oral/apply_corr_t5_hydrant.py",
+   "classification": "GOVERNANCE_RECORD",
+   "rationale": "The applier, carrying the governing sentence once so the three sites cannot drift apart.",
+   "guarded_by": "validate_correction_t5hydrant.py"
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "T5-HYDRANT-01",
+   "file": "QB2_A.html",
+   "path": "meoclass1/QB2_A.html",
+   "anchor": "q8",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "8d06449c96ae23e02dc7eb930192ef730302f0a25f92512c4697a4ec1b4209cd",
+   "post_edit_digest": "863c68bc3e778060ef072254a41727fde4d2f193de8c6455c742ba6ac2902bc6",
+   "what_changed": "'4 to 6 Bar' asserted as the 'minimum operational pressure range required at the furthest hydrant' - roughly double the SOLAS floor and carrying no source - replaced by SOLAS II-2/10.2.1.6 with both of its cargo-ship limbs, and a sentence saying that a higher monitor-throw figure is a design target and not a SOLAS minimum. This is Tranche 5 finding N-3."
+  },
+  {
+   "correction_action_id": "T5-HYDRANT-02",
+   "file": "QB2_B.html",
+   "path": "meoclass1/QB2_B.html",
+   "anchor": "q18",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "2c504a8a8be0698d43e913e8f74f6cd8b17076692b8e72f5984805b9a4c4a788",
+   "post_edit_digest": "23d54edc361cc425129deb93e589bcc0737dc7328c0d2aab705812671f947166",
+   "what_changed": "the correct 0.27 N/mm2 was stated as 'the mandatory minimum pressure' with no threshold, so it read as governing every cargo ship. The 6,000 GT limb is restored in both directions."
+  },
+  {
+   "correction_action_id": "T5-HYDRANT-03",
+   "file": "QB2_H.html",
+   "path": "meoclass1/QB2_H.html",
+   "anchor": "q2",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "13a15603368c96b98320af61c9c903286bdd60cd27bfc5adc8de74c90900e753",
+   "post_edit_digest": "887c8558232266431dbccb738f00767027cfa98e9b3e5297fac3d9c80615d99a",
+   "what_changed": "'the 4.0 bar minimum required at the highest hydrant' replaced by the governing provision and its two limbs. This site was found by the Pass-1 census, not by the tranche, and it contradicted the already-corrected QB9_B#q5 in the same corpus."
+  }
+ ]
+}

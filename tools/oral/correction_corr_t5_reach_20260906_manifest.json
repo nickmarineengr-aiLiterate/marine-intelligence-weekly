@@ -1,0 +1,114 @@
+{
+ "correction_id": "CORR-T5-REACH-20260906",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "known_defect_family_remediation_pass_1",
+ "date": "2026-09-06",
+ "baseline_commit": "464bc3c",
+ "governing_commits": [
+  "4c8dfd6",
+  "e8c2ec7"
+ ],
+ "authorisation_source": "MIW KNOWN-DEFECT-FAMILY REMEDIATION - PASS 1 instruction of 6 September 2026, sections 3, 6 and 8. Section 8 authorises N-1, N-2 and N-4 by name. Sections 3 and 6 require the same census to be run corpus-wide and each hit classified; the three further sites here are MUST CORRECT under that census, and carry a fact already adjudicated and externally verified rather than a new one.",
+ "title": "A correction reaches the teaching body and misses the surfaces carrying the same proposition. Seven such surfaces: a source-confidence footer offering a superseded publication as its verification authority, two cheat sheets teaching a superseded publication as current, a third cheat sheet missing its parent's predecessor banner, and three card-layer reg-box rows that no BMP sweep had ever opened because every sweep derived its site list from a finding's card list instead of from the corpus.",
+ "candidate_claim": "Not a candidate report. Tranche 5 findings N-1, N-2 and N-4, plus three sites the Pass-1 corpus census added.",
+ "candidate_verdict": "UPHELD. No new factual theory is advanced. Every edit carries the BMP supersession already established by CORR-GPT-T2C-CURRENCY-20260905 and propagated once by CORR-BMP-EDITION-PROP-20260905, to surfaces those records missed.",
+ "authority": "BMP Maritime Security, 1st Edition (2025) as updated during 2026, published by BIMCO, ICS, IMCA, INTERCARGO, INTERTANKO and OCIMF; it replaced BMP5 (2018), BMP West Africa and the Global Counter Piracy Guidance. Registered SRC-BMPMS-2026 / SRC-BMPMS-2025. THIS RECORD ADDS NO SOURCE EVIDENCE OF ITS OWN. For N-2 no replacement circular is asserted: MSC.1/Circ.1606 was removed from the parent card as unusable and is not re-cited anywhere, so guessing a successor would be invention.",
+ "propagation": {
+  "derived_surfaces": "NONE. No question stem changed; build_qb_content_index.py --check reports 761 / 86 unchanged and byte-identical outputs.",
+  "hub_date": "NOT ADVANCED.",
+  "deliberately_not_swept": "94 of the 102 corpus BMP5/MSC.1-Circ.1606 sites are KEEP. A q-text, a cs-qtitle, a TOC entry, a sub-desc or a generated index row echoing one is the EXAMINER'S OWN WORDING; QB4_H#q11 is retained on purpose as the predecessor record because examiners still ask for BMP5 by name; and a currentness note that quotes BMP5 in order to deny it is the fix, not the defect. The N-4b cheat-sheet cue '\"BMP5 details\"' is kept for the same reason and only its ANSWER cell is qualified.",
+  "cards_edited_here_but_pinned_by_a_sibling_record": "QB1_F.html#q10. Its reg-box row was migrated to BMP Maritime Security by THIS family (site A-5), and the same card was structurally repaired by CORR-T5-DDCASCADE-20260906, both in the same content commit - so no commit holds an intermediate state and the card cannot be pinned twice. It is pinned once, baseline to live, by the structural record, whose edit rewrote far more of the card. The A-5 propositions are declared here and asserted by this record's own content gate, reg-code slot and reg-desc separately.",
+  "ambiguous_reported_not_corrected": "QB4_B.html page-level provenance disclaimer lists BMP5 among the publications the bank was derived from. That is a historical statement about sources used, not current teaching, and is reported rather than swept."
+ },
+ "invariants": {
+  "canonical_questions_before": 761,
+  "canonical_questions_after": 761,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "corrected_cards": 3,
+  "revision_surfaces_corrected": 3,
+  "sites_corrected": 8
+ },
+ "review": {
+  "gate": "tools/oral/validate_correction_t5reach.py",
+  "mutation_suite": "tools/oral/mutate_correction_t5reach.py",
+  "independent_review": "NOT YET - this record is produced by the same session that made the edits."
+ },
+ "known_traps_entries": [
+  94,
+  95
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/QB9_A_CheatSheet.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Carries no q-card, so it takes no digest pin, but it held the two proposition-less MSC.1/Circ.1606 pills the parent card removed as unusable. N-2. The whole cs-row goes with them: two pills removed from a row that held nothing else would leave an empty promise, which is the defect family next door.",
+   "guarded_by": "validate_correction_t5reach.py"
+  },
+  {
+   "path": "meoclass1/QB5_B_CheatSheet.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Carries no q-card. Its Q34 answer taught 'BMP5 procedures' as current. N-4a.",
+   "guarded_by": "validate_correction_t5reach.py"
+  },
+  {
+   "path": "meoclass1/QB4_H_cheatsheet.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Carries no q-card. Its row 11 examiner cue '\"BMP5 details\"' is QUOTED wording and is KEPT - QB4_H#q11 exists precisely because examiners still ask for BMP5 by name. Only the ANSWER cell is qualified, with the predecessor banner the parent card already carries. N-4b.",
+   "guarded_by": "validate_correction_t5reach.py"
+  },
+  {
+   "path": "meoclass1/known_traps.md",
+   "classification": "GOVERNANCE_RECORD",
+   "known_traps_entry": 94,
+   "rationale": "Entry 94 records why a sweep driven by a finding's card list leaves siblings behind, and that 94 of 102 corpus occurrences are KEEP. Entry 95 records that a cheat sheet takes no digest pin, so a content gate is the only thing that can guard it.",
+   "guarded_by": "validate_correction_t5reach.py"
+  },
+  {
+   "path": "tools/oral/apply_corr_t5_reach.py",
+   "classification": "GOVERNANCE_RECORD",
+   "rationale": "The applier, with the KEEP boundary stated in code rather than in prose.",
+   "guarded_by": "validate_correction_t5reach.py"
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "T5-REACH-01",
+   "file": "QB4_H.html",
+   "path": "meoclass1/QB4_H.html",
+   "anchor": "q2",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "2e044dd85b42ac0e6d7fbc5f1e7332395af27e43394a66650461a60ea383e2cc",
+   "post_edit_digest": "9bd1e8677c5cc60216e4bb680d500935c82d70971019bd2fc2402f8da456b337",
+   "what_changed": "the source-confidence footer still cited 'BMP5 Section 5 (mscio.eu)' as an authority this card was verified against, five days after the card's own body removed that carry-over as unverifiable and quoted the held current publication instead. The footer now cites the held BMP Maritime Security 1st Edition (2025) as updated June 2026. This is Tranche 5 finding N-1.",
+   "supersedes": {
+    "manifest": "correction_corr_t4a_bmp_security_20260906_manifest.json",
+    "action_id": "T4A-BMP-SECURITY-20260906-02",
+    "post_edit_digest": "2e044dd85b42ac0e6d7fbc5f1e7332395af27e43394a66650461a60ea383e2cc",
+    "note": "T4A-BMP-SECURITY-20260906-02 pinned the state this record edits. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T5-REACH-02",
+   "file": "QB4_H.html",
+   "path": "meoclass1/QB4_H.html",
+   "anchor": "q6",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "8fc2e0562749832c7fdbff97de964acae4068d2f69c8a55984c424a9746adba8",
+   "post_edit_digest": "170aab0f1fbdd01b09f6f6d2445f39dd20d6932a4ebbea72a2d2dc8206eb5952",
+   "what_changed": "reg-box row 'BMP5' migrated to BMP Maritime Security. A sibling card in the SAME FILE as N-1 that three BMP sweeps did not open."
+  },
+  {
+   "correction_action_id": "T5-REACH-03",
+   "file": "QB5_B.html",
+   "path": "meoclass1/QB5_B.html",
+   "anchor": "q14",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "c73a647c9312dd91f6a4554d2d547c0eb53c1f44e71517e03a3beace728e56e9",
+   "post_edit_digest": "31f6657da99cd66432d77dabc31531b36b8d05d4703dd193b7dc3c159ea52f11",
+   "what_changed": "'BMP5 engineering measures' in the answer body and the 'BMP5 / Industry Best Management Practices' reg-box row migrated to the current publication. The card layer paired with the N-4a cheat sheet, and left behind by the same sweep."
+  }
+ ]
+}

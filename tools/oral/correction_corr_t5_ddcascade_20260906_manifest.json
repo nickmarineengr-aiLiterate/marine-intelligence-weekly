@@ -1,0 +1,560 @@
+{
+ "correction_id": "CORR-T5-DDCASCADE-20260906",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "known_defect_family_remediation_pass_1",
+ "date": "2026-09-06",
+ "baseline_commit": "464bc3c",
+ "governing_commits": [
+  "4c8dfd6",
+  "e8c2ec7"
+ ],
+ "authorisation_source": "MIW KNOWN-DEFECT-FAMILY REMEDIATION - PASS 1 instruction of 6 September 2026, sections 4 and 5. Section 5 authorises correcting structural duplication and emptiness, and directs that an empty block with no trustworthy source content has its promise REMOVED rather than an answer fabricated. Section 4 authorises removing raw authoring residue once the owning block has been read.",
+ "title": "A markdown-to-HTML conversion split each deep-dive blob into typed blocks by taking the tail from every '* <strong>Label:</strong>' marker ONWARD instead of the segment BETWEEN markers. Every block therefore rendered its own content plus every following section as raw markdown - 82,736 bytes of cascaded duplication across 146 blocks on 38 cards. Six further cards promised a seven-section deep dive and delivered an empty <details>.",
+ "candidate_claim": "Not a candidate report. Tranche 5 named QB1_G#q40, QB1_I#q2 and QB2_H as members of this family; the corpus-wide census found the other 41 cards and established the single conversion-step root cause behind all of them.",
+ "candidate_verdict": "UPHELD, and proved lossless before application. For all 146 blocks tools/oral/analyse_ddcascade.py showed the removed text is byte-identical to the OWN body of the later typed block carrying the same label on the same card, so the repair deletes only duplication. 0 blocks were unproven; the applier refuses any block the analyser has not proved.",
+ "authority": "NONE REQUIRED - and that is the point. No regulatory proposition is added, removed or altered by this record. The set of propositions visible to a candidate is unchanged on every one of the 44 cards; only the duplicate rendering of them is gone. The six empty deep-dive elements carried no proposition at all.",
+ "propagation": {
+  "derived_surfaces": "NONE. No <div class=\"q-text\"> stem changed - build_qb_content_index.py --check reports the on-disk outputs still match the live derivation at 761 questions / 86 files, so qb_content_index.json, the hub, search, the examiner index, topics and study_mappings are byte-identical and were deliberately not regenerated. No XLSX regeneration is required.",
+  "hub_date": "NOT ADVANCED. The Pass-1 instruction forbids it.",
+  "cards_edited_here_but_pinned_by_a_sibling_record": "QB2_H.html#q2. Its empty deep-dive promise was removed by THIS family, and its 4.0 bar hydrant figure by CORR-T5-HYDRANT-20260906, both in the same content commit - so no commit holds an intermediate state and the card cannot be pinned twice. It is pinned once, baseline to live, by the hydrant record, whose family is the substantive one for it. The structural edit is declared here and asserted by this record's own content gate, which checks that NO empty deep-dive promise remains anywhere in the corpus - QB2_H included.",
+  "residue_remaining": "This record closes the cascade, the orphaned bullets and the empty promises. A SECOND conversion generation remains and is reported as Pass-2 backlog, not silently dropped: 97 <p>#### heading residues (QB9_D 71, QB5_C_B 26), 18 <p>> blockquote residues, 19 <p>```</p> fence residues and 176 long rule separators. Those need re-rendering, not truncation, so a sweep must not touch them."
+ },
+ "invariants": {
+  "canonical_questions_before": 761,
+  "canonical_questions_after": 761,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "corrected_cards": 43,
+  "cascaded_blocks_repaired": 146,
+  "duplicated_bytes_removed": 82736,
+  "empty_deep_dive_promises_removed": 6,
+  "orphaned_markdown_bullets_removed": 8,
+  "blocks_refused_as_unproven": 0
+ },
+ "review": {
+  "gate": "tools/oral/validate_correction_t5struct.py",
+  "mutation_suite": "tools/oral/mutate_correction_t5struct.py",
+  "independent_review": "NOT YET - this record is produced by the same session that made the edits."
+ },
+ "known_traps_entries": [
+  90,
+  91,
+  92
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/known_traps.md",
+   "classification": "GOVERNANCE_RECORD",
+   "known_traps_entry": 90,
+   "rationale": "Entry 90 records the cascade, the proof that makes it mechanically repairable, and the two traps that cost this repair a full re-run: matching blocks by position instead of by label, and re-implementing the normaliser beside its own proof so that 37 blocks silently failed to match and were skipped with no error raised. Entries 91 and 92 record the deletion-blind idempotency check and the generator that read its own output.",
+   "guarded_by": "validate_correction_t5struct.py"
+  },
+  {
+   "path": "tools/oral/analyse_ddcascade.py",
+   "classification": "GOVERNANCE_RECORD",
+   "rationale": "The losslessness proof. Re-runnable: it reports 0 cascaded blocks on the corrected corpus, and would report any block a future edit re-broke.",
+   "guarded_by": "validate_correction_t5struct.py"
+  },
+  {
+   "path": "tools/oral/apply_ddcascade_repair.py",
+   "classification": "GOVERNANCE_RECORD",
+   "rationale": "The applier. Idempotent, and refuses any block the analyser has not proved lossless.",
+   "guarded_by": "validate_correction_t5struct.py"
+  },
+  {
+   "path": "tools/oral/census_known_defect_families.py",
+   "classification": "GOVERNANCE_RECORD",
+   "rationale": "The Pass-1 census that found the 41 cards the tranche did not name, and that measures the Pass-2 residue backlog this record deliberately leaves.",
+   "guarded_by": "validate_correction_t5struct.py"
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "T5-DDCASCADE-01",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q1",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "e6d43dcdd5afb9ee0f80836b46cae9548b87bf64562ee5fca097c12c5cd4d402",
+   "post_edit_digest": "648c62dc9d63efa9648be0ded3b9fa29b1157d531db492b6974d20aabf68b738",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label",
+   "supersedes": {
+    "manifest": "batch_e1_enrichment_manifest.json",
+    "action_id": "ENRICH-A002",
+    "post_edit_digest": "e6d43dcdd5afb9ee",
+    "note": "ENRICH-A002 pinned the state this record edits. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-02",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q2",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "5e362f528091cb236a1f8598e0be21881a7c9f9144da4923b07dbdbb8660a8f2",
+   "post_edit_digest": "17c22e8bb91da17990606dd6306fcc7abae595ff735d16bef5352fb6c1ec5126",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label; orphaned markdown bullet removed from the answer body",
+   "supersedes": {
+    "manifest": "correction_corr_orb_applicability_20260831_manifest.json",
+    "action_id": "CORR-ORB-01",
+    "post_edit_digest": "5e362f528091cb236a1f8598e0be21881a7c9f9144da4923b07dbdbb8660a8f2",
+    "note": "CORR-ORB-01 pinned the state this record edits. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-03",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q4",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "4d2a1ef29879b7bed97d5c959cb112a98a53edef9fdb9c68995aae7280b5cb79",
+   "post_edit_digest": "bf09e82007e6a9ace3069b5f4c42ea9c8a5b4cab02f10f68c5deeaa3700370d9",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-04",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q5",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "180aed7f581cff4e4249238780f36b9d3431322f515c3aafbeac6e82fc3ccd79",
+   "post_edit_digest": "b44fb0618596dc4183eec0696fe4a1bd60485cc5c58feeb90fbef594c34774b7",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-05",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q6",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "bca4a3253e29f20aa5835d7e0e7c8e9708c5ae1b9d576d1025d94026e222a113",
+   "post_edit_digest": "bb7df285e8180de8ccff963148818d44630f7acf0a52c830fde4e177e4f539ad",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-06",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q7",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "1658b73523719291821f19d78f11db16f662e929b9fa9a837254ea450110bf57",
+   "post_edit_digest": "a92b8e005cb42cb51b94b58e364f9e83defe4103beab55e4779624472a9a53cf",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label",
+   "supersedes": {
+    "manifest": "batch_e2_enrichment_manifest.json",
+    "action_id": "ENRICH-A011",
+    "post_edit_digest": "1658b73523719291",
+    "note": "ENRICH-A011 pinned the state this record edits. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-07",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q9",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "e3fd5a4d15de73f1f1d25a4509b016d44d48ecb453e8227d543463b92c273ff6",
+   "post_edit_digest": "ebe7d95e7a1e8e7523d0b44e2aaf9532455e970b3011c397bc18d3018dff418d",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-08",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q10",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "cb567c0b4c690804ab54ed67a8ece6022dbc4152b717b91bd33049ee0d3cdb42",
+   "post_edit_digest": "eebe444de0f866e21cb5372a3cefbeb50715e9d664e2a71e10642599e9e90f1e",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-09",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q11",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "2e2ac18889dcd66fa5ca8f5df0c9642ec9be36e7aaf3e63aab4112ecad311901",
+   "post_edit_digest": "09082213ea87a52d8fa4173d97ef25c8ddaac821d2c4792dff4d8c37d2ec94e9",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-10",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q12",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "7c728948ea0a1dcdddb0d21ed6634b65ca76210194370dd6572a005d19969892",
+   "post_edit_digest": "0035213baada1574b6f4bfb961635eadd09c9191607d50284d29c71bf55fcb77",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label",
+   "supersedes": {
+    "manifest": "batch_e5_enrichment_manifest.json",
+    "action_id": "ENRICH-A038",
+    "post_edit_digest": "7c728948ea0a1dcd",
+    "note": "ENRICH-A038 pinned the state this record edits. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-11",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q13",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "62ec33f50e623b73b3c475d56a8478ef60f943194954df1081a6ae969890fd70",
+   "post_edit_digest": "e71033709067d6023e7dcbd9663112051389c3ca57cac97678494548aa386135",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-12",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q14",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "6b0d63732f58df4f9cd0483f6ea8e6e0c4d89318ab4c4b945a25ccba47879399",
+   "post_edit_digest": "6ff31cf29df87bac9caa5f30289a2745f663340fc3af2908855e8b85eb17c772",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-13",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q15",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "ff0c76a651094f071daef8039afe17cec4c8af6ec6d09f125d2269c39d2793a3",
+   "post_edit_digest": "eaf35652a77647e1efe8fff2f4c9a1201228f9b6138b6f55b9995788969b6fbf",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-14",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q16",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "ea48261b3e2bdbce53d5c30c7cd9fa0703d5cf1dbf90562b104e007e3c8869f4",
+   "post_edit_digest": "3541b30dbb500e8574308b4e3170e564521bc612dcb8523458ee4158b11a6784",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-15",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q17",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "1a0aca93141a772422c6ed6a1a1fc8c5811c672fb1cdef314d600aa616ebc16d",
+   "post_edit_digest": "8dcf4511bfefea42c8fe70f324f06862f7bd9aa01598c215bad7d0070afc3af8",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-16",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q18",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "6473b88f0c2f686a95c9a517761c12d403fc5c39d19173efe766f9aa5ea2bad6",
+   "post_edit_digest": "4c54061d238d037845ec9556f308d42bffb819ed662bd7ee12aebb2941d84e44",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-17",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q19",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "a2bf74cd68d8e0284463acc70fdfa22b370344028dc621995ed150c5f07a6e81",
+   "post_edit_digest": "e4ab278ad1f741f530d2534ac66e50d335b136d945a9de73e2046416748b2b4e",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-18",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q20",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "2e126d0e32f488395e30f540ad84bbcc6b16d8ccce04d6e3689d89920b61f226",
+   "post_edit_digest": "6e2ed94515c2db28f3e93e55bf878d88ae65bb8557607f4809a4aeb81a626fd2",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-19",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q21",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "e52701275a63d1f164efbe2d268c25a8c74ded0b9df1840bfb8258076cdd6e26",
+   "post_edit_digest": "5295f2d23862ab9889e11e4436e6cbddf1266e19dd3cef0f617e1d3fb7615ca3",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-20",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q22",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "804bf7f47e88f84f2a5e1975da7d4f451ccf9e584bd0046135f0f7acff7fe70f",
+   "post_edit_digest": "1417f8dbcd4623c83039766fe52d6c8bae174cda660fb6b1203fd129f132c833",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-21",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q23",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "b6eb4686d72e12da2ee708435c8381152984c48b41ed3ab5ee9518b4be543640",
+   "post_edit_digest": "77534c744136c69cc88f9e27a18799de79c23aaed01185c73d9339fca8944227",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-22",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q24",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "49e2a39295225da6f7cd1bcac96c469e60a2a17a7add2bd97987ee3741e1f995",
+   "post_edit_digest": "9042d0a3052fa230903e4f0512a018db054d59528437734c7bf52cb0c4fbb4d6",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-23",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q25",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "36d81a3e29c6282289da0724ec26fc9c6b916ecc6497b866640b3086de89bae2",
+   "post_edit_digest": "20827d01314cab409ce16d52da0a907e6af8fa9289582f7318a3a5206e5dcacd",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-24",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q26",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "a9aa723fcbc5e35d0bcf2c0470a13e0d3f433fa4b5257e3a68c470e68515890e",
+   "post_edit_digest": "47381c77c5f5204b3aef2354649d0b7d6f334657b477f97e7087c7f8be73f32e",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-25",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q27",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "34329bcaa9d008d3569dde9f584d029bf94f20aa3c7873f835f3900b46ea995c",
+   "post_edit_digest": "1f5517903debc358468e398a923899d407060e157bc3306f3015aa6f9839e387",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-26",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q28",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "7071eaffe1dad0e0fa341d88786a69ff767201bc92b49104dca228c9277670c7",
+   "post_edit_digest": "7544c6d2a4e5607a3464d338c297fd72fe0975095f232256fbc0b314718c439e",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-27",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q29",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "53c2d365fa3c7c5e401853b7bab0336cca9b1ac78a9d1ac07769a1bac55828f9",
+   "post_edit_digest": "b45c5fedfe60643ed28b8642bcf6add48531309254662d303281f79f557454db",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label",
+   "supersedes": {
+    "manifest": "batch_e1_enrichment_manifest.json",
+    "action_id": "ENRICH-A006",
+    "post_edit_digest": "53c2d365fa3c7c5e",
+    "note": "ENRICH-A006 pinned the state this record edits. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-28",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q30",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "00e6208f24be23e73a7d7ea48ea3da8064419d1734cdec173dd48749e9843101",
+   "post_edit_digest": "b2fedcbd6919a1072b0bba1e15b294e6a906632b56eda311afedbf6a1c745aa3",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-29",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q31",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "8e13b4ce9725e2b46c99e36e32f4080782d2bec2ff1855464f2e13ceb2179a96",
+   "post_edit_digest": "fe5e91fd75f707ce54442850566f0c1f0ca9a03c69c1a0754422d634d0125891",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-30",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q32",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "28e574d2e1da5a2457426ab85e653784569be11ce52c7c7749b55df81a7a4f7d",
+   "post_edit_digest": "fb617b963715e67cde53c3f50c860385ea133a47cf3668f5380440d3a49db086",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label",
+   "supersedes": {
+    "manifest": "correction_corr_g1_006_salvor_citation_20260824_manifest.json",
+    "action_id": "CORR-G1-006-01",
+    "post_edit_digest": "28e574d2e1da5a2457426ab85e653784569be11ce52c7c7749b55df81a7a4f7d",
+    "note": "CORR-G1-006-01 pinned the state this record edits. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-31",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q33",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "8430beb86e3edd70bf1403cffeb808103e83799ee9a765e859d9419ad6281fb4",
+   "post_edit_digest": "c3a2853696b9ac11a38923842a46c11676cdb590127a01b7a3aba895934e187e",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-32",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q34",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "aa3956897e67891ac4629bec6d7b19acc89abed7e7021e400e49e7d7d0d4e3ad",
+   "post_edit_digest": "e7d70084fafa2a2dfa643cfa3702dbab0bb393922a6f1743d57444df24030e21",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label; orphaned markdown bullet removed before the trap answer"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-33",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q35",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "f3963465f481e15067d0fb58b6524d7255a21ed0057dcf8ad031636ea2196c24",
+   "post_edit_digest": "8060df8afd46a16ca465fe4044cb7789301f70d57d81d3157646007201349642",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-34",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q36",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "4bb0affb77d725cd4bdb64b6b2a8e6c249dd39f8a50619584c795a16cb09d164",
+   "post_edit_digest": "e04504cb6446757340489b24cc73405db0a83a35680748551df72ecd843939c9",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label; orphaned markdown bullet removed before the trap answer"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-35",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q37",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "660eeae869412da0cfaad6359aab7056cb8e46d34925cfe5088669d76708e5ca",
+   "post_edit_digest": "9c9b45f3051d9d9feb9792090ce4b97157344941d243fcef5938c4b82687eed0",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label; orphaned markdown bullet removed before the trap answer"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-36",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q38",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "1172614fde1395752b04ac217d6e4e744bd4fb65d3c9b3361377fd9e59896181",
+   "post_edit_digest": "67f42e783631b2fb1c7ebcc4df4b7ef845b031cd2bcdfc68082860005b9e5c84",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label; orphaned markdown bullet removed before the trap answer"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-37",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q39",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "88692bca17cca63a3f635d5b75d4d4847aa4ae6f056c0fd8b304a309e6a42458",
+   "post_edit_digest": "5e691c18204280955ab7f54ca6879cce7990ca29a1fa8cc30243760d186dbf21",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label; orphaned markdown bullet removed before the trap answer"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-38",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q40",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "4166691c4a9a6d62f02b103bcf87f7196080a01898729989ff4b2581ac7ca7ee",
+   "post_edit_digest": "938bde8792df7c727698dacf0217b8f0029f94721a1869f1e2c81fbb2960a156",
+   "what_changed": "cascaded deep-dive blocks truncated at their first stray markdown marker; every removed section survives verbatim as the own body of the later typed block carrying that label; orphaned markdown bullet removed before the trap answer",
+   "supersedes": {
+    "manifest": "correction_corr_dgma_naming_20260823_manifest.json",
+    "action_id": "CORR-DGMANAME-01",
+    "post_edit_digest": "4166691c4a9a6d62f02b103bcf87f7196080a01898729989ff4b2581ac7ca7ee",
+    "note": "CORR-DGMANAME-01 pinned the state this record edits. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-39",
+   "file": "QB1_I.html",
+   "path": "meoclass1/QB1_I.html",
+   "anchor": "q2",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "0fc998f7861fb39b0f1f5f24ee7e97cc59a11ed6affdb6436df16ef3ad19d7b8",
+   "post_edit_digest": "3251f9421db1c1230f75d5af73dd45bd2736885dd1c67b328415e43d2b620137",
+   "what_changed": "empty <details class=\"deep-dive\"> element removed - it promised seven sections and delivered none, and no trustworthy source content existed to fill it",
+   "supersedes": {
+    "manifest": "correction_corr_msact2b_green_20260904_manifest.json",
+    "action_id": "CORR-MSACT2B-B-04",
+    "post_edit_digest": "0fc998f7861fb39b0f1f5f24ee7e97cc59a11ed6affdb6436df16ef3ad19d7b8",
+    "note": "CORR-MSACT2B-B-04 pinned the state this record edits. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken and nothing edited the card in between."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-40",
+   "file": "QB1_I.html",
+   "path": "meoclass1/QB1_I.html",
+   "anchor": "q3",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "1925ae95d1e401c7380c90ebba08d155e84a3a52728d7c938e1a0fc2efec789e",
+   "post_edit_digest": "a6dc8371804d14a345bc3d7ef664fb1f2fcae98f592d7d73cd956ee0dd69e6a4",
+   "what_changed": "empty <details class=\"deep-dive\"> element removed - it promised seven sections and delivered none, and no trustworthy source content existed to fill it; orphaned markdown bullet removed from the answer body"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-41",
+   "file": "QB1_I.html",
+   "path": "meoclass1/QB1_I.html",
+   "anchor": "q4",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "cf85aab6e18c78c75856b015c5e3914ef1fe07b21f8983b835414f842e9afa1c",
+   "post_edit_digest": "4b69286be555b72ca18c047d909a713e9dda9f56b214cbbc6d71280a0ff00d2a",
+   "what_changed": "empty <details class=\"deep-dive\"> element removed - it promised seven sections and delivered none, and no trustworthy source content existed to fill it"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-42",
+   "file": "QB1_I.html",
+   "path": "meoclass1/QB1_I.html",
+   "anchor": "q5",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "a0d6da394db41b91d528cebd97ecce5e010c0c974b90a949203845289784fc87",
+   "post_edit_digest": "d177f1a8bd3946371cdb0340485be58614790348e6ebf6b440f24c626873cc36",
+   "what_changed": "empty <details class=\"deep-dive\"> element removed - it promised seven sections and delivered none, and no trustworthy source content existed to fill it"
+  },
+  {
+   "correction_action_id": "T5-DDCASCADE-43",
+   "file": "QB1_I.html",
+   "path": "meoclass1/QB1_I.html",
+   "anchor": "q6",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "1e09a17bf55ebeb4374507b1b81f2685da38a795d9e4a5c1c146f594eddd2b55",
+   "post_edit_digest": "9b79628602a5ce6ef198d3a22da872a48f4d9ded35b89a10c98f9a1bad6a6470",
+   "what_changed": "empty <details class=\"deep-dive\"> element removed - it promised seven sections and delivered none, and no trustworthy source content existed to fill it"
+  }
+ ]
+}

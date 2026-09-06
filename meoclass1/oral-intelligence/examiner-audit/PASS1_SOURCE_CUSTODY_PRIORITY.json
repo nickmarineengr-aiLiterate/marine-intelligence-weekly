@@ -1,0 +1,148 @@
+{
+ "record": "MIW KNOWN-DEFECT-FAMILY REMEDIATION - PASS 1",
+ "schema": "miw-pass1-source-custody-priority/1",
+ "date": "2026-09-06",
+ "status": "RANKED - NOT ACQUIRED",
+ "acquisition_authority": "NONE GRANTED IN PASS 1. Section 10 of the Pass-1 instruction is explicit: do not acquire unless already authorised elsewhere. This register RANKS the work and states what each acquisition would and would not close. Nothing here was fetched, and no card was corrected on the strength of a source named here.",
+ "why_ranked_by_blast_radius": "The site counts below are the reason the ordering is not the obvious one. A source is worth acquiring in proportion to how many candidate-facing propositions it settles, and known_traps entry 94 records the failure mode this avoids: a correction scoped to the card a finding named leaves every sibling site stale, and the sweep has to be run again. Acquire, then sweep the whole family once.",
+ "counting_note": "Sites are regex occurrences across meoclass1/QB*.html, not lines and not cards - known_traps entry 89 records a census quoted per line that understated the true occurrence count by a factor of three. A site count is an upper bound on work, not a defect count: most sites will be correct.",
+
+ "priority_1": [
+  {
+   "source_id_proposed": "SRC-MSC255-84",
+   "title": "Code of the International Standards and Recommended Practices for a Safety Investigation into a Marine Casualty or Marine Incident (Casualty Investigation Code), resolution MSC.255(84)",
+   "issuing_authority": "IMO",
+   "availability": "OFFICIAL, public - IMO resolution, freely published",
+   "target_local_custody": "true-source/03-imo-instruments/Casualty-Investigation-Code/",
+   "dependent_sites": 123,
+   "dependent_files": 15,
+   "densest_pages": ["QB1_A.html (34)", "QB9_H.html (18)", "QB4_G.html (13)", "QB5_B.html (13)"],
+   "dependent_p1_findings": ["QB1_A#q24", "QB1_B#q15"],
+   "acquisition_alone_closes_issue": false,
+   "acquisition_alone_note": "It establishes the governing text. Each of the fifteen pages still has to be read against it - but at present NOTHING adjudicates any of them, so every one of these sites is currently unverifiable rather than merely unverified.",
+   "known_complication": "A package for this Code is reported to exist already in the git-ignored Knowledge Central corpus. If so this is a MIGRATION into governed custody, not a fetch - and per known_traps 94's sibling rule, an index row saying it exists is a pointer and not evidence: open the artefact before recording it as held."
+  },
+  {
+   "source_id_proposed": "SRC-LSA-CODE",
+   "title": "International Life-Saving Appliance (LSA) Code, current consolidated text, plus the adopting resolution for the lifeboat lowering-speed amendment",
+   "issuing_authority": "IMO",
+   "availability": "OFFICIAL - the Code is an IMO sales publication; the adopting MSC resolutions are freely published",
+   "target_local_custody": "true-source/03-imo-instruments/LSA-Code/",
+   "dependent_sites": 50,
+   "dependent_files": 11,
+   "densest_pages": ["QB2_E.html (15)", "QB2_I.html (10)", "QB2_F.html (7)"],
+   "dependent_p1_findings": ["QB10_B#q1 - the 1.0-1.3 m/s lowering-speed range"],
+   "acquisition_alone_closes_issue": true,
+   "acquisition_alone_note": "The QB10_B claim is that a new range REPLACED the height-dependent formula. The adopting resolution settles it outright, in both directions - and a replacement claim is precisely the shape that cannot be adjudicated from the figure alone.",
+   "promoted_above_the_instruction_order": true,
+   "promotion_reason": "The instruction lists the LSA Code at priority 2. It is raised here because it is the sole blocker on a live P1 numeric-standard claim, and the numeric-standard family is the one with a demonstrated history of shipping invented figures - Tranche 4's 6 bar, Tranche 5's 4-6 bar, and the 4.0 bar the Pass-1 census added. Priority 2's other members block no P1.",
+   "caveat": "A supplement to a sales publication is an editorial aid and not the instrument (SKILL.md 8.2c). Get the resolution, not only the consolidated reprint."
+  },
+  {
+   "source_id_proposed": "SRC-DGMA-ORDER-01-2026",
+   "title": "DGS/DGMA Order 01 of 2026",
+   "issuing_authority": "Directorate General of Shipping / DGMA, India",
+   "availability": "OFFICIAL, public - published at dgma.gov.in. The old dgshipping.gov.in host refuses connections; the Engineering Wing page has carried orders the site's general index omitted, so take the listing that actually carries the document.",
+   "target_local_custody": "true-source/05-india/DGMA-Orders/",
+   "dependent_sites": 15,
+   "dependent_files": 2,
+   "densest_pages": ["QB1_I.html (11)", "QB10_B.html (4)"],
+   "dependent_p1_findings": [],
+   "acquisition_alone_closes_issue": true,
+   "acquisition_alone_note": "Small and self-contained. QB1_I#q2 already teaches a transition from DGS Order 06 of 2023 to Order 01 of 2026 as a currency point a candidate should volunteer to a Kochi examiner - a claim about a named order that the repository does not hold. That is the QB4_H#q2 defect shape exactly: advising a candidate to assert something the corpus cannot verify.",
+   "currency_rule": "Ask the DGMA listing what it has published MOST RECENTLY on this subject, never whether Order 01 of 2026 superseded Order 06 of 2023 - the second question cannot see a 2026 successor (SKILL.md 8.2b)."
+  },
+  {
+   "source_id_proposed": "SRC-IRS-RULES",
+   "title": "Indian Register of Shipping rules underpinning the QB1_G survey and classification content",
+   "issuing_authority": "Indian Register of Shipping",
+   "availability": "OFFICIAL, public - IRS publishes its rules",
+   "target_local_custody": "true-source/06-class/IRS/",
+   "dependent_sites": 70,
+   "dependent_files": 22,
+   "densest_pages": ["QB4_A.html (18)", "QB1_G.html (13)", "QB1_supplementary.html (9)"],
+   "dependent_p1_findings": [],
+   "acquisition_alone_closes_issue": false,
+   "acquisition_alone_note": "Class rules are versioned annually. Registering an edition without a revalidation trigger produces a source that is authoritative on the day it is filed and silently stale afterwards.",
+   "note": "QB1_G#q40's CSM content was corrected on 23 August 2026 (CORR-CSMBOILER, CORR-CSMINDIA, CORR-DGMANAME) against UR Z18, and again structurally in this pass. The IRS acquisition would let the class-society-specific limb be verified rather than inferred from the IACS UR."
+  }
+ ],
+
+ "priority_2": [
+  {
+   "source_id_proposed": "SRC-IACS-MEMBERSHIP",
+   "title": "IACS official membership listing",
+   "availability": "OFFICIAL, public",
+   "dependent_sites": 571,
+   "dependent_files": 60,
+   "dependent_p1_findings": ["QB4_E#q12"],
+   "acquisition_alone_closes_issue": true,
+   "note": "The 571 sites are overwhelmingly references to IACS Unified Requirements, which this source does not govern - only the MEMBERSHIP claims depend on it, and QB4_E#q12 is where they concentrate. Recorded at its true blast radius so a later session does not read 571 as 571 defects. Its defect mode is currency, not support: it goes wrong with no edit to the card, so the registry row needs a currentness state and a revalidation trigger, not just a fetch."
+  },
+  {
+   "source_id_proposed": "SRC-MLC-2006",
+   "title": "Maritime Labour Convention 2006, as amended",
+   "availability": "OFFICIAL, public - ILO",
+   "dependent_sites": 268,
+   "dependent_files": 45,
+   "dependent_p1_findings": [],
+   "acquisition_alone_closes_issue": false,
+   "note": "The widest unheld instrument in the corpus by file count. Amended repeatedly since 2006, so the amendment set matters as much as the base text."
+  },
+  {
+   "source_id_proposed": "SRC-NOX-TECHNICAL-CODE-2008",
+   "title": "NOx Technical Code 2008, as amended",
+   "availability": "OFFICIAL, public - IMO",
+   "dependent_sites": 20,
+   "dependent_files": 11,
+   "dependent_p1_findings": [],
+   "acquisition_alone_closes_issue": true
+  },
+  {
+   "source_id_proposed": "SRC-ISO-IDENTITY",
+   "title": "ISO standards cited candidate-facing by number",
+   "availability": "PAYWALLED - ISO standards are sold, not published",
+   "dependent_p1_findings": [],
+   "acquisition_alone_closes_issue": false,
+   "governance_note": "Acquisition is a governance question before it is a technical one, and the instruction conditions it on governance permitting. An access limit is STATED, never worked around and never hidden (SKILL.md 8.2b rule 4): the precedent is BMP MS, whose HTTP 403 was not defeated, whose card therefore asserts no chapter or page structure, and which is registered ACCESS_LIMITED. An ISO number cited with no verified content should be registered the same way rather than quietly dropped or quietly asserted."
+  },
+  {
+   "source_id_proposed": "SRC-SOLAS-CONSOLIDATED-2024",
+   "title": "SOLAS Consolidated Edition 2024 - governed relocation",
+   "availability": "ALREADY HELD",
+   "dependent_p1_findings": [],
+   "acquisition_alone_closes_issue": true,
+   "note": "Not an acquisition. This text is already held and was relied on for CORR-T5-HYDRANT-20260906 (II-2/10.2.1.6); the outstanding work is relocating it into governed custody so its digest and currentness state are registered like every other source."
+  }
+ ],
+
+ "k_items": [
+  {
+   "id": "K-ITEM-P1-MSC255",
+   "blocks": ["QB1_A#q24", "QB1_B#q15"],
+   "needs": "SRC-MSC255-84"
+  },
+  {
+   "id": "K-ITEM-P1-LSA-LOWERING-SPEED",
+   "blocks": ["QB10_B#q1"],
+   "needs": "SRC-LSA-CODE plus the adopting MSC resolution"
+  },
+  {
+   "id": "K-ITEM-P1-IACS-MEMBERSHIP",
+   "blocks": ["QB4_E#q12"],
+   "needs": "SRC-IACS-MEMBERSHIP with a currentness state and revalidation trigger"
+  },
+  {
+   "id": "K-ITEM-HOSE-TEST-PRESSURE",
+   "blocks": ["QB2_B#q16", "QB2_B#q13", "QB2_A#q21"],
+   "needs": "the governing text for the weathertightness hose test",
+   "detail": "Raised by the Pass-1 numeric census, not by the tranche. One file states the hose-test inlet pressure as 'at least 1 bar (100 kPa)' on q16 and as '0.2 N/mm2 (2 bar)' on q13, and QB2_A#q21 agrees with the second. The contradiction is real and internal, but no governing source for the hose test is held, so section 7's correction test is not met in either direction. Explicitly NOT guessed: picking the majority reading would be inventing a standard, which is the family this pass exists to close."
+  },
+  {
+   "id": "K-ITEM-QB2F-MONITOR-PRESSURE",
+   "blocks": ["QB2_F#q2"],
+   "needs": "adjudication, not acquisition",
+   "detail": "States '0.27 MPa' as a minimum fire-main pressure benchmark AT DECK MONITORS. The figure equals the SOLAS hydrant value but is applied to a different location and hedged as a 'benchmark'. Reported AMBIGUOUS: whether the hydrant figure governs a monitor supply is a subject-matter question the census cannot settle."
+  }
+ ]
+}

@@ -1,0 +1,108 @@
+{
+ "record": "MIW KNOWN-DEFECT-FAMILY REMEDIATION - PASS 1",
+ "schema": "miw-pass1-p1-disposition/1",
+ "date": "2026-09-06",
+ "baseline_commit": "464bc3c",
+ "governing_commits": ["4c8dfd6", "e8c2ec7"],
+ "purpose": "Every Tranche-5 P1 card is dispositioned here. NO SILENT DROPPING: a card this pass did not correct carries an explicit reason and a named blocker, so a later session can act on it without re-deriving the finding. A card marked CLOSED_IN_PASS_1 names the record that closed it and is verifiable by that record's own content gate.",
+ "discovery_status": {
+  "verdict": "DISCOVERY CONVERGED, REMEDIATION NOT COMPLETE",
+  "basis": "Tranche 5 returned P0 = 0, seventeen P1 findings across eight cards, and ZERO genuinely new material defect classes - every P1 mapped to a defect family already known and already adjudicated at least once. Sampling for new classes has therefore stopped; no Tranche 6 was selected or run.",
+  "what_this_pass_changed": "The corpus census found that the known families were substantially LARGER than the tranche had shown: 44 cards carrying the deep-dive cascade against the 3 the tranche named, and 3 correction-reach sites plus 2 numeric-standard sites that no finding had ever named. Convergence of DISCOVERY is not convergence of EXTENT."
+ },
+ "dispositions": [
+  {
+   "card": "QB1_G.html#q40",
+   "tranche_5_finding": "deep-dive structure - cascaded duplicate payload",
+   "disposition": "CLOSED_IN_PASS_1",
+   "closed_by": "CORR-T5-DDCASCADE-20260906",
+   "action_classification": "PRIMARY_CORRECTION",
+   "detail": "This is the card the tranche named in this family, so it carries the record's PRIMARY_CORRECTION classification. The census then found 43 more with the identical conversion defect. Proved lossless before application; the removed text survives verbatim as the own body of the later typed block carrying the same label.",
+   "verifiable_by": "tools/oral/validate_correction_t5struct.py"
+  },
+  {
+   "card": "QB1_I.html#q2",
+   "tranche_5_finding": "empty deep-dive block - seven sections promised, none delivered",
+   "disposition": "CLOSED_IN_PASS_1",
+   "closed_by": "CORR-T5-DDCASCADE-20260906",
+   "action_classification": "SCOPE_PASS_CORRECTION",
+   "detail": "The empty <details> element was REMOVED rather than filled, per the Pass-1 instruction that an empty block with no trustworthy source content has its promise removed rather than an answer fabricated. The census found four more on the same page (q3-q6) and one on QB2_H#q2, all closed the same way.",
+   "verifiable_by": "tools/oral/validate_correction_t5struct.py"
+  },
+  {
+   "card": "QB10_B.html#q1",
+   "tranche_5_finding": "unsupported numeric standard - \"1.0-1.3 m/s: new lifeboat lowering speed range (replacing the old H-dependent formula)\"",
+   "disposition": "REQUIRES_SOURCE_ACQUISITION",
+   "closed_by": null,
+   "blocker": "K-ITEM-P1-LSA-LOWERING-SPEED",
+   "detail": "The claim is a REPLACEMENT claim - that a new range supersedes the LSA Code's height-dependent lowering-speed formula - and a replacement claim cannot be adjudicated from the number alone. The card is a consolidated 2024-2028 SOLAS/MARPOL amendment overview, so the same acquisition closes several of its rows at once. NOT corrected in Pass 1: section 7 permits correction only where held primary source directly adjudicates the claim or the proposition is internally contradicted with the correct in-repo source already established. Neither holds. Guessing a figure here would repeat the defect class this pass exists to close.",
+   "source_required": ["SRC-LSA-CODE (amended, current consolidated text)", "the adopting MSC resolution for the lowering-speed amendment"],
+   "closes_issue_alone": true
+  },
+  {
+   "card": "QB1_B.html#q15",
+   "tranche_5_finding": "IMO Casualty Investigation Code - scope and purpose",
+   "disposition": "REQUIRES_SOURCE_ACQUISITION",
+   "closed_by": null,
+   "blocker": "K-ITEM-P1-MSC255",
+   "detail": "The Casualty Investigation Code is taught across at least twelve pages and 52 sites in this corpus, and no held primary text governs any of them. A single-card correction here would be exactly the finding-scoped sweep that known_traps entry 94 records as the reason siblings keep being left behind: the acquisition has to precede the correction so the whole family can be swept once. This card ALSO carries long-rule authoring residue, which is Pass-2 backlog.",
+   "source_required": ["SRC-MSC255-84 Casualty Investigation Code"],
+   "closes_issue_alone": false,
+   "closes_issue_alone_note": "Acquisition establishes the text; the propositions on each of the twelve pages still have to be read against it."
+  },
+  {
+   "card": "QB1_A.html#q24",
+   "tranche_5_finding": "Casualty Investigation Code - why, how to report, human elements",
+   "disposition": "REQUIRES_SOURCE_ACQUISITION",
+   "closed_by": null,
+   "blocker": "K-ITEM-P1-MSC255",
+   "detail": "Same family and same blocker as QB1_B#q15. QB1_A carries seventeen of the corpus's Casualty-Investigation-Code sites - the densest single page - so it is where the post-acquisition sweep should start.",
+   "source_required": ["SRC-MSC255-84 Casualty Investigation Code"],
+   "closes_issue_alone": false
+  },
+  {
+   "card": "QB4_E.html#q12",
+   "tranche_5_finding": "IACS members - list all member societies",
+   "disposition": "REQUIRES_EXTERNAL_VERIFICATION",
+   "closed_by": null,
+   "blocker": "K-ITEM-P1-IACS-MEMBERSHIP",
+   "detail": "A membership list is a LIVE list, and its defect mode is currency rather than support: it goes wrong when a society joins, leaves or merges, with no edit to the card. Section 8.2b of the batch skill governs how to ask - the question is what IACS's own listing says MOST RECENTLY, never whether a supersession this session already suspects occurred. Registering the IACS members page with a currentness state and a revalidation trigger is what closes this durably; correcting the list once does not. This card also carries long-rule authoring residue (Pass-2 backlog).",
+   "source_required": ["IACS official membership listing, registered with a currentness state and revalidation trigger"],
+   "closes_issue_alone": true
+  },
+  {
+   "card": "QB8_A.html#q3",
+   "tranche_5_finding": "liner consortium and freight rates",
+   "disposition": "REQUIRES_LATER_SURGICAL_CORRECTION",
+   "closed_by": null,
+   "blocker": "no Pass-1 family covers it; no primary instrument governs it",
+   "detail": "Commercial-practice content with no governing instrument, so none of the five Pass-1 families reaches it and no source acquisition would settle it. It needs a subject-matter read, not a sweep. Carried forward explicitly rather than closed by silence.",
+   "source_required": [],
+   "closes_issue_alone": false
+  },
+  {
+   "card": "QB5_A.html#q4",
+   "tranche_5_finding": "Maslow's Hierarchy of Needs",
+   "disposition": "REQUIRES_LATER_SURGICAL_CORRECTION",
+   "closed_by": null,
+   "blocker": "no Pass-1 family covers it; no primary instrument governs it",
+   "detail": "Management-theory content. Same shape as QB8_A#q3: no regulatory source adjudicates it and no mechanised family reaches it. Carried forward explicitly.",
+   "source_required": [],
+   "closes_issue_alone": false
+  }
+ ],
+ "summary": {
+  "p1_cards_total": 8,
+  "closed_in_pass_1": 2,
+  "requires_source_acquisition": 3,
+  "requires_external_verification": 1,
+  "requires_later_surgical_correction": 2,
+  "silently_dropped": 0
+ },
+ "named_findings_closed_in_pass_1": {
+  "N-1": "QB4_H#q2 source-confidence footer - CLOSED by CORR-T5-REACH-20260906",
+  "N-2": "QB9_A_CheatSheet MSC.1/Circ.1606 pills - CLOSED by CORR-T5-REACH-20260906",
+  "N-3": "QB2_A#q8 4-6 bar required minimum - CLOSED by CORR-T5-HYDRANT-20260906",
+  "N-4": "QB5_B_CheatSheet CLOSED and QB4_H_cheatsheet ADJUDICATED by CORR-T5-REACH-20260906 - the examiner cue is quoted wording and was KEPT; only the answer cell was qualified"
+ }
+}
