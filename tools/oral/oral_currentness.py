@@ -250,6 +250,13 @@ def firemain_scope_defects(raw: str):
                 continue
             if DENIAL.search(sent) or (label and DENIAL.search(label)):
                 continue
+            # A QUESTION is not an assertion. The currentness detector has had
+            # this rule since it was written; this one did not, so a trap
+            # question or a practice prompt quoting the figure was reported as
+            # teaching it - the same asymmetry as the excused classes, one
+            # layer down.
+            if sent.rstrip().endswith("?"):
+                continue
             # Completeness is judged on the SEGMENT, never the page: a 0.25
             # three paragraphs away must not rescue a single-limb bullet.
             seg_vals = [v for v, _ in pressures_mpa(text)]
@@ -378,7 +385,16 @@ def _governing_currentness(raw: str):
     an unrelated BMP5 claim sitting beside it.
     """
     spans = []
-    for m in re.finditer(r'<div class="(?:q-card|topic-block)"[^>]*>', raw):
+    # Attribute ORDER, QUOTE STYLE, an extra class, or `<section>` instead of
+    # `<div>` are all invisible to a reader and all broke this pattern - and
+    # when it breaks, an entire card's legitimate history is reported as live
+    # teaching. Matching a rendering rather than the structure is the defect
+    # this module exists to remove, and it had survived here, in the one path
+    # that never went through `oral_visible`.
+    for m in re.finditer(
+            r'<(?:div|section|article)\b[^>]*\bclass\s*=\s*'
+            r'(?:"[^"]*\b(?:q-card|topic-block)\b[^"]*"'
+            r"|'[^']*\b(?:q-card|topic-block)\b[^']*')[^>]*>", raw):
         depth, i, n = 0, m.start(), len(raw)
         while i < n:
             if raw.startswith("<div", i):
@@ -425,8 +441,15 @@ CURRENT_ASSERTION = re.compile(
 
 #: A clause whose subject is a back-reference. Anchored: the pronoun has to be
 #: what the clause is ABOUT, not merely a word inside it.
+#: English almost always fronts an adverbial before resuming with a pronoun -
+#: "Nevertheless, it remains the guidance we apply". Anchoring on the bare
+#: pronoun missed every such sentence, which is to say most of them.
+_OPENER = (r"(?:and|or|so|but|yet|nevertheless|nonetheless|however|still|"
+           r"today|even so|that said|in practice|on board|in our fleet|"
+           r"in service|as such|therefore|thus|hence|meanwhile|currently|"
+           r"at present|for now|in any case|regardless|notwithstanding)")
 PRONOUN_SUBJECT = re.compile(
-    r"^(?:and|or|so|but|yet)?\s*(?:it|they|this|these|those)\b", re.I)
+    r"^(?:%s\b,?\s+){0,2}(?:it|they|this|these|those)\b" % _OPENER, re.I)
 
 
 def bmp5_current_teaching(raw: str):

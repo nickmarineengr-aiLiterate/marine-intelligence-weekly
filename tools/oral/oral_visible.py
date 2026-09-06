@@ -229,7 +229,14 @@ _VERB = (r"(?:is|are|was|were|be|been|being|remains?|remained|stays?|stayed|"
          r"sets?|forms?|shall|should|must|may|can|will|would|has|have|had|"
          r"does|do|did|replaced?|replaces|supersede[sd]?|superseded|"
          r"describes?|states?|lists?|exists?|withdrawn|revoked|repealed|"
-         r"taught|carried|stands?|holds?)")
+         r"taught|carried|stands?|holds?|"
+         # Past-tense forms an author reaches for when describing what a
+         # superseded publication USED to do. Omitting them left the left-hand
+         # clause with no recognised verb, so the coordinator refused to split
+         # and the clause's own denial silenced the live claim after it -
+         # "BMP5 governed HRA transits before 2025, and it remains current".
+         r"governed|covered|specified|mandated|recommended|introduced|"
+         r"addressed|dealt|applied|required|prescribed|defined|set out)")
 _COORD = re.compile(r",?\s+(?:and|or|so|which|that)\s+", re.I)
 _HAS_VERB = re.compile(r"\b%s\b" % _VERB, re.I)
 

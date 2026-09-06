@@ -3006,3 +3006,31 @@ for the Red Sea…`) is a denial. That sentence is live in `QB4_H.html` and surv
 because its container happened to carry a governing note; on a cheat sheet the same words
 were reported as teaching BMP5 as current. **Correct content must not depend on which
 container it was filed in.**
+
+### 111. An exemption is a blind spot, and it is where the last defect hides
+
+`bmp5_current_teaching` exempts an entire card whose banner says the publication was
+superseded. So a live claim INSIDE that card — "BMP5 is the current industry guidance" —
+is invisible, while the same words one byte outside are reported.
+
+That is precisely this corpus's own documented defect. `QB4_B.html` records: *"the body and
+Numbers layers still taught BMP5 as the current publication, contradicting this card's own
+banner"*. **The banner is what buys the immunity.**
+
+Worse, the exemption exists to hide a measured **18 of 18 false-positive rate** on real
+historical sentences ("BMP5 was published in 2018", "BMP5 covered the Red Sea"). A
+whitelist that broad is not a policy; it is a symptom that the rule underneath it does not
+discriminate.
+
+**When you add an exemption, measure what it HIDES, not only what it fixes.** Neutralise it
+and count the hits: if most are legitimate, the sentence rule is the thing to repair. Here
+the honest fix is a tense-and-aspect rule — a past-tense predication about a superseded
+publication is history — not a wider whitelist.
+
+And the exemption's own container test read RAW HTML with a literal attribute pattern: the
+one path that never went through the normalising segmenter. `<div id="q1" class="q-card">`
+broke it, turning a whole card of correct history into reported defects.
+
+**Audit exemption paths to the same standard as detection paths.** They are load-bearing in
+the opposite direction, and they are the easiest thing to forget when the detector is what
+is under review.

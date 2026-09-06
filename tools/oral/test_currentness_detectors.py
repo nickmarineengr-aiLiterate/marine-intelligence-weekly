@@ -396,19 +396,73 @@ def main() -> int:
               "applies.</p>"),
           "one sentence, and only on an explicit currency claim")
 
+    # ---- adverbial openers, and past-tense verbs -----------------------
+    ADV_CATCH = [
+        "BMP5 was superseded in 2025. Nevertheless, it remains the guidance "
+        "we apply.",
+        "BMP5 was superseded in 2025. However, it remains the guidance we "
+        "apply.",
+        "BMP5 is superseded; nevertheless it applies today.",
+        "BMP5 was superseded in 2025. In practice, it remains the guidance "
+        "we apply.",
+    ]
+    check("E1_adverbial_opener_does_not_hide_the_pronoun",
+          all(bmp5_current_teaching("<p>%s</p>" % c) for c in ADV_CATCH),
+          "%d case(s); English fronts the adverbial, then resumes"
+          % len(ADV_CATCH))
+
+    PAST_CATCH = [
+        "BMP5 governed HRA transits before 2025, and it remains the current "
+        "industry guidance.",
+        "BMP5 covered HRA transits before 2025, and it remains the current "
+        "industry guidance.",
+        "BMP5 specified HRA measures before 2025, and it remains the current "
+        "guidance.",
+    ]
+    check("E1_past_tense_verbs_still_form_a_clause",
+          all(bmp5_current_teaching("<p>%s</p>" % c) for c in PAST_CATCH),
+          "an unrecognised verb makes a whole clause invisible")
+
+    # ---- the exemption must not depend on how the tag was typed --------
+    # It read RAW HTML with a literal attribute pattern - the one path that
+    # never went through the normalising segmenter. Attribute order, quote
+    # style, an extra class and <section> are all invisible to a reader, and
+    # each of them turned a whole card of correct history into reported
+    # defects.
+    GOVERNED = ('<%s><p>Currentness note: BMP5 has been superseded. It was '
+                'replaced in 2025 by BMP Maritime Security.</p>'
+                '<p>BMP5 was published in 2018 by an ICS-led coalition.</p>'
+                '</div>')
+    check("currentness_exemption_survives_markup_variation",
+          not any(bmp5_current_teaching(GOVERNED % t) for t in (
+              'div class="q-card"', "div class='q-card'",
+              'div class="q-card collapsed"', 'div id="q1" class="q-card"',
+              'section class="q-card"')),
+          "5 spellings of one container, one verdict")
+
     # ---- the two detectors must excuse the same things -----------------
     # An examiner's stem quotes the examiner. The BMP5 detector excused those
     # from the start; the fire-main detector skipped only three provenance
     # classes, so it would have reported a stem as a defect and pointed an
     # operator at the one edit the corpus rule forbids.
+    # Deliberately NOT phrased as questions: a stem can be an instruction
+    # ("state the basis"), and if every case here ended in "?" this check
+    # would pass on the question rule below and prove nothing about classes.
     check("firemain_excuses_examiner_wording_like_bmp5_does",
           not firemain_scope_defects(
-              '<div class="q-card"><div class="q-text">What is the minimum '
-              'fire main pressure of 0.27 N/mm2 based on?</div></div>')
+              '<div class="q-card"><div class="q-text">Minimum fire main '
+              'pressure 0.27 N/mm2 - state the regulatory basis.</div></div>')
           and not firemain_scope_defects(
-              '<div class="cs-qtitle">Minimum hydrant pressure 0.27 MPa - '
-              'on what is it based?</div>'),
+              '<div class="cs-qtitle">Hydrant minimum 0.27 MPa - explain the '
+              'two limbs.</div>'),
           "same excused-class set as the currentness detector")
+
+    check("firemain_excuses_a_question_like_bmp5_does",
+          not firemain_scope_defects(
+              '<div class="practice-block"><span class="pb-label">Practice'
+              '</span>What is the basis for the 0.27 N/mm2 minimum hydrant '
+              'pressure?</div>'),
+          "a question is not an assertion - same rule, one layer down")
 
     # ---- a dated frame is a denial -------------------------------------
     # Verbatim live in QB4_H.html. It survived only because its container

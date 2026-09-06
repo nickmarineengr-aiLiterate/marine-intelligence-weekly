@@ -103,6 +103,42 @@ was a live content defect:
 Verified after all four: the live corpus stayed at **firemain 0 / BMP5 0** across all 173
 non-past-paper files, so none of the widenings produced a false positive.
 
+## Third independent review - four more fixed, one deferred as the top debt item
+
+| # | Finding | Disposition |
+|---|---|---|
+| **E2** | *"BMP5 was superseded in 2025. **Nevertheless, it** remains the guidance we apply."* The pronoun rule was anchored on the bare pronoun, and English almost always fronts an adverbial first - so it missed 10 of 10 natural phrasings. | **FIXED.** Up to two adverbial openers may precede the pronoun. |
+| **E3** | `_VERB` listed `governs` but not `governed`, `covered`, `specified`, `mandated`. With no recognised verb on the left the coordinator refused to split, and the left clause's denial silenced the live claim: *"BMP5 governed HRA transits before 2025, and it remains the current industry guidance."* 11 of 12 missed. | **FIXED.** The past-tense forms an author actually reaches for are recognised. |
+| **FP2** | The fire-main detector had no question exemption, where the currentness detector has had one from the start. A trap question or practice prompt quoting the figure was reported as teaching it. | **FIXED.** A question is not an assertion - the same rule, one layer down. |
+| **FP1b** | The exemption's own container test read **raw HTML** with a literal attribute pattern - the one path that never went through the normalising segmenter. `<div id="q1" class="q-card">`, single quotes, an extra class and `<section>` each broke it, and when it breaks an entire card of correct history is reported as live teaching. | **FIXED.** Attribute order, quote style, extra classes and the three container tags all resolve alike. |
+| **E1w** | **The whole-card exemption itself.** A card carrying a supersession banner is exempt in its entirety, so a live claim *inside* it is invisible while the same words one byte outside are reported. | **DEFERRED - the single most serious open item in this record.** |
+
+### The deferred item, stated plainly
+
+`_governing_currentness` grants a **whole-card** exemption. That makes the detector
+structurally blind to this corpus's own documented defect shape: `QB4_B.html` records a
+correction of 6 Sep 2026 reading *"the body and Numbers layers still taught BMP5 as the
+current publication, contradicting this card's own banner"*. The banner is exactly what
+buys the immunity.
+
+It is not a parser edge case and it is not being dismissed as one. It is deferred for two
+reasons, both stated so a reader can overrule them:
+
+1. **It is outside the E1-E4 + generated-surface contract this record was authorised to
+   close**, and that authorisation forbids redesigning the detector architecture again.
+2. **Removing it requires that redesign.** The exemption exists because the sentence-level
+   rule flags plain past-tense history - *"BMP5 was published in 2018"*, *"BMP5 covered the
+   Red Sea"* - at a measured **18 of 18** false positives on real corpus sentences once the
+   exemption is neutralised. Dropping the whitelist without first teaching the detector
+   that a past-tense predication about a superseded publication is history would trade a
+   blind spot for eighteen false alarms on correct text.
+
+The principled repair is a tense-and-aspect rule, not another list. **Recommended as the
+first item of a Pass 1.5**, before any new paid surface depends on this guard.
+
+No live content defect follows from it: three independent verifiers, each with their own
+enumeration and their own regexes, measured the corpus clean.
+
 ## Two defects found while closing, worth as much as the closure
 
 **A committed regex had two dead alternatives.** `oral_currentness.py` carried a literal
@@ -140,6 +176,10 @@ Each new control names a reachable failing state and one mutation reaches it:
 | `E1_pronoun_carries_the_subject_one_sentence` | `E1-P` |
 | `firemain_excuses_examiner_wording_like_bmp5_does` | `F-X` |
 | `historical_date_framing_is_a_denial` | `H-D` |
+| `E1_adverbial_opener_does_not_hide_the_pronoun` | `E1-O` |
+| `E1_past_tense_verbs_still_form_a_clause` | `E1-V` |
+| `currentness_exemption_survives_markup_variation` | `W-D` |
+| `firemain_excuses_a_question_like_bmp5_does` | `F-Q` |
 
 `E1-E` is **two edits in one mutation**, and that is a finding in itself. The noun-list
 rule is defended twice over — the both-sides verb test, and the rule that a verbless
@@ -151,25 +191,38 @@ exist to refuse.
 
 ## Evidence
 
-- **Controls:** `tools/oral/test_currentness_detectors.py` — 28 checks, 0 FAIL, over 80
+- **Controls:** `tools/oral/test_currentness_detectors.py` — 32 checks, 0 FAIL, over 95
   adversarial cases including 6 E1 MUST-CATCH (both the shared-subject and own-subject
   shapes) with 3 MUST-NOT-CATCH, the 3 E2 spellings, 7 E3 MUST-CATCH with 4
   MUST-NOT-CATCH, and both E4 directions, plus the table-row idiom in both tag spellings,
   five pronoun sentences with two bounds, the examiner-stem symmetry and the dated frame.
   Every case two independent verifiers used to reopen this closure is in the set as a
   case, not as prose.
-- **Mutations:** `tools/oral/mutate_correction_p1guard.py` — **30 of 30 behaved as
-  required, 0 escapes, 0 crashes**, serial, byte-exact restore. 30 must-catch (product
+- **Mutations:** `tools/oral/mutate_correction_p1guard.py` — **38 of 38 behaved as
+  required, 0 escapes, 0 crashes**, serial, byte-exact restore. 34 must-catch (product
   and detector) and 4 must-NOT-catch: past-paper wording, a wholly historical
   coordinated sentence, an unrelated heading, and a generated stem echo.
-- **Gates:** p1repair 50, struct 23, reach 42, hydrant 35, scope 10, detectors 28,
+- **Gates:** p1repair 50, struct 23, reach 42, hydrant 35, scope 10, detectors 32,
   tranche4a 85 — 0 FAIL.
 - **Live corpus, recursive, 224 files:** fire-main incomplete-scope claims **0**;
   BMP5-as-current **0**, generated surfaces now included.
 
-## Residual P2/P3 release-hardening debt
+## Residual release-hardening debt
 
-Declared, not hidden, and outside the closure contract:
+Declared, not hidden, and outside the closure contract. **The whole-card currentness
+exemption (E1w above) is the top item and is P1-grade guard debt, not P2/P3** - it has its
+own heading above rather than being buried here. The rest:
+
+- **P2** - `OBSERVATION` is tested before `MANDATORY`, so a hedge beats an explicit
+  requirement: *"In practice the minimum hydrant pressure is 0.27 N/mm2"* reads as a
+  report. No live instance.
+- **P2** - `HEADING_CLASSES` carries seven class names with zero occurrences in this
+  corpus and omits the ones it does use (`dd-label`, `cs-label`). Structural label
+  detection therefore rests on the tag set, which does cover the live pages.
+- **P2** - *"Even though"* and *"Notwithstanding that"* openers are split by the
+  subordinator rule before the leading-clause rule sees them.
+- **P2** - a correction footnote outside the three provenance classes is judged as
+  teaching.
 
 - **P3** — CSS- or JavaScript-generated text, malformed markup beyond the parser's
   recovery, OCR-style corruption, and claims carried only in HTML attribute text.
