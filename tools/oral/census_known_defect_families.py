@@ -380,9 +380,17 @@ FAMILIES = {
 #: publication date. A scope defect does not announce itself: every count the
 #: censuses produced was internally consistent and simply described 57% of the
 #: corpus.
-def corpus_files():
-    """Every HTML file in the question-bank corpus, recursively."""
-    return sorted(QB_ROOT.rglob("*.html"))
+def corpus_files(root=None):
+    """Every HTML file in the question-bank corpus, recursively.
+
+    `root` is parameterised so the scope CONTROL can prove recursion against a
+    synthetic tree instead of planting a probe file inside the product corpus.
+    A test that writes into `meoclass1/` to prove a property of the enumeration
+    is a test that can leave debris in the candidate-facing tree if it is
+    killed mid-run, which is a real hazard here - a killed mutating gate has
+    left product bytes behind before.
+    """
+    return sorted(pathlib.Path(root or QB_ROOT).rglob("*.html"))
 
 
 #: A surface is not a directory - it is a POLICY. The 224 files are not one

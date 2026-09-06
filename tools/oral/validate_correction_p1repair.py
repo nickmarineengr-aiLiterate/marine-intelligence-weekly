@@ -239,9 +239,46 @@ def main() -> int:
              for *forms, expect in equivalences)
     report("pressure_units_normalise_to_one_scale", ok,
            "0.27 MPa = 0.27 N/mm2 = 2.7 bar = 270 kPa; 0.25 likewise")
-    report("unit_normalisation_is_detection_only",
-           "0.27 MPa" in read_text(QB_ROOT / "QB2_F.html"),
-           "QB2_F still prints MPa - the guard changed, not the card")
+    # A REAL detection-only invariant. The previous version asserted
+    # `"0.27 MPa" in QB2_F.html` - which was ALSO true before the correction,
+    # so it passed on a complete revert and proved nothing about the policy it
+    # named. What "detection only" actually means is: the detector is pure, and
+    # a card may print either unit without the guard's verdict changing.
+    probe_mpa = ("<li>Minimum at the hydrants, both required pumps: "
+                 "0.27 MPa at 6,000 GT and upwards, 0.25 MPa below.</li>")
+    probe_nmm = probe_mpa.replace("MPa", "N/mm&sup2;")
+    probe_bar = ("<li>Minimum at the hydrants, both required pumps: "
+                 "2.7 bar at 6,000 GT and upwards, 2.5 bar below.</li>")
+    before = (probe_mpa, probe_nmm, probe_bar)
+    verdicts = [bool(firemain_scope_defects(x)) for x in before]
+    single = "<li>Minimum required hydrant pressure 0.27 MPa</li>"
+    single_nmm = "<li>Minimum required hydrant pressure 0.27 N/mm&sup2;</li>"
+    report("detector_verdict_is_unit_independent",
+           verdicts == [False, False, False]
+           and bool(firemain_scope_defects(single))
+           and bool(firemain_scope_defects(single_nmm)),
+           "the same claim gets the same verdict in MPa, N/mm2 and bar")
+    report("detector_rewrites_no_product_text",
+           (probe_mpa, probe_nmm, probe_bar) == before,
+           "pure function - detection never edits")
+    report("no_product_unit_change_was_required",
+           "0.27 MPa" in read_text(QB_ROOT / "QB2_F.html")
+           and "0.27 N/mm" in read_text(QB_ROOT / "QB2_B.html"),
+           "QB2_F keeps MPa and QB2_B keeps N/mm2 - both pass the same guard")
+
+    # ================= D5 / D9 : exemptions must be bounded ===============
+    unrelated = ('<div class="q-card"><p>Currentness note: MSC.535(107) has '
+                 'been superseded for lifeboat ventilation.</p>'
+                 '<p>Harden the vessel as per BMP5.</p></div>')
+    report("currentness_exemption_is_subject_specific",
+           bool(bmp5_current_teaching(unrelated)),
+           "a note about another instrument grants no immunity to a BMP5 claim")
+    stem_near = ('<div><h2 class="topic-title">Security</h2></div>'
+                 '<div><p>BMP5 is the current industry guidance.</p></div>')
+    report("stem_exemption_does_not_leak_into_neighbouring_teaching",
+           bool(bmp5_current_teaching(stem_near)),
+           "a nearby heading no longer excuses a live claim - the old +/-220 "
+           "character window swallowed teaching text")
 
     # ================= P1-B : the banner is TOPIC-LOCAL ===================
     p10 = QB_ROOT / "oralnotes/miw-notes-mgmt-p10.html"

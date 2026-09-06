@@ -92,27 +92,28 @@ def main() -> int:
            {"oralnotes", "pastpapers", "rulesapp"} <= set(subdirs),
            "subtrees: %s" % ", ".join(subdirs))
 
-    # A planted file must be SEEN. This is the mutation the control exists for.
-    probe = None
-    try:
-        d = QB_ROOT / "oralnotes"
-        fd, name = tempfile.mkstemp(prefix="_scope_probe_", suffix=".html",
-                                    dir=str(d))
-        os.close(fd)
-        probe = pathlib.Path(name)
-        probe.write_bytes(b"<html><body>scope probe</body></html>")
-        seen = probe.resolve() in {p.resolve() for p in corpus_files()}
-        report("a_file_planted_in_a_nested_directory_is_seen", seen,
-               "probe %s" % probe.name)
+    # A planted file must be SEEN - proved on a SYNTHETIC tree, never by
+    # writing into the product corpus. The previous version planted a probe in
+    # `meoclass1/oralnotes/` and removed it in a `finally:`, which does not run
+    # when a process is killed; a killed gate has left product bytes behind in
+    # this repository before, and a scope control is not worth that risk.
+    with tempfile.TemporaryDirectory() as tmp:
+        root = pathlib.Path(tmp)
+        (root / "a.html").write_bytes(b"<html>top</html>")
+        nested = root / "deep" / "deeper"
+        nested.mkdir(parents=True)
+        probe = nested / "_scope_probe.html"
+        probe.write_bytes(b"<html>nested</html>")
+        seen = {q.resolve() for q in corpus_files(root)}
+        report("a_file_planted_in_a_nested_directory_is_seen",
+               probe.resolve() in seen,
+               "the enumeration recurses on any root it is given")
         report("the_planted_file_is_invisible_to_a_top_level_glob",
-               probe.resolve() not in
-               {p.resolve() for p in QB_ROOT.glob("*.html")},
+               probe.resolve() not in {q.resolve() for q in root.glob("*.html")},
                "which is precisely the Pass-1 blind spot")
-    finally:
-        if probe is not None and probe.exists():
-            probe.unlink()
-    report("probe_removed", probe is None or not probe.exists(),
-           "the corpus is left byte-identical")
+    report("scope_control_writes_nothing_into_the_product_tree",
+           not any(q.name.startswith("_scope_probe") for q in enumerated),
+           "the probe lives in a temporary directory, not in meoclass1/")
 
     # Consumers must not re-glob. One enumeration, or they drift - and the
     # drift is what hides a scope defect.
