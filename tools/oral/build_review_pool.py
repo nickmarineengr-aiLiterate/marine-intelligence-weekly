@@ -102,7 +102,16 @@ def explain(pool, target):
         print("EXPLAIN: expected FILE#ANCHOR, got %r" % target)
         return 2
     name, anchor = target.rsplit("#", 1)
-    ident = RP.card_identity({"path": name, "anchor": anchor}, "--explain")
+    # ONE normaliser for BOTH spellings. `path` is read as repo-relative, so a
+    # bare filename has to enter as `file` for card_identity to apply the
+    # meoclass1/ prefix. Passing everything as `path` meant the bare spelling
+    # the accepts file itself uses ("QB7_D.html#q15") resolved to a path that
+    # matches nothing, and --explain answered "carries no manifest evidence"
+    # for a card that was in fact explicitly ACCEPTED - the most misleading
+    # answer this tool can give, in the one command that exists to stop a
+    # reviewer taking an exclusion on trust.
+    key = "path" if ("/" in name or "\\" in name) else "file"
+    ident = RP.card_identity({key: name, "anchor": anchor}, "--explain")
 
     rows = {"pool": pool["cards"], "excluded": pool["excluded"],
             "out of scope": pool["scope_excluded"]}

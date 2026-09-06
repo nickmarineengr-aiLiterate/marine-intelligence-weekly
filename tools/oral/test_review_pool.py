@@ -854,6 +854,21 @@ def control_explain_cli():
     ok("explain.states_the_rule", "digest_match" in text or "no acceptance" in text,
        "explain must say what the acceptance logic concluded, not just a status")
 
+    # Both identity spellings must resolve to ONE card. The accepts file
+    # legitimately writes the bare filename ("QB7_D.html"), and --explain used
+    # to pass whatever it was handed as a repo-relative `path`, so the bare
+    # spelling never received the meoclass1/ prefix and an ACCEPTED card came
+    # back as carrying "no manifest evidence". Same normaliser, one answer.
+    bare = "%s#%s" % (rows[0]["file"].split("/")[-1], rows[0]["anchor"])
+    got_bare = _run("--explain", bare)
+    ok("explain.bare_filename_resolves", got_bare.returncode == 0,
+       "bare-file spelling must resolve: %s" % got_bare.stdout[:200])
+    ok("explain.bare_filename_not_reported_absent",
+       "is not present in this pool" not in got_bare.stdout,
+       "the bare spelling must not be answered as an unknown card")
+    ok("explain.both_spellings_agree", got_bare.stdout == text,
+       "the two spellings of one card must produce identical output")
+
     unknown = _run("--explain", "meoclass1/QB_NOPE.html#q1")
     ok("explain.unknown_card_is_loud", unknown.returncode != 0,
        "explaining a card the pool does not hold must not print a reassuring "
@@ -874,18 +889,111 @@ def control_explain_cli():
 # The bands are now R1..R4 (R for REVIEW) under the field `review_priority`.
 # R1 means "read this card first", never "this card is wrong".
 
-#: The live ranking, taken at eabccd8 BEFORE the rename: sha256 over the ordered
-#: [file, anchor, risk_score] triples. The rename is a relabelling, so this pin
-#: must survive it byte for byte. If it moves, the ranking formula moved with
-#: the labels - which is the one thing this change was not authorised to do.
-RANKING_PIN = "17bcf176bd27ff7627c2a94a314f67785d761309bb2925d5d2ce0bba5fe8f270"
-RANKING_PIN_CARDS = 169
+#: RANKING INVARIANCE, WITHOUT A FROZEN CORPUS
+#: -------------------------------------------
+#: This control used to pin a sha256 over the LIVE pool's ordered
+#: (file, anchor, risk_score) triples together with a card count of 169. Those
+#: two values described the review-pool EVIDENCE POPULATION at the tooling
+#: branch's fork point - not a property of the code. The moment main carried
+#: further correction manifests the population legitimately became 192 and the
+#: guard went red, reporting a ranking regression that had not happened. A guard
+#: keyed to the mutable corpus cannot tell "the formula moved" from "the
+#: evidence grew", which is the one distinction it exists to draw, and it
+#: re-expires on the next correction. Guard expiry is a named defect class here.
+#:
+#: The property actually under test is narrow: relabelling P1..P4 -> R1..R4 must
+#: not alter SCORES or ORDER. That is a claim about ONE input evaluated under
+#: TWO naming schemes, so it is tested over a fixed synthetic evidence set, and
+#: the legacy naming lives here in the TEST as an expected translation table.
+#: It is never restored to production output.
+#:
+#: A pin over a FIXTURE is legitimate and is used below - the expected scores are
+#: hard integers, derived by hand from SCORE_RULES rather than recomputed from
+#: SCORE_WEIGHTS, which would make the expectation follow the code it checks. A
+#: fixture cannot drift, so a fixture pin cannot expire. A pin over the
+#: repository CORPUS is not legitimate, because the corpus is meant to change.
+LEGACY_PRIORITY_BANDS = ((70, "P1"), (45, "P2"), (25, "P3"), (0, "P4"))
+LEGACY_TO_REVIEW = {"P1": "R1", "P2": "R2", "P3": "R3", "P4": "R4"}
 
-def _ranking_hash(cards):
-    import hashlib
-    blob = json.dumps([[c["file"], c["anchor"], c["risk_score"]] for c in cards],
-                      sort_keys=True, separators=(",", ":"))
-    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+
+def legacy_priority(score):
+    """The pre-rename band function, reproduced from eabccd8 for comparison.
+
+    It lives in the TEST so both naming schemes can be run over one input. The
+    production module must never grow a P-series queue band again.
+    """
+    for floor, band in LEGACY_PRIORITY_BANDS:
+        if score >= floor:
+            return band
+    return "P4"
+
+
+#: The fixture's expected ranking, in emitted order. Hand-derived from
+#: SCORE_RULES: NARROW 40, REOPENED 30, HIGH_RISK 25, NEW_AUGUST 20,
+#: PRIMARY 15, SOURCE_CUSTODY 15, REPEATED 10, ENRICHED 10, PROSE_HINT -10.
+#: Both sides of every band floor appear, and two score ties are present so the
+#: (file, anchor) tie-break is under test rather than assumed.
+RANKING_FIXTURE_EXPECTED = [
+    ("meoclass1/QBC.html", "q1", 70),    # PRIMARY+HIGH_RISK+NEW+REPEATED R1 floor
+    ("meoclass1/QBH.html", "q1", 70),    # NARROW+REOPENED        tie with QBC
+    ("meoclass1/QBB.html", "q1", 65),    # NARROW+HIGH_RISK
+    ("meoclass1/QBI.html", "q1", 45),    # HIGH_RISK+NEW                  R2 floor
+    ("meoclass1/QBA.html", "q1", 40),    # NARROW
+    ("meoclass1/QBD.html", "q1", 40),    # PRIMARY+SOURCE+ENRICHED tie with QBA
+    ("meoclass1/QBJ.html", "q1", 25),    # HIGH_RISK                      R3 floor
+    ("meoclass1/QBE.html", "q1", 20),    # NEW
+    ("meoclass1/QBF.html", "q1", 10),    # NEW+PROSE_HINT
+    ("meoclass1/QBK.html", "q1", 0),     # REPEATED+PROSE_HINT            R4 floor
+    ("meoclass1/QBG.html", "q1", -10),   # PROSE_HINT alone          below floor
+]
+
+
+def _ranking_fixture():
+    """`(docs, accepts, hints, live)` for the rename-invariance comparison.
+
+    Synthetic on purpose. The real corpus is the thing under review; using it to
+    test the ranking FORMULA is what tied the previous guard to a date.
+    """
+    def card(name, **over):
+        c = {"file": name, "anchor": "q1"}
+        c.update(over)
+        return c
+
+    docs = [
+        ("corr_plain.json", _corr("CORR-FIX-1", [
+            card("QBA.html", classification="PROPAGATED_FACT_CORRECTION"),
+            card("QBE.html", action_kind="NEW_CARD"),
+            card("QBF.html", action_kind="NEW_CARD"),
+            card("QBG.html"),
+            card("QBK.html")])),
+        ("corr_plain2.json", _corr("CORR-FIX-2", [card("QBK.html")])),
+        ("corr_highrisk.json", _corr("CORR-FIX-3", [
+            card("QBB.html", classification="PROPAGATED_FACT_CORRECTION"),
+            card("QBI.html", action_kind="NEW_CARD"),
+            card("QBJ.html")], origin="candidate_feedback")),
+        # `note` carries the SRC- reference that raises SOURCE_CUSTODY_SIGNAL,
+        # which is derived from the whole manifest, not from the card row.
+        ("corr_custody.json", _corr("CORR-FIX-4", [
+            card("QBD.html", classification="PRIMARY_CORRECTION",
+                 action_kind="ENRICH_EXISTING")],
+            note="registered source SRC-FIXTURE-001")),
+        ("corr_c1.json", _corr("CORR-FIX-5", [
+            card("QBC.html", classification="PRIMARY_CORRECTION",
+                 action_kind="NEW_CARD")], origin="candidate_feedback")),
+        ("corr_c2.json", _corr("CORR-FIX-6", [card("QBC.html")])),
+        # Dated BEFORE the acceptance, so the ONLY reopen trigger on QBH is the
+        # moved digest - the later-evidence path is tested elsewhere.
+        ("corr_h.json", _corr("CORR-FIX-7", [
+            card("QBH.html", classification="PROPAGATED_FACT_CORRECTION")],
+            date="2026-08-01")),
+    ]
+    qbh = ("meoclass1/QBH.html", "q1")
+    accepts = {qbh: _accept_record(identity=qbh)}
+    live = {qbh: MOVED_DIGEST}
+    hints = {("meoclass1/QBF.html", "q1"): "tranche1 lists it as untouched",
+             ("meoclass1/QBG.html", "q1"): "tranche1 lists it as untouched",
+             ("meoclass1/QBK.html", "q1"): "tranche1 lists it as untouched"}
+    return docs, accepts, hints, live
 
 
 def control_review_priority_semantics():
@@ -976,13 +1084,42 @@ def control_review_priority_semantics():
     doc2 = json.loads((OUT / "review_pool.json").read_text(encoding="utf-8"))
     ok("band.rebuild_byte_identical", RP.canonical_json(doc2["canonical"]) == canon)
 
-    ok("band.ranking_card_count_unchanged",
-       len(pool["cards"]) == RANKING_PIN_CARDS,
-       "expected %d cards, got %d" % (RANKING_PIN_CARDS, len(pool["cards"])))
+    # F. RANKING INVARIANCE over a FIXED input, under BOTH naming schemes.
+    # Corpus-independent by construction: a new correction manifest on main
+    # cannot move these numbers, so only a change to the SCORING or to the
+    # ORDER can turn this red. This control owns mutation U.
+    fdocs, faccepts, fhints, flive = _ranking_fixture()
+    fpool = RP.build_pool(fdocs, accepts=faccepts, prose_hints=fhints,
+                          live_digests=flive)
+    triples = [(c["file"], c["anchor"], c["risk_score"]) for c in fpool["cards"]]
+
+    ok("band.fixture_exercises_every_component",
+       {s for c in fpool["cards"] for s in c["risk_signals"]}
+       == {name for name, _, _ in RP.SCORE_RULES},
+       "the fixture must raise every scoring component, or the invariance it "
+       "proves is narrower than the formula it guards")
+
     ok("band.ranking_unchanged_by_rename",
-       _ranking_hash(pool["cards"]) == RANKING_PIN,
-       "the ordered (file, anchor, score) triples moved during a rename-only "
-       "change: %s" % _ranking_hash(pool["cards"]))
+       triples == RANKING_FIXTURE_EXPECTED,
+       "scores or order moved under the R-relabelling: %r" % (triples,))
+
+    # The LABELS are the only thing the rename was permitted to change.
+    ok("band.labels_are_the_only_difference",
+       [c["review_priority"] for c in fpool["cards"]]
+       == [LEGACY_TO_REVIEW[legacy_priority(s)] for _, _, s in triples],
+       "a card's band must be exactly the legacy band's rename")
+
+    # Thresholds are numerically identical, including where no score the
+    # fixture can produce lands: every weight is a multiple of 5, so 69, 44
+    # and 24 are unreachable through evidence and must be swept directly.
+    ok("band.thresholds_match_legacy_numerically",
+       all(RP.review_priority(s) == LEGACY_TO_REVIEW[legacy_priority(s)]
+           for s in range(-50, 151)),
+       "a band floor moved under cover of the rename")
+    ok("band.no_p_label_leaks_from_fixture",
+       not any(str(c["review_priority"]).startswith("P")
+               for c in fpool["cards"]))
+
     ok("band.order_is_score_then_identity",
        [(c["file"], c["anchor"]) for c in pool["cards"]]
        == [(c["file"], c["anchor"]) for c in
