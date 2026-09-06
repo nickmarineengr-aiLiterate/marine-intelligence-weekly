@@ -2593,3 +2593,91 @@ a wrong **reg-code** likewise hid behind a right **reg-desc** until the code slo
 on its own.
 
 GREP: `[cite:` and `REGULATORY REFERENCE BOX` must both be absent from `meoclass1/*.html`.
+
+### 90. The deep-dive suffix cascade — one conversion bug, 146 blocks, 82,736 duplicated bytes
+
+A markdown-to-HTML conversion split each deep-dive blob into typed `dd-block` divs by taking the
+tail from every `* <strong>Label:</strong>` marker **onward** instead of the segment **between**
+markers. `dd-trap` therefore rendered its own content plus four following sections as raw
+markdown, `dd-fail` three, and so on down the card. 146 blocks on 38 cards across `QB1_F` and
+`QB1_G`.
+
+**A suffix cascade is repairable mechanically; an arbitrary duplication is not.** Because the
+conversion took suffixes, every stray section is byte-identical to the **own body of the later
+typed block carrying the same label on the same card**. That was proved for all 146 before a
+byte was written, and the applier refuses any block the proof does not cover. Truncation then
+deletes only duplication — no content is invented and none is lost.
+
+**Match by LABEL, never by position.** The blocks are not emitted in the markdown's order:
+`dd-chain` sits between `dd-casualty` and `dd-vessel`. A positional comparison reported a false
+mismatch on every card and made the repair look unprovable.
+
+**A normaliser is part of the key.** The proof recorded labels through `html.unescape`; the
+applier first re-derived them without it, and every block labelled `Numbers &amp; Regulations`
+silently failed to match and was skipped — 109 of 146 repaired, no error raised. Import the
+normaliser; never re-implement it beside its own proof.
+
+### 91. An idempotency check written for replacements is blind to deletions
+
+The reach applier tested "already applied" by looking for its replacement text. One of its eight
+edits is a **deletion** — the two proposition-less `MSC.1/Circ.1606` pills — and a deletion has
+no replacement text to find, so a perfectly clean re-run reported it as a refusal. The rule for a
+deletion is that its anchor is simply gone. Same family as the guard that expires in both
+directions: a check has to change **subject** with the edit it guards, not just keep running.
+
+### 92. A generator must not read its own output
+
+`build_t5_correction_records.py` resolves each card's prior authorised pin by walking the
+manifest surface — and once its own records were on disk, `build_chain` saw them as states in the
+chain and reported `PREDECESSOR_PIN_ALTERED` against the very pins the run was recomputing. The
+second run of a generator is not a re-run if the first run changed its input. Exclude the
+record's own filename explicitly; do not rely on running it only once.
+
+### 93. Hydrant minimum pressure is **0.27 / 0.25 N/mm²** by SOLAS II-2/10.2.1.6, scoped at 6,000 GT
+
+Three sites taught a bar figure under mandatory wording for a quantity SOLAS fixes: `QB2_A#q8`
+gave "4 to 6 Bar" as the "minimum … required at the furthest hydrant", `QB2_H#q2` gave a "4.0 bar
+minimum required at the highest hydrant", and `QB2_B#q18` gave the correct 0.27 N/mm² with **no
+threshold**, so it read as governing every cargo ship.
+
+For **cargo ships**, with the two required pumps delivering simultaneously: **0.27 N/mm² at 6,000
+GT and upwards, 0.25 N/mm² below**. A higher figure quoted for deck-monitor throw is a design or
+operational target, not a SOLAS minimum. The passenger-ship limbs are deliberately not imported
+into container cards.
+
+**Internal contradiction is a stronger signal than a suspicious number.** The 4.0 bar site was
+promoted out of a 1,034-hit numeric census because it contradicted `QB9_B#q5`, corrected to the
+governing figures five days earlier. "This number looks invented" cannot be mechanised; "this
+number contradicts held source **and** a corrected sibling card" can.
+
+**A single-limb version of a two-limb rule is not a blurred rule.** It is simply wrong for every
+ship on the other side of the threshold — the same shape as the MSC.535(107) lifeboat-ventilation
+defect, where keeping only the newbuilding limb inverted the rule for the in-service fleet.
+
+### 94. A sweep whose site list comes from a finding's card list will always leave siblings behind
+
+Three BMP corrections ran between 31 August and 6 September, and a corpus-wide census on
+6 September still found **three untouched card-layer sites** — including `QB4_H#q6`, in the *same
+file* as a card two of those sweeps had corrected — plus a `source-confidence` footer on `QB4_H#q2`
+still offering "BMP5 Section 5" as the authority the card had been verified against, five days
+after the card's own body removed that citation as unverifiable.
+
+**Derive the site list from the corpus, then classify; never from the finding.** Of 102 corpus
+occurrences, **94 are KEEP**: a `q-text`, a `cs-qtitle`, a TOC entry, a `sub-desc` or a generated
+index row echoing one is the **examiner's own wording**; `QB4_H#q11` is retained on purpose as the
+predecessor record because examiners still ask for BMP5 by name; and a currentness note that
+quotes BMP5 in order to deny it is the fix, not the defect. A flat "remove every occurrence" sweep
+would have destroyed all of it.
+
+**Emit the SURFACE with every hit.** The same string is a defect in an answer body and correct in
+a `q-text`. A census that reports only file and line cannot be adjudicated without reopening every
+site by hand.
+
+### 95. A cheat sheet takes no digest pin, so only a content gate can guard it
+
+Revision surfaces (`*_CheatSheet.html`, `*_cheatsheet.html`) carry no `q-card`, so they are
+recorded in a correction manifest's `artefacts` **without** a digest — a pin on an unguarded file
+would expire on the next unrelated edit to it. That means the manifest cannot prove what they say,
+and their propositions have to be asserted by the correction's own content gate instead. Three of
+this pass's eight reach sites live only there; without content gates they would have been
+completely unguarded while looking recorded.
