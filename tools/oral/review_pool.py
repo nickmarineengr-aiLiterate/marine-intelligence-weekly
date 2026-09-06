@@ -32,6 +32,12 @@ commit on main moves HEAD, and treating that as invalidation would reopen the
 whole file every day for reasons no reviewer could act on. The digest is what
 decides; the head is what lets an auditor find the tree that was read.
 
+REVIEW PRIORITY IS NOT DEFECT SEVERITY. The queue bands are R1..R4 under the
+field `review_priority`. R1 means "read this card first"; it never means "this
+card is wrong". They were spelled P1..P4, colliding with the P0/P1/P2/P3 content
+severity MIW uses everywhere else - and a card reopened purely because its bytes
+moved, with no defect established at all, was emitted as `"P1"`.
+
 This module is the library. tools/oral/build_review_pool.py is the CLI.
 """
 from __future__ import annotations
@@ -411,7 +417,18 @@ SCORE_RULES = (
 SCORE_WEIGHTS = {name: pts for name, pts, _ in SCORE_RULES}
 SCORE_REASONS = {name: why for name, _, why in SCORE_RULES}
 
-PRIORITY_BANDS = ((70, "P1"), (45, "P2"), (25, "P3"), (0, "P4"))
+#: REVIEW priority, not defect severity. R for Review.
+#:
+#: These were spelled P1/P2/P3/P4, which is how MIW spells CONTENT DEFECT
+#: SEVERITY - in correction manifests, tranche reports and residual findings.
+#: They are different concepts, and the collision was not theoretical: a card
+#: reopened only because its bytes moved after acceptance, with no content
+#: defect established at all, was emitted as `"P1"` and rendered as `(P1)`. A
+#: reviewer scanning that queue reads a P1 defect that nobody found.
+#:
+#: R1 means "read this card first". It never means "this card is wrong". The
+#: thresholds and the score that feeds them are unchanged by the relabelling.
+REVIEW_PRIORITY_BANDS = ((70, "R1"), (45, "R2"), (25, "R3"), (0, "R4"))
 
 
 def risk_signals(ev, reopened, prose_hint):
@@ -447,16 +464,17 @@ def score_card(signals):
     return sum(c["points"] for c in components), components
 
 
-def tranche_priority(score):
-    for floor, band in PRIORITY_BANDS:
+def review_priority(score):
+    """The review-queue band for a risk score. Never a defect severity."""
+    for floor, band in REVIEW_PRIORITY_BANDS:
         if score >= floor:
             return band
-    return "P4"
+    return "R4"
 
 
 # --- the pool --------------------------------------------------------------
 
-POOL_SCHEMA = "miw-oral-review-pool/2"   # /2 adds digest_state + reopen_codes
+POOL_SCHEMA = "miw-oral-review-pool/3"   # /2 digest_state+reopen_codes; /3 review_priority
 
 
 #: Reopen triggers, as codes. Named constants rather than substrings so a test
@@ -642,7 +660,7 @@ def build_pool(docs, accepts, prose_hints=None, live_digests=None):
             "risk_signals": signals,
             "risk_score": score,
             "score_components": components,
-            "recommended_tranche_priority": tranche_priority(score),
+            "review_priority": review_priority(score),
             "prose_hint": hint,
         }
 
@@ -694,9 +712,9 @@ def build_pool(docs, accepts, prose_hints=None, live_digests=None):
             "out_of_scope": len(off_scope),
             "narrow_correction_only": sum(
                 1 for c in cards if "NARROW_CORRECTION_ONLY" in c["risk_signals"]),
-            "by_priority": {band: sum(
-                1 for c in cards if c["recommended_tranche_priority"] == band)
-                for _, band in PRIORITY_BANDS},
+            "by_review_priority": {band: sum(
+                1 for c in cards if c["review_priority"] == band)
+                for _, band in REVIEW_PRIORITY_BANDS},
         },
         "cards": cards,
         "excluded": excluded,
@@ -772,7 +790,7 @@ COUNT_LABELS = (("cards_in_pool", "Cards in pool"),
 def _card_line(c):
     return ("- `%s#%s` — **%d** (%s) — %s"
             % (c["file"], c["anchor"], c["risk_score"],
-               c["recommended_tranche_priority"], c["why_in_pool"]))
+               c["review_priority"], c["why_in_pool"]))
 
 
 def render_markdown(pool):
@@ -787,10 +805,15 @@ def render_markdown(pool):
     out.append("- Reopened because the card's bytes moved after acceptance: %d"
                % s["reopened_by_digest_change"])
     out.append("")
-    out.append("| Priority | Cards |")
+    out.append("| Review priority | Cards |")
     out.append("| --- | --- |")
-    for _, band in PRIORITY_BANDS:
-        out.append("| %s | %d |" % (band, s["by_priority"][band]))
+    for _, band in REVIEW_PRIORITY_BANDS:
+        out.append("| %s | %d |" % (band, s["by_review_priority"][band]))
+    out.append("")
+    out.append("R1..R4 is REVIEW priority - the order to read these cards in. "
+               "It is **not a content-defect severity**: R1 says \"read this "
+               "first\", never \"this card is wrong\". MIW's P0/P1/P2/P3 scale "
+               "means something else entirely and is not used here.")
 
     def section(title, rows, empty):
         out.extend(["", "## %s" % title, ""])

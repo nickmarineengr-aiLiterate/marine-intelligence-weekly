@@ -534,8 +534,8 @@ def control_pool_rules():
        == sorted([c["risk_score"] for c in pool["cards"]], reverse=True))
     ok("pool.every_card_has_reason",
        all(c["why_in_pool"] for c in pool["cards"]))
-    ok("pool.tranche_priority_present",
-       all(c["recommended_tranche_priority"] for c in pool["cards"]))
+    ok("pool.review_priority_present",
+       all(c["review_priority"] for c in pool["cards"]))
 
 
 # --- 4. Determinism and JSON/Markdown consistency --------------------------
@@ -862,8 +862,137 @@ def control_explain_cli():
        "EXPLICITLY_ACCEPTED" not in unknown.stdout)
 
 
+# --- 11. Review priority is NOT defect severity ----------------------------
+# MIW spells CONTENT DEFECT SEVERITY P0/P1/P2/P3 everywhere: correction
+# manifests, tranche reports, residual findings. The review pool's QUEUE bands
+# were spelled P1/P2/P3/P4, which is a different concept wearing the same
+# clothes - and the collision was not theoretical. A card reopened only because
+# its bytes moved after acceptance, with no content defect established at all,
+# was emitted as `"recommended_tranche_priority": "P1"` and rendered as
+# `**70** (P1)`. A reviewer scanning that queue reads a P1 defect.
+#
+# The bands are now R1..R4 (R for REVIEW) under the field `review_priority`.
+# R1 means "read this card first", never "this card is wrong".
+
+#: The live ranking, taken at eabccd8 BEFORE the rename: sha256 over the ordered
+#: [file, anchor, risk_score] triples. The rename is a relabelling, so this pin
+#: must survive it byte for byte. If it moves, the ranking formula moved with
+#: the labels - which is the one thing this change was not authorised to do.
+RANKING_PIN = "17bcf176bd27ff7627c2a94a314f67785d761309bb2925d5d2ce0bba5fe8f270"
+RANKING_PIN_CARDS = 169
+
+def _ranking_hash(cards):
+    import hashlib
+    blob = json.dumps([[c["file"], c["anchor"], c["risk_score"]] for c in cards],
+                      sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+
+
+def control_review_priority_semantics():
+    import re
+
+    # --- the vocabulary ---------------------------------------------------
+    labels = [band for _, band in RP.REVIEW_PRIORITY_BANDS]
+    ok("band.vocabulary_is_r_series", labels == ["R1", "R2", "R3", "R4"],
+       "queue bands must not be spelled like defect severities: %s" % labels)
+    ok("band.no_p_label_survives",
+       not any(re.fullmatch(r"P\d", b) for b in labels))
+
+    # --- F. the ranking FORMULA is untouched by the relabelling ------------
+    # Same thresholds, same scores, same order - only the names moved.
+    for score, band in ((999, "R1"), (85, "R1"), (70, "R1"), (69, "R2"),
+                        (45, "R2"), (44, "R3"), (25, "R3"), (24, "R4"),
+                        (0, "R4"), (-10, "R4")):
+        ok("band.boundary_%s_is_%s" % (score, band),
+           RP.review_priority(score) == band,
+           "band boundary moved during a rename-only change")
+
+    # --- A/B. a digest-only reopen ----------------------------------------
+    docs = _one_correction()
+    row = RP.build_pool(docs, accepts={Q2: _accept_record()},
+                        live_digests={Q2: MOVED_DIGEST})["cards"][0]
+    ok("band.reopened_card_is_top_review_priority",
+       row["review_priority"] == "R1",
+       "a card whose accepted bytes moved should be read first")
+    ok("band.reopened_card_asserts_no_defect",
+       "P1" not in json.dumps(row),
+       "a digest-only reopen must not emit a token that reads as a P1 defect")
+    ok("band.no_severity_is_fabricated",
+       not any("severity" in k for k in row),
+       "no content-severity field may be invented for a queue entry")
+    ok("band.reopen_reason_is_the_explanation",
+       row["reopen_codes"] == [RP.CARD_DIGEST_CHANGED]
+       and row["review_status"] == "REOPENED",
+       "status + reopen code carry the meaning, not the band")
+
+    # --- the old field name is gone, not aliased --------------------------
+    ok("band.old_field_removed", "recommended_tranche_priority" not in row,
+       "keeping the old key alive lets a reader keep reading the old meaning")
+    ok("band.field_is_review_priority", "review_priority" in row)
+
+    # --- live payload ------------------------------------------------------
+    built = _run()
+    ok("band.pool_builds", built.returncode == 0, built.stderr[-300:])
+    if built.returncode != 0:
+        return
+    doc = json.loads((OUT / "review_pool.json").read_text(encoding="utf-8"))
+    pool = doc["canonical"]
+    canon = RP.canonical_json(pool)
+
+    ok("band.live_top_card_is_r1",
+       pool["cards"][0]["review_priority"] == "R1")
+
+    # C. no queue band is spelled with a P anywhere in the generated payload.
+    # Scoped to the FIELD, not to the whole document: a residual finding may
+    # legitimately record severity "P3", and a blanket substring ban would
+    # forbid the very vocabulary this change exists to protect.
+    ok("band.no_p_queue_band_in_json",
+       re.search(r'"review_priority": "P', canon) is None)
+    ok("band.no_legacy_key_in_json",
+       "recommended_tranche_priority" not in canon)
+    ok("band.every_card_banded_r",
+       {c["review_priority"] for c in pool["cards"]} <= {"R1", "R2", "R3", "R4"})
+    ok("band.summary_keys_are_r",
+       set(pool["summary"]["by_review_priority"]) == {"R1", "R2", "R3", "R4"})
+    ok("band.summary_totals_agree",
+       sum(pool["summary"]["by_review_priority"].values())
+       == pool["summary"]["cards_in_pool"])
+
+    # D. the reviewer-facing document
+    md = (OUT / "review_pool.md").read_text(encoding="utf-8")
+    ok("band.markdown_table_is_r",
+       all(("| %s |" % b) in md for b in ("R1", "R2", "R3", "R4")))
+    ok("band.markdown_has_no_p_band_row",
+       not any(("| %s |" % b) in md for b in ("P1", "P2", "P3", "P4")))
+    ok("band.markdown_card_lines_are_r",
+       all(("(%s)" % c["review_priority"]) in md for c in pool["cards"][:5]))
+    ok("band.markdown_says_r_is_not_severity",
+       "not a content-defect severity" in md,
+       "the report must tell the reader R is a queue band, in the report")
+
+    # E/F. determinism and the ranking itself
+    second = _run()
+    ok("band.rebuild_exits_clean", second.returncode == 0)
+    doc2 = json.loads((OUT / "review_pool.json").read_text(encoding="utf-8"))
+    ok("band.rebuild_byte_identical", RP.canonical_json(doc2["canonical"]) == canon)
+
+    ok("band.ranking_card_count_unchanged",
+       len(pool["cards"]) == RANKING_PIN_CARDS,
+       "expected %d cards, got %d" % (RANKING_PIN_CARDS, len(pool["cards"])))
+    ok("band.ranking_unchanged_by_rename",
+       _ranking_hash(pool["cards"]) == RANKING_PIN,
+       "the ordered (file, anchor, score) triples moved during a rename-only "
+       "change: %s" % _ranking_hash(pool["cards"]))
+    ok("band.order_is_score_then_identity",
+       [(c["file"], c["anchor"]) for c in pool["cards"]]
+       == [(c["file"], c["anchor"]) for c in
+           sorted(pool["cards"], key=lambda c: (-c["risk_score"], c["file"],
+                                                c["anchor"]))])
+
+
 CONTROLS = [control_identity, control_accepts, control_acceptance_contract,
-            control_digest_reuse, control_explain_cli, control_pool_rules,
+            control_digest_reuse, control_explain_cli,
+            control_review_priority_semantics, control_pool_rules,
             control_determinism_and_report,
             control_prose_hints_never_exclude,
             control_prose_extraction,

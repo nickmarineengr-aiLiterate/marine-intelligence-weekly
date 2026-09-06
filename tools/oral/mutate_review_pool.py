@@ -2,7 +2,7 @@
 """
 Mutation suite for the Oral review-pool ACCEPTANCE CONTRACT.
 
-`test_review_pool.py` reports 159 green controls. Green output is
+`test_review_pool.py` reports 193 green controls. Green output is
 indistinguishable from a suite that asserts nothing, and this particular suite
 guards the one artefact in the toolchain that can REMOVE a card from a queue a
 human believes is complete. So every proposition the contract rests on is
@@ -174,11 +174,54 @@ MUTATIONS = [
                       "known_identities:",
                  "        if False:"),
      "accepts.unstable_identity_is_loud"),
+
+    # ---- review priority is not defect severity --------------------------
+    # A relabelling is the easiest kind of change to get silently wrong: the
+    # old label can come back, the new label can be translated back at the
+    # render boundary, or the ranking can move while attention is on the names.
+    ("S", "restore the old P-series queue labels, which read as MIW defect "
+          "severities",
+     sub_in_file(LIB, '((70, "R1"), (45, "R2"), (25, "R3"), (0, "R4"))',
+                 '((70, "P1"), (45, "P2"), (25, "P3"), (0, "P4"))'),
+     "band.vocabulary_is_r_series"),
+
+    ("T", "render R-bands back as P-bands in the reviewer-facing report, so "
+          "the payload is clean and the document a human reads is not",
+     sub_in_file(LIB,
+                 'out.append("| %s | %d |" % (band, '
+                 's["by_review_priority"][band]))',
+                 'out.append("| %s | %d |" % (band.replace("R", "P"), '
+                 's["by_review_priority"][band]))'),
+     "band.markdown_table_is_r"),
+
+    ("U", "move the ranking order while relabelling",
+     sub_in_file(LIB,
+                 'cards.sort(key=lambda c: (-c["risk_score"], c["file"], '
+                 'c["anchor"]))',
+                 'cards.sort(key=lambda c: (c["risk_score"], c["file"], '
+                 'c["anchor"]))'),
+     "band.ranking_unchanged_by_rename"),
+
+    ("V", "shift a band threshold under cover of the rename",
+     sub_in_file(LIB, '((70, "R1"), (45, "R2")', '((60, "R1"), (45, "R2")'),
+     "band.boundary_69_is_R2"),
+
+    ("W", "re-alias the retired field name alongside the new one, so a reader "
+          "can keep reading the old meaning",
+     sub_in_file(LIB, '"review_priority": review_priority(score),',
+                 '"review_priority": review_priority(score),' + chr(10)
+                 + '            "recommended_tranche_priority": '
+                   'review_priority(score),'),
+     "band.old_field_removed"),
+
+    ("X", "drop the legend that tells the reader R is not a defect severity",
+     sub_in_file(LIB, "**not a content-defect severity**", "**a priority**"),
+     "band.markdown_says_r_is_not_severity"),
 ]
 
 WATCHED = [LIB, CLI, ACCEPTS]
 
 if __name__ == "__main__":
     raise SystemExit(run_suite(
-        "mutation suite: Oral review-pool acceptance contract (schema/2)",
+        "mutation suite: Oral review-pool acceptance contract + priority semantics",
         PROBE, MUTATIONS, WATCHED))

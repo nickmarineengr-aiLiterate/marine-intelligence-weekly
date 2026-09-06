@@ -139,8 +139,9 @@ def explain(pool, target):
                 print("    - %s" % reason)
             if row["review_status"] != "EXPLICITLY_ACCEPTED":
                 print("  why_in_pool:   %s" % row["why_in_pool"])
-            print("  risk_score:    %d (%s)"
-                  % (row["risk_score"], row["recommended_tranche_priority"]))
+            print("  risk_score:       %d" % row["risk_score"])
+            print("  review_priority:  %s  (queue order, NOT a defect severity)"
+                  % row["review_priority"])
             return 0
 
     print("EXPLAIN: %s#%s is not present in this pool. It carries no manifest "
