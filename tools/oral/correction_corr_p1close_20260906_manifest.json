@@ -1,0 +1,115 @@
+{
+ "correction_id": "CORR-P1CLOSE-20260906",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "fresh_independent_verification_p1_block",
+ "date": "2026-09-06",
+ "baseline_commit": "43597e3",
+ "governing_commits": [
+  "0626fca"
+ ],
+ "known_traps_entries": [
+  99,
+  100
+ ],
+ "authorisation_source": "MIW PASS 1 REPAIR CLOSURE instruction of 6 September 2026, section 0, which confirms the original P0s closed and rules that exactly three P1 escape mechanisms remain. Those three were found by a clean-context verifier that had not seen how the repair was produced, and each was independently re-verified here before any byte was written.",
+ "title": "Three P1 escapes, one defect: a guard that recognised a spelling (case), a rendering (unit and element type) or a position (first matching anchor) instead of the proposition it was written to protect.",
+ "candidate_claim": "Not a candidate report. Fresh independent verification of CORR-P1REPAIR-20260906: P1-A unit/element blindness, P1-B wrong-occurrence insertion, P1-C HTML-shape-limited BMP currentness gate.",
+ "candidate_verdict": "UPHELD IN FULL and re-verified at source. The verifier also confirmed the two original P0s genuinely gone corpus-wide, pastpapers untouched, no content lost, 761/86 and 5/5 accepts - so the defects were guard breadth and one insertion locator, not the substance of the repair.",
+ "authority": "SOLAS II-2/10.2.1.6 (Consolidated Edition 2024), already relied on by CORR-T5-HYDRANT: minimum pressure at the HYDRANTS with the two required pumps delivering simultaneously - cargo ships 0.27 N/mm2 at 6,000 GT and upwards, 0.25 N/mm2 below. The provision fixes no separate deck-monitor figure, so none is asserted. NO NEW SOURCE EVIDENCE. Unit equivalence (1 N/mm2 = 1 MPa; 1 bar = 0.1 MPa) is arithmetic used for DETECTION only and is never applied to rewrite a card's chosen units.",
+ "propagation": {
+  "derived_surfaces": "NONE. No question stem changed; 761 questions / 86 files, outputs already matching the live derivation.",
+  "hub_date": "NOT ADVANCED.",
+  "detector_generalisation": "tools/oral/oral_currentness.py replaces three narrow matchers with one semantic implementation: pressure normalised across MPa / N/mm2 / bar / kPa, 'two pumps' and '2 pumps' treated as one proposition, and the claim taken from the smallest ENCLOSING element of any candidate-facing tag (li, p, td, th, div, span, strong, b, em, h1-h6, summary, caption) rather than the innermost, which around a figure is usually a <strong> carrying no subject and no modal.",
+  "false_positives_held": "A claim needs subject AND figure AND mandatory framing AND incomplete scope. Two of four is not the defect: figure plus subject alone fires on 'fire main water (typically 5-7 bar)', a HydroPen operating pressure that is correct; figure plus modal alone fires on the weathertightness hose test, a different quantity with no held source, already recorded as K-ITEM-HOSE-TEST-PRESSURE.",
+  "surface_policy_unchanged": "The recursive classification stands: qcard, cheatsheet, oralnotes, pastpapers, rulesapp, generated. The currentness gate runs on the governed teaching surfaces only. pastpapers remain sitting-anchored and are asserted unchanged; generated pages echo question stems and are never hand-edited - topics.html carries a BMP5 stem echo that is KEEP for exactly that reason.",
+  "collateral_prose_restored": "Two clauses dropped by the earlier oralnotes rewrites are restored: 'but referenced in IMO circulars', and the HRA geography, now framed as the contrast with a global guide. The Witherby attribution is NOT restored - it was BMP5's publisher, and attaching it to BMP MS would be a new error."
+ },
+ "invariants": {
+  "canonical_questions_before": 761,
+  "canonical_questions_after": 761,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "corrected_cards": 2,
+  "corrected_artefact_surfaces": 2,
+  "firemain_scope_defects_remaining": 0,
+  "bmp5_taught_as_current_remaining": 0,
+  "currentness_banners_outside_intended_topic": 0
+ },
+ "supersedes_summary": {
+  "note": "Neither the Pass-1 records nor the Pass-1 repair record is rewritten. Each states what the one before it got wrong and keeps its own pins; the chain is Pass 1 -> repair -> closure.",
+  "corrected_claims": [
+   "CORR-P1REPAIR-20260906's single-limb check was described as corpus-wide. It required the literal '0.27 N/mm' and read only <li> and <p>, so it could not see QB2_F's '0.27 MPa' in a <div>.",
+   "CORR-P1REPAIR-20260906's BMP5 check was described as proving no surface teaches BMP5 as current. It inspected reg-code slots only, and would not have caught the <td> cell or CE-tip prose that same record had just corrected.",
+   "CORR-P1REPAIR-20260906 recorded a currentness note as added to the SUA/BMP topic. It was inserted at the first matching anchor in the file and landed in an unrelated topic."
+  ]
+ },
+ "review": {
+  "gate": "tools/oral/validate_correction_p1repair.py",
+  "mutation_suite": "tools/oral/mutate_correction_p1close.py",
+  "scope_control": "tools/oral/test_corpus_scope.py",
+  "independent_review": "The three defects were found by fresh independent verification. A further clean-context verification of this closure is recorded separately."
+ },
+ "artefacts": [
+  {
+   "path": "meoclass1/oralnotes/miw-notes-mgmt-p10.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Carries no q-card. The BMP currentness banner had been inserted at the FIRST occurrence of its anchor and landed in the Marine Environmental Governance (UNCLOS Pt. XII) topic, about 375 lines and four topics from the BMP material, while topic-46 said 'see the currentness note above' and carried none. A currentness note governs its container, so the misplaced banner protected text that needed no protection and left the real material unguarded. Relocated into topic-46 by structural id. The timeline row also regains the HRA geography, now as the contrast it has become.",
+   "guarded_by": "validate_correction_p1repair.py"
+  },
+  {
+   "path": "meoclass1/oralnotes/simon-notes-p1.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Restores 'but referenced in IMO circulars', dropped as collateral by the earlier reg-item rewrite. The Witherby attribution is deliberately NOT restored: it was BMP5's publisher, and attaching it to BMP Maritime Security would be a new error.",
+   "guarded_by": "validate_correction_p1repair.py"
+  },
+  {
+   "path": "tools/oral/oral_currentness.py",
+   "classification": "GOVERNANCE_RECORD",
+   "rationale": "THE semantic detector module, and the substance of this record. Units normalised (0.27 MPa = 0.27 N/mm2 = 2.7 bar = 270 kPa), numerals normalised (two pumps = 2 pumps), claims taken from the smallest ENCLOSING element of any candidate-facing tag. Imported by the gates, never re-implemented - three escapes came from three gates each inventing its own narrow matcher.",
+   "guarded_by": "validate_correction_p1repair.py"
+  },
+  {
+   "path": "meoclass1/known_traps.md",
+   "classification": "GOVERNANCE_RECORD",
+   "known_traps_entry": 99,
+   "rationale": "Entry 99 records that all three escapes were ONE defect - a guard recognising a spelling, a shape or a position instead of a proposition - with the case/unit/element/class table. Entry 100 records insertion by structural identity, and that this was the third wrong-occurrence bug in one session.",
+   "guarded_by": "validate_correction_p1repair.py"
+  },
+  {
+   "path": "tools/oral/apply_corr_p1close.py",
+   "classification": "GOVERNANCE_RECORD",
+   "rationale": "The applier, locating the topic by structural id rather than by a text needle.",
+   "guarded_by": "validate_correction_p1repair.py"
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "P1CLOSE-01",
+   "file": "QB2_F.html",
+   "path": "meoclass1/QB2_F.html",
+   "anchor": "q2",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "c65b9e643bcb0e3f0cb8864af5493ebee4610eadafd3736f0092c7a1795976eb",
+   "post_edit_digest": "13655748756559748d9cf4fd322b86b269edfb50c3faaf89189535d72fa8c6ae",
+   "what_changed": "The deep-dive Numbers layer taught 'Minimum fire-main pressure benchmark: 0.27 MPa at deck monitors' - single-limb, so wrong for every cargo ship under 6,000 GT, and attributing to SOLAS a deck-monitor figure the provision does not fix. Replaced with SOLAS II-2/10.2.1.6, both cargo-ship limbs, the two-pump condition, and an explicit statement that the figure applies AT THE HYDRANTS. The card's second site, a cheat-card <div>, carried the same claim and is corrected with it."
+  },
+  {
+   "correction_action_id": "P1CLOSE-02",
+   "file": "QB2_H.html",
+   "path": "meoclass1/QB2_H.html",
+   "anchor": "q2",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "1cbd15b09bafa1bc4cd6cc6426c287174052f480fd91f30ed33fc7fb2d44ac4c",
+   "post_edit_digest": "31f7770c152da457232e548222ab89859270c7d33ad16dbf7577c3ef7f2d59a9",
+   "what_changed": "Version stamp corrected: it attributed the removal of an empty deep-dive element to this card's own 6 September correction, when that removal was made the same day by CORR-T5-DDCASCADE-20260906. Provenance, not teaching - but a stamp that misattributes an edit is the audit trail being wrong about itself.",
+   "supersedes": {
+    "manifest": "correction_corr_p1repair_20260906_manifest.json",
+    "action_id": "P1REPAIR-01",
+    "post_edit_digest": "1cbd15b09bafa1bc4cd6cc6426c287174052f480fd91f30ed33fc7fb2d44ac4c",
+    "note": "P1REPAIR-01 pinned the state this closure edits. Its post-edit digest is this record's pre-edit digest, so the chain Pass 1 -> Pass-1 repair -> Pass-1 closure is unbroken and no earlier record was rewritten to accommodate it."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  }
+ ]
+}

@@ -351,6 +351,72 @@ def main() -> int:
         report("known_traps_entry_%d_carries_the_lesson" % n,
                bool(body) and all(x in body for x in needles), "entry %d" % n)
 
+    # ================= the CLOSURE record, and the chain ==================
+    close_path = HERE / "correction_corr_p1close_20260906_manifest.json"
+    close = json.loads(read_text(close_path))
+    report("closure_record_exists_and_is_authorised",
+           close.get("correction_id") == "CORR-P1CLOSE-20260906"
+           and close.get("status") == "AUTHORISED",
+           close.get("correction_id"))
+    bad = []
+    for c in close["cards"]:
+        d = card_digests(read_text(QB_ROOT / c["file"]))
+        res = resolve_authorised_card_state(
+            manifest=close_path.name, action_id=c["correction_action_id"],
+            file=c["file"], anchor=c["anchor"],
+            pinned_post_digest=c["post_edit_digest"],
+            live_digest=d.get(c["anchor"]))
+        if not res.ok:
+            bad.append("%s#%s:%s" % (c["file"], c["anchor"], res.status))
+    report("closure_pins_are_live_or_proven_ancestors", not bad,
+           "%d card(s), problems: %s" % (len(close["cards"]), bad or "none"))
+    # The chain has to be THREE links, and each link must still hold its own
+    # claim. A repair that quietly rebaselined its predecessor would look
+    # identical from the outside except for this.
+    # Asserted against the OBJECT STORE, not against the record's own prose.
+    # "the earlier records are not rewritten" is a claim about bytes, and a
+    # sentence saying so is not evidence of it - the first version of this
+    # check tested for a phrase, which is exactly the class of check this whole
+    # chain exists to stop shipping.
+    earlier = subprocess.run(
+        ["git", "diff", "--name-only", "d07591c", "HEAD", "--",
+         "tools/oral/correction_corr_t5_ddcascade_20260906_manifest.json",
+         "tools/oral/correction_corr_t5_reach_20260906_manifest.json",
+         "tools/oral/correction_corr_t5_hydrant_20260906_manifest.json"],
+        cwd=str(REPO), capture_output=True)
+    repair_rec = subprocess.run(
+        ["git", "diff", "--name-only", "43597e3", "HEAD", "--",
+         "tools/oral/correction_corr_p1repair_20260906_manifest.json"],
+        cwd=str(REPO), capture_output=True)
+    report("the_three_link_chain_is_intact",
+           len(close["supersedes_summary"]["corrected_claims"]) == 3
+           and earlier.returncode == 0 and not earlier.stdout.strip()
+           and repair_rec.returncode == 0 and not repair_rec.stdout.strip(),
+           "Pass 1 -> Pass-1 repair -> Pass-1 closure; the three Pass-1 "
+           "records are byte-unchanged since d07591c and the repair record "
+           "since 43597e3")
+    report("closure_declares_zero_remaining_defects",
+           close["invariants"]["firemain_scope_defects_remaining"] == 0
+           and close["invariants"]["bmp5_taught_as_current_remaining"] == 0
+           and close["invariants"][
+               "currentness_banners_outside_intended_topic"] == 0,
+           "and the three checks above re-derive each of those from the corpus")
+    report("closure_artefacts_exist",
+           all((REPO / a["path"]).is_file() for a in close["artefacts"]),
+           "%d artefact(s)" % len(close["artefacts"]))
+    m99 = re.search(r"### 99\..*?(?=\n### |\Z)", read_text(TRAPS), re.S)
+    m100 = re.search(r"### 100\..*?(?=\n### |\Z)", read_text(TRAPS), re.S)
+    report("known_traps_entry_99_carries_the_lesson",
+           bool(m99) and all(x in m99.group(0) for x in
+                             ("Detect the **proposition**", "depth counter is not a stack",
+                              "DETECTOR rule")),
+           "entry 99")
+    report("known_traps_entry_100_carries_the_lesson",
+           bool(m100) and all(x in m100.group(0) for x in
+                              ("structural identity", "third wrong-occurrence",
+                               "governs its container")),
+           "entry 100")
+
     print("\n%d checks, %d FAIL" % (CHECKS, len(FAILS)))
     if FAILS:
         print("failed: " + ", ".join(FAILS))
