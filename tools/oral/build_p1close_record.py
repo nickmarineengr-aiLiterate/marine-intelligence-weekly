@@ -40,6 +40,17 @@ CARDS = [
      "cargo-ship limbs, the two-pump condition, and an explicit statement that "
      "the figure applies AT THE HYDRANTS. The card's second site, a cheat-card "
      "<div>, carried the same claim and is corrected with it."),
+    ("QB2_F.html", "q4", "PROPAGATED_FACT_CORRECTION",
+     "Two further sites on the same page printed a RANGE, '0.27-0.35 MPa', at "
+     "open-deck monitors - one in the Engineering Actions list and one in the "
+     "'Numbers & Regulations to Memorise' block. The detector could not see "
+     "them because in a range only the last figure carries the unit, so the "
+     "governed 0.27 limb was never normalised: a FOURTH instance of the same "
+     "defect class, this time number formatting. The operational target is "
+     "kept - q2 of this card already sanctions that category - and the "
+     "governing minimum is attached beside it in q2's own wording, which is "
+     "propagation of an adjudicated sentence rather than a new editorial "
+     "judgement."),
     ("QB2_H.html", "q2", "SCOPE_PASS_CORRECTION",
      "Version stamp corrected: it attributed the removal of an empty deep-dive "
      "element to this card's own 6 September correction, when that removal was "
@@ -240,6 +251,7 @@ def main() -> int:
             "new_cards": 0,
             "corrected_cards": len(entries),
             "corrected_artefact_surfaces": 2,
+            "pressure_forms_normalised": "MPa, N/mm2, bar, kPa; ranges with hyphen, en-dash, em-dash, solidus or 'to'; comma decimal separator; 'two pumps' and '2 pumps'",
             "firemain_scope_defects_remaining": 0,
             "bmp5_taught_as_current_remaining": 0,
             "currentness_banners_outside_intended_topic": 0,

@@ -170,8 +170,24 @@ def teaching_html(raw: str) -> str:
 _UNIT_TO_MPA = {"mpa": 1.0, "n/mm": 1.0, "n/mm2": 1.0, "n/mm²": 1.0,
                 "bar": 0.1, "kpa": 0.001}
 
+#: A NUMBER GROUP carrying one unit. The unit binds to every figure in the
+#: group, not only to the one it touches.
+#:
+#: The first version required the figure to be immediately adjacent to its
+#: unit. In a range only the LAST figure carries it, so `0.27-0.35 MPa` left the
+#: governed 0.27 limb unnormalised and invisible - and QB2_F carried exactly
+#: that text, live, in a block headed "Numbers & Regulations to Memorise". That
+#: was the FOURTH instance of one defect class: case, then unit, then element
+#: type, then class name, then NUMBER FORMATTING. A quantity is not its
+#: rendering.
+#:
+#: Separators covered: hyphen, en-dash, em-dash, solidus, "to", and the comma
+#: decimal separator used in much of the world.
+_NUM = r"\d+(?:[.,]\d+)?"
+_SEP = r"\s*(?:-|–|—|/|to)\s*"
 PRESSURE = re.compile(
-    r"(\d+(?:\.\d+)?)\s*(MPa|N/mm(?:²|2|\^2)?|bar|kPa)\b", re.I)
+    r"(%s(?:%s%s)*)\s*(MPa|N/mm(?:²|2|\^2)?|bar|kPa)\b" % (_NUM, _SEP, _NUM),
+    re.I)
 
 
 def to_mpa(value: str, unit: str):
@@ -182,13 +198,23 @@ def to_mpa(value: str, unit: str):
     return None if factor is None else round(float(value) * factor, 6)
 
 
+def _figures(group: str):
+    """Every figure in a number group, comma decimals accepted."""
+    return [f.replace(",", ".") for f in re.findall(_NUM, group)]
+
+
 def pressures_mpa(text: str):
-    """Every pressure in `text`, normalised to MPa."""
+    """Every pressure in `text`, normalised to MPa.
+
+    A range yields ONE ENTRY PER FIGURE, because "0.27-0.35 MPa" asserts
+    something about 0.27 as much as about 0.35.
+    """
     out = []
     for m in PRESSURE.finditer(text):
-        v = to_mpa(m.group(1), m.group(2))
-        if v is not None:
-            out.append((v, m.group(0)))
+        for fig in _figures(m.group(1)):
+            v = to_mpa(fig, m.group(2))
+            if v is not None:
+                out.append((v, m.group(0)))
     return out
 
 
@@ -226,9 +252,12 @@ def firemain_scope_defects(raw: str):
     text = teaching_html(raw)
     hits, seen = [], set()
     for m in PRESSURE.finditer(text):
-        mpa = to_mpa(m.group(1), m.group(2))
-        if mpa not in (UPPER_MPA, LOWER_MPA):
+        # A GOVERNED limb anywhere in the group - a range whose floor is the
+        # SOLAS cargo-ship figure is making a claim about that figure.
+        governed = [to_mpa(f, m.group(2)) for f in _figures(m.group(1))]
+        if not any(v in (UPPER_MPA, LOWER_MPA) for v in governed if v is not None):
             continue
+        mpa = next(v for v in governed if v in (UPPER_MPA, LOWER_MPA))
         # The smallest enclosing element that actually states a claim: has the
         # fire-main subject AND mandatory framing. If no enclosing element has
         # both, there is no claim here - only a number.

@@ -68,6 +68,37 @@ EDITS = [
              '0.25 MPa below</div>',
          why="the same claim on the cheat-card surface, in a <div> - the "
              "element type the previous sweep could not see"),
+    # Found by the GENERALISED detector, after the range form was added. The
+    # framing is "target", not "minimum", and an operational target is a
+    # sanctioned category on this corpus - q2 of this same card says so. What
+    # is not sanctioned is a range whose FLOOR is the SOLAS cargo-ship limb,
+    # printed at monitors, in a block headed "Numbers & Regulations to
+    # Memorise", with no statement of what the regulation actually fixes. The
+    # target is kept and the governing minimum is attached beside it, in the
+    # wording q2 already carries - propagation of an adjudicated sentence, not
+    # a new editorial judgement.
+    dict(id="P1-A3", file="QB2_F.html", anchor="q4", count=1,
+         old='<li>Run main and emergency fire pumps in parallel, targeting '
+             '0.27-0.35 MPa at open-deck monitors.</li>',
+         new='<li>Run main and emergency fire pumps in parallel, targeting '
+             '0.27–0.35 MPa at open-deck monitors &mdash; an operational '
+             'target, not a SOLAS minimum. SOLAS II-2/10.2.1.6 fixes the '
+             'minimum at the <strong>hydrants</strong>, both required pumps '
+             'delivering simultaneously: 0.27 MPa at 6,000 GT and upwards, '
+             '0.25 MPa below.</li>',
+         why="a range whose floor is the SOLAS limb, printed at monitors with "
+             "no statement of what the regulation fixes"),
+    dict(id="P1-A4", file="QB2_F.html", anchor="q4", count=1,
+         old='<li>Target fire-main pressure: <strong>0.27-0.35 MPa</strong>'
+             '</li>',
+         new='<li>Target fire-main pressure at open-deck monitors: '
+             '<strong>0.27–0.35 MPa</strong> &mdash; an operational '
+             'target. The SOLAS II-2/10.2.1.6 minimum is at the '
+             '<strong>hydrants</strong>, both required pumps delivering '
+             'simultaneously: <strong>0.27 MPa</strong> at 6,000 GT and '
+             'upwards, <strong>0.25 MPa</strong> below.</li>',
+         why="the same range in the card's Numbers & Regulations block, the "
+             "layer a candidate memorises"),
 ]
 
 #: P1-B. The banner is located by the topic's STRUCTURAL ID, never by a text

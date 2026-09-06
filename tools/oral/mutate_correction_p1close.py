@@ -112,6 +112,11 @@ MUTATIONS = [
     ("E", "delete the lower limb from the corrected QB2_F bullet",
      drop_lower_limb(), FIREMAIN),
 
+    ("K", "the claim as a RANGE, 0.27-0.35 MPa - only the last figure carries the unit",
+     inject(QB2_F, HOST, shape("div", "0.27-0.35 MPa")), FIREMAIN),
+    ("L", "the same range with an en-dash and a comma decimal",
+     inject(QB2_F, HOST, shape("li", "0,27–0,35 MPa")), FIREMAIN),
+
     ("F", "move the currentness banner into an earlier topic",
      move_banner(), "banner_exists_exactly_once_in_the_intended_topic"),
     ("G", "delete the banner from the intended topic",
