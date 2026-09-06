@@ -36,6 +36,7 @@ from oral_content_mutation import (                    # noqa: E402
 QB2_F = QB_ROOT / "QB2_F.html"
 P1 = QB_ROOT / "oralnotes/miw-notes-mgmt-p1.html"
 PASTPAPER = QB_ROOT / "pastpapers/QP2301.html"
+TOPICS = QB_ROOT / "topics.html"
 CURRENTNESS = HERE / "oral_currentness.py"
 VISIBLE = HERE / "oral_visible.py"
 
@@ -49,6 +50,22 @@ HOST = '<div class="reg-box">'
 
 def inject(path, payload):
     return sub_in_file(path, HOST, payload + HOST, count=1)
+
+
+def both(*edits):
+    """One mutation made of several edits.
+
+    Needed where a property is defended REDUNDANTLY. The noun-list rule is
+    protected twice over - the left side must contain a verb AND the right side
+    must open with one - so removing either alone changes nothing the control
+    can see. Two independent guards is the right design; the mutation that
+    proves the control falsifiable therefore has to remove both, and pretending
+    a single edit did it would credit the check with a kill it never made.
+    """
+    def apply():
+        for e in edits:
+            e()
+    return apply
 
 
 #: (id, description, apply, probe, required_check)
@@ -99,8 +116,10 @@ MUTATIONS = [
      sub_in_file(CURRENTNESS, '"kg/cm2": 0.0980665,', '', count=1),
      CONTROLS, "pressure_MUST_CATCH_all_renderings"),
     ("K", "restore element-wide denial suppression",
-     sub_in_file(CURRENTNESS, "            why = _excused(sent, text, cls)",
-                 "            why = _excused(text, text, cls)", count=1),
+     sub_in_file(CURRENTNESS,
+                 "            why = _excused(sent, text, cls, stack)",
+                 "            why = _excused(text, text, cls, stack)",
+                 count=1),
      CONTROLS, "bmp5_MUST_CATCH_live_claims"),
     ("L", "make the BMP5 detector default-INNOCENT again",
      sub_in_file(CURRENTNESS, "            if why is None:",
@@ -117,17 +136,104 @@ MUTATIONS = [
                  'INLINE = frozenset("""\ndiv p li td th dd dt figcaption\n',
                  count=1),
      CONTROLS, "bmp5_MUST_CATCH_live_claims"),
+
+    # ================= E1-E4, the terminal closure ======================
+    # PRODUCT first: the exact renderings the escapes named.
+    ("E1-A", "denial + live claim joined by `and`, in one sentence",
+     inject(P1, "<p>BMP5 replaced BMP4 and remains the current industry "
+                "standard for HRA transits.</p>"), GATE, BMP),
+    ("E2-A", "the same claim spelled BMP-5",
+     inject(P1, "<p>BMP-5 is current guidance for ship hardening.</p>"),
+     GATE, BMP),
+    ("E3-A", "modal-free label:value hydrant figure",
+     inject(QB2_F, "<li>Hydrant pressure - 0.27 N/mm&sup2;</li>"), GATE, FIRE),
+    ("E3-B", "modal-free figure under a Key Numbers heading",
+     inject(QB2_F, "<h4>Key numbers</h4><ul><li>hydrant 2.7 bar</li></ul>"),
+     GATE, FIRE),
+    ("E4-A", "subject in the heading, figure in the block beneath it",
+     inject(QB2_F, "<div><h4>Fire main</h4><ul><li>Minimum 0.27 MPa</li>"
+                   "</ul></div>"), GATE, FIRE),
+    ("G2", "a topic label the GENERATOR authors, using BMP5 as current",
+     sub_in_file(TOPICS, '<ul class="q-list">',
+                 '<ul class="q-list"><li><a href="topics.html#D09">BMP5 is '
+                 'the current piracy guidance</a></li>', count=1),
+     GATE, BMP),
+
+    # DETECTOR second. Each new control must be falsifiable, so each is
+    # attacked at the one line that carries its property. Without these the
+    # controls could be narrowed back to nothing and every corpus check would
+    # stay green, because the corpus is clean.
+    ("E1-D", "drop subject inheritance across coordinated clauses",
+     sub_in_file(CURRENTNESS, "            elif subject_group != group:",
+                 "            elif True:", count=1),
+     CONTROLS, "E1_MUST_CATCH_denial_then_live_claim"),
+    ("E1-E", "let a coordinator split a NOUN list too (BOTH guards)",
+     # The noun-list rule has two independent defenders: the left side must
+     # already contain a finite verb, and the right side must OPEN with one.
+     # THREE independent defenders, discovered one at a time by this very
+     # mutation failing to kill anything: the left side must contain a finite
+     # verb; the right side must OPEN with one; and a verbless fragment MERGES
+     # FORWARD instead of standing as a proposition. Removing any one - or any
+     # two - changes nothing the control can see. That redundancy is a good
+     # property of the design and a bad one for a mutation suite, so the
+     # mutation that proves this check falsifiable removes all three.
+     both(
+         sub_in_file(VISIBLE, "        if not _HAS_VERB.search(left):",
+                     "        if False:", count=1),
+         sub_in_file(
+             VISIBLE,
+             r'    r",?\s+(?:and|or|so|which|that)\s+(?=(?:%s\s+)?%s\b)" % (_ADV, _VERB),',
+             r'    r",?\s+(?:and|or|so|which|that)\s+",',
+             count=1),
+         sub_in_file(
+             VISIBLE,
+             "        if not _HAS_VERB.search(part) and "
+             "part is not parts[-1]:",
+             "        if False:", count=1)),
+     CONTROLS, "E1_coordinator_splits_clauses_not_noun_lists"),
+    ("E2-D", "revert the name to the un-hyphenated spelling only",
+     sub_in_file(CURRENTNESS, r'BMP5 = re.compile(r"\bBMP[\s\-]?5\b", re.I)',
+                 r'BMP5 = re.compile(r"\bBMP\s?5\b", re.I)', count=1),
+     CONTROLS, "E2_hyphenated_name_is_the_same_publication"),
+    ("E3-D", "require a modal again - revert label:value and numbers context",
+     sub_in_file(CURRENTNESS,
+                 "    if LABEL_VALUE.search(sent.strip()):",
+                 "    if False:", count=1),
+     CONTROLS, "E3_MUST_CATCH_modal_free_governing_figure"),
+    ("E4-D", "let a label reach across its container boundary",
+     sub_in_file(VISIBLE,
+                 "            if left > 0 and serials[:len(lparent)] == lparent:",
+                 "            if left > 0:", count=1),
+     CONTROLS, "E4_label_does_not_leak_across_containers"),
+    ("G-D", "give generated pages a blanket exemption again",
+     sub_in_file(CURRENTNESS, '    if _stem_echo(stack):',
+                 '    if _stem_echo(stack) or "q-list" in cls:', count=1),
+     CONTROLS, "generated_surface_status_follows_item_provenance"),
 ]
 
-#: Must NOT be caught: sitting-anchored examiner wording is correct as written.
-NON_CATCH = (
-    "O", "historical BMP5 wording planted in a PAST PAPER - must NOT be caught",
-    sub_in_file(PASTPAPER, '<div class="card"',
-                "<div class='qa'><p>Candidates were expected to answer as per "
-                "BMP5, the guidance current at the sitting.</p></div>"
-                '<div class="card"', count=1))
+#: Must NOT be caught. Three ways to be innocent, each the mirror of a
+#: mutation above: a sitting is anchored in time; a coordinated sentence can be
+#: wholly historical; a heading in a CLOSED sibling lends no subject; and a
+#: generated row that quotes an examiner is still the examiner's words.
+NON_CATCH = [
+    ("O", "historical BMP5 wording planted in a PAST PAPER",
+     sub_in_file(PASTPAPER, '<div class="card"',
+                 "<div class='qa'><p>Candidates were expected to answer as per "
+                 "BMP5, the guidance current at the sitting.</p></div>"
+                 '<div class="card"', count=1)),
+    ("E1-B", "a wholly historical coordinated sentence",
+     inject(P1, "<p>BMP5 replaced BMP4 and was itself superseded by BMP "
+                "Maritime Security.</p>")),
+    ("E4-B", "an unrelated heading must not lend its subject to the next block",
+     inject(QB2_F, "<div><h4>Lifeboat davits</h4></div>"
+                   "<div><ul><li>Minimum 0.27 MPa</li></ul></div>")),
+    ("G1", "a generated row echoing a historical examiner stem",
+     sub_in_file(TOPICS, '<ul class="q-list">',
+                 '<ul class="q-list"><li><a href="QB9_A.html#q9">BMP5 '
+                 'measures for a war risk area.</a></li>', count=1)),
+]
 
-WATCHED = [QB2_F, P1, PASTPAPER, CURRENTNESS, VISIBLE]
+WATCHED = [QB2_F, P1, PASTPAPER, TOPICS, CURRENTNESS, VISIBLE]
 
 
 def main() -> int:
@@ -150,7 +256,7 @@ def main() -> int:
             apply()
         except Exception as exc:                        # noqa: BLE001
             crashes.append("%s: %s" % (mid, exc))
-            print("%-3s %-62s CRASH   [%s]" % (mid, desc[:62], exc))
+            print("%-5s %-60s CRASH   [%s]" % (mid, desc[:60], exc))
             snap.restore()
             continue
         _rc, failing = run_probe(probe)
@@ -159,32 +265,33 @@ def main() -> int:
         if not hit:
             problems.append("%s (wanted %s in %s, got %s)"
                             % (mid, want, probe, sorted(failing) or "nothing"))
-        print("%-3s %-62s %s [%s]"
-              % (mid, desc[:62], "CAUGHT " if hit else "ESCAPED", want))
+        print("%-5s %-60s %s [%s]"
+              % (mid, desc[:60], "CAUGHT " if hit else "ESCAPED", want))
         bad = snap.restore()
         if bad:
             print("    RESTORE FAILED: %s" % bad)
             return 2
 
-    mid, desc, apply = NON_CATCH
-    snap = Snapshot(WATCHED)
-    try:
-        apply()
-        _rc, failing = run_probe(GATE)
-    finally:
-        bad = snap.restore()
-    if bad:
-        print("    RESTORE FAILED: %s" % bad)
-        return 2
-    ok = not failing
-    caught += 1 if ok else 0
-    if not ok:
-        problems.append("%s (wrongly flagged: %s)" % (mid, sorted(failing)))
-    print("\n%-3s %-62s %s" % (mid, desc[:62],
-                               "CORRECTLY IGNORED" if ok
-                               else "WRONGLY FLAGGED %s" % sorted(failing)))
+    print()
+    for mid, desc, apply in NON_CATCH:
+        snap = Snapshot(WATCHED)
+        try:
+            apply()
+            _rc, failing = run_probe(GATE)
+        finally:
+            bad = snap.restore()
+        if bad:
+            print("    RESTORE FAILED: %s" % bad)
+            return 2
+        ok = not failing
+        caught += 1 if ok else 0
+        if not ok:
+            problems.append("%s (wrongly flagged: %s)" % (mid, sorted(failing)))
+        print("%-5s %-60s %s" % (mid, desc[:60],
+                                 "CORRECTLY IGNORED" if ok
+                                 else "WRONGLY FLAGGED %s" % sorted(failing)))
 
-    total = len(MUTATIONS) + 1
+    total = len(MUTATIONS) + len(NON_CATCH)
     print("\n%d of %d behaved as required" % (caught, total))
     print("%d mutations, %d failure(s), %d crash(es)"
           % (total, len(problems), len(crashes)))

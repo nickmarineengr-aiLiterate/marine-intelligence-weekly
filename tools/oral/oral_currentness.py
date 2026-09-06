@@ -25,6 +25,22 @@ So the lists are gone:
     silence the whole element, so "BMP5 replaced BMP4, but BMP5 is the guidance
     we apply today" passed. Each proposition is now judged on its own.
 
+GENERATED-SURFACE POLICY
+------------------------
+A generated page gets NO blanket exemption. Its status is inherited item by
+item, from the provenance of the item:
+
+  * a QUESTION-STEM ECHO - a row that is entirely the text of a link into a
+    question card - is the examiner's wording, and takes the historical
+    policy, exactly as it does on the card it quotes;
+  * a LABEL OR DESCRIPTION the generator authors itself is teaching, and takes
+    the currentness policy like any other teaching text;
+  * NAVIGATION inherits the semantics of what it points at.
+
+The distinction is structural, so it cannot be satisfied by adding a class to
+a generated template: a stem echo is recognised by the href that names the
+card it quotes, and nothing else on such a page is excused by being generated.
+
 WHAT IS DELIBERATELY NOT HERE
 -----------------------------
 Unit normalisation is a DETECTOR rule and never an editorial one: a card may
@@ -42,7 +58,8 @@ HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 from oral_visible import (                     # noqa: E402
-    segments, sentences, normalise, container_classes)
+    segments, segments_with_context, sentences, propositions, normalise,
+    container_classes)
 
 # ==========================================================================
 # pressure - quantity, not spelling
@@ -146,18 +163,65 @@ def _governed(values):
     return any(_is(v, UPPER_MPA) or _is(v, LOWER_MPA) for v in values)
 
 
+#: E3. A figure can govern without a modal. "Hydrant pressure - 0.27 N/mm2"
+#: states the requirement as plainly as "minimum 0.27" does, and a reader
+#: memorising it will quote it in an oral. Two ways a modal-free figure reads
+#: as governing:
+#:
+#:  (a) LABEL:VALUE - the segment IS a label and its value, nothing else. The
+#:      label is the assertion; "Fire main: 0.27 MPa" has no room for hedging.
+#:  (b) a NUMBERS context - the container or its heading presents figures to
+#:      memorise, regulatory values, requirements or benchmarks.
+#:
+#: Neither fires on prose. "The fire pump discharges at 0.27 MPa on trials" is
+#: a description, has a subject and a verb, and is not a label - so it is left
+#: alone, which is the whole reason this is not simply "drop the modal test".
+NUMBERS_CONTEXT = re.compile(
+    r"key\s*(?:number|figure|fact)|numbers?\s+to\s+(?:memoris|memoriz|know|"
+    r"remember)|must[-\s]?know|quick\s*(?:facts?|numbers?)|"
+    r"regulatory\s*(?:figure|value|number|requirement)|requirements?\b|"
+    r"benchmark|criteri(?:a|on)|figures?\s+to\s+quote|memory\s*(?:aid|jog)",
+    re.I)
+
+#: The label half of a label:value segment. Bounded: the subject, an optional
+#: qualifier, a separator, then the figure - and the segment ENDS there.
+LABEL_VALUE = re.compile(
+    r"^\s*(?:the\s+)?(?:hydrant|fire[\s-]*main|deck\s*monitor|fire\s*pump)"
+    r"[^:.\-]{0,40}?\s*[:\-]\s*(?:approx\.?\s*)?[\d.,]+\s*\S{1,8}\s*$", re.I)
+
+
+def _reads_as_governing(sent: str, seg: str, label) -> str | None:
+    """Why this figure reads as the governing value, or None."""
+    if MANDATORY.search(sent) or MANDATORY.search(seg):
+        return "mandatory framing"
+    if LABEL_VALUE.search(sent.strip()):
+        return "label:value - the label IS the assertion"
+    if NUMBERS_CONTEXT.search(seg) or (label and NUMBERS_CONTEXT.search(label)):
+        return "presented among figures to memorise"
+    return None
+
+
 def firemain_scope_defects(raw: str):
     """Fire-main pressure claims that state a governed limb with incomplete scope.
 
-    A hit needs ALL of: the fire-main subject, a governed figure, mandatory
-    framing, and MISSING ship-size scope. Any three of the four is not the
-    defect - which is why an equipment operating pressure ("fire main water,
-    typically 5-7 bar") and a weathertightness hose test ("minimum pressure of
-    2 Bar") are both correctly ignored: neither carries a governed figure.
+    A hit needs ALL of: the fire-main subject, a governed figure, framing that
+    reads as GOVERNING, and MISSING ship-size scope. Any three of the four is
+    not the defect - which is why an equipment operating pressure ("fire main
+    water, typically 5-7 bar") and a weathertightness hose test ("minimum
+    pressure of 2 Bar") are both correctly ignored: neither carries a governed
+    figure.
+
+    E4: the subject may live in the preceding SIBLING block -
+    `<h4>Fire main</h4><li>Minimum 0.27 MPa</li>`. The label reaches the line
+    only while that line is still inside the element holding the label, and
+    only for a bounded number of segments. It is NOT a character window: the
+    +-220-character window is the defect this replaces.
     """
     hits = []
-    for text, stack, line, seg_cls in segments(raw):
-        cls = container_classes(stack) | seg_cls
+    for seg in segments_with_context(raw):
+        text, stack, line = seg["text"], seg["stack"], seg["line"]
+        label = seg["label"]
+        cls = container_classes(stack) | seg["classes"]
         # A version stamp QUOTES what it removed; reading it reports the
         # changelog as the defect (known_traps 89).
         if cls & {"q-version", "correction-link", "q-footer"}:
@@ -166,11 +230,13 @@ def firemain_scope_defects(raw: str):
             vals = [v for v, _ in pressures_mpa(sent)]
             if not _governed(vals):
                 continue
-            if not (FIREMAIN.search(sent) or FIREMAIN.search(text)):
+            subject = (FIREMAIN.search(sent) or FIREMAIN.search(text)
+                       or (label and FIREMAIN.search(label)))
+            if not subject:
                 continue
-            if not (MANDATORY.search(sent) or MANDATORY.search(text)):
+            if not _reads_as_governing(sent, text, label):
                 continue
-            if DENIAL.search(sent):
+            if DENIAL.search(sent) or (label and DENIAL.search(label)):
                 continue
             # Completeness is judged on the SEGMENT, never the page: a 0.25
             # three paragraphs away must not rescue a single-limb bullet.
@@ -199,7 +265,12 @@ def firemain_scope_defects(raw: str):
 # BMP5 - default-suspicious, excused by context
 # ==========================================================================
 
-BMP5 = re.compile(r"\bBMP\s?5\b", re.I)
+#: E2. One publication, three spellings a reader cannot tell apart: BMP5,
+#: BMP 5, BMP-5. `normalise` already folds every unicode dash to ASCII "-", so
+#: it folded the exotic forms TOWARDS a spelling this pattern did not accept -
+#: the normalisation and the matcher were pulling in opposite directions.
+#: DETECTION ONLY: nothing here rewrites how a card spells the name.
+BMP5 = re.compile(r"\bBMP[\s\-]?5\b", re.I)
 
 #: Container classes that carry the EXAMINER'S wording, navigation, indexes or
 #: bibliography rather than teaching. These are identities, not phrasings, so
@@ -214,7 +285,7 @@ marks-badge search-hit
 #: A reference LIST cites what was read. `<li>BMP5 - "Best Management
 #: Practices..."` under a References head is history, not instruction.
 BIBLIO_HINT = re.compile(
-    r'^\s*BMP\s?5\s*[-:–]|Best Management Practices to Deter Piracy', re.I)
+    r'^\s*BMP[\s\-]?5\s*[-:–]|Best Management Practices to Deter Piracy', re.I)
 
 #: The current publication. A sentence naming it alongside BMP5 is drawing the
 #: contrast, not teaching the old one.
@@ -225,7 +296,7 @@ SUCCESSOR = re.compile(r"BMP\s*(?:MS|Maritime\s+Security)", re.I)
 #: a historical fact about the compilation, not a claim that it is current.
 PROVENANCE_HINT = re.compile(
     r"compiled from|derived from|sources? consulted|material is compiled|"
-    r"reclassified backlog|questions on", re.I)
+    r"reclassified backlog|questions on\b", re.I)
 
 #: A container statement that puts its subject in the past. Broader than
 #: "Currentness note" on purpose: QB4_H#q11 opens "Predecessor publication -
@@ -233,14 +304,41 @@ PROVENANCE_HINT = re.compile(
 #: just as effectively, and a marker that only recognised one house phrasing
 #: reported the corpus's own predecessor record as a defect.
 CURRENTNESS_MARK = re.compile(
-    r"currentness note|supersed|predecessor|no longer current|replaced|"
+    r"currentness note|supersed|predecessor|no longer current|replaced\b|"
     r"current publication", re.I)
 
 
-def _excused(sent: str, seg: str, cls: frozenset) -> str | None:
+#: A link INTO a question card. A generated index does not carry the source's
+#: `q-text` class, so a stem echoed onto it lost the only mark that said whose
+#: words they were - and the guard read an examiner's question as the site's
+#: own teaching.
+#:
+#: The href is the provenance: it names the card being quoted. This is NOT a
+#: blanket exemption for generated pages (see GENERATED-SURFACE POLICY in the
+#: module docstring) - a topic LABEL that the generator authors itself is not
+#: inside such a link and is judged by the currentness rule like any teaching.
+LINK_TO_QUESTION = re.compile(r"\.html#q\d+", re.I)
+
+
+def _stem_echo(stack) -> bool:
+    """Is this visible run the text of a link into a question card?
+
+    The anchor must be where the run BEGAN - `stack[-1]` - not merely an
+    ancestor somewhere. A generated index row is entirely link text; a prose
+    cross-reference ("see Q13 for the current guidance") starts in the
+    paragraph and only passes through the link, so it stays fully judged.
+    """
+    if not stack or stack[-1][0] != "a":
+        return False
+    return bool(LINK_TO_QUESTION.search(stack[-1][1].get("href", "")))
+
+
+def _excused(sent: str, seg: str, cls: frozenset, stack=()) -> str | None:
     """Why this BMP5 mention is NOT a live claim, or None if it is one."""
     if cls & EXCUSED_CLASSES:
         return "examiner wording / navigation / index / provenance"
+    if _stem_echo(stack):
+        return "question-stem echo - the link names the card it quotes"
     if BIBLIO_HINT.search(seg):
         return "bibliography entry"
     if PROVENANCE_HINT.search(seg):
@@ -248,7 +346,7 @@ def _excused(sent: str, seg: str, cls: frozenset) -> str | None:
     # A mention wholly inside quotation marks is somebody else's words - an
     # examiner cue on a cheat sheet, a quoted question. The corpus keeps those
     # deliberately.
-    if re.search(r'[\"“‘][^\"”’]{0,80}BMP\s?5'
+    if re.search(r'[\"“‘][^\"”’]{0,80}BMP[\s\-]?5'
                  r'[^\"”’]{0,80}[\"”’]', seg, re.I):
         return "quoted wording"
     if sent.rstrip().endswith("?"):
@@ -290,6 +388,29 @@ def _governing_currentness(raw: str):
     return spans
 
 
+#: E1. A coordinated clause SHARES its subject with the clause before it, so
+#: "BMP5 replaced BMP4 and remains the current industry standard" asserts
+#: currency ABOUT BMP5 in a clause that never names it. Splitting the sentence
+#: was necessary but not sufficient: the second clause has no BMP5 to match, so
+#: a name-driven detector skipped it and the denial in the first clause kept
+#: winning.
+#:
+#: A clause with an INHERITED subject is judged only on whether it asserts
+#: currency. That is deliberately narrower than the default-suspicious rule
+#: applied to a clause that names BMP5 itself: an inherited subject is an
+#: inference, and an inference earns a hit only on an explicit claim.
+CURRENT_ASSERTION = re.compile(
+    r"remains?\s+(?:the\s+)?(?:current|in\s+force|authoritative|applicable)|"
+    r"remains?\s+(?:the\s+)?(?:industry\s+)?(?:standard|guidance|practice)|"
+    r"(?:is|are)\s+(?:still\s+)?(?:the\s+)?current|"
+    r"(?:is|are)\s+still\b|still\s+(?:applies|apply|in\s+force|used)|"
+    r"continues?\s+to\s+(?:apply|be|govern)|"
+    r"what\s+we\s+(?:use|apply|follow)\s+today|use\s+today|"
+    r"for\s+current\s+(?:operations|guidance|practice)|"
+    r"current\s+(?:industry\s+)?(?:guidance|standard|practice|publication|"
+    r"reference)|applies\s+today|in\s+force\s+today", re.I)
+
+
 def bmp5_current_teaching(raw: str):
     """Sentences presenting BMP5 as live guidance.
 
@@ -305,11 +426,18 @@ def bmp5_current_teaching(raw: str):
         cls = container_classes(stack) | seg_cls
         if any(a <= line <= b for _s, _e, a, b in governed):
             continue
-        for sent in sentences(text):
-            if not BMP5.search(sent):
-                continue
-            why = _excused(sent, text, cls)
+        subject_group = None          # the sentence-group BMP5 is subject of
+        for sent, group in propositions(text):
+            named = bool(BMP5.search(sent))
+            if named:
+                subject_group = group
+            elif subject_group != group:
+                continue              # a different sentence: no inheritance
+            elif not CURRENT_ASSERTION.search(sent):
+                continue              # inherited subject, no currency claim
+            why = _excused(sent, text, cls, stack)
             if why is None:
-                hits.append({"line": line, "text": sent[:160]})
+                hits.append({"line": line, "text": sent[:160],
+                             "subject": "named" if named else "inherited"})
                 break
     return hits

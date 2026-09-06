@@ -22,7 +22,8 @@ sys.path.insert(0, str(HERE))
 
 from oral_currentness import (                       # noqa: E402
     firemain_scope_defects, bmp5_current_teaching, to_mpa, pressures_mpa)
-from oral_visible import segments, sentences, normalise  # noqa: E402
+from oral_visible import (segments, sentences, normalise,
+                          HEADING_REACH)  # noqa: E402
 
 FAILS: list[str] = []
 CHECKS = 0
@@ -200,15 +201,40 @@ def main() -> int:
           _split("BMP5 replaced BMP4, but BMP5 is what we use today."),
           "subordinating conjunction: denial and claim are separated")
 
-    # OPEN, reported, NOT counted as a pass. `and`/`or`/`so` are absent from
-    # the splitter, so this denial still silences a live claim in the same
-    # sentence. Printing it as a known-open escape is the point: the previous
-    # version of this file hid exactly this behind an unfalsifiable assertion.
-    _and = _split("BMP5 replaced BMP4 and remains the current industry standard.")
-    print("%-4s %-56s %s"
-          % ("OPEN" if not _and else "----",
-             "coordinating_conjunction_split_IS_OPEN_P1",
-             "escape 1 of PASS1_GUARD_CLOSURE.md; not closed, not counted"))
+    # ---- E1: coordinated clauses --------------------------------------
+    # Was reported OPEN by the previous record. Two properties, both needed:
+    # the coordinator SPLITS a clause pair, and does NOT split a noun pair.
+    check("E1_coordinator_splits_clauses_not_noun_lists",
+          len(sentences(normalise(
+              "BMP5 replaced BMP4 and remains the current standard"))) == 2
+          and len(sentences(normalise(
+              "BMP5 and BMP4 are historical predecessors"))) == 1,
+          "left needs a verb, right must open with one")
+
+    E1_CATCH = [
+        "BMP5 replaced BMP4 and remains the current industry standard",
+        "BMP5 superseded BMP4 but BMP5 is still what we use today",
+        "BMP5 was the predecessor, yet refer to BMP5 for current operations",
+    ]
+    E1_PASS = [
+        "BMP5 replaced BMP4 and was itself superseded by BMP Maritime Security",
+        "BMP5 and BMP4 are historical predecessors",
+        "examiner asked for BMP5 and BMP Maritime Security differences",
+    ]
+    check("E1_MUST_CATCH_denial_then_live_claim",
+          all(bmp5_current_teaching("<p>%s</p>" % c) for c in E1_CATCH),
+          "%d case(s); the live clause inherits BMP5 as its subject"
+          % len(E1_CATCH))
+    check("E1_MUST_NOT_CATCH_wholly_historical",
+          not any(bmp5_current_teaching("<p>%s</p>" % c) for c in E1_PASS),
+          "%d case(s)" % len(E1_PASS))
+
+    # ---- E2: the name is one publication, three spellings --------------
+    check("E2_hyphenated_name_is_the_same_publication",
+          bool(bmp5_current_teaching("<p>BMP-5 is current guidance</p>"))
+          and bool(bmp5_current_teaching("<p>BMP 5 is current guidance</p>"))
+          and not bmp5_current_teaching("<p>BMP-5 was superseded</p>"),
+          "BMP5 / BMP 5 / BMP-5 catch alike; denial still excuses")
 
     # ---- pressure: must catch -----------------------------------------
     def _missed(cases, fn):
@@ -265,6 +291,64 @@ def main() -> int:
     check("currentness_exemption_still_governs_its_own_subject",
           not bmp5_current_teaching(related),
           "a BMP-subject note does govern technique text beneath it")
+
+    # ---- E3: a figure can govern without a modal -----------------------
+    E3_CATCH = ["<li>Hydrant pressure - 0.27 N/mm&sup2;</li>",
+                "<li>Fire main: 0.27 MPa</li>",
+                "<h4>Key numbers</h4><ul><li>hydrant 2.7 bar</li></ul>"]
+    E3_PASS = ["<li>HydroPen operating pressure 5-7 bar</li>",
+               "<li>Hose-test pressure 2 bar</li>",
+               "<p>On trials the fire pump delivered 0.27 MPa at the manifold "
+               "and the reading was logged.</p>",
+               '<span class="q-version">was "4.0 Bar", corrected</span>']
+    check("E3_MUST_CATCH_modal_free_governing_figure",
+          all(firemain_scope_defects(c) for c in E3_CATCH),
+          "label:value, and figures presented to memorise")
+    check("E3_MUST_NOT_CATCH_prose_or_ungoverned_figures",
+          not any(firemain_scope_defects(c) for c in E3_PASS),
+          "%d case(s): operating pressure, hose test, prose, changelog"
+          % len(E3_PASS))
+
+    # ---- E4: the subject lives in the preceding sibling block ----------
+    check("E4_MUST_CATCH_subject_in_preceding_sibling",
+          bool(firemain_scope_defects(
+              "<div><h4>Fire main</h4><ul><li>Minimum 0.27 MPa</li></ul></div>")),
+          "a heading labels the block beneath it")
+    # The decisive case is a label that WOULD produce a hit if it leaked: the
+    # same "Fire main" heading, the same governed figure, separated only by a
+    # closed container. An earlier version of this check used an unrelated
+    # heading ("Lifeboat davits"), which passes whether the boundary is
+    # enforced or not - it was the subject test doing the work, not the bound.
+    # A mutation that removed the bound proved it, and this is the repair.
+    check("E4_label_does_not_leak_across_containers",
+          not firemain_scope_defects(
+              "<div><h4>Fire main</h4></div>"
+              "<div><ul><li>Minimum 0.27 MPa</li></ul></div>")
+          and not firemain_scope_defects(
+              "<div><h4>HydroPen</h4><ul><li>Operating pressure 5-7 bar</li>"
+              "</ul></div>"),
+          "same label, same figure, closed sibling: identity, not tag name")
+
+    check("E4_label_reach_is_bounded",
+          not firemain_scope_defects(
+              "<div><h4>Fire main</h4><ul>"
+              + "<li>filler line</li>" * (HEADING_REACH + 2)
+              + "<li>Minimum 0.27 MPa</li></ul></div>"),
+          "a heading does not label the whole rest of a long container")
+
+    # ---- generated-surface policy (one test, both directions) ----------
+    # A generated page gets no blanket exemption: the stem echo is excused by
+    # the href that names the card it quotes, and a label the generator wrote
+    # itself is judged like any teaching text. Same page, same class, same
+    # element - opposite verdicts, decided by provenance alone.
+    check("generated_surface_status_follows_item_provenance",
+          not bmp5_current_teaching(
+              '<ul class="q-list"><li><a href="QB9_A.html#q9">'
+              'BMP5 measures.</a></li></ul>')
+          and bool(bmp5_current_teaching(
+              '<ul class="q-list"><li><a href="topics.html#D09">'
+              'BMP5 is the current piracy guidance</a></li></ul>')),
+          "stem echo KEEP; generator-authored label CAUGHT")
 
     # ---- the detector NEVER rewrites -----------------------------------
     # This compared a `str` to itself. Python strings are immutable, so it

@@ -195,7 +195,17 @@ def main() -> int:
     bar_sites, bmp_sites, orphan_sites, single_limb = [], [], [], []
     for p in files:
         fam = surface_family(p)
-        if fam in ("generated", "pastpapers"):
+        # `pastpapers` stays out: a sitting is anchored in time and the
+        # examiner's wording is CORRECT as written.
+        #
+        # `generated` is now IN. It was skipped because a generated index
+        # loses the `q-text` class that marks an examiner's words, so every
+        # stem echo read as the site's own teaching. That was a detector gap,
+        # not a reason to stop looking - and skipping the surface meant a
+        # topic label the generator authors ITSELF was never examined either.
+        # The detector now decides item by item from provenance, so the whole
+        # surface can be swept.
+        if fam == "pastpapers":
             continue
         t = teaching_text(p)
         if BAR_MINIMUM.search(flat(t)):

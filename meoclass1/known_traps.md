@@ -2869,3 +2869,59 @@ the corpus's own supersession card as a defect.
 byte, so it could not supply a card, a `PRIMARY_CORRECTION` or a digest pair. Manufacturing one
 to fit would have produced the decorative record the schema exists to forbid. It was written as a
 chained governance document instead.
+
+### 102. A shell heredoc eats `\b`, and the regex still compiles
+
+`oral_currentness.py` shipped at `a2c83bd` with a literal `0x08` byte where `\b` belonged, in
+two alternatives — `questions on\b` and `replaced\b`. Written through a bash heredoc that
+consumed one backslash. Nothing failed: the module imported, the pattern compiled, every gate
+stayed green, and both alternatives were simply **unreachable** for two days.
+
+**A regex that compiles is not a regex that matches.** The damage is invisible to syntax checks,
+to review, and to any test whose input does not need that alternative — which is every test,
+because the alternative is what would have made the input pass.
+
+**Both failed CLOSED**, which is why no defect escaped: the dead alternatives were *excuses*, so
+losing them made the detector more suspicious rather than blind. That was luck, not design. Had
+the byte landed in a MUST-CATCH alternative it would have opened a hole with every gate green.
+
+**Do this:** never write a regex through a heredoc. Use the file-editing tools, and scan for
+control bytes (`grep -c $'\x08'`) after any shell-mediated write. Repaired here, and the same
+scan found a third instance in the mutation suite before it ran.
+
+### 103. A check can pass for a reason it does not name
+
+`E4_label_does_not_leak_across_containers` asserted that a heading in a CLOSED sibling block
+lends no subject to the block after it. It used the heading "Lifeboat davits" — which the
+*subject* test refuses whether or not the container bound exists. The bound was never exercised.
+Removing the bound entirely did not turn the check red.
+
+**A negative check must fail if the property is removed.** Pick the input that WOULD produce a
+hit if the guard were gone: same subject, same governed figure, differing only in the property
+under test. Here that is the same `Fire main` heading and the same `0.27 MPa`, separated only by
+a closed container.
+
+The mutation suite found this, and it is the argument for detector mutations: the corpus is
+clean, so a corpus-only suite tests the guard on the one input where it cannot fail.
+
+### 104. Tag names are not element identity
+
+The same check hid a second defect. A label's reach was bounded by comparing the ancestor **tag
+name** path — but two sibling `<div>`s both spell `div`, so a heading's container and the next
+container along were indistinguishable and the label leaked across a boundary that looked
+enforced. Fixed by giving every open element a serial and comparing those.
+
+**When you bound something by structure, bound it by identity.** A path of tag names is a
+description, not an address.
+
+### 105. Redundant defences make a mutation lie
+
+The rule "a coordinator splits clauses, not noun lists" turned out to be upheld three times
+over: the left side must carry a finite verb, the right side must open with one, and a verbless
+fragment merges forward instead of standing alone. A mutation removing the first reported an
+ESCAPE — the control stayed green because the other two still held the property.
+
+**An escape can mean the mutation was too weak, not that the guard is.** Before recording an
+escape, check whether the property is defended elsewhere; if it is, the mutation must remove
+every defender, or it credits a kill it never made. Defence in depth is worth keeping — the
+mutation is what has to change.
