@@ -28,7 +28,11 @@ from validate_batch_h_series import card_digests              # noqa: E402
 from oral_supersession import build_chain, load_card_records  # noqa: E402
 
 BASELINE = "43597e3"
-GOVERNING = ["0626fca"]
+#: THREE commits. The range-form fix (P1CLOSE-02) landed in ad2b802 and the
+#: cross-reference wording fix in 9b1f0e0-to-be; a record whose governing list
+#: stops at the first content commit leaves later product bytes unnamed, and
+#: `governing_commits_produced_post_state` measures against the LAST entry.
+GOVERNING = ["0626fca", "ad2b802"]
 NAME = "correction_corr_p1close_20260906_manifest.json"
 
 CARDS = [
