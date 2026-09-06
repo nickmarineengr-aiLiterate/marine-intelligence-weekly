@@ -164,9 +164,19 @@ def main() -> int:
                "two required pumps" in elem or "two pumps" in elem,
                "the figure is meaningless without the pump condition")
         if removed:
+            # CASE-INSENSITIVE, and not by listing spellings. The Pass-1
+            # version tested `removed not in flat(teaching)` with
+            # removed="4.0 bar"; the live residue read "4.0 Bar" and the gate
+            # reported PASS on a card still teaching the figure it exists to
+            # remove. Capitalisation is semantically irrelevant to a forbidden
+            # proposition, so the MATCHER must be, and enumerating "4.0 bar"
+            # plus "4.0 Bar" would only move the same hole to "4.0 BAR".
+            # Whitespace is normalised for the same reason.
+            hay = re.sub(r"\s+", " ", flat(teaching)).lower()
+            needle = re.sub(r"\s+", " ", removed).lower()
             report("%s_false_figure_gone_from_the_teaching_layers" % label,
-                   removed not in flat(teaching),
-                   "'%s' no longer taught" % removed)
+                   needle not in hay,
+                   "'%s' no longer taught, in ANY capitalisation" % removed)
 
     # N-3 additionally has to say that a bigger number is not a SOLAS minimum,
     # because the number it replaced was defended as a monitor-throw figure.
@@ -189,10 +199,12 @@ def main() -> int:
            UPPER in q5 and LOWER in q5 and THRESHOLD in q5,
            "QB9_B#q5 - the corrected card the 4.0 bar site contradicted")
 
-    # ---- provenance is preserved, not swept -----------------------------
-    report("version_stamps_may_still_quote_what_was_removed",
-           True, "negative checks run on the teaching layers only, per "
-                 "known_traps 89 - this is stated, not asserted")
+    # The literal-`True` pseudo-check that used to sit here is GONE. It
+    # asserted nothing and inflated the gate's advertised check count with a
+    # tautology. The property it claimed - that negative checks read only the
+    # teaching layers - is asserted for real by the mutation suite's
+    # provenance probe, which edits the version stamp and requires every
+    # content check to stay green.
 
     # ---- digests and corpus ---------------------------------------------
     inv = man["invariants"]

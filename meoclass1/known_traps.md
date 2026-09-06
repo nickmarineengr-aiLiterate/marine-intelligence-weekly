@@ -2681,3 +2681,74 @@ would expire on the next unrelated edit to it. That means the manifest cannot pr
 and their propositions have to be asserted by the correction's own content gate instead. Three of
 this pass's eight reach sites live only there; without content gates they would have been
 completely unguarded while looking recorded.
+
+### 96. A forbidden-proposition check must be case-insensitive, and adding the second spelling is not the fix
+
+`CORR-T5-HYDRANT-20260906` corrected `QB2_H#q2`'s extra-block to the SOLAS
+II-2/10.2.1.6 limbs, wrote a version stamp saying the old figure "is not a SOLAS figure", and
+left the card's **Key Numbers / Regs** list — four lines above that stamp — still reading
+`4.0 Bar: Minimum operational pressure required at the furthest deck hydrant`. The gate reported
+PASS. Its negative check was `removed not in flat(teaching)` with `removed = "4.0 bar"`, and the
+residue reads `4.0 Bar`.
+
+**Capitalisation is not part of a proposition, so it must not be part of the matcher.** Lower-case
+both sides and normalise whitespace. Enumerating `"4.0 bar"` and `"4.0 Bar"` is not a fix — it
+moves the same hole to `4.0 BAR`, and the next residue will differ by a non-breaking space or a
+line wrap instead.
+
+**A mutation can pass its own suite while the escape stays live.** The suite's mutation B
+reinserted the figure using the *lower-case* spelling the check was written against, so the guard
+looked proved. A mutation that reproduces the defect **in the exact bytes the corpus actually
+carries** is the only one that tests anything; write the mutation from the live residue, not from
+the correction's own vocabulary.
+
+### 97. A scope defect is invisible from inside its own scope
+
+Every Pass-1 census and gate enumerated `meoclass1/*.html`. That is **128 files**. The corpus is
+**224**: `oralnotes` 44, `pastpapers` 51, `rulesapp` 1. Ninety-six files were outside every claim
+of "corpus-wide", and the whole oralnotes study series sat in that gap teaching **BMP5 as current**
+with a timeline row dating it to **2024**.
+
+Nothing went red. Every count was internally consistent, every gate was green, and three reports
+described a sweep of 57% of the corpus as complete — including the report that added trap entry 94,
+*"derive the site list from the corpus, then classify; never from the finding"*.
+
+> **Rule.** "Corpus-wide" resolves through **one** enumeration function, recursive, imported by
+> every consumer. A local re-glob is how two definitions drift apart, and the drift is what hides.
+
+**A scope control cannot share the enumeration it tests.** `test_corpus_scope.py` re-walks the tree
+with `os.walk` as a second implementation, and **plants a file in a nested directory** and requires
+the enumeration to see it. Assert the contract as a live comparison — "the recursive set is strictly
+larger than the top-level set, and these N files are what a top-level glob would miss" — so
+reverting the glob goes red instead of passing vacuously.
+
+**Recursive scope is not a licence to sweep.** A surface is a POLICY, not a directory.
+`pastpapers` is sitting-anchored: modernising an examiner's historical wording is its own defect.
+`oralnotes` is current study material by its own titles, so currentness rules apply there exactly
+as on a card. Classification must be **total** — a file with no family is a file with no policy.
+
+**And a wider net catches content.** The recursive orphan-bullet scan immediately flagged a lone
+`* Day-counts are ...` line in `miw-notes-mgmt-p6` — the **footnote** paired with the `3 days*` /
+`7 days*` markers above it. A bullet run is two or more consecutive lines; a single starred line is
+a footnote. Widening scope without sharpening the discriminator would have deleted the note saying
+those day-counts are not MLC statutory text.
+
+### 98. What a self-written gate cannot tell you, and the four ways these ones lied
+
+The three Pass-1 gates were written by the session that made the edits, and an independent reviewer
+found four checks that passed while asserting nothing:
+
+* **A body that is never read.** `every_typed_block_survived_the_repair` compared `(class, label)`
+  pairs — `DD_BLOCK` group 3 is the body, and the check never touched it. A repair that replaced
+  all 146 bodies with one character would have passed, and so would a block migrating between cards
+  in the same file, because the comparison was file-wide rather than per card.
+* **A number computed and discarded.** `derived_bytes` was accumulated in the loop and never used;
+  the 82,736-byte claim was guarded by `manifest_number > 50000` — the record marking its own
+  homework.
+* **A check satisfied by the audit trail it was written to exclude.** `N1_footer_agrees_with_its_own_card_body`
+  read the whole card, and the word it looked for exists **only in the version stamp**.
+* **A check that was the literal `True`.** Honest in its message, still counted in the total.
+
+> **Rule.** Every check must be able to FAIL on some reachable state, and the mutation that reaches
+> it must be named. A green gate written beside the edit it guards is evidence of nothing until an
+> independent reader has tried to break it.

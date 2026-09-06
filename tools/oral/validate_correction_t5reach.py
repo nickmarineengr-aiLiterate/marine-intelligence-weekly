@@ -136,10 +136,18 @@ def main() -> int:
            CURRENT in foot and "1st Edition (2025)" in foot
            and "June 2026" in foot,
            "footer names BMP MS 1st Edition (2025) as updated June 2026")
+    # SCOPED TO THE TEACHING LAYERS. The Pass-1 version read the whole card,
+    # and the word it looked for appears ONLY in the q-version stamp - so a
+    # check named "footer agrees with its own card body" was satisfied
+    # entirely by provenance text and tested nothing about the body. The
+    # substantive claim is that the footer and the reg-box now agree on WHICH
+    # publication the muster-point teaching comes from.
+    teaching_q2 = flat(without_provenance(card_block(qb4h, "q2")))
     report("N1_footer_agrees_with_its_own_card_body",
-           "unverifiable" in flat(card_block(qb4h, "q2")).lower()
-           or "could not be verified" in flat(card_block(qb4h, "q2")),
-           "the card still records WHY the old citation went")
+           CURRENT in foot and CURRENT in teaching_q2
+           and "BMP5 Section 5" not in teaching_q2,
+           "footer and teaching body name the same current publication, and "
+           "the superseded section-number citation is in neither")
 
     # ================= N-2 : the cheat-sheet circular ======================
     cs9a = read_text(QB_ROOT / "QB9_A_CheatSheet.html")

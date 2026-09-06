@@ -45,6 +45,11 @@ sys.path.insert(0, str(HERE))
 
 from oral_bytes import read_text  # noqa: E402
 
+
+def rel_of(path):
+    """Corpus-relative path - a bare basename cannot locate a nested file."""
+    return pathlib.Path(path).resolve().relative_to(QB_ROOT.resolve()).as_posix()
+
 # --------------------------------------------------------------------------
 # surface classification
 # --------------------------------------------------------------------------
@@ -162,7 +167,8 @@ def census_labels(files):
                 hits.append({
                     "family": "A/D",
                     "label": spec["id"],
-                    "file": path.name,
+                    "file": rel_of(path),
+                    "surface_family": surface_family(path),
                     "line": line_of(text, m.start()),
                     "card": card_at(spans, m.start()),
                     "surface": surface_at(text, m.start()),
@@ -359,13 +365,66 @@ FAMILIES = {
 }
 
 
+# --------------------------------------------------------------------------
+# corpus enumeration  -  RECURSIVE, and it is a contract, not a convenience
+# --------------------------------------------------------------------------
+
+#: THE corpus enumeration. Every claim of "corpus-wide" in this repository
+#: resolves through this one function.
+#:
+#: It used to be `QB_ROOT.glob("*.html")` - TOP LEVEL ONLY - and every Pass-1
+#: census and gate inherited that. The corpus is 224 HTML files; the top level
+#: is 128. Ninety-six files, including the whole `oralnotes` study series, were
+#: outside every census that called itself corpus-wide, and an independent
+#: review found BMP5 taught as current in that gap with a false 2018->2024
+#: publication date. A scope defect does not announce itself: every count the
+#: censuses produced was internally consistent and simply described 57% of the
+#: corpus.
+def corpus_files():
+    """Every HTML file in the question-bank corpus, recursively."""
+    return sorted(QB_ROOT.rglob("*.html"))
+
+
+#: A surface is not a directory - it is a POLICY. The 224 files are not one
+#: undifferentiated product, and sweeping them as if they were would rewrite
+#: sitting-anchored examiner wording in past papers, which is its own defect.
+SURFACE_FAMILIES = {
+    "qcard": "candidate answer card - current teaching must be current",
+    "cheatsheet": "revision surface - must match its corrected parent card",
+    "oralnotes": "study notes series - current teaching unless explicitly "
+                 "marked historical",
+    "pastpapers": "sitting-anchored paper - historical wording is CORRECT and "
+                  "must not be modernised",
+    "rulesapp": "support/engine page",
+    "generated": "derived navigation/index surface - never hand-edited",
+}
+
+
+def surface_family(path) -> str:
+    rel = pathlib.Path(path).resolve().relative_to(QB_ROOT.resolve()).as_posix()
+    if rel.startswith("pastpapers/"):
+        return "pastpapers"
+    if rel.startswith("oralnotes/"):
+        return "oralnotes"
+    if rel.startswith("rulesapp/"):
+        return "rulesapp"
+    name = pathlib.Path(rel).name
+    if name in ("index.html", "examiner-index.html", "topics.html",
+                "study.html"):
+        return "generated"
+    if "heat" in name.lower():
+        return "cheatsheet"
+    return "qcard"
+
+
 def target_files(scope: str):
-    files = sorted(QB_ROOT.glob("*.html"))
+    files = corpus_files()
     if scope == "cards":
-        return [p for p in files if re.match(r"QB\d", p.name)
-                and "heat" not in p.name.lower()]
+        return [p for p in files if surface_family(p) == "qcard"]
     if scope == "revision":
-        return [p for p in files if "heat" in p.name.lower()]
+        return [p for p in files if surface_family(p) == "cheatsheet"]
+    if scope in SURFACE_FAMILIES:
+        return [p for p in files if surface_family(p) == scope]
     return files
 
 
@@ -373,7 +432,10 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--family", choices=["A", "B", "C", "D", "E", "AD", "all"],
                     default="all")
-    ap.add_argument("--scope", choices=["all", "cards", "revision"], default="all")
+    ap.add_argument("--scope",
+                    choices=["all", "cards", "revision", "qcard", "cheatsheet",
+                             "oralnotes", "pastpapers", "rulesapp", "generated"],
+                    default="all")
     ap.add_argument("--numeric-profile", choices=["tight", "broad"],
                     default="tight",
                     help="tight = the Pass-1 priority set (physical engineering "

@@ -48,7 +48,13 @@ sys.path.insert(0, str(HERE))
 from oral_bytes import read_text                                  # noqa: E402
 from validate_batch_h_series import card_digests                  # noqa: E402
 from oral_supersession import resolve_authorised_card_state       # noqa: E402
-from analyse_ddcascade import analyse, DD_BLOCK, STRAY, norm      # noqa: E402
+from analyse_ddcascade import (                                   # noqa: E402
+    analyse, DD_BLOCK, STRAY, norm, card_spans, split_stray)
+#: The corpus enumeration is IMPORTED, never re-globbed locally. Every
+#: "corpus-wide" claim in this repository must resolve through one function, or
+#: they drift and a scope defect hides in the difference - which is exactly
+#: what happened in Pass 1.
+from census_known_defect_families import corpus_files, rel_of  # noqa: E402
 
 CORRECTION_ID = "CORR-T5-DDCASCADE-20260906"
 MANIFEST = HERE / "correction_corr_t5_ddcascade_20260906_manifest.json"
@@ -58,6 +64,16 @@ TRAPS = REPO / "meoclass1/known_traps.md"
 
 EMPTY_DETAILS = re.compile(r'<details class="deep-dive"><summary>[^<]*</summary>'
                            r'</details>')
+
+#: Two or more consecutive `* ` lines - a markdown bullet RUN, which a lone
+#: footnote marker can never be.
+ORPHAN_RUN = re.compile(r"(?m)^\*\s+\S[^\n]*\n\*\s+\S")
+
+#: Pass 1 removed orphan bullet markers as well as truncating the cascade, so
+#: a baseline body legitimately differs from its live body by exactly that
+#: marker. Normalise it out of BOTH sides before comparing, or the body check
+#: reports six declared edits as content loss.
+ORPHAN_MARKER = re.compile(r'(["”’])\*\s+(?=<strong>)|(</em>|</strong>|:)\s*\*\s+(?=<strong>)')
 
 FAILS: list[str] = []
 CHECKS = 0
@@ -89,14 +105,14 @@ def main() -> int:
 
     # ---- 1. the cascade is gone, corpus-wide -----------------------------
     live_cascade = []
-    for p in sorted(QB_ROOT.glob("*.html")):
+    for p in corpus_files():
         live_cascade.extend(analyse(p))
     report("no_cascaded_deep_dive_block_remains", not live_cascade,
            "%d remaining" % len(live_cascade))
 
     # ---- 2. no empty deep-dive promise remains ---------------------------
-    empty = [(p.name, len(EMPTY_DETAILS.findall(read_text(p))))
-             for p in sorted(QB_ROOT.glob("*.html"))]
+    empty = [(rel_of(p), len(EMPTY_DETAILS.findall(read_text(p))))
+             for p in corpus_files()]
     empty = [(n, c) for n, c in empty if c]
     report("no_empty_deep_dive_promise_remains", not empty, str(empty or "none"))
 
@@ -104,8 +120,17 @@ def main() -> int:
     touched = sorted({c["file"] for c in cards})
     # Corpus-wide, not just the pinned files: QB2_H is edited by this family
     # and pinned by a sibling, so a check scoped to `cards` would stop seeing it.
-    orphan = [(p.name, len(re.findall(r"\*\s+<strong>", read_text(p))))
-              for p in sorted(QB_ROOT.glob("*.html"))]
+    # BOTH orphan forms. Pass 1 scanned only bullets opening with a <strong>,
+    # so three raw bullets in QB9_E whose text starts with a plain word were
+    # neither repaired nor declared. A bullet is a bullet.
+    #
+    # A RUN of two or more, though - never a single line. `miw-notes-mgmt-p6`
+    # carries a lone `* Day-counts are ...` that is the FOOTNOTE paired with
+    # the `3 days*` / `7 days*` / `~30 days*` markers above it. It is content,
+    # and a scan that cannot tell a footnote from a bullet would have deleted
+    # the note explaining that those day-counts are not MLC statutory text.
+    orphan = [(rel_of(p), len(ORPHAN_RUN.findall(read_text(p))))
+              for p in corpus_files()]
     orphan = [(f, n) for f, n in orphan if n and f != "QB9_D.html"]
     report("no_orphaned_markdown_bullet_in_repaired_files", not orphan,
            "%s (QB9_D excluded: its bullet sits inside the Pass-2 blockquote "
@@ -124,12 +149,33 @@ def main() -> int:
             report("baseline_readable_%s" % fname, False, base_commit)
             continue
         live = read_text(QB_ROOT / fname)
-        base_blocks = [(m.group(1), norm(m.group(2)))
-                       for m in DD_BLOCK.finditer(base)]
-        live_blocks = [(m.group(1), norm(m.group(2)))
-                       for m in DD_BLOCK.finditer(live)]
-        if sorted(base_blocks) != sorted(live_blocks):
-            lost.append(fname)
+        # PER CARD, and comparing BODIES. The Pass-1 version compared
+        # (class, label) pairs file-wide: DD_BLOCK group 3 is the body and it
+        # was never read, so a repair that replaced all 146 bodies with one
+        # character would have passed - and a block migrating between cards in
+        # the same file was invisible. What this correction actually claims is
+        # that each block kept ITS OWN body, which is the surviving head of
+        # the baseline body up to the first stray marker.
+        for anchor, bs, be in card_spans(base):
+            live_span = [x for x in card_spans(live) if x[0] == anchor]
+            if not live_span:
+                lost.append("%s#%s MISSING" % (fname, anchor))
+                continue
+            _, ls, le = live_span[0]
+            base_map = {(m.group(1), norm(m.group(2))): split_stray(m.group(3))[0]
+                        for m in DD_BLOCK.finditer(base[bs:be])}
+            live_map = {(m.group(1), norm(m.group(2))): m.group(3)
+                        for m in DD_BLOCK.finditer(live[ls:le])}
+            if set(base_map) != set(live_map):
+                lost.append("%s#%s block set" % (fname, anchor))
+                continue
+            for key, expected in base_map.items():
+                a = norm(ORPHAN_MARKER.sub(lambda m: (m.group(1) or m.group(2))
+                                           + " ", expected))
+                b = norm(ORPHAN_MARKER.sub(lambda m: (m.group(1) or m.group(2))
+                                           + " ", live_map[key]))
+                if a != b:
+                    lost.append("%s#%s %s body" % (fname, anchor, key[0]))
         for m in DD_BLOCK.finditer(live):
             body = re.sub(r"<[^>]+>", "", m.group(3)).strip()
             if not body:
@@ -145,8 +191,8 @@ def main() -> int:
     # declared 6, because QB2_H is edited by this family and pinned by a
     # sibling - the same blind spot as the orphan-bullet scan above.
     derived_blocks = derived_bytes = derived_empty = 0
-    for p_live in sorted(QB_ROOT.glob("*.html")):
-        base = baseline_text(base_commit, "meoclass1/%s" % p_live.name)
+    for p_live in corpus_files():
+        base = baseline_text(base_commit, "meoclass1/%s" % rel_of(p_live))
         if base is None:
             continue
         derived_empty += len(EMPTY_DETAILS.findall(base))
@@ -163,9 +209,14 @@ def main() -> int:
            derived_empty == inv["empty_deep_dive_promises_removed"],
            "derived %d, declared %d"
            % (derived_empty, inv["empty_deep_dive_promises_removed"]))
-    report("declared_duplicated_bytes_is_positive_and_material",
-           inv["duplicated_bytes_removed"] > 50000,
-           str(inv["duplicated_bytes_removed"]))
+    # RE-DERIVED, not read back. The Pass-1 version computed `derived_bytes`
+    # in the loop above and then never used it, asserting only that the
+    # manifest's own number was greater than 50,000 - a record could have
+    # claimed any large figure.
+    report("declared_duplicated_bytes_matches_baseline",
+           derived_bytes == inv["duplicated_bytes_removed"],
+           "derived %d, declared %d" % (derived_bytes,
+                                        inv["duplicated_bytes_removed"]))
     report("no_block_was_refused_as_unproven",
            inv["blocks_refused_as_unproven"] == 0,
            str(inv["blocks_refused_as_unproven"]))

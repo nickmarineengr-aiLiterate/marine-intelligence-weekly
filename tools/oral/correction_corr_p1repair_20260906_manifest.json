@@ -1,0 +1,156 @@
+{
+ "correction_id": "CORR-P1REPAIR-20260906",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "independent_review_p0_block",
+ "date": "2026-09-06",
+ "baseline_commit": "d07591c",
+ "governing_commits": [
+  "816b1e3"
+ ],
+ "authorisation_source": "MIW PASS 1 REPAIR instruction of 6 September 2026, section 0, which confirms the independent-review block and rules that Pass 1 is NOT accepted as closed until both P0 defects are repaired. The review itself was run in a clean context that had not seen how Pass 1 was produced, and its two P0 findings were independently re-verified here before any byte was written.",
+ "title": "Pass 1 shipped two P0 escapes and did not know it. A case-sensitive forbidden-proposition check reported PASS on a card still teaching the false figure it existed to remove, and every census that called itself corpus-wide enumerated 128 of the corpus's 224 files.",
+ "candidate_claim": "Not a candidate report. Independent adversarial review of CORR-T5-DDCASCADE, CORR-T5-REACH and CORR-T5-HYDRANT, findings F-1 and F-2 (P0), F-3, F-4, F-5, F-6, F-7, F-9, F-10.",
+ "candidate_verdict": "UPHELD IN FULL, and both P0s re-verified at source before repair. The review also UPHELD the Pass-1 losslessness claim by its own independent differ - the defects are reach and gate scope, not substance.",
+ "authority": "SOLAS II-2/10.2.1.6 (Consolidated Edition 2024) for the hydrant limbs, as already relied on by CORR-T5-HYDRANT. SRC-BMPMS-2025 and SRC-BMPMS-2026 for the BMP supersession, both held in-repo with digests. NO NEW SOURCE EVIDENCE IS ADDED, and no date is invented: the repository holds no registry row for BMP5's own publication year, so the false 2024 timeline row was replaced with the held 2025 supersession fact rather than with an unsourced 2018.",
+ "propagation": {
+  "derived_surfaces": "NONE. No question stem changed; build_qb_content_index.py --check reports 761 questions / 86 files with outputs already matching the live derivation.",
+  "hub_date": "NOT ADVANCED.",
+  "recursive_scope_established": "The corpus enumeration is now ONE function, census_known_defect_families.corpus_files(), recursive over meoclass1/**/*.html = 224 files, imported by every consumer that claims corpus-wide scope. tools/oral/test_corpus_scope.py plants a file in a nested directory and requires it to be seen, so reverting the glob goes red rather than passing vacuously.",
+  "surface_policy": "224 files are NOT one product. qcard and cheatsheet: current teaching must be current. oralnotes: current study material by its own titles, so currentness rules apply - this is where the escape was. pastpapers: sitting-anchored, historical examiner wording is CORRECT and must not be modernised; it returns zero hits for this family in any case. generated: never hand-edited.",
+  "deliberately_not_swept": "Of 139 recursive BMP5 / MSC.1-Circ.1606 sites, the oralnotes navigation cards, the Topic 46 title and tag, the uday index cross-reference rows and the bibliography entry are KEEP: they identify or cite a topic whose SUBJECT is BMP5, which is the examiner-wording case already settled on cards.",
+  "false_positive_recorded": "oralnotes/miw-notes-mgmt-p6.html carries a lone '* Day-counts are ...' line that the recursive orphan-bullet scan flagged. It is the FOOTNOTE paired with the '3 days*' / '7 days*' / '~30 days*' markers above it. The scan now requires a RUN of two or more consecutive bullets, because a sweep that cannot tell a footnote from a bullet would have deleted the note explaining that those day-counts are not MLC statutory text."
+ },
+ "invariants": {
+  "canonical_questions_before": 761,
+  "canonical_questions_after": 761,
+  "question_bearing_files": 86,
+  "new_cards": 0,
+  "corrected_cards": 4,
+  "corrected_artefact_surfaces": 4,
+  "corpus_files_enumerated_pass1": 128,
+  "corpus_files_enumerated_now": 224,
+  "files_previously_invisible": 96
+ },
+ "supersedes_summary": {
+  "note": "The Pass-1 records are NOT rewritten. They remain on main as the account of what the first attempt did and claimed, because an escape is only auditable if the claim that missed it survives.",
+  "corrected_claims": [
+   "CORR-T5-HYDRANT-20260906 stated its three sites closed the false-hydrant-figure family. QB2_H#q2 was not closed; its Key Numbers layer kept the figure.",
+   "CORR-T5-DDCASCADE-20260906, CORR-T5-REACH-20260906 and CORR-T5-HYDRANT-20260906 each described their censuses as corpus-wide. They covered meoclass1/*.html only - 128 of 224 files."
+  ]
+ },
+ "review": {
+  "gate": "tools/oral/validate_correction_p1repair.py",
+  "mutation_suite": "tools/oral/mutate_correction_p1repair.py",
+  "scope_control": "tools/oral/test_corpus_scope.py",
+  "independent_review": "The DEFECT was found by independent review. A second, fresh independent verification of this repair is recorded separately."
+ },
+ "artefacts": [
+  {
+   "path": "meoclass1/QB2_B_CheatSheet.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Carries no q-card, so it takes no digest pin. Two sites taught single-limb 0.27 N/mm2 as the cargo-ship minimum - the exact defect CORR-T5-HYDRANT calls 'wrong, not merely incomplete' - and one of them had dropped the two-pump condition as well, stating the figure as a continuous firefighting duty. The hydrant record declared no cheat-sheet artefacts at all, unlike its sibling reach record which swept three.",
+   "guarded_by": "validate_correction_p1repair.py"
+  },
+  {
+   "path": "meoclass1/oralnotes/miw-notes-mgmt-p10.html",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "rationale": "Topic 46 taught BMP5 as the live counter-piracy guidance and dated it to 2024 on a timeline. Four sites corrected and a currentness note added. The false date is removed without a replacement publication year being asserted, because none is held.",
+   "guarded_by": "validate_correction_p1repair.py"
+  },
+  {
+   "path": "meoclass1/oralnotes/simon-notes-p1.html",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "rationale": "Two present-tense attributions to BMP5 and one reg-code slot naming it as current industry guidance.",
+   "guarded_by": "validate_correction_p1repair.py"
+  },
+  {
+   "path": "meoclass1/oralnotes/miw-notes-mgmt-p1.html",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "rationale": "A non-mandatory-guidance list and its accompanying tip named BMP5 as a current industry document.",
+   "guarded_by": "validate_correction_p1repair.py"
+  },
+  {
+   "path": "meoclass1/known_traps.md",
+   "classification": "GOVERNANCE_RECORD",
+   "known_traps_entry": 96,
+   "rationale": "Entries 96 and 97 record the two defect classes this repair exists for: a case-sensitive forbidden-proposition matcher, and a scope defect that is invisible from inside its own scope.",
+   "guarded_by": "validate_correction_p1repair.py"
+  },
+  {
+   "path": "tools/oral/test_corpus_scope.py",
+   "classification": "GOVERNANCE_RECORD",
+   "rationale": "The scope control. It plants a file in a nested directory and requires the enumeration to see it, so a reverted glob goes red instead of passing vacuously.",
+   "guarded_by": "validate_correction_p1repair.py"
+  },
+  {
+   "path": "tools/oral/apply_corr_p1repair.py",
+   "classification": "GOVERNANCE_RECORD",
+   "rationale": "The applier, with each site's reason stated beside it.",
+   "guarded_by": "validate_correction_p1repair.py"
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "P1REPAIR-01",
+   "file": "QB2_H.html",
+   "path": "meoclass1/QB2_H.html",
+   "anchor": "q2",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "887c8558232266431dbccb738f00767027cfa98e9b3e5297fac3d9c80615d99a",
+   "post_edit_digest": "1cbd15b09bafa1bc4cd6cc6426c287174052f480fd91f30ed33fc7fb2d44ac4c",
+   "what_changed": "The Key Numbers / Regs layer still carried '4.0 Bar: Minimum operational pressure required at the furthest deck hydrant on a large container vessel during multi-line operations' - the highest-salience block on the card, four lines above the v1.1 stamp CORR-T5-HYDRANT had just written saying that figure is not a SOLAS figure. Replaced with SOLAS II-2/10.2.1.6 and both cargo-ship limbs, plus one sentence separating an operational design target from a regulatory minimum.",
+   "supersedes": {
+    "manifest": "correction_corr_t5_hydrant_20260906_manifest.json",
+    "action_id": "T5-HYDRANT-03",
+    "post_edit_digest": "887c8558232266431dbccb738f00767027cfa98e9b3e5297fac3d9c80615d99a",
+    "note": "T5-HYDRANT-03 pinned the state this repair edits. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken. The earlier record is NOT rewritten: its claim becomes 'my state is the ancestor of what is live', which is true, rather than 'my state is live', which stopped being true when the escape was repaired."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "P1REPAIR-02",
+   "file": "QB4_H.html",
+   "path": "meoclass1/QB4_H.html",
+   "anchor": "q2",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "9bd1e8677c5cc60216e4bb680d500935c82d70971019bd2fc2402f8da456b337",
+   "post_edit_digest": "7bfbf60c26fbdfe4069587c75dfbdf93887b75031c355f91df9514cd44259d31",
+   "what_changed": "Version stamp advanced v1.5 -> v1.6 and its two same-day 'corrected 6 Sep 2026:' clauses merged into one. Neither clause was erased: both describe edits that really happened, and two different card states were sharing one version label.",
+   "supersedes": {
+    "manifest": "correction_corr_t5_reach_20260906_manifest.json",
+    "action_id": "T5-REACH-01",
+    "post_edit_digest": "9bd1e8677c5cc60216e4bb680d500935c82d70971019bd2fc2402f8da456b337",
+    "note": "T5-REACH-01 pinned the state this repair edits. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken. The earlier record is NOT rewritten: its claim becomes 'my state is the ancestor of what is live', which is true, rather than 'my state is live', which stopped being true when the escape was repaired."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "P1REPAIR-03",
+   "file": "QB2_B.html",
+   "path": "meoclass1/QB2_B.html",
+   "anchor": "q18",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "23d54edc361cc425129deb93e589bcc0737dc7328c0d2aab705812671f947166",
+   "post_edit_digest": "a625877681ff2f294b8d6e7fa801de6c919b64ff26bfeeaa2c128070cc1b2dc9",
+   "what_changed": "The deep-dive 'Numbers to Memorise' layer still read 'Minimum hydrant pressure limits (0.27 N/mm2)' - single-limb, no threshold, no pump condition - on the very card whose Key Numbers bullet CORR-T5-HYDRANT corrected as E-3. A reach failure inside a card the previous pass believed it had closed, found by the new single-limb check rather than by any hand-built site list.",
+   "supersedes": {
+    "manifest": "correction_corr_t5_hydrant_20260906_manifest.json",
+    "action_id": "T5-HYDRANT-02",
+    "post_edit_digest": "23d54edc361cc425129deb93e589bcc0737dc7328c0d2aab705812671f947166",
+    "note": "T5-HYDRANT-02 pinned the state this repair edits. Its post-edit digest is this record's pre-edit digest, so the chain is unbroken. The earlier record is NOT rewritten: its claim becomes 'my state is the ancestor of what is live', which is true, rather than 'my state is live', which stopped being true when the escape was repaired."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "P1REPAIR-04",
+   "file": "QB9_E.html",
+   "path": "meoclass1/QB9_E.html",
+   "anchor": "q7",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "abdec54f291992e735c4650ed7d3d28be88990774767f37005504200fec70f9d",
+   "post_edit_digest": "569c678ec945063f8e2f35f627cc29e483e17507ebc394f5e32c7e11acf24194",
+   "what_changed": "Three raw markdown bullets inside the CE Relevance block were rendered literally to the candidate. A SECOND orphan form: Pass 1 scanned for '* <strong>' and these bullets open with a plain word, so they were neither repaired nor declared."
+  }
+ ]
+}
