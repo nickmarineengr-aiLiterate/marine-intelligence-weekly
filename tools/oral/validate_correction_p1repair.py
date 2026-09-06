@@ -467,6 +467,35 @@ def main() -> int:
                                "governs its container")),
            "entry 100")
 
+    # ================= the guard-closure record ===========================
+    # It is a governance DOCUMENT, not a correction manifest, because it
+    # corrects no card - the schema refusing a card-less correction is the
+    # schema working, and manufacturing a card to satisfy it would produce the
+    # decorative record that schema exists to forbid.
+    guard = REPO / ("meoclass1/oral-intelligence/examiner-audit/"
+                    "PASS1_GUARD_CLOSURE.md")
+    gtext = read_text(guard) if guard.is_file() else ""
+    report("guard_closure_record_exists", bool(gtext), guard.name)
+    report("guard_record_states_the_four_link_chain",
+           all(x in gtext for x in ("CORR-P1REPAIR-20260906",
+                                    "CORR-P1CLOSE-20260906",
+                                    "P1GUARD-20260906"))
+           and "Nothing earlier is rewritten" in gtext,
+           "Pass 1 -> repair -> closure -> guard, none rewritten")
+    report("guard_record_states_zero_product_change",
+           "Product bytes changed: ZERO" in gtext,
+           "content was clean before this pass and was not reopened")
+    report("guard_record_states_its_residual_limits",
+           "Residual limits" in gtext and "P3 debt" in gtext,
+           "the limits are stated, not hidden")
+    m101 = re.search(r"### 101\..*?(?=\n### |\Z)", read_text(TRAPS), re.S)
+    report("known_traps_entry_101_carries_the_lesson",
+           bool(m101) and all(x in m101.group(0) for x in
+                              ("enumerating renderings never converges",
+                               "open set", "EXCLUSION",
+                               "schema refusing your record")),
+           "entry 101")
+
     print("\n%d checks, %d FAIL" % (CHECKS, len(FAILS)))
     if FAILS:
         print("failed: " + ", ".join(FAILS))

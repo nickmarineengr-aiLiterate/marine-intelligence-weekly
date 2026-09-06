@@ -28,8 +28,23 @@ CHECKS = 0
 
 
 def check(name, ok, detail=""):
+    """`ok` may be a bool or a zero-arg callable.
+
+    A callable is evaluated HERE, inside the guard, so that an exception counts
+    as a FAILURE rather than as silence. A mutation that removed a unit from the
+    conversion table made `to_mpa` return None, the arithmetic raised, the
+    script died before printing anything, and the mutation suite saw no FAIL
+    line at all - reporting an escape where the guard had actually collapsed.
+    A check that cannot fail loudly is a check that cannot be trusted quietly.
+    """
     global CHECKS
     CHECKS += 1
+    if callable(ok):
+        try:
+            ok = bool(ok())
+            detail = detail
+        except Exception as exc:                        # noqa: BLE001
+            ok, detail = False, "raised %s: %s" % (type(exc).__name__, exc)
     if not ok:
         FAILS.append(name)
     print("%-4s %-58s %s" % ("PASS" if ok else "FAIL", name, detail))
@@ -148,15 +163,16 @@ def main() -> int:
     equiv = [("0.27", "MPa"), ("0.27", "N/mm2"), ("2.7", "bar"),
              ("270", "kPa"), ("2700", "mbar"), ("270000", "Pa")]
     check("unit_equivalence_to_one_scale",
-          all(abs(to_mpa(v, u) - 0.27) < 1e-6 for v, u in equiv),
+          lambda: all(abs(to_mpa(v, u) - 0.27) < 1e-6 for v, u in equiv),
           "MPa = N/mm2 = bar/10 = kPa/1000 = mbar/10000 = Pa/1e6")
     check("legacy_units_convert_deterministically",
-          abs(to_mpa("2.7538", "kg/cm2") - 0.27) < 1e-3
+          lambda: abs(to_mpa("2.7538", "kg/cm2") - 0.27) < 1e-3
           and abs(to_mpa("39.16", "psi") - 0.27) < 1e-3
           and abs(to_mpa("2.6647", "atm") - 0.27) < 1e-3,
           "kg/cm2, psi and atm land on 0.27 MPa")
     check("range_binds_its_unit_to_every_figure",
-          [v for v, _ in pressures_mpa(normalise("0.27-0.35 MPa"))] == [0.27, 0.35],
+          lambda: [v for v, _ in pressures_mpa(normalise("0.27-0.35 MPa"))]
+          == [0.27, 0.35],
           "only the last figure carries the unit in source text")
 
     # ---- normalisation collapses renderings ---------------------------
@@ -172,23 +188,43 @@ def main() -> int:
           "%d proposition(s)" % len(s))
 
     # ---- pressure: must catch -----------------------------------------
-    missed = [n for n, h in PRESSURE_CATCH if not firemain_scope_defects(h)]
+    def _missed(cases, fn):
+        out = []
+        for n, h in cases:
+            try:
+                if not fn(h):
+                    out.append(n)
+            except Exception as exc:                    # noqa: BLE001
+                out.append("%s(raised %s)" % (n, type(exc).__name__))
+        return out
+
+    def _wrong(cases, fn):
+        out = []
+        for n, h in cases:
+            try:
+                if fn(h):
+                    out.append(n)
+            except Exception as exc:                    # noqa: BLE001
+                out.append("%s(raised %s)" % (n, type(exc).__name__))
+        return out
+
+    missed = _missed(PRESSURE_CATCH, firemain_scope_defects)
     check("pressure_MUST_CATCH_all_renderings", not missed,
           "%d case(s), missed: %s" % (len(PRESSURE_CATCH), missed or "none"))
 
     # ---- pressure: must not catch -------------------------------------
-    wrong = [n for n, h in PRESSURE_NO_CATCH if firemain_scope_defects(h)]
+    wrong = _wrong(PRESSURE_NO_CATCH, firemain_scope_defects)
     check("pressure_MUST_NOT_CATCH_legitimate_content", not wrong,
           "%d case(s), wrongly flagged: %s" % (len(PRESSURE_NO_CATCH),
                                                wrong or "none"))
 
     # ---- BMP5: must catch ---------------------------------------------
-    missed = [n for n, h in BMP_CATCH if not bmp5_current_teaching(h)]
+    missed = _missed(BMP_CATCH, bmp5_current_teaching)
     check("bmp5_MUST_CATCH_live_claims", not missed,
           "%d case(s), missed: %s" % (len(BMP_CATCH), missed or "none"))
 
     # ---- BMP5: must not catch -----------------------------------------
-    wrong = [n for n, h in BMP_NO_CATCH if bmp5_current_teaching(h)]
+    wrong = _wrong(BMP_NO_CATCH, bmp5_current_teaching)
     check("bmp5_MUST_NOT_CATCH_historical_or_quoted", not wrong,
           "%d case(s), wrongly flagged: %s" % (len(BMP_NO_CATCH),
                                                wrong or "none"))

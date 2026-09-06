@@ -2823,3 +2823,49 @@ that appears more than once is a positional guess wearing the costume of an edit
 **Prove locality in both directions.** The control asserts the banner is in the intended topic
 **and** in no other, that the intended topic is the one whose subject matches, and that the note
 cross-referencing it lives in the same block. "Exists somewhere in the file" is not a location.
+
+### 101. Five rounds, one defect: enumerating renderings never converges
+
+| round | the guard recognised | what defeated it |
+|---|---|---|
+| 1 | the string `"4.0 bar"` | **case** |
+| 2 | `"0.27 N/mm"`, in `<li>`/`<p>` only | **unit and element type** |
+| 3 | `<span class="reg-code">` only | **HTML class name** |
+| 4 | a figure adjacent to its unit | **number formatting** (`0.27-0.35 MPa`) |
+| 5 | 14 operative phrasings | **wording** (`BMP5 is the current industry guidance`) |
+
+Each fix was correct for the instance in front of it, and each was defeated by the next
+disguise. An enumeration of renderings is an **open set** — the reviewer always has one more.
+
+> **Rule.** Make the rendering stop mattering. Normalise it away before matching; invert the
+> default so an unlisted form fails **closed**; compare **quantities**, not strings. A list is
+> acceptable only where the set is closed by nature — inline tags, unit conversions — never
+> where it enumerates how an author might phrase or mark up a claim.
+
+**Match on visible text, never on raw HTML.** Entities, `&nbsp;`, unicode dashes, superscripts
+and a figure split across tags are all invisible to a reader and must be invisible to the guard.
+`0.27&nbsp;MPa`, `<strong>0.27</strong> MPa` and `0.27 <span>MPa</span>` are one string.
+
+**Cover elements by EXCLUSION.** A block-tag allowlist cannot be finished — `<dd>`,
+`<figcaption>`, `<caption>` were all missed. The *inline* set is small, standard and closed, so
+define blocks as everything else and an unfamiliar tag is segmented correctly for free.
+
+**Scope denial to the proposition.** `BMP5 replaced BMP4, but BMP5 is what we use today` is two
+propositions and only the second is a defect. A denial token anywhere in the element silenced
+both — the negative image of the phrase list.
+
+**Use a RELATIVE tolerance for converted units.** `2.7538 kg/cm2` and `39.16 psi` are both
+0.27 MPa to any practical precision and exact equality sees neither. 1% is safe here because the
+two governed limbs differ by 8%.
+
+**Three parser bugs, each of which silently narrowed the guard:** a container stack sampled at
+flush time loses every inline ancestor, because an inline end tag pops before the flush; classes
+must be unioned over the whole segment, or an inline `<a class="toc-link">` opened mid-run is
+invisible and every navigation row reads as teaching; and an em-dash aside is not a proposition
+boundary — splitting there severed a historical framing from the clause it governs and reported
+the corpus's own supersession card as a defect.
+
+**A schema refusing your record is the schema working.** The guard hardening changed no product
+byte, so it could not supply a card, a `PRIMARY_CORRECTION` or a digest pair. Manufacturing one
+to fit would have produced the decorative record the schema exists to forbid. It was written as a
+chained governance document instead.
