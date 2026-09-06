@@ -163,42 +163,41 @@ def _governed(values):
     return any(_is(v, UPPER_MPA) or _is(v, LOWER_MPA) for v in values)
 
 
-#: E3. A figure can govern without a modal. "Hydrant pressure - 0.27 N/mm2"
-#: states the requirement as plainly as "minimum 0.27" does, and a reader
-#: memorising it will quote it in an oral. Two ways a modal-free figure reads
-#: as governing:
+#: E3. A figure can govern without a modal, and enumerating the ways it can do
+#: so does not converge - the previous attempt listed a label:value shape and a
+#: numbers-context vocabulary, and both were walked past by four trailing words
+#: ("Hydrant pressure: 0.27 N/mm2 on cargo ships") and by ordinary prose
+#: ("SOLAS II-2/10.2.1.6 gives 0.27 N/mm2 at the hydrant for cargo ships").
 #:
-#:  (a) LABEL:VALUE - the segment IS a label and its value, nothing else. The
-#:      label is the assertion; "Fire main: 0.27 MPa" has no room for hedging.
-#:  (b) a NUMBERS context - the container or its heading presents figures to
-#:      memorise, regulatory values, requirements or benchmarks.
+#: So the default is INVERTED, exactly as it is for BMP5 above. 0.27 and 0.25
+#: MPa are not arbitrary quantities: they ARE the two limbs SOLAS II-2/10.2.1.6
+#: fixes. A fire-main sentence stating one of them is asserting the regulation
+#: whether or not it spells out "minimum" - so it is a claim UNLESS it reads as
+#: an OBSERVATION, a measured or reported value rather than a requirement.
 #:
-#: Neither fires on prose. "The fire pump discharges at 0.27 MPa on trials" is
-#: a description, has a subject and a verb, and is not a label - so it is left
-#: alone, which is the whole reason this is not simply "drop the modal test".
-NUMBERS_CONTEXT = re.compile(
-    r"key\s*(?:number|figure|fact)|numbers?\s+to\s+(?:memoris|memoriz|know|"
-    r"remember)|must[-\s]?know|quick\s*(?:facts?|numbers?)|"
-    r"regulatory\s*(?:figure|value|number|requirement)|requirements?\b|"
-    r"benchmark|criteri(?:a|on)|figures?\s+to\s+quote|memory\s*(?:aid|jog)",
-    re.I)
-
-#: The label half of a label:value segment. Bounded: the subject, an optional
-#: qualifier, a separator, then the figure - and the segment ENDS there.
-LABEL_VALUE = re.compile(
-    r"^\s*(?:the\s+)?(?:hydrant|fire[\s-]*main|deck\s*monitor|fire\s*pump)"
-    r"[^:.\-]{0,40}?\s*[:\-]\s*(?:approx\.?\s*)?[\d.,]+\s*\S{1,8}\s*$", re.I)
+#: This is why the check can afford to drop the modal: the figure is doing the
+#: work. Every MUST-NOT-CATCH in the contract - the HydroPen operating pressure,
+#: the weathertightness hose test, unrelated control air - carries an
+#: UNGOVERNED figure and is refused before this test is ever reached.
+OBSERVATION = re.compile(
+    r"\bon\s+trials?\b|\bin\s+service\b|\btypically\b|\bapprox|"
+    r"\bmeasured\b|\bobserved\b|\brecorded\b|\blogged\b|\bshowed\b|"
+    r"\bgauge\s+read|\bwas\s+found\b|\bactual\b|\bin\s+practice\b|"
+    r"\bduring\s+the\s+test\b", re.I)
 
 
 def _reads_as_governing(sent: str, seg: str, label) -> str | None:
-    """Why this figure reads as the governing value, or None."""
+    """Why this governed limb reads as the requirement, or None.
+
+    Default-suspicious: the figure is one of the two SOLAS limbs and the
+    subject is the fire main, so the burden is on the text to show it is
+    reporting rather than requiring.
+    """
+    if OBSERVATION.search(sent):
+        return None
     if MANDATORY.search(sent) or MANDATORY.search(seg):
         return "mandatory framing"
-    if LABEL_VALUE.search(sent.strip()):
-        return "label:value - the label IS the assertion"
-    if NUMBERS_CONTEXT.search(seg) or (label and NUMBERS_CONTEXT.search(label)):
-        return "presented among figures to memorise"
-    return None
+    return "a governed limb asserted of the fire main"
 
 
 def firemain_scope_defects(raw: str):

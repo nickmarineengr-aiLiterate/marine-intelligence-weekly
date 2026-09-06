@@ -2925,3 +2925,39 @@ ESCAPE — the control stayed green because the other two still held the propert
 escape, check whether the property is defended elsewhere; if it is, the mutation must remove
 every defender, or it credits a kill it never made. Defence in depth is worth keeping — the
 mutation is what has to change.
+
+### 106. Word order is not clause structure
+
+E1 was closed once by requiring a coordinated clause to OPEN with its verb — sound
+reasoning about a coordinated *predicate*, which shares its subject and so begins with the
+verb. It caught `BMP5 replaced BMP4 and remains the current standard` and was blind to the
+commoner shape, where the live clause states its own subject:
+
+> `BMP4 was withdrawn and BMP5 is the current industry guidance.`
+
+No split, so the denial in the first clause silenced the second — the exact defect, back
+under a different word order.
+
+**Count predications, not word positions.** A coordinator joins clauses when BOTH SIDES
+CARRY A FINITE VERB. A noun list (`BMP5 and BMP4 are historical predecessors`) predicates
+once and is left intact. The rule got shorter and stronger at the same time.
+
+### 107. A `$`-anchored label pattern dies of four extra words
+
+E3 was closed once with a label:value shape (`^subject : figure $`) plus a numbers-context
+vocabulary. Both were walked past immediately:
+
+- `Hydrant pressure: 0.27 N/mm2 on cargo ships` — the trailing qualifier broke the anchor;
+- `SOLAS II-2/10.2.1.6 gives 0.27 N/mm2 at the hydrant for cargo ships` — prose, so no
+  vocabulary hit.
+
+And the reg-box row is the very surface three earlier defects in this family were found on.
+
+**When the FIGURE is the regulation, let the figure do the work.** 0.27 and 0.25 MPa are
+the two limbs SOLAS II-2/10.2.1.6 fixes, so a fire-main sentence stating one is asserting
+the regulation whether or not it says "minimum". Invert the default: a claim unless it
+reads as an observation. Every legitimate case in the contract carries an UNGOVERNED
+figure and is refused before the question is reached — which is what makes the inversion
+safe, and is worth checking before inverting any default.
+
+Seventh instance of one lesson: a shape and a vocabulary are both open sets.

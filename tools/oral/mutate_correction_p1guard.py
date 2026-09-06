@@ -167,24 +167,19 @@ MUTATIONS = [
      sub_in_file(CURRENTNESS, "            elif subject_group != group:",
                  "            elif True:", count=1),
      CONTROLS, "E1_MUST_CATCH_denial_then_live_claim"),
-    ("E1-E", "let a coordinator split a NOUN list too (BOTH guards)",
-     # The noun-list rule has two independent defenders: the left side must
-     # already contain a finite verb, and the right side must OPEN with one.
-     # THREE independent defenders, discovered one at a time by this very
-     # mutation failing to kill anything: the left side must contain a finite
-     # verb; the right side must OPEN with one; and a verbless fragment MERGES
-     # FORWARD instead of standing as a proposition. Removing any one - or any
-     # two - changes nothing the control can see. That redundancy is a good
-     # property of the design and a bad one for a mutation suite, so the
-     # mutation that proves this check falsifiable removes all three.
+    ("E1-E", "let a coordinator split a NOUN list too (BOTH defenders)",
+     # The noun-list rule is defended TWICE, and this mutation is how that was
+     # discovered: removing one defender killed nothing, and reported an
+     # escape the guard had not actually suffered. The two are the both-sides
+     # verb test - a noun list predicates only once - and the rule that a
+     # verbless fragment MERGES FORWARD rather than standing as a proposition.
+     # Redundancy is good design and bad for a mutation suite: a mutation that
+     # leaves the property standing credits itself with a kill it never made.
      both(
-         sub_in_file(VISIBLE, "        if not _HAS_VERB.search(left):",
-                     "        if False:", count=1),
          sub_in_file(
              VISIBLE,
-             r'    r",?\s+(?:and|or|so|which|that)\s+(?=(?:%s\s+)?%s\b)" % (_ADV, _VERB),',
-             r'    r",?\s+(?:and|or|so|which|that)\s+",',
-             count=1),
+             "        if not (_HAS_VERB.search(left) and _HAS_VERB.search(right)):",
+             "        if False:", count=1),
          sub_in_file(
              VISIBLE,
              "        if not _HAS_VERB.search(part) and "
@@ -197,8 +192,8 @@ MUTATIONS = [
      CONTROLS, "E2_hyphenated_name_is_the_same_publication"),
     ("E3-D", "require a modal again - revert label:value and numbers context",
      sub_in_file(CURRENTNESS,
-                 "    if LABEL_VALUE.search(sent.strip()):",
-                 "    if False:", count=1),
+                 '    return "a governed limb asserted of the fire main"',
+                 "    return None", count=1),
      CONTROLS, "E3_MUST_CATCH_modal_free_governing_figure"),
     ("E4-D", "let a label reach across its container boundary",
      sub_in_file(VISIBLE,

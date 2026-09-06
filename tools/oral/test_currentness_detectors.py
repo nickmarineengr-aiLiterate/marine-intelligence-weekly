@@ -212,7 +212,14 @@ def main() -> int:
           "left needs a verb, right must open with one")
 
     E1_CATCH = [
+        # SHARED subject - the live clause omits it.
         "BMP5 replaced BMP4 and remains the current industry standard",
+        # OWN subject - the commoner shape, and the one an earlier version of
+        # this detector was blind to because it demanded that a coordinated
+        # clause OPEN with its verb.
+        "BMP4 was withdrawn and BMP5 is the current industry guidance.",
+        "BMP4 is superseded, so BMP5 is what we use today.",
+        "BMP4 no longer applies and BMP5 remains the standard on board.",
         "BMP5 superseded BMP4 but BMP5 is still what we use today",
         "BMP5 was the predecessor, yet refer to BMP5 for current operations",
     ]
@@ -295,7 +302,20 @@ def main() -> int:
     # ---- E3: a figure can govern without a modal -----------------------
     E3_CATCH = ["<li>Hydrant pressure - 0.27 N/mm&sup2;</li>",
                 "<li>Fire main: 0.27 MPa</li>",
-                "<h4>Key numbers</h4><ul><li>hydrant 2.7 bar</li></ul>"]
+                "<h4>Key numbers</h4><ul><li>hydrant 2.7 bar</li></ul>",
+                # A label:value row with four trailing words, and ordinary
+                # prose. Both walked past a shape-and-vocabulary version of
+                # this check; the reg-box row is the very surface three prior
+                # defects in this family were found on.
+                '<div class="reg-box"><div class="reg-row"><span>SOLAS '
+                'II-2/10.2.1.6</span><span>Hydrant pressure: 0.27 N/mm2 on '
+                'cargo ships</span></div></div>',
+                '<div class="q-a"><p>SOLAS II-2/10.2.1.6 gives 0.27 N/mm2 at '
+                'the hydrant for cargo ships.</p></div>',
+                '<table><tr><td>Fire main</td><td>0.27 N/mm2 at the hydrants, '
+                'two pumps delivering</td></tr></table>',
+                '<div class="q-a"><p>Sir, the hydrant pressure is 0.27 N/mm2 '
+                'with both pumps running.</p></div>']
     E3_PASS = ["<li>HydroPen operating pressure 5-7 bar</li>",
                "<li>Hose-test pressure 2 bar</li>",
                "<p>On trials the fire pump delivered 0.27 MPa at the manifold "

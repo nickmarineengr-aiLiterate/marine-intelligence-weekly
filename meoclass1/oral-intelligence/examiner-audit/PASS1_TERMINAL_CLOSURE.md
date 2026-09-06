@@ -22,9 +22,9 @@ generated-surface question they exposed, and nothing else.
 
 | id | The escape | How it is closed |
 |---|---|---|
-| **E1** | A denial clause silenced a live claim coordinated with it: *"BMP5 replaced BMP4 **and** remains the current industry standard"*. | Two parts, and the second is the one that mattered. **Bounded clause segmentation**: a coordinator splits only where it joins two CLAUSES — the left side already carries a finite verb, and the right side OPENS with one, because a coordinated predicate shares its subject. And **subject inheritance**: the live clause never names BMP5, so splitting alone left nothing to match. A clause with an inherited subject is judged only on an explicit currency assertion — narrower than the default-suspicious rule, because an inherited subject is an inference. |
+| **E1** | A denial clause silenced a live claim coordinated with it: *"BMP5 replaced BMP4 **and** remains the current industry standard"*. | **Bounded clause segmentation**: a coordinator splits where BOTH SIDES CARRY A FINITE VERB. Two verbs is two predications; a noun list predicates once and is left intact. And **subject inheritance**, for the shared-subject form where the live clause never names BMP5 — judged only on an explicit currency assertion, because an inherited subject is an inference. |
 | **E2** | `BMP-5` was invisible, and `normalise` folds every unicode dash toward that unmatched ASCII form — normalisation and matcher pulled opposite ways. | One publication, three ordinary spellings: `BMP5`, `BMP 5`, `BMP-5`. Detection only; no card's spelling is rewritten. |
-| **E3** | A governing figure with no modal — `Hydrant pressure - 0.27 N/mm²` — was undetectable at any unit. | Two ways a modal-free figure reads as governing: **label:value**, where the label IS the assertion and the segment ends at the figure; and a **numbers context** (key numbers, figures to memorise, regulatory values, benchmarks, criteria). Neither fires on prose, so a machinery description that mentions a pump discharge is still left alone. |
+| **E3** | A governing figure with no modal — `Hydrant pressure - 0.27 N/mm²` — was undetectable at any unit. | The default is **INVERTED**, as it already is for BMP5. 0.27 and 0.25 MPa are not arbitrary quantities: they ARE the two limbs SOLAS II-2/10.2.1.6 fixes, so a fire-main sentence stating one is asserting the regulation whether or not it says "minimum". It is a claim unless it reads as an **observation** (on trials, measured, logged, typically). Every MUST-NOT-CATCH in the contract carries an UNGOVERNED figure and is refused long before this test. |
 | **E4** | The subject in a preceding sibling block — `<h4>Fire main</h4><li>Minimum 0.27 MPa</li>` — defeated the detector. | A structural label reaches the block beneath it, bounded by **element identity** and by a segment count. Not a character window: the ±220-character window is the defect this replaces. |
 | **generated surfaces** | `topics.html` carried four BMP5 mentions the gate never examined, because the whole surface was skipped. | The surface is now swept, and status is decided **item by item from provenance**. |
 
@@ -63,6 +63,29 @@ No source correction is required and no generated HTML was hand-edited. The earl
 report's guess that two of the four were generator-authored topic labels was **wrong**:
 both are sentences of an examiner's stem, and the second is the whole stem.
 
+## The first attempt at E1 and E3 failed, and how
+
+Both were closed once by enumeration and reopened by the independent verifier, inside
+their own declared classes — not as new families:
+
+- **E1** was first closed by requiring a coordinated clause to OPEN with its verb, on
+  the reasoning that a coordinated predicate shares its subject. True of the shape the
+  escape was reported in, and blind to the commoner one, where the live clause states
+  its own subject: *"BMP4 was withdrawn **and** BMP5 is the current industry guidance"*.
+  The denial then silenced the sentence exactly as before. The repair is clause-shaped
+  rather than word-order-shaped: **a verb on each side**.
+- **E3** was first closed with a label:value shape plus a numbers-context vocabulary.
+  Four trailing words defeated the shape (`Hydrant pressure: 0.27 N/mm2 on cargo ships`
+  — the `$` anchor), and ordinary prose defeated the vocabulary (`SOLAS II-2/10.2.1.6
+  gives 0.27 N/mm2 at the hydrant for cargo ships`). The reg-box row is the very surface
+  three earlier defects in this family were found on. The repair stops enumerating and
+  **inverts the default**.
+
+That is the sixth and seventh instance of one lesson: a shape or a vocabulary is an open
+set. Both repairs replace one with a property — "two predications" and "a governed limb,
+unless observed" — and both were verified against the live corpus, which stayed at zero
+under the wider rules.
+
 ## Two defects found while closing, worth as much as the closure
 
 **A committed regex had two dead alternatives.** `oral_currentness.py` carried a literal
@@ -88,26 +111,28 @@ Each new control names a reachable failing state and one mutation reaches it:
 
 | control | mutation that kills it |
 |---|---|
-| `E1_coordinator_splits_clauses_not_noun_lists` | `E1-E` |
+| `E1_coordinator_splits_clauses_not_noun_lists` | `E1-E` (two edits — see below) |
 | `E1_MUST_CATCH_denial_then_live_claim` | `E1-D` |
 | `E2_hyphenated_name_is_the_same_publication` | `E2-D` |
 | `E3_MUST_CATCH_modal_free_governing_figure` | `E3-D` |
 | `E4_label_does_not_leak_across_containers` | `E4-D` |
 | `generated_surface_status_follows_item_provenance` | `G-D` |
 
-`E1-E` is **three edits in one mutation**, and that is a finding in itself. The noun-list
-rule turned out to be defended three times over — the left side must contain a finite
-verb, the right side must open with one, and a verbless fragment merges forward instead
-of standing as a proposition. Removing any one, or any two, changed nothing the control
-could see. The redundancy is good design and bad for a mutation suite: crediting a kill
+`E1-E` is **two edits in one mutation**, and that is a finding in itself. The noun-list
+rule is defended twice over — the both-sides verb test, and the rule that a verbless
+fragment merges forward instead of standing as a proposition. Removing either alone
+changed nothing the control could see, and the mutation reported an escape the guard had
+not suffered. Redundancy is good design and bad for a mutation suite: crediting a kill
 to an edit that left the property standing is exactly the false credit these suites
 exist to refuse.
 
 ## Evidence
 
-- **Controls:** `tools/oral/test_currentness_detectors.py` — 22 checks, 0 FAIL, over 60+
-  adversarial cases including the 6 E1 sentences, the 3 E2 spellings, 3 E3 MUST-CATCH
-  and 4 MUST-NOT-CATCH, and both E4 directions.
+- **Controls:** `tools/oral/test_currentness_detectors.py` — 22 checks, 0 FAIL, over 70
+  adversarial cases including 6 E1 MUST-CATCH (both the shared-subject and own-subject
+  shapes) with 3 MUST-NOT-CATCH, the 3 E2 spellings, 7 E3 MUST-CATCH with 4
+  MUST-NOT-CATCH, and both E4 directions. The four cases an independent verifier used to
+  reopen E1 and E3 are in the set, as cases, not as prose.
 - **Mutations:** `tools/oral/mutate_correction_p1guard.py` — **30 of 30 behaved as
   required, 0 escapes, 0 crashes**, serial, byte-exact restore. 26 must-catch (product
   and detector) and 4 must-NOT-catch: past-paper wording, a wholly historical
@@ -132,6 +157,11 @@ Declared, not hidden, and outside the closure contract:
   full sentence boundary, or through a construction outside the coordinator set, is not
   inherited. No live instance; a defect of this shape would have to be written
   deliberately.
+- **P3** — publication-name forms outside the three ordinary spellings: `BMP.5`,
+  `BMP v5`, `BMP 5th edition`. Outside the declared E2 class and unused on this corpus.
+- **P3** — a structural label whose heading is wrapped in its own element (so the value
+  block is not inside the heading's parent), or a value more than `HEADING_REACH` = 8
+  segments after it. Both are the bound working as designed at its edge.
 - **KEEP, adjudicated** — `QB4_B.html:1931` lists BMP5 among the publications the bank
   was compiled from. A compilation provenance statement is a historical fact about the
   sources read, not a claim of current authority.

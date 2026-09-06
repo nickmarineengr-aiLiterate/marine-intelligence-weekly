@@ -210,28 +210,27 @@ _SENT = re.compile(
 #: propositions and only the second is a defect, but `and` cannot simply be a
 #: boundary: "BMP5 and BMP4 are historical predecessors" would then leave a
 #: bare "BMP5" with nothing to deny it, and the guard would flag the corpus's
-#: own history. So a coordinator splits ONLY where it joins two CLAUSES:
+#: own history.
 #:
-#:   * the left side must already contain a finite verb, and
-#:   * the right side must OPEN with one (optionally after a pronoun or an
-#:     adverb such as "still" or "itself"), because a coordinated predicate
-#:     shares its subject and therefore begins with the verb.
+#: The test is therefore CLAUSE-SHAPED, not word-shaped: a coordinator splits
+#: where BOTH SIDES CARRY A FINITE VERB. Two verbs means two predications; a
+#: noun coordination has only one and is left intact.
 #:
-#: A noun coordination fails both tests and is left intact. This is bounded
-#: clause segmentation, not a parser - it decides one question only.
+#: An earlier version required the RIGHT side to OPEN with a verb, on the
+#: reasoning that a coordinated predicate shares its subject and so begins with
+#: the verb. True of the shared-subject form - and blind to the far commoner
+#: one, where the live clause states its own subject: "BMP4 was withdrawn and
+#: BMP5 is the current industry guidance". The denial then silenced the whole
+#: sentence. Requiring a verb on each side accepts both shapes and still
+#: refuses a noun list, because the left side of a noun list has no verb at all.
 _VERB = (r"(?:is|are|was|were|be|been|being|remains?|remained|stays?|stayed|"
          r"continues?|continued|applies|apply|applied|refers?|refer|uses?|use|"
          r"used|requires?|required|provides?|gives?|serves?|governs?|covers?|"
          r"sets?|forms?|shall|should|must|may|can|will|would|has|have|had|"
          r"does|do|did|replaced?|replaces|supersede[sd]?|superseded|"
-         r"describes?|states?|lists?)")
-#: The coordinator is CONSUMED; the verb is only LOOKED AHEAD at, because it
-#: belongs to the clause that follows and has to survive the split.
-_ADV = (r"(?:it|they|this|these|those|itself|themselves|still|also|now|then|"
-        r"therefore|thus|hence|nevertheless|nonetheless)")
-_COORD = re.compile(
-    r",?\s+(?:and|or|so|which|that)\s+(?=(?:%s\s+)?%s\b)" % (_ADV, _VERB),
-    re.I)
+         r"describes?|states?|lists?|exists?|withdrawn|revoked|repealed|"
+         r"taught|carried|stands?|holds?)")
+_COORD = re.compile(r",?\s+(?:and|or|so|which|that)\s+", re.I)
 _HAS_VERB = re.compile(r"\b%s\b" % _VERB, re.I)
 
 
@@ -246,8 +245,9 @@ def _split_coordinated(piece: str):
     parts, out, pending = [], [], ""
     last = 0
     for m in _COORD.finditer(piece):
-        left = piece[last:m.start()]
-        if not _HAS_VERB.search(left):
+        left, right = piece[last:m.start()], piece[m.end():]
+        # BOTH sides must predicate something. One verb is one clause.
+        if not (_HAS_VERB.search(left) and _HAS_VERB.search(right)):
             continue                      # noun coordination - not a clause
         parts.append(left)
         last = m.end()
