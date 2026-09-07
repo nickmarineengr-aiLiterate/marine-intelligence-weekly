@@ -31,6 +31,10 @@ CONTENT_COMMIT = "78d703c"
 #: in its own right: two of the records below make claims that only became true
 #: at this commit, and one WITHDRAWS a claim that was false at the first.
 REMEDIATION_COMMIT = "5de0c08"
+#: Round 2. A SECOND independent review found that this batch's PR1C record
+#: made a false sweep-completeness claim, and that the sibling it missed was
+#: live in eight layers. See known_traps 128.
+REMEDIATION_COMMIT_2 = "ae80bfe"
 
 AUTH = ("MIW PASS 2 RESUMPTION - KNOWN-DEFECT REMEDIATION instruction of "
         "7 September 2026, sections 3-16. The instruction is explicitly NOT a "
@@ -110,6 +114,7 @@ PRE = {
     "QB3_A.html#q5": "5eb232c07cc9cd054f50aca416f8a69ac26cafd96892ad8bb652cf34d2c2daf9",
     "QB10_B.html#q1": "3ecca484502640a396cc33c947649b27544b98fbc10ee6f99b4938c9ebbfd976",
     "QB3_B.html#q1": "d00a9c6b6aca8774e7c1de6ff7d87f3e0b2c448b95381b21885a088bfb3267a4",
+    "QB4_A.html#q9": "88dc3270fc21669c31369d4237cc3ff581a77ae6a59ae5e4d87c99382332e684",
 }
 
 COMMON = {
@@ -118,7 +123,8 @@ COMMON = {
     "date": DATE,
     "baseline_commit": BASELINE,
     "authorisation_source": AUTH,
-    "governing_commits": [CONTENT_COMMIT, REMEDIATION_COMMIT],
+    "governing_commits": [CONTENT_COMMIT, REMEDIATION_COMMIT,
+                          REMEDIATION_COMMIT_2],
 }
 
 
@@ -223,6 +229,25 @@ def build():
              "under-attendance exception.",
              PRE["QB4_C.html#q5"])
     c["correction_action_id"] = "P2-PR1C-01"
+    qb4a = card("QB4_A.html", "q9", "PROPAGATED_FACT_CORRECTION",
+                "The sibling the first version of this record wrongly reported as absent. "
+                "Eight candidate-facing layers carried the family's defects. 15-second and "
+                "60-second: an overdue Condition of Class taught as suspending class "
+                "outright, replaced by A.2.1's suspension PROCEDURE contrasted against the "
+                "A.1.1-A.1.3 automatic limb for overdue periodical surveys. Cascade bullets: "
+                "'All statutory certificates ... become invalid' replaced by B.1.3's "
+                "'certain', with the certificate list kept as EXAMPLES; 'P&I Club cover "
+                "typically falls away' replaced by the class-warranty analysis, keeping the "
+                "card's own accurate point that 'seaworthy and in class' is a fundamental "
+                "warranty under standard P&I Club Rules; the Flag State notification "
+                "re-attributed from UR Z23 to PR1C B.1.1/B.1.2. Regulatory References: the "
+                "UR Z23 entry replaced by PR1C Rev.7 with its clause map. CE Oral Tip, trap "
+                "answer, Common CE Failures bullet and the Numbers line all realigned. The "
+                "last two of those eight were found by this record's own content gate, not "
+                "by the correcting script, in a card that had just been read end to end.",
+                PRE["QB4_A.html#q9"])
+    qb4a["correction_action_id"] = "P2-PR1C-02"
+
     records.append(("correction_corr_pass2_pr1c_suspension_20260907_manifest.json", dict(
         COMMON,
         origin="pass2_known_defect_remediation",
@@ -272,11 +297,23 @@ def build():
                   "Offshore Drilling Units' - verified from the IACS UR text as republished by "
                   "a Member society, table of contents read.",
         propagation={
-            "same_defect_swept": "The corpus was searched for 'void insurance', 'voiding "
+            "same_defect_swept": "CORRECTED AFTER SECOND INDEPENDENT REVIEW. The first "
+                                 "version of this record claimed that a search for 'void "
                                  "insurance', 'insurance is void', 'all statutory "
-                                 "certificates', 'automatically become invalid' and 'UR Z15'. "
-                                 "Beyond QB4_C q5 the only remaining hits are the already-"
-                                 "corrected QB1_K q2, and past-paper examiner wording.",
+                                 "certificates', 'automatically become invalid' and 'UR Z15' "
+                                 "left, beyond QB4_C q5, 'only the already-corrected QB1_K q2, "
+                                 "and past-paper examiner wording'. THAT WAS FALSE. Re-running "
+                                 "it returns QB4_A#q9, a teaching card carrying all three "
+                                 "propositions across EIGHT candidate-facing layers, plus a "
+                                 "fourth defect - the RO-to-Flag-State notification cited to "
+                                 "IACS UR Z23, which is Hull Survey for New Construction. "
+                                 "QB4_A#q9 is corrected here as P2-PR1C-02. The sweep now "
+                                 "stands as: QB4_C#q5 and QB4_A#q9 corrected in this record; "
+                                 "QB1_K#q2 corrected by CORR-D01-COC-PR1C-20260907; QB1_F "
+                                 "section 4 already correct; every other hit is a past-paper "
+                                 "stem, each of which was OPENED rather than bucketed. See "
+                                 "known_traps 128 - a completeness claim is a claim, and "
+                                 "nothing in the pipeline was checking it.",
             "already_correct_sibling": "meoclass1/QB1_F.html section 4 'Class Status Ladder' "
                                        "already teaches the correct distinction, the six-month "
                                        "rule and 'certain statutory certificates', and cites "
@@ -301,15 +338,22 @@ def build():
             "The Merchant Shipping Act 2025 Part VI Sec 125/127 material corrected on "
             "15 Jul 2026 is unchanged in substance and still replaces 1958 Sec 334.",
             "SOLAS II-1/3-1 and ISM 10.2 reg-box entries unchanged.",
-            "Every candidate-facing layer now carries the 'certain' qualifier, including the "
-            "CE Oral Tip, which the first attempt missed and which the gate did not read.",
+            "Every candidate-facing layer of BOTH cards now carries the 'certain' qualifier, "
+            "including the CE Oral Tip of each - the layer the first attempt missed on "
+            "QB4_C#q5 and which the gate did not read until it was made to.",
+            "QB4_A#q9's 'seaworthy and in class is a fundamental warranty under standard P&I "
+            "Club Rules' is KEPT: it was the accurate half of that card's insurance claim, "
+            "and only the automatic-loss half was removed.",
+            "QB4_A#q9's IACS PR No.1 and PR No.3 entries are NOT touched and NOT asserted "
+            "correct - the IACS PR index could not be read cleanly this pass, so no "
+            "replacement number is claimed. Recorded as unverified, not as verified.",
             "No claim that insurance is unaffected - the class warranty analysis is added, "
             "not the opposite overstatement.",
             "No claim that PR1C is a ceiling: it is the harmonised floor, and an individual "
             "society's Rules may go further.",
         ],
-        known_traps_entries=[113, 121],
-        cards=[c],
+        known_traps_entries=[113, 121, 128],
+        cards=[c, qb4a],
     )))
 
     # ------------------------------------------------------------ ALLIANCE
@@ -538,7 +582,11 @@ def build():
                   "single-side-skin feature. That record was independently revalidated by Lane "
                   "B. This correction propagates a settled adjudication to a sibling site; it "
                   "does not open a new one, and it deliberately asserts nothing that record "
-                  "did not - in particular no percentage and no hold count.",
+                  "did not. CORRECTED AFTER SECOND REVIEW: an earlier version of this sentence "
+                  "went on to say 'in particular no percentage and no hold count', "
+                  "which the remediated card no longer honours - it restates both, "
+                  "because QB3_B#q1 attributes both to UR Z10.2. The age BAND remains "
+                  "unasserted, and that is the source gap this record actually carries.",
         propagation={
             "same_defect_swept": "The corpus was searched for 'side shell frames', 'close-up' "
                                  "with 'annual', and 'single side skin'. The corrected QB3_B "

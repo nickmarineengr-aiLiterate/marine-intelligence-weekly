@@ -69,6 +69,21 @@ class Snapshot:
             p = pathlib.Path(path)
             self.data[p] = p.read_bytes() if p.is_file() else None
 
+    def changed(self) -> bool:
+        """Did the mutation actually alter any watched file?
+
+        The suite already holds the pre-mutation bytes, so a no-op is
+        detectable for free -- and until this existed the summary line printed
+        a hardcoded "0 no-op(s)" that no code computed. A mutation that changes
+        nothing proves nothing, and it looks identical to a caught one if the
+        gate happens to be red for another reason.
+        """
+        for path, blob in self.data.items():
+            now = path.read_bytes() if path.is_file() else None
+            if now != blob:
+                return True
+        return False
+
     def restore(self) -> list[str]:
         bad = []
         for path, blob in self.data.items():
@@ -135,7 +150,7 @@ def run_suite(title: str, probe_script: str, mutations, watched_paths) -> int:
         return 2
     print("control: %s exits %d with no failing check\n" % (probe_script, code))
 
-    caught, escapes, crashes = 0, [], []
+    caught, escapes, crashes, noops = 0, [], [], []
     for mid, desc, apply, want in mutations:
         snap = Snapshot(watched_paths)
         try:
@@ -143,6 +158,11 @@ def run_suite(title: str, probe_script: str, mutations, watched_paths) -> int:
         except Exception as exc:                      # noqa: BLE001
             crashes.append("%s: %s" % (mid, exc))
             print("%-3s %-58s CRASH   [%s]" % (mid, desc, exc))
+            snap.restore()
+            continue
+        if not snap.changed():
+            noops.append(mid)
+            print("%-3s %-58s NO-OP   [%s]" % (mid, desc, want))
             snap.restore()
             continue
         _rc, failing = run_probe(probe_script)
@@ -163,10 +183,12 @@ def run_suite(title: str, probe_script: str, mutations, watched_paths) -> int:
     # parse_summary() already covers it, and inventing a new dialect is how a
     # harness ends up reporting green through a parser that never read it.
     print("\n%d caught of %d" % (caught, len(mutations)))
-    print("%d mutations, %d escape(s), 0 no-op(s), %d crash(es)"
-          % (len(mutations), len(escapes), len(crashes)))
+    print("%d mutations, %d escape(s), %d no-op(s), %d crash(es)"
+          % (len(mutations), len(escapes), len(noops), len(crashes)))
     for line in escapes:
         print("  ESCAPE %s" % line)
+    for mid in noops:
+        print("  NO-OP  %s changed no watched file" % mid)
     for line in crashes:
         print("  CRASH %s" % line)
-    return 0 if (not escapes and not crashes) else 1
+    return 0 if (not escapes and not crashes and not noops) else 1

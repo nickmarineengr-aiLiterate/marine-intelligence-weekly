@@ -42,9 +42,10 @@ QB5_A = QB / "QB5_A.html"
 QB3_A = QB / "QB3_A.html"
 QB10_B = QB / "QB10_B.html"
 QB3_B = QB / "QB3_B.html"
+QB4_A = QB / "QB4_A.html"
 
 GATE = "validate_correction_pass2.py"
-WATCHED = [QB4_E, QB4_C, QB8_A, QB5_A, QB3_A, QB10_B, QB3_B]
+WATCHED = [QB4_E, QB4_C, QB8_A, QB5_A, QB3_A, QB10_B, QB3_B, QB4_A]
 
 MUTATIONS = [
     # ---------------------------------------------------------------- IACS
@@ -305,6 +306,70 @@ MUTATIONS = [
                  "(bulk carriers/tankers), forward hold + one other selected hold.",
                  count=1),
      "closeup_sibling_numbers_layer_not_over_broad"),
+    # ------------------------------------------- second-review escapes
+    # Z1-Z3 are the escapes the SECOND independent review demonstrated in a
+    # sandbox against the hardened gate. Each is kept as standing proof that
+    # the fix works, because each exploited a different way for an absence
+    # check to be true-by-accident.
+    ("Z1", "reinstate the P1 defect behind a bare 'no' in the same sentence",
+     sub_in_file(QB4_C,
+                 "This demonstrates a strong compliance-driven approach.",
+                 "Make no mistake, sir, every statutory certificate is invalidated the "
+                 "moment class is suspended. This demonstrates a strong compliance-driven "
+                 "approach.", count=1),
+     "pr1c_ce_tip_no_unqualified_certificate_claim"),
+
+    ("Z2", "universal insurance loss with a verb the first list did not carry",
+     sub_in_file(QB4_C,
+                 "<li>Insurance: PR1C contains no insurance provision at all,",
+                 "<li>Insurance: once class is suspended our P&amp;I and H&amp;M cover is "
+                 "forfeited outright in every case,", count=1),
+     "pr1c_no_universal_insurance_void_claim"),
+
+    ("Z3", "widen QB3_B's Numbers layer without the parenthesised spelling",
+     sub_in_file(QB3_B,
+                 "forward hold + one other selected hold, and age-conditioned.",
+                 "forward hold + one other selected hold; in practice it is applied to "
+                 "bulk carriers and tankers generally.", count=1),
+     "closeup_sibling_numbers_layer_not_over_broad"),
+
+    # ------------------------------------------------- QB4_A#q9, 8th card
+    # The card the PR1C record's sweep claimed did not exist. Each mutation
+    # reverts one layer and leaves the rest corrected.
+    ("Z4", "restore 'all statutory certificates' in the cascade bullet only",
+     sub_in_file(QB4_A,
+                 "Under PR1C B.1.3 the Society&#x27;s letter states that "
+                 "<strong>certain</strong> statutory certificates",
+                 "All statutory certificates", count=1),
+     "qb4a_no_all_statutory_certificates_claim"),
+
+    ("Z5", "make an overdue CoC automatic again in the 60s layer",
+     sub_in_file(QB4_A,
+                 "IACS PR1C A.2.1 provides that the vessel&#x27;s class becomes "
+                 "<strong>subject to a suspension procedure</strong>",
+                 "the society suspends class automatically", count=1),
+     "qb4a_coc_is_a_suspension_procedure"),
+
+    ("Z6", "re-cite UR Z23 for the Flag State notification",
+     sub_in_file(QB4_A,
+                 "<strong>IACS PR1C B.1.1</strong>, with B.1.2 covering withdrawal",
+                 "<strong>IACS UR Z23</strong>, with SOLAS Ch I/Reg 6", count=1),
+     "qb4a_no_ur_z23_attribution"),
+
+    ("Z7", "restore automatic insurance loss in the cascade bullet",
+     sub_in_file(QB4_A,
+                 "so loss of class breaches it and cover may be prejudiced",
+                 "so P&amp;I Club cover falls away automatically", count=1),
+     "qb4a_no_universal_insurance_loss_claim"),
+
+    ("Z8", "restore the unqualified claim in QB4_A's CE Oral Tip only",
+     sub_in_file(QB4_A,
+                 "under PR1C B.1.3 the Society&#x27;s letter to Owner and Flag State says "
+                 "that <em>certain</em> RO-issued statutory certificates are implicitly "
+                 "invalidated",
+                 "all RO-issued statutory certificates become invalid simultaneously",
+                 count=1),
+     "qb4a_ce_tip_no_unqualified_certificate_claim"),
 ]
 
 

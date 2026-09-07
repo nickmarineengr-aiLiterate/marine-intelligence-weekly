@@ -127,11 +127,21 @@ th thead time title tr track tspan u ul use var video wbr
 #: cannot tell an assertion from a warning goes red on the correction itself.
 #: That is trap 89 in the absence-check direction: the first draft of this gate
 #: failed six checks, every one of them on wording the correction had added.
-_NEGATION = re.compile(
-    r"(?:\bno\b|\bnot\b|\bnever\b|\bnothing\b|rather than|instead of|"
-    r"does not|is not|was not|say[^.]{0,40}?,\s*$|there is no|no universal|"
-    r"no such|to hedge over|deliberately says)",
+#: Constructions that actually DENY a following claim. These may sit anywhere
+#: in the same sentence before the match.
+_DENIAL = re.compile(
+    r"(?:there is no\b|there are no\b|no universal\b|no such\b|"
+    r"contains no\b|says nothing\b|nothing whatever\b|"
+    r"do(?:es)? not\b|did not\b|is not\b|are not\b|was not\b|"
+    r"\bnever\b|rather than\b|instead of\b|to hedge over\b|"
+    r"deliberately says\b|not merely\b)",
     re.I)
+
+#: Bare negation particles. These are NOT evidence on their own -- "Make no
+#: mistake, sir, every statutory certificate is invalidated" contains "no" and
+#: asserts the defect. They count only when they immediately precede the match,
+#: which is the position from which they can actually govern it.
+_BARE_NEGATION = re.compile(r"(?:\bno\b|\bnot\b|\bnothing\b)[^.]{0,10}$", re.I)
 
 
 def asserts(text: str, pattern: str, window: int = 130):
@@ -150,17 +160,26 @@ def asserts(text: str, pattern: str, window: int = 130):
         # the words rather than preceding them. A claim that contains its own
         # negation is a contrast, not an assertion.
         prefix = text[max(0, m.start() - window):m.start()]
-        # Negation scopes to its own SENTENCE. Mutations A/B/F escaped the
-        # first draft because an unrelated "is not a Member." or "do not tell
-        # an examiner" one sentence earlier disarmed a fresh assertion. Clip
-        # the prefix at the last sentence break so only same-sentence negation
-        # counts.
+        # Negation scopes to its own SENTENCE. An unrelated "is not a Member."
+        # one sentence earlier must not disarm a fresh assertion, so clip the
+        # prefix at the last sentence break.
         cut = max(prefix.rfind(". "), prefix.rfind("; "), prefix.rfind("? "))
         if cut >= 0:
             prefix = prefix[cut + 2:]
-        if _NEGATION.search(prefix):
+        # A real denial construction anywhere in the sentence, a bare negation
+        # particle only if it is adjacent, or a negation inside the match
+        # itself (the "say X, not Y" contrast form).
+        if _DENIAL.search(prefix) or _BARE_NEGATION.search(prefix):
             continue
-        if _NEGATION.search(m.group(0)):
+        if _DENIAL.search(m.group(0)) or re.search(r"\bnot\b", m.group(0), re.I):
+            continue
+        # An examiner's QUESTION is not a taught proposition. These cards
+        # quote trap questions verbatim - 'do statutory certificates also
+        # become invalid?' is the examiner asking, and the card's own answer
+        # is what corrects it. Skip a match whose sentence is interrogative.
+        tail = text[m.end():m.end() + 220]
+        ends = [tail.find(x) for x in ('. ', '? ', '?"', '?\u201d') if tail.find(x) >= 0]
+        if ends and tail[min(ends)] == '?':
             continue
         return m
     return None
@@ -293,9 +312,14 @@ def check_pr1c() -> None:
                "B.1.1 -- absent from the card before this pass")
 
     # Insurance: no universal-void claim in any layer, in any wording.
+    #: Verbs for "the cover stops applying". "prejudiced" is deliberately
+    #: absent: that is the correct framing this correction introduced.
+    LOST = (r"void|avoid|lapse|invalidat|cease|null|forfeit|withdrawn|"
+            r"falls? away|fell away|at an end|no longer (?:applies|responds)|"
+            r"stops? (?:answering|responding)|ends? outright")
     void = asserts(flat, r"(?:insurance|cover|coverage|P&I|H&M)[^.]{0,90}?"
-                         r"(?:void|avoid|lapse|invalidat|cease|null)"
-                         r"|(?:void|avoid|freeze|invalidat)\w*[^.]{0,50}?"
+                         r"(?:" + LOST + r")"
+                         r"|(?:" + LOST + r")[^.]{0,50}?"
                          r"(?:insurance|cover|coverage)")
     report("pr1c_no_universal_insurance_void_claim", void is None,
            "found=%r" % (void.group(0) if void else None))
@@ -476,6 +500,60 @@ def check_human() -> None:
 # 5. QB3_A q5 -- annual close-up scope
 # ---------------------------------------------------------------------------
 
+def check_qb4a_sibling() -> None:
+    """QB4_A#q9 - the card the PR1C record's sweep claimed did not exist.
+
+    A second independent review ran the record's own declared search and found
+    this card carrying all three corrected propositions in six layers. It is
+    guarded here on the same terms as QB4_C#q5, layer by layer, because the
+    defect that hid in a CE Oral Tip once can hide in one again.
+    """
+    c = teaching(card("QB4_A.html", "q9"))
+    flat = flatten(c)
+
+    over = asserts(flat, r"all statutory certificates[^.]{0,60}?"
+                         r"(?:invalid|simultaneous)"
+                         r"|every statutory certificate"
+                         r"|statutory certificates[^.]{0,40}?become "
+                         r"(?:simultaneously )?invalid")
+    report("qb4a_no_all_statutory_certificates_claim", over is None,
+           "found=%r" % (over.group(0)[:60] if over else None))
+    report("qb4a_certain_statutory_certificates_taught",
+           re.search(r"certain[^.]{0,40}statutory certificates", flat, re.I) is not None,
+           "B.1.3 as written")
+
+    LOST = (r"void|lapse|invalidat|cease|forfeit|falls? away|at an end|"
+            r"no longer (?:applies|responds)|automatically ends?")
+    ins = asserts(flat, r"(?:P&I|H&M|insurance|cover|coverage)[^.]{0,80}?(?:" + LOST + r")")
+    report("qb4a_no_universal_insurance_loss_claim", ins is None,
+           "found=%r" % (ins.group(0)[:60] if ins else None))
+
+    auto = asserts(flat, r"(?:due date[^.]{0,40}?results in Suspension"
+                         r"|Condition expires unresolved, the society suspends class"
+                         r"|failure to meet the due date results in Suspension)")
+    report("qb4a_coc_is_a_suspension_procedure", auto is None,
+           "A.2.1 - an overdue CoC is not automatic; found=%r"
+           % (auto.group(0)[:60] if auto else None))
+    report("qb4a_procedure_limb_taught",
+           re.search(r"suspension procedure", flat, re.I) is not None,
+           "the distinction, stated")
+
+    z23 = asserts(flat, r"UR\s*Z23")
+    report("qb4a_no_ur_z23_attribution", z23 is None,
+           "UR Z23 is Hull Survey for New Construction; found=%r"
+           % (z23.group(0) if z23 else None))
+    report("qb4a_notification_attributed_to_pr1c",
+           re.search(r"PR1C[^.]{0,60}B\.1\.1|B\.1\.1", flat) is not None,
+           "the provision that actually requires the letter")
+
+    # The layer that hid the same defect on QB4_C#q5.
+    tip = layer(c, "CE Oral Tip")
+    tip_over = asserts(tip, r"all[^.]{0,40}statutory certificates[^.]{0,40}invalid"
+                            r"|every statutory certificate")
+    report("qb4a_ce_tip_no_unqualified_certificate_claim", tip_over is None,
+           "found=%r" % (tip_over.group(0)[:60] if tip_over else None))
+
+
 def check_closeup() -> None:
     c = teaching(card("QB3_A.html", "q5"))
     flat = flatten(c)
@@ -527,9 +605,24 @@ def check_closeup() -> None:
                (re.search(pat, flat, re.I) is not None)
                == (re.search(pat, sib_flat, re.I) is not None),
                "QB3_A#q5 and QB3_B#q1 must not diverge")
-    sib_over = asserts(sib_flat, r"\(bulk carriers/tankers\)")
+    sib_numbers = layer(teaching(card("QB3_B.html", "q1")), "Numbers to Memorise") \
+        if "Numbers to Memorise" in sib_flat else sib_flat
+    close_line = next((s for s in sib_numbers.split(" \u2014 ")
+                       if "close-up" in s.lower()), sib_numbers)
+    # No "close-up ... within N characters" anchor: the layer contains
+    # "UR Z10.2", and a [^.] window stops dead at that period, which is how
+    # mutation Z3 escaped. Match the widening CLAIM itself and let asserts()
+    # discount the legitimate "not oil tankers".
+    sib_over = asserts(sib_numbers,
+                       r"bulk carriers?\s*/\s*tankers?"
+                       r"|bulk carriers and (?:oil )?tankers"
+                       r"|tankers generally"
+                       r"|applied to[^;]{0,60}?tankers")
     report("closeup_sibling_numbers_layer_not_over_broad", sib_over is None,
-           "QB3_B#q1's own memorisation layer contradicted its body")
+           "found=%r" % (sib_over.group(0)[:60] if sib_over else None))
+    report("closeup_sibling_numbers_layer_names_the_population",
+           re.search(r"single side skin", sib_numbers, re.I) is not None,
+           "the memorisation layer must carry the scope, not just the body")
 
     report("closeup_drydock_teaching_preserved",
            "36 months" in flat and re.search(r"twice in", flat, re.I) is not None,
@@ -645,6 +738,7 @@ def main() -> int:
                      ("QB4_C q5   PR1C suspension", check_pr1c),
                      ("QB8_A q3   alliance currentness", check_alliance),
                      ("QB5_A q4   human element", check_human),
+                     ("QB4_A q9   PR1C sibling (8th card)", check_qb4a_sibling),
                      ("QB3_A q5   annual close-up scope", check_closeup),
                      ("QB10_B q1  amendment overview", check_amend)):
         print("\n-- %s" % name)
