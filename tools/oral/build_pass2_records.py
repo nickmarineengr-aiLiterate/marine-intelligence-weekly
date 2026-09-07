@@ -52,6 +52,10 @@ REMEDIATION_COMMIT_4 = "93c4d3c"
 #: Both cards reach their authorised state only at this commit, so it is
 #: governing, not incidental.
 RESTORATION_COMMIT = "8a0a33c"
+#: Terminal closure: the three Notes PR mis-citations, the governed
+#: correction log, and the seven QB10_B propositions declared open in
+#: Pass 2. QB10_B#q1 reaches its authorised state only here.
+TERMINAL_CLOSURE_COMMIT = "cdd1626"
 
 AUTH = ("MIW PASS 2 RESUMPTION - KNOWN-DEFECT REMEDIATION instruction of "
         "7 September 2026, sections 3-16. The instruction is explicitly NOT a "
@@ -167,7 +171,8 @@ COMMON = {
     "authorisation_source": AUTH,
     "governing_commits": [CONTENT_COMMIT, REMEDIATION_COMMIT,
                           REMEDIATION_COMMIT_2, REMEDIATION_COMMIT_3,
-                          REMEDIATION_COMMIT_4, RESTORATION_COMMIT],
+                          REMEDIATION_COMMIT_4, RESTORATION_COMMIT,
+                          TERMINAL_CLOSURE_COMMIT],
 }
 
 
@@ -484,6 +489,30 @@ def build():
                    "carries no q-card, so the corpus card digester is structurally blind to "
                    "it - which is why it survived two sweeps. Corrected here; no digest is "
                    "pinned because no release guard pins this file.",
+        }, {
+            "path": "meoclass1/oralnotes/miw-notes-mgmt-p7.html",
+            "why": "Cited the deleted PR 1, and called PR1C A.4.1's six months an "
+                   "automatic-suspension TRIGGER when it is withdrawal after six months "
+                   "already suspended. Corrected in the HTML body, which is this page's "
+                   "source of record: tools/notes/specs holds p19..p22 only, and this part "
+                   "predates the builder. The template chrome was not touched.",
+        }, {
+            "path": "meoclass1/oralnotes/simon-notes-p2.html",
+            "why": "Cited 'IACS PR 1 - Procedural Arrangements for Classification', which "
+                   "does not exist; PR 1 is Deleted. Re-cited to PR1C and PR 35. No spec "
+                   "exists for the simon-notes series.",
+        }, {
+            "path": "meoclass1/oralnotes/simon-notes-p6.html",
+            "why": "Cited PR 1 for conditions of class. Re-cited to PR 35 and PR1C.",
+        }, {
+            "path": "tools/oral/qb_content_index_governed.json",
+            "why": "The hand-maintained, SOURCE-OWNED half of the content index. "
+                   "Regenerating qb_content_index.json from HEAD reproduced the committed "
+                   "file byte for byte, so the derived surface was never stale - the "
+                   "staleness was here, in a correction log a rebuild cannot populate. "
+                   "The Pass-2 batch entry is added; meoclass1/qb_content_index.json is "
+                   "the regenerated output and carries no digest pin because no release "
+                   "guard pins it.",
         }, {
             "path": "reports/pr1c_family_sweep.json",
             "why": "The generated sweep this record now cites INSTEAD of asserting a "
