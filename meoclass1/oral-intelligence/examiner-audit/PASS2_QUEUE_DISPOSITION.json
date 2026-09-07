@@ -1,0 +1,186 @@
+{
+ "record": "MIW KNOWN-DEFECT REMEDIATION - PASS 2 RESUMPTION",
+ "schema": "miw-pass2-queue-disposition/1",
+ "date": "2026-09-07",
+ "baseline_commit": "05b49d8",
+ "content_commit": "78d703c",
+ "governance_commit": "a0faa7e",
+ "purpose": "The Pass-2 counterpart of PASS1_P1_DISPOSITION_REGISTER.json. Every item in the reconstructed unresolved queue is dispositioned here, including the ones this pass did not close and the ones the instruction named that turned out not to exist. NO SILENT DROPPING.",
+ "how_the_queue_was_reconstructed": {
+  "method": "The Pass-2 instruction listed an expected queue and required it to be checked against repository governance rather than trusted. It was reconstructed from PASS1_P1_DISPOSITION_REGISTER.json, PASS1_SOURCE_CUSTODY_PRIORITY.json, the D01-S01 and D01-S02 remediation handoffs, the correction manifests in tools/oral/, and by reading each named card end to end.",
+  "why_it_mattered": "Governance and the instruction disagreed on three items, and in every case the repository was right. QB1_F#q23 is not a member of the PR1C family at all. The QB10_B free-fall row is a true amendment stated backwards, not a fabrication. RC-10 to RC-12 do not exist. Had the instruction's list been worked directly, one card would have been edited for a defect it does not have, one true amendment would have been deleted as invented, and three phantom items would have been hunted."
+ },
+ "disposition_values": [
+  "CLOSED_IN_PASS_2",
+  "ALREADY_CORRECT",
+  "CLOSED_BY_D01_PROPAGATION",
+  "DOES_NOT_EXIST",
+  "SOURCE_GAP",
+  "DEFERRED",
+  "OUT_OF_SCOPE"
+ ],
+ "dispositions": [
+  {
+   "item": "QB10_B.html#q1",
+   "instruction_ref": "A - largest remaining known-risk item",
+   "governance_ref": "PASS1 register: REQUIRES_SOURCE_ACQUISITION, blocker K-ITEM-P1-LSA-LOWERING-SPEED",
+   "disposition": "CLOSED_IN_PASS_2",
+   "scope": "PARTIAL BY DESIGN - six proposition families corrected, all verified to primary. The card's remaining unverified propositions are listed under open_propositions below and are NOT claimed as verified by this record.",
+   "closed_by": "CORR-PASS2-AMENDMENT-OVERVIEW-20260907",
+   "detail": "K-ITEM-P1-LSA-LOWERING-SPEED is discharged. MSC.554(108) was retrieved and read: LSA 6.1.2.8 as amended keeps S = 0.4 + 0.02H and caps it at 1.0 m/s 'whichever is less', and 6.1.2.10 sets 1.3 m/s as an Administration-variable maximum. The card's claim that the range REPLACED the formula is contradicted by the instrument. Pass 1 was right to refuse to guess: both of the card's numbers were real and only the verb was false, so any adjudication from the numbers alone would have confirmed the defect.",
+   "verifiable_by": "tools/oral/validate_correction_pass2.py"
+  },
+  {
+   "item": "QB10_B.html#q1 free-fall / 5-knot / 20,000 GT row",
+   "instruction_ref": "section 10 - listed among 'known prior concerns' as a 'false free-fall / 5-knot / 20,000-GT proposition'",
+   "disposition": "CLOSED_IN_PASS_2",
+   "instruction_premise": "REJECTED ON EVIDENCE",
+   "detail": "The proposition is not false. MSC.482(103), adopted 13 May 2021 and in force 1 January 2024, replaced SOLAS III/33.2 to read 'On cargo ships of 20,000 gross tonnage and upwards, davit-launched lifeboats shall be capable of being launched, utilizing painters where necessary, with the ship making headway at speeds up to 5 knots in calm water.' The card was right about the date and the instrument family and wrong about the DIRECTION - the requirement was narrowed to davit-launched lifeboats rather than removed - and about the population, which is cargo ships. Corrected accordingly. Deleting the row as fabricated would have removed a real amendment from a currency card."
+  },
+  {
+   "item": "QB8_A.html#q3",
+   "instruction_ref": "B",
+   "governance_ref": "PASS1 register: REQUIRES_LATER_SURGICAL_CORRECTION",
+   "disposition": "CLOSED_IN_PASS_2",
+   "closed_by": "CORR-PASS2-ALLIANCE-CURRENTNESS-20260907",
+   "detail": "2M ended January 2025; THE Alliance became Premier Alliance February 2025 after Hapag-Lloyd left for Gemini. CBER 906/2009 expired 25 April 2024. Three unsupported BAF claims removed. The Pass-1 blocker - 'no primary instrument governs it' - was correct and is precisely why this card decayed unseen: a commercial roster carries no resolution number for a currentness detector to date-check."
+  },
+  {
+   "item": "QB5_A.html#q4",
+   "instruction_ref": "C",
+   "governance_ref": "PASS1 register: REQUIRES_LATER_SURGICAL_CORRECTION",
+   "disposition": "CLOSED_IN_PASS_2",
+   "closed_by": "CORR-PASS2-HUMAN-ELEMENT-20260907",
+   "detail": "Beyond the fabricated anecdote and the MLC misattribution the instruction anticipated, the Numbers to Memorise block had lost both of its numbers from the markup - the 1943 and the 5 were absent from the source, not merely mis-rendered, four lines below a CE-failures bullet warning the candidate not to forget the year."
+  },
+  {
+   "item": "QB4_E.html#q12",
+   "instruction_ref": "D",
+   "governance_ref": "PASS1 register: REQUIRES_EXTERNAL_VERIFICATION, blocker K-ITEM-P1-IACS-MEMBERSHIP",
+   "disposition": "CLOSED_IN_PASS_2",
+   "closed_by": "CORR-PASS2-IACS-MEMBERS-20260907",
+   "detail": "Membership is twelve. The card taught eleven in its 15-second answer, its 60-second answer and its CE Oral Tip, hedged '11 or 12 depending on', and had dropped KR from the 60-second list - while its own detail list below already enumerated all twelve including KR. The decisive evidence was internal self-contradiction. Note the authority downgrade recorded in the manifest: iacs.org.uk returned HTTP 403 to this session, so the issuer's own page was NOT read and the record says so."
+  },
+  {
+   "item": "QB4_C.html#q5",
+   "instruction_ref": "E, and section 5 in full",
+   "governance_ref": "Same family as CORR-D01-COC-PR1C-20260907 (RC-05, QB1_K#q2)",
+   "disposition": "CLOSED_IN_PASS_2",
+   "closed_by": "CORR-PASS2-PR1C-SUSPENSION-20260907",
+   "detail": "All four distinctions section 5 required are now taught, against PR1C Rev.7 read this pass. The card was worse than the family description: the instrument cited as governing the whole answer, IACS UR Z15, is Hull, Structure, Equipment and Machinery Surveys of Mobile Offshore Drilling Units. It appeared in the Regulatory References box and again in Numbers & Regs."
+  },
+  {
+   "item": "D01-S01 open point - which PR1C revision governs, and is the clause lettering stable",
+   "governance_ref": "D01_S01_REMEDIATION_HANDOFF_20260907.json, QB1_K#q2 notes: 'OPEN POINT FOR LANE B - REVISION CURRENCY'",
+   "disposition": "CLOSED_IN_PASS_2",
+   "detail": "Both limbs answered from the instrument. PR1C Rev.7 clause 8: 'Rev.7 of this Procedural Requirement applies from 1 January 2026', so Rev.7 governs at today's date. A.1.1, A.2.1, A.4.1 and B.1.3 are textually identical between Rev.6 and Rev.7, so the clause lettering D01-S01 asked to be checked is stable and the caveat carried on QB1_K#q2 can be resolved. Recorded here rather than acted on: QB1_K#q2 is a D01 card and editing it is not this pass's scope."
+  },
+  {
+   "item": "QB1_F.html#q23",
+   "instruction_ref": "F - 'if still open', listed under 'QB1_F#q23 / RELATED PR1C FAMILY'",
+   "disposition": "ALREADY_CORRECT",
+   "detail": "Read end to end as section 6 required. The card is 'PMS approval - what certificate will be onboard?' and answers it from IACS UR Z20: the Certificate of Approval for a Planned Maintenance Scheme, the equivalent-certification limb of 2.3.1, the implementation survey, the annual audit, and the 2.3.5 cancellation power. It contains no PR1C, no suspension or withdrawal, no statutory-certificate consequence and no insurance proposition of any kind. There is nothing in this card for the PR1C family to be open on. NOT TOUCHED.",
+   "residual_note": "Two version stamps in the card cite UR Z20 Rev.2 May 2019 and UR Z18 Rev.9 April 2020. Neither was revalidated this pass. Recorded as an unverified currentness claim, not as a defect."
+  },
+  {
+   "item": "QB3_A.html#q5",
+   "instruction_ref": "G - 'weak/blog citation if still open'",
+   "disposition": "CLOSED_IN_PASS_2",
+   "closed_by": "CORR-PASS2-CLOSEUP-SCOPE-20260907",
+   "detail": "Open, and larger than the instruction anticipated. The blog link was carrying the same proposition D01-S02 had already adjudicated on QB3_B#q1 - the annual close-up of cargo hold side shell frames belongs to single side skin bulk carriers under UR Z10.2, not to bulk carriers and oil tankers generally. Replacing the citation without correcting the scope would have left a false claim with a better footnote. The unsourced '25% ... forward hold + one other' figure entered the corpus from that blog and is NOT restated."
+  },
+  {
+   "item": "RC-07, RC-08, RC-09",
+   "instruction_ref": "J - 'any specifically-recorded D01 RC-07...RC-12 still unresolved'",
+   "disposition": "CLOSED_BY_D01_PROPAGATION",
+   "detail": "RC-07 is closed by CORR-D01S02-CMS-PMS-20260907; RC-08 and RC-09 by CORR-D01S02-HSSC-REACH-20260907. Both records are at 05b49d8 and were independently revalidated by Lane B."
+  },
+  {
+   "item": "RC-10, RC-11, RC-12",
+   "instruction_ref": "J",
+   "disposition": "DOES_NOT_EXIST",
+   "detail": "The D01 RC series runs RC-01 to RC-06 in S01 and RC-D01S02-01 to RC-D01S02-09 in S02. No RC-10, RC-11 or RC-12 identifier appears in any manifest or handoff in the repository. The instruction's range was speculative."
+  },
+  {
+   "item": "K-ITEM-P1-LSA-LOWERING-SPEED",
+   "disposition": "CLOSED_IN_PASS_2",
+   "detail": "The adopting resolution MSC.554(108) was retrieved and read. PASS1_SOURCE_CUSTODY_PRIORITY recorded acquisition_alone_closes_issue=true for this item, and that was correct. SRC-LSA-CODE remains only PARTIALLY acquired: the adopting resolution is held, the consolidated LSA Code text is not, so the other 50 LSA-dependent sites across 11 files are unaffected and still unverified."
+  },
+  {
+   "item": "K-ITEM-P1-IACS-MEMBERSHIP",
+   "disposition": "CLOSED_IN_PASS_2",
+   "detail": "Discharged for QB4_E#q12 on internal contradiction plus corroboration. SRC-IACS-MEMBERSHIP is NOT acquired into governed custody - iacs.org.uk refused this session - so the 571 IACS-dependent sites across 60 files that the custody register counts remain unverified. Closing the finding is not the same as acquiring the source."
+  },
+  {
+   "item": "K-ITEM-P1-MSC255 (Casualty Investigation Code)",
+   "blocks": ["QB1_A#q24", "QB1_B#q15"],
+   "disposition": "SOURCE_GAP",
+   "detail": "Unchanged from Pass 1. Not attempted: both blocked cards are outside the six declared families, and section 3 confines this pass to the named queue. The custody register's note stands - a package is reported to exist in the git-ignored Knowledge Central corpus, and an index row saying so is a pointer, not evidence."
+  },
+  {
+   "item": "SRC-DGMA-ORDER-01-2026, SRC-IRS-RULES, SRC-MLC-2006, SRC-NOX-TECHNICAL-CODE-2008, SRC-ISO-IDENTITY, SRC-SOLAS-CONSOLIDATED-2024",
+   "disposition": "SOURCE_GAP",
+   "detail": "Unchanged from Pass 1, none attempted. None of them blocks a card in the six declared families. MLC 2006 Regulation 1.4 was verified for QB5_A#q4 without acquiring the convention into custody, which closes that one finding and leaves the other 268 MLC-dependent sites untouched."
+  },
+  {
+   "item": "Second-generation structural residue",
+   "instruction_ref": "H, and section 12",
+   "disposition": "DEFERRED",
+   "scope_closed": "Only the residue sitting inside the six cards this pass opened for P1 content was repaired: the authoring scaffold and trailing rule in QB4_E#q12, the markdown bold and backslash-escape artefacts in QB4_C#q5, the lost list numbers in QB5_A#q4, and the unescaped '<' in QB10_B#q1.",
+   "census_of_what_remains": {
+    "p_hash_headings": "QB5_C_B.html 26 sites, QB9_D.html 71 sites",
+    "fence_artefacts": "QB1_B.html 4, QB3_H.html 2, QB6_D.html 2, QB7_D.html 20, QB8_C.html 2, QB9_C.html 2, QB9_D.html 4",
+    "trailing_rules": "QB7_E.html:563 - one site; the QB4_E site is closed",
+    "label_stutter_NEW_CLASS": "QB5_A.html 17 sites, QB5_B.html 14 sites - '<h5>On My Vessel (Maersk A/S)</h5><p>(Maersk A/S):</p>'. Cosmetic, loses no content, and NOT one of the classes section 12 enumerates. Reported as a new P3 class, not swept."
+   },
+   "why_deferred": "Section 4 forbids low-value formatting work delaying P1 factual corrections, and clearing this residue would open roughly a dozen cards outside the declared families, each of which would then have to be declared, gated and mutated. It is a bounded, fully enumerated batch of its own."
+  },
+  {
+   "item": "Unescaped '<' before a numeral - NEW P1 CLASS",
+   "disposition": "DEFERRED",
+   "severity": "P1",
+   "detail": "Found while correcting QB10_B#q1 and recorded as known_traps 126. A raw '<' followed by a digit makes a browser discard everything up to the next '>', so the source bytes stay complete and the rendered teaching is gone. Every source-side check in the repository is blind to it. The QB10_B site was deleting about 150 characters including two entry-into-force dates.",
+   "sites_remaining": [
+    "meoclass1/QB2_A.html:2794 - '<0.01%'",
+    "meoclass1/QB2_A.html:3077 - '<0.5 m'",
+    "meoclass1/QB2_F.html:320 - '<30 m'",
+    "meoclass1/QB5_I.html:122 - '<75 dB(A)'",
+    "meoclass1/QB6_D.html:457 - '<130 RPM'"
+   ],
+   "why_deferred": "Section 15 requires a NEW defect class to be reported rather than expanded into a discovery tranche, and all five sites are outside the six declared families. The fix is mechanical ('<' to '&lt;') and needs no adjudication, so this is a short authorised batch rather than an investigation. It is named as remaining P1 debt in the Pass-2 report because it is candidate-facing content loss on regulatory and technical thresholds.",
+   "not_a_defect": "Occurrences inside <script> blocks - loop conditions such as 'r<10' and 'c<4' in QB1_A, QB1_A_CheatSheet, QB1_supplementary, QB2_A, QB2_A_CheatSheet, QB3_A and QB3_A_CheatSheet - are harmless and excluded."
+  },
+  {
+   "item": "QB10_B#q1 propositions not verified this pass",
+   "disposition": "DEFERRED",
+   "severity": "P2",
+   "detail": "Declared open in CORR-PASS2-AMENDMENT-OVERVIEW-20260907 rather than left to look verified. MSC.595(111) and the MASS Code's 1 Jul 2026 voluntary status; the STCW-F entry, which says the Convention 'entered force 1 Jan 2026' where the 1995 Convention has been in force since 2012 and it is likely the amendments that are meant; the Polar Code non-SOLAS extension and its 1 Jan 2027 retroactivity; MEPC.392(82); the LRIT approved-in-principle status; the MSC 112 expectations, which are future events; and the Bulk Jupiter causal attribution for the electronic inclinometer requirement, which also names the ship as 'Jupiter'. This card needs a dedicated proposition-by-proposition pass."
+  },
+  {
+   "item": "QB8_A#q3 reg-box filler",
+   "disposition": "OUT_OF_SCOPE",
+   "detail": "'ISM Code Section 7' and 'ISO 50001 Standards' are weak fits for a freight-rate question. Neither is false. Removing a true-but-irrelevant reference is an editorial decision, not a defect closure, and section 4 forbids it delaying P1 work."
+  },
+  {
+   "item": "Lane-B files",
+   "disposition": "OUT_OF_SCOPE",
+   "detail": "docs/study/assurance/**, tools/study/**, meoclass1/study.html and F:/MIW-Study-Assurance were neither read nor modified. No merge, cherry-pick, worktree maintenance, gc, prune, repack or commit-graph repair was performed - the pre-existing 'unable to find all commit-graph files' warning is untouched."
+  }
+ ],
+ "corpus_state": {
+  "questions": 761,
+  "files": 86,
+  "unchanged_from": "05b49d8",
+  "cards_moved": 6,
+  "undeclared_cards_moved": 0,
+  "method": "canonical card digests recomputed over all 224 tracked HTML pages under meoclass1/ at 05b49d8 and at HEAD, and compared anchor by anchor"
+ },
+ "not_done_deliberately": [
+  "hub Last Updated NOT advanced - still 2 Sep 2026",
+  "no Excel regeneration",
+  "no push, no deploy, no release announcement",
+  "no D01-S03 audit work",
+  "no Pass 1.5 guard redesign",
+  "no discovery tranche - no card was sampled looking for new defect classes"
+ ]
+}
