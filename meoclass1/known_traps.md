@@ -3220,3 +3220,142 @@ back to a plain pin comparison and fails.
 **Ten claims later, every chain resolved.** The lesson is not "add a claim"; it is that a
 correction system needs a way for a record to be *superseded without being falsified*, and
 if you find yourself editing a predecessor's pins, you have skipped it.
+
+### 120. IACS has twelve Members, and the one that goes missing is the Korean Register
+
+`QB4_E#q12` — the card whose entire job is to list the members — taught **eleven** in its
+15-second answer, its 60-second answer and its CE tip, and hedged "11 or 12 members
+depending on the inclusion of the newest member, Türk Loydu". Its own detail list
+immediately below already carried **twelve**, including **KR**. The card contradicted
+itself on its single load-bearing fact, and the 60-second list — the one a candidate
+recites — was the layer that had dropped KR.
+
+The membership is: ABS, BV, CCS, CRS, DNV, IRClass, **KR**, LR, ClassNK, PRS, RINA, TL.
+Türk Loydu was admitted 1 November 2023 as the twelfth; RMRS was terminated in March 2022.
+
+**A hedge is not caution when the fact is settled.** "11 or 12 depending on" reads as
+scholarly care and is simply a wrong answer with a hedge attached — and the hedge told a
+candidate to expect ambiguity where an examiner expects a number. The tell that this was
+a defect rather than a genuinely open question was inside the card: a list of twelve
+sitting under a sentence saying eleven.
+
+### 121. UR Z15 is Mobile Offshore Drilling Units. Suspension and withdrawal of class is PR1C
+
+`QB4_C#q5` cited **IACS UR Z15** as the instrument that "outlines standardized
+international procedures for class suspension and withdrawal", in its Regulatory
+References box and again in Numbers & Regs. UR Z15 is *Hull, Structure, Equipment and
+Machinery Surveys of Mobile Offshore Drilling Units*. It has nothing to do with the
+subject.
+
+The instrument is **PR1C**, *Procedure for Suspension and Reinstatement or Withdrawal of
+Class in Case of Surveys or Conditions of Class Going Overdue*.
+
+**A citation in the right register is the hardest kind of wrong to see.** "IACS UR Z15"
+has the right issuer, the right series and the right shape, so every reader who was
+checking that a citation *existed* passed it. Only a reader who opened it would find it
+was about drilling units. An existence check cannot catch this class; only reading the
+cited text can. (Compare #114 — a real instrument cited for the wrong proposition.)
+
+### 122. MSC.554(108) did not abolish S = 0.4 + 0.02H
+
+`QB10_B#q1` taught "1.0–1.3 m/s: new lifeboat lowering speed range (replacing the old
+H-dependent formula)" in a formula block and again in Numbers to Memorise, and this was
+carried as a P1 source gap through Pass 1 because a *replacement* claim cannot be
+adjudicated from the number alone.
+
+The primary text settles it. LSA Code **6.1.2.8**, as replaced by MSC.554(108): the
+lowering speed "shall not be less than that obtained from the formula: **S = 0.4 + 0.02H,
+or 1.0, whichever is less**". **6.1.2.10**: the maximum "shall be 1.3 m/s", and the
+Administration may accept another. In force 1 January 2026 for appliances installed on or
+after that date.
+
+So both numbers in the card are real, and the proposition joining them is false: 1.0 m/s
+is a **ceiling on the formula-derived minimum**, not a replacement for the formula, and
+1.3 m/s is a default maximum the Administration can vary.
+
+**Two true numbers do not make the sentence between them true.** The figures survived
+every numeric check because they are the figures in the instrument. What was wrong was
+the verb.
+
+### 123. SOLAS III/33.2 was narrowed to davit-launched lifeboats, not removed
+
+`QB10_B#q1` listed under the 1 January 2024 tranche: "SOLAS III/33 removed the 5-knot
+headway test-launch requirement for ships ≥20,000 GT."
+
+**MSC.482(103)** (adopted 13 May 2021, in force 1 January 2024) replaced III/33.2 with:
+"On cargo ships of 20,000 gross tonnage and upwards, **davit-launched** lifeboats shall be
+capable of being launched, utilizing painters where necessary, with the ship making
+headway at speeds up to 5 knots in calm water."
+
+The requirement was not removed. It was confined to davit-launched lifeboats, which is
+what releases free-fall lifeboats from it — and it dropped "ships" for "cargo ships". A
+candidate reading the card would tell an examiner that a davit-launched boat on a
+25,000 GT bulker no longer needs the capability. It does.
+
+**An exemption written as an abolition is a bigger error than the one it corrects.** The
+card was right that something changed and right about the date; it inverted which
+population kept the rule.
+
+### 124. The container alliances changed in February 2025, and 2M is gone
+
+`QB8_A#q3` offered "2M, Ocean Alliance" and "the Ocean Alliance or THE Alliance" as
+current examples of a liner consortium. The 2M vessel-sharing agreement between Maersk and
+MSC ended in January 2025; MSC now operates standalone. Hapag-Lloyd left THE Alliance in
+February 2025 to form **Gemini Cooperation** with Maersk, and the remainder — ONE, HMM,
+Yang Ming — rebranded as **Premier Alliance**. Ocean Alliance (CMA CGM, COSCO, Evergreen,
+OOCL) is the only pre-2025 grouping still intact.
+
+The same card called Regulation 906/2009 the "historical" block exemption without saying
+what happened to it: the **Consortia Block Exemption Regulation expired on 25 April 2024**
+and was not renewed.
+
+**A commercial-currentness card decays on a schedule nothing in the repository tracks.**
+Regulatory cards have resolution numbers and entry-into-force dates that a detector can
+compare against. An alliance roster has neither — it simply stops being true one Tuesday,
+and it reads exactly as authoritative the day after. Cards of this class need a stated
+as-at date and a re-verification trigger, not a currentness regex.
+
+### 125. MLC Regulation 1.4 is Recruitment and placement, not fair treatment
+
+`QB5_A#q4` mapped Maslow's esteem level to "MLC Reg. 1.4 (Recruitment / Fair Treatment)"
+in its Regulatory Hook column. MLC Reg. 1.4 is **Recruitment and placement** — the
+regulation of manning agents. Fair treatment is not its subject, and recognition,
+appraisal and promotion prospects have no MLC hook at all: they are management practice.
+
+This is the third occasion a fair-treatment proposition has been attached to an MLC
+regulation that does not carry it (see #38, the fabricated "Regulation 5.2.7", and #41,
+Reg. 2.7).
+
+**A management-theory card is where legal attributions go unchecked.** Nobody expects a
+Maslow answer to contain a false citation, so the regulatory-hook column of a soft-skills
+table is read as decoration rather than as a claim. It is a claim, and a candidate will
+recite it.
+
+### 126. An unescaped `<` before a numeral silently deletes rendered teaching
+
+`QB10_B#q1` contained `(e.g. <150 GT, fishing vessels)`. A browser reads `<150 GT,` as the
+start of a tag and discards everything up to the next `>` — here, about 150 characters,
+including *both* entry-into-force dates for the 2028 pilot transfer arrangements. The
+markup was intact, the file was well-formed enough to render, the card count was right,
+and the teaching was gone from the page.
+
+This defect is invisible to every check the repository runs against the source bytes,
+because the source bytes are complete. It is only visible in the *rendered* text.
+
+A census of `<` immediately followed by a digit found six candidate-facing sites in five
+files, plus harmless occurrences inside `<script>` loop conditions:
+
+| File | What is being eaten |
+|---|---|
+| `QB10_B.html` | `<150 GT` — fixed in this pass |
+| `QB2_A.html` | `<0.01%` and `<0.5 m³/t` |
+| `QB2_F.html` | `<30 m` |
+| `QB5_I.html` | `<75 dB(A)` |
+| `QB6_D.html` | `<130 RPM` |
+
+**Every one of these is a regulatory or technical threshold** — the exact content class
+where silent deletion is most damaging, because "less than" is where the numbers live.
+Compare with the extraction convention used throughout the toolchain, which strips tags
+from the source and therefore *sees* the text a browser throws away: a source-side
+extractor and a browser disagree about this file, and the browser is the one the candidate
+uses.
