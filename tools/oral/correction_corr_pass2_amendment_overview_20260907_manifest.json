@@ -1,0 +1,56 @@
+{
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "date": "2026-09-07",
+ "baseline_commit": "05b49d8",
+ "authorisation_source": "MIW PASS 2 RESUMPTION - KNOWN-DEFECT REMEDIATION instruction of 7 September 2026, sections 3-16. The instruction is explicitly NOT a discovery tranche: it authorises work only on already-known unresolved P1/P2 content defects, previously identified source-blocked items, bounded same-defect propagation, and already-classified structural residue. The unresolved queue was reconstructed from repository governance - meoclass1/oral-intelligence/examiner-audit/PASS1_P1_DISPOSITION_REGISTER.json and the two D01 remediation handoffs - and not from the instruction's own list, which the instruction requires and which turned out to matter: the register and the cards disagreed with the instruction on three items.",
+ "governing_commits": [
+  "78d703c"
+ ],
+ "origin": "pass2_known_defect_remediation",
+ "correction_id": "CORR-PASS2-AMENDMENT-OVERVIEW-20260907",
+ "title": "QB10_B q1 - K-ITEM-P1-LSA-LOWERING-SPEED closed against MSC.554(108), which does not replace the formula; and the free-fall row, suspected of being fabricated, turns out to be real but inverted.",
+ "candidate_claim": "Not a candidate report. Carried from PASS1_P1_DISPOSITION_REGISTER as REQUIRES_SOURCE_ACQUISITION, blocker K-ITEM-P1-LSA-LOWERING-SPEED, which recorded that a REPLACEMENT claim cannot be adjudicated from the number alone and that guessing a figure would repeat the defect class Pass 1 existed to close. That reasoning was right, and the acquisition it asked for is what closed the item.",
+ "candidate_verdict": "UPHELD on the lowering speed. PARTLY_CORRECT, and corrected in the opposite direction, on the free-fall row: the Pass-2 instruction characterised it as a 'false free-fall / 5-knot / 20,000-GT proposition'. It is not false. MSC.482(103) really did change SOLAS III/33.2 with effect from 1 January 2024, and the card was right about the date. What it got wrong was the direction - the requirement was narrowed to davit-launched lifeboats, not removed - and the population, which is cargo ships rather than ships. Deleting the row as fabricated, which is what the instruction's framing invited, would have removed a true amendment from a currency card.",
+ "authority": "PRIMARY - three IMO resolutions retrieved from the IMO document server and read in full this pass. MSC.554(108), 'Amendments to the International Life-Saving Appliance (LSA) Code', adopted 23 May 2024, in force 1 January 2026, applying to life-saving appliances installed on or after that date. Paragraph 6.1.2.8 is replaced: 'The speed at which the fully loaded survival craft or rescue boat is lowered to the water shall not be less than that obtained from the formula: S = 0.4 + 0.02H, or 1.0, whichever is less', with S the lowering speed in m/s and H the height from davit head to the waterline at the lightest sea-going condition. Paragraph 6.1.2.10 is replaced: 'The maximum lowering speed of a fully loaded survival craft or rescue boat shall be 1.3 m/s. The Administration may accept a maximum lowering speed other than 1.3 m/s, having regard to the design of the survival craft or rescue boat, the protection of its occupants from excessive forces, and the strength of the launching arrangements taking into account inertia forces during an emergency stop.' The formula therefore survives; 1.0 m/s caps the formula-derived minimum. MSC.482(103), adopted 13 May 2021, in force 1 January 2024. Paragraph 33.2 is replaced by: 'On cargo ships of 20,000 gross tonnage and upwards, davit-launched lifeboats shall be capable of being launched, utilizing painters where necessary, with the ship making headway at speeds up to 5 knots in calm water.' The same resolution adds SOLAS II-1/25-1, the water level detectors the card already lists in the same tranche. MSC.559(108), adopted 23 May 2024, in force 1 January 2026: 'Amendments to the Requirements for maintenance, thorough examination, operational testing, overhaul and repair of lifeboats and rescue boats, launching appliances and release gear (resolution MSC.402(96))', made - in its own recitals - 'taking into account the amendments to the LSA Code adopted by resolution MSC.535(107), with respect to ventilation means' and 'recognizing the need to keep the Requirements up to date with regard to annual thorough examination and operational testing of ventilation systems'. So MSC.559(108) is the TESTING regime and MSC.535(107) is the ventilation requirement it serves; the card had the former standing for both, and MSC.535(107) - which known_traps 42 governs - appeared nowhere on the card.",
+ "propagation": {
+  "same_defect_swept": "The corpus was searched for '0.4 + 0.02', '1.3 m/s', 'lowering speed', 'free-fall' with '5 knot', and 'III/33'. QB10_B q1 is the only site making the replacement claim or the removal claim.",
+  "checked_clean": "known_traps 46 records that the rescue boat's 5-knot figure belongs to launching rather than recovery. That is a different 5-knot provision from SOLAS III/33.2 and is not disturbed here.",
+  "not_corrected_quarantined": "NOTHING is left quarantined in this card: the instruction permitted a partial correction with the uncertain claims fenced off, and that fallback was not needed for the propositions this record touches, because every one of them was settled from primary text. Propositions NOT touched are listed below and are unverified rather than quarantined - they carry no correction and no assurance.",
+  "not_verified_reported": "The following load-bearing propositions in this card were NOT verified this pass and are declared open: the MSC.595(111) MASS Code adoption and its 1 Jul 2026 voluntary status; the STCW-F entry, which says the Convention 'entered force 1 Jan 2026' where the 1995 Convention has been in force since 2012 and it is the amendments that are likely meant; the Polar Code non-SOLAS extension and its 1 Jan 2027 retroactivity; MEPC.392(82); the LRIT approved-in-principle status; the MSC 112 expectations, which are future events; and the Bulk Jupiter causal attribution for the inclinometer requirement, which also names the ship as 'Jupiter'. This card needs a dedicated proposition-by-proposition pass; six families is what this batch could verify to primary standard.",
+  "derived_surfaces": "NONE. corpus 761 / 86 unchanged.",
+  "hub_date": "NOT ADVANCED."
+ },
+ "invariants": [
+  "The 1 Jan 2026 tranche content corrected by CORR-G1-010 - the ro-ro package attributed to MSC.550(108) rather than MSC.532(107) - is byte-identical.",
+  "The MSC.520(106) versus MSC.521(106) discrimination the card teaches is unchanged.",
+  "The four-year SOLAS cycle framing, and the warning not to conflate it with MARPOL Annex VI's own timeline, are unchanged.",
+  "No entry-into-force date is altered anywhere in the card; the only date work done is the RESTORATION of two 2028/2029 dates that the unescaped '<' was deleting from the rendered page.",
+  "The MSC.552(108) grain reg-box entry, which a prior record pins, is byte-identical - the new MSC.482(103) entry was anchored on the MSC.559 item being replaced rather than by inserting before MSC.552, precisely so that pin could not move."
+ ],
+ "known_traps_entries": [
+  42,
+  46,
+  122,
+  123,
+  126
+ ],
+ "cards": [
+  {
+   "correction_action_id": "P2-AMEND-01",
+   "file": "QB10_B.html",
+   "path": "meoclass1/QB10_B.html",
+   "anchor": "q1",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "3ecca484502640a396cc33c947649b27544b98fbc10ee6f99b4938c9ebbfd976",
+   "post_edit_digest": "c0398833fc606d3c933b5ab24be128723315a7bf347b2fb917654bd58ef94d83",
+   "what_changed": "Formula block: 'Lifeboat lowering speed (post-2026): min 1.0 m/s, max 1.3 m/s - replaces the old S = 0.4 + 0.02H formula' replaced by the amended LSA Code text with its resolution, its applicability, and an explicit statement that the formula is not abolished. Numbers to Memorise: the same '1.0-1.3 m/s ... (replacing the old H-dependent formula)' entry replaced on the same basis. 1 January 2024 tranche: the free-fall row's 'SOLAS III/33 removed the 5-knot headway test-launch requirement for ships >=20,000 GT' replaced by the actual amended text of III/33.2, its resolution, and the narrowed-not-abolished framing; the invented rationale ('studies showed the test added no meaningful data on dynamic loads at that speed') removed. 1 January 2028 tranche: an unescaped '<' in '(e.g. <150 GT, fishing vessels)' escaped to '&lt;' - a browser was reading it as a tag open and discarding roughly 150 characters of rendered teaching, including the 1 Jan 2028 and 1 Jan 2029 compliance dates that follow it. Regulatory References: the 'MSC.559(108) / MSC.560(108) - Lifeboat ventilation testing regime' entry rebuilt to separate four instruments candidates conflate, and a new MSC.482(103) entry added for the 2024 tranche, which had no reference at all. Trap Warning: the self-dating 'it is now mid-2026' replaced by the instrument date.",
+   "supersedes": {
+    "manifest": "correction_corr_g1_010_roro_attribution_20260825_manifest.json",
+    "action_id": "CORR-G1-010-02",
+    "post_edit_digest": "3ecca484502640a396cc33c947649b27544b98fbc10ee6f99b4938c9ebbfd976",
+    "note": "The predecessor record stays exactly as published. This correction is a later authorised state descending from that pin, not a rebaseline."
+   }
+  }
+ ]
+}

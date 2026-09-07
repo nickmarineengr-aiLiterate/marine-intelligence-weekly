@@ -1,0 +1,49 @@
+{
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "date": "2026-09-07",
+ "baseline_commit": "05b49d8",
+ "authorisation_source": "MIW PASS 2 RESUMPTION - KNOWN-DEFECT REMEDIATION instruction of 7 September 2026, sections 3-16. The instruction is explicitly NOT a discovery tranche: it authorises work only on already-known unresolved P1/P2 content defects, previously identified source-blocked items, bounded same-defect propagation, and already-classified structural residue. The unresolved queue was reconstructed from repository governance - meoclass1/oral-intelligence/examiner-audit/PASS1_P1_DISPOSITION_REGISTER.json and the two D01 remediation handoffs - and not from the instruction's own list, which the instruction requires and which turned out to matter: the register and the cards disagreed with the instruction on three items.",
+ "governing_commits": [
+  "78d703c"
+ ],
+ "origin": "pass2_known_defect_remediation",
+ "correction_id": "CORR-PASS2-IACS-MEMBERS-20260907",
+ "title": "QB4_E q12 - the card whose job is to list the IACS members taught eleven in three candidate-facing layers, above its own list of twelve, having dropped KR.",
+ "candidate_claim": "Not a candidate report. Carried from PASS1_P1_DISPOSITION_REGISTER as REQUIRES_EXTERNAL_VERIFICATION, blocker K-ITEM-P1-IACS-MEMBERSHIP.",
+ "candidate_verdict": "UPHELD. The blocker is discharged, and the decisive evidence was internal: the card's own detail list already carried all twelve including KR, so the card contradicted itself and no external source was needed to establish that at least one of its two answers was wrong.",
+ "authority": "PRIMARY-INTENDED, DEGRADED TO CORROBORATED - recorded honestly. iacs.org.uk returned HTTP 403 to this session on both the membership page and the site root, so the issuer's own page could not be read and this entry is ACCESS_LIMITED on the primary. The figure of twelve rests on three independent legs that agree: (1) the card's own detail list, authored earlier and never corrected, enumerating all twelve including KR; (2) the Founder-recorded prior verification carried in the Pass-2 instruction, which names the same twelve; (3) a public sweep this pass returning the same twelve, with Turk Loydu admitted 1 November 2023 as the twelfth and RMRS terminated 11 March 2022. Membership: ABS, BV, CCS, CRS, DNV, IRClass, KR, LR, ClassNK, PRS, RINA, TL. KR has been a member since long before any of the disputed events and is not itself in question - the defect was an omission from one list, not a contested admission.",
+ "propagation": {
+  "same_defect_swept": "The corpus was searched for '11 members', '11 full member', 'eleven members' and 'IACS now has'. QB4_E q12 is the only site. No other card states an IACS membership count.",
+  "checked_clean": "The RMRS 'expelled' wording elsewhere in the same card carries the correct March 2022 date and no count, and was left alone - it is a terminology preference, not a false proposition.",
+  "derived_surfaces": "NONE. corpus 761 / 86 unchanged.",
+  "hub_date": "NOT ADVANCED."
+ },
+ "invariants": [
+  "The UR Z7 / UR Z10-series distinction corrected on 5 Sep 2026 is untouched and still reads Z7 = hull classification surveys.",
+  "The Role of IACS, IACS vs RO, and UR/UI sections are byte-identical.",
+  "The detail list of twelve societies is byte-identical apart from the TL line's admission date - it was already correct and was NOT rewritten to match the corrected summary, because it was the summary that was wrong.",
+  "No claim is made about which society is 'newest' beyond TL's dated admission."
+ ],
+ "known_traps_entries": [
+  120
+ ],
+ "cards": [
+  {
+   "correction_action_id": "P2-IACS-01",
+   "file": "QB4_E.html",
+   "path": "meoclass1/QB4_E.html",
+   "anchor": "q12",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "68fbdbfda51fe72bbfbe7f0ef8344d7b5ca699d1d12b4f1eec9dc2923e8c8a1b",
+   "post_edit_digest": "151ff4b5404be90d8753a7f55705ea2addf2395a888ddd04399361c9bde2499a",
+   "what_changed": "15-second answer: 'currently consists of 11 full member societies' and the hedge 'IACS now has 11 or 12 members depending on the inclusion of the newest member, Turk Loydu' replaced by a flat statement of twelve with the full abbreviation list and the two membership events dated. 60-second answer: the member list read 'As of 2026, the members are' and enumerated ELEVEN, omitting the Korean Register; KR restored and the count stated. Detail list: 'Turk Loydu (Turkey - admitted recently)' dated to 1 November 2023 and identified as the twelfth. CE Oral Tip: the model answer told the candidate to say 'bringing the list to 11 current members'; replaced, and the tip now names KR as the member candidates drop. Structural: a live authoring scaffold ('Below are Q13-Q15 drafted in the exact required chat-ready format, using quote blocks and collapsible sections') and its preceding horizontal rule were removed from the end of the CE tip - the only two-line scaffold block left in this file.",
+   "supersedes": {
+    "manifest": "correction_corr_pre_t4_z7esp_20260905_manifest.json",
+    "action_id": "CORR-PRE-T4-Z7ESP-02",
+    "post_edit_digest": "68fbdbfda51fe72bbfbe7f0ef8344d7b5ca699d1d12b4f1eec9dc2923e8c8a1b",
+    "note": "The predecessor record stays exactly as published. This correction is a later authorised state descending from that pin, not a rebaseline."
+   }
+  }
+ ]
+}
