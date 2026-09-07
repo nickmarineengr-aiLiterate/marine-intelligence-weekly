@@ -3435,3 +3435,49 @@ corrected. One proposition, two cards, and each held a different half of it wron
 propagation record whose gate cannot see a contradiction it created cannot certify the
 propagation — and until this check existed, none of the six Pass-2 checks compared a card
 to anything outside itself.
+
+### 128. A sweep-completeness claim is a claim, and nothing in the pipeline was checking it
+
+`CORR-PASS2-PR1C-SUSPENSION` recorded, under `propagation.same_defect_swept`:
+
+> The corpus was searched for 'void insurance', 'voiding insurance', 'insurance is void',
+> 'all statutory certificates', 'automatically become invalid' and 'UR Z15'. Beyond
+> QB4_C q5 the only remaining hits are the already-corrected QB1_K q2, and past-paper
+> examiner wording.
+
+A second independent review ran that exact search. It returns **`QB4_A#q9`** — a teaching
+card, not examiner wording — carrying all three of the propositions the record exists to
+correct, across **eight** candidate-facing layers:
+
+> "all statutory certificates issued by the RO on behalf of the Flag State become
+> **simultaneously invalid** … **P&I cover typically falls away**, and the Flag State is
+> notified by the RO under **IACS UR Z23**"
+
+and, for a Condition of Class, "failure to meet the due date **results in** Suspension of
+Class" — the automatic limb, which PR1C A.2.1 gives as a suspension *procedure*. UR Z23 is
+**Hull Survey for New Construction**, so the citation defect of trap 121 was live in a
+second card at the same time.
+
+**The content defect was outside the declared card set. The false claim was inside an
+AUTHORISED record.** Every gate passed: `validate_corrections.py` checks that declared
+cards exist, that digests match and that no *undeclared* card changed — it has no way to
+ask whether a record's account of what it searched is true. The Pass-2 content gate is
+scoped to the seven declared cards, so it could not see an eighth. The claim was load-
+bearing: it is the sentence that says the family is closed.
+
+**Three rules.**
+
+*A propagation record must name its search terms AND its hits, not its conclusion.* "The
+only remaining hits are X" is unfalsifiable in review unless the reader re-runs the search.
+Listing the terms invited exactly that, and it is the only reason this was found.
+
+*"Past-paper examiner wording" is the sweep's most dangerous bucket.* It is where a hit
+goes when it is quoted rather than taught, and it is the bucket a tired author reaches for
+to explain a hit they have not opened. The correct discipline is the one trap 94's sibling
+rule already states for index rows: open the artefact.
+
+*The eight sites were found by the GATE, not by the author.* Writing card-scoped content
+checks first and then running them found two layers — a trap answer and a "Common CE
+Failures" bullet — that the correcting script had missed, in a card the author had just
+read end to end. The gate is a better reader of a card than its corrector is, which is an
+argument for writing the gate before finishing the edit rather than after.
