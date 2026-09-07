@@ -3532,3 +3532,52 @@ sweep's first `anchor_for` located the first occurrence of the match's *first wo
 reported `QB1_G`'s hit as `q24` when it is in `q36`. The gate check written against `q24`
 passed, and its mutation escaped — a check pointed at the wrong card is indistinguishable
 from a check that works.
+
+### 130. Correcting an attribution is not the same as correcting the claim — and I overshot
+
+Six cards taught that suspension of class "voids insurance". Rounds 1–3 of this batch found
+that IACS **PR1C contains no insurance provision at all** — a full-text search of Rev.6 and
+Rev.7 returns zero hits for `insur`, `warrant` and `P&I` — and replaced the claim with:
+
+> our class warranty is breached, so **cover may be prejudiced** … PR1C contains no
+> insurance provision, and cover is **not automatically void**.
+
+The first half is right and the second half is wrong. A fourth independent review found the
+answer sitting three paragraphs above one of the edits, in `QB1_F#q7`'s own section 4, which
+the record had cited as "already correct" and then contradicted:
+
+> **Institute Time Clauses – Hulls (1/11/95), cl. 4.2** — the insurance *"terminates
+> automatically"* on change of Classification Society, or change, suspension,
+> discontinuance, withdrawal or expiry of her Class; deferred until arrival at her next port
+> if the vessel is at sea; and disapplied where the class event resulted from insured damage
+> and the Society approves sailing.
+
+So on standard hull terms cover **does** end automatically. The corrected cards were teaching
+candidates that it survives — a worse error than the crude one they replaced, because it is
+confidently worded and it would be marked wrong.
+
+**The mistake was to treat "PR1C does not say this" as if it settled "this is not so."**
+PR1C is a *procedural requirement addressed to classification societies*. It has nothing to
+say about insurance because insurance is not its subject — not because the consequence does
+not exist. The instrument that governs the consequence is the **policy**, and the policy says
+the opposite of what the correction said.
+
+**The accurate teaching, and the shape to reuse:** name the right instrument for each limb.
+Statutory certificates → PR1C B.1.3, *certain* certificates implicitly invalidated. Hull
+cover → ITC-Hulls cl. 4.2, automatic termination with its two qualifications. P&I → club
+rules, class as a condition of entry. The original cards collapsed all three into "class is
+suspended, everything falls"; the over-correction collapsed them into "nothing falls
+automatically". Both are one-instrument answers to a three-instrument question.
+
+**Two process notes.**
+
+*A silence is evidence about the instrument, not about the world.* "Source X does not
+mention Y" is a sound reason to stop citing X for Y. It is never a reason to assert not-Y.
+Every card in this batch that said "PR1C contains no insurance provision" was correct to say
+so, and four of them then drew a conclusion the sentence does not support.
+
+*The corpus already knew.* `QB1_F#q7` section 4 and `oralnotes/miw-notes-mgmt-p21` both had
+ITC-Hulls right the whole time, and the batch's own sweep flagged the notes line as a
+suspected defect. When a sweep flags something that turns out to be *more* correct than the
+correction, that is the signal to re-open the correction, not to adjudicate the sweep hit
+away.
