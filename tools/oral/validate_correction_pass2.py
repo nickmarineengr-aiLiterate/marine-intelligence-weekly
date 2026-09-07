@@ -134,14 +134,26 @@ _DENIAL = re.compile(
     r"contains no\b|says nothing\b|nothing whatever\b|"
     r"do(?:es)? not\b|did not\b|is not\b|are not\b|was not\b|"
     r"\bnever\b|rather than\b|instead of\b|to hedge over\b|"
-    r"deliberately says\b|not merely\b)",
+    r"deliberately says\b|not merely\b|"
+    r"not\s+(?:UR|PR|MSC|IACS|A\.)|which is Hull|is Deleted\b)",
     re.I)
 
 #: Bare negation particles. These are NOT evidence on their own -- "Make no
 #: mistake, sir, every statutory certificate is invalidated" contains "no" and
 #: asserts the defect. They count only when they immediately precede the match,
 #: which is the position from which they can actually govern it.
-_BARE_NEGATION = re.compile(r"(?:\bno\b|\bnot\b|\bnothing\b)[^.]{0,10}$", re.I)
+_BARE_NEGATION = re.compile(r"(?:\bno\b|\bnothing\b)\s+\S+\s*$", re.I)
+
+
+#: Clause boundaries. A denial in the previous clause did not survive into this
+#: one -- "PR1C is not an insurance document, YET our cover falls away" is an
+#: assertion, and the first draft read it as a denial.
+_CLAUSE_BREAK = re.compile(r"[.;:?!]\s|\s[\u2014\u2013-]\s|,\s(?:yet|but|and|so|or|nor|"
+                           r"however|although|though|while|whereas|then|thus)\s", re.I)
+
+#: The explicit contrast form: say X, NOT Y. Only this shape lets a negation
+#: INSIDE the match disarm it -- a parenthetical "whether or not" must not.
+_CONTRAST = re.compile(r"[,\u201d\"']\s*not\s(?!or\b)", re.I)
 
 
 def asserts(text: str, pattern: str, window: int = 130):
@@ -159,28 +171,41 @@ def asserts(text: str, pattern: str, window: int = 130):
         # be prejudiced", NOT "insurance is void" -- where the negation follows
         # the words rather than preceding them. A claim that contains its own
         # negation is a contrast, not an assertion.
-        prefix = text[max(0, m.start() - window):m.start()]
-        # Negation scopes to its own SENTENCE. An unrelated "is not a Member."
-        # one sentence earlier must not disarm a fresh assertion, so clip the
-        # prefix at the last sentence break.
-        cut = max(prefix.rfind(". "), prefix.rfind("; "), prefix.rfind("? "))
-        if cut >= 0:
-            prefix = prefix[cut + 2:]
-        # A real denial construction anywhere in the sentence, a bare negation
-        # particle only if it is adjacent, or a negation inside the match
-        # itself (the "say X, not Y" contrast form).
-        if _DENIAL.search(prefix) or _BARE_NEGATION.search(prefix):
+        # ONE rule, replacing three that each leaked. Take the prefix AND the
+        # matched span together, clip at the last clause break anywhere in that
+        # context, and ask whether a denial survives into the final clause.
+        #
+        # A denial governs the clause it is in and no further:
+        #   "PR1C is not an insurance document, YET our cover falls away"
+        #       -> clipped at ", yet"; final clause has no denial; CAUGHT
+        #   "PR1C contains no insurance provision, AND there is no universal
+        #    rule that cover becomes void"
+        #       -> clipped at ", and"; "there is no" survives; disarmed
+        #   "DO NOT FORGET: all statutory certificates become invalid"
+        #       -> clipped at ":"; final clause has no denial; CAUGHT
+        #   "our cover, whether or NOT the club agrees, lapses outright"
+        #       -> "or not" is neither a denial construction nor adjacent;
+        #          CAUGHT
+        context = text[max(0, m.start() - window):m.end()]
+        breaks = list(_CLAUSE_BREAK.finditer(context))
+        if breaks:
+            context = context[breaks[-1].end():]
+        if (_DENIAL.search(context) or _BARE_NEGATION.search(context)
+                or _CONTRAST.search(context)):
             continue
-        if _DENIAL.search(m.group(0)) or re.search(r"\bnot\b", m.group(0), re.I):
-            continue
-        # An examiner's QUESTION is not a taught proposition. These cards
-        # quote trap questions verbatim - 'do statutory certificates also
-        # become invalid?' is the examiner asking, and the card's own answer
-        # is what corrects it. Skip a match whose sentence is interrogative.
-        tail = text[m.end():m.end() + 220]
-        ends = [tail.find(x) for x in ('. ', '? ', '?"', '?\u201d') if tail.find(x) >= 0]
-        if ends and tail[min(ends)] == '?':
-            continue
+        # An examiner's QUESTION is not a taught proposition -- but only when
+        # it is genuinely a quoted question. Requiring an OPEN QUOTE before the
+        # match and a "?" closing it before the quote closes is what separates
+        # 'do statutory certificates also become invalid?' from mutation X3,
+        # which asserted the defect and appended a rhetorical question.
+        tail = text[m.end():m.end() + 200]
+        head = text[max(0, m.start() - 200):m.start()]
+        q_open = max(head.rfind('"'), head.rfind('\u201c'))
+        if q_open >= 0 and not re.search(r'["\u201d]', head[q_open + 1:]):
+            close = re.search(r'["\u201d]', tail)
+            qmark = tail.find('?')
+            if qmark >= 0 and (close is None or qmark < close.start()):
+                continue
         return m
     return None
 
@@ -317,10 +342,15 @@ def check_pr1c() -> None:
     LOST = (r"void|avoid|lapse|invalidat|cease|null|forfeit|withdrawn|"
             r"falls? away|fell away|at an end|no longer (?:applies|responds)|"
             r"stops? (?:answering|responding)|ends? outright")
-    void = asserts(flat, r"(?:insurance|cover|coverage|P&I|H&M)[^.]{0,90}?"
+    #: [^.,;:] rather than [^.] -- clause-local, so a match cannot begin in a
+    #: denied clause and end in an asserting one.
+    void = asserts(flat, r"(?:insurance|cover|coverage|P&I|H&M)[^.,;:]{0,90}?"
                          r"(?:" + LOST + r")"
-                         r"|(?:" + LOST + r")[^.]{0,50}?"
-                         r"(?:insurance|cover|coverage)")
+                         r"|(?:" + LOST + r")[^.,;:]{0,50}?"
+                         r"(?:insurance|cover|coverage)"
+                         # comma-tolerant: an interposed clause must not hide it
+                         r"|(?:our|the)\s+(?:P&I\s+|H&M\s+|hull\s+)?"
+                         r"(?:insurance|cover|coverage)[^.;:]{0,70}?(?:" + LOST + r")")
     report("pr1c_no_universal_insurance_void_claim", void is None,
            "found=%r" % (void.group(0) if void else None))
     report("pr1c_class_warranty_framing_present",
@@ -524,13 +554,20 @@ def check_qb4a_sibling() -> None:
 
     LOST = (r"void|lapse|invalidat|cease|forfeit|falls? away|at an end|"
             r"no longer (?:applies|responds)|automatically ends?")
-    ins = asserts(flat, r"(?:P&I|H&M|insurance|cover|coverage)[^.]{0,80}?(?:" + LOST + r")")
+    ins = asserts(flat,
+                  r"(?:P&I|H&M|insurance|cover|coverage)[^.,;:]{0,80}?(?:" + LOST + r")")
     report("qb4a_no_universal_insurance_loss_claim", ins is None,
            "found=%r" % (ins.group(0)[:60] if ins else None))
 
-    auto = asserts(flat, r"(?:due date[^.]{0,40}?results in Suspension"
-                         r"|Condition expires unresolved, the society suspends class"
-                         r"|failure to meet the due date results in Suspension)")
+    auto = asserts(flat, r"[Cc]ondition of [Cc]lass[^.,;:]{0,90}?"
+                         r"(?:automatic\w*[^.,;:]{0,40}?suspen|suspends? class)"
+                         r"|automatic\w*\s+[Ss]uspension of [Cc]lass"
+                         r"|(?:class|classification) is suspended automatic\w*"
+                         r"|suspend\w*\s+automatic\w*"
+                         r"|(?:due date|timeframe)[^.,;:]{0,60}?results in[^.,;:]{0,30}?[Ss]uspen"
+                         r"|[Cc]lass suspended if not met"
+                         r"|suspension if missed"
+                         r"|the society suspends class")
     report("qb4a_coc_is_a_suspension_procedure", auto is None,
            "A.2.1 - an overdue CoC is not automatic; found=%r"
            % (auto.group(0)[:60] if auto else None))
@@ -552,6 +589,68 @@ def check_qb4a_sibling() -> None:
                             r"|every statutory certificate")
     report("qb4a_ce_tip_no_unqualified_certificate_claim", tip_over is None,
            "found=%r" % (tip_over.group(0)[:60] if tip_over else None))
+
+
+def check_pr1c_family_reach() -> None:
+    """Every surface the PR1C family reaches -- including derived ones.
+
+    The P0 of this batch was QB4_A_CheatSheet, the DERIVED surface of a card
+    that had just been corrected, still teaching the opposite. No check in the
+    first three rounds of this gate read a cheat sheet, because the corpus's
+    card digester cannot see one: cheat sheets contain no q-card. So this check
+    reads whole pages, and the sweep behind it enumerates from disk.
+    """
+    cs = flatten(read_text(QB / "QB4_A_CheatSheet.html"))
+    over = asserts(cs, r"ALL[^.]{0,40}statutory\s+certs?"
+                       r"|statutory\s+certs?[^.]{0,40}invalid\s+simultaneously")
+    report("cheatsheet_no_all_statutory_certs_claim", over is None,
+           "found=%r" % (over.group(0)[:60] if over else None))
+    report("cheatsheet_carries_the_qualifier",
+           re.search(r"certain", cs, re.I) is not None,
+           "the derived surface must teach what the card teaches")
+    report("cheatsheet_no_false_pr_citation",
+           not re.search(r"PR\s*No\.?\s*[13]\b", cs),
+           "PR 1 is Deleted; PR 3 is Transparency of Classification")
+    coc = asserts(cs, r"suspension if missed|[Cc]lass suspended if not met")
+    report("cheatsheet_coc_is_a_procedure", coc is None,
+           "found=%r" % (coc.group(0) if coc else None))
+
+    # QB4_A#q9's own table and Numbers layers, which round 2 missed.
+    q9 = teaching(card("QB4_A.html", "q9"))
+    q9flat = flatten(q9)
+    report("qb4a_table_row_is_a_procedure",
+           re.search(r"Suspension procedure[^|]{0,80}A\.2\.1", q9flat, re.I) is not None,
+           "the notation table is the card's most memorisable layer")
+    report("qb4a_three_month_window_is_a_1_2_and_a_1_3",
+           re.search(r"A\.1\.2[^.]{0,80}A\.1\.3[^.]{0,60}three months", q9flat)
+           is not None
+           or re.search(r"A\.1\.1[^.]{0,90}certificate expiry date", q9flat) is not None,
+           "A.1.1 suspends from the certificate expiry date, not at three months")
+    report("qb4a_no_false_pr_citation",
+           not re.search(r"IACS\s+PR\s*No\.?\s*[13]\b", q9flat),
+           "PR 1 is Deleted; PR 3 is Transparency of Classification")
+
+    # The sibling teaching cards the sweep found.
+    for name, anchor, key in (("QB1_C.html", "q6", "qb1c"),
+                              ("QB4_E.html", "q13", "qb4e_q13"),
+                              ("QB1_G.html", "q36", "qb1g_q36")):
+        f = flatten(teaching(card(name, anchor)))
+        bad = asserts(f, r"automatic\w*\s+[Ss]uspension of [Cc]lass"
+                         r"|[Ss]uspension automatic\w*\s+voids?"
+                         r"|(?:voids?|invalidat\w+)[^.,;:]{0,40}?"
+                         r"(?:insurance|P&I|H&M|hull insurance)"
+                         r"|\ball\b[^.,;:]{0,40}statutory certificates")
+        report("%s_no_pr1c_family_defect" % key, bad is None,
+               "%s#%s found=%r" % (name, anchor, bad.group(0)[:60] if bad else None))
+
+    # The sweep itself, run as a check rather than asserted in prose.
+    import subprocess
+    rc = subprocess.run([sys.executable, str(HERE / "sweep_pr1c_family.py"), "--check"],
+                        cwd=str(REPO), capture_output=True)
+    out = (rc.stdout + rc.stderr).decode("utf-8", "replace")
+    tail = [l for l in out.splitlines() if "UNADJUDICATED" in l]
+    report("pr1c_family_sweep_has_no_unadjudicated_hit", rc.returncode == 0,
+           tail[0].strip() if tail else "sweep did not report")
 
 
 def check_closeup() -> None:
@@ -645,8 +744,8 @@ def check_amend() -> None:
     for name, text in (("formula_block", formula_layer), ("numbers_block", numbers_layer)):
         replaced = asserts(text,
                            r"(?:replac|supersed|abolish|withdraw|retir)\w*"
-                           r"[^.]{0,70}?formula"
-                           r"|formula[^.]{0,70}?(?:no longer applies|is withdrawn|"
+                           r"[^.,;:]{0,70}?formula"
+                           r"|formula[^.,;:]{0,70}?(?:no longer applies|is withdrawn|"
                            r"has been replaced|was replaced|is superseded|no longer used)"
                            r"|(?:in place of|instead of) the (?:old )?"
                            r"(?:H-dependent )?formula")
@@ -739,6 +838,7 @@ def main() -> int:
                      ("QB8_A q3   alliance currentness", check_alliance),
                      ("QB5_A q4   human element", check_human),
                      ("QB4_A q9   PR1C sibling (8th card)", check_qb4a_sibling),
+                     ("PR1C family reach + generated sweep", check_pr1c_family_reach),
                      ("QB3_A q5   annual close-up scope", check_closeup),
                      ("QB10_B q1  amendment overview", check_amend)):
         print("\n-- %s" % name)

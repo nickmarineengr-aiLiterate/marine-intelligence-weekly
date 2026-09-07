@@ -43,9 +43,13 @@ QB3_A = QB / "QB3_A.html"
 QB10_B = QB / "QB10_B.html"
 QB3_B = QB / "QB3_B.html"
 QB4_A = QB / "QB4_A.html"
+QB4_A_CS = QB / "QB4_A_CheatSheet.html"
+QB1_C = QB / "QB1_C.html"
+QB1_G = QB / "QB1_G.html"
 
 GATE = "validate_correction_pass2.py"
-WATCHED = [QB4_E, QB4_C, QB8_A, QB5_A, QB3_A, QB10_B, QB3_B, QB4_A]
+WATCHED = [QB4_E, QB4_C, QB8_A, QB5_A, QB3_A, QB10_B, QB3_B, QB4_A,
+           QB4_A_CS, QB1_C, QB1_G]
 
 MUTATIONS = [
     # ---------------------------------------------------------------- IACS
@@ -370,6 +374,81 @@ MUTATIONS = [
                  "all RO-issued statutory certificates become invalid simultaneously",
                  count=1),
      "qb4a_ce_tip_no_unqualified_certificate_claim"),
+    # -------------------------------------------- third-review escapes
+    # X1-X5 are the five mutations the THIRD independent review demonstrated
+    # walking past the gate in a sandbox. Each attacked a different disarm path
+    # in asserts(), and all five now fail closed. They are the reason that
+    # helper was rebuilt around a single rule -- a denial governs its own
+    # clause and no further.
+    ("X1", "CoC suspends automatically, in words the old literal check never held",
+     sub_in_file(QB4_A,
+                 "IACS PR1C A.2.1 provides that the vessel&#x27;s class becomes "
+                 "<strong>subject to a suspension procedure</strong>",
+                 "class is suspended automatically on the due date", count=1),
+     "qb4a_coc_is_a_suspension_procedure"),
+
+    ("X2", "assert the defect after a denial about a DIFFERENT subject",
+     sub_in_file(QB4_C,
+                 "<li>Insurance: PR1C contains no insurance provision at all,",
+                 "<li>Insurance: PR1C is not an insurance document, yet our cover falls "
+                 "away the moment class is suspended,", count=1),
+     "pr1c_no_universal_insurance_void_claim"),
+
+    ("X3", "assert the defect, then append a rhetorical question",
+     sub_in_file(QB4_A,
+                 "The ship cannot sail. I immediately inform the Master",
+                 "Every statutory certificate is invalidated at once - what else could "
+                 "&quot;implicitly invalidated&quot; mean? The ship cannot sail. I "
+                 "immediately inform the Master", count=1),
+     "qb4a_no_all_statutory_certificates_claim"),
+
+    ("X4", "hide the defect behind an imperative 'Do not forget:'",
+     sub_in_file(QB4_C,
+                 "This demonstrates a strong compliance-driven approach.",
+                 "Do not forget: all statutory certificates become invalid. This "
+                 "demonstrates a strong compliance-driven approach.", count=1),
+     "pr1c_ce_tip_no_unqualified_certificate_claim"),
+
+    ("X5", "hide the defect behind a parenthetical 'whether or not'",
+     sub_in_file(QB4_C,
+                 "<li>Insurance: PR1C contains no insurance provision at all,",
+                 "<li>Insurance: our cover, whether or not the club agrees, lapses "
+                 "outright,", count=1),
+     "pr1c_no_universal_insurance_void_claim"),
+
+    # ------------------------------------------- derived + sibling surfaces
+    ("X6", "restore the P0: the cheat sheet contradicting its own card",
+     sub_in_file(QB4_A_CS,
+                 "PR1C B.1.1 letter to Owner + Flag State; B.1.3 says "
+                 "<strong>certain</strong> statutory certs implicitly invalidated (not all)",
+                 "ALL RO-issued statutory certs invalid simultaneously", count=1),
+     "cheatsheet_no_all_statutory_certs_claim"),
+
+    ("X7", "re-cite the deleted PR No.1 on the cheat sheet",
+     sub_in_file(QB4_A_CS,
+                 "<td>IACS PR1C (suspension/withdrawal) + PR 35 (imposing/clearing CoC)</td>",
+                 "<td>IACS PR No.1/3</td>", count=1),
+     "cheatsheet_no_false_pr_citation"),
+
+    ("X8", "restore the automatic-suspension claim on QB1_C q6",
+     sub_in_file(QB1_C,
+                 "IACS PR1C A.2.1 makes the vessel&#x27;s class <strong>subject to a "
+                 "suspension procedure</strong>",
+                 "there is automatic Suspension of Class", count=1),
+     "qb1c_no_pr1c_family_defect"),
+
+    ("X9", "restore the automatic insurance void on QB1_G q36",
+     sub_in_file(QB1_G,
+                 "Hull and P&amp;I cover is written subject to a class warranty",
+                 "Suspension automatically voids the vessel&#x27;s hull insurance", count=1),
+     "qb1g_q36_no_pr1c_family_defect"),
+
+    ("X10", "put the defect back on a surface the sweep must find",
+     sub_in_file(QB4_E,
+                 "IACS PR1C B.1.3 has the Society tell the Owner and the Flag State that "
+                 "<em>certain</em> statutory certificates",
+                 "all statutory certificates", count=1),
+     "qb4e_q13_no_pr1c_family_defect"),
 ]
 
 

@@ -7,7 +7,8 @@
  "governing_commits": [
   "78d703c",
   "5de0c08",
-  "ae80bfe"
+  "ae80bfe",
+  "05a9f95"
  ],
  "origin": "pass2_known_defect_remediation",
  "correction_id": "CORR-PASS2-PR1C-SUSPENSION-20260907",
@@ -16,11 +17,11 @@
  "candidate_verdict": "UPHELD, and the card was worse than the family description. Beyond the blended triggers, the overstated statutory-certificate consequence and the universal insurance claim, the instrument cited as governing the whole answer was the wrong document.",
  "authority": "PRIMARY - IACS PR1C Rev.7 (November 2024), 'Procedure for Suspension and Reinstatement or Withdrawal of Class in Case of Surveys or Conditions of Class Going Overdue', retrieved and read this pass from IACS's own hosting, together with Rev.6 for comparison. RETRIEVAL ROUTE, recorded because an independent reviewer could not reproduce it and reasonably challenged the PRIMARY claim on that basis: iacs.org.uk refuses a default user agent with HTTP 403, and returns 200 to a browser user agent. Rev.7 is at https://iacs.s3.af-south-1.amazonaws.com/wp-content/uploads/2024/11/18161614/PR-1C-Rev.7-Nov-2024-CLN.pdf and Rev.6 at https://iacs.s3.af-south-1.amazonaws.com/wp-content/uploads/2023/08/10163156/pr1crev6-2.pdf - both on IACS's own S3 bucket, both read in full this pass. A.1.1 Special (Renewal) overdue: the 5-year Class Certificate expires and 'classification is automatically suspended'. A.1.2 Annual, A.1.3 Intermediate: same automatic language. A.1.4 continuous survey item: 'subject to a suspension procedure'. A.2.1 overdue condition of class: 'the vessel's class will be subject to a suspension procedure'. A.2.2: the vessel is disclassed from the date of suspension until reinstatement. A.4.1: six months suspended for overdue surveys and/or conditions of class and the class is to be withdrawn, with a longer period available where the vessel is not trading. B.1.1/B.1.2: written confirmation to Owner and Flag State. B.1.3: for SOLAS ships the letter states that 'certain statutory certificates are implicitly invalidated'. A full-text search of BOTH revisions for 'insur', 'warrant' and 'P&I' returns ZERO hits, which is the basis for deleting the universal insurance claim rather than merely softening it. REVISION CURRENCY, and this CLOSES the open point D01-S01 recorded: Rev.7 clause 8 states 'Rev.7 of this Procedural Requirement applies from 1 January 2026', so Rev.7 governs at today's date; and A.1.1, A.2.1, A.4.1 and B.1.3 are textually identical between Rev.6 and Rev.7, so the clause lettering D01-S01 asked to be checked is stable and the QB1_K q2 caveat can be resolved. UR Z15 is 'Hull, Structure, Equipment and Machinery Surveys of Mobile Offshore Drilling Units' - verified from the IACS UR text as republished by a Member society, table of contents read.",
  "propagation": {
-  "same_defect_swept": "CORRECTED AFTER SECOND INDEPENDENT REVIEW. The first version of this record claimed that a search for 'void insurance', 'insurance is void', 'all statutory certificates', 'automatically become invalid' and 'UR Z15' left, beyond QB4_C q5, 'only the already-corrected QB1_K q2, and past-paper examiner wording'. THAT WAS FALSE. Re-running it returns QB4_A#q9, a teaching card carrying all three propositions across EIGHT candidate-facing layers, plus a fourth defect - the RO-to-Flag-State notification cited to IACS UR Z23, which is Hull Survey for New Construction. QB4_A#q9 is corrected here as P2-PR1C-02. The sweep now stands as: QB4_C#q5 and QB4_A#q9 corrected in this record; QB1_K#q2 corrected by CORR-D01-COC-PR1C-20260907; QB1_F section 4 already correct; every other hit is a past-paper stem, each of which was OPENED rather than bucketed. See known_traps 128 - a completeness claim is a claim, and nothing in the pipeline was checking it.",
+  "same_defect_swept": "GENERATED, NOT ASSERTED. Three consecutive versions of this field made a prose completeness claim and all three were false, so the claim is now the output of tools/oral/sweep_pr1c_family.py, committed at reports/pr1c_family_sweep.json and re-run as a gate check (pr1c_family_sweep_has_no_unadjudicated_hit). It enumerates all 224 pages from DISK - including the 34 cheat sheets, which carry no q-card and are therefore invisible to the corpus card digester - reads RENDERED text, and matches on token variants including 'certs', the abbreviation that hid the P0 through two rounds. Current state: 3 hits, 3 adjudicated with reasons recorded inline, 0 unadjudicated. HISTORY, kept because it is the evidence: CORRECTED AFTER SECOND INDEPENDENT REVIEW. The first version of this record claimed that a search for 'void insurance', 'insurance is void', 'all statutory certificates', 'automatically become invalid' and 'UR Z15' left, beyond QB4_C q5, 'only the already-corrected QB1_K q2, and past-paper examiner wording'. THAT WAS FALSE. Re-running it returns QB4_A#q9, a teaching card carrying all three propositions across EIGHT candidate-facing layers, plus a fourth defect - the RO-to-Flag-State notification cited to IACS UR Z23, which is Hull Survey for New Construction. QB4_A#q9 is corrected here as P2-PR1C-02. The sweep now stands as: QB4_C#q5 and QB4_A#q9 corrected in this record; QB1_K#q2 corrected by CORR-D01-COC-PR1C-20260907; QB1_F section 4 already correct; every other hit is a past-paper stem, each of which was OPENED rather than bucketed. See known_traps 128 - a completeness claim is a claim, and nothing in the pipeline was checking it.",
   "already_correct_sibling": "meoclass1/QB1_F.html section 4 'Class Status Ladder' already teaches the correct distinction, the six-month rule and 'certain statutory certificates', and cites PR1C Rev.7 - it was used as a consistency control, not as proof. Primary text decided every point.",
   "examiner_wording_keep": "Past-paper stems using 'enlist all statutory certificates' are sitting-anchored examiner wording and were not touched.",
   "not_swept_reported": "QB1_F q23 was named by the instruction as a member of this family. It is not. The card is about the Certificate of Approval for a Planned Maintenance Scheme under IACS UR Z20 and contains no PR1C, suspension, withdrawal, statutory-certificate or insurance proposition at all. Classified ALREADY_CORRECT for this family and not touched.",
-  "derived_surfaces": "NONE. corpus 761 / 86 unchanged.",
+  "derived_surfaces": "ONE, and it was the P0 of this batch: meoclass1/QB4_A_CheatSheet.html, the cheat sheet of QB4_A#q9, contradicted its own card until this round. Corrected and declared as an artefact. The earlier 'derived_surfaces: NONE' in this record was false. meoclass1/qb_content_index.json is separately STALE - it was last generated 5 Sep and does not list any Pass-2 correction - and is NOT regenerated here, because regenerating it advances a published surface and this pass is not authorised to publish. Declared as remaining debt. corpus 761 / 86 unchanged.",
   "hub_date": "NOT ADVANCED."
  },
  "invariants": [
@@ -29,14 +30,15 @@
   "SOLAS II-1/3-1 and ISM 10.2 reg-box entries unchanged.",
   "Every candidate-facing layer of BOTH cards now carries the 'certain' qualifier, including the CE Oral Tip of each - the layer the first attempt missed on QB4_C#q5 and which the gate did not read until it was made to.",
   "QB4_A#q9's 'seaworthy and in class is a fundamental warranty under standard P&I Club Rules' is KEPT: it was the accurate half of that card's insurance claim, and only the automatic-loss half was removed.",
-  "QB4_A#q9's IACS PR No.1 and PR No.3 entries are NOT touched and NOT asserted correct - the IACS PR index could not be read cleanly this pass, so no replacement number is claimed. Recorded as unverified, not as verified.",
+  "QB4_A#q9's PR citations are now RESOLVED, not deferred. The earlier claim that the IACS PR index 'could not be read cleanly' was a failure of method, not of the source: extracting it by word COORDINATES rather than by a column-collapsing text dump reads it exactly. PR 1 is Deleted; PR 3 is Transparency of Classification and Statutory Information; the instrument the card described is PR 35, Procedure for Imposing and Clearing Recommendations/Conditions of Class. Both false entries replaced, on the card and on its cheat sheet.",
   "No claim that insurance is unaffected - the class warranty analysis is added, not the opposite overstatement.",
   "No claim that PR1C is a ceiling: it is the harmonised floor, and an individual society's Rules may go further."
  ],
  "known_traps_entries": [
   113,
   121,
-  128
+  128,
+  129
  ],
  "cards": [
   {
@@ -56,8 +58,58 @@
    "anchor": "q9",
    "classification": "PROPAGATED_FACT_CORRECTION",
    "pre_edit_digest": "88dc3270fc21669c31369d4237cc3ff581a77ae6a59ae5e4d87c99382332e684",
-   "post_edit_digest": "a084925dde58390d7ce8b17747010d6b26adad4ae74bb07f0ffaab4fc80898c6",
+   "post_edit_digest": "302cf2ba120f4477a7fc9ac02a2acb61ac998b5919e5ac157c8af4a3d1b1f66a",
    "what_changed": "The sibling the first version of this record wrongly reported as absent. Eight candidate-facing layers carried the family's defects. 15-second and 60-second: an overdue Condition of Class taught as suspending class outright, replaced by A.2.1's suspension PROCEDURE contrasted against the A.1.1-A.1.3 automatic limb for overdue periodical surveys. Cascade bullets: 'All statutory certificates ... become invalid' replaced by B.1.3's 'certain', with the certificate list kept as EXAMPLES; 'P&I Club cover typically falls away' replaced by the class-warranty analysis, keeping the card's own accurate point that 'seaworthy and in class' is a fundamental warranty under standard P&I Club Rules; the Flag State notification re-attributed from UR Z23 to PR1C B.1.1/B.1.2. Regulatory References: the UR Z23 entry replaced by PR1C Rev.7 with its clause map. CE Oral Tip, trap answer, Common CE Failures bullet and the Numbers line all realigned. The last two of those eight were found by this record's own content gate, not by the correcting script, in a card that had just been read end to end."
+  },
+  {
+   "correction_action_id": "P2-PR1C-03",
+   "file": "QB1_C.html",
+   "path": "meoclass1/QB1_C.html",
+   "anchor": "q6",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "298c61c74b463d5d31ce043d8d12efa1c922e400a79fae0d32e92ee1bcb8e9b1",
+   "post_edit_digest": "ce5678478478c056ea204d8e03850103c7567a333e0eefab0819e0b3e4cdd3de",
+   "what_changed": "All three propositions in one sentence - 'results in the automatic Suspension of Class, which invalidates the ship's statutory certificates and voids hull and machinery (H-backslash-ampersand-M) insurance cover' - which also contradicted this card's own preceding paragraph saying a Condition of Class does not warrant immediate suspension. Rebuilt on A.2.1, B.1.1/B.1.3 and the class-warranty analysis; the markdown escape artefact went with it."
+  },
+  {
+   "correction_action_id": "P2-PR1C-04",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q7",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "cdfff894e43020f40ce71c0185dbe5ad7d4dc9e0b902d9facf3476dd95756b0c",
+   "post_edit_digest": "6f2d1c728d1b5f36598300a879c545f1190a6e7802a62a779cf2c20afec300e9",
+   "what_changed": "'can lead to the withdrawal of the vessel's class notation, automatically invalidating the ship's insurance policies cover' - twice, in two copies of the CE Relevance block. This is the card the first version of this record cited as ALREADY CORRECT: its section 4 is, and section q7 was not. Treating a file as clear because one section is clear is the same reasoning error as the sweep claim itself."
+  },
+  {
+   "correction_action_id": "P2-PR1C-05",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q36",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "e04504cb6446757340489b24cc73405db0a83a35680748551df72ecd843939c9",
+   "post_edit_digest": "ea42ab77e2e1023177a691c1337cf81e1f4a0457ffdccf0db8d9040cc9474c53",
+   "what_changed": "'a single overdue major item can lead to the immediate suspension of Class, which automatically voids the vessel's hull insurance, cargo insurance, and charter party agreements' - the automatic limb applied to every trigger, and an automatic-void claim extended to charterparties as well as cover. Split into A.1.1-A.1.3 automatic and A.2.1 procedure, with the class-warranty framing for cover and the charter consequence left to that contract."
+  },
+  {
+   "correction_action_id": "P2-PR1C-06",
+   "file": "QB4_E.html",
+   "path": "meoclass1/QB4_E.html",
+   "anchor": "q13",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "f9e982bc8337130544ce1773fae7c480cc45350409409286ff3c2e158df282c2",
+   "post_edit_digest": "09e50b1187734cd80fd621d4f513969400132657a73a23f5917b336ec50d91a2",
+   "what_changed": "'the statutory certificates are invalidated' - unqualified, in the same file as declared card q12, and not reached by any earlier sweep."
+  }
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/QB4_A_CheatSheet.html",
+   "why": "The DERIVED surface of QB4_A#q9, and the P0 of this batch: it was still teaching 'CoC = suspension if missed', 'ALL RO-issued statutory certs invalid simultaneously' and 'P&I cover typically void' after the card itself had been corrected, plus the deleted PR No.1/3 citation. It carries no q-card, so the corpus card digester is structurally blind to it - which is why it survived two sweeps. Corrected here; no digest is pinned because no release guard pins this file."
+  },
+  {
+   "path": "reports/pr1c_family_sweep.json",
+   "why": "The generated sweep this record now cites INSTEAD of asserting a completeness claim in prose. Regenerate with tools/oral/sweep_pr1c_family.py --check --json reports/pr1c_family_sweep.json"
   }
  ]
 }

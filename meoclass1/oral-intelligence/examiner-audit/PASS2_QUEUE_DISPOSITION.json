@@ -177,24 +177,37 @@
    "closed_by": "CORR-PASS2-PR1C-SUSPENSION-20260907, action P2-PR1C-02",
    "detail": "Found by a second independent review re-running the PR1C record's own declared search, which the record had reported as returning nothing but examiner wording. Eight candidate-facing layers carried the automatic-on-CoC claim, the all-statutory-certificates overstatement, the automatic-insurance-loss claim, and IACS UR Z23 cited three times for the Flag State notification - UR Z23 is Hull Survey for New Construction. Two of the eight layers were found by the content gate rather than by the correcting script.",
    "not_asserted": "The card's IACS PR No.1 and PR No.3 reg-box entries are left untouched and recorded as UNVERIFIED. The IACS PR index could not be read cleanly this pass, so no replacement number is asserted."
+  },
+  {
+   "item": "meoclass1/qb_content_index.json",
+   "disposition": "DEFERRED",
+   "severity": "P2",
+   "detail": "Stale: last generated 5 Sep, so it lists no Pass-2 correction and the generated home, search and updates surfaces do not reflect any of the 12 corrected cards. NOT regenerated here - regenerating it advances a published surface, and this pass is not authorised to publish. It must be regenerated as part of release qualification, before or with the hub-date advance."
   }
  ],
  "corpus_state": {
   "questions": 761,
   "files": 86,
   "unchanged_from": "05b49d8",
-  "cards_moved": 8,
+  "cards_moved": 12,
   "undeclared_cards_moved": 0,
-  "method": "canonical card digests recomputed over all 224 tracked HTML pages under meoclass1/ at 05b49d8 and at HEAD, and compared anchor by anchor",
+  "method": "Canonical card digests over every tracked page under meoclass1/ at 05b49d8 and at HEAD, compared anchor by anchor - PLUS git diff --stat over meoclass1/, because the card digester reads q-card blocks only and the 34 cheat sheets contain none. The P0 of this batch lived on exactly that blind spot.",
   "moved_cards": [
    "QB10_B.html#q1",
+   "QB1_C.html#q6",
+   "QB1_F.html#q7",
+   "QB1_G.html#q36",
    "QB3_A.html#q5",
    "QB3_B.html#q1",
    "QB4_A.html#q9",
    "QB4_C.html#q5",
    "QB4_E.html#q12",
+   "QB4_E.html#q13",
    "QB5_A.html#q4",
    "QB8_A.html#q3"
+  ],
+  "non_card_pages_changed": [
+   "meoclass1/QB4_A_CheatSheet.html"
   ]
  },
  "not_done_deliberately": [
@@ -244,7 +257,58 @@
   ],
   "not_upheld": {
    "pr1c_rev7_primary_claim": "The reviewer challenged CORR-PASS2-PR1C-SUSPENSION's PRIMARY-on-Rev.7 claim because iacs.org.uk returned 403 and they could obtain only Rev.6. The challenge was well founded on their evidence and the claim is nonetheless correct: Rev.7 was retrieved this pass from IACS's own S3 bucket and read in full, including clause 8 'Rev.7 of this Procedural Requirement applies from 1 January 2026'. The record now carries both S3 URLs and the user-agent condition, so the retrieval is reproducible rather than merely asserted. This is a REPRODUCIBILITY defect in the record, not a truth defect in the claim."
+  },
+  "rounds": 3,
+  "round_3": {
+   "result": "P0 and further P1s found. The round-2 rewrite of the sweep-completeness claim was ALSO false. All closed at 05a9f95.",
+   "findings": [
+    {
+     "id": "IR3-1",
+     "severity": "P0",
+     "site": "meoclass1/QB4_A_CheatSheet.html",
+     "finding": "The DERIVED surface of the card round 2 had just corrected was still teaching all three propositions, plus the deleted PR No.1/3 citation.",
+     "why_it_survived": "It abbreviates 'certificates' to 'certs', which no search term covered, and it carries no q-card, so the corpus card digester - and the disposition's own stated verification method - are structurally blind to it."
+    },
+    {
+     "id": "IR3-2",
+     "severity": "P0",
+     "site": "correction_corr_pass2_pr1c_suspension_20260907_manifest.json",
+     "finding": "The rewritten sweep claim was false for the third round running.",
+     "closed_by": "The prose claim is replaced by a generated artefact - tools/oral/sweep_pr1c_family.py, output at reports/pr1c_family_sweep.json, re-run as a gate check. See trap 129."
+    },
+    {
+     "id": "IR3-3",
+     "severity": "P1",
+     "site": "meoclass1/QB4_A.html#q9",
+     "finding": "The notation TABLE row still said 'Class suspended if not met by due date' - untouched by round 2, and the card's most memorisable layer."
+    },
+    {
+     "id": "IR3-4",
+     "severity": "P1",
+     "site": "meoclass1/QB4_A.html#q9",
+     "finding": "The round-2 rewrite ITSELF introduced an error, generalising the three-month suspension window to A.1 when A.1.1 suspends from the certificate expiry date. A fix that introduces a defect is the reason a second review is mandatory, not optional."
+    },
+    {
+     "id": "IR3-5",
+     "severity": "P1",
+     "site": "meoclass1/QB4_A.html#q9 reg box",
+     "finding": "PR No.1 (Deleted) and PR No.3 (Transparency of Classification and Statutory Information) carried fabricated descriptions. The earlier record's plea that the IACS PR index 'could not be read cleanly' was a failure of method: positional extraction reads it exactly. The instrument the card described is PR 35."
+    },
+    {
+     "id": "IR3-6",
+     "severity": "P1",
+     "site": "QB1_C#q6, QB1_G#q36, QB4_E#q13, QB1_F#q7",
+     "finding": "Four more teaching cards carried the family. QB1_F is the card the record cited as 'already correct' on the strength of its section 4."
+    },
+    {
+     "id": "IR3-7",
+     "severity": "P1",
+     "site": "tools/oral/validate_correction_pass2.py",
+     "finding": "Five of six hand-written mutations walked past asserts(). Every escape used a negation that CO-OCCURRED with the claim without governing it. Rebuilt around one rule: a denial governs its own clause and no further. All five are now mutations X1-X5 and all are caught."
+    }
+   ]
   }
  },
- "remediation_commit_2": "ae80bfe"
+ "remediation_commit_2": "ae80bfe",
+ "remediation_commit_3": "05a9f95"
 }

@@ -35,6 +35,12 @@ REMEDIATION_COMMIT = "5de0c08"
 #: made a false sweep-completeness claim, and that the sibling it missed was
 #: live in eight layers. See known_traps 128.
 REMEDIATION_COMMIT_2 = "ae80bfe"
+#: Round 3. A THIRD independent review found that the round-2 rewrite of the
+#: sweep claim was ALSO false, and that its worst miss was a derived surface:
+#: QB4_A_CheatSheet, the cheat sheet of the card round 2 had just corrected,
+#: still teaching the opposite. This round stops asserting the sweep and
+#: generates it instead. See known_traps 129.
+REMEDIATION_COMMIT_3 = "05a9f95"
 
 AUTH = ("MIW PASS 2 RESUMPTION - KNOWN-DEFECT REMEDIATION instruction of "
         "7 September 2026, sections 3-16. The instruction is explicitly NOT a "
@@ -115,6 +121,10 @@ PRE = {
     "QB10_B.html#q1": "3ecca484502640a396cc33c947649b27544b98fbc10ee6f99b4938c9ebbfd976",
     "QB3_B.html#q1": "d00a9c6b6aca8774e7c1de6ff7d87f3e0b2c448b95381b21885a088bfb3267a4",
     "QB4_A.html#q9": "88dc3270fc21669c31369d4237cc3ff581a77ae6a59ae5e4d87c99382332e684",
+    "QB1_C.html#q6": "298c61c74b463d5d31ce043d8d12efa1c922e400a79fae0d32e92ee1bcb8e9b1",
+    "QB1_F.html#q7": "cdfff894e43020f40ce71c0185dbe5ad7d4dc9e0b902d9facf3476dd95756b0c",
+    "QB1_G.html#q36": "e04504cb6446757340489b24cc73405db0a83a35680748551df72ecd843939c9",
+    "QB4_E.html#q13": "f9e982bc8337130544ce1773fae7c480cc45350409409286ff3c2e158df282c2",
 }
 
 COMMON = {
@@ -124,7 +134,7 @@ COMMON = {
     "baseline_commit": BASELINE,
     "authorisation_source": AUTH,
     "governing_commits": [CONTENT_COMMIT, REMEDIATION_COMMIT,
-                          REMEDIATION_COMMIT_2],
+                          REMEDIATION_COMMIT_2, REMEDIATION_COMMIT_3],
 }
 
 
@@ -248,6 +258,39 @@ def build():
                 PRE["QB4_A.html#q9"])
     qb4a["correction_action_id"] = "P2-PR1C-02"
 
+    siblings = [
+        card("QB1_C.html", "q6", "PROPAGATED_FACT_CORRECTION",
+             "All three propositions in one sentence - 'results in the automatic Suspension "
+             "of Class, which invalidates the ship's statutory certificates and voids hull "
+             "and machinery (H-backslash-ampersand-M) insurance cover' - which also "
+             "contradicted this card's own preceding paragraph saying a Condition of Class "
+             "does not warrant immediate suspension. Rebuilt on A.2.1, B.1.1/B.1.3 and the "
+             "class-warranty analysis; the markdown escape artefact went with it.",
+             PRE["QB1_C.html#q6"]),
+        card("QB1_F.html", "q7", "PROPAGATED_FACT_CORRECTION",
+             "'can lead to the withdrawal of the vessel's class notation, automatically "
+             "invalidating the ship's insurance policies cover' - twice, in two copies of "
+             "the CE Relevance block. This is the card the first version of this record "
+             "cited as ALREADY CORRECT: its section 4 is, and section q7 was not. Treating "
+             "a file as clear because one section is clear is the same reasoning error as "
+             "the sweep claim itself.",
+             PRE["QB1_F.html#q7"]),
+        card("QB1_G.html", "q36", "PROPAGATED_FACT_CORRECTION",
+             "'a single overdue major item can lead to the immediate suspension of Class, "
+             "which automatically voids the vessel's hull insurance, cargo insurance, and "
+             "charter party agreements' - the automatic limb applied to every trigger, and "
+             "an automatic-void claim extended to charterparties as well as cover. Split "
+             "into A.1.1-A.1.3 automatic and A.2.1 procedure, with the class-warranty "
+             "framing for cover and the charter consequence left to that contract.",
+             PRE["QB1_G.html#q36"]),
+        card("QB4_E.html", "q13", "PROPAGATED_FACT_CORRECTION",
+             "'the statutory certificates are invalidated' - unqualified, in the same file "
+             "as declared card q12, and not reached by any earlier sweep.",
+             PRE["QB4_E.html#q13"]),
+    ]
+    for i, s in enumerate(siblings, start=3):
+        s["correction_action_id"] = "P2-PR1C-%02d" % i
+
     records.append(("correction_corr_pass2_pr1c_suspension_20260907_manifest.json", dict(
         COMMON,
         origin="pass2_known_defect_remediation",
@@ -297,7 +340,20 @@ def build():
                   "Offshore Drilling Units' - verified from the IACS UR text as republished by "
                   "a Member society, table of contents read.",
         propagation={
-            "same_defect_swept": "CORRECTED AFTER SECOND INDEPENDENT REVIEW. The first "
+            "same_defect_swept": "GENERATED, NOT ASSERTED. Three consecutive versions of "
+                                 "this field made a prose completeness claim and all three "
+                                 "were false, so the claim is now the output of "
+                                 "tools/oral/sweep_pr1c_family.py, committed at "
+                                 "reports/pr1c_family_sweep.json and re-run as a gate check "
+                                 "(pr1c_family_sweep_has_no_unadjudicated_hit). It enumerates "
+                                 "all 224 pages from DISK - including the 34 cheat sheets, "
+                                 "which carry no q-card and are therefore invisible to the "
+                                 "corpus card digester - reads RENDERED text, and matches on "
+                                 "token variants including 'certs', the abbreviation that hid "
+                                 "the P0 through two rounds. Current state: 3 hits, 3 "
+                                 "adjudicated with reasons recorded inline, 0 unadjudicated. "
+                                 "HISTORY, kept because it is the evidence: "
+                                 "CORRECTED AFTER SECOND INDEPENDENT REVIEW. The first "
                                  "version of this record claimed that a search for 'void "
                                  "insurance', 'insurance is void', 'all statutory "
                                  "certificates', 'automatically become invalid' and 'UR Z15' "
@@ -329,7 +385,17 @@ def build():
                                   "statutory-certificate or insurance proposition at all. "
                                   "Classified ALREADY_CORRECT for this family and not "
                                   "touched.",
-            "derived_surfaces": "NONE. corpus 761 / 86 unchanged.",
+            "derived_surfaces": "ONE, and it was the P0 of this batch: "
+                                "meoclass1/QB4_A_CheatSheet.html, the cheat sheet of "
+                                "QB4_A#q9, contradicted its own card until this round. "
+                                "Corrected and declared as an artefact. The earlier "
+                                "'derived_surfaces: NONE' in this record was false. "
+                                "meoclass1/qb_content_index.json is separately STALE - it "
+                                "was last generated 5 Sep and does not list any Pass-2 "
+                                "correction - and is NOT regenerated here, because "
+                                "regenerating it advances a published surface and this pass "
+                                "is not authorised to publish. Declared as remaining debt. "
+                                "corpus 761 / 86 unchanged.",
             "hub_date": "NOT ADVANCED.",
         },
         invariants=[
@@ -344,16 +410,35 @@ def build():
             "QB4_A#q9's 'seaworthy and in class is a fundamental warranty under standard P&I "
             "Club Rules' is KEPT: it was the accurate half of that card's insurance claim, "
             "and only the automatic-loss half was removed.",
-            "QB4_A#q9's IACS PR No.1 and PR No.3 entries are NOT touched and NOT asserted "
-            "correct - the IACS PR index could not be read cleanly this pass, so no "
-            "replacement number is claimed. Recorded as unverified, not as verified.",
+            "QB4_A#q9's PR citations are now RESOLVED, not deferred. The earlier claim that "
+            "the IACS PR index 'could not be read cleanly' was a failure of method, not of "
+            "the source: extracting it by word COORDINATES rather than by a column-collapsing "
+            "text dump reads it exactly. PR 1 is Deleted; PR 3 is Transparency of "
+            "Classification and Statutory Information; the instrument the card described is "
+            "PR 35, Procedure for Imposing and Clearing Recommendations/Conditions of Class. "
+            "Both false entries replaced, on the card and on its cheat sheet.",
             "No claim that insurance is unaffected - the class warranty analysis is added, "
             "not the opposite overstatement.",
             "No claim that PR1C is a ceiling: it is the harmonised floor, and an individual "
             "society's Rules may go further.",
         ],
-        known_traps_entries=[113, 121, 128],
-        cards=[c, qb4a],
+        known_traps_entries=[113, 121, 128, 129],
+        cards=[c, qb4a] + siblings,
+        artefacts=[{
+            "path": "meoclass1/QB4_A_CheatSheet.html",
+            "why": "The DERIVED surface of QB4_A#q9, and the P0 of this batch: it was still "
+                   "teaching 'CoC = suspension if missed', 'ALL RO-issued statutory certs "
+                   "invalid simultaneously' and 'P&I cover typically void' after the card "
+                   "itself had been corrected, plus the deleted PR No.1/3 citation. It "
+                   "carries no q-card, so the corpus card digester is structurally blind to "
+                   "it - which is why it survived two sweeps. Corrected here; no digest is "
+                   "pinned because no release guard pins this file.",
+        }, {
+            "path": "reports/pr1c_family_sweep.json",
+            "why": "The generated sweep this record now cites INSTEAD of asserting a "
+                   "completeness claim in prose. Regenerate with "
+                   "tools/oral/sweep_pr1c_family.py --check --json reports/pr1c_family_sweep.json",
+        }],
     )))
 
     # ------------------------------------------------------------ ALLIANCE
