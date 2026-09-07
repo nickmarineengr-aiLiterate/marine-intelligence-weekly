@@ -31,6 +31,7 @@ QB = REPO / "meoclass1"
 sys.path.insert(0, str(HERE))
 
 from oral_bytes import enable_utf8_stdio  # noqa: E402
+from oral_bytes import read_text, write_text  # noqa: E402
 from oral_content_mutation import run_suite, sub_in_file  # noqa: E402
 
 enable_utf8_stdio()
@@ -46,6 +47,25 @@ QB4_A = QB / "QB4_A.html"
 QB4_A_CS = QB / "QB4_A_CheatSheet.html"
 QB1_C = QB / "QB1_C.html"
 QB1_G = QB / "QB1_G.html"
+
+def _strip_instrument(path):
+    """Remove every ITC-Hulls attribution from one file, keeping the substance.
+
+    A card-wide "does the instrument appear anywhere" check cannot be tested by
+    deleting one of three mentions. This deletes all of them and leaves the
+    teaching otherwise intact, so only the attribution is on trial.
+    """
+    def apply():
+        text = read_text(path)
+        assert "ITC-Hulls" in text or "Institute Time Clauses" in text
+        text = text.replace("Institute Time Clauses &ndash; Hulls (1/11/95) cl. 4.2",
+                            "the standard hull policy")
+        text = text.replace("ITC-Hulls (1/11/95) cl. 4.2", "the standard hull policy")
+        text = text.replace("ITC-Hulls cl. 4.2", "the standard hull policy")
+        text = text.replace("ITC-Hulls", "the standard hull policy")
+        write_text(path, text)
+    return apply
+
 
 GATE = "validate_correction_pass2.py"
 WATCHED = [QB4_E, QB4_C, QB8_A, QB5_A, QB3_A, QB10_B, QB3_B, QB4_A,
@@ -368,12 +388,21 @@ MUTATIONS = [
                  "Time Clauses", count=1),
      "qb4a_no_universal_insurance_loss_claim"),
 
-    ("Z7b", "strip the instrument, leaving the trap-130 understatement",
+    # Z7b reintroduces the trap-130 understatement, and is caught by the check
+    # that forbids it. Z7c is its twin: it removes EVERY instrument mention
+    # without adding the understatement, which is the only way to exercise the
+    # instrument check on its own -- a card-wide presence check survives losing
+    # one of three mentions, and that is how the first draft of Z7b escaped.
+    ("Z7b", "reintroduce the trap-130 understatement",
      sub_in_file(QB4_A,
                  "Institute Time Clauses &ndash; Hulls (1/11/95) cl. 4.2 terminates hull "
                  "cover",
                  "the class warranty is breached so cover may be prejudiced; a policy "
                  "terminates hull cover", count=1),
+     "qb4a_no_insurance_understatement"),
+
+    ("Z7c", "strip EVERY instrument mention, leaving the substance correct",
+     _strip_instrument(QB4_A),
      "qb4a_insurance_limb_names_its_instrument"),
 
     ("Z8", "restore the unqualified claim in QB4_A's CE Oral Tip only",

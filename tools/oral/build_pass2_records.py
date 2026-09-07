@@ -47,6 +47,11 @@ REMEDIATION_COMMIT_3 = "05a9f95"
 #: so "cover may be prejudiced, not automatically void" was wrong in the
 #: other direction. See known_traps 130.
 REMEDIATION_COMMIT_4 = "93c4d3c"
+#: The restoration commit. 93c4d3c captured QB3_B#q1 mid-mutation - `git add`
+#: ran while the mutation suite was live - and mis-targeted the QB1_I stamp.
+#: Both cards reach their authorised state only at this commit, so it is
+#: governing, not incidental.
+RESTORATION_COMMIT = "8a0a33c"
 
 AUTH = ("MIW PASS 2 RESUMPTION - KNOWN-DEFECT REMEDIATION instruction of "
         "7 September 2026, sections 3-16. The instruction is explicitly NOT a "
@@ -162,7 +167,7 @@ COMMON = {
     "authorisation_source": AUTH,
     "governing_commits": [CONTENT_COMMIT, REMEDIATION_COMMIT,
                           REMEDIATION_COMMIT_2, REMEDIATION_COMMIT_3,
-                          REMEDIATION_COMMIT_4],
+                          REMEDIATION_COMMIT_4, RESTORATION_COMMIT],
 }
 
 
