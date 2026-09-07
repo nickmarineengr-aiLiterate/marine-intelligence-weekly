@@ -41,9 +41,10 @@ QB8_A = QB / "QB8_A.html"
 QB5_A = QB / "QB5_A.html"
 QB3_A = QB / "QB3_A.html"
 QB10_B = QB / "QB10_B.html"
+QB3_B = QB / "QB3_B.html"
 
 GATE = "validate_correction_pass2.py"
-WATCHED = [QB4_E, QB4_C, QB8_A, QB5_A, QB3_A, QB10_B]
+WATCHED = [QB4_E, QB4_C, QB8_A, QB5_A, QB3_A, QB10_B, QB3_B]
 
 MUTATIONS = [
     # ---------------------------------------------------------------- IACS
@@ -178,9 +179,18 @@ MUTATIONS = [
     # ------------------------------------------------------------- CLOSEUP
     ("Q", "widen the close-up scope back to all bulkers and tankers",
      sub_in_file(QB3_A,
-                 "<strong>single side skin bulk carriers only</strong>, under IACS UR Z10.2",
-                 "bulk carriers and oil tankers generally, under IACS UR Z10", count=1),
+                 "so it is <strong>not</strong> an oil tanker requirement",
+                 "and it applies to oil tankers on the same terms", count=1),
      "closeup_scoped_to_single_side_skin_bulk_carriers"),
+
+    ("Q2", "drop the extent and hold scope again, keeping the population right",
+     sub_in_file(QB3_A,
+                 "a close-up examination of at least <strong>25% of cargo hold side shell "
+                 "frames</strong>, their lower end attachments and adjacent shell plating, "
+                 "in a forward cargo hold and one other selected hold",
+                 "a close-up examination of cargo hold side shell frames and their end "
+                 "attachments", count=1),
+     "closeup_extent_restated"),
 
     # --------------------------------------------------------------- AMEND
     ("R", "reintroduce an unescaped '<' at a FRESH site with new wording",
@@ -188,20 +198,30 @@ MUTATIONS = [
                  "<strong>3,000 GT:</strong> threshold for mandatory electronic inclinometers",
                  "<strong>3,000 GT:</strong> ships <3,000 GT are outside the requirement; "
                  "threshold for mandatory electronic inclinometers", count=1),
-     "amend_no_unescaped_lt_before_numeral"),
+     "amend_lt_before_numeral_is_escaped"),
 
-    # An UNCLOSED tag, not a pseudo-tag: the first draft of this mutation wrote
-    # "<on ships over 500 GT>", which has its own ">" and therefore only eats
-    # itself. A browser discards from "<" to the NEXT ">" wherever that is, so
-    # the damaging form is an opening that never closes -- here it swallows
-    # both 2028 and 2029 dates. The source bytes stay complete throughout,
-    # which is the whole point: only a rendered-text check can see this.
-    ("S", "eat two compliance dates with an UNCLOSED tag - source stays intact",
+    # Rewritten after trap 126. Two earlier drafts of this mutation were both
+    # wrong, in opposite directions, and the sequence is the lesson:
+    #   draft 1  "<on ships over 500 GT>" - closes itself, eats only itself
+    #   draft 2  "<em comply ..."          - eats text, and the gate CAUGHT it,
+    #            which felt like proof. It was not: the gate modelled "<" plus
+    #            ANY character as tag-opening, so mutation and gate shared one
+    #            wrong model of HTML and agreed with each other.
+    # A browser opens a tag only on "<" plus an ASCII LETTER. So the damaging
+    # form is an unclosed opening whose name is not a real element, and that is
+    # what the gate now tests against a real element list.
+    ("S", "unclosed non-element opening - the form that actually eats text",
      sub_in_file(QB10_B,
                  "New installations comply immediately from 1 Jan 2028;",
-                 "New installations <em comply immediately from 1 Jan 2028;",
+                 "New installations <clause comply immediately from 1 Jan 2028;",
                  count=1),
-     "amend_2028_compliance_dates_survive_rendering"),
+     "amend_no_unclosed_pseudo_tag_eating_text"),
+
+    ("S2", "a '<' before a numeral is NOT the same defect - hygiene only",
+     sub_in_file(QB10_B,
+                 "(e.g. &lt;150 GT, fishing vessels)",
+                 "(e.g. <150 GT, fishing vessels)", count=1),
+     "amend_lt_before_numeral_is_escaped"),
 
     ("T", "say the formula is gone using 'superseded' instead of 'replaces'",
      sub_in_file(QB10_B,
@@ -244,6 +264,47 @@ MUTATIONS = [
                  "since",
                  "it is now late-2026 and that entire package is already in force", count=1),
      "amend_no_self_dating_currency_claim"),
+    # ---------------------------------------------------- review escapes
+    # Every mutation below was proposed by the clean-context verifier as one
+    # it believed WOULD escape the first draft of the gate. Each did. They are
+    # kept as the standing proof that the checks written to close them work.
+    ("Y1", "wrong lowering-speed MAXIMUM - the provision this record exists to fix",
+     sub_in_file(QB10_B,
+                 "The maximum lowering speed shall be <strong>1.3 m/s</strong>",
+                 "The maximum lowering speed shall be <strong>2.3 m/s</strong>", count=1),
+     "amend_formula_block_maximum_is_1_3_ms"),
+
+    ("Y2", "put Maersk in Premier Alliance - right names, wrong members",
+     sub_in_file(QB8_A,
+                 "<strong>Premier Alliance</strong> (ONE, HMM, Yang Ming",
+                 "<strong>Premier Alliance</strong> (ONE, HMM, Maersk", count=1),
+     "alliance_membership_correct_premier"),
+
+    ("Y3", "delete the age condition from the close-up requirement",
+     sub_in_file(QB3_A,
+                 "The requirement is also <strong>age-conditioned</strong>; this card "
+                 "does not state the age band, because it could not be verified against "
+                 "Z10.2 directly — check the applicable clause before quoting a "
+                 "threshold in an oral. ",
+                 "", count=1),
+     "closeup_is_age_conditioned"),
+
+    ("Y4", "restore the unqualified certificate claim in the CE Oral Tip ONLY",
+     sub_in_file(QB4_C,
+                 "under PR1C B.1.3 that letter states that <em>certain</em> statutory "
+                 "certificates are implicitly invalidated — not all of them — and trading "
+                 "on that basis exposes us",
+                 "operating under either status invalidates our statutory certificates "
+                 "and exposes us", count=1),
+     "pr1c_ce_tip_no_unqualified_certificate_claim"),
+
+    ("Y5", "let QB3_B's memorisation layer drift back to bulk carriers/tankers",
+     sub_in_file(QB3_B,
+                 "<strong>single side skin bulk carriers only</strong> (UR Z10.2; not oil "
+                 "tankers), forward hold + one other selected hold, and age-conditioned.",
+                 "(bulk carriers/tankers), forward hold + one other selected hold.",
+                 count=1),
+     "closeup_sibling_numbers_layer_not_over_broad"),
 ]
 
 

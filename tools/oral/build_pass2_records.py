@@ -26,6 +26,11 @@ from oral_bytes import read_text  # noqa: E402
 DATE = "2026-09-07"
 BASELINE = "05b49d8"
 CONTENT_COMMIT = "78d703c"
+#: The remediation round that closed the three P1s an independent clean-context
+#: review found inside this batch's own declared scope. It is a governing commit
+#: in its own right: two of the records below make claims that only became true
+#: at this commit, and one WITHDRAWS a claim that was false at the first.
+REMEDIATION_COMMIT = "5de0c08"
 
 AUTH = ("MIW PASS 2 RESUMPTION - KNOWN-DEFECT REMEDIATION instruction of "
         "7 September 2026, sections 3-16. The instruction is explicitly NOT a "
@@ -63,6 +68,11 @@ PRIOR_PINS = {
         "action_id": "CORR-G1-010-02",
         "post_edit_digest": "3ecca484502640a396cc33c947649b27544b98fbc10ee6f99b4938c9ebbfd976",
     },
+    "QB3_B.html#q1": {
+        "manifest": "correction_corr_d01s02_hssc_reach_20260907_manifest.json",
+        "action_id": "D01S02-HSSC-01",
+        "post_edit_digest": "d00a9c6b6aca8774e7c1de6ff7d87f3e0b2c448b95381b21885a088bfb3267a4",
+    },
 }
 
 SUPERSEDES_NOTE = ("The predecessor record stays exactly as published. This "
@@ -99,6 +109,7 @@ PRE = {
     "QB5_A.html#q4": "45b6e5b4578a603523c7499a9036951f4a0c9a9b44012b3c811dfae7d2081e40",
     "QB3_A.html#q5": "5eb232c07cc9cd054f50aca416f8a69ac26cafd96892ad8bb652cf34d2c2daf9",
     "QB10_B.html#q1": "3ecca484502640a396cc33c947649b27544b98fbc10ee6f99b4938c9ebbfd976",
+    "QB3_B.html#q1": "d00a9c6b6aca8774e7c1de6ff7d87f3e0b2c448b95381b21885a088bfb3267a4",
 }
 
 COMMON = {
@@ -107,7 +118,7 @@ COMMON = {
     "date": DATE,
     "baseline_commit": BASELINE,
     "authorisation_source": AUTH,
-    "governing_commits": [CONTENT_COMMIT],
+    "governing_commits": [CONTENT_COMMIT, REMEDIATION_COMMIT],
 }
 
 
@@ -202,7 +213,14 @@ def build():
              "markdown bold artefacts closed. Trap Questions: the model answer's 'the "
              "statutory certificates are legally invalidated, and insurance cover may be "
              "voided' rewritten to lead with the trigger distinction. Casualty Link: "
-             "'automatic invalidation of their statutory certificates' softened to B.1.3.",
+             "'automatic invalidation of their statutory certificates' softened to B.1.3. "
+             "REMEDIATED AFTER INDEPENDENT REVIEW: the CE Oral Tip was missed by the first "
+             "attempt and still read 'Operating under either status invalidates our statutory "
+             "certificates', unqualified - in the one layer that is a script for what the "
+             "candidate says to the examiner. Corrected, together with the Stop-Work bullet's "
+             "bare 'without valid statutory certificates or insurance'; and the A.1 line in "
+             "Numbers & Regs now carries A.1.2/A.1.3's three-month window and the "
+             "under-attendance exception.",
              PRE["QB4_C.html#q5"])
     c["correction_action_id"] = "P2-PR1C-01"
     records.append(("correction_corr_pass2_pr1c_suspension_20260907_manifest.json", dict(
@@ -222,7 +240,15 @@ def build():
         authority="PRIMARY - IACS PR1C Rev.7 (November 2024), 'Procedure for Suspension and "
                   "Reinstatement or Withdrawal of Class in Case of Surveys or Conditions of "
                   "Class Going Overdue', retrieved and read this pass from IACS's own hosting, "
-                  "together with Rev.6 for comparison. A.1.1 Special (Renewal) overdue: the "
+                  "together with Rev.6 for comparison. RETRIEVAL ROUTE, recorded because an "
+                  "independent reviewer could not reproduce it and reasonably challenged the "
+                  "PRIMARY claim on that basis: iacs.org.uk refuses a default user agent with "
+                  "HTTP 403, and returns 200 to a browser user agent. Rev.7 is at "
+                  "https://iacs.s3.af-south-1.amazonaws.com/wp-content/uploads/2024/11/"
+                  "18161614/PR-1C-Rev.7-Nov-2024-CLN.pdf and Rev.6 at "
+                  "https://iacs.s3.af-south-1.amazonaws.com/wp-content/uploads/2023/08/"
+                  "10163156/pr1crev6-2.pdf - both on IACS's own S3 bucket, both read in full "
+                  "this pass. A.1.1 Special (Renewal) overdue: the "
                   "5-year Class Certificate expires and 'classification is automatically "
                   "suspended'. A.1.2 Annual, A.1.3 Intermediate: same automatic language. "
                   "A.1.4 continuous survey item: 'subject to a suspension procedure'. A.2.1 "
@@ -275,6 +301,8 @@ def build():
             "The Merchant Shipping Act 2025 Part VI Sec 125/127 material corrected on "
             "15 Jul 2026 is unchanged in substance and still replaces 1958 Sec 334.",
             "SOLAS II-1/3-1 and ISM 10.2 reg-box entries unchanged.",
+            "Every candidate-facing layer now carries the 'certain' qualifier, including the "
+            "CE Oral Tip, which the first attempt missed and which the gate did not read.",
             "No claim that insurance is unaffected - the class warranty analysis is added, "
             "not the opposite overstatement.",
             "No claim that PR1C is a ceiling: it is the harmonised floor, and an individual "
@@ -465,14 +493,29 @@ def build():
              "blog post via an anchor rendered to the candidate as '[reference]' - the only "
              "such placeholder anywhere in the corpus. The blog link is removed and the scope "
              "corrected, with the sibling requirements named so a candidate can place a double "
-             "side skin bulker (Z10.5) and an oil tanker (Z10.1/Z10.4). The '25% of cargo hold "
-             "side shell frames (forward hold + one other selected hold)' figure is NOT "
-             "restated: UR Z10.2 is not held in this repository, the figure entered the corpus "
-             "from the blog, and D01-S02 did not assert it when it corrected the same "
-             "proposition on QB3_B q1. Dropping an unsourced number is the conservative move; "
-             "restating it from a source now identified as tier-6 would be the defect.",
+             "side skin bulker (Z10.5) and an oil tanker (Z10.1/Z10.4). "
+             "REMEDIATED AFTER INDEPENDENT REVIEW: the first attempt at this correction "
+             "removed the '25% of cargo hold side shell frames, forward hold + one other "
+             "selected hold' figure as blog-sourced, dropped the 'can require' modality, "
+             "and dropped the age condition - leaving an UNCONDITIONAL rule. That was wrong "
+             "on the facts: D01-S02 DOES assert the 25% and the hold scope on QB3_B q1 and "
+             "attributes them to UR Z10.2, and it expressly records that the requirement is "
+             "age-conditioned with the band unverified. The bullet is now restated in QB3_B "
+             "q1's own wording - extent, hold scope, 'can require' modality, age condition "
+             "and source gap included - and cross-referenced to it.",
              PRE["QB3_A.html#q5"])
     c["correction_action_id"] = "P2-CLOSEUP-01"
+    sibling = card("QB3_B.html", "q1", "PROPAGATED_FACT_CORRECTION",
+                   "Numbers to Memorise still read '25% - annual close-up survey extent of "
+                   "cargo hold side shell frames (bulk carriers/tankers), forward hold + one "
+                   "other selected hold'. That is the exact over-broad scope this card's own "
+                   "body and reg-box refute, both of which D01-S02 corrected to single side "
+                   "skin bulk carriers under UR Z10.2. The memorisation layer was left behind "
+                   "by that pass and contradicted the card it sits in. Corrected, with the age "
+                   "condition added to the line.",
+                   PRE["QB3_B.html#q1"])
+    sibling["correction_action_id"] = "P2-CLOSEUP-02"
+
     records.append(("correction_corr_pass2_closeup_scope_20260907_manifest.json", dict(
         COMMON,
         origin="pass2_known_defect_remediation",
@@ -503,6 +546,11 @@ def build():
                                  "scope; QB3_A q5 was the one D01-S02's sweep did not reach, "
                                  "because that sweep was scoped to the HSSC token family and "
                                  "this card never contained the token.",
+            "sibling_memorisation_layer": "QB3_B#q1's Numbers block is corrected here as "
+                                          "P2-CLOSEUP-02 - a seventh declared card. Bounded "
+                                          "same-defect propagation, not new discovery: D01-S02 "
+                                          "had already adjudicated the proposition, and one "
+                                          "layer of that card never received it.",
             "citation_class_swept": "'[reference]' as rendered anchor text: one occurrence "
                                     "corpus-wide, now zero. marinegyaan.com as a cited source: "
                                     "this was the only candidate-facing link to it.",
@@ -514,13 +562,17 @@ def build():
             "inspections in five years, maximum 36 months, the IWS substitution limits, the "
             "6-12 month planning timeline - is byte-identical.",
             "The coinciding-surveys list is otherwise unchanged.",
-            "No percentage and no hold count is asserted, because none is held.",
+            "Extent, hold scope, modality and age condition now match QB3_B#q1 exactly - "
+            "this record asserts nothing that record does not, which is a claim the first "
+            "attempt made and did not honour.",
+            "No age BAND is asserted, because none is verified - the source gap is carried "
+            "forward visibly rather than resolved by guessing.",
             "The card's HSSC framing is left as it stands: this is the statutory bottom-"
             "inspection regime, where HSSC is the correct regime, and is not the class-cycle "
             "misattribution trap 112 covers.",
         ],
-        known_traps_entries=[112, 116],
-        cards=[c],
+        known_traps_entries=[112, 116, 127],
+        cards=[c, sibling],
     )))
 
     # --------------------------------------------------------------- AMEND
@@ -534,10 +586,17 @@ def build():
              "headway test-launch requirement for ships >=20,000 GT' replaced by the actual "
              "amended text of III/33.2, its resolution, and the narrowed-not-abolished framing; "
              "the invented rationale ('studies showed the test added no meaningful data on "
-             "dynamic loads at that speed') removed. 1 January 2028 tranche: an unescaped '<' "
-             "in '(e.g. <150 GT, fishing vessels)' escaped to '&lt;' - a browser was reading it "
-             "as a tag open and discarding roughly 150 characters of rendered teaching, "
-             "including the 1 Jan 2028 and 1 Jan 2029 compliance dates that follow it. "
+             "dynamic loads at that speed') removed. 1 January 2028 tranche: a raw '<' in "
+             "'(e.g. <150 GT, fishing vessels)' was escaped to '&lt;' as correct markup "
+             "hygiene. WITHDRAWN AFTER INDEPENDENT REVIEW: the first version of this record "
+             "claimed that raw '<' was deleting about 150 characters of rendered teaching, "
+             "including two entry-into-force dates. That was FALSE. HTML5 emits '<' as a "
+             "literal character unless the next character is an ASCII letter, so '<150 GT' "
+             "always rendered correctly - verified by serving the pre-fix string to a real "
+             "browser and reading the rendered text back, which returned the passage complete "
+             "with both dates. The claim reached a candidate-facing version stamp before it "
+             "was tested. It is withdrawn from the card, from this record, and from "
+             "known_traps 126, which now records the actual lesson. "
              "Regulatory References: the 'MSC.559(108) / MSC.560(108) - Lifeboat ventilation "
              "testing regime' entry rebuilt to separate four instruments candidates conflate, "
              "and a new MSC.482(103) entry added for the 2024 tranche, which had no reference "
@@ -643,9 +702,8 @@ def build():
             "The MSC.520(106) versus MSC.521(106) discrimination the card teaches is unchanged.",
             "The four-year SOLAS cycle framing, and the warning not to conflate it with MARPOL "
             "Annex VI's own timeline, are unchanged.",
-            "No entry-into-force date is altered anywhere in the card; the only date work done "
-            "is the RESTORATION of two 2028/2029 dates that the unescaped '<' was deleting from "
-            "the rendered page.",
+            "No entry-into-force date is altered anywhere in the card, and none was ever "
+            "missing from it - see the withdrawn claim above.",
             "The MSC.552(108) grain reg-box entry, which a prior record pins, is byte-identical "
             "- the new MSC.482(103) entry was anchored on the MSC.559 item being replaced "
             "rather than by inserting before MSC.552, precisely so that pin could not move.",

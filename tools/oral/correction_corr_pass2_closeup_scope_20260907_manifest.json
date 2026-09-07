@@ -5,7 +5,8 @@
  "baseline_commit": "05b49d8",
  "authorisation_source": "MIW PASS 2 RESUMPTION - KNOWN-DEFECT REMEDIATION instruction of 7 September 2026, sections 3-16. The instruction is explicitly NOT a discovery tranche: it authorises work only on already-known unresolved P1/P2 content defects, previously identified source-blocked items, bounded same-defect propagation, and already-classified structural residue. The unresolved queue was reconstructed from repository governance - meoclass1/oral-intelligence/examiner-audit/PASS1_P1_DISPOSITION_REGISTER.json and the two D01 remediation handoffs - and not from the instruction's own list, which the instruction requires and which turned out to matter: the register and the cards disagreed with the instruction on three items.",
  "governing_commits": [
-  "78d703c"
+  "78d703c",
+  "5de0c08"
  ],
  "origin": "pass2_known_defect_remediation",
  "correction_id": "CORR-PASS2-CLOSEUP-SCOPE-20260907",
@@ -15,6 +16,7 @@
  "authority": "HELD IN-REPOSITORY, and its provenance stated rather than re-derived. The governing adjudication is CORR-D01S02-HSSC-REACH-20260907 on QB3_B q1, whose recorded source basis is the IACS UR index read that pass: UR Z10.2 governs single side skin bulk carriers, Z10.5 double side skin, and Z10.1/Z10.4 oil tankers, with cargo hold side shell frames being a single-side-skin feature. That record was independently revalidated by Lane B. This correction propagates a settled adjudication to a sibling site; it does not open a new one, and it deliberately asserts nothing that record did not - in particular no percentage and no hold count.",
  "propagation": {
   "same_defect_swept": "The corpus was searched for 'side shell frames', 'close-up' with 'annual', and 'single side skin'. The corrected QB3_B q1 and this card are the only two sites that stated the scope; QB3_A q5 was the one D01-S02's sweep did not reach, because that sweep was scoped to the HSSC token family and this card never contained the token.",
+  "sibling_memorisation_layer": "QB3_B#q1's Numbers block is corrected here as P2-CLOSEUP-02 - a seventh declared card. Bounded same-defect propagation, not new discovery: D01-S02 had already adjudicated the proposition, and one layer of that card never received it.",
   "citation_class_swept": "'[reference]' as rendered anchor text: one occurrence corpus-wide, now zero. marinegyaan.com as a cited source: this was the only candidate-facing link to it.",
   "derived_surfaces": "NONE. corpus 761 / 86 unchanged.",
   "hub_date": "NOT ADVANCED."
@@ -22,12 +24,14 @@
  "invariants": [
   "The drydock-planning teaching the question actually asks about - two bottom inspections in five years, maximum 36 months, the IWS substitution limits, the 6-12 month planning timeline - is byte-identical.",
   "The coinciding-surveys list is otherwise unchanged.",
-  "No percentage and no hold count is asserted, because none is held.",
+  "Extent, hold scope, modality and age condition now match QB3_B#q1 exactly - this record asserts nothing that record does not, which is a claim the first attempt made and did not honour.",
+  "No age BAND is asserted, because none is verified - the source gap is carried forward visibly rather than resolved by guessing.",
   "The card's HSSC framing is left as it stands: this is the statutory bottom-inspection regime, where HSSC is the correct regime, and is not the class-cycle misattribution trap 112 covers."
  ],
  "known_traps_entries": [
   112,
-  116
+  116,
+  127
  ],
  "cards": [
   {
@@ -37,8 +41,24 @@
    "anchor": "q5",
    "classification": "PRIMARY_CORRECTION",
    "pre_edit_digest": "5eb232c07cc9cd054f50aca416f8a69ac26cafd96892ad8bb652cf34d2c2daf9",
-   "post_edit_digest": "fa3129398b5cbb47b05a56e69725067d8c93b063c89fde40372f88fc7691d246",
-   "what_changed": "The 'Annual Survey Close-Up Extension (bulk carriers/oil tankers)' bullet rewritten. Two defects in one sentence: the requirement was scoped to bulk carriers and oil tankers generally when it belongs to single side skin bulk carriers under IACS UR Z10.2, and the whole claim was cited to a marinegyaan.com blog post via an anchor rendered to the candidate as '[reference]' - the only such placeholder anywhere in the corpus. The blog link is removed and the scope corrected, with the sibling requirements named so a candidate can place a double side skin bulker (Z10.5) and an oil tanker (Z10.1/Z10.4). The '25% of cargo hold side shell frames (forward hold + one other selected hold)' figure is NOT restated: UR Z10.2 is not held in this repository, the figure entered the corpus from the blog, and D01-S02 did not assert it when it corrected the same proposition on QB3_B q1. Dropping an unsourced number is the conservative move; restating it from a source now identified as tier-6 would be the defect."
+   "post_edit_digest": "bf3d42413f9526c219fdb8876fd3ca7244c6c47ac026821e6e1facfbeb81118c",
+   "what_changed": "The 'Annual Survey Close-Up Extension (bulk carriers/oil tankers)' bullet rewritten. Two defects in one sentence: the requirement was scoped to bulk carriers and oil tankers generally when it belongs to single side skin bulk carriers under IACS UR Z10.2, and the whole claim was cited to a marinegyaan.com blog post via an anchor rendered to the candidate as '[reference]' - the only such placeholder anywhere in the corpus. The blog link is removed and the scope corrected, with the sibling requirements named so a candidate can place a double side skin bulker (Z10.5) and an oil tanker (Z10.1/Z10.4). REMEDIATED AFTER INDEPENDENT REVIEW: the first attempt at this correction removed the '25% of cargo hold side shell frames, forward hold + one other selected hold' figure as blog-sourced, dropped the 'can require' modality, and dropped the age condition - leaving an UNCONDITIONAL rule. That was wrong on the facts: D01-S02 DOES assert the 25% and the hold scope on QB3_B q1 and attributes them to UR Z10.2, and it expressly records that the requirement is age-conditioned with the band unverified. The bullet is now restated in QB3_B q1's own wording - extent, hold scope, 'can require' modality, age condition and source gap included - and cross-referenced to it."
+  },
+  {
+   "correction_action_id": "P2-CLOSEUP-02",
+   "file": "QB3_B.html",
+   "path": "meoclass1/QB3_B.html",
+   "anchor": "q1",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "d00a9c6b6aca8774e7c1de6ff7d87f3e0b2c448b95381b21885a088bfb3267a4",
+   "post_edit_digest": "f18f12c30b85990828eaabc5ea9425ea477afd0b1984aedf26bac4da6a40a80a",
+   "what_changed": "Numbers to Memorise still read '25% - annual close-up survey extent of cargo hold side shell frames (bulk carriers/tankers), forward hold + one other selected hold'. That is the exact over-broad scope this card's own body and reg-box refute, both of which D01-S02 corrected to single side skin bulk carriers under UR Z10.2. The memorisation layer was left behind by that pass and contradicted the card it sits in. Corrected, with the age condition added to the line.",
+   "supersedes": {
+    "manifest": "correction_corr_d01s02_hssc_reach_20260907_manifest.json",
+    "action_id": "D01S02-HSSC-01",
+    "post_edit_digest": "d00a9c6b6aca8774e7c1de6ff7d87f3e0b2c448b95381b21885a088bfb3267a4",
+    "note": "The predecessor record stays exactly as published. This correction is a later authorised state descending from that pin, not a rebaseline."
+   }
   }
  ]
 }

@@ -103,15 +103,22 @@ def flatten(markup: str) -> str:
     return re.sub(r"\s+", " ", htmllib.unescape(re.sub(r"<[^>]+>", " ", markup)))
 
 
-def rendered(markup: str) -> str:
-    """What a BROWSER shows, which is not what the source contains.
-
-    An unescaped "<" opens a tag as far as a parser is concerned, and
-    everything up to the next ">" disappears from the page. Stripping tags with
-    a `<[^>]+>` pattern models exactly that, so text lost this way is lost here
-    too -- whereas reading the source bytes would show it present.
-    """
-    return flatten(markup)
+#: Element names a browser will actually open a tag for. A "<" followed by an
+#: ASCII letter that is NOT one of these is the only form that eats text -- and
+#: there are zero such sites in this corpus. See trap 126: the first draft of
+#: this gate modelled "<" + ANY character as tag-opening, which is not how
+#: HTML5 tokenises, and invented a content-loss defect that did not exist.
+HTML_AND_SVG_ELEMENTS = frozenset("""
+a abbr address area article aside audio b base bdi bdo blockquote body br button canvas
+caption circle cite clippath code col colgroup data datalist dd defs del desc details dfn
+dialog div dl dt ellipse em embed feblend fieldset figcaption figure footer foreignobject
+form g h1 h2 h3 h4 h5 h6 head header hgroup hr html i iframe image img input ins kbd label
+legend li line lineargradient link main map mark marker mask menu meta meter nav noscript
+object ol optgroup option output p param path pattern picture polygon polyline pre progress
+q radialgradient rect rp rt ruby s samp script section select slot small source span stop
+strong style sub summary sup svg symbol table tbody td template text textarea textpath tfoot
+th thead time title tr track tspan u ul use var video wbr
+""".split())
 
 
 #: Cues that turn a claim into its own denial. A corrected card frequently has
@@ -307,6 +314,20 @@ def check_pr1c() -> None:
            re.search(r"six\s*\(?6?\)?\s*months?", flat, re.I) is not None,
            "A.4.1")
 
+    # The CE Oral Tip is the sentence the card tells the candidate to SAY, and
+    # the first draft of this gate never opened it -- so the unqualified
+    # "invalidates our statutory certificates" survived there, in the one layer
+    # that reaches an examiner, while every other layer was corrected.
+    tip = layer(c, "CE Oral Tip")
+    tip_over = asserts(tip, r"invalidates (?:our|the|all) statutory certificates"
+                            r"|statutory certificates are invalidated"
+                            r"|(?:all|every) statutory certificate")
+    report("pr1c_ce_tip_no_unqualified_certificate_claim", tip_over is None,
+           "found=%r" % (tip_over.group(0) if tip_over else None))
+    report("pr1c_ce_tip_carries_the_qualifier",
+           re.search(r"certain", tip, re.I) is not None,
+           "the tip must say 'certain', like every other layer")
+
     # Markdown escape artefacts that reached the candidate.
     report("pr1c_no_markdown_escape_artefacts",
            "H\\&" not in c and ":**" not in flat,
@@ -340,6 +361,23 @@ def check_alliance() -> None:
            re.search(r"2M.{0,120}?(?:ended|no longer exists)", flat, re.S | re.I) is not None
            and "January 2025" in flat,
            "stated as ended, with its date")
+
+    # M4: the first draft tested only that the three names appear. The card
+    # could put Maersk in Premier Alliance and stay green.
+    for grouping, members in (("Gemini", ("Maersk", "Hapag-Lloyd")),
+                              ("Ocean Alliance", ("CMA CGM", "COSCO", "Evergreen", "OOCL")),
+                              ("Premier Alliance", ("ONE", "HMM", "Yang Ming"))):
+        best = None
+        for m in re.finditer(re.escape(grouping), flat):
+            span = flat[m.start():m.start() + 240]
+            missing = [x for x in members if x not in span]
+            if best is None or len(missing) < len(best):
+                best = missing
+            if not missing:
+                break
+        report("alliance_membership_correct_%s" % grouping.split()[0].lower(),
+               best == [], "no occurrence carries full membership; best miss=%s"
+               % (best if best else "none"))
 
     report("alliance_cber_expiry_taught",
            "25 April 2024" in flat and re.search(r"expired", flat, re.I) is not None,
@@ -443,9 +481,11 @@ def check_closeup() -> None:
     flat = flatten(c)
 
     report("closeup_scoped_to_single_side_skin_bulk_carriers",
-           re.search(r"single side skin bulk carriers?\s*(?:</strong>)?\s*only"
-                     r"|single side skin bulk carriers only", flat, re.I) is not None,
-           "UR Z10.2 population")
+           re.search(r"single side skin bulk carriers", flat, re.I) is not None
+           and re.search(r"not(?:</strong>)?\s*an oil tanker requirement", flat, re.I)
+           is not None,
+           "population named AND oil tankers excluded -- the proposition, not the "
+           "word 'only'")
     report("closeup_attributed_to_ur_z10_2",
            re.search(r"UR\s*Z10\.2", flat) is not None, "not a blog")
 
@@ -460,10 +500,36 @@ def check_closeup() -> None:
            "marinegyaan" not in c and "[reference]" not in c,
            "tier-6 source and its placeholder anchor text")
 
-    # The correction promised NOT to restate an unsourced figure.
-    report("closeup_no_unsourced_percentage_restated",
-           not re.search(r"25%\s*of cargo hold side shell", flat, re.I),
-           "the figure came from the blog and is not held")
+    # The independent review found this correction had propagated the
+    # POPULATION from QB3_B#q1 and dropped its extent, hold scope, modality and
+    # age condition -- stating as an unconditional rule what the source record
+    # states conditionally. All four are now guarded.
+    report("closeup_extent_restated",
+           re.search(r"25% of cargo hold side shell", flat, re.I) is not None,
+           "UR Z10.2 extent, as QB3_B#q1 attributes it")
+    report("closeup_hold_scope_restated",
+           re.search(r"forward cargo hold and one other", flat, re.I) is not None,
+           "which holds")
+    report("closeup_is_age_conditioned",
+           re.search(r"age-conditioned", flat, re.I) is not None,
+           "the qualification the source record makes")
+    report("closeup_modality_is_can_require",
+           re.search(r"can require", flat, re.I) is not None,
+           "'can require', not 'includes' -- QB3_B#q1's own modality")
+
+    # Cross-card: this record's entire authority is QB3_B#q1, so a check that
+    # cannot see the two disagree cannot certify the propagation.
+    sib_flat = flatten(teaching(card("QB3_B.html", "q1")))
+    for prop, pat in (("population", r"single side skin bulk carriers"),
+                      ("extent", r"25% of cargo hold side shell"),
+                      ("age_condition", r"age-conditioned")):
+        report("closeup_agrees_with_qb3b_q1_on_%s" % prop,
+               (re.search(pat, flat, re.I) is not None)
+               == (re.search(pat, sib_flat, re.I) is not None),
+               "QB3_A#q5 and QB3_B#q1 must not diverge")
+    sib_over = asserts(sib_flat, r"\(bulk carriers/tankers\)")
+    report("closeup_sibling_numbers_layer_not_over_broad", sib_over is None,
+           "QB3_B#q1's own memorisation layer contradicted its body")
 
     report("closeup_drydock_teaching_preserved",
            "36 months" in flat and re.search(r"twice in", flat, re.I) is not None,
@@ -502,6 +568,16 @@ def check_amend() -> None:
         report("amend_%s_cites_msc554" % name,
                "MSC.554(108)" in text, "the resolution that actually did it")
 
+    # M1: the first draft read "Administration may accept" and never read the
+    # figure, so 1.3 could be changed to 2.3 in the very provision this record
+    # exists to fix and the gate stayed green.
+    for name, text in (("formula_block", formula_layer), ("numbers_block", numbers_layer)):
+        maxima = set(re.findall(r"maximum(?:\s+\w+){0,4}?\s+(?:is\s+|shall be\s+)?"
+                                r"(\d+\.\d+)\s*m/s", text, re.I))
+        report("amend_%s_maximum_is_1_3_ms" % name, maxima == {"1.3"},
+               "the numeral itself, not the discretion clause; found=%s"
+               % (sorted(maxima) or "none"))
+
     report("amend_maximum_is_administration_variable",
            re.search(r"Administration may accept", flat, re.I) is not None,
            "6.1.2.10 is a default, not an absolute")
@@ -520,16 +596,25 @@ def check_amend() -> None:
     report("amend_cites_msc482", "MSC.482(103)" in flat,
            "the 2024 tranche had no reference at all")
 
-    # -- the rendering defect, checked as a BROWSER sees it -----------------
-    # This is the check the source-side gates could not express: the source
-    # bytes were complete, and the teaching was still gone from the page.
-    page_text = rendered(raw)
-    report("amend_2028_compliance_dates_survive_rendering",
-           "1 Jan 2028" in page_text and "1 Jan 2029" in page_text,
-           "an unescaped '<' was deleting both from the rendered card")
-    report("amend_no_unescaped_lt_before_numeral",
+    # -- markup hygiene, stated as what it actually is ----------------------
+    # Trap 126: "<150 GT" renders correctly, so escaping it fixed nothing that
+    # was broken. The check is kept because the escaping is correct markup, but
+    # it no longer claims to be preventing content loss.
+    report("amend_lt_before_numeral_is_escaped",
            re.search(r"<\d", raw) is None,
-           "the mechanism, not just this instance")
+           "markup hygiene -- NOT content loss; see trap 126")
+
+    # The mechanism that DOES eat text: "<" plus a letter that is not an
+    # element name. Checked against a real element list rather than modelled.
+    bogus = [m.group(1) for m in re.finditer(r"<(/?[A-Za-z][A-Za-z0-9-]*)", raw)
+             if m.group(1).lstrip("/").lower() not in HTML_AND_SVG_ELEMENTS]
+    report("amend_no_unclosed_pseudo_tag_eating_text", not bogus,
+           "found=%s" % (sorted(set(bogus))[:4] or "none"))
+
+    # The dates themselves, asserted directly rather than via a parser model.
+    report("amend_2028_and_2029_compliance_dates_present",
+           "1 Jan 2028" in flat and "1 Jan 2029" in flat,
+           "the pilot-transfer compliance dates")
 
     # -- resolution custody -------------------------------------------------
     report("amend_msc535_named_as_ventilation_requirement",
