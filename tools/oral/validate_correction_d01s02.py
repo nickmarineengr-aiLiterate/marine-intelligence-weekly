@@ -487,9 +487,18 @@ def main() -> int:
 
     hssc = json.loads(read_text(
         HERE / "correction_corr_d01s02_hssc_reach_20260907_manifest.json"))
+    # The gap lives in `note`, not a field of its own: `source_gap` is not in
+    # the schema's closed field set and an unclassified field fails by design.
     report("record_hssc_declares_the_source_gap",
-           "source_gap" in hssc and "Z10.2" in hssc["source_gap"],
+           "SOURCE GAP" in hssc.get("note", "")
+           and "Z10.2" in hssc.get("note", ""),
            "an unretrievable source is recorded, not papered over")
+    # Exactly one origin per record - the schema's rule, asserted locally so it
+    # fails here rather than in the corpus-wide run twenty minutes later.
+    report("record_hssc_has_exactly_one_primary_correction",
+           sum(1 for c in hssc["cards"]
+               if c["classification"] == "PRIMARY_CORRECTION") == 1,
+           "one reported defect; the rest are scope-pass or propagation")
 
     # ============ controls, untouched ===================================
     for label, path, anchor, digest in (
