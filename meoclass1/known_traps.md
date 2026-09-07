@@ -3331,31 +3331,107 @@ Maslow answer to contain a false citation, so the regulatory-hook column of a so
 table is read as decoration rather than as a claim. It is a claim, and a candidate will
 recite it.
 
-### 126. An unescaped `<` before a numeral silently deletes rendered teaching
+### 126. A regex tag-stripper is not an HTML parser, and the gap between them invented a defect
 
-`QB10_B#q1` contained `(e.g. <150 GT, fishing vessels)`. A browser reads `<150 GT,` as the
-start of a tag and discards everything up to the next `>` — here, about 150 characters,
-including *both* entry-into-force dates for the 2028 pilot transfer arrangements. The
-markup was intact, the file was well-formed enough to render, the card count was right,
-and the teaching was gone from the page.
+`QB10_B#q1` contained `(e.g. <150 GT, fishing vessels)`. Extracting the card's visible
+text with the toolchain's usual `re.sub(r"<[^>]+>", " ", …)` showed the sentence ending
+mid-parenthesis and colliding with the next clause: *"subject to the usual V/1.4 exemptions
+(e.g. Why: pilot transfer accidents…"*. About 150 characters were missing, including both
+2028 and 2029 compliance dates.
 
-This defect is invisible to every check the repository runs against the source bytes,
-because the source bytes are complete. It is only visible in the *rendered* text.
+I concluded a browser was eating them, corrected the card, wrote it into the version stamp
+as candidate-facing fact, recorded it as a manifest invariant, built a gate check and a
+mutation around it, and censused five more "affected" sites as remaining P1 debt.
 
-A census of `<` immediately followed by a digit found six candidate-facing sites in five
-files, plus harmless occurrences inside `<script>` loop conditions:
+**All of that was wrong.** An independent review disputed it, and a real browser settles it.
+Serving the pre-fix string and reading the rendered text back:
 
-| File | What is being eaten |
-|---|---|
-| `QB10_B.html` | `<150 GT` — fixed in this pass |
-| `QB2_A.html` | `<0.01%` and `<0.5 m³/t` |
-| `QB2_F.html` | `<30 m` |
-| `QB5_I.html` | `<75 dB(A)` |
-| `QB6_D.html` | `<130 RPM` |
+```
+exemptions (e.g. <150 GT, fishing vessels). New installations comply
+immediately from 1 Jan 2028; existing arrangements by first survey
+after 1 Jan 2029. ENDMARKER
+```
 
-**Every one of these is a regulatory or technical threshold** — the exact content class
-where silent deletion is most damaging, because "less than" is where the numbers live.
-Compare with the extraction convention used throughout the toolchain, which strips tags
-from the source and therefore *sees* the text a browser throws away: a source-side
-extractor and a browser disagree about this file, and the browser is the one the candidate
-uses.
+Nothing was ever lost. HTML5 tokenisation is explicit: in the tag open state, anything
+other than an ASCII letter, `!`, `/` or `?` after `<` is a parse error, the `<` is emitted
+as a literal character, and the parser reconsumes in the data state. `<1` is text. Only
+`<` followed by a **letter** opens a tag — and in the same probe, `unclosed <em comply …`
+rendered as the single word `unclosed`, everything after it swallowed.
+
+A corpus census for that genuinely damaging form — `<` plus a letter that is not a real
+element name — returns **zero sites across all 224 pages**. The 75 distinct tag-like names
+in `meoclass1/` are all real HTML or SVG elements. The defect class does not exist here.
+
+The escaping to `&lt;` was kept, because it is correct markup regardless. Everything
+claimed about its effect was withdrawn.
+
+**Three compounding lessons, and the third is the expensive one.**
+
+*The tool disagreed with the browser, and I believed the tool.* `<[^>]+>` is a decent
+approximation of tag stripping and a bad model of a parser. It cannot see that `<1` is
+text, so it deletes to the next `>` and reports damage that only exists inside itself.
+
+*A gate can encode a fictional failure mode.* `amend_2028_compliance_dates_survive_rendering`
+passed, and its mutation was CAUGHT — because the mutation was written against the same
+wrong model. A green check and a caught mutation prove the gate is self-consistent, not
+that it describes reality. Nothing in a mutation suite can catch this: the suite inherits
+the author's model of the defect.
+
+*A false claim in a version stamp is published to candidates.* This one reached the card
+footer and a manifest invariant before anyone tested it, and the correction that carried
+it was otherwise sound. Verify the MECHANISM, not just the symptom — especially when the
+symptom is produced by your own extractor.
+
+**Where the extraction convention is still right:** stripping tags from source is the
+correct way to read teaching text, and it is what every content gate in `tools/oral/` does.
+The failure was not using it; it was treating its output as evidence about a *browser*.
+When a claim is about what a candidate SEES, render it.
+
+### 127. Propagating a proposition means carrying its qualifications, not just its subject
+
+`CORR-PASS2-CLOSEUP-SCOPE` propagated the annual close-up requirement from `QB3_B#q1` to
+`QB3_A#q5`, and named that card as its entire authority. The source says:
+
+> The annual survey itself — not just the special survey — **can require** a close-up
+> examination of at least **25% of cargo hold side shell frames**, their lower end
+> attachments and adjacent shell plating, in a forward cargo hold and one other selected
+> hold … The requirement is also **age-conditioned**. This card does not state the age
+> band, because it could not be verified against Z10.2 directly.
+
+What arrived on `QB3_A#q5` was:
+
+> On those ships the annual survey itself **includes** close-up examination of cargo hold
+> side shell frames and their end attachments, so it is not held over to the special survey.
+
+The population survived. The **extent**, the **hold scope**, the **modality** and the **age
+condition** did not — and "can require, age-conditioned" became "includes". The record
+claimed it *"deliberately asserts nothing that record did not"*. It asserted an
+unconditional rule where its source asserted a conditional one, so a candidate would learn
+that a two-year-old bulker gets an annual close-up of its side shell frames.
+
+The 25% was dropped for a reason that sounded like discipline: the figure had entered the
+corpus through a tier-6 blog, so restating it looked like laundering a bad source. But
+`QB3_B#q1` had already re-attributed that same figure to **UR Z10.2** in the D01-S02 pass.
+Deleting it was not conservatism; it was discarding an adjudication that had already been
+made, and it left the bullet weaker AND broader than the source it cited.
+
+**Two rules, and the second is the one that bites.**
+
+*A propagation is only faithful if the qualifications travel.* Population, extent, scope,
+modality and conditions are one proposition. Carrying the subject and dropping the limits
+does not narrow the claim, it widens it — the most dangerous direction, because the
+resulting sentence is shorter and reads more confidently.
+
+*Check the sibling before deciding a figure is unsourced.* The question is not "where did
+this number originally come from" but "what does the corpus currently attribute it to".
+`QB3_B#q1` answered that, and reading it was already required — it was the record's only
+authority.
+
+The reverse defect was live in the same pair: `QB3_B#q1`'s own Numbers block still scoped
+the 25% to "(bulk carriers/tankers)", contradicting the body and reg-box that D01-S02 had
+corrected. One proposition, two cards, and each held a different half of it wrong.
+
+**The gate now asserts the two cards AGREE**, on population, extent and age condition. A
+propagation record whose gate cannot see a contradiction it created cannot certify the
+propagation — and until this check existed, none of the six Pass-2 checks compared a card
+to anything outside itself.
