@@ -346,10 +346,54 @@ def main() -> int:
                           man["baseline_commit"], "HEAD", "--",
                           "meoclass1/pastpapers"],
                          cwd=str(REPO), capture_output=True)
+    # "No past-paper file changed at all" was the right check while no past
+    # paper had been corrected. QP2506 q2 has since been corrected under
+    # CORR-D01-NETZERO-CURRENTNESS-20260907 - a source-map clause that made a
+    # claim about the FUTURE of the sitting, not about the sitting - so the
+    # blanket form now fails on an authorised and correct edit.
+    #
+    # What this check actually protects is the EXAMINER'S WORDING. That is
+    # what "sitting-anchored" means, and it is what must never be modernised.
+    # So the check now asserts the property instead of the proxy: any changed
+    # past paper must be declared in an authorised correction record, and no
+    # question stem may differ from its baseline.
+    changed = [x for x in out.stdout.decode("utf-8", "replace").split()
+               if x.strip()]
+    declared = set()
+    for man_path in sorted(HERE.glob("correction_*_manifest.json")):
+        try:
+            m2 = json.loads(read_text(man_path))
+        except Exception:                                   # noqa: BLE001
+            continue
+        for c in m2.get("cards", []):
+            declared.add(c.get("path"))
+    # A correction whose target the CARD schema cannot digest is recorded in a
+    # governance document instead, so that document is a declaration too.
+    for doc in sorted((REPO / "meoclass1/oral-intelligence/examiner-audit")
+                      .glob("*NON_CARD*.md")):
+        declared.update(re.findall(r"meoclass1/[\w/.-]+\.html", read_text(doc)))
+    undeclared = [x for x in changed if x not in declared]
+
+    stems_moved = []
+    for rel in changed:
+        was = subprocess.run(["git", "show", "%s:%s"
+                              % (man["baseline_commit"], rel)],
+                             cwd=str(REPO), capture_output=True)
+        if was.returncode != 0:
+            continue
+        before = was.stdout.decode("utf-8", "replace")
+        now = read_text(REPO / rel)
+        rx = re.compile(r'<div class="(?:q-text|q-txt|cs-qtitle|exam-q|qa-q)"'
+                        r'[^>]*>(.*?)</div>', re.S)
+        if sorted(rx.findall(before)) != sorted(rx.findall(now)):
+            stems_moved.append(rel)
+
     report("past_papers_were_not_modernised",
-           out.returncode == 0 and not out.stdout.strip(),
-           "%d sitting-anchored files, 0 changed since %s"
-           % (len(pp), man["baseline_commit"]))
+           out.returncode == 0 and not undeclared and not stems_moved,
+           "%d sitting-anchored files; %d changed; undeclared: %s; "
+           "examiner stems moved in: %s"
+           % (len(pp), len(changed), undeclared or "none",
+              stems_moved or "none"))
     report("record_states_the_surface_policy",
            "sitting-anchored" in man["propagation"]["surface_policy"],
            "policy is in the record, not only in the code")

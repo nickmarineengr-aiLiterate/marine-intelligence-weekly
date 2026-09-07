@@ -34,6 +34,7 @@ sys.path.insert(0, str(HERE))
 
 from oral_bytes import read_text                                  # noqa: E402
 from validate_batch_h_series import card_digests, _balanced_end   # noqa: E402
+from census_known_defect_families import rel_of                   # noqa: E402
 
 FAILS: list[str] = []
 CHECKS = 0
@@ -54,6 +55,12 @@ def report(name: str, ok, detail: str = "") -> None:
 
 def flat(raw: str) -> str:
     return re.sub(r"\s+", " ", htmllib.unescape(re.sub(r"<[^>]+>", " ", raw)))
+
+
+def without_provenance(text: str) -> str:
+    """A version stamp quotes what it removed - strip it first."""
+    return re.sub(r'<span class="q-version">.*?</span>', " ", text,
+                  flags=re.S)
 
 
 def teaching(block: str) -> str:
@@ -119,12 +126,26 @@ def main() -> int:
                          r"(?:operates?\s+on|runs?\s+on)[^.]{0,40}HSSC", t9, re.I)
            and not re.search(r"\b(?:5-year|five-year)\s+HSSC", t9, re.I),
            "no 'class system operates on a 5-year HSSC framework'")
-    report("RC01_IACS_HSSC_attribution_gone_corpus_wide",
-           not any("IACS HSSC" in read_text(p)
-                   for p in sorted(QB.rglob("*.html")))
-           and not any("IACS HSSC" in read_text(p)
-                       for p in sorted((REPO / "docs").rglob("*.md"))),
-           "HSSC guidelines are an IMO Assembly instrument, not an IACS one")
+    # PROVENANCE STRIPPED. The D01-S02 corrections added version stamps that
+    # QUOTE "IACS HSSC" in order to record its removal, and this check read
+    # them as the defect - known_traps #89, in the very gate written to stop
+    # a related failure.
+    #
+    # NOTE ON WHAT THIS CHECK IS WORTH. It asserts the absence of a STRING.
+    # D01-S02 proved that is not enough: the same PROPOSITION survived in six
+    # sites that never contained the token. The proposition-scoped control now
+    # lives in validate_correction_d01s02.py; this one is kept as the narrower
+    # companion it always was, not as evidence that the defect is gone.
+    _no_token = []
+    for p in list(sorted(QB.rglob("*.html"))):
+        if "IACS HSSC" in without_provenance(read_text(p)):
+            _no_token.append(rel_of(p))
+    for p in sorted((REPO / "docs").rglob("*.md")):
+        if "IACS HSSC" in read_text(p):
+            _no_token.append(str(p.relative_to(REPO)))
+    report("RC01_IACS_HSSC_attribution_gone_corpus_wide", not _no_token,
+           str(_no_token or "none - and see validate_correction_d01s02.py for "
+                            "the PROPOSITION check this one cannot make"))
     report("RC01_HSSC_named_as_statutory_where_it_is_mentioned",
            re.search(r"statutory[^.]{0,120}HSSC|HSSC[^.]{0,120}statutory",
                      t9, re.I) is not None,
@@ -348,10 +369,29 @@ def main() -> int:
         live = card_digests(read_text(QB / path))
         for rec in man["cards"]:
             got = live[rec["anchor"]]
+            # A LATER authorised correction may have moved the same card. That
+            # is supersession, not drift: this record's pin describes the state
+            # IT produced, and D01-S02 corrected q1 and q11 again the same day.
+            # The check must therefore accept "this pin, or a pin declared by a
+            # record that supersedes it" - refusing that would force every new
+            # correction to rewrite its predecessor's history.
+            superseded_by = [
+                m2["correction_id"]
+                for m2 in (json.loads(read_text(x))
+                           for x in sorted(HERE.glob("correction_*_manifest.json")))
+                if m2.get("correction_id") != man.get("correction_id")
+                for c2 in m2.get("cards", [])
+                if c2.get("path") == rec.get("path")
+                and c2.get("anchor") == rec.get("anchor")
+                and c2.get("post_edit_digest") == got
+                and c2.get("pre_edit_digest") == rec["post_edit_digest"]]
             report("record_%s_%s_post_digest_matches_the_bytes"
                    % (name, rec["anchor"]),
-                   rec["post_edit_digest"] == got,
-                   "declared %s" % rec["post_edit_digest"][:16])
+                   rec["post_edit_digest"] == got or bool(superseded_by),
+                   "declared %s%s" % (rec["post_edit_digest"][:16],
+                                      "" if rec["post_edit_digest"] == got
+                                      else " - SUPERSEDED by %s"
+                                           % ", ".join(superseded_by)))
             report("record_%s_%s_pre_digest_differs_from_post"
                    % (name, rec["anchor"]),
                    rec["pre_edit_digest"] != rec["post_edit_digest"],

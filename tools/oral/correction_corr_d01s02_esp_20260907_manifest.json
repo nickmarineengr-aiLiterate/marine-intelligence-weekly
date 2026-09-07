@@ -1,0 +1,74 @@
+{
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "d01_s02_study_path_remediation",
+ "date": "2026-09-07",
+ "baseline_commit": "4cdba1f",
+ "governing_commits": [],
+ "authorisation_source": "MIW D01-S02 STUDY-PATH REMEDIATION instruction of 7 September 2026, sections 4-16, consuming the approved Lane-B audit at F:/MIW-Study-Assurance b1b9092 (docs/study/assurance/D01/D01-S02.json and docs/study/assurance/handoffs/D01-S02_REMEDIATION_CANDIDATES.md). Lane B was read only; not modified, merged or cherry-picked.",
+ "correction_id": "CORR-D01S02-ESP-20260907",
+ "title": "QB3_B q5 cited A.1104(29) as the current ESP guidelines, put chemical tankers inside statutory ESP scope, and asserted a 5-year age threshold for applicability. RC-03, RC-04, RC-06, plus two propagation sites.",
+ "candidate_claim": "Not a candidate report. Lane-B audit D01-S02.",
+ "candidate_verdict": "UPHELD, and independently re-adjudicated rather than accepted. Section 9 of the instruction required the chemical-tanker scope to be adjudicated against primary text, not taken from the handoff, and it was.",
+ "authority": "PRIMARY, retrieved and read this pass: IMO res. A.1049(27), International Code on the Enhanced Programme of Inspections during Surveys of Bulk Carriers and Oil Tankers, 2011 (2011 ESP Code), adopted 30 November 2011. Annex A part A 1.1.1: 'The Code should apply to all self-propelled bulk carriers of 500 gross tonnage and above other than double-side skin bulk carriers'. The threshold is TONNAGE; there is NO age threshold for applicability. The word 'chemical' does not appear in any application clause. The preamble recites A.744(18) as the earlier Guidelines made mandatory by SOLAS regulation XI-1/2 - so 'replaces A.744(18)' is not the language used and is not asserted. A.1104(29) is Survey Guidelines under the HSSC, 2015, adopted 2 December 2015: an Assembly numbered (29) sat in 2015, so the card's '2019' was impossible on its face. Current HSSC guidance is A.1207(34). Chemical tankers have an enhanced hull survey regime under IACS UR Z10 - a CLASS regime, not the statutory Code.",
+ "propagation": {
+  "same_defect_propagate": "Family E found the identical proposition in two further cards, both corrected in this record: QB1_F#q16 and QB1_G#q30 each answered a trap question with 'the statutory ESP Code applies only to bulk carriers and oil/chemical tankers'. Both are TRAP ANSWERS, so the defect sat in the layer a candidate reads precisely to avoid being caught out. A FIFTH and SIXTH site were found only after the scope check was strengthened: QB1_F#q16's 'Target Vessels' list and QB1_G#q30's 'It applies explicitly to oil tankers, chemical tankers, and bulk carriers'. The first version of that check required the word 'ESP' within 140 characters of the ship list, and both sentences name ESP in the PREVIOUS sentence. The check now reads the scope statement itself.",
+  "different_context": "QB4_A (chemical tanker STCW training), QB5_B (IG system on chemical tankers) and QB8_B (P&A Manual) mention chemical tankers in unrelated contexts and are untouched.",
+  "cross_answer_control": "QP2511-Q5, a GREEN item in this same session, already states it correctly - 'the 2011 ESP Code, adopted as resolution A.1049(27) on 30 November 2011' and 'Annex A covers bulk carriers, Annex B oil tankers'. The corpus disagreed with itself, and the written answer was right.",
+  "derived_surfaces": "NONE. corpus 761 / 86 unchanged.",
+  "hub_date": "NOT ADVANCED."
+ },
+ "invariants": [
+  "SOLAS XI-1/2 as the mandating regulation is retained - it was correct.",
+  "Combination and ore carriers stay in scope: they fall within the SOLAS definition of a bulk carrier.",
+  "'Replaces A.744(18)' is NOT asserted; the resolution recasts the earlier Guidelines and the preamble's own language is used.",
+  "The 5/10/15-year escalation is retained as a SCOPE escalation, which is what it is."
+ ],
+ "known_traps_entries": [
+  117
+ ],
+ "cards": [
+  {
+   "correction_action_id": "D01S02-ESP-01",
+   "file": "QB3_B.html",
+   "path": "meoclass1/QB3_B.html",
+   "anchor": "q5",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "f3f2a7164cf008fc834af84900574072ae1b5863f52f292db6aacc36d669e182",
+   "post_edit_digest": "3893726d804e5b998d01724f76aa4072cef42d5bad3fe987a85de8e9c6ad3d71",
+   "what_changed": "REG-BOX row replaced: A.1049(27) with its full title, adoption date and SOLAS XI-1/2 mandate, plus an explicit note that A.1104(29) is an HSSC instrument and not an ESP one. Chemical tankers removed from the 60-second ship list and from 'Ship Types and Scope', with a new NOT-applicable line naming the class UR Z10 regime that does cover them. The 5-year age threshold removed from the 15-second answer, the 'Age Threshold' bullet and 'Numbers to Memorise', replaced by the 500 GT threshold with age re-stated as driving SCOPE."
+  },
+  {
+   "correction_action_id": "D01S02-ESP-02",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q16",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "3541b30dbb500e8574308b4e3170e564521bc612dcb8523458ee4158b11a6784",
+   "post_edit_digest": "7db658977afb0e0c7744470963e0ac5634a6603f3b13f10657a0b24c3f9916fb",
+   "what_changed": "Trap answer 'the statutory ESP Code legally applies only to bulk carriers and oil/chemical tankers' replaced by bulk carriers (Annex A) and oil tankers (Annex B) of 500 GT and above, with chemical tankers named as OUT of statutory scope and their class UR Z10 regime named.",
+   "supersedes": {
+    "manifest": "correction_corr_t5_ddcascade_20260906_manifest.json",
+    "action_id": "T5-DDCASCADE-14",
+    "post_edit_digest": "3541b30dbb500e8574308b4e3170e564521bc612dcb8523458ee4158b11a6784",
+    "note": "This correction edits a card an earlier authorised record already pinned. The claim makes the descent explicit so the supersession resolver can prove one continuous line rather than reporting a PIN_MISMATCH - a later correction must not require its predecessor to rewrite history."
+   }
+  },
+  {
+   "correction_action_id": "D01S02-ESP-03",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q30",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "b2fedcbd6919a1072b0bba1e15b294e6a906632b56eda311afedbf6a1c745aa3",
+   "post_edit_digest": "2b2ab6f1f154cc57bf194c7235fd4c15ae6bfcc0813e5c5c64786a70734e7350",
+   "what_changed": "The same trap answer, same correction.",
+   "supersedes": {
+    "manifest": "correction_corr_t5_ddcascade_20260906_manifest.json",
+    "action_id": "T5-DDCASCADE-28",
+    "post_edit_digest": "b2fedcbd6919a1072b0bba1e15b294e6a906632b56eda311afedbf6a1c745aa3",
+    "note": "This correction edits a card an earlier authorised record already pinned. The claim makes the descent explicit so the supersession resolver can prove one continuous line rather than reporting a PIN_MISMATCH - a later correction must not require its predecessor to rewrite history."
+   }
+  }
+ ]
+}

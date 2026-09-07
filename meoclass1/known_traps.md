@@ -3130,3 +3130,93 @@ And the first version of that scan **reported itself**, because its needle was w
 as a literal escape and so contained the byte it was hunting. Build the needle with
 `chr(8)`. A detector that cannot be written safely in the same language it detects is a
 detector that will find itself first.
+
+### 116. The string went away. The proposition did not.
+
+`CORR-D01-HSSC-CLASS-20260907` corrected the class-cycle-is-HSSC defect in `QB3_B#q9`,
+swept for propagation, and gated the result with `"IACS HSSC" appears nowhere`. The string
+genuinely vanished. The commit message said so, and it was **literally true**.
+
+An independent audit then found the **proposition** alive in six sites, none of which
+contained the token:
+
+| where | what it said |
+|---|---|
+| q1 60-second | "follows the **IACS Harmonized System of Survey and Certification (HSSC)** cycle" |
+| q11 15-second | "resets the 5-year **HSSC** clock" |
+| q11 60-second | "resets the 5-year **HSSC** cycle" |
+| q11 heading | "Post-Renewal **HSSC** Matrix" |
+| q11 CE Oral Tip | "the statutory **HSSC** intermediate matrix" |
+| q11 Examiner Chain | "Resetting **HSSC** Timeline" |
+
+Both cards were left **contradicting themselves** — a corrected REG-BOX saying HSSC is a
+separate statutory regime, and a memorisation-weighted layer saying the class cycle is
+HSSC. **A partial correction is worse than none: it gives the defect an alibi.**
+
+This is trap #101 ("enumerating renderings never converges") reproduced one session after
+it was written down, by the author of #101.
+
+**Two rules came out of it.** First, gate the PROPOSITION: a matcher that folds the
+acronym and the spelled-out name, at sentence scope, with an explicit acquittal for
+sentences that draw the distinction. Second, **guard every candidate-facing layer by
+name** — a card-wide "is the phrase present somewhere" test cannot tell a corrected
+REG-BOX from a defective 15-second answer, which is exactly the state these cards were in.
+
+The proposition-scoped control then found **six further cards** the grep families had
+missed: `QB1_F#q8`, `#q13`, `#q14`, `#q16`, `QB1_G#q30`, `#q31`, `QB1_I#q5`. The grep and
+the token check both said the corpus was clean. It was not.
+
+### 117. A narrow check and a broad check fail in opposite directions, and both are wrong
+
+Building the proposition matcher took four rounds, alternating between the two failures:
+
+- **Too narrow:** the ESP scope check required the word "ESP" within 140 characters of the
+  ship list. Two sites wrote "…the ESP Code. **It applies** to oil tankers, chemical
+  tankers…" — the subject in the previous sentence — and walked straight past. Two more
+  scope sites were found only after the check was rewritten to read the scope statement
+  itself.
+- **Too broad:** the same matcher then flagged `QB1_G#q24` ("the Cargo Ship Safety
+  Certificate under the **HSSC scheme**") and `QB2_A#q15` ("the ICOF's 5-year **HSSC
+  cycle**"). Both are **correct**: those are statutory certificates, and a statutory
+  certificate's survey cycle genuinely *is* HSSC.
+
+**The fix was to name what the defect actually is.** HSSC legitimately *is* a framework
+and a scheme; what it does not have is a **cycle** or a **clock** that a *class* survey
+runs on. Dropping "framework" and "scheme" from the noun list, and keeping "cycle",
+"clock", "matrix", "timeline", separated the two.
+
+**Widening a check until it fires on correct content is not thoroughness.** It forces you
+to either edit right answers or add exceptions until the check means nothing — and it
+drags in unrelated cards the batch was scoped to leave alone.
+
+### 118. A record must declare where its edit LANDED, not where it was aimed
+
+An `A.1156(32)` → `A.1207(34)` fix was written with `count=1` and replaced the **first**
+occurrence in the file — which was in `QB1_F#q7`, a card explicitly out of batch, not the
+`q14` site it was aimed at. Nothing crashed. The card is better for it. But the record
+declared `q14`, and the change to `q7` was **undeclared**.
+
+`every_pinned_state_is_live_or_a_proven_ancestor` caught it as `AMBIGUOUS_ROOT`, and
+tracing where the edit had gone turned up a **third** instance in `q13`.
+
+**`count=1` targets a position, not a card.** Anchor a replacement inside the card's own
+byte span, or verify afterwards which anchors moved. The edit was declared rather than
+reverted — reverting would have restored a stale instrument this pass had already
+identified — but the declaration is not optional.
+
+### 119. A later correction must not require its predecessor to rewrite history
+
+Correcting cards that three earlier records had already pinned turned four gates red at
+once: `PIN_MISMATCH` on six cards, a typed-block invariant, and a token check reading the
+new version stamps — which **quote** the old string in order to record its removal
+(trap #89, in the gate written to prevent a related failure).
+
+None of those was a defect in the earlier records. They are what supersession looks like
+when it has not been declared. The repository already has the mechanism —
+`oral_supersession`, and a `supersedes` claim naming the predecessor manifest, action id
+and post-digest — and **the resolver treats a card with no claim as dormant**, which falls
+back to a plain pin comparison and fails.
+
+**Ten claims later, every chain resolved.** The lesson is not "add a claim"; it is that a
+correction system needs a way for a record to be *superseded without being falsified*, and
+if you find yourself editing a predecessor's pins, you have skipped it.

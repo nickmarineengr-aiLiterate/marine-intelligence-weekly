@@ -1,0 +1,49 @@
+{
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "d01_s02_study_path_remediation",
+ "date": "2026-09-07",
+ "baseline_commit": "4cdba1f",
+ "governing_commits": [],
+ "authorisation_source": "MIW D01-S02 STUDY-PATH REMEDIATION instruction of 7 September 2026, sections 4-16, consuming the approved Lane-B audit at F:/MIW-Study-Assurance b1b9092 (docs/study/assurance/D01/D01-S02.json and docs/study/assurance/handoffs/D01-S02_REMEDIATION_CANDIDATES.md). Lane B was read only; not modified, merged or cherry-picked.",
+ "correction_id": "CORR-D01S02-CMS-PMS-20260907",
+ "title": "QB1_supplementary q4 listed PMS (UR Z20) entitlements under a CMS (UR Z18) heading and reserved cylinder liners to the surveyor. RC-05, RC-07.",
+ "candidate_claim": "Not a candidate report. Lane-B audit D01-S02.",
+ "candidate_verdict": "UPHELD. The card contradicted itself in FIVE places: the 15-second, 60-second, scripted Full Oral Answer and Numbers panel all state the restriction correctly, and the Trap Questions section warns that candidates 'often wrongly assume all engine room machinery falls under CMS'. The wrong statement occupied the most detailed and most authoritative-looking section, so a candidate studying the detail walks into the trap the same card warns against.",
+ "authority": "Indian Register of Shipping Technical Circular 016/2014, 'Machinery Surveys by Chief Engineer' - the society this card itself cites - which keeps section (A) Continuous Survey by CE and section (B) PMS by CE strictly separate. Connecting rods, crossheads, top end bearings, guides, gudgeon pins and bushes, ME crankshafts and bearings (MULTIPLE ENGINE INSTALLATIONS ONLY), intermediate shafts and the ME thrust bearing are (B) only. Cylinder liners are expressly on the (A) CMS list. Steering gear pumps are on neither. IACS UR Z18 Rev.8 sets the CMS framework but does NOT itself enumerate a Chief Engineer item list - that is society rules, which is why the lists are now attributed to the society whose rules they reflect rather than presented as universal.",
+ "propagation": {
+  "families_swept": "F CMS/PMS conflation and G crankshaft credited return NO other site in the corpus.",
+  "ur_attribution_audit": "Section 14 required every IACS UR attribution in this card to be audited. Z18 CMS, Z20 the PMS alternative, Z27 condition-based maintenance and 'Z7 is Hull classification surveys and does not govern machinery at all' are ALL already correct and were left byte-identical. No misattribution was found, so none was invented.",
+  "out_of_batch_retained": "QB1_F Q23 (PMS approval certificate) is referenced by this card and is Lane B's LEAD-D01-S02-02. Bounded propagation did NOT reach it - families F and G return nothing there - so per section 21 it stays in the remediation queue, unaudited.",
+  "derived_surfaces": "NONE. corpus 761 / 86 unchanged.",
+  "hub_date": "NOT ADVANCED."
+ },
+ "invariants": [
+  "The 15-second, 60-second, scripted answer and Numbers panel are byte-identical - they were right, and the detail was brought into agreement with them.",
+  "The Trap Questions warning is byte-identical.",
+  "'(multiple engine installations only)' is restored on crankshafts and bearings, and the card states that on a single-main-engine motorship the crankshaft is not CE-surveyable even under an approved PMS.",
+  "The card now says that performing the maintenance is not the same as crediting the survey item.",
+  "No UR number was substituted or guessed: every existing attribution was verified correct and left alone."
+ ],
+ "known_traps_entries": [
+  118
+ ],
+ "cards": [
+  {
+   "correction_action_id": "D01S02-CMSPMS-01",
+   "file": "QB1_supplementary.html",
+   "path": "meoclass1/QB1_supplementary.html",
+   "anchor": "q4",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "71f0bfdc6a0a2bd1e8bf7312c8731f9c99a3f25e40ebb2c64c2c7717d73efb0a",
+   "post_edit_digest": "58d667484d94c63c1c2fd5c926f02fd673ac60a7837958c8289ee5ce0a73384f",
+   "what_changed": "'Detailed CMS Item Lists (Typical Programme)' with one undifferentiated delegation list split into (A) under CMS (UR Z18), (B) under an approved PMS (UR Z20) only, and (C) neither - reserved for the surveyor - per IRS TC 016/2014, with the lists attributed to that society rather than presented as universal, the 'multiple engine installations only' qualifier restored on crankshafts and bearings, and an added paragraph separating performing maintenance from crediting a survey item. Cylinder liners removed from 'Items REQUIRING Class Surveyor'.",
+   "supersedes": {
+    "manifest": "correction_corr_urz7_20260901_manifest.json",
+    "action_id": "CORR-URZ7-01",
+    "post_edit_digest": "71f0bfdc6a0a2bd1e8bf7312c8731f9c99a3f25e40ebb2c64c2c7717d73efb0a",
+    "note": "This correction edits a card an earlier authorised record already pinned. The claim makes the descent explicit so the supersession resolver can prove one continuous line rather than reporting a PIN_MISMATCH - a later correction must not require its predecessor to rewrite history."
+   }
+  }
+ ]
+}

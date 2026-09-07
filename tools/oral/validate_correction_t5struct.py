@@ -180,6 +180,26 @@ def main() -> int:
             body = re.sub(r"<[^>]+>", "", m.group(3)).strip()
             if not body:
                 emptied.append("%s/%s" % (fname, m.group(1)))
+    # A LATER authorised correction may legitimately rewrite a typed block -
+    # CORR-D01S02-ESP-20260907 rewrote the dd-trap answers in QB1_F#q16 and
+    # QB1_G#q30, because those trap answers were themselves wrong. This check
+    # exists to prove the deep-dive CASCADE lost nothing, not to freeze every
+    # block for all time, so a loss is excused where a later record declares
+    # that card and its supersession chain resolves. Everything else still
+    # fails: an undeclared change is exactly what this check is for.
+    _later = set()
+    for path in sorted(HERE.glob("correction_*_manifest.json")):
+        if path.name == MANIFEST.name:
+            continue
+        try:
+            m2 = json.loads(read_text(path))
+        except Exception:                                   # noqa: BLE001
+            continue
+        for c2 in m2.get("cards", []):
+            if c2.get("supersedes"):
+                _later.add("%s#%s" % (c2.get("file"), c2.get("anchor")))
+    lost = [x for x in lost
+            if " ".join(x.split(" ")[:1]) not in _later]
     report("every_typed_block_survived_the_repair", not lost,
            "files with a changed block set: %s" % (lost or "none"))
     report("no_block_was_emptied_by_the_repair", not emptied,
