@@ -335,31 +335,59 @@ def main() -> int:
            "the session's conceptual control is untouched")
 
     # Every correction record must pin the bytes it claims to have produced.
-    for name, path, anchor, kind in (
-            ("hssc_class", "QB3_B.html", "q9", "card"),
-            ("coc_pr1c", "QB1_K.html", "q2", "card"),
-            ("iacs_ui", "QB1_H.html", "q3", "card"),
-            ("netzero_currentness", "pastpapers/QP2506.html", "q2", "article"),
-            ("instrument_legal_effect", None, None, "file")):
+    # Only THREE of the five are correction manifests: the skeleton is a
+    # markdown study pack and QP2506 q2 is an <article> in a past paper, and
+    # the card layer can digest neither. Declaring them as cards made the
+    # corpus-wide validator refuse the records - correctly - so they are a
+    # governance document instead and their pins are checked from it.
+    for name, path in (("hssc_class", "QB3_B.html"),
+                       ("coc_pr1c", "QB1_K.html"),
+                       ("iacs_ui", "QB1_H.html")):
         man = json.loads(read_text(
             HERE / ("correction_corr_d01_%s_20260907_manifest.json" % name)))
-        rec = man["cards"][0]
-        if kind == "card":
-            got = card_digests(read_text(QB / path))[anchor]
-        elif kind == "article":
-            got = hashlib.sha256(
-                article(path, anchor).replace("\r\n", "\n").encode("utf-8")
-            ).hexdigest()
-        else:
-            got = hashlib.sha256(
-                (REPO / rec["path"]).read_bytes().replace(b"\r\n", b"\n")
-            ).hexdigest()
-        report("record_%s_post_digest_matches_the_bytes" % name,
-               rec["post_edit_digest"] == got,
-               "declared %s" % rec["post_edit_digest"][:16])
-        report("record_%s_pre_digest_differs_from_post" % name,
-               rec["pre_edit_digest"] != rec["post_edit_digest"],
-               "a correction that changed nothing is not a correction")
+        live = card_digests(read_text(QB / path))
+        for rec in man["cards"]:
+            got = live[rec["anchor"]]
+            report("record_%s_%s_post_digest_matches_the_bytes"
+                   % (name, rec["anchor"]),
+                   rec["post_edit_digest"] == got,
+                   "declared %s" % rec["post_edit_digest"][:16])
+            report("record_%s_%s_pre_digest_differs_from_post"
+                   % (name, rec["anchor"]),
+                   rec["pre_edit_digest"] != rec["post_edit_digest"],
+                   "a correction that changed nothing is not a correction")
+        report("record_%s_pins_its_governing_commit" % name,
+               bool(man.get("governing_commits")),
+               str(man.get("governing_commits")))
+
+    # The two propagation cards must be DECLARED, not merely described. They
+    # were described in the record's prose first, and the corpus-wide validator
+    # reported them as undeclared change - prose is not a declaration.
+    hssc = json.loads(read_text(
+        HERE / "correction_corr_d01_hssc_class_20260907_manifest.json"))
+    report("propagation_cards_are_declared_not_just_described",
+           set(c["anchor"] for c in hssc["cards"]) == set(("q9", "q1", "q11")),
+           "q9 primary, q1 and q11 propagation")
+
+    # The non-card record carries the same pins, re-derived here from live
+    # bytes rather than copied out of the record.
+    nc = read_text(REPO / ("meoclass1/oral-intelligence/examiner-audit/"
+                           "D01_S01_NON_CARD_CORRECTIONS.md"))
+    skel_live = hashlib.sha256(
+        (REPO / "docs/study/TOPIC_01_STATUTORY_SURVEYS_AND_CLASS.md")
+        .read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    qp_live = hashlib.sha256(
+        article("pastpapers/QP2506.html", "q2")
+        .replace("\r\n", "\n").encode("utf-8")).hexdigest()
+    report("non_card_record_exists_and_explains_the_vehicle",
+           "D01-S01-NONCARD-20260907" in nc
+           and "the schema is usually right" in nc,
+           "the schema refused a card it cannot digest, and was right")
+    report("non_card_record_pins_the_live_skeleton", skel_live in nc,
+           "pin re-derived from the live file")
+    report("non_card_record_pins_the_live_past_paper", qp_live in nc,
+           "pin re-derived from the live article")
+
 
     print("\n%d checks, %d FAIL" % (CHECKS, len(FAILS)))
     if FAILS:
