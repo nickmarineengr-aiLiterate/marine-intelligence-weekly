@@ -3481,3 +3481,54 @@ checks first and then running them found two layers — a trap answer and a "Com
 Failures" bullet — that the correcting script had missed, in a card the author had just
 read end to end. The gate is a better reader of a card than its corrector is, which is an
 argument for writing the gate before finishing the edit rather than after.
+
+### 129. Three false completeness claims, one cause: the sweep was written in the vocabulary of the card being fixed
+
+`CORR-PASS2-PR1C-SUSPENSION` recorded a sweep-completeness claim three times. All three were
+false, and each was found by an independent reviewer re-running the record's own search:
+
+| Round | The claim | What it missed |
+|---|---|---|
+| 1 | *"the only remaining hits are the already-corrected QB1_K q2, and past-paper examiner wording"* | `QB4_A#q9`, eight layers |
+| 2 | *"every other hit is a past-paper stem, each of which was OPENED"* | `QB4_A_CheatSheet` (P0), `QB1_C#q6`, `QB4_E#q13`, `QB1_F#q7` |
+| 3 | replaced by a generated artefact | — |
+
+**The mechanism never changed.** Each sweep was run with the words that happened to be in
+the card under repair, over the surfaces that card lives on, and its *conclusion* was
+written into an authorised record where nothing could check it. Three specific failures
+followed from that:
+
+*Token shape.* The P0 — the cheat sheet of the very card round 2 had just corrected, still
+teaching `ALL RO-issued statutory certs invalid simultaneously` — survived **two** sweeps
+because it abbreviates "certificates" to **certs**. Every search term carried the long form.
+
+*Surface blindness.* The corpus card digester works on `q-card` blocks. The 34 cheat sheets
+contain none, so they are structurally invisible to it — and the disposition's own stated
+method, "canonical card digests over all 224 tracked pages, compared anchor by anchor",
+therefore could not have seen the P0 even in principle. A derived surface needs a sweep that
+enumerates *pages*, not cards.
+
+*The unopened bucket.* "Past-paper examiner wording" is where a hit goes when nobody read
+it. It is the only classification that requires no evidence, and it absorbed four teaching
+cards across two rounds.
+
+**The fix is not a better search; it is refusing to state the result as prose.**
+`tools/oral/sweep_pr1c_family.py` enumerates every page from disk, reads what a browser
+renders, matches on token variants, and refuses to assign the examiner-wording bucket at
+all. Hits are `REVIEW` until a human opens them, and each adjudication carries its reason
+inline. The record cites the artefact; a gate check re-runs it and fails on any
+unadjudicated hit.
+
+Two further lessons the third round produced on its own account:
+
+*Scope the sweep to the family, or it becomes a discovery tranche.* The first draft matched
+any mention of insurance and returned "hatch cover", "recovery" and "void space" — 25 hits,
+almost all noise. Anchoring every pattern to the class-status subject cut it to 5 real
+sites. An unscoped sweep is not more thorough, it is unreadable, and an unreadable sweep is
+how a real hit gets waved through.
+
+*An anchor that is confidently wrong is worse than one that admits it does not know.* The
+sweep's first `anchor_for` located the first occurrence of the match's *first word*, and
+reported `QB1_G`'s hit as `q24` when it is in `q36`. The gate check written against `q24`
+passed, and its mutation escaped — a check pointed at the wrong card is indistinguishable
+from a check that works.
