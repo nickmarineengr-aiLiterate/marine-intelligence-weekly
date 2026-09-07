@@ -155,8 +155,18 @@ The corpus grew; it exposed no missing concept, so no branch was added. Growth
 is not a reason to complicate a skeleton whose whole value is that it is
 memorable.
 
-1. **The IMO instrument hierarchy** — Convention → Protocol → Code →
-   Resolution → Circular. What binds, what guides, and how you tell them apart.
+1. **IMO instrument families & legal effect** — *not* a ladder. Three
+   questions: which instrument? what makes this provision binding, and on
+   whom? mandatory or recommendatory? Three facts: a **Protocol may itself be
+   treaty law** (the 1988 SOLAS and Load Line Protocols); a **Code is
+   mandatory when a binding instrument makes it so** (ISM via SOLAS IX); a
+   **Resolution or Circular has no single legal effect** — MSC resolutions
+   adopt mandatory amendments, Assembly resolutions recommend.
+
+   *Corrected 7 Sep 2026 (CORR-D01-INSTRUMENT-LEGAL-EFFECT-20260907): this
+   branch previously read "Convention → Protocol → Code → Resolution →
+   Circular", which reads as descending legal force and is wrong in both
+   directions — see `known_traps.md` #53.*
 2. **Entry into force** — the four stages (adoption → acceptance → entry into
    force → implementation), tacit acceptance, and why an amendment's date is
    not its adoption date. *(5 written occurrences — the single most repeated

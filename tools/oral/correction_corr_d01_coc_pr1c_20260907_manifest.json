@@ -1,0 +1,43 @@
+{
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "d01_s01_study_path_remediation",
+ "date": "2026-09-07",
+ "baseline_commit": "1eb467f",
+ "authorisation_source": "MIW D01-S01 STUDY-PATH REMEDIATION instruction of 7 September 2026, sections 5-10, consuming the approved Lane-B handoff docs/study/assurance/handoffs/D01-S01_REMEDIATION_CANDIDATES_V2.md at F:/MIW-Study-Assurance a07c705. Lane B is evidence and specification; it was read only and not modified, merged or cherry-picked.",
+ "correction_id": "CORR-D01-COC-PR1C-20260907",
+ "title": "QB1_K q2 taught that an overdue Condition of Class suspends class automatically and collapses the statutory certificates. IACS PR1C says neither. RC-05.",
+ "candidate_claim": "Not a candidate report. Lane-B audit D01-S01, RC-05 - materially REWRITTEN from the V1 handoff, which had defended the automatic-suspension wording and asked for the statutory clause to be softened. Primary evidence showed V1 wrong in both directions. That correction of a correction is preserved here deliberately.",
+ "candidate_verdict": "UPHELD as re-specified. The card expressly invokes 'the IACS harmonized definition', so it is held to the harmonized text.",
+ "authority": "PRIMARY - IACS Procedural Requirement PR1C, retrieved and read by Lane B at Rev.6. A.1.1 Special/Renewal overdue: 'classification is automatically suspended'. A.1.2 Annual beyond +3 months: 'the Class Certificate becomes invalid, and classification is automatically suspended'. A.1.3 Intermediate beyond +3 months of the third annual: 'classification is automatically suspended'. A.1.4 continuous survey item overdue: 'subject to a suspension procedure'. A.2.1 OVERDUE CONDITION OF CLASS: 'the vessel's class will be subject to a suspension procedure if the item is not dealt with, or postponed by agreement, by the due date'. The word 'automatically' runs through A.1 and is absent from A.2. A.4.1: class suspended six months for overdue surveys and/or conditions of class is to be withdrawn. B.1.1 and B.1.2: written confirmation to the Owner and the Flag State. B.1.3: for SOLAS ships the letter states that 'certain statutory certificates are implicitly invalidated'. The definition of Conditions of Class is verbatim correct in the card and was kept. REVISION DISCREPANCY, recorded not resolved: the evidence verified for this correction is Rev.6, while meoclass1/QB1_F.html cites Rev.7 applicable from 1 January 2026 - and states the SAME A.1/A.2 distinction, the SAME six-month rule and the SAME 'certain statutory certificates' wording. The substance is corroborated across two revisions; the clause letters should be checked against the current revision before being quoted verbatim, and the card now says so. PR1C is the harmonized floor, not a ceiling: an individual society's Rules may go further, and neither position is asserted as universal.",
+ "propagation": {
+  "already_correct_sibling": "meoclass1/QB1_F.html section 4 'Class Status Ladder - Suspension Against Withdrawal' ALREADY teaches the correct distinction, the six-month withdrawal rule and 'certain statutory certificates'. The defect was therefore inconsistent across the corpus rather than systematic - QB1_K was wrong while its sibling was right, which is why a single-card correction is the right scope.",
+  "checked_clean": "The 'all statutory certificates' grep hits are past-paper examiner wording ('enlist all statutory certificates', QP2308 q8) - EXAMINER_WORDING_KEEP, sitting-anchored, not touched.",
+  "derived_surfaces": "NONE. corpus 761 / 86 unchanged.",
+  "hub_date": "NOT ADVANCED."
+ },
+ "invariants": [
+  "The IACS harmonized definition sentence is byte-identical.",
+  "Issuer (society through the attending surveyor, never flag, never owner) unchanged.",
+  "The four triggers unchanged.",
+  "CoC versus memorandum - time limit against none - unchanged.",
+  "'Only the society can extend, on application, usually with an attending survey' unchanged; PR1C's 'postponed by agreement' supports it.",
+  "No universal claim that insurance automatically becomes void: the card says cover conditional on class is prejudiced."
+ ],
+ "known_traps_entries": [
+  113
+ ],
+ "cards": [
+  {
+   "correction_action_id": "D01-COC-01",
+   "file": "QB1_K.html",
+   "path": "meoclass1/QB1_K.html",
+   "anchor": "q2",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "21029b21c82ef420c6011d14a826b78b4f88d95ed3dba1c6234d25a21ae0ac96",
+   "post_edit_digest": "32222caabd1b449f768a73c0e73dd6d953a0b0dccc5d582766dfef82898beb08",
+   "what_changed": "15-second: 'Miss the deadline without an agreed extension and class is suspended, which collapses the statutory certificates and the ship's insurance basis' replaced by the A.2.1 suspension PROCEDURE, contrasted with the automatic suspension an overdue survey attracts, plus the B.1.1-B.1.3 written notification to Owner and Flag State and 'certain statutory certificates are implicitly invalidated'. 60-second: 'automatic on an overdue CoC unless postponed' replaced by the same distinction with the clause references, the harmonized-floor caveat, and the A.4.1 six-month withdrawal rule added. Equasis attribution replaced by the class status report. Two deeper layers that contradicted the correction were aligned: the Trap-Questions 'overdue CoC - status?' answer and the Numbers-to-Memorise 'typically automatic when a CoC falls overdue'."
+  }
+ ],
+ "governing_commits": []
+}

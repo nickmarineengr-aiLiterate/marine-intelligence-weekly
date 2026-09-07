@@ -1,0 +1,40 @@
+{
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "d01_s01_study_path_remediation",
+ "date": "2026-09-07",
+ "baseline_commit": "1eb467f",
+ "authorisation_source": "MIW D01-S01 STUDY-PATH REMEDIATION instruction of 7 September 2026, sections 5-10, consuming the approved Lane-B handoff docs/study/assurance/handoffs/D01-S01_REMEDIATION_CANDIDATES_V2.md at F:/MIW-Study-Assurance a07c705. Lane B is evidence and specification; it was read only and not modified, merged or cherry-picked.",
+ "correction_id": "CORR-D01-IACS-UI-20260907",
+ "title": "QB1_H q3 taught that a UI 'once accepted becomes the standard by which Flag States and ROs interpret the convention', and cited 'PR 1C - transfer of class'. RC-06.",
+ "candidate_claim": "Not a candidate report. Lane-B audit D01-S01, RC-06.",
+ "candidate_verdict": "UPHELD. The UI claim was contradicted by the card's own trap line - 'a Flag State may reject a UI and issue its own interpretation' - and the trap line is right. The PR citation is worse than an unverifiable number: it names a real IACS instrument for the wrong proposition, so it survives any check that merely asks whether PR1C exists.",
+ "authority": "SECONDARY - ClassNK on IACS UR & UI: UIs were created for uniform implementation of IMO conventions among IACS Member Societies and interpret provisions that are vaguely worded or 'have been left to the satisfaction of each Administration'. SECONDARY - IACS material: UIs are to be applied by IACS Societies to ships whose flag Administrations have 'not issued definite instructions' on the interpretation concerned, in the course of statutory certification on those Administrations' behalf, and interpretations are circulated to the flag Administrations concerned or sent to IMO. A UI is therefore a FALLBACK: it governs where the Administration is silent and yields where it has spoken. PRIMARY - PR1C is 'Procedure for Suspension and Reinstatement or Withdrawal of Class in Case of Surveys or Conditions of Class Going Overdue'. PRIMARY - IACS PR No.9 is 'Procedural Requirements for ISM Code Certification' (Rev.4, 2020) - the card was already right and is unchanged in substance. PRIMARY - IACS PR No.17 Rev.1 (Sept 2016) is 'Reporting on deficiencies possibly affecting the implementation of the ISM Code on board during surveys', so 'defect reporting' was loose and was tightened. UNRESOLVED AND DELIBERATELY NOT ASSERTED: the correct PR letter for the transfer-of-class procedure. The PR 1 family is right; the letter was not verified this pass, so the card names the concept, says it is not PR 1C, and instructs the candidate not to quote a letter unverified.",
+ "propagation": {
+  "checked_clean": "No other site in meoclass1/ or docs/ attributes transfer of class to PR1C, and no other site states a UI as universally binding on Flag States. Both greps return only this card's own correction record.",
+  "derived_surfaces": "NONE. corpus 761 / 86 unchanged.",
+  "hub_date": "NOT ADVANCED."
+ },
+ "invariants": [
+  "The trap line 'a Flag State may reject a UI and issue its own interpretation' is byte-identical - it was right, and the correction makes the body agree with it rather than the reverse.",
+  "PR 9 / ISM certification is retained: it was verified correct.",
+  "No PR letter is asserted for transfer of class.",
+  "UR and PR definitions are otherwise unchanged."
+ ],
+ "known_traps_entries": [
+  114
+ ],
+ "cards": [
+  {
+   "correction_action_id": "D01-UI-01",
+   "file": "QB1_H.html",
+   "path": "meoclass1/QB1_H.html",
+   "anchor": "q3",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "517e9d4a967cb2ab5cd3423a29a33b16e4b0243916a943c3c6af14cf6981cb7c",
+   "post_edit_digest": "8da5dc7d5567753040e49146230ea404aea7f99d485b650ba3b76ac2a22451fd",
+   "what_changed": "UI paragraph: 'once accepted become the standard by which Flag States and ROs interpret the convention' replaced by the fallback mechanism - vaguely worded or left to each Administration, circulated to the Administrations concerned or sent to IMO, applied to ships whose Administration has not issued definite instructions, and yielding where it has. PR example: 'PR 1C - transfer of class' replaced by PR1C's actual subject, with transfer of class named as the PR 1 family and an explicit instruction not to quote a letter unverified. PR 17 tightened from 'defect reporting' to its ISM scope."
+  }
+ ],
+ "governing_commits": []
+}

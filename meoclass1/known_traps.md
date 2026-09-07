@@ -3034,3 +3034,99 @@ broke it, turning a whole card of correct history into reported defects.
 **Audit exemption paths to the same standard as detection paths.** They are load-bearing in
 the opposite direction, and they are the easiest thing to forget when the detector is what
 is under review.
+
+### 112. HSSC is a statutory regime; the class survey cycle is not HSSC
+
+`QB3_B#q9` taught, in both memorisation-weighted layers, that "the Classification
+Society survey system operates on a 5-year Harmonized System of Survey and Certification
+(HSSC) framework", under a section headed "Survey Types and Periodicity (HSSC)", citing
+"IACS HSSC Guidelines". Four sites in the same file repeated the attribution.
+
+**HSSC was introduced by the 1988 SOLAS and Load Line Protocols** and harmonises the
+intervals and validity of **statutory certificates**. Its guidelines are IMO Assembly
+instruments — A.1207(34), adopted 3 December 2025, revoking A.1186(33) — and they invite
+**Governments** carrying out surveys under IMO instruments to apply them. There is no
+such thing as an "IACS HSSC Guideline". The class cycle (Annual / Intermediate /
+Special) comes from the society's own Rules on the **IACS UR Z series**.
+
+The two are **deliberately aligned in interval** so class and statutory surveys can be
+taken on one attendance, and a society acting as an RO does statutory work in a
+different legal capacity on the same visit. Alignment and co-location are exactly why
+the conflation is easy — and why it is dangerous.
+
+**The bottom survey is the teaching case.** It exists in BOTH regimes on the same
+interval — two inspections in any five-year period, max 36 months — statutory under
+SOLAS I/10 and class under IACS UR Z3. An overlap is not a merger.
+
+The card's own "Key distinction for exam" bullet had said the right thing four bullets
+below the defect. **When a card contradicts itself, the defect is usually in the layer
+that gets memorised**, because that is the layer written fastest.
+
+### 113. "Automatic" belongs to overdue SURVEYS, not to an overdue Condition of Class
+
+`QB1_K#q2` taught that missing a CoC deadline suspends class **automatically** and
+"collapses the statutory certificates". IACS **PR1C** draws the opposite distinction and
+does it with one word:
+
+| Trigger | PR1C wording |
+|---|---|
+| Special/Renewal survey overdue (A.1.1) | *"classification is **automatically suspended**"* |
+| Annual +3 months (A.1.2), Intermediate +3 months (A.1.3) | *"**automatically suspended**"* |
+| Continuous survey item overdue (A.1.4) | *"subject to a **suspension procedure**"* |
+| **Overdue condition of class (A.2.1)** | *"subject to a **suspension procedure**"* |
+
+"Automatically" runs through A.1 and is **absent from A.2**. And B.1.3 says the letter
+states that **"certain statutory certificates are implicitly invalidated"** — *certain*,
+not all — with B.1.1/B.1.2 requiring written confirmation to the **Owner and the Flag
+State**, which is the mechanism an examiner asks for next.
+
+Two lessons beyond the content. **First: an earlier audit pass had this backwards in
+both directions** — it defended "automatic" and asked for the statutory clause to be
+softened. Primary evidence reversed both. A finding is not evidence; the instrument is.
+
+**Second: the corpus disagreed with itself.** `QB1_F` already taught the correct
+distinction, the six-month withdrawal rule (A.4.1) and "certain statutory certificates".
+A defect present in one card and absent from its sibling is not systematic — and
+checking the sibling first would have found the answer without any research.
+
+**Currency footnote:** the correction was verified against Rev.6; `QB1_F` cites Rev.7 in
+force from 1 January 2026 with the same substance. Recorded in the card, not silently
+chosen — PR1C is also a harmonized **floor**, and a society's own Rules may go further.
+
+### 114. A UI is a fallback, and a real instrument cited for the wrong proposition beats any existence check
+
+`QB1_H#q3` said a Unified Interpretation, "once accepted", becomes "the standard by
+which Flag States and ROs interpret the convention" — while the same card's trap line
+said "a Flag State may reject a UI and issue its own interpretation". The trap line was
+right.
+
+A UI addresses provisions that are vaguely worded or **left to the satisfaction of each
+Administration**. IACS societies apply it to ships whose flag Administration has **not
+issued definite instructions**, in the course of statutory certification on that
+Administration's behalf. **It governs silence and yields to instruction.**
+
+The second defect is the more instructive one. The card cited **"PR 1C — transfer of
+class"**. PR1C is real; it is the suspension/withdrawal procedure. **A real instrument
+attached to the wrong proposition survives every check that only asks whether the
+instrument exists** — which is most citation checks, including automated ones.
+
+The correct PR letter for transfer of class was **not** established, so none was
+asserted: the card names the concept, says it is not PR 1C, and tells the candidate not
+to quote a letter unverified. **An unresolved citation is left unresolved out loud.**
+Substituting a plausible number would have reproduced the exact defect being fixed.
+
+### 115. Documenting a trap does not prevent it — only a check does
+
+Entry #102 recorded that a shell heredoc silently turns `\b` into a literal `0x08`, so
+the regex still compiles and the alternative can never match. **It then happened twice
+more in the same session**, once in `mutate_correction_p1guard.py` and once in a
+`hidden`-element guard written minutes after #102 was filed — where it let a live
+mutation escape and the gate report PASS.
+
+**A lesson in a register is not a control.** `validate_correction_d01s01.py` now scans
+every `tools/**/*.py` for the byte and fails closed.
+
+And the first version of that scan **reported itself**, because its needle was written
+as a literal escape and so contained the byte it was hunting. Build the needle with
+`chr(8)`. A detector that cannot be written safely in the same language it detects is a
+detector that will find itself first.
