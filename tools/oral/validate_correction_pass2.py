@@ -33,6 +33,7 @@ Design rules this gate is written against (Pass-2 instruction section 17):
 from __future__ import annotations
 
 import html as htmllib
+import json
 import pathlib
 import re
 import sys
@@ -97,6 +98,26 @@ def teaching(markup: str) -> str:
     if cut < 0:
         cut = markup.find('<span class="q-version"')
     return markup if cut < 0 else markup[:cut]
+
+
+def strip_all_footers(markup: str) -> str:
+    """Whole-page provenance stripper.
+
+    `teaching()` handles one card. A page-wide scan needs the same discipline,
+    because every version stamp in this batch quotes the wording it removed.
+    """
+    out, pos = [], 0
+    for m in re.finditer(r'<div class="q-footer"', markup):
+        out.append(markup[pos:m.start()])
+        depth, i = 0, m.start()
+        for tok in re.finditer(r"<div\b|</div>", markup[m.start():]):
+            depth += -1 if tok.group(0) == "</div>" else 1
+            i = m.start() + tok.end()
+            if depth == 0:
+                break
+        pos = i
+    out.append(markup[pos:])
+    return "".join(out)
 
 
 def flatten(markup: str) -> str:
@@ -671,6 +692,126 @@ def check_pr1c_family_reach() -> None:
            tail[0].strip() if tail else "sweep did not report")
 
 
+def check_terminal_closure() -> None:
+    """The four Pass-2 terminal-closure blockers.
+
+    Three of these guard SOURCE-OWNED or GENERATED surfaces rather than cards,
+    which is the gap that let the Notes mis-citations and the stale correction
+    log sit outside every earlier gate in this batch.
+    """
+    import subprocess
+
+    # -- A. PR 1 / PR 3 / PR 35 attribution, corpus-wide including the Notes --
+    # PR1C, PR1A..PR1D and PR 35 are legitimate; a bare PR 1 or a PR No.3 cited
+    # for conditions of class is not. Checked over rendered text so a citation
+    # inside an attribute cannot hide.
+    bad = []
+    for page in sorted((QB).rglob("*.html")):
+        flat = flatten(strip_all_footers(read_text(page)))
+        for m in re.finditer(r"\(?\bPR\s?1\)?(?!\s*[A-D]\b)(?![A-D0-9])"
+                             r"|\bPR\s*No\.?\s*[13]\b(?!\s*5)", flat, re.I):
+            window = flat[max(0, m.start() - 90):m.end() + 40]
+            if re.search(r"\bnot\b|Deleted|index records|there is no|family|"
+                         r"UR ?/ ?UI|neighbouring", window, re.I):
+                continue
+            bad.append("%s: %r" % (page.name, flat[m.start():m.start() + 50]))
+    report("notes_and_qb_no_bare_pr1_or_pr3_citation", not bad,
+           "found=%s" % (bad[:3] or "none"))
+    # Read the reg-CODE, not the whole page: the instrument name survives in the
+    # reg-description after the code is swapped, so a page-wide test passes on a
+    # card that now cites the wrong number. Mutations TB and TC found this.
+    for page, must in (("oralnotes/simon-notes-p2.html", "PR1C"),
+                       ("oralnotes/simon-notes-p6.html", "PR 35"),
+                       ("oralnotes/miw-notes-mgmt-p7.html", "PR1C A.4.1")):
+        raw = read_text(QB / page)
+        codes = " | ".join(re.findall(r'<span class="reg-code">(.*?)</span>', raw))
+        hay = codes if codes and "reg-code" in raw else flatten(raw)
+        if page.endswith("p7.html"):
+            hay = flatten(raw)          # p7 has no reg box; the claim is in prose
+        report("notes_%s_cites_the_right_instrument" % page.split("/")[-1].replace(
+                   "-", "_").replace(".html", ""),
+               must in hay, "expects %r in the cited code" % must)
+    # p7 carried a second error in the same sentence: six months is WITHDRAWAL
+    # after suspension, not a trigger that causes it.
+    p7 = flatten(read_text(QB / "oralnotes/miw-notes-mgmt-p7.html"))
+    trig = asserts(p7, r"six[- ]month[^.,;:]{0,40}?(?:automatic[- ]suspension )?trigger"
+                       r"|6-month automatic-suspension trigger")
+    report("notes_p7_six_months_is_withdrawal_not_a_trigger", trig is None,
+           "found=%r" % (trig.group(0) if trig else None))
+
+    # -- B. qb_content_index freshness, proved by regeneration ---------------
+    idx = REPO / "meoclass1" / "qb_content_index.json"
+    before = idx.read_bytes()
+    rc = subprocess.run([sys.executable, str(HERE / "build_qb_content_index.py")],
+                        cwd=str(REPO), capture_output=True)
+    after = idx.read_bytes()
+    if after != before:
+        idx.write_bytes(before)
+    report("qb_content_index_is_current_and_deterministic",
+           rc.returncode == 0 and after == before,
+           "regenerating from HEAD reproduces the committed file byte for byte")
+    governed = json.loads(read_text(HERE / "qb_content_index_governed.json"))
+    report("qb_content_index_records_the_pass2_batch",
+           any(e.get("date") == "2026-09-07" for e in governed.get("recently_updated", [])),
+           "the correction log is hand-maintained, so a generated rebuild alone "
+           "cannot make it current")
+
+    # -- C. the seven QB10_B propositions, each guarded by its own claim -----
+    q1 = flatten(teaching(card("QB10_B.html", "q1")))
+    report("qb10b_stcwf_convention_vs_amendments",
+           re.search(r"Convention[^.]{0,60}?in force since 2012", q1) is not None,
+           "the Convention predates 2026; the amendments and Code did not")
+    report("qb10b_polar_population_is_precise",
+           all(s in q1 for s in ("24 m LOA", "300 GT")) ,
+           "fishing vessels 24 m LOA+, yachts 300 GT+, cargo 300-500 GT")
+    # The card names the pairing only to record that it is NOT asserted.
+    # Require every occurrence to sit inside that disclaimer.
+    pair = [m.start() for m in re.finditer(r"MSC\.532\(107\)/MSC\.538\(107\)", q1)]
+    disc = [m.start() for m in re.finditer(r"adopting resolution is not stated here", q1)]
+    loose = [p for p in pair
+             if not any(0 < p - d < 160 for d in disc)]
+    report("qb10b_polar_no_unverified_resolution", not loose,
+           "every mention must sit inside the not-asserted disclaimer; loose=%d"
+           % len(loose))
+    # PRESENCE of both dates is not the claim. A card can carry 2026 and 2027
+    # and still bind them to the wrong events - which is the whole trap this
+    # bullet warns about. Test the PAIRING: designation/in-force is 2026,
+    # enforcement of the 0.10% limit is 2027, and neither may take the other
+    # date. Mutation TI collapsed the pairing while leaving both dates on the
+    # card, and a presence check stayed green on it.
+    wrong = asserts(q1,
+                    r"(?:become ECAs|designat\w+|in force)[^.;]{0,60}?1 March 2027"
+                    r"|(?:enforc\w+|0\.10% limit|0\.10% sulphur)[^.;]{0,60}?1 March 2026")
+    both = "1 March 2026" in q1 and "1 March 2027" in q1
+    report("qb10b_eca_both_dates_present", both and wrong is None,
+           "designation 2026 / enforcement 2027; miswired=%r"
+           % (wrong.group(0)[:60] if wrong else None))
+    jup = asserts(q1, r"traces directly to"
+                      r"|<em>Jupiter</em>"
+                      r"|Jupiter</em> bauxite cargo-shift")
+    report("qb10b_no_unsupported_jupiter_causal_claim", jup is None,
+           "found=%r" % (jup.group(0)[:50] if jup else None))
+    shift = asserts(q1, r"lost to a? ?bauxite cargo shift|bauxite cargo-shift")
+    report("qb10b_jupiter_named_and_mechanism_correct",
+           "Bulk Jupiter" in q1 and "liquefaction" in q1.lower() and shift is None,
+           "ship is Bulk Jupiter, mechanism is liquefaction; found=%r"
+           % (shift.group(0) if shift else None))
+    for label, pat in (("lrit", r"status as at September 2026"),
+                       ("msc112", r"still a future session as at\s*September 2026")):
+        report("qb10b_%s_is_as_at_dated" % label,
+               re.search(pat, q1) is not None,
+               "a perishable status must carry the date it was true")
+
+    # -- D. K-items closed earlier must not regress -------------------------
+    for name, pat in (("msc482_amendment", r"MSC\.482\(103\)"),
+                      ("davit_launched_scope", r"davit-launched"),
+                      ("lowering_formula", r"0\.4 \+ 0\.02"),
+                      ("formula_cap", r"whichever is less"),
+                      ("max_speed", r"1\.3\s*m/s")):
+        report("qb10b_preserved_%s" % name, re.search(pat, q1) is not None,
+               "closed K-item must not regress")
+
+
 def check_closeup() -> None:
     c = teaching(card("QB3_A.html", "q5"))
     flat = flatten(c)
@@ -858,6 +999,7 @@ def main() -> int:
                      ("QB4_A q9   PR1C sibling (8th card)", check_qb4a_sibling),
                      ("PR1C family reach + generated sweep", check_pr1c_family_reach),
                      ("QB3_A q5   annual close-up scope", check_closeup),
+                     ("Terminal closure: Notes PR, index, QB10_B", check_terminal_closure),
                      ("QB10_B q1  amendment overview", check_amend)):
         print("\n-- %s" % name)
         fn()

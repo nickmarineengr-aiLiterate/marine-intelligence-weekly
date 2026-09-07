@@ -107,7 +107,9 @@ PROPOSITIONS = {
 #: making it. Kept narrow on purpose: this is the mechanism that let a defect
 #: hide behind the word "no" in an earlier gate.
 DISARM = re.compile(
-    r"(?:\bnot\b\s*(?:UR|PR)|\bNot\b\s*(?:UR|PR)|not all of them|"
+    r"(?:\bnot\b\s*[\u201c\u201d\"\']?\s*(?:UR|PR)|records as Deleted|"
+    r"index records|there is no\s*[\u201c\u201d\"\']?\s*.{0,3}PR|"
+    r"\bDeleted\b|not all of them|"
     r"rather than claiming|do not (?:tell|call|go further|forget to)|"
     r"there is no universal|contains no insurance|says nothing about insurance|"
     r"is not automatic|not automatic|cover may be prejudiced|"
@@ -161,22 +163,6 @@ ADJUDICATED = {
 #: must fix" are different claims, and collapsing them is how a live defect
 #: comes to look cleared. Each entry names where it is tracked.
 DEFERRED = {
-    ("meoclass1/oralnotes/miw-notes-mgmt-p7.html", "(PR1)"):
-        "REAL DEFECT, NOT FIXED HERE. 'The 6-month automatic-suspension trigger for a "
-        "lapsed CoC extension request is standard IACS practice (PR1)' is wrong twice: "
-        "PR 1 is Deleted in the IACS PR index, and PR1C A.4.1's six months is WITHDRAWAL "
-        "after suspension, not a suspension trigger. The Notes series is generated from a "
-        "JSON content spec by tools/notes, so its HTML must not be hand-edited - the fix "
-        "belongs in that spec and that toolchain. Tracked in PASS2_QUEUE_DISPOSITION.",
-    ("meoclass1/oralnotes/simon-notes-p2.html", "PR 1"):
-        "REAL DEFECT, NOT FIXED HERE. Cites 'IACS PR 1 ... Procedural Arrangements for "
-        "Classification' for conditions of class and suspension procedures. PR 1 is "
-        "Deleted; the instruments are PR1C and PR 35. The card's own hedge - 'verify exact "
-        "PR number before quoting' - is honest but does not make the citation right. Notes "
-        "series, same toolchain constraint as above.",
-    ("meoclass1/oralnotes/simon-notes-p6.html", "PR 1"):
-        "REAL DEFECT, NOT FIXED HERE. 'IACS PR 1 - IACS procedure for condition of class'. "
-        "Same defect and same toolchain constraint as simon-notes-p2.",
     ("meoclass1/pastpapers/QP2503.html",
      "condition of class with a due date; if that is not cleared, class is suspen"):
         "COMPRESSION IN A PLAN BLOCK, P3. MIW-authored model-answer planning text, not an "

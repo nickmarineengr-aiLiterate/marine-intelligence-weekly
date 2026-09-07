@@ -32,7 +32,7 @@ sys.path.insert(0, str(HERE))
 
 from oral_bytes import enable_utf8_stdio  # noqa: E402
 from oral_bytes import read_text, write_text  # noqa: E402
-from oral_content_mutation import run_suite, sub_in_file  # noqa: E402
+from oral_content_mutation import edit_json, run_suite, sub_in_file  # noqa: E402
 
 enable_utf8_stdio()
 
@@ -47,6 +47,10 @@ QB4_A = QB / "QB4_A.html"
 QB4_A_CS = QB / "QB4_A_CheatSheet.html"
 QB1_C = QB / "QB1_C.html"
 QB1_G = QB / "QB1_G.html"
+NOTES_P7 = QB / "oralnotes" / "miw-notes-mgmt-p7.html"
+SIMON_P2 = QB / "oralnotes" / "simon-notes-p2.html"
+SIMON_P6 = QB / "oralnotes" / "simon-notes-p6.html"
+IDX_GOV = REPO / "tools" / "oral" / "qb_content_index_governed.json"
 
 def _strip_instrument(path):
     """Remove every ITC-Hulls attribution from one file, keeping the substance.
@@ -69,7 +73,8 @@ def _strip_instrument(path):
 
 GATE = "validate_correction_pass2.py"
 WATCHED = [QB4_E, QB4_C, QB8_A, QB5_A, QB3_A, QB10_B, QB3_B, QB4_A,
-           QB4_A_CS, QB1_C, QB1_G]
+           QB4_A_CS, QB1_C, QB1_G,
+           NOTES_P7, SIMON_P2, SIMON_P6, IDX_GOV]
 
 MUTATIONS = [
     # ---------------------------------------------------------------- IACS
@@ -489,6 +494,96 @@ MUTATIONS = [
                  "<em>certain</em> statutory certificates",
                  "all statutory certificates", count=1),
      "qb4e_q13_no_pr1c_family_defect"),
+    # ------------------------------------------- terminal-closure classes
+    # A-E guard the SOURCE-OWNED and GENERATED surfaces that sat outside every
+    # earlier gate in this batch; F-L take one QB10_B proposition each; M and N
+    # attack the two ways a resolved proposition can quietly come back.
+    ("TA", "restore the deleted PR 1 as a live citation (simon-notes-p6)",
+     sub_in_file(SIMON_P6,
+                 '<span class="reg-code">IACS PR 35 / PR1C</span>',
+                 '<span class="reg-code">IACS PR 1</span>', count=1),
+     "notes_and_qb_no_bare_pr1_or_pr3_citation"),
+
+    ("TB", "restore the PR 3 misattribution (simon-notes-p2)",
+     sub_in_file(SIMON_P2,
+                 '<span class="reg-code">IACS PR1C / PR 35</span>',
+                 '<span class="reg-code">IACS PR No.3</span>', count=1),
+     "notes_and_qb_no_bare_pr1_or_pr3_citation"),
+
+    ("TC", "drop PR 35 from the instrument that imposes and clears a CoC",
+     sub_in_file(SIMON_P6, "IACS PR 35 / PR1C", "IACS class rules", count=1),
+     "notes_simon_notes_p6_cites_the_right_instrument"),
+
+    ("TD", "make six months a suspension TRIGGER again (notes p7)",
+     sub_in_file(NOTES_P7,
+                 "The six-month figure is corrected rather than retained: under IACS",
+                 "The 6-month automatic-suspension trigger is standard practice: under IACS",
+                 count=1),
+     "notes_p7_six_months_is_withdrawal_not_a_trigger"),
+
+    ("TE", "stale the correction log after a rebuild",
+     edit_json(IDX_GOV, lambda d: d["recently_updated"].__setitem__(
+         0, dict(d["recently_updated"][0], date="2026-09-04"))),
+     "qb_content_index_records_the_pass2_batch"),
+
+    # ---- F-L: one per QB10_B proposition --------------------------------
+    ("TF", "STCW-F: collapse Convention and amendments again",
+     sub_in_file(QB10_B,
+                 "the <em>Convention</em> itself (STCW-F 1995) has been in force since 2012",
+                 "the Convention and Code both arrived together", count=1),
+     "qb10b_stcwf_convention_vs_amendments"),
+
+    ("TG", "Polar: drop the size thresholds back to a vague population",
+     sub_in_file(QB10_B, "24 m LOA and above", "a certain size and above", count=1),
+     "qb10b_polar_population_is_precise"),
+
+    ("TH", "Polar: assert the unverified resolution pairing as the adopting one",
+     sub_in_file(QB10_B,
+                 "Polar Code Part I-A:</strong>",
+                 "Polar Code Part I-A, MSC.532(107)/MSC.538(107):</strong>", count=1),
+     "qb10b_polar_no_unverified_resolution"),
+
+    # Deleting the parenthetical is a NO-OP in teaching terms: the bullet
+    # states both dates again in its own prose. The real defect is collapsing
+    # designation into enforcement, so that is what this mutation does now.
+    ("TI", "ECA: collapse designation into enforcement, one date for both",
+     sub_in_file(QB10_B,
+                 "the areas become ECAs on 1 March 2026",
+                 "the areas become ECAs on 1 March 2027", count=1),
+     "qb10b_eca_both_dates_present"),
+
+    ("TJ", "Bulk Jupiter: restore the unsupported causal attribution",
+     sub_in_file(QB10_B,
+                 "the loss of the bulk carrier <em>Bulk Jupiter</em>",
+                 "this traces directly to the bulk carrier <em>Bulk Jupiter</em>", count=1),
+     "qb10b_no_unsupported_jupiter_causal_claim"),
+
+    ("TK", "LRIT: strip the as-at date from a perishable status",
+     sub_in_file(QB10_B,
+                 "(status as at September 2026 &mdash; re-check before any sitting, this is a "
+                 "moving item)",
+                 "", count=1),
+     "qb10b_lrit_is_as_at_dated"),
+
+    ("TL", "MSC 112: present a future session as settled",
+     sub_in_file(QB10_B,
+                 "(December 2026, still a future session as at September 2026)",
+                 "(December 2026)", count=1),
+     "qb10b_msc112_is_as_at_dated"),
+
+    # ---- M: an unsupported claim back in a memorisation layer ------------
+    ("TM", "put the removed causal claim back in the Casualty Link layer only",
+     sub_in_file(QB10_B,
+                 "Use her to explain <em>why</em> recorded roll data matters",
+                 "The requirement traces directly to her", count=1),
+     "qb10b_no_unsupported_jupiter_causal_claim"),
+
+    # ---- N: a source-gap claim restated as certain fact -------------------
+    ("TN", "restate the liquefaction mechanism as a cargo shift",
+     sub_in_file(QB10_B,
+                 "she was lost to bauxite <strong>liquefaction</strong>, not a cargo shift",
+                 "she was lost to a bauxite cargo shift", count=1),
+     "qb10b_jupiter_named_and_mechanism_correct"),
 ]
 
 
