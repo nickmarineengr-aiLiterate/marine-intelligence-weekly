@@ -368,6 +368,13 @@ def main() -> int:
     report("propagation_cards_are_declared_not_just_described",
            set(c["anchor"] for c in hssc["cards"]) == set(("q9", "q1", "q11")),
            "q9 primary, q1 and q11 propagation")
+    # The classification vocabulary is a CLOSED SET, and "PROPAGATION" is not
+    # in it - PROPAGATED_FACT_CORRECTION is. An unclassified card fails by
+    # design, which is how this was found rather than shipped.
+    report("propagation_cards_use_the_schema_vocabulary",
+           set(c["classification"] for c in hssc["cards"])
+           == set(("PRIMARY_CORRECTION", "PROPAGATED_FACT_CORRECTION")),
+           "closed-set classes, not invented ones")
 
     # The non-card record carries the same pins, re-derived here from live
     # bytes rather than copied out of the record.
