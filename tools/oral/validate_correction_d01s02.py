@@ -469,6 +469,18 @@ def main() -> int:
         m3 = json.loads(read_text(
             HERE / ("correction_corr_d01s02_%s_20260907_manifest.json" % nm)))
         _claims += sum(1 for c in m3["cards"] if c.get("supersedes"))
+    _gov = 0
+    for nm in ("hssc_reach", "esp", "cms_pms"):
+        m4 = json.loads(read_text(
+            HERE / ("correction_corr_d01s02_%s_20260907_manifest.json" % nm)))
+        _gov += 1 if m4.get("governing_commits") else 0
+    # An empty governing_commits is a schema violation the corpus-wide
+    # validator catches AFTER the commit exists. It has now been the last
+    # failure of two consecutive remediation batches, so it is gated here.
+    report("records_pin_their_governing_commit", _gov == 3,
+           "%d of 3 records name the commit that produced their post-state"
+           % _gov)
+
     report("records_declare_their_supersession_claims", _claims >= 10,
            "%d cards declare a predecessor - the resolver's own mechanism, "
            "not a bespoke re-derivation" % _claims)
