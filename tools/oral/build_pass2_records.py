@@ -56,6 +56,8 @@ RESTORATION_COMMIT = "8a0a33c"
 #: correction log, and the seven QB10_B propositions declared open in
 #: Pass 2. QB10_B#q1 reaches its authorised state only here.
 TERMINAL_CLOSURE_COMMIT = "cdd1626"
+#: The fifth review's three P1s, all in QB10_B#q1.
+TC_REMEDIATION_COMMIT = "196b2e5"
 
 AUTH = ("MIW PASS 2 RESUMPTION - KNOWN-DEFECT REMEDIATION instruction of "
         "7 September 2026, sections 3-16. The instruction is explicitly NOT a "
@@ -172,7 +174,7 @@ COMMON = {
     "governing_commits": [CONTENT_COMMIT, REMEDIATION_COMMIT,
                           REMEDIATION_COMMIT_2, REMEDIATION_COMMIT_3,
                           REMEDIATION_COMMIT_4, RESTORATION_COMMIT,
-                          TERMINAL_CLOSURE_COMMIT],
+                          TERMINAL_CLOSURE_COMMIT, TC_REMEDIATION_COMMIT],
 }
 
 
