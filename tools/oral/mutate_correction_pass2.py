@@ -537,11 +537,15 @@ MUTATIONS = [
      sub_in_file(QB10_B, "24 m LOA and above", "a certain size and above", count=1),
      "qb10b_polar_population_is_precise"),
 
-    ("TH", "Polar: assert the unverified resolution pairing as the adopting one",
-     sub_in_file(QB10_B,
-                 "Polar Code Part I-A:</strong>",
-                 "Polar Code Part I-A, MSC.532(107)/MSC.538(107):</strong>", count=1),
-     "qb10b_polar_no_unverified_resolution"),
+    # Retired and replaced. The proposition TH guarded - "do not assert an
+    # unverified pairing" - was itself wrong: the pairing IS verifiable, and the
+    # fifth review found the card had removed a correct citation on a source gap
+    # nobody had tested. The live risk is now the opposite one, so TH attacks
+    # that instead: silently dropping the adoption date that ties the citation
+    # to its claim.
+    ("TH", "Polar: strip the adoption date that anchors the citation",
+     sub_in_file(QB10_B, "adopted 8 June 2023, inserts", "inserts", count=1),
+     "qb10b_polar_cites_msc538"),
 
     # Deleting the parenthetical is a NO-OP in teaching terms: the bullet
     # states both dates again in its own prose. The real defect is collapsing
@@ -584,6 +588,34 @@ MUTATIONS = [
                  "she was lost to bauxite <strong>liquefaction</strong>, not a cargo shift",
                  "she was lost to a bauxite cargo shift", count=1),
      "qb10b_jupiter_named_and_mechanism_correct"),
+    # ------------------------- fifth-review P1s, kept as standing proof
+    # All three passed the terminal-closure gate green. Each is now attacked
+    # by the check that was rebuilt to catch it.
+    ("TR1", "swap the Polar chapter subjects back",
+     sub_in_file(QB10_B,
+                 "<strong>9-1, Safety of navigation</strong>, and "
+                 "<strong>11-1, Voyage planning</strong>",
+                 "<strong>9-1, Voyage planning</strong>, and "
+                 "<strong>11-1, Safety of navigation</strong>", count=1),
+     "qb10b_polar_chapter_subjects_not_swapped"),
+
+    ("TR2", "call the Polar chapters regulations again",
+     sub_in_file(QB10_B,
+                 "inserts two new <strong>chapters</strong> into",
+                 "inserts New regulations 9-1 and 11-1 into", count=1),
+     "qb10b_polar_chapters_not_regulations"),
+
+    ("TR3", "withdraw the verifiable Polar citation as a false source gap",
+     sub_in_file(QB10_B, "MSC.538(107), adopted 8 June 2023, inserts",
+                 "An unnamed resolution inserts", count=1),
+     "qb10b_polar_cites_msc538"),
+
+    ("TR4", "restore the phantom 2022 STCW-F amendments",
+     sub_in_file(QB10_B,
+                 "MSC.561(108), the revised annex to the 1995 Convention, and "
+                 "MSC.562(108), the new STCW-F Code, both adopted 23 May 2024",
+                 "the 2022 amendments and the new STCW-F Code", count=1),
+     "qb10b_stcwf_no_phantom_2022_amendments"),
 ]
 
 

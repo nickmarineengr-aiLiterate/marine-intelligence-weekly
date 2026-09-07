@@ -758,21 +758,53 @@ def check_terminal_closure() -> None:
 
     # -- C. the seven QB10_B propositions, each guarded by its own claim -----
     q1 = flatten(teaching(card("QB10_B.html", "q1")))
+    # The old check asserted only that the Convention predates 2026 and never
+    # read the amendment YEAR, so "the 2022 amendments" - an instrument that
+    # does not exist - passed green.
     report("qb10b_stcwf_convention_vs_amendments",
-           re.search(r"Convention[^.]{0,60}?in force since 2012", q1) is not None,
-           "the Convention predates 2026; the amendments and Code did not")
+           re.search(r"in force since 2012", q1) is not None,
+           "the distinguishing fact is that the Convention predates the "
+           "amendments by fourteen years")
+    report("qb10b_stcwf_names_the_real_resolutions",
+           "MSC.561(108)" in q1 and "MSC.562(108)" in q1,
+           "revised annex and STCW-F Code, both adopted 23 May 2024")
+    ghost = asserts(q1, r"2022 amendments")
+    report("qb10b_stcwf_no_phantom_2022_amendments", ghost is None,
+           "found=%r -- no 2022 STCW-F amendments exist"
+           % (ghost.group(0) if ghost else None))
     report("qb10b_polar_population_is_precise",
            all(s in q1 for s in ("24 m LOA", "300 GT")) ,
            "fishing vessels 24 m LOA+, yachts 300 GT+, cargo 300-500 GT")
-    # The card names the pairing only to record that it is NOT asserted.
-    # Require every occurrence to sit inside that disclaimer.
-    pair = [m.start() for m in re.finditer(r"MSC\.532\(107\)/MSC\.538\(107\)", q1)]
-    disc = [m.start() for m in re.finditer(r"adopting resolution is not stated here", q1)]
-    loose = [p for p in pair
-             if not any(0 < p - d < 160 for d in disc)]
-    report("qb10b_polar_no_unverified_resolution", not loose,
-           "every mention must sit inside the not-asserted disclaimer; loose=%d"
-           % len(loose))
+    # The fifth review found this pair of checks green over three P1s at once.
+    # The old one forbade a LITERAL "MSC.532(107)/MSC.538(107)" string, so the
+    # standalone MSC.532(107) attribution elsewhere in the same card was
+    # invisible - and the card asserted a source gap that was false, because
+    # MSC.538(107) is plainly retrievable. The claim to test is not "is a
+    # number absent" but "are the chapters attributed correctly and is the
+    # citation present".
+    report("qb10b_polar_cites_msc538",
+           re.search(r"MSC\.538\(107\)[^.;]{0,60}?adopted 8 June 2023"
+                     r"[^.;]{0,40}?insert", q1) is not None,
+           "the citation must sit on the claim it supports, not merely somewhere "
+           "on the card")
+    report("qb10b_polar_chapters_not_regulations",
+           re.search(r"two new chapters", q1) is not None
+           and not re.search(r"[Nn]ew regulations 9-1", q1),
+           "9-1 and 11-1 are CHAPTERS of Polar Code Part I-A")
+    swapped = asserts(q1, r"9-1[^.;]{0,24}[Vv]oyage planning"
+                          r"|11-1[^.;]{0,24}[Ss]afety of navigation")
+    report("qb10b_polar_chapter_subjects_not_swapped", swapped is None,
+           "MSC.538(107): 9-1 is Safety of navigation, 11-1 is Voyage "
+           "planning; found=%r" % (swapped.group(0) if swapped else None))
+    # Cross-card: QB2_I teaches the same pairing and had it right throughout.
+    sib = flatten(read_text(QB / "QB2_I.html"))
+    for prop, pat in (("chapter_9_1", r"9-1[^.;]{0,24}[Ss]afety of navigation"),
+                      ("chapter_11_1", r"11-1[^.;]{0,24}[Vv]oyage planning"),
+                      ("msc538", r"MSC\.538\(107\)")):
+        report("qb10b_agrees_with_qb2i_on_%s" % prop,
+               (re.search(pat, q1) is not None)
+               == (re.search(pat, sib) is not None),
+               "the two cards must not diverge on the Polar amendment")
     # PRESENCE of both dates is not the claim. A card can carry 2026 and 2027
     # and still bind them to the wrong events - which is the whole trap this
     # bullet warns about. Test the PAIRING: designation/in-force is 2026,
