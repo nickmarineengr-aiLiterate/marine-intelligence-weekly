@@ -41,6 +41,12 @@ REMEDIATION_COMMIT_2 = "ae80bfe"
 #: still teaching the opposite. This round stops asserting the sweep and
 #: generates it instead. See known_traps 129.
 REMEDIATION_COMMIT_3 = "05a9f95"
+#: Round 4. A FOURTH independent review found that this batch had
+#: OVER-corrected the insurance limb: ITC-Hulls (1/11/95) cl. 4.2 does
+#: terminate hull cover automatically on suspension or withdrawal of class,
+#: so "cover may be prejudiced, not automatically void" was wrong in the
+#: other direction. See known_traps 130.
+REMEDIATION_COMMIT_4 = "93c4d3c"
 
 AUTH = ("MIW PASS 2 RESUMPTION - KNOWN-DEFECT REMEDIATION instruction of "
         "7 September 2026, sections 3-16. The instruction is explicitly NOT a "
@@ -82,6 +88,26 @@ PRIOR_PINS = {
         "manifest": "correction_corr_d01s02_hssc_reach_20260907_manifest.json",
         "action_id": "D01S02-HSSC-01",
         "post_edit_digest": "d00a9c6b6aca8774e7c1de6ff7d87f3e0b2c448b95381b21885a088bfb3267a4",
+    },
+    # QB1_F#q7 carries three historical pins - an enrichment batch, a T5
+    # structural repair and D01-S02. The claim names the LATEST, which is the
+    # state this correction actually descends from; the resolver walks the rest
+    # of the chain from there. Without it both prior pins read as conflicts and
+    # the corpus validator reports AMBIGUOUS_ROOT (trap 119).
+    "QB1_F.html#q7": {
+        "manifest": "correction_corr_d01s02_hssc_reach_20260907_manifest.json",
+        "action_id": "D01S02-HSSC-07",
+        "post_edit_digest": "cdfff894e43020f40ce71c0185dbe5ad7d4dc9e0b902d9facf3476dd95756b0c",
+    },
+    "QB1_G.html#q36": {
+        "manifest": "correction_corr_t5_ddcascade_20260906_manifest.json",
+        "action_id": "T5-DDCASCADE-34",
+        "post_edit_digest": "e04504cb6446757340489b24cc73405db0a83a35680748551df72ecd843939c9",
+    },
+    "QB1_I.html#q6": {
+        "manifest": "correction_corr_t5_ddcascade_20260906_manifest.json",
+        "action_id": "T5-DDCASCADE-43",
+        "post_edit_digest": "9b79628602a5ce6ef198d3a22da872a48f4d9ded35b89a10c98f9a1bad6a6470",
     },
 }
 
@@ -125,6 +151,7 @@ PRE = {
     "QB1_F.html#q7": "cdfff894e43020f40ce71c0185dbe5ad7d4dc9e0b902d9facf3476dd95756b0c",
     "QB1_G.html#q36": "e04504cb6446757340489b24cc73405db0a83a35680748551df72ecd843939c9",
     "QB4_E.html#q13": "f9e982bc8337130544ce1773fae7c480cc45350409409286ff3c2e158df282c2",
+    "QB1_I.html#q6": "9b79628602a5ce6ef198d3a22da872a48f4d9ded35b89a10c98f9a1bad6a6470",
 }
 
 COMMON = {
@@ -134,7 +161,8 @@ COMMON = {
     "baseline_commit": BASELINE,
     "authorisation_source": AUTH,
     "governing_commits": [CONTENT_COMMIT, REMEDIATION_COMMIT,
-                          REMEDIATION_COMMIT_2, REMEDIATION_COMMIT_3],
+                          REMEDIATION_COMMIT_2, REMEDIATION_COMMIT_3,
+                          REMEDIATION_COMMIT_4],
 }
 
 
@@ -158,6 +186,15 @@ def build():
              "end of the CE tip - the only two-line scaffold block left in this file.",
              PRE["QB4_E.html#q12"])
     c["correction_action_id"] = "P2-IACS-01"
+    iacs_sibling = card("QB1_I.html", "q6", "PROPAGATED_FACT_CORRECTION",
+                        "'11-12 Members' - the same count hedge this record removed from "
+                        "QB4_E#q12, in a card the declared search could not reach because "
+                        "the hedge is HYPHENATED rather than written '11 or 12'. Corrected "
+                        "to 12. Found by a fourth independent review, not by this record's "
+                        "own sweep, and it is the second time in this batch that a "
+                        "completeness claim failed on token shape rather than on reach.",
+                        PRE["QB1_I.html#q6"])
+    iacs_sibling["correction_action_id"] = "P2-IACS-02"
     records.append(("correction_corr_pass2_iacs_members_20260907_manifest.json", dict(
         COMMON,
         origin="pass2_known_defect_remediation",
@@ -186,13 +223,22 @@ def build():
                   "long before any of the disputed events and is not itself in question - the "
                   "defect was an omission from one list, not a contested admission.",
         propagation={
-            "same_defect_swept": "The corpus was searched for '11 members', '11 full member', "
-                                 "'eleven members' and 'IACS now has'. QB4_E q12 is the only "
-                                 "site. No other card states an IACS membership count.",
+            "same_defect_swept": "CORRECTED AFTER FOURTH INDEPENDENT REVIEW. The first "
+                                 "version of this field said the corpus had been searched for "
+                                 "'11 members', '11 full member', 'eleven members' and 'IACS "
+                                 "now has', and that QB4_E q12 was the only site. FALSE: "
+                                 "QB1_I#q6 read '11-12 Members', which none of those terms can "
+                                 "reach because the hedge is hyphenated. Corrected as "
+                                 "P2-IACS-02. The lesson is the same one known_traps 129 "
+                                 "records for the PR1C family - a completeness claim written "
+                                 "in the vocabulary of the card being fixed will miss the "
+                                 "sibling that phrases it differently - and it is why the "
+                                 "membership count is now also checked corpus-wide by the "
+                                 "content gate rather than by a remembered search.",
             "checked_clean": "The RMRS 'expelled' wording elsewhere in the same card carries "
                              "the correct March 2022 date and no count, and was left alone - "
                              "it is a terminology preference, not a false proposition.",
-            "derived_surfaces": "NONE. corpus 761 / 86 unchanged.",
+            "derived_surfaces": "NONE for this family. corpus 761 / 86 unchanged.",
             "hub_date": "NOT ADVANCED.",
         },
         invariants=[
@@ -204,8 +250,8 @@ def build():
             "corrected summary, because it was the summary that was wrong.",
             "No claim is made about which society is 'newest' beyond TL's dated admission.",
         ],
-        known_traps_entries=[120],
-        cards=[c],
+        known_traps_entries=[120, 130],
+        cards=[c, iacs_sibling],
     )))
 
     # ---------------------------------------------------------------- PR1C

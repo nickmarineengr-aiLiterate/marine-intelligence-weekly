@@ -353,9 +353,16 @@ def check_pr1c() -> None:
                          r"(?:insurance|cover|coverage)[^.;:]{0,70}?(?:" + LOST + r")")
     report("pr1c_no_universal_insurance_void_claim", void is None,
            "found=%r" % (void.group(0) if void else None))
-    report("pr1c_class_warranty_framing_present",
-           "class warranty" in flat.lower(),
-           "the accurate replacement, not merely a deletion")
+    report("pr1c_insurance_limb_names_its_instrument",
+           re.search(r"ITC-Hulls|Institute Time Clauses", flat) is not None,
+           "PR1C is silent on insurance; the consequence comes from the POLICY")
+    # The over-correction, guarded in its own right. "Cover may be prejudiced"
+    # understates ITC-Hulls cl. 4.2, which terminates hull cover AUTOMATICALLY.
+    under = asserts(flat, r"cover (?:may be|might be|could be) prejudiced"
+                          r"|(?:cover|insurance) is not automatically void"
+                          r"|not automatically void")
+    report("pr1c_no_insurance_understatement", under is None,
+           "found=%r -- see trap 130" % (under.group(0) if under else None))
 
     # The false governing citation, in every layer that carried it.
     z15 = asserts(flat, r"UR\s*Z15")
@@ -558,6 +565,17 @@ def check_qb4a_sibling() -> None:
                   r"(?:P&I|H&M|insurance|cover|coverage)[^.,;:]{0,80}?(?:" + LOST + r")")
     report("qb4a_no_universal_insurance_loss_claim", ins is None,
            "found=%r" % (ins.group(0)[:60] if ins else None))
+    report("qb4a_insurance_limb_names_its_instrument",
+           re.search(r"ITC-Hulls|Institute Time Clauses", flat) is not None,
+           "the consequence is contractual, not PR1C's -- trap 130")
+    # Mutation Z7b stripped the instrument from ONE site and the card-wide
+    # presence check stayed green on the others. The understatement itself is
+    # the thing to forbid, and it must be forbidden here as well as on QB4_C.
+    under = asserts(flat, r"cover (?:may be|might be|could be) prejudiced"
+                          r"|(?:cover|insurance) is not automatically void"
+                          r"|not automatically void")
+    report("qb4a_no_insurance_understatement", under is None,
+           "found=%r -- see trap 130" % (under.group(0) if under else None))
 
     auto = asserts(flat, r"[Cc]ondition of [Cc]lass[^.,;:]{0,90}?"
                          r"(?:automatic\w*[^.,;:]{0,40}?suspen|suspends? class)"

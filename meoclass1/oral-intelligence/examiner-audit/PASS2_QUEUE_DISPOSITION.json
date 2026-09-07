@@ -183,13 +183,25 @@
    "disposition": "DEFERRED",
    "severity": "P2",
    "detail": "Stale: last generated 5 Sep, so it lists no Pass-2 correction and the generated home, search and updates surfaces do not reflect any of the 12 corrected cards. NOT regenerated here - regenerating it advances a published surface, and this pass is not authorised to publish. It must be regenerated as part of release qualification, before or with the hub-date advance."
+  },
+  {
+   "item": "IACS PR 1 mis-citation in the Notes series",
+   "disposition": "DEFERRED",
+   "severity": "P1",
+   "sites": [
+    "meoclass1/oralnotes/miw-notes-mgmt-p7.html",
+    "meoclass1/oralnotes/simon-notes-p2.html",
+    "meoclass1/oralnotes/simon-notes-p6.html"
+   ],
+   "detail": "Three Notes pages cite 'IACS PR 1' for conditions of class and suspension procedures. PR 1 is Deleted in the IACS PR index; the instruments are PR1C and PR 35. miw-notes-mgmt-p7 additionally calls PR1C A.4.1's six months an 'automatic-suspension trigger' when it is WITHDRAWAL after six months suspended.",
+   "why_deferred": "The Notes series is generated from a JSON content spec by tools/notes, so its HTML must not be hand-edited - the fix belongs in that spec and that toolchain, which is a different product with its own build and gates. Recorded as DEFERRED in reports/pr1c_family_sweep.json, which distinguishes 'not a defect' from 'a real defect somebody else must fix'."
   }
  ],
  "corpus_state": {
   "questions": 761,
   "files": 86,
   "unchanged_from": "05b49d8",
-  "cards_moved": 12,
+  "cards_moved": 13,
   "undeclared_cards_moved": 0,
   "method": "Canonical card digests over every tracked page under meoclass1/ at 05b49d8 and at HEAD, compared anchor by anchor - PLUS git diff --stat over meoclass1/, because the card digester reads q-card blocks only and the 34 cheat sheets contain none. The P0 of this batch lived on exactly that blind spot.",
   "moved_cards": [
@@ -197,6 +209,7 @@
    "QB1_C.html#q6",
    "QB1_F.html#q7",
    "QB1_G.html#q36",
+   "QB1_I.html#q6",
    "QB3_A.html#q5",
    "QB3_B.html#q1",
    "QB4_A.html#q9",
@@ -207,7 +220,9 @@
    "QB8_A.html#q3"
   ],
   "non_card_pages_changed": [
-   "meoclass1/QB4_A_CheatSheet.html"
+   "meoclass1/QB4_A_CheatSheet.html",
+   "meoclass1/QB1_K_CheatSheet.html",
+   "meoclass1/known_traps.md"
   ]
  },
  "not_done_deliberately": [
@@ -258,7 +273,7 @@
   "not_upheld": {
    "pr1c_rev7_primary_claim": "The reviewer challenged CORR-PASS2-PR1C-SUSPENSION's PRIMARY-on-Rev.7 claim because iacs.org.uk returned 403 and they could obtain only Rev.6. The challenge was well founded on their evidence and the claim is nonetheless correct: Rev.7 was retrieved this pass from IACS's own S3 bucket and read in full, including clause 8 'Rev.7 of this Procedural Requirement applies from 1 January 2026'. The record now carries both S3 URLs and the user-agent condition, so the retrieval is reproducible rather than merely asserted. This is a REPRODUCIBILITY defect in the record, not a truth defect in the claim."
   },
-  "rounds": 3,
+  "rounds": 4,
   "round_3": {
    "result": "P0 and further P1s found. The round-2 rewrite of the sweep-completeness claim was ALSO false. All closed at 05a9f95.",
    "findings": [
@@ -307,8 +322,59 @@
      "finding": "Five of six hand-written mutations walked past asserts(). Every escape used a negation that CO-OCCURRED with the claim without governing it. Rebuilt around one rule: a denial governs its own clause and no further. All five are now mutations X1-X5 and all are caught."
     }
    ]
+  },
+  "round_4": {
+   "result": "The headline finding is against this batch's OWN corrections, not against the original cards: rounds 1-3 fixed the attribution of the insurance consequence and then overshot the claim.",
+   "findings": [
+    {
+     "id": "IR4-1",
+     "severity": "P1",
+     "site": "six cards, all corrected by this batch",
+     "finding": "The batch replaced 'suspension voids insurance' with 'cover may be prejudiced ... not automatically void'. Institute Time Clauses - Hulls (1/11/95) cl. 4.2 terminates hull cover AUTOMATICALLY on suspension, discontinuance or withdrawal of class - deferred to the next port if at sea, disapplied where the class event arose from insured damage and the Society approves sailing. The correction taught that cover survives a suspension, which is worse than the crude claim it replaced.",
+     "my_error": "I treated 'PR1C does not say this' as if it settled 'this is not so'. PR1C is silent on insurance because insurance is not its subject, not because the consequence does not exist. The governing instrument is the POLICY.",
+     "the_corpus_already_knew": "QB1_F#q7 section 4 had ITC-Hulls cl.4/5.1 correct throughout - and the PR1C record cited that card as 'already correct' and then contradicted it. The batch's own sweep flagged oralnotes p21 as a suspected defect when it was MORE correct than the correction.",
+     "closed_by": "93c4d3c; known_traps 130; and two new gate checks that require the insurance limb to name its instrument, so the understatement cannot return unguarded"
+    },
+    {
+     "id": "IR4-2",
+     "severity": "P1",
+     "site": "meoclass1/QB1_C.html#q6",
+     "finding": "A trap-answer still read 'Unreported hull damage invalidates class automatically', two paragraphs below the bullet round 3 had corrected to 'not automatic'."
+    },
+    {
+     "id": "IR4-3",
+     "severity": "P1",
+     "site": "meoclass1/QB1_K_CheatSheet.html",
+     "finding": "A SECOND derived cheat sheet carried the P0 defect, twice: 'overdue -> suspension' and 'Overdue -> suspension -> statutory/insurance cascade'."
+    },
+    {
+     "id": "IR4-4",
+     "severity": "P1",
+     "site": "meoclass1/QB1_I.html#q6",
+     "finding": "'11-12 Members' - the exact hedge trap 120 exists to kill. The IACS record's declared search terms could not reach it because the hedge is HYPHENATED. Second completeness claim in this batch to fail on token shape."
+    },
+    {
+     "id": "IR4-5",
+     "severity": "P1",
+     "site": "meoclass1/QB4_A.html#q9 footer",
+     "finding": "The version stamp asserted the PR No.1/No.3 entries were 'left as they stand and recorded as unverified'. Round 3 had replaced both, three lines above. A footer describing an edit that did not happen is a candidate-facing falsehood - the second of that shape in this batch."
+    },
+    {
+     "id": "IR4-6",
+     "severity": "P1",
+     "site": "meoclass1/QB4_A.html#q9 notation table",
+     "finding": "Round 3's OWN new Recommendation row said a thing with 'no due date attached' can go 'overdue', and contradicted four sibling surfaces calling a Recommendation non-binding. Reverted."
+    },
+    {
+     "id": "IR4-7",
+     "severity": "P1",
+     "site": "tools/oral/sweep_pr1c_family.py",
+     "finding": "The generated sweep - this batch's structural answer to three false prose claims - had its own recall defects: patterns were case-SENSITIVE while its disarm list was case-insensitive; 'CoC' and bare 'PR 1' were unhandled; the disarm window was an unscoped 160 characters; and the adjudication ledger matched on (file, substring), so any future hit in an adjudicated file inherited a human decision it never received. All closed."
+    }
+   ]
   }
  },
  "remediation_commit_2": "ae80bfe",
- "remediation_commit_3": "05a9f95"
+ "remediation_commit_3": "05a9f95",
+ "remediation_commit_4": "93c4d3c"
 }

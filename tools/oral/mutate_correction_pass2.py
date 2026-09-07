@@ -360,11 +360,21 @@ MUTATIONS = [
                  "<strong>IACS UR Z23</strong>, with SOLAS Ch I/Reg 6", count=1),
      "qb4a_no_ur_z23_attribution"),
 
-    ("Z7", "restore automatic insurance loss in the cascade bullet",
+    ("Z7", "attribute the insurance consequence to PR1C again",
      sub_in_file(QB4_A,
-                 "so loss of class breaches it and cover may be prejudiced",
-                 "so P&amp;I Club cover falls away automatically", count=1),
+                 "and the standard hull wording goes further than a warranty: Institute "
+                 "Time Clauses",
+                 "and under PR1C P&amp;I Club cover falls away automatically: Institute "
+                 "Time Clauses", count=1),
      "qb4a_no_universal_insurance_loss_claim"),
+
+    ("Z7b", "strip the instrument, leaving the trap-130 understatement",
+     sub_in_file(QB4_A,
+                 "Institute Time Clauses &ndash; Hulls (1/11/95) cl. 4.2 terminates hull "
+                 "cover",
+                 "the class warranty is breached so cover may be prejudiced; a policy "
+                 "terminates hull cover", count=1),
+     "qb4a_insurance_limb_names_its_instrument"),
 
     ("Z8", "restore the unqualified claim in QB4_A's CE Oral Tip only",
      sub_in_file(QB4_A,
@@ -439,8 +449,9 @@ MUTATIONS = [
 
     ("X9", "restore the automatic insurance void on QB1_G q36",
      sub_in_file(QB1_G,
-                 "Hull and P&amp;I cover is written subject to a class warranty",
-                 "Suspension automatically voids the vessel&#x27;s hull insurance", count=1),
+                 "On insurance, cite the policy and not PR1C: ITC-Hulls",
+                 "Suspension automatically voids the vessel&#x27;s hull insurance. ITC-Hulls",
+                 count=1),
      "qb1g_q36_no_pr1c_family_defect"),
 
     ("X10", "put the defect back on a surface the sweep must find",

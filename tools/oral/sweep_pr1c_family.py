@@ -83,7 +83,11 @@ PROPOSITIONS = {
         r"(?:P&I|H&M|hull)?\s*insurance",
     ],
     "COC_AUTOMATICALLY_SUSPENDS": [
-        r"[Cc]ondition of [Cc]lass[^.]{0,90}?automatic\w*[^.]{0,40}?suspen",
+        r"(?:[Cc]ondition of [Cc]lass|\bCoC\b)[^.]{0,90}?automatic\w*[^.]{0,40}?suspen",
+        r"(?:[Cc]ondition of [Cc]lass|\bCoC\b)[^.]{0,60}?"
+        r"(?:overdue|not (?:met|cleared|rectified))[^.]{0,60}?suspen",
+        r"[Oo]verdue[^.]{0,40}?(?:\u2192|->|=>)\s*suspension",
+        r"invalidates? class automatic\w*",
         r"automatic\w*\s+[Ss]uspension of [Cc]lass",
         r"(?:due date|timeframe)[^.]{0,50}?results in[^.]{0,30}?[Ss]uspension",
         r"[Cc]lass suspended if not met",
@@ -93,6 +97,9 @@ PROPOSITIONS = {
         r"\bUR\s*Z15\b",
         r"\bUR\s*Z23\b",
         r"IACS\s+PR\s*No\.?\s*[13]\b",
+        # bare "PR 1" / "(PR1)" - the form that hid three sites in the notes
+        r"\(?\bPR\s?1\)?(?!\s*[A-D]\b)(?![A-D0-9])",
+        r"\bPR\s*No\.?\s*3\b(?!\s*5)",
     ],
 }
 
@@ -104,6 +111,9 @@ DISARM = re.compile(
     r"rather than claiming|do not (?:tell|call|go further|forget to)|"
     r"there is no universal|contains no insurance|says nothing about insurance|"
     r"is not automatic|not automatic|cover may be prejudiced|"
+    r"suspension procedure|can lead to|may lead to|A\.2\.1|A\.1\.1|"
+    r"terminates automatically|ITC-Hulls|Institute Time Clauses|"
+    r"PR\s?1 family|PR1 family|UR ?/ ?UI ?/ ?PR|neighbouring procedures|"
     r"which is Hull Survey|which is Hull, Structure|is Deleted in the IACS)",
     re.I)
 
@@ -117,6 +127,19 @@ ADJUDICATED = {
         "EXAMINER QUESTION, not teaching. The card quotes a trap question - 'are only "
         "the classification records invalid, or do statutory certificates also become "
         "invalid?' - and its own answer corrects it to PR1C B.1.3's 'certain'.",
+
+    ("meoclass1/oralnotes/miw-notes-mgmt-p1.html", "Every statutory certificate"):
+        "DIFFERENT SENSE, and correct. 'Every statutory certificate on board - IOPP, Safety "
+        "Equipment, Loadline - is issued under an IMO convention' is set membership, with "
+        "no invalidation claim.",
+
+    ("meoclass1/oralnotes/miw-notes-mgmt-p21.html",
+     "Loss of class \u2014 hull and machinery cover and most financing covenants fall away"):
+        "CORRECT AS WRITTEN, and it is this batch that was wrong. Institute Time Clauses - "
+        "Hulls (1/11/95) cl. 4.2 terminates hull cover AUTOMATICALLY on suspension, "
+        "discontinuance or withdrawal of class. Rounds 1-3 of this batch replaced that with "
+        "'cover may be prejudiced', which was an over-correction; round 4 reversed it "
+        "across every card it had touched. This note was right all along.",
 
     ("meoclass1/oralnotes/miw-notes-mgmt-p22.html", "every statutory certificate"):
         "DIFFERENT SENSE, and correct. 'A ship can hold every statutory certificate and "
@@ -133,10 +156,54 @@ ADJUDICATED = {
 }
 
 
+#: Hits that ARE defects but sit outside what this pass may correct. Separated
+#: from ADJUDICATED on purpose: "not a defect" and "a real defect somebody else
+#: must fix" are different claims, and collapsing them is how a live defect
+#: comes to look cleared. Each entry names where it is tracked.
+DEFERRED = {
+    ("meoclass1/oralnotes/miw-notes-mgmt-p7.html", "(PR1)"):
+        "REAL DEFECT, NOT FIXED HERE. 'The 6-month automatic-suspension trigger for a "
+        "lapsed CoC extension request is standard IACS practice (PR1)' is wrong twice: "
+        "PR 1 is Deleted in the IACS PR index, and PR1C A.4.1's six months is WITHDRAWAL "
+        "after suspension, not a suspension trigger. The Notes series is generated from a "
+        "JSON content spec by tools/notes, so its HTML must not be hand-edited - the fix "
+        "belongs in that spec and that toolchain. Tracked in PASS2_QUEUE_DISPOSITION.",
+    ("meoclass1/oralnotes/simon-notes-p2.html", "PR 1"):
+        "REAL DEFECT, NOT FIXED HERE. Cites 'IACS PR 1 ... Procedural Arrangements for "
+        "Classification' for conditions of class and suspension procedures. PR 1 is "
+        "Deleted; the instruments are PR1C and PR 35. The card's own hedge - 'verify exact "
+        "PR number before quoting' - is honest but does not make the citation right. Notes "
+        "series, same toolchain constraint as above.",
+    ("meoclass1/oralnotes/simon-notes-p6.html", "PR 1"):
+        "REAL DEFECT, NOT FIXED HERE. 'IACS PR 1 - IACS procedure for condition of class'. "
+        "Same defect and same toolchain constraint as simon-notes-p2.",
+    ("meoclass1/pastpapers/QP2503.html",
+     "condition of class with a due date; if that is not cleared, class is suspen"):
+        "COMPRESSION IN A PLAN BLOCK, P3. MIW-authored model-answer planning text, not an "
+        "examiner stem, so it is not protected by the examiner-wording rule - but it is "
+        "sitting-anchored past-paper content and outside this pass's declared families. "
+        "The same compression was corrected where it appeared in QB teaching cards.",
+    ("meoclass1/pastpapers/QP2507.html",
+     "condition of class with a due date; if that is not cleared, class is suspen"):
+        "COMPRESSION IN A PLAN BLOCK, P3. Same as QP2503.",
+}
+
+
 def adjudication(hit):
+    """An adjudication covers the TEXT that was read, not the file.
+
+    The first version matched (file, substring), so any later hit anywhere in
+    that page inherited the human decision as long as it happened to contain
+    the fragment. That is a permanent per-file blind spot, and it is the same
+    shape as the acceptance rule the review pool already gets right: a
+    clearance covers the bytes somebody read.
+    """
     for (f, frag), why in ADJUDICATED.items():
+        if hit["file"] == f and hit["text"].strip() == frag.strip():
+            return "CLEARED: " + why
+    for (f, frag), why in DEFERRED.items():
         if hit["file"] == f and frag in hit["text"]:
-            return why
+            return "DEFERRED: " + why
     return None
 
 
@@ -189,8 +256,17 @@ def sweep():
         text = rendered_text(strip_provenance(raw))
         for family, patterns in PROPOSITIONS.items():
             for pat in patterns:
-                for m in re.finditer(pat, text):
-                    window = text[max(0, m.start() - 160):m.end() + 160]
+                for m in re.finditer(pat, text, re.I):
+                    # Scoped like the validator's asserts(): a disarming
+                    # phrase in a NEIGHBOURING sentence is not evidence about
+                    # this one. An unscoped window let "Reinstatement ... is
+                    # not automatic" clear an assertion two sentences earlier.
+                    head = text[max(0, m.start() - 200):m.start()]
+                    cut = max(head.rfind(". "), head.rfind("; "), head.rfind("? "))
+                    tail = text[m.end():m.end() + 160]
+                    stop = min([i for i in (tail.find(". "), tail.find("; "))
+                                if i >= 0] or [len(tail)])
+                    window = head[cut + 2:] + m.group(0) + tail[:stop]
                     if DISARM.search(window):
                         continue
                     # Locate the match in the MARKUP, not the first occurrence
@@ -232,7 +308,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", help="write the full result here")
     ap.add_argument("--check", action="store_true",
-                    help="exit 1 if any hit is on a qb or cheatsheet surface")
+                    help="exit 1 if any hit is unadjudicated, on any surface")
     a = ap.parse_args()
 
     hits = sweep()
@@ -247,8 +323,13 @@ def main() -> int:
               % ("OK" if h["adjudication"] else "OPEN",
                  h["surface"], h["file"].split("/")[-1], h["anchor"],
                  h["family"], h["text"][:70]))
-    print("\nadjudicated: %d   UNADJUDICATED: %d"
-          % (len(hits) - len(live), len(live)))
+    cleared = [h for h in hits if (h["adjudication"] or "").startswith("CLEARED")]
+    deferred = [h for h in hits if (h["adjudication"] or "").startswith("DEFERRED")]
+    print("\ncleared: %d   deferred: %d   UNADJUDICATED: %d"
+          % (len(cleared), len(deferred), len(live)))
+    for h in deferred:
+        print("  DEFERRED %s [%s] %s"
+              % (h["file"], h["family"], h["adjudication"].split(".")[0][10:]))
     for h in live:
         print("  OPEN %s#%s [%s] %s"
               % (h["file"], h["anchor"], h["family"], h["text"][:110]))
