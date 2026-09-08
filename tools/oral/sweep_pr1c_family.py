@@ -138,7 +138,7 @@ ADJUDICATED = {
     ("meoclass1/oralnotes/miw-notes-mgmt-p21.html",
      "Loss of class \u2014 hull and machinery cover and most financing covenants fall away"):
         "CORRECT AS WRITTEN, and it is this batch that was wrong. Institute Time Clauses - "
-        "Hulls (1/11/95) cl. 4.2 terminates hull cover AUTOMATICALLY on suspension, "
+        "Hulls (1/11/95) cl. 5.1 terminates hull cover AUTOMATICALLY on suspension, "
         "discontinuance or withdrawal of class. Rounds 1-3 of this batch replaced that with "
         "'cover may be prejudiced', which was an over-correction; round 4 reversed it "
         "across every card it had touched. This note was right all along.",

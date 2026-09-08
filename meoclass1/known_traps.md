@@ -3546,7 +3546,7 @@ The first half is right and the second half is wrong. A fourth independent revie
 answer sitting three paragraphs above one of the edits, in `QB1_F#q7`'s own section 4, which
 the record had cited as "already correct" and then contradicted:
 
-> **Institute Time Clauses – Hulls (1/11/95), cl. 4.2** — the insurance *"terminates
+> **Institute Time Clauses – Hulls (1/11/95), cl. 5.1** — the insurance *"terminates
 > automatically"* on change of Classification Society, or change, suspension,
 > discontinuance, withdrawal or expiry of her Class; deferred until arrival at her next port
 > if the vessel is at sea; and disapplied where the class event resulted from insured damage
@@ -3564,7 +3564,7 @@ the opposite of what the correction said.
 
 **The accurate teaching, and the shape to reuse:** name the right instrument for each limb.
 Statutory certificates → PR1C B.1.3, *certain* certificates implicitly invalidated. Hull
-cover → ITC-Hulls cl. 4.2, automatic termination with its two qualifications. P&I → club
+cover → ITC-Hulls cl. 5.1, automatic termination with its two qualifications. P&I → club
 rules, class as a condition of entry. The original cards collapsed all three into "class is
 suspended, everything falls"; the over-correction collapsed them into "nothing falls
 automatically". Both are one-instrument answers to a three-instrument question.
@@ -3625,3 +3625,50 @@ suggests" and "the investigation found".
 Four were the LSA rescue-boat launch limit and an incinerator temperature. They were opened
 and read rather than counted, which is the difference between a swept family and a
 find-and-replace. See also trap 128: a completeness claim is itself a claim.
+
+### 132. The right mechanism under the wrong clause number — and the seed card said so all along
+
+Trap 130 fixed a real over-correction: it established that on standard hull terms cover
+**does** end automatically, and named the instrument — Institute Time Clauses – Hulls
+(1/11/95). It then attached that mechanism to **cl. 4.2**, and
+`apply_corr_pass2_r4.py` propagated the citation to **fourteen candidate-facing sites**
+across six cards and two cheat sheets in one pass.
+
+The clause number is wrong. In ITC-Hulls 1/11/95:
+
+- **Clause 4 — Classification.** 4.1 is the duty to keep the Vessel classed with an
+  agreed Society and to comply with her Society's recommendations by their due dates.
+  **4.2** is the consequence of breaching *that duty*: the Underwriters are **discharged
+  from liability** as from the date of breach, deferred until the next port if the
+  Vessel is at sea.
+- **Clause 5 — Termination.** **5.1** is automatic termination of the insurance on change
+  of the Classification Society, or change, suspension, discontinuance, withdrawal or
+  expiry of her Class — deferred until arrival at her next port if at sea, and subject to
+  the Clause 6 proviso where the class event arose from insured damage.
+
+Both clauses carry an at-sea deferral, which is what makes the confusion easy. They are
+different mechanisms with different triggers: 4.2 is breach of a duty, 5.1 is a change in
+class status.
+
+**The corpus already held the right answer.** `QB1_F#q7`'s own reg-box reads
+*"Institute Time Clauses – Hulls 1/11/95, cl. 4 and 5.1 — Duty to maintain class;
+automatic termination of hull cover"*. The round-4 record's own
+`the_corpus_already_knew` field quotes that card as *"cl.4/5.1 correct throughout"* —
+and the finding three lines above it writes cl. 4.2. The record contradicted itself, and
+the wrong half is the half that shipped. For one day the seed card taught 5.1 in its
+reg-box and 4.2 in its prose.
+
+**What made it invisible.** The Pass-2 gate asked *"does this card name ITC-Hulls?"* —
+a presence check. Presence checks cannot see a citation that names the right instrument
+and the wrong clause within it. The gate that catches this
+(`validate_correction_itc51.py`) is **proposition-scoped**: it asserts that every site
+teaching automatic termination cites 5.1, *and* that 4.2 survives wherever the genuine
+Clause-4 duty/breach mechanism is taught — so it cannot be satisfied by a blanket
+4.2 → 5.1 substitution.
+
+**What to check.** When a correction supplies a clause number, verify the number against
+the instrument's own structure, not against the prose of the record that supplies it —
+and when the corpus already cites that instrument elsewhere, read the existing citation
+before overwriting it. A card that disagrees with its own reg-box is the cheapest signal
+available, and nothing was reading for it. See also trap 130, which is this trap's
+parent, and trap 128 on completeness claims.
