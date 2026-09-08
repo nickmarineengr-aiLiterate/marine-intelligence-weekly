@@ -79,6 +79,15 @@ def _strip_instrument(path):
 # anchors are re-pointed at the corrected text so this suite keeps testing the
 # proposition it was written for. Nothing about what Z7b and Z7c PROVE has
 # changed; only the bytes they reach for. See known_traps 132.
+def _stale_pass2_entry(d):
+    """Move the Pass-2 entry's date off 2026-09-07, wherever it now sits."""
+    for e in d["recently_updated"]:
+        if e.get("date") == "2026-09-07":
+            e["date"] = "2026-09-04"
+            return
+    raise AssertionError("no 2026-09-07 entry in the governed correction log")
+
+
 GATE = "validate_correction_pass2.py"
 WATCHED = [QB4_E, QB4_C, QB8_A, QB5_A, QB3_A, QB10_B, QB3_B, QB4_A,
            QB4_A_CS, QB1_C, QB1_G,
@@ -529,9 +538,14 @@ MUTATIONS = [
                  count=1),
      "notes_p7_six_months_is_withdrawal_not_a_trigger"),
 
+    # Selected by DATE, not by position. This mutation used to stale
+    # recently_updated[0] on the assumption that index 0 is the Pass-2 entry.
+    # CORR-ITC51-20260908 prepended an entry, so [0] became a different record
+    # and TE staled that instead - the check it names stayed green and the
+    # mutation ESCAPED, caught only by the generic determinism check. A guard
+    # that indexes into a growing log expires the first time the log grows.
     ("TE", "stale the correction log after a rebuild",
-     edit_json(IDX_GOV, lambda d: d["recently_updated"].__setitem__(
-         0, dict(d["recently_updated"][0], date="2026-09-04"))),
+     edit_json(IDX_GOV, _stale_pass2_entry),
      "qb_content_index_records_the_pass2_batch"),
 
     # ---- F-L: one per QB10_B proposition --------------------------------
