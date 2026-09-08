@@ -18,6 +18,15 @@ import re
 import subprocess
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+#: Reaches the shared UTF-8 stdio contract -- and this file is the one that
+#: actually needs it. It is a mutation harness: it writes a product page,
+#: runs the validator, prints the result and then restores. A
+#: UnicodeEncodeError on that print lands BETWEEN the mutation and the
+#: restore and leaves the mutation on disk, which is the incident the
+#: contract exists to prevent.
+from oral_bytes import enable_utf8_stdio  # noqa: E402,F401
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 QB = os.path.join(ROOT, "meoclass1")
 VALIDATOR = os.path.join(ROOT, "tools", "oral", "validate_tranche4a.py")

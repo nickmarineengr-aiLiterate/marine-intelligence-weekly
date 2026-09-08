@@ -22,6 +22,14 @@ import os
 import re
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+#: Reaches the shared UTF-8 stdio contract. This tool prints degree signs
+#: and dashes; on Windows a piped stdout uses the locale codec, so those
+#: raise UnicodeEncodeError. Importing oral_bytes applies the contract on
+#: import, which is what test_oral_release_infra asserts for every
+#: validate_*/mutate_* tool on disk. This pair was the last two unreached.
+from oral_bytes import enable_utf8_stdio  # noqa: E402,F401
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 QB = os.path.join(ROOT, "meoclass1")
 

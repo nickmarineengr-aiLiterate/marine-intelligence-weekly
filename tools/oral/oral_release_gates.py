@@ -472,6 +472,31 @@ GATES = (
                "independently, and planting the rejected term on a DIFFERENT "
                "candidate page that the reported card's own guard cannot see"),
 
+    # Content gate for the two 2026-09-08 Bulk Jupiter corrections, found in
+    # final release qualification. Both cards WERE pinned and both pins were
+    # green over wrong content, which is the point: sha256 cannot see that
+    # "the IMO" should read "the Bahamas Maritime Authority as flag State",
+    # that "concluded" should read "most probable", or that "5 minutes" should
+    # read "20 minutes". Every check here asserts the proposition instead, and
+    # four of them assert the UNTOUCHED sibling pages so the corpus cannot be
+    # left disagreeing with itself about one casualty.
+    _gate("validate_correction_bulkjupiter",
+          ["python", "%s/validate_correction_bulkjupiter.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="asserts WHO investigated (flag State, not the IMO), HOW STRONGLY "
+               "the report found it (most probable, two candidate mechanisms, no "
+               "physical evidence of cause) and the particulars; and asserts the "
+               "four untouched Bulk Jupiter sites still agree, which no pin sees"),
+    _gate("correction_bulkjupiter_mutate",
+          ["python", "%s/mutate_correction_bulkjupiter.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1800,
+          historical_39=False, depends_on=("validate_correction_bulkjupiter",),
+          note="22 mutations in three directions - regression, silent weakening "
+               "(a right name with its rule stripped, a figure with nothing to "
+               "compare it to) and OVER-SWEEP, which deletes true teaching that "
+               "sat beside a false claim; plus a vacuity trap that renames the "
+               "block heading the gate extracts"),
+
     # The shared-module controls. These were runnable but were NOT in the suite,
     # so the guard for the health-comparison contract could rot without any
     # release noticing -- the expired-guard defect class this repository has

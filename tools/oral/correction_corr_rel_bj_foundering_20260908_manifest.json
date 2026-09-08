@@ -1,0 +1,60 @@
+{
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "date": "2026-09-08",
+ "baseline_commit": "74ffd0c",
+ "authorisation_source": "MIW FINAL RELEASE QUALIFICATION instruction of 8 September 2026, section 4 (BULK JUPITER - SPECIAL RELEASE CHECK), which directs that if either flagged card carries a live material factual error it is to be classified RELEASE_BLOCKING_P1 and given a bounded surgical correction, expressly notwithstanding that it sat outside Pass-2 terminal scope. Pass 2 is not reopened by this record and no discovery tranche was run: the two cards were named in the instruction and only those two cards were opened.",
+ "governing_commits": [
+  "001be26"
+ ],
+ "origin": "final_release_qualification",
+ "authority": "PRIMARY, read at source. Bahamas Maritime Authority, 'M.v Bulk Jupiter - Marine Safety Investigation Report', published 18 August 2015 - the flag State's own report, 64 pages. Section 4.2: the vessel 'foundered ... within approximately 20 minutes', and separately the window from the 0640 general alarm to the 0700 EPIRB transmission 'was unlikely to be more than 20 minutes'. Sections 4.3.12-4.3.13 and 5.1: an average moisture content of 21.3% across 46,400t loaded over thirteen days, against 10% declared on all three declarations. Section 5.1: 'there is no physical evidence to confirm what caused the vessel to adopt an unrecoverable list to starboard and subsequent capsize', and the report concludes only that it is 'most probable that either liquefaction or a free surface effect induced an unrecoverable list'. Sections 3.12-3.18 and 4.5: NE monsoon, forecast Beaufort 6-7, sea state 4-6, average wave height 2.2m - which is why QB5_A's 'heavy weather' was tested and KEPT rather than removed on suspicion. SUPPORTING, already held in this repository at P1: CCC.1/Circ.2 of 20 October 2015, read at source for QP2509-Q1, which records that CCC 2 considered the BAHAMAS submission on the loss - the IMO's role was to receive that submission and circulate the warning, not to investigate. The flag-State duty is SOLAS XI-1/6 with the Casualty Investigation Code (MSC.255(84)), which this corpus already teaches and which CORR-GPT-PASS3 corrected to the Code's own term, 'marine safety investigation' - the term the BMA report itself uses in its title.",
+ "known_traps_entries": [
+  131
+ ],
+ "correction_id": "CORR-REL-BJ-FOUNDERING-20260908",
+ "title": "QB5_A q11 - the risk-assessment card said Bulk Jupiter sank within five minutes. The flag State's report gives approximately twenty.",
+ "candidate_claim": "Not a candidate report. Raised by the final release qualification's section 4.",
+ "candidate_verdict": "UPHELD. A specific numeric claim, wrong by a factor of four against the flag State's report, in a Casualty Link block on a card whose whole subject is assessing consequence. The second limb of the same sentence asserted liquefaction as settled where the report concludes only that liquefaction or a free-surface effect is most probable.",
+ "propagation": {
+  "same_defect_swept": "'within 5 minutes' returns four further sites corpus-wide - QB2_G x3 and oralnotes/simon-notes-p4 x1 - which were opened and READ rather than counted: three are the LSA Code rescue-boat five-minute launch limit and one is the incinerator batch-temperature figure. None concerns Bulk Jupiter and none is touched. A keyword sweep that had counted them would have reported five sites of one defect and been wrong about four.",
+  "same_family_prior": "None for the figure. The over-assertion limb is the same shape as known trap 131, which this record shares.",
+  "corpus_agreement_checked": "The four other Bulk Jupiter sites were read for contradiction with the corrected text. QB10_B#q1 (2 January 2015, off Vung Tau, 18 of 19 crew lost, bauxite liquefaction not a cargo shift, average cargo moisture 21.3%), QB8_H#q5, QB2_B_CheatSheet and the QP2304 / QP2509 past-paper layer all agree with the corrected wording and are byte-identical after this record.",
+  "not_swept_reported": "The past-paper layer (QP2304, QP2501, QP2509) characterises the Bulk Jupiter mechanism as DYNAMIC SEPARATION and says expressly that it is not a simple liquefaction case, while the QB layer says liquefaction. That divergence is real and is NOT closed here. Both corrected cards now state the mechanism as the flag State's report states it, which is the narrower and safer claim, and the nuance is REPORTED as post-release hardening rather than swept - section 15 of the release instruction requires a new class to be reported rather than expanded.",
+  "derived_surfaces": "qb_content_index.json and qb_content_index_governed.json regenerate to no-ops on the corrected page; corpus 761 / 86 unchanged; no q-text and no card identity was touched, so no index, examiner, topic or search surface moves.",
+  "hub_date": "NOT ADVANCED. Still 2 Sep 2026."
+ },
+ "invariants": [
+  "The card's q-text is unchanged, so no anchor, no identity and no derived surface moves. Corpus stays 761 / 86.",
+  "'In heavy weather' is PRESERVED - it was tested against the report's own heavy-weather section and is correct. It was not removed on suspicion, and the conditions it refers to are now named.",
+  "The risk-assessment teaching is preserved in full: the known hazard, the absent assessment against TML, the Likelihood/Consequence pair, and the closing point that a missing risk assessment produces a catastrophe rather than a recoverable incident.",
+  "The 18-of-19 crew toll, already correct, is byte-identical.",
+  "Every other block on the card, including the whole On My Vessel and Examiner Chain, is byte-identical."
+ ],
+ "cards": [
+  {
+   "correction_action_id": "REL-BJ-02",
+   "file": "QB5_A.html",
+   "path": "meoclass1/QB5_A.html",
+   "anchor": "q11",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "834dd3a0ab29b59650fdbb264381b51f0437b75a409f92fdab06834552037a75",
+   "post_edit_digest": "f913e950434fb28f778b188ff378218abc31628160d22e4d37d6c13d8f442990",
+   "what_changed": "Casualty Link. 'The vessel sank within 5 minutes of bauxite cargo liquefying in heavy weather' replaced with 'The vessel foundered in approximately 20 minutes in heavy weather (NE monsoon, Beaufort 6-7) after the bauxite cargo most probably liquefied or developed a free surface'. Two changes: the foundering time, which was wrong by a factor of four against the flag State's report, and the mechanism, which is now stated at the report's own strength rather than asserted. 'In heavy weather' was tested and kept, and the conditions it refers to are now named. The rest of the card - the hazard, the absent assessment against TML, the Likelihood/Consequence pair and the closing catastrophe point - is byte-identical."
+  }
+ ],
+ "artefacts": [
+  {
+   "path": "tools/oral/apply_corr_rel_bulkjupiter.py",
+   "role": "The applier for both records. Four exact-string replacements, each required to match exactly once, with the file's own line endings preserved in both directions."
+  },
+  {
+   "path": "tools/oral/validate_correction_bulkjupiter.py",
+   "role": "The content gate for both records. Asserts the propositions rather than banning strings, and strips the q-version footer before every check because the corrected footers quote the rejected wording verbatim."
+  },
+  {
+   "path": "tools/oral/mutate_correction_bulkjupiter.py",
+   "role": "The mutation suite. Every mutation must trip its OWN named check, never the digest pin."
+  }
+ ]
+}

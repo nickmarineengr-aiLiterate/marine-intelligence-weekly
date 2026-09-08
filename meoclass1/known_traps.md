@@ -3581,3 +3581,47 @@ ITC-Hulls right the whole time, and the batch's own sweep flagged the notes line
 suspected defect. When a sweep flags something that turns out to be *more* correct than the
 correction, that is the signal to re-open the correction, not to adjudicate the sweep hit
 away.
+
+### 131. A casualty was investigated by its flag State, never by the IMO — and a qualified finding is not a conclusion
+
+**Where it was found:** `QB8_A#q4`, in the release qualification that followed Pass-2
+terminal closure. `QB5_A#q11` carried the second half of the same shape.
+
+**What the card said:** "The subsequent investigation by the IMO concluded that … the
+material underwent rapid liquefaction (Group A transition), causing an immediate loss of
+stability and a sudden capsize."
+
+**Why it is wrong twice.**
+
+*The body.* The IMO does not investigate marine casualties. Investigation is a **flag-State
+duty** under **SOLAS XI-1/6** and the **Casualty Investigation Code (MSC.255(84))**, and
+`Bulk Jupiter` was investigated by the **Bahamas Maritime Authority**, whose report was
+published on 18 August 2015. What the IMO did was *receive the Bahamas submission* at CCC 2
+and circulate the warning as **CCC.1/Circ.2**. This corpus already held that fact at P1 —
+`QP2509-Q1` read the circular at source and recorded the submission as the Bahamas' — so
+the card contradicted verified repository evidence, not merely the outside world.
+
+*The strength.* The BMA report says in terms that "there is **no physical evidence** to
+confirm what caused the vessel to adopt an unrecoverable list to starboard and subsequent
+capsize", and concludes only that it is "**most probable** that **either** liquefaction
+**or** a free surface effect induced" it. The card converted that into a conclusion, and
+into a single mechanism. An investigation that says *most probable, and it might be either
+of two things* has not concluded anything, and a card that says it has is teaching a
+confidence the candidate cannot defend when the examiner presses.
+
+**Why this class is worse than a mis-citation.** Who investigates a marine casualty is
+**itself an examinable topic** at MEO Class I. A card that names the wrong investigating
+body is not merely imprecise about a casualty; it plants a wrong answer to a question the
+candidate will be asked in its own right, in the block — Casualty Link — that the candidate
+is most likely to memorise verbatim.
+
+**What to check.** Whenever a card names who investigated, the answer is the **flag State**
+(or the substantially interested States acting jointly), and the IMO's role is to receive,
+publish and act on the report. Whenever a card reports a finding, quote the report's own
+modal verb. "Most probable" and "concluded" are not synonyms, and neither is "evidence
+suggests" and "the investigation found".
+
+**One process note.** The sweep for this defect returned five sites for "within 5 minutes".
+Four were the LSA rescue-boat launch limit and an incinerator temperature. They were opened
+and read rather than counted, which is the difference between a swept family and a
+find-and-replace. See also trap 128: a completeness claim is itself a claim.

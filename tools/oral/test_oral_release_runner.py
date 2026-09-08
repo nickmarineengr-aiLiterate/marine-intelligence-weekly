@@ -73,12 +73,14 @@ check("determinism is the only held-back phase",
 _correction = [g for g in REG.ALL_GATES if g["category"] == REG.CAT_CORRECTION]
 check("the correction gates are registered",
       sorted(g["id"] for g in _correction)
-      == ["correction_annexvi_eif_mutate", "correction_cicstem_mutate",
+      == ["correction_annexvi_eif_mutate", "correction_bulkjupiter_mutate",
+          "correction_cicstem_mutate",
           "correction_defntreaty_mutate",
           "correction_g1_010_mutate", "correction_grainterm_mutate",
           "correction_ismspares_mutate", "correction_lsavent_mutate",
           "correction_msactsea_mutate",
           "corrections_mutate", "validate_correction_annexvi_eif",
+          "validate_correction_bulkjupiter",
           "validate_correction_cicstem",
           "validate_correction_defntreaty", "validate_correction_g1_010",
           "validate_correction_grainterm", "validate_correction_ismspares",
@@ -129,6 +131,12 @@ POST_E6_GATES = [
     "batch_g4_mutate",
     "batch_h_series_mutate",
     "correction_annexvi_eif_mutate",
+    # The two 2026-09-08 Bulk Jupiter corrections, found in final release
+    # qualification. Both cards were already pinned and both pins were green
+    # over wrong content: a digest cannot see that the wrong body was named
+    # as the investigator, that a qualified finding was stated as a
+    # conclusion, or that a duration was wrong by a factor of four.
+    "correction_bulkjupiter_mutate",
     # The 2026-09-03 CIC stem correction. Its validator carries the control
     # nothing else in the suite had: a question stem must agree with its own
     # answer body. QB8_C#q4 shipped naming a campaign that does not exist
@@ -163,6 +171,7 @@ POST_E6_GATES = [
     "validate_batch_g4",
     "validate_batch_h_series",
     "validate_correction_annexvi_eif",
+    "validate_correction_bulkjupiter",
     "validate_correction_cicstem",
     "validate_correction_defntreaty",
     "validate_correction_g1_010",
@@ -178,6 +187,7 @@ POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
                            "batch_g3_mutate", "batch_g4_mutate",
                            "batch_h_series_mutate",
                            "correction_annexvi_eif_mutate",
+                           "correction_bulkjupiter_mutate",
                            "correction_cicstem_mutate",
                            "correction_defntreaty_mutate",
                            "correction_g1_010_mutate",
