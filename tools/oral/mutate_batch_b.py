@@ -161,8 +161,35 @@ def m_I(snap):
 
 
 def m_J(snap):
-    """Modify a pre-existing neighbouring card - the regression guard."""
-    c = by_family("GAP-0083")
+    """Modify a pre-existing neighbouring card - the regression guard.
+
+    RE-AIMED 2026-09-08, in final release qualification. This probe used to
+    target GAP-0083's destination, QB8_A.html#q1, and it ESCAPED.
+
+    Not because the guard broke. `pre_existing_cards_unchanged` exempts any
+    anchor a LATER authorisation record owns, which is right - without it the
+    pin would forbid every future authorised edit and expire on the next batch.
+    But CORR-T4A-ARTEFACT-HYGIENE-20260906 subsequently took ownership of
+    QB8_A q1, q2, q4, q5 and q6, and batch B pins exactly q1..q6 for that file.
+    Every anchor it pins there is now delegated, so the guard compares nothing
+    for QB8_A and this probe was testing a check that no longer applies to the
+    card it named.
+
+    The delegation is an exemption, not a suppression: applying this same edit
+    to QB8_A#q1 and running validate_corrections.py produces
+    `live_matches_authorised_post_state ... PIN_MISMATCH meoclass1/QB8_A.html#q1`,
+    so the card is still guarded, by the record that owns it. Verified by
+    running it, not by reading the code.
+
+    So the probe moves to a destination whose pinned neighbours are still
+    COMPARED here: GAP-0113's file is QB1_D.html, whose four pinned anchors are
+    owned by no other record. A probe must exercise the guard that exists.
+
+    That three of batch B's eight files are now fully delegated - QB2_H, QB7_C
+    and QB8_A - while the check still reports PASS is reported separately as
+    post-release hardening. A guard that compares nothing should say so.
+    """
+    c = by_family("GAP-0113")
     t = snap[c["file"]]
     s, e = card_span(t, "q1")
     card = t[s:e].replace("</h4>", "</h4><p>Neighbouring card quietly edited.</p>", 1)
