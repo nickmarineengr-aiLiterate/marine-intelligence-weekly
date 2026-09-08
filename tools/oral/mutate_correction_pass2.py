@@ -62,15 +62,23 @@ def _strip_instrument(path):
     def apply():
         text = read_text(path)
         assert "ITC-Hulls" in text or "Institute Time Clauses" in text
-        text = text.replace("Institute Time Clauses &ndash; Hulls (1/11/95) cl. 4.2",
+        text = text.replace("Institute Time Clauses &ndash; Hulls (1/11/95) cl. 5.1",
                             "the standard hull policy")
-        text = text.replace("ITC-Hulls (1/11/95) cl. 4.2", "the standard hull policy")
-        text = text.replace("ITC-Hulls cl. 4.2", "the standard hull policy")
+        text = text.replace("ITC-Hulls (1/11/95) cl. 5.1", "the standard hull policy")
+        text = text.replace("ITC-Hulls cl. 5.1", "the standard hull policy")
         text = text.replace("ITC-Hulls", "the standard hull policy")
         write_text(path, text)
     return apply
 
 
+# SUPERSEDED LITERALS, 8 Sep 2026. Four anchors in this file quoted the
+# ITC-Hulls citation as "cl. 4.2". CORR-ITC51-20260908 corrected that citation
+# to cl. 5.1 across all fourteen candidate-facing sites, which left Z7b's
+# search target absent from QB4_A - and a mutation whose target has moved does
+# not fail loudly, it either crashes on the assert or silently no-ops. The
+# anchors are re-pointed at the corrected text so this suite keeps testing the
+# proposition it was written for. Nothing about what Z7b and Z7c PROVE has
+# changed; only the bytes they reach for. See known_traps 132.
 GATE = "validate_correction_pass2.py"
 WATCHED = [QB4_E, QB4_C, QB8_A, QB5_A, QB3_A, QB10_B, QB3_B, QB4_A,
            QB4_A_CS, QB1_C, QB1_G,
@@ -400,7 +408,7 @@ MUTATIONS = [
     # one of three mentions, and that is how the first draft of Z7b escaped.
     ("Z7b", "reintroduce the trap-130 understatement",
      sub_in_file(QB4_A,
-                 "Institute Time Clauses &ndash; Hulls (1/11/95) cl. 4.2 terminates hull "
+                 "Institute Time Clauses &ndash; Hulls (1/11/95) cl. 5.1 terminates hull "
                  "cover",
                  "the class warranty is breached so cover may be prejudiced; a policy "
                  "terminates hull cover", count=1),

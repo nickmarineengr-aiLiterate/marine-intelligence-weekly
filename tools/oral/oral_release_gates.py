@@ -530,6 +530,29 @@ GATES = (
                "the cheat-sheet-left-stale case and the MIW-line-relabelled-as-"
                "official case, both of which escaped the first guard"),
 
+    # Content gates for CORR-ITC51-20260908. The standing reason for the whole
+    # per-correction content-gate family, in its purest form yet: the Pass-2
+    # gate that WAS watching these six cards asked "does this card name
+    # ITC-Hulls?", and every one of the fourteen defective sites answered yes.
+    # The instrument was right and the clause within it was wrong, which is a
+    # state no presence check and no digest pin can distinguish from correct.
+    _gate("validate_correction_itc51",
+          ["python", "%s/validate_correction_itc51.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="binds MECHANISM to CLAUSE at every ITC site: automatic termination "
+               "must cite 5.1, AND 4.2 must survive where the Clause-4 duty/breach "
+               "mechanism is taught - two checks a blanket substitution cannot both "
+               "satisfy; site-scoped, so a page with one stale site of three fails"),
+    _gate("correction_itc51_mutate",
+          ["python", "%s/mutate_correction_itc51.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1800,
+          historical_39=False, depends_on=("validate_correction_itc51",),
+          note="13 mutations, each required to trip its OWN named check; includes "
+               "the corrupt-one-site-of-three cases that prove site-scoping, the "
+               "over-correction direction (blanket 4.2->5.1, PR1C and P&I folded "
+               "into the hull policy), and a target removed from the census input "
+               "to prove the extractor cannot report success over what it never read"),
+
     # ---- follow-up authorisation register ---------------------------------
     # Postdates E6, so outside the historical 39, and not held back either.
     #

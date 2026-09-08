@@ -1,0 +1,178 @@
+{
+ "correction_id": "CORR-ITC51-20260908",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "release_blocker_closure_content_batch",
+ "date": "2026-09-08",
+ "title": "ITC-Hulls automatic termination of hull cover cited as Clause 4.2 in fourteen candidate-facing sites; the mechanism taught is Clause 5.1",
+ "baseline_commit": "942f38c",
+ "governing_commits": [
+  "3c50296"
+ ],
+ "authorisation_source": "MIW ORAL QB - RELEASE CONTENT BLOCKER CLOSURE instruction of 8 September 2026, section 0.A: close verified P1-A. The instruction records P1-A as already independently verified against the primary policy text and supplies the correct clause structure; this record re-verifies it against the instrument and against the repository's own evidence before acting.",
+ "known_traps_entries": [
+  132
+ ],
+ "candidate_claim": "Not a candidate report. Raised by the independent release qualification of this release candidate and confirmed here.",
+ "candidate_verdict": "UPHELD",
+ "candidate_introduced": "YES, AND BY THIS UNRELEASED RELEASE CANDIDATE. The string 'cl. 4.2' does not occur in ANY of the nine affected files on origin/main (9e26f02) - verified file by file with git show. The defect was introduced on 7 Sep 2026 by CORR-PASS2-PR1C-SUSPENSION-20260907 via tools/oral/apply_corr_pass2_r4.py and has never been in production. Shipping this candidate would have published a new examinable citation error into a bank that does not currently carry it. That is what makes it release-blocking rather than corpus debt.",
+ "authority": "PRIMARY - Institute Time Clauses - Hulls, 1/11/95 (CL280). Clause 4 is CLASSIFICATION: 4.1 imposes the duty to keep the Vessel classed with a Society agreed by the Underwriters and to comply with the Society's recommendations, requirements and restrictions by their due dates; 4.2 is the consequence of breaching THAT DUTY - the Underwriters are discharged from liability under the insurance as from the date of the breach, with the discharge deferred until arrival at her next port if the Vessel is at sea. Clause 5 is TERMINATION: 5.1 terminates the insurance AUTOMATICALLY at the time of change of the Classification Society of the Vessel, or change, suspension, discontinuance, withdrawal or expiry of her Class, with the same at-sea deferral, and with the proviso that where the class event resulted from loss or damage covered by Clause 6 the automatic termination operates only if the Vessel sails from her next port without the prior approval of the Classification Society. CORROBORATION FROM THE REPOSITORY, and it is decisive: QB1_F#q7's own reg-box already reads 'Institute Time Clauses - Hulls 1/11/95, cl. 4 and 5.1 - Duty to maintain class; automatic termination of hull cover on suspension or withdrawal of class'. The card's prose contradicted its own reg-box. meoclass1/oral-intelligence/examiner-audit/PASS2_QUEUE_DISPOSITION.json round_4 field 'the_corpus_already_knew' independently records that same card as 'ITC-Hulls cl.4/5.1 correct throughout', three lines below the finding that writes cl. 4.2. The wrong number is a transcription slip, not a reading of the policy.",
+ "rationale": "Every one of the fourteen candidate-facing occurrences teaches automatic termination - the words 'terminates hull cover automatically' or 'hull cover terminates automatically' - on suspension, discontinuance or withdrawal of class, with the at-sea deferral, and three of them also carry the Clause 6 disapplication. Automatic termination and the Clause 6 proviso are markers of Clause 5.1 and appear nowhere in Clause 4.2, whose consequence is discharge from liability for breach of a duty. The mechanism taught was therefore already correct and only the clause number was wrong, so only the clause number moves.",
+ "note": "SCOPE. Fourteen candidate-facing sites in six cards and two cheat sheets, plus the governed changelog note and its derived index entry, plus two authoring surfaces that would have re-seeded the defect: known_traps.md entry 130, which is where the wrong number was first written down as the teaching to reuse, and the hardcoded adjudication in tools/oral/sweep_pr1c_family.py, which the Pass-2 release gate re-runs. NOT DONE, deliberately: the PASS2_QUEUE_DISPOSITION.json round-4 finding is left verbatim and annotated with a superseded_note, because it is the audit record of how the defect entered and rewriting it would destroy that evidence. tools/oral/apply_corr_pass2_r4.py is left unchanged as spent release evidence per tools/oral/SKILL.md section 2. No teaching, no reg-box entry, no PR1C proposition and no P&I proposition was touched.",
+ "cards": [
+  {
+   "correction_action_id": "ITC51-01",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q7",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "9e8c809eb7551cbda50dc6b2cc10058112e1435a61faa86447900da61342638e",
+   "post_edit_digest": "2ad00fb9829f7e52d4c06b638ef3e99ec714740ed3e1319e993643b4b326e534",
+   "digest_pinned_by_earlier_manifest": true,
+   "rationale": "Named PRIMARY because it is the seed: this card's reg-box is the source the round-4 review read the mechanism out of, and its two CE Relevance copies carried the mis-transcribed number back into it. Two citations corrected; the reg-box 'cl. 4 and 5.1' entry was already correct and is untouched. The card carried no correction stamp for the 7 Sep edit - a governance gap - and is stamped v1.1 here.",
+   "surfaces_corrected": [
+    "ITC-Hulls citation",
+    "q-version changelog"
+   ],
+   "supersedes": {
+    "manifest": "correction_corr_pass2_pr1c_suspension_20260907_manifest.json",
+    "action_id": "P2-PR1C-04",
+    "post_edit_digest": "9e8c809eb7551cbda50dc6b2cc10058112e1435a61faa86447900da61342638e",
+    "note": "The predecessor record stays exactly as published. This correction is a later authorised state descending from that pin, not a rebaseline. The predecessor is also the record that introduced the defect corrected here."
+   }
+  },
+  {
+   "correction_action_id": "ITC51-02",
+   "file": "QB4_C.html",
+   "path": "meoclass1/QB4_C.html",
+   "anchor": "q5",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "ec1153f7febacb1bcd5600dd102765aba6a91ca42054741fb44c8c9606736438",
+   "post_edit_digest": "df25d64e53f6585c2bfdc7848da7466c27792cae68d960f76deaecd6f3879efc",
+   "digest_pinned_by_earlier_manifest": true,
+   "rationale": "Three citations: the 60-second insurance limb, the Stop-Work bullet and the spoken practice answer. v1.3 to v1.4.",
+   "surfaces_corrected": [
+    "ITC-Hulls citation",
+    "q-version changelog"
+   ],
+   "supersedes": {
+    "manifest": "correction_corr_pass2_pr1c_suspension_20260907_manifest.json",
+    "action_id": "P2-PR1C-01",
+    "post_edit_digest": "ec1153f7febacb1bcd5600dd102765aba6a91ca42054741fb44c8c9606736438",
+    "note": "The predecessor record stays exactly as published. This correction is a later authorised state descending from that pin, not a rebaseline. The predecessor is also the record that introduced the defect corrected here."
+   }
+  },
+  {
+   "correction_action_id": "ITC51-03",
+   "file": "QB4_A.html",
+   "path": "meoclass1/QB4_A.html",
+   "anchor": "q9",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "cf234eed54c925371ec2eb789becf181fcfdf9be630e2cbac0f705a246e75f46",
+   "post_edit_digest": "ebc3f4147469f35ddb9195cf705675f71c8173065b7347e771d27c14678c1b9d",
+   "digest_pinned_by_earlier_manifest": true,
+   "rationale": "Four citations - the cascade bullet, the P&I / hull-wording paragraph, the CE Oral Tip cascade sentence, and the card's own v1.3 changelog entry, which recorded the re-attribution using the wrong number. The card's accurate point that 'seaworthy and in class' is a fundamental warranty under standard P&I Club Rules is untouched, and no P&I proposition was rewritten as ITC-Hulls. v1.3 to v1.4.",
+   "surfaces_corrected": [
+    "ITC-Hulls citation",
+    "q-version changelog"
+   ],
+   "supersedes": {
+    "manifest": "correction_corr_pass2_pr1c_suspension_20260907_manifest.json",
+    "action_id": "P2-PR1C-02",
+    "post_edit_digest": "cf234eed54c925371ec2eb789becf181fcfdf9be630e2cbac0f705a246e75f46",
+    "note": "The predecessor record stays exactly as published. This correction is a later authorised state descending from that pin, not a rebaseline. The predecessor is also the record that introduced the defect corrected here."
+   }
+  },
+  {
+   "correction_action_id": "ITC51-04",
+   "file": "QB1_C.html",
+   "path": "meoclass1/QB1_C.html",
+   "anchor": "q6",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "9e360edc289263b573f2d9e48d41bbdf6a28a9957d691311a5759afa7bd0c9f5",
+   "post_edit_digest": "e708caa7a2fc9b2b827e87dc4142b8b7c4d60cd670fda7dd04e50073d9ddccdb",
+   "digest_pinned_by_earlier_manifest": true,
+   "rationale": "One citation in the insurance-attribution sentence. The PR1C B.1.1/B.1.3 limb in the same sentence is untouched. v1.2 to v1.3.",
+   "surfaces_corrected": [
+    "ITC-Hulls citation",
+    "q-version changelog"
+   ],
+   "supersedes": {
+    "manifest": "correction_corr_pass2_pr1c_suspension_20260907_manifest.json",
+    "action_id": "P2-PR1C-03",
+    "post_edit_digest": "9e360edc289263b573f2d9e48d41bbdf6a28a9957d691311a5759afa7bd0c9f5",
+    "note": "The predecessor record stays exactly as published. This correction is a later authorised state descending from that pin, not a rebaseline. The predecessor is also the record that introduced the defect corrected here."
+   }
+  },
+  {
+   "correction_action_id": "ITC51-05",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q36",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "16f76d3629a669e184727c403c8677969abd4a0f7a3807525853c5c5d55e288b",
+   "post_edit_digest": "17de2abdb4dc02e9e1b46f85edb93d8e15e933e3ea17edaeba910979b7a9fad0",
+   "digest_pinned_by_earlier_manifest": true,
+   "rationale": "Two citations - the insurance-attribution sentence and the card's own v1.1 changelog entry. The charter-warranty limb is left with that contract, as the 7 Sep correction had it. v1.1 to v1.2.",
+   "surfaces_corrected": [
+    "ITC-Hulls citation",
+    "q-version changelog"
+   ],
+   "supersedes": {
+    "manifest": "correction_corr_pass2_pr1c_suspension_20260907_manifest.json",
+    "action_id": "P2-PR1C-05",
+    "post_edit_digest": "16f76d3629a669e184727c403c8677969abd4a0f7a3807525853c5c5d55e288b",
+    "note": "The predecessor record stays exactly as published. This correction is a later authorised state descending from that pin, not a rebaseline. The predecessor is also the record that introduced the defect corrected here."
+   }
+  }
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/QB4_A_CheatSheet.html",
+   "why": "Derived surface of QB4_A#q9 and one of the fourteen sites. Carries no q-card, so the corpus card digester is structurally blind to it - the same blindness that made it the P0 of the 7 Sep batch. Whole-file LF-normalised digest 01762e38bab575181d63efce5693ee1cbb1f06d51566d8172577a975984ee35a -> 1200fa2d996cd18ed491c03d0400aaf38ead497577a4fba38dfceff556fabcc4."
+  },
+  {
+   "path": "meoclass1/QB1_K_CheatSheet.html",
+   "why": "Cheat sheet of the QB1_K#q2 PR1C family. One citation. Whole-file LF-normalised digest 968f6019269696f5158d3997e749da1623563d21406f746e11f2004ee4ad283c -> 21fd952b24d6e0ac847591ddc984d9041c7e0e8e494cf5652b376eba675924de."
+  },
+  {
+   "path": "meoclass1/known_traps.md",
+   "why": "Entry 130 both quoted the mechanism under the wrong number and prescribed it as 'the accurate teaching, and the shape to reuse' - so it was the authoring surface that would have re-seeded the defect into any future card. Both citations corrected. New entry 132 records the defect class, the self-contradiction in the seed card, and why a does-this-card-name-the-instrument presence check cannot see it."
+  },
+  {
+   "path": "tools/oral/sweep_pr1c_family.py",
+   "why": "Owns the hardcoded adjudication text emitted into reports/pr1c_family_sweep.json, which the Pass-2 gate re-runs as pr1c_family_sweep_has_no_unadjudicated_hit. Its miw-notes-mgmt-p21 adjudication asserted the wrong clause as live governance. Corrected at source; the report regenerated from it. Sweep still 224 scanned, 5 cleared, 2 deferred, 0 unadjudicated."
+  },
+  {
+   "path": "meoclass1/oral-intelligence/examiner-audit/PASS2_QUEUE_DISPOSITION.json",
+   "why": "HISTORICAL. The round-4 finding IR4-1 is left verbatim and annotated with a superseded_note. It is the evidence of how the defect entered and of the record contradicting itself; rewriting it would destroy that."
+  }
+ ],
+ "propagation": {
+  "method": "GENERATED, NOT ASSERTED. tools/oral/census_itc_clause.py walks the whole repository, keeps every file whose text carries an ITC cue, and reports every decimal clause token appearing in an ITC context with its file and its nearest preceding q-card anchor. It refuses to report success from an empty target set: it asserts files_scanned > 0, files_with_itc_cue > 0 and sites > 0 and exits non-zero on any of them, so ZERO TRUE MATCHES and ZERO INPUTS SCANNED are distinguishable in the output.",
+  "before": "1665 files scanned, 123 carrying an ITC cue, 80 ITC clause sites, of which 18 cited 4.2: 14 candidate-facing, 2 in known_traps.md, 1 in the governed index, 1 in the derived index. Independently reproduces the 16-site / 9-file count carried in the release qualification, and adds known_traps.md as a tenth file that count had missed.",
+  "after": "1666 files scanned, 124 carrying an ITC cue, 105 ITC clause sites. Every candidate-facing automatic-termination citation now reads 5.1. The remaining 4.2 tokens are, in each case, a correct Clause-4 proposition: the five new q-version changelog entries, which state what 4.2 actually is; the historical PASS2_QUEUE_DISPOSITION finding; and spent release evidence under tools/oral/.",
+  "excluded_and_why": {
+   "tools/oral/apply_corr_pass2_r4.py": "12 occurrences. Spent one-shot applier, already applied and never re-run; tools/oral/SKILL.md section 2 keeps historical appliers as release evidence.",
+   "tools/oral/build_pass2_records.py": "1 occurrence, inside the prose of the record it generated. Regenerating it would rewrite a published record.",
+   "tools/oral/validate_correction_pass2.py": "1 occurrence, in a comment only. The comment's point - that 'cover may be prejudiced' understates the policy - remains true under 5.1.",
+   "MLC and SOLAS 4.2 tokens": "MLC 2006 Regulation 4.2 / Standard A4.2 in QB4_A, QB9_B and QB9_C, and SOLAS II-2/13.4.2.1 in QB9_B. Different instruments; not ITC clause tokens and never in scope."
+  },
+  "derived_surfaces": "TWO, both regenerated from their governed source and neither hand-edited. meoclass1/qb_content_index.json from tools/oral/qb_content_index_governed.json via build_qb_content_index.py, --check green afterwards. reports/pr1c_family_sweep.json from sweep_pr1c_family.py.",
+  "hub_date": "NOT ADVANCED. meoclass1/index.html is byte-identical to its state at 942f38c after the index rebuild - the builder owns three regions of it and none of them moved, because no question text and no count changed."
+ },
+ "invariants": [
+  "corpus 761 questions / 86 files, unchanged.",
+  "No new cards. No cards removed. No question text altered.",
+  "The three insurance/class layers stay separate: IACS PR1C (class suspension, reinstatement and withdrawal procedure), ITC-Hulls (hull policy consequence) and P&I Club Rules (class as a condition of entry). No PR1C site was rewritten as ITC-Hulls and no P&I site was rewritten as ITC-Hulls.",
+  "Clause 4.2 is not banned. It survives wherever the genuine Clause-4 duty/breach mechanism is the proposition, which after this correction is the five new q-version entries.",
+  "QB1_F#q7's reg-box entry 'cl. 4 and 5.1' was already correct and is byte-untouched.",
+  "The Clause 6 proviso and the at-sea deferral are preserved at every site that already carried them; none was injected into a site that did not.",
+  "QB4_A#q9's 'seaworthy and in class is a fundamental warranty under standard P&I Club Rules' is unchanged."
+ ],
+ "review": {
+  "independent_review": "pending",
+  "round_1_verdict": null,
+  "round_1_blocking": null
+ }
+}

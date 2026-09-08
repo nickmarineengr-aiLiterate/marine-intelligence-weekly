@@ -364,6 +364,15 @@ CORRECTION_FIELD_CLASSES: dict[str, str] = {
     # shipped record would be to edit the record, which destroys the evidence
     # of how the escape happened.
     "supersedes_summary": INFORMATIONAL,
+    # Added for CORR-ITC51-20260908, on the same terms as every field above: it
+    # is allowed in ONLY because that correction's own content gate asserts it
+    # (`record_states_candidate_introduced_status`). A defect that this
+    # unreleased candidate INTRODUCED and a defect it merely INHERITED are the
+    # same text on disk and completely different release decisions - the first
+    # cannot ship, the second is pre-existing debt that shipping does not make
+    # worse. Nothing in the schema could express that difference, so the
+    # question was being answered in prose in a report nobody's gate reads.
+    "candidate_introduced": INFORMATIONAL,
 }
 
 CORRECTION_CARD_FIELDS = ("file", "path", "anchor",
