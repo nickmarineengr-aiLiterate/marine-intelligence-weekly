@@ -184,10 +184,30 @@ def m_I(snap):
 
 
 def m_J(snap):
-    """Modify a pre-existing neighbouring card - the regression guard."""
+    """Modify a pre-existing neighbouring card - the regression guard.
+
+    RE-AIMED 2026-09-08, in final release qualification, for the same reason as
+    batch B's probe of the same name and on the same day: it targeted q1, and
+    q1 had since been ADOPTED by a later authorisation record.
+
+    `pre_existing_cards_unchanged` exempts any anchor another record owns, which
+    is correct - without it the pin would forbid every future authorised edit.
+    But that makes a probe aimed at a fixed anchor decay silently: the MS Act
+    2025 corrections took QB9_H q1, q2, q4, q8, q9, q10 and q11, so this probe
+    was exercising a check that no longer applies to the card it named, and it
+    escaped without anything being wrong with the guard.
+
+    The card is not unguarded - the owning record's own validator pins it. The
+    probe simply has to point at an anchor this batch still COMPARES. QB9_H#q3
+    is pinned here and owned by nobody else.
+
+    The general lesson, recorded because it will recur: a mutation probe that
+    names a fixed anchor has a shelf life ending at the next correction to that
+    card. A probe should be aimed at the guard, not at a coordinate.
+    """
     c = by_family("GAP-0159")
     t = snap[c["file"]]
-    s, e = card_span(t, "q1")
+    s, e = card_span(t, "q3")
     card = t[s:e].replace("</h4>", "</h4><p>Neighbouring card quietly edited.</p>", 1)
     write(c["file"], t[:s] + card + t[e:])
 
