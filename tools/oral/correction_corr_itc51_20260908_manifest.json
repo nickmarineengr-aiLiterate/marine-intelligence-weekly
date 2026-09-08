@@ -159,7 +159,9 @@
    "MLC and SOLAS 4.2 tokens": "MLC 2006 Regulation 4.2 / Standard A4.2 in QB4_A, QB9_B and QB9_C, and SOLAS II-2/13.4.2.1 in QB9_B. Different instruments; not ITC clause tokens and never in scope."
   },
   "derived_surfaces": "TWO, both regenerated from their governed source and neither hand-edited. meoclass1/qb_content_index.json from tools/oral/qb_content_index_governed.json via build_qb_content_index.py, --check green afterwards. reports/pr1c_family_sweep.json from sweep_pr1c_family.py.",
-  "hub_date": "NOT ADVANCED. meoclass1/index.html is byte-identical to its state at 942f38c after the index rebuild - the builder owns three regions of it and none of them moved, because no question text and no count changed."
+  "hub_date": "NOT ADVANCED. meoclass1/index.html is byte-identical to its state at 942f38c after the index rebuild - the builder owns three regions of it and none of them moved, because no question text and no count changed.",
+  "sibling_not_reached": "ONE, found by the independent review and confirmed here, and it is recorded rather than corrected. meoclass1/QB1_A.html and its mirror SQ/QB1_A.html carry, in a block headed 'Key Clauses - ITC(H) 1983': 'Clause 4 - Classification: Ship must maintain class with IACS member. Loss of class = suspension of cover', and again in the 60-second answer 'Clause 4 requires maintenance of class - loss of class suspends cover'. This is the same subject as this correction - the ITC-Hulls consequence of a class event - under a third description that matches neither clause: 4.2 is discharge from liability for breach of the Clause 4.1 duty, and 5.1 is automatic termination; neither is a 'suspension of cover'. The block is also edition-mixed: it is labelled 1983 while its Clause 6 Perils, Clause 8 three-fourths collision and Clause 11 entries are the 1995 structure. NOT CORRECTED HERE, for the reason this batch applies to every other pre-existing finding: the string is byte-identical in BOTH copies at origin/main, at 942f38c and at HEAD, so it is live production content this candidate neither introduced nor touched, and correcting it would need the 1983 form read at source to decide what that block should say. Recorded as post-release debt. It does NOT falsify this record's completeness claim, which is scoped to sites teaching AUTOMATIC TERMINATION: QB1_A contains no automatic-termination claim at all, which is exactly why the gate's mechanism regex does not reach it - but a reader of this record is entitled to know the sibling exists.",
+  "site_count_reconciliation": "The record says 14 corrected sites; the gate's non-vacuity floor reports 13 automatic-termination sites. They are counting different things and both are right. Two of the 14 corrected sites live in q-version FOOTERS (QB4_A#q9's v1.3 entry and QB1_G#q36's v1.1 entry), which the gate strips before any teaching assertion because the new stamps quote the wording they removed - trap 89. That leaves 12 corrected teaching sites, plus QB1_F#q7's reg-box entry, which was already correct and is guarded separately by qb1f_regbox_keeps_cl_4_and_5_1 because it names two clauses ('cl. 4 and 5.1') and so falls outside a single-clause mechanism regex. 12 + 1 = 13."
  },
  "invariants": [
   "corpus 761 questions / 86 files, unchanged.",
@@ -171,8 +173,17 @@
   "QB4_A#q9's 'seaworthy and in class is a fundamental warranty under standard P&I Club Rules' is unchanged."
  ],
  "review": {
-  "independent_review": "pending",
-  "round_1_verdict": null,
-  "round_1_blocking": null
+  "independent_review": "complete",
+  "reviewer": "clean-context read-only agent, scoped to seven questions and given no implementation reasoning",
+  "round_1_verdict": "ACCEPT. A (correctness and propagation), C (no new contradiction), D (source/generated agreement), F (no unmanifested card edits) and G (no accepted-card break) all PASS, each independently derived - the reviewer wrote its own ITC citation extractor rather than reusing census_itc_clause.py, its own balanced-div card differ, and its own comparison of reports/pr1c_family_sweep.json against the generator's own adjudication table (7/7 exact). It independently confirmed that 'cl. 4.2' occurs zero times in all seven files on origin/main.",
+  "round_1_blocking": null,
+  "round_1_findings_applied": [
+   "SIBLING NOT REACHED (P2, pre-existing): QB1_A.html and SQ/QB1_A.html attribute loss of class to ITC Clause 4 as a 'suspension of cover'. Verified independently and declared in propagation.sibling_not_reached. Not corrected: pre-existing and unchanged by this candidate.",
+   "SITE-COUNT RECONCILIATION (P3): the gate's 13 against this record's 14. Verified and explained in propagation.site_count_reconciliation."
+  ],
+  "round_1_findings_rejected": [
+   "The reviewer reported that meoclass1/QB9_A.html does not carry the war-risk defect and that meoclass1/QB9_E.html never mentions the Institute War and Strikes Clauses. BOTH ARE FALSE and were checked directly. QB9_A.html line 201 reads 'the P&I Club exercises its right to issue a 7-day Notice of Cancellation of the standard policy's transit cover', and the file carries four occurrences of '7-day'; QB9_E.html carries one 'Institute War and Strikes' reg-box entry. The reviewer searched for '7 days' and 'seven days' and missed the HYPHENATED form - the same wrong-representation extractor error this batch documents twice elsewhere. The finding is out of this record's scope either way (P1-C is pre-existing), but the rejection is recorded because an unchallenged reviewer claim becomes tomorrow's premise.",
+   "The reviewer's site attribution for the ':**' artefact family is ACCEPTED, not rejected, and is noted here because it corrects the governing instruction rather than this record: the 10-site '<p>:**</p>' family is QB1_C x6 and QB3_C x4, and QB1_G carries none. The artefact at QB1_G line 453 is a different markdown-bleed shape ('</em>each*' plus a duplicated Numbers block). Both families are pre-existing and outside this correction."
+  ]
  }
 }
