@@ -212,8 +212,27 @@ def m_H(snap):
 
 
 def m_I(snap):
-    """Modify a pre-existing neighbouring card - the regression guard."""
-    c = by_family("GAP-0180")
+    """Modify a pre-existing neighbouring card - the regression guard.
+
+    RE-AIMED 2026-09-08. Third and last instance of one decay, closed in the
+    same pass as batch B's m_J and batch C's m_J.
+
+    The probe named GAP-0180's destination, QB9_B.html#q1. Batch D pins q1..q4
+    for that file and a later authorisation record now owns ALL of them, so
+    `pre_existing_cards_unchanged` compares nothing there and the probe was
+    exercising a check that no longer reaches the card it named. It escaped
+    while the guard was working as designed.
+
+    Re-aimed at GAP-0334's destination, QB5_C_A.html#q1: pinned by this batch
+    and owned by no other record.
+
+    Scanned rather than guessed. Every mutate_batch_*.py carrying a probe of
+    this shape was checked against its own pins and the live ownership set;
+    batches A-D are the only ones that use `baseline_card_digests` with a
+    by_family probe, and after this the three stale ones are the only three
+    there were.
+    """
+    c = by_family("GAP-0334")
     t = snap[c["file"]]
     s, e = card_span(t, "q1")
     card = t[s:e].replace("</h4>", "</h4><p>Neighbouring card quietly edited.</p>", 1)
