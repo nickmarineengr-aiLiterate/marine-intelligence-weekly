@@ -174,17 +174,62 @@ MUTATIONS = [
      "casualty_link_q11_extracted"),
 
     # ---- the corpus must not be allowed to disagree with itself ---------
-    ("Q", "break the untouched sibling's agreement on the moisture figure",
-     sub_in_file(QB10_B, "moisture content of 21.3%",
-                 "moisture content of 12.3%", count=1),
+    ("Q", "break the sibling's agreement on the moisture figure",
+     # Re-aimed 2026-09-08: the earlier target string was rewritten by this
+     # record's own QB10_B edit, so the mutation crashed on an absent target.
+     sub_in_file(QB10_B, "<strong>21.3%</strong>", "<strong>12.3%</strong>",
+                 count=1),
      "qb10b_moisture_agrees_with_q4"),
 
-    ("R", "reintroduce the defect on a page neither record ever touched",
+    ("R", "put the investigation back on the IMO, on the sibling page",
+     # Re-aimed for the same reason as Q.
      sub_in_file(QB10_B,
-                 "and the investigation found an average cargo moisture content",
-                 "and the investigation by the IMO found an average cargo "
-                 "moisture content", count=1),
+                 "The <strong>Bahamas Maritime Authority</strong> investigated "
+                 "her as flag State",
+                 "The investigation by the IMO examined her", count=1),
      "no_other_page_attributes_the_investigation_to_the_imo"),
+
+    # ---- the contradiction an independent verifier found ----------------
+    # These four are the ones that matter. The first version of this gate had
+    # no check that could see a sibling page asserting the cause as settled --
+    # it asserted only the crew toll, the moisture figure and the presence of
+    # "not a cargo shift", all of which agreed BEFORE the correction and so
+    # could never detect a disagreement the correction created.
+    # Surgical: removes ONLY the modal verb and leaves both mechanisms
+    # standing, so it must trip the qualification check and nothing else. The
+    # first version replaced the whole clause and tripped the mechanisms check
+    # instead - a mutation that proves a different check from the one it names
+    # is not evidence for the one it names.
+    ("W", "state QB10_B's cause as established, keeping both mechanisms",
+     sub_in_file(QB10_B,
+                 "and it is <strong>most probable</strong> that either",
+                 "and it is <strong>established</strong> that either", count=1),
+     "cause_is_qualified_on_qb10b_site2"),
+
+    ("X", "leave QB10_B qualified but drop the second mechanism",
+     sub_in_file(QB10_B,
+                 "<strong>liquefaction</strong> or a <strong>free-surface "
+                 "effect</strong> induced it",
+                 "<strong>liquefaction</strong> induced it", count=1),
+     "cause_offers_both_mechanisms_on_qb10b_site2"),
+
+    ("Y", "reinstate the exact sentence the verifier found, on the bullet",
+     sub_in_file(QB10_B,
+                 "is the standard illustration. The Bahamas Maritime Authority, "
+                 "as flag State, found no physical evidence of the cause",
+                 "is the standard illustration, and she was lost to bauxite "
+                 "<strong>liquefaction</strong>, not a cargo shift. The flag "
+                 "State found no physical evidence of the cause", count=1),
+     "no_page_asserts_the_cause_as_settled"),
+
+    # The true-and-kept limb, guarded in the other direction: a later sweep
+    # removing "not a cargo shift" would delete a correct distinction.
+    ("Z", "a sweep deletes the cargo-shift distinction that was kept on purpose",
+     # count=1 removes the FIRST occurrence, which is the inclinometer bullet,
+     # so this binds to site1. Named for the site it actually hits rather than
+     # the one it was first assumed to hit.
+     sub_in_file(QB10_B, " &mdash; not a cargo shift", "", count=1),
+     "qb10b_site1_denies_the_cargo_shift_reading"),
 
     # ---- the records themselves -----------------------------------------
     ("S", "unhook the attribution record from known trap 131",

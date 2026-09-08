@@ -62,6 +62,7 @@ sys.path.insert(0, str(HERE))
 
 from oral_bytes import enable_utf8_stdio          # noqa: E402
 from validate_batch_b import card_digests         # noqa: E402
+from oral_supersession import resolve_authorised_card_state  # noqa: E402
 
 enable_utf8_stdio()
 
@@ -227,12 +228,33 @@ def main() -> int:
            str(ids))
 
     # ---- digests match what the record authorised -------------------------
+    #
+    # Resolved THROUGH the supersession chain, not compared directly. A direct
+    # comparison asks "is my state live?", which stops being the right question
+    # the moment a later authorised record edits the same card - and it forbids
+    # every future authorised correction, so the pin expires on the next one.
+    # Through the resolver the question becomes "is my state the ancestor of
+    # what is live?", which is strictly stronger: the whole chain must be
+    # continuous and its terminal state must be the live card.
+    #
+    # This gate was red at the 2026-09-08 release qualification for exactly
+    # that reason. QB10_B#q1 has been edited twice since G1-010 pinned it -
+    # by the Pass-2 terminal closure and then by CORR-REL-BJ-ATTRIBUTION - and
+    # both declared their descent, so the chain resolves and the record's claim
+    # holds. With no successor declared this is byte-for-byte the original
+    # comparison.
     drift = []
     for rel, anchor in (PRIMARY, SIBLING):
         live = card_digests(page(rel)).get(anchor)
-        want = declared.get((rel, anchor), {}).get("post_edit_digest")
-        if live != want:
-            drift.append("%s#%s live=%s pinned=%s" % (rel, anchor, live, want))
+        entry = declared.get((rel, anchor), {})
+        want = entry.get("post_edit_digest")
+        res = resolve_authorised_card_state(
+            manifest=MANIFEST.name, action_id=entry.get("correction_action_id"),
+            file=rel.rsplit("/", 1)[-1], anchor=anchor,
+            pinned_post_digest=want, live_digest=live, directory=MANIFEST.parent)
+        if not res.ok:
+            drift.append("%s#%s live=%s pinned=%s %s"
+                         % (rel, anchor, live, want, res.describe()))
     report("live_state_matches_the_record", not drift, "drift=%s" % (drift or "none"))
 
     # ---- THE CORRECTION ITSELF --------------------------------------------

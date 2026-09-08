@@ -257,10 +257,7 @@ def main() -> int:
            "18 of 19 crew lost" in qb10b, "untouched sibling")
     report("qb10b_moisture_agrees_with_q4",
            "21.3%" in qb10b, "the figure QB8_A now carries came from here")
-    report("qb10b_still_denies_the_cargo_shift_reading",
-           "not a cargo shift" in flat(qb10b),
-           "true, tested and kept - the distinction stops a candidate reaching "
-           "for the solid-mass-slides answer")
+    # Deferred until `sites` exists below -- see cargo-shift check there.
 
     # ---------- 8b. THE PROPOSITION, ON EVERY PAGE THAT STATES IT ---------
     # This is the check that should have existed in the first version of this
@@ -278,14 +275,36 @@ def main() -> int:
     # So the cause-strength proposition is now asserted directly, on every
     # deployed page that states a cause at all, and negatively as well as
     # positively: no page may assert the cause as settled.
-    flat10b = flat(without_provenance(qb10b))
-    for label, blob in (("q4", cl4), ("q11", cl11), ("qb10b", flat10b)):
+    # SITE-scoped, not page-scoped. QB10_B states this casualty in TWO places -
+    # the inclinometer bullet and the Numbers block - and the first version of
+    # these checks searched the whole page, so removing the qualification from
+    # one site left the other satisfying the check. Mutations W, X and Z proved
+    # exactly that: all three were caught only by the digest pin, which proves
+    # nothing but that sha256 works. Every site that names the casualty is now
+    # asserted on its own.
+    body10b = without_provenance(qb10b)
+    sites = [flat(body10b[max(0, m.start() - 200):m.start() + 700])
+             for m in re.finditer(r"Bulk Jupiter", body10b)]
+    report("qb10b_sites_found", len(sites) >= 2,
+           "%d site(s) naming the casualty" % len(sites))
+    blobs = [("q4", cl4), ("q11", cl11)]
+    blobs += [("qb10b_site%d" % (i + 1), t) for i, t in enumerate(sites)]
+    for label, blob in blobs:
         report("cause_is_qualified_on_%s" % label,
                "most probable" in blob or "most probably" in blob,
                "the report's own modal verb, per known trap 131")
         report("cause_offers_both_mechanisms_on_%s" % label,
                "free-surface effect" in blob or "free surface" in blob,
                "one mechanism where the report gives two is a hardened finding")
+    # The true-and-kept limb, asserted PER SITE for the same reason as the
+    # cause checks: mutation Z removed the distinction from one of QB10_B's two
+    # sites and a page-wide check stayed green because the other still carried
+    # it. A sweep that deletes correct teaching usually deletes one instance.
+    for i, blob in enumerate(sites, 1):
+        report("qb10b_site%d_denies_the_cargo_shift_reading" % i,
+               "not a cargo shift" in blob,
+               "true, tested and kept - it stops a candidate reaching for the "
+               "solid-mass-slides answer")
     report("no_page_asserts_the_cause_as_settled",
            not any(re.search(r"was lost to bauxite <strong>liquefaction</strong>,"
                              r"|she was lost to bauxite liquefaction",
