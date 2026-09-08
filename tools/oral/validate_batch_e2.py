@@ -394,6 +394,8 @@ def main():
 
     # ---- the limb is actually there, and its authority with it ----
     additive_bad, digest_bad, claim_bad, qual_bad = [], [], [], []
+    additive_superseded, timed_superseded = [], []
+    superseded_anchors = set()
     for fname, wanted in sorted(by_file.items()):
         raw = (QB_DIR / fname).read_text(encoding="utf-8", newline="")
         live = cards_of(raw)
@@ -430,12 +432,6 @@ def main():
             if a in based:
                 bb = based[a].replace("\r\n", "\n")
                 ll = card.replace("\r\n", "\n")
-                sm = difflib.SequenceMatcher(None, bb, ll, autojunk=False)
-                bad = [o for o in sm.get_opcodes()
-                       if o[0] not in ("equal", "insert")]
-                if bad:
-                    additive_bad.append("%s#%s %d non-insert op(s)"
-                                        % (fname, a, len(bad)))
                 if digest16(bb) != c.get("pre_edit_digest"):
                     digest_bad.append("%s#%s pre" % (fname, a))
                 # The pin is never rewritten and never relaxed. When a later
@@ -453,6 +449,30 @@ def main():
                 if not res.ok:
                     digest_bad.append("%s post %s" % ("%s#%s" % (fname, a), res.describe()))
 
+                # E2's claim is about the state E2 PRODUCED, and it was being
+                # compared against the LIVE card. Those diverge the moment a
+                # later authorised record edits the card - and a correction is
+                # very often a DELETION, which is what a difflib opcode scan
+                # reads as a non-insert op. QB1_F#q7 and #q8 carry the
+                # DDCASCADE structural repair and the D01-S02 HSSC correction,
+                # both authorised, both partly deletions.
+                #
+                # The digest check three lines up already resolves the chain and
+                # says the succession is sound. So the additive comparison runs
+                # only while E2's state is still live, and where it cannot the
+                # card is NAMED rather than dropped - an unevaluated check that
+                # prints "-" is indistinguishable from a passing one.
+                if res.describe().startswith("SUPERSEDED"):
+                    superseded_anchors.add((fname, a))
+                    additive_superseded.append("%s#%s" % (fname, a))
+                else:
+                    sm = difflib.SequenceMatcher(None, bb, ll, autojunk=False)
+                    bad = [o for o in sm.get_opcodes()
+                           if o[0] not in ("equal", "insert")]
+                    if bad:
+                        additive_bad.append("%s#%s %d non-insert op(s)"
+                                            % (fname, a, len(bad)))
+
     report("target_cards_present", not absent, "%s" % (absent or "-"))
     report("target_anchors_unique", not dupes, "%s" % (dupes or "-"))
     report("target_cards_under_q_feed", not outside, "%s" % (outside or "-"))
@@ -461,7 +481,12 @@ def main():
     report("required_authority_cited", not auth_missing,
            "%s" % (auth_missing or "-"))
     report("edits_purely_additive", not additive_bad,
-           "%s" % (additive_bad or "-"))
+           "non-additive=%s superseded-so-not-comparable=%s"
+           % (additive_bad or "-", additive_superseded or "-"))
+    report("additive_check_compared_something",
+           len(additive_superseded) < len(cards),
+           "%d of %d target cards still comparable"
+           % (len(cards) - len(additive_superseded), len(cards)))
     report("manifest_digests_match", not digest_bad, "%s" % (digest_bad or "-"))
     report("unsubstantiated_claims_absent", not claim_bad,
            "%s" % (claim_bad or "-"))
@@ -484,9 +509,26 @@ def main():
                 re.S)
             lb = pat.findall(live[a].replace("\r\n", "\n"))
             bb = pat.findall(based[a].replace("\r\n", "\n"))
-            if lb != bb and not c.get("timed_blocks_changed"):
-                timed_bad.append("%s#%s" % (fname, a))
-    report("timed_blocks_unchanged", not timed_bad, "%s" % (timed_bad or "-"))
+            if lb == bb or c.get("timed_blocks_changed"):
+                continue
+            # Same reasoning as edits_purely_additive above: "enrichment did not
+            # touch the timed blocks" is a claim about E2's edit. QB1_F#q8's 60s
+            # block was later changed by CORR-D01S02-HSSC-REACH, which removed
+            # the false claim that the CLASS hull survey cycle is conducted
+            # under the HSSC and replaced it with the IACS UR Z framing. That is
+            # authorised content work, not enrichment drift.
+            #
+            # The manifest's own `timed_blocks_changed` flag is NOT the vehicle
+            # for this: setting it would make E2's record assert that E2 changed
+            # a timed block, which E2 did not. A record must not be rewritten to
+            # absorb a successor's edit.
+            if (fname, a) in superseded_anchors:
+                timed_superseded.append("%s#%s" % (fname, a))
+                continue
+            timed_bad.append("%s#%s" % (fname, a))
+    report("timed_blocks_unchanged", not timed_bad,
+           "changed=%s superseded-so-not-comparable=%s"
+           % (timed_bad or "-", timed_superseded or "-"))
 
     # ---- no relationship delta is authorised for an enrichment batch ----
     r = subprocess.run([sys.executable, "tools/oral/build_examiner_index.py",

@@ -71,7 +71,13 @@
    "classification": "PROPAGATED_FACT_CORRECTION",
    "pre_edit_digest": "510f75c55c7e32e8cf4c6205211182ebb6d9916e7a91b1f265c8cc7112a0d569",
    "post_edit_digest": "7f53925a8a08a8bfc2cd344d7c28ccc4f3bb9afb806d84e3e8353ddd9f7536e2",
-   "what_changed": "The same proposition, found by the PROPOSITION-scoped scan and missed by the family-A grep: 'Conducted under the Harmonized System of Survey and Certification (HSSC)' framing the CLASS hull survey cycle, and a section headed 'Types and Frequencies of Hull Surveys (HSSC Framework)'. Both corrected; the same MarineGyaan 25% citation that RC-08 removed from q1 had propagated here and is replaced by IACS UR Z10.2 with the single-side-skin restriction and the same declared age-band gap."
+   "what_changed": "The same proposition, found by the PROPOSITION-scoped scan and missed by the family-A grep: 'Conducted under the Harmonized System of Survey and Certification (HSSC)' framing the CLASS hull survey cycle, and a section headed 'Types and Frequencies of Hull Surveys (HSSC Framework)'. Both corrected; the same MarineGyaan 25% citation that RC-08 removed from q1 had propagated here and is replaced by IACS UR Z10.2 with the single-side-skin restriction and the same declared age-band gap.",
+   "supersedes": {
+    "manifest": "batch_e2_enrichment_manifest.json",
+    "action_id": "ENRICH-A013",
+    "post_edit_digest": "510f75c55c7e32e8",
+    "note": "This correction edits a card batch E2 had already pinned, and the descent was never declared - so E2's pin resolved to no chain at all and reported PIN_MISMATCH against a state this record had itself produced. The omission is recorded rather than inferred: this action's own pre_edit_digest already opens with E2's post digest, 510f75c55c7e32e8, so the repository data established the line and only the declaration was missing. D01S02-HSSC-07, one card away in this same record, declared its descent correctly, which is what makes this an omission rather than a policy. Added 2026-09-08 in final release qualification; E2's pin is not rewritten and stays the true statement of the state E2 produced."
+   }
   },
   {
    "correction_action_id": "D01S02-HSSC-04",
