@@ -439,6 +439,7 @@ def main():
 
     # ---- the limb is actually there, and its authority with it ----
     additive_bad, digest_bad, claim_bad, qual_bad = [], [], [], []
+    additive_superseded = []
     for fname, wanted in sorted(by_file.items()):
         raw = (QB_DIR / fname).read_text(encoding="utf-8", newline="")
         live = cards_of(raw)
@@ -484,12 +485,6 @@ def main():
             if a in based:
                 bb = based[a].replace("\r\n", "\n")
                 ll = card.replace("\r\n", "\n")
-                sm = difflib.SequenceMatcher(None, bb, ll, autojunk=False)
-                bad = [o for o in sm.get_opcodes()
-                       if o[0] not in ("equal", "insert")]
-                if bad:
-                    additive_bad.append("%s#%s %d non-insert op(s)"
-                                        % (fname, a, len(bad)))
                 if digest16(bb) != c.get("pre_edit_digest"):
                     digest_bad.append("%s#%s pre" % (fname, a))
                 # The pin is never rewritten and never relaxed. When a later
@@ -507,6 +502,34 @@ def main():
                 if not res.ok:
                     digest_bad.append("%s post %s" % ("%s#%s" % (fname, a), res.describe()))
 
+                # "E1's edit was purely additive" is a claim about the state E1
+                # PRODUCED, and it was being evaluated against the LIVE card.
+                # Those are the same thing only until a later authorised record
+                # edits that card -- and a correction is very often a DELETION,
+                # which is exactly what this check reads as a non-insert op.
+                #
+                # CORR-T5-DDCASCADE removed the duplicated cascaded deep-dive
+                # blocks from QB1_F#q1 and QB1_G#q29. Both chains resolve
+                # SUPERSEDED-and-live immediately above, so the digest check is
+                # satisfied and says the succession is sound -- and the additive
+                # check then reported the successor's authorised deletion as
+                # E1's defect. One function, two comparisons over the same pair
+                # of states, and only one of them supersession-aware.
+                #
+                # So the comparison is made only while E1's state is still the
+                # live one. Where it is not, the card is NAMED in the report
+                # rather than silently dropped: an unevaluated check that prints
+                # "-" is indistinguishable from a passing one.
+                if res.describe().startswith("SUPERSEDED"):
+                    additive_superseded.append("%s#%s" % (fname, a))
+                else:
+                    sm = difflib.SequenceMatcher(None, bb, ll, autojunk=False)
+                    bad = [o for o in sm.get_opcodes()
+                           if o[0] not in ("equal", "insert")]
+                    if bad:
+                        additive_bad.append("%s#%s %d non-insert op(s)"
+                                            % (fname, a, len(bad)))
+
     report("target_cards_present", not absent, "%s" % (absent or "-"))
     report("target_anchors_unique", not dupes, "%s" % (dupes or "-"))
     report("target_cards_under_q_feed", not outside, "%s" % (outside or "-"))
@@ -515,7 +538,14 @@ def main():
     report("required_authority_cited", not auth_missing,
            "%s" % (auth_missing or "-"))
     report("edits_purely_additive", not additive_bad,
-           "%s" % (additive_bad or "-"))
+           "non-additive=%s superseded-so-not-comparable=%s"
+           % (additive_bad or "-", additive_superseded or "-"))
+    # Non-vacuity: if every target were superseded this check would compare
+    # nothing and still print PASS.
+    report("additive_check_compared_something",
+           len(additive_superseded) < len(cards),
+           "%d of %d target cards still comparable"
+           % (len(cards) - len(additive_superseded), len(cards)))
     report("manifest_digests_match", not digest_bad, "%s" % (digest_bad or "-"))
     report("unsubstantiated_claims_absent", not claim_bad,
            "%s" % (claim_bad or "-"))
