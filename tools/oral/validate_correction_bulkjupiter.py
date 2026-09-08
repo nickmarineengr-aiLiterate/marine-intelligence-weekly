@@ -258,7 +258,41 @@ def main() -> int:
     report("qb10b_moisture_agrees_with_q4",
            "21.3%" in qb10b, "the figure QB8_A now carries came from here")
     report("qb10b_still_denies_the_cargo_shift_reading",
-           "not a cargo shift" in flat(qb10b), "")
+           "not a cargo shift" in flat(qb10b),
+           "true, tested and kept - the distinction stops a candidate reaching "
+           "for the solid-mass-slides answer")
+
+    # ---------- 8b. THE PROPOSITION, ON EVERY PAGE THAT STATES IT ---------
+    # This is the check that should have existed in the first version of this
+    # gate, and its absence is the defect an independent verifier found.
+    #
+    # The four checks above assert the crew toll, the moisture figure and the
+    # presence of "not a cargo shift". All three agreed BEFORE this correction,
+    # so they could never have detected the disagreement it created: QB10_B said
+    # twice, as settled fact, that she "was lost to bauxite liquefaction", while
+    # the two corrected cards said the flag State found no physical evidence of
+    # cause. The gate was not merely blind to that - the check above REQUIRED
+    # the contradicting sentence to remain, which is a guard pinning the defect
+    # it was written to prevent.
+    #
+    # So the cause-strength proposition is now asserted directly, on every
+    # deployed page that states a cause at all, and negatively as well as
+    # positively: no page may assert the cause as settled.
+    flat10b = flat(without_provenance(qb10b))
+    for label, blob in (("q4", cl4), ("q11", cl11), ("qb10b", flat10b)):
+        report("cause_is_qualified_on_%s" % label,
+               "most probable" in blob or "most probably" in blob,
+               "the report's own modal verb, per known trap 131")
+        report("cause_offers_both_mechanisms_on_%s" % label,
+               "free-surface effect" in blob or "free surface" in blob,
+               "one mechanism where the report gives two is a hardened finding")
+    report("no_page_asserts_the_cause_as_settled",
+           not any(re.search(r"was lost to bauxite <strong>liquefaction</strong>,"
+                             r"|she was lost to bauxite liquefaction",
+                             flat(without_provenance(read_text(p))), re.I)
+                   for p in sorted(QB_ROOT.rglob("QB*.html"))),
+           "closed-world over the deployed bank, not over the pages this "
+           "correction happened to open")
     report("qb8h_still_names_the_casualty", "Bulk Jupiter 2015" in qb8h, "")
     report("cheatsheet_still_names_the_casualty",
            "Bulk Jupiter" in sheet, "")
