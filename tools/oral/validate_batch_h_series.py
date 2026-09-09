@@ -63,7 +63,7 @@ from oral_manifest import (                        # noqa: E402
     audit_manifest, authorisation_manifest_paths,
 )
 from oral_supersession import (                    # noqa: E402
-    load_card_records, resolve_authorised_card_state,
+    build_chain, load_card_records, resolve_authorised_card_state,
 )
 
 enable_utf8_stdio()
@@ -293,6 +293,10 @@ def main() -> int:
         if baseline:
             declared = {(c.get("file"), c.get("anchor")) for c in cards}
             undeclared = []
+            # NON-VACUITY.  With no touched page, or pages whose cards did not
+            # parse, this loop compares nothing and still reports
+            # "undeclared=none" -- a PASS that proves the opposite of its name.
+            compared = 0
             for fname in touched_files:
                 before = git_show(baseline, "meoclass1/%s" % fname)
                 if before is None:
@@ -301,16 +305,20 @@ def main() -> int:
                 old = card_digests(before)
                 new = live_cache.get(fname) or card_digests(
                     (MEO / fname).read_text(encoding="utf-8"))
+                compared += len(new)
                 for anchor, digest in new.items():
                     if old.get(anchor) == digest:
                         continue
                     if (fname, anchor) in declared:
                         continue
-                    if authorised_elsewhere(fname, anchor, name, records):
+                    if authorised_elsewhere(fname, anchor, name, records,
+                                            live_digest=digest):
                         continue
                     undeclared.append("%s#%s" % (fname, anchor))
-            check("%s:only_authorised_cards_changed" % name, not undeclared,
-                  "undeclared=%s" % (undeclared[:6] or "none"))
+            check("%s:only_authorised_cards_changed" % name,
+                  not undeclared and compared > 0,
+                  "undeclared=%s; compared %d card(s) across %d page(s)"
+                  % (undeclared[:6] or "none", compared, len(touched_files)))
         else:
             check("%s:only_authorised_cards_changed" % name, False,
                   "no baseline_commit to compare against")
@@ -324,22 +332,61 @@ def main() -> int:
     return report()
 
 
-def authorised_elsewhere(fname, anchor, own_manifest, records) -> bool:
-    """Is this card's change authorised by some OTHER governed record?
+def _agree(a, b) -> bool:
+    """Two digests describe the same bytes, allowing a 16-char truncation.
+
+    The manifests in this repo record both widths -- 16 for the batch
+    enrichments, 64 for the T5 corrections -- and `card_digests` always
+    produces 64, so a bare `==` would refuse every truncated pin.
+    """
+    if not a or not b:
+        return False
+    n = min(len(a), len(b))
+    return a[:n] == b[:n]
+
+
+def authorised_elsewhere(fname, anchor, own_manifest, records,
+                         live_digest=None) -> bool:
+    """Is this card's LIVE state authorised by some OTHER governed record?
 
     A card an H batch touched may legitimately be edited later by a correction
     or a subsequent batch.  Anchor-level delegation answers 'was it allowed';
     the digest pin above answers 'is it still what was authorised'.  Both are
     required, and neither subsumes the other (SKILL section 8.2).
+
+    NAMING A CARD IS NOT THE SAME AS ACCOUNTING FOR IT.  Delegation used to be
+    satisfied by mere ownership: any other record that mentioned the card
+    excused ANY change to it, including one nobody ever pinned.  That is how
+    mutation H escaped.  Its target, QB1_F#q5, was owned by no record when the
+    mutation was written; CORR-T5-DDCASCADE-20260906 later claimed it, and from
+    that day an undeclared edit smuggled onto that card was waved through --
+    the guard-expiry defect class, arriving as a WIDENING rather than a
+    narrowing.
+
+    So delegation is now VERIFIED.  The delegate must account for the bytes
+    that are actually live: either the supersession chain for the card ends at
+    the live state, or some other record pins the live state directly.  A card
+    whose live bytes match nothing anyone pinned is an unmanifested edit, and
+    is reported as undeclared exactly as if no delegate existed.
     """
     others = {p.name for p in
               authorisation_manifest_paths(HERE, exclude=HERE / own_manifest)}
-    for rec in records:
-        if rec.manifest not in others:
-            continue
-        if (rec.file, rec.anchor) == (fname, anchor):
-            return True
-    return False
+    owning = [rec for rec in records
+              if rec.manifest in others
+              and (rec.file, rec.anchor) == (fname, anchor)]
+    if not owning:
+        return False
+    if live_digest is None:
+        # No live state to account for: fall back to plain ownership rather
+        # than inventing a failure the caller cannot act on.
+        return True
+
+    chain, problem = build_chain((fname, anchor), records=records)
+    if problem is None and chain:
+        # A declared chain governs the card outright; its terminal state is
+        # the only live state it authorises.
+        return _agree(chain[-1].post, live_digest)
+    return any(_agree(rec.post_edit_digest, live_digest) for rec in owning)
 
 
 def report() -> int:

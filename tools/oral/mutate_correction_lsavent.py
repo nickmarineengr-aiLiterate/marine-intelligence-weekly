@@ -255,19 +255,35 @@ def main() -> int:
     for mid, desc, files, apply, _probe, _check in MUTATIONS:
         snap = Snapshot(files)
         before = dict(snap.data)
+        # RESTORE IN `finally`, NOT ON THE PATHS WE THOUGHT OF.
+        #
+        # The restores used to sit on the happy path and on `except
+        # Exception`, which covers neither KeyboardInterrupt nor SystemExit nor
+        # MemoryError -- and this suite is long enough to meet all three. A
+        # mutation interrupted between the write and the restore strands
+        # corrupted bytes in a real product page. `finally` also runs on the
+        # `continue` below, so an ERROR no longer relies on remembering to
+        # restore before it leaves.
+        #
+        # It cannot cover a hard kill: a release-runner timeout terminates the
+        # process outright, and nothing in-process runs after that. That case is
+        # covered twice over -- by sizing this gate's timeout from the measured
+        # runtime, and by the runner's own byte snapshot and exact-path restore.
         try:
-            apply()
-        except Exception as exc:
-            print("%-3s ERROR %s: %s" % (mid, type(exc).__name__, exc))
-            no_ops.append(mid)
-            snap.restore()
-            continue
-        after = {p: (p.read_bytes() if p.is_file() else None) for p in snap.data}
-        changed = any(before[p] != after[p] for p in before)
-        print("%-3s %-58s %s" % (mid, desc, "applied" if changed else "NO-OP"))
-        if not changed:
-            no_ops.append(mid)
-        bad = snap.restore()
+            try:
+                apply()
+            except Exception as exc:
+                print("%-3s ERROR %s: %s" % (mid, type(exc).__name__, exc))
+                no_ops.append(mid)
+                continue
+            after = {p: (p.read_bytes() if p.is_file() else None)
+                     for p in snap.data}
+            changed = any(before[p] != after[p] for p in before)
+            print("%-3s %-58s %s" % (mid, desc, "applied" if changed else "NO-OP"))
+            if not changed:
+                no_ops.append(mid)
+        finally:
+            bad = snap.restore()
         if bad:
             print("    RESTORE FAILED: %s" % bad)
             return 2
@@ -296,22 +312,23 @@ def main() -> int:
     for mid, desc, files, apply, probe, want in MUTATIONS:
         snap = Snapshot(files)
         try:
-            apply()
-            rc, failing = run_probe(probe)
-        except Exception as exc:
-            print("%-3s CRASH  %s: %s" % (mid, type(exc).__name__, exc))
-            crashes.append(mid)
-            snap.restore()
-            continue
-        hit = want in failing
-        if hit:
-            caught += 1
-        else:
-            escapes.append("%s (wanted %s, got %s)"
-                           % (mid, want, sorted(failing) or "nothing"))
-        print("%-3s %-58s %s  [%s]"
-              % (mid, desc, "CAUGHT " if hit else "ESCAPED", want))
-        bad = snap.restore()
+            try:
+                apply()
+                rc, failing = run_probe(probe)
+            except Exception as exc:
+                print("%-3s CRASH  %s: %s" % (mid, type(exc).__name__, exc))
+                crashes.append(mid)
+                continue
+            hit = want in failing
+            if hit:
+                caught += 1
+            else:
+                escapes.append("%s (wanted %s, got %s)"
+                               % (mid, want, sorted(failing) or "nothing"))
+            print("%-3s %-58s %s  [%s]"
+                  % (mid, desc, "CAUGHT " if hit else "ESCAPED", want))
+        finally:
+            bad = snap.restore()
         if bad:
             print("    RESTORE FAILED: %s" % bad)
             return 2

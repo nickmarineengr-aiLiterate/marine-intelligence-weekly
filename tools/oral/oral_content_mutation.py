@@ -153,28 +153,41 @@ def run_suite(title: str, probe_script: str, mutations, watched_paths) -> int:
     caught, escapes, crashes, noops = 0, [], [], []
     for mid, desc, apply, want in mutations:
         snap = Snapshot(watched_paths)
+        # RESTORE IN `finally`, NOT ON THE PATHS WE THOUGHT OF.
+        #
+        # Every restore here used to sit on a path someone had to remember:
+        # the happy path, the `except Exception`, the no-op branch. That covers
+        # neither KeyboardInterrupt nor SystemExit nor MemoryError, and these
+        # suites run long enough to meet all three -- and they mutate live
+        # product pages, so an interrupted mutation strands corrupted bytes in
+        # the corpus. `finally` also covers the two `continue`s below.
+        #
+        # It cannot cover a hard kill; a release-runner timeout terminates the
+        # process and nothing in-process runs afterwards. That case is covered
+        # by sizing the gate timeout from measured runtime, and by the runner's
+        # own byte snapshot and exact-path restore.
         try:
-            apply()
-        except Exception as exc:                      # noqa: BLE001
-            crashes.append("%s: %s" % (mid, exc))
-            print("%-3s %-58s CRASH   [%s]" % (mid, desc, exc))
-            snap.restore()
-            continue
-        if not snap.changed():
-            noops.append(mid)
-            print("%-3s %-58s NO-OP   [%s]" % (mid, desc, want))
-            snap.restore()
-            continue
-        _rc, failing = run_probe(probe_script)
-        hit = want in failing
-        if hit:
-            caught += 1
-        else:
-            escapes.append("%s (wanted %s, got %s)"
-                           % (mid, want, sorted(failing) or "nothing"))
-        print("%-3s %-58s %s  [%s]"
-              % (mid, desc, "CAUGHT " if hit else "ESCAPED", want))
-        bad = snap.restore()
+            try:
+                apply()
+            except Exception as exc:                  # noqa: BLE001
+                crashes.append("%s: %s" % (mid, exc))
+                print("%-3s %-58s CRASH   [%s]" % (mid, desc, exc))
+                continue
+            if not snap.changed():
+                noops.append(mid)
+                print("%-3s %-58s NO-OP   [%s]" % (mid, desc, want))
+                continue
+            _rc, failing = run_probe(probe_script)
+            hit = want in failing
+            if hit:
+                caught += 1
+            else:
+                escapes.append("%s (wanted %s, got %s)"
+                               % (mid, want, sorted(failing) or "nothing"))
+            print("%-3s %-58s %s  [%s]"
+                  % (mid, desc, "CAUGHT " if hit else "ESCAPED", want))
+        finally:
+            bad = snap.restore()
         if bad:
             print("    RESTORE FAILED: %s" % bad)
             return 2

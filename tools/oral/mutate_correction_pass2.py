@@ -605,10 +605,32 @@ MUTATIONS = [
      "qb10b_no_unsupported_jupiter_causal_claim"),
 
     # ---- N: a source-gap claim restated as certain fact -------------------
-    ("TN", "restate the liquefaction mechanism as a cargo shift",
+    #
+    # STALE TARGET, REPAIRED. TN used to mutate the sentence "she was lost to
+    # bauxite <strong>liquefaction</strong>, not a cargo shift". That wording
+    # has not existed at origin/main, at 942f38c, or at HEAD since the Bulk
+    # Jupiter correction replaced the flat claim with the flag State's own
+    # qualification. `sub_in_file` asserts its target is present, so TN -- the
+    # last mutation of the suite -- crashed, and the suite never reported. A
+    # mutation harness that cannot finish has silently expired, which is the
+    # same defect class as a guard that stops matching.
+    #
+    # The PROPOSITION under test is unchanged, and is the one the check states:
+    # q1 names Bulk Jupiter and gives liquefaction (under its qualification)
+    # rather than a cargo shift. TN now attacks the live wording of exactly
+    # that. The replacement also drops the "found no physical evidence" clause
+    # deliberately: `asserts()` disarms a match preceded by a negation cue
+    # within 130 characters, so leaving that clause in front would have made
+    # the reintroduced claim read as a denial and the mutation would have
+    # escaped the very check it is aimed at.
+    ("TN", "restate the qualified mechanism as a certain cargo shift",
      sub_in_file(QB10_B,
-                 "she was lost to bauxite <strong>liquefaction</strong>, not a cargo shift",
-                 "she was lost to a bauxite cargo shift", count=1),
+                 "found no physical evidence of the cause and concluded only "
+                 "that it was <strong>most probable</strong> that either "
+                 "<strong>liquefaction</strong> or a <strong>free-surface "
+                 "effect</strong> induced the list &mdash; not a cargo shift",
+                 "established the cause with certainty. She was lost to a "
+                 "bauxite cargo shift", count=1),
      "qb10b_jupiter_named_and_mechanism_correct"),
     # ------------------------- fifth-review P1s, kept as standing proof
     # All three passed the terminal-closure gate green. Each is now attacked

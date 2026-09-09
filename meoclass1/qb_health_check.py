@@ -1078,34 +1078,91 @@ def check_manifest(files, file_results=None):
                     f"disk has {actual_qcount} numeric q-cards — manifest likely stale after an edit"
                 )
 
-    # Changelog completeness: a file mentioned in a recently_updated note
-    # should have a corrections_applied entry to match — otherwise the fix
-    # landed in the file but the audit trail was never appended (the exact
-    # gap found in the 2026-07-26 manifest audit: QB6_C, QB6_E, QB7_A, QB9_C,
-    # QB9_D, QB4_I all had version bumps + live fixes but zero-length
-    # corrections_applied arrays).
+    # Changelog integrity.
+    #
+    # THE CONTRACT THIS USED TO ASSERT WAS NOT THE ONE THE DATA CARRIES.
+    #
+    # The old rule harvested QB filenames out of the PROSE of each
+    # recently_updated note with a regex and then demanded that every page it
+    # matched carry a non-empty corrections_applied array. It was wrong three
+    # times over, and each way is demonstrable on the current manifest:
+    #
+    #  1. WRONG FIELD. The canonical entry is {date, note, files}; "files" is
+    #     the identity of what the entry touched, "note" is candidate-facing
+    #     prose that names sibling pages for context. The 2026-09-04 entry
+    #     lists files = [QB2_A, QB5_J, QB5_C_B, QB5_B_CheatSheet] and says in
+    #     prose "... and the QB5_B cheat sheet". The regex read "QB5_B" out of
+    #     that phrase and blamed a page the entry never claimed to touch.
+    #
+    #  2. WRONG PREMISE. recently_updated records ADDITIONS as well as
+    #     corrections -- "New page QB7_I (9 questions)". A page that was added
+    #     rather than corrected truthfully has nothing in corrections_applied.
+    #
+    #  3. UNDECIDABLE EVIDENCE. build_qb_content_index.py emits the key only
+    #     when the governed list is non-empty, so .get(..., []) cannot tell
+    #     "the governed source records none" (valid) from "the trail was lost"
+    #     (a defect). And the field is dormant: its newest dated entry is
+    #     2026-09-03 while the changelog runs to 2026-09-08, because the audit
+    #     trail moved to recently_updated and the correction-manifest layer.
+    #
+    # So the blocking propositions are now the ones the data can prove --
+    # referential integrity of the canonical "files" list, and a
+    # corrections_applied array that is present but empty, which is the
+    # malformed state the 2026-07-26 manifest audit actually found (QB6_C,
+    # QB6_E, QB7_A, QB9_C, QB9_D, QB4_I) and which the generator can no longer
+    # produce, so this now fails closed against a hand edit.
+    #
+    # What is withdrawn is not lost: a page named in "files" with no
+    # corrections_applied is emitted as a [REVIEW] note, which the release
+    # runner reports and does not block on. Preservation of the governed
+    # arrays is not asserted here at all -- validate_qb_content_index owns it
+    # ("corrections_preserved"), and two validators asserting one contract in
+    # two dialects is how they came to disagree in the first place.
     recently_updated = manifest.get("recently_updated", [])
-    filename_pattern = re.compile(r'\bQB\d+(?:_[A-Za-z]+)*(?:\.html)?\b')
+    # A QB QUESTION PAGE, NOT ANY FILE WHOSE NAME STARTS WITH QB. The first
+    # spelling of this pattern let a trailing "_Word" group repeat, so
+    # QB4_A_CheatSheet.html matched it and every cheat sheet named in a files
+    # list was reported as an untracked QB page. Cheat sheets follow a
+    # separate A/B convention and carry no manifest entry by design.
+    qb_page = re.compile(r'^QB\d+[A-Za-z0-9_]*\.html$', re.I)
+    cheat_sheet = re.compile(r'cheat_?sheet', re.I)
+    named_pages = 0
+    advisories = set()
     for entry in recently_updated:
-        # canonical correction-log contract: {date, note, files}; "note" is the
-        # human description (the hub renders it), "files" is metadata. This
-        # check reads the description only, as it always has.
-        note = entry.get("note", "")
         date = entry.get("date", "unknown date")
-        mentioned = set()
-        for m in filename_pattern.findall(note):
-            base = m if m.lower().endswith(".html") else m + ".html"
-            mentioned.add(base)
-        for fname in mentioned:
+        for fname in entry.get("files", []):
+            # Cheat sheets and notes pages are legitimately outside the QB
+            # manifest; only a QB question page is expected to be tracked.
+            if not qb_page.match(fname) or cheat_sheet.search(fname):
+                continue
+            named_pages += 1
             meta = manifest_files.get(fname)
             if meta is None:
-                continue  # not a QB-series file this manifest tracks (e.g. cheat sheet), skip
-            corrections = meta.get("corrections_applied", [])
-            if len(corrections) == 0:
                 errors.append(
-                    f"Changelog gap: {fname} is named in the {date} recently_updated note "
-                    f"but has an empty corrections_applied array — fix likely landed without a logged entry"
+                    f"Changelog integrity: {fname} is named in the {date} "
+                    f"recently_updated files list but the manifest does not track it"
                 )
+                continue
+            if "corrections_applied" in meta and len(meta["corrections_applied"]) == 0:
+                errors.append(
+                    f"Changelog gap: {fname} carries an empty corrections_applied "
+                    f"array - the generator omits the key when there is nothing to "
+                    f"carry, so an empty array is a hand edit that lost the trail"
+                )
+            elif "corrections_applied" not in meta:
+                advisories.add(
+                    f"[REVIEW] {fname} is named in the {date} recently_updated "
+                    f"files list and has no corrections_applied history"
+                )
+    # NON-VACUITY. Empty "files" lists everywhere would make both checks above
+    # trivially true and report nothing; say so rather than passing silently.
+    if recently_updated and not named_pages:
+        errors.append(
+            "Changelog integrity: %d recently_updated entries name no tracked QB "
+            "page at all - the files lists are empty or malformed, so the "
+            "changelog checks scanned nothing" % len(recently_updated)
+        )
+    errors.extend(sorted(advisories))
 
     return errors, manifest_files
 

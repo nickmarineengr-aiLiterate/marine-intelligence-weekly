@@ -54,7 +54,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from oral_manifest import authorisation_manifest_paths, sibling_owned_cards  # noqa: E402
-from oral_supersession import resolve_authorised_card_state  # noqa: E402
+from oral_supersession import (  # noqa: E402
+    build_chain, resolve_authorised_card_state)
 
 REPO = Path(__file__).resolve().parents[2]
 MANIFEST = Path(__file__).resolve().parent / "batch_e3_enrichment_manifest.json"
@@ -221,9 +222,75 @@ def _own_post_state(fname, anchor, base, pinned_post, limit=400):
         if blk is None:
             continue
         blk = blk.replace("\r\n", "\n")
-        if digest16(blk) == pinned_post:
+        if pinned_post and digest16(blk) == pinned_post[:16]:
             return blk
     return None
+
+
+# ---- live-side lineage: this batch's contribution, and what it preserved ----
+#
+# `every_authorised_card_changed` and `edits_purely_additive` were both true of
+# the SHIPPED state and blind to the LIVE one, which is why mutation L (strip
+# E3's own added block off the live page) and mutation O (delete baseline text
+# off the live page) were caught by the digest pin alone. Neither could ever
+# move its named check: "card differs from its baseline" stays true while E3's
+# contribution is gone, and the additive comparison is deliberately retargeted
+# to this batch's RECONSTRUCTED post state, so nothing done to live bytes
+# reaches it.
+#
+# The repair leaves both shipped-state comparisons exactly as they were and
+# adds a LIVE arm to each: the runs E3 inserted must still be on the page, and
+# the baseline runs E3 preserved must still be on the page.
+#
+# Neither arm can expire. A later authorised record that legitimately removes
+# one is DERIVED, not declared: if the supersession chain's own terminal state
+# has already dropped that run, the removal was authorised there, this batch
+# defers, and the run is reported BY NAME as superseded instead of failing.
+# Only a run that vanished from live while the governing state still carries it
+# is a defect -- which is exactly what L and O do.
+
+_WS = re.compile(r"\s+")
+# Runs shorter than this are closing/opening tag punctuation shared by every
+# card in the corpus and prove nothing. 24 characters of collapsed text is a
+# phrase.
+_MIN_RUN = 24
+
+
+def _norm(s):
+    return _WS.sub(" ", s)
+
+
+def _runs(base_text, state_text):
+    """(inserted, preserved) meaningful runs between a baseline and a state."""
+    sm = difflib.SequenceMatcher(None, base_text, state_text, autojunk=False)
+    ins, keep = [], []
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag == "insert":
+            r = _norm(state_text[j1:j2]).strip()
+            if len(r) >= _MIN_RUN:
+                ins.append(r)
+        elif tag == "equal":
+            r = _norm(base_text[i1:i2]).strip()
+            if len(r) >= _MIN_RUN:
+                keep.append(r)
+    return ins, keep
+
+
+def _successor_state(fname, anchor, base, pin):
+    """Bytes of the chain-terminal card state when a LATER record owns it.
+
+    None when no supersession chain is declared for the card, when this batch's
+    own pin IS the terminal state, or when the terminal bytes cannot be
+    reconstructed from history -- in each case there is no authorised successor
+    to defer to, and the live arm applies in full.
+    """
+    chain, problem = build_chain((fname, anchor), directory=MANIFEST.parent)
+    if problem is not None or not chain:
+        return None
+    terminal = chain[-1]
+    if not terminal.post or terminal.post[:16] == (pin or "")[:16]:
+        return None
+    return _own_post_state(fname, anchor, base, terminal.post)
 
 
 def main():
@@ -363,8 +430,7 @@ def main():
            % (unauthorised or "-", exempt or "-"))
 
     not_changed = sorted(authorised - set(changed))
-    report("every_authorised_card_changed", not not_changed,
-           "unchanged=%s" % (not_changed or "-"))
+    # Reported after the per-card loop below, which supplies the live arm.
 
     # A stem reworded on a card ANOTHER authorisation record owns is that
     # record's business, not this batch's. Without this exemption the check
@@ -381,6 +447,7 @@ def main():
 
     # ---- the limb is actually there, and its authority with it ----
     additive_bad, digest_bad, claim_bad, qual_bad = [], [], [], []
+    contribution_lost, superseded_runs = [], []
     for fname, wanted in sorted(by_file.items()):
         raw = (QB_DIR / fname).read_text(encoding="utf-8", newline="")
         live = cards_of(raw)
@@ -453,6 +520,37 @@ def main():
                 if bad:
                     additive_bad.append("%s#%s %d non-insert op(s)"
                                         % (fname, a, len(bad)))
+
+                # LIVE arm. `cmp_to` is this batch's own post state, so the
+                # runs it inserted and the baseline runs it kept are both
+                # derived, never declared.
+                own_ins, own_keep = _runs(bb, cmp_to)
+                live_n = _norm(ll)
+                gone_ins = [r for r in own_ins if r not in live_n]
+                gone_keep = [r for r in own_keep if r not in live_n]
+                succ_n = None
+                if gone_ins or gone_keep:
+                    succ = _successor_state(fname, a, base,
+                                            c.get("post_edit_digest"))
+                    succ_n = _norm(succ) if succ is not None else None
+                for r in gone_ins:
+                    if succ_n is not None and r not in succ_n:
+                        superseded_runs.append(
+                            "%s#%s own insert dropped by successor: %r"
+                            % (fname, a, r[:56]))
+                    else:
+                        contribution_lost.append(
+                            "%s#%s own insert absent from live card: %r"
+                            % (fname, a, r[:56]))
+                for r in gone_keep:
+                    if succ_n is not None and r not in succ_n:
+                        superseded_runs.append(
+                            "%s#%s baseline run dropped by successor: %r"
+                            % (fname, a, r[:56]))
+                    else:
+                        additive_bad.append(
+                            "%s#%s baseline text deleted from live card: %r"
+                            % (fname, a, r[:56]))
                 if digest16(bb) != c.get("pre_edit_digest"):
                     digest_bad.append("%s#%s pre" % (fname, a))
                 # The pin is never rewritten and never relaxed. When a later
@@ -470,6 +568,15 @@ def main():
                 if not res.ok:
                     digest_bad.append("%s post %s" % ("%s#%s" % (fname, a), res.describe()))
 
+    # Non-vacuity: an empty authorised set would make every card check below
+    # trivially true, so the set itself is asserted before they are reported.
+    report("authorised_card_set_non_empty", bool(cards) and bool(by_file),
+           "%d card(s) across %d file(s)" % (len(cards), len(by_file)))
+    report("every_authorised_card_changed",
+           not not_changed and not contribution_lost,
+           "unchanged=%s; contribution-lost=%s; superseded-away=%s"
+           % (not_changed or "-", contribution_lost or "-",
+              superseded_runs or "-"))
     report("target_cards_present", not absent, "%s" % (absent or "-"))
     report("target_anchors_unique", not dupes, "%s" % (dupes or "-"))
     report("target_cards_under_q_feed", not outside, "%s" % (outside or "-"))
