@@ -917,6 +917,78 @@ check("every validator and mutation harness reaches the UTF-8 contract",
 
 
 # ===========================================================================
+# A MUTATION THAT REMOVES COVER MUST REMOVE THE ONLY COVER THERE IS
+# ===========================================================================
+#
+# Two corrections mutations hardcoded QB5_A#q4 as the card whose cover they
+# removed.  On 7 September a second correction record also declared that card,
+# and from that moment both mutations changed bytes and asserted nothing: the
+# guard they named stayed green -- correctly, because one authorised owner
+# remained -- and the suite reported two anonymous escapes.
+#
+# These controls pin the repair: the targets are chosen at runtime, the choice
+# is checked for the property the mutation depends on, and a state in which no
+# valid target exists RAISES instead of quietly escaping.
+print("\n--- corrections mutation target selection ---")
+
+import mutate_corrections as MC       # noqa: E402
+
+_sole = MC.pick_sole_owned_card()
+check("G's target is declared by this record and no other",
+      MC.other_owners(_sole["file"], _sole["anchor"]) == [],
+      "%s#%s" % (_sole["file"], _sole["anchor"]))
+
+_pinned, _owners = MC.pick_pinned_card_and_owners()
+check("A2's target is pinned by batch B",
+      _pinned["anchor"] in (json.loads(
+          (HERE / "batch_b_manifest.json").read_text(encoding="utf-8"))
+          ["baseline_card_digests"].get(_pinned["file"]) or {}),
+      "%s#%s" % (_pinned["file"], _pinned["anchor"]))
+check("A2's target has DRIFTED from that pin, so removing cover can be seen",
+      MC._raw_digests(_pinned["path"]).get(_pinned["anchor"])
+      != json.loads((HERE / "batch_b_manifest.json").read_text(encoding="utf-8"))
+      ["baseline_card_digests"][_pinned["file"]][_pinned["anchor"]],
+      "a card still equal to its pin would keep the guard green with no owner "
+      "at all, which is vacuity of a second kind")
+check("A2 removes EVERY record authorising that card, not just this one",
+      len(_owners) == 1 + len(MC.other_owners(_pinned["file"], _pinned["anchor"]))
+      and MC.MANIFEST in _owners,
+      "owners=%s" % [p.name for p in _owners])
+
+_co, _co_owners = MC.pick_co_owned_card()
+check("K has a genuinely co-authorised card to hold cover for",
+      _co is not None and _co_owners,
+      "%s#%s co-owned by %s" % (_co["file"], _co["anchor"], _co_owners)
+      if _co else "none -- the delegation control would be vacuous")
+
+# The vacuity trap itself: with every declaration duplicated elsewhere, the
+# selector must refuse rather than hand back a target that proves nothing.
+_saved_other_owners = MC.other_owners
+try:
+    MC.other_owners = lambda file, anchor: ["some_other_record.json"]
+    try:
+        MC.pick_sole_owned_card()
+        _raised = False
+    except AssertionError as _exc:
+        _raised = True
+        _msg = str(_exc)
+finally:
+    MC.other_owners = _saved_other_owners
+check("a fully co-owned record RAISES rather than yielding a vacuous target",
+      _raised and "removes no cover" in _msg,
+      "the next occurrence of this defect arrives named, not as an escape")
+
+# The digest reader the selector uses must be the one the guard uses. Reading a
+# CRLF page through universal newlines yields a different digest, and a
+# selector comparing a translated digest to an untranslated pin would be
+# choosing a target for a question the guard is not asking.
+_src = (HERE / "mutate_corrections.py").read_text(encoding="utf-8")
+check("the selector reads card bytes the way batch B reads them",
+      'newline=""' in _src.split("def _raw_digests")[1].split("def ")[0],
+      "raw read, no newline translation")
+
+
+# ===========================================================================
 print("\n%d checks, %d FAIL" % (CHECKS[0], len(FAILURES)))
 for f in FAILURES:
     print("  FAIL %s" % f)
