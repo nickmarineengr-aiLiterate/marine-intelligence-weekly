@@ -291,7 +291,20 @@ GATES = (
                  "mutate_gap0609_exception.py", 900,
                  note="prints the key=value summary dialect"),
     *_batch_pair("batch_e1", "validate_batch_e1.py", "mutate_batch_e1.py", 2400),
-    *_batch_pair("batch_e2", "validate_batch_e2.py", "mutate_batch_e2.py", 1800),
+    # TIMED OUT at exactly 1800.1s in the 8 Sep 2026 full run, mid-suite.
+    # validate_batch_e2 measures 57.1s standalone and the suite runs 18
+    # mutations, so the formula gives (18 + 2) x 57.1 x 2 = 2284s -- which
+    # LOOKS like 1800s should nearly have sufficed. It did not, and the reason
+    # is the calibration that run supplied: a gate is ~1.7x slower INSIDE the
+    # full suite than standalone (validate_batch_e3 35.1s alone vs 63.5s in
+    # suite; batch_e3_mutate 679s alone vs 1066.4s in suite). At an in-suite
+    # ~95s validator this suite needs ~1900s bare, so it is budgeted from the
+    # in-suite figure: 20 x 95 x 2 = 3800 -> 3600s, the nearest step that still
+    # carries the doubling. PROVEN 9 Sep 2026: 18 mutations, 0 escapes, tree
+    # byte-identical, 1001s standalone. At the ~1.7x in-suite factor that is
+    # ~1700s against a 3600s budget, so the doubling is intact and no further
+    # resize is warranted.
+    *_batch_pair("batch_e2", "validate_batch_e2.py", "mutate_batch_e2.py", 3600),
     *_batch_pair("batch_e3", "validate_batch_e3.py", "mutate_batch_e3.py", 1800),
     *_batch_pair("batch_e4", "validate_batch_e4.py", "mutate_batch_e4.py", 1200),
     # 25 mutations x a 103.7s validator = ~2800s needed. The old 2400s killed
@@ -343,8 +356,17 @@ GATES = (
           depends_on=("validate_ce_tip_review",)),
 
     # ---- phase 2 reconciliation -------------------------------------------
+    # DECLARED MUTATING because it WRITES.  `validate_phase2.emit()` rewrites
+    # PHASE2_VALIDATION_RESULTS.json on every run, exactly as validate_audit
+    # rewrites VALIDATION_RESULTS.json below -- but this gate was registered
+    # without saying so.  The runner restores generated artefacts only for
+    # gates that declare `mutates`, so the rewrite was never put back; the
+    # gate then reported `restore_verified: false` with no restore attempted,
+    # and because the snapshot is captured once for the whole run, EVERY later
+    # gate inherited the same false flag and the same misleading warning.
     _gate("validate_phase2", ["python", "%s/validate_phase2.py" % _ORAL],
-          CAT_CORPUS, PARSER_VALIDATOR, timeout=900),
+          CAT_CORPUS, PARSER_VALIDATOR, mutates=True, timeout=900,
+          note="rewrites PHASE2_VALIDATION_RESULTS.json"),
     _gate("phase2_mutate", ["python", "%s/mutate_phase2.py" % _ORAL],
           CAT_CORPUS, PARSER_MUTATION, mutates=True, timeout=3000,
           depends_on=("validate_phase2",)),
@@ -364,15 +386,69 @@ GATES = (
     # are NOT held back either. A correction delegates authority away from every
     # historical batch guard; the release that carries it must prove the
     # delegation is still honoured, or the guards were simply switched off.
+    # SIZING A VALIDATOR TIMEOUT, AND A SUITE THAT PROBES ANOTHER VALIDATOR
+    # ---------------------------------------------------------------------
+    # Measured at HEAD 17d2815 on 8 Sep 2026, 74 correction records:
+    #
+    #   validate_corrections          1186.4s / 1118.6s  (mean 1152.5s)
+    #   validate_correction_lsavent      0.3s
+    #
+    # validate_corrections was registered at 900s. It has therefore not been
+    # passing this gate at all -- it has been KILLED on every run, and a
+    # standalone "593 checks, 0 FAIL" says only that it passes in nineteen
+    # minutes, not that the gate completed. Sized here the same way the
+    # mutation budgets below are: from the measured MAXIMUM, doubled, because
+    # this validator gets slower every time a correction record is added.
+    #
+    #   1186.4 x 2 = 2373  ->  2400s
+    #
+    # WHY IT COSTS WHAT IT COSTS. `no_undeclared_change_in_window` reads every
+    # tracked page at each record's baseline: 74 records x 124 pages = 9,176
+    # `git show` subprocesses at ~75ms each, ~684s of the ~1150s, with the card
+    # parsing of each retrieved page on top. The cost is records x pages, so it
+    # grows on BOTH axes. Nothing here is wrong; it is simply expensive, and a
+    # gate budget that is not re-derived from a measurement expires silently.
+    #
+    # A MUTATION SUITE THAT PROBES ANOTHER VALIDATOR PAYS THAT PRICE PER PROBE.
+    # The standard formula below -- (mutations + 2) x the validator's runtime,
+    # doubled -- assumes one validator. These two suites probe TWO, and the
+    # expensive one dominates completely:
+    #
+    #   correction_lsavent_mutate  3 x validate_corrections (control + 2
+    #                              mutations) + 14 x validate_correction_lsavent
+    #                              = 3 x 1186 + ~4 = ~3562s -> x2 = 7200s
+    #
+    #   corrections_mutate         8 x validate_corrections (control + 7
+    #                              mutations), plus 4 x validate_batch_b,
+    #                              2 x validate_batch_e1, 1 x validate_batch_e4
+    #                              and 1 x validate_batch_e6
+    #                              = 8 x 1186 + ~600 = ~10,100s -> x2 = 20,400s
+    #
+    # Unchanged by the 9 September repair, which is why it is stated in probes
+    # rather than in mutations: mutations A2 and G moved OFF the expensive
+    # probe (A2 to batch_b, G to batch_e1) and the new delegation control K
+    # costs one batch_b run. The suite went from 13 mutations to 14 and its
+    # measured runtime from 8357s to 8253.7s.
+    #
+    # corrections_mutate is registered below at its measured requirement and
+    # NOT at the 2400s it carried, which could only ever produce a TIMEOUT.
+    # A five-hour gate is a real cost and is flagged for a Founder decision:
+    # the durable fix is to make validate_corrections cheap to run repeatedly
+    # (the window check recomputes the same (baseline, page) pair for every
+    # record that shares a baseline -- 38 distinct baselines against 74
+    # records), which is a validator change and is deliberately NOT made here.
     _gate("validate_corrections",
           ["python", "%s/validate_corrections.py" % _ORAL],
-          CAT_CORRECTION, PARSER_VALIDATOR, timeout=900, historical_39=False,
-          note="pins the post-correction state the batch guards now delegate"),
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=2400, historical_39=False,
+          note="pins the post-correction state the batch guards now delegate; "
+               "measured 1186.4s max at 74 records, budget = max x 2"),
     _gate("corrections_mutate",
           ["python", "%s/mutate_corrections.py" % _ORAL],
-          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=2400,
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=20400,
           historical_39=False, depends_on=("validate_corrections",),
-          note="proves the delegation is an exemption, not a suppression"),
+          note="proves the delegation is an exemption, not a suppression; "
+               "8 validate_corrections probes at 1186.4s each dominate; "
+               "14 mutations / 8253.7s measured 9 Sep 2026, 0 escapes"),
 
     # Content gates for CORR-LSA-LIFEBOAT-VENTILATION-20260822. See the
     # MAINTENANCE note: these assert the regulatory substance the digest pin
@@ -383,9 +459,10 @@ GATES = (
           note="asserts the two-limb MSC.535(107) application rule the pin cannot"),
     _gate("correction_lsavent_mutate",
           ["python", "%s/mutate_correction_lsavent.py" % _ORAL],
-          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1800,
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=7200,
           historical_39=False, depends_on=("validate_correction_lsavent",),
-          note="each mutation must trip its OWN named check, never the digest pin"),
+          note="each mutation must trip its OWN named check, never the digest "
+               "pin; 3 validate_corrections probes at 1186.4s each dominate"),
 
     # Content gates for CORR-G1-010-RORO-ATTRIBUTION-20260825. Same shape and
     # same reason as the lsavent pair above: a digest pin was green for weeks
@@ -397,9 +474,19 @@ GATES = (
           CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
           note="asserts the MSC.550(108) attribution, both application dates and "
                "the two cards' agreement - none of which a digest pin can see"),
+    # TIMED OUT at exactly 2400.0s in the 8 Sep 2026 full run. Same root cause
+    # as validate_corrections and the lsavent suite: this harness declares
+    # `corrections` as a second probe, so its control and one of its mutations
+    # each pay a full validate_corrections run (~1050s standalone, ~1400s
+    # in-suite). Two of those alone exceed the old budget before its own 14
+    # mutations are counted: 2 x 1400 x 2 = 5600 -> 6000s.
+    # PROVEN 9 Sep 2026: 14 of 14 caught, 0 escapes, both residue probes green,
+    # 2733s standalone -- roughly half the budget, and the estimate above was
+    # conservative because the second validate_corrections probe runs against a
+    # warm git object cache rather than a cold one.
     _gate("correction_g1_010_mutate",
           ["python", "%s/mutate_correction_g1_010.py" % _ORAL],
-          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=2400,
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=6000,
           historical_39=False, depends_on=("validate_correction_g1_010",),
           note="includes the second-pass mutation: prose corrected, REG-BOX left "
                "wrong - the shape that has escaped this repo's corrections before"),
@@ -583,6 +670,34 @@ GATES = (
           note="7 mutations; includes reintroducing the defect on a page the "
                "correction never touched, which is what proves the check is "
                "closed-world and not a fix-up of the pages it happened to see"),
+
+    # Content gates for the Pass-2 known-defect remediation.
+    #
+    # REGISTERED HERE FOR THE FIRST TIME. These two have existed and been
+    # maintained for as long as the per-correction family above, and NOTHING
+    # RAN THEM: the plan listed 82 gates and neither of these was one of them,
+    # and no other harness invokes them. A guard that cannot run has silently
+    # expired, and this pair proves it -- mutation TN pinned wording that the
+    # Bulk Jupiter correction had already replaced, so the suite crashed on its
+    # last mutation at origin/main, at 942f38c and at HEAD, and reported
+    # nothing. No release noticed, because no release asked.
+    #
+    # Sized by the formula above: the validator measures 35.1s, the suite runs
+    # 70 mutations, so (70 + 2) x 35.1 = 2527s, doubled = 5054s -> 6000s. The
+    # suite was observed end-to-end at ~2340s, comfortably inside it.
+    _gate("validate_correction_pass2",
+          ["python", "%s/validate_correction_pass2.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="133 checks over the Pass-2 remediation: the substance a digest "
+               "pin cannot see, including the perishable statuses that must "
+               "carry the date they were true"),
+    _gate("correction_pass2_mutate",
+          ["python", "%s/mutate_correction_pass2.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=6000,
+          historical_39=False, depends_on=("validate_correction_pass2",),
+          note="70 mutations, each required to trip its OWN named check and "
+               "none permitted to be caught by a digest pin; measured 35.1s "
+               "validator x 72 x 2"),
     _gate("validate_followup_register",
           ["python", "%s/validate_followup_register.py" % _ORAL],
           CAT_AUTHORISATION, PARSER_VALIDATOR, timeout=600, historical_39=False,
