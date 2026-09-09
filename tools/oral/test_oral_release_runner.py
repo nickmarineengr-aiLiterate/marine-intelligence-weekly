@@ -78,8 +78,10 @@ check("the correction gates are registered",
           "correction_defntreaty_mutate",
           "correction_g1_010_mutate", "correction_grainterm_mutate",
           "correction_ismspares_mutate", "correction_itc51_mutate",
-          "correction_lsavent_mutate",
-          "correction_msactsea_mutate",
+          "correction_lsavent_mutate", "correction_msactsea_mutate",
+          # The Pass-2 remediation pair, registered for the first time:
+          # it had existed and been maintained without ever being run.
+          "correction_pass2_mutate",
           "corrections_mutate", "validate_correction_annexvi_eif",
           "validate_correction_bulkjupiter",
           "validate_correction_cicstem",
@@ -87,6 +89,7 @@ check("the correction gates are registered",
           "validate_correction_grainterm", "validate_correction_ismspares",
           "validate_correction_itc51",
           "validate_correction_lsavent", "validate_correction_msactsea",
+          "validate_correction_pass2",
           "validate_corrections"],
       str(sorted(g["id"] for g in _correction)))
 check("correction gates are post-E6, so not part of the historical 39",
@@ -157,6 +160,10 @@ POST_E6_GATES = [
     "correction_itc51_mutate",
     "correction_lsavent_mutate",
     "correction_msactsea_mutate",
+    # The Pass-2 remediation pair, registered for the first time: it had
+    # existed and been maintained without ever being run by a release, which
+    # is how its mutation TN kept a target the corpus no longer contained.
+    "correction_pass2_mutate",
     "corrections_mutate",
     "followup_register_mutate",
     # The shared-module controls, moved INTO the suite: a guard that never runs
@@ -188,6 +195,7 @@ POST_E6_GATES = [
     "validate_correction_itc51",
     "validate_correction_lsavent",
     "validate_correction_msactsea",
+    "validate_correction_pass2",
     "validate_corrections",
     "validate_followup_register",
 ]
@@ -205,6 +213,7 @@ POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
                            "correction_itc51_mutate",
                            "correction_lsavent_mutate",
                            "correction_msactsea_mutate",
+                           "correction_pass2_mutate",
                            "corrections_mutate",
                            "followup_register_mutate"]
 
@@ -452,6 +461,77 @@ check("E. a clean summary with a non-zero exit still records the summary",
 
 
 # ===========================================================================
+# D2. A MUTATION GATE MUST NAME ITS FAILURES, NOT ONLY COUNT THEM
+# ===========================================================================
+#
+# The 8 September release run recorded "corrections_mutate: 2 escapes" and
+# nothing else.  Two of thirteen mutations had escaped and the record could not
+# say which two, so the only way to learn their identity was to spend the
+# 2.3 hours again.  A count is a symptom; an identity is a defect.
+print("\n--- D2. mutation identities survive into the runner record ---")
+
+import io                                                        # noqa: E402
+import oral_mutation as _M                                       # noqa: E402
+
+_buf = io.StringIO()
+_M.emit_results("corrections",
+                caught=["A1", "A3", "B"], escaped=["A2", "G"], out=_buf)
+TWO_ESCAPES = _buf.getvalue()
+
+status, detail = R.classify_mutation(TWO_ESCAPES, "", 1)
+check("D2. THE regression: a two-escape run records BOTH identities",
+      status == R.FAIL and detail.get("escaped_ids") == ["A2", "G"],
+      "escaped_ids=%s" % detail.get("escaped_ids"))
+check("D2. the identities travel with a suite name",
+      detail.get("suite") == "corrections", "suite=%s" % detail.get("suite"))
+check("D2. caught identities are recorded too, not just failures",
+      detail.get("caught_ids") == ["A1", "A3", "B"],
+      "caught_ids=%s" % detail.get("caught_ids"))
+check("D2. the counts still agree with the identities",
+      detail["run"] == 5 and detail["escapes"] == 2 and detail["caught"] == 3,
+      json.dumps(detail, sort_keys=True))
+
+# Backward compatibility: every harness that has NOT been wired still parses,
+# and is simply recorded as unnamed rather than as broken.
+_status, _legacy = R.classify_mutation(
+    "13 mutations, 2 escape(s), 0 no-op(s), 0 crash(es)", "", 1)
+check("D2. an unwired harness still parses, with no identity fields",
+      _status == R.FAIL and _legacy["escapes"] == 2
+      and "escaped_ids" not in _legacy,
+      json.dumps(_legacy, sort_keys=True))
+
+# A harness whose structured line and prose line disagree is misreporting
+# itself.  Preferring either one would hide that; the half-wired batch digest
+# pin is the precedent for why a silent winner is the wrong answer.
+_contradiction = (
+    'MUTATION-RESULTS {"suite": "x", "run": 4, "caught": ["a"], '
+    '"escaped": ["b"], "no_ops": [], "crashes": []}\n'
+    "4 mutations, 0 escape(s), 0 no-op(s), 0 crash(es)\n")
+_st, _dt = R.classify_mutation(_contradiction, "", 0)
+check("D2. a suite that contradicts itself is UNAVAILABLE, never a pass",
+      _st == R.UNAVAILABLE, str(_dt)[:120])
+
+# Aggregation across suites must keep ids distinguishable: "A1" from two
+# harnesses are two different mutations.
+_a = _M.parse_summary(TWO_ESCAPES)
+_b_buf = io.StringIO()
+_M.emit_results("batch_e2", caught=["A1"], escaped=["A1x"], out=_b_buf)
+_b = _M.parse_summary(_b_buf.getvalue())
+_agg = _M.aggregate([_a, _b])
+check("D2. aggregated identities stay qualified by suite",
+      _agg.escaped_ids == ("corrections:A2", "corrections:G", "batch_e2:A1x"),
+      str(_agg.escaped_ids))
+
+# No-ops and crashes are identified on the same channel.
+_c_buf = io.StringIO()
+_M.emit_results("corrections", no_ops=["C1"], crashes=["D2"], out=_c_buf)
+_st3, _dt3 = R.classify_mutation(_c_buf.getvalue(), "", 1)
+check("D2. no-op and crash identities are recorded as well as escapes",
+      _dt3.get("no_op_ids") == ["C1"] and _dt3.get("crash_ids") == ["D2"],
+      json.dumps(_dt3, sort_keys=True))
+
+
+# ===========================================================================
 # F. AUDIT CANNOT HIDE BEHIND EXIT 0
 # ===========================================================================
 print("\n--- F. audit semantics ---")
@@ -557,6 +637,13 @@ check("J. every mutation-parser gate is marked as mutating the worktree",
 check("J. validate_audit is marked mutating (it rewrites VALIDATION_RESULTS)",
       REG.by_id("validate_audit")["mutates_worktree"] is True)
 check("J. determinism is marked mutating", REG.DETERMINISM_GATE["mutates_worktree"])
+# validate_phase2 WRITES: emit() rewrites PHASE2_VALIDATION_RESULTS.json on
+# every run. It was registered non-mutating, so the runner never restored it,
+# reported restore_verified=false with no restore attempted, and -- because the
+# snapshot is captured once per run -- handed that false flag to every later
+# gate. A gate that writes a generated artefact must say so.
+check("J. validate_phase2 is marked mutating (it rewrites PHASE2_VALIDATION_RESULTS)",
+      REG.by_id("validate_phase2")["mutates_worktree"] is True)
 check("J. read-only gates are not marked mutating",
       not REG.by_id("node_security_tests")["mutates_worktree"]
       and not REG.by_id("content_index_check")["mutates_worktree"])
@@ -633,6 +720,17 @@ with tempfile.TemporaryDirectory() as tmp:
     guard2.capture()
     check("a non-existent artefact is skipped, not created",
           not guard2.snapshot and not missing_file.exists(), "skipped")
+
+# An undeclared dirtier must be NAMED, RESTORED and FAILED -- not turned into a
+# warning that cascades onto every gate after it.
+check("the runner restores a non-mutating gate that dirtied an artefact",
+      "undeclared_dirty" in _runner_src
+      and "gate[\"mutates_worktree\"] or undeclared_dirty" in _runner_src,
+      "restore is driven by observed drift, not by the declaration alone")
+check("an undeclared generated write fails its gate and names the file",
+      "undeclared_generated_writes" in _runner_src
+      and "GATE DECLARED NON-MUTATING BUT REWROTE" in _runner_src,
+      "reported against the gate that caused it")
 
 check("the registry names the artefacts gates are known to rewrite",
       len(REG.GENERATED_ARTEFACTS) == 3

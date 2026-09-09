@@ -280,6 +280,17 @@ def classify_mutation(out, err, rc):
         "escapes": summary.escapes, "no_ops": summary.no_ops,
         "crashes": summary.crashes, "dialect": summary.dialect, "exit": rc,
     }
+    # Identities, when the harness named them.  "2 escapes" with no names is
+    # a number, not release evidence -- the 8 September run could not say which
+    # two of thirteen corrections mutations had escaped, and the log had to be
+    # re-read by hand.  These land in the run's JSON record, which is what a
+    # later reader actually has.
+    if summary.identified:
+        detail["suite"] = summary.suite
+        detail["escaped_ids"] = list(summary.escaped_ids)
+        detail["no_op_ids"] = list(summary.no_op_ids)
+        detail["crash_ids"] = list(summary.crash_ids)
+        detail["caught_ids"] = list(summary.caught_ids)
     ok = (summary.escapes == 0 and summary.no_ops == 0
           and summary.crashes == 0 and summary.run > 0)
     return (PASS if ok else FAIL), detail
@@ -789,7 +800,27 @@ def execute(gates, args, log):
                                 detail["baseline_fixed"] = sorted(base - live)
         finally:
             owner = None
-            restored = guard.restore() if gate["mutates_worktree"] else []
+            # AN UNDECLARED DIRTIER IS A DECLARATION DEFECT, NOT A WARNING.
+            #
+            # The snapshot is captured ONCE for the whole run, so a gate that
+            # rewrites a generated artefact without declaring `mutates` was
+            # never restored -- and every gate after it inherited the same
+            # dirty artefact, the same `restore_verified: false`, and the same
+            # "still differ after restore" line, which was itself untrue
+            # because no restore had been attempted. `validate_phase2` did
+            # exactly this: it writes PHASE2_VALIDATION_RESULTS.json on every
+            # run and was registered non-mutating.
+            #
+            # So an undeclared dirtier is now NAMED, restored from the runner's
+            # own snapshot by exact path, and reported against the gate that
+            # caused it -- which stops the cascade and points at the registry
+            # entry to fix rather than at the innocent gates downstream.
+            undeclared_dirty = []
+            if not gate["mutates_worktree"]:
+                undeclared_dirty = [p.relative_to(REPO).as_posix()
+                                    for p in guard.dirtied()]
+            restored = guard.restore() if (
+                gate["mutates_worktree"] or undeclared_dirty) else []
             product_restored = (guard.restore_product()
                                 if gate["mutates_worktree"] else [])
 
@@ -804,6 +835,14 @@ def execute(gates, args, log):
             status = FAIL
             log("      PRODUCT BYTES LEFT DIRTY by %s -- restored from the "
                 "runner's own snapshot: %s" % (gid, ", ".join(names)))
+
+        if undeclared_dirty:
+            detail = dict(detail)
+            detail["undeclared_generated_writes"] = undeclared_dirty
+            status = FAIL
+            log("      GATE DECLARED NON-MUTATING BUT REWROTE %s -- restored "
+                "from the runner's own snapshot; fix its registry entry"
+                % ", ".join(undeclared_dirty))
 
         record = {
             "gate": gid, "status": status, "detail": detail,
@@ -850,6 +889,21 @@ def summarise(records, gates, log):
                sum(r["detail"]["escapes"] for r in muts),
                sum(r["detail"]["no_ops"] for r in muts),
                sum(r["detail"]["crashes"] for r in muts)))
+
+        # Name the failures.  The per-gate log line truncates `detail` to 110
+        # characters, so without this an escaped id can be present in the JSON
+        # record and still invisible to anyone reading the log.
+        for record in muts:
+            det = record["detail"]
+            named = [(label, det.get(key)) for label, key in
+                     (("escaped", "escaped_ids"), ("no-op", "no_op_ids"),
+                      ("crash", "crash_ids")) if det.get(key)]
+            if named:
+                log("      %-16s %s" % (record["gate"], "; ".join(
+                    "%s: %s" % (label, ", ".join(ids)) for label, ids in named)))
+            elif det.get("escapes") or det.get("no_ops") or det.get("crashes"):
+                log("      %-16s failures are unnamed -- this harness emits no "
+                    "MUTATION-RESULTS line" % record["gate"])
 
     blocking = [r["gate"] for r in records if r["status"] in RELEASE_BLOCKING]
     log("  %-22s %s" % ("release", "BLOCKED by " + ", ".join(blocking)

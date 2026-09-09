@@ -49,6 +49,7 @@ The six live dialects, all covered by the self-tests:
 from __future__ import annotations
 
 import dataclasses
+import json
 import os
 import pathlib
 import re
@@ -214,6 +215,65 @@ _BARE = {
 _RUN_AFTER = re.compile(r"mutations?\s*[:=]?\s*(\d+)\s*run\b", re.I)
 
 
+# ------------------------------------------------- structured result channel
+#
+# A count is not evidence.  The 8 September release run reported "2 escapes"
+# for `corrections_mutate` and could not say WHICH two, so a 2.3-hour gate
+# produced a number and no defect identity.  Re-parsing the prose log cannot
+# fix that: a mutation log is full of the probe validator's own FAIL lines,
+# which are the proof a mutation was CAUGHT, and pattern-matching identities
+# out of that is precisely the reading the prose parser exists to forbid.
+#
+# So the harness emits its identities directly, on one line, from the SAME
+# lists it derives its printed counts from.  `emit_results` prints both, which
+# is what makes them incapable of disagreeing -- the half-wired-pin defect
+# (a summary describing one thing and a pin describing another) cannot recur
+# for a field that has exactly one source.
+#
+# Harnesses that do not emit the line parse exactly as before: the identity
+# fields come back empty and every count is read from prose as it always was.
+
+RESULTS_PREFIX = "MUTATION-RESULTS "
+
+_RESULTS_LINE = re.compile(r"^MUTATION-RESULTS\s+(\{.*\})\s*$", re.M)
+
+
+def emit_results(suite, caught=(), escaped=(), no_ops=(), crashes=(),
+                 run=None, extra=None, out=None):
+    """Print a suite's per-mutation identities AND its prose summary.
+
+    Both come from the same four lists, so the counts a runner parses and the
+    identities it records are the same fact stated twice, never two facts.
+
+    `run` defaults to the total of the four lists.  A suite whose mutation
+    count is not simply that total (one mutation probed twice, say) passes it
+    explicitly, and the mismatch is recorded rather than silently normalised.
+    """
+    caught, escaped = list(caught), list(escaped)
+    no_ops, crashes = list(no_ops), list(crashes)
+    total = len(caught) + len(escaped) + len(no_ops) + len(crashes)
+    if run is None:
+        run = total
+    payload = {
+        "suite": suite,
+        "run": run,
+        "caught": caught,
+        "escaped": escaped,
+        "no_ops": no_ops,
+        "crashes": crashes,
+    }
+    if extra:
+        payload["extra"] = extra
+    stream = sys.stdout if out is None else out
+    print(RESULTS_PREFIX + json.dumps(payload, sort_keys=True), file=stream)
+    # The prose line the existing parser reads.  Emitted from the same lists.
+    print("%d mutations, %d escape(s), %d no-op(s), %d crash(es)"
+          % (run, len(escaped), len(no_ops), len(crashes)), file=stream)
+    if escaped:
+        print("escaped: %s" % ", ".join(escaped), file=stream)
+    return payload
+
+
 @dataclasses.dataclass(frozen=True)
 class MutationSummary:
     """The normalised result contract every suite is read into."""
@@ -225,6 +285,20 @@ class MutationSummary:
     crashes: int
     source_line: str
     dialect: str
+    # Identity fields.  Empty for a harness that emits no MUTATION-RESULTS
+    # line, which is every harness that has not been wired yet -- so these
+    # default, and no existing construction site has to change.
+    suite: str = ""
+    caught_ids: tuple = ()
+    escaped_ids: tuple = ()
+    no_op_ids: tuple = ()
+    crash_ids: tuple = ()
+
+    @property
+    def identified(self) -> bool:
+        """True when this suite named its mutations rather than only counting."""
+        return bool(self.caught_ids or self.escaped_ids
+                    or self.no_op_ids or self.crash_ids)
 
     @property
     def green(self) -> bool:
@@ -300,6 +374,23 @@ def parse_summary(text: str) -> MutationSummary:
     # that a suite reporting only run/escapes still fills the contract.
     caught = chosen.get("caught", run - escapes - no_ops - crashes)
 
+    ident = _read_results_line(text)
+    if ident is not None:
+        # The structured line and the prose line are emitted from the same
+        # lists by `emit_results`.  If they disagree, one of the two was
+        # hand-written and the suite is misreporting itself -- refuse rather
+        # than pick a winner, because picking a winner is how a half-wired
+        # pin stays undetected.
+        stated = {"run": ident["run"], "escapes": len(ident["escaped"]),
+                  "no_ops": len(ident["no_ops"]),
+                  "crashes": len(ident["crashes"])}
+        seen = {"run": run, "escapes": escapes,
+                "no_ops": no_ops, "crashes": crashes}
+        if stated != seen:
+            raise ValueError(
+                "mutation suite contradicts itself: MUTATION-RESULTS says %s "
+                "but its summary line says %s" % (stated, seen))
+
     return MutationSummary(
         run=run,
         escapes=escapes,
@@ -308,7 +399,30 @@ def parse_summary(text: str) -> MutationSummary:
         crashes=crashes,
         source_line=chosen_line,
         dialect="key=value" if chosen.get("_kv") else "prose",
+        suite=(ident or {}).get("suite", ""),
+        caught_ids=tuple((ident or {}).get("caught", ())),
+        escaped_ids=tuple((ident or {}).get("escaped", ())),
+        no_op_ids=tuple((ident or {}).get("no_ops", ())),
+        crash_ids=tuple((ident or {}).get("crashes", ())),
     )
+
+
+def _read_results_line(text: str) -> dict | None:
+    """The LAST MUTATION-RESULTS line, or None if the suite emitted none."""
+    found = None
+    for match in _RESULTS_LINE.finditer(text):
+        try:
+            payload = json.loads(match.group(1))
+        except ValueError:
+            continue
+        if not isinstance(payload, dict):
+            continue
+        for field in ("caught", "escaped", "no_ops", "crashes"):
+            payload[field] = [str(x) for x in payload.get(field) or []]
+        payload.setdefault("suite", "")
+        payload["run"] = int(payload.get("run", 0))
+        found = payload
+    return found
 
 
 def aggregate(summaries: Iterable[MutationSummary]) -> MutationSummary:
@@ -319,6 +433,15 @@ def aggregate(summaries: Iterable[MutationSummary]) -> MutationSummary:
     ``parse_summary``, then total the structured results here.
     """
     items = list(summaries)
+    def ids(field):
+        # Qualify each id by its suite: "A1" from two suites are two different
+        # mutations, and an unqualified aggregate would collapse them.
+        out = []
+        for item in items:
+            prefix = (item.suite + ":") if item.suite else ""
+            out.extend(prefix + x for x in getattr(item, field))
+        return tuple(out)
+
     return MutationSummary(
         run=sum(s.run for s in items),
         escapes=sum(s.escapes for s in items),
@@ -327,6 +450,11 @@ def aggregate(summaries: Iterable[MutationSummary]) -> MutationSummary:
         crashes=sum(s.crashes for s in items),
         source_line="aggregate of %d suite(s)" % len(items),
         dialect="aggregate",
+        suite="aggregate",
+        caught_ids=ids("caught_ids"),
+        escaped_ids=ids("escaped_ids"),
+        no_op_ids=ids("no_op_ids"),
+        crash_ids=ids("crash_ids"),
     )
 
 
