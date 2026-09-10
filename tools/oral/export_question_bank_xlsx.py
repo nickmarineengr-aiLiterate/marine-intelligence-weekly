@@ -111,6 +111,22 @@ ABOUT_NOTE = (
 )
 ACCESS_NOTE = "Question links use normal MIW access permissions."
 
+# --- internal WORKING master ---------------------------------------------
+# The working master is a reference index for internal use, not a candidate
+# product and not a dated edition. It used to inherit SNAPSHOT_LABEL/ABOUT_NOTE
+# above, which are the August interim candidate strings, because the About sheet
+# branched on whether a month projection was present rather than on who the file
+# is for. It therefore described itself as an August interim snapshot awaiting a
+# final consolidated workbook long after the bank had moved on.
+WORKING_LABEL = "Internal reference master — current bank"
+WORKING_NOTE = (
+    "Internal reference copy of the current live MIW Oral question bank, "
+    "regenerated from the live question pages on demand. It is not a candidate "
+    "product and not a dated edition: it always describes the bank as at the "
+    "Generated timestamp above. The group-facing workbook is the monthly "
+    "MIW_MEO_Class1_Oral_QuestionBank_<Month>_<Year>.xlsx."
+)
+
 # --- group-facing wording -------------------------------------------------
 # Every claim here has to be one the repository can prove. In particular the
 # month sheet describes what MIW ADDED AND UPDATED, never "everything asked in
@@ -417,6 +433,10 @@ def render_workbook(meta, rows, generated_at, internal=False):
     if month:
         label = SHARE_LABEL_FMT % (meta["month_name"], meta["month_year"])
         note, access = SHARE_NOTE, SHARE_ACCESS_NOTE
+    elif internal:
+        # Audience, not data shape, decides the banner: the internal master is
+        # never the August interim candidate product.
+        label, note, access = WORKING_LABEL, WORKING_NOTE, ACCESS_NOTE
     else:
         label, note, access = meta["snapshot_label"], ABOUT_NOTE, ACCESS_NOTE
     lines = [

@@ -15,6 +15,8 @@ Proves (against a workbook exported from the CURRENT repo into scratch):
   leak_refused           an internal token on the About sheet is refused
   dgma_refused           an "Official DGMA syllabus" header is refused
   interim_banner         the banner is present, and its removal is refused
+  banner                 the About banner follows the AUDIENCE, not the data
+                         shape: share > internal master > interim candidate
   protected_outputs      the historical and final release names are never written
   determinism            two exports of the same model produce identical rows
 
@@ -183,6 +185,22 @@ def main():
                         c.value = str(c.value).replace("INTERIM", "")
         refused("interim_banner/removal-refused", mutated("nobanner", strip_banner), "interim")
 
+        # The About banner is chosen by AUDIENCE, not by data shape. The same
+        # month-free model must render the interim candidate wording on its own
+        # and the internal reference wording under internal=True; the internal
+        # master must carry none of the interim candidate claims.
+        def about_text(wb):
+            return chr(10).join(str(c.value) for r in wb[X.ABOUT_SHEET].iter_rows()
+                                for c in r if c.value)
+        i_about = about_text(X.render_workbook(meta, rows, "test-time"))
+        w_about = about_text(X.render_workbook(meta, rows, "test-time", internal=True))
+        check("banner/audience_split",
+              X.SNAPSHOT_LABEL in i_about and X.ABOUT_NOTE in i_about
+              and X.WORKING_LABEL in w_about and X.WORKING_NOTE in w_about
+              and "INTERIM" not in w_about and X.ABOUT_NOTE not in w_about,
+              "interim keeps its banner=%s; working master is interim-free=%s"
+              % (X.SNAPSHOT_LABEL in i_about, "INTERIM" not in w_about))
+
         # protected_outputs: exporter refuses, and the real historical files are untouched
         before = {n: (X.RELEASE_DIR / n).stat().st_mtime_ns for n in X.PROTECTED_OUTPUTS
                   if (X.RELEASE_DIR / n).exists()}
@@ -248,6 +266,16 @@ def main():
                       for row in s.iter_rows() for c in row))
         check("month/sheet_is_second", openpyxl.load_workbook(share).sheetnames[1] == sheet,
               ", ".join(openpyxl.load_workbook(share).sheetnames[:3]))
+
+        # A month projection is group-facing whatever else it is asked to be:
+        # the share wording must win even if internal=True is passed.
+        m_about = about_text(X.render_workbook(m_meta, m_rows, "test-time",
+                                               internal=True))
+        check("banner/share_outranks_internal",
+              X.SHARE_NOTE in m_about and X.WORKING_LABEL not in m_about
+              and X.WORKING_NOTE not in m_about and "INTERIM" not in m_about,
+              "share note kept=%s; no working-master wording=%s"
+              % (X.SHARE_NOTE in m_about, X.WORKING_LABEL not in m_about))
 
         def mutate(name, fn):
             p = scratch / (name + ".xlsx")
