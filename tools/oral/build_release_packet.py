@@ -48,6 +48,7 @@ from collections import Counter
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 PASS = "PASS"
 FAIL = "FAIL"
@@ -106,6 +107,24 @@ def changed_surface(base_ref, cwd=REPO):
     return rows
 
 
+def full_suite_gate_ids():
+    """Every gate a default release run executes, from the registry itself.
+
+    Never a remembered number. The count has been 39, 43, 69, 79, 84 and 86 at
+    different times in this repository's history, and a packet quoting a stale
+    one would certify a suite that no longer exists.
+
+    The default set is the registry minus the held-back phases -- the same rule
+    `run_oral_release.select_gates` applies, read off the registry directly so
+    the packet does not import the runner it reports on.
+    """
+    try:
+        import oral_release_gates as REG
+        return [g["id"] for g in REG.ALL_GATES if not g["separate_phase"]]
+    except Exception:
+        return None
+
+
 def read_run(path):
     with open(path, "r", encoding="utf-8") as fh:
         return json.load(fh)
@@ -160,6 +179,17 @@ def assess(run, candidate, base_ref=None, run_path=None):
                         % (len(not_executed), ", ".join(not_executed)))
     if not records:
         blockers.append("the run recorded no gates at all")
+    # A partial run cannot qualify a release. Six green gates out of eighty-six
+    # is a useful check and not a qualification, and the packet must not let
+    # the difference disappear into "all gates green".
+    full = full_suite_gate_ids()
+    missing_from_suite = ([g for g in full if g not in set(planned)]
+                          if full else [])
+    if missing_from_suite:
+        blockers.append(
+            "this was a partial run: %d of the %d gates a default release "
+            "executes were never planned"
+            % (len(missing_from_suite), len(full)))
     # An uncommitted worktree is not a release candidate. The packet names a
     # commit to push, and a dirty tree means that commit is NOT what the gates
     # qualified: the qualified bytes are the ones on disk, and pushing would
@@ -205,6 +235,8 @@ def assess(run, candidate, base_ref=None, run_path=None):
             "unavailable_gates": unavailable,
             "skipped_gates": skipped,
             "not_executed": not_executed,
+            "full_suite": len(full) if full else None,
+            "not_planned": missing_from_suite,
         },
         "mutations": {
             "suites": len(mutation_rows),
@@ -293,6 +325,8 @@ def render(packet):
     add("")
     add("| result | count |")
     add("|---|---|")
+    add("| the default release suite | %s |"
+        % (g["full_suite"] if g["full_suite"] is not None else "unknown"))
     add("| planned | %d |" % g["planned"])
     add("| executed | %d |" % g["executed"])
     add("| PASS | %d |" % g["pass"])
@@ -317,6 +351,10 @@ def render(packet):
         if names:
             any_exc = True
             add("- **%s** (%d): %s" % (label, len(names), ", ".join(names)))
+    if g["not_planned"]:
+        any_exc = True
+        add("- **not planned** (%d of %s): this run did not cover the whole "
+            "release suite." % (len(g["not_planned"]), g["full_suite"]))
     if m["escaped_ids"]:
         any_exc = True
         add("- **escaped mutations**: %s" % ", ".join(m["escaped_ids"]))

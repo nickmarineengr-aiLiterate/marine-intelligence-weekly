@@ -51,8 +51,13 @@ def gate(gid, status=P.PASS, detail=None, mutates=False, restored=True):
             "started": "2026-09-10T00:00:00"}
 
 
+FULL_SUITE = P.full_suite_gate_ids() or []
+
+
 def run(records=None, **kw):
-    records = records if records is not None else [gate("g1"), gate("g2")]
+    """A fixture run. By default it plans the whole suite, because a partial
+    run is itself a blocker and would otherwise mask every other control."""
+    records = records if records is not None else [gate(g) for g in FULL_SUITE]
     base = {"started": "20260910T000000Z",
             "gates_planned": [r["gate"] for r in records],
             "records": records, "interrupted": False, "exit": 0,
@@ -65,6 +70,8 @@ def run(records=None, **kw):
 print("\n--- 1. a clean run is approvable, and says what approval permits ---")
 # ===========================================================================
 pkt = P.assess(run(), CANDIDATE)
+check("the full suite is read from the registry, never remembered",
+      len(FULL_SUITE) > 50, "%d gates" % len(FULL_SUITE))
 check("a clean run produces an APPROVABLE packet",
       pkt["verdict"] == P.APPROVABLE, pkt["verdict"])
 check("the packet carries no blockers", pkt["blockers"] == [], "")
@@ -80,7 +87,7 @@ check("the rendered packet states the act in full", P.APPROVED_ACT in _text, "")
 # ===========================================================================
 print("\n--- 2. a failed gate can never produce an approvable packet ---")
 # ===========================================================================
-pkt = P.assess(run([gate("g1"), gate("g2", P.FAIL)]), CANDIDATE)
+pkt = P.assess(run([gate(FULL_SUITE[0]), gate("g2", P.FAIL)]), CANDIDATE)
 check("one FAIL blocks the packet", pkt["verdict"] == P.BLOCKED, pkt["verdict"])
 check("a blocked packet carries no approval line at all",
       pkt["approval"] is None, "nothing to sign")
@@ -101,19 +108,25 @@ cases = [
     ("interrupted run", run(interrupted=True)),
     ("non-zero runner exit", run(exit=1)),
     ("planned gate never executed",
-     dict(run(), gates_planned=["g1", "g2", "g3"])),
+     dict(run(), gates_planned=FULL_SUITE + ["g_extra"])),
     ("escaped mutation",
-     run([gate("m", detail={"run": 10, "escapes": 1, "no_ops": 0,
-                            "crashes": 0, "escaped_ids": ["K"]},
-               mutates=True)])),
+     run([gate(g) for g in FULL_SUITE[:-1]]
+         + [gate(FULL_SUITE[-1], detail={"run": 10, "escapes": 1, "no_ops": 0,
+                                         "crashes": 0, "escaped_ids": ["K"]},
+                 mutates=True)])),
     ("crashed mutation",
-     run([gate("m", detail={"run": 10, "escapes": 0, "no_ops": 0,
-                            "crashes": 2}, mutates=True)])),
+     run([gate(g) for g in FULL_SUITE[:-1]]
+         + [gate(FULL_SUITE[-1], detail={"run": 10, "escapes": 0, "no_ops": 0,
+                                         "crashes": 2}, mutates=True)])),
     ("unverified restore",
-     run([gate("m", detail={"run": 4, "escapes": 0, "no_ops": 0, "crashes": 0},
-               mutates=True, restored=False)])),
+     run([gate(g) for g in FULL_SUITE[:-1]]
+         + [gate(FULL_SUITE[-1], detail={"run": 4, "escapes": 0, "no_ops": 0,
+                                         "crashes": 0}, mutates=True,
+                 restored=False)])),
     ("no gates at all", run([])),
     ("dirty worktree", run()),
+    # Six green gates out of eighty-six is a check, not a qualification.
+    ("partial run", run([gate(FULL_SUITE[0]), gate(FULL_SUITE[1])])),
 ]
 for label, fixture in cases:
     subject = (dict(CANDIDATE, worktree_clean=False,
@@ -150,20 +163,23 @@ check("the approval refuses to carry forward",
 # ===========================================================================
 print("\n--- 5. warnings are surfaced, never absorbed into a pass count ---")
 # ===========================================================================
-pkt = P.assess(run([gate("g1"),
-                    gate("g2", P.BASELINE),
-                    gate("g3", P.UNAVAILABLE),
-                    gate("g4", P.SKIPPED),
-                    gate("m", detail={"run": 6, "escapes": 0, "no_ops": 2,
-                                      "crashes": 0}, mutates=True)]),
+_rest = [gate(g) for g in FULL_SUITE[4:]]
+pkt = P.assess(run([gate(FULL_SUITE[0]),
+                    gate(FULL_SUITE[1], P.BASELINE),
+                    gate(FULL_SUITE[2], P.UNAVAILABLE),
+                    gate(FULL_SUITE[3], P.SKIPPED)] + _rest[:-1]
+                   + [gate(_rest[-1]["gate"],
+                           detail={"run": 6, "escapes": 0, "no_ops": 2,
+                                   "crashes": 0}, mutates=True)]),
                 CANDIDATE)
 check("a baseline state does not count as a pass",
-      pkt["gates"]["pass"] == 2 and pkt["gates"]["pre_existing_baseline"] == 1,
+      pkt["gates"]["pass"] == len(FULL_SUITE) - 3
+      and pkt["gates"]["pre_existing_baseline"] == 1,
       "pass=%d baseline=%d" % (pkt["gates"]["pass"],
                                pkt["gates"]["pre_existing_baseline"]))
 check("unavailable and skipped gates are listed by name",
-      pkt["exceptions"]["unavailable"] == ["g3"]
-      and pkt["exceptions"]["skipped"] == ["g4"], "")
+      pkt["exceptions"]["unavailable"] == [FULL_SUITE[2]]
+      and pkt["exceptions"]["skipped"] == [FULL_SUITE[3]], "")
 check("a no-op mutation is reported as an exception",
       pkt["exceptions"]["no_ops"] == 2, "a mutation that changed nothing "
       "proved nothing")
