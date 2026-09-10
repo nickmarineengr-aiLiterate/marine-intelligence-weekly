@@ -49,10 +49,26 @@ from oral_content_mutation import (                    # noqa: E402
 QB8_A = REPO / "meoclass1/QB8_A.html"
 QB5_A = REPO / "meoclass1/QB5_A.html"
 QB10_B = REPO / "meoclass1/QB10_B.html"
+SHEET = REPO / "meoclass1/QB2_B_CheatSheet.html"
 TRAPS = REPO / "meoclass1/known_traps.md"
 M_ATTR = HERE / "correction_corr_rel_bj_attribution_20260908_manifest.json"
 M_FOUND = HERE / "correction_corr_rel_bj_foundering_20260908_manifest.json"
+M_SHEET = HERE / "correction_corr_rel_bj_cheatsheet_20260909_manifest.json"
 PROBE = "validate_correction_bulkjupiter.py"
+# The artefact-governance probe. Deliberately NOT validate_corrections.py:
+# that gate is the authority but runs `git show` over every tracked page per
+# record, so a suite that used it would take minutes per mutation and would
+# stop being run. Both call the same pin function, so they cannot disagree.
+PROBE_GOV = "validate_artefact_governance.py"
+
+# The pre-edit line, kept verbatim. It is the specimen every regression
+# mutation below restores, and it is the exact wording the original
+# closed-world guard read straight past.
+SHEET_WAS = ("<li>Casualties: <em>MV Bulk Jupiter (2015)</em> — bauxite "
+             "liquefaction sinking</li>")
+SHEET_NOW = ("<li>Casualties: <em>MV Bulk Jupiter (2015)</em> — bauxite; "
+             "most probably liquefaction or a free-surface effect (flag State "
+             "found no physical evidence of cause)</li>")
 
 MUTATIONS = [
     # ---- REGRESSION: who investigated -----------------------------------
@@ -248,12 +264,119 @@ MUTATIONS = [
     ("V", "withdraw the attribution record's authorisation",
      edit_json(M_ATTR, lambda d: d.__setitem__("status", "DRAFT")),
      "status_authorised_attribution"),
+
+    # ---- the cheat sheet: the site the first gate could not see ----------
+    # AA is the escape itself, reproduced. The pre-edit line said the rejected
+    # proposition in words neither of the original guard's two literals
+    # reached, so the corpus shipped a release in which every q-card was
+    # pinned and the one page a candidate reads on the morning of the oral
+    # contradicted all of them.
+    ("AA", "restore the settled-cause wording to the cheat sheet",
+     sub_in_file(SHEET, SHEET_NOW, SHEET_WAS, count=1),
+     "cause_is_qualified_on_cheatsheet_site1"),
+
+    ("AB", "keep 'most probably' on the cheat sheet but drop the second mechanism",
+     sub_in_file(SHEET, "most probably liquefaction or a free-surface effect",
+                 "most probably liquefaction", count=1),
+     "cause_offers_both_mechanisms_on_cheatsheet_site1"),
+
+    # NON-VACUITY. If a later edit removed the casualty from the cheat sheet
+    # altogether, every per-site check above would pass over an empty list of
+    # sites and the gate would report green on a page that teaches nothing.
+    ("AC", "delete the casualty bullet entirely",
+     sub_in_file(SHEET, SHEET_NOW, "", count=1),
+     "cheatsheet_sites_found"),
+
+    # OVER-SWEEP, in the cheat sheet's direction: a later sweep for the
+    # rejected word takes the mechanism out of the teaching with it.
+    ("AD", "a sweep for 'liquefaction' eats the TML rule the bullet sits under",
+     sub_in_file(SHEET,
+                 "Cannot load Group A if moisture content &gt; TML",
+                 "Cannot load Group A cargo", count=1),
+     "cheatsheet_teaches_the_tml_rule"),
+]
+
+# The artefact-governance mutations. These run against PROBE_GOV, because the
+# propositions they attack live in the RECORD rather than on the page.
+#
+# Three of them are answered by a digest or a pin, which the card suite refuses
+# as a catch. The rule is not inverted here, it is being applied: for a q-card
+# the pin is incidental to the content check that owns the proposition, so
+# accepting it proves only that sha256 works. For the artefact form the pin IS
+# the mechanism under test -- it is the thing that did not exist when the cheat
+# sheet shipped a rejected proposition -- so a mutation that the pin does not
+# catch is a mechanism that does not work.
+GOVERNANCE_MUTATIONS = [
+    ("GA", "remove the cheat sheet from artefact governance",
+     edit_json(M_SHEET, lambda d: d.__setitem__("governed_artefacts", [])),
+     "governed_artefacts_non_empty"),
+
+    ("GB", "corrupt the artefact's post-edit digest",
+     edit_json(M_SHEET, lambda d: d["governed_artefacts"][0].__setitem__(
+         "post_edit_digest", "0" * 64)),
+     "live_matches_authorised_artefact_state"),
+
+    ("GC", "point the record at a parent correction that does not exist",
+     edit_json(M_SHEET, lambda d: d["governed_artefacts"][0].__setitem__(
+         "governing_correction", "CORR-DOES-NOT-EXIST-20260909")),
+     "governed_artefact_parent_exists"),
+
+    # LINEAGE, the other half. GC breaks the pointer; this keeps a real parent
+    # and claims it says something it does not. A propagation record that may
+    # assert any proposition it likes about a parent nobody re-reads is a
+    # first-instance finding wearing a propagation label.
+    ("GD", "keep the real parent but claim it states a proposition it does not",
+     edit_json(M_SHEET, lambda d: d["governed_artefacts"][0].__setitem__(
+         "proposition_markers", ["dynamic separation was the proven cause"])),
+     "governed_artefact_parent_states_the_proposition"),
+
+    ("GE", "spell the artefact as a q-card by giving it an anchor",
+     edit_json(M_SHEET, lambda d: d["governed_artefacts"][0].__setitem__(
+         "anchor", "q1")),
+     "governed_artefact_is_not_a_card"),
+
+    ("GF", "declare a correction that changed nothing",
+     edit_json(M_SHEET, lambda d: d["governed_artefacts"][0].__setitem__(
+         "post_edit_digest", d["governed_artefacts"][0]["pre_edit_digest"])),
+     "governed_artefact_digests_differ"),
+
+    ("GG", "pin the right bytes but declare the wrong text as the outcome",
+     edit_json(M_SHEET, lambda d: d["governed_artefacts"][0].__setitem__(
+         "expected_text_after", "<li>Casualties: none recorded</li>")),
+     "artefact_carries_expected_proposition_text"),
+
+    ("GH", "point the governed artefact at a file that does not exist",
+     edit_json(M_SHEET, lambda d: d["governed_artefacts"][0].__setitem__(
+         "path", "meoclass1/QB2_B_CheatSheet_NOPE.html")),
+     "governed_artefact_path_exists"),
+
+    # Re-aimed. This mutation first named `artefact_only_record_claims_no_primary`
+    # and escaped to `artefact_paths_are_not_card_pages`, which showed the check
+    # it named could not fail -- adding a card to make `primary` non-empty stops
+    # the record being artefact-only, so the branch it lived in was never the
+    # one reached. That check is gone; this now names the guard that really owns
+    # the proposition. A page governed as BOTH an artefact and a q-card page is
+    # pinned twice by two mechanisms with different rules, each right about half
+    # of it, and a synthetic anchor on a page with no card block is exactly the
+    # fake-anchor outcome the artefact form exists to avoid.
+    ("GI", "claim the cheat sheet as a q-card page as well as an artefact",
+     edit_json(M_SHEET, lambda d: d.__setitem__("cards", [{
+         "correction_action_id": "FAKE-01", "file": "QB2_B_CheatSheet.html",
+         "path": "meoclass1/QB2_B_CheatSheet.html", "anchor": "q1",
+         "classification": "PRIMARY_CORRECTION",
+         "pre_edit_digest": "a" * 64, "post_edit_digest": "b" * 64}])),
+     "artefact_paths_are_not_card_pages"),
 ]
 
 
 def main() -> int:
-    return run_suite("CORR-REL-BJ-* (Bulk Jupiter)", PROBE, MUTATIONS,
-                     [QB8_A, QB5_A, QB10_B, TRAPS, M_ATTR, M_FOUND])
+    content = run_suite("CORR-REL-BJ-* (Bulk Jupiter)", PROBE, MUTATIONS,
+                        [QB8_A, QB5_A, QB10_B, SHEET, TRAPS, M_ATTR, M_FOUND])
+    print()
+    governance = run_suite(
+        "CORR-REL-BJ-CHEATSHEET-20260909 (artefact governance)",
+        PROBE_GOV, GOVERNANCE_MUTATIONS, [SHEET, M_SHEET])
+    return content or governance
 
 
 if __name__ == "__main__":

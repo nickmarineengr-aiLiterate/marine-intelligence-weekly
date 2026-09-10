@@ -56,7 +56,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from oral_manifest import (                                     # noqa: E402
     CORRECTION_MANIFEST_GLOB, audit_correction_manifest,
-    authorisation_manifest_paths, action_id_of)
+    authorisation_manifest_paths, action_id_of,
+    audit_governed_artefacts_live)
 from validate_batch_b import card_digests                       # noqa: E402
 from oral_supersession import resolve_authorised_card_state    # noqa: E402
 
@@ -225,6 +226,14 @@ def validate(manifest_path: Path) -> None:
     gone = [a.get("path") for a in (manifest.get("artefacts") or [])
             if not (REPO / str(a.get("path"))).is_file()]
     report("declared_artefacts_exist", not gone, "missing=%s" % (gone or "none"))
+
+    # ---- 8. governed non-card artefacts ------------------------------------
+    #
+    # The pins themselves live in `oral_manifest.audit_governed_artefacts_live`
+    # so that this gate and `validate_artefact_governance.py` cannot drift into
+    # asking different questions of the same record.
+    for finding in audit_governed_artefacts_live(manifest_path, REPO):
+        report(finding.check, finding.ok, finding.detail)
 
 
 def tracked_correction_records() -> list[str]:
