@@ -596,6 +596,32 @@ GATES = (
                "that the health gate ignores structural summary lines while still "
                "blocking on a real finding"),
 
+    # The follow-up closure derivation. Registered rather than left as a
+    # README line for the same reason as release_infra_controls: a guard that
+    # never runs has silently expired. This one is worth a gate specifically
+    # because closing a governed register row is authority-bearing evidence,
+    # and the two ways to get it wrong -- closing an action no manifest
+    # implements, and closing an action against the wrong card -- both leave a
+    # register that validates cleanly on every other check.
+    _gate("followup_closure_controls",
+          ["python", "%s/test_followup_closure.py" % _ORAL],
+          CAT_UNIT, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="prose is not evidence, an id that resolves to the wrong record "
+               "does not close, a hold moves nothing, and a discharge that "
+               "implements nothing is refused"),
+
+    # The approval-packet controls. The packet is what a Founder approves
+    # instead of an 85-gate transcript, so the property that must never rot is
+    # that a failed, interrupted or escaped run cannot produce an approvable
+    # packet -- and that an approval cannot drift onto a candidate nobody
+    # qualified.
+    _gate("release_packet_controls",
+          ["python", "%s/test_release_packet.py" % _ORAL],
+          CAT_UNIT, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="a failed gate can never produce an approvable packet, warnings "
+               "are never absorbed into a pass count, and the packet binds to "
+               "one commit and one tree"),
+
     # Content gates for CORR-DEFN-TREATY-20260825. Third pair of this shape,
     # and the one that shows why the shape is needed: QB9_G#q6 shipped a legal
     # HIERARCHY -- Treaty then Convention then Protocol -- under its own

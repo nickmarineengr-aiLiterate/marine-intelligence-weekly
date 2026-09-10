@@ -911,6 +911,23 @@ def summarise(records, gates, log):
     return 1 if blocking else 0
 
 
+def _candidate_identity():
+    """The commit and tree this run qualified, for the approval packet."""
+    def _git(*args):
+        proc = subprocess.run(["git"] + list(args), cwd=str(REPO),
+                              capture_output=True, text=True)
+        return proc.stdout.strip() if proc.returncode == 0 else None
+
+    dirty = _git("status", "--porcelain")
+    return {
+        "commit": _git("rev-parse", "HEAD"),
+        "commit_short": _git("rev-parse", "--short", "HEAD"),
+        "branch": _git("rev-parse", "--abbrev-ref", "HEAD"),
+        "tree": _git("write-tree"),
+        "worktree_clean": dirty == "",
+    }
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(
         prog="run_oral_release",
@@ -981,8 +998,13 @@ def main(argv=None):
     # the line count -- which a baseline comparison then read as 481 new
     # findings. newline="" plus explicit LF means the log says what it saw.
     write_text(log_path, "\n".join(buffer) + "\n")
+    # Stamp WHAT was qualified, not just that something was. A commit alone
+    # cannot identify it: a dirty worktree keeps its commit while the bytes
+    # move. `write-tree` hashes the index, so an approval built from this
+    # record can refuse to apply to a tree nobody qualified.
     write_text(json_path, json.dumps({
         "started": stamp,
+        "candidate": _candidate_identity(),
         "gates_planned": [g["id"] for g in gates],
         "interrupted": interrupted,
         "records": records,

@@ -165,10 +165,14 @@ POST_E6_GATES = [
     # is how its mutation TN kept a target the corpus no longer contained.
     "correction_pass2_mutate",
     "corrections_mutate",
+    # The closure-derivation controls. Sorted position, like every other row.
+    "followup_closure_controls",
     "followup_register_mutate",
     # The shared-module controls, moved INTO the suite: a guard that never runs
     # has silently expired, which is why this is a gate and not a README line.
     "release_infra_controls",
+    # The approval-packet controls, in sorted position.
+    "release_packet_controls",
     # The study-spine hook: a new oral question cannot ship unmapped.
     "study_mapping_check",
     # ...and cannot ship mapped-but-invisible: both study surfaces must
