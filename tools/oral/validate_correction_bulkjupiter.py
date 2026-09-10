@@ -305,16 +305,70 @@ def main() -> int:
                "not a cargo shift" in blob,
                "true, tested and kept - it stops a candidate reaching for the "
                "solid-mass-slides answer")
+    # This guard was written from QB10_B's own prior sentence and matched two
+    # literal strings taken from it. It was documented as closed-world over the
+    # deployed bank, and it was closed-world over the PAGES -- but not over the
+    # PHRASINGS, so it read every page and could only ever recognise one way of
+    # saying the thing. QB2_B_CheatSheet said "bauxite liquefaction sinking" and
+    # walked straight past it. The patterns are now a set of assertion shapes,
+    # and SETTLED_CAUSE_SELFTEST below proves each one still bites.
+    SETTLED_CAUSE = [
+        r"was lost to bauxite <strong>liquefaction</strong>,",
+        r"she was lost to bauxite liquefaction",
+        r"bauxite liquefaction sinking",
+        r"bauxite liquefaction (?:sank|sinking|capsiz|foundering)",
+        r"(?:sank|sunk|lost|foundered|capsized) (?:due to|from|because of|to) "
+        r"(?:bauxite )?liquefaction",
+    ]
     report("no_page_asserts_the_cause_as_settled",
-           not any(re.search(r"was lost to bauxite <strong>liquefaction</strong>,"
-                             r"|she was lost to bauxite liquefaction",
-                             flat(without_provenance(read_text(p))), re.I)
-                   for p in sorted(QB_ROOT.rglob("QB*.html"))),
-           "closed-world over the deployed bank, not over the pages this "
-           "correction happened to open")
+           not any(re.search(pat, flat(without_provenance(read_text(p))), re.I)
+                   for p in sorted(QB_ROOT.rglob("QB*.html"))
+                   for pat in SETTLED_CAUSE),
+           "closed-world over the deployed bank AND over the phrasings, not "
+           "over the pages this correction happened to open")
+    # A negative guard that has never been shown to fire proves nothing. Each
+    # pattern is run against a specimen of the wording it exists to reject --
+    # including the exact pre-edit cheat-sheet line.
+    SPECIMENS = [
+        "she was lost to bauxite <strong>liquefaction</strong>, not a cargo shift",
+        "she was lost to bauxite liquefaction",
+        "Casualties: MV Bulk Jupiter (2015) - bauxite liquefaction sinking",
+        "bauxite liquefaction sank her in twenty minutes",
+        "the vessel sank due to liquefaction of the bauxite",
+    ]
+    report("settled_cause_guard_self_test",
+           all(any(re.search(pat, spec, re.I) for pat in SETTLED_CAUSE)
+               for spec in SPECIMENS),
+           "every rejected phrasing, including the pre-edit cheat-sheet line, "
+           "is caught by at least one pattern")
     report("qb8h_still_names_the_casualty", "Bulk Jupiter 2015" in qb8h, "")
     report("cheatsheet_still_names_the_casualty",
            "Bulk Jupiter" in sheet, "")
+
+    # ---------- 8c. CORR-REL-BJ-CHEATSHEET-20260909 -----------------------
+    # The presence check immediately above is all this gate ever asked of the
+    # cheat sheet, so the line was free to say anything -- and it said "bauxite
+    # liquefaction sinking", the rejected proposition, on the most
+    # memorisation-weighted surface in the corpus. The site now takes the same
+    # per-site proposition checks as every other page that states a cause.
+    cs_sites = [flat(without_provenance(sheet)[max(0, m.start() - 120):m.start() + 320])
+                for m in re.finditer(r"Bulk Jupiter", without_provenance(sheet))]
+    report("cheatsheet_sites_found", len(cs_sites) >= 1,
+           "%d site(s) naming the casualty" % len(cs_sites))
+    for i, blob in enumerate(cs_sites, 1):
+        report("cause_is_qualified_on_cheatsheet_site%d" % i,
+               "most probable" in blob or "most probably" in blob,
+               "the report's own modal verb, per known trap 131")
+        report("cause_offers_both_mechanisms_on_cheatsheet_site%d" % i,
+               "free-surface effect" in blob or "free surface" in blob,
+               "one mechanism where the report gives two is a hardened finding")
+    # OVER-SWEEP, guarded in the cheat sheet's direction. The bullet corrected
+    # here sits directly under the Group A moisture rule, and a later sweep for
+    # the rejected word is exactly how a correction removes correct teaching
+    # instead of leaving stale teaching in place.
+    report("cheatsheet_teaches_the_tml_rule",
+           "Cannot load Group A if moisture content &gt; TML" in sheet,
+           "the rule the corrected bullet sits under, kept byte-identical")
     report("no_other_page_attributes_the_investigation_to_the_imo",
            not any(re.search(r"investigation by the IMO",
                              read_text(p))
