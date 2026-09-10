@@ -162,3 +162,14 @@ docs/sources/*.docx
 # Generated Oral review pool - derived operational output, not authority.
 # Regenerate with: python tools/oral/build_review_pool.py
 reports/oral-review-pool/
+
+# INTERNAL_ONLY audit evidence for the August 2026 oral coverage review:
+# per-question coverage rows, provenance and cleanup findings. It is working
+# evidence about the corpus, not a product surface, and this repository is
+# public -- a `git add -A` would publish it. The report's CONCLUSIONS reach
+# the corpus through governed correction records; the raw audit does not.
+# No paired .vercelignore rule is required: section C's blanket `docs/` line
+# already excludes every path under it at deploy time, which is exactly the
+# subsumption exemption deploy_surface.test.mjs checks (RULE 2). Do not
+# narrow `docs/` there without re-reading that test.
+docs/reports/august-2026-oral-coverage/
