@@ -46,6 +46,7 @@ REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import oral_lib  # noqa: E402
+import followup_closure  # noqa: E402
 
 OUT = REPO / "tools" / "oral" / "oral_followup_register.json"
 
@@ -419,10 +420,31 @@ def build():
             "target_review_status": review,
             "target_structural_check": structural,
             "creates_new_card": False,
+            # Implementation state. Filled in below from the committed batch
+            # manifests; the defaults are what an unproduced action carries.
+            "production_evidence": None,
+            "holds": [],
             "colocated_enrichment_actions": colo,
             "caution": caution,
             "source_families": src_families,
         })
+
+    # ---- implementation state, derived from the batch manifests ----------
+    # The register is an AUTHORISATION record: it says what is authorised, and
+    # each batch manifest says what was implemented. Those two claims stay
+    # separate -- but `status` and `batch` exist precisely to point from one to
+    # the other, and hardcoding them left the register over-reporting the
+    # remaining workload by every action that had already shipped. The
+    # derivation reads the manifests; it never authors a status.
+    closure = followup_closure.closure_for_register(actions)
+    for action in actions:
+        derived_state = closure.get(action["followup_id"])
+        if derived_state is None:
+            continue
+        action["status"] = derived_state["status"]
+        action["batch"] = derived_state["batch"]
+        action["production_evidence"] = derived_state["production_evidence"]
+        action["holds"] = derived_state["holds"]
 
     # ---- reconciliation proof --------------------------------------------
     sizes = Counter(len(groups[t]) for t in groups)
@@ -465,7 +487,13 @@ def build():
                 "authorised for future production. This says WHAT is "
                 "authorised. Each production batch writes its own "
                 "batch_f*_manifest.json saying what was IMPLEMENTED. The two "
-                "must never be collapsed.",
+                "must never be collapsed. The per-action `status` and `batch` "
+                "fields are DERIVED from those manifests by "
+                "tools/oral/followup_closure.py: a manifest counts only when "
+                "it declares this register as its authorisation_source, and "
+                "only through cards[].followup_id, never through prose. "
+                "IN_BATCH and WITHDRAWN are in the vocabulary and are never "
+                "derived - no committed artefact expresses either.",
         "provenance": {
             "sources": SOURCES,
             "derivation": "Families dispositioned FOLLOWUP_ONLY are grouped by "
@@ -512,6 +540,11 @@ def build():
             "by_target_structural_check": dict(sorted(Counter(
                 a["target_structural_check"] for a in actions).items())),
             "by_status": dict(sorted(Counter(a["status"] for a in actions).items())),
+            "by_batch": dict(sorted(Counter(
+                a["batch"] for a in actions if a["batch"]).items())),
+            "produced": sum(1 for a in actions if a["status"] == "PRODUCED"),
+            "outstanding": sum(1 for a in actions
+                               if a["status"] != "PRODUCED"),
             "parent_files": dict(sorted(Counter(
                 a["parent_file"] for a in actions).items())),
             "currentness_required": sum(1 for a in actions

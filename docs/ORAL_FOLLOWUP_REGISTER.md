@@ -1,6 +1,8 @@
 # Oral follow-up authorisation register
 
-**Status:** committed and validated. Follow-up production (F1 onward) has not started.
+**Status:** committed and validated. Batches F1 and F1b have shipped three of the 35
+actions; 32 remain outstanding. Per-action `status` and `batch` are **derived** from the
+batch manifests by `tools/oral/followup_closure.py` — see §11.
 **Register:** `tools/oral/oral_followup_register.json` — 35 actions, `FUP-001`..`FUP-035`.
 
 This document explains where the register came from and how to read it. The operational
@@ -183,7 +185,7 @@ separation.
 
 ---
 
-## 9. Recommended first batch (F1) — not started
+## 9. The first batch (F1) — shipped
 
 **`FUP-006`, `FUP-018`, `FUP-033`.**
 
@@ -198,8 +200,14 @@ the register. Of those seven, only `FUP-006` is `CONFIRMED`; five are LOW confid
 | `FUP-018` | `QB3_I#q4` | HIGH / CONFIRMED | `EXPECTED_DETAIL` | no | — |
 | `FUP-033` | `QB9_C#q5` | HIGH / CONFIRMED | `FOLLOW_UP` | no | — |
 
+F1 produced `FUP-018` and `FUP-033` and **held** `FUP-006` as `HELD_GOVERNANCE`: its
+parent card was pinned by E1's enrichment manifest and no digest pin had a delegation
+path. `F1b` discharged that hold through the generic supersession contract and produced
+`FUP-006`. F1's hold record is deliberately not rewritten — it is a truthful record of
+what F1 did.
+
 Three actions, three files, three source families. Every one is hand-adjudicated, so F1
-tests the *workflow* rather than the targeting. `FUP-006` and `FUP-033` are both Marine
+tested the *workflow* rather than the targeting. `FUP-006` and `FUP-033` are both Marine
 Insurance, giving coherent subject matter; `FUP-018` exercises the second relationship
 type. Zero currentness exposure. Exactly one colocation, which rehearses the live-recheck
 step without being a messy case.
@@ -218,8 +226,9 @@ Excluded deliberately:
 
 | Tool | Result |
 |---|---|
-| `validate_followup_register.py` | 32 checks, 0 FAIL |
-| `mutate_followup_register.py` | 12 mutations, 12 caught, 0 weak / 0 escapes / 0 no-ops / 0 crashes |
+| `validate_followup_register.py` | 37 checks, 0 FAIL |
+| `mutate_followup_register.py` | 16 mutations, 16 caught, 0 weak / 0 escapes / 0 no-ops / 0 crashes |
+| `test_followup_closure.py` | 30 checks, 0 FAIL |
 | `test_oral_release_infra.py` | 91 checks, 0 FAIL |
 | `test_oral_release_runner.py` | 107 checks, 0 FAIL |
 | `oral_manifest.py --quiet` | 113 / 113 |
@@ -230,3 +239,42 @@ re-derives the register and byte-compares, and that check fires on every edit �
 harness that only asked "did the validator go red?" would report 12/12 while proving
 nothing about the other 31 checks. Mutations caught solely by byte-currency are reported
 as `WEAK` and fail the suite.
+
+---
+
+## 11. Implementation state is derived, never hand-written
+
+`status` and `batch` were hardcoded to `AUTHORISED_NOT_STARTED` / `null` on all 35
+actions and stayed that way after F1 and F1b shipped. The register therefore
+over-reported the remaining workload by three actions for as long as those batches had
+been live. `PRODUCED` was already in the vocabulary; nothing wrote it.
+
+`tools/oral/followup_closure.py` now derives both fields, and
+`build_followup_register.py` calls it. Three rules make the derivation safe:
+
+1. **A manifest counts only when it declares this register as its
+   `authorisation_source`.** A manifest authorised elsewhere cannot close a row here.
+2. **Only `cards[].followup_id` closes a row — never prose.** `batch_f1_manifest.json`
+   names `FUP-003`, `008`, `009`, `013`, `017`, `025` and `034` in a note about colocated
+   actions, and `batch_f1b_manifest.json` names `FUP-018` and `FUP-033` in a note about
+   F1. A grep-driven writer would have closed nine actions that never shipped.
+3. **The identifier must round-trip.** `followup_id` → the register action →
+   `parent_file#parent_anchor` must equal the manifest card's own file and anchor. An id
+   that resolves to the wrong record is an exception, not a closure.
+
+A hold records itself and moves nothing; a discharge closes a row only when the
+discharging batch also implements it. `IN_BATCH` and `WITHDRAWN` stay in the vocabulary
+and stay unwritten — no committed artefact expresses either, and a row carrying one was
+authored by hand.
+
+Anything the rules cannot prove becomes a `NEEDS_FOUNDER_REVIEW` exception, and one
+standing exception refuses the whole generation rather than writing a partial derivation.
+
+```bash
+python tools/oral/followup_closure.py --audit     # register vs artefacts
+python tools/oral/followup_closure.py --dry-run   # proposed changes, writes nothing
+python tools/oral/followup_closure.py --apply     # regenerate through the generator
+```
+
+`--apply` never edits the JSON in place: it re-runs `build_followup_register.py`, so the
+register keeps exactly one author and its byte-currency check stays green.

@@ -112,14 +112,28 @@ def edit_manifest(mutate) -> None:
     write_text(MANIFEST, json.dumps(data, indent=2) + "\n")
 
 
-def edit_register(followup_id: str, status: str) -> None:
+def edit_register(followup_id: str, status: str, batch=None) -> None:
     data = json.loads(read_text(REGISTER))
     for action in data.get("actions", []):
         if action.get("followup_id") == followup_id:
             action["status"] = status
+            if batch is not None:
+                action["batch"] = batch or None
             write_text(REGISTER, json.dumps(data, indent=1) + "\n")
             return
     raise AssertionError("no such action in the register: %s" % followup_id)
+
+
+def drop_register_hold(followup_id: str) -> None:
+    """Erase the hold record a batch left on a register row."""
+    data = json.loads(read_text(REGISTER))
+    for action in data.get("actions", []):
+        if action.get("followup_id") == followup_id:
+            action["holds"] = []
+            write_text(REGISTER, json.dumps(data, indent=1) + "\n")
+            return
+    raise AssertionError("no such action in the register: %s" % followup_id)
+
 
 
 def card_of(rel: str) -> dict:
@@ -296,13 +310,20 @@ def build_mutations():
              {"target": "QB9_C.html#q5"})),
          "f1", "held_action_blocker_is_actionable"),
 
-        # The register is the authorisation record, not a status board. Editing
-        # it to say FUP-006 was produced would make the hold disappear from the
-        # only place a future session looks for outstanding work.
-        ("X", "edit the register to disguise the hold as produced",
+        # The register's status is DERIVED from the batch manifests, so there
+        # is one source of truth rather than two. The failure guarded here is
+        # unchanged: a register that credits F1 with FUP-006 makes the hold
+        # disappear from the only place a future session looks for outstanding
+        # work. F1b produced it; F1 did not, and the register must not say so.
+        ("X", "credit this batch with the action it held",
          [REGISTER],
-         lambda: edit_register("FUP-006", "PRODUCED"),
-         "f1", "register_status_of_held_action_untouched"),
+         lambda: edit_register("FUP-006", "PRODUCED", batch="F1"),
+         "f1", "register_does_not_credit_this_batch_with_a_held_action"),
+
+        ("X2", "erase this batch's hold from the register",
+         [REGISTER],
+         lambda: drop_register_hold("FUP-006"),
+         "f1", "register_carries_this_batch_hold"),
 
         ("P", "strip a card's authority record",
          [MANIFEST],

@@ -2,7 +2,7 @@
   "register_version": "1.0",
   "generated_by": "tools/oral/build_followup_register.py",
   "record_class": "AUTHORISATION_REGISTER",
-  "note": "Authoritative register of the Oral examiner follow-up actions authorised for future production. This says WHAT is authorised. Each production batch writes its own batch_f*_manifest.json saying what was IMPLEMENTED. The two must never be collapsed.",
+  "note": "Authoritative register of the Oral examiner follow-up actions authorised for future production. This says WHAT is authorised. Each production batch writes its own batch_f*_manifest.json saying what was IMPLEMENTED. The two must never be collapsed. The per-action `status` and `batch` fields are DERIVED from those manifests by tools/oral/followup_closure.py: a manifest counts only when it declares this register as its authorisation_source, and only through cards[].followup_id, never through prose. IN_BATCH and WITHDRAWN are in the vocabulary and are never derived - no committed artefact expresses either.",
   "provenance": {
     "sources": {
       "authorisation": {
@@ -170,8 +170,15 @@
       "TARGET_RESOLVES": 35
     },
     "by_status": {
-      "AUTHORISED_NOT_STARTED": 35
+      "AUTHORISED_NOT_STARTED": 32,
+      "PRODUCED": 3
     },
+    "by_batch": {
+      "F1": 2,
+      "F1b": 1
+    },
+    "produced": 3,
+    "outstanding": 32,
     "parent_files": {
       "QB10_B.html": 2,
       "QB1_A.html": 4,
@@ -262,6 +269,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -421,6 +430,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -509,6 +520,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [
         "ENRICH-A001"
       ],
@@ -607,6 +620,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -727,6 +742,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -772,9 +789,9 @@
     {
       "followup_id": "FUP-006",
       "kind": "FOLLOWUP_INSERTION",
-      "status": "AUTHORISED_NOT_STARTED",
+      "status": "PRODUCED",
       "priority": "F-P1",
-      "batch": null,
+      "batch": "F1b",
       "source_family_ids": [
         "GAP-0620"
       ],
@@ -812,6 +829,21 @@
       "target_review_status": "CONFIRMED",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": {
+        "batch_id": "F1b",
+        "manifest": "tools/oral/batch_f1b_manifest.json",
+        "card_index": 0,
+        "target": "QB1_A.html#q9"
+      },
+      "holds": [
+        {
+          "batch_id": "F1",
+          "manifest": "batch_f1_manifest.json",
+          "status": "HELD_GOVERNANCE",
+          "target": "QB1_A.html#q9",
+          "discharged_by_batch_id": "F1b"
+        }
+      ],
       "colocated_enrichment_actions": [
         "ENRICH-A003"
       ],
@@ -901,6 +933,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -992,6 +1026,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [
         "ENRICH-A012"
       ],
@@ -1120,6 +1156,8 @@
       "target_review_status": "RETARGET_REQUIRED",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [
         "ENRICH-A038"
       ],
@@ -1211,6 +1249,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -1297,6 +1337,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -1382,6 +1424,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -1467,6 +1511,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [
         "ENRICH-A006"
       ],
@@ -1557,6 +1603,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -1644,6 +1692,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -1729,6 +1779,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -1817,6 +1869,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [
         "ENRICH-A018"
       ],
@@ -1867,9 +1921,9 @@
     {
       "followup_id": "FUP-018",
       "kind": "FOLLOWUP_INSERTION",
-      "status": "AUTHORISED_NOT_STARTED",
+      "status": "PRODUCED",
       "priority": "F-P1",
-      "batch": null,
+      "batch": "F1",
       "source_family_ids": [
         "GAP-0126"
       ],
@@ -1907,6 +1961,13 @@
       "target_review_status": "CONFIRMED",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": {
+        "batch_id": "F1",
+        "manifest": "tools/oral/batch_f1_manifest.json",
+        "card_index": 0,
+        "target": "QB3_I.html#q4"
+      },
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [],
       "source_families": [
@@ -1989,6 +2050,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -2077,6 +2140,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -2164,6 +2229,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -2249,6 +2316,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -2334,6 +2403,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -2419,6 +2490,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -2506,6 +2579,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [
         "ENRICH-A036",
         "ENRICH-A037"
@@ -2599,6 +2674,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -2686,6 +2763,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -2775,6 +2854,8 @@
       "target_review_status": "METADATA_ONLY_CANDIDATE",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Source states this is not an answer - it may belong as a trap or expected-detail marker rather than a Q&A limb."
@@ -2861,6 +2942,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -2946,6 +3029,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -3031,6 +3116,8 @@
       "target_review_status": "RETARGET_REQUIRED",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "The coverage score that selected this parent no longer selects it; adjudicate the home against live answer bodies before authoring.",
@@ -3117,6 +3204,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."
@@ -3162,9 +3251,9 @@
     {
       "followup_id": "FUP-033",
       "kind": "FOLLOWUP_INSERTION",
-      "status": "AUTHORISED_NOT_STARTED",
+      "status": "PRODUCED",
       "priority": "F-P1",
-      "batch": null,
+      "batch": "F1",
       "source_family_ids": [
         "GAP-0607"
       ],
@@ -3202,6 +3291,13 @@
       "target_review_status": "CONFIRMED",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": {
+        "batch_id": "F1",
+        "manifest": "tools/oral/batch_f1_manifest.json",
+        "card_index": 1,
+        "target": "QB9_C.html#q5"
+      },
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [],
       "source_families": [
@@ -3289,6 +3385,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [
         "ENRICH-A046"
       ],
@@ -3379,6 +3477,8 @@
       "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
       "target_structural_check": "TARGET_RESOLVES",
       "creates_new_card": false,
+      "production_evidence": null,
+      "holds": [],
       "colocated_enrichment_actions": [],
       "caution": [
         "Target was chosen by a coverage score, not by hand adjudication."

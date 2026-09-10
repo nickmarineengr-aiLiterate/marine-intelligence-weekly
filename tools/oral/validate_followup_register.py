@@ -52,6 +52,7 @@ sys.path.insert(0, str(HERE))
 
 import oral_lib  # noqa: E402
 import build_followup_register as B  # noqa: E402
+import followup_closure as FC  # noqa: E402
 from validate_phase2 import RELATIONSHIP_TYPES  # noqa: E402
 
 REGISTER = HERE / "oral_followup_register.json"
@@ -304,6 +305,55 @@ def main():
            sum(int(k) * v for k, v in sizes.items()) == len(owned)
            and sum(sizes.values()) == len(actions),
            str(sizes))
+
+    # ------------------------------------------------------------------ 6
+    # Implementation state. `status` and `batch` are DERIVED from the batch
+    # manifests, so the failure this guards is a register row claiming a
+    # closure the artefacts do not carry -- or, worse, claiming one against
+    # the wrong card. Closing a governed row is authority-bearing evidence,
+    # so it gets the same scrutiny as the authorisation it sits beside.
+    # ------------------------------------------------------------------
+    closure, exceptions = FC.derive(actions, FC.discover_manifests())
+    report("no_closure_exception_stands", not exceptions,
+           "; ".join("%s %s" % (e["kind"], e["followup_id"])
+                     for e in exceptions) or "none")
+
+    drifted = []
+    for a in actions:
+        d = closure.get(a["followup_id"]) or FC._blank(a["followup_id"])
+        if (a.get("status"), a.get("batch")) != (d["status"], d["batch"]):
+            drifted.append(a["followup_id"])
+    report("status_matches_the_batch_manifests", not drifted,
+           "drifted=%s" % (drifted or "none"))
+
+    bad_evidence = []
+    for a in actions:
+        ev = a.get("production_evidence")
+        if (a.get("status") == "PRODUCED") != bool(ev):
+            bad_evidence.append(a["followup_id"])
+            continue
+        if not ev:
+            continue
+        if not (REPO / ev["manifest"]).exists():
+            bad_evidence.append(a["followup_id"])
+            continue
+        if ev["target"] != "%s#%s" % (a["parent_file"], a["parent_anchor"]):
+            bad_evidence.append(a["followup_id"])
+    report("produced_rows_round_trip_to_their_evidence", not bad_evidence,
+           "bad=%s" % (bad_evidence or "none"))
+
+    unevidenced = [a["followup_id"] for a in actions
+                   if bool(a.get("batch")) != (a.get("status") == "PRODUCED")]
+    report("batch_is_named_exactly_when_produced", not unevidenced,
+           "bad=%s" % (unevidenced or "none"))
+
+    # IN_BATCH and WITHDRAWN stay in the vocabulary and stay unwritten: no
+    # committed artefact expresses either, so a row carrying one was authored
+    # by hand.
+    invented = [a["followup_id"] for a in actions
+                if a.get("status") in {"IN_BATCH", "WITHDRAWN"}]
+    report("no_status_without_a_derivation_source", not invented,
+           "bad=%s" % (invented or "none"))
 
     print("\n%d checks, %d FAIL" % (_checks, len(_failed)))
     if _failed:

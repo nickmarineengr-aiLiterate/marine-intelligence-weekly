@@ -143,6 +143,37 @@ def m_no_provenance(obj):
     obj["provenance"]["sources"] = {}
 
 
+# M. a row is closed against work that never shipped
+def m_false_closure(obj):
+    a = _find(obj, "FUP-020")
+    a["status"] = "PRODUCED"
+    a["batch"] = "F1"
+    a["production_evidence"] = {
+        "batch_id": "F1",
+        "manifest": "tools/oral/batch_f1_manifest.json",
+        "card_index": 0,
+        "target": "%s#%s" % (a["parent_file"], a["parent_anchor"]),
+    }
+
+
+# N. a shipped row is quietly re-opened, restoring the over-report
+def m_reopen(obj):
+    a = _find(obj, "FUP-018")
+    a["status"] = "AUTHORISED_NOT_STARTED"
+    a["batch"] = None
+    a["production_evidence"] = None
+
+
+# O. a closed row points its evidence at a card that is not its own
+def m_evidence_wrong_target(obj):
+    _find(obj, "FUP-018")["production_evidence"]["target"] = "QB1_A.html#q9"
+
+
+# P. a status no artefact can express is asserted by hand
+def m_invented_status(obj):
+    _find(obj, "FUP-020")["status"] = "IN_BATCH"
+
+
 MUTATIONS = [
     jmut("A", m_remove, "action_count_matches_reconstructed_truth",
          "an authorised action is silently dropped from the register"),
@@ -168,6 +199,15 @@ MUTATIONS = [
          "a follow-up is switched to create a canonical card"),
     jmut("L", m_no_provenance, "register_provenance_present",
          "the provenance block is stripped from the register"),
+    jmut("M", m_false_closure, "status_matches_the_batch_manifests",
+         "a register row is closed against work no batch manifest implements"),
+    jmut("N", m_reopen, "status_matches_the_batch_manifests",
+         "a shipped action is quietly re-opened, restoring the over-report"),
+    jmut("O", m_evidence_wrong_target,
+         "produced_rows_round_trip_to_their_evidence",
+         "a closed row's evidence points at a card that is not its own"),
+    jmut("P", m_invented_status, "no_status_without_a_derivation_source",
+         "a status no committed artefact can express is asserted by hand"),
 ]
 
 

@@ -89,6 +89,7 @@ HOLDING_MANIFEST = "batch_f1_manifest.json"
 PREDECESSOR_MANIFEST = "batch_e1_enrichment_manifest.json"
 PREDECESSOR_ACTION = "ENRICH-A003"
 
+BATCH_ID = "F1b"
 PLACEHOLDER_CLASS = "UNCLASSIFIED_PENDING_BATCH_SCOPING"
 
 # Actions permitted to create a canonical card. Empty by design and asserted
@@ -319,11 +320,20 @@ def main():
            and bool(entry.get("discharged_by")),
            "discharged=%s by=%s" % (sorted(dis), (entry or {}).get("held_by_manifest")))
 
-    # The register is an AUTHORISATION record, not a status board. Turning it
-    # into one would mean two competing sources of truth for what is done.
-    report("register_status_of_the_action_untouched",
-           (reg_actions.get("FUP-006") or {}).get("status") == "AUTHORISED_NOT_STARTED",
-           "register status=%s" % (reg_actions.get("FUP-006") or {}).get("status"))
+    # The register is an AUTHORISATION record whose status is DERIVED from the
+    # batch manifests, so there is one source of truth for what is done rather
+    # than two. This batch is where FUP-006's implementation is recorded, so
+    # the register must say F1b produced it -- and must still carry F1's hold,
+    # because F1 did hold it and that record is not rewritten.
+    _rec = reg_actions.get("FUP-006") or {}
+    report("register_records_this_batch_as_the_producer",
+           _rec.get("status") == "PRODUCED" and _rec.get("batch") == BATCH_ID,
+           "register status=%s batch=%s" % (_rec.get("status"), _rec.get("batch")))
+    report("register_preserves_the_predecessor_hold",
+           any(h.get("batch_id") == "F1"
+               and h.get("discharged_by_batch_id") == BATCH_ID
+               for h in (_rec.get("holds") or [])),
+           "holds=%s" % (_rec.get("holds") or "-"))
 
     # ---- 3. the card matches its register record, field by field ----------
     tgt_bad, rel_bad, edge_bad, cls_bad, cur_bad, auth_bad, newcard_bad = (

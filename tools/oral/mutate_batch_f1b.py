@@ -144,14 +144,28 @@ def edit_manifest(mutate) -> None:
     edit_json(MANIFEST, mutate)
 
 
-def edit_register(followup_id: str, status: str) -> None:
+def edit_register(followup_id: str, status: str, batch=None) -> None:
     data = json.loads(read_text(REGISTER))
     for action in data.get("actions", []):
         if action.get("followup_id") == followup_id:
             action["status"] = status
+            if batch is not None:
+                action["batch"] = batch or None
             write_text(REGISTER, json.dumps(data, indent=1) + "\n")
             return
     raise AssertionError("no such action in the register: %s" % followup_id)
+
+
+def drop_register_hold(followup_id: str) -> None:
+    """Erase the hold record a batch left on a register row."""
+    data = json.loads(read_text(REGISTER))
+    for action in data.get("actions", []):
+        if action.get("followup_id") == followup_id:
+            action["holds"] = []
+            write_text(REGISTER, json.dumps(data, indent=1) + "\n")
+            return
+    raise AssertionError("no such action in the register: %s" % followup_id)
+
 
 
 def mark_card(rel: str, anchor: str) -> None:
@@ -368,13 +382,18 @@ def build_mutations():
          lambda: edit_manifest(lambda d: d.pop("discharges_hold")),
          "f1b", "f1b_records_the_discharge"),
 
-        # The register is the AUTHORISATION record, not a status board. Editing
-        # it to say the action was produced creates a second, competing source
-        # of truth for what is done.
-        ("S", "edit the register to mark the action produced",
+        # The register's status is DERIVED from the batch manifests, and this
+        # batch is where FUP-006's implementation is recorded. Re-opening the
+        # row restores exactly the over-report the derivation exists to close.
+        ("S", "re-open the row this batch produced",
          [REGISTER],
-         lambda: edit_register("FUP-006", "PRODUCED"),
-         "f1b", "register_status_of_the_action_untouched"),
+         lambda: edit_register("FUP-006", "AUTHORISED_NOT_STARTED", batch=""),
+         "f1b", "register_records_this_batch_as_the_producer"),
+
+        ("S2", "erase the predecessor hold from the register",
+         [REGISTER],
+         lambda: drop_register_hold("FUP-006"),
+         "f1b", "register_preserves_the_predecessor_hold"),
 
         # ---- content integrity ---------------------------------------------
         ("T", "remove the examiner follow-up edge from the live card",

@@ -56,6 +56,7 @@ REGISTER = HERE / "oral_followup_register.json"
 
 # The batch as AUTHORISED, and the batch as IMPLEMENTED. They differ by one
 # held action and the difference is asserted, never assumed.
+BATCH_ID = "F1"
 AUTHORISED_FUPS = {"FUP-006", "FUP-018", "FUP-033"}
 IMPLEMENTED_FUPS = {"FUP-018", "FUP-033"}
 HELD_FUPS = AUTHORISED_FUPS - IMPLEMENTED_FUPS
@@ -275,15 +276,26 @@ def main():
     report("held_action_blocker_is_actionable", not bad_hold,
            "%s" % (bad_hold or "-"))
 
-    # The register must NOT have been edited to disguise the hold: the held
-    # action stays AUTHORISED_NOT_STARTED there, and the batch carries the
-    # status. Two competing status sources is the failure being prevented.
-    reg_status = [(h.get("followup_id"),
-                   (reg_actions.get(h.get("followup_id")) or {}).get("status"))
-                  for h in held]
-    report("register_status_of_held_action_untouched",
-           all(s == "AUTHORISED_NOT_STARTED" for _, s in reg_status),
-           "%s" % (reg_status or "-"))
+    # The register must not credit THIS batch with an action it held. The
+    # register's status is derived from the batch manifests, so there is one
+    # source of truth and not two -- but the failure this has always guarded
+    # is unchanged: a register that says F1 produced FUP-006 makes the hold
+    # disappear from the only place a future session looks for outstanding
+    # work. F1b later produced it, and the register says so; F1 did not, and
+    # the register must never say otherwise.
+    bad_credit, missing_hold = [], []
+    for h in held:
+        fid = h.get("followup_id")
+        rec = reg_actions.get(fid) or {}
+        if rec.get("status") == "PRODUCED" and rec.get("batch") == BATCH_ID:
+            bad_credit.append("%s credited to %s" % (fid, BATCH_ID))
+        if not any(x.get("batch_id") == BATCH_ID
+                   for x in (rec.get("holds") or [])):
+            missing_hold.append(fid)
+    report("register_does_not_credit_this_batch_with_a_held_action",
+           not bad_credit, "%s" % (bad_credit or "-"))
+    report("register_carries_this_batch_hold", not missing_hold,
+           "%s" % (missing_hold or "-"))
 
     report("held_action_is_not_silently_implemented",
            not (set(declared) & HELD_FUPS),
