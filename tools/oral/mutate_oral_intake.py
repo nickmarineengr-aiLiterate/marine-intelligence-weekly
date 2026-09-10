@@ -8,6 +8,18 @@ The real repository is never mutated. The tree is copied once into a scratch
 directory and ORAL_REPO_ROOT points the validator at the copy, so a killed run
 cannot leave mutated bytes on disk.
 
+The staged copy carries a REPOSITORY CONTEXT as well as content, because three
+of the validator's controls ask about repository configuration rather than about
+records: P1 asks `git check-ignore`, P2 asks `git ls-files`, and P3 reads
+`.vercelignore` at the root. Staging content alone left all three with nothing
+to read, and the harness died on its own precondition before injecting a single
+mutation. `stage_git_context` reproduces the minimum evidence those three
+questions need -- the two ignore files, an initialised repository, and an index
+seeded from the REAL repository's tracked set -- so the controls are answered
+truthfully rather than skipped. Nothing is asserted to pass: `assert_git_context`
+refuses to continue if the staged index is empty or no carrier was staged, which
+are the two ways P1/P2 could go quietly vacuous.
+
   python tools/oral/mutate_oral_intake.py
 """
 from __future__ import annotations
@@ -186,8 +198,14 @@ SPECS = [
      {"A9_new_card_claims_carry_negative_search"}),
     ("MUT-10_delete_one_fresh_occurrence", m_delete_fresh_occurrence,
      {"A2_every_intake_occurrence_adjudicated"}),
+    # A10 was SUPERSEDED, not weakened, in 4b16195: the old form asserted every
+    # row was PANEL_LEVEL_ONLY, which would have forced the intake to discard the
+    # per-question attributions S003 and S004 brought. The new form checks
+    # attribution against the evidence the submission declared, and it is what
+    # catches an invented individual attribution on panel-level evidence. Only
+    # this expectation was stale; mutate_batch_g1 and g2 already name the new gate.
     ("MUT-11_invent_surveyor_attribution", m_invent_surveyor_attribution,
-     {"A10_intake_attribution_is_panel_level"}),
+     {"A10_intake_attribution_matches_evidence"}),
     ("MUT-12_adjudication_without_preserved_occurrence", m_intake_raw_wording_altered,
      {"A2_every_intake_occurrence_adjudicated", "A11_intake_raw_wording_present"}),
     ("MUT-13_intake_target_nonexistent_card", m_intake_target_nonexistent,
@@ -197,6 +215,59 @@ SPECS = [
     ("MUT-15_overwrite_prior_july_workbook", m_overwrite_july_workbook,
      {"Z2_prior_july_v26_workbooks_preserved"}),
 ]
+
+
+# ------------------------------------------------------- repository context
+STAGED = ("meoclass1", "tools/oral", "docs/MIW-master-Question-bank")
+ROOT_FILES = (".gitignore", ".vercelignore")
+
+
+def _git(args, cwd, **kw):
+    return subprocess.run(["git", *args], cwd=str(cwd), capture_output=True,
+                          text=True, encoding="utf-8", errors="replace", **kw)
+
+
+def stage_git_context(base):
+    """Give the staged copy the repository evidence P1, P2 and P3 read.
+
+    The index is seeded from the real repository's own `ls-files -s` output
+    rather than by `git add`, for two reasons. It is the truthful answer -- the
+    staged tracked set is exactly the real tracked set -- and it costs a text
+    pipe instead of hashing 250 MB into a scratch object store fifteen times.
+    Index entries may name blobs that are not present; `ls-files` reads the
+    index, not the objects.
+    """
+    for name in ROOT_FILES:
+        src = REPO / name
+        if src.is_file():
+            shutil.copy2(src, base / name)
+
+    _git(["init", "-q"], base)
+
+    # BYTES, deliberately. Piping the listing as text runs it through Python's
+    # newline translation, every path arrives at git wearing a trailing CR, and
+    # update-index answers "Ignoring path ..." on every line while still exiting
+    # 0 -- a silently empty index. assert_git_context is what caught that.
+    listing = subprocess.run(["git", "ls-files", "-s", "--", *STAGED, *ROOT_FILES],
+                             cwd=str(REPO), capture_output=True)
+    if listing.returncode == 0 and listing.stdout.strip():
+        subprocess.run(["git", "update-index", "--index-info"],
+                       cwd=str(base), capture_output=True, input=listing.stdout)
+
+
+def assert_git_context(base):
+    """Fail loudly rather than let P1/P2 pass for the wrong reason."""
+    problems = []
+    if _git(["rev-parse", "--git-dir"], base).returncode != 0:
+        problems.append("staged copy is not a git repository")
+    if not _git(["ls-files"], base).stdout.strip():
+        problems.append("staged index is empty, so P2 would pass vacuously")
+    carrier_dir = base / "docs/MIW-master-Question-bank/New questions from August orals"
+    if not (carrier_dir.is_dir() and any(carrier_dir.glob("*.txt"))):
+        problems.append("no carrier .txt staged, so P1 would pass vacuously")
+    if not (base / ".vercelignore").is_file():
+        problems.append(".vercelignore not staged, so P3 cannot be answered")
+    return problems
 
 
 def run_validator(root):
@@ -212,11 +283,19 @@ def main():
     base = scratch / "base"
     try:
         print(f"staging a copy of the tree in {scratch} ...")
-        for rel in ("meoclass1", "tools/oral", "docs/MIW-master-Question-bank"):
+        for rel in STAGED:
             s = REPO / rel
             d = base / rel
             d.parent.mkdir(parents=True, exist_ok=True)
             shutil.copytree(s, d, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+
+        stage_git_context(base)
+        problems = assert_git_context(base)
+        if problems:
+            for pr in problems:
+                print(f"STAGING FAILED: {pr}")
+            return 1
+        print("staged repository context: ignore files, git repo, seeded index")
 
         rc, failed = run_validator(base)
         if rc != 0:

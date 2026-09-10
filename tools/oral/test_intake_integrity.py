@@ -300,6 +300,39 @@ def t_live_carriers():
               "a carrier changed during reconciliation")
 
 
+def t_live_identity_alignment():
+    """The ledger's ids must be the PRODUCTION ids, not carrier-local ones.
+
+    An id that does not resolve is a visible defect. An id that resolves to a
+    DIFFERENT question is not, and that is what a per-carrier restart produces:
+    the second carrier's ledger reported AUG-0031/AUG-0043 for its duplicate
+    pair while those ids belong to two unrelated 24-August asks. The review
+    packet published that pair, which is how a reporting defect becomes a wrong
+    claim about evidence.
+    """
+    print()
+    print("I   ledger identities are the production identities")
+    import json
+    store = {json.loads(l)["occurrence_id"]: json.loads(l)["raw_question_text"]
+             for l in I.RECORDS.read_text(encoding="utf-8").splitlines() if l.strip()}
+    led = R.reconcile_registered()
+
+    unknown, mismatched, checked = [], [], 0
+    for car in led["carriers"]:
+        for g in car.get("duplicateGroups", []):
+            for oid in g["occurrenceIds"]:
+                checked += 1
+                if oid not in store:
+                    unknown.append(oid)
+                elif R.duplicate_key(store[oid]) != g["duplicateKey"]:
+                    mismatched.append((oid, store[oid][:40]))
+    check("I-LEDGER-IDS-EXIST", not unknown, f"absent from the store: {unknown}")
+    check("I-LEDGER-IDS-ARE-THE-SAME-QUESTION", not mismatched,
+          f"id resolves to a different ask: {mismatched}")
+    check("I-IDENTITY-CHECK-NOT-VACUOUS", checked > 0,
+          "no duplicate group was available to check identities against")
+
+
 def t_live_window_consistency():
     print("\nL   the registry's own window fields agree with its carriers")
     import json
@@ -320,7 +353,8 @@ def t_live_window_consistency():
 def main() -> int:
     for t in (t_ledger_shape, t_ledger_catches_loss, t_zero_yield,
               t_unnumbered_still_parses, t_duplicates, t_write_gate,
-              t_live_carriers, t_live_window_consistency):
+              t_live_carriers, t_live_identity_alignment,
+              t_live_window_consistency):
         t()
     print(f"\n{PASS} PASS / {FAIL} FAIL")
     for f in FAILURES:

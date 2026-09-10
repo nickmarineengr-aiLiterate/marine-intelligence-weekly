@@ -80,11 +80,24 @@ def parse_text(text: str, source_name: str = "synthetic.txt"):
     return I.parse_source(text.splitlines(), source_name=source_name)
 
 
-def reconcile_text(text: str, source_name: str = "synthetic.txt") -> dict:
-    """The ledger for one carrier: every line disposed, every repeat linked."""
+def reconcile_text(text: str, source_name: str = "synthetic.txt", *,
+                   submission_start: int = 1, seq_start: int = 1) -> dict:
+    """The ledger for one carrier: every line disposed, every repeat linked.
+
+    `submission_start` and `seq_start` are where THIS carrier's identities begin,
+    exactly as `ingest_august_intake.parse_source` takes them. They are NOT
+    cosmetic. Identities are allocated across the whole registry walk, so a
+    carrier read on its own restarts at AUG2026-S001 / AUG-0001 and every id it
+    reports then collides with a real production id belonging to a DIFFERENT
+    question -- an id that resolves, and resolves wrongly, which is worse than
+    one that does not resolve at all. `reconcile_registered` and the ingest's
+    gate both accumulate the offsets the way `ingest_carriers` does.
+    """
     lines = text.splitlines()
     blocks = I.split_blocks(lines)
-    subs, skipped = I.parse_source(lines, source_name=source_name)
+    subs, skipped = I.parse_source(lines, source_name=source_name,
+                                   submission_start=submission_start,
+                                   seq_start=seq_start)
 
     # The i-th submission-yielding block produced the i-th submission. Both walks
     # use `split_blocks` and `block_is_submission`, so the pairing is exact
@@ -239,14 +252,18 @@ def public(led: dict) -> dict:
 def reconcile_registered() -> dict:
     """Every registered carrier, read-only, in registry order."""
     out = []
+    sub_n, seq = 1, 1
     for c in I.load_carriers():
         p = I.carrier_path(c)
         if not p.exists():
             out.append({"sourceFile": c["source_file"], "clean": False,
                         "error": "registered carrier absent from disk"})
             continue
-        out.append(public(reconcile_text(p.read_text(encoding="utf-8"),
-                                        c["source_file"])))
+        led = reconcile_text(p.read_text(encoding="utf-8"), c["source_file"],
+                             submission_start=sub_n, seq_start=seq)
+        sub_n += led["submissions"]
+        seq += led["occurrences"]
+        out.append(public(led))
     return {
         "record_class": "CURRENT_INTAKE_RECONCILIATION_LEDGER",
         "generated_by": "tools/oral/intake_reconcile.py",

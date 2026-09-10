@@ -777,9 +777,13 @@ def main():
     # submission that reached no field, and a recognised submission that yielded
     # zero occurrences while its body carried text.
     import intake_reconcile as _R
+    _sub_n, _seq = 1, 1
     for c in regs:
         led = _R.reconcile_text(carrier_path(c).read_text(encoding="utf-8"),
-                                c["source_file"])
+                                c["source_file"],
+                                submission_start=_sub_n, seq_start=_seq)
+        _sub_n += led["submissions"]
+        _seq += led["occurrences"]
         ok, why = _R.gate(led)
         if not ok:
             print(f"FAIL: {c['source_file']}: {why}")
