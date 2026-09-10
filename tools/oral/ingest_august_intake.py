@@ -512,9 +512,44 @@ def parse_submission(lines, submission_id: str, seq_start: int,
     }
 
 
-def parse_file(path: Path, *, submission_start: int = 1, seq_start: int = 1,
-               received_date: str = "2026-08-24", attempt_date: str = "2026-08-24"):
-    """One file may carry several candidate reports separated by rule lines.
+def split_blocks(lines) -> list[list[str]]:
+    """The candidate reports in one carrier, separated by its rule lines.
+
+    Factored out so that the reconciliation ledger walks the SAME blocks the
+    ingest does. A second private copy of this split would drift, and a ledger
+    that describes a different partition from the one that produced the records
+    proves nothing about the records.
+    """
+    blocks, cur = [], []
+    for ln in lines:
+        if RULE_RE.match(ln.strip()):
+            blocks.append(cur)
+            cur = []
+        else:
+            cur.append(ln)
+    blocks.append(cur)
+    return blocks
+
+
+def block_is_submission(blk) -> tuple[bool, bool]:
+    """(is a submission, is numbered) for one block.
+
+    A candidate who numbers nothing still declares the panel. Requiring
+    numbering to recognise a submission silently discarded an entire sitting
+    report: the block just failed the test and `continue` said nothing. Either
+    signal now identifies a submission. Shared with the ledger for the same
+    reason `split_blocks` is.
+    """
+    numbered = any(Q_RE.match(l.strip()) for l in blk)
+    declared = any(ROLE_RE.match(l.strip()) and not Q_RE.match(l.strip())
+                   for l in blk)
+    return (numbered or declared), numbered
+
+
+def parse_source(lines, *, submission_start: int = 1, seq_start: int = 1,
+                 received_date: str = "2026-08-24", attempt_date: str = "2026-08-24",
+                 source_name: str = ""):
+    """One carrier's lines may carry several candidate reports.
 
     `submission_start` and `seq_start` are where THIS carrier's identities
     begin. They are passed in rather than assumed, because a second carrier
@@ -522,25 +557,11 @@ def parse_file(path: Path, *, submission_start: int = 1, seq_start: int = 1,
     collides with the committed corpus and, on a writer that overwrote,
     destroyed it.
     """
-    blocks, cur = [], []
-    for ln in path.read_text(encoding="utf-8").splitlines():
-        if RULE_RE.match(ln.strip()):
-            blocks.append(cur)
-            cur = []
-        else:
-            cur.append(ln)
-    blocks.append(cur)
-
+    blocks = split_blocks(lines)
     subs, seq, skipped = [], seq_start, []
     for idx, blk in enumerate(blocks, 1):
-        numbered = any(Q_RE.match(l.strip()) for l in blk)
-        # A candidate who numbers nothing still declares the panel. Requiring
-        # numbering to recognise a submission silently discarded an entire
-        # sitting report: the block just failed the test and `continue` said
-        # nothing. Either signal now identifies a submission.
-        declared = any(ROLE_RE.match(l.strip()) and not Q_RE.match(l.strip())
-                       for l in blk)
-        if not numbered and not declared:
+        is_sub, numbered = block_is_submission(blk)
+        if not is_sub:
             if any(l.strip() for l in blk):
                 skipped.append({
                     "block_index": idx,
@@ -551,11 +572,17 @@ def parse_file(path: Path, *, submission_start: int = 1, seq_start: int = 1,
         s = parse_submission(blk, f"AUG2026-S{submission_start + len(subs):03d}", seq,
                              unnumbered=not numbered,
                              received_date=received_date, attempt_date=attempt_date)
-        s["source_file"] = path.name
+        s["source_file"] = source_name
         s["line_style"] = "NUMBERED" if numbered else "UNNUMBERED"
         seq += len(s["occurrences"])
         subs.append(s)
     return subs, skipped
+
+
+def parse_file(path: Path, **kw):
+    """`parse_source` over a carrier on disk."""
+    kw.setdefault("source_name", path.name)
+    return parse_source(path.read_text(encoding="utf-8").splitlines(), **kw)
 
 
 def load_carriers() -> list:
@@ -742,6 +769,23 @@ def main():
         print(f"OK: {len(occ)} August occurrences across {len(regs)} carrier(s) "
               f"byte-match the source")
         return 0
+
+    # THE RECONCILIATION GATE, BEFORE THE WRITE. `--check` already refused a
+    # carrier with an unparsed block, but it runs AFTER the records exist: the
+    # first run is where a loss happens, and it wrote regardless. The gate also
+    # catches the two shapes `--check` cannot see -- a line inside an accepted
+    # submission that reached no field, and a recognised submission that yielded
+    # zero occurrences while its body carried text.
+    import intake_reconcile as _R
+    for c in regs:
+        led = _R.reconcile_text(carrier_path(c).read_text(encoding="utf-8"),
+                                c["source_file"])
+        ok, why = _R.gate(led)
+        if not ok:
+            print(f"FAIL: {c['source_file']}: {why}")
+            print("Nothing was written. Read the carrier, add a RED control for "
+                  "the shape it shows, then widen the parser -- see SKILL.md 14a.")
+            return 1
 
     RECORDS.write_text(
         "\n".join(json.dumps(o, ensure_ascii=False) for o in occ) + "\n",

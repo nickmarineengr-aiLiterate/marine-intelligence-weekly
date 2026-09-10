@@ -941,6 +941,75 @@ Two rules that generalise:
   every non-rule source line and requires each to be an occurrence, a preserved comment, or a
   recognised metadata match.
 
+### 14c. The intake contract, in code — `tools/oral/intake_reconcile.py`
+
+Rules 1–5 above say what a snapshot is. This says what the pipeline now **refuses**.
+
+**Raw input is immutable.** The live inbox is a mutable human file and is never a carrier.
+A snapshot carrier, once registered, is hash-pinned and may not change: `verify_carriers()`
+re-hashes every one before anything is read, and `S5-SNAPSHOT-IMMUTABLE` proves it.
+
+**A snapshot record carries its full identity.** `AUGUST2026_INTAKE_CARRIERS.json` holds, per
+snapshot: `source_file`, `sha256`, `bytes`, `carrier_date`, `received_date`, `attempt_date`,
+`source_type`, `status`, and for a rolling day also `append_characterisation`,
+`predecessor_snapshot`, `predecessor_sha256`, `live_inbox_sha256_at_capture`,
+`live_inbox_bytes_at_capture` and `reconstruction`. The last six are what make "append-only"
+a checked claim rather than an assertion.
+
+**Every non-empty line reaches exactly one accountable disposition.** `reconcile_text()` walks
+each carrier and assigns one of:
+
+| Disposition | Meaning |
+|---|---|
+| `OCCURRENCE` | became an examinable occurrence record |
+| `CONTEXT_COMMENT` | preserved verbatim in `context_comments` |
+| `EXAMINER_DECLARATION` | named a panel member |
+| `METADATA_CONSUMED` | consumed into attempt / result / attribution state |
+| `UNPARSED_BLOCK` | in a block that yielded no submission |
+| `UNACCOUNTED` | reached nothing — **always a defect** |
+
+A line consumed by a metadata branch is accounted for by the **value it produced**, never by
+surviving as text. Two shapes cost this ledger its first two false alarms and both are now
+explicit: a bare `<Name> :` marker is accounted for by the `attribution_marker` it set on the
+occurrences below it, and a pasted chat line is compared **after** `redact_third_parties()`,
+because the committed comment is deliberately not byte-equal to the source.
+
+**The gate runs before the write, not after.** `--check` already refused an unparsed block, but
+it runs once the records exist — and the first run is where a loss happens. `ingest_august_intake`
+now reconciles every carrier and **writes nothing** if any carrier is unclean. It also catches the
+two shapes `--check` cannot see:
+
+* a line inside an *accepted* submission that reached no field;
+* a **recognised** submission — it declared a panel, so it is not an unparsed block — that
+  yielded **zero occurrences** while its body carried text. That is the
+  `VISIBLE_UNPARSED_INPUT`, never `ZERO QUESTIONS` rule. `unconsumedBodyLines` separates a
+  genuine metadata-only report from a parser that read nothing while the candidate wrote
+  something.
+
+**A duplicate is counted and linked, never discarded.** Candidate repetition is
+examiner-frequency evidence. `duplicateGroups` records the group key, the first occurrence id it
+links to, every member id, the submissions it spans and every raw form observed. Matching folds
+case, punctuation and the messaging app's invisible characters **only** — no stemming, no synonym
+folding, no fuzzy distance — so two differently worded asks about one subject stay two asks. A
+repeat is not a loss and never refuses an ingest.
+
+**Commands.**
+
+```bash
+python tools/oral/intake_reconcile.py            # the ledger, every registered carrier
+python tools/oral/intake_reconcile.py --json      # full ledger
+python tools/oral/test_intake_integrity.py        # the controls
+```
+
+`test_intake_integrity.py` distinguishes a `FAIL` (tooling defect) from a `FIND` (a defect in a
+governed provenance record that the controls were built to detect). Both exit non-zero. A `FIND`
+is the Founder's to correct; the tooling does not edit production data.
+
+**Two drift fields are checked, not trusted.** `intake_window.snapshots_taken` is a hand-written
+count beside a list that grows, and `intake_window.as_at` is a hand-written date beside carriers
+that keep arriving. `L-SNAPSHOT-COUNT-AGREES` and `L-AS-AT-NOT-BEHIND-CARRIERS` compare both
+against the carrier list.
+
 ### 14b. A rejection reason must quote the card it rejects
 
 Adjudication rejects candidate cards by the dozen, and the failure mode is specific: **the card
