@@ -255,6 +255,45 @@ with tempfile.TemporaryDirectory() as tmp:
           "")
 
 
+# =========================================================================
+print("")
+print("--- 9. missing evidence blocks; it never passes by absence ---")
+# =========================================================================
+# Both controls guard one defect shape: a guard written as "if the evidence is
+# present AND it disagrees, block" passes silently when the evidence is
+# absent. Absence is a missing required input, not agreement.
+
+_no_identity = run()
+_no_identity.pop("candidate")
+check("a run record naming no qualified tree cannot be bound",
+      P.assess(_no_identity, CANDIDATE)["verdict"] == P.BLOCKED,
+      "the shape of records written before the runner carried identity")
+
+check("an empty candidate block is absence, not a match",
+      P.assess(run(candidate={}), CANDIDATE)["verdict"] == P.BLOCKED, "")
+
+check("a qualified commit that is not the commit on disk blocks",
+      P.assess(run(candidate={"tree": CANDIDATE["tree"], "commit": "9" * 40}),
+               CANDIDATE)["verdict"] == P.BLOCKED, "")
+
+_six = FULL_SUITE[:6]
+_partial = run([gate(g) for g in _six])
+_real = P.full_suite_gate_ids
+try:
+    P.full_suite_gate_ids = lambda: None
+    check("an unreadable gate registry blocks instead of skipping the check",
+          P.assess(_partial, CANDIDATE)["verdict"] == P.BLOCKED,
+          "6 gates cannot approve while the required suite is unknown")
+    check("the packet reports no full-suite size it could not read",
+          P.assess(_partial, CANDIDATE)["gates"]["full_suite"] is None, "")
+finally:
+    P.full_suite_gate_ids = _real
+
+check("with the registry readable, the same partial run still blocks",
+      P.assess(_partial, CANDIDATE)["verdict"] == P.BLOCKED,
+      "%d of %d gates" % (len(_six), len(FULL_SUITE)))
+
+
 # ===========================================================================
 print("\n%d checks, %d FAIL" % (CHECKS[0], len(FAILURES)))
 for f in FAILURES:

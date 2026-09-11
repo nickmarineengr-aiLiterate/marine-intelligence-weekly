@@ -183,6 +183,15 @@ def assess(run, candidate, base_ref=None, run_path=None):
     # is a useful check and not a qualification, and the packet must not let
     # the difference disappear into "all gates green".
     full = full_suite_gate_ids()
+    # The comparison is against the authoritative registry, never a remembered
+    # number -- and when the registry cannot be read there is no authoritative
+    # set to compare against, so the completeness claim is unprovable. An
+    # unprovable claim must block: skipping the comparison would let a
+    # six-gate run approve exactly when the check is most needed.
+    if full is None:
+        blockers.append(
+            "the authoritative gate registry could not be read, so this run "
+            "cannot be proven to have covered the whole qualification suite")
     missing_from_suite = ([g for g in full if g not in set(planned)]
                           if full else [])
     if missing_from_suite:
@@ -206,9 +215,22 @@ def assess(run, candidate, base_ref=None, run_path=None):
     # against and the tree on disk has moved, the evidence is about something
     # else -- which is the exact failure a packet is supposed to prevent.
     run_candidate = run.get("candidate") or {}
-    if run_candidate.get("tree") and run_candidate["tree"] != candidate["tree"]:
+    # A run record that does not say what it qualified cannot be bound to
+    # anything. Records written before the runner carried candidate identity
+    # are exactly this shape, and they are also the historical evidence a
+    # qualification is most likely to be replayed against -- so an absent
+    # identity is a missing required input, not a comparison that passes.
+    if not run_candidate.get("tree"):
+        blockers.append(
+            "the run record does not name the tree it qualified, so the "
+            "candidate described here cannot be bound to the evidence")
+    elif run_candidate["tree"] != candidate["tree"]:
         blockers.append("the qualified tree %s is not the tree on disk %s"
                         % (run_candidate["tree"][:12], candidate["tree"][:12]))
+    if run_candidate.get("commit") and candidate.get("commit")             and run_candidate["commit"] != candidate["commit"]:
+        blockers.append("the qualified commit %s is not the commit on disk %s"
+                        % (run_candidate["commit"][:12],
+                           (candidate["commit"] or "")[:12]))
 
     verdict = BLOCKED if blockers else APPROVABLE
 
