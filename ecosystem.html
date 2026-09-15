@@ -3,25 +3,25 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Maritime Technology Ecosystem Map 2026 — 80+ Companies, 21 Segments | Marine Intelligence Weekly</title>
-<meta name="description" content="A living, filterable map of the global maritime technology landscape — 80+ companies across 21 segments covering voyage optimisation, predictive maintenance, decarbonisation, AI navigation, emissions compliance and more. Updated by Marine Intelligence Weekly."/>
+<title>Maritime Technology Ecosystem Map 2026 — 80+ Companies, 22 Segments | Marine Intelligence Weekly</title>
+<meta name="description" content="A living, filterable map of the global maritime technology landscape — 80+ companies across 22 segments covering voyage optimisation, predictive maintenance, decarbonisation, AI navigation, emissions compliance and more. Updated by Marine Intelligence Weekly."/>
 
 <!-- ═══ SEO: CANONICAL & ROBOTS ═══ -->
 <link rel="canonical" href="https://marineintelligenceweekly.com/ecosystem.html"/>
 <meta name="robots" content="index, follow"/>
 
 <!-- ═══ SEO: KEYWORDS ═══ -->
-<meta name="keywords" content="maritime technology companies, maritime AI, shipping technology map, maritime ecosystem, vessel performance monitoring, predictive maintenance maritime, voyage optimisation software, maritime decarbonisation, CII compliance, EU ETS shipping, emissions accounting maritime, maritime ERP, fleet management software, autonomous shipping, MASS, maritime digital transformation, maritime innovation, marine engineer technology, MIW, Marine Intelligence Weekly"/>
+<meta name="keywords" content="maritime technology companies, maritime AI, shipping technology map, maritime ecosystem, vessel performance monitoring, predictive maintenance maritime, voyage optimisation software, maritime decarbonisation, CII compliance, EU ETS shipping, emissions accounting maritime, maritime ERP, fleet management software, autonomous shipping, MASS, uncrewed surface vessels, USV, autonomous surface vessel, maritime digital transformation, maritime innovation, marine engineer technology, MIW, Marine Intelligence Weekly"/>
 
 <!-- ═══ SEO: AUTHORSHIP & DATES ═══ -->
 <meta name="author" content="Nixon Antony, Marine Intelligence Weekly"/>
 <meta name="publisher" content="Marine Intelligence Weekly"/>
-<meta name="last-modified" content="2026-06-10"/>
+<meta name="last-modified" content="2026-09-15"/>
 
 <!-- ═══ SEO: OPEN GRAPH (LinkedIn, WhatsApp, Facebook) ═══ -->
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Maritime Technology Ecosystem Map — Marine Intelligence Weekly"/>
-<meta property="og:description" content="A living map of 80+ maritime technology companies across 21 segments — voyage optimisation, predictive maintenance, AI navigation, emissions compliance, fleet ERP and more. Filterable by lane and India companies."/>
+<meta property="og:description" content="A living map of 80+ maritime technology companies across 22 segments — voyage optimisation, predictive maintenance, AI navigation, uncrewed surface vessels, emissions compliance, fleet ERP and more. Filterable by lane and India companies."/>
 <meta property="og:url" content="https://marineintelligenceweekly.com/ecosystem.html"/>
 <meta property="og:site_name" content="Marine Intelligence Weekly"/>
 <meta property="og:image" content="https://marineintelligenceweekly.com/assets/miw-og-ecosystem.jpg"/>
@@ -32,7 +32,7 @@
 <!-- ═══ SEO: TWITTER / X CARD ═══ -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Maritime Technology Ecosystem Map — Marine Intelligence Weekly"/>
-<meta name="twitter:description" content="80+ companies. 21 segments. 3 swim lanes. A living reference map of the global maritime technology landscape — updated post-Posidonia 2026."/>
+<meta name="twitter:description" content="80+ companies. 22 segments. 3 swim lanes. A living reference map of the global maritime technology landscape — updated post-Posidonia 2026."/>
 <meta name="twitter:image" content="https://marineintelligenceweekly.com/assets/miw-og-ecosystem.jpg"/>
 <meta name="twitter:site" content="@MarineIntelWkly"/>
 
@@ -42,9 +42,9 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Maritime Technology Ecosystem Map",
-  "description": "A living, filterable reference map of 80+ global maritime technology companies across 21 segments — from voyage optimisation and predictive maintenance to AI navigation, emissions compliance, and fleet ERP. Updated post-Posidonia 2026 by Marine Intelligence Weekly.",
+  "description": "A living, filterable reference map of 80+ global maritime technology companies across 22 segments — from voyage optimisation and predictive maintenance to AI navigation, uncrewed surface vessels, emissions compliance, and fleet ERP. Updated post-Posidonia 2026 by Marine Intelligence Weekly.",
   "url": "https://marineintelligenceweekly.com/ecosystem.html",
-  "dateModified": "2026-06-10",
+  "dateModified": "2026-09-15",
   "publisher": {
     "@type": "Organization",
     "name": "Marine Intelligence Weekly",
@@ -82,7 +82,7 @@
     "name": "Maritime Technology",
     "description": "Digital technologies, AI platforms, OEM systems, and compliance tools serving the global shipping industry"
   },
-  "keywords": "maritime technology, shipping AI, vessel performance, decarbonisation, CII compliance, EU ETS, maritime ERP, fleet management, voyage optimisation, predictive maintenance, autonomous shipping, MASS, Marine Intelligence Weekly"
+  "keywords": "maritime technology, shipping AI, vessel performance, decarbonisation, CII compliance, EU ETS, maritime ERP, fleet management, voyage optimisation, predictive maintenance, autonomous shipping, MASS, uncrewed surface vessels, USV, Marine Intelligence Weekly"
 }
 </script>
 <!-- Google tag (gtag.js) -->
@@ -388,6 +388,7 @@ body {
    SWIM LANE
 ────────────────────────────────────── */
 .swim-lane {
+  position: relative;
   margin-bottom: 2rem;
   border-radius: 14px;
   overflow: hidden;
@@ -638,6 +639,7 @@ body.filter-india-mode .india-spotlight {
 /* ──────────────────────────────────────
    FOOTER
 ────────────────────────────────────── */
+.page-footer {
   background: var(--navy);
   border-top: 2px solid var(--teal);
   padding: 1.8rem 2rem;
@@ -664,13 +666,322 @@ body.filter-india-mode .india-spotlight {
   margin-top: 2rem;
 }
 
+/* ──────────────────────────────────────
+   LANE RAIL — trunk + branch taps (desktop only)
+────────────────────────────────────── */
+.rail-tap { display: none; }
+
+@media (min-width: 900px) {
+  .page-body { position: relative; padding-left: 6rem; }
+
+  /* neutral trunk — runs the full column so lanes read as continuous */
+  .page-body::before {
+    content: '';
+    position: absolute;
+    left: 48px;
+    top: 0;
+    bottom: 5.5rem;
+    width: 8px;
+    border-radius: 4px;
+    background: var(--border);
+    opacity: 0.55;
+    transition: background 0.25s, opacity 0.25s;
+    pointer-events: none;
+  }
+
+  .india-spotlight, .swim-lane { overflow: visible; }
+  .india-spotlight::before { border-radius: 16px 16px 0 0; }
+  .lane-header { border-radius: 14px 14px 0 0; }
+  .lane-body   { border-radius: 0 0 14px 14px; }
+  .swim-lane:has(.lane-body.collapsed) .lane-header { border-radius: 14px; }
+
+  /* the lane bar — full height of its block, in the lane's own colour */
+  .swim-lane::before,
+  .india-spotlight::after {
+    content: '';
+    position: absolute;
+    left: -48px;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    border-radius: 4px;
+    opacity: 0.38;
+    transition: opacity 0.25s, box-shadow 0.25s;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .india-spotlight::after                       { background: var(--gold); }
+  .swim-lane[data-lane="commercial"]::before    { background: var(--lane-commercial); }
+  .swim-lane[data-lane="vessel"]::before        { background: var(--lane-vessel); }
+  .swim-lane[data-lane="intel"]::before         { background: var(--lane-intel); }
+
+  /* node + branch stub into the block */
+  .rail-tap {
+    display: block;
+    position: absolute;
+    left: -52px;
+    top: 24px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 4px solid var(--border);
+    z-index: 3;
+    pointer-events: none;
+    transition: box-shadow 0.25s;
+  }
+  .rail-tap::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 2px;
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    opacity: 0.55;
+  }
+
+  /* lane designation — vertical mono label running down the gutter */
+  .rail-tap::after {
+    content: attr(data-rail);
+    position: absolute;
+    left: -30px;
+    top: 0;
+    writing-mode: vertical-rl;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0.55;
+    transition: opacity 0.25s;
+  }
+
+  .india-spotlight .rail-tap                    { border-color: var(--gold); }
+  .swim-lane[data-lane="commercial"] .rail-tap  { border-color: var(--lane-commercial); }
+  .swim-lane[data-lane="vessel"]     .rail-tap  { border-color: var(--lane-vessel); }
+  .swim-lane[data-lane="intel"]      .rail-tap  { border-color: var(--lane-intel); }
+
+  .india-spotlight .rail-tap::before                    { background: var(--gold); }
+  .swim-lane[data-lane="commercial"] .rail-tap::before  { background: var(--lane-commercial); }
+  .swim-lane[data-lane="vessel"]     .rail-tap::before  { background: var(--lane-vessel); }
+  .swim-lane[data-lane="intel"]      .rail-tap::before  { background: var(--lane-intel); }
+
+  .india-spotlight .rail-tap::after                    { color: var(--gold); }
+  .swim-lane[data-lane="commercial"] .rail-tap::after  { color: var(--lane-commercial); }
+  .swim-lane[data-lane="vessel"]     .rail-tap::after  { color: var(--lane-vessel); }
+  .swim-lane[data-lane="intel"]      .rail-tap::after  { color: var(--lane-intel); }
+
+  /* hover preview — lane bar brightens when you hover its header */
+  .swim-lane:hover::before { opacity: 0.7; }
+
+  /* ── ACTIVE FILTER: trunk adopts the selected lane's colour ── */
+  body[data-lit="india"]      .page-body::before { background: var(--gold);            opacity: 0.45; }
+  body[data-lit="commercial"] .page-body::before { background: var(--lane-commercial); opacity: 0.45; }
+  body[data-lit="vessel"]     .page-body::before { background: var(--lane-vessel);     opacity: 0.45; }
+  body[data-lit="intel"]      .page-body::before { background: var(--lane-intel);      opacity: 0.45; }
+
+  /* ── ACTIVE FILTER: the lane bar and node light up ── */
+  body[data-lit="india"]      .india-spotlight::after,
+  body[data-lit="commercial"] .swim-lane[data-lane="commercial"]::before,
+  body[data-lit="vessel"]     .swim-lane[data-lane="vessel"]::before,
+  body[data-lit="intel"]      .swim-lane[data-lane="intel"]::before {
+    opacity: 1;
+  }
+  body[data-lit="india"]      .india-spotlight::after                   { box-shadow: 0 0 16px rgba(201,168,76,0.55); }
+  body[data-lit="commercial"] .swim-lane[data-lane="commercial"]::before { box-shadow: 0 0 16px rgba(59,130,246,0.55); }
+  body[data-lit="vessel"]     .swim-lane[data-lane="vessel"]::before     { box-shadow: 0 0 16px rgba(13,148,136,0.55); }
+  body[data-lit="intel"]      .swim-lane[data-lane="intel"]::before      { box-shadow: 0 0 16px rgba(249,115,22,0.55); }
+
+  body[data-lit="india"]      .india-spotlight .rail-tap::after                   { opacity: 1; }
+  body[data-lit="commercial"] .swim-lane[data-lane="commercial"] .rail-tap::after { opacity: 1; }
+  body[data-lit="vessel"]     .swim-lane[data-lane="vessel"] .rail-tap::after     { opacity: 1; }
+  body[data-lit="intel"]      .swim-lane[data-lane="intel"] .rail-tap::after      { opacity: 1; }
+
+  body[data-lit="india"]      .india-spotlight .rail-tap                    { box-shadow: 0 0 0 4px rgba(201,168,76,0.22); }
+  body[data-lit="commercial"] .swim-lane[data-lane="commercial"] .rail-tap  { box-shadow: 0 0 0 4px rgba(59,130,246,0.22); }
+  body[data-lit="vessel"]     .swim-lane[data-lane="vessel"] .rail-tap      { box-shadow: 0 0 0 4px rgba(13,148,136,0.22); }
+  body[data-lit="intel"]      .swim-lane[data-lane="intel"] .rail-tap       { box-shadow: 0 0 0 4px rgba(249,115,22,0.22); }
+}
+
+/* ── ACTIVE FILTER: the whole lane block lights up (all viewports) ── */
+.swim-lane, .india-spotlight { transition: box-shadow 0.25s, border-color 0.25s; }
+
+body[data-lit="commercial"] .swim-lane[data-lane="commercial"] {
+  border-color: var(--lane-commercial);
+  box-shadow: 0 0 0 2px var(--lane-commercial), 0 10px 34px rgba(59,130,246,0.20);
+}
+body[data-lit="vessel"] .swim-lane[data-lane="vessel"] {
+  border-color: var(--lane-vessel);
+  box-shadow: 0 0 0 2px var(--lane-vessel), 0 10px 34px rgba(13,148,136,0.20);
+}
+body[data-lit="intel"] .swim-lane[data-lane="intel"] {
+  border-color: var(--lane-intel);
+  box-shadow: 0 0 0 2px var(--lane-intel), 0 10px 34px rgba(249,115,22,0.20);
+}
+body[data-lit="commercial"] .swim-lane[data-lane="commercial"] .lane-header { background: rgba(59,130,246,0.18); }
+body[data-lit="vessel"]     .swim-lane[data-lane="vessel"] .lane-header     { background: rgba(13,148,136,0.18); }
+body[data-lit="intel"]      .swim-lane[data-lane="intel"] .lane-header      { background: rgba(249,115,22,0.18); }
+
+@media (prefers-reduced-motion: reduce) {
+  .swim-lane, .india-spotlight, .page-body::before,
+  .swim-lane::before, .india-spotlight::after, .rail-tap { transition: none; }
+}
+
+/* ──────────────────────────────────────
+   DEEP LINKING — anchor targets
+────────────────────────────────────── */
+:root { --sticky-offset: 116px; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.seg-row[id], .pill[id] { scroll-margin-top: var(--sticky-offset); }
+
+/* arriving at a linked company or segment */
+.pill.anchor-hit {
+  border-color: var(--teal) !important;
+  background: var(--teal-dim) !important;
+  box-shadow: 0 0 0 4px var(--teal-glow);
+  animation: anchorPulse 1.6s ease-out 1;
+}
+.seg-row.anchor-hit { background: var(--teal-dim); animation: anchorPulse 1.6s ease-out 1; }
+.seg-row.anchor-hit .seg-label-col { background: transparent; }
+
+@keyframes anchorPulse {
+  0%   { box-shadow: 0 0 0 0 var(--teal-glow); }
+  40%  { box-shadow: 0 0 0 8px var(--teal-glow); }
+  100% { box-shadow: 0 0 0 4px rgba(13,148,136,0.10); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pill.anchor-hit, .seg-row.anchor-hit { animation: none; }
+}
+
+/* ──────────────────────────────────────
+   COPY LINK TO SEGMENT
+────────────────────────────────────── */
+.seg-label-col { position: relative; }
+
+.seg-link {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.45rem;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--slate-light);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.18s, color 0.15s, border-color 0.15s, background 0.15s;
+}
+.seg-row:hover .seg-link,
+.seg-link:focus-visible { opacity: 1; }
+.seg-link:hover { color: var(--teal); border-color: var(--teal); background: var(--teal-dim); }
+.seg-link:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+.seg-link.copied {
+  opacity: 1;
+  width: auto;
+  padding: 0 0.4rem;
+  color: var(--teal);
+  border-color: var(--teal);
+  background: var(--teal-dim);
+  font-size: 0.55rem;
+  letter-spacing: 0.06em;
+}
+
+/* touch devices have no hover — keep it faintly visible */
+@media (hover: none) {
+  .seg-link { opacity: 0.4; }
+}
+
+/* ──────────────────────────────────────
+   BACK TO TOP
+────────────────────────────────────── */
+.to-top {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--teal);
+  background: var(--navy);
+  color: var(--teal-light);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.22s, transform 0.22s, visibility 0.22s, background 0.15s;
+  box-shadow: 0 4px 16px rgba(15,23,42,0.25);
+  z-index: 300;
+}
+.to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.to-top:hover { background: var(--teal); color: #f8fafc; }
+.to-top:focus-visible { outline: 2px solid var(--teal-light); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .to-top { transition: opacity 0.01s, visibility 0.01s; transform: none; }
+  .to-top.show { transform: none; }
+}
+
+/* tablet band — narrower segment label column */
+@media (max-width: 899px) and (min-width: 641px) {
+  .seg-row { grid-template-columns: 130px 1fr; }
+  .seg-label-col { padding: 0.85rem 0.9rem; }
+}
+
 @media (max-width: 640px) {
+  :root { --sticky-offset: 108px; }
   .seg-row { grid-template-columns: 1fr; }
   .seg-label-col { border-right: none; border-bottom: 1px solid var(--border); padding: 0.6rem 1rem; }
-  .hero-stats { flex-wrap: wrap; }
-  .filter-bar { padding: 0.6rem 1rem; }
+  .hero { padding: 2.5rem 1rem 2rem; }
+  .hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); width: 100%; }
+  .hero-stat { padding: 0.6rem 0.5rem; }
+  .hero-stat:nth-child(2n) { border-right: none; }
+  .hero-stat:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,0.08); }
+
+  /* keep the filter bar to one scrollable line instead of wrapping to three */
+  .filter-bar {
+    padding: 0.55rem 1rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .filter-bar::-webkit-scrollbar { display: none; }
+  .filter-group-label { display: none; }
+  .fbtn { flex: 0 0 auto; }
+
+  .lane-header { padding: 0.85rem 1rem; gap: 0.7rem; }
+  .lane-meta { font-size: 0.55rem; }
   .india-chip { max-width: 100%; }
   .page-body { padding: 1.25rem 0.75rem 4rem; }
+  .to-top { right: 1rem; bottom: 1rem; }
+}
+
+/* very narrow phones */
+@media (max-width: 380px) {
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .lane-label { font-size: 0.98rem; }
+  .lane-desc { display: none; }
+  .pill { font-size: 0.74rem; padding: 0.28rem 0.6rem; }
 }
 </style>
 </head>
@@ -694,11 +1005,11 @@ body.filter-india-mode .india-spotlight {
       <span class="hero-stat-l">Swim Lanes</span>
     </div>
     <div class="hero-stat">
-      <span class="hero-stat-n">21</span>
+      <span class="hero-stat-n">22</span>
       <span class="hero-stat-l">Segments</span>
     </div>
     <div class="hero-stat">
-      <span class="hero-stat-n gold">12</span>
+      <span class="hero-stat-n gold">13</span>
       <span class="hero-stat-l">India Co.</span>
     </div>
     <div class="hero-stat">
@@ -719,6 +1030,34 @@ body.filter-india-mode .india-spotlight {
   <button class="fbtn india-fbtn" data-f="india">🇮🇳 India Only</button>
 </div>
 
+<!--
+  ══════════════════════════════════════════════════════════════════
+  ANCHOR SCHEME — read before renaming any segment or company pill
+  ══════════════════════════════════════════════════════════════════
+  Segments : id="seg-<slugified segment label>"
+  Companies: id="co-<slugified pill text>"
+  Slug rule: lowercase; "&" -> "and"; every other non-alphanumeric
+             run -> single hyphen; leading/trailing hyphens stripped.
+
+  A company placed in more than one segment carries its id on the
+  FIRST placement only (Kpler, StormGeo, NAPA, Windward, Shipfix,
+  Orca AI, ShipIn Systems, Intangles, Drishti Marine). Ids must stay
+  unique document-wide.
+
+  The hash resolver in the script block below matches leniently: the
+  id, the id without its co-/seg- prefix, the pill text, and the full
+  company name taken from the pill's title attribute all resolve to
+  the same element. So #sagardefenceengineering, #sagar-defence and
+  #co-sagar-defence all reach the same pill.
+
+  ⚠ RENAMING A PILL OR SEGMENT CHANGES ITS ANCHOR and silently breaks
+  any link already published in a newsletter issue or on LinkedIn.
+  If you rename, keep the old id on the element as well by adding a
+  second empty <span id="old-id"></span> beside it, or accept the break
+  knowingly.
+  ══════════════════════════════════════════════════════════════════
+-->
+
 <!-- PAGE BODY -->
 <main class="page-body">
 
@@ -726,6 +1065,7 @@ body.filter-india-mode .india-spotlight {
      INDIA SPOTLIGHT
 ═══════════════════════════════════════ -->
 <div class="india-spotlight" data-lane="india">
+  <span class="rail-tap" data-rail="India Only" aria-hidden="true"></span>
   <div class="india-spotlight-head">
     <span class="india-flag">🇮🇳</span>
     <span class="india-spotlight-title">India's Maritime Tech Builders</span>
@@ -805,6 +1145,12 @@ body.filter-india-mode .india-spotlight {
       <span class="india-chip-desc">AI-driven situational awareness and computer vision for vessel operations and onboard safety monitoring.</span>
     </a>
 
+    <a href="https://www.sagardefence.com" class="india-chip" target="_blank" rel="noopener">
+      <span class="india-chip-seg">Autonomous Vessels &middot; MASS</span>
+      <span class="india-chip-name">Sagar Defence Engineering</span>
+      <span class="india-chip-desc">Indigenous autonomous surface vessel platforms with in-house navigation and collision-avoidance software. Its Matangi USV completed an 850 nm autonomous Mumbai&ndash;Tuticorin transit in October 2024.</span>
+    </a>
+
   </div>
 </div>
 
@@ -812,6 +1158,7 @@ body.filter-india-mode .india-spotlight {
      SWIM LANE 1 — COMMERCIAL OPERATIONS
 ═══════════════════════════════════════ -->
 <div class="swim-lane" data-lane="commercial">
+  <span class="rail-tap" data-rail="Lane 1" aria-hidden="true"></span>
   <div class="lane-header lane-header-commercial" onclick="toggleLane(this)">
     <div class="lane-icon lane-icon-commercial"><span aria-hidden="true">🏢</span></div>
     <div>
@@ -823,95 +1170,102 @@ body.filter-india-mode .india-spotlight {
   </div>
   <div class="lane-body">
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-pre-fixture-and-chartering">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-pre-fixture-and-chartering" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Pre-Fixture &amp; Chartering</div>
         <div class="seg-label-count">5 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.clarksons.com" class="pill" target="_blank" rel="noopener">Clarksons</a>
-        <a href="https://www.balticexchange.com" class="pill" target="_blank" rel="noopener">Baltic Exchange</a>
-        <a href="https://www.veson.com" class="pill pill-acquired" target="_blank" rel="noopener" title="Q88 — acquired by Veson Nautical, May 2022">Q88 <span class="acq-badge">→ Veson 2022</span></a>
-        <a href="https://www.danaos.gr" class="pill" target="_blank" rel="noopener" title="Danaos Management Consultants — maritime software &amp; IT (not Danaos Corporation, the shipowner)">Danaos (MCo)</a>
-        <a href="https://www.veson.com" class="pill" target="_blank" rel="noopener">Veson IMOS</a>
+        <a id="co-clarksons" href="https://www.clarksons.com" class="pill" target="_blank" rel="noopener">Clarksons</a>
+        <a id="co-baltic-exchange" href="https://www.balticexchange.com" class="pill" target="_blank" rel="noopener">Baltic Exchange</a>
+        <a id="co-q88" href="https://www.veson.com" class="pill pill-acquired" target="_blank" rel="noopener" title="Q88 — acquired by Veson Nautical, May 2022">Q88 <span class="acq-badge">→ Veson 2022</span></a>
+        <a id="co-danaos-mco" href="https://www.danaos.gr" class="pill" target="_blank" rel="noopener" title="Danaos Management Consultants — maritime software &amp; IT (not Danaos Corporation, the shipowner)">Danaos (MCo)</a>
+        <a id="co-veson-imos" href="https://www.veson.com" class="pill" target="_blank" rel="noopener">Veson IMOS</a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-voyage-management">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-voyage-management" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Voyage Management</div>
         <div class="seg-label-count">5 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.stormgeo.com" class="pill" target="_blank" rel="noopener">StormGeo</a>
-        <a href="https://www.napa.fi" class="pill" target="_blank" rel="noopener">NAPA</a>
-        <a href="https://www.oceanlook.com" class="pill" target="_blank" rel="noopener">OceanLook</a>
-        <a href="https://www.maritimeoptima.com" class="pill" target="_blank" rel="noopener">Maritime Optima</a>
-        <a href="https://www.shipfix.com" class="pill" target="_blank" rel="noopener">Shipfix</a>
+        <a id="co-stormgeo" href="https://www.stormgeo.com" class="pill" target="_blank" rel="noopener">StormGeo</a>
+        <a id="co-napa" href="https://www.napa.fi" class="pill" target="_blank" rel="noopener">NAPA</a>
+        <a id="co-oceanlook" href="https://www.oceanlook.com" class="pill" target="_blank" rel="noopener">OceanLook</a>
+        <a id="co-maritime-optima" href="https://www.maritimeoptima.com" class="pill" target="_blank" rel="noopener">Maritime Optima</a>
+        <a id="co-shipfix" href="https://www.shipfix.com" class="pill" target="_blank" rel="noopener">Shipfix</a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-demurrage-and-claims">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-demurrage-and-claims" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Demurrage &amp; Claims</div>
         <div class="seg-label-count">4 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.claimshub.com" class="pill" target="_blank" rel="noopener">ClaimsHub</a>
-        <a href="https://www.harborlab.com" class="pill" target="_blank" rel="noopener">HarborLab</a>
-        <a href="https://www.enquire.io" class="pill" target="_blank" rel="noopener">Enquire</a>
-        <a href="https://www.dataloy.com" class="pill" target="_blank" rel="noopener">Dataloy</a>
+        <a id="co-claimshub" href="https://www.claimshub.com" class="pill" target="_blank" rel="noopener">ClaimsHub</a>
+        <a id="co-harborlab" href="https://www.harborlab.com" class="pill" target="_blank" rel="noopener">HarborLab</a>
+        <a id="co-enquire" href="https://www.enquire.io" class="pill" target="_blank" rel="noopener">Enquire</a>
+        <a id="co-dataloy" href="https://www.dataloy.com" class="pill" target="_blank" rel="noopener">Dataloy</a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-bunkers-and-fuel-procurement">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-bunkers-and-fuel-procurement" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Bunkers &amp; Fuel Procurement</div>
         <div class="seg-label-count">4 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.engine.online" class="pill" target="_blank" rel="noopener">ENGINE</a>
-        <a href="https://www.zeronorth.io" class="pill" target="_blank" rel="noopener">ZeroNorth</a>
-        <a href="https://www.netpas.com" class="pill" target="_blank" rel="noopener">Netpas</a>
-        <a href="https://www.nereus.tech" class="pill" target="_blank" rel="noopener" title="Nereus Digital Bunkers — AI-powered bunker procurement platform with oil price forecasting, marketplace, and post-fixture management">Nereus Digital Bunkers</a>
+        <a id="co-engine" href="https://www.engine.online" class="pill" target="_blank" rel="noopener">ENGINE</a>
+        <a id="co-zeronorth" href="https://www.zeronorth.io" class="pill" target="_blank" rel="noopener">ZeroNorth</a>
+        <a id="co-netpas" href="https://www.netpas.com" class="pill" target="_blank" rel="noopener">Netpas</a>
+        <a id="co-nereus-digital-bunkers" href="https://www.nereus.tech" class="pill" target="_blank" rel="noopener" title="Nereus Digital Bunkers — AI-powered bunker procurement platform with oil price forecasting, marketplace, and post-fixture management">Nereus Digital Bunkers</a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-port-agency-and-operations">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-port-agency-and-operations" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Port Agency &amp; Operations</div>
         <div class="seg-label-count">4 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.portico.systems" class="pill" target="_blank" rel="noopener">Portico</a>
-        <a href="https://www.portchain.com" class="pill" target="_blank" rel="noopener">Portchain</a>
-        <a href="https://www.windward.ai" class="pill" target="_blank" rel="noopener">Windward</a>
-        <a href="https://drishti.com" class="pill india-pill" target="_blank" rel="noopener">Drishti Marine <span class="in-badge">IN</span></a>
+        <a id="co-portico" href="https://www.portico.systems" class="pill" target="_blank" rel="noopener">Portico</a>
+        <a id="co-portchain" href="https://www.portchain.com" class="pill" target="_blank" rel="noopener">Portchain</a>
+        <a id="co-windward" href="https://www.windward.ai" class="pill" target="_blank" rel="noopener">Windward</a>
+        <a id="co-drishti-marine" href="https://drishti.com" class="pill india-pill" target="_blank" rel="noopener">Drishti Marine <span class="in-badge">IN</span></a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-e-bills-of-lading-and-documentation">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-e-bills-of-lading-and-documentation" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">E-Bills of Lading &amp; Documentation</div>
         <div class="seg-label-count">4 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.bolero.net" class="pill" target="_blank" rel="noopener">Bolero</a>
-        <a href="https://www.edoxonline.com" class="pill" target="_blank" rel="noopener">edox</a>
-        <a href="https://www.cargox.io" class="pill" target="_blank" rel="noopener">CargoX</a>
-        <a href="https://www.wavebbl.com" class="pill" target="_blank" rel="noopener">WaveBL</a>
+        <a id="co-bolero" href="https://www.bolero.net" class="pill" target="_blank" rel="noopener">Bolero</a>
+        <a id="co-edox" href="https://www.edoxonline.com" class="pill" target="_blank" rel="noopener">edox</a>
+        <a id="co-cargox" href="https://www.cargox.io" class="pill" target="_blank" rel="noopener">CargoX</a>
+        <a id="co-wavebl" href="https://www.wavebbl.com" class="pill" target="_blank" rel="noopener">WaveBL</a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-standards-contracts-and-industry-bodies">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-standards-contracts-and-industry-bodies" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Standards, Contracts &amp; Industry Bodies</div>
         <div class="seg-label-count">3 associations</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.bimco.org" class="pill pill-assoc" target="_blank" rel="noopener" title="Industry association — standard contracts, clauses &amp; advisory (not a bunker tech company)">BIMCO <span class="assoc-badge">ASSOC</span></a>
-        <a href="https://www.ics-shipping.org" class="pill pill-assoc" target="_blank" rel="noopener">ICS <span class="assoc-badge">ASSOC</span></a>
-        <a href="https://www.intercargo.org" class="pill pill-assoc" target="_blank" rel="noopener">Intercargo <span class="assoc-badge">ASSOC</span></a>
+        <a id="co-bimco" href="https://www.bimco.org" class="pill pill-assoc" target="_blank" rel="noopener" title="Industry association — standard contracts, clauses &amp; advisory (not a bunker tech company)">BIMCO <span class="assoc-badge">ASSOC</span></a>
+        <a id="co-ics" href="https://www.ics-shipping.org" class="pill pill-assoc" target="_blank" rel="noopener">ICS <span class="assoc-badge">ASSOC</span></a>
+        <a id="co-intercargo" href="https://www.intercargo.org" class="pill pill-assoc" target="_blank" rel="noopener">Intercargo <span class="assoc-badge">ASSOC</span></a>
       </div>
     </div>
 
@@ -922,136 +1276,161 @@ body.filter-india-mode .india-spotlight {
      SWIM LANE 2 — VESSEL MANAGEMENT
 ═══════════════════════════════════════ -->
 <div class="swim-lane" data-lane="vessel">
+  <span class="rail-tap" data-rail="Lane 2" aria-hidden="true"></span>
   <div class="lane-header lane-header-vessel" onclick="toggleLane(this)">
     <div class="lane-icon lane-icon-vessel"><span aria-hidden="true">⚓</span></div>
     <div>
       <div class="lane-label">Vessel Management</div>
       <div class="lane-desc">Voyage optimisation, performance monitoring, condition monitoring, crew &amp; technical management</div>
     </div>
-    <div class="lane-meta">Lane 2 of 3<br><span>8 segments</span></div>
+    <div class="lane-meta">Lane 2 of 3<br><span>9 segments</span></div>
     <span class="lane-toggle">▲</span>
   </div>
   <div class="lane-body">
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-voyage-optimisation">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-voyage-optimisation" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Voyage Optimisation</div>
         <div class="seg-label-count">7 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.deepsea.ai" class="pill" target="_blank" rel="noopener">DeepSea Technologies</a>
+        <a id="co-deepsea-technologies" href="https://www.deepsea.ai" class="pill" target="_blank" rel="noopener">DeepSea Technologies</a>
         <a href="https://www.stormgeo.com" class="pill" target="_blank" rel="noopener">StormGeo</a>
-        <a href="https://www.cetoai.com" class="pill" target="_blank" rel="noopener">CetoAI</a>
+        <a id="co-cetoai" href="https://www.cetoai.com" class="pill" target="_blank" rel="noopener">CetoAI</a>
         <a href="https://www.napa.fi" class="pill" target="_blank" rel="noopener">NAPA</a>
-        <a href="https://www.solverminds.com" class="pill" target="_blank" rel="noopener">Solverminds</a>
-        <a href="https://www.enkimarine.co.uk" class="pill" target="_blank" rel="noopener" title="Enki Marine — maritime technology consultancy and open innovation platform; DEEP smart propulsion system">Enki Marine</a>
-        <a href="https://intangles.com" class="pill india-pill" target="_blank" rel="noopener">Intangles <span class="in-badge">IN</span></a>
+        <a id="co-solverminds" href="https://www.solverminds.com" class="pill" target="_blank" rel="noopener">Solverminds</a>
+        <a id="co-enki-marine" href="https://www.enkimarine.co.uk" class="pill" target="_blank" rel="noopener" title="Enki Marine — maritime technology consultancy and open innovation platform; DEEP smart propulsion system">Enki Marine</a>
+        <a id="co-intangles" href="https://intangles.com" class="pill india-pill" target="_blank" rel="noopener">Intangles <span class="in-badge">IN</span></a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-vessel-performance-monitoring">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-vessel-performance-monitoring" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Vessel Performance Monitoring</div>
         <div class="seg-label-count">6 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.kongsbergmaritime.com" class="pill" target="_blank" rel="noopener">Kongsberg Maritime</a>
-        <a href="https://new.abb.com/marine" class="pill" target="_blank" rel="noopener">ABB Marine</a>
-        <a href="https://marine-digital.com" class="pill" target="_blank" rel="noopener">Marine Digital</a>
-        <a href="https://www.me-production.com" class="pill" target="_blank" rel="noopener">ME Production</a>
-        <a href="https://www.futurismtechnologies.com" class="pill" target="_blank" rel="noopener">Futurism Technologies</a>
-        <a href="https://www.bluewaterreporting.com" class="pill india-pill" target="_blank" rel="noopener">BOSS by Blue Water <span class="in-badge">IN</span></a>
+        <a id="co-kongsberg-maritime" href="https://www.kongsbergmaritime.com" class="pill" target="_blank" rel="noopener">Kongsberg Maritime</a>
+        <a id="co-abb-marine" href="https://new.abb.com/marine" class="pill" target="_blank" rel="noopener">ABB Marine</a>
+        <a id="co-marine-digital" href="https://marine-digital.com" class="pill" target="_blank" rel="noopener">Marine Digital</a>
+        <a id="co-me-production" href="https://www.me-production.com" class="pill" target="_blank" rel="noopener">ME Production</a>
+        <a id="co-futurism-technologies" href="https://www.futurismtechnologies.com" class="pill" target="_blank" rel="noopener">Futurism Technologies</a>
+        <a id="co-boss-by-blue-water" href="https://www.bluewaterreporting.com" class="pill india-pill" target="_blank" rel="noopener">BOSS by Blue Water <span class="in-badge">IN</span></a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-condition-monitoring-and-predictive-maintenance">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-condition-monitoring-and-predictive-maintenance" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Condition Monitoring &amp; Predictive Maintenance</div>
         <div class="seg-label-count">9 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.acoem.com" class="pill" target="_blank" rel="noopener">Acoem</a>
-        <a href="https://www.skf.com" class="pill" target="_blank" rel="noopener">SKF Marine</a>
-        <a href="https://www.emerson.com" class="pill" target="_blank" rel="noopener">Emerson AMS</a>
-        <a href="https://www.gevernova.com/software/apm" class="pill" target="_blank" rel="noopener">GE Vernova APM</a>
-        <a href="https://www.endress.com/en/field-instruments-overview/software-solutions-process-automation" class="pill" target="_blank" rel="noopener" title="Endress+Hauser — MARdiagnostics condition monitoring, MARpems predictive emissions monitoring, MARlogger GHG monitoring; DNV-certified maritime solutions">Endress+Hauser</a>
-        <a href="https://www.maseurope.com/project-solutions/marine/" class="pill" target="_blank" rel="noopener" title="MAS S.A. — ACROSS® digital energy ecosystem; vessel performance monitoring, power management, SCADA, propulsion optimisation; 50 years maritime automation">MAS S.A.</a>
-        <a href="https://electropneumatic.gr" class="pill" target="_blank" rel="noopener" title="Electropneumatic S.A. — Ship Viewer Platform (SVP), Fuel Consumption System (FCS), Bunker Fuel Metering System, Alarm Monitoring System; class-approved onboard automation">Electropneumatic</a>
-        <a href="https://detect.technology" class="pill india-pill" target="_blank" rel="noopener">Detect Technologies <span class="in-badge">IN</span></a>
+        <a id="co-acoem" href="https://www.acoem.com" class="pill" target="_blank" rel="noopener">Acoem</a>
+        <a id="co-skf-marine" href="https://www.skf.com" class="pill" target="_blank" rel="noopener">SKF Marine</a>
+        <a id="co-emerson-ams" href="https://www.emerson.com" class="pill" target="_blank" rel="noopener">Emerson AMS</a>
+        <a id="co-ge-vernova-apm" href="https://www.gevernova.com/software/apm" class="pill" target="_blank" rel="noopener">GE Vernova APM</a>
+        <a id="co-endress-hauser" href="https://www.endress.com/en/field-instruments-overview/software-solutions-process-automation" class="pill" target="_blank" rel="noopener" title="Endress+Hauser — MARdiagnostics condition monitoring, MARpems predictive emissions monitoring, MARlogger GHG monitoring; DNV-certified maritime solutions">Endress+Hauser</a>
+        <a id="co-mas-s-a" href="https://www.maseurope.com/project-solutions/marine/" class="pill" target="_blank" rel="noopener" title="MAS S.A. — ACROSS® digital energy ecosystem; vessel performance monitoring, power management, SCADA, propulsion optimisation; 50 years maritime automation">MAS S.A.</a>
+        <a id="co-electropneumatic" href="https://electropneumatic.gr" class="pill" target="_blank" rel="noopener" title="Electropneumatic S.A. — Ship Viewer Platform (SVP), Fuel Consumption System (FCS), Bunker Fuel Metering System, Alarm Monitoring System; class-approved onboard automation">Electropneumatic</a>
+        <a id="co-detect-technologies" href="https://detect.technology" class="pill india-pill" target="_blank" rel="noopener">Detect Technologies <span class="in-badge">IN</span></a>
         <a href="https://intangles.com" class="pill india-pill" target="_blank" rel="noopener">Intangles <span class="in-badge">IN</span></a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-underwater-inspection">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-underwater-inspection" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Underwater Inspection</div>
         <div class="seg-label-count">4 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.ocean-infinity.com" class="pill" target="_blank" rel="noopener">Ocean Infinity</a>
-        <a href="https://www.saipem.com" class="pill" target="_blank" rel="noopener">Saipem ROV</a>
-        <a href="https://planystech.com" class="pill india-pill" target="_blank" rel="noopener">Planys Technologies <span class="in-badge">IN</span></a>
-        <a href="https://eyerov.com" class="pill india-pill" target="_blank" rel="noopener">EyeROV <span class="in-badge">IN</span></a>
+        <a id="co-ocean-infinity" href="https://www.ocean-infinity.com" class="pill" target="_blank" rel="noopener">Ocean Infinity</a>
+        <a id="co-saipem-rov" href="https://www.saipem.com" class="pill" target="_blank" rel="noopener">Saipem ROV</a>
+        <a id="co-planys-technologies" href="https://planystech.com" class="pill india-pill" target="_blank" rel="noopener">Planys Technologies <span class="in-badge">IN</span></a>
+        <a id="co-eyerov" href="https://eyerov.com" class="pill india-pill" target="_blank" rel="noopener">EyeROV <span class="in-badge">IN</span></a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-navigation-ai-and-mass">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-navigation-ai-and-mass" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Navigation AI &amp; MASS</div>
         <div class="seg-label-count">4 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.orca-ai.io" class="pill" target="_blank" rel="noopener">Orca AI</a>
-        <a href="https://www.sea.ai" class="pill" target="_blank" rel="noopener">SEA.AI</a>
-        <a href="https://www.nauticai.com" class="pill" target="_blank" rel="noopener">NauticAi</a>
-        <a href="https://www.kongsberg.com" class="pill" target="_blank" rel="noopener">Kongsberg Autonomous</a>
+        <a id="co-orca-ai" href="https://www.orca-ai.io" class="pill" target="_blank" rel="noopener">Orca AI</a>
+        <a id="co-sea-ai" href="https://www.sea.ai" class="pill" target="_blank" rel="noopener">SEA.AI</a>
+        <a id="co-nauticai" href="https://www.nauticai.com" class="pill" target="_blank" rel="noopener">NauticAi</a>
+        <a id="co-kongsberg-autonomous" href="https://www.kongsberg.com" class="pill" target="_blank" rel="noopener">Kongsberg Autonomous</a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-uncrewed-surface-and-autonomous-platforms">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-uncrewed-surface-and-autonomous-platforms" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
+        <div class="seg-label-text">Uncrewed Surface &amp; Autonomous Platforms</div>
+        <div class="seg-label-count">6 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a id="co-saildrone" href="https://www.saildrone.com" class="pill" target="_blank" rel="noopener" title="Saildrone — wind- and solar-powered USV fleet (Explorer, Voyager, Surveyor); NOAA deep-ocean bathymetry, seafloor mapping, offshore energy and maritime domain awareness">Saildrone</a>
+        <a id="co-liquid-robotics" href="https://www.liquid-robotics.com" class="pill" target="_blank" rel="noopener" title="Liquid Robotics (a Boeing company) — Wave Glider wave- and solar-powered USV; persistent ocean monitoring for scientific, commercial and defence users">Liquid Robotics</a>
+        <a id="co-maritime-robotics" href="https://www.maritimerobotics.com" class="pill" target="_blank" rel="noopener" title="Maritime Robotics — Otter and Mariner USVs; hydrographic survey, environmental monitoring and autonomous cargo shuttle operations (Trondheim–Vanvikan)">Maritime Robotics</a>
+        <a id="co-ocean-aero" href="https://www.oceanaero.com" class="pill" target="_blank" rel="noopener" title="Ocean Aero — Triton AUSV; combined surface and subsurface operation for seabed, pipeline and infrastructure monitoring">Ocean Aero</a>
+        <a id="co-seasats" href="https://www.seasats.com" class="pill" target="_blank" rel="noopener" title="Seasats — Lightfish small USV; low-cost persistent survey and maritime domain awareness at fleet scale">Seasats</a>
+        <a id="co-sagar-defence" href="https://www.sagardefence.com" class="pill india-pill" target="_blank" rel="noopener" title="Sagar Defence Engineering — indigenous autonomous surface vessel platforms; Matangi USV completed an 850 nm autonomous Mumbai–Tuticorin transit, October 2024">Sagar Defence <span class="in-badge">IN</span></a>
+      </div>
+    </div>
+
+    <div class="seg-row" id="seg-fleet-erp-and-technical-management">
+      <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-fleet-erp-and-technical-management" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Fleet ERP &amp; Technical Management</div>
         <div class="seg-label-count">7 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.dnv.com" class="pill" target="_blank" rel="noopener">DNV AMOS</a>
-        <a href="https://www.jibe.dk" class="pill" target="_blank" rel="noopener">JIBE</a>
-        <a href="https://www.shipnet.no" class="pill" target="_blank" rel="noopener">ShipNet</a>
-        <a href="https://www.hanseaticsoft.com" class="pill" target="_blank" rel="noopener">Hanseaticsoft</a>
-        <a href="https://www.frtntech.com" class="pill" target="_blank" rel="noopener" title="Fortune Technologies — Maritime ERP on Microsoft Dynamics 365 Business Central; Lloyd's Register &amp; ClassNK certified; MRV &amp; IMO-DCS via Emicert">Fortune Technologies</a>
-        <a href="https://fleetwork.io/en/" class="pill" target="_blank" rel="noopener" title="Fleetwork — fully cloud-native maritime ERP (AWS); AI FleetVision tool; maintenance, procurement, crew, compliance; launched AI features Posidonia 2026">Fleetwork</a>
-        <a href="https://mariapps.com" class="pill india-pill" target="_blank" rel="noopener">MariApps <span class="in-badge">IN</span></a>
+        <a id="co-dnv-amos" href="https://www.dnv.com" class="pill" target="_blank" rel="noopener">DNV AMOS</a>
+        <a id="co-jibe" href="https://www.jibe.dk" class="pill" target="_blank" rel="noopener">JIBE</a>
+        <a id="co-shipnet" href="https://www.shipnet.no" class="pill" target="_blank" rel="noopener">ShipNet</a>
+        <a id="co-hanseaticsoft" href="https://www.hanseaticsoft.com" class="pill" target="_blank" rel="noopener">Hanseaticsoft</a>
+        <a id="co-fortune-technologies" href="https://www.frtntech.com" class="pill" target="_blank" rel="noopener" title="Fortune Technologies — Maritime ERP on Microsoft Dynamics 365 Business Central; Lloyd's Register &amp; ClassNK certified; MRV &amp; IMO-DCS via Emicert">Fortune Technologies</a>
+        <a id="co-fleetwork" href="https://fleetwork.io/en/" class="pill" target="_blank" rel="noopener" title="Fleetwork — fully cloud-native maritime ERP (AWS); AI FleetVision tool; maintenance, procurement, crew, compliance; launched AI features Posidonia 2026">Fleetwork</a>
+        <a id="co-mariapps" href="https://mariapps.com" class="pill india-pill" target="_blank" rel="noopener">MariApps <span class="in-badge">IN</span></a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-oems-and-decarbonisation-propulsion">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-oems-and-decarbonisation-propulsion" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">OEMs &amp; Decarbonisation Propulsion</div>
         <div class="seg-label-count">8 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.man-es.com" class="pill" target="_blank" rel="noopener">MAN Energy Solutions</a>
-        <a href="https://www.wartsila.com" class="pill" target="_blank" rel="noopener">Wärtsilä</a>
-        <a href="https://www.wingd.com" class="pill" target="_blank" rel="noopener">WinGD</a>
-        <a href="https://www.norsepower.com" class="pill" target="_blank" rel="noopener">Norsepower</a>
-        <a href="https://corvusenergy.com" class="pill" target="_blank" rel="noopener">Corvus Energy</a>
-        <a href="https://valuemaritime.com" class="pill" target="_blank" rel="noopener">Value Maritime</a>
-        <a href="https://www.bartechnologies.uk" class="pill" target="_blank" rel="noopener">BAR Technologies</a>
-        <a href="https://www.auramarine.com" class="pill" target="_blank" rel="noopener" title="Auramarine — fuel supply systems for methanol, ammonia, biofuels, HFO/MGO; decarbonisation-ready newbuild and retrofit solutions">Auramarine</a>
+        <a id="co-man-energy-solutions" href="https://www.man-es.com" class="pill" target="_blank" rel="noopener">MAN Energy Solutions</a>
+        <a id="co-w-rtsil" href="https://www.wartsila.com" class="pill" target="_blank" rel="noopener">Wärtsilä</a>
+        <a id="co-wingd" href="https://www.wingd.com" class="pill" target="_blank" rel="noopener">WinGD</a>
+        <a id="co-norsepower" href="https://www.norsepower.com" class="pill" target="_blank" rel="noopener">Norsepower</a>
+        <a id="co-corvus-energy" href="https://corvusenergy.com" class="pill" target="_blank" rel="noopener">Corvus Energy</a>
+        <a id="co-value-maritime" href="https://valuemaritime.com" class="pill" target="_blank" rel="noopener">Value Maritime</a>
+        <a id="co-bar-technologies" href="https://www.bartechnologies.uk" class="pill" target="_blank" rel="noopener">BAR Technologies</a>
+        <a id="co-auramarine" href="https://www.auramarine.com" class="pill" target="_blank" rel="noopener" title="Auramarine — fuel supply systems for methanol, ammonia, biofuels, HFO/MGO; decarbonisation-ready newbuild and retrofit solutions">Auramarine</a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-classification-and-statutory-bodies">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-classification-and-statutory-bodies" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Classification &amp; Statutory Bodies</div>
         <div class="seg-label-count">5 bodies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.dnv.com" class="pill pill-assoc" target="_blank" rel="noopener">DNV <span class="assoc-badge">CLASS</span></a>
-        <a href="https://www.lr.org" class="pill pill-assoc" target="_blank" rel="noopener">Lloyd's Register <span class="assoc-badge">CLASS</span></a>
-        <a href="https://ww2.eagle.org" class="pill pill-assoc" target="_blank" rel="noopener">ABS <span class="assoc-badge">CLASS</span></a>
-        <a href="https://www.bureauveritas.com/marine-offshore" class="pill pill-assoc" target="_blank" rel="noopener">Bureau Veritas <span class="assoc-badge">CLASS</span></a>
-        <a href="https://www.irclass.org" class="pill pill-assoc india-pill" target="_blank" rel="noopener">IRClass <span class="in-badge">IN</span> <span class="assoc-badge">CLASS</span></a>
+        <a id="co-dnv" href="https://www.dnv.com" class="pill pill-assoc" target="_blank" rel="noopener">DNV <span class="assoc-badge">CLASS</span></a>
+        <a id="co-lloyd-s-register" href="https://www.lr.org" class="pill pill-assoc" target="_blank" rel="noopener">Lloyd's Register <span class="assoc-badge">CLASS</span></a>
+        <a id="co-abs" href="https://ww2.eagle.org" class="pill pill-assoc" target="_blank" rel="noopener">ABS <span class="assoc-badge">CLASS</span></a>
+        <a id="co-bureau-veritas" href="https://www.bureauveritas.com/marine-offshore" class="pill pill-assoc" target="_blank" rel="noopener">Bureau Veritas <span class="assoc-badge">CLASS</span></a>
+        <a id="co-irclass" href="https://www.irclass.org" class="pill pill-assoc india-pill" target="_blank" rel="noopener">IRClass <span class="in-badge">IN</span> <span class="assoc-badge">CLASS</span></a>
       </div>
     </div>
 
@@ -1062,6 +1441,7 @@ body.filter-india-mode .india-spotlight {
      SWIM LANE 3 — INTELLIGENCE & ANALYTICS
 ═══════════════════════════════════════ -->
 <div class="swim-lane" data-lane="intel">
+  <span class="rail-tap" data-rail="Lane 3" aria-hidden="true"></span>
   <div class="lane-header lane-header-intel" onclick="toggleLane(this)">
     <div class="lane-icon lane-icon-intel"><span aria-hidden="true">📊</span></div>
     <div>
@@ -1073,91 +1453,97 @@ body.filter-india-mode .india-spotlight {
   </div>
   <div class="lane-body">
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-cargo-and-vessel-tracking">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-cargo-and-vessel-tracking" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Cargo &amp; Vessel Tracking</div>
         <div class="seg-label-count">5 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.kpler.com" class="pill pill-acquired" target="_blank" rel="noopener" title="MarineTraffic — acquired by Kpler, 2023. Portal remains active.">MarineTraffic <span class="acq-badge">→ Kpler 2023</span></a>
-        <a href="https://www.kpler.com" class="pill" target="_blank" rel="noopener">Kpler</a>
+        <a id="co-marinetraffic" href="https://www.kpler.com" class="pill pill-acquired" target="_blank" rel="noopener" title="MarineTraffic — acquired by Kpler, 2023. Portal remains active.">MarineTraffic <span class="acq-badge">→ Kpler 2023</span></a>
+        <a id="co-kpler" href="https://www.kpler.com" class="pill" target="_blank" rel="noopener">Kpler</a>
         <a href="https://www.windward.ai" class="pill" target="_blank" rel="noopener">Windward</a>
         <a href="https://www.shipfix.com" class="pill" target="_blank" rel="noopener">Shipfix</a>
-        <a href="https://www.shipin.ai" class="pill" target="_blank" rel="noopener">ShipIn Systems</a>
+        <a id="co-shipin-systems" href="https://www.shipin.ai" class="pill" target="_blank" rel="noopener">ShipIn Systems</a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-satellite-ais-and-earth-observation">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-satellite-ais-and-earth-observation" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Satellite AIS &amp; Earth Observation</div>
         <div class="seg-label-count">5 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.orbcomm.com" class="pill" target="_blank" rel="noopener">ORBCOMM</a>
-        <a href="https://spire.com/maritime" class="pill" target="_blank" rel="noopener">Spire Maritime</a>
-        <a href="https://www.imo.org/en/OurWork/Safety/Pages/LRIT.aspx" class="pill pill-regulatory" target="_blank" rel="noopener" title="SOLAS V/19-1 regulatory system — not a company">LRIT <span class="reg-badge">REG</span></a>
-        <a href="https://spire.com/maritime" class="pill pill-acquired" target="_blank" rel="noopener" title="exactEarth — legacy AIS brand, acquired by Spire Global 2021">exactEarth <span class="acq-badge">→ Spire 2021</span></a>
-        <a href="https://www.pole-star.com" class="pill" target="_blank" rel="noopener">Pole Star</a>
+        <a id="co-orbcomm" href="https://www.orbcomm.com" class="pill" target="_blank" rel="noopener">ORBCOMM</a>
+        <a id="co-spire-maritime" href="https://spire.com/maritime" class="pill" target="_blank" rel="noopener">Spire Maritime</a>
+        <a id="co-lrit" href="https://www.imo.org/en/OurWork/Safety/Pages/LRIT.aspx" class="pill pill-regulatory" target="_blank" rel="noopener" title="SOLAS V/19-1 regulatory system — not a company">LRIT <span class="reg-badge">REG</span></a>
+        <a id="co-exactearth" href="https://spire.com/maritime" class="pill pill-acquired" target="_blank" rel="noopener" title="exactEarth — legacy AIS brand, acquired by Spire Global 2021">exactEarth <span class="acq-badge">→ Spire 2021</span></a>
+        <a id="co-pole-star" href="https://www.pole-star.com" class="pill" target="_blank" rel="noopener">Pole Star</a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-market-data-and-forecasts">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-market-data-and-forecasts" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Market Data &amp; Forecasts</div>
         <div class="seg-label-count">6 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.clarksons.com" class="pill" target="_blank" rel="noopener">Clarksons Research</a>
-        <a href="https://www.drewry.co.uk" class="pill" target="_blank" rel="noopener">Drewry</a>
-        <a href="https://www.spglobal.com/commodityinsights/en/ci/products/maritime.html" class="pill" target="_blank" rel="noopener">S&amp;P Global Maritime</a>
+        <a id="co-clarksons-research" href="https://www.clarksons.com" class="pill" target="_blank" rel="noopener">Clarksons Research</a>
+        <a id="co-drewry" href="https://www.drewry.co.uk" class="pill" target="_blank" rel="noopener">Drewry</a>
+        <a id="co-s-and-p-global-maritime" href="https://www.spglobal.com/commodityinsights/en/ci/products/maritime.html" class="pill" target="_blank" rel="noopener">S&amp;P Global Maritime</a>
         <a href="https://www.kpler.com" class="pill" target="_blank" rel="noopener">Kpler</a>
-        <a href="https://www.tradeviews.com" class="pill" target="_blank" rel="noopener">Tradeviews</a>
-        <a href="https://www.woodmac.com" class="pill" target="_blank" rel="noopener">Wood Mackenzie</a>
+        <a id="co-tradeviews" href="https://www.tradeviews.com" class="pill" target="_blank" rel="noopener">Tradeviews</a>
+        <a id="co-wood-mackenzie" href="https://www.woodmac.com" class="pill" target="_blank" rel="noopener">Wood Mackenzie</a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-vessel-valuations">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-vessel-valuations" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Vessel Valuations</div>
         <div class="seg-label-count">4 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.vesselsvalue.com" class="pill" target="_blank" rel="noopener">VesselsValue</a>
-        <a href="https://www.marsoft.com" class="pill" target="_blank" rel="noopener">Marsoft</a>
-        <a href="https://www.msival.com" class="pill" target="_blank" rel="noopener">MSI</a>
-        <a href="https://www.vesselindex.com" class="pill" target="_blank" rel="noopener">VesselIndex</a>
+        <a id="co-vesselsvalue" href="https://www.vesselsvalue.com" class="pill" target="_blank" rel="noopener">VesselsValue</a>
+        <a id="co-marsoft" href="https://www.marsoft.com" class="pill" target="_blank" rel="noopener">Marsoft</a>
+        <a id="co-msi" href="https://www.msival.com" class="pill" target="_blank" rel="noopener">MSI</a>
+        <a id="co-vesselindex" href="https://www.vesselindex.com" class="pill" target="_blank" rel="noopener">VesselIndex</a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-operational-ai-and-computer-vision">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-operational-ai-and-computer-vision" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Operational AI &amp; Computer Vision</div>
         <div class="seg-label-count">6 companies</div>
       </div>
       <div class="seg-companies">
         <a href="https://www.shipin.ai" class="pill" target="_blank" rel="noopener">ShipIn Systems</a>
         <a href="https://www.orca-ai.io" class="pill" target="_blank" rel="noopener">Orca AI</a>
-        <a href="https://smartseas.ai" class="pill india-pill" target="_blank" rel="noopener">SmartSeas AI <span class="in-badge">IN</span></a>
-        <a href="https://dockervision.com" class="pill india-pill" target="_blank" rel="noopener">Docker Vision <span class="in-badge">IN</span></a>
+        <a id="co-smartseas-ai" href="https://smartseas.ai" class="pill india-pill" target="_blank" rel="noopener">SmartSeas AI <span class="in-badge">IN</span></a>
+        <a id="co-docker-vision" href="https://dockervision.com" class="pill india-pill" target="_blank" rel="noopener">Docker Vision <span class="in-badge">IN</span></a>
         <a href="https://drishti.com" class="pill india-pill" target="_blank" rel="noopener">Drishti Marine <span class="in-badge">IN</span></a>
-        <a href="https://dtyle.ai" class="pill india-pill" target="_blank" rel="noopener">Dtyle.AI <span class="in-badge">IN</span></a>
+        <a id="co-dtyle-ai" href="https://dtyle.ai" class="pill india-pill" target="_blank" rel="noopener">Dtyle.AI <span class="in-badge">IN</span></a>
       </div>
     </div>
 
-    <div class="seg-row">
+    <div class="seg-row" id="seg-emissions-accounting-and-compliance-verification">
       <div class="seg-label-col">
+        <button class="seg-link" type="button" data-anchor="seg-emissions-accounting-and-compliance-verification" aria-label="Copy link to this segment" title="Copy link to this segment">#</button>
         <div class="seg-label-text">Emissions Accounting &amp; Compliance Verification</div>
         <div class="seg-label-count">8 platforms</div>
       </div>
       <div class="seg-companies">
-        <a href="https://sea.live" class="pill" target="_blank" rel="noopener">Sea/</a>
-        <a href="https://www.wartsila.com/voyage/products/fleet-operations-and-performance/fleet-decarbonisation" class="pill" target="_blank" rel="noopener">Wärtsilä Decarbonisation</a>
-        <a href="https://www.sgs.com/en-us/services/environmental-compliance-ships-engine-emissions" class="pill" target="_blank" rel="noopener" title="SGS Maritime — EU MRV, IMO DCS, NOx, MARPOL Annex VI emissions sampling and verification; ISO 14065 accredited">SGS Maritime</a>
-        <a href="https://www.maritec.com.sg" class="pill" target="_blank" rel="noopener" title="Maritec Naias (CTI Group) — marine fuel testing, ballast water analysis, energy efficiency solutions, IHM, EU ETS &amp; CII compliance verification; labs in Singapore, Athens, Shanghai">Maritec Naias</a>
-        <a href="https://www.dnv.com/maritime/insights/topics/maritime-decarbonisation/cii-rating.html" class="pill pill-assoc" target="_blank" rel="noopener" title="DNV CII Advisory — classification society advisory service">DNV CII Advisory <span class="assoc-badge">CLASS</span></a>
-        <a href="https://www.lr.org/en/digital-assurance/" class="pill pill-assoc" target="_blank" rel="noopener" title="LR Digital Assurance Framework — type-approval and assurance for maritime AI and digital systems">LR Digital Assurance <span class="assoc-badge">CLASS</span></a>
-        <a href="https://ww2.eagle.org/en/products-and-services/abs-nautical-systems.html" class="pill pill-assoc" target="_blank" rel="noopener" title="ABS — emissions compliance and performance technology programmes">ABS Emissions Tech <span class="assoc-badge">CLASS</span></a>
-        <a href="https://www.siglar.ai" class="pill" target="_blank" rel="noopener">Siglar Carbon</a>
+        <a id="co-sea" href="https://sea.live" class="pill" target="_blank" rel="noopener">Sea/</a>
+        <a id="co-w-rtsil-decarbonisation" href="https://www.wartsila.com/voyage/products/fleet-operations-and-performance/fleet-decarbonisation" class="pill" target="_blank" rel="noopener">Wärtsilä Decarbonisation</a>
+        <a id="co-sgs-maritime" href="https://www.sgs.com/en-us/services/environmental-compliance-ships-engine-emissions" class="pill" target="_blank" rel="noopener" title="SGS Maritime — EU MRV, IMO DCS, NOx, MARPOL Annex VI emissions sampling and verification; ISO 14065 accredited">SGS Maritime</a>
+        <a id="co-maritec-naias" href="https://www.maritec.com.sg" class="pill" target="_blank" rel="noopener" title="Maritec Naias (CTI Group) — marine fuel testing, ballast water analysis, energy efficiency solutions, IHM, EU ETS &amp; CII compliance verification; labs in Singapore, Athens, Shanghai">Maritec Naias</a>
+        <a id="co-dnv-cii-advisory" href="https://www.dnv.com/maritime/insights/topics/maritime-decarbonisation/cii-rating.html" class="pill pill-assoc" target="_blank" rel="noopener" title="DNV CII Advisory — classification society advisory service">DNV CII Advisory <span class="assoc-badge">CLASS</span></a>
+        <a id="co-lr-digital-assurance" href="https://www.lr.org/en/digital-assurance/" class="pill pill-assoc" target="_blank" rel="noopener" title="LR Digital Assurance Framework — type-approval and assurance for maritime AI and digital systems">LR Digital Assurance <span class="assoc-badge">CLASS</span></a>
+        <a id="co-abs-emissions-tech" href="https://ww2.eagle.org/en/products-and-services/abs-nautical-systems.html" class="pill pill-assoc" target="_blank" rel="noopener" title="ABS — emissions compliance and performance technology programmes">ABS Emissions Tech <span class="assoc-badge">CLASS</span></a>
+        <a id="co-siglar-carbon" href="https://www.siglar.ai" class="pill" target="_blank" rel="noopener">Siglar Carbon</a>
       </div>
     </div>
 
@@ -1165,11 +1551,14 @@ body.filter-india-mode .india-spotlight {
 </div>
 
 <div class="last-updated">
-  Last updated: June 2026 — Post-Posidonia 2026 Edition (Issue 24) &nbsp;·&nbsp; Maintained by Marine Intelligence Weekly &nbsp;·&nbsp;
+  Last updated: September 2026 — Rev. 3: Uncrewed Surface &amp; Autonomous Platforms segment added &nbsp;·&nbsp; Maintained by Marine Intelligence Weekly &nbsp;·&nbsp;
   <a href="mailto:contactus@marineintelligenceweekly.com">Submit a correction or addition</a>
 </div>
 
 </main>
+
+<!-- BACK TO TOP -->
+<button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top">&#9650;</button>
 
 <!-- FOOTER -->
 <footer class="page-footer">
@@ -1182,6 +1571,120 @@ body.filter-india-mode .india-spotlight {
 </footer>
 
 <script>
+// ── DEEP LINKING ──
+// Resolves #anchors leniently: #sagardefenceengineering, #sagar-defence,
+// #co-sagar-defence and #Sagar_Defence all reach the same pill.
+(function () {
+  const norm = t => (t || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  let map = null;
+
+  function buildMap() {
+    const m = new Map();
+    document.querySelectorAll('[id]').forEach(el => {
+      m.set(norm(el.id), el);
+      m.set(norm(el.id.replace(/^(co|seg)-/, '')), el);
+    });
+    // also key company pills by their full name from the title attribute
+    document.querySelectorAll('a.pill[id]').forEach(el => {
+      const t = el.getAttribute('title');
+      if (t) {
+        const full = t.split('\u2014')[0].split(' - ')[0].trim();
+        if (full && !m.has(norm(full))) m.set(norm(full), el);
+      }
+      const txt = el.textContent.replace(/\b(IN|REG|CLASS|ASSOC)\b/g, '').trim();
+      if (txt && !m.has(norm(txt))) m.set(norm(txt), el);
+    });
+    return m;
+  }
+
+  function reveal(el) {
+    // expand the lane if it is collapsed
+    const laneBody = el.closest('.lane-body');
+    if (laneBody && laneBody.classList.contains('collapsed')) {
+      const header = laneBody.previousElementSibling;
+      if (header) header.click();
+    }
+    // make sure the lane is not filtered out of view
+    const lane = el.closest('.swim-lane, .india-spotlight');
+    if (lane && lane.classList.contains('hidden')) {
+      const allBtn = document.querySelector('.fbtn[data-f="all"]');
+      if (allBtn) allBtn.click();
+    }
+    document.querySelectorAll('.anchor-hit').forEach(n => n.classList.remove('anchor-hit'));
+    el.classList.add('anchor-hit');
+    requestAnimationFrame(() => el.scrollIntoView({ block: 'center' }));
+    window.setTimeout(() => el.classList.remove('anchor-hit'), 4000);
+  }
+
+  function resolve() {
+    const raw = decodeURIComponent(window.location.hash.slice(1));
+    if (!raw) return;
+    if (!map) map = buildMap();
+    const el = document.getElementById(raw) || map.get(norm(raw));
+    if (el) reveal(el);
+  }
+
+  window.addEventListener('hashchange', resolve);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => window.setTimeout(resolve, 60));
+  } else {
+    window.setTimeout(resolve, 60);
+  }
+})();
+
+// ── COPY LINK TO SEGMENT ──
+document.addEventListener('click', function (ev) {
+  const btn = ev.target.closest('.seg-link');
+  if (!btn) return;
+  ev.preventDefault();
+  const url = location.origin + location.pathname + '#' + btn.dataset.anchor;
+
+  function done(ok) {
+    const prev = btn.textContent;
+    btn.textContent = ok ? 'Copied' : 'Ctrl+C';
+    btn.classList.add('copied');
+    window.setTimeout(function () {
+      btn.textContent = prev;
+      btn.classList.remove('copied');
+    }, 1600);
+  }
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(url).then(function () { done(true); }, function () { done(false); });
+  } else {
+    // fallback for non-secure contexts / older browsers
+    const ta = document.createElement('textarea');
+    ta.value = url;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:absolute;left:-9999px;';
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    done(ok);
+  }
+});
+
+// ── BACK TO TOP ──
+(function () {
+  const btn = document.getElementById('toTop');
+  if (!btn) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let ticking = false;
+  function update() {
+    btn.classList.toggle('show', window.scrollY > 600);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+  }, { passive: true });
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+  update();
+})();
+
 // ── LANE TOGGLE (collapse/expand) ──
 function toggleLane(header) {
   const body = header.nextElementSibling;
@@ -1209,6 +1712,10 @@ filterBtns.forEach(btn => {
     filterBtns.forEach(b => Object.values(activeClassMap).forEach(c => b.classList.remove(c)));
     const f = btn.dataset.f;
     btn.classList.add(activeClassMap[f]);
+
+    // light the selected lane end-to-end (trunk, bar, node, block)
+    if (f === 'all') { delete document.body.dataset.lit; }
+    else { document.body.dataset.lit = f; }
 
     // reset
     document.body.classList.remove('filter-india-mode');
