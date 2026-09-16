@@ -666,6 +666,30 @@ GATES = (
                "into the hull policy), and a target removed from the census input "
                "to prove the extractor cannot report success over what it never read"),
 
+    # Content gates for CORR-NOSDCP-MINISTRY-20260916, a candidate report on
+    # QB1_A Q15. Card taught NOSDCP under the Ministry of Earth Sciences with the
+    # Coast Guard as "nodal agency", and Q14/Q15 made the P&I club the party
+    # liable for all costs. The phrase "Ministry of Earth Sciences" is correct
+    # elsewhere in the bank, so the gate binds it to NOSDCP authority rather
+    # than banning it, and asserts the legitimate use survives. The suite
+    # probes only its own validator (~2 min measured 16 Sep 2026); budget ~x9.
+    _gate("validate_correction_nosdcp",
+          ["python", "%s/validate_correction_nosdcp.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="binds Earth Sciences and 'nodal' to NOSDCP authority (never a "
+               "blanket ban), P&I 'liable for all costs' only where ASSERTED, the "
+               "Authority/Agency distinction at every site, qualified direct action, "
+               "no DGMA in the reporting chain, and the SQ twin"),
+    _gate("correction_nosdcp_mutate",
+          ["python", "%s/mutate_correction_nosdcp.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1200,
+          historical_39=False, depends_on=("validate_correction_nosdcp",),
+          note="20 mutations, each tripping its OWN named check: one-site "
+               "regressions, twin drift, an untouched page re-infected, and the "
+               "over-correction direction (blanket Earth Sciences ban, trap made a "
+               "literal GREP, unconditional direct action, DGMA in the Protocol I chain); "
+               "20/20 caught, 130s measured 16 Sep 2026"),
+
     # ---- follow-up authorisation register ---------------------------------
     # Postdates E6, so outside the historical 39, and not held back either.
     #

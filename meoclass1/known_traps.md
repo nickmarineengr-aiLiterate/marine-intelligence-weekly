@@ -1116,6 +1116,7 @@ may **liquefy or undergo dynamic separation**.
 | 2026-08-25 | Entry 52: `QB2_F` Q3 credited the ro-ro / vehicle / special-category fire-safety package to **MSC.532(107)** across three blocks; the package is **MSC.550(108)** with FSS Code amendments in **MSC.555(108)**, and `QB10_B` Q1 already had it right, so two paid cards disagreed. Root cause is a shared 1 Jan 2026 entry-into-force date, not carelessness - identify a package by the regulation it AMENDS. Two further defects found in the same card: the 10 mg/kg PFOS threshold is MSC.1/Circ.1694, not SOLAS (II-2/10.11.2 is an unqualified prohibition); and SOLAS II-2/20 states application in each section chapeau, so summarising the requirements gave cargo ships the entire passenger-ship package. The last of these was found only by independent clean-context review. | OPEN-G1-010, and the AUG-0015 ro-ro ask it was blocking |
 | 2026-08-25 | Entry 53: `QB9_G` Q6 taught a legal hierarchy Treaty → Convention → Protocol that international law does not recognise (VCLT Art.2(1)(a): a treaty “whatever its particular designation”), defined a Protocol as only an amendment, claimed every Protocol needs its own ratification (disproved by MARPOL Protocol of 1978 Art.IV(1)) and dismissed an IMO Resolution as committee guidance (SOLAS Art.VIII(b) amendments are adopted BY MSC resolution). Q3’s instrument ladder carried the same resolution defect. All three `QB9_G_CheatSheet` copies reconciled. Definition-source rule recorded once at `Claude skill/miw-correction-workflow_SKILL.md` §2a. | Founder review while studying from the MIW study roadmap |
 | 2026-09-02 | Entry 64: three cards taught a consequence their instrument does not carry. `QB5_I` Q8 said ISM 10.3 *drives*/*derives* the critical-spares list and that an unobtainable spare *is* an ISM 9 non-conformity, and had filed 10.3's reliability and stand-by-testing limbs under 10.4 - corrected against A.741(18) as amended by MSC.273(85), with ISM 9 made conditional on ISM 1.1.9. `QB2_A` Q11 and Q33 said the Document of Authorisation is *invalid* without the booklet - corrected to Grain Code A 3.1/3.2/3.5 and A 6.1, closing the H6 terminology limitation. `QB9_H` Q10 shipped five candidate-visible editorial placeholders - removed by RETRIEVING the MS Act 2025 corrigenda (three typographical fixes, no renumbering) and citing Part V s.63/64/83(1)/94(1) from the Act itself. Raised by GPT content review of the H6 packet; the 10.3/10.4 mis-citation and the Q33 sibling were found by the scope pass, not reported. | H6 terminology limitation on the grain loading booklet |
+| 2026-09-16 | Entry 133: NOSDCP ministry and designation — QB1_A Q15 named the Ministry of Earth Sciences as the authority and the Coast Guard as "nodal implementing agency"; corrected to Ministry of Defence / Indian Coast Guard as Central Coordinating Authority (Allocation of Business Rules: Central Coordinating Agency). Q14 and Q15 also corrected for the P&I "strictly liable for all costs" statement and the DPA/DGS fixed reporting chain. Two follow-ups logged, not actioned. | Candidate correction ("Pls check under which ministry") |
 
 ### 50. A truncated citation is worse than no citation
 
@@ -3672,3 +3673,85 @@ and when the corpus already cites that instrument elsewhere, read the existing c
 before overwriting it. A card that disagrees with its own reg-box is the cheapest signal
 available, and nothing was reading for it. See also trap 130, which is this trap's
 parent, and trap 128 on completeness claims.
+
+### 133. NOSDCP sits under the Ministry of Defence, and the P&I club is the insurer, not the liable party
+
+**Flagged:** candidate feedback on `QB1_A` Q15 (*"NOSDCP — Explain."*), 16 September 2026:
+*"Pls check under which ministry"*. Upheld.
+
+**WRONG** (as shipped on `QB1_A` Q15, and in part on Q14, both gated and `SQ/` copies):
+
+- *"Authority: Ministry of Earth Sciences, Government of India"*, repeated in the 15-second
+  answer, the reg-box and the numbers box (*"Nodal agency = Indian Coast Guard under Ministry
+  of Earth Sciences"*).
+- The Coast Guard as *"nodal implementing agency"* / *"nodal agency"* (Q15, Q14).
+- *"the shipowner's P&I club is held strictly liable for all … costs"*, and *"ICG can recover
+  all costs from the shipowner's P&I club"* (Q15, Q14 — body, 60-second answer, CE tip,
+  scenario, memory map).
+- A fixed reporting chain *"CE → Master → DPA → ICG → DGS → Port Authority"*, which puts the
+  DPA in front of the statutory report and uses the pre-rename authority name.
+
+**CORRECT:**
+
+- **Ministry of Defence.** Government of India (Allocation of Business) Rules, 1961, as amended
+  up to Amendment Series no. 386 of 22 July 2026 — Ministry of Defence, Department of Defence,
+  item 17: *"All matters relating to Coast Guard Organisation, including-"* (b) combating oil
+  spills in the maritime zones except in the waters of ports and within 500 metres of offshore
+  platforms, coastal refineries and associated facilities; (c) *"Central Coordinating Agency for
+  Combating of Oil Pollution"*; (d) *"implementation of National Contingency Plan for oil spill
+  disaster"*.
+- **Two official words — keep them apart.** Coast Guard NOSDCP material calls the Coast Guard the
+  **Central Coordinating Authority** (ICG Marine Environment page; Chairman NOSDCP circulars
+  01/2012–01/2017; ICG dispersant policy 2025, *"Central Coordinating Authority (CCA)"*). The
+  Allocation of Business Rules say **Central Coordinating Agency**. Teach "Authority" in the
+  oral answer; record that the Rules say "Agency". Neither document says "nodal agency".
+- The **Director General, Indian Coast Guard** is Chairman NOSDCP. Designated 1986; plan approved
+  1993; revised edition released 2015 and amended since by Chairman NOSDCP circulars. Do not
+  write "current edition 2015" — no later edition was found, which is not proof that none exists.
+- **Where Earth Sciences came from.** MoES institutions support the response — INCOIS provides
+  oil-spill trajectory advisories, and Amendment No. 2 to NOSDCP 2015 names *"Ministry of Earth
+  Sciences / National Institute of Oceanography"* as a section heading among the agencies with
+  responsibilities. MoES is a supporting agency. It is **not** the ministry that controls NOSDCP.
+- **Liability.** The **shipowner** is liable — strictly, but normally within the convention
+  limits and subject to the convention defences. The **P&I club insures** that liability; where
+  the applicable Convention provides for direct action (CLC 1992, Bunkers Convention), a claim may
+  also be brought directly against the insurer — never taught as universal. CLC 1992 plus the
+  1992 Fund covers persistent oil from tankers; bunker spills from other ships are a separate
+  regime. Never "the P&I club is liable for all costs".
+- **Reporting.** The Master reports without delay to the coastal State under MARPOL Protocol I —
+  in Indian waters the Indian Coast Guard (nearest MRCC), and the port authority within port
+  limits — with the Company/DPA informed in parallel. "DGS" is DGMA (entry 6), but DGMA is not
+  a recipient the Protocol I report must pass through: renaming DGS must never put DGMA into the
+  immediate reporting chain.
+
+**Affected content types:** oral answer body, 15/60-second answers, reg-box, CE Oral Tip,
+examiner trap, numbers box, scenario anchor, memory map, q-version stamp; gated page and `SQ/`
+twin.
+
+**Search terms for a manual pass:** `NOSDCP`, `NOS-DCP`, `Oil Spill Disaster Contingency`,
+`Earth Sciences`, `MoES`, `nodal`, `Central Coordinating`, `strictly liable`, `all costs`,
+`P&I club pays`, `DPA →`.
+
+**Prevention.** `tools/oral/validate_correction_nosdcp.py` checks the proposition, not the phrase:
+*Earth Sciences* must not be bound to NOSDCP or Coast Guard authority in teaching text, *nodal*
+must not be the Coast Guard's NOSDCP designation, and the P&I club must not be the party
+*liable for all costs* — on the corrected cards and across `meoclass1/`. The phrase *Ministry of
+Earth Sciences* is legitimate elsewhere (`QB9_E` marine spatial planning) and must never be
+blanket-banned.
+
+**Open follow-ups — logged here, NOT actioned in this correction:**
+
+- **Follow-up A — NOSDCP tier tonnage limits.** `QB9_A` Q8 and `oralnotes/simon-notes-p3.html`
+  teach Tier 1 *<700 t*, Tier 2 *700–10,000 t*, Tier 3 *>10,000 t*. No primary source for those
+  figures was obtained (the NOSDCP 2015 text itself was not held; ITOPF's secondary country
+  profile mentions only Tier 1 equipment "up to 700 tons"). `QB3_J` Q4 already teaches that
+  quoting fixed tonnage bands is a trap, so the bank contradicts itself. Verify against the
+  NOSDCP text before correcting; run a targeted search for further duplicates first.
+- **Follow-up B — India's OPRC 1990 date.** `oralnotes/simon-notes-p3.html` says India
+  *"ratified/acceded 1993 (verify exact year before quoting)"*. IMO *Status of IMO Treaties*
+  (20 November 2024) lists India's accession as **17 November 1997**, entry into force
+  **17 February 1998**. Re-verify against the current IMO status publication before changing
+  the corpus. (1993 is the year the Government of India approved NOSDCP, a probable source of
+  the conflation.)
+
+GREP: SKIP (context-dependent by design: "Ministry of Earth Sciences" is correct in other subjects — enforced by the proposition-scoped content gate, not by a literal scan)

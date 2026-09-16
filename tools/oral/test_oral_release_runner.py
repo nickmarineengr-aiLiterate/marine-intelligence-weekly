@@ -79,6 +79,7 @@ check("the correction gates are registered",
           "correction_g1_010_mutate", "correction_grainterm_mutate",
           "correction_ismspares_mutate", "correction_itc51_mutate",
           "correction_lsavent_mutate", "correction_msactsea_mutate",
+          "correction_nosdcp_mutate",
           # The Pass-2 remediation pair, registered for the first time:
           # it had existed and been maintained without ever being run.
           "correction_pass2_mutate",
@@ -89,6 +90,7 @@ check("the correction gates are registered",
           "validate_correction_grainterm", "validate_correction_ismspares",
           "validate_correction_itc51",
           "validate_correction_lsavent", "validate_correction_msactsea",
+          "validate_correction_nosdcp",
           "validate_correction_pass2",
           "validate_corrections"],
       str(sorted(g["id"] for g in _correction)))
@@ -160,6 +162,10 @@ POST_E6_GATES = [
     "correction_itc51_mutate",
     "correction_lsavent_mutate",
     "correction_msactsea_mutate",
+    # CORR-NOSDCP-MINISTRY-20260916, a candidate report: NOSDCP taught under
+    # the wrong Ministry. The phrase is correct elsewhere in the bank, so the
+    # content gate binds it to NOSDCP authority instead of banning it.
+    "correction_nosdcp_mutate",
     # The Pass-2 remediation pair, registered for the first time: it had
     # existed and been maintained without ever being run by a release, which
     # is how its mutation TN kept a target the corpus no longer contained.
@@ -199,6 +205,7 @@ POST_E6_GATES = [
     "validate_correction_itc51",
     "validate_correction_lsavent",
     "validate_correction_msactsea",
+    "validate_correction_nosdcp",
     "validate_correction_pass2",
     "validate_corrections",
     "validate_followup_register",
@@ -217,6 +224,7 @@ POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
                            "correction_itc51_mutate",
                            "correction_lsavent_mutate",
                            "correction_msactsea_mutate",
+                           "correction_nosdcp_mutate",
                            "correction_pass2_mutate",
                            "corrections_mutate",
                            "followup_register_mutate"]
