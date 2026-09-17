@@ -23,6 +23,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import oral_lib as L  # noqa: E402
+import followup_closure as FC  # noqa: E402
 
 OUT = L.OUT
 HIST_EXPECTED = 788
@@ -112,9 +113,35 @@ def main():
           == [f"FUP-{i:03d}" for i in range(1, len(acts) + 1)])
     check("F2_followup_targets_resolve",
           all(a.get("target_structural_check") == "TARGET_RESOLVES" for a in acts))
+    # Implementation state is DERIVED from the batch manifests (bf64b54), so F3
+    # asks the same derivation the generator uses rather than keeping a rule of
+    # its own. The old form required every row to be AUTHORISED_NOT_STARTED,
+    # which went red the moment F1/F1b legitimately closed three rows. Merely
+    # admitting PRODUCED would accept a hand-typed closure; instead every row's
+    # status, batch and evidence must EQUAL what the manifests prove. That
+    # catches an unbacked closure, a stale re-open, evidence pointing at the
+    # wrong card, and a row left PRODUCED after its manifest was removed or
+    # corrupted (discover_manifests skips an unreadable manifest, so its rows
+    # derive back to not-started and show up here as drift).
+    closure, exceptions = FC.derive(
+        acts, FC.discover_manifests(L.REPO / "tools" / "oral"))
+    unbacked = []
+    for a in acts:
+        fid = a["followup_id"]
+        d = closure.get(fid) or FC._blank(fid)
+        ev = a.get("production_evidence")
+        if (a.get("status") not in (FC.NOT_STARTED, FC.PRODUCED)
+                or (a.get("status"), a.get("batch"), ev)
+                != (d["status"], d["batch"], d["production_evidence"])
+                or (ev and not (L.REPO / ev["manifest"]).is_file())):
+            unbacked.append(fid)
+    produced = sorted("%s/%s" % (f, c["batch"]) for f, c in closure.items()
+                      if c["status"] == FC.PRODUCED)
     check("F3_no_followup_claims_implemented_without_a_batch_manifest",
-          all(a["status"] == "AUTHORISED_NOT_STARTED" for a in acts),
-          "register records authorisation; manifests record implementation")
+          not exceptions and not unbacked,
+          "produced=%s unbacked=%s exceptions=%s" % (
+              produced, unbacked,
+              ["%s %s" % (e["kind"], e["followup_id"]) for e in exceptions]))
 
     # ---------------- current intake ----------------
     intake = jsonl(OUT / "AUGUST2026_INTAKE_RECORDS.jsonl")
