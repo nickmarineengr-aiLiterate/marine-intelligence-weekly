@@ -3714,8 +3714,10 @@ parent, and trap 128 on completeness claims.
   responsibilities. MoES is a supporting agency. It is **not** the ministry that controls NOSDCP.
 - **Liability.** The **shipowner** is liable — strictly, but normally within the convention
   limits and subject to the convention defences. The **P&I club insures** that liability; where
-  the applicable Convention provides for direct action (CLC 1992, Bunkers Convention), a claim may
-  also be brought directly against the insurer — never taught as universal. CLC 1992 plus the
+  the applicable liability convention provides for direct action (for example CLC 1992), a claim
+  may also be brought directly against the insurer — never taught as universal. Do not name the
+  Bunkers Convention in that sentence on an India card: India's status under it is unverified
+  (queued audit). CLC 1992 plus the
   1992 Fund covers persistent oil from tankers; bunker spills from other ships are a separate
   regime. Never "the P&I club is liable for all costs".
 - **Reporting.** The Master reports without delay to the coastal State under MARPOL Protocol I —
@@ -3724,13 +3726,21 @@ parent, and trap 128 on completeness claims.
   a recipient the Protocol I report must pass through: renaming DGS must never put DGMA into the
   immediate reporting chain.
 
+- **Response responsibility is location-based.** Ports within port limits, oil-handling agencies
+  within 500 m of their installations, coastal States/UTs on the shoreline, the Coast Guard in the
+  maritime zones as Central Coordinating Authority. Never "the Coast Guard leads the response"
+  unqualified, and never "ICG declares Tier 2 or Tier 3" as a fixed rule: beyond local capability
+  the response escalates to Tier 2 or Tier 3 under NOSDCP, with the Coast Guard in the
+  coordinating/overall response role. (Amended 17 Sep 2026 after independent review, before
+  release.)
+
 **Affected content types:** oral answer body, 15/60-second answers, reg-box, CE Oral Tip,
 examiner trap, numbers box, scenario anchor, memory map, q-version stamp; gated page and `SQ/`
 twin.
 
 **Search terms for a manual pass:** `NOSDCP`, `NOS-DCP`, `Oil Spill Disaster Contingency`,
 `Earth Sciences`, `MoES`, `nodal`, `Central Coordinating`, `strictly liable`, `all costs`,
-`P&I club pays`, `DPA →`.
+`P&I club pays`, `DPA →`, `leads the response`, `leading`, `declares Tier`, `directly against`.
 
 **Prevention.** `tools/oral/validate_correction_nosdcp.py` checks the proposition, not the phrase:
 *Earth Sciences* must not be bound to NOSDCP or Coast Guard authority in teaching text, *nodal*

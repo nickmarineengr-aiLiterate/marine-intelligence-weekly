@@ -6,7 +6,7 @@ refuses a digest pin as a catch. Probes only validate_correction_nosdcp.py, so
 the suite runs in minutes, not hours (validate_corrections owns the pins and
 is exercised by corrections_mutate).
 
-REGRESSION (A-H, L): a corrected limb goes back to the shipped defect - the
+REGRESSION (A-H, L, U-X): a corrected limb goes back to the shipped defect - the
   ministry, the "nodal" designation, the P&I "all costs" statement, the DPA/DGS
   reporting chain - one site at a time, so a card-scoped "somewhere on the
   card it is right" check cannot pass.
@@ -119,9 +119,34 @@ MUTATIONS = [
      "q14_shipowner_liable_pandi_insures:gated"),
 
     ("S", "Q15 direct action made unconditional",
-     sub_in_file(GATED, "; where the applicable Convention provides for direct action (CLC 1992, Bunkers Convention), a claim may also be brought <strong>directly against the insurer</strong>.",
+     sub_in_file(GATED, "; where the applicable liability convention provides for direct action (for example CLC 1992), a claim may also be brought <strong>directly against the insurer</strong>.",
                  "; claims can be made <strong>directly against the insurer</strong>.", count=1),
      "direct_action_is_qualified:gated"),
+
+    # ---- GPT-REVIEW AMENDMENTS (17 Sep 2026) ---------------------------------
+    ("U", "Bunkers Convention named again in the Q14 direct-action sentence",
+     sub_in_file(GATED, "provides for direct action (for example CLC 1992), a claim may also be brought directly against the insurer.",
+                 "provides for direct action (CLC 1992, Bunkers Convention), a claim may also be brought directly against the insurer.",
+                 count=1),
+     "direct_action_names_no_bunkers_convention:gated"),
+
+    ("V", "Q15 CE tip: 'the Coast Guard leads the operational response' restored",
+     sub_in_file(GATED, "Response responsibility depends on where the spill occurs: the Coast Guard leads within its maritime-zone responsibilities and coordinates nationally under NOSDCP.",
+                 "The Coast Guard leads the operational response under NOSDCP.", count=1),
+     "no_unqualified_coast_guard_leads:gated"),
+
+    ("W", "Q14 scenario: 'ICG declares Tier 2 or Tier 3' restored",
+     sub_in_file(GATED, "if the incident exceeds local capability, the response escalates to Tier 2 or Tier 3 under NOSDCP, with the Coast Guard taking the coordinating/overall response role;",
+                 "ICG declares Tier 2 or Tier 3 NOSDCP response;", count=1),
+     "no_icg_declares_tier:gated"),
+
+    ("X", "Q15 60-second answer re-bloated with the Authority/Agency detail",
+     sub_in_file(GATED, "The Indian Coast Guard is the Central Coordinating Authority; the DG Coast Guard chairs it.",
+                 "The Indian Coast Guard is the Central Coordinating Authority - designated in 1986, plan approved in 1993, "
+                 "revised edition released in 2015 and amended since by circular - and the DG Coast Guard chairs it; the "
+                 "Allocation of Business Rules word the same role as Central Coordinating Agency, which the Coast Guard's own "
+                 "documents also quote when citing the Rules.", count=1),
+     "q15_60s_speakable_and_complete:gated"),
 
     ("T", "DGMA inserted into the Protocol I reporting chain",
      sub_in_file(GATED, "The Master reports <strong>without delay</strong> to the coastal State under",

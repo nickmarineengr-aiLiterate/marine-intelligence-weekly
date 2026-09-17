@@ -190,13 +190,14 @@ def main() -> int:
                not earth_bound_unnegated(q15), "bound=%r" % (earth_bound_unnegated(q15)[:2] or None))
         report("q15_central_coordinating_authority:%s" % side,
                len(re.findall(r"Central Coordinating Authority", q15)) >= 4)
-        # Site-scoped: body, 60-second answer and reg-box each carry "Agency",
-        # and every one of them is attributed to the Business Rules.
+        # Site-scoped: body and reg-box each carry "Agency" (the speakable
+        # 60-second answer deliberately does not), and every one is attributed
+        # to the Business Rules.
         agency = [m.start() for m in re.finditer(r"Central Coordinating Agency", q15)]
         unattributed = [q15[max(0, i - 60):i + 30] for i in agency
                         if not re.search(r"Allocation of Business|Business Rules", q15[max(0, i - 250):i])]
         report("q15_business_rules_say_agency:%s" % side,
-               len(agency) >= 3 and not unattributed,
+               len(agency) >= 2 and not unattributed,
                "%d site(s), unattributed=%r" % (len(agency), unattributed[:1] or None))
         report("q14_central_coordinating_authority:%s" % side,
                "Central Coordinating Authority" in q14)
@@ -218,12 +219,31 @@ def main() -> int:
                    # limit must be a convention or liability limit.
                    and re.search(r"within[^.]{0,25}(?:convention|liability)\s+limits", t_) is not None)
 
-        # Direct action against the insurer is Convention-conditional: every
-        # site that teaches it must carry the qualification.
+        # Direct action against the insurer is convention-conditional: every
+        # site that teaches it must carry the qualification, and on this
+        # India card it must not name the Bunkers Convention - India's status
+        # under it is a separate, unverified audit.
         da = [s for s in sentences(both) if re.search(r"directly against the insurer", s)]
-        unq = [s[:90] for s in da if not re.search(r"where the applicable Convention provides for direct action", s)]
-        report("direct_action_is_qualified:%s" % side, len(da) >= 3 and not unq,
+        unq = [s[:90] for s in da
+               if not re.search(r"where the applicable liability convention provides for direct action", s)]
+        report("direct_action_is_qualified:%s" % side, len(da) >= 2 and not unq,
                "%d site(s), unqualified=%r" % (len(da), unq[:1] or None))
+        bunk = [s[:90] for s in da if re.search(r"Bunker", s, re.I)]
+        report("direct_action_names_no_bunkers_convention:%s" % side, bool(da) and not bunk,
+               "found=%r" % (bunk[:1] or None))
+
+        # Response responsibility is location-based: the Coast Guard never
+        # "leads the response" unqualified, and never "declares" a tier.
+        leads = [s[:90] for s in sentences(both)
+                 if re.search(r"(?:Coast Guard|ICG)\s+(?:leads|leading)(?!\s+within)", s)]
+        report("no_unqualified_coast_guard_leads:%s" % side, not leads,
+               "found=%r" % (leads[:1] or None))
+        report("location_based_response_stated:%s" % side,
+               re.search(r"depends on (?:where the spill occurs|location)", q15) is not None
+               and re.search(r"escalates to Tier 2 or Tier 3", q14) is not None)
+        declares = re.search(r"(?:ICG|Coast Guard)\s+declares?\s+Tier", both)
+        report("no_icg_declares_tier:%s" % side, declares is None,
+               "found=%r" % (declares.group(0) if declares else None))
 
         # 3. Reporting.
         report("no_dpa_before_statutory_report:%s" % side, not DPA_CHAIN.search(both))
@@ -235,6 +255,18 @@ def main() -> int:
                all("Protocol I" in t_ and re.search(r"DPA[^.]{0,30}(?:in parallel)|in parallel[^.]{0,30}DPA", t_)
                    for t_ in (q14, q15)))
         report("no_dgs_in_teaching:%s" % side, not re.search(r"\bDGS\b", both))
+
+        m60 = re.search(r"60-Second Answer(.*?)(?:⚖|Regulatory References)", q15)
+        s60 = m60.group(1) if m60 else ""
+        need = [r"National Oil Spill Disaster Contingency Plan", r"Ministry of Defence",
+                r"Central Coordinating Authority", r"DG Coast Guard chairs", r"OPRC 1990",
+                r"port limits", r"500 m", r"shoreline", r"Tier 1", r"Tier 2", r"Tier 3",
+                r"shipowner is liable", r"P&I club insures"]
+        missing = [n for n in need if not re.search(n, s60)]
+        words = len(s60.split())
+        report("q15_60s_speakable_and_complete:%s" % side,
+               bool(s60) and words <= 110 and not missing,
+               "%d words, missing=%r" % (words, missing or None))
 
         # 4. Wording the approval ruled out.
         report("no_current_edition_2015_claim:%s" % side,

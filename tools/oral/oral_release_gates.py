@@ -678,17 +678,20 @@ GATES = (
           CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
           note="binds Earth Sciences and 'nodal' to NOSDCP authority (never a "
                "blanket ban), P&I 'liable for all costs' only where ASSERTED, the "
-               "Authority/Agency distinction at every site, qualified direct action, "
-               "no DGMA in the reporting chain, and the SQ twin"),
+               "Authority/Agency distinction at every site, jurisdiction-neutral direct "
+               "action, location-based response, no DGMA in the reporting chain, a "
+               "speakable 60-second answer, and the SQ twin"),
     _gate("correction_nosdcp_mutate",
           ["python", "%s/mutate_correction_nosdcp.py" % _ORAL],
           CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1200,
           historical_39=False, depends_on=("validate_correction_nosdcp",),
-          note="20 mutations, each tripping its OWN named check: one-site "
+          note="24 mutations, each tripping its OWN named check: one-site "
                "regressions, twin drift, an untouched page re-infected, and the "
                "over-correction direction (blanket Earth Sciences ban, trap made a "
-               "literal GREP, unconditional direct action, DGMA in the Protocol I chain); "
-               "20/20 caught, 130s measured 16 Sep 2026"),
+               "literal GREP, unconditional direct action, DGMA in the Protocol I chain), "
+               "plus the 17 Sep review amendments (Bunkers named, unqualified Coast "
+               "Guard lead, ICG declares a tier, bloated 60-second answer); 24/24 "
+               "caught, 182s measured 17 Sep 2026"),
 
     # ---- follow-up authorisation register ---------------------------------
     # Postdates E6, so outside the historical 39, and not held back either.
