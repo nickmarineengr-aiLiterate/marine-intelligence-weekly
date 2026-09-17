@@ -106,6 +106,80 @@ def m_followup_marked_implemented(root):
     p.write_text(json.dumps(d, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
+def _edit_json(path, fn):
+    d = json.loads(path.read_text(encoding="utf-8"))
+    fn(d)
+    path.write_text(json.dumps(d, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
+def _reg_action(root, fid, fn):
+    _edit_json(root / REG, lambda d: fn(next(a for a in d["actions"]
+                                             if a["followup_id"] == fid)))
+
+
+def _claim_produced(a, batch, manifest):
+    a.update(status="PRODUCED", batch=batch, production_evidence={
+        "batch_id": batch, "manifest": manifest, "card_index": 0,
+        "target": "%s#%s" % (a["parent_file"], a["parent_anchor"])})
+
+
+def m_followup_produced_without_manifest(root):
+    """A fully-formed closure claim that no manifest card implements."""
+    _reg_action(root, "FUP-020", lambda a: _claim_produced(
+        a, "F1", "tools/oral/batch_f1_manifest.json"))
+
+
+def m_followup_produced_by_phantom_batch(root):
+    _reg_action(root, "FUP-020", lambda a: _claim_produced(
+        a, "F9", "tools/oral/batch_f9_manifest.json"))
+
+
+def m_manifest_card_points_elsewhere(root):
+    """The id still resolves, but the manifest card is for a different record."""
+    _edit_json(root / "tools/oral/batch_f1_manifest.json",
+               lambda d: d["cards"][0].update(anchor="q999"))
+
+
+def m_followup_credited_to_wrong_batch(root):
+    def fn(a):
+        a["batch"] = "F1b"
+        a["production_evidence"].update(
+            batch_id="F1b", manifest="tools/oral/batch_f1b_manifest.json")
+    _reg_action(root, "FUP-018", fn)
+
+
+def m_followup_stale_reopen(root):
+    _reg_action(root, "FUP-018", lambda a: a.update(
+        status="AUTHORISED_NOT_STARTED", batch=None, production_evidence=None))
+
+
+def m_followup_evidence_wrong_card(root):
+    _reg_action(root, "FUP-033",
+                lambda a: a["production_evidence"].update(target="QB1_A.html#q9"))
+
+
+def m_followup_produced_without_evidence(root):
+    _reg_action(root, "FUP-006", lambda a: a.update(production_evidence=None))
+
+
+def m_followup_not_started_with_batch(root):
+    _reg_action(root, "FUP-020", lambda a: a.update(batch="F1"))
+
+
+def m_supporting_manifest_removed(root):
+    (root / "tools/oral/batch_f1b_manifest.json").unlink()
+
+
+def m_supporting_manifest_corrupted(root):
+    (root / "tools/oral/batch_f1_manifest.json").write_text("{ truncated", encoding="utf-8")
+
+
+def m_supporting_manifest_undeclared(root):
+    """A manifest that stops declaring the register is no longer its evidence."""
+    _edit_json(root / "tools/oral/batch_f1b_manifest.json",
+               lambda d: d.pop("authorisation_source", None))
+
+
 def m_followup_renumbered(root):
     p = root / REG
     d = json.loads(p.read_text(encoding="utf-8"))
@@ -175,6 +249,8 @@ def m_overwrite_july_workbook(root):
     (root / QBK / "MIW_July2026_QuestionBank_SHARE.xlsx").unlink()
 
 
+F3 = "F3_no_followup_claims_implemented_without_a_batch_manifest"
+
 SPECS = [
     ("MUT-01_delete_one_historical_occurrence", m_delete_historical,
      {"H1_historical_count_is_788", "H4_reconciliation_accounts_every_occurrence_once"}),
@@ -214,6 +290,25 @@ SPECS = [
      {"Z1_no_final_august_workbook_while_intake_open"}),
     ("MUT-15_overwrite_prior_july_workbook", m_overwrite_july_workbook,
      {"Z2_prior_july_v26_workbooks_preserved"}),
+    # F3 checks the register against the manifest derivation, not against a
+    # fixed status. The clean copy carrying legitimate PRODUCED rows is the
+    # positive control (see assert_followup_states); these are the negatives.
+    ("MUT-16_followup_produced_without_supporting_manifest_card",
+     m_followup_produced_without_manifest, {F3}),
+    ("MUT-17_followup_produced_by_nonexistent_batch_manifest",
+     m_followup_produced_by_phantom_batch, {F3}),
+    ("MUT-18_manifest_card_round_trips_to_a_different_record",
+     m_manifest_card_points_elsewhere, {F3}),
+    ("MUT-19_produced_action_credited_to_the_wrong_batch",
+     m_followup_credited_to_wrong_batch, {F3}),
+    ("MUT-20_produced_action_stale_reopened", m_followup_stale_reopen, {F3}),
+    ("MUT-21_produced_evidence_names_another_card", m_followup_evidence_wrong_card, {F3}),
+    ("MUT-22_produced_status_without_evidence", m_followup_produced_without_evidence, {F3}),
+    ("MUT-23_not_started_action_names_a_batch", m_followup_not_started_with_batch, {F3}),
+    ("MUT-24_supporting_manifest_removed", m_supporting_manifest_removed, {F3}),
+    ("MUT-25_supporting_manifest_corrupted", m_supporting_manifest_corrupted, {F3}),
+    ("MUT-26_supporting_manifest_stops_declaring_the_register",
+     m_supporting_manifest_undeclared, {F3}),
 ]
 
 
@@ -270,6 +365,18 @@ def assert_git_context(base):
     return problems
 
 
+def assert_followup_states(base):
+    """The green precondition proves F3 accepts both legitimate states only if
+    the staged register actually carries both. Without this, a register that
+    happened to hold no PRODUCED row would let a regression back to the old
+    all-not-started rule pass the precondition unnoticed."""
+    reg = json.loads((base / REG).read_text(encoding="utf-8"))
+    states = {a["status"] for a in reg["actions"]}
+    missing = {"AUTHORISED_NOT_STARTED", "PRODUCED"} - states
+    return ["staged register has no %s row, so F3's positive control is vacuous" % s
+            for s in sorted(missing)]
+
+
 def run_validator(root):
     env = dict(os.environ, ORAL_REPO_ROOT=str(root), PYTHONIOENCODING="utf-8")
     r = subprocess.run([sys.executable, str(root / "tools/oral/validate_oral_intake.py")],
@@ -290,7 +397,7 @@ def main():
             shutil.copytree(s, d, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
 
         stage_git_context(base)
-        problems = assert_git_context(base)
+        problems = assert_git_context(base) + assert_followup_states(base)
         if problems:
             for pr in problems:
                 print(f"STAGING FAILED: {pr}")
