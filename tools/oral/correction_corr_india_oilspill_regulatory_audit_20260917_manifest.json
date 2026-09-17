@@ -1,0 +1,324 @@
+{
+ "correction_id": "CORR-INDIA-OILSPILL-REGULATORY-AUDIT-20260917",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "founder_audit_batch",
+ "date": "2026-09-17",
+ "title": "India oil-spill regulatory audit - NOSDCP tier tonnage bands, India's OPRC 1990 date, India's Bunkers Convention 2001 status, and the PANS 96-hour claim",
+ "baseline_commit": "91f71e8",
+ "governing_commits": [
+  "0c3d906"
+ ],
+ "authorisation_source": "meoclass1/known_traps.md",
+ "known_traps_entries": [
+  134
+ ],
+ "candidate_claim": "Founder audit brief, 17 Sep 2026: four queued propositions from CORR-NOSDCP-MINISTRY-20260916 (Follow-ups A and B, Bunkers status, Q14 PANS line), audited together as one governed batch.",
+ "candidate_verdict": "A_TIER UNSUPPORTED; B_OPRC_DATE INCORRECT; C_BUNKERS_STATUS PARTLY_CORRECT (treaty status blurred with domestic law); D_PANS PARTLY_CORRECT on Q14, INCORRECT on Q18",
+ "sub_issues": {
+  "A_TIER": {
+   "proposition": "NOSDCP Tier 1 <700 t, Tier 2 700-10,000 t, Tier 3 >10,000 t",
+   "verdict": "UNSUPPORTED",
+   "confidence": "HIGH that the bands are unsupported by held official material; the NOSDCP plan text itself is ACCESS_LIMITED",
+   "evidence_class": "OFFICIAL (issuer's guidance); PRIMARY plan text not obtainable",
+   "authority": "SRC-ICG-OSD-POLICY-2025 s.13.1 (700-ton risk-exposure stocking example) and annex (Tier-1 by area; assistance 'beyond their response capabilities that is beyond Tier-1'; Coast Guard Tier-2 in the Maritime Zones); SRC-ICG-NOSDCP-CIRCULARS-2025 (tier escalation as a response decision); SRC-ICG-NOSDCP-2015-PLAN ACCESS_LIMITED (404 at the Coast Guard's own URL).",
+   "correction": "Bands removed, not replaced; tiers taught by capability; 700-tonne figure named as a stocking example.",
+   "cards": [
+    "INDIA-OILSPILL-A-01"
+   ],
+   "artefacts": [
+    "meoclass1/oralnotes/simon-notes-p3.html"
+   ],
+   "safe_to_implement": true
+  },
+  "B_OPRC_DATE": {
+   "proposition": "India ratified/acceded to OPRC 1990 in 1993",
+   "verdict": "INCORRECT",
+   "confidence": "HIGH",
+   "evidence_class": "PRIMARY (depositary)",
+   "authority": "SRC-IMO-STATUS-TREATIES-2026-08-26: India (accession) 17 November 1997, entry into force 17 February 1998. 1993 = Government approval of NOSDCP (SRC-ICG-MARINE-ENVIRONMENT-2026; Committee of Secretaries 4 Nov 1993 per SRC-ICG-NOSDCP-CIRCULARS-2025).",
+   "correction": "simon-notes-p3 reg-box states the accession and entry-into-force dates and separates 1993.",
+   "cards": [],
+   "artefacts": [
+    "meoclass1/oralnotes/simon-notes-p3.html"
+   ],
+   "safe_to_implement": true
+  },
+  "C_BUNKERS_STATUS": {
+   "proposition": "India is a Party to / implements the Bunkers Convention 2001",
+   "verdict": "PARTLY_CORRECT - India is NOT a Party; bunker liability in India is domestic law (MS Act 2025 Part IX Ch IV)",
+   "confidence": "HIGH",
+   "evidence_class": "PRIMARY (depositary; Gazette text of the Act)",
+   "authority": "SRC-IMO-STATUS-TREATIES-2026-08-26: India not listed under BUNKERS 2001. SRC-MSACT-2025 ss.196-210 (liability s.198, insurance >1,000 GT s.204, direct action s.205(3), certificate ss.206-207).",
+   "correction": "QB1_A Q4 reg-box and SQ twin; QB1_B_CheatSheet trap qualified.",
+   "cards": [
+    "INDIA-OILSPILL-C-01",
+    "INDIA-OILSPILL-C-02"
+   ],
+   "artefacts": [
+    "meoclass1/QB1_B_CheatSheet.html"
+   ],
+   "reviewed_correct_unchanged": [
+    "meoclass1/QB9_D.html and QB9_D_CheatSheet.html - 'India has not ratified the Bunker Convention' (treaty limb correct)",
+    "meoclass1/QB1_A.html#q14, #q15 - jurisdiction-neutral 'separate bunker regime' wording",
+    "meoclass1/QB3_J.html#q5 examiner chain - topic list, no party claim",
+    "convention-level Bunkers teaching on QB1_A#q4, QB1_B, QB4_A, QB9_A, QB9_E, QB9_H, miw-notes-mgmt-p9 - no India party claim"
+   ],
+   "held_for_founder_review": [
+    "meoclass1/pastpapers/specs/QP2304.json (+ QP2304.html, solvedQP/QP2304.html): follow-up 'Does she need a certificate in an Indian port? Yes. Article 7.12 requires a State Party...' treats India as a State Party at an April 2023 sitting - proposal under the solvedQP correction skill, not edited",
+    "meoclass1/pastpapers/docs/QP2310_TEMPORAL_AND_DONOR_ANCHOR.md: 'India is a party to both' (CLC 1992 and Bunkers) - internal anchor doc; proposal, not edited"
+   ],
+   "safe_to_implement": true
+  },
+  "D_PANS": {
+   "proposition": "PANS approx. 96 hours for India; a SOLAS/ISPS 96-hour notice; PANS to a DGS port office",
+   "verdict": "PARTLY_CORRECT (Q14) / INCORRECT (Q18 limbs)",
+   "confidence": "HIGH for the Indian rule; MEDIUM-HIGH for removing the SOLAS attribution (SOLAS text not re-read; the Indian notice attributes the period to national rules)",
+   "evidence_class": "PRIMARY/OFFICIAL (issuing administration's notice)",
+   "authority": "SRC-DGMA-MSNOTICE-13-2024-PANS paras 5-8 and Annexure I; Draft MS (Ship and Port Facility Security) Rules, 2026 keep 96 hours (draft, context only); MSA 2025 s.324(2)(a) saves the 2024 Rules.",
+   "correction": "QB1_A Q14 numbers box (+SQ twin); QB1_A Q18 body, reg-box, CE tip, numbers box, memory map.",
+   "cards": [
+    "INDIA-OILSPILL-D-01",
+    "INDIA-OILSPILL-D-02",
+    "INDIA-OILSPILL-D-03"
+   ],
+   "artefacts": [],
+   "safe_to_implement": true
+  }
+ },
+ "rationale": "One audit event, four independent propositions, recorded separately so each can be reviewed, reverted or re-verified on its own. Each was verified at the most authoritative source obtainable before any edit; nothing was corrected because another MIW page disagreed. Where primary text could not be obtained (the NOSDCP plan), false certainty was removed and no replacement figure was invented.",
+ "note": "SCOPE. Cards: QB9_A#q8; QB1_A#q4, #q14, #q18; SQ twins of q4 and q14 (SQ q18 is a locked teaser, untouched). Non-card surfaces: oralnotes/simon-notes-p3.html note 5 (A_TIER, B_OPRC_DATE), QB1_B_CheatSheet.html (C), known_traps entries 133 (status pointer) and 134, governed changelog + derived index, three source-registry rows plus claims appended to SRC-ICG-OSD-POLICY-2025 and SRC-MSACT-2025. NOT DONE: the pastpapers/solvedQP Bunkers items (held proposals); QB9_D/QB9_D_CheatSheet 'India has not ratified the Nairobi WRC 2007' (IMO lists accession 23 Mar 2011, in force 14 Apr 2015 - out of scope, logged in entry 134); QB3_J Q4/Q5 wording that NOSDCP 'defines' working thresholds (hedged, not demonstrably wrong, unchanged); oral-intelligence/examiner-audit/ORAL_NOTES_UNITS.jsonl (a frozen audit snapshot still quoting the old notes text, left as history per the 7b22475 precedent). Notes page stamp not bumped, following the same precedent. The applier derives from the baseline commit.",
+ "content_index_effect": "recently_updated gains one 2026-09-17 entry naming QB1_A.html and QB9_A.html; regenerated with build_qb_content_index.py, --check CURRENT. Corpus 86 files / 761 questions unchanged.",
+ "propagation": {
+  "method": "Repo-wide text search (excluding RulesApp) for Tier 1/2/3 with 700/10,000 and t/MT/tonnes/tons; NOSDCP/NOS-DCP; OPRC with India and ratif/acced/accession/1993/1997/1998; Bunker(s) Convention / Bunker Oil Pollution / Bunkers 2001 / blue card with India, party, ratified, certificate, in force; PANS / pre-arrival / 96 hours / 96h / security notice. Every hit read in context, including pastpapers specs, verification records and derived indexes; then asserted corpus-wide by validate_correction_india_oilspill.py.",
+  "A_TIER_sites": [
+   "meoclass1/QB9_A.html#q8 (4)",
+   "meoclass1/oralnotes/simon-notes-p3.html#n5 (heading, 3-line formula box, Simon tip)"
+  ],
+  "B_OPRC_DATE_sites": [
+   "meoclass1/oralnotes/simon-notes-p3.html#n5 reg-box (1)"
+  ],
+  "C_BUNKERS_STATUS_sites": [
+   "meoclass1/QB1_A.html#q4 (1)",
+   "SQ/QB1_A.html#q4 (1)",
+   "meoclass1/QB1_B_CheatSheet.html (1)"
+  ],
+  "D_PANS_sites": [
+   "meoclass1/QB1_A.html#q14 (1)",
+   "SQ/QB1_A.html#q14 (1)",
+   "meoclass1/QB1_A.html#q18 (7)"
+  ],
+  "consistent_already": [
+   "meoclass1/QB3_J.html#q4 (tiers by capability; trap against tonnage)",
+   "meoclass1/QB1_A.html#q15 (tiers without tonnage)",
+   "meoclass1/QB9_D.html (India has not ratified the Bunker Convention)"
+  ],
+  "frozen_snapshot_not_edited": [
+   "meoclass1/oral-intelligence/examiner-audit/ORAL_NOTES_UNITS.jsonl"
+  ]
+ },
+ "invariants": [
+  "corpus 761 questions / 86 files, unchanged.",
+  "No new cards, none removed, no question text altered.",
+  "Only the declared cards move: QB1_A q4/q14/q18, SQ/QB1_A q4/q14, QB9_A q8 (asserted by the applier).",
+  "SQ twin byte-identical to the gated copy for q4 and q14 before and after; SQ q18 teaser untouched.",
+  "validate_correction_nosdcp stays green: Q14 keeps its v1.1 NOSDCP stamp text and every NOSDCP proposition.",
+  "No tier tonnage figure added anywhere; no replacement figure invented.",
+  "'India has not ratified the Bunker Convention' (QB9_D) is not over-corrected; the MS Act 2025 Part IX Ch IV citation survives.",
+  "No 96-hour figure is attributed to SOLAS or the ISPS Code."
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/oralnotes/simon-notes-p3.html",
+   "classification": "INDEX_METADATA",
+   "sub_issue": [
+    "A_TIER",
+    "B_OPRC_DATE"
+   ],
+   "role": "NOTES_SURFACE",
+   "digest_pinned": false,
+   "rationale": "Note 5: 'Oil Spill Volume Tiers' heading, 700 / 10,000 MT formula box and 'Know the three tiers by volume' replaced by capability-based tiers with a no-tonnage note (A); OPRC reg-box 'India ratified/acceded 1993 (verify...)' replaced by accession 17 Nov 1997 / in force 17 Feb 1998, 1993 = NOSDCP approval (B). An oralnotes page carries no card digest.",
+   "guarded_by": "validate_correction_india_oilspill (A_notes_*, B_notes_*)"
+  },
+  {
+   "path": "meoclass1/QB1_B_CheatSheet.html",
+   "classification": "INDEX_METADATA",
+   "sub_issue": [
+    "C_BUNKERS_STATUS"
+   ],
+   "rationale": "HNS trap: 'Bunker Convention 2001 (IS in force)' on an Indian-waters line qualified - in force internationally since 21 Nov 2008, India not a Party, bunker liability in Indian waters under MS Act 2025 Part IX Ch IV.",
+   "guarded_by": "validate_correction_india_oilspill (C_cheatsheet_in_force_qualified)"
+  },
+  {
+   "path": "meoclass1/known_traps.md",
+   "classification": "INDEX_METADATA",
+   "rationale": "Entry 134 added (four sub-issues, held items, out-of-scope WRC finding); entry 133 gains a status pointer while keeping its follow-up log; change-log row. GREP: SKIP.",
+   "guarded_by": "validate_correction_india_oilspill (trap_134_*, trap_133_points_to_resolution), validate_correction_nosdcp (trap_133_*)"
+  },
+  {
+   "path": "tools/oral/qb_content_index_governed.json",
+   "classification": "INDEX_METADATA",
+   "rationale": "recently_updated entry for 2026-09-17.",
+   "guarded_by": "validate_qb_content_index, validate_correction_india_oilspill"
+  },
+  {
+   "path": "meoclass1/qb_content_index.json",
+   "classification": "INDEX_METADATA",
+   "rationale": "Regenerated by build_qb_content_index.py; never hand-edited.",
+   "guarded_by": "build_qb_content_index --check, validate_correction_india_oilspill"
+  },
+  {
+   "path": "docs/sources/MIW_SOURCE_REGISTRY.json",
+   "classification": "INDEX_METADATA",
+   "rationale": "Rows SRC-IMO-STATUS-TREATIES-2026-08-26, SRC-DGMA-MSNOTICE-13-2024-PANS, SRC-ICG-NOSDCP-2015-PLAN (ACCESS_LIMITED); verified claims appended to SRC-ICG-OSD-POLICY-2025 and SRC-MSACT-2025. PDF bytes stored beside the registry and git-ignored by convention; digests committed.",
+   "guarded_by": "validate_correction_india_oilspill (sources_registered, nosdcp_plan_recorded_access_limited)"
+  },
+  {
+   "path": "tools/oral/apply_corr_india_oilspill.py",
+   "classification": "INDEX_METADATA",
+   "rationale": "The applier; derives from baseline 91f71e8.",
+   "guarded_by": "no release guard pins this file"
+  },
+  {
+   "path": "tools/oral/validate_correction_india_oilspill.py",
+   "classification": "INDEX_METADATA",
+   "rationale": "Content gate.",
+   "guarded_by": "oral_release_gates: validate_correction_india_oilspill"
+  },
+  {
+   "path": "tools/oral/mutate_correction_india_oilspill.py",
+   "classification": "INDEX_METADATA",
+   "rationale": "Mutation suite, 25 mutations across the four sub-issues plus record and non-vacuity cases.",
+   "guarded_by": "oral_release_gates: correction_india_oilspill_mutate"
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "INDIA-OILSPILL-A-01",
+   "file": "QB9_A.html",
+   "path": "meoclass1/QB9_A.html",
+   "anchor": "q8",
+   "classification": "PRIMARY_CORRECTION",
+   "sub_issue": "A_TIER",
+   "pre_edit_digest": "edc479bc20441a274b5ccf44a2b6aab0273a7d87c144f5819acd4c3b6945fc99",
+   "post_edit_digest": "98c74f1f36ae0edd12aa3bc036565f2c3e24971d5649df25221ca068651b148c",
+   "known_traps_entry": 134,
+   "rationale": "PRIMARY_CORRECTION because Follow-up A - the tier tonnages - is the first item the authorising entry queued, and this is the card it named. The other three propositions are independent defects audited by the same authorised sweep (SCOPE_PASS_CORRECTION), never the same fix. The only QB card teaching fixed NOSDCP tier tonnage bands, at four sites (three tier bullets and the Key Numbers 'Tier 3 (>10,000 Tonnes)'). Unsupported: the held official Coast Guard material grades tiers by capability and its only 700-ton figure is a dispersant-stocking risk-exposure example; the NOSDCP plan text is ACCESS_LIMITED. Bands removed, not replaced; capability-based tiers taught; a 'No tonnage limits' bullet names the stocking example as an example. Question text unchanged. Stamped v1.2.",
+   "changed_propositions": [
+    "Tier 1/2/3 bullets: tonnage bands -> escalation by response capability (local agency by area; Coast Guard beyond local capability; national with international assistance).",
+    "New bullet: no tonnage limits; the 700-tonne figure is a stocking example, not a tier definition.",
+    "Key Numbers: 'Tier 3 (>10,000 Tonnes)' threshold -> tiers graded by capability, no threshold quoted.",
+    "q-version v1.1 -> v1.2."
+   ],
+   "digest_pinned_by_earlier_manifest": true,
+   "supersedes": {
+    "manifest": "correction_corr_t4a_artefact_hygiene_20260906_manifest.json",
+    "action_id": "T4A-ARTEFACT-HYGIENE-20260906-14",
+    "post_edit_digest": "edc479bc20441a274b5ccf44a2b6aab0273a7d87c144f5819acd4c3b6945fc99",
+    "note": "T4A removed authoring residue from this card and pinned the result. That pin is this record's pre-edit digest, so nothing edited the card in between."
+   }
+  },
+  {
+   "correction_action_id": "INDIA-OILSPILL-C-01",
+   "file": "QB1_A.html",
+   "path": "meoclass1/QB1_A.html",
+   "anchor": "q4",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "sub_issue": "C_BUNKERS_STATUS",
+   "pre_edit_digest": "6880d3c2d7490991d6130b8099923a6a2f184535f40c323472d1049673bb2231",
+   "post_edit_digest": "e8c78eed149eba4955a31c240d1a8d23cf82dfff67ec4a15c88fd7af216667d8",
+   "known_traps_entry": 134,
+   "rationale": "The Bunker Convention card's reg-box called the Merchant Shipping Act, 2025 Part IX Ch IV the 'domestic implementation of the Bunker Convention (replaces the 1958 Act equivalent)', which reads as India being a Party. IMO Status of Treaties (26 Aug 2026) does not list India under BUNKERS 2001. The reg-desc now states the Act as India's domestic regime (ss.198, 204, 205, 206-207, read in the Gazette text) and that India is not a Party; the unverified 1958-equivalent limb is removed. Convention-level teaching elsewhere on the card is jurisdiction-neutral and unchanged. Stamped v1.2.",
+   "changed_propositions": [
+    "Reg-box MS Act 2025 Part IX Ch IV: 'domestic implementation of the Bunker Convention (replaces the 1958 Act equivalent)' -> India's domestic bunker-oil liability regime modelled on the Convention; India not a Party.",
+    "q-version v1.1 -> v1.2 (prior 15 Jul 2026 note retained in the stamp)."
+   ]
+  },
+  {
+   "correction_action_id": "INDIA-OILSPILL-C-02",
+   "file": "QB1_A.html",
+   "path": "SQ/QB1_A.html",
+   "anchor": "q4",
+   "classification": "TEASER_SYNC",
+   "sub_issue": "C_BUNKERS_STATUS",
+   "pre_edit_digest": "6880d3c2d7490991d6130b8099923a6a2f184535f40c323472d1049673bb2231",
+   "post_edit_digest": "e8c78eed149eba4955a31c240d1a8d23cf82dfff67ec4a15c88fd7af216667d8",
+   "known_traps_entry": 134,
+   "rationale": "Free-sample copy of INDIA-OILSPILL-C-01. Byte-identical to the gated card before and after (asserted by the applier and by validate_correction_india_oilspill twin_identical_to_gated).",
+   "changed_propositions": [
+    "As INDIA-OILSPILL-C-01."
+   ]
+  },
+  {
+   "correction_action_id": "INDIA-OILSPILL-D-01",
+   "file": "QB1_A.html",
+   "path": "meoclass1/QB1_A.html",
+   "anchor": "q18",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "sub_issue": "D_PANS",
+   "pre_edit_digest": "7a9839126439667e4050b760ba6105ca4348502d38ee616d1156cf54b4947e5c",
+   "post_edit_digest": "e129d77de61e3963c2afd7fc4ff9661d7b30de96952fd7638fc08b0c8ff7fe35",
+   "known_traps_entry": 134,
+   "rationale": "The FAL / PANS card taught a '96-hour advance arrival notification (SOLAS XI-2 / ISPS Code)', PANS sent to a 'DGS port office', a reg-box '96-hour submission to DGS', and an unconditional 96 hours in the CE tip, numbers box and memory map. MS Notice 13 of 2024 (still listed by DGMA): to the port / PFSO and the regional Navy JOC or Coast Guard MRCC at least 96 hours before arrival, or within 2 hours of departure on a shorter voyage; 96 hours set by the 2024 national Rules. Every PANS site now carries the rule and its condition; the SOLAS limb states only the power to require information before entry. The SQ copy is a locked teaser and is unchanged. Stamped v1.1.",
+   "changed_propositions": [
+    "Body: SOLAS/ISPS 96-hour notification -> SOLAS XI-2/9.2 power to require information before entry; India's period set by national rules.",
+    "Body: 'ships notify DGS port office 96 hours before arrival' -> PANS under MS Notice 13 of 2024, recipients, at least 96 h / within 2 h of departure, ship types, form contents (FAL Forms 5 and 7).",
+    "Reg-box: SOLAS item without a 96-hour figure; 'DGS MS Notice - 96-hour submission to DGS' -> MS Notice 13 of 2024 with recipients, the conditional rule and the Rules as source of the 96 hours.",
+    "CE tip, numbers box, memory map: conditional rule stated.",
+    "q-version v1.0 -> v1.1."
+   ],
+   "digest_pinned_by_earlier_manifest": true,
+   "supersedes": {
+    "manifest": "batch_e6_enrichment_manifest.json",
+    "action_id": "ENRICH-A047",
+    "post_edit_digest": "7a9839126439667e4050b760ba6105ca4348502d38ee616d1156cf54b4947e5c",
+    "note": "E6 ENRICH-A047 added the declaration-list and container-loss sections and pinned the card; its post-edit digest is this record's pre-edit digest. Neither enriched section is changed."
+   }
+  },
+  {
+   "correction_action_id": "INDIA-OILSPILL-D-02",
+   "file": "QB1_A.html",
+   "path": "meoclass1/QB1_A.html",
+   "anchor": "q14",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "sub_issue": "D_PANS",
+   "pre_edit_digest": "8fc7a7f19afebe6c9c7f5928db99d16b3a9e0ddf3ebae74084f5184a58def1fd",
+   "post_edit_digest": "93128054deac3146aa02095195bd02f7dbeb67ef8e30be5549c9b5596b40dbbf",
+   "known_traps_entry": 134,
+   "rationale": "The adjacent OPRC card's numbers box carried the queued line 'Pre-arrival security notice (PANS, related context) approx. 96 hours for India' - wrong expansion, approximate where the rule is a minimum, no short-voyage limb. Restated from MS Notice 13 of 2024 as a port-entry security report, not a pollution report. Nothing else on the card moves; every NOSDCP proposition and the validate_correction_nosdcp checks stay green. Stamped v1.2 with the 16 Sep v1.1 provenance kept in the stamp.",
+   "changed_propositions": [
+    "Numbers box PANS line: approx. 96 hours -> at least 96 hours, or within 2 hours of departure if the voyage is shorter; official expansion; security, not pollution.",
+    "q-version v1.1 -> v1.2 (v1.1 NOSDCP text retained)."
+   ],
+   "digest_pinned_by_earlier_manifest": true,
+   "supersedes": {
+    "manifest": "correction_corr_nosdcp_ministry_20260916_manifest.json",
+    "action_id": "NOSDCP-02",
+    "post_edit_digest": "8fc7a7f19afebe6c9c7f5928db99d16b3a9e0ddf3ebae74084f5184a58def1fd",
+    "note": "CORR-NOSDCP-MINISTRY-20260916 pinned this card at its bc2a646 review-amendment state and deliberately left the PANS line untouched as a queued audit. That pin is this record's pre-edit digest."
+   }
+  },
+  {
+   "correction_action_id": "INDIA-OILSPILL-D-03",
+   "file": "QB1_A.html",
+   "path": "SQ/QB1_A.html",
+   "anchor": "q14",
+   "classification": "TEASER_SYNC",
+   "sub_issue": "D_PANS",
+   "pre_edit_digest": "8fc7a7f19afebe6c9c7f5928db99d16b3a9e0ddf3ebae74084f5184a58def1fd",
+   "post_edit_digest": "93128054deac3146aa02095195bd02f7dbeb67ef8e30be5549c9b5596b40dbbf",
+   "known_traps_entry": 134,
+   "rationale": "Free-sample copy of INDIA-OILSPILL-D-02, byte-identical to the gated card before and after.",
+   "changed_propositions": [
+    "As INDIA-OILSPILL-D-02."
+   ],
+   "digest_pinned_by_earlier_manifest": true,
+   "supersedes": {
+    "manifest": "correction_corr_nosdcp_ministry_20260916_manifest.json",
+    "action_id": "NOSDCP-04",
+    "post_edit_digest": "8fc7a7f19afebe6c9c7f5928db99d16b3a9e0ddf3ebae74084f5184a58def1fd",
+    "note": "The NOSDCP record's twin pin is this record's pre-edit digest; the twin stays byte-identical to the gated card."
+   }
+  }
+ ]
+}

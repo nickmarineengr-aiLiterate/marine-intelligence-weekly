@@ -720,8 +720,9 @@ GATES = (
                "over-correction direction (QB3_J's capability trap flattened, QB9_D's "
                "true 'has not ratified' removed, Q4 losing the MS Act 2025 citation, "
                "Q18 losing the SOLAS XI-2/9.2 limb - the case that caught a substring "
-               "check the card's own E6 enrichment satisfied); 25/25 caught, 2377s "
-               "measured 17 Sep 2026"),
+               "check the card's own E6 enrichment satisfied); plus the record cases, "
+               "including a softened sub-issue verdict and a card filed under the wrong "
+               "proposition; 28/28 caught, 1922s measured 17 Sep 2026"),
 
     # ---- follow-up authorisation register ---------------------------------
     # Postdates E6, so outside the historical 39, and not held back either.

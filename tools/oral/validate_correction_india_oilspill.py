@@ -79,6 +79,8 @@ TRAPS = QB / "known_traps.md"
 REGISTRY = REPO / "docs" / "sources" / "MIW_SOURCE_REGISTRY.json"
 CORR_DATE = "2026-09-17"
 STAMP = "India oil-spill regulatory audit"
+MANIFEST = HERE / "correction_corr_india_oilspill_regulatory_audit_20260917_manifest.json"
+SUB_ISSUES = ("A_TIER", "B_OPRC_DATE", "C_BUNKERS_STATUS", "D_PANS")
 
 # ---- proposition patterns -------------------------------------------------
 TIER = re.compile(r"\bTier[\s-]*(?:1|2|3|I{1,3})\b", re.I)
@@ -477,6 +479,35 @@ def main() -> int:
            "QP2304" in entry and "QP2310" in entry and "Nairobi" in entry)
     e133 = traps[traps.find("### 133. "):at] if at >= 0 else ""
     report("trap_133_points_to_resolution", "resolved in entry 134" in e133)
+
+    # The record carries the four propositions as a structured block. The
+    # schema admits `sub_issues` only because these checks read it.
+    man = json.loads(read_text(MANIFEST)) if MANIFEST.is_file() else {}
+    subs = man.get("sub_issues") or {}
+    verdicts = {"CORRECT", "PARTLY_CORRECT", "INCORRECT", "UNSUPPORTED", "OUTDATED"}
+    well_formed = subs and set(subs) == set(SUB_ISSUES) and all(
+        s.get("verdict", "").split(" ")[0] in verdicts
+        and s.get("authority") and s.get("evidence_class") and s.get("confidence")
+        and s.get("safe_to_implement") is True
+        for s in subs.values())
+    report("record_states_four_sub_issues", bool(well_formed),
+           "keys=%s" % (sorted(subs) or "none"))
+    declared = {c.get("correction_action_id"): c.get("sub_issue") for c in man.get("cards", [])}
+    unmapped = sorted(a for a, s in declared.items() if s not in SUB_ISSUES)
+    listed = {a for s in subs.values() for a in (s.get("cards") or [])}
+    orphan = sorted(listed - set(declared))
+    # every card's sub_issue must be one of the four, every card a sub_issue
+    # lists must exist, and the two directions must agree on which is which
+    crossed = sorted(a for a in listed if declared.get(a) and a not in
+                     (subs.get(declared[a], {}).get("cards") or []))
+    report("record_sub_issue_cards_resolve",
+           bool(declared) and not unmapped and not orphan and not crossed,
+           "unmapped=%s orphan=%s crossed=%s" % (unmapped or None, orphan or None, crossed or None))
+    report("record_verdicts_match_the_correction",
+           subs.get("A_TIER", {}).get("verdict") == "UNSUPPORTED"
+           and subs.get("B_OPRC_DATE", {}).get("verdict") == "INCORRECT"
+           and re.search(r"not a Party", subs.get("C_BUNKERS_STATUS", {}).get("verdict", ""), re.I)
+           and subs.get("D_PANS", {}).get("verdict", "").startswith("PARTLY_CORRECT"))
 
     reg = json.loads(read_text(REGISTRY))
     ids = {s["source_id"]: s for s in reg["sources"]}

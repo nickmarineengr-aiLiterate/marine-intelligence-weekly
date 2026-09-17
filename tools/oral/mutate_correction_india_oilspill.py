@@ -15,7 +15,7 @@ Per proposition, three directions:
                  limb of Q18).
 
   A_TIER  A1-A5   B_OPRC_DATE  B1-B2   C_BUNKERS_STATUS  C1-C6
-  D_PANS  D1-D6   RECORD  R1-R5        NON-VACUITY  N1
+  D_PANS  D1-D6   RECORD  R1-R8        NON-VACUITY  N1
 """
 from __future__ import annotations
 
@@ -42,9 +42,10 @@ TRAPS = QB / "known_traps.md"
 GOV = HERE / "qb_content_index_governed.json"
 IDX = QB / "qb_content_index.json"
 REGISTRY = REPO / "docs/sources/MIW_SOURCE_REGISTRY.json"
+MANIFEST = HERE / "correction_corr_india_oilspill_regulatory_audit_20260917_manifest.json"
 
 PROBE = "validate_correction_india_oilspill.py"
-WATCHED = [GATED, TWIN, QB9A, QB3J, QB9D, QB9E, CHEAT, NOTES, NOTES7, TRAPS, GOV, IDX, REGISTRY]
+WATCHED = [GATED, TWIN, QB9A, QB3J, QB9D, QB9E, CHEAT, NOTES, NOTES7, TRAPS, GOV, IDX, REGISTRY, MANIFEST]
 
 
 def _gov_note_drops_not_a_party(d):
@@ -62,6 +63,23 @@ def _index_note_drifts(d):
             e["note"] = e["note"] + " (hand-edited on the derived surface)"
             return
     raise AssertionError("generated index anchor absent")
+
+
+def _sub_issue_verdict_softened(d):
+    d["sub_issues"]["A_TIER"]["verdict"] = "CORRECT"
+
+
+def _sub_issue_loses_authority(d):
+    d["sub_issues"]["C_BUNKERS_STATUS"].pop("authority")
+    d["sub_issues"]["C_BUNKERS_STATUS"].pop("evidence_class")
+
+
+def _card_sub_issue_crossed(d):
+    for c in d["cards"]:
+        if c["correction_action_id"] == "INDIA-OILSPILL-D-01":
+            c["sub_issue"] = "A_TIER"
+            return
+    raise AssertionError("INDIA-OILSPILL-D-01 absent")
 
 
 def _plan_row_claims_retrieved(d):
@@ -186,6 +204,16 @@ MUTATIONS = [
     ("R5", "NOSDCP plan row claims the text was retrieved",
      edit_json(REGISTRY, _plan_row_claims_retrieved),
      "nosdcp_plan_recorded_access_limited"),
+
+    ("R6", "record: A_TIER verdict softened to CORRECT",
+     edit_json(MANIFEST, _sub_issue_verdict_softened),
+     "record_verdicts_match_the_correction"),
+    ("R7", "record: a sub-issue loses its authority and evidence class",
+     edit_json(MANIFEST, _sub_issue_loses_authority),
+     "record_states_four_sub_issues"),
+    ("R8", "record: a card is filed under the wrong proposition",
+     edit_json(MANIFEST, _card_sub_issue_crossed),
+     "record_sub_issue_cards_resolve"),
 
     # ================================================================ NON-VACUITY
     ("N1", "remove a target card from the census input",

@@ -378,6 +378,19 @@ CORRECTION_FIELD_CLASSES: dict[str, str] = {
     # worse. Nothing in the schema could express that difference, so the
     # question was being answered in prose in a report nobody's gate reads.
     "candidate_introduced": INFORMATIONAL,
+    # Added for CORR-INDIA-OILSPILL-REGULATORY-AUDIT-20260917, on the same terms
+    # as every field above: it is allowed in ONLY because that correction's own
+    # content gate asserts it (`record_states_four_sub_issues`,
+    # `record_sub_issue_cards_resolve`). One authorised audit may carry several
+    # INDEPENDENT propositions - four here, verified at different sources, each
+    # with its own verdict, and one of them (the tier tonnages) resolved by
+    # DELETION because no primary source could be obtained. `cards[]` records
+    # which bytes moved and `classification` records why a card moved relative
+    # to the others, but neither can say which PROPOSITION a card serves, and
+    # a reader asking "what was decided about the Bunkers Convention, and on
+    # what evidence" would otherwise have to infer it from prose. Verdicts that
+    # live only in a commit message are not something a gate can read.
+    "sub_issues": INFORMATIONAL,
 }
 
 CORRECTION_CARD_FIELDS = ("file", "path", "anchor",
