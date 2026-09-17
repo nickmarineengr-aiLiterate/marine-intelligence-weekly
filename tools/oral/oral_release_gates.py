@@ -693,6 +693,36 @@ GATES = (
                "Guard lead, ICG declares a tier, bloated 60-second answer); 24/24 "
                "caught, 182s measured 17 Sep 2026"),
 
+    # Content gates for CORR-INDIA-OILSPILL-REGULATORY-AUDIT-20260917: one audit
+    # of four India oil-spill propositions queued by the NOSDCP record - NOSDCP
+    # tier tonnage bands (unsupported, removed), India's OPRC accession date
+    # (1997, not 1993), India's Bunkers Convention status (not a Party; MS Act
+    # 2025 Part IX Ch IV is domestic law) and PANS (at least 96 hours, or within
+    # 2 hours of departure on a shorter voyage). Every check is a proposition,
+    # never a banned string: the corrected text names what it rejects.
+    _gate("validate_correction_india_oilspill",
+          ["python", "%s/validate_correction_india_oilspill.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="four propositions scoped by sentence: no tier tonnage band TAUGHT "
+               "(a rejecting sentence may name one), no OPRC accession year for India "
+               "but 1997/1998, India never a Bunkers Party on the oral surfaces while "
+               "the MS Act 2025 citation and QB9_D's 'not ratified' survive, every "
+               "PANS sentence 'at least' 96 hours with the 2-hour short-voyage limb, "
+               "never to DGS, never a SOLAS 96-hour rule; and the SQ twin"),
+    _gate("correction_india_oilspill_mutate",
+          ["python", "%s/mutate_correction_india_oilspill.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1800,
+          historical_39=False, depends_on=("validate_correction_india_oilspill",),
+          note="25 mutations, each tripping its OWN named check: one-site regressions "
+               "for all four propositions, twin drift, three untouched pages re-infected "
+               "(QB3_J with the bands and with a 1993 accession, QB9_E with an India "
+               "party claim, simon-notes-p7 with 'PANS approx. 96 hours'), and the "
+               "over-correction direction (QB3_J's capability trap flattened, QB9_D's "
+               "true 'has not ratified' removed, Q4 losing the MS Act 2025 citation, "
+               "Q18 losing the SOLAS XI-2/9.2 limb - the case that caught a substring "
+               "check the card's own E6 enrichment satisfied); 25/25 caught, 2377s "
+               "measured 17 Sep 2026"),
+
     # ---- follow-up authorisation register ---------------------------------
     # Postdates E6, so outside the historical 39, and not held back either.
     #

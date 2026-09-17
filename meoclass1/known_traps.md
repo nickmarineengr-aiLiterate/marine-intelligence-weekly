@@ -1117,6 +1117,7 @@ may **liquefy or undergo dynamic separation**.
 | 2026-08-25 | Entry 53: `QB9_G` Q6 taught a legal hierarchy Treaty → Convention → Protocol that international law does not recognise (VCLT Art.2(1)(a): a treaty “whatever its particular designation”), defined a Protocol as only an amendment, claimed every Protocol needs its own ratification (disproved by MARPOL Protocol of 1978 Art.IV(1)) and dismissed an IMO Resolution as committee guidance (SOLAS Art.VIII(b) amendments are adopted BY MSC resolution). Q3’s instrument ladder carried the same resolution defect. All three `QB9_G_CheatSheet` copies reconciled. Definition-source rule recorded once at `Claude skill/miw-correction-workflow_SKILL.md` §2a. | Founder review while studying from the MIW study roadmap |
 | 2026-09-02 | Entry 64: three cards taught a consequence their instrument does not carry. `QB5_I` Q8 said ISM 10.3 *drives*/*derives* the critical-spares list and that an unobtainable spare *is* an ISM 9 non-conformity, and had filed 10.3's reliability and stand-by-testing limbs under 10.4 - corrected against A.741(18) as amended by MSC.273(85), with ISM 9 made conditional on ISM 1.1.9. `QB2_A` Q11 and Q33 said the Document of Authorisation is *invalid* without the booklet - corrected to Grain Code A 3.1/3.2/3.5 and A 6.1, closing the H6 terminology limitation. `QB9_H` Q10 shipped five candidate-visible editorial placeholders - removed by RETRIEVING the MS Act 2025 corrigenda (three typographical fixes, no renumbering) and citing Part V s.63/64/83(1)/94(1) from the Act itself. Raised by GPT content review of the H6 packet; the 10.3/10.4 mis-citation and the Q33 sibling were found by the scope pass, not reported. | H6 terminology limitation on the grain loading booklet |
 | 2026-09-16 | Entry 133: NOSDCP ministry and designation — QB1_A Q15 named the Ministry of Earth Sciences as the authority and the Coast Guard as "nodal implementing agency"; corrected to Ministry of Defence / Indian Coast Guard as Central Coordinating Authority (Allocation of Business Rules: Central Coordinating Agency). Q14 and Q15 also corrected for the P&I "strictly liable for all costs" statement and the DPA/DGS fixed reporting chain. Two follow-ups logged, not actioned. | Candidate correction ("Pls check under which ministry") |
+| 2026-09-17 | Entry 134: India oil-spill regulatory audit, four propositions. A_TIER - NOSDCP tier tonnage bands (<700 / 700-10,000 / >10,000 t) on `QB9_A` Q8 and `simon-notes-p3` were unsupported and removed; tiers taught by response capability. B_OPRC_DATE - India acceded to OPRC 1990 on 17 Nov 1997 (in force 17 Feb 1998), not 1993. C_BUNKERS_STATUS - India is not a Party to the Bunkers Convention 2001; `QB1_A` Q4 and `QB1_B_CheatSheet` now separate treaty status from MS Act 2025 Part IX Ch IV. D_PANS - `QB1_A` Q14/Q18: at least 96 hours, or within 2 hours of departure for a shorter voyage, to the port and regional authority (MS Notice 13 of 2024). QP2304/QP2310 pastpaper items and the QB9_D Nairobi WRC claim held, not corrected. | Entry 133 follow-ups A and B; queued Bunkers and PANS audits |
 
 ### 50. A truncated citation is worse than no citation
 
@@ -3764,4 +3765,109 @@ blanket-banned.
   the corpus. (1993 is the year the Government of India approved NOSDCP, a probable source of
   the conflation.)
 
+**Status 17 Sep 2026:** Follow-ups A and B above, and the queued Bunkers Convention and PANS questions, were audited and resolved in entry 134 (`CORR-INDIA-OILSPILL-REGULATORY-AUDIT-20260917`).
+
 GREP: SKIP (context-dependent by design: "Ministry of Earth Sciences" is correct in other subjects — enforced by the proposition-scoped content gate, not by a literal scan)
+
+### 134. India oil-spill audit: NOSDCP tiers are capability, India acceded to OPRC in 1997, India is not a Bunkers Party, PANS is at least 96 hours with a short-voyage rule
+
+**Flagged:** the four follow-ups queued by entry 133 and its review (tier tonnages, OPRC date,
+Bunkers Convention status, the Q14 PANS line), audited together on 17 September 2026 as
+`CORR-INDIA-OILSPILL-REGULATORY-AUDIT-20260917`. Four separate propositions, one record.
+
+**A_TIER — NOSDCP tier tonnage bands. Verdict UNSUPPORTED.**
+
+- **WRONG** (`QB9_A` Q8, `oralnotes/simon-notes-p3.html` note 5): Tier 1 *<700 t*, Tier 2
+  *700–10,000 t*, Tier 3 *>10,000 t*, taught as the tier definitions; *"Know the three tiers by
+  volume"*.
+- **CORRECT, as far as official material goes:** the tiers are graded by **response capability**.
+  ICG *Policy and Guidelines for Use of OSD in Indian Waters* (2025): ports, oil-handling agencies
+  and the Coast Guard each hold **Tier-1** response in their own areas; the Coast Guard holds
+  **Tier-2** response in the Maritime Zones of India; agencies may seek assistance *"when the
+  magnitude of oil spill is beyond their response capabilities that is beyond Tier-1"*. Its only
+  700-ton figure is a **dispersant-stocking example of risk exposure** (*"Ports/Oil handling
+  companies having a risk exposure of 700 tons should ideally stock 25-35 tons of OSD"*) — not a
+  tier definition. Keep five things apart: tier definition, spill quantity, planning/risk
+  quantity, equipment capability, escalation by capability.
+- **Not resolved:** the NOSDCP 2015 plan text itself. The Coast Guard's former URL now returns
+  404 and no copy is held (registered `SRC-ICG-NOSDCP-2015-PLAN`, `ACCESS_LIMITED`). The bands were
+  **removed, not replaced** — the cards say to verify against the current NOSDCP text before
+  quoting any figure. `QB3_J` Q4/Q5 already taught capability, not tonnage, and are unchanged.
+
+**B_OPRC_DATE — India and OPRC 1990. Verdict INCORRECT.**
+
+- **WRONG** (`oralnotes/simon-notes-p3.html` reg-box): *"India ratified/acceded 1993 (verify exact
+  year before quoting)"*.
+- **CORRECT:** IMO *Status of IMO Treaties*, 26 August 2026, OPRC 1990 table: **India
+  (accession) 17 November 1997, entry into force 17 February 1998**. **1993** is the year the
+  Government of India approved NOSDCP (ICG Marine Environment page; a Committee of Secretaries
+  decision of 4 November 1993) — the source of the conflation. No other site in the corpus
+  carried a wrong date.
+
+**C_BUNKERS_STATUS — India and the Bunkers Convention 2001. Treaty verdict: India is NOT a Party.**
+
+- **Treaty status:** IMO *Status of IMO Treaties*, 26 August 2026, BUNKERS 2001 table — India
+  is not listed (the alphabetical run is Honduras, Hungary, Indonesia, Iran).
+- **Domestic law, kept separate:** the **Merchant Shipping Act, 2025** (in force 15 March 2026),
+  **Part IX Chapter IV, ss.196–210**, *"Civil liability for bunker oil pollution damage"*:
+  shipowner liability (s.198), compulsory insurance above 1,000 GT (s.204), direct action against
+  the insurer (s.205(3)), a certificate granted by the Central Government (s.206), and no entry
+  to or departure from an Indian port or place without it (s.207(1)), with certificates of other
+  States and of Bunker Convention contracting parties accepted (s.207(2)). Implementing rules
+  were still in draft when checked. So a ship **does** need bunker-liability cover and a
+  certificate in an Indian port today — under **Indian statute**, not because India is a Party.
+- **WRONG / blurred:** `QB1_A` Q4 reg-box — *"domestic implementation of the Bunker Convention
+  (replaces the 1958 Act equivalent)"*; the 1958 limb is unverified and removed.
+  `QB1_B_CheatSheet` — *"Bunker Convention 2001 (IS in force)"* on an Indian-waters trap, now
+  qualified. `QB9_D` and its cheat sheet (*"India has not ratified the Bunker Convention"*) are
+  **correct on treaty status** and unchanged.
+- **Held, not corrected here (Founder proposals):** `pastpapers/QP2304` follow-up *"The ship is
+  registered in a State that is not a party. Does she need a certificate in an Indian port? Yes.
+  Article 7.12 requires a State Party…"* — treats India as a State Party at an April 2023 sitting
+  (and its `solvedQP` mirror); and `pastpapers/docs/QP2310_TEMPORAL_AND_DONOR_ANCHOR.md` —
+  *"India is a party to both"* (CLC 1992 and Bunkers). Both belong to the solvedQP product, whose
+  correction skill requires a proposal and Founder review before an edit.
+- **Out of scope, logged:** `QB9_D` / `QB9_D_CheatSheet` also say India has not ratified the
+  **Nairobi Wreck Removal Convention 2007**; the same IMO status publication lists India
+  (accession) 23 March 2011, in force 14 April 2015. Not audited or changed in this record.
+
+**D_PANS — India's Pre-Arrival Notification of Security. Verdict PARTLY_CORRECT (Q14) /
+INCORRECT (Q18 limbs).**
+
+- **WRONG:** `QB1_A` Q14 — *"Pre-arrival security notice (PANS, related context) ≈ 96 hours for
+  India"*. `QB1_A` Q18 — *"96-hour advance arrival notification (SOLAS XI-2 / ISPS Code)"*;
+  *"ships notify DGS port office 96 hours before arrival"*; reg-box *"96-hour submission to DGS"*;
+  CE tip, numbers box and memory map with an unconditional 96 hours.
+- **CORRECT:** DG Shipping (now DGMA) **Merchant Shipping Notice 13 of 2024**, 3 September 2024,
+  still listed by DGMA: PANS is submitted to **the port and the relevant regional authority**
+  (Indian Navy Joint Operations Centres and Coast Guard MRCCs, by coast) and the port facility
+  security officer **at least 96 hours** before arrival; **if the voyage is shorter than 96 hours,
+  within 2 hours of departure** from the last port. It applies to passenger ships and high-speed
+  passenger craft, cargo ships and high-speed craft of **500 GT and above**, MODUs, pleasure
+  yachts and sailing vessels, on international voyages and on the coast between Indian ports. The
+  notice attributes the 96 hours to **section 29 of the Merchant Shipping (Ships and Port Facility
+  Security) Rules, 2024** (saved by MSA 2025 s.324(2)(a)); SOLAS XI-2/9.2 is the enabling power to
+  require information *before entry*. The form attaches the DG Manifest (FAL Form 7) and Crew List
+  (FAL Form 5). "PANS" is the official, current term. The Draft MS (Ship and Port Facility
+  Security) Rules, 2026 keep 96 hours (rule 30) — a draft, not relied on.
+- The SOLAS consolidation registered as `SRC-SOLAS-CONSOLIDATED-2024` was not re-read (its held
+  copy is on a drive outside this session's bounds), so Q18 now asserts only what the DGMA notice
+  itself establishes about SOLAS: the power to require information before entry.
+
+**Affected content types:** reg-box, numbers box, answer body, CE Oral Tip, memory map, key
+numbers list, notes formula box and Simon tip, cheat-sheet trap, q-version stamps; gated page and
+`SQ/` twin for `QB1_A` Q4 and Q14 (Q18's `SQ/` copy is a locked teaser).
+
+**Search terms for a manual pass:** `Tier 1`, `Tier 2`, `Tier 3`, `700`, `10,000`, `NOS-DCP`,
+`OPRC` with `India`, `1993`, `acceded`, `Bunker Convention` with `India`/`party`/`ratified`/
+`in force`, `PANS`, `pre-arrival`, `96 hours`, `96h`, `DGS port office`.
+
+**Prevention.** `tools/oral/validate_correction_india_oilspill.py` checks each proposition, not a
+phrase: a tier sentence may not teach a 700/10,000-tonne band unless it rejects it; an OPRC +
+India accession sentence may carry no year but 1997/1998; India may not be asserted a Bunkers
+Party on the oral surfaces; every PANS sentence must say *at least* 96 hours and carry the
+2-hour short-voyage limb, and never send PANS to DGS or credit the 96 hours to SOLAS/ISPS.
+Over-correction guards keep QB3_J's capability trap, QB9_D's "has not ratified" and Q4's MS Act
+2025 citation alive.
+
+GREP: SKIP (proposition-scoped by design: the corrected sentences name the rejected bands and dates to reject them — enforced by the content gate, not by a literal scan)
