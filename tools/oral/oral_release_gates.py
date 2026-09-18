@@ -635,13 +635,44 @@ GATES = (
                "Collection terminology, and that no hierarchy, amendment-only "
                "protocol, universal-ratification or resolution-is-guidance claim "
                "is ASSERTED anywhere across both cards and the cheat sheet"),
+    # SIZED IN PROBES, NOT IN MUTATIONS -- see "A MUTATION SUITE THAT PROBES
+    # ANOTHER VALIDATOR PAYS THAT PRICE PER PROBE" above. This suite declares
+    # TWO probes and its control phase runs BOTH once before any mutation, so
+    # it pays one full validate_corrections every time it is invoked, while all
+    # 12 mutations probe the cheap defntreaty validator:
+    #
+    #   1 x validate_corrections            (control)
+    #  13 x validate_correction_defntreaty  (control + 12 mutations)
+    #
+    # The 1800s it carried was the SINGLE-validator formula applied to the
+    # cheap probe alone, and it expired the moment validate_corrections grew:
+    # on 1 Sep 2026 that validator ran 198.0s/255.5s and the suite landed at
+    # 205.9s/260.1s -- the suite's wall time IS its validate_corrections probe.
+    # At 76 records it is an order of magnitude bigger, and the 17 Sep full run
+    # killed this gate at exactly 1800.1s: a resource bound, not a defect. The
+    # same tree passed 12/12 caught, 0 escapes standalone.
+    #
+    # Re-sized from the measured MAXIMUM of the dominant probe, doubled, per the
+    # rule above. validate_corrections measured across machines on this tree:
+    # 576.4s (reference), 1105.8s / 1225.3s (here, 614 checks, 18 Sep 2026),
+    # 1374.2s (622 checks), 1516.1s (slowest completed run).
+    #
+    #   1516.1 + 13 x 0.54 = 1523.1s  ->  x2 = 3046s  ->  3600s
+    #
+    # Sized from the corpus-wide maximum and not from this machine, because
+    # validate_corrections varies ~2.6x by machine and gets slower with every
+    # correction record added; a budget derived from one fast box expires on
+    # the next slow one. The durable fix is still the one flagged at
+    # validate_corrections: make that validator cheap to run repeatedly.
     _gate("correction_defntreaty_mutate",
           ["python", "%s/mutate_correction_defntreaty.py" % _ORAL],
-          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1800,
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=3600,
           historical_39=False, depends_on=("validate_correction_defntreaty",),
           note="12 mutations, each required to trip its OWN named check; includes "
                "the cheat-sheet-left-stale case and the MIW-line-relabelled-as-"
-               "official case, both of which escaped the first guard"),
+               "official case, both of which escaped the first guard; budget is "
+               "one validate_corrections control probe at its measured maximum "
+               "1516.1s x 2, NOT (mutations + 2) x the cheap probe"),
 
     # Content gates for CORR-ITC51-20260908. The standing reason for the whole
     # per-correction content-gate family, in its purest form yet: the Pass-2
