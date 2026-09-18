@@ -709,9 +709,18 @@ GATES = (
                "the MS Act 2025 citation and QB9_D's 'not ratified' survive, every "
                "PANS sentence 'at least' 96 hours with the 2-hour short-voyage limb, "
                "never to DGS, never a SOLAS 96-hour rule; and the SQ twin"),
+    # SIZING A MUTATION TIMEOUT, worked for this gate: (mutations + 2) x the
+    # validator's own runtime = (28 + 2) x 101.5s measured in the full suite
+    # = 3045s. The first full run budgeted 1800s from the 1922s standalone
+    # measurement, was killed at 1800.1s, and left the record file dirty for the
+    # runner to restore - a killed gate is not a failed check, but it blocks a
+    # release just the same. 6000s carries the arithmetic plus headroom for a
+    # slower working copy: validate_corrections takes 576s on the reference
+    # machine and 1516s here on the same commit, so a budget tuned to one
+    # stopwatch expires on the other.
     _gate("correction_india_oilspill_mutate",
           ["python", "%s/mutate_correction_india_oilspill.py" % _ORAL],
-          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1800,
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=6000,
           historical_39=False, depends_on=("validate_correction_india_oilspill",),
           note="25 mutations, each tripping its OWN named check: one-site regressions "
                "for all four propositions, twin drift, three untouched pages re-infected "
