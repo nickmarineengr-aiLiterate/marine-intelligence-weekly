@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 760" font-family="Arial, Helvetica, sans-serif" font-size="13" role="img" aria-labelledby="t d">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" font-family="Arial, Helvetica, sans-serif" font-size="13" role="img" aria-labelledby="t d">
   <title id="t">QP2609 Q4 - D5: Fuel in use, cylinder-oil BN, feed-rate mode and condition monitoring (Everllence B&amp;W)</title>
-  <desc id="d">Decision flow. The fuel in use decides the oil: high-sulphur fuel above 0.50 percent sulphur takes a Cat. II BN 100 to 140+ oil or an ACOM mix, and the feed rate is the feed-rate factor times sulphur percent, never below the minimum. Fuel of 0 to 0.50 percent sulphur and LNG, ethane, LPG or methanol take a Cat. II BN 40 oil and the feed rate is governed by the minimum feed-rate setting. Monitoring - daily consumption, scavenge drain oil analysis, monthly port inspection and wear measurement - decides whether to reduce in small steps, hold, or restore and raise the feed or the BN.</desc>
+  <desc id="d">Decision flow with a monitoring return path. The fuel in use decides the oil: high-sulphur fuel above 0.50 percent sulphur takes a Cat. II BN 100 to 140+ oil or an ACOM mix, and the feed rate is the feed-rate factor times sulphur percent, never below the minimum. Fuel of 0 to 0.50 percent sulphur and LNG, ethane, LPG or methanol take a Cat. II BN 40 oil and the feed rate is governed by the minimum feed-rate setting. Monitoring - daily consumption, scavenge drain oil analysis, monthly port inspection and wear measurement - decides whether to reduce in small steps, hold, or restore and raise the feed or the BN; the result returns to the feed setting and monitoring starts again.</desc>
   <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b3a5c"/></marker>
   <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#b35900"/></marker>
   <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#2e7d32"/></marker></defs>
-  <rect x="0" y="0" width="1000" height="760" fill="#ffffff"/>
+  <rect x="0" y="0" width="1000" height="800" fill="#ffffff"/>
   <text x="20" y="28" font-size="17" font-weight="bold" fill="#111">Q4 - D5  Fuel in use -&gt; oil BN -&gt; feed-rate mode -&gt; monitoring (Everllence B&amp;W Mk 9+ and dual-fuel)</text>
   <text x="20" y="49" fill="#555">BN and feed rate are SEPARATE decisions. Maker guidance for this engine family only - do not transfer to another maker. No feed-rate figures shown.</text>
   <rect x="330" y="70" width="340" height="62" rx="6" fill="#eef3f8" stroke="#1b3a5c" stroke-width="2"/>
@@ -57,7 +57,7 @@
   <path d="M800 442 V460" fill="none" stroke="#1b3a5c" stroke-width="2" marker-end="url(#a)"/>
   <path d="M500 502 V522" fill="none" stroke="#1b3a5c" stroke-width="2" marker-end="url(#a)"/>
   <rect x="40" y="524" width="920" height="96" rx="6" fill="#eef3f8" stroke="#1b3a5c" stroke-width="2"/>
-  <text x="50" y="544" font-weight="bold" fill="#111">Condition monitoring loop</text>
+  <text x="50" y="544" font-weight="bold" fill="#111">Condition monitoring - repeated after every change (return path below)</text>
   <text x="50" y="562" font-size="12" fill="#555">daily: measured cylinder-oil consumption against the MOP calculated figure (a shortfall is a fault - raise the feed and investigate)</text>
   <text x="50" y="578" font-size="12" fill="#555">scavenge drain oil: residual BN and total / magnetic iron - accredited laboratory as the reference, onboard kits as a supplement</text>
   <text x="50" y="594" font-size="12" fill="#555">monthly scavenge-port inspection of liners, rings and deposits (more often while reducing); wear measurement at overhaul</text>
@@ -71,5 +71,8 @@
   <text x="530" y="664" font-weight="bold" fill="#111">Raised iron, deposits, micro-seizure, scuffing</text>
   <text x="530" y="682" font-size="12" fill="#555">restore the previous good setting or raise the feed;</text>
   <text x="530" y="698" font-size="12" fill="#555">on HSFO with persistent corrosion, raise the BN</text>
-  <text x="20" y="746" font-size="11" fill="#555">Sources: MAN SL2023-737 (June 2023) sections 1-7 and App. I; Everllence SL2025-776 (Nov 2025); Everllence project guide G95ME-C10.5-GI, 7020-0260-14ppr rev 1.0 (July 2026), 9.01-9.02.</text>
+  <path d="M260 714 V742 H18 V394 H38" fill="none" stroke="#1b3a5c" stroke-width="2" stroke-dasharray="7 4" marker-end="url(#a)"/>
+  <path d="M740 714 V742 H982 V394 H962" fill="none" stroke="#1b3a5c" stroke-width="2" stroke-dasharray="7 4" marker-end="url(#a)"/>
+  <text x="500" y="764" font-size="12" fill="#1b3a5c" text-anchor="middle" font-style="italic">Return path: the outcome sets the next feed (or BN) setting - then monitor again.</text>
+  <text x="20" y="786" font-size="11" fill="#555">Sources: MAN SL2023-737 (June 2023) sections 1-7 and App. I; Everllence SL2025-776 (Nov 2025); Everllence project guide G95ME-C10.5-GI, 7020-0260-14ppr rev 1.0 (July 2026), 9.01-9.02.</text>
 </svg>
