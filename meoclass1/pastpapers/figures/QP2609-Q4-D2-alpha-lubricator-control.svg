@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" font-family="Arial, Helvetica, sans-serif" font-size="13" role="img" aria-labelledby="t d">
   <title id="t">QP2609 Q4 - D2: Alpha lubricator control - functional block diagram (Everllence B&amp;W ME engines)</title>
-  <desc id="d">Functional block diagram. The main operating panel supplies settings and the fuel or pilot-fuel sulphur figure; the cylinder control unit of the engine control system uses engine speed and fuel index to set injection frequency and dosage. It commands the lubricator control valve - a solenoid valve on the Alpha/ME lubricator or a proportional valve on the Alpha Mk 2 - which admits hydraulic system oil from the hydraulic cylinder unit to drive small multi-piston pumps. They deliver cylinder oil through non-return valves to the lubricating quills. A feedback sensor reports back to the control unit; a level switch monitors the oil supply. The internal porting is not published by the maker and is not drawn.</desc>
+  <desc id="d">Functional block diagram. The main operating panel supplies settings and the fuel or pilot-fuel sulphur figure; the cylinder control unit of the engine control system uses engine speed and fuel index to set injection frequency and dosage. It commands the lubricator control valve - a solenoid valve on the Alpha/ME lubricator or a proportional valve on the Alpha Mk 2 - which activates each lubricator stroke. The lubricator's small multi-piston pumps meter the cylinder oil and deliver it through non-return valves to the lubricating quills. The lubricator is mounted on the hydraulic cylinder unit, which is supplied with 300 bar system oil from the hydraulic power supply; the medium that actuates the lubricator is not established by the available maker sources and is not drawn. A feedback sensor reports back to the control unit; a level switch monitors the oil supply. The internal porting is not published by the maker and is not drawn.</desc>
   <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b3a5c"/></marker>
   <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#b35900"/></marker>
   <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#2e7d32"/></marker></defs>
   <rect x="0" y="0" width="1000" height="700" fill="#ffffff"/>
-  <text x="20" y="28" font-size="17" font-weight="bold" fill="#111">Q4 - D2  Alpha lubricator: control and actuation (functional block diagram)</text>
+  <text x="20" y="28" font-size="17" font-weight="bold" fill="#111">Q4 - D2  Alpha lubricator: control and injection (functional block diagram)</text>
   <rect x="20" y="40" width="960" height="30" rx="4" fill="#fff4e5" stroke="#b35900"/>
   <text x="32" y="60" font-weight="bold" fill="#7a3d00">FUNCTIONAL BLOCKS, NOT PIPEWORK: the maker does not publish the lubricator's internal hydraulic porting, so none is drawn.</text>
   <rect x="25" y="95" width="250" height="108" rx="6" fill="#eef3f8" stroke="#1b3a5c" stroke-width="2"/>
@@ -33,10 +33,10 @@
   <text x="665" y="150" font-weight="bold" fill="#111">Control valve</text>
   <text x="665" y="168" font-size="12" fill="#555">solenoid valve - Alpha/ME lubricator</text>
   <text x="665" y="184" font-size="12" fill="#555">proportional valve - Alpha Mk 2</text>
-  <rect x="655" y="208" width="305" height="64" rx="6" fill="#e8f3e9" stroke="#2e7d32" stroke-width="2"/>
-  <text x="665" y="228" font-weight="bold" fill="#111">Hydraulic actuation</text>
-  <text x="665" y="246" font-size="12" fill="#555">engine system oil from the HCU;</text>
-  <text x="665" y="262" font-size="12" fill="#555">stroke activated by the control valve</text>
+  <rect x="655" y="208" width="305" height="64" rx="6" fill="#f6f6f6" stroke="#1b3a5c" stroke-width="2" stroke-dasharray="5 3"/>
+  <text x="665" y="228" font-size="12" font-weight="bold" fill="#111">Stroke activation</text>
+  <text x="665" y="246" font-size="11" fill="#555">activated by the control valve; actuation medium</text>
+  <text x="665" y="262" font-size="11" fill="#555">not established by the available maker source</text>
   <rect x="655" y="286" width="305" height="48" rx="6" fill="#eef3f8" stroke="#1b3a5c" stroke-width="2"/>
   <text x="665" y="306" font-weight="bold" fill="#111">Small multi-piston pumps</text>
   <text x="665" y="324" font-size="12" fill="#555">pressurise the cylinder oil to the quills</text>
@@ -50,13 +50,14 @@
   <text x="592" y="162" font-size="12" fill="#b35900">command</text>
   <path d="M655 384 H610 V240 H587" fill="none" stroke="#b35900" stroke-width="2" stroke-dasharray="2 3" marker-end="url(#ac)"/>
   <text x="552" y="300" font-size="12" fill="#b35900">feedback</text>
-  <path d="M807 192 V206" fill="none" stroke="#2e7d32" stroke-width="2" marker-end="url(#ah)"/>
+  <path d="M807 192 V206" fill="none" stroke="#1b3a5c" stroke-width="2" marker-end="url(#a)"/>
   <path d="M807 272 V284" fill="none" stroke="#1b3a5c" stroke-width="2" marker-end="url(#a)"/>
   <rect x="655" y="460" width="305" height="60" rx="6" fill="#e8f3e9" stroke="#2e7d32" stroke-width="2"/>
   <text x="665" y="480" font-weight="bold" fill="#111">Hydraulic Cylinder Unit (HCU)</text>
   <text x="665" y="498" font-size="12" fill="#555">one per cylinder; fed with 300 bar system oil</text>
   <text x="665" y="514" font-size="12" fill="#555">from the hydraulic power supply</text>
-  <path d="M720 458 V427" fill="none" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#ah)"/>
+  <path d="M720 458 V427" fill="none" stroke="#1b3a5c" stroke-width="2.5"/>
+  <text x="728" y="447" font-size="11" fill="#555">lubricator mounted on the HCU</text>
   <rect x="335" y="460" width="250" height="60" rx="6" fill="#eef3f8" stroke="#1b3a5c" stroke-width="2"/>
   <text x="345" y="480" font-weight="bold" fill="#111">Cylinder oil main pipe</text>
   <text x="345" y="498" font-size="12" fill="#555">from heating tank / ACOM via AC (D1, D3, D4)</text>
