@@ -1004,6 +1004,49 @@ const FIXTURES = {
     // what separates them.
     narrow: ['reactivation survey', 'QP2608-Q1'],
   },
+  QP2609: {
+    // Every probe below was proved UNIQUE against the nine real data-search
+    // payloads of the built page, under the search's own token-AND semantics
+    // (QP2609-RELEASE Stage B, 22 Sep 2026). Rejected by that proof and recorded
+    // so they are not tried again: 'bunker convention', 'clc 1992' and
+    // 'bunkers 2001' reach Q8 as well as Q2 (the steering-gear question's
+    // liability limb); 'bunker oil' reaches Q2, Q4 and Q8; 'lubricating oil'
+    // reaches Q2 and Q4; 'ordinary members' matches nothing.
+    probes: [
+      ['facilitation committee', 'QP2609-Q1'],
+      ['reinstatement', 'QP2609-Q2'],
+      ['twin skeg', 'QP2609-Q3'],
+      ['cylinder oil', 'QP2609-Q4'],
+      ['harmonized system', 'QP2609-Q5'],
+      ['receiver of wreck', 'QP2609-Q6'],
+      ['designated person', 'QP2609-Q7'],
+      ['steering gear', 'QP2609-Q8'],
+      ['net-zero framework', 'QP2609-Q9'],
+    ],
+    aliases: [
+      // Search-only: each reaches exactly one card and was checked against that
+      // card's visible text with tag boundaries treated as HARD BREAKS.
+      ['imo organs', 'QP2609-Q1', 'Q1 (the structural term the answer never prints)'],
+      ['civil liability bunker oil pollution damage', 'QP2609-Q2',
+       'Q2 (the full title of the Convention, carried in search only)'],
+      ['hull form optimization', 'QP2609-Q3', 'Q3 (the US spelling of the stem)'],
+      ['alpha acc', 'QP2609-Q4', 'Q4 (the MAN product name for the ACC-mode lubricator)'],
+      ['harmonised system of survey and certification', 'QP2609-Q5',
+       'Q5 (the British spelling of the HSSC title)'],
+      ['merchant shipping act 1958', 'QP2609-Q6',
+       'Q6 (the repealed Act a candidate may still search by)'],
+      ['imo ilo human element', 'QP2609-Q7', 'Q7 (the two-regime framing of the stem)'],
+      ['allision', 'QP2609-Q8', 'Q8 (the term for striking a fixed object such as a jetty)'],
+      ['levels of ambition', 'QP2609-Q9', 'Q9 (the heading used in the 2023 Strategy)'],
+    ],
+    // G.S.R. 354(E) - the MIER Rules 2026 - is new to the corpus on this paper.
+    regulation: ['g.s.r. 354(e)', 'QP2609-Q6'],
+    // Leak probe: QP2402-Q8 is the Q6 answer donor; its pointer must stay out
+    // of the shipped payload.
+    recurrence: ['2024/feb/q8'],
+    // 'abandoned' alone is not proved unique; with the Part X actor it is.
+    narrow: ['nodal authority abandoned', 'QP2609-Q6'],
+  },
   QP2601: {
     probes: [
       ['cold corrosion', 'QP2601-Q1'],

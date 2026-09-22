@@ -1,7 +1,14 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-17, after the **Bullet Exam Plan became the standard rendering across the
+Last updated: 2026-09-22, after **QP2609 (September 2026) was integrated locally** on the isolated
+release worktree `release/qp2609-20260921` (review packet `QP2609-RELEASE-20260921`, Stage B). With it:
+the Founder-approved **CORR-PASTPAPERS-BUNKERS-INDIA** correction (India is NOT a Party to BUNKERS 2001),
+dated current-framework notes on **QP2402 Q7 and Q8**, the **T-3** derivation-registry fix in
+`delivery_gate.py`, and two Answer-tab sketches (Q3, Q4) delivered through the existing inline-markup path.
+The corpus becomes **41 papers / 369 questions**; 2026 moves to **8 of 11**. **Not committed, not live**
+until the Founder commit and deployment gates in that packet are passed; the LIVE row in §1 is unchanged.
+Previously: 2026-08-17, after the **Bullet Exam Plan became the standard rendering across the
 whole solved corpus** (`history/SESSION_HISTORY.md` §38). The pilot flag `plan_bullets` is
 **removed** — there is one exam-plan renderer, no per-paper opt-in and no legacy branch. Limb
 dividers now carry the subpart marks **where the source paper stated them** (393 of 689 dividers);
