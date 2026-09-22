@@ -1656,8 +1656,8 @@
         }
       ],
       "total_marks": 16,
-      "understand_first": "There are two variables, not one. The oil's BASE NUMBER is how much alkali each drop carries; the FEED RATE is how many drops arrive. What the liner actually needs is alkali per unit of sulphur burnt, which is the product of the two. Every operating decision in the second half of this answer - grade selection, sulphur entry, step-wise reduction, scrape-down interpretation - follows from that product.",
-      "memory_cue": "System half is the oil's own path, steps 1 to 3. Optimisation half is Acid, Alkali, Amount, Assess at steps 4 to 6, then the traps at 7.",
+      "understand_first": "There are two variables, not one. The oil's BASE NUMBER is how much alkali each drop carries; the FEED RATE is how many drops arrive. What the liner actually needs is alkali per unit of sulphur burnt, which is the product of the two. On a modern engine the two are even set by different equipment: the supply system (switching or mixing) decides which oil reaches the lubricator, and the lubricator control decides how much of it is injected. Every operating decision in the second half of this answer follows from that product.",
+      "memory_cue": "System half is the oil's own path, steps 1 to 3. Optimisation half is Acid, Alkali, Amount, Assess at steps 4 to 6, then the traps at 7 and the modern switching-or-mixing extension at 8.",
       "answer_route": {
         "archetype": "explain",
         "steps": [
@@ -1676,9 +1676,9 @@
             "limb": null,
             "title": "The system layout - what the sketch must show",
             "points": [
-              "Storage tank, service tank, heater and filter",
-              "Lubricator pump unit per cylinder with its own accumulator",
-              "Quills around the liner circumference with non-return valves"
+              "Name the make: Everllence (MAN) B&W G95ME-C10.5-GI with Alpha lubricators",
+              "Two BN grades, ACOS2 switching valve, filter, heating tank, heat-traced line to the engine",
+              "Alpha lubricator on each HCU, quills with non-return valves, cylinder control unit"
             ]
           },
           {
@@ -1686,9 +1686,9 @@
             "limb": null,
             "title": "How the dose is timed and controlled",
             "points": [
-              "Electronically timed injection referenced to crank angle",
-              "Delivered as a metered slug while the ring pack passes the quills",
-              "Rate set by the control system from load and fuel sulphur"
+              "Electronically timed, metered injection as the rings pass the quills on the upstroke",
+              "Intermittent - the control unit sets injection frequency from engine speed and fuel index",
+              "Load-proportional above a part-load breakpoint, speed-proportional below it"
             ]
           },
           {
@@ -1706,9 +1706,9 @@
             "limb": null,
             "title": "Setting the optimum feed rate in service",
             "points": [
-              "Choose the base number grade to suit the fuel, then set the quantity",
-              "Feed proportioned to engine load and to fuel sulphur, above a maker minimum",
-              "Reduce in small steps and hold, never in one jump"
+              "Choose the BN grade for the fuel in use, then enter the sulphur from the bunker delivery note",
+              "High-sulphur fuel: feed-rate factor times sulphur; low-sulphur fuel and gas: the minimum feed-rate setting",
+              "Reduce in small steps only after good condition and acceptable iron are confirmed"
             ]
           },
           {
@@ -1716,9 +1716,9 @@
             "limb": null,
             "title": "How the engineer verifies the feed rate is right",
             "points": [
-              "Scrape-down oil analysis for residual base number and iron",
+              "Scavenge drain analysis for residual base number and iron, laboratory as the reference",
               "Scavenge port inspection of liner and ring condition",
-              "Periodic liner wear measurement to close the loop"
+              "Daily consumption check and liner wear measurement to close the loop"
             ]
           },
           {
@@ -1726,9 +1726,19 @@
             "limb": null,
             "title": "The traps - changeover, over-lubrication and the minimum",
             "points": [
-              "Changing fuel sulphur without changing grade or rate",
+              "Changing between high- and low-sulphur fuel without changing the grade and the sulphur entry",
               "Over-lubrication is not a safe error - it causes deposits and bore polishing",
               "Never go below the maker's minimum feed rate"
+            ]
+          },
+          {
+            "n": 8,
+            "limb": null,
+            "title": "Modern-engine extension - automatic grade switching or mixing",
+            "points": [
+              "ACOS2 switches between two oils - the maker's standard, failing safe to the high-BN oil",
+              "ACOM Mk III mixes two oils to an ordered BN - an option for high-sulphur operation",
+              "The supply system sets the BN; the lubricator control sets the feed rate - separate decisions"
             ]
           }
         ]
@@ -1745,34 +1755,32 @@
             "h": "2. The system layout - what the sketch must show"
           },
           {
-            "p": "A labelled line diagram should run in this order:"
+            "p": "Naming a make, as the question requires: the <b>Everllence B&amp;W G95ME-C10.5-GI</b> (Everllence is the name MAN Energy Solutions has traded under since 2025), a current electronically controlled two-stroke engine lubricated by the maker's <b>Alpha</b> cylinder lubrication system. A labelled line diagram should follow the path of the oil:"
           },
           {
             "ol": [
-              "<b>Cylinder oil storage tank</b>, with the grades carried - modern ships commonly hold more than one base number grade since the 2020 sulphur limit.",
-              "<b>Cylinder oil service (daily) tank</b>, gravity-fed and heated, sited above the engine, with level alarm and a low-level cut-out.",
-              "<b>Heater and filter</b> in the supply line, to bring the oil to the correct viscosity and protect the pump elements.",
-              "<b>Lubricator pump unit</b> - one per cylinder on a modern engine, containing individual plunger elements, driven electrically or by servo oil pressure and controlled by a solenoid valve.",
-              "<b>Accumulator</b> fitted with each lubricator unit, keeping the oil pressure steady so that every metered stroke is complete.",
-              "<b>High-pressure delivery pipes</b> to a set of <b>injection quills spaced around the liner circumference</b> at the level of the ring pack near the top of the stroke, each with its own <b>non-return valve</b>.",
-              "<b>Control unit</b> taking crank-angle position, engine load and the fuel sulphur setting, with feedback of actual delivery.",
-              "<b>Scavenge space and drain</b>, from which scrape-down samples are drawn."
+              "<b>Two cylinder oil storage and/or service tanks</b> - a low-BN and a high-BN oil, kept separate, feeding by gravity from above the engine.",
+              "<b>ACOS2 automated cylinder oil switching valve</b> - the maker's standard: a pneumatically operated three-way valve, controlled by the engine control system, that selects one oil or the other and fails safe to the high-BN oil. The maker's option in this position is the <b>ACOM Mk III</b> mixing unit (step 8).",
+              "<b>Filter</b> in the supply line.",
+              "<b>Cylinder oil heating tank</b> - a small heated tank with a low-level alarm, sited well above the engine inlet.",
+              "<b>Insulated, electrically heat-traced pipe</b> to the engine inlet, a <b>main supply valve</b>, and the <b>main cylinder oil pipe</b> along the engine.",
+              "<b>Alpha lubricator on each cylinder's hydraulic cylinder unit (HCU)</b> - small multi-piston pumps, actuated by the engine's high-pressure hydraulic (system) oil and triggered by a control valve: a solenoid valve, or a proportional valve on the Alpha Mk 2.",
+              "<b>Several lubricating quills round the liner</b>, each with its own <b>non-return valve</b>; the number depends on the engine type.",
+              "<b>Cylinder Control Unit (CCU)</b> of the engine control system for each cylinder, taking engine speed and fuel index, with the settings and the fuel-sulphur figure entered on the main operating panel, and a <b>feedback sensor</b> on the lubricator.",
+              "<b>Scavenge space and piston-underside drain</b>, from which scrape-down samples are drawn."
             ]
           },
           {
-            "p": "<a href=\"figures/QP2609-Q4-cylinder-lubrication.svg\" target=\"_blank\" rel=\"noopener\"><img src=\"figures/QP2609-Q4-cylinder-lubrication.svg\" alt=\"Schematic of an electronically timed cylinder lubricating system: storage tank, service tank, heater and filter, lubricator unit per cylinder with its accumulator, high-pressure delivery to quills round the liner, control unit and scavenge drain\" loading=\"lazy\" style=\"display:block;width:100%;height:auto;margin:10px 0 4px;border:1px solid #d0d7de;border-radius:6px;background:#fff\"></a><i>Sketch - generic cylinder lubricating system (MAN B&amp;W Alpha Lubricator as the example), numbered as in the list above; not to scale, no settings. Tap the sketch to open it full size.</i>"
+            "p": "<a href=\"figures/QP2609-Q4-cylinder-lubrication.svg\" target=\"_blank\" rel=\"noopener\"><img src=\"figures/QP2609-Q4-cylinder-lubrication.svg\" alt=\"Sketch D1: cylinder lubricating oil system of an Everllence B&amp;W G95ME-C10.5-GI - low-BN and high-BN oil tanks, ACOS2 switching valve, filter, heating tank, heat-traced pipe to the engine inlet and main pipe, an Alpha lubricator on each cylinder's hydraulic cylinder unit, quills with non-return valves round the liner, and a cylinder control unit per cylinder\" loading=\"lazy\" style=\"display:block;width:100%;height:auto;margin:10px 0 4px;border:1px solid #d0d7de;border-radius:6px;background:#fff\"></a><i>Sketch D1 - Everllence B&amp;W G95ME-C10.5-GI cylinder oil system with Alpha lubricators and ACOS2, numbered as in the list above; an original line diagram drawn from the maker's project guide, not to scale, no settings. Tap the sketch to open it full size.</i> Full-size supporting diagrams: <a href=\"figures/QP2609-Q4-D2-alpha-lubricator-control.svg\" target=\"_blank\" rel=\"noopener\">D2 - Alpha lubricator control and actuation (functional blocks)</a>; <a href=\"figures/QP2609-Q4-D5-bn-feedrate-monitoring.svg\" target=\"_blank\" rel=\"noopener\">D5 - fuel in use, BN, feed-rate mode and monitoring</a>."
           },
           {
-            "p": "Naming a make, the <b>MAN B&amp;W Alpha Lubricator</b> arrangement is the standard example: a common-rail servo-oil-driven lubricator with one unit per cylinder, several quills per liner, and electronic timing referenced to the crankshaft."
-          },
-          {
-            "p": "<b>Maker distinction.</b> The principle is common to both two-stroke designers, but the control logic is maker-specific and the sketch should say which one it shows. On <b>MAN B&W</b> engines with electronically controlled lubricators (Alpha Lubricator or ME lube) running in <b>ACC mode</b> - Adaptive Cylinder oil Control - the feed rate is set in proportion to the fuel sulphur content through an <b>ACC factor</b>, never below the maker's minimum feed rate, and the factor is optimised from service inspections, wear data and scavenge drain oil analysis (MAN service letter SL2013-571 and its successors). <b>WinGD</b> engines use the maker's <b>Pulse Jet</b> system - electronically timed injections with tailored spray angles for an even oil film - and WinGD's Lubricants Guideline adjusts the feed rate in steps from oil analysis down to a stated minimum, with the oil's base number chosen to suit the fuel's sulphur content. Follow the guidance for the engine actually fitted; do not transfer one maker's settings to the other."
+            "p": "<b>Maker distinction.</b> Electronically timed, metered injection is common to both current two-stroke designers, but the hardware and the control logic are maker-specific: say which one the sketch shows, and never transfer one maker's settings to the other. The competing alternative is <b>WinGD's Pulse Jet</b> system: one servo-oil-operated pump per cylinder, commanded by the engine control system, with tailored spray angles and most of the oil placed above the ring pack; its optional automatic grade changeover is the <b>iCAT</b>. See <a href=\"figures/QP2609-Q4-D6-wingd-pulse-jet.svg\" target=\"_blank\" rel=\"noopener\">D6 - WinGD Pulse Jet (a different maker)</a>."
           },
           {
             "h": "3. How the dose is timed and controlled"
           },
           {
-            "p": "The essential difference from the old mechanical lubricator is that the modern unit is <b>electronically timed and independently metered</b>. The control system knows crank angle continuously, and injects a <b>discrete measured slug</b> at the moment the piston ring pack is passing the quills, so the oil is laid down <b>onto the rings themselves</b> rather than sprayed onto bare liner and wasted. Delivery is not a continuous drip proportional to shaft revolutions; it is a pulse, and on some engines it is delivered <b>every few revolutions</b> at low load rather than every revolution, which is exactly what makes low-load running possible without over-lubricating. Because timing and quantity are decoupled from engine speed, the rate can be commanded from <b>load and fuel sulphur</b> rather than being fixed by a mechanical drive."
+            "p": "The essential difference from the old mechanical lubricator is that the modern unit is <b>electronically timed and independently metered</b>. The control unit knows the crank position and injects a <b>discrete measured quantity</b> through the non-return valves <b>as the piston rings pass the quills on the upward stroke</b>, so that on this engine the oil is placed into the ring pack rather than sprayed onto bare liner and wasted. Delivery is <b>intermittent</b> - for instance every 2, 4 or 8 revolutions - with the CCU setting the injection frequency from the engine-speed and fuel-index signals. Above a <b>part-load breakpoint</b> the feed follows engine load; below it, engine speed. Because timing and quantity are no longer fixed by a mechanical drive, the dose can be commanded from <b>load, fuel sulphur and the oil's base number</b>."
           },
           {
             "h": "4. Why sulphur content drives both the base number and the quantity"
@@ -1787,14 +1795,15 @@
             "h": "5. Setting the optimum feed rate in service"
           },
           {
-            "p": "The procedure is: <b>choose the grade, then set the quantity, then prove it.</b>"
+            "p": "The procedure is: <b>choose the grade, then set the quantity, then prove it.</b> The maker's current guidance for the named engine keeps these steps separate:"
           },
           {
             "ul": [
-              "<b>Select the base number grade</b> appropriate to the fuel actually in use, following the engine maker's and oil supplier's matrix. On the 0.50% global limit and the 0.10% ECA limit this normally means carrying and switching between grades.",
-              "<b>Set the feed proportional to engine load and to fuel sulphur.</b> The control system does this automatically on a modern engine: a base rate scaled by load, multiplied by a factor proportional to the sulphur percentage entered by the engineer. <b>The sulphur figure must be entered from the bunker delivery note</b> - the system cannot measure it.",
+              "<b>Select the base number grade for the fuel actually in use.</b> A low-BN oil for fuel of up to 0.50% sulphur and for gas or methanol operation; a high-BN oil only when high-sulphur fuel is burnt, as on ships with exhaust gas scrubbers. The switching valve or mixing unit puts the selected grade into the line.",
+              "<b>Enter the sulphur figure.</b> It is entered on the main operating panel from the <b>bunker delivery note</b> - on a dual-fuel engine, the pilot fuel's sulphur, from which the system calculates a 'sulphur equivalent'. The system cannot measure it.",
+              "<b>Set the feed.</b> On high-sulphur fuel the feed is proportional to load and to sulphur through the maker's <b>feed-rate factor</b> - formerly the ACC factor, from Alpha ACC (Adaptive, or Adaptable, Cylinder oil Control). On low-sulphur fuel and gas the sulphur-proportional figure falls below the minimum, so the feed is governed by the <b>minimum feed-rate setting</b> and optimised from the cylinder condition.",
               "<b>Respect the maker's minimum feed rate.</b> Below it the film fails regardless of what the acid calculation says, because the oil is also there to lubricate and to clean.",
-              "<b>Optimise downward in small steps.</b> Reduce by a modest increment, then <b>hold and monitor for a defined running period</b> before the next reduction. Never make a large single reduction, and never optimise during a period of unstable load or immediately after an overhaul."
+              "<b>Optimise downward in small steps.</b> Reduce only after confirming good cylinder condition and acceptable iron in the drain oil, then <b>hold and monitor</b> before the next step. Never make a large single reduction, and never optimise during unstable load or running-in."
             ]
           },
           {
@@ -1808,20 +1817,20 @@
               ],
               "rows": [
                 [
-                  "<b>Scrape-down oil analysis</b> from the piston underside drains",
-                  "<b>Residual base number</b> - too high means alkali is being wasted and the rate can come down; too low means acid is not being fully neutralised. <b>Iron content</b> indicates the rate of wear, and the iron TYPE distinguishes corrosive from abrasive or adhesive wear"
+                  "<b>Scavenge drain (scrape-down) oil analysis</b> from the piston underside drains",
+                  "<b>Residual base number</b> - too high means alkali is being wasted and the rate or the grade can come down; too low means acid is not being fully neutralised. <b>Iron content</b> indicates the rate of wear; iron oxides point to corrosive wear, metallic iron to abrasive or adhesive wear. Onboard test kits supplement laboratory analysis; they do not replace it"
                 ],
                 [
                   "<b>Scavenge port inspection</b>",
-                  "Liner surface condition and running pattern, ring free movement and condition, deposits on piston crown and land, and any sign of scuffing or bore polishing"
+                  "Liner surface condition and running pattern, ring free movement and condition, deposits on piston crown and land, and any sign of scuffing or bore polishing - routinely, and more often while the feed is being reduced"
                 ],
                 [
                   "<b>Liner wear measurement</b> at overhaul",
                   "Closes the loop over the long term and confirms the wear rate is within the maker's expectation"
                 ],
                 [
-                  "<b>Feed rate and consumption records</b>",
-                  "Actual cylinder oil consumption against commanded rate - a divergence indicates a lubricator fault, a leaking quill or a stuck non-return valve"
+                  "<b>Daily consumption check</b>",
+                  "Measured cylinder oil consumption against the figure the control system calculates - a shortfall points to a lubricator fault, a leaking quill or a stuck non-return valve, and the feed is raised while it is investigated"
                 ]
               ]
             }
@@ -1831,11 +1840,26 @@
           },
           {
             "ul": [
-              "<b>Changing fuel without changing the setting.</b> Entering an ECA and burning 0.10% sulphur fuel while the system is still set for the previous grade over-delivers alkali; the reverse under-delivers and invites cold corrosion. The sulphur entry and the grade selection are part of the changeover procedure.",
+              "<b>Changing fuel without changing the setting.</b> Moving between high-sulphur fuel and low-sulphur fuel or gas without changing the oil grade and the sulphur entry either over-delivers alkali, building deposits, or under-delivers it and invites cold corrosion. Grade selection and sulphur entry are part of the fuel changeover procedure. On the named engine the same low-BN oil serves fuel of up to 0.50% sulphur and gas, so within that range only the sulphur entry changes.",
               "<b>Over-lubrication is not a safe error.</b> Excess alkaline oil leaves <b>hard calcium deposits</b> on the piston top land and in the ring grooves, causes <b>bore polishing</b> which destroys the liner's oil-retaining honing pattern, sticks rings, and raises consumption cost. Candidates routinely assume more oil is always safer; it is not.",
               "<b>Never go below the maker's minimum</b>, whatever a calculation suggests.",
               "<b>Watch the low-sulphur trap.</b> On very low sulphur fuel there is little acid, but the oil is still needed for film strength and detergency, so the answer is a suitable lower-BN grade at an adequate rate, not simply less of a high-BN oil."
             ]
+          },
+          {
+            "h": "8. Modern-engine extension - automatic grade switching or mixing"
+          },
+          {
+            "p": "Carrying two grades raises a practical question: how does the right one reach the lubricator? Everllence offers two supply systems:"
+          },
+          {
+            "ul": [
+              "<b>ACOS2 - automated cylinder oil switching</b> (the standard system on most engines). It <b>selects</b> one of two oils through the three-way valve, controlled by the engine control system in Auto, High BN or Low BN mode, and fails safe to the high-BN oil. The maker describes it as securing fully acceptable conditions where a longer changeover period is available.",
+              "<b>ACOM Mk III - automated cylinder oil mixing</b> (an option for engines that burn high-sulphur fuel; not applicable to low-sulphur-only engines). It <b>mixes</b> two fully formulated cylinder oils in a small tank to the BN that the control system orders from the fuel sulphur, giving a faster change of BN. Since Category II BN 40 oils became available, the maker no longer recommends mixing for low-sulphur operation."
+            ]
+          },
+          {
+            "p": "Neither system meters the oil - that remains the lubricator's job - and neither sets the feed rate. <b>BN selection and feed rate are separate control decisions</b>: the supply system decides how much alkali each drop carries; the lubricator control decides how many drops arrive. Full-size diagrams: <a href=\"figures/QP2609-Q4-D3-acos2-switching.svg\" target=\"_blank\" rel=\"noopener\">D3 - ACOS2 automated cylinder oil switching</a>; <a href=\"figures/QP2609-Q4-D4-acom-mk3-mixing.svg\" target=\"_blank\" rel=\"noopener\">D4 - ACOM Mk III automated cylinder oil mixing</a>."
           }
         ]
       },
@@ -1845,16 +1869,86 @@
             "h": "Why this structure scores"
           },
           {
-            "p": "The question is two questions joined by 'and'. Splitting it into steps 1 to 3 (the system) and steps 4 to 7 (the optimisation) makes the balance visible while writing, which matters because the sketch is seductive - it is easy to spend twenty minutes drawing and then write three lines on sulphur. The sketch should be a <b>labelled line diagram, not a work of art</b>."
+            "p": "The question is two questions joined by 'and'. Splitting it into steps 1 to 3 (the system) and steps 4 to 7 (the optimisation) makes the balance visible while writing, which matters because the sketch is seductive - it is easy to spend twenty minutes drawing and then write three lines on sulphur. The sketch should be a <b>labelled line diagram, not a work of art</b>. Step 8 is an extension: it earns credit on a 'new generation' question, but write it only once steps 1 to 7 are secure."
           },
           {
             "p": "Step 2 is written as a numbered list precisely so it doubles as the sketch's label list. Draw the diagram, number the components, and the description writes itself."
           },
           {
+            "p": "<b>Historical and current context.</b> This question was set in essentially the same words in March 2022 and February 2024 (QP2203 Q9, QP2402 Q4). The answers written for those sittings, MIW's QP2402 Q4 included, present the sulphur-proportional ACC factor as the general rule for setting the feed. The maker's guidance since June 2023 confines that factor to high-sulphur fuel. Write to the current guidance and say that you are doing so."
+          },
+          {
             "h": "The idea underneath the question"
           },
           {
-            "p": "<b>Alkali delivered equals base number times quantity.</b> Everything in the second half of the answer comes out of that one relation. It explains why there are two knobs and not one; why a high-BN oil at low feed and a low-BN oil at higher feed can be equivalent; why the sulphur percentage must be entered by hand from the bunker delivery note; and why the answer to low-sulphur fuel is a different grade rather than simply less oil."
+            "p": "<b>Alkali delivered equals base number times quantity.</b> Everything in the second half of the answer comes out of that one relation. It explains why there are two knobs and not one; why a high-BN oil at low feed and a low-BN oil at higher feed can be equivalent; why the sulphur percentage must be entered by hand from the bunker delivery note; and why the answer to low-sulphur fuel is a different grade rather than simply less oil. On a modern engine the two knobs are two different pieces of equipment: the supply system (ACOS2 switching or ACOM mixing) decides the BN reaching the lubricator, and the lubricator control decides the quantity."
+          },
+          {
+            "h": "The named engine in detail - Everllence B&W G95ME-C10.5-GI"
+          },
+          {
+            "p": "The maker's current project guide for the G95ME-C10.5-GI (July 2026) describes the arrangement drawn in D1. Points worth knowing beyond the examination minimum:"
+          },
+          {
+            "ul": [
+              "<b>Drive and control.</b> The Alpha lubricator sits on each cylinder's hydraulic cylinder unit and is actuated by the engine's high-pressure hydraulic (system) oil. The Cylinder Control Unit of the engine control system triggers it through a solenoid valve - a proportional valve on the Alpha Mk 2 - and reads a feedback sensor; a level switch watches the oil supply. Because the ME engine control system runs it, the maker also calls it the 'ME lubricator'. See <a href=\"figures/QP2609-Q4-D2-alpha-lubricator-control.svg\" target=\"_blank\" rel=\"noopener\">D2 - Alpha lubricator control and actuation (functional blocks)</a>.",
+              "<b>Variants.</b> The project guide shows pipe arrangements for both the Alpha/ME lubricator and the Alpha Mk 2, which the maker describes as having improved injection flexibility; the Mk 2 can deliver one or several timed injections per revolution. The guide does not state which of the two is standard on this engine.",
+              "<b>MC/MC-C engines are different.</b> Older camshaft engines with Alpha lubricators use a separate pump station and a stand-alone controller (the ALCU, now replaced by the ALCU 2R), and their lubricators carry accumulators that must be kept charged. Do not describe those items as part of an ME engine's system.",
+              "<b>Supply side.</b> The standard ACOS2 layout uses separate low-BN and high-BN tanks, the switching valve, a filter and a small heated tank above the engine inlet, with the whole line to the engine insulated and electrically heat-traced. ACOM replaces the two service tanks and the heating tank with its own small tanks. See <a href=\"figures/QP2609-Q4-D3-acos2-switching.svg\" target=\"_blank\" rel=\"noopener\">D3 - ACOS2 automated cylinder oil switching</a> and <a href=\"figures/QP2609-Q4-D4-acom-mk3-mixing.svg\" target=\"_blank\" rel=\"noopener\">D4 - ACOM Mk III automated cylinder oil mixing</a>.",
+              "<b>Load changes.</b> The control raises the feed temporarily during starting, manoeuvring and load changes (load-change-dependent lubrication), and can pre-lubricate the cylinders before starting."
+            ]
+          },
+          {
+            "h": "Dual-fuel operation on the named engine"
+          },
+          {
+            "p": "The maker's current guidance uses the same cylinder oil for LNG, ethane, LPG and methanol as for fuel oil of up to 0.50% sulphur - a Category II BN 40 oil on Mark 9 and later engines and on dual-fuel engines - so moving between gas and low-sulphur fuel does not by itself require a change of oil. In dual-fuel mode the control system calculates a 'sulphur equivalent' from engine load, the amount of pilot fuel and the pilot fuel's sulphur, which the crew enters on the operating panel. A higher-BN oil (BN 100-140+, or an ACOM mix) is needed only for high-sulphur fuel. The maker's ammonia-engine project guide gives no ammonia-specific cylinder-oil guidance, so none is offered here. WinGD's guideline states only that no high-BN oil is required on LNG, methanol or ammonia. Do not assume one maker's dual-fuel oil rule applies to another maker's engine."
+          },
+          {
+            "h": "Current maker guidance on the feed (for reference, not for memorising)"
+          },
+          {
+            "table": {
+              "headers": [
+                "Point",
+                "Everllence / MAN guidance for this engine family"
+              ],
+              "rows": [
+                [
+                  "Oil for 0-0.50% sulphur fuel, LNG, ethane, LPG and methanol",
+                  "Category II BN 40 (Mark 9 and later, and dual-fuel engines)"
+                ],
+                [
+                  "Oil for high-sulphur fuel (above 0.50% sulphur)",
+                  "Category II BN 100-140+, or an ACOM mix of a lower-BN and a higher-BN oil"
+                ],
+                [
+                  "Feed on high-sulphur fuel",
+                  "Feed-rate factor (formerly ACC) times sulphur %, started at the upper end and lowered only on sweep-test and drain-oil evidence; if the factor has to be set high, change to a higher-BN oil instead"
+                ],
+                [
+                  "Feed on low-sulphur fuel and gas",
+                  "Governed by the minimum feed-rate setting. The absolute minimum is 0.6 g/kWh; up to 0.8 g/kWh may be needed on Mark 9 and later engines to keep them clean"
+                ],
+                [
+                  "Reducing the feed",
+                  "Small steps (0.05-0.1 g/kWh), only after good condition and acceptable iron are confirmed"
+                ],
+                [
+                  "Checks",
+                  "Daily consumption against the calculated figure; monthly scavenge-port inspection, more often while reducing; drain-oil analysis by an accredited laboratory, with onboard kits as a supplement"
+                ]
+              ]
+            }
+          },
+          {
+            "p": "Sources: MAN Energy Solutions Service Letter SL2023-737 (June 2023), Everllence Service Letter SL2025-776 (November 2025) and the G95ME-C10.5-GI project guide (July 2026). These are the maker's published guiding values for its own engines, shown so that the principle has a scale. On board, the engine's current service letters and the oil supplier's recommendation govern. None of these figures is needed in the examination answer. The whole decision chain is drawn in <a href=\"figures/QP2609-Q4-D5-bn-feedrate-monitoring.svg\" target=\"_blank\" rel=\"noopener\">D5 - fuel in use, BN, feed-rate mode and monitoring</a>."
+          },
+          {
+            "h": "The competing maker - WinGD Pulse Jet"
+          },
+          {
+            "p": "WinGD's Pulse Jet system (called the Pulse Lubricating System in WinGD's installation manuals) is a genuinely different design, not a variant of the Alpha lubricator. Each cylinder has its own lubricating pump, operated by servo oil and controlled by the engine control system through a solenoid valve, with a pressure transmitter for feedback. The quills carry non-return valves, and their spray angles and the injection timing are tailored for an even distribution; the control-system timing places the oil above, into and below the ring pack, usually mostly above it. Oil reaches the engine as a single validated grade, through two service tanks with manual changeover valves near the engine inlet, or - on engines ordered with it - through the automatic <b>iCAT</b> unit. WinGD's guideline has the drain oil sampled at least weekly for residual BN and iron, on board and by laboratory. In its 'Safe' band the feed is reduced in steps to a stated minimum, or held. See <a href=\"figures/QP2609-Q4-D6-wingd-pulse-jet.svg\" target=\"_blank\" rel=\"noopener\">D6 - WinGD Pulse Jet (a different maker)</a>."
           },
           {
             "h": "Common mistakes"
@@ -1867,7 +1961,10 @@
               "Forgetting that the sulphur figure is <b>entered by the engineer</b>, not measured by the engine.",
               "Omitting the <b>maker's minimum feed rate</b> - the single most important operational limit in the whole answer.",
               "Confusing cylinder oil with system oil, or suggesting cylinder oil is filtered and returned. It is total-loss.",
-              "Quoting a feed rate in grams per kilowatt-hour or a BN number from memory. These are maker- and oil-specific."
+              "Calling the Alpha lubricator a 'common-rail' system, or giving the ME engine's lubricator an accumulator. Neither is in the maker's description of the ME arrangement; accumulators belong to the older MC/MC-C Alpha lubricators.",
+              "Treating ACOS2 or ACOM as the lubricator. They deliver the right oil to it; the lubricator meters it.",
+              "Applying the sulphur-proportional factor on low-sulphur fuel. On the maker's current guidance it governs only on high-sulphur fuel; otherwise the minimum feed-rate setting does.",
+              "Quoting a feed rate or BN figure as if it were universal. Name the maker and say the figures come from its current service letter for that engine; do not transfer them to another maker."
             ]
           },
           {
@@ -1878,7 +1975,9 @@
               "<b>'You have reduced the feed rate and iron in the scrape-down has risen. What now?'</b> Restore the previous rate immediately, then investigate - the reduction has passed the point where the film or the alkali is adequate.",
               "<b>'Residual BN in the scrape-down is very high. Is that good?'</b> No - it means alkali is being thrown away unburnt and the rate is above what the fuel needs.",
               "<b>'Why not just run maximum feed always?'</b> Cost, deposits, bore polishing, stuck rings and higher emissions of unburnt oil.",
-              "<b>'What happens on entering an ECA?'</b> Fuel changeover to 0.10% sulphur, and the cylinder oil grade and sulphur setting must be changed to match.",
+              "<b>'What happens on entering an ECA?'</b> The fuel changes to 0.10% sulphur and the sulphur entry must be changed with it. On an engine already running a low-BN oil for 0.50% fuel, the maker's guidance does not call for a change of oil; a change of grade is needed when the ship moves between high-sulphur fuel and low-sulphur fuel.",
+              "<b>'The ship has ACOM. Why not order one mid-range BN all the time?'</b> Because the BN should follow the fuel's sulphur. For low-sulphur fuel the maker now recommends a single Category II BN 40 oil rather than a mixture.",
+              "<b>'Is the ACC factor still how the feed is set?'</b> Only on high-sulphur fuel, where the maker now calls it the feed-rate factor. On low-sulphur fuel and gas the minimum feed-rate setting governs.",
               "Being asked for numbers. State the principle and the basis, and say that the actual figures come from the engine maker's and oil supplier's current recommendation for that installation."
             ]
           },
@@ -1889,16 +1988,35 @@
             "ul": [
               "What is cold corrosion and where on the liner does it occur? Corrosive wear from condensed sulphuric acid where the wall is below the acid dew point, typically in the upper part of the liner.",
               "What is bore polishing and why does it matter? Loss of the honed surface pattern, so the liner no longer retains oil - it follows over-lubrication and deposit build-up.",
-              "How many quills per liner and why several? Several around the circumference so oil is distributed evenly to the whole ring pack in the available time.",
+              "How many quills per liner, and why several? The number depends on the engine type; several round the circumference so that oil reaches the whole ring pack in the time available.",
               "What does iron in the scrape-down tell you? Wear rate, and the form of the iron indicates the wear mechanism.",
-              "Where does the cylinder oil finally go? Burnt with the charge, or scraped down to the scavenge drain."
+              "Where does the cylinder oil finally go? Burnt with the charge, or scraped down to the scavenge drain.",
+              "What does the ACOS2 valve do if control air or its signal is lost? A spring returns it to the high-BN oil.",
+              "What is a 'sulphur equivalent'? The sulphur content of the fuel actually burnt in dual-fuel operation, which the control system calculates from engine load, the amount of pilot fuel and the pilot fuel's sulphur.",
+              "What drives the Alpha lubricator on an ME engine? The engine's high-pressure hydraulic (system) oil at the hydraulic cylinder unit, triggered by a solenoid or proportional valve that the cylinder control unit commands."
             ]
           },
           {
             "h": "Memory framework"
           },
           {
-            "p": "System half: <b>tank - tank - heat and filter - pump unit (with its accumulator) - quills - control</b>, which is simply the path the oil takes and is also the sketch. Optimisation half: <b>Acid, Alkali, Amount, Assess</b> - acid comes from sulphur (4), alkali is the base number, amount is the feed rate (5), assess by scrape-down and inspection (6). Then the traps (7)."
+            "p": "System half: <b>tanks - switch - filter - heating tank - heat-traced line - lubricator on the HCU - quills - control</b>, which is simply the path the oil takes and is also the sketch. Optimisation half: <b>Acid, Alkali, Amount, Assess</b> - acid comes from sulphur (4), alkali is the base number, amount is the feed rate (5), assess by scrape-down and inspection (6). Then the traps (7) and the switching-or-mixing extension (8)."
+          },
+          {
+            "h": "Diagrams for this answer"
+          },
+          {
+            "ul": [
+              "<a href=\"figures/QP2609-Q4-cylinder-lubrication.svg\" target=\"_blank\" rel=\"noopener\">D1 - the complete system for the named engine (the examination sketch)</a>",
+              "<a href=\"figures/QP2609-Q4-D2-alpha-lubricator-control.svg\" target=\"_blank\" rel=\"noopener\">D2 - Alpha lubricator control and actuation (functional blocks)</a>",
+              "<a href=\"figures/QP2609-Q4-D3-acos2-switching.svg\" target=\"_blank\" rel=\"noopener\">D3 - ACOS2 automated cylinder oil switching</a>",
+              "<a href=\"figures/QP2609-Q4-D4-acom-mk3-mixing.svg\" target=\"_blank\" rel=\"noopener\">D4 - ACOM Mk III automated cylinder oil mixing</a>",
+              "<a href=\"figures/QP2609-Q4-D5-bn-feedrate-monitoring.svg\" target=\"_blank\" rel=\"noopener\">D5 - fuel in use, BN, feed-rate mode and monitoring</a>",
+              "<a href=\"figures/QP2609-Q4-D6-wingd-pulse-jet.svg\" target=\"_blank\" rel=\"noopener\">D6 - WinGD Pulse Jet (a different maker)</a>"
+            ]
+          },
+          {
+            "p": "Every diagram is an original educational line drawing checked against the makers' published documents, not a copy of a maker drawing. Where a maker does not publish internal details, the diagram shows functional blocks and says so."
           },
           {
             "h": "Regulation and source map"
@@ -1920,11 +2038,27 @@
                 ],
                 [
                   "Base number depletion, scrape-down analysis, wear mechanisms",
-                  "MIW verification record verification/QP2401/Q6.md, verified at the immediately preceding sitting"
+                  "MIW's verified answer to the January 2024 question on the same subject (QP2401 Q6), with the maker guidance below"
                 ],
                 [
-                  "System layout, electronic timing, quill arrangement, minimum feed rate",
-                  "Established engine maker practice, described generically with one make named as the question requires"
+                  "Named engine; system layout; Alpha lubricator; ACOS2; ACOM Mk III; dual-fuel oil",
+                  "Everllence, Project guide G95ME-C10.5-GI, document 7020-0260-14ppr, revision 1.0, July 2026 (chapter 9)"
+                ],
+                [
+                  "Feed-rate factor on high-sulphur fuel, minimum feed on low-sulphur fuel, BN categories",
+                  "MAN Energy Solutions Service Letter SL2023-737, June 2023"
+                ],
+                [
+                  "Drain-oil sampling and evaluation",
+                  "Everllence Service Letter SL2025-776, November 2025"
+                ],
+                [
+                  "MC/MC-C lubricator pump station, controller and accumulators",
+                  "MAN Service Letters SL2016-632 (2016) and SL2025-766 (2025)"
+                ],
+                [
+                  "WinGD Pulse Jet, iCAT and WinGD feed-rate optimisation",
+                  "WinGD Lubricants guideline DTAA001621 rev B (25 November 2025); WinGD X82DF Operation Manual (2021); WinGD X72DF-1.1 and X72DF-M-1.0 Marine Installation Manuals; WinGD tribology web page"
                 ]
               ]
             }
@@ -1933,7 +2067,7 @@
             "h": "Uncertainty and the numbers deliberately not given"
           },
           {
-            "p": "<b>No numeric feed rate, base number grade, sulphur-proportioning constant, wear limit, iron threshold or alarm setting appears anywhere in this answer.</b> Every one of those is specific to the engine maker, the engine type, the oil supplier and often the individual installation, and several have been revised by makers since the 2020 sulphur limit. Quoting one from memory would give a candidate false confidence in the examination room and false authority in service. The production protocol requires an unverifiable quantity to be omitted rather than invented, and the answer instead states the <b>basis</b> on which each figure is set and directs the engineer to the maker's and supplier's current recommendation. The one regulatory claim - the 0.50% and 0.10% limits - was verified against the corpus copy of MARPOL Annex VI. The printed stem's malformed wording is noted in the spec and not corrected in the transcription."
+            "p": "<b>The Answer tab quotes no feed rate, BN setpoint, wear limit, iron threshold or alarm setting.</b> Each is specific to the maker, the engine type, the oil and often the installation, and makers revise them by service letter. The reference table above repeats the maker's published guiding values for this engine family, with sources and dates, for understanding only. The maker's documents do not settle the following, so they are neither drawn nor stated: the lubricator's internal hydraulic porting (D2 is therefore a functional block diagram); whether the Alpha/ME or the Alpha Mk 2 lubricator is standard on this engine; the number of quills per liner; the internal control logic of ACOM Mk III; any ammonia-specific cylinder-oil guidance; and, for WinGD, the current pump type, whether it has an accumulator, and whether iCAT is offered on the newest engines. One sentence in the maker's ACOS2 control-mode table, on Auto mode choosing the high-BN oil in dual-fuel operation, appears to conflict with the same guide's oil strategy and has not been relied on. The one regulatory claim - the 0.50% and 0.10% limits - was verified against the corpus copy of MARPOL Annex VI. The printed stem's malformed wording is noted in the spec and not corrected in the transcription."
           }
         ]
       },
@@ -1942,21 +2076,21 @@
           "id": "QP2609-Q4-C1",
           "type": "structure",
           "prompt": "Give the route for the cylinder lubricating system question.",
-          "answer": "1 What the oil must do and why it is once-through. 2 The layout to sketch level. 3 How the dose is timed and controlled. 4 Why sulphur drives base number and quantity. 5 Setting the optimum feed rate. 6 Verifying it. 7 The traps.",
-          "why": "Steps 1 to 3 are the sketch-and-describe half; steps 4 to 7 are the sulphur half. Roughly equal marks."
+          "answer": "1 What the oil must do and why it is once-through. 2 The layout to sketch level. 3 How the dose is timed and controlled. 4 Why sulphur drives base number and quantity. 5 Setting the optimum feed rate. 6 Verifying it. 7 The traps. 8 Switching or mixing the grade (modern extension).",
+          "why": "Steps 1 to 3 are the sketch-and-describe half; steps 4 to 7 are the sulphur half. Step 8 is credit on top, written last."
         },
         {
           "id": "QP2609-Q4-C2",
           "type": "procedure",
-          "prompt": "List the components a cylinder lubricating system sketch must show, in oil-path order.",
-          "answer": "Cylinder oil storage tank; heated gravity service tank with level alarm; heater and filter; lubricator pump unit per cylinder with solenoid control and its accumulator; high-pressure pipes to several injection quills spaced round the liner at ring-pack level, each with a non-return valve; electronic control unit taking crank angle, load and fuel sulphur; scavenge space and drain for sampling.",
+          "prompt": "List the components a cylinder lubricating system sketch must show for the named engine, in oil-path order.",
+          "answer": "Low-BN and high-BN oil tanks; ACOS2 switching valve (or ACOM Mk III mixer); filter; heating tank with low-level alarm; insulated heat-traced pipe, main supply valve and main pipe; Alpha lubricator on each HCU, actuated by hydraulic system oil through a solenoid or proportional valve; several quills per liner with non-return valves; cylinder control unit with feedback sensor; scavenge drain for sampling.",
           "why": "This list is both the sketch labels and the description - draw it, number it, describe it."
         },
         {
           "id": "QP2609-Q4-C3",
           "type": "distinction",
           "prompt": "How does a new-generation lubricator differ from a mechanical one?",
-          "answer": "It is electronically timed and independently metered. A discrete measured slug is injected at the crank angle at which the ring pack passes the quills, rather than a continuous drip geared to shaft speed. Quantity and timing are therefore commanded from engine load and entered fuel sulphur, and at low load injection can be every few revolutions instead of every revolution.",
+          "answer": "It is electronically timed and independently metered. The control unit injects a measured quantity through non-return valves as the piston rings pass the quills on the upstroke, intermittently - for instance every 2, 4 or 8 revolutions - setting the frequency from engine speed and fuel index. The dose therefore follows load, fuel sulphur and oil BN, not a mechanical drive.",
           "why": "The question says 'new generation'; describing a camshaft-driven lubricator answers a different question."
         },
         {
@@ -1977,7 +2111,7 @@
           "id": "QP2609-Q4-C6",
           "type": "procedure",
           "prompt": "How do you optimise the feed rate downward safely, and how do you prove it?",
-          "answer": "Select the base number grade for the fuel in use, set the feed proportional to load and entered sulphur, and stay above the maker's minimum. Reduce in small increments, holding and monitoring for a defined running period between steps - never a single large reduction, never during unstable load or straight after an overhaul. Prove it by scrape-down residual base number and iron content, scavenge port inspection of liner and rings, and liner wear measurement at overhaul.",
+          "answer": "Choose the BN grade for the fuel in use and enter the sulphur from the bunker delivery note. On high-sulphur fuel the feed follows the feed-rate factor times sulphur; on low-sulphur fuel and gas the minimum feed-rate setting governs. Reduce in small steps only after good condition and acceptable drain-oil iron are confirmed, holding between steps. Prove it by residual BN and iron, scavenge port inspection, daily consumption checks and liner wear.",
           "why": "This is the marks-bearing operating procedure and the part that shows shipboard judgement."
         },
         {
@@ -1986,45 +2120,87 @@
           "prompt": "Scrape-down residual base number is very high. What does it mean and what do you do?",
           "answer": "Alkali is being delivered in excess of what the fuel's sulphur requires and is being wasted. Provided iron content and liner condition are satisfactory and the maker's minimum is respected, the feed rate can be reduced in a controlled step and the result monitored before any further reduction.",
           "why": "Tests whether the candidate can interpret the analysis rather than merely name it."
+        },
+        {
+          "id": "QP2609-Q4-C8",
+          "type": "distinction",
+          "prompt": "What is the difference between ACOS2 and ACOM on an Everllence B&W engine?",
+          "answer": "ACOS2 SWITCHES between two cylinder oils through a three-way valve controlled by the engine control system, and fails safe to the high-BN oil; it is the standard system and suits a longer changeover period. ACOM Mk III MIXES two fully formulated oils to the BN ordered from the fuel sulphur, for a faster change; it is an option for high-sulphur operation. Neither meters the oil - the Alpha lubricator does.",
+          "why": "Switching, mixing and metering are three different jobs; examiners reward keeping them apart."
+        },
+        {
+          "id": "QP2609-Q4-C9",
+          "type": "distinction",
+          "prompt": "On a current MAN/Everllence engine, when does the feed-rate factor (the old ACC factor) actually set the feed?",
+          "answer": "Only on high-sulphur fuel, where the feed is the factor times the sulphur percentage, never below the minimum. On fuel of up to 0.50% sulphur and on gas or methanol the product falls below the minimum, so the minimum feed-rate setting governs and is optimised from inspection and drain-oil results.",
+          "why": "The commonest out-of-date statement in answers to this question."
+        },
+        {
+          "id": "QP2609-Q4-C10",
+          "type": "trap",
+          "prompt": "A G95ME-GI engine changes from very-low-sulphur fuel oil to gas mode. Must the cylinder oil be changed?",
+          "answer": "Not on the maker's current guidance - the same low-BN Category II oil serves gas and fuel of up to 0.50% sulphur. The pilot fuel's sulphur must still be entered so that the system can calculate the sulphur equivalent. A change of oil is needed when moving to or from high-sulphur fuel.",
+          "why": "Tests whether the candidate knows the dual-fuel position rather than assuming every fuel change means a grade change."
+        },
+        {
+          "id": "QP2609-Q4-C11",
+          "type": "distinction",
+          "prompt": "Where is the oil placed by an Everllence B&W Alpha system, compared with a WinGD Pulse Jet system?",
+          "answer": "Alpha: injected through non-return valves as the piston rings pass the quills on the upstroke - into the ring pack. WinGD Pulse Jet: jets with tailored spray angles, placed by control-system timing above, into and below the ring pack - usually mostly above it. Different makers, different logic; never transfer settings between them.",
+          "why": "Shows the candidate has named a make and knows it is not the only design."
         }
       ],
       "quick_revision": {
-        "recall_15s": "Cylinder oil: film, neutralise, clean, seal, carry debris - and it is TOTAL LOSS. Sketch path: storage tank, service tank, heater and filter, lubricator pump per cylinder with its accumulator, quills round the liner with non-return valves, electronic control. Modern unit is electronically timed - a metered slug onto the ring pack, commanded from load and sulphur. Sulphur burns to SO2/SO3, condenses as sulphuric acid below the dew point, neutralised by the oil's base number. Alkali delivered = BN x quantity, so two knobs: grade and feed rate. Set grade, set rate above the maker minimum, reduce in small steps, prove by scrape-down BN and iron, scavenge inspection and liner wear.",
+        "recall_15s": "Cylinder oil: film, neutralise, clean, seal, carry debris - and it is TOTAL LOSS. Named engine: Everllence B&W G95ME-C10.5-GI. Sketch path: two BN grades, ACOS2 switching valve, filter, heating tank, heat-traced line, main pipe, Alpha lubricator on each HCU (hydraulic system oil, solenoid or proportional valve), quills with non-return valves, cylinder control unit. Dose: timed onto the ring pack, intermittent, set from speed and fuel index. Sulphur burns to acid below the dew point, neutralised by BN. Two decisions: the grade (supply system) and the feed (lubricator control). High-sulphur fuel: factor times S%; low-sulphur fuel and gas: the minimum. Reduce in small steps; prove by drain-oil BN and iron, port inspection, consumption and wear.",
         "keywords": [
           "total loss",
-          "electronically timed slug",
+          "Alpha lubricator",
+          "electronically timed injection",
           "acid dew point",
           "cold corrosion",
           "base number",
           "alkali = BN x quantity",
+          "ACOS2 switching",
+          "ACOM mixing",
+          "feed-rate factor",
           "maker's minimum feed rate",
+          "sulphur equivalent",
           "scrape-down analysis",
           "bore polishing"
         ],
         "critical_numbers": [
           "MARPOL Annex VI regulation 14: 0.50% m/m global sulphur limit since 1 January 2020",
           "0.10% m/m in emission control areas",
-          "No feed rate, base number or wear figure is quoted - all are maker- and installation-specific"
+          "No feed rate, base number or wear figure is quoted in the Answer - they are maker-, oil- and installation-specific; the Study Guide shows the maker's published values, sourced and dated"
         ],
         "critical_regulation": "MARPOL Annex VI regulation 14 - global sulphur limit 0.50% m/m, and 0.10% m/m in emission control areas. Regulation 18 and appendix V make the bunker delivery note the record of the sulphur content the engineer enters.",
-        "major_trap": "Assuming over-lubrication is the safe error. Excess alkaline oil causes hard deposits on the piston top land, bore polishing which destroys the honing pattern, and stuck rings. The second trap is changing fuel sulphur without changing the oil grade and the sulphur setting."
+        "major_trap": "Assuming over-lubrication is the safe error. Excess alkaline oil causes hard deposits on the piston top land, bore polishing which destroys the honing pattern, and stuck rings. The second trap is moving between high-sulphur and low-sulphur fuel without changing the oil grade and the sulphur entry."
       },
       "short_title": "Cylinder Lubricating System and Feed Rate with Varying Sulphur",
       "reused_from": "QP2402-Q4",
       "reuse_tier": "D",
       "answer_status": "Pilot Review Ready",
-      "verification_status": "Verified for the September 2026 sitting in QP2609-PROD01 (reference date 21 September 2026). Donor QP2402-Q4 unchanged (no sitting-relative prose); maker-distinction paragraph added without numbers.",
+      "verification_status": "Verified for the September 2026 sitting in QP2609-PROD01 (reference date 21 September 2026). Enhanced in QP2609-Q4-MODERN-LUBRICATION-01 (22 September 2026): named engine, system and feed-rate guidance re-verified against the Everllence G95ME-C10.5-GI project guide (July 2026), MAN SL2023-737, Everllence SL2025-776 and WinGD documents; six diagrams. Donor QP2402-Q4 unchanged.",
       "sources": [
         "QP2402-Q4 (donor)",
-        "MAN B&W / WinGD maker practice - P5, identity only",
-        "MAN Diesel & Turbo Service Letter SL2013-571/JAP, May 2013 (man-es.com)",
+        "Everllence - Project guide G95ME-C10.5-GI, 7020-0260-14ppr rev 1.0, July 2026 (chapter 9)",
+        "MAN Energy Solutions - Service Letter SL2023-737/NHN, Cylinder lubrication update, June 2023",
+        "Everllence - Service Letter SL2025-776/NHN, Sampling of scavenge drain oil, November 2025",
+        "MAN Diesel & Turbo - Service Letter SL2016-632/AAB, Alpha Lubricator service experience, November 2016",
+        "MAN Energy Solutions - Service Letter SL2025-766/ANRE, ALCU 2R, April 2025",
+        "MAN Diesel & Turbo - Service Letter SL2013-571/JAP, May 2013 (superseded; predecessor evidence)",
         "WinGD Lubricants Guideline DTAA001621 rev B, 25 Nov 2025 (wingd.com)",
+        "WinGD - Operation Manual X82DF, issue 002, 2021",
+        "WinGD - Marine Installation Manuals X72DF-1.1 (2021) and X72DF-M-1.0 rev 02 (2026)",
         "WinGD - Tribology, Fuels & Lubricants web page (Pulse Jet)"
       ],
       "unresolved": [
-        "MAN guidance is cited from SL2013-571 (2013); later service letters may revise it for newer engines and 100 BN oils. No setting is quoted in the Answer tab.",
-        "WinGD's automatic cylinder-oil changeover unit is not named: its name appears only in secondary summaries.",
-        "Accumulator position in the lubricator circuit is not verified against a maker manual (MAN Alpha Lubricator manuals are not publicly served); the answer and sketch show it as fitted with each lubricator unit without asserting its place in the oil path."
+        "Alpha lubricator internal hydraulic porting is not published by the maker: diagram D2 is a functional block diagram and no porting is asserted.",
+        "Whether the Alpha/ME or the Alpha Mk 2 lubricator is standard on the G95ME-C10.5-GI is not stated in the current project guide (both pipe arrangements are shown); the answer names both valve types.",
+        "Number of quills per liner is 'depends on the actual engine type' in the maker's guide; not stated.",
+        "ACOS2 control-mode table sentence (Auto: high-BN oil in dual-fuel operation) appears to conflict with the same guide's oil strategy; not relied on.",
+        "No ammonia-specific cylinder-oil guidance found in the Everllence ME-LGIA project guide; none given.",
+        "WinGD: current pump type, accumulator, quill count and iCAT availability on current X-DF 2.x/-A/-M engines not established; not stated."
       ],
       "topic_tags": [
         "cylinder lubrication",
@@ -2034,7 +2210,9 @@
         "base number",
         "fuel sulphur",
         "cold corrosion",
-        "scrape-down analysis"
+        "scrape-down analysis",
+        "ACOS2",
+        "ACOM"
       ],
       "command_verbs": [
         "with specific reference to any make",
@@ -2043,17 +2221,18 @@
       ],
       "decomposition": [
         "Duties of cylinder oil; once-through",
-        "System layout (sketch)",
+        "System layout (sketch) for a named engine",
         "Timing and control",
         "Why sulphur drives BN and quantity",
         "Setting the feed rate",
         "Verification",
-        "Traps"
+        "Traps",
+        "Modern extension: switching or mixing the grade"
       ],
       "reuse_evidence": [
         "TIER D - EXACT PRINTED RECURRENCE of QP2402-Q4 and QP2203-Q9 ('With specific to reference' corrected to 'With specific reference' in Sept 2026)."
       ],
-      "question_delta": "QUESTION DELTA: printed typo corrected only. CONTENT DELTA: maker paragraph now verified against MAN SL2013-571 and WinGD sources; schematic asset supplied.",
+      "question_delta": "QUESTION DELTA: printed typo corrected only. CONTENT DELTA: named engine Everllence B&W G95ME-C10.5-GI; system and feed-rate guidance re-verified against current maker documents (22 Sep 2026); ACOS2 and ACOM Mk III added; six diagrams.",
       "recurrence_class": "exact_recurrence",
       "host_recurrence_hint": [],
       "recurrence_adjudication": "MIW text: QP2203-Q9, QP2402-Q4. No official bank item. Governed family QIF-EM-0063.",
@@ -2068,42 +2247,54 @@
         "mark_allocation": "16.",
         "examiner_expectation": "A labelled sketch; BN x feed = alkali; maker's minimum; verification by scrape-down.",
         "primary_source_plan": [
-          "MAN SL2013-571 (maker document, cached)",
-          "WinGD Lubricants Guideline DTAA001621 rev B and WinGD tribology page",
+          "Everllence project guide G95ME-C10.5-GI (7020-0260-14ppr rev 1.0, July 2026)",
+          "MAN SL2023-737 (June 2023) and Everllence SL2025-776 (Nov 2025)",
+          "WinGD Lubricants Guideline DTAA001621 rev B, X82DF OM, X72DF MIMs, tribology page",
           "Donor QP2402-Q4"
         ],
         "freshness_risk": "MEDIUM - maker guidance is revised by service letter.",
         "jurisdiction_risk": "LOW.",
         "technical_ambiguities": [
-          "Maker settings differ and must not be transferred"
+          "Maker settings differ and must not be transferred",
+          "Alpha variant standard on the named engine not stated by the maker",
+          "Lubricator internal porting not published"
         ],
         "target_answer_shape": "Seven steps plus a sketch.",
-        "note": "Completed for the September 2026 sitting in QP2609-PROD01. For D-tier questions the donor's gate was read first and re-issued for this sitting; sitting-relative statements were not carried.",
+        "note": "Completed for the September 2026 sitting in QP2609-PROD01. For D-tier questions the donor's gate was read first and re-issued for this sitting; sitting-relative statements were not carried. Re-issued on 22 September 2026 in QP2609-Q4-MODERN-LUBRICATION-01 against current maker documents.",
         "completed": "2026-09-21"
       },
       "provenance_summary": {
         "P1_PRIMARY_VERIFIED": [],
         "P2_AUTHORITATIVE_SECONDARY": [],
         "P3_INDUSTRY_GUIDANCE": [
-          "MAN Diesel & Turbo SL2013-571 (May 2013): ACC mode, ACC factor x S%, minimum feed rate, drain oil analysis, sweep test",
-          "WinGD Lubricants Guideline DTAA001621 rev B (25 Nov 2025): feed-rate optimisation from oil analysis to a minimum; BN selection by fuel sulphur",
+          "Everllence project guide G95ME-C10.5-GI (July 2026): Alpha lubricator on HCU, multi-piston pumps, CCU control, intermittent timed injection, ACOS2 standard, ACOM Mk III option, dual-fuel oil strategy",
+          "MAN SL2023-737 (June 2023): Cat. II BN 40 for 0-0.50% S and gas/methanol; FRF only on HSFO; minimum feed rate; small-step reduction; daily consumption and monthly inspection",
+          "Everllence SL2025-776 (Nov 2025): scavenge drain oil sampling and evaluation",
+          "MAN SL2016-632 and SL2025-766: MC/MC-C Alpha lubricator pump station, ALCU and accumulators",
+          "WinGD Lubricants Guideline DTAA001621 rev B (25 Nov 2025): BN selection, drain-oil analysis, stepwise reduction to a minimum",
+          "WinGD X82DF Operation Manual and X72DF / X72DF-M MIMs: Pulse Lubricating System, iCAT option",
           "WinGD tribology page: Pulse Jet system, electronically controlled injection timing"
         ],
         "INTERNAL_REUSE_VERIFIED": [
           "QP2402-Q4 verification record"
         ],
         "ENGINEERING_JUDGEMENT": [
-          "System layout description"
+          "Examination structure and the functional (not hydraulic) representation in D2 and D6"
         ],
         "UNRESOLVED": [],
         "TIME_SENSITIVE_REVERIFY": [
-          "MAN SL2013-571 may be superseded for newer engines and 100 BN oils"
+          "Maker cylinder-lubrication guidance is revised by service letter"
         ]
       },
       "reverify_before_publication": [
         {
-          "claim": "MAN ACC description taken from SL2013-571 (2013)",
-          "why": "Later service letters may revise guidance for newer engines; no numbers are quoted in the Answer tab",
+          "claim": "Current Everllence/MAN cylinder-lubrication guidance (SL2023-737, SL2025-776, project guide July 2026)",
+          "why": "Maker guidance is revised by service letter; check the maker's service-letter index before each new sitting",
+          "class": "B_CURRENCY_CHECK"
+        },
+        {
+          "claim": "Alpha lubricator variant fitted as standard, and its internal hydraulic porting",
+          "why": "Not published by the maker; the variant is not asserted and D2 is drawn as functional blocks",
           "class": "C_ACCEPTED_LIMITATION"
         }
       ],
@@ -2164,7 +2355,20 @@
         "0.10% sulphur",
         "MARPOL Annex VI regulation 14",
         "bunker delivery note",
-        "two stroke crosshead"
+        "two stroke crosshead",
+        "Everllence",
+        "ME lubricator",
+        "Alpha Mk 2",
+        "ACOS2",
+        "automated cylinder oil switching",
+        "ACOM",
+        "automated cylinder oil mixing",
+        "feed rate factor",
+        "FRF",
+        "sulphur equivalent",
+        "Pulse Lubricating System",
+        "iCAT",
+        "hydraulic cylinder unit"
       ],
       "primary_category": "Human Element & Management"
     },
