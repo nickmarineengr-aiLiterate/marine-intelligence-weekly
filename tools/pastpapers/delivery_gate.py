@@ -56,6 +56,7 @@ if __name__ == '__main__':
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from render_common import REPO_ROOT, is_intake
+import build_questions_year as BQY
 
 SPEC_GLOB = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers', 'specs', '*.json')
 
@@ -75,11 +76,16 @@ def is_solved(spec):
     return any(q.get('model_answer') for q in spec['questions'])
 
 
-def expected_artefacts(specs):
+def expected_artefacts(specs, archive=None):
     """Every file the toolchain must have produced, as repo-relative paths.
 
     Each block names the builder it mirrors. If a builder's rule changes, the
     matching block here changes with it and --verify-derivation proves it.
+
+    `archive` is the wording-archive store, defaulting to the one on disk. It is
+    a parameter for the same reason `specs` is: the self-test drives this
+    function with synthetic input, and a rule that silently reached for the real
+    store would make those controls depend on shipped content.
     """
     pp = os.path.join('meoclass1', 'pastpapers')
     sq = 'solvedQP'
@@ -104,6 +110,24 @@ def expected_artefacts(specs):
         add(os.path.join(pp, 'questions-%d.html' % y), 'review year sheet')
     for y in sorted({d['year'] for d in specs if is_solved(d)}):
         add(os.path.join(sq, 'questions-%d.html' % y), 'delivery year sheet')
+
+    # build_questions_year.py -- the 2021/2022 WORDING ARCHIVE. These years hold
+    # no spec, so neither rule above can reach them, yet they are published on
+    # BOTH surfaces: the builder appends `arc_years` to the loop on every pass
+    # (`for year in years + arc_years`), the delivery pass differing only by
+    # `deliver=`, and questions_year_check's ARCHIVE-A fails an archive year
+    # whose sheet is missing from EITHER tree. A gate that did not expect them
+    # would let the publication that drops one report green.
+    #
+    # Derived through the builder's own archive_years() rather than restated,
+    # which is what keeps ARCHIVE_FLOOR and the solved-year exclusion from
+    # drifting: the store also holds 2023, and only that exclusion keeps a
+    # second 2023 sheet out of the expected set.
+    if archive is None:
+        archive = BQY.load_archive()
+    for y in BQY.archive_years(specs, archive):
+        add(os.path.join(pp, 'questions-%d.html' % y), 'review archive year sheet')
+        add(os.path.join(sq, 'questions-%d.html' % y), 'delivery archive year sheet')
 
     # build_index.py -- review manifest, review index, one topics sheet per
     # year present in the manifest. topics-*.html is INTERNAL: it carries
@@ -242,7 +266,7 @@ def self_test():
         'paper_id': 'QPZZ99', 'year': 2099, 'questions': [
             {'q_no': 'Q1', 'model_answer': {'blocks': []}}],
     }]
-    exp = expected_artefacts(fake)
+    exp = expected_artefacts(fake, archive={})
     expect('solved spec expects a REVIEW page',
            'meoclass1/pastpapers/QPZZ99.html' in exp)
     expect('solved spec expects a DELIVERY page',
@@ -258,13 +282,44 @@ def self_test():
     # deliberately does not sell.
     intake = [{'paper_id': 'QPZZ98', 'year': 2098,
                'questions': [{'q_no': 'Q1'}]}]
-    exp_i = expected_artefacts(intake)
+    exp_i = expected_artefacts(intake, archive={})
     expect('intake year gets NO delivery year sheet',
            'solvedQP/questions-2098.html' not in exp_i)
     expect('intake spec gets NO delivery paper page',
            'solvedQP/QPZZ98.html' not in exp_i)
     expect('intake year DOES get a review year sheet',
            'meoclass1/pastpapers/questions-2098.html' in exp_i)
+
+    # The wording archive, against a SYNTHETIC store. Driving these from the
+    # shipped 2021/2022 pages would prove only that two filenames were written
+    # down somewhere; a synthetic year proves the rule computes.
+    arc = {2097: {3: [{'paper_id': 'ARC97'}]}}
+    exp_a = expected_artefacts(fake, archive=arc)
+    expect('archive year expects BOTH tree sheets',
+           'meoclass1/pastpapers/questions-2097.html' in exp_a
+           and 'solvedQP/questions-2097.html' in exp_a)
+    expect('archive year is NOT sold as a paper page',
+           'solvedQP/ARC97.html' not in exp_a
+           and 'meoclass1/pastpapers/ARC97.html' not in exp_a)
+
+    # The exclusions that make this a derivation and not a list. Below the
+    # floor, and a year the specs already solve, must both stay out -- the real
+    # store holds 2023, which only the second rule keeps from being expected
+    # twice.
+    exp_f = expected_artefacts(fake, archive={2020: {3: [{'paper_id': 'ARC20'}]}})
+    expect('archive year below ARCHIVE_FLOOR is refused',
+           'meoclass1/pastpapers/questions-2020.html' not in exp_f
+           and 'solvedQP/questions-2020.html' not in exp_f)
+    exp_x = expected_artefacts(fake, archive={2099: {3: [{'paper_id': 'ARC99'}]}})
+    expect('a year the specs solve gets NO second archive sheet',
+           exp_x.get('meoclass1/pastpapers/questions-2099.html')
+           == 'review year sheet')
+
+    # An empty store must expect no archive sheet at all. This is the control
+    # that fails if the four shipped paths were ever hardcoded.
+    expect('empty archive store expects NO archive sheet',
+           not [p for p in expected_artefacts(fake, archive={})
+                if 'questions-2021' in p or 'questions-2022' in p])
 
     # The gate must report a path Git has never seen. Proven against a name
     # that cannot exist rather than by touching the working tree.
