@@ -92,7 +92,7 @@ be made and no week-granularity distance may be computed from this sitting.
 | **MEPC.346(78)** 2022 SEEMP guidelines | Operative. |
 | Global sulphur limit 0.50 % m/m | Operative since 1 January 2020; 0.10 % m/m in ECAs. |
 | **AFS Convention** as amended | Operative; **cybutryne controls applied from 1 January 2023**. |
-| **CLC 1992** and the **Bunker Convention 2001** | Both long in force; India is a party to both. |
+| **CLC 1992** and the **Bunker Convention 2001** | Both long in force. India is a Party to **CLC 1992** (accession 15 November 1999, in force for India 15 November 2000); India is **not** a Contracting State to the **Bunker Convention 2001** (IMO *Status of IMO Treaties*, 26 August 2026). |
 | **LLMC 1976 / 1996 Protocol**, limits as raised by the 2012 amendments | The raised limits have applied since **8 June 2015**. |
 | **MLC 2006** as amended through the **2018** set | Operative. |
 | **ISM Code** as amended through `MSC.353(92)` | Operative. |
