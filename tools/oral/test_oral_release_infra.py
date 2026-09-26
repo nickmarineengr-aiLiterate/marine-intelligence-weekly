@@ -409,6 +409,181 @@ check("E1's per-card shared-target dialect is accepted", not e1,
 
 
 # ===========================================================================
+# 5b. A DECLARED authorisation_commit IS THE AUTHORISATION
+#
+# The defect this guards: resolve_authorisation_source() looked in the working
+# tree FIRST, so a declared authorisation_commit was never tested while the
+# record existed on disk. H7 declared 8e291db, where its queue does not exist,
+# and the audit still answered "-> tree", i.e. PASS. Any commit value at all --
+# a pre-authorisation commit, PENDING_FOUNDER_COMMIT, a SHA that exists
+# nowhere -- read green, because the working copy was always substituted.
+#
+# The fixture is a throwaway repository, so every case is deterministic and no
+# case depends on a dirty candidate worktree:
+#   c_pre   -- no authorisation record exists yet (the "before the Founder
+#              decided" commit)
+#   c_auth  -- the record is committed (the real authorisation)
+#   c_gone  -- the record is deleted again
+#   c_bad   -- the record exists but is not parseable JSON
+# and after all four, a VALID record is left in the working tree, so that every
+# negative case below is one the old resolver would have answered "tree".
+# ===========================================================================
+print("\n--- 5b. declared authorisation_commit is authoritative ---")
+
+AUTH_REL = "meoclass1/oral-intelligence/examiner-audit/FIXTURE_PRODUCTION_QUEUE.json"
+AUTH_BODY = json.dumps({"batches": {"HX": {"status": "FOUNDER_AUTHORISED"}}})
+
+with tempfile.TemporaryDirectory() as tmp:
+    fx = Path(tmp)
+    # A fresh directory is never on a safe.directory allowlist on a volume that
+    # does not record ownership (SKILL section 13); scope the exception to it.
+    git_env = dict(os.environ, GIT_CONFIG_COUNT="1",
+                   GIT_CONFIG_KEY_0="safe.directory",
+                   GIT_CONFIG_VALUE_0=fx.as_posix())
+
+    def fgit(*args):
+        return subprocess.run(
+            ["git", "-c", "user.name=fixture", "-c", "user.email=fixture@invalid",
+             "-c", "commit.gpgsign=false", *args],
+            cwd=str(fx), env=git_env, capture_output=True, text=True, check=True
+        ).stdout.strip()
+
+    def commit_all(msg):
+        fgit("add", "-A")
+        fgit("commit", "-q", "--allow-empty", "-m", msg)
+        return fgit("rev-parse", "HEAD")
+
+    fgit("init", "-q")
+    (fx / "README").write_text("fixture\n", encoding="utf-8")
+    c_pre = commit_all("pre-authorisation")
+    (fx / AUTH_REL).parent.mkdir(parents=True)
+    (fx / AUTH_REL).write_text(AUTH_BODY, encoding="utf-8")
+    c_auth = commit_all("authorisation")
+    (fx / AUTH_REL).unlink()
+    c_gone = commit_all("record removed")
+    (fx / AUTH_REL).write_text("{not json", encoding="utf-8")
+    c_bad = commit_all("record unparseable")
+    (fx / AUTH_REL).write_text(AUTH_BODY, encoding="utf-8")   # valid, uncommitted
+
+    _saved_repo, _saved_env = M.REPO, dict(os.environ)
+    M.REPO = fx
+    os.environ.update(git_env)
+    try:
+        R = M.resolve_authorisation_source
+        check("fixture: a valid record is on disk (every FAIL below is not 'tree')",
+              R(AUTH_REL) == "tree", "undeclared -> %s" % R(AUTH_REL))
+
+        got = R(AUTH_REL, c_auth)
+        check("declared commit + record committed there -> PASS at THAT commit",
+              got == c_auth, "-> %s (want %s)" % (got, c_auth[:12]))
+        got = R(AUTH_REL, c_auth[:7])
+        check("an abbreviated declared commit resolves to its full SHA",
+              got == c_auth, "-> %s" % got)
+
+        got = R(AUTH_REL, c_pre)
+        check("declared pre-authorisation commit FAILS though the tree is valid",
+              got is None, "-> %s" % got)
+        got = R(AUTH_REL, c_gone)
+        check("record absent at the declared commit FAILS though the tree is valid",
+              got is None, "-> %s" % got)
+        got = R(AUTH_REL, c_bad)
+        check("unparseable record at the declared commit FAILS",
+              got is None, "-> %s" % got)
+        got = R(AUTH_REL, "0123456789abcdef0123456789abcdef01234567")
+        check("a nonexistent declared commit FAILS",
+              got is None, "-> %s" % got)
+        # HEAD (= c_bad here) and every AUTHORISATION_REFS entry are refs, not a
+        # recorded commit identity: a declaration must be deterministic.
+        for bad in ("PENDING_FOUNDER_COMMIT", "", "HEAD", "master",
+                    "--output=x", c_auth + "~0", "%s^{tree}" % c_auth, " " + c_auth):
+            got = R(AUTH_REL, bad)
+            check("a malformed declared commit FAILS: %r" % bad, got is None,
+                  "-> %s" % got)
+
+        # No declaration: the historical order (tree, then refs) is unchanged.
+        (fx / AUTH_REL).unlink()
+        got = R(AUTH_REL)
+        check("undeclared + absent from tree -> falls back to the known refs",
+              got == "HEAD", "-> %s" % got)
+        got = R("no/such/record.json")
+        check("undeclared + resolvable nowhere -> FAIL", got is None, "-> %s" % got)
+    finally:
+        M.REPO = _saved_repo
+        os.environ.clear()
+        os.environ.update(_saved_env)
+
+# The same defect through the audit itself, on this repository's real history.
+# The August queue is first committed at bfc43cf, so its parent is a genuine
+# "before the authorisation existed" commit -- and the queue is on disk here.
+_pre_queue = subprocess.run(
+    ["git", "rev-parse", "--verify", "--quiet", "bfc43cf372fefe1940e50efdca0da103cbe6e818~1"],
+    cwd=str(REPO), capture_output=True, text=True).stdout.strip()
+with tempfile.TemporaryDirectory() as tmp:
+    h6 = json.loads(B.read_text(HERE / "batch_h6_manifest.json"))
+
+    def h6_probe(name, commit_value):
+        d = json.loads(json.dumps(h6))
+        d["authorisation_commit"] = commit_value
+        p = Path(tmp) / ("probe_h6_%s_manifest.json" % name)
+        B.write_text(p, json.dumps(d))
+        return [f for f in M.audit_manifest(p) if f.check == "authorisation_source_resolves"]
+
+    check("real history: the queue is on disk and absent before bfc43cf",
+          bool(_pre_queue) and (REPO / h6["authorisation_source"]).is_file()
+          and M._git_show(_pre_queue, h6["authorisation_source"]) is None,
+          "pre=%s" % (_pre_queue[:12] or "UNRESOLVED"))
+    for name, value in (("pre", _pre_queue), ("pending", "PENDING_FOUNDER_COMMIT"),
+                        ("null", None)):
+        got = h6_probe(name, value)
+        check("audit FAILS a declared %s authorisation_commit (queue on disk)" % name,
+              len(got) == 1 and not got[0].ok,
+              got[0].describe() if got else "no finding emitted")
+
+# Historical compatibility: every committed manifest that declares an
+# authorisation_commit must still resolve AT that commit. Enumerated, so a
+# manifest that quietly stops declaring one is a visible diff here.
+EXPECTED_COMMIT_BEARING = sorted([
+    "batch_e1_enrichment_manifest.json", "batch_e2_enrichment_manifest.json",
+    "batch_e3_enrichment_manifest.json", "batch_e4_enrichment_manifest.json",
+    "batch_e5_enrichment_manifest.json", "batch_e6_enrichment_manifest.json",
+    "batch_f1_manifest.json", "batch_f1b_manifest.json",
+    "batch_g1_manifest.json", "batch_g2_manifest.json",
+    "batch_g3_manifest.json", "batch_g4_manifest.json",
+    "batch_h1_manifest.json", "batch_h2_manifest.json",
+    "batch_h3a_manifest.json", "batch_h3a_orb_manifest.json",
+    "batch_h3b1_manifest.json", "batch_h3b2_manifest.json",
+    "batch_h4_manifest.json", "batch_h6_manifest.json",
+])
+_bearing, _unresolved = [], []
+for path in sorted(HERE.glob("*_manifest.json")):
+    d = json.loads(B.read_text(path))
+    if "authorisation_commit" not in d:
+        continue
+    _bearing.append(path.name)
+    got = M.resolve_authorisation_source(d.get("authorisation_source"),
+                                         d["authorisation_commit"])
+    if not (got and got.startswith(str(d["authorisation_commit"]))):
+        _unresolved.append("%s -> %s" % (path.name, got))
+check("commit-bearing manifests are exactly the enumerated set",
+      [n for n in _bearing if n in EXPECTED_COMMIT_BEARING] == EXPECTED_COMMIT_BEARING,
+      "declared=%d missing=%s" % (len(_bearing),
+                                  sorted(set(EXPECTED_COMMIT_BEARING) - set(_bearing))
+                                  or "none"))
+check("every commit-bearing manifest resolves AT its declared commit",
+      not _unresolved and len(_bearing) >= len(EXPECTED_COMMIT_BEARING),
+      "; ".join(_unresolved) or "%d/%d" % (len(_bearing), len(_bearing)))
+
+# Correction manifests declare no authorisation_commit; their audit call is
+# deliberately unchanged by this fix (see the report on governing_commits).
+_corr = next(p for p in sorted(HERE.glob("correction_*_manifest.json"))
+             if json.loads(B.read_text(p)).get("authorisation_source", "").endswith(".md"))
+_cf = [f for f in M.audit_correction_manifest(_corr) if f.check == "authorisation_source_resolves"]
+check("correction manifests keep tree-first resolution (no commit declared)",
+      len(_cf) == 1 and _cf[0].ok and _cf[0].detail.endswith("-> tree"),
+      _cf[0].describe() if _cf else "no finding emitted")
+
+
+# ===========================================================================
 # 6. HEALTH-CHECK SOURCE IS REAL
 #
 # The defect this guards: qb_health_check hardcoded remote `main` and never

@@ -33,6 +33,7 @@ from __future__ import annotations
 import dataclasses
 import json
 import pathlib
+import re
 import subprocess
 from typing import Iterable
 
@@ -237,19 +238,66 @@ def _git_show(ref: str, rel: str) -> bytes | None:
     return out.stdout if out.returncode == 0 else None
 
 
+# A declared authorisation_commit is a recorded commit identity: hex, full or
+# abbreviated.  Refs and revision expressions (HEAD, a branch, X~0, X^{tree})
+# move with the checkout, so accepting them would let the same manifest pass or
+# fail depending on where it is read -- and anything starting "-" would reach
+# `git show` as an option.
+_COMMIT_ID = re.compile(r"[0-9a-f]{7,40}")
+
+
+def _resolve_commit(commit) -> str | None:
+    """The full SHA a declared authorisation_commit names, or None."""
+    if not isinstance(commit, str) or not _COMMIT_ID.fullmatch(commit):
+        return None
+    try:
+        out = subprocess.run(
+            ["git", "rev-parse", "--verify", "--quiet", "%s^{commit}" % commit],
+            cwd=str(REPO), capture_output=True, text=True, check=False)
+    except OSError:
+        return None
+    # An ambiguous abbreviation exits non-zero too: not deterministic, so no.
+    return out.stdout.strip() if out.returncode == 0 else None
+
+
 def resolve_authorisation_source(rel: str, commit: str | None = None) -> str | None:
     """Return where an authorisation record resolves, or None.
 
-    Checked in order: the working tree, the manifest's own
-    ``authorisation_commit``, then the known authorisation refs.  A record that
-    resolves nowhere is a dangling provenance pointer and is reported as such.
+    ``commit`` is the manifest's ``authorisation_commit``; ``None`` means the
+    manifest declares none (a declared-but-empty value is passed as ``""``).
+
+    Declared: the record must exist, and parse if it is JSON, IN THAT COMMIT'S
+    TREE; the return value is the commit's full SHA.  The working copy and the
+    fallback refs are never consulted.  The declaration is the manifest's claim
+    about *when* the authorisation existed -- H7 once declared a commit that
+    predates its own queue and still read green, because the working copy was
+    checked first and a later, valid record stood in for the missing one.
+
+    Undeclared: the working tree, then the known authorisation refs (the
+    historical order, unchanged).
+
+    A record that resolves nowhere is a dangling provenance pointer.  This
+    answers only "does the record exist where it is claimed to"; selecting the
+    batch through ``authorisation_batch_key`` is the batch validator's job
+    (SKILL section 3.1).
     """
     if not rel:
         return None
+    if commit is not None:
+        sha = _resolve_commit(commit)
+        blob = _git_show(sha, rel) if sha else None
+        if blob is None:
+            return None
+        if rel.endswith(".json"):
+            try:
+                json.loads(blob)
+            except ValueError:
+                return None
+        return sha
     if (REPO / rel).is_file():
         return "tree"
-    for ref in ([commit] if commit else []) + list(AUTHORISATION_REFS):
-        if ref and _git_show(ref, rel) is not None:
+    for ref in AUTHORISATION_REFS:
+        if _git_show(ref, rel) is not None:
             return ref
     return None
 
@@ -812,8 +860,12 @@ def audit_manifest(path) -> list[Finding]:
                  or manifest.get("authorisation_selector")),
             "generation-1 schema (no batch_id)")
 
-    # 3. Provenance pointers must actually resolve.
+    # 3. Provenance pointers must actually resolve -- at the declared commit when
+    #    one is declared.  A present-but-null/empty value is a malformed
+    #    declaration, not an absent one, so it must not fall back to the tree.
     commit = manifest.get("authorisation_commit")
+    if "authorisation_commit" in manifest and not isinstance(commit, str):
+        commit = ""
     for field in ("authorisation_source", "authorisation", "authorisation_selector"):
         value = manifest.get(field)
         if not isinstance(value, str) or not value.endswith(".json"):
