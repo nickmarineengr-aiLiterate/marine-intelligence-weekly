@@ -180,6 +180,9 @@ POST_E6_GATES = [
     # The closure-derivation controls. Sorted position, like every other row.
     "followup_closure_controls",
     "followup_register_mutate",
+    # The monthly-projection controls: runnable, never run by a release, so the
+    # TEASER_SYNC refusal went unnoticed. Sorted position.
+    "monthly_controls",
     # The shared-module controls, moved INTO the suite: a guard that never runs
     # has silently expired, which is why this is a gate and not a README line.
     "release_infra_controls",
