@@ -622,6 +622,18 @@ GATES = (
                "are never absorbed into a pass count, and the packet binds to "
                "one commit and one tree"),
 
+    # The monthly "New & Updated" projection controls. Registered for the same
+    # reason as release_infra_controls: this suite existed and was never run by
+    # a release, so when CORR-NOSDCP-MINISTRY-20260916 introduced the first
+    # TEASER_SYNC row the exporter began refusing every month and no gate
+    # noticed. It uses no temporary files and never touches product bytes.
+    _gate("monthly_controls",
+          ["python", "%s/test_oral_monthly.py" % _ORAL],
+          CAT_UNIT, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="calendar-month boundaries, TEASER_SYNC counts zero and only "
+               "beside its counted gated twin, unknown action kinds fail closed, "
+               "and closed-month counts do not drift"),
+
     # Content gates for CORR-DEFN-TREATY-20260825. Third pair of this shape,
     # and the one that shows why the shape is needed: QB9_G#q6 shipped a legal
     # HIERARCHY -- Treaty then Convention then Protocol -- under its own

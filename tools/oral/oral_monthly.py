@@ -84,6 +84,12 @@ Deliberately NOT counted as an update (a product rule, not a technical one):
 regenerated derived indexes, CSS/markup repair, table-of-contents fixes and
 validator-only edits. Those move bytes without changing what a candidate
 studies, so only manifest actions of a materially-changing kind qualify.
+
+TEASER_SYNC -- the free-sample (SQ/) copy realigned to the gated card in the
+same event -- is recorded as dated evidence on that card and counts zero: the
+gated twin already counts the change. It is accepted only beside exactly one
+counted gated twin with the same file, anchor and digests; see
+NON_COUNTING_KINDS.
 """
 from __future__ import annotations
 
@@ -130,6 +136,27 @@ UPDATE_KINDS = {
     "EXPANSION",
     "CURRENCY_EXPANSION",
 }
+# ... and the kinds that are dated governance EVIDENCE but never a count.
+#
+# TEASER_SYNC (oral_manifest.CORRECTION_CLASSES: "free surface realigned to a
+# correct gated copy") records that the SQ/ free-sample copy of a card was
+# rewritten to stay byte-identical to the gated card the same event corrected.
+# The candidate-facing change is the GATED card's, and that card's own action
+# already counts; the teaser row keys to the same canonical id, so counting it
+# would at best double-count and, without a twin, would mint an UPDATED row for
+# a card no counted action changed. So it counts zero, and it is valid ONLY
+# beside exactly one counted gated twin in the same manifest -- same file, same
+# anchor, identical pre- and post-edit digests. Anything else fails closed.
+NON_COUNTING_KINDS = {
+    "TEASER_SYNC",
+}
+
+# Where the gated card lives, and the free surfaces a TEASER_SYNC may realign.
+# A surface not listed here fails closed rather than being guessed at.
+GATED_ROOT = "meoclass1/"
+FREE_SURFACE_ROOTS = ("SQ/",)
+
+_DIGEST_RE = re.compile(r"[0-9a-f]{64}")
 
 # Below this token overlap a rewritten stem is treated as a different question.
 REWORD_SIMILARITY = 0.5
@@ -329,30 +356,136 @@ def manifest_event_date(path, manifest, gid):
          "`date` field, or commit the manifest." % gid)
 
 
+def _card_kind(card, top):
+    return card.get("action_kind") or card.get("classification") or card.get("kind") or top
+
+
+def _action_id(card):
+    return (card.get("correction_action_id") or card.get("action_id")
+            or "%s#%s" % (card.get("file"), card.get("anchor")))
+
+
+def _action_label(gid, card):
+    return "%s/%s" % (gid, _action_id(card))
+
+
+def teaser_sync_twins(gid, cards, top=None):
+    """{teaser card index: twin card index} for one manifest's cards[], or fail.
+
+    A TEASER_SYNC row is accepted only when, in the SAME manifest, exactly one
+    counted card
+      - sits on the gated page of the same file   (GATED_ROOT + file),
+      - carries the same anchor,
+      - and records the same pre_edit_digest AND post_edit_digest,
+    and no other TEASER_SYNC row has already claimed that card. The teaser row
+    itself must sit on a known free surface of the same file and carry both
+    digests. These are the manifest's own fields, compared as recorded; whether
+    the live pages still match them is validate_corrections.py's job, not this
+    projection's."""
+    twins, claimed = {}, {}
+    for i, t in enumerate(cards):
+        if _card_kind(t, top) not in NON_COUNTING_KINDS:
+            continue
+        label = _action_label(gid, t)
+        f, anchor, path = t.get("file") or "", t.get("anchor"), t.get("path") or ""
+        if not f or not anchor or path not in {r + f for r in FREE_SURFACE_ROOTS}:
+            fail("%s: TEASER_SYNC must name a free-surface copy of its own file "
+                 "(one of %s + file); got file=%r path=%r anchor=%r"
+                 % (label, list(FREE_SURFACE_ROOTS), f, path, anchor))
+        for d in ("pre_edit_digest", "post_edit_digest"):
+            if not _DIGEST_RE.fullmatch(t.get(d) or ""):
+                fail("%s: TEASER_SYNC carries no valid %s digest" % (label, d))
+        found = [j for j, c in enumerate(cards)
+                 if j != i and _card_kind(c, top) not in NON_COUNTING_KINDS
+                 and c.get("file") == f and c.get("anchor") == anchor
+                 and c.get("path") == GATED_ROOT + f]
+        if not found:
+            fail("%s: TEASER_SYNC on %s#%s has no counted gated twin (%s%s#%s) in "
+                 "the same manifest -- a teaser realigned to nothing cannot be "
+                 "evidence" % (label, f, anchor, GATED_ROOT, f, anchor))
+        if len(found) > 1:
+            fail("%s: TEASER_SYNC twin is ambiguous -- %d gated cards on %s#%s: %s"
+                 % (label, len(found), f, anchor,
+                    [_action_label(gid, cards[j]) for j in found]))
+        j = found[0]
+        g = cards[j]
+        gk = _card_kind(g, top)
+        if gk not in CREATE_KINDS and gk not in UPDATE_KINDS:
+            fail("%s: TEASER_SYNC twin %s has action kind %r, which is not a counted "
+                 "kind" % (label, _action_label(gid, g), gk))
+        for d in ("pre_edit_digest", "post_edit_digest"):
+            if t.get(d) != g.get(d):
+                fail("%s: TEASER_SYNC %s %s does not match twin %s's %s -- the "
+                     "free copy is not the gated card" % (
+                         label, d, (t.get(d) or "-")[:12], _action_label(gid, g),
+                         (g.get(d) or "-")[:12]))
+        if j in claimed:
+            fail("%s: TEASER_SYNC twin %s is already claimed by %s"
+                 % (label, _action_label(gid, g), claimed[j]))
+        claimed[j] = label
+        twins[i] = j
+    return twins
+
+
+def manifest_rows(gid, manifest, when):
+    """[(governance_id, kind, canonical_id, event_date)] for ONE manifest.
+
+    Kind is the per-card action where the manifest records one, else the
+    manifest-level kind. Every kind must be classified -- CREATE, UPDATE or
+    NON_COUNTING -- and every NON_COUNTING row must resolve to its counted twin
+    (teaser_sync_twins), or the whole manifest is refused."""
+    top = manifest.get("kind") or manifest.get("action_kind")
+    cards = manifest.get("cards", [])
+    for c in cards:
+        kind = _card_kind(c, top)
+        if kind not in CREATE_KINDS and kind not in UPDATE_KINDS \
+                and kind not in NON_COUNTING_KINDS:
+            fail("%s: unclassified manifest action kind %r -- add it to "
+                 "CREATE_KINDS, UPDATE_KINDS or NON_COUNTING_KINDS in "
+                 "oral_monthly.py" % (gid, kind))
+    teaser_sync_twins(gid, cards, top)
+    return [(gid, _card_kind(c, top), "%s#%s" % (c["file"][:-5], c["anchor"]), when)
+            for c in cards]
+
+
+def _manifest_files():
+    return sorted(glob.glob(str(HERE / "batch_*_manifest.json"))) + \
+        sorted(glob.glob(str(HERE / "correction_*_manifest.json")))
+
+
+def _manifest_gid(path, m):
+    return m.get("batch_id") or m.get("batch") or m.get("correction_id") or Path(path).stem
+
+
 def manifest_actions():
     """[(governance_id, kind, canonical_id, event_date)] over every batch and
-    correction manifest in tools/oral/. Kind is the per-card action where the
-    manifest records one, else the manifest-level kind. The event date is the
-    manifest's, not the card's: a manifest is one governance event.
+    correction manifest in tools/oral/. The event date is the manifest's, not
+    the card's: a manifest is one governance event.
 
     Every manifest on disk is read, and every kind is classified, regardless of
     date -- the unclassified-kind guard is a governance-vocabulary control and
     must not be narrowed to one month. Date filtering is the caller's job."""
     rows = []
-    files = sorted(glob.glob(str(HERE / "batch_*_manifest.json"))) + \
-        sorted(glob.glob(str(HERE / "correction_*_manifest.json")))
-    for p in files:
+    for p in _manifest_files():
         m = json.loads(Path(p).read_text(encoding="utf-8"))
-        gid = m.get("batch_id") or m.get("batch") or m.get("correction_id") or Path(p).stem
-        top = m.get("kind") or m.get("action_kind")
+        gid = _manifest_gid(p, m)
         when, _src = manifest_event_date(p, m, gid)
-        for c in m.get("cards", []):
-            kind = c.get("action_kind") or c.get("classification") or c.get("kind") or top
-            if kind not in CREATE_KINDS and kind not in UPDATE_KINDS:
-                fail("%s: unclassified manifest action kind %r -- add it to "
-                     "CREATE_KINDS or UPDATE_KINDS in oral_monthly.py" % (gid, kind))
-            rows.append((gid, kind, "%s#%s" % (c["file"][:-5], c["anchor"]), when))
+        rows.extend(manifest_rows(gid, m, when))
     return rows
+
+
+def teaser_sync_pairs():
+    """{(governance_id, teaser action id): twin action id} over every manifest
+    on disk -- the audit view of what each TEASER_SYNC row resolved to."""
+    out = {}
+    for p in _manifest_files():
+        m = json.loads(Path(p).read_text(encoding="utf-8"))
+        gid = _manifest_gid(p, m)
+        cards = m.get("cards", [])
+        top = m.get("kind") or m.get("action_kind")
+        for i, j in teaser_sync_twins(gid, cards, top).items():
+            out[(gid, _action_id(cards[i]))] = _action_id(cards[j])
+    return out
 
 
 # ------------------------------------------------------------------ projection
@@ -376,6 +509,21 @@ def project(month, base, closing, current_ids, actions,
     start, end_excl = month_window(month)
     live = set(current_ids)
     at_close = set(closing)
+
+    # The vocabulary guard again, at the algebra: this function is handed
+    # actions directly by tests and could otherwise drop an unknown kind on the
+    # floor. A NON_COUNTING action must be backed by a counted action of the
+    # SAME event on the same card -- manifest_rows() proved the digests; this
+    # proves nobody handed the algebra an orphan.
+    counted = {(g, c, w) for g, k, c, w in actions
+               if k in CREATE_KINDS or k in UPDATE_KINDS}
+    for g, k, c, w in actions:
+        if k in NON_COUNTING_KINDS:
+            if (g, c, w) not in counted:
+                fail("%s: %s on %s@%s has no counted twin in the same event"
+                     % (g, k, c, w))
+        elif k not in CREATE_KINDS and k not in UPDATE_KINDS:
+            fail("%s: unclassified manifest action kind %r on %s" % (g, k, c))
 
     base_keys = collections.defaultdict(list)
     for bid, key in base.items():
@@ -468,6 +616,8 @@ def project(month, base, closing, current_ids, actions,
         "manifest_updated": sorted(m_upd & live),
         "manifest_actions_in_month": len(inside),
         "manifest_actions_out_of_month": len(outside),
+        "non_counting_actions_in_month": sum(1 for a in inside
+                                             if a[1] in NON_COUNTING_KINDS),
         "reworded": reworded,
         "withdrawn_after_month": withdrawn,
         "unresolved_at_close": unresolved,
@@ -475,12 +625,14 @@ def project(month, base, closing, current_ids, actions,
     }
 
 
-def classify(month, current):
+def classify(month, current, actions=None):
     """current: {canonical_id: display question text} for the live corpus.
 
     Gathers the two corpus states and every governance record's event date, then
     hands the decision to project(). Raises MonthlyFailure when the two
-    independent evidence streams disagree."""
+    independent evidence streams disagree. `actions` defaults to every manifest
+    on disk; a caller may pass manifest_actions() filtered, which is how the
+    TEASER_SYNC zero-contribution control compares like with like."""
     sha, sha_date = baseline_commit(month)
     base = baseline_cards(sha)
     csha, csha_date, closed = closing_commit(month)
@@ -491,7 +643,9 @@ def classify(month, current):
         # whatever the corpus says right now.
         closing = {qid: norm(text) for qid, text in current.items()}
 
-    p = project(month, base, closing, set(current), manifest_actions(),
+    if actions is None:
+        actions = manifest_actions()
+    p = project(month, base, closing, set(current), actions,
                 baseline_label=sha[:7], closing_label=csha[:7])
     p.update({
         "baseline_commit": sha[:7],
@@ -527,8 +681,9 @@ def main(argv):
              "" if p["month_closed"] else " [MONTH STILL OPEN: live corpus]",
              p["current_questions"], len(p["new"]), len(p["updated"]),
              len(p["retired"])))
-    print("  governance records: %d in month, %d outside"
-          % (p["manifest_actions_in_month"], p["manifest_actions_out_of_month"]))
+    print("  governance records: %d in month (%d non-counting), %d outside"
+          % (p["manifest_actions_in_month"], p["non_counting_actions_in_month"],
+             p["manifest_actions_out_of_month"]))
     if p["withdrawn_after_month"]:
         print("  withdrawn after the month (not listed): %s" % p["withdrawn_after_month"])
     if p["unresolved_at_close"]:
