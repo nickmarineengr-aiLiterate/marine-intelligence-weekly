@@ -52,7 +52,7 @@ import path from "node:path";
 import { ROOT } from "./deploy_set.mjs";
 
 /** Every issue with a root page, oldest to newest. */
-const ISSUES = [17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+const ISSUES = [17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 
 /**
  * Issues whose page carries NO previous-issue navigation.
@@ -248,7 +248,7 @@ describe("absent-next convention", () => {
         const html = read(rel);
         for (const m of html.matchAll(ANCHOR)) {
           const t = issueTargetOf(m[1]);
-          if (t !== null && t > 30) offenders.push(`${rel} -> Issue ${t}`);
+          if (t !== null && t > Math.max(...ISSUES)) offenders.push(`${rel} -> Issue ${t}`);
         }
       }
     }

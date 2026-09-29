@@ -41,7 +41,7 @@ import {
 } from "./archive_portability.mjs";
 
 /** Every issue that must have a standalone page in archive/. */
-const ARCHIVED_RANGE = [17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+const ARCHIVED_RANGE = [17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 
 const ARCHIVE_INDEX = "archive/index.html";
 
@@ -72,13 +72,13 @@ describe("comparison controls", () => {
 // -------------------------------------------------------------
 // 1. THE ARCHIVE IS CONTINUOUS
 // -------------------------------------------------------------
-describe("archive continuity — issues 17-30 all present", () => {
+describe("archive continuity — issues 17-31 all present", () => {
   test("the thematic map still carries issues 01-16", () => {
     assert.ok(exists("archive/thematicmapissues01to16.html"),
       "archive/thematicmapissues01to16.html is the only record of issues 01-16");
   });
 
-  test("every issue 17-30 has an archive page, with no gap", () => {
+  test("every issue 17-31 has an archive page, with no gap", () => {
     const missing = ARCHIVED_RANGE.filter((n) => !exists(archivePathFor(n)));
     assert.deepEqual(missing, [], `archive pages missing for issue(s): ${missing.join(", ")}`);
   });
@@ -91,9 +91,9 @@ describe("archive continuity — issues 17-30 all present", () => {
   });
 
   test("no archive page exists for an issue that has not been published", () => {
-    // Issue 31 is not started; an archive page for it would be a phantom.
-    assert.ok(!exists("archive/issue31.html"), "archive/issue31.html must not exist");
-    assert.ok(!exists("index31.html"), "index31.html must not exist");
+    // Issue 32 is not started; an archive page for it would be a phantom.
+    assert.ok(!exists("archive/issue32.html"), "archive/issue32.html must not exist");
+    assert.ok(!exists("index32.html"), "index32.html must not exist");
   });
 });
 
@@ -164,7 +164,7 @@ describe("published archive pages lead where the root page leads", () => {
 // -------------------------------------------------------------
 // 4. THE ARCHIVE LISTING OFFERS EVERY ISSUE, ONCE
 // -------------------------------------------------------------
-describe("archive/index.html lists issues 17-30", () => {
+describe("archive/index.html lists issues 17-31", () => {
   const listing = read(ARCHIVE_INDEX);
 
   /**
@@ -179,7 +179,7 @@ describe("archive/index.html lists issues 17-30", () => {
     return listing.match(pat) ?? [];
   };
 
-  test("every issue 17-30 appears in the listing", () => {
+  test("every issue 17-31 appears in the listing", () => {
     const absent = ARCHIVED_RANGE.filter((n) => cardsFor(n).length === 0);
     assert.deepEqual(absent, [], `not listed in the archive index: ${absent.join(", ")}`);
   });
