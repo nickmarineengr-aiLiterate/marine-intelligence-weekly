@@ -1067,8 +1067,13 @@
       if (moved || Date.now() - arrived > 10000) { return; }
       root.style.scrollBehavior = 'auto';
       document.getElementById(target).scrollIntoView();
+      // The font swap's reflow can land in the NEXT frame, after this handler; scroll anchoring then drifts the
+      // target by a few px. Re-assert once more after that frame has been laid out.
       requestAnimationFrame(function () {
-        requestAnimationFrame(function () { root.style.scrollBehavior = prior || ''; });
+        requestAnimationFrame(function () {
+          if (!moved && Date.now() - arrived <= 10000) { document.getElementById(target).scrollIntoView(); }
+          root.style.scrollBehavior = prior || '';
+        });
       });
     }
     if (document.fonts) {
