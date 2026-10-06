@@ -116,8 +116,11 @@ export const REGULATORY_FACTS = [
     correct: /\b4 De(c|cember)\b/,
     // ...and must never give these, which are superseded.
     superseded: [
-      { pattern: /\bOctober 2026\b/, label: "October 2026" },
-      { pattern: /\bOct 2026\b/, label: "Oct 2026" },
+      // The superseded claim is a MONTH ("reconvenes October 2026"). A full
+      // calendar date such as an issue's own "7 October 2026" dateline is not
+      // that claim, so a day number immediately before the month is excluded.
+      { pattern: /(?<!\b\d{1,2} )\bOctober 2026\b/, label: "October 2026" },
+      { pattern: /(?<!\b\d{1,2} )\bOct 2026\b/, label: "Oct 2026" },
     ],
     // Only pages that actually talk about the session are asked for the date.
     topic: /Net-Zero Framework|MEPC\/ES\.2|extraordinary session/i,
@@ -190,6 +193,14 @@ describe("controls", () => {
   test("'October 2025' is not mistaken for the superseded date", () => {
     const historyOnly = "The session adjourned in October 2025 by 57-49.";
     assert.ok(!fact.superseded.some((s) => s.pattern.test(historyOnly)));
+  });
+
+  test("a calendar date in October 2026 is not the superseded month", () => {
+    const dateline = "Issue 31 \u2014 7 October 2026. MEPC/ES.2 resumes 4 December 2026.";
+    assert.ok(!fact.superseded.some((s) => s.pattern.test(dateline)));
+    assert.ok(fact.superseded.some((s) => s.pattern.test("the Net-Zero vote falls in October 2026")),
+      "the bare month must still be caught");
+    assert.ok(fact.superseded.some((s) => s.pattern.test("reconvenes Oct 2026")));
   });
 
   test("correction blocks are stripped, and only correction blocks", () => {
