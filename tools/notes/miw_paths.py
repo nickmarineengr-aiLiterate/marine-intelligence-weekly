@@ -122,6 +122,26 @@ def assert_no_legacy_manifest(raise_on_find=True):
     return found
 
 
+SPECS_DIR = os.path.join(REPO_ROOT, 'tools', 'notes', 'specs')
+
+
+def spec_parts(specs_dir=None):
+    """Part numbers that have a content spec on disk (tools/notes/specs/p<N>.json), ascending.
+
+    Added 2026-10-07 (WP-23C). audit_overlap.py and match_qb.py used to hard-code
+    the tuple (19, 20, 21, 22); every new Part would have needed a code edit. A
+    governed executor cannot pass arguments, so the default has to discover the
+    Parts itself.
+    """
+    import re as _re
+    d = specs_dir or SPECS_DIR
+    out = []
+    for name in os.listdir(d):
+        m = _re.fullmatch(r'p(\d+)\.json', name)
+        if m:
+            out.append(int(m.group(1)))
+    return sorted(out)
+
 
 def load_json(path):
     """Read a UTF-8 JSON file, with the offending path named on failure."""

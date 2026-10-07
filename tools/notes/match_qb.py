@@ -1,7 +1,7 @@
 import io, json, os, re, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from miw_paths import REPO_ROOT, QB_MANIFEST, assert_no_legacy_manifest
+from miw_paths import REPO_ROOT, QB_MANIFEST, assert_no_legacy_manifest, spec_parts
 
 assert_no_legacy_manifest()
 
@@ -21,7 +21,7 @@ for fname, meta in files.items():
     blobs[fname] = (' '.join(parts)).lower()
 
 specs_dir = os.path.join(ROOT, 'tools', 'notes', 'specs')
-for pn in (19, 20, 21, 22):
+for pn in spec_parts(specs_dir):  # WP-23C: discovered, not hard-coded
     spec = json.load(open(os.path.join(specs_dir, 'p%d.json' % pn), encoding='utf-8'))
     for t in spec['topics']:
         kws = [k.strip().lower() for k in t.get('kw', '').split(',') if k.strip()]

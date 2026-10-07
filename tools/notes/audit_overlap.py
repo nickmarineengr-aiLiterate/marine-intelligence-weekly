@@ -22,7 +22,7 @@ _real_print = print
 # and it is correct with NO arguments -- a governed executor cannot pass any,
 # because the Python policy refuses script options.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from miw_paths import REPO_ROOT  # noqa: E402
+from miw_paths import REPO_ROOT, spec_parts  # noqa: E402
 
 ROOT = REPO_ROOT
 
@@ -49,8 +49,9 @@ STOP = {'and','the','of','a','to','in','for','on','or','with','by','at','from',
         'is','are','be','as','an','its','their','this','that','not','no'}
 
 def load_new_topics():
+    # WP-23C (2026-10-07): Parts discovered from specs/ instead of a hard-coded tuple.
     out = []
-    for p in (19, 20, 21, 22):
+    for p in spec_parts(SPECS):
         d = json.load(open(os.path.join(SPECS, 'p%d.json' % p), encoding='utf-8'))
         for t in d['topics']:
             out.append({'part': p, 'n': t['n'], 'title': t['title'],
@@ -95,10 +96,12 @@ def crossref_matches(term, rows):
             hits.append(r)
     return hits
 
-# ---- (b) direct grep of Parts 1-18 -----------------------------------------
-def load_parts_1_18():
+# ---- (b) direct grep of earlier Parts --------------------------------------
+def load_parts_1_18(upto=18):
+    """Load built Parts 1..upto (name kept for compatibility; WP-23C made the
+    ceiling a parameter so Part 23+ is checked against Parts 1-22, not 1-18)."""
     files = {}
-    for i in range(1, 19):
+    for i in range(1, upto + 1):
         p = os.path.join(NOTES, 'miw-notes-mgmt-p%d.html' % i)
         if os.path.exists(p):
             files[i] = open(p, encoding='utf-8').read()
@@ -135,7 +138,8 @@ def main():
 
     topics = load_new_topics()
     rows = parse_crossref()
-    parts = load_parts_1_18()
+    newest = max(t['part'] for t in topics) if topics else 18
+    parts = load_parts_1_18(upto=newest - 1)
 
     for t in topics:
         print('=' * 78)
@@ -148,6 +152,8 @@ def main():
                 if r['status'] in ('idx-matched',):
                     seen_crossref.append((term, r))
             for pno, tid, ttitle, snippet in grep_parts(term, parts):
+                if pno >= t['part']:
+                    continue  # only earlier Parts count as overlap
                 seen_parts_direct.setdefault((pno, tid, ttitle), set()).add(term)
         if seen_crossref:
             print('  [Book-index crossref hits — Parts 1-18]')
@@ -157,11 +163,11 @@ def main():
             for (topicname, stat, href), tms in uniq.items():
                 print('    - "%s" -> %s  [%s]  matched on: %s' % (topicname, stat, href, ', '.join(sorted(set(tms)))))
         if seen_parts_direct:
-            print('  [Direct full-text hits — Parts 1-18]')
+            print('  [Direct full-text hits — earlier Parts]')
             for (pno, tid, ttitle), tms in sorted(seen_parts_direct.items()):
                 print('    - Part %d / %s / "%s"  matched on: %s' % (pno, tid, ttitle, ', '.join(sorted(tms))))
         if not seen_crossref and not seen_parts_direct:
-            print('  (no hits in Parts 1-18)')
+            print('  (no hits in earlier Parts)')
         print()
     out.close()
     _real_print('Wrote', out_path)

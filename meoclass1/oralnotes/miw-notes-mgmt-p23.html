@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>MIW Engineering Management Notes — Part 23 | MEO Class 1 | EEDI Required vs Attained, Reference Line &amp; Verification · EEXI · CII Ratings &amp; Corrective Action · IMO DCS, Statement of Compliance &amp; GISIS · EU MRV vs IMO DCS</title>
+<meta name="description" content="MEO Class 1 Engineering Management Notes Part 23 — EEDI required versus attained values, the reference line, reduction factors, pre-verification and sea-trial verification and the IEE Certificate (hand-off from Part 22); EEXI for existing ships including EPL/SHaPoLi and a rebuilt worked example; CII attained and required values, Z factors to 2030, A–E ratings and corrective action; the IMO Data Collection System, Statement of Compliance and GISIS; and EU MRV compared with IMO DCS. Originally compiled by Uday Sankar S., Anglo-Eastern.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/miw-notes-mgmt-p23.html">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:15px;line-height:1.6;user-select:none;-webkit-user-select:none;}
+.miw-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.05;overflow:hidden;}
+.topbar{background:var(--navy);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logo{width:30px;height:30px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;letter-spacing:-0.5px;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;letter-spacing:0.3px;}
+.topbar-nav{display:flex;gap:20px;}
+.topbar-nav a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.15s;}
+.topbar-nav a:hover{color:#fff;}
+.page-header{background:var(--navy);padding:32px 24px 28px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.notes-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid var(--teal);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.notes-badge-icon{background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;letter-spacing:1px;}
+.notes-badge-text{color:var(--teal-light);font-size:12px;font-weight:600;}
+.page-title{color:#fff;font-size:26px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+.page-sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.header-meta-item{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:12px;color:#cbd5e1;}
+.header-meta-item strong{color:#fff;}
+.attribution-strip{margin-top:14px;padding:10px 14px;background:rgba(201,168,76,0.12);border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;font-size:12px;color:#cbd5e1;}
+.attribution-strip strong{color:#e2c97e;}
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:24px 16px;}
+.sidebar{position:sticky;top:68px;height:calc(100vh - 80px);overflow-y:auto;padding-right:6px;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--grey-border);border-radius:2px;}
+.toc-head{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;font-size:12px;color:var(--grey-text);text-decoration:none;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;transition:all 0.15s;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:700;}
+.toc-divider{height:1px;background:var(--grey-border);margin:14px 0;}
+.qb-sidebar-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:12px;}
+.qb-sidebar-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin-bottom:8px;}
+.qb-sidebar-link{display:block;font-size:12px;color:var(--teal-dark);text-decoration:none;font-weight:600;padding:3px 0;}
+.qb-sidebar-link:hover{text-decoration:underline;}
+#notes-feed{min-width:0;}
+.topic-block{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:24px;margin-bottom:32px;scroll-margin-top:72px;}
+.topic-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--teal-light);}
+.topic-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+.topic-title{margin:0 0 8px;font-size:20px;font-weight:800;color:var(--navy);}
+.topic-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;}
+.topic-tag{background:var(--teal-light);color:var(--teal-dark);padding:3px 8px;border-radius:20px;font-weight:600;}
+.topic-pages{color:var(--grey-text);padding:3px 0;}
+.topic-examiner{background:var(--orange-light);color:#92400e;padding:3px 8px;border-radius:20px;font-weight:600;}
+.freq-high{background:#fef9c3;color:#713f12;padding:3px 8px;border-radius:20px;font-weight:700;}
+.freq-medium{background:#f0fdf4;color:#14532d;padding:3px 8px;border-radius:20px;font-weight:600;}
+.section-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--grey-border);}
+.notes-body{font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:8px;}
+.notes-list{font-family:'Georgia',serif;font-size:14px;line-height:1.8;padding-left:22px;margin-bottom:8px;}
+.notes-list li{margin-bottom:4px;}
+.timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
+.timeline-block .t-year{color:#fff;font-weight:700;}
+.ascii-diagram{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12px;line-height:1.35;overflow-x:auto;white-space:pre;}
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
+.reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
+.reg-code{color:var(--orange);font-weight:700;white-space:nowrap;flex-shrink:0;font-family:monospace;font-size:12px;}
+.reg-desc{color:#cbd5e1;line-height:1.5;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:13.5px;font-family:'Georgia',serif;line-height:1.7;}
+.ce-tip strong{color:#92400e;}
+.qa-block{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.qa-item{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.qa-q{background:var(--grey-bg);padding:10px 14px;font-weight:700;font-size:13px;color:var(--navy);}
+.qa-a{padding:10px 14px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;color:var(--ink);}
+.exam-focus-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:16px 0;}
+.exam-focus-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin:0 0 12px;}
+.exam-q{margin:8px 0;font-family:'Georgia',serif;font-size:13.5px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+.marks-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+.memory-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:16px 0;}
+.memory-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#713f12;margin:0 0 10px;}
+.memory-list{font-family:'Georgia',serif;font-size:13.5px;line-height:1.8;padding-left:18px;}
+.memory-list li{margin-bottom:4px;}
+.amend-table,.compare-table,.revision-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.amend-table th,.compare-table th,.revision-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+.amend-table td,.compare-table td,.revision-table td{padding:8px 12px;border-bottom:1px solid var(--grey-border);font-family:'Georgia',serif;line-height:1.6;vertical-align:top;}
+.amend-table tr:nth-child(even) td,.revision-table tr:nth-child(even) td{background:var(--grey-bg);}
+.psc-focus{background:#fef2f2;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);}
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;}
+.mental-map .root{color:#fff;font-weight:700;}
+.qb-link-box{background:var(--teal-light);border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;}
+.qb-link-box strong{color:var(--teal-dark);}
+.qb-link-box a{color:var(--teal-dark);font-weight:600;text-decoration:none;margin-right:12px;}
+.qb-link-box a:hover{text-decoration:underline;}
+.deep-dive{margin:14px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:16px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;display:none;}
+.deep-dive-body.open{display:block;}
+.deep-dive-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.deep-dive-body p,.deep-dive-body li{margin-bottom:6px;}
+.deep-dive-body ul{padding-left:20px;}
+.verify-note{background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:16px;font-size:13px;font-family:'Georgia',serif;line-height:1.7;color:#1e3a5f;}
+.verify-note strong{color:#1d4ed8;}
+.ref-list{font-size:13px;line-height:1.9;padding-left:18px;}
+.ref-list a{color:var(--teal-dark);}
+.topic-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:12px;border-top:1px dashed var(--grey-border);font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.topic-version{font-weight:700;}
+.page-footer{background:var(--grey-bg);border-top:1px solid var(--grey-border);padding:28px 24px;margin-top:40px;font-size:12px;color:var(--grey-text);text-align:center;}
+.page-footer a{color:var(--teal-dark);}
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+
+<div class="miw-watermark" aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wmpat" width="420" height="220" patternTransform="rotate(-30)" patternUnits="userSpaceOnUse">
+        <text x="0" y="60" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">marineintelligenceweekly.com</text>
+        <text x="0" y="90" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wmpat)"/>
+  </svg>
+</div>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-logo">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="notes-badge">
+      <span class="notes-badge-icon">NOTES</span>
+      <span class="notes-badge-text">Engineering Management · Part 23 of 31</span>
+    </div>
+    <h1 class="page-title">Engineering Management Notes — Part 23</h1>
+    <p class="page-sub">EEDI — Required vs Attained, Reference Line, Verification and the IEE Certificate · EEXI — Existing-Ship Technical Efficiency, Power Limitation and Certification · CII — Operational Carbon Intensity, Ratings, Corrective Action and the Annual Cycle · IMO DCS, Statement of Compliance and GISIS · EU MRV and the IMO DCS Comparison</p>
+    <div class="header-meta">
+            <span class="header-meta-item"><strong>Pages:</strong> 551–575 of 768</span>
+            <span class="header-meta-item"><strong>Topics:</strong> 5 (local P23-T1–P23-T5 — see note below)</span>
+            <span class="header-meta-item"><strong>Access:</strong> Subscriber Only</span>
+            <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>
+            <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>
+        </div>
+        <div class="attribution-strip">
+            Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and verified by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly. <strong>Sequencing note:</strong> Part 23 (pp. 551–575) continues directly from Part 22 (pp. 526–550). Topic numbering below uses local <strong>Part 23</strong> badges (not a continuous global T-number), consistent with the platform's standing rule to defer global renumbering until all 31 Parts are confirmed live.
+        </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="toc-head">Topics · Part 23</div>
+    <a class="toc-link" href="#topic-p23-1">T1 · EEDI — Required vs Attained &amp; Verification</a>
+    <a class="toc-link" href="#topic-p23-2">T2 · EEXI — Existing-Ship Technical Efficiency</a>
+    <a class="toc-link" href="#topic-p23-3">T3 · CII — Ratings, Corrective Action &amp; Cycle</a>
+    <a class="toc-link" href="#topic-p23-4">T4 · IMO DCS, Statement of Compliance &amp; GISIS</a>
+    <a class="toc-link" href="#topic-p23-5">T5 · EU MRV &amp; IMO DCS Comparison</a>
+    <div class="toc-divider"></div>
+    <div class="toc-head">Navigate</div>
+    <a class="toc-link" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Notes Index</a>
+    <a class="toc-link" href="miw-notes-mgmt-p22.html">← Part 22</a>
+    <div class="toc-divider"></div>
+    <div class="qb-sidebar-box">
+        <div class="qb-sidebar-title">🔗 Related QB Files</div>
+        <a class="qb-sidebar-link" href="../QB6.html">QB6 — GHG, CII, EEXI, Alternative Fuels &amp; Automation</a>
+        <a class="qb-sidebar-link" href="../QB7_A.html">QB7_A — GHG, CII, EEXI, SEEMP &amp; Decarbonisation</a>
+        <a class="qb-sidebar-link" href="../QB7_C.html">QB7_C — SEEMP Part III &amp; CII Corrective Action</a>
+        <a class="qb-sidebar-link" href="../QB6_E.html">QB6_E — GHG Basics — CII &amp; GFI</a>
+        <a class="qb-sidebar-link" href="../QB3_A.html">QB3_A — MARPOL, Surveys &amp; Ship Construction</a>
+    </div>
+</aside>
+
+<!-- NOTES FEED -->
+<main id="notes-feed">
+
+
+<!-- ========================================================================== -->
+<!-- TOPIC 1 — EEDI — REQUIRED VS ATTAINED &AMP; VERIFICATION -->
+<!-- ========================================================================== -->
+
+<div class="topic-block" id="topic-p23-1" data-kw="EEDI, attained EEDI, required EEDI, EEDI reference line, EEDI phases, Phase 3, reduction factor, MARPOL Annex VI regulation 22, MARPOL Annex VI regulation 24, Vref, reference speed, auxiliary engine power, PAE, carbon factor, specific fuel consumption, SFC, NOx Technical File, EEDI Technical File, tank test, sea trial, preliminary verification, final verification, IEE Certificate, International Energy Efficiency Certificate, minimum propulsion power, new ship definition">
+  <div class="topic-header">
+    <div class="topic-badge">Part 23 · Topic 1</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">EEDI — Required versus Attained Values, the Reference Line, Verification and the IEE Certificate</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Reg. 22 / Reg. 24 · Reference Line · Verification · IEE Certificate</span>
+        <span class="topic-pages">Uday pp. 551–555</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> <strong>Hand-off from Part 22 Topic 3.</strong> Part 22 Topic 3 gives the IMO GHG Strategy context, the one-line EEDI definition and the phase ladder as an overview. This topic takes the chapter from there and does not repeat the Strategy narrative; read the two together. Four material corrections to the source notes. <strong>(1) Regulation numbers.</strong> The notes cite ‘regulation 21’ for the required EEDI. That was the numbering before the 2021 revision of MARPOL Annex VI, in force 1 November 2022. The current numbers are <strong>regulation 22 (attained EEDI)</strong> and <strong>regulation 24 (required EEDI)</strong>; the reference-line parameters are in regulation 24, Table 2, and the reduction factors in regulation 24, Table 1. Minimum propulsion power is regulation 24.5. <strong>(2) Phases are not a uniform five-year 0/10/20/30 ladder.</strong> That ladder is correct for bulk carriers and tankers of 20,000 DWT and above, but MEPC.324(75) brought Phase 3 forward to <strong>1 April 2022</strong> for containerships, general cargo ships, gas carriers of 15,000 DWT and above, LNG carriers and cruise ships with non-conventional propulsion, and raised the containership Phase 3 factor to 30–50% by size. <strong>(3) Auxiliary engine power is not ‘5% of main engine power’.</strong> The EEDI Calculation Guidelines (MEPC.364(79)) set P<sub>AE</sub> = 0.025 × MCR + 250 kW where the total propulsion power is 10,000 kW or more, and 0.05 × MCR below that. <strong>(4) In the reference-line formula a × b<sup>−c</sup>, b is the ship’s capacity (deadweight, or GT for cruise ships), not a constant.</strong> A fuel-density temperature-correction formula that appeared in the source has been removed: it is a bunker-survey practice, not part of the EEDI calculation. The source’s ‘five factors determining the EEDI’ is kept in the Memory Box as a memory aid only; it is not IMO text. <strong>Cross-reference:</strong> Part 4 Topic 19 (NOx Technical Code) covers the NOx Technical File itself; it is cited here only as the source of the certified SFC values. <strong>Currency check, MEPC 84 (27 April – 1 May 2026):</strong> the governing survey guideline is now the <strong>2026 EEDI Survey and Certification Guidelines, resolution MEPC.411(84)</strong>, which supersede MEPC.365(79) and its amendments MEPC.374(80) and MEPC.403(83); the two-stage process, document list, verifier duties and certificate issue are unchanged, the sea-trial standards are now ITTC 7.5-04-01-01.1 (2024) or ISO 15016:2025, and the dual-fuel treatment is clarified. The EEDI Calculation Guidelines remain MEPC.364(79), now <strong>as amended by MEPC.410(84)</strong> (two footnotes on dual-fuel engines; nothing changes for a conventional ship). Every citation in this topic uses the 2026 position.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">The <strong>attained EEDI</strong> (regulation 22) is the ship-specific value, in grams of CO<sub>2</sub> per tonne-nautical mile, calculated at the design stage and confirmed at sea trial, that expresses how much CO<sub>2</sub> the ship emits for a unit of transport work at a defined reference condition. The <strong>required EEDI</strong> (regulation 24) is the maximum attained value permitted for that ship type and size in the phase in which the ship was contracted, laid down or delivered: required EEDI = (1 − X/100) × reference line value, where X is the reduction factor in regulation 24, Table 1, and the reference line value is a × b<sup>−c</sup> with a and c from regulation 24, Table 2 and b the ship’s capacity. Compliance means attained EEDI ≤ required EEDI, verified in two stages and recorded by the issue of the International Energy Efficiency Certificate.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>The attained EEDI is fixed at design and construction. Once the IEE Certificate is issued, <strong>nothing the Chief Engineer does changes it</strong> — but any later change to engines, power limitation, propeller or hull appendages that departs from the EEDI Technical File can invalidate the certificate and must be verified.</li>
+    <li>The EEDI Technical File on board is the authority for the ship’s reference speed, installed power, SFC values and the electric power table. Surveyors, vetting inspectors and charterers read it; the Chief Engineer must know where it is and what it commits the ship to.</li>
+    <li>Minimum propulsion power (regulation 24.5) is the safety counterweight to EEDI: a ship cannot be made ‘efficient’ by under-powering it to the point where it cannot hold course in adverse weather. This is the engineering tension examiners like to explore.</li>
+    <li>Everything in EEXI (Topic 2) is built on EEDI machinery — the same reference line, the same P<sub>ME</sub>/P<sub>AE</sub> rules, the same Technical File logic. Understanding EEDI properly makes EEXI a short step.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">Jul 2011</span>  MEPC.203(62) — EEDI and SEEMP added to MARPOL Annex VI as Chapter 4
+<span class="t-year">1 Jan 2013</span>  Chapter 4 in force; Phase 0 begins (reduction factor 0%)
+<span class="t-year">May 2013</span>  MEPC.231(65) — Guidelines for calculation of reference lines; MEPC.232(65) — interim minimum propulsion power guidelines
+<span class="t-year">1 Jan 2015</span>  Phase 1 (10%)
+<span class="t-year">1 Jan 2020</span>  Phase 2 (20%; 15% general cargo)
+<span class="t-year">Nov 2020</span>  MEPC.324(75) — Phase 3 brought forward to 1 April 2022 for several ship types; containership factors raised to 30–50%
+<span class="t-year">Jun 2021</span>  MEPC.328(76) — revised Annex VI; Chapter 4 renumbered (attained EEDI = reg. 22, required EEDI = reg. 24); in force 1 Nov 2022
+<span class="t-year">Dec 2022</span>  MEPC.364(79) 2022 EEDI Calculation Guidelines; MEPC.365(79) 2022 EEDI Survey and Certification Guidelines (now historical)
+<span class="t-year">1 Jan 2025</span>  Phase 3 (30%, up to 50% for large containerships) applies to all covered ship types
+<span class="t-year">1 May 2026</span>  MEPC 84 — <strong>MEPC.411(84)</strong> 2026 EEDI Survey and Certification Guidelines supersede MEPC.365(79) as amended; <strong>MEPC.410(84)</strong> amends the 2022 Calculation Guidelines (dual-fuel footnotes)</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 2.2.18</span><span class="reg-desc"><strong>New ship</strong> — building contract on or after 1 January 2013; or, with no contract, keel laid on or after 1 July 2013; or delivery on or after 1 July 2015. Existing ship = not a new ship (reg. 2.2.13).</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 19</span><span class="reg-desc">Chapter 4 applies to all ships of 400 GT and above; ships solely on domestic voyages are excluded.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 22</span><span class="reg-desc"><strong>Attained EEDI</strong> — calculated for each new ship of the listed types, accompanied by the EEDI Technical File, verified by the Administration or a recognized organization.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 24</span><span class="reg-desc"><strong>Required EEDI</strong> — attained ≤ (1 − X/100) × reference line value; Table 1 reduction factors by type, size and phase; Table 2 reference-line parameters a and c; para. 5 minimum installed propulsion power.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.364(79), as amended by MEPC.410(84)</span><span class="reg-desc">2022 Guidelines on the method of calculation of the attained EEDI for new ships — P<sub>ME</sub>, P<sub>AE</sub>, V<sub>ref</sub>, SFC, C<sub>F</sub>, correction factors. The May 2026 amendment adds footnotes on dual-fuel C<sub>F</sub>/SFC treatment and on MCR as certified under the NOx Technical Code.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.411(84)</span><span class="reg-desc"><strong>2026 Guidelines on survey and certification of the EEDI</strong> (adopted 1 May 2026) — preliminary verification at design stage, final verification at sea trial, EEDI Technical File contents. Supersedes MEPC.365(79) and its amendments MEPC.374(80) and MEPC.403(83).</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.231(65)</span><span class="reg-desc">2013 Guidelines for calculation of reference lines — IHS Fairplay dataset of ships of 400 GT and above delivered 1 January 1999 to 1 January 2009.</span></div>
+    <div class="reg-item"><span class="reg-code">MEPC.1/Circ.850/Rev.3</span><span class="reg-desc">2021 Interim guidelines for determining minimum propulsion power to maintain manoeuvrability in adverse conditions (reg. 24.5).</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 6.4, 9.10 and 9.11</span><span class="reg-desc">International Energy Efficiency Certificate — issued after survey under reg. 5.4. Regulation 9.10: valid throughout the life of the ship subject to regulation 9.11. Regulation 9.11: ceases to be valid (1) if the ship is withdrawn from service or a new certificate is issued following major conversion; (2) upon transfer to the flag of another State; or (3) if the equipment, systems, fittings, arrangements or material covered by the survey are changed without the Administration’s express approval under reg. 5.5 (unless reg. 3 applies).</span></div>
+  </div>
+
+  <div class="section-head">📐 Required versus Attained — the Two Numbers</div>
+  <p class="notes-body" style="text-align:center;"><strong>Attained EEDI ≤ Required EEDI = (1 − X/100) × Reference line value</strong></p>
+  <table class="revision-table">
+    <tr><th></th><th>Attained EEDI (reg. 22)</th><th>Required EEDI (reg. 24)</th></tr>
+    <tr><td>What it is</td><td>The ship’s own calculated index, g CO<sub>2</sub>/t·nm</td><td>The ceiling for that ship type, size and phase</td></tr>
+    <tr><td>Who produces it</td><td>Shipbuilder/designer, in the EEDI Technical File</td><td>Fixed by regulation 24 Tables 1 and 2</td></tr>
+    <tr><td>When fixed</td><td>Preliminary at design; final at sea trial</td><td>At contract/keel/delivery date → phase</td></tr>
+    <tr><td>Verified by</td><td>Administration or recognized organization (class)</td><td>—</td></tr>
+    <tr><td>Changes later?</td><td>Only after major conversion or verified modification</td><td>No (phase locked at build)</td></tr>
+  </table>
+  <p class="notes-body">The <strong>reference line</strong> is a regression curve through the attained values of a historical fleet: for most types <strong>a × DWT<sup>−c</sup></strong> (cruise ships with non-conventional propulsion use GT). The parameters a and c are fixed in regulation 24 Table 2 — for example bulk carriers a = 961.79, c = 0.477; tankers a = 1,218.80, c = 0.488; containerships a = 174.22, c = 0.201 — and were derived under MEPC.231(65) from the IHS Fairplay database (now S&amp;P Global Sea-web) of ships of 400 GT and above delivered between 1 January 1999 and 1 January 2009, using each ship’s capacity, service speed and total installed main power.</p>
+  <p class="notes-body">Because the exponent c is less than one, the curve falls with size: a 200,000 DWT bulk carrier is allowed far fewer grams per tonne-mile than a 30,000 DWT one. That is the regulatory expression of economies of scale.</p>
+
+  <div class="section-head">📉 Reduction Factors and the Phase 3 Nuances</div>
+  <table class="revision-table">
+    <tr><th>Ship type (size)</th><th>Phase 0 2013–14</th><th>Phase 1 2015–19</th><th>Phase 2 2020–24 (or to 31 Mar 2022*)</th><th>Phase 3</th></tr>
+    <tr><td>Bulk carrier ≥ 20,000 DWT</td><td>0</td><td>10</td><td>20</td><td>30 (from 1 Jan 2025)</td></tr>
+    <tr><td>Tanker ≥ 20,000 DWT</td><td>0</td><td>10</td><td>20</td><td>30 (from 1 Jan 2025)</td></tr>
+    <tr><td>Gas carrier ≥ 15,000 DWT</td><td>0</td><td>10</td><td>20</td><td>30 (from 1 Apr 2022*)</td></tr>
+    <tr><td>General cargo ≥ 15,000 DWT</td><td>0</td><td>10</td><td>15</td><td>30 (from 1 Apr 2022*)</td></tr>
+    <tr><td>Containership 15,000–40,000 DWT</td><td>0</td><td>10</td><td>20</td><td>30 (from 1 Apr 2022*)</td></tr>
+    <tr><td>Containership 40,000–80,000 DWT</td><td>0</td><td>10</td><td>20</td><td>35 (from 1 Apr 2022*)</td></tr>
+    <tr><td>Containership 80,000–120,000 DWT</td><td>0</td><td>10</td><td>20</td><td>40 (from 1 Apr 2022*)</td></tr>
+    <tr><td>Containership 120,000–200,000 DWT</td><td>0</td><td>10</td><td>20</td><td>45 (from 1 Apr 2022*)</td></tr>
+    <tr><td>Containership ≥ 200,000 DWT</td><td>0</td><td>10</td><td>20</td><td>50 (from 1 Apr 2022*)</td></tr>
+  </table>
+  <p class="notes-body">* MEPC.324(75) shortened Phase 2 to 31 March 2022 and started Phase 3 on 1 April 2022 for containerships, general cargo ships, gas carriers of 15,000 DWT and above, LNG carriers and cruise passenger ships with non-conventional propulsion. Smaller sizes in each type carry a sliding ‘0–X’ factor. Which phase a ship belongs to follows the new-ship definition shifted to the phase start: contract on or after the phase start date, keel six months later, or delivery 48 months later (MEPC.1/Circ.795 unified interpretation).</p>
+  <p class="notes-body">Since 1 January 2025 every covered type is in Phase 3. The examiner’s trap is the containership ladder — ‘30%’ is the floor, not the rule, for container tonnage.</p>
+
+  <div class="section-head">🧮 The Attained-EEDI Formula and Its Principal Terms</div>
+  <p class="notes-body" style="text-align:center;"><strong>EEDI ≈ [ (P<sub>ME</sub> × SFC<sub>ME</sub> × C<sub>F</sub>) + (P<sub>AE</sub> × SFC<sub>AE</sub> × C<sub>F</sub>) ] ÷ (Capacity × V<sub>ref</sub>)</strong>   g CO<sub>2</sub>/t·nm</p>
+  <p class="notes-body">This is the teaching form. The full expression in MEPC.364(79) adds shaft-motor and shaft-generator terms, innovative-technology deductions and the correction factors f<sub>j</sub>, f<sub>w</sub>, f<sub>i</sub>, f<sub>c</sub>, f<sub>l</sub> and f<sub>m</sub>; for a conventional single-screw diesel ship without them the teaching form is numerically the same.</p>
+  <table class="revision-table">
+    <tr><th>Term</th><th>Verified rule (MEPC.364(79))</th><th>Where it comes from</th></tr>
+    <tr><td>P<sub>ME</sub></td><td>75% of MCR of each main engine (adjusted for PTO/PTI)</td><td>Engine particulars; EEDI Technical File</td></tr>
+    <tr><td>P<sub>AE</sub></td><td><strong>0.025 × ΣMCR + 250 kW</strong> where total propulsion power ≥ 10,000 kW; <strong>0.05 × ΣMCR</strong> below 10,000 kW; electric power table where the rule misrepresents the sea load (e.g. passenger ships)</td><td>Guideline rule or validated electric power table</td></tr>
+    <tr><td>SFC<sub>ME</sub> / SFC<sub>AE</sub></td><td>Certified SFC at <strong>75% MCR</strong> (main) and <strong>50% MCR</strong> (auxiliary), corrected to ISO reference conditions and LCV 42,700 kJ/kg</td><td>Approved NOx Technical File test report</td></tr>
+    <tr><td>C<sub>F</sub></td><td>Mass CO<sub>2</sub> per mass fuel: HFO 3.114, LFO 3.151, diesel/gas oil 3.206, LNG 2.750, methanol 1.375</td><td>Guideline table</td></tr>
+    <tr><td>Capacity</td><td>Deadweight (bulk, tanker, container, gas, general cargo…); GT for passenger and cruise ships; 70% DWT for containerships</td><td>Tonnage/stability documents</td></tr>
+    <tr><td>V<sub>ref</sub></td><td>Ship speed in deep water at the draught corresponding to Capacity (summer load draught for passenger ships) at P<sub>ME</sub></td><td>Design power curve; confirmed at sea trial</td></tr>
+  </table>
+  <p class="notes-body">Note the dimensional logic: kW × g/kWh × (g CO<sub>2</sub>/g fuel) in the numerator gives grams of CO<sub>2</sub> per hour; tonnes × knots in the denominator gives tonne-nautical miles per hour. The hours cancel and the index is g CO<sub>2</sub> per tonne-mile.</p>
+
+  <div class="section-head">🔍 Verification — Design Stage and Sea Trial</div>
+  <p class="notes-body">The 2026 EEDI Survey and Certification Guidelines, MEPC.411(84), require survey and certification of the EEDI in <strong>two stages</strong>: preliminary verification at the design stage and final verification at the sea trial. The verifier is the Administration or its recognized organization.</p>
+  <table class="revision-table">
+    <tr><th>Stage</th><th>Submitter provides</th><th>Verifier does</th></tr>
+    <tr><td>① Preliminary (design)</td><td><strong>EEDI Technical File</strong> — DWT/GT, MCR of main and auxiliary engines, V<sub>ref</sub>, fuel type, SFC at 75%/50% MCR, electric power table where applicable, estimated power curve(s), principal particulars, calculation summary; copy of the <strong>NOx Technical File</strong>; on request, tank-test facility description and calibration records, model and ship lines, lightweight, tank-test reports</td><td>Reviews the file; may <strong>witness the model tank test</strong>; checks the power-curve estimation and the qualification of the tank-test organization; issues a <strong>report of pre-verification</strong></td></tr>
+    <tr><td>② Final (sea trial)</td><td>Before the trial: speed-trial test procedure, final displacement table and measured lightweight (or deadweight survey report), NOx Technical File. After the trial: measured speed/power points, developed <strong>power curves</strong>, <strong>revised EEDI Technical File</strong></td><td><strong>Attends the sea trial</strong> and confirms propulsion and power-supply arrangement, draught and trim, sea conditions, ship speed and shaft power/RPM; checks the power-curve development (ITTC 7.5-04-01-01.1, 2024 edition, or ISO 15016:2025); confirms the attained EEDI recalculated with the measured speed at P<sub>ME</sub> and with the final deadweight; then the <strong>IEE Certificate</strong> is issued</td></tr>
+  </table>
+  <p class="notes-body">Why the sea trial matters: the only term that cannot be certified on paper is V<sub>ref</sub>. If the measured speed at 75% MCR falls below the design estimate, the attained EEDI rises. The guidelines therefore prescribe how speed is measured (at more than two power points spanning P<sub>ME</sub>), how it is corrected for wind, waves, current, shallow water, displacement and water temperature, and how the design power curve is adjusted — with a warning against deliberately conservative design curves intended to buy an upward speed adjustment.</p>
+  <p class="notes-body"><strong>Minimum propulsion power.</strong> Regulation 24.5 requires that installed propulsion power is not less than the power needed to maintain manoeuvrability in adverse conditions, assessed under MEPC.1/Circ.850/Rev.3. It is checked at the same verification and is the reason an owner cannot chase a low EEDI by simply fitting a smaller engine.</p>
+
+  <div class="section-head">📄 The IEE Certificate</div>
+  <ul class="notes-list">
+    <li>Issued by the Administration or its recognized organization after the survey under regulation 5.4, to any ship of 400 GT and above (regulation 6.4), in the form of Appendix VIII.</li>
+    <li>Supplement records the attained and required EEDI (and, for existing ships, EEXI — Topic 2) and confirms the SEEMP is on board.</li>
+    <li><strong>Validity:</strong> the IEE Certificate has no periodic expiry date and no annual, intermediate or renewal survey cycle; under regulation 9.10 it remains valid throughout the life of the ship, subject to the cessation-of-validity conditions in regulation 9.11. Do not tell an examiner it ‘never expires’ — say it has no expiry date but ceases to be valid in the regulation 9.11 cases.</li>
+    <li><strong>Regulation 9.11 — it ceases to be valid:</strong> (1) if the ship is withdrawn from service, or if a new certificate is issued following a major conversion of the ship; (2) upon transfer of the ship to the flag of another State — a new certificate is issued only when the new Administration is satisfied the ship complies with Chapter 4, and the former flag transmits copies of the certificate and survey reports on request within three months; or (3) if the ship’s equipment, systems, fittings, arrangements or material covered by the survey are changed without the express approval of the Administration (regulation 5.5), unless regulation 3 (exceptions and exemptions) applies.</li>
+    <li>The EEDI Technical File is its supporting document and must be kept on board.</li>
+  </ul>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Simon):</strong> Simon asks for the two numbers by name. Say <em>attained</em> and <em>required</em>, give the current regulation numbers — <em>22 and 24 under the 2021 revised Annex VI, in force 1 November 2022</em> — and the formula with X as the reduction factor. Then show you know the one thing most candidates get wrong: the auxiliary power rule is not a flat five per cent; it is 2.5 per cent of MCR plus 250 kW above 10,000 kW. If he moves to verification, structure it as two stages and name the Technical File, the NOx Technical File as the source of SFC, the tank test and the sea-trial speed confirmation. Close with the IEE Certificate: no expiry date and no survey cycle, valid for the life of the ship under regulation 9.10, but it ceases to be valid in the three regulation 9.11 cases — withdrawal from service or a new certificate after major conversion, change of flag, or unapproved change to the surveyed equipment and arrangements. Do not drift into the GHG Strategy — that is Part 22 territory and he will ask you to stop.</div>
+
+  <div class="section-head">🎯 Oral Q&amp;A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. Distinguish attained EEDI from required EEDI and state the governing regulations.</div><div class="qa-a">The attained EEDI is the ship’s own calculated index, in grams of carbon dioxide per tonne-nautical mile, produced from the design parameters and confirmed at sea trial; it is governed by regulation 22 of MARPOL Annex VI under the 2021 revised numbering. The required EEDI is the maximum attained value allowed for that ship type, size and phase, governed by regulation 24, and equals one minus the reduction factor X over one hundred, multiplied by the reference line value. Compliance is attained less than or equal to required, verified by the Administration or recognized organization and recorded on the International Energy Efficiency Certificate.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. What is the EEDI reference line and how was it derived?</div><div class="qa-a">The reference line is a curve representing the average attained index of a defined group of ships, expressed as a times capacity to the power minus c, where capacity is deadweight for most types and gross tonnage for cruise ships with non-conventional propulsion. The parameters a and c are fixed per ship type in regulation 24 Table 2. They were derived under resolution MEPC.231(65) by regression on data from the IHS Fairplay database, now S&amp;P Global Sea-web, for ships of 400 gross tonnage and above delivered between 1 January 1999 and 1 January 2009, using each ship’s capacity, service speed and total installed main engine power.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Explain how auxiliary engine power is taken into the attained EEDI.</div><div class="qa-a">Under the 2022 EEDI Calculation Guidelines, MEPC.364(79) as amended by MEPC.410(84), the auxiliary power term P<sub>AE</sub> is the power required to supply the normal maximum sea load for propulsion machinery and accommodation. For ships with total propulsion power of 10,000 kilowatts or more it is taken as 0.025 times the total main engine MCR plus 250 kilowatts; below 10,000 kilowatts it is 0.05 times the MCR. Where that rule would misrepresent the real sea load, for example on passenger ships, a validated electric power table is used instead. It is multiplied by the auxiliary engine SFC at 50 per cent MCR from the NOx Technical File and by the carbon factor of the fuel.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4. Describe the two stages of EEDI verification and the role of the sea trial.</div><div class="qa-a">Under the 2026 EEDI Survey and Certification Guidelines, resolution MEPC.411(84), which superseded the 2022 guidelines MEPC.365(79) in May 2026, verification is in two stages. At the design stage the shipbuilder submits the EEDI Technical File with the ship’s particulars, installed power, estimated power curve, reference speed, SFC values from the NOx Technical File and the electric power table where required; the verifier reviews it, may witness the model tank test and confirm the qualification of the test facility, and issues a report of pre-verification. At the sea trial the verifier attends and confirms the propulsion arrangement, draught and trim, sea conditions, ship speed and shaft power. The submitter develops the power curves from the measured points, corrects them for environmental effects, and recalculates the attained EEDI using the measured speed at 75 per cent MCR and the final deadweight; the revised Technical File is then verified and the International Energy Efficiency Certificate is issued.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5. Can a shipowner reduce the attained EEDI simply by installing a smaller main engine?</div><div class="qa-a">Only within limits. Regulation 24.5 requires that the installed propulsion power is not less than the power needed to maintain the manoeuvrability of the ship in adverse conditions, assessed under the interim guidelines in MEPC.1/Circ.850/Rev.3, and this minimum-power check is part of the EEDI verification. So the reduction in power and speed that lowers the index is bounded by a safety floor, and in practice designers look to hull form, propeller efficiency, waste heat recovery and shaft generators rather than simple under-powering.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Define attained EEDI and required EEDI, give the formula linking required EEDI to the reference line and state the regulations that govern each under the current MARPOL Annex VI numbering.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Explain the terms P<sub>ME</sub>, P<sub>AE</sub>, SFC, C<sub>F</sub>, Capacity and V<sub>ref</sub> in the attained EEDI calculation, stating the verified rule for each and the document from which it is taken.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Describe the preliminary and final verification of the attained EEDI under the 2026 survey and certification guidelines (MEPC.411(84)), including the contents of the EEDI Technical File, the verifier’s duties at the sea trial, the treatment of reference speed, the minimum propulsion power check and the issue of the International Energy Efficiency Certificate.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>Attained (reg. 22) ≤ Required (reg. 24) = (1 − X/100) × a·b<sup>−c</sup>.</strong> b = capacity (DWT; GT for cruise), a and c from reg. 24 Table 2.</li>
+      <li><strong>Phases: 0 (2013) · 10% (2015) · 20% (2020) · 30% (2025)</strong> — but Phase 3 from <strong>1 Apr 2022</strong> for container/general cargo/gas ≥15k/LNG/cruise, and containers go <strong>30 → 50%</strong> by size.</li>
+      <li><strong>P<sub>ME</sub> = 75% MCR · P<sub>AE</sub> = 2.5% MCR + 250 kW (≥10,000 kW) or 5% MCR (below) · SFC at 75%/50% from the NOx file · C<sub>F</sub> HFO 3.114.</strong></li>
+      <li>Memory aid only (not IMO text): the five things that move EEDI are <strong>power, SFC, carbon factor, capacity, speed</strong>.</li>
+      <li><strong>Two stages: design-stage pre-verification (Technical File, tank test) → sea-trial final verification (V<sub>ref</sub>, power curves) → IEE Certificate (reg. 6.4): no expiry date, valid for the ship’s life (9.10) unless it ceases under 9.11 — withdrawn/major conversion · change of flag · unapproved change to surveyed arrangements.</strong></li>
+      <li>Reference line data: <strong>IHS Fairplay, ≥400 GT, delivered 1 Jan 1999 – 1 Jan 2009</strong> (MEPC.231(65)).</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Case Study — A Sea Trial That Missed the Design Speed</button>
+    <div class="deep-dive-body">
+      <h4>Situation</h4>
+      <p>A 63,000 DWT Ultramax bulk carrier contracted in Phase 3 is designed to a reference speed of 14.2 knots at 75% MCR, giving a preliminary attained EEDI comfortably inside the required value. At the sea trial, run in Beaufort 5 with a following current, the raw measured speed at the EEDI power point is 13.6 knots.</p>
+      <h4>What the verifier does</h4>
+      <p>The verifier does not take the raw figure. Under MEPC.411(84) paragraphs 4.3.5 to 4.3.9 the submitter corrects the measured points for wind, waves, current, shallow water, displacement, water temperature and density using ITTC 7.5-04-01-01.1 (2024) or ISO 15016:2025, develops the trial power curve, and compares it with the design curve. Where the trial curve sits to the right of the design curve the attained EEDI is recalculated at the corrected trial speed; where the ship was tried at a draught other than the EEDI draught, the speed is adjusted through the tank-test relationship between the two conditions.</p>
+      <h4>Outcome</h4>
+      <p>After correction the speed at P<sub>ME</sub> is 13.9 knots. The attained EEDI rises by about two per cent but remains below the required value, the revised Technical File is verified and the IEE Certificate is issued. Had it crossed the line, the yard’s options would have been a verified power limitation with a recalculated V<sub>ref</sub>, or hull and propeller changes and a re-trial — not a quiet edit of the Technical File. The lesson for the Chief Engineer who later joins the ship: the V<sub>ref</sub> on the certificate is a corrected, verified figure, and every machinery change that could move it is a certificate matter.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>MARPOL Annex VI (2021 revised text, resolution MEPC.328(76)) — regulations 2, 5, 6, 9, 19, 22 and 24; Appendix VIII</li>
+    <li>Resolution MEPC.364(79), as amended by resolution MEPC.410(84) (1 May 2026) — 2022 Guidelines on the method of calculation of the attained Energy Efficiency Design Index (EEDI) for new ships</li>
+    <li>Resolution MEPC.411(84) (1 May 2026) — 2026 Guidelines on survey and certification of the Energy Efficiency Design Index (EEDI); supersedes MEPC.365(79), MEPC.374(80) and MEPC.403(83) (historical)</li>
+    <li>Resolution MEPC.231(65) — 2013 Guidelines for calculation of reference lines for use with the EEDI</li>
+    <li>Resolution MEPC.324(75) — amendments bringing EEDI Phase 3 forward for certain ship types</li>
+    <li>MEPC.1/Circ.850/Rev.3 — 2021 Interim guidelines for determining minimum propulsion power to maintain the manoeuvrability of ships in adverse conditions</li>
+    <li>MEPC.1/Circ.795/Rev.5 — Unified interpretations to MARPOL Annex VI (application of the new-ship definition to each EEDI phase)</li>
+    <li>MIW Engineering Management Notes Part 22 Topic 3 — IMO GHG Strategy, Market-Based Measures and Technical Energy Efficiency (hand-off source)</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p23 · Topic 1 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p23 · P23-T1 · v1.0</div>
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- TOPIC 2 — EEXI — EXISTING-SHIP TECHNICAL EFFICIENCY -->
+<!-- ========================================================================== -->
+
+<div class="topic-block" id="topic-p23-2" data-kw="EEXI, attained EEXI, required EEXI, Energy Efficiency Existing Ship Index, MARPOL Annex VI regulation 23, MARPOL Annex VI regulation 25, engine power limitation, EPL, shaft power limitation, SHaPoLi, power reserve, onboard management manual, EEXI Technical File, IEE Certificate, existing ship, MEPC.328(76), MEPC.350(78), MEPC.335(76), EEDI reference line, Vref approximation, 1 January 2023, 400 GT">
+  <div class="topic-header">
+    <div class="topic-badge">Part 23 · Topic 2</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">EEXI — Existing-Ship Technical Efficiency, Power Limitation and Certification</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Reg. 23 / Reg. 25 · One-off · EPL / SHaPoLi · EEXI Technical File</span>
+        <span class="topic-pages">Uday pp. 556–561</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> Five material corrections to the source notes, each of which an examiner would penalise. <strong>(1) Applicability.</strong> EEXI applies to ships of <strong>400 GT and above</strong> of the listed types (regulations 19, 23 and 25), not ‘above 5,000 GT’; 5,000 GT is the threshold for the Data Collection System and CII (Topics 3 and 4). <strong>(2) Dates.</strong> The amendments (MEPC.328(76), adopted June 2021) entered into force on <strong>1 November 2022</strong>, not 2021; the attained EEXI is verified at the first annual, intermediate or renewal survey on or after <strong>1 January 2023</strong>. <strong>(3) No phases.</strong> The reduction factor Y is a single fixed value per ship type and size in regulation 25 Table 3; EEXI is a one-off requirement and there is no separate ‘EEXI reference line’ — the required EEXI is taken from the <strong>EEDI reference line</strong>. <strong>(4) No sea trial is required.</strong> The reference speed is taken from the approved EEDI speed-power curve, an estimated curve, an existing sea-trial report, or the statistical approximation V<sub>ref,app</sub> in MEPC.350(78); a ship that fits power limitation recalculates V<sub>ref</sub> through the power curve, it does not re-trial. <strong>(5) The ‘Case I / II / III’ construction-date scheme</strong> in the source is a teaching device, not an IMO classification. What the regulation actually says is in regulation 23.3: a ship whose <strong>verified attained EEDI is at or below its required EEXI</strong> may use that EEDI as its attained EEXI and is verified on the EEDI Technical File; every other ship calculates an attained EEXI. The source’s numerical worked example has <strong>not</strong> been reproduced: its auxiliary SFC of 30 g/kWh is physically impossible and its carbon factor was rounded. A rebuilt example using the verified method and realistic inputs is given below. <strong>Currency check, MEPC 84 (May 2026):</strong> no EEXI calculation or survey guideline was amended; MEPC.350(78) and MEPC.351(78) remain current, including the rule that with overridable power limitation P<sub>ME</sub> is 83% of the limited power or 75% of the original MCR, whichever is lower. The 2022 EEDI Calculation Guidelines that EEXI borrows from are now MEPC.364(79) as amended by MEPC.410(84); the amendment adds only dual-fuel footnotes. MEPC.407(84), adopted at MEPC 84 and entering into force on 1 September 2027, replaces the fixed review clause in regulation 25.3 with a standing review; it changes nothing an existing ship must do now.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">The <strong>Energy Efficiency Existing Ship Index</strong> extends the EEDI logic to ships that were never subject to it. Every ship of 400 GT and above of the listed types must have an <strong>attained EEXI</strong> (regulation 23), calculated once with the EEDI formula and the EEXI Calculation Guidelines and recorded in an EEXI Technical File, that does not exceed the <strong>required EEXI</strong> (regulation 25) = (1 − Y/100) × EEDI reference line value, where Y is the fixed reduction factor for the ship type and size. It is a technical, design-side measure verified at the first survey on or after 1 January 2023, after which the International Energy Efficiency Certificate is reissued; it is not recalculated annually.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>For most existing tonnage EEXI compliance was achieved by <strong>limiting power</strong> — an overridable engine power limitation (EPL) or shaft power limitation (SHaPoLi). The Chief Engineer owns the sealed setting, the power reserve, the Onboard Management Manual and the record of every un-limiting event. Examiners test exactly that.</li>
+    <li>Un-limiting is permitted only to secure the safety of the ship or save life at sea (regulation 3.1 scenario); every use must be recorded and reported. A casual override to make a tide is a non-compliance with a certificate attached to it.</li>
+    <li>EEXI fixes the technical baseline; CII (Topic 3) then judges how the ship is actually operated inside that baseline. A ship that only just passes EEXI by limitation has less speed margin to trade against CII.</li>
+    <li>The EEXI Technical File and the IEE Certificate supplement are PSC-inspectable documents since 2023.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">Jun 2021</span>  MEPC.328(76) adopted — revised Annex VI with new regulations 23 (attained EEXI) and 25 (required EEXI); MEPC.333(76) EEXI calculation, MEPC.334(76) survey and certification, MEPC.335(76) EPL/SHaPoLi guidelines
+<span class="t-year">Jun 2022</span>  MEPC.350(78) 2022 EEXI Calculation Guidelines and MEPC.351(78) 2022 EEXI Survey and Certification Guidelines replace the 2021 versions
+<span class="t-year">1 Nov 2022</span>  Revised Annex VI in force
+<span class="t-year">1 Jan 2023</span>  Attained EEXI verified at the first annual, intermediate or renewal survey on or after this date; IEE Certificate reissued
+<span class="t-year">Apr 2024</span>  MEPC.390(81) amends the EPL/SHaPoLi guidelines (power reserve use and reactivation of the limitation)</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 23</span><span class="reg-desc"><strong>Attained EEXI</strong> — calculated for each ship (and each ship after major conversion) of the listed categories; accompanied by the EEXI Technical File; verified by the Administration or recognized organization. Reg. 23.3: a verified attained EEDI at or below the required EEXI may be taken as the attained EEXI.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 25</span><span class="reg-desc"><strong>Required EEXI</strong> — attained EEXI ≤ (1 − Y/100) × EEDI reference line value; Y per ship type and size in Table 3.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 5.4.7</span><span class="reg-desc">Verification of EEXI at the first annual, intermediate or renewal survey on or after 1 January 2023.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.350(78)</span><span class="reg-desc">2022 Guidelines on the method of calculation of the attained EEXI — P<sub>ME</sub> with power limitation, V<sub>ref</sub> sources including V<sub>ref,app</sub>.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.351(78)</span><span class="reg-desc">2022 Guidelines on survey and certification of the attained EEXI — EEXI Technical File verification.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.335(76), as amended by MEPC.390(81)</span><span class="reg-desc">Guidelines on the shaft/engine power limitation system to comply with EEXI and use of a power reserve — overridable limitation, Onboard Management Manual, recording of un-limiting.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 6.4 / 9.10 / 9.11</span><span class="reg-desc">IEE Certificate reissued on EEXI verification; its supplement records attained and required EEXI. No expiry date (9.10); ceases to be valid in the 9.11 cases — see Topic 1.</span></div>
+  </div>
+
+  <div class="section-head">📐 Required versus Attained EEXI</div>
+  <p class="notes-body" style="text-align:center;"><strong>Attained EEXI ≤ Required EEXI = (1 − Y/100) × EEDI reference line value</strong></p>
+  <table class="revision-table">
+    <tr><th>Ship type</th><th>Size</th><th>Y (%)</th></tr>
+    <tr><td>Bulk carrier</td><td>≥ 200,000 DWT</td><td>15</td></tr>
+    <tr><td>Bulk carrier</td><td>20,000 – 200,000 DWT</td><td>20</td></tr>
+    <tr><td>Tanker</td><td>≥ 200,000 DWT</td><td>15</td></tr>
+    <tr><td>Tanker</td><td>20,000 – 200,000 DWT</td><td>20</td></tr>
+    <tr><td>Gas carrier</td><td>≥ 15,000 DWT</td><td>30</td></tr>
+    <tr><td>Containership</td><td>15,000 – 40,000 DWT</td><td>20</td></tr>
+    <tr><td>Containership</td><td>40,000 – 80,000 DWT</td><td>30</td></tr>
+    <tr><td>Containership</td><td>80,000 – 120,000 DWT</td><td>35</td></tr>
+    <tr><td>Containership</td><td>120,000 – 200,000 DWT</td><td>45</td></tr>
+    <tr><td>Containership</td><td>≥ 200,000 DWT</td><td>50</td></tr>
+    <tr><td>General cargo ship</td><td>≥ 15,000 DWT</td><td>30</td></tr>
+    <tr><td>LNG carrier</td><td>≥ 10,000 DWT</td><td>30</td></tr>
+  </table>
+  <p class="notes-body">Y is deliberately set so that an existing ship is brought roughly to the EEDI Phase 2 or Phase 3 level of a new ship of the same type and size. There is one value per ship for its whole life — no phases — and it is applied to the same reference line a × b<sup>−c</sup> that Topic 1 describes. The reduction factor table in regulation 25 carries the full list including general cargo, LNG, ro-ro and cruise categories.</p>
+  <p class="notes-body"><strong>Regulation 23.3 — the EEDI shortcut.</strong> Where a ship already has a verified attained EEDI and that value is at or below its required EEXI, the EEDI is taken as the attained EEXI and verification is done on the EEDI Technical File; no new calculation is needed. Where the EEDI is above the required EEXI, or the ship has no EEDI (pre-2013 tonnage), an attained EEXI is calculated. This single rule replaces the ‘Case I/II/III’ scheme in the source notes.</p>
+
+  <div class="section-head">🧮 Calculating the Attained EEXI — What Changes from EEDI</div>
+  <p class="notes-body">MEPC.350(78) uses the EEDI formula and parameters, reading ‘EEDI’ as ‘EEXI’, with these differences:</p>
+  <ul class="notes-list">
+    <li><strong>P<sub>ME</sub> with overridable power limitation fitted:</strong> 83% of the limited power (MCR<sub>lim</sub>) or 75% of the original MCR, whichever is lower, for each main engine.</li>
+    <li><strong>P<sub>AE</sub>:</strong> the EEDI rule (0.025 × MCR + 250 kW above 10,000 kW; 0.05 × MCR below). Where that differs significantly from the real sea load, the electric power table or onboard-monitored annual average at sea may be used.</li>
+    <li><strong>V<sub>ref</sub>:</strong> for an EEDI ship, from the approved speed-power curve; for a non-EEDI ship, from an estimated speed-power curve under MEPC.351(78), or from an existing sea-trial report if run under EEDI draught and sea conditions; or, where neither exists, the statistical approximation <strong>V<sub>ref,app</sub> = (V<sub>ref,avg</sub> − m<sub>V</sub>) × (ΣP<sub>ME</sub> / (0.75 × MCR<sub>avg</sub>))<sup>1/3</sup></strong>. A new sea trial is <strong>not</strong> required.</li>
+    <li><strong>SFC:</strong> from the NOx Technical File at 75% MCR (main) and 50% MCR (auxiliary); where the file lacks the point, manufacturer data or an approved default is used.</li>
+    <li><strong>Boilers</strong> are not a term in the formula; the index covers main engines, auxiliary engines and shaft motors/generators only.</li>
+  </ul>
+  <p class="notes-body">The cube-root relationship between power and speed is the key engineering idea: reducing P<sub>ME</sub> by 40% reduces the numerator by about 40% but reduces V<sub>ref</sub> by only about 16%, so the index falls. That is why power limitation is so effective, and why it costs speed.</p>
+
+  <div class="section-head">🧪 Rebuilt Worked Example (educational, simplified)</div>
+  <p class="notes-body"><strong>This example is an MIW teaching calculation.</strong> It uses the verified P<sub>ME</sub>, P<sub>AE</sub>, SFC and C<sub>F</sub> rules but omits correction factors, shaft generators and the exact V<sub>ref</sub> derivation. Inputs are typical, not from any specific ship.</p>
+  <table class="revision-table">
+    <tr><th>Input</th><th>Value</th><th>Basis</th></tr>
+    <tr><td>Ship</td><td>Panamax bulk carrier, 76,000 DWT, built 2010 (no EEDI)</td><td>—</td></tr>
+    <tr><td>Main engine MCR</td><td>12,000 kW</td><td>Engine particulars</td></tr>
+    <tr><td>P<sub>ME</sub> = 75% MCR</td><td>9,000 kW</td><td>MEPC.364(79) 2.2.5.1</td></tr>
+    <tr><td>P<sub>AE</sub> = 0.025 × 12,000 + 250</td><td>550 kW</td><td>MEPC.364(79) 2.2.5.6.1 (≥ 10,000 kW)</td></tr>
+    <tr><td>SFC<sub>ME</sub> at 75% MCR</td><td>171 g/kWh</td><td>NOx Technical File, ISO-corrected</td></tr>
+    <tr><td>SFC<sub>AE</sub> at 50% MCR</td><td>215 g/kWh</td><td>NOx Technical File</td></tr>
+    <tr><td>C<sub>F</sub> (HFO)</td><td>3.114</td><td>Guideline table</td></tr>
+    <tr><td>V<sub>ref</sub> at 9,000 kW, summer draught</td><td>14.0 knots</td><td>Estimated speed-power curve</td></tr>
+  </table>
+  <div class="timeline-block">Attained EEXI
+  = [ (9,000 × 171) + (550 × 215) ] × 3.114  ÷  (76,000 × 14.0)
+  = [ 1,539,000 + 118,250 ] × 3.114  ÷  1,064,000
+  = 1,657,250 × 3.114  ÷  1,064,000
+  = 5,160,677 g CO2/h  ÷  1,064,000 t·nm/h
+  ≈ 4.85 g CO2 / t·nm
+
+Required EEXI (bulk carrier, 20,000–200,000 DWT, Y = 20 %)
+  Reference line = 961.79 × 76,000^(−0.477) ≈ 4.52 g CO2 / t·nm
+  Required EEXI  = (1 − 0.20) × 4.52 ≈ 3.61 g CO2 / t·nm
+
+Result: 4.85 > 3.61  →  NOT compliant as built.</div>
+  <p class="notes-body"><strong>Compliance by power limitation.</strong> Treat speed as proportional to the cube root of power (teaching assumption). Limiting P<sub>ME</sub> to 60% of 9,000 kW = 5,400 kW gives V<sub>ref</sub> ≈ 14.0 × 0.60<sup>1/3</sup> ≈ 11.8 knots. Then the attained EEXI ≈ [(5,400 × 171) + (550 × 215)] × 3.114 ÷ (76,000 × 11.8) ≈ 3,243,700 ÷ 897,400 ≈ 3.61, which just meets the required 3.61; in practice the owner would set the limit a little deeper for margin, and the exact V<sub>ref</sub> would come from the ship’s own power curve rather than the cube-root approximation. Under MEPC.350(78) the limited P<sub>ME</sub> is 83% of MCR<sub>lim</sub>, so MCR<sub>lim</sub> ≈ 5,400 ÷ 0.83 ≈ 6,500 kW — about 54% of the original MCR. The ship keeps the remaining power as a sealed <strong>power reserve</strong> for safety use only.</p>
+  <p class="notes-body">Check the dimensions: kW × g/kWh × (g/g) → g/h; t × nm/h → t·nm/h; the ratio is g per t·nm. The source example gave an auxiliary SFC of 30 g/kWh, which no diesel engine achieves; realistic values are 200–220 g/kWh.</p>
+
+  <div class="section-head">🔧 EPL and SHaPoLi — the Engineer’s Compliance Route</div>
+  <table class="revision-table">
+    <tr><th></th><th>Engine Power Limitation (EPL)</th><th>Shaft Power Limitation (SHaPoLi)</th></tr>
+    <tr><td>How</td><td>Mechanical fuel-rack stop or electronic fuel-index/power limit in the engine control system</td><td>Shaft power meter plus a control unit that limits engine output to the certified shaft power</td></tr>
+    <tr><td>Sealed?</td><td>Yes — sealed/verified setting recorded in the Onboard Management Manual (OMM)</td><td>Yes — tamper-evident, with alarm and recording</td></tr>
+    <tr><td>Un-limiting</td><td>Only for safety of the ship or saving life (overridable); logged and reported to the Administration/RO and the ship’s SEEMP</td><td>Same</td></tr>
+    <tr><td>Record</td><td>OMM describes how power is limited and un-limited, who may do it, and how the event is displayed and recorded</td><td>Same, with automatic logging</td></tr>
+  </table>
+  <p class="notes-body">After limitation the yard or service company produces a new EEXI Technical File with the limited P<sub>ME</sub> and the recalculated V<sub>ref</sub>; the verifier checks the file and the physical arrangement, and the IEE Certificate supplement is reissued. Engine derating, propeller or bulbous-bow modification, or energy-saving devices are alternative or additional routes where the owner wants to keep speed.</p>
+
+  <div class="section-head">📄 EEXI Technical File and Verification</div>
+  <ul class="notes-list">
+    <li>Contents: ship particulars, engine MCR and SFC sources, P<sub>ME</sub>/P<sub>AE</sub> basis, V<sub>ref</sub> and how it was obtained, C<sub>F</sub>, the calculation, and the power-limitation arrangement where fitted.</li>
+    <li>Verified by the Administration or recognized organization against MEPC.351(78); no sea trial, tank test or re-measurement is prescribed.</li>
+    <li>Timing: first annual, intermediate or renewal survey on or after 1 January 2023 (regulation 5.4.7); re-verification only after a major conversion.</li>
+    <li>On verification the IEE Certificate is reissued with attained and required EEXI in the supplement; the EEXI Technical File is kept on board with the EEDI Technical File (if any) and the SEEMP.</li>
+  </ul>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Simon):</strong> Simon will test whether you know EEXI is a one-off and where its numbers come from. Open with: <em>regulations 23 and 25, 400 GT and above, in force 1 November 2022, verified at the first survey on or after 1 January 2023, required value from the EEDI reference line with a fixed Y</em>. He then usually asks how your last ship complied. If it was EPL, be ready to describe the sealed setting, the power reserve, the Onboard Management Manual and when you may un-limit — and that every un-limiting is recorded. If you quote the handwritten ‘5,000 GT’ or ‘2021’ he will stop you; if you say the ship needed a new sea trial he will ask you to show him where the guidelines say so. They do not.</div>
+
+  <div class="section-head">🎯 Oral Q&amp;A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. What is EEXI, to which ships does it apply and when did it take effect?</div><div class="qa-a">The Energy Efficiency Existing Ship Index is a one-off technical efficiency requirement for existing ships introduced by the 2021 revision of MARPOL Annex VI, resolution MEPC.328(76), which entered into force on 1 November 2022. Under regulations 23 and 25 every ship of 400 gross tonnage and above of the listed types must have an attained EEXI, calculated with the EEDI method and recorded in an EEXI Technical File, that does not exceed the required EEXI. The attained value is verified at the first annual, intermediate or renewal survey on or after 1 January 2023, after which the International Energy Efficiency Certificate is reissued.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. How is the required EEXI determined?</div><div class="qa-a">Required EEXI equals one minus Y over one hundred, multiplied by the EEDI reference line value for the ship type and capacity. Y is a single fixed reduction factor per ship type and size in regulation 25 Table 3 — for example 20 per cent for bulk carriers and tankers between 20,000 and 200,000 deadweight, 15 per cent above 200,000, 30 per cent for gas carriers of 15,000 deadweight and above and 50 per cent for containerships of 200,000 deadweight and above. There is no separate EEXI reference line and there are no phases.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. A ship built in 2016 already holds a verified attained EEDI. Must it calculate an EEXI?</div><div class="qa-a">Not necessarily. Regulation 23.3 provides that where the attained EEDI verified by the Administration is at or below the required EEXI, that EEDI value may be taken as the attained EEXI and verification is carried out on the EEDI Technical File. If the EEDI is above the required EEXI, the ship must achieve compliance, typically by an overridable engine or shaft power limitation, and produce an EEXI Technical File with the limited power and the recalculated reference speed.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4. Explain how reference speed is obtained for an existing ship that has no EEDI and no usable sea-trial data.</div><div class="qa-a">Under MEPC.350(78) the reference speed for a ship outside the EEDI scope is taken from an estimated speed-power curve developed under the EEXI survey and certification guidelines, or from an existing sea-trial report if the trial was run at the EEDI draught and sea conditions. Where neither is available the guidelines permit a statistical approximation, V<sub>ref,app</sub>, derived from the fleet-average speed and power for the ship type and corrected by the cube root of the ratio of the ship’s P<sub>ME</sub> to 75 per cent of the average MCR. No new sea trial is required.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5. Describe the Chief Engineer’s responsibilities for a ship that complies with EEXI by engine power limitation.</div><div class="qa-a">The limitation must be fitted and sealed as described in the Onboard Management Manual under MEPC.335(76) as amended, and the EEXI Technical File and the IEE Certificate supplement must be on board. The Chief Engineer ensures the limited power setting is not exceeded in normal operation, that the power reserve above the limit is used only to secure the safety of the ship or save life at sea, that every un-limiting is recorded with time, reason and duration and reported to the Administration or recognized organization as the manual requires, and that the limitation is reinstated and re-verified afterwards. Any engine modification that changes the limited power or the reference speed is a certificate matter.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Define attained and required EEXI, state the applicability threshold and the dates of entry into force and first verification, and explain the relationship between the required EEXI and the EEDI reference line.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Compare EEDI and EEXI under MARPOL Annex VI Chapter 4 in terms of the ships covered, the regulations, the reduction factors, the verification process and the certificate issued.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>With the aid of a worked example, show how an existing bulk carrier’s attained EEXI is calculated and how an overridable engine power limitation brings it into compliance; discuss the operational constraints that follow for the ship’s staff, including the power reserve and the Onboard Management Manual.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>EEXI = EEDI logic for existing ships · reg. 23 attained / reg. 25 required · ≥ 400 GT · in force 1 Nov 2022 · verified first survey after 1 Jan 2023 · once.</strong></li>
+      <li><strong>Required EEXI = (1 − Y/100) × EEDI reference line.</strong> Y fixed per type/size: bulk/tanker 20% (15% ≥ 200k), gas ≥ 15k 30%, container ≥ 200k 50%.</li>
+      <li><strong>Reg. 23.3: verified EEDI ≤ required EEXI → EEDI is the EEXI.</strong></li>
+      <li><strong>With EPL/SHaPoLi: P<sub>ME</sub> = 83% of MCR<sub>lim</sub> or 75% of MCR, whichever lower.</strong> Speed ∝ power<sup>1/3</sup>.</li>
+      <li><strong>No sea trial.</strong> V<sub>ref</sub> from EEDI curve → estimated curve → trial report → V<sub>ref,app</sub>.</li>
+      <li>Un-limiting: safety only · recorded · reported · reinstated (OMM, MEPC.335(76)/MEPC.390(81)).</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Case Study — An Un-limiting Event and Its Paper Trail</button>
+    <div class="deep-dive-body">
+      <h4>Situation</h4>
+      <p>A 2009-built Aframax complies with EEXI by an electronic engine power limitation sealed at 62% of MCR. Crossing the Bay of Biscay in winter the master orders full power to maintain steerage into a Force 10 head sea. The Chief Engineer releases the limitation under the procedure in the Onboard Management Manual.</p>
+      <h4>What must happen</h4>
+      <p>The release itself is lawful: MEPC.335(76) permits use of the power reserve to secure the safety of the ship. What converts it into a compliance problem is the record. The OMM requires the time of un-limiting, the reason, the duration and the time of reinstatement to be logged; the SEEMP and the Administration or recognized organization must be informed as the manual specifies; and the limitation must be reinstated and, where the system requires it, re-sealed and verified before the next survey. MEPC.390(81) tightened the reactivation and reporting expectations after Administrations reported limitations left released for convenience.</p>
+      <h4>Lesson</h4>
+      <p>The Chief Engineer should treat an EPL release exactly like an oily-water-separator bypass for safety: permissible in the defined emergency, indefensible without the entry. On the next PSC inspection the engine log, the OMM record and the EEXI Technical File will be read together.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>MARPOL Annex VI (2021 revised text, resolution MEPC.328(76)) — regulations 2, 5.4.7, 6.4, 19, 23 and 25 (Table 3)</li>
+    <li>Resolution MEPC.350(78) — 2022 Guidelines on the method of calculation of the attained Energy Efficiency Existing Ship Index (EEXI)</li>
+    <li>Resolution MEPC.351(78) — 2022 Guidelines on survey and certification of the attained EEXI</li>
+    <li>Resolution MEPC.335(76), as amended by resolution MEPC.390(81) — Guidelines on the shaft/engine power limitation system to comply with the EEXI requirements and use of a power reserve</li>
+    <li>Resolution MEPC.364(79), as amended by MEPC.410(84) — 2022 EEDI Calculation Guidelines (P<sub>AE</sub> rule and C<sub>F</sub> table applied to EEXI)</li>
+    <li>IMO — EEXI and CII: ship carbon intensity and rating system (frequently asked questions)</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p23 · Topic 2 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p23 · P23-T2 · v1.0</div>
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- TOPIC 3 — CII — RATINGS, CORRECTIVE ACTION &AMP; CYCLE -->
+<!-- ========================================================================== -->
+
+<div class="topic-block" id="topic-p23-3" data-kw="CII, carbon intensity indicator, attained CII, required CII, annual efficiency ratio, AER, cgDIST, CII reference line, Z factor, reduction factor, MARPOL Annex VI regulation 28, CII rating, A to E rating, dd vectors, corrective action plan, SEEMP Part III, statement of compliance, MEPC.338(76), MEPC.400(83), MEPC.352(78), MEPC.353(78), MEPC.354(78), 5000 GT, tank-to-wake, carbon sequestration, direct air capture">
+  <div class="topic-header">
+    <div class="topic-badge">Part 23 · Topic 3</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">CII — Operational Carbon Intensity, Required and Attained Values, Ratings, Corrective Action and the Annual Cycle</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Reg. 28 · AER · Z to 2030 · A–E · Corrective Action</span>
+        <span class="topic-pages">Uday pp. 562–569</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> Four material corrections. <strong>(1) Dates.</strong> The CII amendments entered into force on <strong>1 November 2022</strong>, not 2021; the first rating year was calendar 2023. <strong>(2) Z factors.</strong> The source shows 5/7/9/11% for 2023–2026 and ‘released only till this’. MEPC 83 (April 2025) adopted resolution MEPC.400(83) extending the factors: <strong>2027 13.625%, 2028 16.25%, 2029 18.875%, 2030 21.5%</strong>, all relative to the 2019 reference. Re-verify at each MEPC before relying on them. <strong>(3) Incentives.</strong> Regulation 28.10 says Administrations, port authorities and other stakeholders ‘are <strong>encouraged</strong> to provide incentives’ to A and B ships. There is no legal entitlement to reduced port charges; charterer preference for A/B tonnage is market practice. <strong>(4) Process wording.</strong> Before 1 January 2023 the ship needed a verified <strong>SEEMP Part III with a Confirmation of Compliance</strong>, not a ‘Certificate of Compliance’; after a D rating for three consecutive years or an E, the revised SEEMP with its corrective action plan is submitted for <strong>verification</strong> within one month of reporting the attained CII — it is not a ‘Flag inspection’. The ‘company verifies the data in January–March’ step in the source is operational practice; the regulation fixes only the ship’s reporting deadline (three months), the Statement of Compliance deadline (five months) and the IMO transfer (one month after the Statement). The Carbon Sequestration page in the source (PDF 569) is included below as a clearly labelled engineering deep-dive: it is <strong>not</strong> part of the CII formula or rating mechanism. Cross-reference: Part 22 Topic 3 lists the engineering levers (waste heat recovery, shaft generators, hull and propeller condition) that move CII; they are not repeated here. Part 2 Topic 9 covers the draft Net-Zero Framework and must not be confused with CII, which is tank-to-wake. <strong>Currency check, MEPC 84 (27 April – 1 May 2026):</strong> <strong>MEPC.412(84)</strong> amends the G1 guidelines (MEPC.352(78)) by replacing section 4.2: transport work for the attained CII remains the supply-based proxy W<sub>s</sub> = Capacity × D<sub>t</sub>, and D<sub>t</sub> is now expressly the <strong>total distance travelled in the calendar year, both under way and not under way</strong>, as reported under the DCS; the AER formula, capacity definitions and fuel inputs are otherwise unchanged. The SEEMP guidelines cited for Part III are the <strong>2024 Guidelines, MEPC.395(82)</strong>, as amended by MEPC.401(83) and MEPC.413(84); the 2022 guidelines MEPC.346(78) were revoked in October 2024. <strong>MEPC.407(84)</strong>, adopted 1 May 2026 and entering into force on <strong>1 September 2027</strong>, replaces the regulation 28.11 ‘review by 1 January 2026’ clause with a standing review requirement and aligns regulation 20 with the 2023 Strategy; it is adopted law, not yet in force, and changes no current CII obligation. The Z factors adopted by MEPC.400(83) remain current.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">The <strong>Carbon Intensity Indicator</strong> (regulation 28) is the operational counterpart of EEDI/EEXI: an annual measure of how much CO<sub>2</sub> a ship of 5,000 GT and above actually emitted per unit of transport work, using the fuel-consumption data collected under regulation 27. The <strong>attained annual operational CII</strong> is total CO<sub>2</sub> divided by capacity × distance travelled (the Annual Efficiency Ratio, AER, in g CO<sub>2</sub>/dwt·nm). The <strong>required annual operational CII</strong> is (1 − Z/100) × CII<sub>ref</sub>, where CII<sub>ref</sub> = a × Capacity<sup>−c</sup> is the 2019 fleet reference line and Z the annual reduction factor. The ratio of attained to required places the ship in rating band A to E; a D for three consecutive years or a single E obliges a corrective action plan in SEEMP Part III. The rating is recorded on the annual Statement of Compliance.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>CII is the only Chapter 4 measure that <strong>recurs every year and is driven by operation</strong> — speed, trim, hull and propeller condition, auxiliary load, waiting time at anchor all feed the AER. It is the Chief Engineer’s regulation.</li>
+    <li>The required line falls every year: a ship that sits in C today drifts into D by 2028 if nothing changes, because Z rises from 11% to 21.5% between 2026 and 2030.</li>
+    <li>A D×3 or E rating forces a verified corrective action plan into SEEMP Part III and delays the Statement of Compliance until it is accepted — a document the charterer and PSC will ask for.</li>
+    <li>Distance-based AER rewards full-speed laden passages and punishes waiting and ballast legs equally; the Chief Engineer must understand that the metric, not just the fuel bill, shapes the voyage orders.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">2019</span>  First IMO DCS reporting year — the data set used to build the CII reference lines and the 2019 baseline
+<span class="t-year">Jun 2021</span>  MEPC.328(76) — regulation 28 and SEEMP Part III adopted; G1–G5 guidelines (MEPC.336–340(76)) adopted
+<span class="t-year">Jun 2022</span>  2022 revisions: MEPC.352(78) G1, MEPC.353(78) G2, MEPC.354(78) G4, MEPC.355(78) G5; MEPC.346(78) SEEMP guidelines
+<span class="t-year">1 Nov 2022</span>  Revised Annex VI in force
+<span class="t-year">1 Jan 2023</span>  SEEMP Part III with Confirmation of Compliance required on board; first CII data year begins
+<span class="t-year">2024</span>  First attained CII reported (by 31 March) and rated; first Statements of Compliance with CII rating (by 31 May)
+<span class="t-year">Oct 2024</span>  MEPC.395(82) — 2024 SEEMP Guidelines replace MEPC.346(78) (Part III structure unchanged)
+<span class="t-year">Apr 2025</span>  MEPC 83 — MEPC.400(83) adopts Z factors for 2027–2030 (to 21.5%); MEPC.401(83) amends the SEEMP guidelines
+<span class="t-year">1 Jan 2026</span>  Date by which regulation 28.11 required the CII framework review to be completed (phase 1 done; phase 2 continuing)
+<span class="t-year">1 May 2026</span>  MEPC 84 — <strong>MEPC.412(84)</strong> amends G1 (transport work = capacity × total distance, under way and not under way); <strong>MEPC.407(84)</strong> adopted: standing review clause for reg. 28 and DCS database access, <strong>in force 1 Sep 2027</strong></div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 28</span><span class="reg-desc">Operational carbon intensity — attained annual operational CII (28.1–28.3), required CII and reduction factors (28.4–28.5), rating A–E (28.6), corrective actions for D×3/E (28.7–28.9), incentives encouraged for A/B (28.10), review clause (28.11 — fixed date 1 January 2026; replaced by a standing review from 1 September 2027 under MEPC.407(84)). Applies to ships of 5,000 GT and above of the listed types.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 26.3</span><span class="reg-desc">SEEMP Part III — ship operational carbon intensity plan: required CII for the next three years, implementation plan, self-evaluation; revised to include the corrective action plan where triggered; verified with a Confirmation of Compliance.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 6.6 and 9.12</span><span class="reg-desc">Statement of Compliance — Fuel Oil Consumption Reporting and Operational Carbon Intensity Rating (Appendix X): issued no later than five months from the start of the year; valid for the year of issue plus the first five months of the next.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.352(78), as amended by MEPC.412(84) — G1</span><span class="reg-desc">2022 Guidelines on operational carbon intensity indicators and calculation methods — AER (DWT) and cgDIST (GT); section 4.2 replaced in May 2026 so that transport work = capacity × total distance travelled (under way and not under way).</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.395(82), as amended by MEPC.401(83) and MEPC.413(84)</span><span class="reg-desc">2024 Guidelines for the development of a SEEMP — Part III ship operational carbon intensity plan and the plan of corrective actions (replaces MEPC.346(78)).</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.353(78) — G2</span><span class="reg-desc">2022 Guidelines on the reference lines — CII<sub>ref</sub> = a × Capacity<sup>−c</sup> fitted to 2019 DCS data (e.g. bulk carrier a = 4,745, c = 0.622; tanker a = 5,247, c = 0.610).</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.338(76) as amended by MEPC.400(83) — G3</span><span class="reg-desc">Reduction factors Z: 2023 5% · 2024 7% · 2025 9% · 2026 11% · 2027 13.625% · 2028 16.25% · 2029 18.875% · 2030 21.5%.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.354(78) — G4</span><span class="reg-desc">Rating guidelines — dd vectors d1–d4 setting the superior, lower, upper and inferior boundaries as multiples of the required CII.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.355(78) — G5</span><span class="reg-desc">Operational carbon intensity correction factors and voyage adjustments (ice, STS, cargo heating, etc.).</span></div>
+  </div>
+
+  <div class="section-head">📐 Attained and Required CII</div>
+  <p class="notes-body" style="text-align:center;"><strong>Attained CII (AER) = Σ(FC<sub>j</sub> × C<sub>F,j</sub>) ÷ (Capacity × Distance travelled)</strong>   g CO<sub>2</sub>/dwt·nm</p>
+  <p class="notes-body">FC<sub>j</sub> is the mass of each fuel consumed in the calendar year (from the DCS), C<sub>F,j</sub> its carbon factor, Capacity the deadweight (AER) or gross tonnage (cgDIST — cruise, ro-pax, ro-ro) and distance the <strong>total</strong> nautical miles travelled over ground in the year, under way and not under way (G1 section 4.2 as replaced by MEPC.412(84)). It is <strong>tank-to-wake</strong>: fixed carbon factors per fuel, no upstream emissions — unlike FuelEU Maritime or the draft IMO GHG fuel intensity, which are well-to-wake. Correction factors and voyage adjustments under G5 may be applied for specified conditions.</p>
+  <p class="notes-body" style="text-align:center;"><strong>Required CII = (1 − Z/100) × CII<sub>ref</sub>,   CII<sub>ref</sub> = a × Capacity<sup>−c</sup></strong></p>
+  <table class="revision-table">
+    <tr><th>Year</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th><th>2027</th><th>2028</th><th>2029</th><th>2030</th></tr>
+    <tr><td>Z (% below 2019 reference)</td><td>5</td><td>7</td><td>9</td><td>11</td><td>13.625</td><td>16.25</td><td>18.875</td><td>21.5</td></tr>
+  </table>
+  <p class="notes-body">The 2023–2026 values were set in 2021 (MEPC.338(76)) at 2 points a year; MEPC.400(83) continued the line at 2.625 points a year to reach 21.5% in 2030, the carbon-intensity reduction the 2023 Strategy implies for the operational measure. The reference lines (G2) are regressions on the first verified DCS year, 2019 — the first year for which the whole fleet above 5,000 GT had reported.</p>
+
+  <div class="section-head">🏷 Ratings A to E and the dd Vectors</div>
+  <table class="revision-table">
+    <tr><th>Rating</th><th>Regulation 28.6 descriptor</th><th>Band (attained ÷ required)</th><th>Bulk carrier boundaries (G4)</th></tr>
+    <tr><td>A</td><td>Major superior</td><td>below the superior boundary</td><td>< 0.86</td></tr>
+    <tr><td>B</td><td>Minor superior</td><td>superior to lower boundary</td><td>0.86 – 0.94</td></tr>
+    <tr><td>C</td><td>Moderate</td><td>lower to upper boundary (required CII at centre)</td><td>0.94 – 1.06</td></tr>
+    <tr><td>D</td><td>Minor inferior</td><td>upper to inferior boundary</td><td>1.06 – 1.18</td></tr>
+    <tr><td>E</td><td>Inferior</td><td>above the inferior boundary</td><td>> 1.18</td></tr>
+  </table>
+  <p class="notes-body">The boundaries are the required CII multiplied by exp(d<sub>i</sub>), where the four dd vectors d1–d4 come from quantile regression of the 2019 fleet at the 15th, 35th, 65th and 85th percentiles. In 2019 terms that put roughly 15% of ships in A, 20% in B, 30% in C, 20% in D and 15% in E; because Z tightens the required line every year, the bands move down with it. The author’s glosses ‘excellent / good / satisfactory / bad / worst’ are memory aids; use the regulation 28.6 words in an oral.</p>
+
+  <div class="section-head">📅 The Annual Cycle — Who Does What, By When</div>
+  <table class="revision-table">
+    <tr><th>Step</th><th>Deadline</th><th>Provision</th></tr>
+    <tr><td>Ship collects fuel, distance and hours data through the calendar year</td><td>1 Jan – 31 Dec</td><td>Reg. 27.1, SEEMP Part II</td></tr>
+    <tr><td>Ship aggregates and reports DCS data and the attained annual operational CII to the Administration/RO</td><td>Within <strong>3 months</strong> of year end (by 31 March)</td><td>Reg. 27.3, 28.2</td></tr>
+    <tr><td>Administration/RO verifies data and CII, determines the rating, issues the <strong>Statement of Compliance</strong></td><td>No later than <strong>5 months</strong> from the start of the year (by 31 May)</td><td>Reg. 6.6, 28.5–28.6</td></tr>
+    <tr><td>D×3 / E ships: revised SEEMP Part III with corrective action plan submitted for verification</td><td>No later than <strong>1 month</strong> after reporting the CII; before the Statement is issued</td><td>Reg. 28.7–28.9, 26.3.2</td></tr>
+    <tr><td>Administration transfers the DCS data to the IMO Ship Fuel Oil Consumption Database (GISIS module)</td><td>Not later than <strong>1 month</strong> after issuing the Statements</td><td>Reg. 27.9</td></tr>
+  </table>
+  <p class="notes-body">Company-level checking of the ship’s figures before submission is normal practice but is not a regulatory stage. The Statement of Compliance for a CII ship is the combined form in Appendix X — DCS reporting and operational carbon intensity rating on one document.</p>
+
+  <div class="section-head">🛠 D×3 / E — Corrective Action and SEEMP Part III</div>
+  <ul class="notes-list">
+    <li>Trigger: rated <strong>D for three consecutive years</strong> or <strong>E for one year</strong> (reg. 28.7).</li>
+    <li>Action: develop a plan of corrective actions to achieve the required CII; review SEEMP Part III to include it (reg. 28.8); submit the revised SEEMP to the Administration/RO for verification no later than one month after reporting the attained CII; the Statement of Compliance follows the verified plan (reg. 26.3.2, 6.6).</li>
+    <li>Then: carry out the corrective actions (reg. 28.9); self-evaluate under the SEEMP Part III procedure.</li>
+    <li>SEEMP Part III itself (required since 1 January 2023 with a Confirmation of Compliance) contains the required CII for the next three years, the implementation plan for achieving it and the self-evaluation procedure.</li>
+    <li>Incentives: regulation 28.10 <em>encourages</em> Administrations, ports and stakeholders to reward A and B ships; it creates no entitlement.</li>
+  </ul>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Simon):</strong> Simon’s CII questions run in a fixed order: formula, required line, Z, rating, consequence. Give the AER with its units and say <em>tank-to-wake, fixed carbon factors</em>. Quote Z through 2030 — <em>5, 7, 9, 11, then 13.625, 16.25, 18.875, 21.5, adopted at MEPC 83 by MEPC.400(83)</em> — and he will know you are current. Name the five bands with the regulation 28.6 words, not ‘good/bad’. For D×3/E say <em>corrective action plan into SEEMP Part III, verified within a month of reporting, before the Statement of Compliance</em>. If he asks about incentives for A/B, say ‘encouraged under 28.10, not an entitlement’. Then be ready for the engineering follow-up — what you would actually do on board to move a ship from D to C — which is Part 22 Topic 3 material: hull and propeller cleaning, trim, auxiliary load, waste heat recovery, speed.</div>
+
+  <div class="section-head">🎯 Oral Q&amp;A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. Define the attained annual operational CII and state how it is calculated.</div><div class="qa-a">The attained annual operational carbon intensity indicator under regulation 28 is the ship’s actual carbon intensity over a calendar year, expressed for most ship types as the Annual Efficiency Ratio: the total mass of CO<sub>2</sub> emitted, obtained by multiplying the mass of each fuel consumed under the Data Collection System by its carbon factor, divided by the ship’s deadweight multiplied by the distance travelled over ground in nautical miles, giving grams of CO<sub>2</sub> per deadweight-tonne-nautical mile. For cruise, ro-ro and ro-pax ships gross tonnage replaces deadweight and the indicator is called cgDIST. It is a tank-to-wake metric using the fixed carbon factors of the guidelines, with correction factors and voyage adjustments permitted under the G5 guidelines.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. How is the required annual operational CII determined and what are the current reduction factors?</div><div class="qa-a">The required CII is one minus Z over one hundred multiplied by the reference CII, where the reference is a times capacity to the power minus c with parameters fitted to the 2019 Data Collection System results for each ship type under the G2 guidelines. Z is the annual reduction factor relative to 2019: five per cent for 2023, seven for 2024, nine for 2025 and eleven for 2026 under MEPC.338(76), and, following resolution MEPC.400(83) adopted at MEPC 83 in April 2025, 13.625 per cent for 2027, 16.25 for 2028, 18.875 for 2029 and 21.5 for 2030.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Explain the A to E rating and what follows a poor rating.</div><div class="qa-a">The ratio of attained to required CII is compared with four boundaries — superior, lower, upper and inferior — obtained by multiplying the required CII by exponential factors derived from the dd vectors in the G4 guidelines. Below the superior boundary is A, major superior; between superior and lower is B, minor superior; between lower and upper, with the required value at its centre, is C, moderate; between upper and inferior is D, minor inferior; above the inferior boundary is E, inferior. A ship rated D for three consecutive years or E for one year must develop a plan of corrective actions to achieve the required CII, incorporate it in a revised SEEMP Part III, submit the revised SEEMP for verification no later than one month after reporting the attained CII, and then carry the actions out. The Statement of Compliance is issued after the revised plan has been verified.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4. Describe the annual CII reporting and certification cycle.</div><div class="qa-a">The ship collects fuel consumption, distance and hours-under-way data throughout the calendar year according to its SEEMP Part II. Within three months of the year end it reports the aggregated data and the attained annual operational CII to its Administration or recognized organization. The Administration or recognized organization verifies the data and the CII, determines the rating and issues the Statement of Compliance for fuel oil consumption reporting and operational carbon intensity rating no later than five months from the beginning of the year; the Statement is valid for that year and the first five months of the next. Not later than one month after issuing the Statements the Administration transfers the data to the IMO Ship Fuel Oil Consumption Database. Ships triggered into corrective action submit the revised SEEMP within one month of reporting.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5. Is carbon sequestration part of the CII mechanism?</div><div class="qa-a">No. Carbon sequestration — the capture and long-term storage of atmospheric CO<sub>2</sub> in geological formations, soils or the ocean, or by direct air capture — is a climate-mitigation concept outside the ship. The CII counts only the CO<sub>2</sub> produced by burning fuel on board, through fixed carbon factors, divided by transport work; nothing captured ashore or by the ocean enters the formula or the rating. The question is asked to see whether a candidate can separate the regulatory metric from the wider decarbonisation vocabulary.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Define the attained annual operational CII, state its units and the ships to which it applies, and explain why it is described as a tank-to-wake measure.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Explain how the required annual operational CII is derived from the reference line and the reduction factor Z, listing the adopted Z values from 2023 to 2030, and describe how the A to E rating is determined.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Describe the annual CII cycle from data collection to the Statement of Compliance, the consequences of a D rating for three consecutive years or an E rating including the role of SEEMP Part III, and analyse the operational and engineering measures available to a Chief Engineer to improve a ship’s rating within the same trade.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>AER = Σ(FC × C<sub>F</sub>) ÷ (DWT × distance) · g CO<sub>2</sub>/dwt·nm · tank-to-wake · ≥ 5,000 GT · reg. 28.</strong></li>
+      <li><strong>Required = (1 − Z/100) × a·Capacity<sup>−c</sup> (2019 line).</strong> Z: 5 · 7 · 9 · 11 · 13.625 · 16.25 · 18.875 · 21.5 (2023→2030; MEPC.400(83)).</li>
+      <li><strong>A major superior · B minor superior · C moderate · D minor inferior · E inferior.</strong> Required CII sits mid-C.</li>
+      <li><strong>D×3 or E → corrective action plan → SEEMP Part III → verified within 1 month → then SoC.</strong></li>
+      <li><strong>Cycle: report ≤ 3 months (31 Mar) · SoC ≤ 5 months (31 May) · IMO database ≤ 1 month after SoC.</strong></li>
+      <li>A/B incentives are <strong>encouraged</strong> (28.10), not an entitlement. Carbon sequestration is <strong>not</strong> in the CII formula.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Engineering Context — Carbon Sequestration (not part of the CII mechanism)</button>
+    <div class="deep-dive-body">
+      <h4>Why this block exists</h4>
+      <p>The source notes place a one-page oral-question summary of carbon sequestration immediately after CII. It is retained here because examiners do ask it, but it must be understood as decarbonisation vocabulary, not shipboard regulation: nothing in this block changes a CII value, a rating or a Statement of Compliance.</p>
+      <h4>Definition and recognised routes</h4>
+      <p>Carbon sequestration is the capture and long-term storage of atmospheric or point-source CO<sub>2</sub>. The routes recognised in authoritative climate-science taxonomies are: geological sequestration — injection into depleted oil and gas reservoirs, unmineable coal seams or deep saline aquifers; soil sequestration — storage as soil organic carbon through land-management practice; ocean sequestration — the ocean already absorbs roughly a quarter of the CO<sub>2</sub> released by fossil-fuel burning and other human activities, and deliberate enhancement is under study; and direct air capture — chemical capture from ambient air followed by storage. Biofuel use and conversion of CO<sub>2</sub> to graphite or graphene, which the source lists alongside these, are carbon-utilisation or emissions-avoidance routes rather than sequestration, and are not presented here as equivalent methods.</p>
+      <h4>Maritime relevance</h4>
+      <p>For shipping the live engineering link is onboard carbon capture and storage — capturing CO<sub>2</sub> from the exhaust for later discharge ashore to a geological store. Under the current CII guidelines captured CO<sub>2</sub> is not deducted from the attained CII; any future credit would require amendment of regulation 28 and the G1 guidelines. A Chief Engineer should be able to say that clearly.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>MARPOL Annex VI (2021 revised text, resolution MEPC.328(76)) — regulations 6.6, 9.12, 26.3, 27 and 28; Appendix X</li>
+    <li>Resolution MEPC.352(78), as amended by resolution MEPC.412(84) (1 May 2026) — 2022 Guidelines on operational carbon intensity indicators and the calculation methods (CII Guidelines, G1)</li>
+    <li>Resolution MEPC.353(78) — 2022 Guidelines on the reference lines for use with operational carbon intensity indicators (CII Reference Lines Guidelines, G2)</li>
+    <li>Resolution MEPC.338(76), as amended by resolution MEPC.400(83) — Guidelines on the operational carbon intensity reduction factors relative to reference lines (CII Reduction Factors Guidelines, G3)</li>
+    <li>Resolution MEPC.354(78) — 2022 Guidelines on the operational carbon intensity rating of ships (CII Rating Guidelines, G4)</li>
+    <li>Resolution MEPC.395(82) (4 October 2024), as amended by MEPC.401(83) and MEPC.413(84) — 2024 Guidelines for the development of a Ship Energy Efficiency Management Plan (SEEMP)</li>
+    <li>IMO — MEPC 83 report (April 2025), adoption of MEPC.400(83); MEPC 84 report (27 April – 1 May 2026), adoption of MEPC.407(84) and MEPC.412(84)</li>
+    <li>NOAA Research — ocean uptake of approximately a quarter of anthropogenic CO<sub>2</sub> (deep-dive block only)</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p23 · Topic 3 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p23 · P23-T3 · v1.0</div>
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- TOPIC 4 — IMO DCS, STATEMENT OF COMPLIANCE &AMP; GISIS -->
+<!-- ========================================================================== -->
+
+<div class="topic-block" id="topic-p23-4" data-kw="IMO DCS, data collection system, fuel oil consumption data, MARPOL Annex VI regulation 27, SEEMP Part II, data collection plan, bunker delivery note, flow meter, tank monitoring, distance travelled, hours under way, Appendix IX, statement of compliance, Appendix X, confirmation of compliance, IMO Ship Fuel Oil Consumption Database, GISIS, Global Integrated Shipping Information System, MEPC.278(70), MEPC.346(78), 5000 GT, 1 March 2018">
+  <div class="topic-header">
+    <div class="topic-badge">Part 23 · Topic 4</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">IMO Data Collection System, the Statement of Compliance and GISIS</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Reg. 27 · SEEMP Part II · SoC (App. X) · GISIS</span>
+        <span class="topic-pages">Uday pp. 570–573</span>
+        <span class="topic-examiner">Examiner: Senthil</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> Three material corrections. <strong>(1) Regulation number.</strong> The source cites ‘regulation 22A’. That was the number given by MEPC.278(70) in 2016; since the revised Annex VI entered into force on 1 November 2022 the Data Collection System is <strong>regulation 27</strong>. The old number is mentioned once below for history only. <strong>(2) 2018 was a preparation year, not a data year.</strong> Between 1 March 2018 and 31 December 2018 each ship of 5,000 GT and above had to add <strong>SEEMP Part II</strong> (the data collection plan) and obtain a <strong>Confirmation of Compliance</strong>; fuel data collection began on 1 January 2019. The source’s ‘collect data and submit in the first ten months’ and ‘Certificate of Compliance’ are both wrong. <strong>(3) Statement of Compliance validity.</strong> It is not ‘valid for one year’: regulation 9.12 makes it valid for the calendar year in which it is issued and the first five months of the following year. The GISIS module count in the source (‘26’) is not reproduced because the number changes; the public GISIS site listed about thirty modules when checked in October 2026. The dates in the source’s process diagram (2019 data → 31 March 2020 → 31 May 2020 → June 2020) are the correct first cycle and are shown below as the recurring annual deadlines. <strong>Cross-reference:</strong> Part 20 Topic 2 covers bunker quantity disputes and the flow-meter/sounding/VCF mechanics in commercial depth; this topic covers only their use as DCS measurement methods. <strong>Currency check, MEPC 84 (27 April – 1 May 2026):</strong> the SEEMP guidelines are the <strong>2024 Guidelines, MEPC.395(82)</strong>, as amended by MEPC.401(83) and <strong>MEPC.413(84)</strong>; MEPC.346(78) was revoked in October 2024. The amendments define ‘under way’ as the period from full ahead on passage to end of sea passage, change the consumer term to ‘fired boilers’, and require the data collection plan and the standard reporting format to show <strong>total distance travelled split into under way and not under way</strong>. <strong>Appendix IX is the enhanced-granularity version.</strong> Resolution MEPC.385(81) (adopted 22 March 2024, <strong>in force 1 August 2025</strong>) replaced Appendix IX: fuel consumption is now reported per consumer type (main engines, auxiliary engines/generators, boilers, others) and separately while not under way, with total distance, laden distance (voluntary), hours under way, onshore power supplied, and — for CII ships — transport work, the required and attained CII and the rating; it also added regulation 27.14–27.15 (ad hoc data sharing with research entities; publication of a company’s own ships’ reports in non-anonymised form at the company’s request). <strong>MEPC.407(84)</strong>, adopted 1 May 2026, goes further — separate reporting periods for regulation 27 and regulation 28 in Appendix IX, ‘Fired Boiler(s)’, and regulation 27.11–27.17 giving each Administration and its ROs the full reported history of its own ships and giving Parties a non-anonymised database for analysis unless a flag opts out. It enters into force on <strong>1 September 2027</strong> and is shown below as future law; until then the anonymised public database (27.11) plus the MEPC.385(81) provisions apply.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">The <strong>IMO Data Collection System</strong> (regulation 27, originally regulation 22A under MEPC.278(70)) requires every ship of 5,000 GT and above engaged in international voyages to collect, for each calendar year from 2019, the data in Appendix IX — fuel consumption by fuel type and the method used (since the 1 August 2025 enhanced-granularity amendment, also per consumer type and while not under way), total distance travelled over ground, hours under way, onshore power, and for CII ships the transport work and CII values, together with the ship’s technical particulars — according to the methodology in <strong>SEEMP Part II</strong>, and to report the aggregated data to its Administration within three months of the year end. The Administration verifies the report, issues the <strong>Statement of Compliance</strong> (Appendix X) no later than five months into the year, and transfers the data to the <strong>IMO Ship Fuel Oil Consumption Database</strong> within a month. That database is a module of <strong>GISIS</strong>, the Global Integrated Shipping Information System through which Administrations supply, and the public can access, data required under IMO instruments.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>The DCS is the <strong>measurement layer under CII</strong>: the same fuel, distance and hours figures produce the attained CII (Topic 3). An error in a bunker delivery note or flow-meter log is an error in the rating.</li>
+    <li>The Chief Engineer is the custodian of two of the three fuel-measurement methods (flow meters and tank monitoring) and of the BDN file, and must apply the method that SEEMP Part II says the ship uses — not the convenient one.</li>
+    <li>The Statement of Compliance is a PSC document from June each year; a missing or expired Statement is a detainable deficiency under the Annex VI survey and certification regime.</li>
+    <li>GISIS is where a Chief Engineer can check, for example, port reception facility details, the status of a convention for a flag, or an Administration’s contact points — a practical tool, not only a reporting destination.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">28 Oct 2016</span>  MEPC.278(70) — DCS adopted as new regulation 22A
+<span class="t-year">1 Mar 2018</span>  DCS amendments in force
+<span class="t-year">31 Dec 2018</span>  Deadline for SEEMP Part II (data collection plan) on board with Confirmation of Compliance (MEPC.1/Circ.876 format)
+<span class="t-year">1 Jan 2019</span>  First data collection year begins
+<span class="t-year">31 Mar 2020 / 31 May 2020 / Jun 2020</span>  First cycle: ship reports 2019 data; Administration issues first Statements of Compliance; data transferred to the IMO database
+<span class="t-year">Jun 2022</span>  MEPC.346(78) 2022 SEEMP guidelines (Parts I, II and III) — since revoked
+<span class="t-year">1 Nov 2022</span>  Revised Annex VI in force — DCS renumbered regulation 27; Appendix IX expanded; Statement of Compliance becomes the combined DCS/CII form (Appendix X)
+<span class="t-year">4 Oct 2024</span>  MEPC.395(82) 2024 SEEMP guidelines replace MEPC.346(78); amended by MEPC.401(83) (Apr 2025: ‘under way’ definition, fired boilers) and MEPC.413(84) (May 2026: distance split under way / not under way)
+<span class="t-year">1 Aug 2025</span>  MEPC.385(81) in force — <strong>enhanced-granularity Appendix IX</strong> (fuel per consumer and while not under way, laden distance, onshore power, transport work and CII fields) and regulation 27.14–27.15 (ad hoc research sharing; company-requested publication); applies to 2026 data, early application invited from 2025
+<span class="t-year">1 May 2026</span>  MEPC.407(84) adopted — regulation 27.11–27.17 database access and Appendix IX reporting periods; <strong>in force 1 September 2027</strong></div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 27</span><span class="reg-desc">Collection and reporting of ship fuel oil consumption data — ships ≥ 5,000 GT; data per Appendix IX; report within three months of year end; Administration verification; transfer to the IMO database within one month of the Statement; anonymised database (27.11); since 1 Aug 2025 (MEPC.385(81)) ad hoc sharing with research entities (27.14) and company-requested publication of its own ships’ reports (27.15).</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 26.2</span><span class="reg-desc">SEEMP Part II — description of the methodology for collecting the regulation 27 data and the processes for reporting it; verified with a Confirmation of Compliance.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 6.6 / 6.7 and Reg. 9.12</span><span class="reg-desc">Statement of Compliance issued no later than five months from the beginning of the calendar year; valid for that year and the first five months of the next; kept on board at least five years.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Appendix IX (as replaced by MEPC.385(81), in force 1 Aug 2025)</span><span class="reg-desc">Information to be submitted: IMO number; period; year of delivery; ship type; GT, NT, DWT; rated power of engines over 130 kW; attained EEDI and EEXI if applicable; ice class; total fuel consumption by fuel type and method; fuel consumption per consumer type (main engines, auxiliary engines/generators, boilers, others) and separately while not under way; total distance travelled; laden distance (voluntary); hours under way; onshore power supplied; and for regulation 28 ships the transport work, applicable CII metric, required CII, attained CII before and after correction, innovative-technology category and rating.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Appendix X</span><span class="reg-desc">Form of Statement of Compliance — Fuel Oil Consumption Reporting and Operational Carbon Intensity Rating.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.278(70)</span><span class="reg-desc">2016 amendments that introduced the DCS (then regulation 22A); in force 1 March 2018.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.395(82), as amended by MEPC.401(83) and MEPC.413(84)</span><span class="reg-desc">2024 SEEMP guidelines (replacing MEPC.346(78)) — Part II data collection plan including the three fuel-measurement methods, ‘under way’ definition, fired boilers, and total distance split under way / not under way.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.407(84) — adopted 1 May 2026, <strong>in force 1 September 2027</strong></span><span class="reg-desc">Amendments to MARPOL Annex VI — regulation 27.11–27.17 (Administration/RO access to own ships’ full history; Party non-anonymised database with flag opt-out; anonymised public access retained), Appendix IX reporting periods for regulations 27 and 28, ‘Fired Boiler(s)’; standing review clauses in regulations 25.3 and 28.11; regulation 20 aligned with the 2023 Strategy. Future law, not a current obligation.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.385(81) — adopted 22 Mar 2024, in force 1 Aug 2025</span><span class="reg-desc">Amendments to MARPOL Annex VI — enhanced-granularity Appendix IX (fuel per consumer and while not under way, laden distance, onshore power, transport work and CII entries) and regulation 27.14–27.15 data-access provisions. Current law.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.292(71)</span><span class="reg-desc">2017 Guidelines for Administration verification of ship fuel oil consumption data.</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution A.1029(26) / IMO GISIS</span><span class="reg-desc">Global Integrated Shipping Information System — IMO-maintained web platform; public, Member State and Secretariat areas.</span></div>
+  </div>
+
+  <div class="section-head">📋 What Is Collected and How</div>
+  <table class="revision-table">
+    <tr><th>Datum (Appendix IX)</th><th>Source on board</th><th>Notes</th></tr>
+    <tr><td>Fuel consumption, by fuel type (t), per consumer (main engines, auxiliary engines, fired boilers, others)</td><td>Method 1: BDNs with tank soundings; Method 2: flow meters; Method 3: bunker tank monitoring</td><td>The method is fixed in SEEMP Part II; C<sub>F</sub> by fuel type (HFO 3.114, LFO 3.151, MGO 3.206, LNG 2.750) converts to CO<sub>2</sub></td></tr>
+    <tr><td>Total distance travelled (nm)</td><td>Deck log / GPS, over ground (SOLAS V/28 logbook)</td><td>Defined in reg. 2.2.12; under MEPC.395(82) as amended by MEPC.413(84) the plan and report show it split <strong>under way / not under way</strong></td></tr>
+    <tr><td>Hours under way</td><td>Deck and engine logs</td><td>Under way = from full ahead on passage (FAOP) to end of sea passage (EOSP) (MEPC.401(83))</td></tr>
+    <tr><td>Fuel consumed while not under way, per consumer type</td><td>Same three methods, apportioned by the FAOP/EOSP boundary</td><td>Added by MEPC.385(81) (in force 1 Aug 2025); first full data year 2026</td></tr>
+    <tr><td>Laden distance (nm) — voluntary; onshore power supplied (kWh)</td><td>Deck log / cargo records; shore-connection meter</td><td>Added by MEPC.385(81)</td></tr>
+    <tr><td>Transport work, applicable CII metric, required CII, attained CII (before and after correction), rating</td><td>Calculated from the above (Topic 3)</td><td>Appendix IX entries for regulation 28 ships (MEPC.385(81))</td></tr>
+    <tr><td>Technical particulars</td><td>Certificates</td><td>IMO number, type, GT, NT, DWT, engine ratings > 130 kW, EEDI/EEXI, ice class</td></tr>
+  </table>
+  <p class="notes-body">SEEMP Part II also records the data quality control, the responsible persons and the reporting route. It was due on board by 31 December 2018 with a Confirmation of Compliance; it is reviewed whenever the method changes.</p>
+
+  <div class="section-head">📅 The Reporting and Verification Sequence</div>
+  <div class="timeline-block">Calendar year N      ship collects data (SEEMP Part II method)
+        |
+   by 31 Mar N+1     ship reports aggregated Appendix IX data (+ attained CII if ≥ 5,000 GT CII ship)
+        |             to Administration / RO                              [reg. 27.3 / 28.2 — within 3 months]
+        |
+   by 31 May N+1     Administration / RO verifies (MEPC.292(71)) and issues
+        |             STATEMENT OF COMPLIANCE (Appendix X)                 [reg. 6.6 — within 5 months]
+        |
+   ≤ 1 month later   Administration transfers data to the
+                     IMO Ship Fuel Oil Consumption Database (GISIS)       [reg. 27.9]</div>
+  <p class="notes-body">Transfers of flag or company mid-year trigger a partial report to the losing Administration on the day of transfer (reg. 27.4–27.6). The IMO database is anonymised so that an individual ship cannot be identified (reg. 27.11); the Secretary-General reports annually to the MEPC on the aggregated results. Since 1 August 2025 (MEPC.385(81)) the Secretary-General may also share data ad hoc with research entities under confidentiality (27.14) and must, at a company’s request, make that company’s own ships’ reports public in non-anonymised form (27.15).</p>
+  <p class="notes-body"><strong>Adopted, not yet in force — MEPC.407(84), effective 1 September 2027:</strong> regulation 27.11 to 27.17 will additionally give each Administration (and its ROs) access to the full reported history of its own ships and give Parties a non-anonymised database for analysis (a flag may require its express approval first), while keeping anonymised public access and the company-request route. Appendix IX will carry separate reporting periods for regulation 27 and regulation 28 and the term ‘Fired Boiler(s)’. Until that date the present text applies.</p>
+
+  <div class="section-head">📄 The Statement of Compliance</div>
+  <ul class="notes-list">
+    <li>Issued by the Administration or RO under regulation 6.6 after verifying that the data was collected and reported in accordance with the SEEMP — and, for CII ships, with the attained CII and rating since reporting year 2023.</li>
+    <li>Form: Appendix X — ship particulars (name, distinctive number, IMO number, port of registry, GT, DWT, type), data period, SEEMP period, attained CII, rating, issue date.</li>
+    <li>Validity: the calendar year of issue plus the first five months of the following year (reg. 9.12) — so there is a continuous overlap and the ship is never without a valid Statement if the cycle is kept.</li>
+    <li>Kept on board at least five years; a PSC inspector may ask for it alongside the IEE Certificate, SEEMP Parts I–III and the Confirmation of Compliance.</li>
+  </ul>
+
+  <div class="section-head">🌐 GISIS — the Information System</div>
+  <p class="notes-body">The Global Integrated Shipping Information System is the IMO-developed and maintained web platform through which Administrations, port authorities and the Secretariat exchange the data that IMO instruments require. It is organised in <strong>modules</strong> — among them Maritime Security, Marine Casualties and Incidents, Port Reception Facilities, Global SAR Plan, Ship Fuel Oil Consumption (the DCS database), MARPOL Annex VI, Condition Assessment Scheme, Survey and Certification, Cargoes, Ballast Water Management, STCW information and Maritime Single Window. The module list grows; do not quote a fixed count.</p>
+  <ul class="notes-list">
+    <li><strong>Public area</strong> — read access after registering an IMO Web Account with an e-mail address.</li>
+    <li><strong>IMO Members area</strong> — upload and compliance functions for Administrations and their authorised users.</li>
+    <li><strong>IMO Secretariat area</strong> — administration of the system.</li>
+  </ul>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Senthil):</strong> Senthil treats this as a management-system question: who measures, who reports, who verifies, by when, and what paper proves it. Answer in that order — <em>ship, by 31 March, under SEEMP Part II; Administration or RO, Statement of Compliance by 31 May; IMO database within a month</em> — and say regulation 27, not 22A. He will ask what you would do if the flow meter failed mid-year: the answer is to fall back to the alternative method written in SEEMP Part II, record the change and the dates, and inform the company so the verifier sees a consistent method. Finish by naming GISIS as where the data ends up and one practical thing you have used it for.</div>
+
+  <div class="section-head">🎯 Oral Q&amp;A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. What is the IMO Data Collection System and to which ships does it apply?</div><div class="qa-a">The Data Collection System under regulation 27 of MARPOL Annex VI, introduced by resolution MEPC.278(70) as regulation 22A and in force since 1 March 2018, requires each ship of 5,000 gross tonnage and above engaged in international voyages to collect, for every calendar year from 2019, the data in Appendix IX — fuel oil consumption by fuel type with the measurement method and, since the enhanced-granularity amendment in force on 1 August 2025, per consumer type and while not under way; total distance travelled over ground; hours under way; onshore power; the transport work and CII values for CII ships; and the ship’s technical characteristics — according to the methodology described in Part II of its SEEMP, and to report the aggregated data to its Administration or recognized organization within three months of the end of the year.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. What are the three fuel-measurement methods and who decides which the ship uses?</div><div class="qa-a">The 2024 SEEMP guidelines, MEPC.395(82) as amended, recognise three methods: bunker delivery notes combined with tank soundings; flow meters on the fuel systems; and bunker fuel tank monitoring on board. The method, the equipment, its calibration and the quality-control procedure are written into SEEMP Part II, which the Administration or recognized organization verifies with a Confirmation of Compliance. The ship must use the method in its plan; a change of method is a change to the plan and must be recorded and re-verified.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Describe the Statement of Compliance — who issues it, when, and for how long is it valid?</div><div class="qa-a">On receipt of the ship’s annual report the Administration or recognized organization determines whether the data was collected and reported in accordance with regulation 27 and the SEEMP and, since reporting year 2023, verifies the attained CII and determines the rating. It then issues the Statement of Compliance for fuel oil consumption reporting and operational carbon intensity rating, in the form of Appendix X, no later than five months from the beginning of the calendar year. Under regulation 9.12 the Statement is valid for the calendar year in which it is issued and for the first five months of the following year, and must be kept on board for at least five years.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4. What happens to the data after the Statement is issued?</div><div class="qa-a">Not later than one month after issuing the Statements of Compliance the Administration transfers the Appendix IX data for its ships to the IMO Ship Fuel Oil Consumption Database, a module of GISIS, electronically in the standard format. The Secretary-General maintains the database in anonymised form so that no individual ship can be identified, gives Parties access to the anonymised data for analysis, and produces an annual summary report for the Marine Environment Protection Committee. The 2019 data set from this process was used to build the CII reference lines. Since 1 August 2025 a company may ask for its own ships’ reports to be published in non-anonymised form (regulation 27.15, MEPC.385(81)). From 1 September 2027, under MEPC.407(84) adopted at MEPC 84, Administrations will also see their own ships’ full history and Parties will have a non-anonymised database for analysis; until then the anonymised public database stands.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5. What is GISIS and how is it accessed?</div><div class="qa-a">GISIS, the Global Integrated Shipping Information System, is the web-based platform developed and maintained by the IMO Secretariat for the collection, processing and sharing of data that Member States and others supply under IMO instruments. It is organised in modules such as maritime security, marine casualties, port reception facilities, the global SAR plan, ship fuel oil consumption, MARPOL Annex VI, survey and certification and cargoes. It has three access levels: a public area available after registering an IMO Web Account, an IMO Members area for Administrations with upload and compliance functions, and a Secretariat area for system administration.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>State the ships to which the IMO Data Collection System applies, the data to be collected under Appendix IX and the regulation that governs it under the current MARPOL Annex VI numbering.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Describe the annual DCS reporting and verification sequence with its deadlines, the role of SEEMP Part II, and the issue, content and validity of the Statement of Compliance.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Explain the purpose and architecture of the IMO Data Collection System and GISIS, the three fuel-measurement methods and their control on board, the Administration’s verification duties, and how the collected data is used in the operational carbon intensity framework. Discuss the Chief Engineer’s responsibilities for data integrity.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>DCS = reg. 27 (was 22A) · MEPC.278(70) · in force 1 Mar 2018 · data from 1 Jan 2019 · ≥ 5,000 GT.</strong></li>
+      <li><strong>Appendix IX data (enhanced since 1 Aug 2025): fuel by type + method, per consumer, and while not under way · total distance (+ laden, voluntary) · hours under way · onshore power · transport work and CII fields · particulars.</strong> Methods: BDN + soundings · flow meters · tank monitoring (SEEMP Part II).</li>
+      <li><strong>31 Mar report (3 months) → 31 May SoC (5 months) → IMO database ≤ 1 month later.</strong></li>
+      <li><strong>SoC = Appendix X, combined DCS + CII rating · valid year of issue + 5 months · keep 5 years.</strong></li>
+      <li>2018 = SEEMP Part II + <strong>Confirmation</strong> of Compliance by 31 Dec 2018; first data year 2019.</li>
+      <li><strong>GISIS: IMO-maintained · modules (fuel oil consumption, Annex VI, PRF, casualties, SAR…) · public / Members / Secretariat areas.</strong></li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Case Study — A Flow-Meter Drift Discovered at Year End</button>
+    <div class="deep-dive-body">
+      <h4>Situation</h4>
+      <p>A 5,500 TEU container ship uses Method 2, mass flow meters on the main and auxiliary engine fuel lines, as written in SEEMP Part II. In December the Chief Engineer reconciles twelve months of flow-meter totals against bunker delivery notes and tank soundings and finds the meters have under-read by about 2.4 per cent since a sensor replacement in May.</p>
+      <h4>Why it matters</h4>
+      <p>The DCS report due by 31 March is built on the flow-meter figures; the attained CII for the year, and therefore the rating on the Statement of Compliance, moves with them. Reporting the raw figure would understate CO<sub>2</sub> by 2.4 per cent — enough to shift a ship near a band boundary — and the verifier’s cross-check against BDNs under MEPC.292(71) would expose the gap.</p>
+      <h4>What the Chief Engineer does</h4>
+      <p>Quantifies the drift period and magnitude from the May calibration record; applies the correction described in the SEEMP Part II quality-control procedure, or reverts to Method 1 for the affected months if the plan provides for it; documents the correction with the supporting soundings and BDNs; informs the company so the report submitted to the Administration carries the corrected totals and an explanatory note; and schedules recalibration. The point for the examiner is that data integrity under the DCS is a Chief Engineer responsibility, and the SEEMP Part II procedure, not improvisation, is the authority for how a discrepancy is handled.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>MARPOL Annex VI (2021 revised text, resolution MEPC.328(76)) — regulations 2.2.12, 6.6, 6.7, 9.12, 26.2 and 27; Appendices IX and X</li>
+    <li>Resolution MEPC.278(70) — Amendments to MARPOL Annex VI (Data collection system for fuel oil consumption of ships), adopted 28 October 2016</li>
+    <li>Resolution MEPC.385(81) (22 March 2024, in force 1 August 2025) — Amendments to MARPOL Annex VI (enhanced granularity of Appendix IX; regulation 27.14–27.15 data access)</li>
+    <li>Resolution MEPC.395(82) (4 October 2024), as amended by resolutions MEPC.401(83) and MEPC.413(84) — 2024 Guidelines for the development of a Ship Energy Efficiency Management Plan (SEEMP), Part II data collection plan</li>
+    <li>Resolution MEPC.407(84) (1 May 2026) — Amendments to MARPOL Annex VI (clarification of entries in data reporting under regulations 27 and 28; accessibility of the IMO Ship Fuel Oil Consumption Database; review clauses), entry into force 1 September 2027 — from the report of MEPC 84 (MEPC 84/16/Add.1, annex 3)</li>
+    <li>Resolution MEPC.292(71) — 2017 Guidelines for Administration verification of ship fuel oil consumption data</li>
+    <li>MEPC.1/Circ.876 — Sample format for the Confirmation of Compliance</li>
+    <li>IMO GISIS — gisis.imo.org (public area); resolution A.1029(26) on the Global Integrated Shipping Information System</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p23 · Topic 4 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p23 · P23-T4 · v1.0</div>
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- TOPIC 5 — EU MRV &AMP; IMO DCS COMPARISON -->
+<!-- ========================================================================== -->
+
+<div class="topic-block" id="topic-p23-5" data-kw="EU MRV, monitoring reporting verification, Regulation (EU) 2015/757, Regulation (EU) 2023/957, THETIS-MRV, emissions report, monitoring plan, accredited verifier, EU ETS maritime, FuelEU Maritime, 5000 GT, 400 GT offshore ships, general cargo ships 2025, methane, nitrous oxide, 31 March deadline, 30 April, document of compliance, EEA ports, transport work, cargo carried, IMO DCS comparison">
+  <div class="topic-header">
+    <div class="topic-badge">Part 23 · Topic 5</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">EU MRV — Scope, Gases, Verification and the Comparison with IMO DCS</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Reg. (EU) 2015/757 · CO<sub>2</sub>+CH<sub>4</sub>+N<sub>2</sub>O · Accredited Verifier · 31 March</span>
+        <span class="topic-pages">Uday pp. 574–575</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> Three material corrections and one currency update. <strong>(1) Scope has widened.</strong> The source says ‘5,000 GT and above’. Regulation (EU) 2015/757 originally applied to ships above 5,000 GT; since <strong>1 January 2025</strong> it also applies to offshore ships and general cargo ships of 400 GT and above but below 5,000 GT (Regulation (EU) 2023/957). <strong>(2) Gases.</strong> The source lists CO<sub>2</sub>, CH<sub>4</sub> and N<sub>2</sub>O without a date; MRV covered <strong>CO<sub>2</sub> only</strong> for reporting years 2018–2023 and added methane and nitrous oxide from <strong>1 January 2024</strong>. <strong>(3) Deadlines.</strong> The source’s ‘31 April 2019’ does not exist; the first emissions report was due by <strong>30 April 2019</strong>, and from reporting year 2024 the deadline is <strong>31 March</strong>. The IMO DCS deadline in the comparison table (31 March 2020) was the first cycle and recurs every year. <strong>Currency:</strong> since 2024 the MRV data is also the basis for the inclusion of maritime transport in the EU Emissions Trading System and for FuelEU Maritime compliance; those regimes are noted for context only and are not covered here. <strong>Do not conflate:</strong> EU MRV and IMO DCS are both tank-to-wake fuel-based reporting systems; FuelEU Maritime and the draft IMO GHG fuel intensity standard are well-to-wake and belong to Part 2 Topic 9 and Part 22 Topic 3.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">The <strong>EU Monitoring, Reporting and Verification Regulation</strong>, Regulation (EU) 2015/757 as amended by Regulation (EU) 2023/957, is European Union law requiring companies operating ships above 5,000 GT — and, from 2025, offshore and general cargo ships of 400 GT and above — on voyages to, from or between ports under the jurisdiction of an EU/EEA Member State to monitor, on a per-voyage and annual basis, fuel consumption, CO<sub>2</sub> and (from 2024) CH<sub>4</sub> and N<sub>2</sub>O emissions, distance, time at sea and cargo carried; to have the monitoring plan assessed and the annual emissions report verified by an <strong>accredited verifier</strong>; to submit the verified report by 31 March; and to carry a document of compliance. The Commission publishes the per-ship data. It is a regional legal regime that runs in parallel with, and is distinct from, the IMO Data Collection System.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>A ship trading to Europe reports the <strong>same fuel twice under two laws</strong> — DCS to the flag, MRV to the EU — with different scopes, different capacity measures and different verifiers. The Chief Engineer’s fuel records must satisfy both.</li>
+    <li>MRV is per-voyage and includes cargo carried; the auditor can trace a single voyage’s fuel, distance and cargo. Data discipline that is adequate for the DCS annual aggregate may not survive an MRV verification.</li>
+    <li>Since 2024 the MRV figures drive EU ETS allowance surrender and FuelEU Maritime compliance balances — the emissions report has a direct cost attached.</li>
+    <li>Examiners use the DCS-versus-MRV comparison to test whether a candidate can keep two similar regimes separate under questioning.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">1 Jul 2015</span>  Regulation (EU) 2015/757 in force
+<span class="t-year">31 Aug 2017</span>  Deadline for first monitoring plans
+<span class="t-year">1 Jan 2018</span>  Monitoring begins (CO<sub>2</sub>, ships > 5,000 GT)
+<span class="t-year">30 Apr 2019</span>  First verified emissions reports due; Commission publishes per-ship data by 30 June each year
+<span class="t-year">10 May 2023</span>  Regulation (EU) 2023/957 adopted — aligns MRV with EU ETS maritime, adds CH<sub>4</sub> and N<sub>2</sub>O, extends scope
+<span class="t-year">1 Jan 2024</span>  CH<sub>4</sub> and N<sub>2</sub>O monitored; EU ETS maritime phase-in begins; monitoring plans updated by 1 April 2024
+<span class="t-year">1 Jan 2025</span>  Offshore ships and general cargo ships 400–5,000 GT enter MRV; emissions report deadline becomes 31 March</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">Regulation (EU) 2015/757</span><span class="reg-desc">MRV of greenhouse gas emissions from maritime transport — Art. 2 scope; Art. 6–7 monitoring plan; Art. 9–10 per-voyage and annual monitoring; Art. 11 emissions report; Art. 13–16 verification and accreditation; Art. 17–18 document of compliance; Art. 21 publication.</span></div>
+    <div class="reg-item"><span class="reg-code">Regulation (EU) 2023/957</span><span class="reg-desc">Amending regulation — CH<sub>4</sub> and N<sub>2</sub>O from 2024; offshore and general cargo ships 400–5,000 GT from 2025; 31 March reporting deadline; link to the EU ETS Directive 2003/87/EC.</span></div>
+    <div class="reg-item"><span class="reg-code">Regulation (EC) 765/2008</span><span class="reg-desc">Accreditation framework under which MRV verifiers are accredited by national accreditation bodies.</span></div>
+    <div class="reg-item"><span class="reg-code">THETIS-MRV</span><span class="reg-desc">EMSA’s platform through which monitoring plans, emissions reports and documents of compliance are submitted and published.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 27 (for comparison)</span><span class="reg-desc">IMO Data Collection System — Topic 4.</span></div>
+  </div>
+
+  <div class="section-head">🧭 Scope, Gases and Obligations</div>
+  <table class="revision-table">
+    <tr><th>Element</th><th>Original (2018–2023)</th><th>Current (2024 onwards)</th></tr>
+    <tr><td>Ships</td><td>Above 5,000 GT</td><td>Above 5,000 GT; plus offshore ships and general cargo ships of 400 GT and above from 1 Jan 2025</td></tr>
+    <tr><td>Voyages</td><td>To, from or between ports under Member State jurisdiction (EU/EEA), and in port</td><td>Unchanged</td></tr>
+    <tr><td>Gases</td><td>CO<sub>2</sub></td><td>CO<sub>2</sub>, CH<sub>4</sub>, N<sub>2</sub>O (from 1 Jan 2024)</td></tr>
+    <tr><td>Parameters</td><td>Fuel consumed per voyage and per year, distance, time at sea, cargo carried, transport work</td><td>Unchanged, with emission factors per gas</td></tr>
+    <tr><td>Report deadline</td><td>30 April</td><td>31 March (from reporting year 2024)</td></tr>
+    <tr><td>Use of data</td><td>Transparency, Commission publication</td><td>Also EU ETS surrender and FuelEU Maritime</td></tr>
+  </table>
+  <ul class="notes-list">
+    <li><strong>Monitoring plan</strong> — per ship, describing the methods, fuel measurement, emission factors and data flow; assessed by the accredited verifier and submitted via THETIS-MRV; updated when methods or the regulation change (by 1 April 2024 for the new gases).</li>
+    <li><strong>Verification</strong> — the annual emissions report is verified by a verifier accredited by a national accreditation body under Regulation (EC) 765/2008; many classification societies hold this accreditation, but it is the accreditation, not the class status, that qualifies them.</li>
+    <li><strong>Document of compliance</strong> — issued by the verifier for the ship once the report is satisfactory; valid for 18 months after the end of the reporting period; must be carried on board and may be checked by Member State inspections.</li>
+    <li><strong>Publication</strong> — the Commission publishes the per-ship emissions and efficiency information annually by 30 June.</li>
+  </ul>
+
+  <div class="section-head">⚖ IMO DCS versus EU MRV — the Focused Comparison</div>
+  <table class="revision-table">
+    <tr><th></th><th>IMO DCS (MARPOL Annex VI reg. 27)</th><th>EU MRV (Regulation (EU) 2015/757 as amended)</th></tr>
+    <tr><td>Legal basis</td><td>International convention; flag State enforces</td><td>EU regulation; Member State and Commission enforce</td></tr>
+    <tr><td>Ships</td><td>≥ 5,000 GT, international voyages</td><td>> 5,000 GT; plus offshore and general cargo ≥ 400 GT from 2025</td></tr>
+    <tr><td>Voyages</td><td>All voyages in the calendar year</td><td>Only EU/EEA-related voyages and time in EU/EEA ports</td></tr>
+    <tr><td>Capacity measure</td><td>Deadweight (and GT) as technical particulars</td><td>Actual cargo carried and transport work per voyage</td></tr>
+    <tr><td>Gases</td><td>CO<sub>2</sub> via fixed C<sub>F</sub> (CII)</td><td>CO<sub>2</sub>, CH<sub>4</sub>, N<sub>2</sub>O (from 2024)</td></tr>
+    <tr><td>Plan</td><td>SEEMP Part II — data collection plan (IMO format)</td><td>Monitoring plan in the MRV format</td></tr>
+    <tr><td>Verifier</td><td>Administration or its recognized organization</td><td>Independent verifier accredited under Reg. (EC) 765/2008</td></tr>
+    <tr><td>Output</td><td>Statement of Compliance (Appendix X); anonymised IMO database (company may request publication of its own ships since 1 Aug 2025; wider Administration and Party access from 1 Sep 2027 under MEPC.407(84) — see Topic 4)</td><td>Verified emissions report; document of compliance; per-ship publication</td></tr>
+    <tr><td>Deadline</td><td>Report within 3 months (31 March); SoC within 5 months (31 May)</td><td>Report by 31 March (was 30 April); publication by 30 June</td></tr>
+  </table>
+  <p class="notes-body">The two systems share the tank-to-wake principle and the same shipboard measurements, which is why a single fuel-management process can feed both. They differ in law, geography, cargo granularity, gases and verifier — and since 2024 in financial consequence, because the MRV figure is the ETS figure.</p>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Nair):</strong> Nair wants the legal architecture clean. Say <em>Regulation (EU) 2015/757, in force 1 July 2015, monitoring from 2018, amended by 2023/957</em>, then give the three things that changed: methane and nitrous oxide from 2024, 400 GT general cargo and offshore ships from 2025, and the 31 March deadline. If he asks ‘who verifies’, the answer is an accredited verifier under the EU accreditation regulation, not ‘class’ — even when a class society does it. Then draw the comparison with the DCS in four lines: law, voyages, cargo versus deadweight, verifier. Do not quote ‘31 April’; there is no such date, and he will notice.</div>
+
+  <div class="section-head">🎯 Oral Q&amp;A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. What is the EU MRV Regulation and to which ships and voyages does it apply?</div><div class="qa-a">Regulation (EU) 2015/757, in force since 1 July 2015 and amended by Regulation (EU) 2023/957, requires companies to monitor, report and have verified the greenhouse gas emissions of ships on voyages to, from or between ports under the jurisdiction of an EU or EEA Member State, including emissions in those ports. It applied from 1 January 2018 to ships above 5,000 gross tonnage and, from 1 January 2025, also to offshore ships and general cargo ships of 400 gross tonnage and above but below 5,000. Warships, naval auxiliaries, fish-catching and fish-processing ships, wooden ships of primitive build, ships not propelled by mechanical means and government ships on non-commercial service are excluded.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Which gases and parameters are monitored, and how did this change in 2024?</div><div class="qa-a">From 2018 to 2023 the regulation covered carbon dioxide only. Regulation (EU) 2023/957 added methane and nitrous oxide from 1 January 2024, with monitoring plans updated by 1 April 2024. For each voyage and for the year the company monitors fuel consumed by type, emissions of each gas using emission factors, distance travelled, time at sea, cargo carried and transport work, and derives energy-efficiency indicators such as fuel consumption and emissions per distance and per transport work.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Explain the verification arrangements and the document of compliance.</div><div class="qa-a">The monitoring plan is assessed, and the annual emissions report verified, by an independent verifier accredited for maritime MRV by a national accreditation body under Regulation (EC) 765/2008; classification societies may act only if so accredited. The verified report is submitted through THETIS-MRV by 31 March following the reporting year, previously 30 April. Where the report is satisfactory the verifier issues a document of compliance for the ship, valid for eighteen months after the end of the reporting period, which must be carried on board and may be checked by Member State authorities.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4. Compare the IMO Data Collection System with EU MRV.</div><div class="qa-a">Both are tank-to-wake reporting systems built on the ship’s fuel records, but they differ in five respects. Legal basis: the DCS is regulation 27 of MARPOL Annex VI enforced by the flag State; MRV is an EU regulation enforced by Member States and the Commission. Scope: the DCS covers all voyages of ships of 5,000 gross tonnage and above; MRV covers only EU and EEA-related voyages but now extends to 400 gross tonnage for offshore and general cargo ships. Granularity: the DCS reports annual totals with deadweight as the capacity; MRV reports per voyage with actual cargo carried and transport work. Gases: the DCS feeds a CO<sub>2</sub> metric through fixed carbon factors; MRV covers carbon dioxide, methane and nitrous oxide since 2024. Verification and output: the DCS is verified by the Administration or recognized organization and produces a Statement of Compliance and an anonymised IMO database; MRV is verified by an accredited verifier and produces a verified emissions report, a document of compliance and per-ship publication, and since 2024 the MRV figure is the basis for EU ETS allowance surrender.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5. What are the deadlines in each system?</div><div class="qa-a">Under the DCS the ship reports within three months of the calendar year end, in practice by 31 March, and the Administration issues the Statement of Compliance no later than five months from the start of the year, by 31 May, transferring the data to the IMO database within a further month. Under MRV the verified emissions report is due by 31 March from reporting year 2024, having been 30 April for the first reports in 2019, and the Commission publishes the data by 30 June.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>State the scope of Regulation (EU) 2015/757 as amended, the greenhouse gases it covers and the current deadline for the verified emissions report, distinguishing the original from the current requirements.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Describe the monitoring plan, the per-voyage and annual monitoring parameters, the role of the accredited verifier and the document of compliance under EU MRV.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Compare the IMO Data Collection System and the EU MRV Regulation in terms of legal basis, ships and voyages covered, parameters and gases, verification, outputs and deadlines, and explain how a Chief Engineer organises shipboard fuel measurement so that one process satisfies both.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>EU MRV = Reg. (EU) 2015/757 · in force 1 Jul 2015 · monitoring from 1 Jan 2018 · amended by 2023/957.</strong></li>
+      <li><strong>Scope: > 5,000 GT; + offshore and general cargo ≥ 400 GT from 1 Jan 2025 · EU/EEA-related voyages and ports.</strong></li>
+      <li><strong>Gases: CO<sub>2</sub> (2018–23) → CO<sub>2</sub> + CH<sub>4</sub> + N<sub>2</sub>O (from 2024).</strong></li>
+      <li><strong>Plan assessed + report verified by an ACCREDITED verifier (Reg. 765/2008) · report by 31 Mar (was 30 Apr) · publication 30 Jun · DoC 18 months.</strong></li>
+      <li><strong>DCS vs MRV: flag vs EU · all voyages vs EU voyages · DWT vs cargo carried · RO vs accredited verifier · anonymised vs per-ship.</strong></li>
+      <li>No ‘31 April’. Tank-to-wake both; FuelEU/GFI are well-to-wake.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Case Study — One Fuel Record, Two Regimes</button>
+    <div class="deep-dive-body">
+      <h4>Situation</h4>
+      <p>A 115,000 DWT Aframax trades Primorsk–Rotterdam–Houston–Fos. Her flag RO verifies the DCS; a Dutch accredited verifier handles MRV. In the ETS phase-in the owner is surrendering allowances on the MRV figure and the charterer is disputing the voyage split.</p>
+      <h4>Where the regimes diverge</h4>
+      <p>The DCS wants one annual total per fuel type for every voyage, with deadweight as capacity. MRV wants each EU-related leg separately — Primorsk to Rotterdam counts, Rotterdam to Houston counts as a departure from an EEA port, Houston to Fos counts as an arrival — with the cargo carried on each, and from 2024 with methane and nitrous oxide emission factors applied. Port stays in Rotterdam and Fos are MRV-reportable; the Houston stay is not.</p>
+      <h4>What the Chief Engineer sets up</h4>
+      <p>One measurement method, fixed in both SEEMP Part II and the MRV monitoring plan, so the verifiers see the same meter and the same BDNs; a voyage log that records fuel ROB and consumption at every arrival and departure, not only at bunkering; the fuel type and sulphur grade per tank at each boundary, because the carbon and methane factors differ; and a reconciliation at month end between flow meters and soundings. With that in place the annual DCS aggregate is a sum of the voyage records, the MRV report is a filter of them, and the ETS and charter-party disputes are settled from the same evidence.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>Regulation (EU) 2015/757 of the European Parliament and of the Council on the monitoring, reporting and verification of greenhouse gas emissions from maritime transport (consolidated text as of 1 January 2024, EUR-Lex)</li>
+    <li>Regulation (EU) 2023/957 of 10 May 2023 amending Regulation (EU) 2015/757 (inclusion of maritime transport in the EU ETS; additional gases and ship types)</li>
+    <li>Regulation (EC) No 765/2008 — accreditation and market surveillance (verifier accreditation)</li>
+    <li>European Maritime Safety Agency — THETIS-MRV</li>
+    <li>MARPOL Annex VI (2021 revised text, resolution MEPC.328(76)) — regulations 6.6, 9.12 and 27, for the comparison</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p23 · Topic 5 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p23 · P23-T5 · v1.0</div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+    Part 23 of 31 · Pages 551–575 of 768 · Engineering Management Notes — Marine Intelligence Weekly<br>
+    Originally compiled by Uday Sankar S., Anglo-Eastern. Transcribed, expanded and verified by Nixon Antony, 2/E, Maersk A/S.<br>
+    This is subscriber-only content for MEO Class 1 exam preparation (Kochi MMD). Unauthorized redistribution is prohibited.<br>
+    Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p23 · Correction Required">Contact us</a> ·
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Back to Notes Index</a>
+</div>
+
+<script>
+function toggleDD(btn){
+  var body = btn.nextElementSibling;
+  body.classList.toggle('open');
+  btn.textContent = body.classList.contains('open') ? btn.textContent.replace('▶','▼') : btn.textContent.replace('▼','▶');
+}
+document.addEventListener('DOMContentLoaded', function(){
+  var links = document.querySelectorAll('.toc-link[href^="#"]');
+  var sections = Array.from(links).map(function(l){ return document.querySelector(l.getAttribute('href')); }).filter(Boolean);
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var id = '#' + entry.target.id;
+      var link = document.querySelector('.toc-link[href="' + id + '"]');
+      if(link){ link.classList.toggle('active', entry.isIntersecting); }
+    });
+  }, {rootMargin:'-80px 0px -70% 0px'});
+  sections.forEach(function(s){ observer.observe(s); });
+});
+</script>
+
+</body>
+</html>
