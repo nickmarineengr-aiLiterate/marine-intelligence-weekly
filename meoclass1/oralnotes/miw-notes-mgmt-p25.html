@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>MIW Engineering Management Notes — Part 25 | MEO Class 1 | Alternative Marine Fuels — Ammonia, Hydrogen, Methanol &amp; LNG under the IGF Framework · Ship Design for Energy Efficiency — Size, Speed, Principal Dimensions &amp; Hull-Form Optimisation</title>
+<meta name="description" content="MEO Class 1 Engineering Management Notes Part 25 — alternative marine fuels under the IGF framework: well-to-tank, tank-to-wake and well-to-wake accounting per the 2024 IMO LCA Guidelines, the IGF Code and the family of IMO interim guidelines, then LNG, methanol, ammonia and hydrogen as fuels with verified properties, storage, materials, engine and emissions positions and a comparison table; and ship design for energy efficiency: size and capacity, service speed, principal dimensions, hull-form routes, bulbous bow, aft-body optimisation, stern flaps and twin-skeg design. Source range PDF 600–621; PDF 622–625 handed to Part 26. Originally compiled by Uday Sankar S., Anglo-Eastern.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/miw-notes-mgmt-p25.html">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:15px;line-height:1.6;user-select:none;-webkit-user-select:none;}
+.miw-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.05;overflow:hidden;}
+.topbar{background:var(--navy);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logo{width:30px;height:30px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;letter-spacing:-0.5px;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;letter-spacing:0.3px;}
+.topbar-nav{display:flex;gap:20px;}
+.topbar-nav a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.15s;}
+.topbar-nav a:hover{color:#fff;}
+.page-header{background:var(--navy);padding:32px 24px 28px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.notes-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid var(--teal);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.notes-badge-icon{background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;letter-spacing:1px;}
+.notes-badge-text{color:var(--teal-light);font-size:12px;font-weight:600;}
+.page-title{color:#fff;font-size:26px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+.page-sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.header-meta-item{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:12px;color:#cbd5e1;}
+.header-meta-item strong{color:#fff;}
+.attribution-strip{margin-top:14px;padding:10px 14px;background:rgba(201,168,76,0.12);border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;font-size:12px;color:#cbd5e1;}
+.attribution-strip strong{color:#e2c97e;}
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:24px 16px;}
+.sidebar{position:sticky;top:68px;height:calc(100vh - 80px);overflow-y:auto;padding-right:6px;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--grey-border);border-radius:2px;}
+.toc-head{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;font-size:12px;color:var(--grey-text);text-decoration:none;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;transition:all 0.15s;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:700;}
+.toc-divider{height:1px;background:var(--grey-border);margin:14px 0;}
+.qb-sidebar-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:12px;}
+.qb-sidebar-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin-bottom:8px;}
+.qb-sidebar-link{display:block;font-size:12px;color:var(--teal-dark);text-decoration:none;font-weight:600;padding:3px 0;}
+.qb-sidebar-link:hover{text-decoration:underline;}
+#notes-feed{min-width:0;}
+.topic-block{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:24px;margin-bottom:32px;scroll-margin-top:72px;}
+.topic-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--teal-light);}
+.topic-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+.topic-title{margin:0 0 8px;font-size:20px;font-weight:800;color:var(--navy);}
+.topic-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;}
+.topic-tag{background:var(--teal-light);color:var(--teal-dark);padding:3px 8px;border-radius:20px;font-weight:600;}
+.topic-pages{color:var(--grey-text);padding:3px 0;}
+.topic-examiner{background:var(--orange-light);color:#92400e;padding:3px 8px;border-radius:20px;font-weight:600;}
+.freq-high{background:#fef9c3;color:#713f12;padding:3px 8px;border-radius:20px;font-weight:700;}
+.freq-medium{background:#f0fdf4;color:#14532d;padding:3px 8px;border-radius:20px;font-weight:600;}
+.section-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--grey-border);}
+.notes-body{font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:8px;}
+.notes-list{font-family:'Georgia',serif;font-size:14px;line-height:1.8;padding-left:22px;margin-bottom:8px;}
+.notes-list li{margin-bottom:4px;}
+.timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
+.timeline-block .t-year{color:#fff;font-weight:700;}
+.ascii-diagram{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12px;line-height:1.35;overflow-x:auto;white-space:pre;}
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
+.reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
+.reg-code{color:var(--orange);font-weight:700;white-space:nowrap;flex-shrink:0;font-family:monospace;font-size:12px;}
+.reg-desc{color:#cbd5e1;line-height:1.5;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:13.5px;font-family:'Georgia',serif;line-height:1.7;}
+.ce-tip strong{color:#92400e;}
+.qa-block{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.qa-item{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.qa-q{background:var(--grey-bg);padding:10px 14px;font-weight:700;font-size:13px;color:var(--navy);}
+.qa-a{padding:10px 14px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;color:var(--ink);}
+.exam-focus-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:16px 0;}
+.exam-focus-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin:0 0 12px;}
+.exam-q{margin:8px 0;font-family:'Georgia',serif;font-size:13.5px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+.marks-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+.memory-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:16px 0;}
+.memory-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#713f12;margin:0 0 10px;}
+.memory-list{font-family:'Georgia',serif;font-size:13.5px;line-height:1.8;padding-left:18px;}
+.memory-list li{margin-bottom:4px;}
+.amend-table,.compare-table,.revision-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.amend-table th,.compare-table th,.revision-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+.amend-table td,.compare-table td,.revision-table td{padding:8px 12px;border-bottom:1px solid var(--grey-border);font-family:'Georgia',serif;line-height:1.6;vertical-align:top;}
+.amend-table tr:nth-child(even) td,.revision-table tr:nth-child(even) td{background:var(--grey-bg);}
+.psc-focus{background:#fef2f2;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);}
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;}
+.mental-map .root{color:#fff;font-weight:700;}
+.qb-link-box{background:var(--teal-light);border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;}
+.qb-link-box strong{color:var(--teal-dark);}
+.qb-link-box a{color:var(--teal-dark);font-weight:600;text-decoration:none;margin-right:12px;}
+.qb-link-box a:hover{text-decoration:underline;}
+.deep-dive{margin:14px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:16px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;display:none;}
+.deep-dive-body.open{display:block;}
+.deep-dive-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.deep-dive-body p,.deep-dive-body li{margin-bottom:6px;}
+.deep-dive-body ul{padding-left:20px;}
+.verify-note{background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:16px;font-size:13px;font-family:'Georgia',serif;line-height:1.7;color:#1e3a5f;}
+.verify-note strong{color:#1d4ed8;}
+.ref-list{font-size:13px;line-height:1.9;padding-left:18px;}
+.ref-list a{color:var(--teal-dark);}
+.topic-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:12px;border-top:1px dashed var(--grey-border);font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.topic-version{font-weight:700;}
+.page-footer{background:var(--grey-bg);border-top:1px solid var(--grey-border);padding:28px 24px;margin-top:40px;font-size:12px;color:var(--grey-text);text-align:center;}
+.page-footer a{color:var(--teal-dark);}
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+
+<div class="miw-watermark" aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wmpat" width="420" height="220" patternTransform="rotate(-30)" patternUnits="userSpaceOnUse">
+        <text x="0" y="60" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">marineintelligenceweekly.com</text>
+        <text x="0" y="90" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wmpat)"/>
+  </svg>
+</div>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-logo">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="notes-badge">
+      <span class="notes-badge-icon">NOTES</span>
+      <span class="notes-badge-text">Engineering Management · Part 25 of 31</span>
+    </div>
+    <h1 class="page-title">Engineering Management Notes — Part 25</h1>
+    <p class="page-sub">Alternative Marine Fuels — Ammonia, Hydrogen, Methanol and LNG under the IGF Framework · Ship Design for Energy Efficiency — Size, Speed, Principal Dimensions and Hull-Form Optimisation · Source range PDF 600–621 (PDF 600 handed in from Part 24; PDF 622–625 handed on to Part 26 so the Propeller Advancement chapter stays whole)</p>
+    <div class="header-meta">
+            <span class="header-meta-item"><strong>Pages:</strong> 600–621 of 768</span>
+            <span class="header-meta-item"><strong>Topics:</strong> 2 (local P25-T1–P25-T2 — see note below)</span>
+            <span class="header-meta-item"><strong>Access:</strong> Subscriber Only</span>
+            <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>
+            <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>
+        </div>
+        <div class="attribution-strip">
+            Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and verified by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly. <strong>Sequencing note:</strong> Part 25 (pp. 600–621) continues directly from Part 24 (pp. 576–600). Topic numbering below uses local <strong>Part 25</strong> badges (not a continuous global T-number), consistent with the platform's standing rule to defer global renumbering until all 31 Parts are confirmed live.
+        </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="toc-head">Topics · Part 25</div>
+    <a class="toc-link" href="#topic-p25-1">T1 · Alternative Fuels &amp; IGF Framework</a>
+    <a class="toc-link" href="#topic-p25-2">T2 · Ship Design for Energy Efficiency</a>
+    <div class="toc-divider"></div>
+    <div class="toc-head">Navigate</div>
+    <a class="toc-link" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Notes Index</a>
+    <a class="toc-link" href="miw-notes-mgmt-p24.html">← Part 24</a>
+    <div class="toc-divider"></div>
+    <div class="qb-sidebar-box">
+        <div class="qb-sidebar-title">🔗 Related QB Files</div>
+        <a class="qb-sidebar-link" href="../QB7_D.html">QB7_D — GHG, CII &amp; Decarbonisation (LCA, ammonia, methane slip, IGF, LNG bunkering)</a>
+        <a class="qb-sidebar-link" href="../QB6.html">QB6 — GHG, CII, EEXI, Alternative Fuels &amp; Automation</a>
+        <a class="qb-sidebar-link" href="../QB7_I.html">QB7_I — Latest Onboard Technology, Alternative Fuels &amp; Decarbonisation</a>
+        <a class="qb-sidebar-link" href="../QB7_B.html">QB7_B — GHG, Alternative Fuels &amp; Hydrogen</a>
+    </div>
+</aside>
+
+<!-- NOTES FEED -->
+<main id="notes-feed">
+
+
+<!-- ========================================================================== -->
+<!-- TOPIC 1 — ALTERNATIVE FUELS &AMP; IGF FRAMEWORK -->
+<!-- ========================================================================== -->
+
+<div class="topic-block" id="topic-p25-1" data-kw="alternative fuels, alternative marine fuels, low-flashpoint fuel, IGF Code, MSC.391(95), SOLAS II-1 Part G, SOLAS II-1/55, alternative design, interim guidelines, MSC.1/Circ.1621, MSC.1/Circ.1647, MSC.1/Circ.1666, MSC.1/Circ.1679, MSC.1/Circ.1687, MSC.1/Circ.1701, MSC.1/Circ.1702, life cycle assessment, LCA Guidelines, MEPC.391(81), well to tank, tank to wake, well to wake, WtT, TtW, WtW, GHG intensity, gCO2eq per MJ, GWP100, methane, nitrous oxide, ammonia as fuel, NH3, Haber-Bosch, grey ammonia, blue ammonia, green ammonia, ammonia toxicity, ammonia flammability, ammonia slip, N2O, stress corrosion cracking, Type C tank, refrigerated ammonia, hydrogen as fuel, liquid hydrogen, compressed hydrogen, fuel cell, electrolysis, steam methane reforming, grey hydrogen, blue hydrogen, green hydrogen, methanol as fuel, CH3OH, bio-methanol, e-methanol, flash point, Stena Germanica, LNG as fuel, LNG tank types, Type A tank, Type B tank, membrane tank, secondary barrier, methane slip, lean burn, dual fuel, Otto cycle, Diesel cycle, gas ready, volumetric energy density, pilot fuel, MAN ES, Everllence, WinGD, Wärtsilä, 2023 IMO GHG Strategy, net-zero by or around 2050">
+  <div class="topic-header">
+    <div class="topic-badge">Part 25 · Topic 1</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Alternative Marine Fuels — Ammonia, Hydrogen, Methanol and LNG under the IGF Framework</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">IGF Code (natural gas) · §2.3 alternative design · Interim guidelines 1621 / 1647 / 1666 / 1687 / 1701 · LCA Guidelines MEPC.391(81) · LNG · Methanol · Ammonia · Hydrogen</span>
+        <span class="topic-pages">Uday pp. 600–613</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> <strong>Part 25 source range.</strong> This Part's authored content is PDF 600–621. PDF 600 (the opening of the Alternative Fuels chapter) was handed in from Part 24 under Founder decision D-24-1. PDF 622–625, although inside the old nominal Part 25 window, open the <strong>Propeller Advancement</strong> chapter that runs to PDF 638; under Founder decision D-25-1 that chapter is handed on <strong>whole to Part 26</strong> and nothing from it is taught here. <strong>Regulatory status — read this first.</strong> The source says only that the IGF Code 'does not have prescriptive requirements for NH3' and that there is a 'lack of regulations'. As at October 2026 the position is: the <strong>IGF Code (MSC.391(95))</strong> is the mandatory code and is prescriptive for <strong>natural gas only</strong>; every other low-flashpoint fuel is approved through <strong>IGF section 2.3 alternative design</strong>, demonstrated under <strong>SOLAS II-1/55</strong>, supported by IMO <strong>interim guidelines</strong> — methyl/ethyl alcohol MSC.1/Circ.1621 (2020), fuel cells MSC.1/Circ.1647 (2022), LPG MSC.1/Circ.1666 (2023) and LPG cargo as fuel MSC.1/Circ.1679 (2024), ammonia MSC.1/Circ.1687 (2025), and hydrogen MSC.1/Circ.1701 and ammonia cargo as fuel MSC.1/Circ.1702 (both approved at MSC 111, May 2026). All of these are <strong>interim and recommendatory</strong>, not code text; no ammonia, hydrogen or methanol chapter has been adopted into the IGF Code. <strong>Lifecycle terms.</strong> The source's 'WtT + TtW = WtW' is exactly the definition in the <strong>2024 LCA Guidelines, MEPC.391(81)</strong>; the result is a <em>GHG intensity</em> in gCO<sub>2</sub>eq/MJ covering CO<sub>2</sub>, CH<sub>4</sub> and N<sub>2</sub>O, not a 'net carbon impact'. The 'net zero by 2050' line is corrected to the Strategy's wording, <em>by or around, i.e. close to, 2050</em>; the Net-Zero Framework itself is taught in Part 22 Topic 3 and not repeated. <strong>Safety-critical source errors corrected.</strong> (1) The ammonia odour threshold is <em>not</em> 0.037–10 ppm and odour is <em>not</em> a reliable warning: it is detectable at roughly 5 ppm (ATSDR), the reported range spans about 0.04–53 ppm, and the exposure limits (TWA 25 ppm) sit inside that band. The source's 'less poisonous at that low concentration' is removed. (2) The flammable range written as '15.5%' on one page is a slip for 15.15%; the measured pair is 15.15–27.35% in dry air and the exam value is <strong>about 15–28% v/v</strong>. (3) 'NH<sub>3</sub> is already used on ships with SCR' is wrong: marine SCR uses aqueous urea (IACS UR M77). (4) 'LNG occupies 600 times less space than conventional fuels' confuses gas-to-liquid shrinkage with fuel-oil tank volume: LNG needs about <strong>1.8 times</strong> the fuel volume of fuel oil. (5) Methane GWP is taught at the regulatory value of <strong>28</strong> (MEPC.391(81), IPCC AR5 GWP100), not 36. (6) A Type B tank has a <em>partial</em> secondary barrier. (7) The source's bunker-station-near-tank 'insulation' rule has no basis in the IGF Code and is dropped. <strong>Volatile or superseded values.</strong> The ammonia volume ratio (source 2.4×) is about 2.8–3.1× fuel oil; the 'large percentage of pilot fuel' is now about 5% at full load on both two-stroke platforms; ammonia engines are in service, not 'at design stage'; hydrogen production shares are given only as a dated IEA context box; fuel-price statements are not taught as fact. The source's Stena Germanica CO<sub>2</sub> figure is omitted. <strong>Provenance.</strong> The ammonia pages condense the ABS whitepaper <em>Ammonia as Marine Fuel</em> (2020); its 2020 figures are checked individually against NIST, NIOSH, ATSDR, the IGC Code, MSC.1/Circ.1687 and current OEM evidence. <strong>Cross-references, not repeated here:</strong> Net-Zero Framework status and the tank-to-wake versus well-to-wake regime in Part 22 Topic 3; carbon conversion factors C<sub>F</sub> and the draft GFI box in Part 24 Topic 1; EEDI/CII calculations in Part 23; SCR and urea in Part 4.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body"><strong>Alternative marine fuels</strong> are fuels other than conventional fuel oil that a ship can use to reduce its greenhouse-gas intensity: in this Part <strong>LNG, methanol, ammonia and hydrogen</strong>. Two frameworks govern how they are judged and approved. The <strong>lifecycle framework</strong> of the 2024 IMO LCA Guidelines (MEPC.391(81)) measures a fuel's GHG intensity in grams of CO<sub>2</sub>-equivalent per megajoule on a <strong>well-to-wake</strong> basis, the sum of its <strong>well-to-tank</strong> (upstream) and <strong>tank-to-wake</strong> (shipboard) emissions of CO<sub>2</sub>, CH<sub>4</sub> and N<sub>2</sub>O. The <strong>safety framework</strong> is the <strong>IGF Code</strong>, mandatory under SOLAS chapter II-1 Part G since 1 January 2017, which is prescriptive for natural gas and admits any other low-flashpoint fuel through its <strong>alternative-design</strong> route (section 2.3, equivalence under SOLAS II-1/55), guided by a family of IMO <strong>interim guidelines</strong>. Each fuel then presents its own engineering problem: LNG is cryogenic with methane slip; methanol is a low-flashpoint toxic liquid; ammonia is toxic and corrosive but easily liquefied; hydrogen is non-toxic but extremely flammable and hard to store.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li><strong>Simon's decarbonisation questions have moved from 'what is CII' to 'which fuel, and why'.</strong> The examiner wants the lifecycle logic, the regulatory route and a fuel-by-fuel comparison stated in one connected answer.</li>
+    <li>A Chief Engineer on a dual-fuel ship owns the fuel-gas supply system, the gas detection, the ventilation and the bunkering: every one of them is an IGF Code or interim-guideline requirement.</li>
+    <li>The safety hazards differ in kind, not degree: toxicity for ammonia and methanol, invisible flame and wide flammability for hydrogen, cryogenic temperature and methane slip for LNG. Confusing them in an oral is dangerous as well as wrong.</li>
+    <li>Well-to-wake accounting decides which fuels will actually count under FuelEU Maritime and the draft IMO fuel standard. A fuel that is 'clean at the funnel' can be worse than fuel oil overall.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">11 Jun 2015</span>  IGF Code adopted, MSC.391(95); SOLAS II-1 Part G added by MSC.392(95)
+<span class="t-year">Mar 2015</span>  <em>Stena Germanica</em> converted to methanol dual-fuel at Remontowa, Gdansk — first methanol-fuelled ro-pax
+<span class="t-year">1 Jan 2017</span>  IGF Code in force (mandatory) — prescriptive Part A-1 for natural gas
+<span class="t-year">7 Dec 2020</span>  MSC.1/Circ.1621 — Interim guidelines for ships using methyl/ethyl alcohol as fuel (MSC 102)
+<span class="t-year">15 Jun 2022</span>  MSC.1/Circ.1647 — Interim guidelines for ships using fuel cell power installations (MSC 105)
+<span class="t-year">30 Jun 2023</span>  MSC.1/Circ.1666 — Interim guidelines for ships using LPG fuels (MSC 107)
+<span class="t-year">7 Jul 2023</span>  2023 IMO GHG Strategy, MEPC.377(80) — net-zero by or around, i.e. close to, 2050; 5–10% zero/near-zero energy by 2030
+<span class="t-year">22 Mar 2024</span>  2024 LCA Guidelines, MEPC.391(81) — well-to-wake GHG intensity method (revokes MEPC.376(80))
+<span class="t-year">26 Feb 2025</span>  MSC.1/Circ.1687 — Interim guidelines for ships using ammonia as fuel (approved MSC 109, Dec 2024)
+<span class="t-year">Jul 2025</span>  First ammonia dual-fuel two-stroke engine in service (WinGD X52DF-A, EXMAR <em>Antwerpen</em>)
+<span class="t-year">May 2026</span>  MSC 111 approves MSC.1/Circ.1701 (hydrogen as fuel) and MSC.1/Circ.1702 (ammonia cargo as fuel)
+<span class="t-year">Sep 2026</span>  CCC 12 finalises the revised methanol/ethanol interim guidelines for MSC 113 approval (2027)</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments and Their Status (October 2026)</div>
+    <div class="reg-item"><span class="reg-code">IGF Code — resolution MSC.391(95), mandatory via SOLAS II-1 Part G (reg. 56–57), in force 1 Jan 2017</span><span class="reg-desc"><strong>IN FORCE, MANDATORY CODE.</strong> Part A: goal and functional requirements for all low-flashpoint fuels. Part A-1: prescriptive requirements for <strong>natural gas</strong> (LNG/CNG) only. Section 2.3: alternative design — a fuel 'not specifically addressed in this Code' may be used if the goal and functional requirements are met with an equivalent level of safety, demonstrated under SOLAS II-1/55. Amended by MSC.422(98), MSC.458(101), MSC.475(102), MSC.524(106), MSC.551(108) and MSC.567(109) (the last in force 1 Jan 2028).</span></div>
+    <div class="reg-item"><span class="reg-code">MSC.1/Circ.1621 (7 Dec 2020)</span><span class="reg-desc"><strong>INTERIM GUIDELINES</strong> — safety of ships using methyl/ethyl alcohol as fuel. Revision finalised at CCC 12 (Sep 2026), to MSC 113 for approval in 2027, with a mandatory methanol chapter stated as a future aim.</span></div>
+    <div class="reg-item"><span class="reg-code">MSC.1/Circ.1647 (15 Jun 2022)</span><span class="reg-desc"><strong>INTERIM GUIDELINES</strong> — safety of ships using fuel cell power installations. Revision deferred to CCC 13 (2027).</span></div>
+    <div class="reg-item"><span class="reg-code">MSC.1/Circ.1666 (30 Jun 2023) and MSC.1/Circ.1679 (2024)</span><span class="reg-desc"><strong>INTERIM GUIDELINES</strong> — LPG fuels; LPG cargo as fuel on gas carriers.</span></div>
+    <div class="reg-item"><span class="reg-code">MSC.1/Circ.1687 (26 Feb 2025)</span><span class="reg-desc"><strong>INTERIM GUIDELINES</strong> — safety of ships using ammonia as fuel (approved MSC 109). The Committee itself noted their 'provisional nature'. Toxicity thresholds 25 / 110 / 220 ppm; tank types per IGF 6.4; piping design pressure 18 bar; materials per IGC 17.12.</span></div>
+    <div class="reg-item"><span class="reg-code">MSC.1/Circ.1701 and MSC.1/Circ.1702 (approved MSC 111, May 2026)</span><span class="reg-desc"><strong>INTERIM GUIDELINES</strong> — safety of ships using hydrogen as fuel; use of ammonia cargo as fuel on gas carriers. (Training: STCW.7/Circ.25 generic and STCW.7/Circ.27 ammonia-specific interim training guidelines.)</span></div>
+    <div class="reg-item"><span class="reg-code">IGC Code — resolution MSC.370(93)</span><span class="reg-desc">Mandatory for gas carriers. Chapter 4 defines the independent tank Types A, B and C and membrane tanks used for LNG and ammonia; chapter 17.12 gives the ammonia steel and oxygen requirements that MSC.1/Circ.1687 invokes.</span></div>
+    <div class="reg-item"><span class="reg-code">2024 LCA Guidelines — resolution MEPC.391(81), 22 Mar 2024</span><span class="reg-desc">Recommendatory method for well-to-tank, tank-to-wake and well-to-wake GHG intensity of marine fuels in gCO<sub>2</sub>eq/MJ; gases CO<sub>2</sub>, CH<sub>4</sub>, N<sub>2</sub>O; GWP100 from IPCC AR5 (1 / 28 / 265); default emission and slip factors by fuel pathway and engine class. Basis of the draft GHG fuel intensity (Part 22 Topic 3, Part 24 Topic 1).</span></div>
+    <div class="reg-item"><span class="reg-code">2023 IMO GHG Strategy — resolution MEPC.377(80)</span><span class="reg-desc">Net-zero GHG emissions by or around, i.e. close to, 2050; checkpoints of at least 20% (striving 30%) by 2030 and 70% (striving 80%) by 2040 against 2008; zero or near-zero GHG fuels at least 5%, striving for 10%, of energy by 2030.</span></div>
+    <div class="reg-item"><span class="reg-code">IACS UR M77</span><span class="reg-desc">SCR reductant: the standard is 40% aqueous urea (AUS 40); aqueous or anhydrous ammonia only where urea is impracticable, anhydrous only with Flag agreement — why 'ships already handle ammonia in SCR' is wrong.</span></div>
+  </div>
+
+  <div class="section-head">🧭 Lifecycle Frame — Well-to-Tank, Tank-to-Wake, Well-to-Wake</div>
+  <div class="timeline-block">   WELL-TO-TANK (WtT)            TANK-TO-WAKE (TtW)              WELL-TO-WAKE (WtW)
+   feedstock extraction /    +    on-board conversion /      =    total GHG intensity
+   cultivation, conversion,       combustion, incl. methane        of the energy used
+   transport, bunkering           or ammonia slip, fugitives
+
+   GHG_WtW = GHG_WtT + GHG_TtW        [MEPC.391(81), Equation (3)]      unit: g CO2eq / MJ (LCV)
+   CO2eq = CO2 x 1  +  CH4 x 28  +  N2O x 265        (GWP100, IPCC AR5, as fixed by the Guidelines)</div>
+  <table class="revision-table">
+    <tr><th>Term</th><th>What it covers (2024 LCA Guidelines)</th><th>Example</th></tr>
+    <tr><td>Well-to-tank</td><td>Upstream: feedstock extraction or cultivation, processing and conversion, transport and distribution, bunkering — per unit energy of fuel delivered to the ship</td><td>Natural-gas reforming CO<sub>2</sub> for grey hydrogen; electricity source for e-fuels</td></tr>
+    <tr><td>Tank-to-wake</td><td>From the bunker manifold to the energy converter: combustion CO<sub>2</sub>, plus methane slip, ammonia slip, N<sub>2</sub>O and fugitive losses on board</td><td>Methane slip from an Otto-cycle dual-fuel engine; N<sub>2</sub>O from ammonia combustion</td></tr>
+    <tr><td>Well-to-wake</td><td>The sum. The metric for the draft IMO GHG fuel intensity and for FuelEU Maritime</td><td>Fossil methanol: near-zero benefit; e-methanol: large benefit, same funnel CO<sub>2</sub></td></tr>
+  </table>
+  <ul class="notes-list">
+    <li>The CII (Part 23 Topic 3) is <strong>tank-to-wake</strong> with fixed C<sub>F</sub> factors (Part 24 Topic 1); the draft GHG fuel intensity and FuelEU Maritime are <strong>well-to-wake</strong>. Never argue from one basis to the other — Part 22 Topic 3.</li>
+    <li>A fuel that contains no carbon (ammonia, hydrogen) still has a well-to-wake footprint if it was made from fossil energy, and still emits N<sub>2</sub>O or unburnt fuel on board.</li>
+    <li>The 2023 Strategy's aim is <strong>net-zero by or around, i.e. close to, 2050</strong>, with 5–10% zero or near-zero GHG energy by 2030. Status of the Net-Zero Framework: see Part 22 Topic 3 (not repeated here).</li>
+  </ul>
+
+  <div class="section-head">⚖️ Regulatory Spine — Mandatory Code, Alternative Design, Interim Guidelines</div>
+  <div class="timeline-block">SOLAS II-1 Part G (reg. 56-57)  ──►  IGF CODE, MSC.391(95)   [MANDATORY, in force 1 Jan 2017]
+                                        │
+            ┌───────────────────────────┴────────────────────────────┐
+            ▼                                                        ▼
+   Part A-1 PRESCRIPTIVE                                   Section 2.3 ALTERNATIVE DESIGN
+   natural gas (LNG / CNG) only                            any other low-flashpoint fuel:
+                                                           meet goal + functional requirements,
+                                                           equivalent safety, approved per SOLAS II-1/55
+                                                                        │
+                                     supported by INTERIM GUIDELINES (recommendatory):
+                                     1621 methanol/ethanol · 1647 fuel cells · 1666/1679 LPG
+                                     1687 ammonia · 1701 hydrogen · 1702 ammonia cargo as fuel</div>
+  <table class="revision-table">
+    <tr><th>Fuel</th><th>Instrument</th><th>Status (Oct 2026)</th><th>Route to approval</th></tr>
+    <tr><td>Natural gas (LNG)</td><td>IGF Code Part A-1</td><td><strong>Mandatory code</strong></td><td>Prescriptive compliance</td></tr>
+    <tr><td>Methanol / ethanol</td><td>MSC.1/Circ.1621 (2020); revision to MSC 113 (2027)</td><td><strong>Interim guidelines</strong></td><td>IGF 2.3 alternative design + guidelines</td></tr>
+    <tr><td>Fuel cells (any fuel)</td><td>MSC.1/Circ.1647 (2022)</td><td><strong>Interim guidelines</strong></td><td>IGF 2.3 + guidelines</td></tr>
+    <tr><td>LPG</td><td>MSC.1/Circ.1666 (2023); cargo as fuel MSC.1/Circ.1679 (2024)</td><td><strong>Interim guidelines</strong></td><td>IGF 2.3 + guidelines; IGC ships per 1679</td></tr>
+    <tr><td>Ammonia</td><td>MSC.1/Circ.1687 (2025); cargo as fuel MSC.1/Circ.1702 (approved MSC 111, May 2026)</td><td><strong>Interim guidelines</strong>, 'provisional'</td><td>IGF 2.3 + guidelines; class rules</td></tr>
+    <tr><td>Hydrogen</td><td>MSC.1/Circ.1701 (approved MSC 111, May 2026)</td><td><strong>Interim guidelines</strong></td><td>IGF 2.3 + guidelines</td></tr>
+    <tr><td>Ammonia / hydrogen / methanol IGF chapters</td><td>CCC work programme</td><td><strong>Under development</strong> — none adopted</td><td>—</td></tr>
+  </table>
+  <p class="notes-body"><strong>How to say it in the oral.</strong> 'The IGF Code is mandatory and prescriptive for natural gas. For methanol, ammonia or hydrogen the ship is approved under section 2.3 alternative design, demonstrating equivalence under SOLAS II-1/55, using the relevant IMO interim guidelines and class rules. Those guidelines are interim and recommendatory; they are not code text.' Each time an interim guideline is named, call it interim.</p>
+
+  <div class="section-head">🔵 LNG as Fuel — The In-Service Baseline</div>
+  <table class="revision-table">
+    <tr><th>Property</th><th>Value</th><th>Note</th></tr>
+    <tr><td>Composition / storage</td><td>Mostly methane; liquid at about <strong>−162 °C</strong> at near-atmospheric pressure</td><td>Methane boils at −161.5 °C</td></tr>
+    <tr><td>Volume</td><td>Liquefaction shrinks natural gas about <strong>600 times</strong> from its gaseous volume</td><td>That is gas-to-liquid, <em>not</em> a comparison with fuel oil</td></tr>
+    <tr><td>Volume versus fuel oil</td><td>About <strong>1.8–1.9 times</strong> the fuel volume of MDO/HFO for the same energy (≈21 MJ/L vs ≈38–40 MJ/L); installed tank space 2× or more with insulation and filling limits</td><td>LHV ≈48 MJ/kg, density ≈0.42–0.45 kg/L</td></tr>
+    <tr><td>Combustion CO<sub>2</sub></td><td>About <strong>25% less per unit energy</strong> than fuel oil (57 vs 75–78 g CO<sub>2</sub>/MJ from the IMO C<sub>F</sub>/LHV values); near-zero SOx; PM 90–100% lower; NOx 40–80% lower depending on cycle</td><td>EMSA LNG bunkering guidance; C<sub>F</sub> LNG 2.750 (Part 24 Topic 1)</td></tr>
+    <tr><td>GHG caveat</td><td><strong>Methane slip</strong> (unburnt CH<sub>4</sub>) erodes the benefit; CH<sub>4</sub> GWP100 = <strong>28</strong> (regulatory, MEPC.391(81)); ≈30 in AR6; ≈80 over 20 years</td><td>The source's '36' is the AR5 fossil-methane-with-feedback value, not the regulatory one</td></tr>
+  </table>
+  <table class="revision-table">
+    <tr><th>IGC Code tank type (ch. 4)</th><th>Design vapour pressure</th><th>Secondary barrier</th><th>Typical use</th></tr>
+    <tr><td>Independent Type A (prismatic)</td><td>&lt; 0.07 MPa gauge (0.7 bar)</td><td><strong>Complete</strong></td><td>Large fully refrigerated volumes</td></tr>
+    <tr><td>Independent Type B (prismatic or spherical)</td><td>&lt; 0.07 MPa gauge</td><td><strong>Partial</strong> (drip tray), justified by refined stress/crack analysis</td><td>Moss spheres on LNG carriers</td></tr>
+    <tr><td>Independent Type C (pressure vessel)</td><td>Pressure-vessel criteria, P<sub>0</sub> ≥ 0.2 + AC(ρ<sub>r</sub>)<sup>1.5</sup> MPa</td><td><strong>None</strong></td><td>Most LNG-fuelled ships; bunker vessels; ammonia fuel tanks</td></tr>
+    <tr><td>Membrane</td><td>≤ 0.025 MPa gauge</td><td><strong>Complete</strong> (the hull structure)</td><td>Large LNG carriers; some fuel tanks</td></tr>
+  </table>
+  <table class="revision-table">
+    <tr><th>Engine class (IMO LCA converter classes)</th><th>Cycle</th><th>NOx</th><th>Default methane slip C<sub>slip</sub> (MEPC.391(81))</th></tr>
+    <tr><td>Lean-burn spark-ignited pure gas (LBSI)</td><td>Otto</td><td>Tier III in gas mode without after-treatment</td><td>2.6%</td></tr>
+    <tr><td>Low-pressure dual-fuel, medium-speed</td><td>Otto (gas admitted in air)</td><td>Tier III in gas mode</td><td>3.5%</td></tr>
+    <tr><td>Low-pressure dual-fuel, slow-speed (e.g. X-DF)</td><td>Otto</td><td>Tier III in gas mode</td><td>1.7%</td></tr>
+    <tr><td>High-pressure dual-fuel, slow-speed (e.g. ME-GI)</td><td>Diesel (gas injected at high pressure)</td><td>Not inherently Tier III — EGR/SCR needed</td><td>0.15%</td></tr>
+    <tr><td>Steam turbine / gas turbine</td><td>—</td><td>—</td><td>Niche (LNG carriers; a few fast ferries)</td></tr>
+  </table>
+  <ul class="notes-list">
+    <li><strong>Lean-burn Otto engines</strong> achieve the NOx reduction of up to about 80% that the source quotes; Diesel-cycle high-pressure engines keep the thermal efficiency and almost eliminate slip but need after-treatment for Tier III.</li>
+    <li><strong>'Gas ready'</strong> (DNV GAS READY, ABS LNG Fuel Ready) is a <em>design-compliance notation</em>: the design and a convertible main engine are approved in advance. The conversion itself — tanks, fuel-gas supply system, double-walled piping, ventilation, detection, class approval — is a major project, not an 'easy retrofit'.</li>
+    <li><strong>Redundancy.</strong> IGF Code 9.3 requires redundancy <em>within the gas fuel system</em> (at least two tanks and segregated supply) for single-fuel ships; it does not require a diesel fallback. Most LNG-fuelled ships are dual-fuel by commercial choice.</li>
+    <li><strong>Bunkering</strong> is a mature, standardised operation (IGF chapter 8: bunkering station on open deck; ISO 20519; EMSA guidance). The source's 'new technology' and 'bunker station close to the tank to save insulation' statements are out of date and unfounded respectively.</li>
+    <li><strong>Price.</strong> LNG is not structurally cheaper than fuel oil; in 2022 LNG bunkers were far dearer than VLSFO. Do not teach a price ranking as fact.</li>
+  </ul>
+
+  <div class="section-head">🟢 Methanol as Fuel — Low-Flashpoint Liquid</div>
+  <table class="revision-table">
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>Molecule</td><td>CH<sub>3</sub>OH — contains carbon; combustion C<sub>F</sub> 1.375 t CO<sub>2</sub>/t (Part 24 Topic 1)</td></tr>
+    <tr><td>Storage</td><td>Liquid at ambient temperature and pressure; about <strong>2.3 times</strong> the fuel volume of MGO (LHV 19.9 MJ/kg, ≈15.8 MJ/L)</td></tr>
+    <tr><td>Flash point</td><td>About <strong>11–12 °C</strong> — a low-flashpoint fuel, hence the IGF framework (cofferdams, double-walled piping, inerting, detection)</td></tr>
+    <tr><td>Flammability</td><td>About 6–36% v/v in air; burns with a near-invisible flame; miscible with water (water-dilution is a fire-fighting option)</td></tr>
+    <tr><td>Toxicity</td><td>Toxic by ingestion, inhalation and skin absorption</td></tr>
+    <tr><td>Instrument</td><td>MSC.1/Circ.1621 (2020) <strong>interim guidelines</strong>; revised text to MSC 113 (2027)</td></tr>
+  </table>
+  <table class="revision-table">
+    <tr><th>Pathway</th><th>Feedstock / process</th><th>Well-to-wake position</th></tr>
+    <tr><td>Fossil ('grey') methanol</td><td>Natural gas → syngas → methanol</td><td>About the same as, or higher than, MGO (FuelEU default ≈100 vs ≈90 g CO<sub>2</sub>eq/MJ) — <em>no GHG benefit</em></td></tr>
+    <tr><td>Bio-methanol</td><td>Biomass, forestry residues, biogas, municipal waste</td><td>Low WtW; funnel CO<sub>2</sub> unchanged but biogenic</td></tr>
+    <tr><td>e-Methanol</td><td>Renewable-electricity hydrogen + CO<sub>2</sub> from direct air capture or a biogenic point source</td><td>Low WtW if electricity and CO<sub>2</sub> source qualify; <strong>not</strong> zero at the funnel</td></tr>
+  </table>
+  <p class="notes-body"><strong>Operating example — <em>Stena Germanica</em>.</strong> The Stena Line ro-pax was converted at Remontowa, Gdansk, in January–March 2015: four Wärtsilä-Sulzer 8ZA40S engines were converted to dual-fuel methanol operation with diesel pilot injection — the first methanol-fuelled ro-pax conversion. Wärtsilä's reference figures for methanol operation against conventional fuel are about <strong>99% less SOx, 60% less NOx and 90% less particulates</strong> (maker figures, fossil methanol). Any life-cycle CO<sub>2</sub> benefit depends on the methanol pathway, not on the conversion.</p>
+  <p class="notes-body"><strong>ORAL-Q currency (date-labelled).</strong> DNV's Alternative Fuels Insight reported over 450 methanol-capable vessels in operation and on order (December 2025); methanol newbuild orders fell from 149 in 2024 to 61 in 2025 while LNG orders rose — re-verify any such figure before quoting it.</p>
+
+  <div class="section-head">🟠 Ammonia as Fuel — Toxic, Easily Liquefied, Carbon-Free at the Funnel</div>
+  <div class="timeline-block">PRODUCTION — every pathway ends in HABER-BOSCH synthesis:  N2 + 3 H2  →  2 NH3
+   typically 100-300 bar, 400-500 C, promoted iron catalyst, ~15 % per pass with recycle
+
+   hydrogen source                     label (informal)        world share 2020 (IEA)
+   natural gas, steam reforming   →    GREY                    ~72 %
+   coal gasification              →    BROWN / BLACK           ~26 %
+   fossil + carbon capture (CCS)  →    BLUE                    small
+   renewable electrolysis + ASU   →    GREEN                   a fraction of a per cent
+   The ammonia is chemically identical; only the upstream (well-to-tank) emissions differ.</div>
+  <ul class="notes-list">
+    <li><strong>Colour labels are informal industry terms</strong> ('lack legal definition' — IRENA). No IMO instrument defines them; the 2024 LCA Guidelines use fuel-pathway codes and gCO<sub>2</sub>eq/MJ. The source's 'brown ammonia from natural gas' is corrected: gas-based is <em>grey</em>, coal-based is <em>brown or black</em>, with-CCS is <em>blue</em>.</li>
+    <li>Ammonia is an <strong>established commodity</strong> (about 185 Mt a year, IEA 2020 figure) with mature terminal, ship and pipeline handling under the IGC Code — that, not SCR, is where seagoing ammonia experience lives.</li>
+  </ul>
+  <table class="revision-table">
+    <tr><th>Safety property</th><th>Verified value</th><th>Source</th></tr>
+    <tr><td><strong>Toxicity — the dominant hazard</strong></td><td>Exposure limits: TWA <strong>25 ppm</strong>, STEL <strong>35 ppm</strong>, IDLH <strong>300 ppm</strong> (NIOSH; ACGIH TLV 25/35; OSHA PEL 50). Detection thresholds in MSC.1/Circ.1687: 25 ppm indication, 110 ppm alarm, 220 ppm safety actions</td><td>NIOSH Pocket Guide; Circ.1687 Table 1</td></tr>
+    <tr><td>Odour</td><td>Detectable at roughly <strong>5 ppm</strong> (ATSDR); reported range about 0.04–53 ppm. <strong>Odour is not a reliable warning</strong> — the band overlaps the exposure limits; fixed detection is required</td><td>ATSDR; DNV</td></tr>
+    <tr><td>Contact</td><td>Corrosive to skin and eyes (chemical burns); liquid or pressurised release causes frostbite</td><td>ICSC 0414</td></tr>
+    <tr><td>Flammable range</td><td>About <strong>15–28% v/v</strong> in air (NIOSH LEL 15 / UEL 28); laboratory 15.15–27.35% in dry air</td><td>NIOSH; ASHRAE 1995</td></tr>
+    <tr><td>Auto-ignition</td><td>About <strong>630–651 °C</strong> depending on reference (ICSC 630; USCG/CAMEO 651)</td><td>ICSC; CAMEO</td></tr>
+    <tr><td>Fire behaviour</td><td>Narrow range, high minimum ignition energy (DNV: ≈8 mJ vs 0.3 mJ for methane), low flame speed — fire risk lower than for other fuels; <em>toxicity, not fire, drives the design</em></td><td>DNV; ABS</td></tr>
+  </table>
+  <table class="revision-table">
+    <tr><th>Storage and materials</th><th>Position under MSC.1/Circ.1687 and the IGC Code</th></tr>
+    <tr><td>Liquefaction</td><td>Liquid at about <strong>−33 °C at atmospheric pressure</strong> (682 kg/m³), or at ambient temperature under its own vapour pressure — <strong>≈8.6 bar absolute at 20 °C</strong> (610 kg/m³, NIST). Piping design pressure 18 bar = vapour pressure at 45 °C (Circ.1687 7.3.1)</td></tr>
+    <tr><td>Tank types</td><td>Circ.1687 6.4 applies IGF 6.4: independent Type A, B, C and membrane tanks are all admissible. <strong>Type C pressurised or semi-refrigerated</strong> tanks are the usual fuel-tank choice; large volumes may be fully refrigerated Type A/B at −33 °C. Boil-off handling is far less demanding than for LNG or liquid hydrogen</td></tr>
+    <tr><td>Volume</td><td>LHV 18.6 MJ/kg → ≈11–13 MJ/L: about <strong>2.8–3.1 times</strong> the fuel volume of MGO (≈36 MJ/L), smaller than liquid hydrogen (≈8.5 MJ/L, ≈4.2×); tank-system volume larger still</td></tr>
+    <tr><td>Materials excluded</td><td><strong>Copper, zinc, aluminium and their alloys</strong> (brass, bronze) — attacked by moist ammonia (ICSC); mercury and cadmium also excluded by class rules</td></tr>
+    <tr><td>Steels</td><td>Carbon-manganese steel per IGC 17.12: specified minimum yield ≤ 355 N/mm² and actual yield ≤ 440 N/mm², plus one of tensile strength ≤ 410 N/mm², post-weld heat treatment, carriage below −20 °C, or ≥ 0.1% w/w water; nickel steels above 5% Ni prohibited. Invoked by Circ.1687 7.3.3; bellows prohibited (7.3.2)</td></tr>
+    <tr><td>Stress corrosion cracking</td><td>Driven by <strong>dissolved oxygen and tensile stress</strong> in liquid ammonia; IGC 17.12.8 limits dissolved O<sub>2</sub> to < 2.5 ppm w/w; a small water content (≥ 0.1% w/w) inhibits it; low temperature retards initiation; PWHT or low-strength steel are the design answers</td></tr>
+  </table>
+  <table class="revision-table">
+    <tr><th>Engine and emissions (current OEM evidence)</th><th>Position</th></tr>
+    <tr><td>Engines in service</td><td>WinGD X52DF-A delivered and installed July 2025 (EXMAR <em>Antwerpen</em>); Everllence (ex-MAN ES) 6G60ME-LGIA passed FAT April 2026, first delivery from October 2026. 'Engine at design stage' is no longer true</td></tr>
+    <tr><td>Pilot fuel</td><td>About <strong>5% at full load</strong> on both two-stroke platforms (MAN ES specific pilot oil consumption target reached; WinGD ≈5%); higher at part load. The source's 'large percentage' reflects 2020 test figures of 10–15%</td></tr>
+    <tr><td>Exhaust species that matter</td><td><strong>N<sub>2</sub>O</strong> (GWP100 273 in AR6; 265 in the LCA Guidelines) and <strong>ammonia slip</strong> (unburnt NH<sub>3</sub> in the exhaust — distinct from a leak). OEM data: N<sub>2</sub>O 'negligible' with tuning (WinGD &lt; 3 ppm), NH<sub>3</sub> slip &lt; 10 ppm with SCR</td></tr>
+    <tr><td>NOx</td><td>Manageable: MAN ES reports NOx about 40% lower than fuel oil, residual NOx and NH<sub>3</sub> removed in the SCR. 'Increased NOx' is not the central concern; N<sub>2</sub>O and slip are</td></tr>
+    <tr><td>Combustion</td><td>Low flame speed and high ignition energy make pure-ammonia IC combustion poor; hence pilot-ignited dual-fuel designs and derating of load ranges</td></tr>
+    <tr><td>Challenges that remain</td><td>Toxicity and crew exposure design; fuel infrastructure; cost; corrosion-aware materials; interim-only regulation; low energy density</td></tr>
+  </table>
+
+  <div class="section-head">⚪ Hydrogen as Fuel — Non-Toxic, Extremely Flammable, Hard to Store</div>
+  <table class="revision-table">
+    <tr><th>Property</th><th>Verified value</th></tr>
+    <tr><td>Nature</td><td>Found only in compounds (water, methane); colourless, odourless, lighter than air; <strong>non-toxic simple asphyxiant</strong> — but <strong>extremely flammable and reactive</strong>, not 'non-reactive'</td></tr>
+    <tr><td>Flammability</td><td>About <strong>4–75% v/v</strong> in air; minimum ignition energy ≈ 0.02 mJ (an order of magnitude below methane); auto-ignition ≈ 574 °C; near-invisible flame</td></tr>
+    <tr><td>Dispersion</td><td>Rises and disperses rapidly <em>unless confined</em> — enclosed spaces are the hazard; detection and ventilation at high points</td></tr>
+    <tr><td>Compressed storage</td><td><strong>350 or 700 bar</strong> standard pressures (DOE); ≈2.8–4.7 MJ/L — about 8–13 times the fuel volume of MGO</td></tr>
+    <tr><td>Liquid storage</td><td>Boiling point <strong>−252.8 °C</strong>; ≈8–8.5 MJ/L, about 4.2 times MGO before insulation; cryogenic plant and boil-off management required</td></tr>
+    <tr><td>Use on board</td><td>Fuel cells (PEM) — zero GHG <em>at point of use</em> (water only), MSC.1/Circ.1647; IC engines mono-fuel or dual-fuel — NOx still to be controlled</td></tr>
+    <tr><td>Instrument</td><td>MSC.1/Circ.1701 <strong>interim guidelines</strong> for hydrogen-fuelled ships (approved MSC 111, May 2026)</td></tr>
+  </table>
+  <p class="notes-body"><strong>Zero tank-to-wake CO<sub>2</sub> is not zero well-to-wake GHG.</strong> Hydrogen from unabated natural-gas reforming carries the reforming CO<sub>2</sub> upstream; only renewable-electrolytic ('green') or effectively abated ('blue') hydrogen gives a low well-to-wake figure. The production chain for grey hydrogen is desulfurisation → steam reforming → shift conversion (CO + H<sub>2</sub>O → CO<sub>2</sub> + H<sub>2</sub>) → CO<sub>2</sub> removal → pressure-swing purification.</p>
+  <p class="notes-body"><strong>Context box — production shares (volatile; IEA Global Hydrogen Review 2024, 2023 data).</strong> World production about 97 Mt a year: roughly two-thirds from unabated natural gas, about one-fifth from coal, most of the rest by-product hydrogen; <strong>all low-emissions hydrogen under 1%</strong> and electrolytic about 0.1%. IEA avoids colour labels and speaks of 'low-emissions hydrogen'. These shares move every year; they are context, not memorisation content, and older percentage splits found in study notes should not be quoted. IEA 2024 cost ranges: unabated natural-gas hydrogen about USD 0.8–5.7/kg; renewable-electrolytic hydrogen carries a premium of roughly USD 1.5–8/kg today.</p>
+
+  <div class="section-head">📊 Comparison — The Answer Simon Is Waiting For</div>
+  <table class="revision-table">
+    <tr><th></th><th>LNG</th><th>Methanol</th><th>Ammonia</th><th>Hydrogen</th></tr>
+    <tr><td>Molecule / carbon in fuel</td><td>CH<sub>4</sub> — yes</td><td>CH<sub>3</sub>OH — yes</td><td>NH<sub>3</sub> — <strong>no</strong></td><td>H<sub>2</sub> — <strong>no</strong></td></tr>
+    <tr><td>Storage form</td><td>Cryogenic liquid</td><td>Ambient liquid</td><td>Refrigerated or pressurised liquid</td><td>Compressed gas or cryogenic liquid</td></tr>
+    <tr><td>Indicative storage condition</td><td>≈ −162 °C, near-atmospheric</td><td>Ambient; flash point ≈ 11–12 °C</td><td>≈ −33 °C at 1 bar, or ≈ 8.6 bar abs at 20 °C</td><td>350–700 bar, or ≈ −253 °C</td></tr>
+    <tr><td>Fuel volume vs MGO (energy basis, approx.)</td><td>≈ 1.8×</td><td>≈ 2.3×</td><td>≈ 2.8–3.1×</td><td>LH<sub>2</sub> ≈ 4.2×; 700 bar ≈ 8×; 350 bar ≈ 13×</td></tr>
+    <tr><td>Key safety hazard</td><td>Cryogenic; flammable 5–15%</td><td>Toxic; low flash point; invisible flame</td><td><strong>Toxic</strong> (TWA 25 ppm); corrosive; narrow flammability 15–28%</td><td><strong>Extremely flammable</strong> 4–75%; invisible flame; asphyxiant</td></tr>
+    <tr><td>Principal emissions concern</td><td><strong>Methane slip</strong> (GWP100 28)</td><td>WtW depends on pathway; funnel CO<sub>2</sub> same for all methanol</td><td><strong>N<sub>2</sub>O</strong> and NH<sub>3</sub> slip; NOx via SCR</td><td>NOx in IC engines; WtW depends on pathway</td></tr>
+    <tr><td>Tank-to-wake CO<sub>2</sub></td><td>≈ 25% below fuel oil</td><td>C<sub>F</sub> 1.375 — about 10% below MGO per MJ</td><td>Zero</td><td>Zero</td></tr>
+    <tr><td>IMO safety route / status</td><td>IGF Code Part A-1 — <strong>mandatory, prescriptive</strong></td><td>IGF 2.3 + MSC.1/Circ.1621 — <strong>interim</strong></td><td>IGF 2.3 + MSC.1/Circ.1687 (and 1702 on gas carriers) — <strong>interim</strong></td><td>IGF 2.3 + MSC.1/Circ.1701 — <strong>interim</strong></td></tr>
+    <tr><td>Engine technology</td><td>Mature: Otto and Diesel dual-fuel, lean-burn SI</td><td>Mature: dual-fuel two- and four-stroke in service since 2015–16</td><td>First dual-fuel two-strokes in service 2025–26 (≈ 5% pilot at full load)</td><td>Fuel cells; IC engines in development / early service</td></tr>
+    <tr><td>Major engineering challenge</td><td>Slip control; cryogenic tank space</td><td>Low flash point; tank volume; pathway certification</td><td>Toxicity engineering; materials; N<sub>2</sub>O; supply of low-carbon product</td><td>Storage volume and temperature; leak detection; cost</td></tr>
+  </table>
+  <p class="notes-body">Values marked 'approx.' are computed from standard LHV and density figures (DNV, NIST, DOE) and are fuel-volume ratios; installed tank-system volumes are larger. Emission and pilot-fuel figures are maker- and pathway-dependent and dated to the OEM and IEA sources named above.</p>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Simon):</strong> Simon opens with 'Why do we need alternative fuels and how do we compare them?' Answer in three moves. <em>One</em>: the 2023 Strategy — net-zero by or around 2050 — and the well-to-wake basis of the 2024 LCA Guidelines, WtW = WtT + TtW in gCO<sub>2</sub>eq/MJ, CO<sub>2</sub>, methane and N<sub>2</sub>O. <em>Two</em>: the regulatory spine — IGF Code mandatory and prescriptive for natural gas, everything else through section 2.3 alternative design under SOLAS II-1/55 with the <strong>interim</strong> guidelines, named by number and always called interim. <em>Three</em>: one hazard and one emissions concern per fuel — LNG cryogenic and methane slip; methanol low flash point and toxic; ammonia toxic with N<sub>2</sub>O and slip; hydrogen 4–75% flammable and storage. If he pushes on ammonia, give the ppm ladder (25/35/300, detection 25/110/220) and say odour is not a warning. If he asks about tank types, Type B has a partial secondary barrier and Type C has none. Four answers fail candidates: that ammonia is already handled in SCR, that LNG needs 600 times less space than fuel oil, that methane is 36 times CO<sub>2</sub> under the IMO guidelines, and that any of the interim guidelines is a mandatory code.</div>
+
+  <div class="section-head">🎯 Oral Q&amp;A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. Explain well-to-tank, tank-to-wake and well-to-wake, and state the IMO basis.</div><div class="qa-a">Under the 2024 IMO LCA Guidelines, resolution MEPC.391(81), well-to-tank covers the upstream emissions of producing the fuel — feedstock extraction or cultivation, conversion, transport and bunkering — per unit energy delivered to the ship. Tank-to-wake covers everything from the bunker manifold to the energy converter: combustion CO2 plus methane or ammonia slip, nitrous oxide and fugitive losses. Well-to-wake is their sum, expressed as a GHG intensity in grams of CO2-equivalent per megajoule, counting CO2, methane and nitrous oxide with 100-year global warming potentials from IPCC AR5 of 1, 28 and 265. The CII is tank-to-wake with fixed carbon factors; the draft IMO GHG fuel intensity and FuelEU Maritime are well-to-wake.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. What is the regulatory status of ammonia, hydrogen and methanol as ship fuels today?</div><div class="qa-a">The IGF Code, resolution MSC.391(95), is mandatory under SOLAS chapter II-1 Part G and has been in force since 1 January 2017, but its prescriptive Part A-1 covers natural gas only. Other low-flashpoint fuels are approved under section 2.3 alternative design, demonstrating an equivalent level of safety under SOLAS regulation II-1/55, supported by IMO interim guidelines: MSC.1/Circ.1621 for methyl and ethyl alcohol, MSC.1/Circ.1647 for fuel cells, MSC.1/Circ.1666 and 1679 for LPG, MSC.1/Circ.1687 for ammonia, and MSC.1/Circ.1701 for hydrogen and 1702 for ammonia cargo as fuel, both approved at MSC 111 in May 2026. All are interim and recommendatory; no ammonia, hydrogen or methanol chapter has yet been adopted into the IGF Code, although a revised methanol guideline goes to MSC 113 in 2027 with a mandatory chapter as the stated aim.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Describe the hazards of ammonia as a fuel and how the ship is protected.</div><div class="qa-a">Toxicity is the dominant hazard: the NIOSH exposure limits are 25 ppm as an eight-hour average and 35 ppm short-term, with 300 ppm immediately dangerous to life, and ammonia is corrosive to skin and eyes. Odour is not a reliable warning because people detect it at roughly 5 ppm but the reported range runs from about 0.04 to 53 ppm, overlapping the limits, so MSC.1/Circ.1687 requires fixed detection with indication at 25 ppm, alarm at 110 ppm and safety actions at 220 ppm, plus toxic-area control, double-walled piping, ventilation, release mitigation and personal protection. The flammable range is about 15 to 28 per cent in air with an auto-ignition temperature around 630 to 651 degrees, so fire risk is lower than for other fuels. Materials exclude copper, zinc, aluminium and their alloys; steels follow IGC Code chapter 17.12 with dissolved oxygen limited below 2.5 ppm and a small water content to prevent stress corrosion cracking.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4. How is ammonia stored on board and how does it compare with hydrogen and LNG?</div><div class="qa-a">Ammonia liquefies at about minus 33 degrees at atmospheric pressure, or at ambient temperature under its own vapour pressure of about 8.6 bar absolute at 20 degrees; MSC.1/Circ.1687 sets a piping design pressure of 18 bar, the vapour pressure at 45 degrees. All IGF tank types are admissible — independent Types A, B and C and membrane — and Type C pressurised or semi-refrigerated tanks are the usual fuel-tank choice, with fully refrigerated Type A or B for large volumes. Its volumetric energy density of about 11 to 13 megajoules per litre means roughly 2.8 to 3.1 times the fuel volume of marine gas oil, compared with about 1.8 times for LNG at minus 162 degrees and about 4.2 times for liquid hydrogen at minus 253 degrees before insulation. Boil-off handling is much less demanding than for LNG or hydrogen.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5. What are the emissions concerns with ammonia and LNG engines?</div><div class="qa-a">For LNG the concern is methane slip, unburnt methane escaping mainly from Otto-cycle engines; the 2024 LCA Guidelines assign default slip of 3.5 per cent for medium-speed and 1.7 per cent for slow-speed low-pressure dual-fuel engines, 2.6 per cent for lean-burn spark-ignited engines and 0.15 per cent for high-pressure Diesel-cycle engines, with methane weighted at a GWP100 of 28. For ammonia the concerns are nitrous oxide, with a GWP100 of 265 in the Guidelines and 273 in AR6, and ammonia slip, unburnt ammonia in the exhaust; current two-stroke designs report N2O below a few ppm with tuning and slip below 10 ppm after SCR, with NOx lower than on fuel oil. Both engines burn about 5 per cent pilot fuel at full load, more at part load.</div></div>
+    <div class="qa-item"><div class="qa-q">Q6. Compare methanol and hydrogen as marine fuels.</div><div class="qa-a">Methanol is an ambient liquid with a flash point of about 11 to 12 degrees, so it is a low-flashpoint fuel under the IGF alternative-design route and MSC.1/Circ.1621; it is toxic, burns with a near-invisible flame, needs about 2.3 times the volume of gas oil, and its tank-to-wake CO2 is the same whatever its origin, so its climate value depends entirely on whether it is fossil, bio- or e-methanol on a well-to-wake basis. Hydrogen is a non-toxic asphyxiant but extremely flammable across 4 to 75 per cent in air with a very low ignition energy; it is stored at 350 to 700 bar or as a liquid at minus 253 degrees, needing four to thirteen times the volume of gas oil; it gives zero tank-to-wake CO2 in fuel cells under MSC.1/Circ.1647 or in engines under MSC.1/Circ.1701, but its well-to-wake footprint depends on the production pathway, and most hydrogen today is still made from unabated natural gas.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Define well-to-tank, tank-to-wake and well-to-wake GHG intensity and name the IMO guidelines that define them.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Explain the regulatory route by which a methanol-, ammonia- or hydrogen-fuelled ship is approved today, distinguishing mandatory code text from interim guidelines, and name the instruments.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Compare LNG, methanol, ammonia and hydrogen as marine fuels under the headings storage, safety hazards, emissions (tank-to-wake and well-to-wake), regulatory status and engineering challenges, and discuss the role of fuel choice in meeting the 2023 IMO GHG Strategy.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>WtW = WtT + TtW · gCO<sub>2</sub>eq/MJ · CO<sub>2</sub>, CH<sub>4</sub> (28), N<sub>2</sub>O (265) · MEPC.391(81).</strong> CII = TtW; GFI and FuelEU = WtW (Part 22 T3).</li>
+      <li><strong>IGF Code = mandatory, natural gas only · everything else = §2.3 alternative design + SOLAS II-1/55 + INTERIM guidelines.</strong></li>
+      <li><strong>1621 methanol · 1647 fuel cells · 1666/1679 LPG · 1687 ammonia · 1701 hydrogen · 1702 ammonia cargo as fuel (MSC 111, May 2026).</strong></li>
+      <li><strong>Ammonia: TWA 25 / STEL 35 / IDLH 300 ppm · detect 25 / 110 / 220 ppm · odour ≈ 5 ppm, NOT a warning · 15–28% · 630–651 °C.</strong></li>
+      <li><strong>Storage: NH<sub>3</sub> −33 °C or 8.6 bar @ 20 °C · LNG −162 °C · LH<sub>2</sub> −253 °C or 350–700 bar · MeOH ambient, flash 11–12 °C.</strong></li>
+      <li><strong>Volume vs MGO: LNG ≈ 1.8× · MeOH ≈ 2.3× · NH<sub>3</sub> ≈ 3× · LH<sub>2</sub> ≈ 4× (600× is gas-to-liquid, not tank volume).</strong></li>
+      <li><strong>Tanks: A complete barrier · B PARTIAL · C pressure vessel, none · membrane complete.</strong> No Cu/Zn/Al with ammonia; O<sub>2</sub> &lt; 2.5 ppm against SCC.</li>
+      <li><strong>Emissions: LNG = methane slip · NH<sub>3</sub> = N<sub>2</sub>O + slip · H<sub>2</sub> = NOx in engines · MeOH = pathway.</strong> Marine SCR uses UREA, not ammonia.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Case Study — An Ammonia Dual-Fuel Newbuilding at the Design-Review Table</button>
+    <div class="deep-dive-body">
+      <h4>Situation (illustrative)</h4>
+      <p>An owner orders a gas carrier with an ammonia dual-fuel two-stroke engine for delivery in 2027. The superintendent asks the Chief Engineer-designate to review the yard's safety concept before the class risk-assessment workshop.</p>
+      <h4>What the review checks</h4>
+      <p><strong>Regulatory route.</strong> The design is approved under IGF Code section 2.3 alternative design, demonstrating equivalence under SOLAS II-1/55, using MSC.1/Circ.1687 (and, because the fuel is also the cargo, MSC.1/Circ.1702) together with the class rules — all interim. The review confirms every departure from the IGF natural-gas text is covered by a risk-assessment item. <strong>Toxicity design.</strong> Fuel-preparation room and engine-room detection set at 25 ppm indication, 110 ppm alarm and 220 ppm safety actions; the dispersion analysis shows that 220 ppm cannot reach accommodation air intakes; double-walled fuel piping with ventilated annular spaces; a release-mitigation system to absorb vented ammonia in water; escape routes and PPE for the toxic-area concept. <strong>Storage.</strong> Type C semi-refrigerated fuel tanks designed for 18 bar; the boil-off calculation shows a modest reliquefaction load compared with the LNG alternative. <strong>Materials.</strong> No copper, zinc or aluminium alloys anywhere in ammonia service — the review catches a brass instrument fitting in the vendor list. Tank and pipe steel per IGC 17.12, with the ammonia specification limiting dissolved oxygen to below 2.5 ppm and a minimum water content against stress corrosion cracking. <strong>Engine and emissions.</strong> Pilot fuel about 5% at full load, so the diesel-oil system and tanks are retained; an SCR sized for the remaining NOx and ammonia slip; N<sub>2</sub>O addressed through combustion tuning and recorded in the well-to-wake calculation, because at a GWP100 of 265 a small N<sub>2</sub>O figure can undo the carbon-free advantage.</p>
+      <h4>The lesson for the examiner</h4>
+      <p>Ammonia's case rests on three numbers the candidate must own — 25 ppm, 2.5 ppm oxygen and GWP 265 — and one sentence: 'approved by alternative design under interim guidelines, not by a prescriptive code'. Everything else in the review follows from those.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>International Code of Safety for Ships using Gases or other Low-flashpoint Fuels (IGF Code), resolution MSC.391(95), as amended — SOLAS chapter II-1 Part G</li>
+    <li>MSC.1/Circ.1621 (7 December 2020) — Interim guidelines for the safety of ships using methyl/ethyl alcohol as fuel</li>
+    <li>MSC.1/Circ.1647 (15 June 2022) — Interim guidelines for the safety of ships using fuel cell power installations</li>
+    <li>MSC.1/Circ.1666 (30 June 2023) — Interim guidelines for the safety of ships using LPG fuels; MSC.1/Circ.1679 (2024) — Interim guidelines for the safety of ships using LPG cargo as fuel</li>
+    <li>MSC.1/Circ.1687 (26 February 2025) — Interim guidelines for the safety of ships using ammonia as fuel</li>
+    <li>MSC.1/Circ.1701 — Interim guidelines for the safety of ships using hydrogen as fuel; MSC.1/Circ.1702 — Interim guidelines for the use of ammonia cargo as fuel (both approved at MSC 111, May 2026)</li>
+    <li>International Code for the Construction and Equipment of Ships Carrying Liquefied Gases in Bulk (IGC Code), resolution MSC.370(93) — chapter 4 (tank types) and chapter 17.12 (ammonia)</li>
+    <li>Resolution MEPC.391(81) (22 March 2024) — 2024 Guidelines on Life Cycle GHG Intensity of Marine Fuels (2024 LCA Guidelines)</li>
+    <li>Resolution MEPC.377(80) (7 July 2023) — 2023 IMO Strategy on Reduction of GHG Emissions from Ships</li>
+    <li>IACS Unified Requirement M77 — Selective catalytic reduction systems: reductant selection</li>
+    <li>NIOSH Pocket Guide to Chemical Hazards (ammonia, methanol); NOAA CAMEO Chemicals (ammonia, hydrogen, methanol); IPCS International Chemical Safety Card 0414 (ammonia); ATSDR Toxicological Profile for Ammonia (2004); NIST Chemistry WebBook (ammonia, methane saturation data)</li>
+    <li>IEA Global Hydrogen Review 2024; IEA Ammonia Technology Roadmap (2021); IRENA/AEA Innovation Outlook: Renewable Ammonia (2022)</li>
+    <li>IPCC AR5 WGI Table 8.7 and AR6 WGI Table 7.15 / 7.SM.7 — global warming potentials</li>
+    <li>EMSA Guidance on LNG Bunkering to Port Authorities and Administrations (2018); DNV Rules Pt 6 Ch 2 'Gas ready'; ABS Guide for LNG Fuel Ready Vessels</li>
+    <li>ABS Sustainability Whitepaper 'Ammonia as Marine Fuel' (2020) and DNV 'Ammonia as a Marine Fuel' (2020) — class background papers (source of the handwritten pages; figures re-verified)</li>
+    <li>Lloyd's Register press release (2 April 2015) and Wärtsilä customer reference — Stena Germanica methanol conversion; MAN Energy Solutions / Everllence and WinGD press releases 2024–2026 — ammonia engine status and pilot-fuel figures</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p25 · Topic 1 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p25 · P25-T1 · v1.0</div>
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- TOPIC 2 — SHIP DESIGN FOR ENERGY EFFICIENCY -->
+<!-- ========================================================================== -->
+
+<div class="topic-block" id="topic-p25-2" data-kw="energy efficiency design, ship size and capacity, economies of scale, transport efficiency, EEDI reference line, service speed, speed power relationship, propeller law, cube law, slow steaming, speed optimisation, just in time arrival, JIT, port call optimisation, principal dimensions, length beam draught, L/B ratio, B/T ratio, block coefficient, wave making resistance, frictional resistance, wetted surface, stability versus resistance, hull form optimisation, parent hull, Lackenby distortion, lines distortion, hull lines, forebody optimisation, bulbous bow, forward shoulder, waterline entrance, Kracht bulb parameters, re-bulbing, aft body optimisation, stern waves, flow separation, eddies, wake field, stern flap, transom stern, cruiser stern, counter stern, CFD, computational fluid dynamics, potential flow, RANS, model test, twin skeg, skeg, redundant propulsion, shuttle tanker, full form ship, naval architecture">
+  <div class="topic-header">
+    <div class="topic-badge">Part 25 · Topic 2</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Ship Design for Energy Efficiency — Size, Speed, Principal Dimensions and Hull-Form Optimisation</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Scale effect · Speed–power law · JIT (cross-ref) · L / B / T trade-offs · Parent-hull distortion · Bulbous bow · Aft-body &amp; stern flaps · CFD · Twin skeg</span>
+        <span class="topic-pages">Uday pp. 614–621</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-medium">◆ Medium Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> <strong>Source structure.</strong> This topic merges two short source pieces: a three-page exam-answer on 'Optimization of Ship Dimensions' (PDF 614–616, from a different notebook sequence) and the written-question chapter 'Hull forms and Energy efficiency' (PDF 617–621). The exam answer is kept as examiner framing; the engineering depth comes from the hull-form chapter. <strong>Part 25 source boundary.</strong> PDF 622 onward (Propeller Advancement, nomenclature, Azimuth) belongs wholly to Part 26 under Founder decision D-25-1 and is not taught here. <strong>Corrections in this topic.</strong> (1) The source's generic 'V-shaped bulb' rule (a V at the base of the bulb to mitigate slamming, behaving as a traditional bulb when loaded and extending the waterline in ballast) has no authoritative basis and is <strong>dropped</strong>; bulb design is taught through Kracht's parameters and the verified fact that a bulb's benefit is specific to speed and draught. (2) 'Line distortion method' is the Lackenby-type <strong>distortion of a parent hull</strong>; the textbook routes are conventional lines design, distortion of an existing form, and CFD-based design, while 'accept the yard's standard hull' is commercial practice. (3) CFD is <em>Computational</em>, not 'computerised', Fluid Dynamics. (4) The source's general statements on fuel-cost share, container-ship upsizing and tanker slow steaming are kept <strong>qualitative</strong>; no statistics are quoted because no primary figures were verified. <strong>Cross-references, not repeated here:</strong> EEDI reference lines and the scale effect in Part 23 Topic 1; EEXI power limitation and bulbous-bow modification in Part 23 Topic 2; SEEMP measures and just-in-time arrival in Part 24 Topic 1; slow steaming versus de-rating and the propeller law in Part 24 Topic 2; propeller devices and wake conditioning in Part 26.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body"><strong>Design for energy efficiency</strong> is the choice of a ship's <strong>size and capacity</strong>, its <strong>service speed</strong>, its <strong>principal dimensions</strong> (length, beam and draught) and its <strong>hull form</strong> so that the transport work it performs costs the least fuel. The physics is simple to state: resistance is mostly friction on the wetted surface plus wave-making, propulsion power rises roughly with the cube of speed, and a larger ship carries more cargo per unit of resistance. The design problem is the trade-off: a longer, finer hull resists less but carries less and may be less stable; a fuller, wider hull carries more but makes more waves. <strong>Hull-form optimisation</strong> — the fore-body (bulbous bow, forward shoulder, waterline entrance), the aft-body (stern waves, flow separation, wake to the propeller, stern flaps and stern form) and, on full ships, a <strong>twin-skeg</strong> arrangement — is the naval architect's lever once the main dimensions are fixed, and is now worked with potential-flow and RANS <strong>computational fluid dynamics</strong> confirmed by model tests.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>The EEDI (Part 23 Topic 1) is a design index: reference lines fall with deadweight and the attained value is driven by installed power at the reference speed. Size, speed and hull form are the three levers that set it.</li>
+    <li>A Chief Engineer who understands why the ship was shaped as it was can explain in-service behaviour — why she is sensitive to trim, why slow steaming helps less than the cube law suggests at low speed, why the bulb hurts in ballast.</li>
+    <li>Retrofit decisions — re-bulbing for a new service speed, fitting a stern flap, choosing a slow-steaming profile — are made with the same physics and the same CFD tools, and the engine department supplies the performance data.</li>
+    <li>Simon uses the topic to test whether a candidate can connect regulation (EEDI, SEEMP, CII) to naval-architecture cause and effect rather than reciting measures.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">1950</span>  Lackenby, 'On the systematic geometrical variation of ship forms' (Trans. RINA) — the parent-hull distortion method still used in hull optimisation
+<span class="t-year">1978</span>  Kracht, 'Design of bulbous bows' (SNAME Transactions) — bulb parameters and section types
+<span class="t-year">1 Jan 2013</span>  EEDI and SEEMP in force (MARPOL Annex VI chapter 4) — design efficiency becomes regulated; reference lines a·DWT<sup>−c</sup> codify the scale effect
+<span class="t-year">2020</span>  IMO GloMEEP / GIA 'Just In Time Arrival Guide' — barriers and benefits of JIT (see Part 24 Topic 1 for SEEMP)
+<span class="t-year">1 Jan 2023</span>  EEXI and CII in force — speed optimisation, power limitation and hull-form retrofits applied to the existing fleet (Part 23 Topics 2 and 3)</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key References</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, regulations 22–25 and the EEDI reference lines (MEPC.203(62); MEPC.308(73) calculation guidelines)</span><span class="reg-desc">Required EEDI = (1 − X/100) × a × DWT<sup>−c</sup>: the reference line falls with size, the regulatory expression of the scale effect. Attained EEDI depends on installed power, reference speed and capacity — the design variables of this topic.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, regulation 26 and the 2024 SEEMP Guidelines (MEPC.395(82) as amended)</span><span class="reg-desc">Speed optimisation means the speed giving minimum fuel per tonne-mile, not minimum speed; just-in-time arrival as a company-specific measure — Part 24 Topic 1.</span></div>
+    <div class="reg-item"><span class="reg-code">IMO GloMEEP / Global Industry Alliance — Just In Time Arrival Guide (2020; MEPC 75/INF.22)</span><span class="reg-desc">JIT to berth, fairway or pilot station; ships spend a significant share of time waiting at anchorage; the 'due despatch' clause as the contractual barrier.</span></div>
+    <div class="reg-item"><span class="reg-code">MAN Energy Solutions — Basic Principles of Ship Propulsion</span><span class="reg-desc">Resistance components (friction 70–90% for full ships), Froude number, block coefficient, wetted surface; the propeller law P ∝ V<sup>3</sup> at low Froude number, steeper at high speed.</span></div>
+    <div class="reg-item"><span class="reg-code">Schneekluth &amp; Bertram, Ship Design for Efficiency and Economy (2nd ed.)</span><span class="reg-desc">Main dimensions and their trade-offs; lines design routes — conventional, distortion of existing forms (Lackenby), CFD; bulbous bows; stern forms.</span></div>
+    <div class="reg-item"><span class="reg-code">Kracht, A. M., 'Design of Bulbous Bows', SNAME Transactions 86 (1978)</span><span class="reg-desc">Bulb parameters (volume, section area at the forward perpendicular, protruding length, height) and section types; dependence on C<sub>B</sub>, L/B, B/T and speed.</span></div>
+    <div class="reg-item"><span class="reg-code">Cusanelli &amp; Hundley, 'Stern Flap Powering Performance…', Naval Engineers Journal (1999)</span><span class="reg-desc">Stern flap: a small extension of the hull bottom aft of the transom; powering gains on transom-stern ships.</span></div>
+    <div class="reg-item"><span class="reg-code">Twin-skeg literature — KRISO (2006), MARIN, Yokoo (1985), van Berlekom (1985); Wärtsilä Encyclopedia of Marine Technology (skeg)</span><span class="reg-desc">Skeg definition; twin-skeg benefits on full-form, shallow-draught or high B/T hulls; design parameters; twin-screw redundancy on shuttle tankers.</span></div>
+  </div>
+
+  <div class="section-head">📦 Ship Size and Capacity — The Scale Effect</div>
+  <ul class="notes-list">
+    <li>A larger ship has more wetted surface and more total resistance, so it burns <strong>more fuel in absolute terms</strong>, but it carries proportionally more cargo, so fuel <strong>per tonne-mile falls</strong>. Volume grows with the cube of dimensions while wetted surface grows with the square.</li>
+    <li>The IMO codified this in the EEDI: the reference line is <strong>a × DWT<sup>−c</sup></strong>, so the permitted gCO<sub>2</sub>/(t·nm) falls as deadweight rises (tankers c ≈ 0.49, bulk carriers ≈ 0.48, container ships ≈ 0.20). A small ship is allowed to be less efficient because physics makes it so.</li>
+    <li>The trade-off is commercial as much as hydrodynamic: a larger ship needs the cargo to fill it, port depth and crane reach to serve it, and an owner who can accept fewer, bigger parcels. Container-ship upsizing and the tanker fleet's reliance on speed rather than size are the two familiar illustrations (qualitative; no statistics quoted).</li>
+  </ul>
+  <div class="timeline-block">   Resistance components (full-form ships, MAN):  friction ~70-90 %   wave-making + residual ~10-30 %
+   Wetted surface  ∝  L^2        Displacement / cargo  ∝  L^3
+   ⇒ resistance per tonne of cargo falls as the ship grows   (the 'scale effect')
+   EEDI reference line:  Required EEDI = (1 - X/100) · a · DWT^(-c)   — lower allowance for bigger ships</div>
+
+  <div class="section-head">⏱️ Service Speed — The Cube Law and Speed Optimisation</div>
+  <div class="timeline-block">   Propulsion power   P ∝ V^3      (propeller law; valid at low Froude number — exponent 4 or more for fast ships)
+   Fuel per voyage    ∝ P × time  ∝ V^3 × (D / V)  =  V^2 · D
+   ⇒ 10 % less speed  ≈ 27 % less power,  ≈ 19 % less fuel on the voyage  (before the hotel load and the engine's part-load efficiency)</div>
+  <ul class="notes-list">
+    <li><strong>Speed optimisation</strong> (SEEMP Guidelines) means the speed that gives the <em>minimum fuel per tonne-mile for the voyage</em>, not the minimum speed: auxiliary and hotel consumption, charter-party speed, cargo-care and schedule all enter. Slow steaming's engine-side effects (heavy running, de-rating, light running margin) are in Part 24 Topic 2.</li>
+    <li><strong>Just-in-time arrival</strong> removes the waste of steaming fast and then waiting at anchor: the ship adjusts speed so as to arrive when the berth, fairway or pilot is actually available. The IMO/GIA Just In Time Arrival Guide (2020) sets out the barriers — chiefly the charter-party 'due despatch' obligation and port data-sharing — and it is a company-specific SEEMP measure (Part 24 Topic 1).</li>
+    <li>Fuel is a major component of voyage operating cost, which is why speed is the first operational lever (qualitative statement; shares vary with fuel price and ship type).</li>
+  </ul>
+
+  <div class="section-head">📐 Principal Dimensions — Length, Beam and Draught</div>
+  <table class="revision-table">
+    <tr><th>Dimension change</th><th>Hydrodynamic effect</th><th>What it costs</th></tr>
+    <tr><td>Longer, more slender hull (higher L/B, lower C<sub>B</sub>)</td><td>Lower Froude number for the same speed; lower wave-making resistance; finer entrance</td><td>More steel and wetted surface; less cargo per metre; port length limits</td></tr>
+    <tr><td>Wider beam (higher B/T, higher C<sub>B</sub>)</td><td>More initial stability (GM) and more cargo volume; more wave-making and form resistance</td><td>Fuel; possibly uncomfortable stiff motions</td></tr>
+    <tr><td>Deeper draught</td><td>Lower B/T, better propeller immersion and diameter; less wetted surface per tonne</td><td>Port and canal draught limits</td></tr>
+    <tr><td>Fuller hull (higher C<sub>B</sub>)</td><td>More deadweight on the same dimensions</td><td>Higher resistance, more non-uniform wake (Part 26)</td></tr>
+  </table>
+  <p class="notes-body">Optimisation of the principal dimensions is therefore a constrained trade: hold the cargo capacity and the stability criteria, respect the port, canal and dock limits, and then find the length, beam and draught that minimise resistance at the design speed. A narrower, more streamlined hull reduces wave resistance; a wider beam buys stability and capacity at a fuel cost. The naval architect's tools are the Froude number, the block, prismatic and midship coefficients, and the longitudinal centre of buoyancy — and, increasingly, a parametric model driven by CFD.</p>
+
+  <div class="section-head">🛠️ Three Routes to a Hull Form</div>
+  <table class="revision-table">
+    <tr><th>Route</th><th>What it is</th><th>When it is used</th></tr>
+    <tr><td>Accept the yard's standard hull</td><td>Commercial practice: the yard offers a proven parent design with model-test data</td><td>Series newbuildings; price- and schedule-driven projects</td></tr>
+    <tr><td><strong>Distort a parent hull</strong> (Lackenby-type transformation)</td><td>Systematic geometrical variation of an existing lines plan — shifting sections to change C<sub>B</sub>, prismatic coefficient or LCB while keeping fairness — the source's 'line distortion method'</td><td>Adapting a proven hull to new dimensions or a new speed; the first step of most optimisation loops</td></tr>
+    <tr><td>New design by analysis</td><td>Hydrostatic, hydrodynamic (potential-flow and RANS CFD) and structural analysis, verified by model tests</td><td>Novel designs; performance-critical ships; EEDI Phase 3 margins</td></tr>
+  </table>
+  <p class="notes-body">Hull form is the <strong>first area of focus</strong> for efficiency because the hull is the point of contact with the water and the origin of all resistance; reducing resistance is the naval architect's principal lever once size and speed are fixed.</p>
+
+  <div class="section-head">🌊 Fore-Body Optimisation and the Bulbous Bow</div>
+  <ul class="notes-list">
+    <li>The fore-body design variables are the <strong>bulbous bow</strong>, the <strong>forward shoulder</strong> and the <strong>waterline entrance</strong>. Potential-flow (panel) calculations are routinely used here because wave-making dominates at the bow; viscous RANS CFD is added for the shoulder and for separation.</li>
+    <li><strong>How the bulb works.</strong> The bulb generates its own wave system ahead of the stem. Designed correctly, its wave trough coincides with the crest of the natural bow wave, so the two partly cancel, the resultant bow wave is smaller and the <strong>wave-making resistance</strong> falls; hull (propulsive) efficiency rises.</li>
+    <li><strong>Kracht's parameters</strong> (SNAME 1978) define a bulb by its volume, its section area at the forward perpendicular, its protruding length and height, and its section type; the optimum depends on block coefficient, L/B, B/T and, above all, on <strong>speed and draught</strong>.</li>
+    <li><strong>The bulb is tuned to one condition.</strong> A bulb designed for the contract speed at design draught can add resistance at a slower speed or in ballast, where it may surface. That is why slow steaming drove a wave of <strong>re-bulbing</strong> retrofits, with reported bow-related savings of up to about 10% in class case studies, and why Part 23 Topic 2 lists bulbous-bow modification among EEXI measures.</li>
+    <li>Bulb section shape (Kracht's section types) is a design choice made for the ship's own speed, draught and seakeeping requirements; there is no one-to-one rule linking a particular section shape to a particular benefit.</li>
+  </ul>
+  <div class="timeline-block">   natural bow wave  ~~~crest~~~          bulb wave  ___trough___
+                         +                                      =   much reduced resultant wave  →  lower wave-making resistance
+   (effective only near the speed and draught the bulb was designed for)</div>
+
+  <div class="section-head">🔚 Aft-Body Optimisation, Stern Flaps and Stern Forms</div>
+  <ul class="notes-list">
+    <li>The aft-body designer wants to <strong>mitigate the stern wave</strong>, <strong>avoid eddies</strong> (flow separation and eddy-making resistance over too-steep buttocks or a bluff stern) and deliver a <strong>uniform wake</strong> to the propeller. Resistance falls and propulsive efficiency rises when the flow around the stern is improved; wake conditioning and propeller devices themselves are Part 26.</li>
+    <li><strong>Stern flap.</strong> A small extension of the hull bottom surface aft of the transom (Cusanelli and Hundley, US Navy, 1999). On transom-stern ships at moderate and higher speeds it modifies the transom flow and pressure field and reduces powering; it is one of the cheapest hydrodynamic retrofits where the hull is suitable.</li>
+    <li><strong>Stern forms</strong> — transom, cruiser and counter (elliptical) sterns — each have advantages and penalties in resistance, deck area, slamming and wake quality. The choice for a given hull is made by <strong>computational fluid dynamics</strong> and confirmed by model tests; there is no universal best stern.</li>
+  </ul>
+
+  <div class="section-head">🦶 Twin-Skeg Design</div>
+  <p class="notes-body">A <strong>skeg</strong> is a deep, vertical, fin-like projection on the bottom of the hull near the stern. It supports the lower edge of the rudder and, on a single-screw ship, carries the propeller shaft and stern tube, and it provides a bearing line when the ship sits on dry-dock blocks (Wärtsilä Encyclopedia of Marine Technology). A <strong>twin-skeg</strong> hull has two such skegs, each carrying a shaft and propeller.</p>
+  <table class="revision-table">
+    <tr><th>Twin-skeg aspect</th><th>Verified position</th></tr>
+    <tr><td>Where it pays</td><td>Full-form ships, especially where <strong>draught is restricted</strong> or the <strong>beam-to-draught ratio is high</strong>: two smaller propellers can be properly immersed where one large one cannot, and the flow between the skegs improves the wake (Yokoo 1985; van Berlekom 1985; KRISO; MARIN)</td></tr>
+    <tr><td>Redundancy</td><td>Adopted in tankers that need <strong>redundant propulsion</strong> — North Sea shuttle tankers with twin-screw, dynamically positioned arrangements are the classic example (DNV); also used on large LNG carriers and some VLCC designs</td></tr>
+    <tr><td>Design parameters</td><td><strong>Distance between the skegs</strong>; the <strong>longitudinal slope</strong> (buttock angle) between them; <strong>vertical</strong> and <strong>longitudinal inclination</strong> of each skeg; and the <strong>skeg form</strong> itself — the parameters model-basin studies vary to minimise resistance and improve the wake</td></tr>
+    <tr><td>Penalties</td><td>More wetted surface and appendage resistance than a single skeg; higher first cost and two shaft lines to maintain — the efficiency gain is design-specific and must be shown by CFD and model test (no generic saving figure is taught)</td></tr>
+  </table>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Simon):</strong> Simon likes to start from the EEDI: 'Why is the reference line lower for bigger ships?' Give the scale effect — wetted surface grows with the square, cargo with the cube — and the formula a × DWT<sup>−c</sup>. Then he will move to speed: say <em>P ∝ V<sup>3</sup> at low Froude number, fuel per voyage ∝ V<sup>2</sup></em>, and that optimum speed is minimum fuel per tonne-mile, not minimum speed; mention just-in-time arrival and the due-despatch barrier in one sentence and point to the SEEMP. For hull form, name the three routes — yard standard, parent-hull distortion, new design by CFD — then the bulb: cancels the bow wave, <em>tuned to speed and draught</em>, hence re-bulbing for slow steaming. Finish with the aft body: stern wave, eddies, wake; stern flap; twin skeg for full, shallow-draught or high B/T hulls and for redundancy. Do not quote percentage savings you cannot source, and call it <em>Computational</em> Fluid Dynamics.</div>
+
+  <div class="section-head">🎯 Oral Q&amp;A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. Explain how ship size affects energy efficiency and how the EEDI reflects it.</div><div class="qa-a">A larger ship has more wetted surface and more total resistance, so it uses more fuel in absolute terms, but because displacement and cargo grow with the cube of the dimensions while wetted surface grows only with the square, the fuel per tonne-mile falls as the ship grows. The EEDI reference line is a times deadweight to the power minus c, so the permitted grams of CO2 per tonne-mile fall with size; a smaller ship is allowed a higher index because the physics makes it less efficient. The limits are commercial and physical: cargo availability, port depth and crane reach, and the hull resistance of a very full form.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Describe the relationship between service speed and fuel consumption and explain speed optimisation and just-in-time arrival.</div><div class="qa-a">For a displacement ship at low Froude number the propeller law gives propulsion power proportional to the cube of speed, so fuel per voyage, power times voyage time, is proportional to the square of speed; a ten per cent speed reduction saves roughly a quarter of the power and nearly a fifth of the voyage fuel, less once hotel load and part-load engine efficiency are counted, and more for fast ships where the exponent is higher. Speed optimisation under the SEEMP Guidelines means the speed that minimises fuel per tonne-mile for the voyage, not the minimum speed. Just-in-time arrival adjusts speed so the ship arrives when the berth, fairway or pilot is actually available instead of steaming fast and waiting at anchor; the IMO and Global Industry Alliance guide identifies the charter-party due-despatch clause and port data-sharing as the main barriers.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Discuss the trade-offs in choosing length, beam and draught for energy efficiency.</div><div class="qa-a">A longer, more slender hull with a lower block coefficient runs at a lower Froude number for the same speed and makes smaller waves, but it needs more steel, has more wetted surface per tonne and may exceed berth lengths. A wider beam increases initial stability and cargo volume but increases wave-making and form resistance, and a very stiff ship rolls uncomfortably. A deeper draught improves propeller immersion and reduces wetted surface per tonne but is limited by ports and canals. A fuller hull carries more on the same dimensions at the cost of resistance and a less uniform wake. The designer holds capacity and stability, respects the port and dock limits, and then minimises resistance at the design speed with the Froude number, the form coefficients and the position of the centre of buoyancy, today with a parametric model and computational fluid dynamics.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4. What are the three routes to a hull form, and how does a bulbous bow reduce resistance?</div><div class="qa-a">An owner can accept the yard's proven standard hull; modify a parent hull by a Lackenby-type systematic distortion of the lines to a new block coefficient, prismatic coefficient or centre of buoyancy; or commission a new design developed by hydrostatic, hydrodynamic and structural analysis with potential-flow and RANS computational fluid dynamics confirmed by model tests. A bulbous bow creates its own wave system ahead of the stem; when its trough coincides with the crest of the natural bow wave the two partly cancel, the resultant wave is smaller and the wave-making resistance falls. Kracht's parameters — bulb volume, section area at the forward perpendicular, protruding length and height — are chosen for the block coefficient, length-to-beam and beam-to-draught ratios, and above all for the design speed and draught, which is why a bulb can hurt at a slower speed or in ballast and why ships were re-bulbed for slow steaming.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5. Explain aft-body optimisation, the stern flap and the twin-skeg arrangement.</div><div class="qa-a">The aft body is shaped to reduce the stern wave, to avoid flow separation and eddy-making over the buttocks, and to deliver a uniform wake to the propeller; improving the stern flow lowers resistance and raises propulsive efficiency. A stern flap is a small extension of the hull bottom aft of the transom which alters the transom flow and pressure field and reduces powering on suitable transom-stern ships. The stern form — transom, cruiser or counter — is selected by computational fluid dynamics and model tests because each has pros and cons. A skeg is a deep vertical fin at the stern that supports the rudder heel, carries the shaft on a single-screw ship and bears on the dock blocks; a twin-skeg hull carries two shafts and propellers and is beneficial on full-form ships with restricted draught or a high beam-to-draught ratio, and on tankers requiring redundant propulsion such as shuttle tankers. The designer varies the distance between the skegs, the buttock slope between them, their vertical and longitudinal inclination and the skeg form, and proves the result by CFD and model test.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Explain, with reference to the EEDI reference line, why energy efficiency per tonne-mile improves with ship size.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Discuss the scope and impact of optimising ship size and capacity, service speed and principal dimensions on the energy efficiency of ships, including the role of just-in-time arrival.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Describe the hull-form measures available to a naval architect to improve the energy efficiency of a ship — fore-body and bulbous-bow design, aft-body optimisation and stern flaps, stern form selection and twin-skeg arrangements — and explain how computational fluid dynamics and model testing are used to select between them.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>Scale effect: wetted surface ∝ L², cargo ∝ L³ → fuel per tonne-mile falls with size · EEDI reference line a × DWT<sup>−c</sup>.</strong></li>
+      <li><strong>P ∝ V³ (low Fn) · voyage fuel ∝ V² · −10% speed ≈ −27% power, ≈ −19% voyage fuel · optimum speed = min fuel per tonne-mile.</strong></li>
+      <li><strong>JIT = arrive when berth/fairway/pilot is ready · barrier = due despatch · SEEMP company measure (Part 24 T1).</strong></li>
+      <li><strong>Slender (high L/B, low C<sub>B</sub>) → less wave resistance, less cargo · wide beam → stability + capacity, more resistance.</strong></li>
+      <li><strong>Three hull routes: yard standard · parent-hull distortion (Lackenby) · new design by CFD + model test.</strong></li>
+      <li><strong>Bulb: own wave cancels bow wave → lower wave-making resistance · tuned to speed AND draught · re-bulb for slow steaming.</strong></li>
+      <li><strong>Aft body: cut stern wave, avoid eddies, uniform wake · stern flap = bottom extension aft of transom · stern form by CFD.</strong></li>
+      <li><strong>Twin skeg: full form, shallow draught, high B/T, redundancy (shuttle tankers) · vary skeg spacing, slope, inclinations, form.</strong></li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Case Study — A Re-Bulb and Stern-Flap Decision for a Slow-Steamed Container Ship</button>
+    <div class="deep-dive-body">
+      <h4>Situation (illustrative — assumed values)</h4>
+      <p>A 2010-built container ship designed for 25 knots now trades at 18 knots under an EEXI power limitation and a CII target. Her bulb was optimised for 25 knots at design draught; at 18 knots and the lighter operating draught the bow wave is visibly larger than it should be. The technical department asks for a hull-form review.</p>
+      <h4>Analysis</h4>
+      <p>The naval architect starts from the existing lines, varies the bulb with a parent-hull distortion of the fore-body (Kracht parameters: smaller protruding length and section area at the forward perpendicular, lower height) and runs potential-flow calculations at 18 knots across the operating draught range, followed by RANS CFD and a model test of the preferred candidate. A stern flap is screened in the same CFD model because the transom is partly immersed at the operating draught. The CFD and model test show a bow-related resistance reduction at the operating condition, a smaller gain from the flap, and a warning: the new bulb is slightly worse at 25 knots, which the ship no longer uses.</p>
+      <h4>Decision and the engine-room role</h4>
+      <p>The re-bulb proceeds at the next dry-docking; the flap is deferred pending a longer sea-trial data set. The Chief Engineer's part is to provide the baseline: shaft power, rpm, fuel and speed through the water at constant draught and trim before the docking, recorded through the SEEMP monitoring step (Part 24 Topic 1), and the same measurements after, so that the saving is proven rather than assumed and the EEXI/CII technical file can be updated. The percentage saving is left to the measurements; the examiner wants the method, not a quoted figure.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>MARPOL Annex VI, chapter 4 — regulations 22–25 (EEDI/EEXI), 26 (SEEMP), 28 (CII); resolution MEPC.203(62) and MEPC.308(73) — EEDI reference line parameters</li>
+    <li>Resolution MEPC.395(82), as amended — 2024 SEEMP Guidelines (speed optimisation; just-in-time arrival as a company-specific measure)</li>
+    <li>IMO GloMEEP Project and Global Industry Alliance — Just In Time Arrival Guide: Barriers and Potential Solutions (2020), MEPC 75/INF.22</li>
+    <li>MAN Energy Solutions — Basic Principles of Ship Propulsion (resistance components, Froude number, propeller law)</li>
+    <li>Schneekluth, H. and Bertram, V. — Ship Design for Efficiency and Economy, 2nd ed. (main dimensions; lines design including distortion of existing forms; bulbous bows; stern forms)</li>
+    <li>Lackenby, H. — 'On the systematic geometrical variation of ship forms', Transactions RINA 92 (1950)</li>
+    <li>Kracht, A. M. — 'Design of Bulbous Bows', SNAME Transactions 86 (1978)</li>
+    <li>Cusanelli, D. S. and Hundley, L. — 'Stern Flap Powering Performance on a Spruance Class Destroyer: Ship Trials and Model Experiments', Naval Engineers Journal (1999)</li>
+    <li>Wärtsilä Encyclopedia of Marine Technology — 'Skeg'; KRISO / MARIN twin-skeg hull-form studies; Yokoo (1985) and van Berlekom (1985) on twin-skeg hulls; DNV on shuttle-tanker redundant propulsion</li>
+    <li>DNV case material on bulbous-bow retrofits for slow steaming (bow-related savings reported up to about 10%)</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p25 · Topic 2 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p25 · P25-T2 · v1.0</div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+    Part 25 of 31 · Pages 600–621 of 768 · Engineering Management Notes — Marine Intelligence Weekly<br>
+    Originally compiled by Uday Sankar S., Anglo-Eastern. Transcribed, expanded and verified by Nixon Antony, 2/E, Maersk A/S.<br>
+    This is subscriber-only content for MEO Class 1 exam preparation (Kochi MMD). Unauthorized redistribution is prohibited.<br>
+    Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p25 · Correction Required">Contact us</a> ·
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Back to Notes Index</a>
+</div>
+
+<script>
+function toggleDD(btn){
+  var body = btn.nextElementSibling;
+  body.classList.toggle('open');
+  btn.textContent = body.classList.contains('open') ? btn.textContent.replace('▶','▼') : btn.textContent.replace('▼','▶');
+}
+document.addEventListener('DOMContentLoaded', function(){
+  var links = document.querySelectorAll('.toc-link[href^="#"]');
+  var sections = Array.from(links).map(function(l){ return document.querySelector(l.getAttribute('href')); }).filter(Boolean);
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var id = '#' + entry.target.id;
+      var link = document.querySelector('.toc-link[href="' + id + '"]');
+      if(link){ link.classList.toggle('active', entry.isIntersecting); }
+    });
+  }, {rootMargin:'-80px 0px -70% 0px'});
+  sections.forEach(function(s){ observer.observe(s); });
+});
+</script>
+
+</body>
+</html>
