@@ -74,9 +74,6 @@ FAMILIES  = os.path.join(ROOT, 'meoclass1', 'pastpapers', 'intelligence',
                          'derived', 'sixyear_families.json')
 WATCH     = os.path.join(ROOT, 'meoclass1', 'pastpapers', 'intelligence',
                          'derived', 'sixyear_temporal_watch.json')
-EXAMINERS = os.path.join(ROOT, 'meoclass1', 'oral-intelligence',
-                         'examiner-audit',
-                         'CURRENT_EXAMINER_RELATIONSHIPS.jsonl')
 OUT       = os.path.join(D, 'MIW_MEO_Class1_Study_Roadmap.xlsx')
 
 NOT_YET = 'NOT YET INTEGRATED'
@@ -168,20 +165,13 @@ def load_sessions():
 
 
 def examiner_signal():
-    """question_id -> the examiners governed evidence ties to it."""
-    out = {}
-    if not os.path.exists(EXAMINERS):
-        return out
-    with open(EXAMINERS, encoding='utf-8') as fh:
-        for line in fh:
-            line = line.strip()
-            if not line:
-                continue
-            rec = json.loads(line)
-            if rec.get('status') != 'PUBLISHED':
-                continue
-            out.setdefault(rec['question_id'], set()).add(rec['examiner'])
-    return {k: sorted(v) for k, v in out.items()}
+    """question_id -> the examiners governed evidence ties to it.
+
+    Read through the one study examiner contract (examiner_source.py): the
+    resolved Examiner Index snapshot, every row of which is published.
+    """
+    import examiner_source as EXS
+    return {k: sorted(v) for k, v in EXS.by_question().items()}
 
 
 def study_qi_index():

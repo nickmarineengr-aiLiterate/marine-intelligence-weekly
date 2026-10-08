@@ -42,12 +42,11 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 
 import mapping_engine as ME
+import examiner_source as EXS
 
 OFFICIAL = os.path.join(ROOT, 'docs', 'study', 'official_syllabus.json')
 STORE    = os.path.join(ROOT, 'docs', 'study', 'study_mappings.json')
 SPECS    = os.path.join(ROOT, 'meoclass1', 'pastpapers', 'specs', '*.json')
-EXAMINER = os.path.join(ROOT, 'meoclass1', 'oral-intelligence', 'examiner-audit',
-                        'CURRENT_EXAMINER_RELATIONSHIPS.jsonl')
 OUT      = os.path.join(ROOT, 'docs', 'study', 'coverage_matrix.json')
 
 # Probe terms per official item, taken from that item's own official wording.
@@ -162,17 +161,8 @@ def build():
             written_texts[f"{spec['paper_id']}-{q['q_no']}"] = blob
 
     # examiner reach, counted over oral hits only (examiners are an oral signal)
-    ex_by_q = collections.defaultdict(set)
-    if os.path.exists(EXAMINER):
-        for line in open(EXAMINER, encoding='utf-8'):
-            line = line.strip()
-            if not line:
-                continue
-            rel = json.loads(line)
-            qid = rel.get('question_id') or rel.get('id')
-            name = rel.get('examiner') or rel.get('examiner_name')
-            if qid and name:
-                ex_by_q[qid].add(name)
+    # (the one study examiner contract -- tools/study/examiner_source.py)
+    ex_by_q = {q: set(names) for q, names in EXS.by_question().items()}
 
     rows = []
     for node in official['nodes']:

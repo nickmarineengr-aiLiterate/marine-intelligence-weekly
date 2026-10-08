@@ -868,6 +868,9 @@ def main():
         ('oral examiner attribution',
          'meoclass1/oral-intelligence/examiner-audit/'
          'CURRENT_EXAMINER_RELATIONSHIPS.jsonl'),
+        ('oral examiner snapshot (the study examiner contract)',
+         'meoclass1/oral-intelligence/examiner-audit/'
+         'EXAMINER_INDEX_SNAPSHOT.json'),
         ('oral recurrence families',
          'meoclass1/oral-intelligence/examiner-audit/'
          'CROSS_EXAMINER_FAMILIES.json'),

@@ -55,10 +55,9 @@ sys.path.insert(0, HERE)
 
 import evidence_model as EM
 import export_roadmap_xlsx as RX
+import examiner_source as EXS
 
 D = os.path.join(ROOT, 'docs', 'study')
-EXAMINERS = os.path.join(ROOT, 'meoclass1', 'oral-intelligence', 'examiner-audit',
-                         'CURRENT_EXAMINER_RELATIONSHIPS.jsonl')
 TOPICS_OUT = os.path.join(ROOT, 'meoclass1', 'topics.html')
 STUDY_OUT = os.path.join(ROOT, 'meoclass1', 'study.html')
 
@@ -140,17 +139,8 @@ def load_all():
                               encoding='utf-8'))['mappings']
     official = json.load(open(os.path.join(D, 'official_syllabus.json'),
                               encoding='utf-8'))
-    ex = collections.defaultdict(set)
-    if os.path.exists(EXAMINERS):
-        for line in open(EXAMINERS, encoding='utf-8'):
-            line = line.strip()
-            if not line:
-                continue
-            rel = json.loads(line)
-            qid = rel.get('question_id') or rel.get('id')
-            name = rel.get('examiner') or rel.get('examiner_name')
-            if qid and name:
-                ex[qid].add(name)
+    # qid -> {examiner: tier}, through the one study examiner contract.
+    ex = EXS.by_question()
     return m, mappings, official, ex
 
 

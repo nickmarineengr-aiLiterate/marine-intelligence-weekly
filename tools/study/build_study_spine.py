@@ -3,7 +3,7 @@
 
     specs/*.json            --(topic_taxonomy)-->  written mappings
     qb_content_index.json   --(study_spine)---->   oral mappings
-    CURRENT_EXAMINER_RELATIONSHIPS.jsonl -------->  examiner intelligence
+    EXAMINER_INDEX_SNAPSHOT.json (examiner_source) -> examiner intelligence
     notes_content_index.json -------------------->  resource inventory
 
 Every count on the output is recomputed here. Nothing is hand-maintained.
@@ -30,11 +30,10 @@ import study_spine as SP
 import mapping_engine as ME
 import study_qi_adapter as SQI
 import topic_taxonomy as TT
+import examiner_source as EXS
 
 SPECS_GLOB = os.path.join(ROOT, 'meoclass1', 'pastpapers', 'specs', '*.json')
 QB_INDEX   = os.path.join(ROOT, 'meoclass1', 'qb_content_index.json')
-EXAMINERS  = os.path.join(ROOT, 'meoclass1', 'oral-intelligence',
-                          'examiner-audit', 'CURRENT_EXAMINER_RELATIONSHIPS.jsonl')
 NOTES      = os.path.join(ROOT, 'meoclass1', 'oralnotes', 'notes_content_index.json')
 STORE      = os.path.join(ROOT, 'docs', 'study', 'study_mappings.json')
 OUT        = os.path.join(ROOT, 'docs', 'study', 'study_spine.json')
@@ -97,7 +96,8 @@ def main():
 
     specs = load_specs()
     idx = json.load(open(QB_INDEX, encoding='utf-8'))
-    rels = [json.loads(l) for l in open(EXAMINERS, encoding='utf-8') if l.strip()]
+    rels = EXS.load()
+    tier_policy = EXS.tier_policy()
     notes = json.load(open(NOTES, encoding='utf-8'))
 
     store = ME.load_store(STORE)
@@ -110,9 +110,11 @@ def main():
     # ---- examiner intelligence, per oral question id ----------------------
     ex_by_q = collections.defaultdict(set)
     rel_by_q = collections.Counter()
+    tiers_by_q = collections.defaultdict(set)
     for r in rels:
-        ex_by_q[r['question_id']].add(r['examiner'])
-        rel_by_q[r['question_id']] += 1
+        ex_by_q[r['canonical_question_id']].add(r['examiner'])
+        rel_by_q[r['canonical_question_id']] += 1
+        tiers_by_q[r['canonical_question_id']].add(r['tier'])
     oral_dom = {r['id']: r['domain_id'] for r in oral}
 
     # ---- recurrence: ONE source for the weight, one for the public label --
@@ -183,6 +185,15 @@ def main():
                 'relationship_occurrences': sum(rel_by_q[q] for q in ex_qs),
                 'distinct_examiners': len(examiners),
                 'examiners': examiners,
+                # Denominator: oral_questions_with_evidence counts a question
+                # with a published pair at ANY tier. This splits the same
+                # questions by their strongest tier, so a surface can show
+                # confirmed apart from inferred instead of one blended number.
+                'oral_questions_by_strongest_tier': {
+                    t: sum(1 for q in ex_qs
+                           if EXS.strongest_tier(tiers_by_q[q], tier_policy) == t)
+                    for t in tier_policy},
+                'evidence_contract': EXS.SNAPSHOT_REL,
             },
             'written_question_intelligence': {
                 'recurring_families': adapter_recurrence[did],
@@ -247,6 +258,7 @@ def main():
             'written_specs': f'{len(specs)} papers',
             'oral_index': f"{idx['total_questions']} questions / {idx['total_files']} files",
             'examiner_relationships': len(rels),
+            'examiner_relationship_source': EXS.SNAPSHOT_REL,
             'notes_files': notes.get('total_files'),
             'mapping_store': f"{len(store['mappings'])} governed mappings @ taxonomy {store.get('taxonomy_version')}",
         },
