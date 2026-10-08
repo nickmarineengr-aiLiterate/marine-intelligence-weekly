@@ -1,6 +1,6 @@
 ---
 name: miw-site-publication
-version: 1.0
+version: 1.1
 updated: 2026-10-08
 description: >
   Cross-surface website maintenance for marineintelligenceweekly.com whenever MIW publishes a
@@ -11,7 +11,7 @@ description: >
   articles/index.html or any page carrying a "Latest Issue" control, and after every publication.
 ---
 
-# MIW Site Publication — Update Skill v1
+# MIW Site Publication — Update Skill v1.1
 
 ## 0. TL;DR
 
@@ -19,6 +19,8 @@ description: >
 python tools/site/check_publication_state.py          # must print "0 finding(s)"; exit 1 = drift
 python tools/site/test_check_publication_state.py     # checker self-tests (synthetic fixtures)
 node --test tools/security/*.test.mjs                 # site, archive, navigation, link, security suite
+# factory repo (MIW-Magazine-Production), before any numbered release:
+python tools/store_patch_publication_state_test.py --store <STORE checkout> --rev origin/main   # synthetic next issue, end to end
 ```
 
 Run the checker **before** you edit, to get the baseline, and **after** you edit, to prove the result.
@@ -30,6 +32,13 @@ were still stale. The homepage counter said 30 and the Twitter-card alt text nam
 "Latest Issue" links pointed at Issues 25 and 22, and the articles hub's "Latest Issues" footer
 started at Issue 25. The release patch updated only the paths it knew about. The rest of this
 skill lists every surface involved and makes the checker enforce them.
+
+**v1.1 (closure sprint, 8 Oct 2026):** the factory `store_patch.py` now owns all seven of those
+surfaces (rows marked **SP** in §3) and, after `--apply`, runs this checker on the patched STORE
+tree and exits 1 on any finding. A replay of the real Issue 31 release through the fixed patch
+reproduces the hand-fixed state (STORE `db5a123`) byte-for-byte. The nav surfaces had drifted
+since Issue 25. The fixed patch **refuses** to stack a release on such pre-existing drift, so
+fix the drift (or re-run this checker) before patching, and never edit around a refusal.
 
 This skill is about the **state** of the publication across the site. Other skills cover how a
 page is written and built:
@@ -80,31 +89,34 @@ checker derives `latest`, `previous` and `count` from level 1 only.
 
 ## 3. A — New numbered magazine issue N
 
-The factory `store_patch.py` writes the issue pages and part of the homepage. **Everything below
-must still be audited.** The 8 Oct drift came from surfaces outside that patch.
+The factory `store_patch.py` writes the rows marked **SP** below with exact-once anchored edits,
+then runs this checker on the candidate tree. Rows without **SP** are hand-maintained or N/A and
+**must still be audited**. If a new current-facing surface is added to the site, either add it to
+`store_patch.PAGE_PATCHES` (with a refusal on unexpected state) or the post-apply checker will
+refuse the next release. That refusal is intended.
 
 | # | Surface | Where (search anchor) | Action for issue N |
 |---|---|---|---|
-| 1 | Issue page | `indexN.html` | Built by the factory; canonical URL = root page |
-| 2 | Archive copy | `archive/issueN.html` | Verbatim twin of root (archive_continuity tests) |
-| 3 | Archive card | `archive/index.html` `<!-- ISSUE N -->` | Insert above N−1 (miw-archive skill) |
-| 4 | Homepage Latest block | `index.html` `<!-- LATEST ISSUE -->` → `.issue-card-featured` | Link, cover, alt, kicker date, title, desc, topics, Read button → N |
-| 5 | Previous issues list | `index.html` `.back-issue-card` grid | N−1 becomes the first back-issue card |
-| 6 | Issue counter (home) | `index.html` `Issues Published<strong>` | = published count |
-| 7 | Latest badge/label (home) | "📰 Latest Issue" start-here card; footer `← Latest` | → N; exactly one `← Latest` |
+| 1 | Issue page **SP** | `indexN.html` | Built by the factory; canonical URL = root page |
+| 2 | Archive copy **SP** | `archive/issueN.html` | Verbatim twin of root (archive_continuity tests) |
+| 3 | Archive card **SP** | `archive/index.html` `<!-- ISSUE N -->` | Insert above N−1 (miw-archive skill) |
+| 4 | Homepage Latest block **SP** | `index.html` `<!-- LATEST ISSUE -->` → `.issue-card-featured` | Link, cover, alt, kicker date, title, desc, topics, Read button → N |
+| 5 | Previous issues list **SP** | `index.html` `.back-issue-card` grid | N−1 becomes the first back-issue card |
+| 6 | Issue counter (home) **SP** | `index.html` `Issues Published<strong>` | = published count |
+| 7 | Latest badge/label (home) **SP** | "📰 Latest Issue" start-here card; footer `← Latest` | → N; exactly one `← Latest` |
 | 8 | Canonical URL | `indexN.html` `<link rel="canonical">` | Root URL, also on the archive twin |
-| 9 | Nav links | every `Latest Issue` nav/footer link site-wide (`timeline.html`, `articles/timeline-article.html`, `GHGDecarb/timeline.html`, `articles/index.html` "Latest Issues") | → N (checker: `LATEST_LINK_STALE`, `LATEST_LIST_STALE`) |
+| 9 | Nav links **SP** | every `Latest Issue` nav/footer link site-wide (`timeline.html`, `articles/timeline-article.html`, `GHGDecarb/timeline.html`, `articles/index.html` "Latest Issues") | → N (checker: `LATEST_LINK_STALE`, `LATEST_LIST_STALE`) |
 | 10 | Issue date | Featured kicker, archive kicker, footer label | The publication date in the release record |
-| 11 | OG/Twitter metadata | `index.html` `og:image`, `twitter:image` and both `:alt` | `coverN.webp`; any "Issue M" in alt text → N |
-| 12 | Structured data | `index.html` ItemList (`numberOfItems`, positions), BreadcrumbList | N at position 1; `numberOfItems` = count |
-| 13 | Sitemap | none today (`/sitemap.xml` 404) | N/A. See §9 FUTURE_RECOMMENDATION |
+| 11 | OG/Twitter metadata **SP** | `index.html` `og:image`, `twitter:image` and both `:alt` | `coverN.webp`; an alt that names "Issue N−1" → N (refused if it names any other issue); a brand-level alt that names no issue is left alone |
+| 12 | Structured data **SP** | `index.html` ItemList (`numberOfItems`, positions), BreadcrumbList | N at position 1; `numberOfItems` = count |
+| 13 | Sitemap | none today (`/sitemap.xml` 404) | N/A. See §9 FUTURE_ARCHITECTURE_RECOMMENDATION |
 | 14 | RSS/feed | none today (`/feed.xml` 404) | N/A |
-| 15 | Archive "latest" marker | `archive/index.html` `card-new` "Latest in Archive" | Move from N−1 to N; exactly one |
+| 15 | Archive "latest" marker **SP** | `archive/index.html` `card-new` "Latest in Archive" | Move from N−1 to N; exactly one |
 | 16 | Prev/next navigation | `indexN.html` must link ← N−1 | **No forward link on N−1.** House convention, asserted by `issue_navigation.test.mjs` |
-| 17 | Issue cover asset | `assets/coverN.webp` | Present; used by featured card and social card |
-| 18 | Mobile cover variant | `assets/*_N_mobile.webp` (in-issue visuals) | Present for every desktop visual |
-| 19 | Homepage share image | `og:image`/`twitter:image` (the same file as #11 today) | coverN |
-| 20 | Article/feature hub | `articles/index.html` footer "Latest Issues" | N, N−1, N−2 |
+| 17 | Issue cover asset **SP** | `assets/coverN.webp` | Present; used by featured card and social card |
+| 18 | Mobile cover variant **SP** | `assets/*_N_mobile.webp` (in-issue visuals) | Present for every desktop visual |
+| 19 | Homepage share image **SP** | `og:image`/`twitter:image` (the same file as #11 today) | coverN |
+| 20 | Article/feature hub **SP** | `articles/index.html` footer "Latest Issues" | N, N−1, N−2 |
 | 21 | YouTube companion | `index.html` `<!-- YOUTUBE WALKTHROUGH` slot | Change only if a companion video exists (§7); keep the comment prefix |
 | 22 | "Issues 1–N" copy | none should exist except the brand line | Do not invent one |
 | 23 | Brand-history copy | 4 places (§6) | **Do not change** |
@@ -196,15 +208,16 @@ decisions, not media drift. The checker deliberately ignores them.
    deployed SHA. It must report 0 findings.
 8. Social/LinkedIn handoff is a separate, Founder-authorised step. Website state never triggers a post.
 
-## 9. FUTURE_RECOMMENDATION (not implemented; needs a decision)
+## 9. FUTURE_ARCHITECTURE_RECOMMENDATION (not implemented; needs a decision)
 
 - **Publication registry.** Add a small `publications.json` (id, type issue|special|article|video,
   number, date, url, cover), written by the factory at release time. The homepage, archive and
   checker would read it instead of inferring state from pages. This is not introduced now: it would
   change the factory contract.
-- **Factory `store_patch.py` coverage.** Extend the homepage patch to the stats strip
-  (`Issues Published`) and the `twitter:image:alt` / `og:image:alt`. The release guard should run
-  this checker on the candidate tree. These two surfaces are exactly where Issue 31 drifted.
+- ~~**Factory `store_patch.py` coverage.**~~ DONE in v1.1 (closure sprint, 8 Oct 2026): stats strip,
+  share-image alt, timeline "Latest Issue" links, articles-hub list, and the post-apply checker gate.
+  The Special Brief path (`consolidated_store_patch.py`) now also refuses a change to the visible
+  "Issues Published" counter.
 - **Sitemap.** No `sitemap.xml` exists. Adding one (public pages only; `meoclass1/` and `solvedQP/`
   are noindex) would need its own small spec and test.
 - **User-level skills** (`miw-production`, `marine-intelligence-weekly`) still say "update stats on
