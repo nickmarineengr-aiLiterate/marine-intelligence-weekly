@@ -299,3 +299,112 @@ Upstream, `tools/oral/validate_phase2.py:106` proves only that `relationship_id`
 ### 15.7 Unchanged (verified by `git diff --name-only 8083e59 36d8bfd`)
 
 0 files changed under `docs/study/qi`, `study_qi.json`, `safe_qi_projection.json`, `modern_qi_baseline.json`, the QI builders and model, `meoclass1/oral-intelligence/` (including the frozen Notes snapshot), `meoclass1/QB*.html`, `qb_content_index.json`, `examiner-index.html`, `tools/oral/` (including the 91+1 registry), `meoclass1/oralnotes/`, `middleware.js`, `api/`, `vercel.json`. No push, deploy or publication.
+
+## 16. FINAL STATUS — rebase and requalification (2026-10-08) — supersedes the status lines above
+
+Lane A accepted candidate `730d444` for final rebase/requalification. Earlier sections are historical and unchanged; this section is the final status.
+
+### 16.1 Bases
+
+| Item | Value |
+|---|---|
+| Historical base | `8083e590f17d2817b90dfa62e30fbda1e6c77cfc` |
+| Current `origin/main` (fetched 2026-10-08) | **`db5a12399cdabc3d16ebd77ba04104f96d833d57`**, tree `5f52e770294733cec369944a279a147647896c4a` |
+| Commits added since `8083e59` | 1 — `db5a123` "fix(site): correct current-facing latest-issue drift after Issue 31; add publication-state skill + checker" |
+| Files in that commit | `GHGDecarb/timeline.html`, `articles/index.html`, `articles/timeline-article.html`, `index.html`, `timeline.html`, `tools/site/SKILL.md`, `tools/site/check_publication_state.py`, `tools/site/test_check_publication_state.py` |
+| Classification | **RELEVANT_RETEST_REQUIRED** (node security tests scan current-facing pages incl. `index.html`) — no file overlap, no semantic conflict; retested (§16.5) |
+
+### 16.2 Rebase
+
+`git rebase origin/main` — **no conflicts**. Patch-ids (`git patch-id --stable`) identical for all six commits; the rebased tree differs from `730d444` only by `db5a123`'s eight files.
+
+| Old | New | Commit |
+|---|---|---|
+| `99b9846` | `11c2841` | study(phase0): map QP2609 into the governed study store |
+| `080a81a` | `b37a515` | study(phase0): one governed examiner contract; rebuild |
+| `6cb3d84` | `279bdc8` | study(phase1): Option A+ on the gated Oral-by-topic page |
+| `7ef18e7` | `4aa47d0` | docs(study): adopt the audit; Phase 0/1 record |
+| `36d8bfd` | `28a0c8b` | study(phase01-review): examiner wording, QP2609 literal, ledger dup check |
+| `730d444` | `4b8e15c` | docs(study): record — final-review corrections |
+
+This section is committed on top of `4b8e15c`; the final candidate SHA is that commit (reported with the package).
+
+### 16.3 H7 / Notes interaction (current main vs `8083e59`)
+
+| Area | Changed on main? |
+|---|---|
+| H7 / Oral registry | NO (no H7 / September artefacts; `oral_release_gates.py` unchanged) |
+| `tools/oral` | NO |
+| QB cards | NO |
+| QB content index | NO (761 / 86) |
+| Examiner source inputs | NO |
+| Examiner snapshot | NO |
+| Notes files | NO |
+| `ORAL_NOTES_UNITS.jsonl` | NO |
+| Study generators | NO |
+| Study data | NO |
+| middleware / api / vercel | NO |
+| Public study-roadmap safety assumptions | NO |
+
+H7 has **not** landed; no H7-specific check exists on main. Notes deferral (FD-P01-2) unchanged: frozen Notes layer not regenerated.
+
+### 16.4 Study chain on the rebased tree
+
+In order: reconciliation `--check` 0 · mappings `--check` 0 · `build_study_spine` 0 · `validate_study_spine` 0 (all PASS) · coverage matrix 0 · evidence horizon 0 · gap register 0 · topic pages 0 · public roadmap 0. **Worktree diff after the chain: empty** — every committed study output is byte-identical to a fresh governed build. `MIW_MEO_Class1_Study_Roadmap.xlsx` deliberately not regenerated (machine-local `file:///` links by design) and untouched by the candidate.
+
+### 16.5 Release-gate matrix (categories content-index, examiner, security, health; `--keep-going`; `docs/MIW-master-Question-bank/` created empty for `examiner_mutate` and removed afterwards on both trees)
+
+| Gate | Candidate | Current main |
+|---|---|---|
+| content_index_check | PASS | PASS |
+| content_index_validate (24) | PASS | PASS |
+| content_index_mutate | PASS 26/26 caught, 0 escapes | PASS 26/26 |
+| study_mapping_check | **PASS** | FAIL (QP2609 unmapped on main) |
+| study_spine_validate | **PASS** | SKIPPED (unmet dependency) |
+| study_pages_check | **PASS** | SKIPPED |
+| study_public_roadmap_check | **PASS** | SKIPPED |
+| examiner_check | PASS | PASS |
+| validate_examiner_index (54) | PASS | PASS |
+| examiner_mutate | PASS 13/13, 0 escapes | PASS 13/13 |
+| test_examiner_check (10) | PASS | PASS |
+| validate_ce_tip_review (28) | PASS | PASS |
+| ce_tip_mutate | PASS 17/17, 0 escapes | PASS 17/17 |
+| node_security_tests | FAIL | FAIL — identical |
+| qb_health_check | PASS (363 = 363, NEW 0) | PASS |
+| **Totals** | **14 PASS · 1 FAIL** · 56 mutations, 0 escapes, 0 no-ops, 0 crashes | 10 PASS · 2 FAIL · 3 SKIPPED · 56 mutations, 0 escapes |
+
+Logs: `oral_release_*` under `release_cand/` and `release_main/` in the landing package.
+
+### 16.6 Failure classification against current main
+
+| Failure | Candidate | Current main | Class |
+|---|---|---|---|
+| `node_security_tests` — `regulatory_facts.test.mjs` "no current-facing page states a superseded mepc-es2-resumption" | 623/625, 1 fail | 623/625, 1 fail; **identical payload**: `miw-notes-mgmt-p24.html -> "October 2026"`, `miw-notes-mgmt-p25.html -> "October 2026"`, `… -> "Oct 2026"` | **UNRELATED_LANE_DEBT** (Notes lane), PRE_EXISTING_ON_CURRENT_MAIN |
+| `test_study_expandability` "1081 mappings preserved" | FAIL (1130) | FAIL (1121) | **PRE_EXISTING_ON_CURRENT_MAIN** (exact `== 1081` literal predating this work) |
+| `test_study_expandability` "mapping summary still accounts for every record" | FAIL | FAIL | **PRE_EXISTING_ON_CURRENT_MAIN** (same literal) |
+
+**NEW_CANDIDATE_REGRESSION: none.**
+
+### 16.7 Study expandability
+
+Current main: 339 assertions, 2 failures (above). Rebased candidate: 339 assertions, 2 failures — identical names. The QP2609 literal (41 / 369) passes on the candidate; on main the old literal passes because main's study layer still holds 40 / 360. No exact-equality assertion weakened.
+
+### 16.8 Other checks (candidate)
+
+`test_mapping_engine` all 132 PASS · `test_syllabus_fanout` all PASS · `build_examiner_index --check` / `validate_examiner_index` PASS · `build_qb_content_index --check` / validator PASS · `topics.html` link integrity: 761 rows, 761 unique ids, 0 broken.
+
+### 16.9 Examiner ledger hardening (reconfirmed)
+
+Real ledger: 860 rows, 860 unique pairs, 0 repeated; reconciliation `--check` exit 0. Negative control (one ledger line duplicated in a scratch copy): exit 1, "ledger repeats 1 (question_id, examiner) pair(s): [('QB1_A#q1', 'Nair')]". `examiner_source.py`: 0 diff lines since `730d444`. Reconciliation record: 0 diff lines since `080a81a`. Snapshot / ledger / tier config: 0 diff lines vs current main.
+
+### 16.10 Public safety (candidate vs current main, `SQ/study-roadmap.html`)
+
+Sample blocks 10 = 10, byte-identical (30 stems); `PUBLIC_TOPIC_FIELDS`, `SAMPLE_MAX_CHARS`, `assert_public_safe` unchanged; `SAMPLES_PER_TOPIC = 3` on both (only its trailing comment differs, the Phase 0 stale-count fix); 0 links into `/meoclass1` or `/solvedQP`; 0 answer / CE-tip / trap / numbers markup; 0 examiner names on either version; no tier label or badge rendered. The one lowercase "confirmed" is inside the approved sentence "(from confirmed records to topic inference)". Word-level diff vs main = the approved wording plus QP2609 / examiner-source numbers.
+
+### 16.11 Change boundary (`git diff --name-status origin/main HEAD`)
+
+21 paths, all inside: `docs/study/` (study data + three records), `tools/study/` (generators, loader, reconciliation, test), `meoclass1/topics.html`, `meoclass1/study.html`, `SQ/study-roadmap.html`. **0** paths under canonical QB cards, `tools/oral`, the Oral release registry, Notes pages, `oral-intelligence`, `middleware.js`, `api/`, `vercel.json`, H7, or QI (layer, builders, model).
+
+### 16.12 Landing readiness
+
+**READY FOR FOUNDER LANDING APPROVAL.** No new candidate regression; the only failures reproduce identically on current main. Not pushed (push URL disabled), not published, not deployed. Landing itself (a fast-forward of main to the final candidate, which is a strict descendant of `db5a123`) awaits Founder approval; if main moves again first, rebase and requalify again.
