@@ -57,6 +57,12 @@ import evidence_model as EM
 import export_roadmap_xlsx as RX
 import examiner_source as EXS
 
+sys.path.insert(0, os.path.join(ROOT, 'tools', 'oral'))
+# The Examiner Index's own identity order (QB1 < QB2 < QB10, then q1 < q2 <
+# q10). Reused, not re-implemented, so the two projections of the same
+# relationship data list a file's questions in the same order.
+from build_examiner_index import natural_file_key
+
 D = os.path.join(ROOT, 'docs', 'study')
 TOPICS_OUT = os.path.join(ROOT, 'meoclass1', 'topics.html')
 STUDY_OUT = os.path.join(ROOT, 'meoclass1', 'study.html')
@@ -114,6 +120,9 @@ main{max-width:960px;margin:0 auto;padding:1.5rem;}
 .q-more{font-size:.76rem;color:var(--grey-text);padding-top:.5rem;}
 .prereq{font-size:.78rem;color:var(--grey-text);margin-bottom:.5rem;}
 .prereq b{color:var(--ink);}
+.legend{font-size:.76rem;color:var(--grey-text);background:#fff;border:1px solid var(--grey-border);border-radius:8px;padding:.6rem .9rem;margin-bottom:1.1rem;}
+.q-ex i{font-style:normal;color:var(--grey-text);}
+.q-list li:target{background:#fffbeb;}
 .gaps{font-size:.78rem;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:.5rem .7rem;margin-top:.7rem;color:#92400e;}
 .note{font-size:.76rem;color:var(--grey-text);margin-top:1.2rem;padding:.8rem 1rem;background:#fff;border:1px solid var(--grey-border);border-radius:8px;}
 .evidence{font-size:.78rem;color:var(--grey-text);}
@@ -197,34 +206,103 @@ def readiness_chips(t):
     return ''.join(out)
 
 
+def oral_identity_key(rec):
+    """Deterministic natural IDENTITY order: file (QB1 < QB2 < QB10), then
+    question number (q1 < q2 < q10). It is not a learning sequence and implies
+    nothing about importance -- the page footer says so."""
+    anchor = rec.get('anchor') or rec['canonical_question_id'].split('#', 1)[1]
+    return (natural_file_key(rec['source_file']), natural_file_key(anchor))
+
+
+def entry_id(qid):
+    """Stable in-page id for one question's row (QB1_A#q19 -> oq-QB1_A-q19):
+    the return target for any later card -> topic link."""
+    return 'oq-' + qid.replace('#', '-')
+
+
+def examiner_tags(names_tiers, policy):
+    """'Nair (Confirmed), Simon (Inferred)', strongest tier first. Every name
+    carries its own tier label, so an inferred attribution never reads as a
+    confirmed one."""
+    if not names_tiers:
+        return ''
+    ordered = sorted(names_tiers.items(),
+                     key=lambda kv: (-policy[kv[1]]['rank'], kv[0]))
+    bits = [f'<span class="ex-{E(t)}" title="{E(policy[t]["meaning"])}">'
+            f'{E(n)} <i>({E(policy[t]["label"])})</i></span>'
+            for n, t in ordered]
+    return f'<span class="q-ex">{", ".join(bits)}</span>'
+
+
+def q_item(rec, ex, policy):
+    qid = rec['canonical_question_id']
+    text = (rec.get('text') or '').strip()
+    anchor = rec.get('anchor') or qid.split('#', 1)[1]
+    return (f'<li id="{E(entry_id(qid))}"><a href="{E(rec["source_file"])}#{E(anchor)}">'
+            f'{E(text) if text else E(qid)}</a>'
+            f'{examiner_tags(ex.get(qid, {}), policy)}</li>')
+
+
 def build_topics_html(model, mappings, official, ex):
     by_node = {n['official_node_id']: n for n in official['nodes']}
     cov_bands = collections.defaultdict(list)
     for row in json.load(open(os.path.join(D, 'coverage_matrix.json'),
                               encoding='utf-8'))['nodes']:
         cov_bands[row['primary_topic']].append(row['coverage'])
+    policy = EXS.tier_policy()
 
-    orals = collections.defaultdict(list)
-    for qid, rec in sorted(mappings.items()):
-        if rec['content_type'] != 'ORAL' or not rec.get('topic_id'):
+    # Placement state, from the governed mapping status only.
+    #   placed      VALID_MAPPED          listed under its topic
+    #   reviewing   REVIEW_PENDING        counted on its topic, NOT listed under
+    #                                     it: the topic is not yet confirmed
+    #   unplaced    ACCIDENTALLY_UNMAPPED no topic at all
+    # Reviewing and unplaced questions are listed once, together, in a
+    # topic-free section, so no uncertain question sits under a topic the page
+    # would then be asserting.
+    placed = collections.defaultdict(list)
+    reviewing = collections.defaultdict(list)
+    not_placed = []
+    all_oral = 0
+    for qid, rec in mappings.items():
+        if rec['content_type'] != 'ORAL':
             continue
-        orals[rec['topic_id']].append(rec)
+        all_oral += 1
+        st = rec['mapping_status']
+        if st == 'VALID_MAPPED' and rec.get('topic_id'):
+            placed[rec['topic_id']].append(rec)
+        elif st == 'REVIEW_PENDING' and rec.get('topic_id'):
+            reviewing[rec['topic_id']].append(rec)
+            not_placed.append(rec)
+        elif st in ('REVIEW_PENDING', 'ACCIDENTALLY_UNMAPPED'):
+            not_placed.append(rec)
+        else:
+            raise SystemExit(f'build_topic_pages: {qid} has unhandled mapping '
+                             f'status {st!r}')
+    for lst in list(placed.values()) + [not_placed]:
+        lst.sort(key=oral_identity_key)
 
-    total_oral = sum(len(v) for v in orals.values())
+    n_placed = sum(len(v) for v in placed.values())
+    n_review = sum(len(v) for v in reviewing.values())
+    n_unmapped = len(not_placed) - n_review
+    assert n_placed + len(not_placed) == all_oral
+
     parts = [head('Oral Study by Topic — MEO Class 1 | Marine Intelligence Weekly',
-                  'Every mapped MEO Class I oral question, grouped by study topic '
+                  'Every MEO Class I oral question, grouped by study topic '
                   'and aligned to the official DGMA syllabus.')]
     parts.append(TOPBAR.format(study_here='', topics_here=' class="here"'))
     parts.append(
         '<div class="page-header">'
         '<h1>Oral Study by Topic</h1>'
-        '<p>Every mapped oral question, grouped into the ten MIW study topics and '
-        'aligned to the official DGMA syllabus. Topics appear in <b>recommended '
-        'study order</b> &mdash; prerequisites first, so you are never sent to a '
-        'topic that assumes one you have not covered.</p></div>')
+        '<p>Oral questions grouped into the ten MIW study topics and aligned to '
+        'the official DGMA syllabus. Topics appear in <b>recommended study '
+        'order</b> &mdash; prerequisites first, so you are never sent to a topic '
+        'that assumes one you have not covered.</p></div>')
     parts.append(
         f'<div class="summary-bar">'
-        f'<span><strong>{total_oral}</strong> mapped oral questions</span>'
+        f'<span><strong>{all_oral}</strong> oral questions in the bank</span>'
+        f'<span><strong>{n_placed}</strong> placed in a topic</span>'
+        f'<span><a href="#not-yet-placed"><strong>{len(not_placed)}</strong> '
+        f'still being placed</a></span>'
         f'<span><strong>{len(model["topics"])}</strong> study topics</span>'
         f'<span><strong>{len(official["nodes"])}</strong> official syllabus items</span>'
         f'<span class="evidence">{E(model["public_claim"])}</span>'
@@ -233,21 +311,36 @@ def build_topics_html(model, mappings, official, ex):
     parts.append('<div class="mininav">')
     for t in model['topics']:
         parts.append(f'<a class="mini-pill" href="#{t["topic_id"]}">'
-                     f'{t["topic_id"]} <span>{len(orals.get(t["topic_id"], ()))}</span></a>')
+                     f'{t["topic_id"]} <span>{len(placed.get(t["topic_id"], ()))}</span></a>')
+    parts.append(f'<a class="mini-pill" href="#not-yet-placed">Not yet placed '
+                 f'<span>{len(not_placed)}</span></a>')
     parts.append('</div>\n<main>')
+
+    # How to read the examiner labels: the Examiner Index's own vocabulary.
+    parts.append('<div class="legend"><b>Examiner labels.</b> A name shows who has '
+                 'been recorded asking a question, and how that record was made: ')
+    parts.append('; '.join(f'<b>{E(p["label"])}</b> &mdash; {E(p["meaning"])}'
+                           for p in policy.values()))
+    parts.append('. The same records drive the <a href="examiner-index.html">'
+                 'Examiner Index</a>.</div>')
 
     for t in model['topics']:
         tid = t['topic_id']
-        qs = orals.get(tid, [])
+        qs = placed.get(tid, [])
+        rv = reviewing.get(tid, [])
+        strongest = collections.Counter(
+            EXS.strongest_tier(ex[r['canonical_question_id']].values(), policy)
+            for r in qs if r['canonical_question_id'] in ex)
+        no_ex = sum(1 for r in qs if r['canonical_question_id'] not in ex)
         parts.append(f'<section class="t-section" id="{tid}">')
         parts.append(
             f'<div class="t-head"><div class="t-order">{t["study_order"]}</div>'
             f'<div><h2>{E(t["topic"])} <span class="t-id">{tid}</span></h2>'
             f'<div class="t-sub">Prerequisites: {E(t["prerequisites"])} '
             f'&middot; Unlocks: {E(t["unlocks"])}</div></div>'
-            f'<div class="t-stats">{len(qs)} oral<br>'
-            f'{t["current_written_questions"]} written<br>'
-            f'{t["examiner_evidenced_oral"]} examiner-evidenced</div></div>')
+            f'<div class="t-stats">{len(qs)} oral'
+            + (f' (+{len(rv)} awaiting confirmation)' if rv else '') +
+            f'<br>{t["current_written_questions"]} written</div></div>')
         parts.append('<div class="t-body">')
 
         parts.append('<div class="chips">')
@@ -258,6 +351,15 @@ def build_topics_html(model, mappings, official, ex):
         parts.append(f'<span class="chip">{t["distinct_examiners"]} examiners</span>')
         parts.append(readiness_chips(t))
         parts.append('</div>')
+        if qs:
+            ev = ' &middot; '.join(
+                f'{strongest[k]} {E(p["label"])}' for k, p in policy.items()
+                if strongest[k])
+            tail = f' &middot; {no_ex} with no examiner record' if no_ex else ''
+            parts.append(
+                f'<div class="readiness">Examiner records for the {len(qs)} placed '
+                f'questions, counted once per question by its strongest record: '
+                f'{ev}{tail}.</div>')
         if t['families_mapped']:
             parts.append(f'<div class="readiness">Written answer readiness: '
                          f'{E(t["readiness_text"])}. Readiness is about whether MIW&rsquo;s '
@@ -275,29 +377,40 @@ def build_topics_html(model, mappings, official, ex):
         if qs:
             parts.append(f'<div class="blocklabel">Oral questions ({len(qs)})</div>')
             parts.append('<ul class="q-list">')
-            for rec in qs:
-                names = sorted(ex.get(rec['canonical_question_id'], ()))
-                tag = (f'<span class="q-ex">{E(", ".join(names))}</span>'
-                       if names else '')
-                text = (rec.get('text') or '').strip()
-                parts.append(
-                    f'<li><a href="{E(rec["source_file"])}#{E(rec["anchor"])}">'
-                    f'{E(text) if text else E(rec["canonical_question_id"])}</a>{tag}</li>')
+            parts.extend(q_item(rec, ex, policy) for rec in qs)
             parts.append('</ul>')
         else:
-            parts.append('<div class="q-more">No oral questions are mapped to this '
-                         'topic yet &mdash; its evidence is written-only.</div>')
+            parts.append('<div class="q-more">No oral questions are confirmed in this '
+                         'topic yet.</div>')
+        if rv:
+            parts.append(f'<div class="q-more">{len(rv)} more question(s) may belong '
+                         f'here; they are listed under <a href="#not-yet-placed">'
+                         f'Not yet placed</a> until their topic is confirmed.</div>')
 
         if t['gaps'] != '—':
             parts.append(f'<div class="gaps"><b>Known gaps:</b> {E(t["gaps"])}</div>')
         parts.append('</div></section>')
+
+    parts.append('<section class="t-section" id="not-yet-placed">')
+    parts.append(f'<div class="t-head"><div class="t-order">&middot;</div><div>'
+                 f'<h2>Not yet placed in a topic <span class="t-id">'
+                 f'{len(not_placed)}</span></h2><div class="t-sub">In the question '
+                 f'bank and answered in full &mdash; their study topic is still being '
+                 f'confirmed.</div></div><div class="t-stats">{n_review} being '
+                 f'reviewed<br>{n_unmapped} not yet assigned</div></div>')
+    parts.append('<div class="t-body"><ul class="q-list">')
+    parts.extend(q_item(rec, ex, policy) for rec in not_placed)
+    parts.append('</ul></div></section>')
 
     parts.append('</main>')
     parts.append(
         '<footer>Questions are grouped by governed mapping, not by page. '
         'A question appears under the topic its mapping record names, which is '
         'why some questions sit under a different topic from the question-bank '
-        'page they live on. '
+        'page they live on. Within a topic, questions are listed in question-bank '
+        'order (page, then question number) &mdash; this is not a ranking or a '
+        'suggested learning sequence. Examiner labels are counted once per '
+        'question by its strongest record; a question can carry several examiners. '
         f'Official scope: {E(model["official_source"]["circular"])}, Annexure III '
         '&mdash; adopted, effective 2027-01-01.</footer>')
     parts.append('\n</body>\n</html>\n')
