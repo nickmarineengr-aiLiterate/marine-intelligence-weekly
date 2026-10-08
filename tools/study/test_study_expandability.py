@@ -284,11 +284,13 @@ def test_adopted_source_layer_adds_no_coverage():
        hsl['research_provenance']['merged_into_main'] is False)
     ok('the research commit is pinned, not floating',
        len(hsl['research_provenance']['commit']) == 40)
-    # And it must not have moved a single MIW count.
+    # And it must not have moved a single MIW count. The governed current
+    # corpus is 41 papers / 369 questions since QP2609 was mapped (Oral
+    # roadmap Phase 0, 2026-10-08); the adoption itself adds none.
     horizon = _load('written_evidence_horizon.json')
     cur = horizon['layers']['current_solved_written']
     ok('the current written corpus is untouched by the adoption',
-       cur['papers_total'] == 40 and cur['questions_total'] == 360,
+       cur['papers_total'] == 41 and cur['questions_total'] == 369,
        f"{cur['papers_total']}/{cur['questions_total']}")
     ok('month gaps distinguish no-source-page from no-archive-capture',
        {g['classification'] for g in hsl['month_gaps']}

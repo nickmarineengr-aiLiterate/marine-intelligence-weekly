@@ -317,8 +317,12 @@ def build_topics_html(model, mappings, official, ex):
     parts.append('</div>\n<main>')
 
     # How to read the examiner labels: the Examiner Index's own vocabulary.
-    parts.append('<div class="legend"><b>Examiner labels.</b> A name shows who has '
-                 'been recorded asking a question, and how that record was made: ')
+    # Wording rule: the legend must not present every name as someone recorded
+    # asking the question -- an Inferred relationship has no primary record.
+    parts.append('<div class="legend"><b>Examiner labels.</b> A label shows how '
+                 'MIW&rsquo;s evidence associates an examiner with a question; the '
+                 'label beside each name states the strength and source of that '
+                 'relationship: ')
     parts.append('; '.join(f'<b>{E(p["label"])}</b> &mdash; {E(p["meaning"])}'
                            for p in policy.values()))
     parts.append('. The same records drive the <a href="examiner-index.html">'
@@ -355,10 +359,11 @@ def build_topics_html(model, mappings, official, ex):
             ev = ' &middot; '.join(
                 f'{strongest[k]} {E(p["label"])}' for k, p in policy.items()
                 if strongest[k])
-            tail = f' &middot; {no_ex} with no examiner record' if no_ex else ''
+            tail = f' &middot; {no_ex} with no examiner relationship' if no_ex else ''
             parts.append(
-                f'<div class="readiness">Examiner records for the {len(qs)} placed '
-                f'questions, counted once per question by its strongest record: '
+                f'<div class="readiness">Examiner relationships for the {len(qs)} '
+                f'placed questions, counted once per question by its strongest '
+                f'label: '
                 f'{ev}{tail}.</div>')
         if t['families_mapped']:
             parts.append(f'<div class="readiness">Written answer readiness: '
@@ -410,7 +415,7 @@ def build_topics_html(model, mappings, official, ex):
         'page they live on. Within a topic, questions are listed in question-bank '
         'order (page, then question number) &mdash; this is not a ranking or a '
         'suggested learning sequence. Examiner labels are counted once per '
-        'question by its strongest record; a question can carry several examiners. '
+        'question by its strongest label; a question can carry several examiners. '
         f'Official scope: {E(model["official_source"]["circular"])}, Annexure III '
         '&mdash; adopted, effective 2027-01-01.</footer>')
     parts.append('\n</body>\n</html>\n')
@@ -459,7 +464,7 @@ def build_study_html(model, official):
         parts.append(f'<span class="chip official">{t["official_syllabus_items"]} '
                      f'official item(s)</span>')
         parts.append(f'<span class="chip">{t["examiner_evidenced_oral"]} '
-                     f'examiner-evidenced orals</span>')
+                     f'orals with an examiner relationship</span>')
         parts.append(f'<span class="chip">{t["distinct_examiners"]} examiners</span>')
         parts.append(f'<span class="chip">{t["current_written_papers"]} papers</span>')
         parts.append(f'<span class="chip">{t["current_written_recurrence_families"]} '

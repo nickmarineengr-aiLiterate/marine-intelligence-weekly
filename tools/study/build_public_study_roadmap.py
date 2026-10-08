@@ -382,8 +382,11 @@ def render_card(t, p):
             f'as a prerequisite.</li>'
             f'<li>It carries {t["current_written_questions"]} solved Written '
             f'questions across {t["current_written_papers"]} papers.</li>'
-            f'<li>{t["examiner_evidenced_oral"]} of its Oral questions are tied to '
-            f'a named examiner by recorded evidence, across '
+            # Any-tier count (confirmed record through topic inference): the
+            # wording must not present it as direct evidence of being asked.
+            f'<li>{t["examiner_evidenced_oral"]} of its Oral questions have an '
+            f'examiner relationship in MIW&rsquo;s evidence model (from confirmed '
+            f'records to topic inference), across '
             f'{t["distinct_examiners"]} examiners.</li>'
             f'<li>It is the leading MIW topic for {t["official_syllabus_items"]} '
             f'items of the official Annexure III syllabus and supports '
@@ -400,8 +403,8 @@ def render_card(t, p):
 
     out.append('<div class="metrics">')
     out.append(metric(t['oral_questions'], 'mapped Oral questions'))
-    out.append(metric(t['examiner_evidenced_oral'], 'Oral questions with examiner evidence'))
-    out.append(metric(t['distinct_examiners'], 'examiners evidenced'))
+    out.append(metric(t['examiner_evidenced_oral'], 'Oral questions with an examiner relationship'))
+    out.append(metric(t['distinct_examiners'], 'examiners linked'))
     out.append(metric(t['current_written_questions'], 'solved Written questions'))
     out.append(metric(t['current_written_papers'], 'Written papers touched'))
     out.append(metric(t['current_written_recurrence_families'],
@@ -455,7 +458,7 @@ def render(p):
         (p['oral_mapped'], 'mapped Oral questions'),
         (p['current']['questions'], 'solved Written questions'),
         (p['current']['papers'], 'Written papers'),
-        (len(p['examiners']), 'examiners evidenced'),
+        (len(p['examiners']), 'examiners linked'),
         (p['official_items'], 'official syllabus items'),
     ):
         parts.append(f'<div class="stat"><div class="stat-num">{num}</div>'
@@ -472,7 +475,7 @@ def render(p):
         '<p class="body">Every MEO Class I Oral and solved Written question in '
         'MIW is mapped to one of ten study topics. Each topic then carries its '
         'own evidence &mdash; how often it is asked orally, how many examiners '
-        'are recorded asking it, how much of the solved Written corpus it '
+        'MIW&rsquo;s evidence links to it, how much of the solved Written corpus it '
         'accounts for, how many Written question families recur in it, and how '
         'much of the official syllabus it leads.</p>'
         '<ol>'
@@ -505,8 +508,8 @@ def render(p):
         'carrying its own Oral, Written and examiner evidence.</p></div>'
         '<div class="way"><div class="q">What does this examiner ask?</div>'
         '<h3>Browse by examiner</h3>'
-        f'<p>Questions recorded against {len(p["examiners"])} named examiners, '
-        'built from candidate-reported sittings.</p>'
+        f'<p>Questions linked to {len(p["examiners"])} named examiners in '
+        'MIW&rsquo;s evidence model.</p>'
         f'<a href="{ROUTE_EXAMINER}" data-ev="study_examiner_cta">'
         'Open the Examiner Index &rarr;</a></div>'
         '<div class="way"><div class="q">How is it answered under exam conditions?</div>'

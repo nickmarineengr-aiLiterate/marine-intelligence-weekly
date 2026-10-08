@@ -21,6 +21,12 @@ Dispositions
     DROPPED                    ledger only. Any such row FAILS this report:
                                the snapshot may not lose a ledger pair silently.
 
+Fails closed (exit 1, nothing written) on a ledger pair that occurs twice:
+the ledger is keyed here by (question_id, examiner), and upstream
+validate_phase2 only proves relationship_id unique, so a repeated pair under
+two ids would otherwise be overwritten without trace. Snapshot duplicates are
+already refused by examiner_source.load().
+
 Read-only over both inputs. Deterministic (sorted, no clock).
 
     python tools/study/report_examiner_source_reconciliation.py           # write
@@ -42,13 +48,23 @@ OUT = os.path.join(ROOT, 'docs', 'study',
                    'ORAL_EXAMINER_SOURCE_RECONCILIATION_20261008.json')
 
 
+class LedgerDuplicate(Exception):
+    pass
+
+
 def build():
     r2l = json.load(open(EXS.CONFIG, encoding='utf-8'))['research_tier_to_literal']
     ledger = {}
+    ledger_duplicates = []
     for line in open(LEDGER, encoding='utf-8'):
         if line.strip():
             r = json.loads(line)
-            ledger[(r['question_id'], r['examiner'])] = r
+            key = (r['question_id'], r['examiner'])
+            if key in ledger:
+                ledger_duplicates.append(key)
+            ledger[key] = r
+    if ledger_duplicates:
+        raise LedgerDuplicate(sorted(set(ledger_duplicates)))
     snap = {(r['canonical_question_id'], r['examiner']): r for r in EXS.load()}
     idx = json.load(open(EXS.QB_INDEX, encoding='utf-8'))
     live = sorted(q['id'] for f in idx['files'].values() for q in f['questions'])
@@ -115,7 +131,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--check', action='store_true')
     args = ap.parse_args()
-    rec = build()
+    try:
+        rec = build()
+    except LedgerDuplicate as exc:
+        print(f'FAIL: ledger repeats {len(exc.args[0])} (question_id, examiner) '
+              f'pair(s): {exc.args[0][:5]}')
+        return 1
     if rec['summary']['by_disposition'].get('DROPPED'):
         print(f"FAIL: {rec['summary']['by_disposition']['DROPPED']} ledger pair(s) "
               f"absent from the snapshot")
