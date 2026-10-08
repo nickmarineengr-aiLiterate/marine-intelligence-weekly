@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>MIW Engineering Management Notes — Part 29 | MEO Class 1 | Lubricating-Oil Analysis and Condition Monitoring · Digital and Regulatory Developments · Electronically Controlled and Dual-Fuel Two-Stroke Engines · Two-Stroke Engine Vibration</title>
+<meta name="description" content="MEO Class 1 Engineering Management Notes Part 29 — used lubricating-oil analysis and condition monitoring (ICP and RDE spectrometry, FTIR, particle counting and the ISO code, BN and AN, viscosity, water, flash point and trend interpretation); digital and regulatory developments (electronic record books under MEPC.312(74), MASS degrees of autonomy and the non-mandatory MASS Code, the Maritime Single Window and India's SagarSetu, and a dated maritime calendar); the MAN B&amp;W / Everllence ME platform (HPS, HCU, ELFI, ELVA, FIVA, ECS redundancy), ME-GI versus ME-GA dual-fuel engines, NOx formation, the NOx Tier table and current NOx ECAs, the IGF and IGC Codes, methane slip and turbocharger developments; and two-stroke engine vibration — axial, torsional, guide-force (lateral) and external unbalanced moments. Source range PDF 696–726. Originally compiled by Uday Sankar S., Anglo-Eastern.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/miw-notes-mgmt-p29.html">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:15px;line-height:1.6;user-select:none;-webkit-user-select:none;}
+.miw-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.05;overflow:hidden;}
+.topbar{background:var(--navy);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logo{width:30px;height:30px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;letter-spacing:-0.5px;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;letter-spacing:0.3px;}
+.topbar-nav{display:flex;gap:20px;}
+.topbar-nav a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.15s;}
+.topbar-nav a:hover{color:#fff;}
+.page-header{background:var(--navy);padding:32px 24px 28px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.notes-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid var(--teal);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.notes-badge-icon{background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;letter-spacing:1px;}
+.notes-badge-text{color:var(--teal-light);font-size:12px;font-weight:600;}
+.page-title{color:#fff;font-size:26px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+.page-sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.header-meta-item{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:12px;color:#cbd5e1;}
+.header-meta-item strong{color:#fff;}
+.attribution-strip{margin-top:14px;padding:10px 14px;background:rgba(201,168,76,0.12);border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;font-size:12px;color:#cbd5e1;}
+.attribution-strip strong{color:#e2c97e;}
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:24px 16px;}
+.sidebar{position:sticky;top:68px;height:calc(100vh - 80px);overflow-y:auto;padding-right:6px;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--grey-border);border-radius:2px;}
+.toc-head{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;font-size:12px;color:var(--grey-text);text-decoration:none;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;transition:all 0.15s;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:700;}
+.toc-divider{height:1px;background:var(--grey-border);margin:14px 0;}
+.qb-sidebar-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:12px;}
+.qb-sidebar-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin-bottom:8px;}
+.qb-sidebar-link{display:block;font-size:12px;color:var(--teal-dark);text-decoration:none;font-weight:600;padding:3px 0;}
+.qb-sidebar-link:hover{text-decoration:underline;}
+#notes-feed{min-width:0;}
+.topic-block{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:24px;margin-bottom:32px;scroll-margin-top:72px;}
+.topic-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--teal-light);}
+.topic-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+.topic-title{margin:0 0 8px;font-size:20px;font-weight:800;color:var(--navy);}
+.topic-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;}
+.topic-tag{background:var(--teal-light);color:var(--teal-dark);padding:3px 8px;border-radius:20px;font-weight:600;}
+.topic-pages{color:var(--grey-text);padding:3px 0;}
+.topic-examiner{background:var(--orange-light);color:#92400e;padding:3px 8px;border-radius:20px;font-weight:600;}
+.freq-high{background:#fef9c3;color:#713f12;padding:3px 8px;border-radius:20px;font-weight:700;}
+.freq-medium{background:#f0fdf4;color:#14532d;padding:3px 8px;border-radius:20px;font-weight:600;}
+.section-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--grey-border);}
+.notes-body{font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:8px;}
+.notes-list{font-family:'Georgia',serif;font-size:14px;line-height:1.8;padding-left:22px;margin-bottom:8px;}
+.notes-list li{margin-bottom:4px;}
+.timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
+.timeline-block .t-year{color:#fff;font-weight:700;}
+.ascii-diagram{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12px;line-height:1.35;overflow-x:auto;white-space:pre;}
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
+.reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
+.reg-code{color:var(--orange);font-weight:700;white-space:nowrap;flex-shrink:0;font-family:monospace;font-size:12px;}
+.reg-desc{color:#cbd5e1;line-height:1.5;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:13.5px;font-family:'Georgia',serif;line-height:1.7;}
+.ce-tip strong{color:#92400e;}
+.qa-block{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.qa-item{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.qa-q{background:var(--grey-bg);padding:10px 14px;font-weight:700;font-size:13px;color:var(--navy);}
+.qa-a{padding:10px 14px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;color:var(--ink);}
+.exam-focus-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:16px 0;}
+.exam-focus-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin:0 0 12px;}
+.exam-q{margin:8px 0;font-family:'Georgia',serif;font-size:13.5px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+.marks-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+.memory-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:16px 0;}
+.memory-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#713f12;margin:0 0 10px;}
+.memory-list{font-family:'Georgia',serif;font-size:13.5px;line-height:1.8;padding-left:18px;}
+.memory-list li{margin-bottom:4px;}
+.amend-table,.compare-table,.revision-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.amend-table th,.compare-table th,.revision-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+.amend-table td,.compare-table td,.revision-table td{padding:8px 12px;border-bottom:1px solid var(--grey-border);font-family:'Georgia',serif;line-height:1.6;vertical-align:top;}
+.amend-table tr:nth-child(even) td,.revision-table tr:nth-child(even) td{background:var(--grey-bg);}
+.psc-focus{background:#fef2f2;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);}
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;}
+.mental-map .root{color:#fff;font-weight:700;}
+.qb-link-box{background:var(--teal-light);border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;}
+.qb-link-box strong{color:var(--teal-dark);}
+.qb-link-box a{color:var(--teal-dark);font-weight:600;text-decoration:none;margin-right:12px;}
+.qb-link-box a:hover{text-decoration:underline;}
+.deep-dive{margin:14px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:16px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;display:none;}
+.deep-dive-body.open{display:block;}
+.deep-dive-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.deep-dive-body p,.deep-dive-body li{margin-bottom:6px;}
+.deep-dive-body ul{padding-left:20px;}
+.verify-note{background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:16px;font-size:13px;font-family:'Georgia',serif;line-height:1.7;color:#1e3a5f;}
+.verify-note strong{color:#1d4ed8;}
+.ref-list{font-size:13px;line-height:1.9;padding-left:18px;}
+.ref-list a{color:var(--teal-dark);}
+.topic-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:12px;border-top:1px dashed var(--grey-border);font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.topic-version{font-weight:700;}
+.page-footer{background:var(--grey-bg);border-top:1px solid var(--grey-border);padding:28px 24px;margin-top:40px;font-size:12px;color:var(--grey-text);text-align:center;}
+.page-footer a{color:var(--teal-dark);}
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+
+<div class="miw-watermark" aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wmpat" width="420" height="220" patternTransform="rotate(-30)" patternUnits="userSpaceOnUse">
+        <text x="0" y="60" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">marineintelligenceweekly.com</text>
+        <text x="0" y="90" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wmpat)"/>
+  </svg>
+</div>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-logo">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="notes-badge">
+      <span class="notes-badge-icon">NOTES</span>
+      <span class="notes-badge-text">Engineering Management · Part 29 of 31</span>
+    </div>
+    <h1 class="page-title">Engineering Management Notes — Part 29</h1>
+    <p class="page-sub">Lubricating-Oil Analysis · Electronic Record Books, MASS, Maritime Single Window · ME and Dual-Fuel Two-Stroke Engines, NOx and Gas Codes · Engine Vibration · Source range PDF 696–726 (four topics under Founder decision D-29-A; facts verified as of 8 October 2026)</p>
+    <div class="header-meta">
+            <span class="header-meta-item"><strong>Pages:</strong> 696–726 of 768</span>
+            <span class="header-meta-item"><strong>Topics:</strong> 4 (local P29-T1–P29-T4 — see note below)</span>
+            <span class="header-meta-item"><strong>Access:</strong> Subscriber Only</span>
+            <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>
+            <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>
+        </div>
+        <div class="attribution-strip">
+            Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and verified by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly. <strong>Sequencing note:</strong> Part 29 (pp. 696–726) continues directly from Part 28 (pp. 675–695). Topic numbering below uses local <strong>Part 29</strong> badges (not a continuous global T-number), consistent with the platform's standing rule to defer global renumbering until all 31 Parts are confirmed live.
+        </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="toc-head">Topics · Part 29</div>
+    <a class="toc-link" href="#topic-p29-1">T1 · Lub-Oil Analysis &amp; Condition Monitoring</a>
+    <a class="toc-link" href="#topic-p29-2">T2 · e-Record Books, MASS, MSW &amp; Maritime Calendar</a>
+    <a class="toc-link" href="#topic-p29-3">T3 · ME, ME-GI/ME-GA, NOx Tiers &amp; Turbochargers</a>
+    <a class="toc-link" href="#topic-p29-4">T4 · Engine Vibration &amp; Unbalanced Moments</a>
+    <div class="toc-divider"></div>
+    <div class="toc-head">Navigate</div>
+    <a class="toc-link" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Notes Index</a>
+    <a class="toc-link" href="miw-notes-mgmt-p28.html">← Part 28</a>
+    <div class="toc-divider"></div>
+    <div class="qb-sidebar-box">
+        <div class="qb-sidebar-title">🔗 Related QB Files</div>
+        <a class="qb-sidebar-link" href="../QB3_A.html">QB3_A — MARPOL, Surveys &amp; Ship Construction (lube oil analysis)</a>
+        <a class="qb-sidebar-link" href="../QB6_G.html">QB6_G — Electrical, Automation &amp; Machinery: New Engine Tech (ME engines, turbochargers)</a>
+        <a class="qb-sidebar-link" href="../QB6_D.html">QB6_D — Electrical, Automation &amp; Control Systems (NOx formation, SCR and EGR)</a>
+        <a class="qb-sidebar-link" href="../QB8_D.html">QB8_D — IGC Code &amp; Dangerous vs Hazardous Cargo (IGC Code)</a>
+        <a class="qb-sidebar-link" href="../QB10_B.html">QB10_B — Maritime Industry, Policy &amp; Current Affairs (MASS Code, North-East Atlantic ECA)</a>
+        <a class="qb-sidebar-link" href="../QB9_G.html">QB9_G — Commercial Law &amp; Maritime Liability (Maritime Single Window)</a>
+    </div>
+</aside>
+
+<!-- NOTES FEED -->
+<main id="notes-feed">
+
+
+<!-- ========================================================================== -->
+<!-- TOPIC 1 — LUB-OIL ANALYSIS &AMP; CONDITION MONITORING -->
+<!-- ========================================================================== -->
+
+<div class="topic-block" id="topic-p29-1" data-kw="lubricating oil analysis, used oil analysis, LOA, tribology, condition monitoring, oil condition, contamination, wear debris, elemental analysis, spectrometric analysis, wear metal analysis, atomic emission spectroscopy, AES, ICP, inductively coupled plasma, RDE, rotating disc electrode, atomic absorption, XRF, ppm, mg/kg, wear metals, iron, copper, lead, tin, chromium, aluminium, additive elements, calcium, zinc, sodium, vanadium, nickel, silicon, cat fines, FTIR, Fourier transform infrared, molecular spectroscopy, wavenumber, oxidation, nitration, sulphation, soot, glycol, water, Karl Fischer, particle counting, ISO 4406, ISO 4407, cleanliness code, laser particle counter, PQ index, ferrography, base number, BN, TBN, acid number, AN, TAN, mg KOH/g, ASTM D2896, ASTM D4739, ASTM D664, ASTM D5185, ASTM D6595, ASTM E2412, viscosity, kinematic viscosity, flash point, fuel dilution, insolubles, system oil, scrape-down oil, scavenge drain oil, stuffing box leakage, trend analysis, CIMAC Recommendation 30">
+  <div class="topic-header">
+    <div class="topic-badge">Part 29 · Topic 1</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Lubricating-Oil Analysis and Condition Monitoring — Spectrometry, FTIR, Particle Counting, BN and AN, and Reading the Trend</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Oil condition · Contamination · Wear debris · ICP / RDE spectrometry (ppm) · FTIR = molecules, not particles · Particle count (ISO 4406) · BN vs AN · The trend, not the single result</span>
+        <span class="topic-pages">Uday pp. 696–700</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> <strong>Source range.</strong> PDF 696–700 (notebook 179–181), the source's lub-oil analysis block. <strong>Source errors corrected.</strong> (1) <strong>RDE, not 'ROE'</strong> (P29-C007): the arc/spark spectrometer is the Rotating Disc Electrode atomic emission spectrometer (RDE-AES, ASTM D6595). (2) <strong>Elemental technique</strong> (P29-C005): atomic emission spectroscopy is the usual principle, but CIMAC also lists atomic absorption and X-ray fluorescence; AES is not the only method. (3) <strong>FTIR</strong> (P29-C013): the source says the absorbed infrared light is taken up 'by the particles'. Infrared is absorbed by <em>molecules</em> — chemical bonds at characteristic wavenumbers — so FTIR measures oxidation products, water, glycol, fuel and soot loading; it does not measure particles. (4) <strong>Particle counting</strong> (P29-C015): the source presents particle counts as a proactive wear warning for oil generally. CIMAC states that the optical ISO 4406/NAS methods were developed for hydraulic oils, are not very suitable for dark, sooty used engine oils (dilution up to 1:10, large scatter) and are not routine for engine oils; the proactive value applies mainly to hydraulic, gear and turbine oils. (5) <strong>Low BN</strong> (P29-C021): the source reads low BN as 'blow-by'. Low BN means the alkaline reserve has been consumed by sulphuric acid from fuel sulphur (carried to the crankcase oil by blow-by in trunk-piston engines); causes include high-sulphur fuel, low oil consumption or top-up, and the wrong grade. <strong>Removed.</strong> The source's line that BN and AN tests are 'relatively expensive with poor results' (P29-C023) is not taught: they are routine, standard titrations central to CIMAC interpretation. <strong>Added from the held CIMAC texts</strong> (Recommendation No. 30, 2011, and the WG8 guideline, February 2023): viscosity, water, flash point, insolubles, the PQ index, sampling practice and the two-stroke system-oil and scrape-down interpretation tables. <strong>Standards</strong> are cited by number and name only; edition years are deliberately omitted.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body"><strong>Used-oil analysis</strong> is the laboratory (or shipboard) testing of a sample of in-service lubricating oil to answer two questions at once: <em>is the oil still fit for use</em>, and — to a certain extent — <em>what condition is the machinery it lubricates in</em>. The tests fall into three families: <strong>fluid properties</strong> (viscosity, base number, acid number, oxidation), <strong>contamination</strong> (water, fuel, soot and insolubles, glycol, sea-water and fuel elements) and <strong>wear debris</strong> (wear metals and ferrous particles). The core methods are <strong>elemental spectrometric analysis</strong> (ICP or RDE atomic emission, reported in ppm), <strong>FTIR</strong> (infrared absorption by molecules), <strong>particle counting</strong> (ISO cleanliness code) and the <strong>BN/AN titrations</strong>. A single result rarely diagnoses anything: the value of oil analysis lies in the <strong>trend</strong> from the same sampling point, laboratory and method.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li><strong>Simon asks what the report means, not what the laboratory does.</strong> The Chief Engineer must read a spectrometric, FTIR and BN result together and say what is happening in the engine — and what he will do next.</li>
+    <li><strong>The limitations are where candidates fail.</strong> ICP does not see particles larger than about 5–7 µm, so iron can look steady while a bearing or liner is failing; a particle count on dark engine oil is unreliable; BN from two different titration methods cannot be compared.</li>
+    <li><strong>System oil on a two-stroke is a shared fluid.</strong> It lubricates bearings, cools pistons and, on an ME engine, is the hydraulic medium for the HPS and HCUs — a stuffing-box leak, a cooler leak or a leaking fuel pump all show first in the oil report.</li>
+    <li><strong>Oil analysis is condition-based maintenance evidence.</strong> It justifies opening up, or not opening up, a unit and supports the maintenance decision under the company's planned maintenance system.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">2011</span>  CIMAC Recommendation No. 30, <em>Used Engine Oil Analysis — User Interpretation Guide</em>: routine and advanced tests, sampling practice, four-stroke and two-stroke interpretation
+<span class="t-year">Feb 2023</span>  CIMAC WG8 (Marine Lubricants) guideline <em>Used engine oil analysis</em>: interpretation tables for two-stroke system oil and cylinder scrape-down oil; 'it is the trend that is most important'</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Standards and Recognised Guidance (cited by number and name)</div>
+    <div class="reg-item"><span class="reg-code">CIMAC Recommendation No. 30 (2011)</span><span class="reg-desc">Used Engine Oil Analysis — User Interpretation Guide. Routine analyses for engine oils: viscosity, water, BN, insolubles, flash point and elements; ICP particle-size limit; sampling procedure and intervals; caution and action limits.</span></div>
+    <div class="reg-item"><span class="reg-code">CIMAC WG8 guideline — Used engine oil analysis (February 2023)</span><span class="reg-desc">Interpretation tables for four-stroke oil, two-stroke system oil and two-stroke scrape-down oil; trend-based interpretation.</span></div>
+    <div class="reg-item"><span class="reg-code">ASTM D5185</span><span class="reg-desc">Multielement determination of used and unused lubricating oils and base oils by inductively coupled plasma atomic emission spectrometry (ICP-AES).</span></div>
+    <div class="reg-item"><span class="reg-code">ASTM D6595</span><span class="reg-desc">Determination of wear metals and contaminants in used lubricating oils or used hydraulic fluids by rotating disc electrode atomic emission spectrometry (RDE-AES).</span></div>
+    <div class="reg-item"><span class="reg-code">ASTM E2412</span><span class="reg-desc">Condition monitoring of in-service lubricants by trend analysis using Fourier transform infrared (FT-IR) spectrometry.</span></div>
+    <div class="reg-item"><span class="reg-code">ASTM D2896 · ASTM D4739</span><span class="reg-desc">Base number by potentiometric titration — perchloric acid (D2896) and hydrochloric acid (D4739). The two methods give different values and are not interchangeable.</span></div>
+    <div class="reg-item"><span class="reg-code">ASTM D664</span><span class="reg-desc">Acid number by potentiometric titration with potassium hydroxide.</span></div>
+    <div class="reg-item"><span class="reg-code">ISO 4406 · ISO 4407</span><span class="reg-desc">ISO 4406: coding the level of contamination by solid particles (hydraulic fluid power). ISO 4407: particle counting with an optical microscope.</span></div>
+  </div>
+
+  <div class="section-head">🧪 Why Analyse Used Oil — Two Purposes, Three Families of Test</div>
+  <p class="notes-body">The source opens with the two purposes of analysis — the condition of the oil and the working condition of the machinery from which the sample was taken — and the three categories of test. CIMAC adds the honest qualifier: analysis shows oil condition and suitability for further use reliably, and machinery condition only <em>to a certain extent</em>, and only when the sample is representative.</p>
+  <table class="revision-table">
+    <tr><th>Family</th><th>What it tells you</th><th>Typical tests</th></tr>
+    <tr><td>Fluid properties</td><td>Is the oil itself still fit — viscosity, alkaline reserve, ageing?</td><td>Viscosity (kV at 40 °C and/or 100 °C), BN, AN, FTIR oxidation / nitration / sulphation</td></tr>
+    <tr><td>Contamination</td><td>What has got into the oil, and from where?</td><td>Water (Karl Fischer or infrared), flash point (fuel dilution), insolubles, soot, glycol; contaminant elements Na, K, B, Mg, Cl (water / coolant / sea water), V and Ni (residual fuel), Si (dust, cat fines — but also anti-foam additive)</td></tr>
+    <tr><td>Wear debris</td><td>Which components are wearing, and how fast?</td><td>Wear elements Fe, Cr, Cu, Pb, Sn, Al, Mo, Sb by spectrometry; PQ index and ferrography for larger ferrous particles</td></tr>
+  </table>
+  <p class="notes-body"><strong>Sampling decides everything.</strong> CIMAC's key points: sample with the machine running at normal temperature; from the main supply line at the engine inlet, in full flow (a side or top tapping on a horizontal pipe, not the bottom); always from the same point; flush about 0.5–1.0 litre through the valve first; fill a clean, dedicated bottle (about 250 ml, or about 100 ml for two-stroke scavenge drain oil) to about 90%; label it fully (engine, oil, sampling point, date, running hours) and dispatch it promptly. Sample monthly until a trend is established and then at intervals set by the OEM or oil supplier, normally not more than three months apart — and always at intervals shorter than the expected time to failure of the condition being watched.</p>
+
+  <div class="section-head">⚛️ Elemental (Spectrometric) Analysis — ICP and RDE</div>
+  <p class="notes-body"><strong>Principle.</strong> In atomic emission spectroscopy the oil sample is exposed to a high-energy source — an electric arc/spark or a plasma. The atoms are excited and, as they relax, emit light at wavelengths characteristic of each element. The intensity at each element's wavelength, calibrated against oil-soluble metal standards, gives its concentration, reported in ppm (mg/kg). This is the most fundamental routine test, which is why the source also calls it wear-metal analysis — but it measures additive elements and contaminants as well as wear metals. CIMAC lists three spectroscopic routes: atomic emission (the usual one), atomic absorption and X-ray fluorescence.</p>
+  <table class="revision-table">
+    <tr><th></th><th>ICP-AES (inductively coupled plasma)</th><th>RDE-AES (rotating disc electrode)</th></tr>
+    <tr><td>Excitation</td><td>Argon plasma; sample nebulised into it</td><td>Arc/spark between a disc electrode rotating through the oil and a counter-electrode</td></tr>
+    <tr><td>Where used</td><td>The method mostly used by shore laboratories (CIMAC)</td><td>Laboratory and shipboard/portable spectrometers</td></tr>
+    <tr><td>Standard</td><td>ASTM D5185</td><td>ASTM D6595</td></tr>
+    <tr><td>Key limitation</td><td>Particles larger than about 5–7 µm are not fully vaporised and are not detected</td><td>Also particle-size-limited; large wear particles are under-read</td></tr>
+  </table>
+  <p class="notes-body"><strong>What the elements point to</strong> (CIMAC Rec. 30): <em>additive</em> elements Ca, Mg, P, Zn (and Si) identify the oil and reveal mixing with another grade; <em>wear</em> elements Al, Cr, Cu, Fe, Mo, Pb, Sb, Sn indicate wear of bearings, rings, liners and other components; <em>contaminants</em> K, Mg, B, Cl and Na come from water, condensate, sea water or coolant, V and Ni from residual fuel, and Si from dust or sand as well as from anti-foam additive.</p>
+  <p class="notes-body"><strong>The limitation that matters.</strong> Because ICP misses particles above about 5–7 µm, wear-metal readings can flatten — or even fall — while a severe wear process accelerates and produces larger debris. CIMAC's remedy is non-routine analysis: the <strong>PQ index</strong> (a magnetometric measure of total ferrous debris, independent of particle size and most sensitive above about 20 µm), <strong>ferrography</strong> (ferrous particles aligned by size for expert examination of the wear mechanism — cutting, fatigue, adhesion), or ashing / XRF to capture all the material. CIMAC also warns that results depend on apparatus and preparation, so trends must use the same laboratory, apparatus and method, and that low values (below 5 ppm) should be read with caution.</p>
+
+  <div class="section-head">🌈 FTIR — Infrared Absorption by Molecules</div>
+  <p class="notes-body"><strong>Principle.</strong> Fourier transform infrared spectroscopy is a purely instrument-based test. Every chemical bond absorbs infrared energy at its own characteristic frequencies (the source's 'resonance frequencies'), expressed as wavenumbers in cm<sup>−1</sup>. A thin film of the used oil is placed in the infrared cell; the transmitted spectrum is compared with the incident beam and with a <strong>new-oil reference</strong> of the same product, and the absorbance at each characteristic wavenumber measures how much of that molecular species is present. Infrared is absorbed by molecules, not by particles — FTIR does not count or size particles.</p>
+  <table class="revision-table">
+    <tr><th>Parameter</th><th>Absorption region (CIMAC Rec. 30)</th><th>What a rise means</th></tr>
+    <tr><td>Oxidation</td><td>about 1710 cm<sup>−1</sup> (carbonyl)</td><td>Oil ageing by oxygen and temperature; viscosity and AN usually rise with it</td></tr>
+    <tr><td>Nitration</td><td>about 1620 cm<sup>−1</sup></td><td>Reaction with NOx in blow-by — measured mainly on gas-engine and high-speed engine oils</td></tr>
+    <tr><td>Sulphation</td><td>about 1150 cm<sup>−1</sup></td><td>Reaction with sulphur oxides; rises as BN falls</td></tr>
+    <tr><td>Soot</td><td>Infrared absorption</td><td>Poor combustion, burnt lube oil, worn injectors, inadequate oil treatment</td></tr>
+    <tr><td>Water, glycol, fuel</td><td>Characteristic bands</td><td>Trend indicators — quantify water by Karl Fischer titration</td></tr>
+  </table>
+  <p class="notes-body">ASTM E2412 describes FTIR as a <em>trend-analysis</em> practice: additive depletion, contaminants (water, soot, glycol, fuels, incorrect oil) and base-stock degradation (oxidation, nitration, sulphation). CIMAC stresses that a fresh-oil baseline is needed and that only results from the same laboratory and method should be compared.</p>
+
+  <div class="section-head">🔬 Particle Counting and the ISO Cleanliness Code</div>
+  <p class="notes-body"><strong>What it measures.</strong> Particle counting gives the number and size distribution of solid particles in the oil — a direct measure of cleanliness. Automatic optical counters use light obscuration or scattering (laser); the microscope method (ISO 4407) is older but still a current standard and a referee method for dark or heavily contaminated fluids, so 'old method' should not be read as 'obsolete'. Pore-blockage counters are a further type used for dark oils.</p>
+  <div class="timeline-block">ISO 4406 cleanliness code (automatic counter calibrated to ISO 11171)
+   three scale numbers  =  particles per mL  ≥ 4 µm(c) / ≥ 6 µm(c) / ≥ 14 µm(c)
+   e.g. 18/16/13  (illustrative)      each step up the scale ≈ DOUBLES the count
+   microscope count (ISO 4407) is reported as a two-number code at ≥ 5 µm and ≥ 15 µm
+   alternative scales: NAS 1638, SAE AS4059</div>
+  <p class="notes-body"><strong>Where it works and where it does not.</strong> For hydraulic, gear and turbine oils particle counting is the proactive measure: a rising code warns of filter or purifier failure, ingress and early wear before damage. For <em>used engine oils</em> CIMAC is explicit: the ISO 4406/NAS optical methods were developed for hydraulic oils, are not very suitable for dark, sooty engine oils that must be diluted as much as 1:10, give significant scatter, and are therefore not routine. Wear in engine oils is tracked mainly by spectrometry, the PQ index and ferrography. The link to the engine room: on an ME engine the system oil is also the hydraulic oil for the hydraulic power supply and cylinder units, and the CIMAC two-stroke table lists a rising particle count among the risks to hydraulic system components (Topic 3).</p>
+
+  <div class="section-head">⚖️ Base Number vs Acid Number</div>
+  <p class="notes-body"><strong>Definitions.</strong> Acid number (AN, formerly TAN) is the amount of acidic material in the oil; base number (BN, formerly TBN) is its <em>alkaline reserve</em> — the capacity left to neutralise acids from combustion. Both are expressed in mg KOH/g and found by potentiometric titration: AN by titration with potassium hydroxide (ASTM D664); BN by titration with an acid — perchloric acid (ASTM D2896, the usual method for new and marine engine oils, giving the higher value) or hydrochloric acid (ASTM D4739, often used for used oils). The two BN methods are not interchangeable, so a trend must stay on one method.</p>
+  <table class="revision-table">
+    <tr><th></th><th>Base Number (BN)</th><th>Acid Number (AN)</th></tr>
+    <tr><td>Measures</td><td>Alkaline reserve left to neutralise acids</td><td>Acidic content formed or picked up</td></tr>
+    <tr><td>Main application</td><td>Crankcase / trunk-piston engine oils; two-stroke system oil; cylinder scrape-down oil (residual BN with iron, for cylinder condition)</td><td>Turbine, hydraulic, gear and compressor oils; also relevant for low-BN engine oils and gas-engine oils (CIMAC)</td></tr>
+    <tr><td>A fall / rise means</td><td>Falling BN: alkaline reserve consumed by sulphuric acid from fuel sulphur. Rising BN in two-stroke <em>system</em> oil: cylinder oil leaking in past the piston-rod stuffing box (or a high-BN oil added)</td><td>Rising AN: oxidation, or contamination with acidic products; biofuel operation can also raise it. High-AN oil can be corrosive</td></tr>
+    <tr><td>Risk</td><td>Low BN: corrosive wear of liners, rings and bearings</td><td>Corrosion; deposits; additive depletion</td></tr>
+  </table>
+  <p class="notes-body"><strong>Low BN, correctly explained.</strong> Sulphur in the fuel burns to SO<sub>2</sub> with a little SO<sub>3</sub>; with the water formed by combustion these condense as sulphuric acid, which the oil's alkaline additives neutralise. In a trunk-piston engine the acidic combustion products reach the crankcase oil with the blow-by gas. BN depletion is therefore driven by fuel sulphur, by oil consumption (fresh top-up restores alkalinity) and by operating conditions — a low BN is not by itself a measure of blow-by, and a wrong oil grade is always a possibility.</p>
+  <p class="notes-body"><strong>Method, not cost, is the limitation.</strong> BN and AN are routine, inexpensive titrations, and shipboard BN kits are standard for scrape-down and system-oil checks. The real caution is that the value depends on the test method — trend results from one laboratory and one method only.</p>
+
+  <div class="section-head">🛢️ The Rest of a Routine Report — Viscosity, Water, Flash Point, Insolubles</div>
+  <p class="notes-body">The source's handwritten notes stop at BN and AN, but a routine CIMAC report always carries these four characteristics, and an oral answer on 'what does the report show' is incomplete without them.</p>
+  <table class="revision-table">
+    <tr><th>Characteristic</th><th>How measured</th><th>Reading it</th></tr>
+    <tr><td>Viscosity</td><td>Kinematic viscosity by capillary flow time, at 40 °C and/or 100 °C (mm²/s, cSt)</td><td>Increase: oxidation, residual-fuel contamination (asphaltenes), soot and insolubles, water emulsion, top-up with a heavier oil. Decrease — potentially more harmful, because film thickness falls: dilution by light (distillate) fuel or top-up with a thinner oil. On a two-stroke, system oil may also be thickened by cylinder oil from the stuffing box.</td></tr>
+    <tr><td>Water</td><td>Karl Fischer titration or infrared (preferred to distillation)</td><td>Cooler or jacket leakage, condensation, a badly set separator. Sea water (Na with Mg) is corrosive; emulsions reduce load-carrying capacity. CIMAC's four-stroke guidance treats water above 0.2% v/v as the point to check the centrifuge and find the source.</td></tr>
+    <tr><td>Flash point</td><td>Open-cup or closed-cup method (closed cup reads lower)</td><td>A drop indicates distillate fuel dilution; residual fuel may show little change. CIMAC's four-stroke guidance: check for fuel leakage when the flash point drops by 30 °C or more; gas chromatography measures fuel dilution more precisely. Flash point is not a measure of crankcase-explosion risk.</td></tr>
+    <tr><td>Insolubles</td><td>Solid material separated by solvent (pentane, heptane or toluene) and filtration or centrifuging</td><td>A composite of contamination and degradation, not a particle count; different methods give different values. Rises with poor combustion, fuel contamination, purifier or filter problems.</td></tr>
+  </table>
+
+  <div class="section-head">📈 Reading the Report — Trend, Limits and Limitations</div>
+  <ul class="notes-list">
+    <li><strong>One analysis is not a diagnosis.</strong> CIMAC: a full and proper diagnosis cannot be achieved from the results of just one analysis. Plot each parameter against time or running hours and look for a change of trend — 'it is the trend that is most important'.</li>
+    <li><strong>Limits are guidance.</strong> 'Caution' and 'action/urgent' limits come from the OEM and the oil supplier (OEM limits first, at least during warranty) and must be refined system by system as data builds up. Reliance on arbitrary limits gives false security.</li>
+    <li><strong>Fast failures escape it.</strong> Oil analysis is less effective where the failure develops quickly — liner scuffing or a bearing fracture — because the sampling interval is longer than the time to failure.</li>
+    <li><strong>Same point, same laboratory, same method.</strong> Spectrometry, insolubles, BN and FTIR are all method-dependent; a change of laboratory resets the baseline.</li>
+    <li><strong>Context.</strong> The analyst needs engine running hours, oil top-up, fuel changes and any incident — the engine staff's information is part of the diagnosis.</li>
+  </ul>
+  <table class="revision-table">
+    <tr><th>Two-stroke sample</th><th>Finding</th><th>Likely cause (CIMAC 2023 tables)</th></tr>
+    <tr><td>System oil</td><td>Viscosity ↑ with BN ↑</td><td>Cylinder/scrape-down oil leaking past the piston-rod stuffing box</td></tr>
+    <tr><td>System oil</td><td>Viscosity ↓, flash point ↓</td><td>Distillate fuel dilution — e.g. leaking fuel pumps</td></tr>
+    <tr><td>System oil</td><td>Water ↑ with Na, Mg, B, K</td><td>Cooling-water or sea-water ingress</td></tr>
+    <tr><td>System oil</td><td>V and Ni present</td><td>Residual fuel contamination</td></tr>
+    <tr><td>Scrape-down oil</td><td>Residual BN too low; iron salts ↑</td><td>Cylinder-oil feed rate or BN too low for the fuel sulphur — cold corrosion</td></tr>
+    <tr><td>Scrape-down oil</td><td>Residual BN too high</td><td>Feed rate or BN too high for the fuel — deposits, possible liner polish</td></tr>
+    <tr><td>Scrape-down oil</td><td>Metallic (ferrous) iron ↑; Al and Si ↑</td><td>Abrasive wear of rings and liner; cat fines from the fuel</td></tr>
+  </table>
+  <p class="notes-body">Oil analysis is one of the condition-monitoring tools that make predictive maintenance possible — see the preventive-versus-predictive comparison in Simon Notes Part 4 · Note 35; Part 16 links oil analysis and vibration data to maintenance decisions in Part 16 · Topic 4.</p>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Simon):</strong> Simon asks 'What is lube oil analysis and what do you do with the report?' Answer in four moves. <em>One</em>: two purposes and three families — oil condition and machinery condition; fluid properties, contamination, wear debris. <em>Two</em>: the methods with their principle — spectrometry (atomic emission, ICP or RDE, ppm), FTIR (infrared absorbed by molecules: oxidation, nitration, sulphation, soot, water), particle count (ISO 4406, for clean oils), BN and AN titrations. <em>Three</em>: the limitation — ICP is blind above about 5–7 µm, so a flat iron trend does not prove a healthy engine; ask for PQ or ferrography. <em>Four</em>: action from the trend — e.g. system-oil BN and viscosity rising together means stuffing-box leakage, so check the drains and the rings. Three answers lose marks: 'ROE', 'FTIR detects particles', and 'BN and AN tests are expensive and useless'.</div>
+
+  <div class="section-head">🎯 Oral Q&amp;A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. What is used lube-oil analysis, and what are its main categories?</div><div class="qa-a">Used-oil analysis is the testing of a representative sample of in-service oil to assess the condition of the oil and, to a certain extent, the condition of the machinery it lubricates. The tests fall into three families. Fluid properties tell me whether the oil is still fit: viscosity, base number, acid number and the FTIR degradation measures — oxidation, nitration and sulphation. Contamination tells me what has entered the oil: water, fuel shown by a falling flash point or viscosity, soot and insolubles, glycol, and contaminant elements such as sodium and magnesium from sea water or vanadium and nickel from residual fuel. Wear debris tells me which components are wearing: wear metals by spectrometry, supported by the PQ index or ferrography for larger ferrous particles. The sample must come from the same full-flow point at the engine inlet, with the engine running at temperature and the valve flushed, and the result is read as a trend, never as a single value.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Explain elemental spectrometric analysis and its main limitation.</div><div class="qa-a">Elemental analysis measures the concentration of metals in the oil in ppm, that is milligrams per kilogram. It is normally done by atomic emission spectroscopy: the sample is exposed to a high-energy source, an argon plasma in ICP or an arc between a rotating disc electrode and a counter electrode in RDE. The excited atoms emit light at wavelengths characteristic of each element, and the intensity at each wavelength, calibrated against standards, gives the concentration. Atomic absorption and X-ray fluorescence are also used. The results cover additive elements such as calcium and zinc, wear metals such as iron, chromium, copper, lead and tin, and contaminants such as sodium, vanadium and silicon. The key limitation is particle size: ICP does not detect particles larger than about 5 to 7 microns, so in severe wear the iron reading can stay flat while large debris is being produced. I would then ask for the PQ index, ferrography or an ashed sample. Results also depend on the laboratory and method, and values below about 5 ppm need caution.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. How does FTIR work, and what does it detect?</div><div class="qa-a">FTIR is infrared spectroscopy of the oil film. Different chemical bonds absorb infrared at characteristic wavenumbers. The instrument passes infrared through a thin layer of the used oil, compares the transmitted spectrum with the incident beam and with a new-oil reference, and the absorbance at each wavenumber gives the amount of that molecular species. It therefore measures molecules, not particles. CIMAC uses about 1710 inverse centimetres for oxidation, 1620 for nitration and 1150 for sulphation; FTIR also shows soot, water, glycol and fuel as trend indicators, with Karl Fischer titration used to quantify water. It is a trend tool against a fresh-oil baseline, standardised as a condition-monitoring practice in ASTM E2412.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4. Distinguish base number and acid number. What does a low BN in a trunk-piston engine oil indicate?</div><div class="qa-a">Both are in milligrams of KOH per gram and found by potentiometric titration. Acid number measures the acidic content of the oil and is the main degradation test for turbine, hydraulic, gear and compressor oils, and is also relevant for low-BN and gas-engine oils; it rises mainly with oxidation. Base number measures the alkaline reserve left to neutralise acids and is the key test for engine oils. BN by perchloric acid and by hydrochloric acid are different methods and must not be mixed in a trend. Low BN in a trunk-piston engine means the alkaline reserve has been used up by sulphuric acid formed from fuel sulphur, which reaches the crankcase with the blow-by gas. Causes are high-sulphur fuel, low oil consumption so too little fresh oil is added, or the wrong grade. The risk is corrosive wear of liners, rings and bearings. Low BN is not in itself a measure of blow-by.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5. Your two-stroke main engine system-oil report shows BN and viscosity both rising over three samples. What is happening and what do you do?</div><div class="qa-a">Rising BN together with rising viscosity in two-stroke system oil is the classic signature of cylinder oil, which has a much higher BN, leaking down into the crankcase past the piston-rod stuffing boxes; a top-up with a different, higher-BN oil is the other possibility, so I first check the top-up record. Then I check the stuffing-box drain quantities cylinder by cylinder, compare them with the maker's guidance and look for the unit with abnormal leakage, plan inspection and overhaul of the stuffing-box rings, and review cylinder-oil feed rate and scavenge-space condition. Meanwhile I watch insolubles and viscosity, run the purifier correctly, and if the oil drifts towards the supplier's action limit I discuss partial renewal. I ask the laboratory for a follow-up sample after the repair to confirm the trend has turned.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Distinguish base number from acid number, stating the unit, the method of measurement and the type of oil to which each is mainly applied.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Describe elemental spectrometric analysis and FTIR analysis of used lubricating oil, giving the principle of each, what each detects and one limitation of each.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Explain how a Chief Engineer uses a used-oil analysis programme for a two-stroke main engine — sampling of system oil and cylinder scrape-down oil, the parameters reported, the interpretation of trends, the limitations of the methods and the actions that follow from an adverse result.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>Two purposes: OIL condition + MACHINE condition. Three families: PROPERTIES · CONTAMINATION · WEAR DEBRIS.</strong></li>
+      <li><strong>Spectrometry = atoms EMIT light → ppm. ICP (shore labs) and RDE (not 'ROE'). AAS and XRF also used.</strong></li>
+      <li><strong>ICP is blind above ~5–7 µm</strong> → flat iron ≠ healthy engine → ask for PQ index / ferrography.</li>
+      <li><strong>FTIR = MOLECULES absorb infrared</strong> — oxidation ~1710, nitration ~1620, sulphation ~1150 cm⁻¹. Not particles.</li>
+      <li><strong>ISO 4406 = ≥4 / ≥6 / ≥14 µm per mL; each step doubles.</strong> Good for hydraulic oils; not routine for dark engine oils.</li>
+      <li><strong>BN = alkaline reserve (acid titration); AN = acidity (KOH titration). Both mg KOH/g. Never mix BN methods in one trend.</strong></li>
+      <li><strong>Two-stroke system oil: BN ↑ + viscosity ↑ = stuffing-box leakage. Flash point ↓ = fuel dilution. V + Ni = residual fuel. Na + Mg = sea water.</strong></li>
+      <li><strong>Same point · same lab · same method · read the TREND</strong> — one sample is not a diagnosis (memory aid, after CIMAC).</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Case Study — The Iron Reading That Stayed Flat</button>
+    <div class="deep-dive-body">
+      <h4>Situation (illustrative)</h4>
+      <p>A four-stroke auxiliary engine's monthly reports show iron steady at a familiar level for four samples. The engine is running hotter on one main bearing temperature, and the oil filter differential pressure rises faster than usual. The third engineer's summary reads 'oil analysis normal'.</p>
+      <h4>What the Chief Engineer reads into it</h4>
+      <p><strong>The method.</strong> The shore laboratory uses ICP, which does not detect particles larger than about 5–7 µm. A developing bearing or journal failure produces larger debris, so the spectrometric iron can stay flat — or even fall — while the real wear rate rises. CIMAC describes exactly this pattern against a rising PQ index. <strong>The other evidence.</strong> A rising bearing temperature and a filter loading faster than normal are independent signals that larger particles are being generated. <strong>What to ask for.</strong> A PQ index and ferrography on the next sample, plus inspection of the filter element and its debris, and a check of the copper, lead and tin trends for bearing-metal involvement.</p>
+      <h4>Action and lesson</h4>
+      <p>The Chief Engineer does not wait for the next routine sample: the evidence justifies opening the suspect bearing under the planned maintenance system. The general lesson for the oral is that oil analysis is one instrument among several. A 'normal' spectrometric result does not over-rule temperatures, filter behaviour or noise, and the limitation of each method must be known before the result is trusted.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>CIMAC Recommendation No. 30 (2011) — Used Engine Oil Analysis: User Interpretation Guide</li>
+    <li>CIMAC WG8 Marine Lubricants — Guideline 'Used engine oil analysis' (February 2023)</li>
+    <li>ASTM D5185 — Multielement determination of used and unused lubricating oils and base oils by ICP-AES</li>
+    <li>ASTM D6595 — Wear metals and contaminants in used lubricating oils or used hydraulic fluids by rotating disc electrode atomic emission spectrometry</li>
+    <li>ASTM E2412 — Condition monitoring of in-service lubricants by trend analysis using FT-IR spectrometry</li>
+    <li>ASTM D2896 and ASTM D4739 — Base number by potentiometric perchloric-acid and hydrochloric-acid titration</li>
+    <li>ASTM D664 — Acid number of petroleum products by potentiometric titration</li>
+    <li>ISO 4406 — Hydraulic fluid power: method for coding the level of contamination by solid particles; ISO 4407 — particulate contamination by optical-microscope counting</li>
+    <li>MIW Simon Notes Part 4 · Note 35 — Maintenance strategies (preventive vs predictive)</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p29 · Topic 1 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p29 · P29-T1 · v1.0</div>
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- TOPIC 2 — E-RECORD BOOKS, MASS, MSW &AMP; MARITIME CALENDAR -->
+<!-- ========================================================================== -->
+
+<div class="topic-block" id="topic-p29-2" data-kw="electronic record book, electronic logbook, eRB, MEPC.312(74), guidelines for the use of electronic record books under MARPOL, Oil Record Book Part I Part II, Cargo Record Book, Garbage Record Book, ODS Record Book, Tier and on/off status, Record of Fuel Oil Changeover, Record Book of Engine Parameters, NOx Technical Code, true copy, audit trail, role based access control, electronic signature, Declaration, flag State, MASS, Maritime Autonomous Surface Ships, degrees of autonomy, MSC.1/Circ.1638, regulatory scoping exercise, MASS Code, non-mandatory MASS Code, MSC 111, MSC 109 road map, MSC 112, experience-building phase, EBP, MSC-LEG-FAL Joint Working Group, JWG, remote operations centre, Maritime Single Window, MSW, FAL Convention, 2022 FAL amendments, arrival stay departure, India, SagarSetu, Sagar Setu, National Logistics Portal Marine, NLP-Marine, MMD module, World Maritime Day, National Maritime Day, SS Loyalty, BBNJ Agreement">
+  <div class="topic-header">
+    <div class="topic-badge">Part 29 · Topic 2</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Digital and Regulatory Developments — Electronic Record Books, MASS Code, Maritime Single Window and Current Maritime Initiatives</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">MEPC.312(74): 7 MARPOL record books may be electronic · MASS: 4 degrees (non-hierarchical) · non-mandatory MASS Code adopted MSC 111, effective 1 Jul 2026 · mandatory code = target only · MSW mandatory 1 Jan 2024 (FAL) · India: SagarSetu (NLP-Marine) MSW module · Maritime calendar dated 8 Oct 2026</span>
+        <span class="topic-pages">Uday pp. 701–706</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> <strong>Source range.</strong> PDF 701–706 (notebook 182–184), the source's short-notes block. <strong>Source errors corrected.</strong> (1) <strong>Instrument</strong> (P29-C024): 'MEPC 312(74)' is resolution MEPC.312(74), adopted 17 May 2019, <em>Guidelines for the use of electronic record books under MARPOL</em>. It covers MARPOL record books only; deck, engine and official logbooks in electronic form are a flag-State matter, so the heading 'Electronic Logbook' is broader than the instrument. (2) <strong>Seven, not six, records</strong> (P29-C025): the source omits the recording of the Tier and on/off status of marine diesel engines (Annex VI reg. 13.5.3). (3) <strong>Updating</strong> (P29-C031): the guideline does not merely ask for periodic review — the system must incorporate MARPOL amendments before they enter into force, without losing existing records. (4) The source's own OWS example for 'complete before saving' (P29-C026) is replaced by IMO's example, an Annex V discharge that cannot be saved without the position. (5) <strong>MASS benefits</strong> (P29-C040): 'enhanced safety as no human error' is overstated — remote operators and software still err, and MASS adds connectivity, cyber and sensor risks. (6) <strong>Who develops the non-mandatory MASS Code</strong> (P29-C041): it is an MSC instrument; the MSC-LEG-FAL Joint Working Group handles only the cross-cutting issues. (7) <strong>JWG 3</strong> (P29-C042) was a separate meeting on 8–10 May 2024, before MSC 108, not held 'in' MSC 108. (8) <strong>OUTDATED → current</strong> (P29-C044): the source's plan line 'May 2026 — finalise and adopt a non-mandatory MASS Code' has happened: MSC 111 (13–22 May 2026) adopted the non-mandatory MASS Code, which takes effect from 1 July 2026. The mandatory code is a target only (P29-C047). (9) <strong>Maritime 'Safety' Window</strong> (P29-C049) is a slip for Maritime <em>Single</em> Window, and the obligation falls on Contracting Governments to the FAL Convention, not on 'all IMO Member States'. (10) <strong>BBNJ is not a plastics treaty</strong> (P29-C057). (11) <strong>'Navigating the Future: Safety First'</strong> (P29-C060) was IMO's World Maritime Day theme for 2024, not India's National Maritime Day theme. <strong>Closed on primary text by the coordinator (closure log 8 Oct 2026).</strong> The 2022 FAL amendments are resolution FAL.14(46), adopted 13 May 2022, in force 1 January 2024; the Indian instrument is DG Shipping (now DGMA) Merchant Shipping Notice No. 03 of 2024 (9 February 2024), 'Use of Electronic Record Books Under MARPOL'.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body"><strong>Electronic record books</strong> are approved software systems that replace the paper MARPOL record books, under IMO's <em>Guidelines for the use of electronic record books under MARPOL</em> (resolution MEPC.312(74)) and the MARPOL amendments that permit them. <strong>Maritime Autonomous Surface Ships (MASS)</strong> are ships that, to a varying degree, can operate independently of human interaction; IMO describes four degrees of autonomy, and the <strong>non-mandatory MASS Code</strong> adopted at MSC 111 in May 2026 is the first goal-based safety framework for them, with a mandatory code only a future target. The <strong>Maritime Single Window (MSW)</strong> is the single electronic portal through which a port State's authorities receive and exchange the information required for a ship's arrival, stay and departure — mandatory for FAL Contracting Governments since 1 January 2024, and implemented in India as a module of <strong>SagarSetu (NLP-Marine)</strong>. Annual maritime days and their themes are dated current-affairs facts and are kept in the calendar box below.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li><strong>Nair asks for the regulation behind the gadget.</strong> 'Can the Oil Record Book be electronic?' is answered with MEPC.312(74), the seven record books it covers, the approval and the Declaration on board — not with a vendor's feature list.</li>
+    <li><strong>The Chief Engineer signs the engine-room record books.</strong> An electronic system shifts the risks from ink and missing pages to log-ins, audit trails, back-ups and certified printouts that a PSC officer may demand.</li>
+    <li><strong>MASS is a current-affairs favourite with a trap.</strong> The non-mandatory MASS Code now exists; the mandatory code does not. Candidates who call the current code mandatory, or the future code adopted, lose the examiner.</li>
+    <li><strong>MSW changes the pre-arrival workload.</strong> Port-clearance data now flows electronically through one window; in India that window sits inside SagarSetu, the National Logistics Portal (Marine).</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">8 Apr 2019</span>  Electronic exchange of information for ship clearance becomes mandatory under earlier FAL Convention amendments
+<span class="t-year">17 May 2019</span>  MEPC.312(74) adopted — Guidelines for the use of electronic record books under MARPOL
+<span class="t-year">1 Oct 2020</span>  Related MARPOL Annex I/II/V/VI and NOx Technical Code amendments permitting electronic record books enter into force
+<span class="t-year">3 Jun 2021</span>  MSC.1/Circ.1638 — outcome of the MASS regulatory scoping exercise; the four degrees of autonomy
+<span class="t-year">13 May 2022</span>  Resolution FAL.14(46) adopted — FAL Convention amendments making the Maritime Single Window mandatory
+<span class="t-year">1 Jan 2024</span>  Maritime Single Window mandatory for FAL Contracting Governments
+<span class="t-year">1 Feb 2024</span>  India's Ministry of Ports, Shipping and Waterways launches the MSW and MMD modules in SagarSetu (NLP-Marine)
+<span class="t-year">8–10 May 2024</span>  Third session of the MSC-LEG-FAL Joint Working Group on MASS (JWG 3); outcome to MSC 108 and LEG 112
+<span class="t-year">2–6 Dec 2024</span>  MSC 109 agrees a revised road map for the MASS Code
+<span class="t-year">13–22 May 2026</span>  MSC 111 adopts the <strong>non-mandatory</strong> International Code of Safety for MASS (MASS Code)
+<span class="t-year">1 Jul 2026</span>  Non-mandatory MASS Code takes effect
+<span class="t-year">Dec 2026 (planned)</span>  MSC 112 to re-establish the MASS Working Group to develop the Experience-Building Phase framework
+<span class="t-year">From 2028 (target)</span>  Development of a <strong>mandatory</strong> MASS Code to begin, with a new SOLAS chapter
+<span class="t-year">By 1 Jul 2030 (target)</span>  Expected adoption of the mandatory MASS Code; expected entry into force 1 Jan 2032</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments and Their Status (8 October 2026)</div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.312(74) (17 May 2019)</span><span class="reg-desc">IMO Guidelines for the use of electronic record books under MARPOL: scope (seven record books), system design, data integrity, user access and audit trail, back-up, approval and the Declaration carried on board.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annexes I, II, V, VI and NOx Technical Code (amendments in force 1 Oct 2020)</span><span class="reg-desc">Permit the record books to be kept electronically in a method approved by the Administration.</span></div>
+    <div class="reg-item"><span class="reg-code">Flag State (non-MARPOL logbooks)</span><span class="reg-desc">Deck, engine and official logbooks in electronic form depend on the flag State's acceptance — MEPC.312(74) does not cover them.</span></div>
+    <div class="reg-item"><span class="reg-code">India — DG Shipping (now DGMA)</span><span class="reg-desc">DG Shipping (now DGMA) Merchant Shipping Notice No. 03 of 2024 (9 February 2024), 'Use of Electronic Record Books Under MARPOL' — the Indian notice on MARPOL electronic record books.</span></div>
+    <div class="reg-item"><span class="reg-code">MSC.1/Circ.1638 (3 Jun 2021)</span><span class="reg-desc">Outcome of the regulatory scoping exercise for MASS; four degrees of autonomy, defined for the purpose of the exercise and non-hierarchical.</span></div>
+    <div class="reg-item"><span class="reg-code">MASS Code — <strong>non-mandatory</strong> (MSC 111, May 2026)</span><span class="reg-desc">International Code of Safety for Maritime Autonomous Surface Ships; goal-based; takes effect 1 July 2026 for cargo ships under SOLAS chapter I. A <strong>mandatory</strong> MASS Code is a target only: expected adoption by 1 July 2030 and entry into force 1 January 2032.</span></div>
+    <div class="reg-item"><span class="reg-code">FAL Convention 1965, as amended — resolution FAL.14(46) (adopted 13 May 2022; in force 1 Jan 2024)</span><span class="reg-desc">Standard 1.3bis: public authorities of Contracting Governments must establish, maintain and use a Maritime Single Window for electronic exchange of arrival, stay and departure information — mandatory from 1 January 2024.</span></div>
+    <div class="reg-item"><span class="reg-code">India — SagarSetu (NLP-Marine)</span><span class="reg-desc">The MSW and MMD modules launched 1 February 2024 (Ministry of Ports, Shipping and Waterways, PIB).</span></div>
+  </div>
+
+  <div class="section-head">💻 Electronic Record Books — What MEPC.312(74) Covers</div>
+  <p class="notes-body">The source heads this note 'Electronic Logbook'. The IMO instrument is narrower: <strong>resolution MEPC.312(74)</strong>, adopted on 17 May 2019, gives <em>Guidelines for the use of electronic record books under MARPOL</em>, supporting the MARPOL amendments (in force 1 October 2020) that allow the record books to be kept electronically in a method approved by the Administration. Paragraph 2.1 lists seven records:</p>
+  <table class="revision-table">
+    <tr><th>#</th><th>Record book (MEPC.312(74) para 2.1)</th><th>MARPOL basis</th></tr>
+    <tr><td>1</td><td>Oil Record Book, Parts I and II</td><td>Annex I regs 17.1 and 36.1</td></tr>
+    <tr><td>2</td><td>Cargo Record Book</td><td>Annex II reg. 15.1</td></tr>
+    <tr><td>3</td><td>Garbage Record Book, Parts I and II</td><td>Annex V reg. 10.3</td></tr>
+    <tr><td>4</td><td>Ozone-depleting Substances Record Book</td><td>Annex VI reg. 12.6</td></tr>
+    <tr><td>5</td><td>Recording of the Tier and on/off status of marine diesel engines <em>(omitted in the source)</em></td><td>Annex VI reg. 13.5.3</td></tr>
+    <tr><td>6</td><td>Record of Fuel Oil Changeover</td><td>Annex VI reg. 14.6</td></tr>
+    <tr><td>7</td><td>Record Book of Engine Parameters</td><td>NOx Technical Code para 6.2.2.7</td></tr>
+  </table>
+  <p class="notes-body"><strong>Not covered.</strong> The deck log, engine-room log and official logbook are not MARPOL record books. Whether they may be electronic is decided by the flag State. Ballast-water record keeping sits under the BWM Convention, not MEPC.312(74).</p>
+
+  <div class="section-head">🔐 Design Requirements — Entry, Integrity and Audit Trail</div>
+  <p class="notes-body">The source lists twelve requirements. Each maps onto the guideline, with the corrections noted:</p>
+  <table class="revision-table">
+    <tr><th>Source requirement</th><th>What MEPC.312(74) says</th><th>Para</th></tr>
+    <tr><td>Save only after all entries made</td><td>An entry cannot be saved for verification until it is complete. IMO's example: a MARPOL Annex V discharge at sea cannot be saved without latitude and longitude</td><td>4.1.2</td></tr>
+    <tr><td>Automatic recording; manual override logged</td><td>Data input automatically where possible; manual input allowed on equipment failure, with the change of data source recorded</td><td>4.1.2</td></tr>
+    <tr><td>Safe from manipulation</td><td>Automatic data protected; the system records any attempt to manipulate or falsify</td><td>—</td></tr>
+    <tr><td>MARPOL format</td><td>Records presented in the format specified in the relevant Annex</td><td>4.1.3</td></tr>
+    <tr><td>Retention; true copy</td><td>Records kept for the MARPOL minimum period; verified records printable for the master to certify as a true copy on request</td><td>4.1.4</td></tr>
+    <tr><td>'Review periodically' <em>(corrected)</em></td><td>The system must be updated to incorporate MARPOL amendments <strong>before</strong> they enter into force, without loss or unreadability of existing records</td><td>4.2</td></tr>
+    <tr><td>Login ID and password</td><td>Role-based access control; at minimum a unique personal login and password for each user</td><td>4.3.1</td></tr>
+    <tr><td>Electronic signature</td><td>Entries linked to the user; e-signatures to the Administration's authentication standards; the master's verification needs an additional authentication factor</td><td>4.3.2–4.3.6</td></tr>
+    <tr><td>Changes recorded; edited value visible</td><td>Original entry and every amendment retained and visible, in the system and in printouts, with date, time and signature; an amended verified entry returns to 'pending'</td><td>4.3.4–4.3.9</td></tr>
+    <tr><td>Entry status</td><td>Status such as 'pending', 'awaiting verification', 'verified'</td><td>4.3.8</td></tr>
+    <tr><td>Attachments</td><td>Reception-facility receipts and endorsements may be attached (e.g. a scanned barge receipt), the original being retained</td><td>4.3.11</td></tr>
+  </table>
+  <p class="notes-body"><strong>What the source leaves out.</strong> Back-up and business-continuity arrangements (4.4), an offline digitally signed copy (4.4.4) and the <strong>Declaration</strong> issued by or on behalf of the flag State and carried on board (section 5) — the document a PSC officer asks for first.</p>
+
+  <div class="section-head">🤖 MASS — Definition and the Four Degrees of Autonomy</div>
+  <p class="notes-body">IMO uses MASS for 'a ship which, to a varying degree, can operate independent of human interaction'. For its regulatory scoping exercise (MSC.1/Circ.1638, 3 June 2021) IMO described four degrees of autonomy. They were set <em>for the purpose of that exercise</em>, they are <strong>not hierarchical</strong>, and a ship may operate at more than one degree during a single voyage.</p>
+  <table class="revision-table">
+    <tr><th>Degree</th><th>Description</th><th>Seafarers on board?</th></tr>
+    <tr><td>One</td><td>Ship with automated processes and decision support — some operations automated and at times unsupervised, but seafarers ready to take control</td><td>Yes — operating and controlling systems</td></tr>
+    <tr><td>Two</td><td>Remotely controlled ship with seafarers on board — controlled from another location</td><td>Yes — available to take control</td></tr>
+    <tr><td>Three</td><td>Remotely controlled ship without seafarers on board</td><td>No</td></tr>
+    <tr><td>Four</td><td>Fully autonomous ship — the operating system makes decisions and determines actions by itself</td><td>No</td></tr>
+  </table>
+  <p class="notes-body"><strong>Benefits and risks, balanced.</strong> Claimed benefits are lower crewing cost, a possible reduction in accidents caused by on-board human error and fatigue, efficiency gains from optimised route and speed, and operational flexibility. They are offset by new risks: loss of connectivity, cyber attack, sensor reliability and remote-operator error. Human error is moved ashore, not removed — which is why the non-mandatory MASS Code is built on goal-based safety requirements rather than an assumption of 'no human error'.</p>
+
+  <div class="section-head">📜 The MASS Code — Status as of 8 October 2026</div>
+  <ul class="notes-list">
+    <li><strong>Who develops it.</strong> The <strong>non-mandatory</strong> MASS Code is a Maritime Safety Committee instrument, developed through the MSC's MASS working and correspondence groups. A joint MSC-LEG-FAL Working Group (JWG) handles the issues that cut across the three committees' instruments — the role of the master, the remote operator and responsibility. JWG 3 met separately on 8–10 May 2024; its outcome went to MSC 108 and LEG 112.</li>
+    <li><strong>Road map.</strong> MSC 109 (2–6 December 2024) agreed a revised road map.</li>
+    <li><strong>Adopted.</strong> MSC 111 (13–22 May 2026) adopted the <strong>non-mandatory</strong> International Code of Safety for Maritime Autonomous Surface Ships, which takes effect from 1 July 2026. It applies to cargo ships under SOLAS chapter I; Governments are invited to apply it, as far as practicable, to MASS below 500 GT. Being non-mandatory, it 'takes effect' rather than 'enters into force'.</li>
+  </ul>
+  <table class="revision-table">
+    <tr><th>Road-map step (after MSC 111)</th><th>Timing</th><th>Status at 8 Oct 2026</th></tr>
+    <tr><td>Framework for an Experience-Building Phase (EBP) under the <strong>non-mandatory</strong> code</td><td>MSC 112, December 2026</td><td>Planned</td></tr>
+    <tr><td>Begin developing a <strong>mandatory</strong> MASS Code, based on the non-mandatory code, EBP experience and sub-committee reviews, with SOLAS amendments (new chapter)</td><td>From 2028</td><td>Target</td></tr>
+    <tr><td>Adoption of the <strong>mandatory</strong> MASS Code</td><td>By 1 July 2030</td><td>Target (expected)</td></tr>
+    <tr><td>Entry into force of the <strong>mandatory</strong> MASS Code</td><td>1 January 2032</td><td>Target (expected)</td></tr>
+  </table>
+  <p class="notes-body">The engine-room consequences — fallback states on loss of the remote link, cyber segmentation of machinery networks and the unresolved question of the master's authority — are set out with the same timeline in Current Topics · Q1, which should be read alongside this topic.</p>
+
+  <div class="section-head">🌐 Maritime Single Window — FAL Convention and India's SagarSetu</div>
+  <p class="notes-body">The source writes 'Maritime Safety Window' once; the instrument is the <strong>Maritime Single Window</strong>. The FAL Convention moved to digital clearance in two steps: electronic exchange of information became mandatory on 8 April 2019, and the <strong>2022 FAL amendments — resolution FAL.14(46)</strong>, adopted 13 May 2022 — made a single window mandatory from <strong>1 January 2024</strong>. The obligation falls on the public authorities of <strong>Contracting Governments</strong> to the FAL Convention: they must establish, maintain and use a single window for the electronic exchange of the information required on the arrival, stay and departure of ships, persons and cargo, so that data is submitted once and routed to customs, immigration, health and port authorities. IMO's purpose is faster clearance and greater efficiency of shipping.</p>
+  <p class="notes-body"><strong>India.</strong> On 1 February 2024 the Ministry of Ports, Shipping and Waterways launched the MSW module, together with the MMD module, in <strong>SagarSetu (NLP-Marine)</strong>, the National Logistics Portal (Marine) whose mobile app was launched in 2023. The MSW module enables electronic submission, processing and exchange of maritime information and documents between government agencies, port authorities, shipping agents and other trade stakeholders, along FAL Convention lines. Sagar Setu is the platform; the MSW is one module within it.</p>
+  <p class="notes-body">The general MSW definition and India's earlier single-window work are in Simon Notes Part 7 · Note 5; this topic adds the FAL obligation holder and SagarSetu.</p>
+
+  <div class="section-head">📅 Maritime Calendar — As of 8 October 2026</div>
+  <p class="notes-body"><strong>Every item in this box is a dated current-affairs fact, correct as of 8 October 2026.</strong> Annual themes change each year — check the current year's theme before an oral; they are not memory items.</p>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Date</th><th>Theme / detail</th></tr>
+    <tr><td>IMO World Maritime Day 2024</td><td>26 Sep 2024</td><td>'Navigating the future: safety first!' — an IMO World Maritime Day theme, <em>not</em> an Indian theme</td></tr>
+    <tr><td>IMO World Maritime Day 2025</td><td>25 Sep 2025</td><td>'Our Ocean, Our Obligation, Our Opportunity' — IMO: more than 80% of global trade moves by sea; the ocean is a source of jobs and food, home to countless species and a regulator of the climate</td></tr>
+    <tr><td>IMO World Maritime Day 2026 and 2027</td><td>24 Sep 2026 (2026)</td><td>'From Policy to Practice: Powering Maritime Excellence' — IMO's first two-year theme</td></tr>
+    <tr><td>India — National Maritime Day</td><td>5 April, annually</td><td>Commemorates the voyage of SS <em>Loyalty</em> from Mumbai to London on 5 April 1919; Merchant Navy Week precedes it</td></tr>
+    <tr><td>National Maritime Day 2024 (61st)</td><td>5 Apr 2024</td><td>'Sustainable Shipping: Opportunities and Challenges'</td></tr>
+    <tr><td>National Maritime Day 2025 (62nd)</td><td>5 Apr 2025</td><td>'Prosperous Seas — Developed India and Youth for Blue Economy and Green Growth'</td></tr>
+    <tr><td>National Maritime Day 2026 (63rd)</td><td>5 Apr 2026</td><td>'Maritime India, Empowering Progress'</td></tr>
+    <tr><td>BBNJ Agreement</td><td>In force 17 Jan 2026</td><td>Agreement under UNCLOS on the Conservation and Sustainable Use of Marine Biological Diversity of Areas beyond National Jurisdiction — high-seas biodiversity. It is <em>not</em> a plastics instrument</td></tr>
+  </table>
+  <p class="notes-body"><strong>BBNJ is not the plastics treaty.</strong> The source links the 2025 theme to 'a new instrument to address plastic pollution (BBNJ agreement)'. IMO linked the 2025 theme to three separate things: the conclusion of the BBNJ Agreement, the separate negotiation of a global instrument on plastic pollution, and the third UN Ocean Conference (June 2025).</p>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Nair):</strong> Nair asks 'Can your Oil Record Book be electronic?' Say yes — under MARPOL as amended in force 1 October 2020, in a method approved by the Administration, following MEPC.312(74). Name the seven records (don't forget the Tier and on/off status record), then the integrity features: unique log-ins, e-signatures, the audit trail with the original and amended values both visible, the master's verified status, the true-copy printout and the Declaration on board. If he moves to MASS, give the four degrees from MSC.1/Circ.1638 and say they are non-hierarchical; then the status in one breath: 'The non-mandatory MASS Code was adopted at MSC 111 and took effect on 1 July 2026; a mandatory code is only targeted — adoption by 2030, entry into force 2032.' Never call today's code mandatory, and never say MSW is 'Maritime Safety Window'.</div>
+
+  <div class="section-head">🎯 Oral Q&amp;A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. Which MARPOL record books may be kept electronically, and under what instrument?</div><div class="qa-a">MARPOL, as amended with effect from 1 October 2020, allows record books to be kept electronically in a method approved by the Administration, and IMO's guidelines for doing so are resolution MEPC.312(74), adopted 17 May 2019. Paragraph 2.1 lists seven records: the Oil Record Book Parts I and II, the Cargo Record Book, the Garbage Record Book Parts I and II, the Ozone-depleting Substances Record Book, the recording of the Tier and on/off status of marine diesel engines, the Record of Fuel Oil Changeover, and the Record Book of Engine Parameters under the NOx Technical Code. The guidelines do not cover the deck, engine or official logbooks; whether those may be electronic is a flag-State decision. On board, the ship carries a Declaration issued by or for the flag State confirming that the electronic record book meets the guidelines.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. What features must an approved electronic record book have to make it trustworthy?</div><div class="qa-a">It must allow an entry to be saved for verification only when complete — IMO's example is an Annex V discharge that cannot be saved without the ship's position. Data should come in automatically wherever possible, with manual input on sensor failure logged as a change of data source, and the system must protect automatic data and record any attempt at manipulation. Each user needs a unique log-in and password under role-based access control, and entries carry the user's electronic signature, with an additional authentication factor for the master's verification. Every change keeps the original visible with date, time and signature, and an amended verified entry goes back to pending. Records must be kept for the MARPOL period, printable as true copies for the master to certify, backed up, and updated for MARPOL amendments before they enter into force. Receipts such as a sludge barge receipt can be attached.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Explain the four degrees of autonomy for MASS.</div><div class="qa-a">IMO's regulatory scoping exercise, reported in MSC.1/Circ.1638 of June 2021, described four degrees. Degree one is a ship with automated processes and decision support: seafarers are on board to operate and control the systems, some operations may be automated and at times unsupervised, but the crew is ready to take control. Degree two is a remotely controlled ship with seafarers on board who can take over. Degree three is a remotely controlled ship without seafarers on board. Degree four is a fully autonomous ship whose operating system makes decisions and determines actions by itself. The degrees were defined for the scoping exercise, they are not hierarchical, and a ship may operate at different degrees during one voyage, so they should not be presented as a mandatory classification.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4. What is the current status of the MASS Code?</div><div class="qa-a">The MASS Code is a Maritime Safety Committee instrument. A joint MSC-LEG-FAL working group deals only with the cross-cutting legal and facilitation issues such as the role of the master and the remote operator. MSC 109 in December 2024 agreed a revised road map, and MSC 111, held 13 to 22 May 2026, adopted the non-mandatory International Code of Safety for Maritime Autonomous Surface Ships, which took effect on 1 July 2026 for cargo ships under SOLAS chapter I; Governments are invited to apply it as far as practicable to MASS below 500 GT. Next, MSC 112 in December 2026 is to develop the framework for an experience-building phase. Development of a mandatory code is to begin in 2028, with a new SOLAS chapter, and the mandatory code is expected to be adopted by 1 July 2030 and to enter into force on 1 January 2032. Those last dates are targets: no mandatory MASS Code exists today.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5. What is the Maritime Single Window, and how has India implemented it?</div><div class="qa-a">The Maritime Single Window is the single electronic portal through which a ship or its agent submits the information required for arrival, stay and departure of ship, persons and cargo once, with the data routed to customs, immigration, health and port authorities. Under the FAL Convention, electronic exchange of information became mandatory in April 2019, and the 2022 FAL amendments, resolution FAL.14(46), made the single window mandatory from 1 January 2024 for the public authorities of Contracting Governments. In India, the Ministry of Ports, Shipping and Waterways launched the MSW module, with the MMD module, on 1 February 2024 inside SagarSetu, the National Logistics Portal (Marine). It allows electronic submission, processing and exchange of maritime information and documents between government agencies, port authorities, agents and trade stakeholders.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>List the MARPOL record books that may be maintained electronically under MEPC.312(74), with the regulation that requires each.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Describe the degrees of autonomy defined by IMO for Maritime Autonomous Surface Ships and explain the current regulatory status of the non-mandatory MASS Code and the planned mandatory code, distinguishing what has been adopted from what is only planned.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Digitalisation is changing the Chief Engineer's documentary obligations. Discuss: (a) the requirements for an approved electronic record book under MARPOL and what the Chief Engineer must verify before it replaces the paper books; (b) the Maritime Single Window under the FAL Convention and its Indian implementation; (c) the benefits and new risks of increasing autonomy on board.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>MEPC.312(74) · 17 May 2019 · MARPOL record books ONLY · 7 records — ORB I/II, Cargo, Garbage I/II, ODS, Tier on/off status, Fuel changeover, Engine Parameters.</strong></li>
+      <li><strong>eRB trust = complete-before-save · unique log-in · e-signature · original + amendment both visible · true-copy printout · Declaration on board.</strong></li>
+      <li><strong>MASS degrees 1–4: decision support → remote with crew → remote without crew → fully autonomous. Non-hierarchical (MSC.1/Circ.1638).</strong></li>
+      <li><strong>MASS Code NOW = NON-MANDATORY · adopted MSC 111 (May 2026) · takes effect 1 Jul 2026.</strong></li>
+      <li><strong>MANDATORY MASS Code = TARGET ONLY: develop from 2028 → adopt by 1 Jul 2030 → EIF 1 Jan 2032.</strong></li>
+      <li><strong>MSW = SINGLE window (not 'Safety') · FAL.14(46) · FAL Contracting Governments · mandatory 1 Jan 2024 · India: SagarSetu (NLP-Marine) MSW module, 1 Feb 2024.</strong></li>
+      <li><strong>BBNJ = high-seas biodiversity (in force 17 Jan 2026) — NOT plastics.</strong></li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Case Study — Switching the Oil Record Book to Electronic</button>
+    <div class="deep-dive-body">
+      <h4>Situation (illustrative)</h4>
+      <p>The company announces that from the next port the ship will use an electronic record-book system for the Oil Record Book Part I, the Garbage Record Book and the fuel changeover record. The superintendent asks the Chief Engineer to 'stop the paper books once the software is installed'.</p>
+      <h4>What the Chief Engineer checks first</h4>
+      <p><strong>Approval and Declaration.</strong> Is the system approved by or for the flag State, and is the Declaration on board? Without it the paper books remain the legal record. For an Indian-flag ship, the reference is DG Shipping (now DGMA) Merchant Shipping Notice No. 03 of 2024. <strong>Scope.</strong> The system covers MARPOL record books only; the engine-room log stays as the flag State requires. <strong>Users.</strong> Every officer has a personal log-in; nobody shares a password; the master's verification uses the extra authentication factor. <strong>Integrity.</strong> Test an amendment: the original and the corrected value must both remain visible with time and signature, and the entry must return to 'pending'. <strong>Evidence.</strong> Barge and reception-facility receipts are scanned and attached, and the originals retained. <strong>Continuity.</strong> Back-up arrangements and a procedure for producing a certified true copy if a PSC officer asks, or if the system fails.</p>
+      <h4>Lesson</h4>
+      <p>The electronic book changes the form of the record, not the Chief Engineer's responsibility for its truth. Changeover is controlled like any other change under the SMS: a dated cut-over entry, the closed paper books retained for the MARPOL period, and crew trained before the first entry.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>IMO Resolution MEPC.312(74) (17 May 2019) — Guidelines for the use of electronic record books under MARPOL</li>
+    <li>IMO MSC.1/Circ.1638 (3 June 2021) — Outcome of the regulatory scoping exercise for the use of Maritime Autonomous Surface Ships</li>
+    <li>IMO meeting summary — MSC 111 (13–22 May 2026): adoption of the non-mandatory MASS Code and next steps</li>
+    <li>IMO document LEG 112/9 — Report of the third session of the MSC-LEG-FAL Joint Working Group on MASS (8–10 May 2024)</li>
+    <li>IUMI — Report on MSC 109 (December 2024): revised MASS Code road map</li>
+    <li>IMO press briefing — Maritime Single Window mandatory under the FAL Convention from 1 January 2024</li>
+    <li>Press Information Bureau (Ministry of Ports, Shipping and Waterways), 1 February 2024 — MSW and MMD modules launched in SagarSetu (NLP-Marine)</li>
+    <li>IMO World Maritime Day theme pages, 2024 and 2025; PIB releases on India's 61st, 62nd and 63rd National Maritime Day</li>
+    <li>MIW Current Topics · Q1 — the non-mandatory MASS Code and the degrees of autonomy; Simon Notes Part 7 · Note 5 — Maritime Single Window</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p29 · Topic 2 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p29 · P29-T2 · v1.0</div>
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- TOPIC 3 — ME, ME-GI/ME-GA, NOX TIERS &AMP; TURBOCHARGERS -->
+<!-- ========================================================================== -->
+
+<div class="topic-block" id="topic-p29-3" data-kw="ME engine, electronically controlled engine, MAN B&amp;W, Everllence, MAN Energy Solutions renamed, ME-C, ME-B, camshaftless, Hydraulic Power Supply, HPS, 300 bar, Hydraulic Cylinder Unit, HCU, fuel booster, fuel oil pressure booster, ELFI, ELVA, FIVA, Fuel Injection and exhaust Valve Activation, proportional valve, Multi-Purpose Controller, MPC, MPC10, CCU, ECU, ACU, EICU, SCU, CWCU, MOP, LOP, tacho system, angle encoder, Engine Control System, ECS, redundancy, common rail, WinGD RT-flex, jerk pump, helix, spill port, VIT, injection rate shaping, dual-fuel engine, gas engine, ME-GI, ME-GA, ME-GIE, ME-LGIP, ME-LGIM, ME-LGIA, ammonia engine, methanol engine, ethane, diesel cycle, Otto cycle, high-pressure gas injection, low-pressure gas admission, SGAV, safe gas admission valve, MBIV, micro booster injection valve, pilot oil, SDF mode, specified dual-fuel, knock, pre-ignition, methane number, EGR, SCR, thermal NOx, Zeldovich, residence time, diffusion flame, lean premixed, NOx Tier I II III, rated speed, NOx Emission Control Area, NECA, North American ECA, US Caribbean ECA, Baltic Sea, North Sea, Canadian Arctic ECA, Norwegian Sea ECA, North-East Atlantic ECA, MEPC.392(82), MEPC.407(84), regulation 13.7 Approved Method, IGF Code, MSC.391(95), IGC Code, MSC.5(48), MSC.370(93), GC Code, Existing Ships Code, methane slip, GWP100, MEPC.391(81), EU ETS methane, FuelEU Maritime, power turbine generator, TCS-PTG, turbo-compounding, hybrid turbocharger, MET-MAG, electric assist turbocharger, ME-GA withdrawn from sale 2024, installed fleet">
+  <div class="topic-header">
+    <div class="topic-badge">Part 29 · Topic 3</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Electronically Controlled and Dual-Fuel Two-Stroke Engines — ME Platform, ME-GI/ME-GA, NOx/NECAs, Gas Codes and Turbocharger Developments</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">ME = per-cylinder hydraulic booster on HCU, ~300 bar oil from HPS — not common rail · ELFI/ELVA or FIVA · ME-GI Diesel/HP gas ≤300 bar, Tier II, Tier III with EGR or SCR · ME-GA Otto/LP admission via SGAV, EGR standard → Tier III (not in SDF) · Tier table + NECA dates · IGF/IGC · Methane slip · PTG ≠ turbocharger</span>
+        <span class="topic-pages">Uday pp. 707–721</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> <strong>Source range.</strong> PDF 707–721: ME engines (707–711), latest engine developments (712–720) and turbocharger types (721). <strong>OEM name.</strong> MAN Energy Solutions was renamed Everllence on 4 June 2025; MAN B&amp;W model names are kept. <strong>Source errors corrected — ME platform.</strong> (1) <strong>Not common rail</strong> (P29-C063): each cylinder has its own hydraulically driven fuel booster on its HCU, fed by a common ~300 bar <em>hydraulic-oil</em> supply from the HPS; a fuel common rail is the WinGD RT-flex/X principle. (2) <strong>No camshaft</strong> (P29-C062) is true of ME-C only; the small-bore ME-B keeps a camshaft for the exhaust valves. (3) <strong>HPS and tacho</strong> are separate units, not parts of the HCU (P29-C066). (4) <strong>MPC</strong> is the Multi-Purpose Controller, not a 'card'; loaded with CCU software it is the CCU (P29-C072, P29-C079). (5) <strong>FIVA</strong> = Fuel Injection and exhaust Valve Activation (P29-C078); <strong>ELVA</strong> = Electronic exhaust Valve Actuation (P29-C077). <strong>Gas engines.</strong> (6) Ammonia is injected as a liquid in the ME-LGI family, not burnt as a 'gas' (P29-C085); efficiency is not the main driver (P29-C086); only LNG Otto engines are Tier III in gas mode without after-treatment (P29-C087); the IMO GHG Strategy is MEPC.377(80), not Annex VI, and the fuel-intensity rules are draft (P29-C088). (7) <strong>ME-GA pressure</strong> (P29-C095): the source's '3–4 bar' is replaced by the OEM figure — engine inlet pressure 'in the range of 5.5–12 barg, depending on engine load and rating' (Everllence project guide 7.00, ME-GA); gas is <em>admitted</em> through SGAVs located in the cylinder liner, not injected. (8) <strong>Knock</strong> and pre-ignition are different events (P29-C097). (9) <strong>ME-GA Tier III</strong> (P29-C101, P29-C120, coordinator-reconciled): the ME-GA design specifies EGR as standard (Everllence project guide, 2025), which ensures Tier III in dual-fuel and fuel-oil-only modes; Tier III is not guaranteed in SDF mode. (10) <strong>ME-GI</strong> is Tier II as built and reaches Tier III with EGR or SCR — not simply 'non-compliant' (P29-C109). <strong>NOx.</strong> (11) Speed bands are n &lt; 130, 130 ≤ n &lt; 2000 and n ≥ 2000 rpm (P29-C105); Tier I applies to ships constructed on or after 1 January 2000 and before 1 January 2011, plus reg. 13.7 (P29-C106); Tier III has a construction date per NOx ECA, not one universal 2016 date (P29-C108). (12) NOx formation: thermal NOx becomes significant at roughly 1,800–2,000 K, and the third factor is oxygen availability, not 'amount of fuel' (P29-C111, P29-C113, P29-C114); ME-GA low NOx comes from lean premixed combustion, not 'gradual' heating or short 'resilent' time (P29-C118, P29-C119). <strong>Removed.</strong> The '850 °C pilot / 1,100 °C gas' in-cylinder narrative (P29-C116) is not taught. <strong>Codes.</strong> IGC title spelling 'Liquefied' (P29-C125); pre-1986 gas carriers split between the GC Code and the Existing Ships Code, both recommendatory and cited by name (P29-C127). <strong>Turbochargers.</strong> A power turbine generator is not a turbocharger type (P29-C131). <strong>Stripped (unverified).</strong> The '4–20 mA' signal label (P29-C073) and the printed telegraph/rpm table (P29-C074). <strong>Closed on primary text by the coordinator (closure log 8 Oct 2026).</strong> FuelEU Maritime Annex II default methane-slip factors are printed as published in OJ L 234, 22.9.2023 (a later consolidated text was not checked); the GC Code is resolution A.328(IX) of 12 November 1975; the Existing Ships Code is cited by name only. <strong>Product status — coordinator check (8 Oct 2026).</strong> The source and the project guide present the ME-GA as a current engine. MAN Energy Solutions withdrew it from sale as of 18 Oct 2024 (customer letter of 17 Oct 2024, as reported by DieselNet, 6 Nov 2024, and TradeWinds); no relaunch was found. It is taught here as an installed-fleet engine. Order and in-service counts are not printed because they are reported only by trade press.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">An <strong>ME engine</strong> (MAN B&amp;W, now Everllence) is a two-stroke crosshead engine in which fuel injection, exhaust-valve actuation and starting air are controlled electronically instead of by a camshaft. Hydraulic oil at about 300 bar from a <strong>Hydraulic Power Supply</strong> drives, cylinder by cylinder, a <strong>fuel-oil pressure booster</strong> and an <strong>exhaust-valve actuator</strong> on each <strong>Hydraulic Cylinder Unit</strong>; a proportional valve (ELFI and ELVA, or the combined FIVA) commanded by the <strong>Cylinder Control Unit</strong> sets timing, quantity and rate. The same platform carries the dual-fuel engines: the <strong>ME-GI</strong> injects gas at high pressure (up to about 300 bar) into the flame of a pilot-oil injection and burns it on the <strong>Diesel principle</strong>; the <strong>ME-GA</strong> admits gas at low pressure into the cylinder during compression and ignites the premixed charge with pilot oil on the <strong>Otto principle</strong>. Their NOx and methane-slip behaviour, the MARPOL Annex VI NOx Tiers and NOx Emission Control Areas, the IGF and IGC Codes, and the newest exhaust-energy machines — power turbine generator, hybrid and electric-assist turbochargers — complete the picture.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li><strong>Simon's favourite machinery question is still 'ME versus MC'.</strong> The basic table is in Simon Notes; the marks now come from the depth — HPS, HCU, FIVA, CCU, redundancy — and from not calling ME a common-rail engine.</li>
+    <li><strong>Dual-fuel engines are on the order books, and the two LNG concepts behave oppositely.</strong> ME-GI: high pressure, no knock, very low slip, Tier II without after-treatment. ME-GA: low pressure, knock-sensitive, more slip, Tier III with its standard EGR — except in SDF mode.</li>
+    <li><strong>The Tier III question is now an ECA-by-ECA question.</strong> The Canadian Arctic and Norwegian Sea ECAs entered into force on 1 March 2026 and the North-East Atlantic ECA has been adopted; one '2016' date is no longer an answer.</li>
+    <li><strong>Methane slip is now priced.</strong> Methane counts under the EU ETS from 1 January 2026 and under FuelEU Maritime, so the Chief Engineer's running mode and load profile on a gas engine have a direct cost.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">1 Jul 1986</span>  IGC Code (MSC.5(48)) mandatory under SOLAS chapter VII for gas carriers constructed on or after this date
+<span class="t-year">1 Jan 2000</span>  NOx Tier I — ships constructed on or after this date (engines over 130 kW)
+<span class="t-year">1 Jul 2010</span>  Revised MARPOL Annex VI (MEPC.176(58)) in force
+<span class="t-year">1 Jan 2011</span>  NOx Tier II — ships constructed on or after this date
+<span class="t-year">11 Jun 2015</span>  IGF Code adopted, MSC.391(95); mandatory under SOLAS II-1 Part G from 1 Jan 2017
+<span class="t-year">1 Jan 2016</span>  Tier III construction date for the North American and US Caribbean Sea ECAs; revised IGC Code (MSC.370(93)) in force, applying to gas carriers with keel laid on or after 1 Jul 2016
+<span class="t-year">1 Jan 2021</span>  Tier III construction date for the Baltic Sea and North Sea ECAs
+<span class="t-year">22 Mar 2024</span>  MEPC.391(81) — 2024 IMO LCA Guidelines (non-mandatory); methane counted with GWP100 = 28
+<span class="t-year">4 Oct 2024</span>  MEPC.392(82) adopted — Canadian Arctic and Norwegian Sea ECAs
+<span class="t-year">1 Jan 2025</span>  FuelEU Maritime applies (well-to-wake, including methane slip)
+<span class="t-year">4 Jun 2025</span>  MAN Energy Solutions renamed Everllence; MAN B&amp;W engine names retained
+<span class="t-year">1 Jan 2026</span>  EU ETS covers methane (CH<sub>4</sub>) and N<sub>2</sub>O from shipping
+<span class="t-year">1 Mar 2026</span>  Canadian Arctic and Norwegian Sea ECAs in force (MEPC.392(82))
+<span class="t-year">Apr–Jun 2026</span>  First Everllence 6G60ME-LGIA ammonia engine passes factory acceptance test (April) and type-approval test (June)
+<span class="t-year">1 May 2026</span>  MEPC.407(84) adopted — North-East Atlantic ECA; entry into force 1 Sep 2027</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments and Their Status (8 October 2026)</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, regulation 13</span><span class="reg-desc">NOx Tier I (reg. 13.3), Tier II (13.4) and Tier III (13.5) limits for marine diesel engines over 130 kW, by rated speed; Tier III only inside NOx ECAs; reg. 13.7 for certain 1990–1999 engines with an Approved Method.</span></div>
+    <div class="reg-item"><span class="reg-code">NOx Technical Code 2008</span><span class="reg-desc">Certification (EIAPP), Technical File, Record Book of Engine Parameters, verification methods — taught in Part 4 · Topic 19.</span></div>
+    <div class="reg-item"><span class="reg-code">MEPC.392(82) (adopted 4 Oct 2024; in force 1 Mar 2026)</span><span class="reg-desc">Canadian Arctic and Norwegian Sea Emission Control Areas (SOx/PM and NOx).</span></div>
+    <div class="reg-item"><span class="reg-code">MEPC.407(84) (adopted 1 May 2026; entry into force 1 Sep 2027)</span><span class="reg-desc">North-East Atlantic Emission Control Area — adopted, not yet in force.</span></div>
+    <div class="reg-item"><span class="reg-code">IGF Code — MSC.391(95)</span><span class="reg-desc">Mandatory under SOLAS II-1 Part G since 1 Jan 2017 for ships, other than those covered by the IGC Code, using gases or other low-flashpoint fuels. Full framework in Part 25 · Topic 1.</span></div>
+    <div class="reg-item"><span class="reg-code">IGC Code — MSC.5(48); revised by MSC.370(93)</span><span class="reg-desc">Mandatory under SOLAS chapter VII for gas carriers constructed on or after 1 Jul 1986; revised text applies to keel laid on or after 1 Jul 2016.</span></div>
+    <div class="reg-item"><span class="reg-code">GC Code — resolution A.328(IX) (12 Nov 1975) · Existing Ships Code (recommendatory)</span><span class="reg-desc">Gas carriers built before 1 Jul 1986. Both codes are recommendatory, not mandatory; the Existing Ships Code is cited by name only.</span></div>
+    <div class="reg-item"><span class="reg-code">MEPC.391(81) — 2024 IMO LCA Guidelines (non-mandatory)</span><span class="reg-desc">Life-cycle GHG intensity of marine fuels; methane GWP100 = 28 (IPCC AR5); default methane-slip factors by engine class.</span></div>
+    <div class="reg-item"><span class="reg-code">EU ETS · FuelEU Maritime (EU law)</span><span class="reg-desc">EU ETS covers CH<sub>4</sub> and N<sub>2</sub>O from 1 Jan 2026; FuelEU Maritime (from 1 Jan 2025) counts methane slip using Annex II default slip factors by engine type (as published in OJ L 234, 22.9.2023), or verified actual values.</span></div>
+    <div class="reg-item"><span class="reg-code">IMO Net-Zero Framework — <strong>draft, NOT ADOPTED</strong></span><span class="reg-desc">Approved at MEPC 83 but not adopted; resumed extraordinary session planned 4 Dec 2026, subject to MEPC 85 (30 Nov–3 Dec 2026). Status in Part 22 · Topic 3.</span></div>
+  </div>
+
+  <div class="section-head">🖥️ The ME Platform — What 'Electronically Controlled' Really Means</div>
+  <p class="notes-body">The MC-versus-ME comparison table — what the ME eliminates (camshaft, chain drive, fuel cams, roller guides, starting-air distributor, mechanical governor) and what replaces it — is already taught in Simon Notes Part 5 · Note 7. This topic goes deeper: how the hydraulics, valves and controllers fit together, and how the system behaves when part of it fails.</p>
+  <p class="notes-body"><strong>Not a common-rail engine.</strong> The source says the ME has 'no individual fuel pump for each unit but uses a common rail system'. That is wrong for the ME. Each cylinder has its own electronically controlled, <em>hydraulically driven</em> fuel-oil pressure booster on its HCU. What is common is the <strong>hydraulic oil</strong> supply at about 300 bar from the HPS; fuel reaches the boosters at low supply pressure. A fuel common rail — fuel stored at injection pressure and distributed to the injectors — is the WinGD RT-flex/X principle.</p>
+  <p class="notes-body"><strong>ME-C and ME-B.</strong> The large-bore ME-C (and the ME-GI, ME-GA and ME-LGI built on it) has no camshaft and no camshaft chain drive. The small-bore ME-B keeps a light camshaft, chain-driven, for the exhaust valves and controls only fuel injection electronically.</p>
+  <table class="revision-table">
+    <tr><th>Unit</th><th>What it is</th><th>Note</th></tr>
+    <tr><td>Hydraulic Power Supply (HPS)</td><td>Engine-driven (standard) or electrically driven pump unit delivering ~300 bar hydraulic oil to the HCUs</td><td>Separate from the HCU. On the mechanically driven HPS, an electrically driven start-up pump runs at start</td></tr>
+    <tr><td>Hydraulic Cylinder Unit (HCU)</td><td>One per cylinder: fuel-oil pressure booster, exhaust-valve actuator drive, ELFI + ELVA or FIVA valve, accumulator</td><td>Neither the HPS nor the tacho system is part of the HCU</td></tr>
+    <tr><td>Tacho system</td><td>Crank-angle sensing (angle encoders or trigger ring and marker sensors)</td><td>Two redundant sets, A and B; timing reference for injection, exhaust valve and starting valves</td></tr>
+    <tr><td>Engine Control Units (ECU) ×2</td><td>Governor, start/stop sequences, timing of injection, exhaust valves and starting valves, running modes</td><td>Operate in parallel, one in hot stand-by</td></tr>
+    <tr><td>Cylinder Control Unit (CCU) ×1 per cylinder</td><td>Drives the ELFI/ELVA or FIVA valve and the starting air valve on the ECU's commands</td><td>A CCU failure cuts out only its own cylinder</td></tr>
+    <tr><td>Auxiliary Control Units (ACU) ×3</td><td>Auxiliary blowers, the HPS pumps (electric and engine-driven)</td><td>Control divided among three for redundancy</td></tr>
+    <tr><td>EICU ×2, SCU, CWCU</td><td>Interface to external systems; scavenge-air control (exhaust bypass, VT turbochargers, WHR); liner cooling-water control where fitted</td><td>EICUs in parallel for mission-critical interfaces</td></tr>
+    <tr><td>Main Operating Panel (MOP) ×2, LOP</td><td>Engineer's interface in the ECR (one MOP as back-up); Local Operating Panel on the engine</td><td>MOPs and controllers linked by redundant control networks A and B</td></tr>
+  </table>
+  <p class="notes-body"><strong>The Multi-Purpose Controller.</strong> The source's 'Multi Purpose Card' is the <strong>Multi-Purpose Controller (MPC)</strong>, the common hardware module of the ECS. The ECU, ACU, EICU, SCU and CWCU run on identical MPC hardware with different software; on current ME and ME-C engines the CCU runs on a downsized controller, the MPC10. The MPC fitted at each cylinder <em>is</em> the CCU because it runs the CCU software.</p>
+
+  <div class="section-head">⚙️ ELFI, ELVA and FIVA — How the Hydraulic Booster Injects</div>
+  <p class="notes-body"><strong>The command chain.</strong> The tacho system gives the ECU the crank position; the ECU sends timing commands to the CCU; the CCU drives the actuator (the source's 'proportional coil') of a proportional multi-way valve; the valve admits ~300 bar hydraulic oil under the booster's hydraulic piston; the piston drives the fuel plunger and fuel is injected. The CCU positions the valve by an electrical command signal with position feedback.</p>
+  <table class="revision-table">
+    <tr><th>Valve</th><th>Expansion</th><th>What it controls</th></tr>
+    <tr><td>ELFI</td><td>Electronic Fuel Injection valve</td><td>Hydraulic oil to the fuel booster</td></tr>
+    <tr><td>ELVA</td><td>Electronic exhaust Valve Actuation valve</td><td>Hydraulic oil to the exhaust-valve actuator</td></tr>
+    <tr><td>FIVA</td><td>Fuel Injection and exhaust Valve Activation valve</td><td>One proportional multi-way valve per cylinder controlling both the booster and the exhaust-valve actuator</td></tr>
+  </table>
+  <p class="notes-body">An engine has either separate ELFI + ELVA valves or a single FIVA per cylinder. <strong>Quantity, timing and rate.</strong> The valve's opening (signal level) and opening duration set the booster plunger's stroke and speed, so the injected quantity follows the strength and duration of the command, not a fixed cam stroke and helix. Injection pressure is the hydraulic pressure multiplied by the booster's area ratio. The booster has a suction valve and no helix or spill port.</p>
+  <table class="revision-table">
+    <tr><th></th><th>MC — cam-operated jerk pump</th><th>ME — hydraulically driven booster</th></tr>
+    <tr><td>Drive</td><td>Fuel cam on the camshaft through a roller guide</td><td>~300 bar hydraulic oil via ELFI/FIVA</td></tr>
+    <tr><td>Stroke</td><td>Cam lift fixed; effective (delivery) stroke set by rotating the plunger helix against the spill ports</td><td>Plunger stroke itself variable — set electronically</td></tr>
+    <tr><td>Metering parts</td><td>Helical groove, spill ports</td><td>Suction valve; no helix, no spill port</td></tr>
+    <tr><td>Timing</td><td>Fixed by cam profile; VIT adjusts within limits</td><td>Free, synchronised to crank angle</td></tr>
+    <tr><td>At low load</td><td>Injection pressure falls with cam speed</td><td>Injection pressure maintained — the main low-load benefit</td></tr>
+  </table>
+  <ul class="notes-list">
+    <li><strong>Combustion quality</strong> — injection pressure and rate are held even at low load, improving atomisation and penetration.</li>
+    <li><strong>Precise timing</strong> — injection, exhaust-valve and starting-valve events synchronised to the tacho crank angle.</li>
+    <li><strong>Metering</strong> — fuel quantity set electronically by command duration and strength.</li>
+    <li><strong>Injection profile</strong> — rate shaping and peak-pressure control let the ECS switch between economy and low-NOx running modes <em>within the IMO NOx Technical File</em>. Tier II is met by engine tuning; Tier III needs EGR or SCR.</li>
+  </ul>
+
+  <div class="section-head">🛡️ Redundancy and Failure Behaviour — Going Deeper than the MC/ME Table</div>
+  <p class="notes-body">Everllence's ME Engine Control System is designed so that <strong>no single failure related to the system may cause the engine to stop</strong>. In most cases a single failure does not affect performance or power availability, or does so only partly by activating a slow-down (project guide 16.01, 'Units, layout and interfaces'):</p>
+  <ul class="notes-list">
+    <li><strong>ECU</strong> — two in parallel; if one fails the other takes over without interruption.</li>
+    <li><strong>CCU</strong> — all identical; a CCU failure automatically cuts out only that cylinder.</li>
+    <li><strong>ACU</strong> — auxiliary control divided among three units so that one failure leaves enough redundancy for continued operation; HPS pump control is split between them.</li>
+    <li><strong>HPS</strong> — multiple engine-driven and electric pumps with stand-by; high-pressure pipes to the HCUs are double-walled, and emergency running is possible using the outer pipe as pressure containment.</li>
+    <li><strong>Networks and panels</strong> — redundant control networks A and B; two MOPs; tacho sets A and B.</li>
+    <li><strong>Repair on the run</strong> — any controller can be replaced without stopping the engine, which returns to normal operation once the defective unit is replaced.</li>
+  </ul>
+  <p class="notes-body"><strong>The oil is a control fluid.</strong> On the ME engine the system oil is also the hydraulic medium for the HPS and HCUs, so cleanliness and water content in the system oil matter to the control valves as well as to the bearings — the oil-analysis link in Topic 1.</p>
+
+  <div class="section-head">🔥 Why Gas and Alternative-Fuel Engines — and the ME Family</div>
+  <p class="notes-body">The source gives three reasons: efficiency, NOx and the IMO GHG Strategy. Corrected: two-stroke dual-fuel engines have thermal efficiency <em>comparable</em> to diesel operation, so efficiency is not the main driver. The real drivers are lower SOx and particulates and lower CO<sub>2</sub> per kWh when burning methane (partly offset by methane slip), fuel cost and availability, and — on gas carriers — the use of cargo boil-off gas. On NOx, only the low-pressure Otto-cycle engine is Tier III in gas mode without after-treatment; the high-pressure Diesel-cycle engine is Tier II. On GHG, the 2023 IMO GHG Strategy is resolution MEPC.377(80) — not part of Annex VI. Its in-force short-term measures are EEXI, CII and SEEMP; the fuel-intensity rules of the Net-Zero Framework remain <strong>draft and not adopted</strong> (Part 22 · Topic 3). Methane, ethane and methanol all contain carbon; only ammonia (and hydrogen) are carbon-free at the funnel.</p>
+  <table class="revision-table">
+    <tr><th>Everllence B&amp;W engine</th><th>Fuel and principle</th><th>Status (8 Oct 2026)</th></tr>
+    <tr><td>ME-GI</td><td>Methane (LNG) — gas injected at high pressure, Diesel principle</td><td>In service</td></tr>
+    <tr><td>ME-GIE</td><td>Ethane — gas injection</td><td>In service (ethane carriers)</td></tr>
+    <tr><td>ME-GA</td><td>Methane (LNG) — low-pressure gas admission, Otto principle</td><td>Reported withdrawn from new sales, Oct 2024; installed fleet remains in service/support.</td></tr>
+    <tr><td>ME-LGIP</td><td>LPG injected as a liquid (Liquid Gas Injection)</td><td>In service</td></tr>
+    <tr><td>ME-LGIM</td><td>Methanol injected as a liquid</td><td>In service since 2016; an ME-LGIM has also been run on ethanol (September 2025)</td></tr>
+    <tr><td>ME-LGIA</td><td>Ammonia injected as a liquid</td><td>Commercial introduction 2026: first 6G60ME-LGIA factory acceptance test April 2026, type-approval test June 2026; first deliveries from October 2026, not yet confirmed in commercial service</td></tr>
+  </table>
+  <p class="notes-body">The source's second classification — liquid fuels (methanol, ethanol) versus gas (methane) — is therefore better stated as gas-injection (GI) and gas-admission (GA) engines for methane and ethane, and liquid-gas-injection (LGI) engines for LPG, methanol and ammonia. The fuels' properties, storage and the IGF framework are in Part 25 · Topic 1.</p>
+
+  <div class="section-head">⛽ ME-GI vs ME-GA — Diesel-Cycle Injection vs Otto-Cycle Admission</div>
+  <table class="revision-table">
+    <tr><th></th><th>ME-GI</th><th>ME-GA</th></tr>
+    <tr><td>Combustion principle</td><td>Diesel cycle — gas burns as it is injected (diffusion flame)</td><td>Otto cycle in gas mode — lean, premixed gas-air charge</td></tr>
+    <tr><td>Sequence</td><td>Pilot oil injected first and ignites in the hot compressed air; gas then injected into the flame near TDC</td><td>Gas admitted during the compression stroke, after scavenging; the premixed charge is compressed and ignited by pilot oil</td></tr>
+    <tr><td>Gas pressure</td><td>High pressure: up to 300 bar, 'the maximum required pressure at the engine inlet', load-dependent</td><td>Low pressure: engine inlet pressure 'in the range of 5.5–12 barg, depending on engine load and rating' (Everllence PG 7.00)</td></tr>
+    <tr><td>Gas valves</td><td>Gas injection valves in the cylinder cover, controlled by an ELGI valve on the ~300 bar hydraulic oil</td><td>Safe Gas Admission Valves (SGAV) located in the cylinder liner, opened by control oil through an ELGA valve</td></tr>
+    <tr><td>Pilot oil</td><td>Fuel oil through the normal ME injection system; minimum 1.5% at MCR (L1) in gas operation</td><td>Dedicated micro booster injection valve (MBIV); 0.5% at MCR (L1), VLSFO or MGO/MDO</td></tr>
+    <tr><td>Knock / pre-ignition</td><td>No knock risk (no premixed charge)</td><td>Susceptible to knock and pre-ignition; controlled by EGR, a minimum methane number (MN ≥ 64 at 100% load) and combustion monitoring</td></tr>
+    <tr><td>Methane slip</td><td>Very low — no gas is present during compression and scavenging (Everllence quotes about 0.2 g/kWh)</td><td>Higher — premixed gas trapped in crevices escapes the flame; EGR reduces slip by up to 50% compared with Otto two-strokes without EGR (OEM)</td></tr>
+    <tr><td>NOx</td><td>Tier II as built in gas and fuel-oil modes; Tier III requires EGR or SCR</td><td>EGR standard: Tier III in dual-fuel mode and fuel-oil-only mode; Tier III <strong>not guaranteed in SDF mode</strong></td></tr>
+    <tr><td>Fuel gas plant</td><td>High-pressure compressor or cryogenic HP pump and vaporiser</td><td>Low-pressure supply — lower fuel-gas plant cost</td></tr>
+  </table>
+  <p class="notes-body"><strong>Product status (as of 8 October 2026).</strong> Trade-press reports citing MAN Energy Solutions customer communication stated that ME-GA was withdrawn from new sales on <strong>18 October 2024</strong>; existing installed engines remain relevant and supported. The ME-GA therefore matters to the Chief Engineer as an <em>installed-fleet</em> engine on LNG carriers, not as a new-build choice: Everllence's LNG dual-fuel two-stroke offering continues on the ME-GI. The ME-GA data in this topic (gas admission, EGR, operating modes) describe that installed design as set out in the Everllence project guide.</p>
+  <p class="notes-body"><strong>Knock versus pre-ignition.</strong> The source attributes ME-GA knock to 'pre-ignition'. They are different abnormal-combustion events. <em>Knock</em> is auto-ignition of the unburnt end-gas after the pilot has ignited the charge; <em>pre-ignition</em> is ignition before the pilot — from hot spots or lube-oil droplets. A premixed Otto engine is exposed to both; a Diesel-principle engine has no premixed charge and neither problem.</p>
+  <p class="notes-body"><strong>Operating modes on the ME-GA.</strong> Dual-fuel (gas) mode is started manually by the operator on the MOP. Specified dual-fuel (SDF) mode — activated only by the fuel-gas supply system — burns a mixture of gas and fuel oil within a gas flow limit, at reduced efficiency, increased methane slip and increased NOx; it is not IMO certified, and when it is logged an alarm is released and the bridge receives an indication of lack of Tier III compliance. The control and safety system fails to safe: any failure detected during gas running stops the gas, changes over to fuel oil and the gas system is purged with inert gas.</p>
+  <div class="timeline-block">ME-GA gas-mode cycle (source PDF 713 printed figure, OEM sequence)
+  SCAVENGING      ports open, fresh air in
+  GAS ADMISSION   ports closed, piston rising — SGAV in liner admits low-pressure gas
+  IGNITION        near TDC — pilot oil (MBIV) ignites the premixed charge
+  COMBUSTION      flame propagates through the lean charge — piston driven down</div>
+
+  <div class="section-head">🌡️ How NOx Forms — Temperature, Residence Time, Oxygen</div>
+  <p class="notes-body">Atmospheric nitrogen is normally inert, but at very high temperature it combines with oxygen — the <strong>thermal (Zeldovich) NOx</strong> mechanism. Engine-out NOx is mostly NO, oxidising to NO<sub>2</sub> later; the limits are expressed as NO<sub>2</sub>. Fuel-bound nitrogen adds a minor 'fuel NOx' share with residual fuels. Three factors govern thermal NOx:</p>
+  <table class="revision-table">
+    <tr><th>Factor</th><th>Corrected teaching</th><th>Source's version</th></tr>
+    <tr><td>1. Peak local temperature</td><td>The dominant factor. Thermal NOx becomes significant only above roughly 1,800–2,000 K (about 1,500–1,700 °C) in the flame and burned-gas zones, and rises steeply with temperature</td><td>'High temp inside chamber (1100 °C)' — not the NOx-forming temperature</td></tr>
+    <tr><td>2. Residence time</td><td>How long the burned gas stays above that temperature</td><td>'How long the temp is maintained' — correct</td></tr>
+    <tr><td>3. Oxygen availability</td><td>Local oxygen concentration (air-fuel ratio) in the hot zone. More fuel (load) raises NOx only indirectly, by raising temperature and pressure</td><td>'Amount of fuel injected' — replaced</td></tr>
+  </table>
+  <p class="notes-body"><strong>Why the ME-GI stays at Tier II.</strong> In the ME-GI the gas is injected at high pressure into hot compressed air after the pilot oil has ignited, and it burns as it enters — a diffusion flame, exactly as with fuel oil. The flame zones burn close to stoichiometric, so local temperatures are very high and oxygen surrounds them: ideal conditions for thermal NOx. Engine-out NOx is therefore at Tier II level in both gas and fuel-oil modes, and Tier III needs EGR (less oxygen, more heat capacity in the charge) or SCR. Combustion lasts only tens of crank-angle degrees — milliseconds — so 'a very long time at high temperature' is the wrong picture.</p>
+  <p class="notes-body"><strong>Why the ME-GA is low-NOx in gas mode.</strong> The ME-GA burns a lean, premixed gas-air charge. Because the excess air is spread evenly through the charge, there are no hot near-stoichiometric flame zones and the peak flame temperature stays well below that of diffusion combustion. With a lower peak temperature, little time is spent above the temperature at which NOx forms quickly. Premixed flame propagation is not 'gradual' — the difference is temperature, not speed. The NOx countermeasures in general (EGR, SCR, Miller timing, HAM) are taught in Part 4 · Topic 19.</p>
+
+  <div class="section-head">📊 NOx Tiers and NOx ECAs — the Table Part 4 Did Not Print</div>
+  <p class="notes-body">MARPOL Annex VI regulation 13 applies to marine diesel engines over 130 kW. Limits are total weighted cycle emissions in g/kWh, expressed as NO<sub>2</sub>; n is the engine's rated speed in crankshaft revolutions per minute.</p>
+  <table class="revision-table">
+    <tr><th>Tier (reg. 13)</th><th>n &lt; 130 rpm</th><th>130 ≤ n &lt; 2000 rpm</th><th>n ≥ 2000 rpm</th><th>Applies to</th></tr>
+    <tr><td>Tier I (13.3)</td><td>17.0</td><td>45 · n<sup>−0.2</sup></td><td>9.8</td><td>Ships constructed on or after 1 Jan 2000 and before 1 Jan 2011 — worldwide</td></tr>
+    <tr><td>Tier II (13.4)</td><td>14.4</td><td>44 · n<sup>−0.23</sup></td><td>7.7</td><td>Ships constructed on or after 1 Jan 2011 — worldwide, and outside NOx ECAs for Tier III ships</td></tr>
+    <tr><td>Tier III (13.5)</td><td>3.4</td><td>9 · n<sup>−0.2</sup></td><td>2.0</td><td>Only while operating inside a NOx ECA, for ships constructed on or after that ECA's date (below)</td></tr>
+  </table>
+  <p class="notes-body"><strong>Worked example (IMO).</strong> A medium-speed engine rated at 720 rpm: Tier I 12.1, Tier II 9.7, Tier III 2.4 g/kWh. <strong>Reg. 13.7.</strong> Engines over 5,000 kW with a displacement of 90 litres per cylinder or more, on ships constructed on or after 1 January 1990 but before 1 January 2000, must meet Tier I where an Approved Method for that engine has been certified and notified to IMO.</p>
+  <table class="revision-table">
+    <tr><th>NOx Emission Control Area</th><th>Status (8 Oct 2026)</th><th>Tier III applies to ships constructed on or after</th></tr>
+    <tr><td>North American ECA · United States Caribbean Sea ECA</td><td>In force</td><td>1 Jan 2016</td></tr>
+    <tr><td>Baltic Sea ECA · North Sea ECA</td><td>In force</td><td>1 Jan 2021</td></tr>
+    <tr><td>Canadian Arctic ECA</td><td>In force 1 Mar 2026 (MEPC.392(82))</td><td>1 Jan 2025</td></tr>
+    <tr><td>Norwegian Sea ECA</td><td>In force 1 Mar 2026 (MEPC.392(82))</td><td>1 Mar 2026 — meaning building contract on or after 1 Mar 2026; or, with no contract, keel laid on or after 1 Sep 2026; or delivery on or after 1 Mar 2030</td></tr>
+    <tr><td>North-East Atlantic ECA</td><td><strong>Adopted</strong> 1 May 2026 (MEPC.407(84)); entry into force 1 Sep 2027 — not yet in force</td><td>Building contract on or after 1 Jan 2027; or, with no contract, keel laid on or after 1 Jul 2027; or delivery on or after 1 Jan 2031</td></tr>
+    <tr><td>Mediterranean Sea ECA</td><td>In force 1 May 2024 (0.10% sulphur from 1 May 2025)</td><td><strong>No NOx requirement</strong> — SOx/PM ECA only</td></tr>
+  </table>
+  <p class="notes-body">The construction date decides whether a ship is a Tier III ship <em>for that ECA</em>; the ship then needs Tier III operation (EGR, SCR or an Otto gas mode) only while inside it, and runs Tier II outside. The NOx Technical Code, EIAPP certificate and Technical File are in Part 4 · Topic 19; the Mediterranean sulphur ECA in Part 5 · Topic 24.</p>
+
+  <div class="section-head">🧯 Gas Codes in One Box — IGF and IGC</div>
+  <table class="revision-table">
+    <tr><th></th><th>IGF Code</th><th>IGC Code</th></tr>
+    <tr><td>Full title</td><td>International Code of Safety for Ships Using Gases or Other Low-flashpoint Fuels</td><td>International Code for the Construction and Equipment of Ships Carrying <strong>Liquefied</strong> Gases in Bulk</td></tr>
+    <tr><td>Gas as…</td><td>FUEL — ships other than gas carriers</td><td>CARGO — gas carriers (which may also burn cargo as fuel under the IGC Code)</td></tr>
+    <tr><td>Instrument</td><td>MSC.391(95), adopted 11 Jun 2015; mandatory under SOLAS II-1 Part G from 1 Jan 2017</td><td>MSC.5(48); mandatory under SOLAS chapter VII since 1 Jul 1986; revised by MSC.370(93)</td></tr>
+    <tr><td>Aim</td><td>Minimise the risk to the ship, its crew and the environment, having regard to the nature of the fuels — by mandatory criteria for the arrangement, installation, control and monitoring of machinery, equipment and systems</td><td>An international standard for the safe carriage by sea in bulk of liquefied gases, by prescribing the design and construction standards of the ships involved</td></tr>
+  </table>
+  <p class="notes-body"><strong>IGC applicability ladder.</strong> Gas carriers constructed on or after 1 July 1986 must comply with the IGC Code; the revised Code (MSC.370(93), in force 1 January 2016) applies to ships whose keel was laid on or after 1 July 2016, while ships built between 1986 and 2016 follow the earlier IGC text as amended. Before 1986 the codes are <em>recommendatory</em>: gas carriers constructed after 31 October 1976 and before 1 July 1986 should comply with the GC Code (Code for the Construction and Equipment of Ships Carrying Liquefied Gases in Bulk, resolution A.328(IX) of 12 November 1975), and older ships, already trading before the GC Code applied, with the Code for Existing Ships Carrying Liquefied Gases in Bulk.</p>
+  <p class="notes-body">Do not re-teach the fuel regime here: the IGF framework, its amendments, the alternative-design route and the interim guidelines for methanol, ammonia and hydrogen are in Part 25 · Topic 1; SOLAS chapter VII Part C and the IGC Code in Part 5 · Topic 21.</p>
+
+  <div class="section-head">💨 Methane Slip</div>
+  <p class="notes-body"><strong>Definition.</strong> Methane slip is methane that is not burnt in the combustion chamber and leaves with the exhaust gas. It is highest in low-pressure Otto-cycle engines, where gas is mixed with air before ignition: premixed charge trapped in crevice volumes — the piston top land and ring pack — is not reached by the flame; in four-stroke engines gas can also short-circuit to the exhaust during valve overlap; and combustion is less complete at low load. A high-pressure Diesel-cycle engine has no gas in the cylinder during compression and scavenging, so its slip is very low.</p>
+  <p class="notes-body"><strong>Why it matters.</strong> Methane is a powerful greenhouse gas. IMO's 2024 LCA Guidelines (MEPC.391(81), <em>non-mandatory</em>) count methane with a 100-year global warming potential of 28 (IPCC AR5). Under EU law, FuelEU Maritime (from 1 January 2025) counts methane slip on a well-to-wake basis using default slip factors by engine type, unless verified actual values are used, and the EU ETS covers methane from 1 January 2026. The IMO LCA default factors by engine class are tabulated in Part 25 · Topic 1, and methane's place among the greenhouse gases in Part 22 · Topic 2; the IMO Net-Zero Framework remains a draft, not adopted (Part 22 · Topic 3).</p>
+  <table class="revision-table">
+    <tr><th>Engine type (FuelEU Maritime, Regulation (EU) 2023/1805, Annex II)</th><th>Default C<sub>slip</sub> — % of the mass of fuel used by the engine</th></tr>
+    <tr><td>LNG Otto dual-fuel, medium speed</td><td>3.1</td></tr>
+    <tr><td>LNG Otto dual-fuel, slow speed</td><td>1.7</td></tr>
+    <tr><td>LNG Diesel dual-fuel, slow speed</td><td>0.2</td></tr>
+    <tr><td>LNG lean-burn spark-ignited (LBSI)</td><td>2.6</td></tr>
+  </table>
+  <p class="notes-body"><em>Values as published in OJ L 234, 22.9.2023; a later consolidated text was not checked. These are EU defaults, used unless a verified actual slip value is applied; the IMO LCA defaults (Part 25) are a separate, non-mandatory set and differ in places.</em></p>
+  <ul class="notes-list">
+    <li><strong>Engine choice</strong> — high-pressure Diesel-cycle injection (ME-GI) keeps slip very low.</li>
+    <li><strong>EGR on Otto two-strokes</strong> — Everllence states that EGR on the ME-GA reduces methane slip by up to 50% compared with Otto two-strokes without EGR.</li>
+    <li><strong>Operation</strong> — avoid prolonged low-load gas running and SDF mode where slip increases; keep the engine in its certified gas mode.</li>
+  </ul>
+
+  <div class="section-head">🌀 Turbocharger Developments (PDF 721) — Power Turbine, Hybrid and Electric-Assist</div>
+  <p class="notes-body">The source lists 'three types of turbocharger'. Only two of them are turbochargers. A <strong>power turbine generator is not a turbocharger</strong>: it is a separate exhaust-gas turbine that recovers surplus exhaust energy (turbo-compounding). Hybrid and electric-assist units are turbochargers with an electric machine on the rotor — and in Mitsubishi's design they are the same machine, run either as a generator or as a motor.</p>
+  <table class="revision-table">
+    <tr><th>Machine</th><th>What it is</th><th>Energy flow</th><th>Example</th></tr>
+    <tr><td>Power turbine generator (turbo-compounding)</td><td>A separate exhaust-gas turbine in a bypass of the main-engine exhaust, driving a generator through a reduction gearbox</td><td>Takes surplus exhaust energy → electricity. Maker figures: about 10–13% of the exhaust flow bypassed, recovering about 4–5% of main-engine power; shut down at low load; needs high-efficiency turbochargers</td><td>Everllence (MAN) TCS-PTG</td></tr>
+    <tr><td>Hybrid turbocharger</td><td>A turbocharger whose rotor is coupled — through a flexible coupling, in the compressor-side silencer — to a high-speed generator/motor</td><td>Generating mode: surplus exhaust energy → electricity. Motoring mode: electricity → rotor at low load, replacing the auxiliary blowers</td><td>Mitsubishi MET-MAG (MET83MAG, the first commercial hybrid turbocharger)</td></tr>
+    <tr><td>Electric-assist turbocharger</td><td>A turbocharger with an electric (typically permanent-magnet) motor on the compressor shaft</td><td>Electricity → rotor: accelerates the turbocharger at low load for better scavenging; can replace the auxiliary blowers</td><td>Motor-assisted turbochargers; the hybrid's motoring mode</td></tr>
+  </table>
+  <p class="notes-body">The distinction examiners want: power turbines and hybrid generating mode <em>extract</em> surplus exhaust energy as electricity; electric assist <em>supplies</em> energy to the rotor when exhaust energy is short. The power turbine as a waste-heat-recovery lever is mentioned in Part 22 · Topic 3.</p>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Simon):</strong> Simon asks 'ME engine — how is fuel injected, and is it common rail?' Answer: 'No. Each cylinder has its own hydraulically driven fuel booster on its HCU. What is common is the 300-bar hydraulic oil from the HPS. The CCU — a Multi-Purpose Controller with CCU software — drives the FIVA or ELFI valve on crank-angle timing from the duplicated tacho system.' Common rail is WinGD. Then he moves to gas: give ME-GI versus ME-GA in one line each — 'GI: Diesel, gas injected up to 300 bar into the pilot flame, no knock, very low slip, Tier II, Tier III with EGR or SCR. GA: Otto, gas admitted at 5.5–12 barg through SGAVs in the liner during compression, knock-sensitive, more slip, EGR standard for Tier III in dual-fuel and fuel-oil-only modes but not in SDF.' For Tier III, name the ECA before the date. Three answers fail: 'ME is common rail', 'ME-GA is Tier III, full stop', and 'Tier III applies to all ships built after 2016'.</div>
+
+  <div class="section-head">🎯 Oral Q&amp;A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. Is the ME engine a common-rail engine? Describe its fuel-injection system.</div><div class="qa-a">No. In the MAN B&amp;W, now Everllence, ME engine each cylinder has its own fuel-oil pressure booster on its Hydraulic Cylinder Unit. The common element is the hydraulic oil supply at about 300 bar from the Hydraulic Power Supply, which is engine-driven as standard, with electric start-up pumps, and is a separate unit from the HCUs. Fuel is supplied to the boosters at low pressure. The Engine Control Unit, using crank position from the duplicated tacho system, sends timing commands to the Cylinder Control Unit, which positions a proportional valve — ELFI for fuel and ELVA for the exhaust valve, or a single FIVA for both. The valve admits hydraulic oil under the booster piston and the plunger injects fuel. Injection pressure is the hydraulic pressure times the booster area ratio, and quantity and rate follow the valve command, because there is no helix or spill port. A true fuel common rail, with fuel stored at injection pressure, is the WinGD RT-flex and X design.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. What happens on an ME engine if one control unit fails?</div><div class="qa-a">The Engine Control System is designed so that no single failure related to the system may cause the engine to stop. There are two ECUs in parallel, one in hot stand-by, which takes over without interruption. There is one CCU per cylinder, all identical; if one fails, only that cylinder is cut out. Auxiliary control is divided among three ACUs, which also share control of the HPS pumps, so one failure leaves enough redundancy. The HPS has stand-by pumps, and the high-pressure pipes to the HCUs are double-walled so that emergency running is possible using the outer pipe. Control networks A and B, two MOPs and tacho sets A and B are duplicated. Any controller can be replaced without stopping the engine. In most cases a single failure has no effect on power, or only causes a slow-down.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Compare the ME-GI and ME-GA dual-fuel engines.</div><div class="qa-a">The ME-GI works on the Diesel principle: pilot oil is injected first and ignites, and gas is then injected at high pressure, up to 300 bar at the engine inlet, and burns as it enters. There is no premixed charge, so there is no knock and methane slip is very low, but engine-out NOx is at Tier II in both modes and Tier III needs EGR or SCR. The ME-GA works on the Otto principle in gas mode: gas is admitted at low pressure, which Everllence gives as 5.5 to 12 barg at the engine inlet depending on load and rating, through safe gas admission valves in the cylinder liner during the compression stroke. The lean premixed charge is ignited by about 0.5% pilot oil from a micro booster valve. That gives low NOx, but the engine is susceptible to knock and pre-ignition and has higher methane slip. Its design specifies EGR as standard (Everllence project guide), which ensures Tier III in dual-fuel and fuel-oil-only modes and cuts slip by up to half, but Tier III is not guaranteed in specified dual-fuel mode. The ME-GA's low-pressure gas plant is cheaper; the ME-GI needs a high-pressure compressor or pump.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4. State the NOx Tier limits and explain where Tier III applies.</div><div class="qa-a">Under MARPOL Annex VI regulation 13, for engines over 130 kW, with n the rated speed: Tier I is 17.0 g/kWh below 130 rpm, 45 times n to the power minus 0.2 from 130 to below 2000 rpm, and 9.8 at 2000 rpm and above, for ships constructed from 1 January 2000 to before 1 January 2011. Tier II is 14.4, 44 times n to the minus 0.23, and 7.7, for ships constructed on or after 1 January 2011. Tier III is 3.4, 9 times n to the minus 0.2, and 2.0 — about 80% below Tier I. Tier III applies only inside a NOx Emission Control Area, and each ECA has its own construction date: 1 January 2016 for the North American and US Caribbean ECAs; 1 January 2021 for the Baltic and North Sea; 1 January 2025 for the Canadian Arctic; and 1 March 2026 for the Norwegian Sea, by building contract, keel or delivery date. Both entered into force on 1 March 2026. The North-East Atlantic ECA was adopted in May 2026 and enters into force on 1 September 2027. The Mediterranean ECA is for sulphur and particulates only. Outside ECAs, a Tier III ship meets Tier II.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5. How is NOx formed in a diesel engine, and why is the ME-GI not Tier III without after-treatment?</div><div class="qa-a">NOx is mainly thermal NOx: nitrogen and oxygen from the air combine at very high temperature. Its formation depends on peak local temperature — it becomes significant above roughly 1,800 to 2,000 kelvin in the flame zones — on the residence time at that temperature, and on oxygen availability. More fuel raises NOx only indirectly, by raising temperature. In the ME-GI, gas is injected into hot air after the pilot ignites and burns as a diffusion flame. The flame zones are near stoichiometric and very hot, with oxygen around them, just as with fuel oil, so engine-out NOx is at Tier II. To reach Tier III it needs EGR, which lowers the oxygen and raises the heat capacity of the charge, or SCR, which removes NOx from the exhaust. The ME-GA in gas mode burns a lean premixed charge with no hot stoichiometric zones, so its peak temperature, and its NOx, are much lower.</div></div>
+    <div class="qa-item"><div class="qa-q">Q6. Distinguish a power turbine generator, a hybrid turbocharger and an electric-assist turbocharger.</div><div class="qa-a">A power turbine generator is not a turbocharger. It is a separate exhaust-gas turbine in a bypass of the main-engine exhaust that drives a generator through a gearbox — turbo-compounding. It recovers surplus exhaust energy as electricity when the turbochargers are efficient enough to spare some exhaust flow, and it is shut down at low load. A hybrid turbocharger, such as Mitsubishi's MET-MAG, has a high-speed generator/motor coupled to the turbocharger rotor. It generates electricity from surplus exhaust energy, and in motoring mode it drives the rotor at low load in place of the auxiliary blowers. An electric-assist turbocharger has a motor on the compressor shaft that supplies energy to accelerate the rotor at low load for better scavenging. The first two take energy out of the exhaust; electric assist puts energy into the rotor.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Distinguish the IGF Code from the IGC Code, stating the type of ship each applies to and the applicability date of the IGC Code.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Compare the ME-GI and ME-GA dual-fuel engines with respect to combustion principle, gas pressure, pilot ignition, knock, methane slip and NOx Tier compliance.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>With reference to an electronically controlled two-stroke engine: (a) describe the hydraulic power supply, hydraulic cylinder unit and ELFI/ELVA or FIVA valves, explaining how injection timing and quantity are controlled; (b) explain how the control system is made tolerant of single failures; (c) state the advantages of electronic control over a camshaft engine.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>State the MARPOL Annex VI NOx Tier limits and explain where Tier III applies, including the current NOx Emission Control Areas. Explain how NOx is formed and the means by which a dual-fuel two-stroke engine is made Tier III compliant.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>ME ≠ common rail.</strong> Per-cylinder BOOSTER on HCU + common 300-bar HYDRAULIC oil from HPS. Fuel common rail = WinGD RT-flex/X.</li>
+      <li><strong>ELFI (fuel) + ELVA (exhaust) — or FIVA = Fuel Injection and exhaust Valve Activation. MPC = Multi-Purpose CONTROLLER; with CCU software it is the CCU.</strong></li>
+      <li><strong>ME redundancy: 2 ECU · 1 CCU/cyl (fail = that cylinder out) · 3 ACU · tacho A/B · networks A/B · double-wall HP pipes.</strong> 'No single failure stops the engine.'</li>
+      <li><strong>ME-C: no camshaft. ME-B: camshaft for exhaust valves, electronic injection only.</strong></li>
+      <li><strong>GI = Diesel · Injection up to 300 bar · no knock · tiny slip · Tier II, Tier III with EGR/SCR.</strong></li>
+      <li><strong>GA = Otto · Admission 5.5–12 barg via SGAV in liner · knock-sensitive · more slip · EGR standard → Tier III (dual-fuel + fuel-oil-only), NOT in SDF.</strong></li>
+      <li><strong>Thermal NOx = TEMPERATURE (≈1,800–2,000 K) · TIME · OXYGEN.</strong> Diffusion flame = hot; lean premix = cool.</li>
+      <li><strong>Tier limits (n &lt; 130): 17.0 / 14.4 / 3.4 g/kWh. Tier III ≈ 80% below Tier I</strong> (memory aid: 9/45 = 0.2).</li>
+      <li><strong>NECA dates: NA + US Caribbean 2016 · Baltic + North Sea 2021 · Canadian Arctic 2025 · Norwegian Sea 1 Mar 2026 (three-date test) · NE Atlantic adopted, EIF 1 Sep 2027 · Mediterranean = SOx only.</strong></li>
+      <li><strong>Power turbine = NOT a turbocharger. Hybrid TC = generator/motor on rotor. Electric assist = motor pushes rotor at low load.</strong></li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Case Study — Entering a NOx ECA on an ME-GA LNG Carrier</button>
+    <div class="deep-dive-body">
+      <h4>Situation (illustrative)</h4>
+      <p>An LNG carrier with Everllence B&amp;W ME-GA main engines, built for Tier III ECA trading, is bound for a North Sea terminal. Boil-off is low after a long ballast leg, and the fuel-gas supply system has the engines running in specified dual-fuel (SDF) mode, burning a gas–fuel-oil mixture within its gas-flow limit. The bridge reports an indication of 'lack of Tier III compliance' 24 hours before the ECA boundary.</p>
+      <h4>What the Chief Engineer works through</h4>
+      <p><strong>Why the alarm.</strong> Everllence states that SDF mode is a compromise — reduced efficiency, increased methane slip and increased NOx — that it is not IMO certified and that Tier III is not guaranteed in it; when SDF is logged the system raises an alarm and gives the bridge this indication. <strong>Compliant options inside the ECA.</strong> The engine's standard EGR ensures Tier III in dual-fuel (gas) mode with minimum pilot oil and in fuel-oil-only mode. So before the boundary the engines must be in one of those two modes: gas mode if enough boil-off or forced vaporisation can sustain the required load, otherwise fuel-oil-only with EGR. <strong>Evidence.</strong> The changeover time, position and mode are recorded as the Tier and on/off status record and in the Record Book of Engine Parameters; the EGR system's readiness — water treatment and bleed-off — is checked in advance. <strong>Methane.</strong> Leaving SDF also cuts methane slip, which now carries a cost under the EU ETS and FuelEU Maritime.</p>
+      <h4>Lesson</h4>
+      <p>'Tier III engine' describes what the engine can do in its certified modes, not what it does in every mode. The Chief Engineer plans the ECA entry like a fuel changeover — mode, time, position and record — and the oral answer should say exactly that.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>Everllence (formerly MAN Energy Solutions) — Project Guide section 16.01 'Units, layout and interfaces' (ME Engine Control System), 199 15 82</li>
+    <li>Everllence — Project Guide section 7.00 'Fuel gas system – ME-GI engine', 199 13 52; section 7.07 'Fuel gas supply' (ME-GI)</li>
+    <li>Everllence — Project Guide section 1.00 'The ME-GA dual-fuel engine', 199 14 58 (2025); section 7.00 'Fuel gas system – ME-GA engine', 199 16 43 (2025)</li>
+    <li>Everllence — ME-GI and ME-LGIA product information; MAN Energy Solutions press release 'EGR offered for dual-fuel ME-GA engine' (24 November 2020)</li>
+    <li>IMO — MARPOL Annex VI regulation 13 (Nitrogen oxides) and NOx Technical Code 2008</li>
+    <li>IMO Resolutions MEPC.392(82) (Canadian Arctic and Norwegian Sea ECAs) and MEPC.407(84) (North-East Atlantic ECA)</li>
+    <li>IMO — IGF Code (MSC.391(95)) and IGC Code (MSC.5(48), revised by MSC.370(93)) pages</li>
+    <li>IMO Resolution MEPC.391(81) — 2024 Guidelines on life cycle GHG intensity of marine fuels (non-mandatory)</li>
+    <li>Regulation (EU) 2023/1805 (FuelEU Maritime); European Commission guidelines on actual methane-slip factors</li>
+    <li>Heywood, J. B. — Internal Combustion Engine Fundamentals, 2nd ed. (2018), chapters 10–11 (combustion and NO formation)</li>
+    <li>Mitsubishi Heavy Industries — MET83MAG hybrid turbocharger press release; ABB — TCS-PTG power turbine generator case study</li>
+    <li>MIW Simon Notes Part 5 · Note 7 (ME vs MC); MIW Notes Part 4 · Topic 19 (NOx Technical Code); Part 25 · Topic 1 (alternative fuels, IGF); Part 22 · Topics 2–3 (GHG, Net-Zero Framework status)</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p29 · Topic 3 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p29 · P29-T3 · v1.0</div>
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- TOPIC 4 — ENGINE VIBRATION &AMP; UNBALANCED MOMENTS -->
+<!-- ========================================================================== -->
+
+<div class="topic-block" id="topic-p29-4" data-kw="engine vibration, two-stroke vibration, excitation sources, natural frequency, resonance, order of excitation, nodes, 2-node, 3-node, 4-node, 5-node hull girder vibration, axial vibration, axial vibration damper, thrust bearing, torsional vibration, critical speed, main critical, barred speed range, class stress limits, tuning wheel, over-critical running, under-critical running, torsional vibration induced propeller thrust, viscous damper, inertia ring, silicone fluid, guide force moments, H-moment, X-moment, lateral vibration, transverse vibration, top bracing, mechanical top bracing, hydraulic top bracing, detuner, longitudinal vibration, longitudinal top bracing, external unbalanced moments, first order moment, second order moment, rotating masses, reciprocating masses, adjustable counterweights, moment compensator, chain-driven compensator, electrically driven compensator, steering gear room, MAN B&amp;W vibration aspects">
+  <div class="topic-header">
+    <div class="topic-badge">Part 29 · Topic 4</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Two-Stroke Engine Vibration — Axial, Torsional, Lateral and External Unbalanced Moments</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Four excitations: external moments · guide-force moments (LATERAL, H and X) · axial · torsional · Resonance = rpm × order = natural frequency · Axial damper standard · Viscous damper shears silicone circumferentially · Top bracing = detuner raising natural frequency · 1st order: rotating + reciprocating · 2nd order: reciprocating only, vertical</span>
+        <span class="topic-pages">Uday pp. 722–726</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-medium">◆ Medium Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> <strong>Source range.</strong> PDF 722–726. The printed figures in this block (vibration modes, Fig. U11 axial damper, viscous damper sections, top bracing, and the '2nd order moment compenstor located on aft end' caption, misprint included) come from the MAN B&amp;W paper <em>An Introduction to Vibration Aspects of Two-stroke Diesel Engines in Ships</em>, which is the authority for this topic. <strong>Source errors corrected.</strong> (1) <strong>'Longitudinal' → lateral</strong> (P29-C135, P29-C144): guide-force moments cause <em>lateral (transverse)</em> vibration of the engine top — H-type rocking and X-type twisting — not longitudinal vibration. The figure's 'longitudinal vibration' label on the end view is also transverse, and there is no 'longitudinal vibration damper': the countermeasure is lateral top bracing. In MAN usage 'longitudinal' vibration is the fore-and-aft vibration of engine and superstructure coupled to axial crankshaft vibration or thrust variation. (2) <strong>Top bracing</strong> (P29-C147): it does not 'transmit the vibration to the hull'. It stiffens the engine–double-bottom system so that the natural frequency rises above the running speed range — it is a <em>detuner</em> (P29-C149). (3) <strong>Viscous damper action</strong> (P29-C143): the relative motion is circumferential, not radial — the casing twists with the crankshaft while the inertia ring rotates steadily, shearing the silicone film. The casing is fixed to the crankshaft; the ring floats free inside it (P29-C142). (4) <strong>External moments</strong> (P29-C150): first-order moments come from rotating <em>and</em> reciprocating masses; only second-order moments come solely from reciprocating masses. <strong>Stripped (unverified).</strong> The axial-damper alarm list ('high oil temperature, low oil pressure on both sides of the flange', P29-C139) is not taught as fact; alarm lists are engine-specific, so the monitoring point is phrased generally. The transcription's unclear heading reading ('2nd/2rd order') carries no fact.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">A two-stroke crosshead engine excites the ship in four ways (MAN B&amp;W): <strong>external unbalanced moments</strong> from the inertia of the moving masses (first order, vertical and horizontal; second order, vertical only); <strong>guide-force moments</strong>, the lateral moments from the crosshead guide forces that rock (H-type) or twist (X-type) the engine top; <strong>axial vibration</strong> of the crankshaft, excited by gas forces deflecting the crank throws and passed to the hull through the thrust bearing; and <strong>torsional vibration</strong> of the shaft system, excited by the varying torque from gas pressure and the crank mechanism. Each becomes a problem at <strong>resonance</strong>, when the engine speed multiplied by the order of excitation equals a natural frequency of the engine, shaft line or hull. The countermeasures are an axial vibration damper, torsional design (shaft diameter, tuning wheel, dampers, barred speed range), lateral top bracing and moment compensators.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li><strong>Simon sorts the four excitations quickly.</strong> A candidate who calls guide-force vibration 'longitudinal', or says top bracing 'passes vibration to the hull', has shown he does not know the mechanism.</li>
+    <li><strong>The barred speed range is the Chief Engineer's daily limit.</strong> It comes from torsional resonance and class stress limits, and the engine must pass through it quickly — not run in it (Part 24 · Topic 2).</li>
+    <li><strong>Vibration complaints arrive after delivery.</strong> Heavy vibration in the accommodation in ballast or at one speed is often a hull resonance with an engine moment; the remedy — compensator, top bracing or a damper — depends on the order and the node position.</li>
+    <li><strong>The hardware needs looking after.</strong> Axial and torsional dampers, top-bracing units and compensator drives are machinery items on the planned maintenance system, and a failed damper can turn a harmless critical into a cracked crankshaft.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">1st order</span>  Frequency 1 × engine speed — rotating and reciprocating masses — acts vertically and horizontally; resonance risk with 2- and 3-node hull modes, mainly on 4-cylinder engines
+<span class="t-year">2nd order</span>  Frequency 2 × engine speed — reciprocating masses only — acts vertically; compensation relevant on 4-, 5- and 6-cylinder engines; resonance with 4- and 5-node vertical hull modes
+<span class="t-year">H-moment</span>  Main order = number of cylinders; dominant on engines with fewer than seven cylinders; rocks the engine top transversely
+<span class="t-year">X-moment</span>  Main order = half the number of cylinders (the two nearest orders for odd numbers); dominant above six cylinders; twists the engine in an X shape
+<span class="t-year">Axial</span>  Dominant order = number of cylinders (fewer than seven cylinders) or half the number (more than six)
+<span class="t-year">Torsional</span>  Main critical order = number of cylinders on 4- and 5-cylinder engines, near service speed</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Authority and Class Context</div>
+    <div class="reg-item"><span class="reg-code">MAN B&amp;W — An Introduction to Vibration Aspects of Two-stroke Diesel Engines in Ships</span><span class="reg-desc">OEM paper and source of this block's figures: four excitation categories, compensators, top bracing, axial damper, torsional design and barred speed ranges, with service cases.</span></div>
+    <div class="reg-item"><span class="reg-code">Classification society rules — torsional vibration</span><span class="reg-desc">Class requires the torsional vibration characteristics of the engine–shafting system to be calculated and sets limits for the additional stress: a lower limit that may be exceeded only briefly (hence a barred speed range) and an upper limit that may not be exceeded at all. Shaft diameter is set by class rules; a reduced diameter needs higher-strength material.</span></div>
+    <div class="reg-item"><span class="reg-code">ISO recommendations — ship vibration levels</span><span class="reg-desc">Measured hull and accommodation vibration is judged against ISO recommended levels; compensators are fitted only where those would be exceeded (MAN).</span></div>
+    <div class="reg-item"><span class="reg-code">ABS — Insights into Ship Vibration Analysis (June 2022)</span><span class="reg-desc">Hull girder modes described by their number of nodes; engine-excited resonance with hull modes.</span></div>
+  </div>
+
+  <div class="section-head">📐 Vibration Basics — Excitation, Order, Natural Frequency and Nodes</div>
+  <p class="notes-body">Every elastic system — crankshaft, shaft line, engine frame, hull girder — has natural frequencies, each with its own mode shape. A hull girder mode is named by its <strong>nodes</strong>, the points that do not move: the source's sketch shows a 2-node and a 3-node vertical mode. An engine produces forces and moments at whole multiples of its rotational speed — the <strong>orders</strong>. Resonance, and large vibration, occur where <strong>engine speed × order = a natural frequency</strong>; the deflection then depends on the excitation, the damping, and how close the frequencies are. A compensating force placed at or near a node has no effect, because it produces no moment about that node.</p>
+  <table class="revision-table">
+    <tr><th>Excitation (MAN B&amp;W)</th><th>Origin</th><th>Direction / effect</th><th>Countermeasure</th></tr>
+    <tr><td>External unbalanced moments</td><td>Inertia of rotating and reciprocating masses</td><td>1st order: vertical and horizontal. 2nd order: vertical</td><td>Adjustable counterweights; 1st- and 2nd-order compensators</td></tr>
+    <tr><td>Guide-force moments (H and X)</td><td>Lateral component of gas and inertia forces at the crosshead guide</td><td><strong>Lateral (transverse)</strong> rocking or twisting of the engine top</td><td>Lateral top bracing (detuner)</td></tr>
+    <tr><td>Axial vibration</td><td>Gas force deflects the crank throws axially</td><td>Fore-and-aft along the crankshaft; to the hull via the thrust bearing</td><td>Axial vibration damper</td></tr>
+    <tr><td>Torsional vibration</td><td>Varying torque from gas pressure and the crank mechanism</td><td>Twisting of the shaft system</td><td>Shaft-line design, tuning wheel, dampers, barred speed range</td></tr>
+  </table>
+  <p class="notes-body">Higher-order external moments (3rd, 4th, 5th) also exist but are very small and normally ignored.</p>
+
+  <div class="section-head">↔️ Axial Vibration and the Axial Vibration Damper</div>
+  <p class="notes-body"><strong>Mechanism.</strong> When the gas force loads a crank throw through the connecting rod, the crank arms deflect in the axial direction of the crankshaft. The resulting axial vibration can be passed through the thrust bearing to the hull. Its dominant order equals the number of cylinders on engines with fewer than seven cylinders, and half the number on engines with more than six.</p>
+  <p class="notes-body"><strong>Why it is fitted to every engine.</strong> At the introduction of the MC series the damper was standard only on engines with six or more cylinders, where resonance would otherwise over-stress the crank throws. Then a 5L50MC in an LPG tanker showed heavy axial vibration on trial: the crankshaft was not in resonance, but its vibration coupled with the engine frame and double bottom, and the whole engine and the superstructure vibrated longitudinally. A retrofitted axial damper alone cured it. That case and others led MAN to fit axial vibration dampers as standard on all its engines.</p>
+  <p class="notes-body"><strong>Construction.</strong> A damping flange (collar) on the crankshaft, at the fore end beside main bearing No. 1, runs inside a cylindrical casing. Both sides of the flange are filled with oil from the main lubricating (system) oil supply, and the two chambers are connected through a throttle — the 'adjusting throttle valve' in the printed Fig. U11. As the crankshaft vibrates axially, oil is forced from one side to the other through the throttle, and this throttling dissipates the vibration energy.</p>
+  <p class="notes-body"><strong>Monitoring.</strong> Damper oil pressure and axial vibration are monitored according to the engine's own alarm list, which differs between engine types; the damper works only while its oil supply is maintained.</p>
+
+  <div class="section-head">🔄 Torsional Vibration — Criticals, Barred Speed Range, Viscous Damper, Tuning Wheel</div>
+  <p class="notes-body"><strong>Cause.</strong> The gas pressure in each cylinder varies through the cycle and, through the crank and connecting-rod mechanism, produces a varying torque on the crankshaft — the source's 'pressure pulses from the different firing units'. Harmonic analysis splits that torque into orders. Stresses peak at resonance, where speed × order equals the shaft system's torsional natural frequency.</p>
+  <p class="notes-body"><strong>Class limits and the barred speed range.</strong> Classification societies require the torsional characteristics to be calculated and set two stress limits: a lower limit that may be exceeded only for a short time — so the speed range where it is exceeded becomes a <strong>barred speed range</strong>, passed through quickly — and an upper limit that may not be exceeded at all. On the load diagram the barred range is a layout limit (Part 24 · Topic 2).</p>
+  <table class="revision-table">
+    <tr><th>Cylinders (MAN guidance)</th><th>Main critical</th><th>Usual solution</th></tr>
+    <tr><td>4</td><td>4th order, above but close to normal speed</td><td>Shaft-line diameter increased above the class diameter in the worst cases, moving the resonance well above the running range</td></tr>
+    <tr><td>5</td><td>5th order, close to but below normal speed</td><td>With a class-diameter shaft a barred range falls near service speed — so fit a <strong>tuning wheel</strong> on the crankshaft fore end and use a reduced-diameter, higher-strength intermediate shaft: <strong>over-critical</strong> running, with normal speed above the resonance</td></tr>
+    <tr><td>6</td><td>—</td><td>Class-diameter shaft line with a barred speed range</td></tr>
+    <tr><td>7 or more</td><td>Smaller excitations</td><td>Barred speed range not normally needed</td></tr>
+  </table>
+  <p class="notes-body"><strong>Two ways to move a critical.</strong> A thinner shaft or a heavier tuning wheel <em>lowers</em> the natural frequency (over-critical: the resonance sits below the running range). A much stiffer, larger-diameter intermediate shaft <em>raises</em> it above MCR (under-critical). Under-critical running avoids a barred range but leaves a high varying torque in the shaft, which produces a varying propeller thrust. In one MAN case, 5L80MCE tankers built with a large shaft and no tuning wheel had a torsional-vibration-induced thrust variation of about 30% of the mean thrust, and heavy longitudinal vibration of the engine frame and superstructure on trial — cured only after longitudinal top bracing and strengthening of the deck steelwork.</p>
+  <p class="notes-body"><strong>The viscous damper.</strong> Where a damper is needed, the most common type is the viscous damper. A closed casing is bolted to the crankshaft; inside it an <strong>inertia ring</strong> floats freely in a thin film of high-viscosity <strong>silicone fluid</strong>. The ring tends to keep turning at the mean speed while the casing twists back and forth with the crankshaft's torsional vibration. The relative <em>circumferential</em> slip shears the silicone film, and the shear turns vibration energy into heat. The ring does not move radially. Spring-type dampers are an alternative.</p>
+
+  <div class="section-head">🏗️ Guide-Force Moments and Top Bracing — Lateral, not 'Longitudinal'</div>
+  <p class="notes-body">When the piston is not exactly at top or bottom dead centre, the force transmitted through the connecting rod has a component perpendicular to the cylinder axis. It acts at the crosshead guide shoe and is reacted at the main bearing; together these form a <strong>guide-force moment</strong>. In a multi-cylinder engine the gas and inertia forces combine into moments of all orders, of two kinds:</p>
+  <table class="revision-table">
+    <tr><th></th><th>H-type guide-force moment</th><th>X-type guide-force moment</th></tr>
+    <tr><td>Motion</td><td>Rocks the engine top transversely</td><td>Twists the engine in an X-like shape</td></tr>
+    <tr><td>Main order</td><td>Equal to the number of cylinders (e.g. 5 × rpm on a 5-cylinder engine)</td><td>Equal to half the number of cylinders; for odd numbers, the two orders closest to half</td></tr>
+    <tr><td>Dominant on</td><td>Engines with fewer than seven cylinders</td><td>Engines with more than six cylinders</td></tr>
+  </table>
+  <p class="notes-body"><strong>Top bracing is a detuner.</strong> MAN recommends a set of <strong>lateral top bracings</strong> between the engine's upper gallery and the hull structure (casing side), either <strong>mechanical</strong>, with a frictional connection, or <strong>hydraulically adjustable</strong>. The bracings stiffen the double-bottom and main-engine system so that its natural frequency rises above the engine's running range; the guide-force moments then cannot excite resonance and are harmless. Measurements in service show that, with adequate bracing, resonance occurs above the normal running range. The bracing is not there to 'transmit vibration to the hull'.</p>
+  <p class="notes-body"><strong>Longitudinal top bracing</strong> is a different device for a different problem — fore-and-aft vibration of engine and superstructure, coupled to axial vibration or thrust variation — as in the 5L50MC and 5L80MCE cases above.</p>
+
+  <div class="section-head">⚖️ External Unbalanced Moments and Moment Compensators</div>
+  <p class="notes-body">The inertia forces on the rotating masses are constant in size at constant speed but change direction; those on the reciprocating masses vary with piston position. The crankshaft's reactions balance the forces, but <strong>external unbalanced moments</strong> remain.</p>
+  <table class="revision-table">
+    <tr><th></th><th>1st-order moment</th><th>2nd-order moment</th></tr>
+    <tr><td>Origin</td><td>Rotating and reciprocating masses</td><td>Reciprocating masses only</td></tr>
+    <tr><td>Frequency</td><td>1 × engine speed</td><td>2 × engine speed</td></tr>
+    <tr><td>Direction</td><td>Vertical and horizontal</td><td>Vertical only</td></tr>
+    <tr><td>When it matters</td><td>Generally no problem; evaluate on 4-cylinder engines (2- and 3-node hull modes)</td><td>4-, 5- and 6-cylinder engines (4- and 5-node vertical hull modes in the running range)</td></tr>
+    <tr><td>Remedy</td><td>Adjustable counterweights (standard on 4-cylinder 50MC and larger) to make the vertical moment insignificant, at the cost of a larger horizontal moment; if needed, a compensator in the chain-tightener wheel — two counter-rotating masses at crankshaft speed — for the horizontal moment</td><td>Compensator with counterweights rotating at twice engine speed</td></tr>
+  </table>
+  <p class="notes-body"><strong>How a compensator works.</strong> Counterweights rotating in the chain drive produce a centrifugal force; that force multiplied by its distance to the hull vibration node is a compensating moment, phased to oppose the engine's free moment. The source's 'idle compensating mass' runs at engine speed for the first order and at twice engine speed for the second.</p>
+  <p class="notes-body"><strong>Options for the 2nd-order vertical moment (MAN).</strong> (a) No compensator, if the natural frequency, node position and moment size make it unnecessary; (b) a compensator on the aft end, driven by the main chain drive (the source's printed figure); (c) a compensator on the fore end, driven from the crankshaft through a separate chain drive; (d) compensators at both ends, which cancel the moment completely and do not depend on the node position; (e) an <strong>electrically driven compensator</strong>, synchronised to the free moment and preferably mounted in the steering-gear room, where hull deflections are largest — compact and driven by a motor of about 15 kW. Options (b), (c) and (e) need the node position, from calculation or sea-trial measurement: a compensator at a node is useless. If compensators are omitted, the engine can be delivered <em>prepared</em> for later fitting, decided at the project stage.</p>
+
+  <div class="section-head">🧭 Recognising and Responding on Board</div>
+  <p class="notes-body">The following are illustrative shipboard practice, built on the MAN mechanisms above, not regulatory requirements:</p>
+  <ul class="notes-list">
+    <li><strong>Pattern first.</strong> Note whether the vibration is tied to an engine speed (resonance), to the loading condition (hull natural frequencies change with draught), and to direction — vertical, transverse at the engine top, or fore-and-aft in the superstructure.</li>
+    <li><strong>Match the order.</strong> Twice engine speed, vertical, on a 4–6-cylinder engine points to the 2nd-order moment; cylinder-number frequency, transverse at the engine top, points to guide-force moments and the top bracing; fore-and-aft superstructure vibration points to axial vibration or thrust variation.</li>
+    <li><strong>Respect the barred speed range.</strong> Pass through it quickly; never run continuously in it. Any change to the engine rating, shafting or propeller is referred to the maker and class, because the torsional calculation behind the barred range depends on them.</li>
+    <li><strong>Keep the hardware working.</strong> Axial damper oil supply, viscous damper condition as the damper maker specifies, top-bracing friction or hydraulic setting, and compensator chain drives belong in the PMS.</li>
+    <li><strong>Measure before modifying.</strong> Vibration surveys against ISO recommended levels, with the node positions, decide whether a compensator or bracing change will help.</li>
+  </ul>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Simon):</strong> Simon asks 'What vibrations does a two-stroke engine produce, and how are they controlled?' List the four MAN excitations in one breath — external unbalanced moments, guide-force moments, axial, torsional — then give each its fix: compensators; lateral top bracing; axial damper; torsional design with a tuning wheel or damper, and a barred speed range. Add the physics in one line: 'Resonance where rpm × order equals a natural frequency.' Then the two corrections that win marks: guide-force moments cause <em>lateral</em> vibration, and top bracing is a <em>detuner</em> that raises the natural frequency above the running range. If he asks about the viscous damper, say the ring slips <em>circumferentially</em> and shears the silicone film.</div>
+
+  <div class="section-head">🎯 Oral Q&amp;A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. Name the main sources of vibration in a large two-stroke engine and the countermeasure for each.</div><div class="qa-a">MAN B&amp;W classifies four excitation sources. First, external unbalanced moments from the inertia of rotating and reciprocating masses: first order, acting vertically and horizontally, and second order, acting vertically only. They are handled by adjustable counterweights and moment compensators. Second, guide-force moments, the lateral moments from the crosshead guide forces, of H-type and X-type. They are handled by lateral top bracing. Third, axial vibration of the crankshaft from the gas force deflecting the crank throws, transmitted through the thrust bearing. It is handled by the axial vibration damper. Fourth, torsional vibration from the varying gas and inertia torque. It is handled by shaft-line design, a tuning wheel or a damper, and where necessary a barred speed range. All of them matter only near resonance, where engine speed times order equals a natural frequency.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Explain the barred speed range.</div><div class="qa-a">Torsional vibration stresses peak at resonance, where the engine speed multiplied by the excitation order equals the torsional natural frequency of the shaft system. Classification societies require the torsional characteristics to be calculated and set two stress limits: a lower limit that may be exceeded only for a short time, and an upper limit that may never be exceeded. The speed range in which the lower limit is exceeded is barred: the engine may pass through it but not run continuously in it,. On five-cylinder engines the main fifth-order critical lies close below normal speed, so MAN fits a tuning wheel and uses a thinner, higher-strength intermediate shaft to put the critical well below the running range — over-critical running. Six-cylinder engines with class-diameter shafting normally have a barred range; engines with seven or more cylinders normally do not.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Describe the construction and working of a viscous torsional vibration damper.</div><div class="qa-a">It is a closed casing bolted to the crankshaft, containing a heavy inertia ring that floats freely in a thin film of high-viscosity silicone fluid. When the crankshaft vibrates torsionally the casing twists back and forth with it, but the inertia ring, being free, tends to keep rotating steadily at the mean speed. The relative circumferential slip between ring and casing shears the silicone film, and the viscous shear converts vibration energy into heat, damping the vibration. The motion is rotational, not radial.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4. What are guide-force moments and what is the purpose of top bracing?</div><div class="qa-a">When the piston is away from the dead centres, the connecting-rod force has a component perpendicular to the cylinder, which acts at the crosshead guide shoe and is reacted at the main bearing, forming a guide-force moment. There are two kinds. The H-moment rocks the engine top transversely, with a main order equal to the number of cylinders, and dominates on engines with fewer than seven cylinders. The X-moment twists the engine in an X shape, with a main order of half the number of cylinders, and dominates above six cylinders. The resulting vibration is lateral, not longitudinal. Lateral top bracing between the upper gallery and the hull structure, mechanical with a friction connection or hydraulically adjustable, stiffens the engine and double-bottom system so that its natural frequency rises above the running speed range. It acts as a detuner, so the moments cannot cause resonance; its purpose is not to pass vibration into the hull.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5. Explain first- and second-order external moments and how they are compensated.</div><div class="qa-a">First-order moments come from the rotating and reciprocating masses, act at engine speed and act both vertically and horizontally. They rarely cause trouble, except possibly on four-cylinder engines with 2- or 3-node hull modes. Adjustable counterweights can make the vertical moment insignificant at the cost of a larger horizontal one, and a compensator with two counter-rotating masses at crankshaft speed in the chain-tightener wheel can neutralise the horizontal moment. Second-order moments come only from the reciprocating masses, act vertically at twice engine speed and matter on four-, five- and six-cylinder engines, where they can excite 4- or 5-node vertical hull modes. They are compensated by counterweights rotating at twice engine speed, chain-driven at the aft or fore end, at both ends, or by an electrically driven compensator in the steering-gear room. Because the compensating moment is force times distance to the node, a single compensator near a node is ineffective.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Explain why a viscous torsional vibration damper is effective, describing the relative motion within it.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Describe the guide-force moments of a two-stroke crosshead engine and explain how lateral top bracing prevents them from causing harmful vibration.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>With reference to a large two-stroke main engine, describe: (a) the four main sources of engine-excited vibration; (b) the external unbalanced moments of first and second order and the means of compensating them; (c) the axial vibration damper; (d) how a barred speed range arises and how it may be avoided at the design stage.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>Four MAN excitations: EXTERNAL moments · GUIDE-FORCE moments · AXIAL · TORSIONAL.</strong></li>
+      <li><strong>Resonance: rpm × ORDER = NATURAL FREQUENCY.</strong> A compensator at a NODE does nothing.</li>
+      <li><strong>1st order = rotating + reciprocating, vertical + horizontal. 2nd order = reciprocating only, VERTICAL, 2 × rpm, 4–6 cylinders.</strong></li>
+      <li><strong>Guide-force = LATERAL (H rocks, X twists) — never 'longitudinal'. H dominant below 7 cyl, X above 6.</strong></li>
+      <li><strong>Top bracing = DETUNER: stiffens, raises natural frequency ABOVE the running range.</strong> Mechanical (friction) or hydraulic.</li>
+      <li><strong>Axial damper = collar in oil-filled casing + throttle; standard on all MAN engines.</strong></li>
+      <li><strong>Viscous damper = free inertia ring in silicone; CIRCUMFERENTIAL shear → heat.</strong></li>
+      <li><strong>Tuning wheel + thin high-strength shaft = OVER-critical (5 cyl). Big shaft = UNDER-critical → thrust variation.</strong></li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Case Study — Vibration in Ballast on a Six-Cylinder Ship</button>
+    <div class="deep-dive-body">
+      <h4>Situation (based on an example in the MAN B&amp;W vibration paper)</h4>
+      <p>A 40,000 dwt general cargo ship was to have a 6-cylinder L67GFCA engine. A rough calculation showed only a small risk of excitation from the 2nd-order external moment of 760 kNm, but with some uncertainty, so owner, yard and engine builder agreed to deliver the engine <em>prepared</em> for later 2nd-order compensators. On trials the vibration was satisfactory loaded, but in the specified ballast condition it measured 11 mm/s against the 9 mm/s the ISO recommendation gave as acceptable.</p>
+      <h4>Diagnosis</h4>
+      <p><strong>Which excitation.</strong> Vertical vibration at twice engine speed on a 6-cylinder engine — the 2nd-order moment, which originates only in the reciprocating masses. <strong>Why only in ballast.</strong> Hull natural frequencies change with loading, so resonance with a vertical hull mode can appear in one condition only. <strong>Where to compensate.</strong> Measurements showed the node of the 4-node hull girder vibration lay very close to the aft end of the engine, nearly independent of loading. A compensator at the aft end would act almost at the node and produce almost no compensating moment.</p>
+      <h4>Remedy and lesson</h4>
+      <p>Only the forward compensator was fitted. The lesson for the oral: identify the order and direction first, then find the node — the moment from a compensator is its force times its distance from the node. Decide at the project stage whether the engine is prepared for compensators, because late remedies are costly.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>MAN B&amp;W Diesel — An Introduction to Vibration Aspects of Two-stroke Diesel Engines in Ships (OEM paper; source of the PDF 722–726 figures)</li>
+    <li>ABS — Insights into Ship Vibration Analysis (June 2022)</li>
+    <li>WinGD — Engine and system dynamics: 2nd-order ship hull vibrations and balancing</li>
+    <li>Classification society rules on torsional vibration of propulsion shafting (stress limits and barred speed ranges) — general reference, no rule number cited</li>
+    <li>MIW Notes Part 24 · Topic 2 — engine layout, load diagram and barred speed range</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p29 · Topic 4 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p29 · P29-T4 · v1.0</div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+    Part 29 of 31 · Pages 696–726 of 768 · Engineering Management Notes — Marine Intelligence Weekly<br>
+    Originally compiled by Uday Sankar S., Anglo-Eastern. Transcribed, expanded and verified by Nixon Antony, 2/E, Maersk A/S.<br>
+    This is subscriber-only content for MEO Class 1 exam preparation (Kochi MMD). Unauthorized redistribution is prohibited.<br>
+    Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p29 · Correction Required">Contact us</a> ·
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Back to Notes Index</a>
+</div>
+
+<script>
+function toggleDD(btn){
+  var body = btn.nextElementSibling;
+  body.classList.toggle('open');
+  btn.textContent = body.classList.contains('open') ? btn.textContent.replace('▶','▼') : btn.textContent.replace('▼','▶');
+}
+document.addEventListener('DOMContentLoaded', function(){
+  var links = document.querySelectorAll('.toc-link[href^="#"]');
+  var sections = Array.from(links).map(function(l){ return document.querySelector(l.getAttribute('href')); }).filter(Boolean);
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var id = '#' + entry.target.id;
+      var link = document.querySelector('.toc-link[href="' + id + '"]');
+      if(link){ link.classList.toggle('active', entry.isIntersecting); }
+    });
+  }, {rootMargin:'-80px 0px -70% 0px'});
+  sections.forEach(function(s){ observer.observe(s); });
+});
+</script>
+
+</body>
+</html>
