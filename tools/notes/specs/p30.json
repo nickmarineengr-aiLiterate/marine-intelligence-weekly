@@ -1,0 +1,963 @@
+{
+ "part": 30,
+ "prev_part": 29,
+ "prev_pages": "696–726",
+ "next_part": 31,
+ "pages": "727–740",
+ "total_pages": 768,
+ "gated": false,
+ "title_topics": "Cyber Risk on Ships — Threats, IT/OT and the CIA Model · Cyber Risk Management in the SMS — MSC.428(98), MSC-FAL.1/Circ.3/Rev.4, ISM, IACS UR E26/E27 and Insurance",
+ "meta_description": "MEO Class 1 Engineering Management Notes Part 30 — maritime cyber security. Cyber system, cyber incident and cyber attack; IT, OT and IIoT; the nine relevant shipboard systems in IMO's current guidelines; untargeted and targeted attacks (malware, water holing, typosquatting, phishing, brute force, DoS); the four stages survey, delivery, breach and pivot; and the CIA impact model read for OT. Then cyber risk management in the safety management system: resolution MSC.428(98), the guidelines MSC-FAL.1/Circ.3/Rev.4 with six functional elements (Govern, Identify, Protect, Detect, Respond, Recover), the ISM clause map corrected, IACS UR E26 and E27, India's DGS Engg. Circular 06 of 2017, and the insurance position — the H&M cyber exclusion, P&I, and SIGCo's Cyber Hull Cover. Source PDF 727–740; facts verified as of 8 October 2026. Originally compiled by Uday Sankar S., Anglo-Eastern.",
+ "page_sub": "Cyber Risk on Ships — Threats, IT/OT and the CIA Model · Cyber Risk in the SMS — MSC.428(98), MSC-FAL.1/Circ.3/Rev.4, ISM, IACS and Insurance · Source range PDF 727–740 (Uday's CYBER SECURITY chapter, two topics; facts verified as of 8 October 2026)",
+ "qb_links": [
+  [
+   "../QB4_F.html",
+   "QB4_F — ISM Code, ISPS, MLC 2006 &amp; STCW, Companion F (cyber security — basic principles and cross-questions)"
+  ],
+  [
+   "../QB4_E.html",
+   "QB4_E — ISM, MLC, SOLAS, PSC &amp; Class (cyber security management — key requirements and latest developments)"
+  ]
+ ],
+ "topics": [
+  {
+   "n": 1,
+   "toc": "Cyber Risk on Ships — Threats, IT/OT &amp; CIA",
+   "title": "Cyber Risk on Ships — Definitions, IT, OT and IIoT, Relevant Systems, Attack Types and Stages, and the CIA Impact Model",
+   "kw": "cyber security, cyber system, computer based system, CBS, cyber incident, cyber attack, intentional or unintentional incident, data breach, information technology, IT, operational technology, OT, IIoT, industrial internet of things, reefer monitoring, boiler control panel, vulnerable systems, relevant systems, bridge systems, propulsion and machinery management, untargeted attack, targeted attack, malware, ransomware, trojan, virus, worm, water holing, scanning, typosquatting, social engineering, brute force, credential stuffing, denial of service, DoS, DDoS, phishing, spear-phishing, supply chain attack, survey and reconnaissance, delivery stage, breach stage, pivot stage, CIA triad, loss of confidentiality, loss of integrity, loss of availability, NotPetya, Maersk, DNV ShipManager, USCG Marine Safety Alert 06-19, BIMCO guidelines, NIST SP 800-82",
+   "tag": "Incident = intentional OR accidental · attack = deliberate · IT manages data, OT moves machinery · IIoT = OT watched from shore · untargeted vs targeted · 4 stages: survey → delivery → breach → pivot · CIA — but OT puts safety, availability and integrity first",
+   "pages": "Uday pp. 727–729, 731 (vulnerable systems), 734–736",
+   "examiner": "Simon",
+   "freq": "high",
+   "verify": "<strong>Source range.</strong> PDF 727–729, the lower half of 731 and 734–736 (notebook 100–104) — the definitions-and-threats half of Uday's CYBER SECURITY chapter. Most of the source wording is lifted from the industry <em>BIMCO/ICS Guidelines on Cyber Security Onboard Ships</em> (2020 edition, v4); the current edition is v5 (14 Nov 2024). <strong>Source errors corrected.</strong> (1) <strong>Cyber incident</strong> (P30-C002): the IMO definition now used is MSC-FAL.1/Circ.3/Rev.4 para 2.1; IACS UR E26 adds that a plain system failure is not a cyber incident, so the source's 'software crashed during an update' example is a cyber incident only if there is a cyber cause, such as an infected USB stick or laptop (P30-C006). (2) <strong>Vulnerable systems</strong> (P30-C013, OUTDATED): the eight-item list is the 2017–2022 IMO text; since Rev.3 (April 2025) IMO lists nine 'relevant systems', adding ship–port interfaces and ship-to-shore integrated systems. (3) <strong>'Trojan virus'</strong> (P30-C023): a trojan and a virus are different kinds of malware. (4) <strong>Malware</strong> is not just 'software stealing data' (P30-C024). (5) <strong>Water holing</strong> is not 'creating lookalike websites' — that is typosquatting (P30-C025). (6) <strong>Brute force</strong> is systematic, not random (P30-C029). (7) <strong>Phishing</strong> sits under 'targeted' only in BIMCO's 2020 grouping; mass phishing is untargeted, spear-phishing is the targeted form, and v5 no longer assigns techniques to either category (P30-C032). (8) The social-engineering example is replaced (P30-C028). The regulatory half of the chapter — MSC.428(98), the IMO guidelines, the ISM clauses, the Indian circular and insurance — is Topic 2.",
+   "definition": "<strong>Maritime cyber risk</strong> is the risk that a ship's computer-based systems — the business <strong>IT</strong> that handles information and the <strong>OT</strong> that monitors and controls machinery and physical processes — are compromised, disrupted or manipulated, whether by a deliberate <strong>cyber attack</strong> or by an accidental <strong>cyber incident</strong>, with consequences for the safety of the ship, the crew and the environment. IMO defines a cyber incident as 'an occurrence or a sequence of occurrences, which actually or potentially results in adverse consequences to a CBS or to the information that they process, store or transmit, and which may require a response action to mitigate the consequences' (MSC-FAL.1/Circ.3/Rev.4). Its impact is judged against <strong>confidentiality, integrity and availability</strong> — and on board, availability and integrity of OT are safety issues.",
+   "why": [
+    "<strong>The engine room is now a network.</strong> Main-engine control, the alarm and monitoring system, power management, ballast and boiler controls are computer-based OT. A cyber event can stop propulsion or blind the watch just as a mechanical failure can.",
+    "<strong>The Chief Engineer owns most of the OT.</strong> Vendor laptops, service engineers' USB sticks, remote-diagnostic links and IIoT gateways are all engine-room entry points — and the CE decides who plugs in what.",
+    "<strong>Examiners test the distinctions.</strong> Incident vs attack, IT vs OT, untargeted vs targeted, and why OT ranks availability and integrity above confidentiality — a candidate who blurs them loses the question.",
+    "<strong>The threat is real and recent.</strong> NotPetya cost Maersk roughly USD 250–300 million in 2017, and a deep-draft ship arriving in New York in February 2019 had its network degraded by malware (USCG Marine Safety Alert 06-19)."
+   ],
+   "timeline": [
+    [
+     "27 Jun 2017",
+     "NotPetya malware hits Maersk's IT systems — an untargeted attack spread through compromised accounting software; cost about USD 250–300 million"
+    ],
+    [
+     "Feb 2019",
+     "Malware significantly degrades the shipboard network of a deep-draft vessel bound for New York/New Jersey; essential control systems unaffected (USCG Marine Safety Alert 06-19, 8 Jul 2019)"
+    ],
+    [
+     "30 Sep 2020",
+     "IMO's own website and web services disrupted by a cyber attack"
+    ],
+    [
+     "2020",
+     "BIMCO/ICS Guidelines on Cyber Security Onboard Ships, v4 — the edition Uday's wording follows"
+    ],
+    [
+     "7 Jan 2023",
+     "Ransomware attack on DNV's ShipManager servers — about 70 customers and some 1,000 vessels affected; onboard offline functions kept working"
+    ],
+    [
+     "28 Sep 2023",
+     "NIST SP 800-82 Rev.3, Guide to Operational Technology Security"
+    ],
+    [
+     "14 Nov 2024",
+     "BIMCO/ICS Guidelines v5 — current industry edition"
+    ],
+    [
+     "4 Apr 2025",
+     "MSC-FAL.1/Circ.3/Rev.3 — IMO's 'relevant systems' list expanded to nine items"
+    ],
+    [
+     "28 May 2026",
+     "MSC-FAL.1/Circ.3/Rev.4 — current IMO guidelines (see Topic 2)"
+    ]
+   ],
+   "regs": {
+    "title": "Key References for the Concepts (status at 8 October 2026)",
+    "items": [
+     [
+      "IMO MSC-FAL.1/Circ.3/Rev.4 (28 May 2026) — recommendatory",
+      "Guidelines on maritime cyber risk management. Para 2.1: definitions of CBS, cyber incident, IT and OT; para 2.2.1: nine relevant systems; para 2.2.2: segment OT from IT."
+     ],
+     [
+      "BIMCO/ICS et al., Guidelines on Cyber Security Onboard Ships, v5 (14 Nov 2024) — industry guidance",
+      "Source of the definitions of cyber system, cyber attack and IIoT; untargeted vs targeted threats; the four stages of an incident; the CIA model."
+     ],
+     [
+      "IACS UR E26 Rev.1 (Nov 2023) — class requirement, ships contracted on or after 1 Jul 2024",
+      "Cyber resilience of the ship: security zones, OT network segmentation, remote-access and removable-media controls."
+     ],
+     [
+      "NIST SP 800-82 Rev.3 (28 Sep 2023) — general OT guidance, not ship-specific",
+      "OT security priorities: safety first, then availability and integrity, confidentiality last."
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "head": "🔎 Cyber System, Cyber Incident and Cyber Attack",
+     "body": [
+      {
+       "p": "<strong>Cyber system.</strong> Uday's definition is the BIMCO glossary's: 'any combination of facilities, equipment, personnel, procedures and communications integrated to provide cyber services' — business systems, control systems and access-control systems are examples. IMO and IACS now use the term <strong>computer-based system (CBS)</strong>: a programmable electronic device, or a set of them, organised to achieve a purpose. On board, CBSs include both IT and OT."
+      },
+      {
+       "table": {
+        "head": [
+         "",
+         "Cyber incident",
+         "Cyber attack"
+        ],
+        "rows": [
+         [
+          "Intent",
+          "May be intentional <em>or</em> accidental",
+          "Always deliberate — an 'offensive manoeuvre'"
+         ],
+         [
+          "Data breach?",
+          "Not necessarily — it may only affect availability or integrity",
+          "May or may not steal data"
+         ],
+         [
+          "Relationship",
+          "Every successful attack causes an incident",
+          "Not every incident is an attack"
+         ],
+         [
+          "Source of definition",
+          "IMO MSC-FAL.1/Circ.3/Rev.4 para 2.1",
+          "BIMCO/ICS Guidelines glossary (IMO does not define it)"
+         ]
+        ]
+       }
+      },
+      {
+       "p": "<strong>Accidental incident — the corrected example.</strong> The source's case of a service technician whose boiler-panel software update 'crashed' is a cyber incident only if there is a cyber cause. IACS UR E26 excludes plain system failures. The classic accidental case is a service engineer's infected USB stick or laptop plugged into the panel during the update: nobody intended harm and no data is stolen, but the control software is corrupted."
+      }
+     ]
+    },
+    {
+     "head": "🏭 IT, OT and IIoT — Where the Engine Room Sits",
+     "body": [
+      {
+       "table": {
+        "head": [
+         "",
+         "What it is",
+         "Shipboard examples"
+        ],
+        "rows": [
+         [
+          "<strong>IT</strong> — information technology",
+          "Hardware, software and communications that store and process data as information; it does not control physical processes",
+          "E-mail, crew payroll and certificates, cargo documents, the company ERP"
+         ],
+         [
+          "<strong>OT</strong> — operational technology",
+          "Hardware and software that directly monitor or control physical devices and processes (IMO's example: main-engine oil temperature sent to the control room)",
+          "ME control and safety system, alarm and monitoring, power management, boiler control panel, ballast and steering controls"
+         ],
+         [
+          "<strong>IIoT</strong> — industrial internet of things",
+          "Instrumentation and connected sensors applied to machinery; on board, OT connected through IT or satellite links for remote monitoring or support",
+          "Reefer temperatures and engine performance viewed ashore; maker remote diagnostics"
+         ]
+        ]
+       }
+      },
+      {
+       "p": "Uday's two examples are good ones once labelled: a <strong>stand-alone boiler control panel with on-site access only</strong> is isolated OT, although it can still be infected through removable media; <strong>reefer temperature monitoring from shore</strong> is IIoT. BIMCO's rule for IIoT is blunt: because OT often cannot be patched, the OT-to-IT interface needs a firewall as a minimum."
+      },
+      {
+       "p": "IoT as a technology — its architecture, advantages and drawbacks — is in Part 31 · Topic 1; this topic treats it only as an attack surface."
+      }
+     ]
+    },
+    {
+     "head": "🚢 Relevant (Vulnerable) Shipboard Systems — Updated List",
+     "body": [
+      {
+       "p": "Uday lists eight 'vulnerable systems'. That is the 2017–2022 IMO text. Since Rev.3 (April 2025) the heading is <strong>'relevant systems'</strong>, and Rev.4 (May 2026) lists nine:"
+      },
+      {
+       "table": {
+        "head": [
+         "#",
+         "Rev.4 para 2.2.1 — relevant systems",
+         "In Uday's list?"
+        ],
+        "rows": [
+         [
+          "1",
+          "Bridge systems — navigation, ship safety and communications systems",
+          "Yes (bridge; communications listed separately)"
+         ],
+         [
+          "2",
+          "Cargo, bunkering, lubrication, ballast and other pumping, handling and management systems",
+          "Partly (cargo only)"
+         ],
+         [
+          "3",
+          "Propulsion, fuel and machinery management and power control systems",
+          "Yes"
+         ],
+         [
+          "4",
+          "Security, access control and surveillance systems",
+          "Partly (access control)"
+         ],
+         [
+          "5",
+          "Passenger and crew servicing and management systems",
+          "Partly (passenger)"
+         ],
+         [
+          "6",
+          "Public networks facing passengers, crew and subcontracted service personnel",
+          "Partly (passenger)"
+         ],
+         [
+          "7",
+          "Administrative and crew welfare systems",
+          "Yes"
+         ],
+         [
+          "8",
+          "<strong>Ship–port interfaces</strong>",
+          "No — new"
+         ],
+         [
+          "9",
+          "<strong>Ship-to-shore integrated systems</strong> (e.g. remote control systems, MASS)",
+          "No — new"
+         ]
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "head": "🎯 Untargeted and Targeted Attacks — Techniques Corrected",
+     "body": [
+      {
+       "p": "BIMCO divides threats into <strong>untargeted</strong> — the ship or company is one of many potential victims, or collateral damage (NotPetya is BIMCO's shipping example) — and <strong>targeted</strong>, where the ship or company is the intended target, usually after reconnaissance. Uday's grouping of techniques follows BIMCO's 2020 edition; v5 (2024) lists the same techniques without assigning them to either group."
+      },
+      {
+       "table": {
+        "head": [
+         "Technique",
+         "Corrected meaning",
+         "Group (BIMCO 2020)"
+        ],
+        "rows": [
+         [
+          "Malware",
+          "Any malicious software or firmware that accesses, damages, disrupts or takes control of a system: viruses, worms, trojans, spyware, <strong>ransomware</strong> (encrypts data and demands payment). Stealing data is only one effect",
+          "Untargeted"
+         ],
+         [
+          "Trojan vs virus",
+          "A <strong>trojan</strong> looks useful but hides a malicious function and does not replicate; a <strong>virus</strong> copies itself into other programs",
+          "—"
+         ],
+         [
+          "Water holing",
+          "A fake website, or a <strong>compromised genuine site</strong> the victims are known to visit, used to infect visitors",
+          "Untargeted"
+         ],
+         [
+          "Scanning",
+          "Searching large parts of the internet for vulnerable systems",
+          "Untargeted"
+         ],
+         [
+          "Typosquatting",
+          "Misspelt or look-alike web addresses that catch users who mistype a URL",
+          "Untargeted"
+         ],
+         [
+          "Social engineering",
+          "Manipulating people into breaking security — e.g. a caller posing as the company IT desk asks for a password",
+          "Targeted"
+         ],
+         [
+          "Brute force",
+          "<strong>Systematically</strong> trying many or all passwords, usually automatically",
+          "Targeted"
+         ],
+         [
+          "Credential stuffing",
+          "Using credentials already stolen elsewhere",
+          "Targeted"
+         ],
+         [
+          "Denial of service (DoS / DDoS)",
+          "Preventing authorised users reaching information or services, usually by flooding the network; DDoS uses many compromised machines",
+          "Targeted"
+         ],
+         [
+          "Phishing",
+          "E-mails to many recipients to make them open a malicious attachment or link or reveal credentials — the most common initial attack vector (BIMCO v5)",
+          "Targeted in BIMCO 2020; mass phishing is untargeted in nature"
+         ],
+         [
+          "Spear-phishing",
+          "Phishing aimed personally at chosen individuals",
+          "Targeted"
+         ],
+         [
+          "Subverting the supply chain",
+          "Attacking through a supplier's software, update or service connection",
+          "Targeted"
+         ]
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "head": "🪜 The Four Stages of a (Targeted) Cyber Incident",
+     "body": [
+      {
+       "ascii": "  SURVEY / RECONNAISSANCE  →  DELIVERY  →  BREACH  →  PIVOT\n  open sources, social      phishing, USB,  exploit a    use the compromised\n  media, crew lists         fake sites,     weakness;    system to reach others\n                            vendor updates  depth set by — e.g. IT network → OT\n                                            the defences"
+      },
+      {
+       "p": "These are BIMCO's stages for a targeted attack. The fourth is <strong>pivot</strong>, not 'affect': the attacker uses the first compromised system to reach otherwise inaccessible ones — which is why a flat network that joins the office PC to the engine-room systems is dangerous. How far a breach goes depends, as Uday says, on the firewall and the other security measures in place."
+      }
+     ]
+    },
+    {
+     "head": "⚖️ Impact Assessment — the CIA Model, Read for OT",
+     "body": [
+      {
+       "table": {
+        "head": [
+         "Loss of …",
+         "Meaning",
+         "Ship example"
+        ],
+        "rows": [
+         [
+          "<strong>Confidentiality</strong>",
+          "Unauthorised access to or disclosure of information",
+          "Crew, cargo or passenger data stolen"
+         ],
+         [
+          "<strong>Integrity</strong>",
+          "Improper modification or destruction of information or systems",
+          "A manipulated engine sensor value; altered ECDIS chart data; a changed cargo or stability figure"
+         ],
+         [
+          "<strong>Availability</strong>",
+          "Loss of timely and reliable access to information or systems",
+          "A frozen alarm and monitoring system; ECDIS unavailable; PMS servers encrypted by ransomware"
+         ]
+        ]
+       }
+      },
+      {
+       "p": "<strong>The engineer's reading.</strong> Office IT usually ranks confidentiality first. Shipboard OT puts <strong>safety first, then availability and integrity</strong>, with confidentiality least critical (NIST SP 800-82r3; BIMCO v5). Stolen engine data is a commercial problem; a false lube-oil pressure reading or a frozen alarm system is a safety problem."
+      }
+     ]
+    },
+    {
+     "head": "🛠️ What It Means in the Engine Room — Practical Controls",
+     "body": [
+      {
+       "p": "Uday's notes stop at definitions. The controls below are what IMO now lists as minimum controls (MSC-FAL.1/Circ.3/Rev.4, Protect), what IACS UR E26 requires on ships contracted from 1 July 2024, and what BIMCO recommends. The source document is named for each, because their legal force differs (see Topic 2)."
+      },
+      {
+       "ul": [
+        "<strong>Segment OT from IT</strong> — firewalls and separate zones; navigation and machinery systems not on the office network (IMO Rev.4 2.2.2 and Protect; E26 security zones).",
+        "<strong>Removable media</strong> — no unscanned USB sticks on OT; scan or validate software before loading (IMO Protect; E26 makes a removable-media policy mandatory on new ships).",
+        "<strong>Remote and vendor access</strong> — no remote session until accepted on board, ability to terminate it from the ship, every session logged; MFA for access from untrusted networks (E26; BIMCO).",
+        "<strong>Accounts</strong> — unique log-ins, no shared generic accounts, least privilege, accounts removed when people leave (IMO Protect; BIMCO).",
+        "<strong>Patching with care</strong> — OT updates only after supplier testing and onboard agreement; OT often cannot be patched quickly, and a change may need class re-approval (E26; BIMCO; NIST).",
+        "<strong>Backups and recovery</strong> — current, tested backups of critical configurations, and a hard-copy incident response plan on board (IMO Recover; E26).",
+        "<strong>People</strong> — annual basic cyber training for all, OT-specific training for OT users, familiarisation on joining (IMO Rev.4 Protect — recommendatory)."
+       ]
+      }
+     ]
+    }
+   ],
+   "ce_tip": {
+    "examiner": "Simon",
+    "text": "Simon asks 'What is the difference between a cyber incident and a cyber attack?' Answer in one line each — an incident is any occurrence with actual or potential adverse consequences to a computer-based system, intentional or not; an attack is a deliberate offensive act — and give an accidental example: the service engineer's infected USB stick in the boiler panel. If he moves to IT and OT, say IT handles information and OT controls machinery, name three OT systems in your own engine room, and finish with the priority: 'On OT, availability and integrity are safety; confidentiality comes last.' If he asks for the functional elements, there are now six, starting with Govern (Topic 2)."
+   },
+   "qa": [
+    [
+     "Q1. Distinguish a cyber incident from a cyber attack, with a shipboard example of each.",
+     "IMO defines a cyber incident as an occurrence, or a sequence of occurrences, that actually or potentially results in adverse consequences to a computer-based system or to the information it processes, stores or transmits, and that may require a response action. It can be intentional or accidental, and it need not involve any data breach — it may only make a system unavailable or unreliable. A cyber attack, in the industry guidelines' wording, is an offensive manoeuvre that targets IT and OT systems or networks and attempts to compromise, destroy or access company and ship systems and data; it is always deliberate. Every successful attack produces an incident, but not every incident is an attack. An accidental incident: a service engineer connects an infected USB stick to the boiler control panel during a software update and corrupts the control software. An attack: a phishing e-mail to the ship's office PC installs ransomware that encrypts the planned-maintenance and stores servers."
+    ],
+    [
+     "Q2. What are IT, OT and IIoT? Why does the difference matter to the Chief Engineer?",
+     "Information technology is the hardware, software and communications that store and process data as information — e-mail, payroll, cargo documents — and it does not control physical processes. Operational technology is the hardware and software that directly monitor or control physical devices and processes — the main-engine control and safety system, alarm and monitoring, power management, boiler and ballast controls. The industrial internet of things is instrumentation and connected sensors on machinery; on board it means OT that is connected through IT or satellite links so that it can be monitored or supported from shore, such as reefer temperatures or engine performance. The difference matters because OT is where a cyber event becomes a safety event, because OT often cannot be patched or rebooted like office IT, and because every IIoT link is a path from the internet into the machinery, so it must be firewalled and segmented."
+    ],
+    [
+     "Q3. Describe the stages of a cyber incident.",
+     "The industry guidelines describe four stages of a targeted attack. First, survey or reconnaissance: the attacker gathers information from open sources and social media about the company, the ship and the crew. Second, delivery: the attacker tries to get into the systems — through phishing e-mails, infected removable media or software updates, fake websites or the company's online services. Third, breach: a vulnerability is exploited; how far the attacker gets depends on the firewalls and other defences, and at this point data may be copied or altered or a system taken over. Fourth, pivot: the attacker uses the compromised system to reach other systems that were not directly accessible — for example from the office network into OT. That is why segmentation between IT and OT is the single most important engine-room defence."
+    ],
+    [
+     "Q4. Explain the CIA model as applied to a ship's OT.",
+     "The CIA model assesses the impact of a cyber event on confidentiality, integrity and availability. Loss of confidentiality is unauthorised access to or disclosure of information, such as crew or cargo data. Loss of integrity is improper modification of information or systems, such as a manipulated engine sensor value or altered chart data. Loss of availability is the loss of timely and reliable access, such as a frozen alarm and monitoring system or encrypted servers. For office IT, confidentiality usually comes first. For shipboard OT, safety comes first, then availability and integrity, with confidentiality least critical, because a false reading or a dead control system can cause a casualty while stolen engine data cannot."
+    ],
+    [
+     "Q5. Name the shipboard systems IMO now lists as relevant to cyber risk.",
+     "MSC-FAL.1/Circ.3/Rev.4 lists nine: bridge systems, including navigation, safety and communications; cargo, bunkering, lubrication, ballast and other pumping and management systems; propulsion, fuel and machinery management and power control; security, access control and surveillance; passenger and crew servicing and management; public networks for passengers, crew and contractors; administrative and crew welfare systems; ship–port interfaces; and ship-to-shore integrated systems such as remote control or MASS. The older 2017 list had eight 'vulnerable systems' and did not include the last two."
+    ]
+   ],
+   "exam": [
+    [
+     "5",
+     "Differentiate between information technology and operational technology on board a ship, giving three examples of each."
+    ],
+    [
+     "10",
+     "Describe untargeted and targeted cyber attacks with examples of the techniques used in each, and explain the stages through which a targeted attack progresses."
+    ],
+    [
+     "15",
+     "A service engineer is due to update the software of the main-engine control system using his own laptop. As Chief Engineer, discuss (a) the cyber risks of the visit, (b) the controls you would apply before, during and after the update, and (c) how you would assess the impact of a resulting incident using the CIA model."
+    ]
+   ],
+   "memory": [
+    "<strong>Incident = intentional OR accidental, no data loss needed · Attack = deliberate. Every attack → incident; not every incident is an attack.</strong>",
+    "<strong>IT = information · OT = machinery and physical processes · IIoT = OT watched or supported from shore → firewall it.</strong>",
+    "<strong>Memory aid (not rule text): S-D-B-P — Survey, Delivery, Breach, Pivot.</strong>",
+    "<strong>Water holing = poisoned website the victim visits · Typosquatting = misspelt URL · Brute force = systematic, not random.</strong>",
+    "<strong>CIA on OT: SAFETY first → Availability + Integrity → Confidentiality last.</strong>",
+    "<strong>Relevant systems now NINE (Rev.4) — new: ship–port interfaces, ship-to-shore / MASS.</strong>"
+   ],
+   "deep_dive": {
+    "title": "Case Study — The Vendor Laptop in the Engine Control Room",
+    "blocks": [
+     [
+      "h4",
+      "Situation (illustrative)"
+     ],
+     [
+      "p",
+      "At anchorage a maker's service engineer boards to update the alarm and monitoring software. He brings his own laptop and a USB stick with the update, and asks for the engine-room network password so that he can download a patch from the maker's server."
+     ],
+     [
+      "h4",
+      "What the Chief Engineer checks"
+     ],
+     [
+      "p",
+      "<strong>Authorisation.</strong> Is the visit and the software change planned under the company's management-of-change procedure, with the superintendent and the maker confirming the version? <strong>Media.</strong> The USB stick is scanned on the ship's stand-alone scanning station before it goes anywhere near OT; the update file's integrity or digital signature is checked. <strong>Network.</strong> No connection of the laptop to the OT network beyond the system being serviced, and no internet bridge through the engine-room network — if a download is unavoidable, it goes through the controlled IT route. <strong>Fallback.</strong> A current backup of the system configuration exists, and the engine can be run on local or backup control during the work. <strong>Record.</strong> The session is logged, the old and new software versions are recorded, and the system is tested before the engineer leaves."
+     ],
+     [
+      "h4",
+      "Lesson"
+     ],
+     [
+      "p",
+      "Most shipboard cyber incidents need no hacker — only a well-meaning person and an uncontrolled device. The Chief Engineer's controls are procedural as much as technical, and they belong in the SMS (Topic 2)."
+     ]
+    ]
+   },
+   "refs": [
+    "IMO MSC-FAL.1/Circ.3/Rev.4 (28 May 2026) — Guidelines on maritime cyber risk management (paras 2.1, 2.2.1, 2.2.2, 3.5)",
+    "BIMCO/ICS et al., The Guidelines on Cyber Security Onboard Ships, version 5 (14 November 2024); version 4 (2020)",
+    "IACS UR E26 Rev.1 (November 2023) — Cyber resilience of ships",
+    "NIST SP 800-82 Rev.3 (September 2023) — Guide to Operational Technology (OT) Security; NIST CSRC Glossary",
+    "USCG Marine Safety Alert 06-19 (8 July 2019) — Cyber incident exposes potential vulnerabilities onboard commercial vessels",
+    "MIW Simon Notes Part 1 · Note 25 — Maritime cyber security; Part 31 · Topic 1 — IoT"
+   ],
+   "version": "1.0"
+  },
+  {
+   "n": 2,
+   "toc": "Cyber Risk in the SMS — IMO, ISM, IACS &amp; Insurance",
+   "title": "Cyber Risk Management in the Safety Management System — MSC.428(98), MSC-FAL.1/Circ.3/Rev.4, the ISM Clause Map, IACS UR E26/E27, India's DGS Circular and Cyber Insurance",
+   "kw": "MSC.428(98), maritime cyber risk management in safety management systems, 16 June 2017, first annual verification of DOC after 1 January 2021, MSC-FAL.1/Circ.3, Rev.1, Rev.2, Rev.3, Rev.4, guidelines on maritime cyber risk management, six functional elements, Govern element, G-IPDRR, IPDRR, NIST CSF 2.0, ISM Code, 1.2.2.2, 2.1, 3.2, 3.3, 6.5, 7, 8.1, 9.1, 9.2, 10.3, 10.4, BIMCO Annex 2, IACS UR E26, UR E27, 1 July 2024, cyber resilience, Rec 166, non-mandatory maritime cyber code, FAL 50, MSC 111, maritime single window cyber, DGS Engg Circular 06 of 2017, ISM Cell, Indian flag, recognised organisation memo, survey status, DOC audit, SMC audit, CL.380, Institute Cyber Attack Exclusion Clause, LMA5403, hull and machinery, P&I, war risks, SIGCo, Shipowners Insurance and Guaranty Company, Cyber Hull Cover, OPA 90, COFR",
+   "tag": "MSC.428(98) (16 Jun 2017) = IMO resolution interpreting ISM — first annual DOC verification after 1 Jan 2021 · MSC-FAL.1/Circ.3/Rev.4 (28 May 2026) = 6 elements, G-IPDRR · E26/E27 = class, newbuilds contracted ≥ 1 Jul 2024 · ISM policy = 2.1, responsibility = 3.2 · India: DGS Engg. Circ. 06/2017 · H&M excludes malicious cyber; P&I generally covers",
+   "pages": "Uday pp. 730–733, 737–740",
+   "examiner": "Senthil",
+   "freq": "high",
+   "verify": "<strong>Source range.</strong> PDF 730–733 and 737–740 (notebook 101–106) — the regulatory and insurance half of Uday's CYBER SECURITY chapter. <strong>Source errors corrected.</strong> (1) <strong>MSC.428(98)</strong> (P30-C039): it does not 'require companies' to do anything; it <em>affirms</em> that an approved SMS should take cyber risk management into account under the ISM Code and <em>encourages Administrations</em> to ensure this by the first annual DOC verification after 1 January 2021. (2) <strong>OUTDATED → current</strong> (P30-C014, C046): the IMO guidelines are now <strong>MSC-FAL.1/Circ.3/Rev.4 (28 May 2026)</strong>; since Rev.3 (April 2025) there are <strong>six</strong> functional elements — <strong>Govern</strong> has been added before Identify, Protect, Detect, Respond and Recover — each with minimum controls. (3) The 'cyber risk management should' list is industry guidance, from the BIMCO/ICS Guidelines, not IMO text (P30-C021). (4) <strong>Two wrong ISM clause numbers</strong>, inherited from the BIMCO Annex 2 table the source copies: company <strong>policy is ISM 2.1</strong>, not 3.2 (P30-C047); <strong>responsibility and authority is ISM 3.2</strong>, not 3.3 (P30-C048). ISM 10.4 does not mention backups (P30-C057). (5) <strong>Indian circular</strong> (P30-C040, C043, C044): correct citation is DGS (ISM Cell) <strong>Engg. Circular No. 06 of 2017</strong> dated 6 November 2017; the RO 'memorandum' is a memo raised in each vessel's survey status, and the 'no audits' rule is an Indian flag rule — DOC annual/renewal and SMC intermediate/renewal audit requests are not accepted. (6) <strong>Insurance</strong>: under the cyber exclusion an H&amp;M claim is <em>excluded</em>, not 'void', and the classic clause (CL.380) excludes only malicious acts (P30-C058); P&amp;I clubs do <strong>not</strong> generally deny cyber-caused claims — only where the war or terrorism exclusion applies (P30-C059). (7) <strong>SIGCo</strong> is the Shipowners Insurance and <em>Guaranty</em> Company Ltd, Bermuda, formed in 1996 by certain P&amp;I Clubs and reinsurers — not by shipowners; it administers Cyber Hull Cover but is not the risk carrier (P30-C060–C062). <strong>Added for currency (8 October 2026):</strong> IACS UR E26/E27 and IMO's planned non-mandatory cyber code.",
+   "definition": "<strong>Cyber risk management in the SMS</strong> is the requirement — set by IMO resolution <strong>MSC.428(98)</strong> and enforced through ISM audits — that a company's Safety Management System treat cyber risk like any other identified risk under the <strong>ISM Code</strong>: assessed, safeguarded against, assigned to responsible people, trained for, covered by emergency procedures, reported and corrected. The recommended method is IMO's <strong>Guidelines on maritime cyber risk management (MSC-FAL.1/Circ.3/Rev.4)</strong>, built on six functional elements — Govern, Identify, Protect, Detect, Respond and Recover. For new ships, <strong>IACS UR E26 and E27</strong> add class requirements for the cyber resilience of the ship and its equipment.",
+   "why": [
+    "<strong>Senthil asks where cyber lives in the SMS.</strong> The answer is the ISM clause map — and an examiner who knows the code will notice if you put company policy under 3.2.",
+    "<strong>Layer discipline wins marks.</strong> MSC.428(98) and MSC-FAL.1/Circ.3 are IMO recommendatory instruments working through the mandatory ISM Code; E26/E27 are class requirements for newbuildings; the DGS circular is an Indian flag rule; BIMCO is industry guidance. Calling all of them 'IMO requirements' is the commonest error.",
+    "<strong>The guidance has moved twice since the notes were written.</strong> Rev.3 (2025) added Govern; Rev.4 (May 2026) is current. 'Five functional elements' is now out of date.",
+    "<strong>Insurance shapes the risk.</strong> The Chief Engineer should know that malicious cyber damage to the ship may fall outside the H&amp;M policy unless it is bought back or covered separately."
+   ],
+   "timeline": [
+    [
+     "16 Jun 2017",
+     "Resolution MSC.428(98) adopted — Maritime Cyber Risk Management in Safety Management Systems"
+    ],
+    [
+     "5 Jul 2017",
+     "MSC-FAL.1/Circ.3 — Guidelines on maritime cyber risk management (FAL 41, MSC 98)"
+    ],
+    [
+     "6 Nov 2017",
+     "India: DGS (ISM Cell) Engg. Circular No. 06 of 2017 — cyber-risk mitigation on Indian-flag ships (corrigendum 20 Nov 2017)"
+    ],
+    [
+     "1 Jan 2018",
+     "India: new DOC applicants to include RO-reviewed cyber procedures before the initial DOC audit"
+    ],
+    [
+     "1 Jan 2021",
+     "First annual DOC verification after this date — cyber risks to be addressed in the SMS (MSC.428(98))"
+    ],
+    [
+     "7 Jun 2022",
+     "MSC-FAL.1/Circ.3/Rev.2 — reference standards updated (BIMCO, ISO/IEC 27001, NIST, IACS Rec 166)"
+    ],
+    [
+     "Sep / Nov 2023",
+     "IACS UR E27 Rev.1 and UR E26 Rev.1 published (originals of April 2022 withdrawn)"
+    ],
+    [
+     "1 Jul 2024",
+     "E26/E27 apply to ships contracted for construction on or after this date"
+    ],
+    [
+     "4 Apr 2025",
+     "MSC-FAL.1/Circ.3/Rev.3 — Govern added: six functional elements with minimum controls"
+    ],
+    [
+     "Jun 2025",
+     "MSC 110 agrees a non-mandatory cybersecurity code should be developed"
+    ],
+    [
+     "Mar / May 2026",
+     "FAL 50 and MSC 111 — non-mandatory maritime cyber code placed on the work programme (working group 2027)"
+    ],
+    [
+     "28 May 2026",
+     "MSC-FAL.1/Circ.3/<strong>Rev.4</strong> — current guidelines"
+    ],
+    [
+     "1 Jan 2029 (expected)",
+     "FAL Convention amendments on cyber protection of Maritime Single Windows — binding on governments, not ships"
+    ]
+   ],
+   "regs": {
+    "title": "The Five Layers — Status at 8 October 2026",
+    "items": [
+     [
+      "ISM Code (SOLAS chapter IX) — <strong>IMO mandatory</strong>",
+      "The legal vehicle. 1.2.2.2 requires the company to assess all identified risks to its ships, personnel and the environment and establish appropriate safeguards — cyber risk is one of them."
+     ],
+     [
+      "Resolution MSC.428(98) (16 Jun 2017) — <strong>IMO resolution, recommendatory in form, interpreting the mandatory ISM Code</strong>",
+      "Affirms that an approved SMS should take cyber risk management into account; encourages Administrations to ensure this no later than the first annual verification of the company's DOC after 1 January 2021. Enforced through flag and RO ISM audits."
+     ],
+     [
+      "MSC-FAL.1/Circ.3/Rev.4 (28 May 2026) — <strong>IMO recommendatory guidelines</strong>",
+      "Six functional elements (Govern, Identify, Protect, Detect, Respond, Recover) with minimum controls; references ISO/IEC 27001, IACS UR E26/E27, the BIMCO guidelines, IACS Rec 166 and the NIST CSF 2.0."
+     ],
+     [
+      "IACS UR E26 Rev.1 / UR E27 Rev.1 (2023) — <strong>class requirement</strong>",
+      "Mandatory for ships contracted for construction on or after 1 July 2024 (passenger ships, cargo ships of 500 GT and above on international voyages, and certain units); E26 = the ship as a whole, E27 = onboard systems and equipment from suppliers. Non-mandatory guidance for other ships."
+     ],
+     [
+      "DGS (ISM Cell) Engg. Circular No. 06 of 2017 — <strong>flag requirement (India)</strong>",
+      "Audit and verification procedure for Indian-flag companies and ships; still listed as current by DGMA at 8 Oct 2026."
+     ],
+     [
+      "BIMCO/ICS Guidelines on Cyber Security Onboard Ships v5 (14 Nov 2024) — <strong>industry guidance</strong>",
+      "Practical guidance, including the Annex 2 ISM clause map that Uday's notes reproduce."
+     ],
+     [
+      "Non-mandatory maritime cyber code — <strong>IMO, in development</strong>",
+      "Output agreed at FAL 50 (Mar 2026) and MSC 111 (May 2026); working group planned for 2027. Not in force — do not quote as a requirement."
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "head": "📜 MSC.428(98) — What the Resolution Actually Says",
+     "body": [
+      {
+       "p": "Resolution <strong>MSC.428(98)</strong>, <em>Maritime Cyber Risk Management in Safety Management Systems</em>, was adopted by the Maritime Safety Committee on 16 June 2017. Its four operative paragraphs:"
+      },
+      {
+       "table": {
+        "head": [
+         "Verb",
+         "What it does"
+        ],
+        "rows": [
+         [
+          "AFFIRMS",
+          "that an approved SMS should take into account cyber risk management in accordance with the objectives and functional requirements of the ISM Code"
+         ],
+         [
+          "ENCOURAGES",
+          "<strong>Administrations</strong> to ensure that cyber risks are appropriately addressed in SMS no later than the <strong>first annual verification of the company's DOC after 1 January 2021</strong>"
+         ],
+         [
+          "ACKNOWLEDGES",
+          "the precautions that may be needed to preserve the confidentiality of certain aspects of cyber risk management"
+         ],
+         [
+          "REQUESTS",
+          "Member States to bring the resolution to the attention of all stakeholders"
+         ]
+        ]
+       }
+      },
+      {
+       "p": "<strong>Legal force — say it precisely.</strong> The resolution does not amend the ISM Code or SOLAS. It records IMO's view that the mandatory ISM Code — which already requires every identified risk to be assessed and safeguarded against — covers cyber risk. In practice it bites through flag and RO ISM audits: a missing cyber element is raised as an ISM non-conformity. The 2021 date is not 'from 1 January 2021' but the first annual DOC verification after it."
+      }
+     ]
+    },
+    {
+     "head": "🧭 MSC-FAL.1/Circ.3 — Now Six Functional Elements (Rev.4)",
+     "body": [
+      {
+       "p": "The guidelines Uday cites date from 5 July 2017. They have been revised four times: Rev.1 (June 2021), Rev.2 (7 June 2022, reference standards), <strong>Rev.3 (4 April 2025, a major rewrite)</strong> and <strong>Rev.4 (28 May 2026, current)</strong>. Uday's five elements, 'IPDRR', are the 2017–2022 text. Since Rev.3 there are six, listed in para 3.5 as concurrent and continuous, not sequential:"
+      },
+      {
+       "table": {
+        "head": [
+         "#",
+         "Element (Rev.4)",
+         "What it means",
+         "Examples of minimum controls"
+        ],
+        "rows": [
+         [
+          "1",
+          "<strong>Govern</strong> — new in Rev.3",
+          "Establish and monitor strategy, expectations and policies; define roles and responsibilities; ensure business continuity",
+          "An accountable person with authority and expertise; backup management, disaster recovery, crisis management"
+         ],
+         [
+          "2",
+          "<strong>Identify</strong>",
+          "Determine the current cyber risk to ships and ship–port interfaces",
+          "Inventory of onboard digital systems; critical systems and supply-chain dependencies; risk assessment"
+         ],
+         [
+          "3",
+          "<strong>Protect</strong>",
+          "Risk control processes, measures and contingency planning",
+          "Unique credentials; no default passwords; MFA; OT/IT segmentation; removable-media control; annual training; backups and updates; supply-chain policy"
+         ],
+         [
+          "4",
+          "<strong>Detect</strong>",
+          "Develop, implement and practise activities to detect a cyber incident in time",
+          "Monitoring for unintended activity on CBSs"
+         ],
+         [
+          "5",
+          "<strong>Respond</strong>",
+          "Plans to provide resilience and restore systems for ship and ship–port operations",
+          "Incident response plan, practised; reporting within time frames set by the Administration"
+         ],
+         [
+          "6",
+          "<strong>Recover</strong>",
+          "Restore onboard CBSs and networks after an incident",
+          "Recovery strategies; root-cause analysis"
+         ]
+        ]
+       }
+      },
+      {
+       "p": "The guidelines say of themselves that they are high-level recommendations; the 'Govern' element mirrors the NIST Cybersecurity Framework 2.0 (2024). Uday's other list — that cyber risk management should identify roles, identify critical systems, implement measures and exercise a contingency plan — is from the industry <em>BIMCO/ICS Guidelines</em> (v5 adds third parties, regulatory compliance and incident reporting under the SMS), not from the IMO text."
+      }
+     ]
+    },
+    {
+     "head": "🗂️ Where Cyber Goes in the SMS — the ISM Clause Map, Corrected",
+     "body": [
+      {
+       "p": "Uday's map is copied from Annex 2 of the BIMCO/ICS Guidelines, which carries two wrong clause numbers through every edition from 2018 to 2024. Corrected against the ISM Code text:"
+      },
+      {
+       "table": {
+        "head": [
+         "Purpose",
+         "Uday / BIMCO",
+         "Correct ISM clause",
+         "Cyber content"
+        ],
+        "rows": [
+         [
+          "Risk assessment and safeguards",
+          "1.2.2.2",
+          "<strong>1.2.2.2</strong> ✔",
+          "Assess cyber risks to ships, personnel and environment; establish safeguards"
+         ],
+         [
+          "Company policy",
+          "3.2 ✘",
+          "<strong>2.1</strong> (2.2 implementation)",
+          "Include cyber risk in the safety and environmental-protection policy"
+         ],
+         [
+          "Responsibility and authority",
+          "3.3 ✘",
+          "<strong>3.2</strong> (Master: section 5)",
+          "Allocate responsibility and authority for cyber risk management"
+         ],
+         [
+          "Shore support for the DPA",
+          "3.3",
+          "<strong>3.3</strong> ✔ (DPA role: section 4)",
+          "Resources and shore support for responding to loss of critical systems"
+         ],
+         [
+          "Training",
+          "6.5",
+          "<strong>6.5</strong> ✔ (familiarisation 6.3)",
+          "Identify and provide cyber training"
+         ],
+         [
+          "Key shipboard operations",
+          "7",
+          "<strong>7</strong> ✔",
+          "Procedures and plans for operations that rely on OT"
+         ],
+         [
+          "Emergency preparedness",
+          "8.1",
+          "<strong>8.1</strong> ✔ (drills 8.2)",
+          "Emergency procedures for cyber incidents; exercise them"
+         ],
+         [
+          "Reporting",
+          "9.1",
+          "<strong>9.1</strong> ✔",
+          "Report cyber incidents with non-conformities, accidents and hazardous situations"
+         ],
+         [
+          "Corrective action",
+          "9.2",
+          "<strong>9.2</strong> ✔",
+          "Corrective action and measures to prevent recurrence"
+         ],
+         [
+          "Critical equipment",
+          "10.3",
+          "<strong>10.3</strong> ✔",
+          "Identify critical OT; measures to promote its reliability"
+         ],
+         [
+          "Maintenance routine",
+          "10.4 'backups' ~",
+          "<strong>10.4</strong> (indirect)",
+          "Integrate inspections and measures — e.g. backup creation and testing — into the maintenance routine"
+         ]
+        ]
+       }
+      },
+      {
+       "p": "MIW correction: the two ✘ rows are wrong in the source and in the BIMCO table; the German flag's own ISM cyber circular uses the correct numbers (policy 2.1, responsibilities 3.2). The ISM Code itself — SMS architecture, DOC/SMC certification and non-conformities — is in Part 13 · Topic 2."
+      }
+     ]
+    },
+    {
+     "head": "🏗️ IACS UR E26 and E27 — the Class Layer for New Ships",
+     "body": [
+      {
+       "table": {
+        "head": [
+         "",
+         "UR E26 — Cyber resilience of ships",
+         "UR E27 — Cyber resilience of onboard systems and equipment"
+        ],
+        "rows": [
+         [
+          "Addressed to",
+          "The ship as a whole — shipyard, integrator, owner, class",
+          "Suppliers of computer-based systems and equipment"
+         ],
+         [
+          "Content",
+          "Security zones and OT segmentation, remote access, removable media, MFA from untrusted networks, incident response plan on board (also in hard copy), backup and restore, a ship cyber-resilience test procedure",
+          "Minimum security capabilities of each system, secure development, documentation and testing; type approval through class"
+         ],
+         [
+          "Revision",
+          "Rev.1, November 2023",
+          "Rev.1, September 2023"
+         ],
+         [
+          "Applies to",
+          "Ships contracted for construction on or after <strong>1 July 2024</strong>",
+          "Systems on those ships"
+         ]
+        ]
+       }
+      },
+      {
+       "p": "The original April 2022 versions were withdrawn and never came into force. E26/E27 do not apply to existing ships, except as voluntary guidance, and they do not replace the company's ISM obligation: they are a <strong>class</strong> layer. IMO's Rev.3/Rev.4 guidelines list them as reference standards, which does not make them IMO requirements. The system-level vs component-level distinction is in Current Topics · Q6."
+      }
+     ]
+    },
+    {
+     "head": "🇮🇳 India — DGS Engg. Circular No. 06 of 2017",
+     "body": [
+      {
+       "p": "The Indian instrument is <strong>DGS (ISM Cell) Engg. Circular No. 06 of 2017</strong>, dated 6 November 2017 (corrigendum 20 November 2017), <em>Implementation of Cyber-security risk mitigation measures on board Indian Flag Ships</em>. It is an audit and verification procedure within the ISM regime, not a technical standard, and DGMA still listed it as current on 8 October 2026. No later ship-cyber circular was found."
+      },
+      {
+       "table": {
+        "head": [
+         "Case",
+         "Indian rule"
+        ],
+        "rows": [
+         [
+          "New DOC applicants — initial DOC audit on or after 1 Jan 2018",
+          "Cyber-risk management procedures included in the SMS and reviewed by the RO before the Administration's initial DOC audit"
+         ],
+         [
+          "After verification on board",
+          "The RO raises a memo stating satisfactory compliance in the <strong>survey status of each vessel</strong> — not a separate certificate"
+         ],
+         [
+          "On or after 1 Jan 2021",
+          "No request for a DOC annual or renewal audit accepted unless RO-reviewed cyber procedures are in the SMS; no SMC intermediate or renewal audit request entertained unless the previous DOC audit report records cyber compliance"
+         ]
+        ]
+       }
+      },
+      {
+       "p": "These are <strong>Indian flag</strong> rules. Under the general IMO model a missing cyber element is a non-conformity; the audit is not refused."
+      }
+     ]
+    },
+    {
+     "head": "💰 Insurance — H&amp;M Exclusion, P&amp;I Position and Cyber Hull Cover",
+     "body": [
+      {
+       "table": {
+        "head": [
+         "Cover",
+         "Position",
+         "Source"
+        ],
+        "rows": [
+         [
+          "<strong>Hull &amp; Machinery</strong>",
+          "The Institute Cyber Attack Exclusion Clause (CL.380), long standard in hull policies, <strong>excludes</strong> loss caused by the malicious use of a computer, software or virus as a means of inflicting harm — e.g. a hacked navigation system causing a grounding. Accidental cyber losses were not excluded by it. Newer wordings (e.g. LMA5403) exclude malicious cyber but affirm non-malicious cyber. The claim is excluded, not 'void' — the policy stays valid.",
+          "Howden, Nov 2020"
+         ],
+         [
+          "<strong>P&amp;I</strong>",
+          "No general cyber exclusion: cyber-caused third-party liabilities are covered. Cover can be lost only where the attack falls within the war and terrorism exclusion; the International Group war-risks extension excludes harm inflicted through a computer virus. P&amp;I never covers damage to the ship itself.",
+          "West of England P&amp;I, Jun 2020"
+         ],
+         [
+          "<strong>Affirmative cyber hull products</strong>",
+          "Products that respond where H&amp;M does not because of a cyber exclusion — e.g. SIGCo's 'Cyber Hull Cover', a defined-perils policy for physical loss or damage to, or liability of, the vessel from the malicious use of computers or malware. <em>Commercial example, checked 8 Oct 2026 — not a memory item.</em>",
+          "SIGCo product summary"
+         ]
+        ]
+       }
+      },
+      {
+       "p": "<strong>SIGCo</strong> is the <strong>Shipowners Insurance and Guaranty Company Ltd</strong>, Bermuda. It was formed in 1996, after the US Oil Pollution Act 1990 (OPA 90), through a collaboration between certain P&amp;I Clubs and reinsurers, to provide the Certificate of Financial Responsibility (COFR) guaranties that OPA 90 requires of ships trading to the US; it began issuing them on 28 December 1996. For Cyber Hull Cover, SIGCo administers the programme and gives brokers access to it, but it is <strong>not the risk carrier</strong>: partner insurers underwrite the risk."
+      }
+     ]
+    }
+   ],
+   "ce_tip": {
+    "examiner": "Senthil",
+    "text": "Senthil asks, 'Where will you include cyber security in your SMS?' Start with the authority: 'MSC.428(98) affirms that the SMS must take cyber risk into account under the ISM Code — by the first annual DOC verification after 1 January 2021.' Then walk the clauses: risk assessment 1.2.2.2, policy 2.1, responsibilities 3.2, shore support for the DPA 3.3, training 6.5, shipboard operations 7, emergency procedures 8.1 with drills 8.2, reporting 9.1, corrective action 9.2, critical equipment 10.3, maintenance routine 10.4. If asked for the guidance, say MSC-FAL.1/Circ.3 — now Rev.4 of May 2026, with six elements starting with Govern. Close with the layers: 'ISM is mandatory, the guidelines are recommendatory, E26/E27 are class for ships contracted from 1 July 2024, and for Indian ships the DGS Engg. Circular 06 of 2017 applies.'"
+   },
+   "qa": [
+    [
+     "Q1. What does resolution MSC.428(98) require, and what is its legal force?",
+     "MSC.428(98), Maritime Cyber Risk Management in Safety Management Systems, was adopted by the Maritime Safety Committee on 16 June 2017. It affirms that an approved safety management system should take into account cyber risk management in accordance with the objectives and functional requirements of the ISM Code, and it encourages Administrations to ensure that cyber risks are appropriately addressed in safety management systems no later than the first annual verification of the company's Document of Compliance after 1 January 2021. It does not amend SOLAS or the ISM Code; it is IMO's interpretation that the mandatory ISM Code, which already requires a company to assess all identified risks and establish safeguards, covers cyber risk. It is therefore enforced through flag and recognised-organisation ISM audits, where a missing cyber element is raised as a non-conformity."
+    ],
+    [
+     "Q2. What are the functional elements of cyber risk management in the current IMO guidelines?",
+     "The current guidelines are MSC-FAL.1/Circ.3/Rev.4 of 28 May 2026. Since Rev.3 of April 2025 they list six functional elements, which are concurrent and continuous rather than sequential. Govern: establish and monitor the risk-management strategy and policies, define roles and responsibilities and ensure business continuity. Identify: determine the current cyber risk to the ship and its ship–port interfaces, with an inventory of systems and a risk assessment. Protect: implement risk controls and contingency planning — unique credentials, multi-factor authentication, segmentation of OT from IT, control of removable media, training and backups. Detect: detect a cyber incident in time. Respond: practised plans to provide resilience and restore systems, including reporting to the Administration. Recover: restore onboard systems and networks and find the root cause. The original 2017 guidelines had only the last five."
+    ],
+    [
+     "Q3. List the ISM Code clauses under which cyber risk is incorporated into the SMS.",
+     "Risk assessment and safeguards under 1.2.2.2; the safety and environmental-protection policy under 2.1; responsibility, authority and interrelation of personnel under 3.2; adequate resources and shore support for the designated person under 3.3; training under 6.5, with familiarisation under 6.3; procedures for key shipboard operations that rely on OT under 7; emergency procedures for cyber incidents under 8.1, exercised under 8.2; reporting of cyber incidents under 9.1; corrective action under 9.2; identification of critical OT and measures to promote its reliability under 10.3; and integration of those measures, such as backups, into the maintenance routine under 10.4. The widely copied industry table puts policy under 3.2 and responsibility under 3.3, which is wrong."
+    ],
+    [
+     "Q4. Explain IACS UR E26 and E27 and how they relate to MSC.428(98).",
+     "UR E26 covers the cyber resilience of the ship as a whole — security zones and segmentation of OT, control of remote access and removable media, an incident response plan on board, backup and restore, and a cyber-resilience test procedure verified by class. UR E27 covers the security capabilities of the individual computer-based systems and equipment provided by suppliers, with type approval through class. Both are at Rev.1 of 2023 and apply to ships contracted for construction on or after 1 July 2024; for existing ships they are only guidance. They are class requirements for the design and construction of new ships, whereas MSC.428(98) concerns the company's management system on every ship. One does not replace the other."
+    ],
+    [
+     "Q5. Is a shipowner insured if a cyber attack damages the ship?",
+     "Not automatically. Hull and machinery policies have long carried the Institute Cyber Attack Exclusion Clause, CL.380, which excludes loss caused by the malicious use of a computer, software or virus as a means of inflicting harm, so damage from a hacked system may fall outside the H&M cover, while accidental cyber losses were not excluded by that clause. Newer wordings exclude malicious cyber and affirm non-malicious cyber. P&I is different: International Group cover has no general cyber exclusion, so third-party liabilities caused by a cyber event are covered unless the attack falls within the war or terrorism exclusion. The owner can close the hull gap by buying back the exclusion or buying an affirmative cyber hull product; one example is the Cyber Hull Cover marketed by SIGCo, the Bermuda company originally set up in 1996 for OPA 90 COFR guaranties."
+    ]
+   ],
+   "exam": [
+    [
+     "5",
+     "State the provisions of IMO Resolution MSC.428(98) and the date by which cyber risks were to be addressed in safety management systems."
+    ],
+    [
+     "10",
+     "Describe the functional elements of cyber risk management in the current IMO guidelines (MSC-FAL.1/Circ.3/Rev.4), giving examples of the minimum controls under each."
+    ],
+    [
+     "15",
+     "As Chief Engineer of an Indian-flag ship, discuss how cyber risk management is incorporated into the safety management system, with reference to (a) the relevant ISM Code clauses, (b) the requirements of the Indian Administration, (c) IACS UR E26/E27, and (d) the insurance position if a cyber attack damages machinery."
+    ]
+   ],
+   "memory": [
+    "<strong>MSC.428(98) · 16 Jun 2017 · AFFIRMS (SMS) + ENCOURAGES (Administrations) · first annual DOC verification after 1 Jan 2021.</strong>",
+    "<strong>MSC-FAL.1/Circ.3 → Rev.4 (28 May 2026). Memory aid: G-IPDRR — Govern, Identify, Protect, Detect, Respond, Recover (Govern added Rev.3, Apr 2025).</strong>",
+    "<strong>ISM map: risk 1.2.2.2 · POLICY 2.1 · RESPONSIBILITY 3.2 · DPA support 3.3 · training 6.5 · ops 7 · emergency 8.1 · report 9.1 · correct 9.2 · critical OT 10.3 · maintenance 10.4.</strong>",
+    "<strong>E26 = ship · E27 = equipment · class · contracted ≥ 1 Jul 2024 · not existing ships.</strong>",
+    "<strong>India: DGS Engg. Circ. 06/2017 (6 Nov 2017) — new DOC ≥ 1 Jan 2018: RO review first; memo in vessel survey status.</strong>",
+    "<strong>H&amp;M: CL.380 excludes MALICIOUS cyber · P&amp;I: covered unless war/terror · SIGCo = Shipowners Insurance and GUARANTY Co., 1996, OPA 90 COFR.</strong>"
+   ],
+   "deep_dive": {
+    "title": "Audit Scenario — The ISM Auditor Asks About Cyber",
+    "blocks": [
+     [
+      "h4",
+      "Situation (illustrative)"
+     ],
+     [
+      "p",
+      "During the ship's intermediate SMC audit the auditor asks the Chief Engineer to show how cyber risk is managed in the engine room. The company's SMS has a one-page 'IT policy' covering e-mail use."
+     ],
+     [
+      "h4",
+      "What the auditor looks for"
+     ],
+     [
+      "p",
+      "<strong>Govern and responsibility.</strong> Who is accountable for cyber on board and ashore (ISM 3.2), and does the DPA have shore IT and OT support (3.3)? <strong>Identify.</strong> An inventory of the ship's OT and IT systems and a cyber risk assessment (1.2.2.2, 10.3). <strong>Protect.</strong> Procedures for removable media, vendor laptops and remote access, and separation of OT from the office network (7). <strong>Training.</strong> Records of cyber awareness training and familiarisation (6.5, 6.3). <strong>Respond and recover.</strong> A cyber contingency in the emergency procedures, exercised (8.1, 8.2); recent backups of critical configurations (10.4). <strong>Reporting.</strong> Cyber events reported and investigated like any non-conformity (9.1, 9.2)."
+     ],
+     [
+      "h4",
+      "Outcome and lesson"
+     ],
+     [
+      "p",
+      "An e-mail policy alone does not meet MSC.428(98): the auditor raises a non-conformity. For an Indian-flag ship the company's DOC compliance with Engg. Circular 06/2017 is also checked. The fix is not new software but an SMS that treats cyber like fire or flooding — assessed, assigned, drilled and reported."
+     ]
+    ]
+   },
+   "refs": [
+    "IMO Resolution MSC.428(98) (16 June 2017) — Maritime Cyber Risk Management in Safety Management Systems",
+    "IMO MSC-FAL.1/Circ.3/Rev.4 (28 May 2026) — Guidelines on maritime cyber risk management; Rev.3 (4 April 2025); Rev.2 (7 June 2022)",
+    "IMO meeting summaries — MSC 110 (June 2025), FAL 50 (March 2026), MSC 111 (May 2026): non-mandatory maritime cyber code",
+    "ISM Code — International Safety Management Code (resolution A.741(18), as amended)",
+    "IACS UR E26 Rev.1 (November 2023) and UR E27 Rev.1 (September 2023); ABS Regulatory News 14/2023",
+    "DGS (ISM Cell) Engg. Circular No. 06 of 2017 (6 November 2017), with corrigendum (20 November 2017); IRClass Technical Circular 141/2017",
+    "BIMCO/ICS et al., The Guidelines on Cyber Security Onboard Ships, version 5 (14 November 2024), Annex 2",
+    "West of England P&amp;I — P&amp;I Cover and Cyber Risk (June 2020); Howden — Marine Cyber Risk and Insurance (November 2020)",
+    "SIGCo — Cyber Hull Cover product summary; UK P&amp;I Club Circulars 11/96 and 13/96 (OPA 90 COFR)",
+    "MIW Engineering Management Notes Part 13 · Topic 2 — the ISM Code; Current Topics · Q6 — UR E26 vs UR E27; Simon Notes Part 1 · Note 25 — Maritime cyber security"
+   ],
+   "version": "1.0"
+  }
+ ]
+}
