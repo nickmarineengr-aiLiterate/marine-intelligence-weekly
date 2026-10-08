@@ -97,7 +97,7 @@ PRIVATE_TOPIC_FIELDS = (
     'official_node_ids', 'links',               # internal ids / gated paths
 )
 
-SAMPLES_PER_TOPIC = 3      # 30 stems of 721 -- a teaser, not the corpus
+SAMPLES_PER_TOPIC = 3      # 30 stems across 10 topics -- a teaser, not the corpus
 SAMPLE_MAX_CHARS = 180
 FAMILIES_PER_TOPIC = 3
 MIN_FAMILY_SIZE = 2        # one sighting is not a recurrence
