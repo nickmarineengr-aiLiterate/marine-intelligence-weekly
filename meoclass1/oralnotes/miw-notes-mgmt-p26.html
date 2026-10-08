@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>MIW Engineering Management Notes — Part 26 | MEO Class 1 | Propeller Wake, Vortex Losses and Energy-Saving Devices · High-Efficiency Propellers and Azimuth Propulsion</title>
+<meta name="description" content="MEO Class 1 Engineering Management Notes Part 26 — propeller wake, wake fraction and hull efficiency, blade pressure and suction sides, tip and hub vortices, wake conditioning and the energy-saving devices that act on them: Schneekluth wake-equalising duct, Becker Mewis Duct, pre-swirl stator, PBCF and ECO-Cap, rudder thrust fins, asymmetric (twisted) leading-edge rudders, rudder bulbs and the Grim vane wheel, with a verified device taxonomy; then high-efficiency propellers and azimuth propulsion: ducted (Kort) propellers, contra-rotating propellers, Kappel and CLT tip-modified propellers, mechanical L- and Z-drive thrusters and electric podded propulsion (Azipod). Maker savings figures are attributed, never generic. Source range PDF 622–647. Originally compiled by Uday Sankar S., Anglo-Eastern.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/miw-notes-mgmt-p26.html">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:15px;line-height:1.6;user-select:none;-webkit-user-select:none;}
+.miw-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.05;overflow:hidden;}
+.topbar{background:var(--navy);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logo{width:30px;height:30px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;letter-spacing:-0.5px;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;letter-spacing:0.3px;}
+.topbar-nav{display:flex;gap:20px;}
+.topbar-nav a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.15s;}
+.topbar-nav a:hover{color:#fff;}
+.page-header{background:var(--navy);padding:32px 24px 28px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.notes-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid var(--teal);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.notes-badge-icon{background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;letter-spacing:1px;}
+.notes-badge-text{color:var(--teal-light);font-size:12px;font-weight:600;}
+.page-title{color:#fff;font-size:26px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+.page-sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.header-meta-item{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:12px;color:#cbd5e1;}
+.header-meta-item strong{color:#fff;}
+.attribution-strip{margin-top:14px;padding:10px 14px;background:rgba(201,168,76,0.12);border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;font-size:12px;color:#cbd5e1;}
+.attribution-strip strong{color:#e2c97e;}
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:24px 16px;}
+.sidebar{position:sticky;top:68px;height:calc(100vh - 80px);overflow-y:auto;padding-right:6px;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--grey-border);border-radius:2px;}
+.toc-head{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;font-size:12px;color:var(--grey-text);text-decoration:none;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;transition:all 0.15s;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:700;}
+.toc-divider{height:1px;background:var(--grey-border);margin:14px 0;}
+.qb-sidebar-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:12px;}
+.qb-sidebar-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin-bottom:8px;}
+.qb-sidebar-link{display:block;font-size:12px;color:var(--teal-dark);text-decoration:none;font-weight:600;padding:3px 0;}
+.qb-sidebar-link:hover{text-decoration:underline;}
+#notes-feed{min-width:0;}
+.topic-block{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:24px;margin-bottom:32px;scroll-margin-top:72px;}
+.topic-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--teal-light);}
+.topic-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+.topic-title{margin:0 0 8px;font-size:20px;font-weight:800;color:var(--navy);}
+.topic-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;}
+.topic-tag{background:var(--teal-light);color:var(--teal-dark);padding:3px 8px;border-radius:20px;font-weight:600;}
+.topic-pages{color:var(--grey-text);padding:3px 0;}
+.topic-examiner{background:var(--orange-light);color:#92400e;padding:3px 8px;border-radius:20px;font-weight:600;}
+.freq-high{background:#fef9c3;color:#713f12;padding:3px 8px;border-radius:20px;font-weight:700;}
+.freq-medium{background:#f0fdf4;color:#14532d;padding:3px 8px;border-radius:20px;font-weight:600;}
+.section-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--grey-border);}
+.notes-body{font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:8px;}
+.notes-list{font-family:'Georgia',serif;font-size:14px;line-height:1.8;padding-left:22px;margin-bottom:8px;}
+.notes-list li{margin-bottom:4px;}
+.timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
+.timeline-block .t-year{color:#fff;font-weight:700;}
+.ascii-diagram{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12px;line-height:1.35;overflow-x:auto;white-space:pre;}
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
+.reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
+.reg-code{color:var(--orange);font-weight:700;white-space:nowrap;flex-shrink:0;font-family:monospace;font-size:12px;}
+.reg-desc{color:#cbd5e1;line-height:1.5;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:13.5px;font-family:'Georgia',serif;line-height:1.7;}
+.ce-tip strong{color:#92400e;}
+.qa-block{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.qa-item{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.qa-q{background:var(--grey-bg);padding:10px 14px;font-weight:700;font-size:13px;color:var(--navy);}
+.qa-a{padding:10px 14px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;color:var(--ink);}
+.exam-focus-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:16px 0;}
+.exam-focus-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin:0 0 12px;}
+.exam-q{margin:8px 0;font-family:'Georgia',serif;font-size:13.5px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+.marks-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+.memory-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:16px 0;}
+.memory-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#713f12;margin:0 0 10px;}
+.memory-list{font-family:'Georgia',serif;font-size:13.5px;line-height:1.8;padding-left:18px;}
+.memory-list li{margin-bottom:4px;}
+.amend-table,.compare-table,.revision-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.amend-table th,.compare-table th,.revision-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+.amend-table td,.compare-table td,.revision-table td{padding:8px 12px;border-bottom:1px solid var(--grey-border);font-family:'Georgia',serif;line-height:1.6;vertical-align:top;}
+.amend-table tr:nth-child(even) td,.revision-table tr:nth-child(even) td{background:var(--grey-bg);}
+.psc-focus{background:#fef2f2;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);}
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;}
+.mental-map .root{color:#fff;font-weight:700;}
+.qb-link-box{background:var(--teal-light);border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;}
+.qb-link-box strong{color:var(--teal-dark);}
+.qb-link-box a{color:var(--teal-dark);font-weight:600;text-decoration:none;margin-right:12px;}
+.qb-link-box a:hover{text-decoration:underline;}
+.deep-dive{margin:14px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:16px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;display:none;}
+.deep-dive-body.open{display:block;}
+.deep-dive-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.deep-dive-body p,.deep-dive-body li{margin-bottom:6px;}
+.deep-dive-body ul{padding-left:20px;}
+.verify-note{background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:16px;font-size:13px;font-family:'Georgia',serif;line-height:1.7;color:#1e3a5f;}
+.verify-note strong{color:#1d4ed8;}
+.ref-list{font-size:13px;line-height:1.9;padding-left:18px;}
+.ref-list a{color:var(--teal-dark);}
+.topic-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:12px;border-top:1px dashed var(--grey-border);font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.topic-version{font-weight:700;}
+.page-footer{background:var(--grey-bg);border-top:1px solid var(--grey-border);padding:28px 24px;margin-top:40px;font-size:12px;color:var(--grey-text);text-align:center;}
+.page-footer a{color:var(--teal-dark);}
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+
+<div class="miw-watermark" aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wmpat" width="420" height="220" patternTransform="rotate(-30)" patternUnits="userSpaceOnUse">
+        <text x="0" y="60" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">marineintelligenceweekly.com</text>
+        <text x="0" y="90" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wmpat)"/>
+  </svg>
+</div>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-logo">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="notes-badge">
+      <span class="notes-badge-icon">NOTES</span>
+      <span class="notes-badge-text">Engineering Management · Part 26 of 31</span>
+    </div>
+    <h1 class="page-title">Engineering Management Notes — Part 26</h1>
+    <p class="page-sub">Propeller Wake, Vortex Losses and Energy-Saving Devices · High-Efficiency Propellers and Azimuth Propulsion · Source range PDF 622–647 (Part 26 begins at PDF 622 under Founder decision D-25-1, which handed the whole Propeller Advancement chapter to this Part; Founder decision D-26-1 ends Part 26 at PDF 647; Human Elements begins at PDF 648 and belongs to Part 27)</p>
+    <div class="header-meta">
+            <span class="header-meta-item"><strong>Pages:</strong> 622–647 of 768</span>
+            <span class="header-meta-item"><strong>Topics:</strong> 2 (local P26-T1–P26-T2 — see note below)</span>
+            <span class="header-meta-item"><strong>Access:</strong> Subscriber Only</span>
+            <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>
+            <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>
+        </div>
+        <div class="attribution-strip">
+            Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and verified by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly. <strong>Sequencing note:</strong> Part 26 (pp. 622–647) continues directly from Part 25 (pp. 600–621). Topic numbering below uses local <strong>Part 26</strong> badges (not a continuous global T-number), consistent with the platform's standing rule to defer global renumbering until all 31 Parts are confirmed live.
+        </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="toc-head">Topics · Part 26</div>
+    <a class="toc-link" href="#topic-p26-1">T1 · Wake, Vortices &amp; Energy-Saving Devices</a>
+    <a class="toc-link" href="#topic-p26-2">T2 · High-Efficiency Propellers &amp; Azimuth Propulsion</a>
+    <div class="toc-divider"></div>
+    <div class="toc-head">Navigate</div>
+    <a class="toc-link" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Notes Index</a>
+    <a class="toc-link" href="miw-notes-mgmt-p25.html">← Part 25</a>
+    <div class="toc-divider"></div>
+    <div class="qb-sidebar-box">
+        <div class="qb-sidebar-title">🔗 Related QB Files</div>
+        <a class="qb-sidebar-link" href="../QB7_D.html">QB7_D — GHG, CII &amp; Decarbonisation (wake equalising duct)</a>
+        <a class="qb-sidebar-link" href="../QB6_D.html">QB6_D — Electrical, Automation &amp; Control Systems (azimuth propeller)</a>
+    </div>
+</aside>
+
+<!-- NOTES FEED -->
+<main id="notes-feed">
+
+
+<!-- ========================================================================== -->
+<!-- TOPIC 1 — WAKE, VORTICES &AMP; ENERGY-SAVING DEVICES -->
+<!-- ========================================================================== -->
+
+<div class="topic-block" id="topic-p26-1" data-kw="propeller wake, wake fraction, Taylor wake fraction, speed of advance, nominal wake, effective wake, hull efficiency, thrust deduction, block coefficient and wake, wake field, non-uniform wake, wake conditioning, blade section, angle of attack, circulation, lift, pressure side, suction side, face, back, tip vortex, hub vortex, root vortex, rotational loss, swirl, energy saving device, ESD, wake equalising duct, WED, Schneekluth, Becker Mewis Duct, pre-duct, pre-swirl, pre-swirl stator, PSS, DSME, propeller boss cap fins, PBCF, MOL, hub cap with fins, ECO-Cap, Nakashima Propeller, post-swirl, post-propeller, rudder thrust fins, RBS-F, Kawasaki, asymmetric rudder, twisted leading edge, ART, Damen Marine Components, rudder bulb, Grim vane wheel, vane wheel, Otto Grim, ESD taxonomy, MEPC.1/Circ.896, class approval of ESD retrofit">
+  <div class="topic-header">
+    <div class="topic-badge">Part 26 · Topic 1</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Propeller Wake, Vortex Losses and Energy-Saving Devices — Pre-swirl, Hub-vortex and Post-swirl</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Wake fraction w = (V − VA)/V · ηH = (1 − t)/(1 − w) · Lift and vortices · WED · Mewis Duct · Pre-swirl stator · PBCF / ECO-Cap · Rudder thrust fins · Twisted leading-edge rudder · Rudder bulb · Grim vane wheel · ESD taxonomy</span>
+        <span class="topic-pages">Uday pp. 622–632, 641–645</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> <strong>Source range.</strong> This topic is built from PDF 622–632 and 641–645, a non-contiguous range approved by the Founder (decision D-26-2): the wake, vortex and energy-saving-device pages are taught together, and the propeller-type pages 633–640 go to Topic 2. Part 26 begins at PDF 622 under D-25-1 and ends at PDF 647 under D-26-1. <strong>Source errors corrected.</strong> (1) <strong>Class survey.</strong> The source says wake ducts 'are fitted with no class survey, as there are no class requirements'. That statement is unsafe and unsupported and is not taught: a welded energy-saving device is normally treated as a classed structural alteration, with drawings, structural strength and fatigue, and installation reviewed and surveyed as applicable (the duct maker designs to classification-society strength requirements; pre-swirl stator fins have failed in service by fatigue cracking). No society rule clause could be read, so no rule number is cited. (2) <strong>Wake fraction.</strong> The source labels V<sub>A</sub> 'propeller speed'. V<sub>A</sub> is the <em>speed of advance</em>, the mean speed of the water arriving at the propeller disc. Its range '0.25–0.45' is taught as an indicative <em>single-screw</em> range (about 0.20–0.45), not a universal one, and its 'less w the better' is replaced by the hull-efficiency explanation. (3) <strong>Lift.</strong> The source's 'longer path above, so higher velocity' is the equal-transit-time myth and is replaced by angle of attack, flow turning and circulation. (4) <strong>Mewis Duct.</strong> The source files it as a 'wake equalizing duct'; it is a combined pre-duct and pre-swirl device. (5) <strong>Pre-swirl stator.</strong> 'No maintenance' and 'uniform flow to the propeller' are corrected; 'up to 8%' was not found in any primary source. (6) <strong>PBCF.</strong> The fins do not 'obstruct' the flow; they straighten the swirling root flow. Reduced vibration and reduced rudder erosion are not taught as established effects. (7) <strong>ECO-Cap</strong> is Nakashima Propeller's own hub-cap-with-fins device, not literally the same technology as PBCF. (8) <strong>Rudder thrust fins.</strong> The source's '2–7%' is Kawasaki's claim for its RBS-F, a rudder bulb <em>with</em> fins; the 'unbalanced port and starboard fins' disadvantage is unsupported (the asymmetry is deliberate) and is not taught. (9) <strong>Grim vane wheel</strong> gives extra thrust for the same shaft power, not 'increased propulsive power'. (10) <strong>Device classes.</strong> The source's pre-swirl / post-swirl list puts the WED under pre-swirl and the contra-rotating propeller under post-swirl; the verified taxonomy below separates wake-equalising, pre-swirl, hub-vortex and post-propeller devices and treats CRP as a propeller system (Topic 2). <strong>Order.</strong> The source page order places rudder item (b) ART before the 'Rudder Improvements' heading and item (a); the teaching order here is restored to (a) thrust fins, (b) ART, (c) rudder bulb, (d) Grim wheel. <strong>Savings figures.</strong> Every percentage in this topic is a named maker, trial or class figure with its context; none is a generic saving, and savings of different devices must not be added. <strong>Cross-references, not repeated here:</strong> block coefficient definition — Part 16 Topic 5; hull-form optimisation, aft body and twin skeg — Part 25 Topic 2; propeller law and engine matching — Part 24 Topic 2; ESDs as an EEDI/EEXI route — Part 23 Topics 1–2; propeller and rudder dry-dock checks — Part 20 Topic 3.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">In propulsion, the <strong>wake</strong> is the water around the after body that the hull drags along with it, so that it reaches the propeller slower than the ship moves. Its size is measured by the <strong>Taylor wake fraction</strong> w = (V − V<sub>A</sub>)/V, where V is ship speed and V<sub>A</sub> the <strong>speed of advance</strong> — the mean speed of water arriving at the propeller disc. The propeller blades work as lifting sections: the <strong>face</strong> (aft, pressure side) carries higher pressure than the <strong>back</strong> (forward, suction side), and that pressure difference is the thrust. Lift also sheds energy the propeller cannot use: a <strong>tip vortex</strong> where water leaks round each blade tip, a <strong>hub vortex</strong> where root vorticity gathers behind the boss, and <strong>swirl</strong> — rotation left in the slipstream by the shaft torque. <strong>Energy-saving devices (ESDs)</strong> are fixed or free-running appendages that recover part of these losses: <strong>wake-equalising</strong> devices ahead of the propeller make the inflow more uniform (Schneekluth WED); <strong>pre-swirl</strong> devices give the inflow a counter-rotation (pre-swirl stator, Becker Mewis Duct); <strong>hub-vortex</strong> devices on the boss cap weaken the hub vortex (PBCF, ECO-Cap); and <strong>post-propeller</strong> devices on or behind the rudder recover slipstream swirl and hub-vortex energy (rudder thrust fins, twisted leading-edge rudders, rudder bulbs, the Grim vane wheel).</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li><strong>Simon's energy-efficiency questions name the devices.</strong> The insert at the end of this source lists 'wake equalizing devices, pre-swirl devices, post-swirl devices' and, in three separate papers, 'rudder thrust fins, asymmetric rudders, rudder bulbs, Grim vane wheels'. The candidate must explain each mechanism and sort them correctly.</li>
+    <li>A Chief Engineer is asked by the owner whether a retrofit duct or boss-cap fin will 'save 8%'. The honest answer depends on the hull, the wake, the propeller loading and the maker's evidence, and on the fact that savings of different devices do not add up.</li>
+    <li>Welded ESDs are structural additions to the stern. Cracked or lost fins can strike the propeller, so the Chief Engineer owns their inspection at every dry-docking and must not accept that 'class does not survey them'.</li>
+    <li>Wake fraction, hull efficiency and wake non-uniformity explain cavitation, vibration and propeller design choices that the engine room lives with every day.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">1949</span>  Van Lammeren's pre-duct principle — the idea behind accelerating ducts ahead of the propeller (as cited by Mewis &amp; Guiard)
+<span class="t-year">1966</span>  Otto Grim (HSVA) patents the free-running vane wheel
+<span class="t-year">May 1980</span>  Grim vane wheel fitted to the German research vessel <em>Gauss</em>; up to about 10% propulsive-efficiency gain reported by the developers
+<span class="t-year">1986</span>  Schneekluth wake-equalising duct (WED) introduced
+<span class="t-year">1988</span>  Ouchi and Ogura publish the research behind Propeller Boss Cap Fins (PBCF), J. Soc. Nav. Arch. Japan
+<span class="t-year">1990</span>  <em>Marine Engineers Review</em> reports design defects or collision damage on about 15% of Grim vane wheels in service
+<span class="t-year">1992</span>  Daewoo (DSME) pre-swirl system research (Lee et al.)
+<span class="t-year">2008</span>  Becker Mewis Duct introduced; DSME's first pre-swirl stator on a 320,000 dwt VLCC reports about 4% on sea trial (maker)
+<span class="t-year">2013</span>  ABS Ship Energy Efficiency Measures Advisory — device classes and advisory saving ranges
+<span class="t-year">2017</span>  MOL's new-type PBCF fins (maker claims about 5% against sister ships)
+<span class="t-year">2018</span>  Becker changes the Mewis Duct from a full ring to a semi-ring to reduce drag
+<span class="t-year">14 Dec 2021</span>  IMO MEPC.1/Circ.896 — guidance on the treatment of innovative energy-efficiency technologies for EEDI/EEXI</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Standards, Guidance and Class Context</div>
+    <div class="reg-item"><span class="reg-code">ITTC Recommended Procedure 7.5-02-03-01.4 (1978 ITTC Performance Prediction Method, Rev 04, 2017)</span><span class="reg-desc">Defines V<sub>A</sub> as the advance speed of the propeller and w as the Taylor wake fraction; thrust-identity and torque-identity wake (w<sub>T</sub>, w<sub>Q</sub>); hull efficiency η<sub>H</sub> = (1 − t)/(1 − w<sub>TS</sub>); wake scaling from model to ship.</span></div>
+    <div class="reg-item"><span class="reg-code">ITTC 7.5-01-02-01 Propeller Geometry Terminology</span><span class="reg-desc">Face = pressure side; back = suction side; leading and trailing edge; chord.</span></div>
+    <div class="reg-item"><span class="reg-code">IMO MEPC.1/Circ.896 (14 December 2021)</span><span class="reg-desc">Guidance on treatment of innovative energy-efficiency technologies in EEDI/EEXI. Technologies that cannot be separated from the overall performance of the vessel are reflected in the speed–power curve (Category A). The circular does not name ducts or stators; treating a hydrodynamic ESD as Category A is an interpretation, verified through model tests and sea trials. EEDI/EEXI themselves: Part 23 Topics 1–2.</span></div>
+    <div class="reg-item"><span class="reg-code">Classification — ESD retrofit (no rule number cited)</span><span class="reg-desc">A welded ESD retrofit is normally handled as a classed structural alteration: drawings, structural strength and fatigue, welding and installation reviewed and surveyed as applicable (DNV, for example, treats propeller retrofits as an alteration project with approval and an on-board survey, with boss cap fins in scope). For EEDI/EEXI the verifier asks for evidence of the device's effect. The society rule clause itself could not be read, so none is quoted.</span></div>
+    <div class="reg-item"><span class="reg-code">ISO 23453:2022</span><span class="reg-desc">Guidelines for the design and manufacture of a hub cap with fins (HCWF) for fixed-pitch propellers — the generic class of devices to which PBCF and ECO-Cap belong.</span></div>
+    <div class="reg-item"><span class="reg-code">ABS Ship Energy Efficiency Measures Advisory (2013)</span><span class="reg-desc">Non-mandatory class guidance: device taxonomy (wake-equalising, pre-swirl, post-swirl, high-efficiency propellers) and advisory saving ranges; warns that devices need strength and fatigue verification.</span></div>
+  </div>
+
+  <div class="section-head">🌊 The Propulsion Wake — What the Propeller Actually Sees</div>
+  <p class="notes-body"><strong>Two meanings of 'wake'.</strong> The visible trail behind a ship — a turbulent track plus the Kelvin wave pattern, whose classical half-angle in deep water is about 19.5° — is also called a wake, and the source lists it ('turbulent wake, Kelvin wake'). It is <em>not</em> the wake used in propulsion. The propulsion wake is the slowed water around the after body that the propeller works in.</p>
+  <table class="revision-table">
+    <tr><th>Wake component</th><th>Cause</th><th>Note</th></tr>
+    <tr><td>Potential (streamline) wake</td><td>Streamlines close in round the stern and the flow slows</td><td>Present even in an ideal fluid</td></tr>
+    <tr><td>Frictional (boundary-layer) wake</td><td>Water dragged along by hull skin friction</td><td>Usually the largest component on full single-screw ships</td></tr>
+    <tr><td>Wave wake</td><td>Whether a crest or a trough of the stern wave system sits over the propeller</td><td>Small; can be positive or negative</td></tr>
+  </table>
+  <p class="notes-body">Hull form governs all three — it is a cause, not a component. On a single-screw ship the upper blades work closest to the hull, so the inflow velocity is lowest near the 12 o'clock position and higher toward the bottom of the disc; each blade meets a changing inflow as it turns. This non-uniformity drives cavitation, propeller-excited pressure pulses and vibration.</p>
+
+  <div class="section-head">📐 Wake Fraction and Hull Efficiency</div>
+  <div class="timeline-block">Taylor wake fraction      w  = (V − VA) / V          VA = V (1 − w)
+   V   ship speed
+   VA  speed of advance = mean speed of water arriving at the propeller disc
+       (NOT 'propeller speed' — that suggests rpm)
+
+Hull efficiency           ηH = (1 − t) / (1 − w)      t = thrust deduction fraction
+   ηH rises as w rises; open-water propeller efficiency falls as VA falls
+
+Check from the source's own figures: w = 0.25 → VA = 0.75 V ;  w = 0.45 → VA = 0.55 V</div>
+  <table class="revision-table">
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>Nominal wake</td><td>Measured behind the hull with no propeller working (towing-tank pitot survey)</td></tr>
+    <tr><td>Effective wake</td><td>Inferred with the propeller working (thrust or torque identity, w<sub>T</sub>, w<sub>Q</sub>); the value used for powering</td></tr>
+    <tr><td>Indicative single-screw range</td><td>About <strong>0.20–0.45</strong>, rising with block coefficient: fine fast ships at the low end, full tankers and bulk carriers at the high end (MAN Diesel &amp; Turbo, <em>Basic Principles of Ship Propulsion</em>)</td></tr>
+    <tr><td>Twin-screw, open stern</td><td>Much lower — the propellers sit outside the hull boundary layer</td></tr>
+    <tr><td>Twin skeg</td><td>About the same as single screw (Part 25 Topic 2)</td></tr>
+  </table>
+  <ul class="notes-list">
+    <li><strong>'Less w is better' is wrong as a rule.</strong> A high wake raises hull efficiency η<sub>H</sub> (about 1.1–1.4 for single-screw ships, highest for full forms, per MAN) but lowers the propeller's open-water efficiency, so overall propulsive efficiency is usually unchanged or slightly worse.</li>
+    <li><strong>The real problem of high-wake, full-form ships is non-uniformity:</strong> cavitation, pressure pulses, vibration and reduced open-water efficiency. That is the problem energy-saving devices address.</li>
+    <li><strong>C<sub>B</sub> and wake.</strong> On single-screw ships a fuller hull (higher C<sub>B</sub>) generally gives a higher and less uniform wake; stern shape and propeller size also matter, and twin-screw open sterns stay low regardless. The definition C<sub>B</sub> = ∇/(L × B × T) is in Part 16 Topic 5 and is not repeated; the hand-off from hull-form design is Part 25 Topic 2.</li>
+    <li>Typical C<sub>B</sub> on LPP (MAN): tankers and bulk carriers about 0.80–0.85, general cargo 0.55–0.75, container ships and ferries 0.50–0.70; warships are finer still.</li>
+  </ul>
+
+  <div class="section-head">🌀 Blade Sections, Lift and the Vortices That Waste Energy</div>
+  <p class="notes-body"><strong>How a blade section makes lift.</strong> A blade section set at an angle of attack, usually with camber, turns the water passing it. This sets up a circulation: flow speeds up over the back and slows on the face. By Bernoulli the back (suction side) is at low pressure and the face (pressure side) at higher pressure; the integrated pressure difference is the lift, whose forward component is the thrust. The popular explanation that 'the path over the top is longer, so the water must go faster' is a myth — the two flows do not have to meet at the trailing edge, and flat or symmetric sections at an angle of attack also lift.</p>
+  <table class="revision-table">
+    <tr><th>Surface</th><th>Faces</th><th>Pressure (ahead running)</th></tr>
+    <tr><td>Face</td><td>Aft</td><td>Pressure side — high (discharge)</td></tr>
+    <tr><td>Back</td><td>Forward</td><td>Suction side — low</td></tr>
+  </table>
+  <p class="notes-body">Thrust acts from face toward back, i.e. forward. Astern, the pressure roles reverse but the names face and back stay with the geometry.</p>
+  <ul class="notes-list">
+    <li><strong>Tip vortex.</strong> Because the face is at higher pressure than the back, water leaks round each blade tip from face to back and rolls up into a trailing tip vortex.</li>
+    <li><strong>Hub vortex.</strong> Vorticity shed at the blade roots gathers behind the boss into a single rotating hub vortex. Its low-pressure core sucks on the boss cap (boss drag, reducing net thrust), carries away rotational energy and can cavitate, eroding downstream parts.</li>
+    <li><strong>Swirl (rotational loss).</strong> The torque that turns the propeller also sets the slipstream rotating. That rotational energy does no propulsive work. Propeller losses are usually grouped as axial (normally the largest), rotational and frictional; no fixed percentage split is taught.</li>
+    <li>Propeller and ESD developments aim to reduce these losses so that more of the delivered power becomes useful thrust — no propeller converts all of it.</li>
+  </ul>
+
+  <div class="section-head">🎛️ Wake Conditioning — The Idea Behind the Devices</div>
+  <p class="notes-body"><strong>Wake (flow) conditioning</strong> means modifying the flow ahead of the propeller to suit it: making the wake more uniform, accelerating the slow inflow (usually the upper part of the disc), and often adding a counter-swirl opposite to the propeller's rotation. The best route is at design stage, through the stern form (Part 25 Topic 2); appendages are the retrofit route.</p>
+  <p class="notes-body"><strong>Who benefits.</strong> Full-form, high-wake ships — tankers and bulk carriers with heavily loaded propellers — benefit most, because their inflow is slow and uneven. The devices do not work 'by lowering w': pre-propeller devices equalise and pre-swirl the inflow; post-propeller devices recover swirl and hub-vortex energy left in the slipstream.</p>
+
+  <div class="section-head">🔧 Wake-Equalising Duct (Schneekluth WED)</div>
+  <p class="notes-body">A <strong>wake-equalising duct</strong> is a fixed hull appendage ahead of the propeller that redirects and accelerates the slow wake flow so that the propeller sees a more uniform, more axial inflow. It is a corrective device: most useful where the stern produces a poor wake, of little value on a hull already designed for good flow.</p>
+  <ul class="notes-list">
+    <li><strong>Arrangement.</strong> Two half-ring ducts of aerofoil section, one on each side of the stern, ahead of the upper half of the propeller disc (above the shaft line).</li>
+    <li><strong>Function.</strong> The ducts gather and accelerate flow into the upper half of the disc, where the wake is heaviest, making the wake field more uniform and cutting propeller-excited pressure fluctuations.</li>
+    <li><strong>Counter-swirl.</strong> The half-ducts are set at a slight asymmetric angle, giving the inflow a small rotation opposite to the propeller's — but the WED is primarily a wake-equalising device, not a pre-swirl device.</li>
+    <li><strong>Attributed figures.</strong> Schneekluth reports fuel savings of up to 12%; its own typical range for full-form ships (C<sub>B</sub> above 0.7) is about 3–8%, and ABS gives 0–5% as an advisory range for this class of device. Schneekluth also claims up to 50% vibration reduction (a maker figure, sometimes stated for duct and spoilers together). None of these is a universal saving.</li>
+  </ul>
+
+  <div class="section-head">🔩 Becker Mewis Duct — Pre-Duct plus Pre-Swirl Fins</div>
+  <p class="notes-body">The <strong>Becker Mewis Duct</strong> is not simply a WED variant. It combines two separate principles in one fixed structure ahead of the propeller: a <strong>pre-duct</strong>, mounted off-centre with its axis above the shaft axis, which straightens and accelerates the hull wake into the propeller; and an integrated <strong>pre-swirl fin system</strong> inside the duct, which gives the inflow a counter-rotation so less rotational energy is left in the slipstream. Becker's figure labels — upper bracket, duct, customised fins, propeller shaft, hull — match the source's pasted diagram. Since 2018 Becker has offered a semi-ring rather than a full ring to reduce drag.</p>
+  <ul class="notes-list">
+    <li><strong>Application.</strong> Slow, full-form ships with heavily loaded propellers — tankers and bulk carriers below about 20 knots (designers' guidance: thrust-loading coefficient C<sub>Th</sub> above about 1).</li>
+    <li><strong>Attributed figures.</strong> Becker quotes up to 8–10% depending on hull–propeller interaction; the designers reported a mean of about 6.5% over 35 model tests and 6.5% at full scale on one 57,000 dwt Supramax bulker; an independent in-service study of one oil tanker found about 3.5–5% against a sister ship.</li>
+    <li><strong>Structure.</strong> A welded structural addition, installed at dry-docking; Becker states the design meets classification-society strength and stiffness requirements.</li>
+  </ul>
+
+  <div class="section-head">⚙️ Pre-Swirl Stator (PSS)</div>
+  <p class="notes-body">A <strong>pre-swirl stator</strong> is a set of fixed fins on the stern boss just ahead of the propeller, often fitted asymmetrically (more fins on one side). The fins give the inflow a swirl opposite to the propeller's rotation; the propeller removes that swirl, so the slipstream leaving it has less rotation and lower rotational energy loss, and the blade angles of attack improve. The fins themselves have drag and save nothing alone — the saving is a stator–propeller interaction, and the propeller is normally designed to work behind the stator. A PSS does not make the inflow 'uniform' in the WED sense.</p>
+  <table class="revision-table">
+    <tr><th>Point</th><th>Verified position</th></tr>
+    <tr><td>Moving parts</td><td>None — fixed fins</td></tr>
+    <tr><td>Maintenance</td><td><strong>Not maintenance-free.</strong> The fins and their welds carry cyclic hydrodynamic and wave loads; fatigue cracking has caused real fin failures, and a detached fin can strike the propeller. Inspect at every dry-docking</td></tr>
+    <tr><td>Design</td><td>Ship-specific; matched to the propeller</td></tr>
+    <tr><td>Attributed figures</td><td>ABS gives 2–6% as an advisory range for pre-swirl devices; DSME reported about 4% on its first installation, a 320,000 dwt VLCC sea trial (2008). The source's 'up to 8%' was not found in any primary source</td></tr>
+    <tr><td>Vibration</td><td>Design-dependent — not taught as a general advantage</td></tr>
+  </table>
+
+  <div class="section-head">🧢 Hub-Vortex Devices — PBCF and ECO-Cap</div>
+  <p class="notes-body"><strong>Propeller Boss Cap Fins (PBCF)</strong> replace the plain boss cap with a cap carrying small fins — one per blade in the original design — that rotate with the propeller. The fins straighten the swirling root flow so the hub vortex is weakened or broken up; part of its rotational energy is recovered as a little extra thrust and reduced shaft torque, and the low-pressure suction on the cap (boss drag) falls. Model tests showed PBCF removing hub-vortex cavitation and reducing propeller noise by about 3–6 dB in some frequency bands. The fins do not 'obstruct' the flow.</p>
+  <table class="revision-table">
+    <tr><th>Point</th><th>Verified position</th></tr>
+    <tr><td>Owner / origin</td><td>MOL (Mitsui O.S.K. Lines) with co-developers including Mikado (now Nakashima) Propeller; research published from 1988</td></tr>
+    <tr><td>Retrofit</td><td>A cap exchange — no hull modification; the unit is custom-made for the propeller</td></tr>
+    <tr><td>Maintenance</td><td>No moving parts of its own; inspected and polished with the propeller at dry-dock</td></tr>
+    <tr><td>Attributed figures</td><td>MOL quotes 3–5% fuel and CO<sub>2</sub> saving (about 5% for its 2017 new-type fins against sister ships); one independent before/after trial on an Aframax tanker (BMT) reported about 4%</td></tr>
+    <tr><td>Not taught as established</td><td>Reduced vibration and reduced rudder erosion — claimed in trade press but not measured in the sources found</td></tr>
+  </table>
+  <p class="notes-body"><strong>ECO-Cap</strong> is <strong>Nakashima Propeller</strong>'s own hub-cap-with-fins device. It works on the same broad principle as PBCF — suppressing the hub vortex — but it is a different design, not the same product. Nakashima and NMRI model tests report up to about 4.7% propulsion-efficiency gain, depending on how strong the hub vortex was on the original propeller (maker and model data).</p>
+
+  <div class="section-head">🚢 Post-Propeller Devices on and Behind the Rudder</div>
+  <p class="notes-body">The source heads these 'Rudder Improvements', and the exam questions say 'rudder-efficiency improvement devices'. They are really <strong>post-propeller energy-saving devices</strong>: they recover energy lost in the propeller slipstream (swirl and hub vortex) and so improve <em>propulsive</em> efficiency, not rudder steering. <em>Provenance note: the source page order places item (b) before the umbrella heading and item (a); the logical order is restored below.</em></p>
+  <table class="revision-table">
+    <tr><th>Device</th><th>Mechanism</th><th>Attributed figures / notes</th></tr>
+    <tr><td>(a) Rudder thrust fins</td><td>Small aerofoil fins on the rudder at about propeller-hub height, angled to the swirling slipstream so that part of its rotational energy becomes forward thrust. Port and starboard fins are set differently on purpose, because the swirl differs on each side</td><td>Kawasaki claims about 2–7% lower required propulsive power for its <strong>RBS-F</strong>, which is a rudder bulb <em>with</em> fins (fitted on more than 100 ships). The fins add loads the rudder's structural design must allow for</td></tr>
+    <tr><td>(b) Asymmetric / twisted leading-edge rudder</td><td>Only the leading edge is asymmetric: it is offset in opposite directions above and below the propeller axis to line up with the rotating slipstream. Flow onto the rudder is smoother, so drag and leading-edge cavitation and erosion fall</td><td><strong>ART™</strong> (Asymmetric Rudder Technology) is Damen Marine Components' (formerly Van der Velden) version, in S- and Z-shape forms for high-load ships above about 20 knots; Becker offers an equivalent 'Twisted Leading Edge'. No maker fuel percentage is published for ART™</td></tr>
+    <tr><td>(c) Rudder bulb</td><td>A streamlined body on the rudder leading edge, in line with and close behind the propeller hub. It weakens the hub vortex and guides the flow smoothly from hub to rudder, recovering energy and preventing hub-vortex cavitation erosion of the rudder</td><td>Becker claims up to about 1.5% for the bulb alone, more when combined with a twisted rudder. Kawasaki's RBS-F combines a bulb with fins. (The source book's index spells it 'rubber bulb' — the correct term is <strong>rudder bulb</strong>)</td></tr>
+    <tr><td>(d) Grim vane wheel</td><td>A free-running wheel just behind the propeller, larger in diameter. Its inner part, inside the propeller slipstream, works as a turbine driven by slipstream energy that would otherwise be lost; its outer part works as a propeller, turning that energy into extra thrust for no extra shaft power</td><td>Otto Grim (HSVA), patented 1966. Up to about 10% reported on the research vessel <em>Gauss</em> (1980, developer-reported). About 15% of wheels in service had design defects or collision damage (1990); treat as a historical, limited-use device</td></tr>
+  </table>
+
+  <div class="section-head">🗂️ Device Taxonomy — Sorting the Devices Correctly</div>
+  <table class="revision-table">
+    <tr><th>Class</th><th>Where</th><th>Mechanism</th><th>Devices</th></tr>
+    <tr><td><strong>Wake-equalising</strong></td><td>Ahead of the propeller, on the hull</td><td>Accelerates and evens out the slow inflow</td><td>Schneekluth WED (also Grothues spoilers, stern tunnels)</td></tr>
+    <tr><td><strong>Pre-swirl</strong></td><td>Ahead of the propeller, on the hull</td><td>Counter-rotates the inflow so less swirl is left in the slipstream</td><td>Pre-swirl stator; Becker Mewis Duct (pre-duct + pre-swirl fins)</td></tr>
+    <tr><td><strong>Hub-vortex</strong></td><td>On the propeller boss cap</td><td>Weakens the hub vortex; recovers its rotational energy; reduces boss drag</td><td>PBCF; ECO-Cap</td></tr>
+    <tr><td><strong>Post-propeller</strong></td><td>On or behind the rudder</td><td>Recovers slipstream swirl and hub-vortex energy</td><td>Rudder thrust fins; twisted / asymmetric leading-edge rudder; rudder bulb; Grim vane wheel (the only rotating one)</td></tr>
+    <tr><td><strong>Propeller systems</strong> (not appendages)</td><td>The propulsor itself</td><td>Different propeller arrangement</td><td>Contra-rotating propellers, ducted propellers, Kappel and CLT — <strong>Topic 2</strong>. A CRP is <em>not</em> a post-swirl device</td></tr>
+  </table>
+  <p class="notes-body"><strong>Do not add savings.</strong> Devices acting on the same rotational and wake losses compete for the same energy: combining a duct, boss-cap fins and rudder fins does not give the sum of their individual figures. Everllence (formerly MAN Energy Solutions) cautions that combined ESD savings above about 10% are unlikely.</p>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Simon):</strong> Simon asks 'What is a wake equalising duct, and what else would you fit?' Answer in four moves. <em>One</em>: the wake — water dragged by the hull, slowest at the top of the disc on a single-screw ship; w = (V − V<sub>A</sub>)/V with V<sub>A</sub> the speed of advance, and the problem is non-uniformity, not the number. <em>Two</em>: the losses — tip vortex, hub vortex and slipstream swirl. <em>Three</em>: sort the devices by mechanism — wake-equalising (Schneekluth WED), pre-swirl (stator, Mewis Duct), hub-vortex (PBCF, ECO-Cap), post-propeller (rudder fins, twisted rudder, rudder bulb, Grim wheel) — and say a CRP is a propeller system, not a post-swirl device. <em>Four</em>: give any saving only with its owner — 'Schneekluth reports up to 12%, typically 3–8% on full forms; ABS gives 2–6% for pre-swirl devices' — and say savings do not add. Three answers fail candidates: that V<sub>A</sub> is propeller speed, that a WED or a stator needs no class attention, and that 'a duct saves 12%'.</div>
+
+  <div class="section-head">🎯 Oral Q&amp;A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. Define the wake fraction and explain its effect on propulsive efficiency.</div><div class="qa-a">The Taylor wake fraction is w equals V minus V A, divided by V, where V is ship speed and V A is the speed of advance, the mean speed of water arriving at the propeller disc, so V A equals V times one minus w. Nominal wake is measured without the propeller; effective wake is inferred with the propeller working and is the value used for powering. For single-screw ships w is typically about 0.20 to 0.45, rising with block coefficient; twin-screw ships with open sterns are much lower. A higher wake raises hull efficiency, one minus t over one minus w, but lowers the propeller's open-water efficiency, so propulsive efficiency is not generally improved. The practical problem of high-wake full-form ships is a non-uniform wake field, which causes cavitation, pressure pulses and vibration.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Explain the tip vortex and the hub vortex and the energy they waste.</div><div class="qa-a">A propeller blade works as a lifting section: at an angle of attack it turns the flow and sets up circulation, so the face is at higher pressure than the back. At the tip, water leaks round from face to back and rolls up into a tip vortex. At the roots, the shed vorticity of all the blades gathers behind the boss into a single hub vortex, whose low-pressure core sucks on the boss cap, carries away rotational energy and can cavitate. In addition the shaft torque leaves the whole slipstream rotating. This rotational energy does no propulsive work; pre-swirl devices, boss-cap fins, post-propeller devices and contra-rotating propellers all aim to recover part of it.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Describe a wake equalising duct and a Becker Mewis Duct and state how they differ.</div><div class="qa-a">A Schneekluth wake equalising duct is two half-ring ducts of aerofoil section fitted on each side of the stern ahead of the upper half of the propeller disc. It accelerates the slow wake flow into the upper disc, making the wake more uniform and reducing pressure fluctuations; a slight asymmetric setting adds a small counter-swirl. The Becker Mewis Duct combines a pre-duct, mounted off-centre above the shaft axis to straighten and accelerate the wake, with pre-swirl fins inside the duct that counter-rotate the inflow; it is a pre-swirl device, not just a WED, and is aimed at slow full-form ships with heavily loaded propellers. Savings are maker- and ship-specific: Schneekluth reports up to 12 per cent but typically 3 to 8 per cent on full forms; Becker quotes up to 8 to 10 per cent, and an independent tanker study found about 3.5 to 5 per cent. Both are welded structural additions reviewed and surveyed by class as a structural alteration.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4. Explain how a pre-swirl stator works and what the Chief Engineer must watch.</div><div class="qa-a">A pre-swirl stator is a set of fixed fins on the stern boss just ahead of the propeller, often more on one side than the other. The fins give the inflow a swirl opposite to the propeller's rotation; the propeller takes that swirl out, so the slipstream has less rotation and less rotational energy loss, and the blade angles of attack improve. The fins themselves add drag; the gain comes only from the stator and propeller working together, and the propeller is designed to suit. ABS gives 2 to 6 per cent as an advisory range for pre-swirl devices, and DSME reported about 4 per cent on its first VLCC sea trial. The Chief Engineer must not treat it as maintenance-free: the fins and welds are fatigue-loaded, cracked fins have failed in service and a lost fin can strike the propeller, so they are inspected at every dry-docking.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5. Explain the working of propeller boss cap fins and compare ECO-Cap.</div><div class="qa-a">The hub vortex forms when root vorticity from the blades gathers behind the boss; its low-pressure core causes boss drag, carries away rotational energy and can cavitate. Propeller Boss Cap Fins replace the plain cap with a cap carrying small fins, one per blade, rotating with the propeller. They straighten the swirling root flow so the hub vortex is weakened, recovering a little thrust and reducing shaft torque; model tests showed hub-vortex cavitation removed and noise reduced by about 3 to 6 decibels in some bands. Retrofit is a cap exchange with no hull modification. MOL quotes 3 to 5 per cent fuel saving and one independent Aframax trial reported about 4 per cent. ECO-Cap is Nakashima Propeller's own hub-cap-with-fins device on the same broad principle but a different design; model tests show up to about 4.7 per cent depending on the original hub vortex strength.</div></div>
+    <div class="qa-item"><div class="qa-q">Q6. Discuss rudder thrust fins, asymmetric rudders, rudder bulbs and Grim vane wheels.</div><div class="qa-a">All four are post-propeller devices that recover energy left in the propeller slipstream. Rudder thrust fins are aerofoil fins on the rudder at about hub height, set to the swirling slipstream so part of its rotation becomes forward thrust; Kawasaki claims about 2 to 7 per cent for its RBS-F, which is a rudder bulb with fins. An asymmetric or twisted leading-edge rudder has its leading edge offset in opposite directions above and below the propeller axis to meet the rotating flow, reducing drag and leading-edge cavitation; Damen Marine Components markets one version as ART. A rudder bulb sits in line behind the propeller hub, weakening the hub vortex and preventing hub-vortex erosion of the rudder; Becker claims up to about 1.5 per cent for the bulb alone. The Grim vane wheel is a free-running wheel behind and larger than the propeller, whose inner part acts as a turbine and outer part as a propeller, adding thrust for no extra shaft power; it was patented in 1966 but in-service damage limited its use. Their savings must not be added together.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Define the Taylor wake fraction, state what V<sub>A</sub> represents, and distinguish nominal from effective wake.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Recent stress on the control of emission from ships has led to the development of devices aimed at improving propeller propulsion effectiveness. Discuss: (a) wake equalizing devices, (b) pre-swirl devices, (c) post-swirl devices. (Based on the source insert, cf. 2023/APR/Q6 a–c; paper codes as printed, not independently verified.)</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Improvements in rudder efficiency can considerably contribute to improving propulsion effectiveness. Discuss common rudder-efficiency improvement devices and techniques currently in use, referring to: (a) rudder thrust fins, (b) asymmetric rudders, (c) rudder bulbs, (d) Grim vane wheels. (Based on the source insert, cf. 2022/JAN/Q7, 2022/SEP/Q7, 2023/JAN/Q1, 2023/AUG/Q3, 2024/APR/Q4; codes as printed, not independently verified.)</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>w = (V − V<sub>A</sub>)/V · V<sub>A</sub> = SPEED OF ADVANCE (not propeller speed) · nominal = no propeller, effective = propeller working.</strong></li>
+      <li><strong>η<sub>H</sub> = (1 − t)/(1 − w) rises with w — high wake is not 'bad'; NON-UNIFORMITY is the problem</strong> (cavitation, pulses, vibration).</li>
+      <li><strong>Lift = angle of attack + circulation → low pressure on BACK (suction), high on FACE (pressure).</strong> 'Longer path' is a myth.</li>
+      <li><strong>Losses: TIP vortex (face→back leakage) · HUB vortex (root vorticity behind boss) · SWIRL (slipstream rotation).</strong></li>
+      <li><strong>Sort by mechanism: WAKE-EQUALISING = Schneekluth WED · PRE-SWIRL = stator, Mewis Duct · HUB-VORTEX = PBCF, ECO-Cap · POST-PROPELLER = rudder fins, twisted rudder, rudder bulb, Grim wheel · CRP = propeller system (T2).</strong></li>
+      <li><strong>Rudder devices a→d: thrust FINS · ASYMMETRIC (twisted) leading edge · BULB behind hub · GRIM wheel (turbine inside, propeller outside).</strong></li>
+      <li><strong>Welded ESD = classed structural alteration; fins fatigue → inspect every dry-dock.</strong> Never 'no class survey'.</li>
+      <li><strong>Savings belong to their owner and never add up</strong> — quote the maker or class source, never a bare percentage.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Case Study — The Owner Wants a Duct and Boss-Cap Fins on a Bulk Carrier</button>
+    <div class="deep-dive-body">
+      <h4>Situation (illustrative)</h4>
+      <p>A superintendent forwards two vendor proposals for a single-screw bulk carrier going into dry-dock: a pre-duct with pre-swirl fins, and boss-cap fins on the existing propeller. The cover note says 'about 8% plus 5%, so 13% fuel saving' and asks the Chief Engineer for comments before the yard order.</p>
+      <h4>What the Chief Engineer's reply covers</h4>
+      <p><strong>Suitability.</strong> The ship is slow, full-form and heavily loaded — the class of hull where wake non-uniformity is greatest and where duct-type pre-swirl devices are aimed. The hub-vortex device addresses a different loss, at the boss. <strong>Expectations.</strong> Each vendor figure is a maker figure for other ships; the evidence to ask for is model-test or CFD work on this hull and propeller, and any independent in-service data. The two savings must not be added: both devices act partly on the same rotational energy, and Everllence (formerly MAN Energy Solutions) cautions that combined ESD savings above about 10% are unlikely. <strong>Class and EEDI/EEXI.</strong> The duct is a welded structural addition: drawings, strength and fatigue calculations and the installation go to the classification society as a structural alteration; the boss-cap fins come within the propeller approval. Any claimed EEXI benefit is evidenced to the verifier through the speed–power curve. <strong>Through-life care.</strong> Fins and welds are fatigue-loaded: inspection at every dry-docking goes into the planned-maintenance system, with propeller polishing and boss-cap fin inspection together. <strong>Measurement.</strong> Agree a before-and-after method — same draught, speed and weather filter — so the saving can be verified rather than assumed.</p>
+      <h4>The lesson for the examiner</h4>
+      <p>The candidate who says 'the duct saves 8%' fails; the candidate who explains which loss each device attacks, who owns the figure, why savings do not add, and what class and the planned-maintenance system must cover, passes.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>ITTC Recommended Procedure 7.5-02-03-01.4 — 1978 ITTC Performance Prediction Method, Rev 04 (2017)</li>
+    <li>ITTC 7.5-01-02-01 — Propeller Geometry Terminology (as reproduced in the 25th ITTC Propulsion Committee final report, 2008)</li>
+    <li>MAN Diesel &amp; Turbo — Basic Principles of Ship Propulsion (2011): wake fraction, hull efficiency, block coefficients by ship type</li>
+    <li>NASA Glenn Research Center — Beginner's Guide to Aeronautics: 'Incorrect Lift Theory' (equal-transit fallacy)</li>
+    <li>Mewis, F. and Guiard, T. — 'Mewis Duct — New Developments, Solutions and Conclusions', Second International Symposium on Marine Propulsors (SMP'11), Hamburg, 2011</li>
+    <li>Becker Marine Systems — Becker Mewis Duct® brochure and product information; Becker rudder options (twisted leading edge, rudder bulb)</li>
+    <li>Schneekluth Hydrodynamik — Wake Equalizing Duct product and fuel-savings information</li>
+    <li>ABS — Ship Energy Efficiency Measures Advisory (2013)</li>
+    <li>ITTC Specialist Committee on Energy Saving Methods — Final Report to the 29th ITTC</li>
+    <li>Wang et al. (CR Classification Society / NTOU) — 'Ship motions contribution to the fatigue life of a pre-swirl stator', PRADS 2016</li>
+    <li>SSPA / DSME — 'Hydrodynamic optimization of pre-swirl stator by CFD and model testing', International Shipbuilding Progress (2013)</li>
+    <li>Ouchi, K. and Ogura, M. (1988), J. Soc. Nav. Arch. Japan 163; Ouchi and Tamashima, PRADS 1989; Ouchi, Tamashima and Arai, PRADS 1992 — PBCF research</li>
+    <li>Kobayashi et al. (Nakashima Propeller and NMRI) — 'Effects of Propeller Pitch and Number of Blades on Energy Saving of an ECO-Cap', MARINE 2021</li>
+    <li>ISO 23453:2022 — Hub cap with fins for fixed-pitch propellers: design and manufacture guidelines</li>
+    <li>Kawasaki Heavy Industries — energy-saving technology (RBS-F rudder bulb system with fins); Damen Marine Components — Asymmetric Rudder Technology (ART™)</li>
+    <li>Grim, O. — 'Propeller and vane wheel', Journal of Ship Research (1980); Blaurock — 'Propeller plus vane wheel, an unconventional propulsion system' (1983); 'Overcoming problems with vane wheels', Marine Engineers Review (1990)</li>
+    <li>IMO MEPC.1/Circ.896 (14 December 2021) — Guidance on treatment of innovative energy efficiency technologies; DNV — 'Efficient handling of propeller retrofits' (2024)</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p26 · Topic 1 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p26 · P26-T1 · v1.0</div>
+  </div>
+</div>
+
+<!-- ========================================================================== -->
+<!-- TOPIC 2 — HIGH-EFFICIENCY PROPELLERS &AMP; AZIMUTH PROPULSION -->
+<!-- ========================================================================== -->
+
+<div class="topic-block" id="topic-p26-2" data-kw="high-efficiency propeller, propeller nomenclature, face, back, pressure side, suction side, blade tip, blade root, boss, hub, pitch, rake, skew, chord, leading edge, trailing edge, ducted propeller, Kort nozzle, accelerating duct, nozzle 19A, bollard pull, duct thrust, tip clearance, contra-rotating propeller, CRP, swirl recovery, load sharing, coaxial shafts, tip-modified propeller, azimuth propeller, Kappel propeller, Everllence, MAN Energy Solutions, CLT propeller, contracted and loaded tip, end plate, Sistemar, TVF, azimuth thruster, azimuth propulsion, L-drive, Z-drive, slewing drive, podded propulsion, Azipod, ABB, frequency converter, variable frequency drive, diesel-electric, double-acting ship, icebreaking LNG carrier">
+  <div class="topic-header">
+    <div class="topic-badge">Part 26 · Topic 2</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">High-Efficiency Propellers and Azimuth Propulsion — Ducted, Contra-rotating, Tip-modified and Podded</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Propeller nomenclature · Kort / ducted propeller · Contra-rotating propeller · Kappel · CLT · Azimuth L- and Z-drive · Electric podded propulsion (Azipod)</span>
+        <span class="topic-pages">Uday pp. 633–640</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> <strong>Source range.</strong> This topic is built from PDF 633–640, including the printed propeller-nomenclature diagram on the lower half of PDF 638, which is used here as a small terms box, not a topic. Part 26 ends at PDF 647 under Founder decision D-26-1; Human Elements begins at PDF 648 and belongs to Part 27. <strong>Source errors corrected.</strong> (1) <strong>Contra-rotating propellers.</strong> The source's 'and wake is zero' is wrong and is removed: the aft propeller recovers the forward propeller's slipstream <em>swirl</em>; the hull wake is unchanged and never zero. Its 'total gain ~3%' is not supported as a general figure and is not taught. (2) <strong>Kort nozzle.</strong> The source explains the duct with 'Q = A × V, as the area reduces velocity increases'. The funnel shape does not by itself accelerate the water: propeller suction and the circulation round the duct's foil section draw the flow through, and the duct produces its own forward thrust. The throat is at the propeller, not at the exit. The advantage is limited to heavily loaded propellers at low speed. (3) <strong>CLT.</strong> 'The end plates are not loaded' is clarified: the <em>blade tip</em> is loaded; the end plates are passive fences, not designed to carry lift. The source's photo caption calls the plate 'welded'; the fabrication method was not verified and is not taught. 'Discharge side' is replaced by pressure side (face). (4) <strong>Kappel and CLT</strong> are the two main commercial tip-modified designs, not the only ones. (5) <strong>Azipod.</strong> 'Speed control by frequency modulation' is replaced by frequency converter (variable-frequency drive). 'Suitable for cruise ships, not for cargo ships' is false and is not taught. 'More generators needed' is restated as 'all propulsion power comes from a diesel-electric plant'. 'Up to 20%' is retained only as an ABB claim against a modern shaftline. (6) <strong>Azimuth.</strong> 'In pods' fits podded units only; in mechanical units the gears carry power and a separate slewing drive steers. <strong>Savings figures.</strong> Every percentage in this topic is a named maker or yard figure with its context; none is generic. <strong>Cross-references:</strong> blade-section lift, face and back, tip vortex — Topic 1; propeller law, margins and heavy running — Part 24 Topic 2; propeller dry-dock checks and cavitation erosion — Part 20 Topic 3.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body"><strong>High-efficiency propellers</strong> are propeller arrangements that reduce the propeller's own losses — axial, rotational and tip-vortex — compared with a conventional open propeller. Four are named in the source's exam question: the <strong>ducted (Kort) propeller</strong>, where a fixed duct of hydrofoil section around the propeller adds thrust and cuts tip leakage on heavily loaded propellers; the <strong>contra-rotating propeller (CRP)</strong>, where a second, smaller propeller turning the opposite way recovers the swirl of the first and shares its load; <strong>tip-modified propellers</strong> such as the <strong>Kappel</strong> (blade tip curved smoothly toward the suction side) and the <strong>CLT</strong> (Contracted and Loaded Tip, with pressure-side end plates); and <strong>azimuth propulsion</strong>, where the propeller unit turns about a vertical axis so that thrust can be directed in any horizontal direction — mechanically through L- or Z-drive gearing, or electrically with the motor inside an underwater pod, as in ABB's <strong>Azipod</strong>.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li><strong>Simon asks this directly.</strong> The insert at the end of the source prints, from three papers, 'Discuss any three of the following high-efficiency propellers with its merits and demerits: ducted propellers, Kappel propellers, contra-rotating propellers, azimuth propulsion.'</li>
+    <li>Each arrangement changes what the engine room maintains: duct clearance and erosion, coaxial shafts and seals, end plates and tips, pod bearings, seals and high-voltage converters.</li>
+    <li>Maker claims for these propulsors are large and easily repeated; the examiner listens for whether the candidate knows the mechanism, the baseline and the ship type behind each figure.</li>
+    <li>Diesel-electric podded ships are now common in cruise, ferry, icebreaking and Arctic LNG trades — a Class 1 engineer will meet them.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">1930s</span>  Ludwig Kort develops the ducted propeller (Kort nozzle)
+<span class="t-year">1976–1986</span>  TVF (Tip Vortex Free) end-plate propellers — first generation (as described by Sistemar's designers)
+<span class="t-year">1986</span>  CLT (Contracted and Loaded Tip) propellers — second generation, Sistemar
+<span class="t-year">1988</span>  IHI line-shaft contra-rotating propeller in service
+<span class="t-year">c. 1990–91</span>  First Azipod (1.5 MW) on the Finnish vessel <em>Seili</em>; developed by Masa-Yards (later Kvaerner Masa-Yards) with ABB
+<span class="t-year">1991</span>  IHI reports about 15% saving on sea trials of the CRP bulk carrier <em>Juno</em> (maker data)
+<span class="t-year">1993</span>  MHI delivers a CRP VLCC; up to 15% energy saving reported at sea trial (maker data)
+<span class="t-year">1993–94</span>  Arctic product tanker <em>Uikku</em> converted to Azipod propulsion
+<span class="t-year">2005</span>  Developers of the Kappel propeller report a 4% efficiency gain in sea trials on a product carrier
+<span class="t-year">6 Sep 2016</span>  ABB launches Azipod XL with a claim of up to 20% fuel saving against modern shaftline propulsion
+<span class="t-year">Dec 2019</span>  Last of 15 Arc7 Yamal LNG carriers delivered with Azipod propulsion</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Standards and Recognised References</div>
+    <div class="reg-item"><span class="reg-code">ITTC 7.5-01-02-01 Propeller Geometry Terminology</span><span class="reg-desc">Face (pressure side), back (suction side), leading and trailing edge, chord; pitch, rake and skew as standard geometry terms.</span></div>
+    <div class="reg-item"><span class="reg-code">ITTC Specialist Committee on Azimuthing Podded Propulsion — Final Report, 24th ITTC (2005)</span><span class="reg-desc">The ITTC's recognised review of podded-propulsion testing and performance prediction.</span></div>
+    <div class="reg-item"><span class="reg-code">Classification of propulsion plant</span><span class="reg-desc">Propellers, thrusters, pods and their electric drives are approved and surveyed by the classification society under its machinery and electrical rules; no rule clause is quoted here. Propeller retrofits (including tip-modified blades) are handled as alterations.</span></div>
+    <div class="reg-item"><span class="reg-code">IMO MEPC.1/Circ.896 (14 December 2021)</span><span class="reg-desc">Propeller design changes are among the technologies that cannot be separated from overall vessel performance and appear through the speed–power curve in EEDI/EEXI (Part 23 Topics 1–2).</span></div>
+  </div>
+
+  <div class="section-head">📏 Propeller Nomenclature — The Terms This Topic Uses</div>
+  <table class="revision-table">
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>Face</td><td>Aft-facing blade surface — the <strong>pressure side</strong> when running ahead</td></tr>
+    <tr><td>Back</td><td>Forward-facing blade surface — the <strong>suction side</strong></td></tr>
+    <tr><td>Tip / root</td><td>Outer end of the blade / where the blade meets the boss</td></tr>
+    <tr><td>Boss (hub)</td><td>The central body carrying the blades; closed by the boss cap</td></tr>
+    <tr><td>Leading / trailing edge</td><td>The edge that meets the flow first / the edge it leaves from</td></tr>
+    <tr><td>Chord</td><td>Straight line from leading to trailing edge of an expanded (unwrapped) cylindrical blade section; its length is the chord length</td></tr>
+    <tr><td>Pitch</td><td>The axial advance per revolution of the blade's helical surface; may vary from root to tip</td></tr>
+    <tr><td>Rake</td><td>Axial inclination of the blade, usually aft, to give hull clearance</td></tr>
+    <tr><td>Skew</td><td>Sideways sweep of the blade outline; meets wake changes progressively and reduces vibration</td></tr>
+  </table>
+  <p class="notes-body">This box sets up only the terms used in this topic; it is built from the printed nomenclature diagram in the source (lower PDF 638), with face/back, tip/root, boss, pitch, rake and skew added. The Kappel tip curves toward the <strong>back</strong>; the CLT end plate projects toward the <strong>face</strong>.</p>
+
+  <div class="section-head">🌀 Ducted (Kort) Propeller</div>
+  <p class="notes-body">A <strong>Kort nozzle</strong> is a fixed, non-rotating annular duct of hydrofoil section around the propeller. The blade tips run with a small clearance at the duct's narrowest section, the <strong>throat</strong>, which is at the propeller; the inlet is much wider and the duct opens out again aft of the propeller.</p>
+  <table class="revision-table">
+    <tr><th>Mechanism</th><th>Explanation</th></tr>
+    <tr><td>Duct thrust</td><td>The propeller's suction, helped by the circulation round the duct's foil section, draws more water through the throat at higher speed. That circulation leaves low pressure on the duct's inner forward surface, so the duct itself is pushed forward and produces part of the total thrust</td></tr>
+    <tr><td>Momentum efficiency</td><td>A larger mass of water is accelerated by a smaller velocity increment — more efficient when the propeller is heavily loaded</td></tr>
+    <tr><td>Tip-loss reduction</td><td>The close-fitting duct restricts leakage round the blade tips from face to back, reducing tip-vortex loss — only if the tip clearance is kept small</td></tr>
+    <tr><td>What is wrong in the source</td><td>'Q = A × V, area reduces so velocity increases' gets cause and effect backwards: continuity only relates area and velocity once the flow is fixed, and an unpowered duct towed through water only adds drag</td></tr>
+  </table>
+  <ul class="notes-list">
+    <li><strong>Where it pays:</strong> heavily loaded propellers at low speed — tugs at bollard pull, trawlers towing, push boats, slow full-form ships, and cases where propeller diameter is restricted.</li>
+    <li><strong>Where it does not:</strong> as ship speed rises, duct drag grows and the advantage disappears, so fast ships do not use accelerating ducts.</li>
+    <li><strong>Attributed figure:</strong> Wärtsilä states its high-efficiency nozzle can raise bollard pull by up to about 30% at low vessel speeds (maker claim).</li>
+    <li><strong>Practical point:</strong> the benefit depends on keeping the tip clearance small, so blade-tip and duct-interior condition belong in the dry-dock checks (Part 20 Topic 3).</li>
+  </ul>
+
+  <div class="section-head">🔄 Contra-Rotating Propellers (CRP)</div>
+  <p class="notes-body">A <strong>contra-rotating propeller</strong> has two propellers on the same axis turning in opposite directions. A single propeller leaves swirl — rotational energy — in its slipstream. In a CRP the aft propeller, turning the other way, <strong>recovers most of the forward propeller's swirl as extra thrust</strong>, and splitting the load between two propellers lowers the blade loading of each. The hull wake is not changed by this: the source's 'wake is zero' is wrong.</p>
+  <table class="revision-table">
+    <tr><th>Design point</th><th>Reason</th></tr>
+    <tr><td>Aft propeller smaller</td><td>Keeps its disc inside the contracted slipstream of the forward propeller, clear of its tip vortices (ABB guidance: about 85–92% of the forward diameter at an equal power split)</td></tr>
+    <tr><td>Different blade numbers</td><td>Blades do not all cross at the same instant, so interaction pulses spread over several frequencies — lower peak shaft vibration, hull pressure pulses and noise</td></tr>
+    <tr><td>Lower blade loading</td><td>Delays cavitation; smaller diameters give more hull clearance</td></tr>
+  </table>
+  <table class="revision-table">
+    <tr><th>Merits</th><th>Demerits</th></tr>
+    <tr><td>Higher propulsive efficiency through swirl recovery and lower blade loading</td><td>Coaxial inner and outer shafts, contra-rotating gearbox, inter-shaft bearings and more complex stern-tube seals</td></tr>
+    <tr><td>More power absorbed within a limited diameter</td><td>Higher first cost (stated by the maker itself)</td></tr>
+    <tr><td>Smaller propellers, more hull clearance, lower pressure pulses</td><td>Extra mechanical losses; more demanding inspection</td></tr>
+  </table>
+  <p class="notes-body"><strong>Attributed figures — no universal value.</strong> Japanese full-scale results reported up to about 15% (IHI bulk carrier <em>Juno</em>, 1991; MHI VLCC, 1994 — maker data); makers today typically claim about 10%; and ABB notes that for a moderately loaded single-screw ship with an already optimised propeller the gain may be small, even marginal. A hybrid layout — a shaft propeller ahead of a contra-rotating pod (ABB CRP Azipod) — avoids the coaxial shafting.</p>
+
+  <div class="section-head">🪽 Tip-Modified Propellers — Kappel and CLT</div>
+  <p class="notes-body">Both designs attack the <strong>tip-vortex loss</strong> (Topic 1) so that the blade can carry load nearer the tip. They are the two main commercial designs, not the only ones: TVF (CLT's predecessor), various end-plate, winglet and tip-rake propellers also exist.</p>
+  <table class="revision-table">
+    <tr><th></th><th>Kappel propeller</th><th>CLT propeller</th></tr>
+    <tr><td>Owner</td><td>Everllence (formerly MAN Energy Solutions), Alpha FP and CP range</td><td>Sistemar (Spain)</td></tr>
+    <tr><td>Tip geometry</td><td>Outer blade curves smoothly toward the <strong>suction side</strong> (back, forward) — an integral, winglet-like tip; <strong>no separate plate</strong></td><td>Finite tip chord with an <strong>end plate</strong> projecting toward the <strong>pressure side</strong> (face, aft); the plate is 'contracted' to follow the contracting slipstream</td></tr>
+    <tr><td>Loading</td><td>The curved tip is a lifting surface that contributes to thrust</td><td>The <strong>blade tip is loaded</strong> (finite circulation and thrust). The end plates are <strong>passive</strong> fences between face and back, aligned with the flow and <strong>not designed to carry lift</strong></td></tr>
+    <tr><td>Other features</td><td>Applicable to fixed-pitch and controllable-pitch propellers</td><td>Pitch increasing from root to tip; moderate skew</td></tr>
+    <tr><td>Claimed benefits</td><td>Lower fuel and emissions; lower hull pressure pulses, hence less onboard noise and vibration (maker)</td><td>Higher efficiency; reduced cavitation, pressure pulses, noise and vibration; the designer also claims better manoeuvrability through a stronger slipstream over the rudder — no independent trial data were found</td></tr>
+    <tr><td>Attributed figures</td><td>Everllence: about 3–6% lower required power, up to 6% for the propeller alone; the developers' 2005 sea trial reported 4%</td><td>Sistemar: 4–8% efficiency over a conventional propeller, largest on slow full-form ships; secondary literature cites 3–4%</td></tr>
+  </table>
+  <p class="notes-body"><strong>Why the CLT plate is described as 'not loaded'.</strong> On a conventional blade, water leaks round the tip from the high-pressure face to the low-pressure back, so the load must fall to zero at the tip and the leakage feeds the tip vortex. The CLT end plate acts as a fence that greatly reduces this leakage, which is what lets the <em>tip section</em> carry load. The plate itself is aligned with the slipstream to keep its drag low and carries only small incidental forces. No independent full-scale efficiency figure was found for either Kappel or CLT; all figures above are maker or designer figures.</p>
+
+  <div class="section-head">🧭 Azimuth Propulsion — Mechanical L- and Z-Drives</div>
+  <p class="notes-body">An <strong>azimuth thruster</strong> is a propeller unit on a steerable housing below the hull that can be turned about a vertical axis to direct its thrust in any horizontal direction. Where azimuth units are the <strong>main propulsion</strong>, they steer the ship by vectoring thrust, most can turn through 360°, and a conventional rudder is normally not fitted; ships with azimuth units only as auxiliary or dynamic-positioning thrusters keep their rudder. Full thrust can be pointed in any direction even at low or zero speed, when a rudder is ineffective — hence the manoeuvrability.</p>
+  <table class="revision-table">
+    <tr><th>Mechanical type</th><th>Power path</th><th>Typical prime mover</th></tr>
+    <tr><td>L-drive</td><td>Vertical input shaft down to the propeller through <strong>one</strong> right-angle bevel-gear set</td><td>Vertically mounted electric motor above the unit</td></tr>
+    <tr><td>Z-drive</td><td>Horizontal input shaft, then down, through <strong>two</strong> right-angle bevel-gear sets (upper and lower)</td><td>Diesel engine (with clutch) or electric motor</td></tr>
+  </table>
+  <p class="notes-body">In both, the gears and shafts carry <strong>power to the propeller</strong>; a separate <strong>slewing (steering) drive</strong>, usually hydraulic or electric motors on a slewing ring, turns the underwater unit. The source's 'the outboard unit is rotated using gears and shafts' mixes the two functions.</p>
+
+  <div class="section-head">⚡ Electric Podded Propulsion — Azipod</div>
+  <p class="notes-body">In a <strong>podded propulsor</strong> an AC electric motor is housed in the underwater pod and drives a fixed-pitch propeller directly on its shaft, with no gearing. Power is fed from the ship's switchboard through a <strong>frequency converter</strong> (variable-frequency drive) and a slip-ring unit. Because the propeller is fixed-pitch, thrust is controlled by motor speed: the converter varies the frequency and voltage supplied to the motor, giving stepless speed and full torque in either direction. The source's 'frequency modulation' is a signal-encoding term, not the drive. <strong>Azipod</strong> is ABB's registered trademark for its podded propulsion; the generic term is podded propulsor, and other makers build them. An electrically driven L-drive (motor in the hull, geared) is electric but not 'motor-in-pod'.</p>
+  <table class="revision-table">
+    <tr><th>Merits</th><th>Demerits</th></tr>
+    <tr><td>No long shaftline, stern tube or rudder — flexible machinery arrangement and space saving</td><td>High initial cost</td></tr>
+    <tr><td>Excellent manoeuvrability; 360° thrust vectoring</td><td>All propulsion power must come from a <strong>diesel-electric</strong> generating plant — electrical conversion losses and a high-voltage plant to maintain</td></tr>
+    <tr><td>Usually lower vibration and noise (pulling propeller in more uniform inflow, no shaftline excitation)</td><td>Pod bearings and seals are critical items; documented failures on early-2000s cruise ships; major repairs may need dry-docking</td></tr>
+    <tr><td>Fuel and emissions can be lower, depending on ship type and operating profile</td><td>Engineers (HV systems, converters) and bridge teams (pod handling) need specialised training</td></tr>
+  </table>
+  <p class="notes-body"><strong>Attributed figure.</strong> ABB has claimed up to 20% fuel saving for Azipod XL compared with a modern shaftline (launched 2016, later applied to Azipod generally); a supporting ferry study was commissioned by ABB, and no independent figure was found. This is a manufacturer's best-case comparison, not a property of podded propulsion.</p>
+  <p class="notes-body"><strong>Where pods are used.</strong> Cruise ships, ferries and RoPax, icebreakers, Arctic tankers such as <em>Uikku</em>, icebreaking LNG carriers (15 Arc7 Yamal ships; Arctic LNG 2 carriers with three 17 MW units each), double-acting tankers, offshore and research vessels — ABB reports more than 25 vessel types and more than 700 units. On conventional deep-sea cargo ships a direct-drive slow-speed diesel shaftline is usually more economical; pods are chosen where manoeuvrability, ice-breaking (double-acting) capability or variable power demand justifies diesel-electric power. 'Suitable for cruise ships, not for cargo ships' is wrong.</p>
+
+  <div class="section-head">📝 How the Source's Exam Insert Is Used (PDF 646–647)</div>
+  <table class="revision-table">
+    <tr><th>Printed question (paper codes as printed, not independently verified)</th><th>Where it is answered</th></tr>
+    <tr><td>High-efficiency propellers — ducted, Kappel, contra-rotating, azimuth (2022/AUG/Q7, 2023/FEB/Q7, 2024/MAR/Q4)</td><td>This topic</td></tr>
+    <tr><td>Devices — wake equalizing, pre-swirl, post-swirl (a–c) and high-efficiency propellers (d) (2023/APR/Q6)</td><td>(a)–(c) Topic 1; (d) this topic</td></tr>
+    <tr><td>Rudder-efficiency devices — thrust fins, asymmetric rudders, rudder bulbs, Grim vane wheels (five papers 2022–2024)</td><td>Topic 1</td></tr>
+    <tr><td>Hull-form optimisation, twin skeg; ship dimensions, size, speed</td><td>Part 25 Topic 2 (not repeated)</td></tr>
+    <tr><td>Hull and propeller maintenance — hull roughness, condition-based propeller maintenance, coating and polishing</td><td>Earlier Parts (hull roughness; propeller polishing in Part 24) — not repeated</td></tr>
+    <tr><td>GISIS — functions, fuel-oil and port-reception-facility modules (2024/SEP/Q7)</td><td>Part 23 Topic 4 — provenance only; no GISIS content in Part 26</td></tr>
+    <tr><td>Skin-friction reduction — air cavity, surface texturing, micro-bubbles</td><td>Not covered by any source page in this Part or by a published Part — recorded as a future gap, not taught here</td></tr>
+  </table>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Simon):</strong> When Simon says 'any three high-efficiency propellers, merits and demerits', choose ducted, CRP and Kappel/CLT and give each the same three-line structure: <em>mechanism</em>, <em>where it pays</em>, <em>what it costs</em>. Ducted: duct thrust from circulation plus less tip leakage, pays at heavy loading and low speed, loses at speed. CRP: aft propeller recovers swirl and shares load, pays on heavily loaded propellers, costs coaxial shafts, gearbox and seals. Kappel: integral tip curved to the suction side; CLT: loaded tip with passive pressure-side end plates — both cut tip-vortex loss. If he picks azimuth, separate L/Z mechanical drives from motor-in-pod, say 'frequency converter', and name icebreaking LNG carriers before he can say 'cruise ships only'. Quote any percentage with its owner — 'ABB has claimed up to 20% for Azipod XL against a modern shaftline' — and never say a CRP makes the wake zero.</div>
+
+  <div class="section-head">🎯 Oral Q&amp;A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. How does a Kort nozzle improve propulsion, and when is it not worth fitting?</div><div class="qa-a">A Kort nozzle is a fixed duct of hydrofoil section around the propeller, with the blade tips running close to its narrowest section, the throat, at the propeller. The propeller's suction, helped by the circulation round the duct's foil section, draws more water through the throat; that circulation leaves low pressure on the duct's inner forward surface, so the duct produces forward thrust of its own. A larger mass of water is accelerated by a smaller velocity increase, which is more efficient at heavy loading, and the close-fitting duct reduces tip leakage. It pays on heavily loaded propellers at low speed — tugs, trawlers, push boats and some slow full-form ships; Wärtsilä states bollard pull can rise by up to about 30 per cent. At higher speed the duct's drag outweighs its thrust, so fast ships do not use it.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Explain the principle of contra-rotating propellers and their merits and demerits.</div><div class="qa-a">Two propellers on one axis turn in opposite directions. The forward propeller leaves swirl in its slipstream; the aft propeller, turning the other way, recovers most of that rotational energy as thrust, and the load is shared so each propeller has lower blade loading. The hull wake is not affected. The aft propeller is smaller, about 85 to 92 per cent of the forward diameter in ABB's guidance, to stay inside the contracted slipstream and clear of the forward tip vortices, and the blade numbers differ so that interaction pulses do not coincide. Merits are higher propulsive efficiency, more power within a limited diameter and lower pressure pulses; demerits are coaxial shafts, a contra-rotating gearbox, inter-shaft bearings and seals, higher first cost and extra mechanical losses. Japanese sea trials reported up to about 15 per cent and makers claim about 10 per cent, but on a moderately loaded, optimised single screw the gain can be marginal.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Compare the Kappel and CLT propellers.</div><div class="qa-a">Both reduce tip-vortex loss so the blade can carry load nearer the tip. The Kappel propeller, from Everllence, formerly MAN Energy Solutions, has the outer blade curved smoothly toward the suction side as an integral winglet-like tip with no separate plate; it is offered on fixed- and controllable-pitch propellers, and the maker quotes about 3 to 6 per cent lower required power. The CLT, Contracted and Loaded Tip, propeller from Sistemar has a finite tip chord with end plates projecting toward the pressure side, pitch increasing from root to tip and moderate skew. Its blade tip is loaded, while the end plates are passive fences that stop face-to-back leakage and are not designed to carry lift; Sistemar claims 4 to 8 per cent. These are the two main commercial tip-modified designs but not the only ones, and no independent full-scale figure was found for either.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4. Describe the types of azimuth thrusters.</div><div class="qa-a">An azimuth thruster is a propeller unit on a steerable housing below the hull that turns about a vertical axis to direct thrust in any horizontal direction; as main propulsion it steers the ship, so a conventional rudder is normally not fitted. Mechanical units keep the prime mover inside the hull: an L-drive has a vertical input shaft, normally from an electric motor mounted above, with one bevel-gear set; a Z-drive has a horizontal input shaft from a diesel engine or electric motor with two bevel-gear sets. The gears carry power to the propeller, and a separate slewing drive turns the unit. In electric podded units an AC motor inside the underwater pod drives a fixed-pitch propeller directly, fed through a frequency converter and slip rings.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5. Discuss the merits, demerits and applications of podded propulsion such as Azipod.</div><div class="qa-a">Azipod is ABB's trademark for its podded propulsor, with the motor in the pod driving a fixed-pitch propeller and speed set by a frequency converter. Merits are excellent manoeuvrability with 360-degree thrust, no shaftline, stern tube or rudder so machinery can be arranged flexibly, and usually lower vibration and noise; fuel and emissions can be lower, and ABB has claimed up to 20 per cent for Azipod XL against a modern shaftline, but that is a maker's best case. Demerits are high initial cost, a diesel-electric plant with conversion losses and high-voltage equipment, pod bearings and seals that have failed in service and may need dry-docking to repair, and specialised training for engineers and bridge teams. Pods are used on cruise ships, ferries, icebreakers, Arctic tankers and icebreaking LNG carriers; on ordinary deep-sea cargo ships a direct-drive two-stroke shaftline is usually more economical.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Distinguish between an L-drive and a Z-drive azimuth thruster, and state how speed is controlled in an electric podded propulsor.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Explain the principle of the contra-rotating propeller, stating why the aft propeller is smaller and the blade numbers differ, and discuss its merits and demerits.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Improving efficiency of propellers is recognised as a growing means to improve the energy efficiency of ships. Discuss any three of the following high-efficiency propellers with their merits and demerits: (a) ducted propellers, (b) Kappel propellers, (c) contra-rotating propellers, (d) azimuth propulsion. (Source insert, cf. 2022/AUG/Q7, 2023/FEB/Q7, 2024/MAR/Q4; codes as printed, not independently verified.)</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>Face = aft = pressure side · Back = forward = suction side · throat of a Kort duct is AT the propeller.</strong></li>
+      <li><strong>Kort: duct thrust (circulation) + less tip leakage → pays at HEAVY LOAD, LOW SPEED; drag kills it at speed.</strong> Not 'Q = A × V'.</li>
+      <li><strong>CRP: aft propeller recovers SWIRL + shares load · aft smaller, blade numbers differ · hull wake UNCHANGED — never 'zero'.</strong></li>
+      <li><strong>Kappel = tip curved to SUCTION side, no plate · CLT = LOADED tip + PASSIVE pressure-side end plates.</strong></li>
+      <li><strong>Azimuth: L-drive 1 bevel set (vertical motor) · Z-drive 2 bevel sets (horizontal input) · separate slewing drive steers.</strong></li>
+      <li><strong>Pod: motor in pod, fixed pitch, FREQUENCY CONVERTER (VFD) · diesel-electric · bearings and seals critical.</strong></li>
+      <li><strong>Pods: cruise, ferries, icebreakers, Arctic tankers, Arc7 LNG carriers — NOT 'cruise only'.</strong></li>
+      <li><strong>Every percentage has an owner</strong> — Everllence, Sistemar, IHI/MHI, Wärtsilä, ABB — and a baseline.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Case Study — Choosing Propulsion for an Arctic Shuttle Tanker</button>
+    <div class="deep-dive-body">
+      <h4>Situation (illustrative)</h4>
+      <p>An owner's technical team is comparing two concepts for an ice-class shuttle tanker that must also hold position at an offshore loading terminal: a conventional two-stroke shaftline with a controllable-pitch propeller and rudder plus tunnel thrusters, or diesel-electric propulsion with azimuthing pods. The Chief Engineer-designate is asked for the engineering view.</p>
+      <h4>What the Chief Engineer's note covers</h4>
+      <p><strong>Operating profile.</strong> Variable power demand — open-water transit, ice operation, slow approach and position-keeping — favours a diesel-electric plant where the number of running generator sets follows the load, and pods that can vector full thrust at zero speed. A double-acting ship can run stern-first through heavy ice with the pods pulling. <strong>Efficiency claims.</strong> The pod maker's 'up to 20%' is a best case against a shaftline on other ship types; the shaftline concept has no electrical conversion losses and is usually more economical in steady open-water service. The comparison has to be made on this ship's profile, including converter and motor losses. <strong>Maintenance.</strong> Pods move critical bearings and seals underwater and add a high-voltage converter plant; the note asks for the maker's bearing-monitoring and seal-replacement procedure, the spares strategy and whether major repair needs dry-docking. <strong>Crew.</strong> Engineers need HV and converter training; the bridge needs pod-handling training. <strong>Alternatives considered.</strong> A CRP on the shaftline would recover swirl but adds coaxial shafting; a ducted propeller would help only in the heavily loaded ice and low-speed conditions; tip-modified blades are a lower-cost efficiency option for the shaftline concept.</p>
+      <h4>The lesson for the examiner</h4>
+      <p>Podded propulsion is chosen for the operating profile — manoeuvrability, ice and variable load — not for a headline percentage. The candidate who can say why pods suit an Arctic tanker but a conventional bulk carrier keeps its two-stroke shaftline has understood the topic.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>ITTC 7.5-01-02-01 — Propeller Geometry Terminology; MAN Diesel &amp; Turbo — Basic Principles of Ship Propulsion (rake, skew, Kappel and ESD saving cautions)</li>
+    <li>Wärtsilä Encyclopedia of Ship Technology — 'Kort nozzle', 'Propeller nozzle', 'Azipod (azimuthing podded drive)'</li>
+    <li>Oosterveld, M. W. C. — Wake Adapted Ducted Propellers, NSMB/MARIN</li>
+    <li>Veikonheimo, T. and Turtiainen, M. — 'CRP Azipod gives a boost to marine propulsion efficiency', ABB Review 1/2003</li>
+    <li>IHI Marine United — Line-shaft contra-rotating propeller fiche (2011); 'Voyage reports and appraisal on CRP-ship JUNO', IHI Engineering Review (1991); Izumi and Nakamura — 'Contra-rotating propeller for VLCC', Mitsubishi Juko Giho (1994)</li>
+    <li>Everllence (formerly MAN Energy Solutions) — Alpha propeller and aft-ship solutions (Kappel); Andersen, Friesch, Kappel et al. — 'Development of a marine propeller with nonplanar lifting surfaces', Marine Technology 42(3), 2005</li>
+    <li>Sistemar — CLT® propeller design information; González-Adalid, Pérez Sobrino et al. — 'Nueva Generación de Hélices CLT® Optimizadas', Derrotero 9 (2015); Sánchez-Caja, González-Adalid et al. — 'Evaluation of End-Plate Impact on Tip Loaded Propeller Performance Using a RANSE Solver', International Shipbuilding Progress 61 (2014)</li>
+    <li>Gaggero, S. et al. — 'Wake Instabilities of Tip-Loaded Propellers: Comparison between CLT and New Generation CLT', Journal of Marine Science and Engineering 11 (2023)</li>
+    <li>Kongsberg Maritime — retractable thruster UL/ULE fact sheet and Azipull (L-drive and Z-drive configurations)</li>
+    <li>ABB — Azipod® product and press information (Azipod XL launch 2016; Arctic LNG carrier and icebreaking references; 30 years of Azipod); ABB Review 2/1999 (Azipod history)</li>
+    <li>ITTC Specialist Committee on Azimuthing Podded Propulsion — Final Report, 24th ITTC (2005); Chalmers University — 'Electrical systems in pod propulsion' (2007)</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p26 · Topic 2 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p26 · P26-T2 · v1.0</div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+    Part 26 of 31 · Pages 622–647 of 768 · Engineering Management Notes — Marine Intelligence Weekly<br>
+    Originally compiled by Uday Sankar S., Anglo-Eastern. Transcribed, expanded and verified by Nixon Antony, 2/E, Maersk A/S.<br>
+    This is subscriber-only content for MEO Class 1 exam preparation (Kochi MMD). Unauthorized redistribution is prohibited.<br>
+    Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p26 · Correction Required">Contact us</a> ·
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Back to Notes Index</a>
+</div>
+
+<script>
+function toggleDD(btn){
+  var body = btn.nextElementSibling;
+  body.classList.toggle('open');
+  btn.textContent = body.classList.contains('open') ? btn.textContent.replace('▶','▼') : btn.textContent.replace('▼','▶');
+}
+document.addEventListener('DOMContentLoaded', function(){
+  var links = document.querySelectorAll('.toc-link[href^="#"]');
+  var sections = Array.from(links).map(function(l){ return document.querySelector(l.getAttribute('href')); }).filter(Boolean);
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var id = '#' + entry.target.id;
+      var link = document.querySelector('.toc-link[href="' + id + '"]');
+      if(link){ link.classList.toggle('active', entry.isIntersecting); }
+    });
+  }, {rootMargin:'-80px 0px -70% 0px'});
+  sections.forEach(function(s){ observer.observe(s); });
+});
+</script>
+
+</body>
+</html>
