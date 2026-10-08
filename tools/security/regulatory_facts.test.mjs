@@ -119,8 +119,14 @@ export const REGULATORY_FACTS = [
       // The superseded claim is a MONTH ("reconvenes October 2026"). A full
       // calendar date such as an issue's own "7 October 2026" dateline is not
       // that claim, so a day number immediately before the month is excluded.
-      { pattern: /(?<!\b\d{1,2} )\bOctober 2026\b/, label: "October 2026" },
-      { pattern: /(?<!\b\d{1,2} )\bOct 2026\b/, label: "Oct 2026" },
+      // Nor is an as-at dateline ("Status (October 2026)", "at the time of
+      // writing (October 2026)", "As at October 2026"): from 1 October 2026 the
+      // bare month is also the month a page was checked. The exemption needs the
+      // dateline words IMMEDIATELY before the month, so "reconvenes October 2026"
+      // beside a dateline is still caught. (Flags are dropped when the pattern is
+      // re-compiled with "g", so case is spelled out.)
+      { pattern: /(?<!\b\d{1,2} )(?<!\b(?:[Aa]s (?:at|of)|time of writing|[Ss]tatus) \(?)\bOctober 2026\b/, label: "October 2026" },
+      { pattern: /(?<!\b\d{1,2} )(?<!\b(?:[Aa]s (?:at|of)|time of writing|[Ss]tatus) \(?)\bOct 2026\b/, label: "Oct 2026" },
     ],
     // Only pages that actually talk about the session are asked for the date.
     topic: /Net-Zero Framework|MEPC\/ES\.2|extraordinary session/i,
@@ -201,6 +207,32 @@ describe("controls", () => {
     assert.ok(fact.superseded.some((s) => s.pattern.test("the Net-Zero vote falls in October 2026")),
       "the bare month must still be caught");
     assert.ok(fact.superseded.some((s) => s.pattern.test("reconvenes Oct 2026")));
+  });
+
+  test("an as-at dateline in October 2026 is not the superseded month", () => {
+    // From 1 October 2026 the bare month is also how a page says WHEN it was
+    // checked. Notes Parts 24/25 (built 7-8 Oct 2026) date their status boxes
+    // this way and never mention the session at all.
+    const asAt = [
+      "a measure that, at the time of writing (October 2026), exists only as draft amendments",
+      "Key Instruments and Their Status (October 2026)",
+      "<th>Status (Oct 2026)</th>",
+      "As at October 2026 the position is: the IGF Code is prescriptive for natural gas only",
+      "as of October 2026, not in force",
+    ];
+    for (const s of asAt) {
+      assert.ok(!fact.superseded.some((p) => p.pattern.test(s)), `dateline wrongly flagged: ${s}`);
+    }
+    // ...while the superseded claim itself is still caught, even beside a dateline.
+    const claims = [
+      "MEPC/ES.2 reconvenes October 2026.",
+      "As at October 2026, the resumed session reconvenes October 2026.",
+      "the Net-Zero vote falls in October 2026",
+      "status: adoption expected October 2026",
+    ];
+    for (const s of claims) {
+      assert.ok(liveSupersededHits(s, fact).length >= 1, `superseded claim missed: ${s}`);
+    }
   });
 
   test("correction blocks are stripped, and only correction blocks", () => {
