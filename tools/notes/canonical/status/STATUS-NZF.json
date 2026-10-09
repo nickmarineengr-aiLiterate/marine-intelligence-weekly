@@ -34,17 +34,17 @@
   "review_trigger": [
     "Close of MEPC 85 and the outcome of the resumed MEPC/ES.2, or any successor IMO decision on the Net-Zero Framework",
     "Any IMO change to the date or confirmation of the resumed MEPC/ES.2",
-    "CA3 consumer conversion must complete before the MEPC 85 / resumed MEPC/ES.2 window (R-CA2-5)"
+    "On any change: update this record, the P22 #topic-p22-3 hub prose and every consumer marker (validate_status_consumers.py requires each marker's data-as-of to equal this record's as_of and to carry its label)"
   ],
   "consumers": [
-    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p22.html#topic-p22-3", "role": "TEACHING_HUB", "note": "Central current-status teaching node (Founder R-CA2-4)."},
-    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p2.html#topic-9", "role": "SPECIALISATION_STATUS_PROSE", "note": "GHG pricing / policy-mechanics specialisation (R-CA2-4); restates status in several places; not the central status node."},
-    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p24.html#topic-p24-1", "role": "STATUS_PROSE", "note": "SEEMP topic; draft-GFI status box."},
-    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p28.html#topic-p28-3", "role": "STATUS_PROSE", "note": "Dated one-liner ('not adopted as of 8 October 2026'), points to Part 22 Topic 3."},
-    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p29.html#topic-p29-3", "role": "STATUS_PROSE", "note": "Dated, qualified status paragraph; points to Part 22 Topic 3."},
-    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p31.html#topic-p31-1", "role": "STATUS_PROSE", "note": "Timeline row and decarbonisation paragraph (v1.1)."},
-    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p25.html#topic-p25-1", "role": "POINTER", "note": "Pointer form: status taught in Part 22 Topic 3."},
-    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p23.html#topic-p23-3", "role": "POINTER", "note": "Points to Part 2 Topic 9 for the draft NZF, not to the hub (CA1 CA-A03); for CA3."}
+    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p22.html#topic-p22-3", "role": "TEACHING_HUB", "marker": true, "note": "Central current-status teaching node (Founder R-CA2-4). CA3: dated hub marker in the Current Status section (v1.2); the only consumer that states the next decision point."},
+    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p2.html#topic-9", "role": "SPECIALISATION_STATUS_PROSE", "marker": true, "requires_pointer_to": "meoclass1/oralnotes/miw-notes-mgmt-p22.html#topic-p22-3", "note": "GHG pricing / policy-mechanics specialisation (R-CA2-4). CA3: dated marker + P22 link; forward decision-point lines converted to hub pointers (v1.2)."},
+    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p24.html#topic-p24-1", "role": "STATUS_PROSE", "marker": true, "requires_pointer_to": "meoclass1/oralnotes/miw-notes-mgmt-p22.html#topic-p22-3", "note": "SEEMP topic; draft-GFI box. CA3: dated marker + P22 link (v1.1)."},
+    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p28.html#topic-p28-3", "role": "STATUS_PROSE", "marker": true, "requires_pointer_to": "meoclass1/oralnotes/miw-notes-mgmt-p22.html#topic-p22-3", "note": "ESG table line. CA3: inline dated marker + P22 link (v1.1)."},
+    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p29.html#topic-p29-3", "role": "STATUS_PROSE", "marker": true, "requires_pointer_to": "meoclass1/oralnotes/miw-notes-mgmt-p22.html#topic-p22-3", "note": "Regulatory-box entry. CA3: inline dated marker + P22 link; meeting schedule removed (v1.1)."},
+    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p31.html#topic-p31-1", "role": "STATUS_PROSE", "marker": true, "requires_pointer_to": "meoclass1/oralnotes/miw-notes-mgmt-p22.html#topic-p22-3", "note": "Decarbonisation paragraph. CA3: dated marker + P22 link; timeline row and paragraph no longer restate the schedule (v1.2)."},
+    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p25.html#topic-p25-1", "role": "POINTER", "marker": false, "requires_pointer_to": "meoclass1/oralnotes/miw-notes-mgmt-p22.html#topic-p22-3", "note": "Pointer form; CA3 makes the cross-reference a real link (v1.1)."},
+    {"source_node_key": "meoclass1/oralnotes/miw-notes-mgmt-p23.html#topic-p23-3", "role": "POINTER", "marker": false, "requires_pointer_to": "meoclass1/oralnotes/miw-notes-mgmt-p22.html#topic-p22-3", "note": "CA3: status pointer repointed from Part 2 Topic 9 to the hub (CA1 CA-A03) (v1.1)."}
   ],
   "excluded": "meoclass1/oralnotes/miw-notes-mgmt-p22.html#topic-p22-2 states the October 2025 adjournment as a dated historical fact. It does not go stale and is not a status consumer.",
   "scope_note": "Data only (POST31-CA2, Layer 3). Not rendered into any page; no learner page is converted in CA2 (consumer conversion = CA3). Consumers are Layer 1 file#anchor keys from tools/notes/canonical/source_nodes.csv. EU measures (FuelEU, EU ETS) are never recorded here."
