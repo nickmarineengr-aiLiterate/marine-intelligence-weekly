@@ -232,6 +232,15 @@ def validate(manifest_path: Path) -> None:
     # The pins themselves live in `oral_manifest.audit_governed_artefacts_live`
     # so that this gate and `validate_artefact_governance.py` cannot drift into
     # asking different questions of the same record.
+    #
+    # That includes governed-artefact SUCCESSION. A record declaring
+    # `governed_artefact_successions` gets its successor-side checks there
+    # (`succession_*`), and a predecessor's `live_matches_authorised_artefact_state`
+    # accepts a superseded pin only through
+    # `oral_supersession.resolve_authorised_artefact_state`, which verifies the
+    # whole chain against git. With no succession declared the check is the
+    # original `pin == live`, so this section's output on such a record is
+    # unchanged.
     for finding in audit_governed_artefacts_live(manifest_path, REPO):
         report(finding.check, finding.ok, finding.detail)
 

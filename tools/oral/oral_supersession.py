@@ -605,6 +605,496 @@ def _manifest_baseline_commit(name, directory=None):
     return None
 
 
+# ===================================================== governed whole-file artefacts
+#
+# THE SAME CONTRACT, A DIFFERENT SHAPE
+# ------------------------------------
+# A governed artefact (oral_manifest GOVERNED_ARTEFACT_FIELDS) is a page with no
+# card block -- a cheat sheet, a notes page -- pinned WHOLE-FILE by the record
+# that corrected it. The contract above carries over unchanged: the historical
+# pin is never rewritten, the LATER record declares descent, and the
+# predecessor's check becomes "my pin is the authorised ancestor of live".
+#
+# Three card assumptions do NOT carry over, and are deliberately not reused:
+#
+#   * KEYING. Cards are keyed on (file, anchor). An artefact is keyed on its
+#     repo-relative PATH, and a link must also agree on artefact_type. A
+#     synthetic anchor would enter the ownership map -- the impersonation
+#     `governed_artefact_is_not_a_card` forbids.
+#
+#   * CONVENTIONS. Cards legitimately mix 16- and 64-character digests, which
+#     is why `_same_convention` tolerates truncation. Artefacts have exactly
+#     one convention, `oral_manifest.artefact_digest` (LF-normalised sha256,
+#     64 hex). Anything else is DIGEST_CONVENTION_MISMATCH; no prefix match.
+#
+#   * EVIDENCE. The card resolver trusts the digests a record states, because
+#     each card validator separately proves its own transition. A whole-file
+#     succession is accepted only after EVERY link has been checked against
+#     repository history (`verify_artefact_chain_history`): the successor's
+#     pre-state is the file at its baseline commit, its post-state is the file
+#     at its last governing commit, the predecessor's governing commit is an
+#     ancestor of that baseline, and every proposition the predecessor governs
+#     survives. Two matching strings inside a JSON declaration prove nothing.
+#     With no history supplied, a declared chain fails HISTORY_UNVERIFIED.
+#
+# DORMANT BY DEFAULT, AGAIN
+# -------------------------
+# With no `governed_artefact_successions` entry naming a path anywhere on disk,
+# resolution is `pin == live` and nothing else runs -- the comparison
+# `audit_governed_artefacts_live` always made. Every record on main is that
+# case.
+
+from oral_manifest import (                                           # noqa: E402
+    GOVERNED_ARTEFACT_SUCCESSION_FIELD, GOVERNED_ARTEFACT_SUCCESSION_FIELDS,
+    GOVERNED_ARTEFACT_SUPERSEDES_FIELDS, SUCCESSION_LINK_STATUS,
+    artefact_digest)
+
+# Outcomes only the artefact form needs. The shared ones above (LIVE_TERMINAL,
+# SUPERSEDED_OK, PIN_MISMATCH, CHAIN_BREAK, CHAIN_FORK, CHAIN_CYCLE,
+# AMBIGUOUS_ROOT, AMBIGUOUS_TERMINAL, TERMINAL_NOT_LIVE,
+# DIGEST_CONVENTION_MISMATCH, MALFORMED_CLAIM, NOT_IN_CHAIN,
+# PREDECESSOR_PIN_ALTERED) keep their card meaning.
+MISSING_ANCESTOR = "MISSING_ANCESTOR"          # named predecessor absent / pin differs
+PATH_MISMATCH = "PATH_MISMATCH"                # successor names another file
+TYPE_MISMATCH = "TYPE_MISMATCH"
+UNKNOWN_FIELD = "UNKNOWN_FIELD"
+UNAUTHORISED_LINK = "UNAUTHORISED_LINK"        # a record in the chain is not AUTHORISED
+HISTORY_UNVERIFIED = "HISTORY_UNVERIFIED"      # no repository history was supplied
+HISTORY_MISMATCH = "HISTORY_MISMATCH"          # git does not show the declared transition
+PROPOSITION_NOT_PRESERVED = "PROPOSITION_NOT_PRESERVED"
+
+
+@dataclasses.dataclass(frozen=True)
+class ArtefactRecord:
+    """One governed-artefact entry or one succession entry, from one record."""
+
+    manifest: str
+    action_id: str
+    path: str
+    artefact_type: str | None
+    pre_edit_digest: str | None
+    post_edit_digest: str | None
+    is_succession: bool
+    supersedes: object              # the claim; only meaningful for successions
+    preserved: tuple                # what this state governs and must survive
+    unknown_fields: tuple
+    record_status: str | None
+    baseline_commit: str | None
+    governing_commit: str | None    # the LAST governing commit
+
+    @property
+    def state_key(self) -> tuple:
+        return (self.manifest, self.pre_edit_digest, self.post_edit_digest)
+
+
+@dataclasses.dataclass(frozen=True)
+class ArtefactState:
+    """One pinned whole-file state, possibly co-owned by several action ids."""
+
+    manifest: str
+    pre: str | None
+    post: str | None
+    action_ids: tuple
+    members: tuple                  # the ArtefactRecords that own this state
+    claim: object                   # None for a root
+
+    @property
+    def key(self) -> tuple:
+        return (self.manifest, self.pre, self.post)
+
+    @property
+    def first(self) -> ArtefactRecord:
+        return self.members[0]
+
+    @property
+    def is_succession(self) -> bool:
+        return any(m.is_succession for m in self.members)
+
+    def describe(self) -> str:
+        return "%s/%s" % (self.manifest, "+".join(sorted(self.action_ids)))
+
+
+_MISSING = object()
+
+
+def _is_artefact_digest(value) -> bool:
+    return (isinstance(value, str) and len(value) == 64
+            and all(c in "0123456789abcdef" for c in value))
+
+
+def load_artefact_records(directory=None) -> list[ArtefactRecord]:
+    """Every governed-artefact and succession entry on the authorisation surface.
+
+    Same surface as ``load_card_records`` and the ownership scan, for the same
+    reason: one definition of "the records that may authorise an edit". Batch
+    manifests carry neither collection, so they contribute nothing.
+    """
+    out: list[ArtefactRecord] = []
+    for path in authorisation_manifest_paths(directory):
+        try:
+            doc = json.loads(read_text(path))
+        except Exception:                                  # noqa: BLE001
+            continue
+        if not isinstance(doc, dict):
+            continue
+        commits = doc.get("governing_commits") or []
+        common = dict(manifest=path.name, record_status=doc.get("status"),
+                      baseline_commit=doc.get("baseline_commit"),
+                      governing_commit=commits[-1] if isinstance(commits, list)
+                      and commits else None)
+        for a in doc.get("governed_artefacts") or []:
+            if not (isinstance(a, dict) and a.get("path")):
+                continue
+            out.append(ArtefactRecord(
+                action_id=str(a.get("correction_action_id") or ""),
+                path=str(a["path"]), artefact_type=a.get("artefact_type"),
+                pre_edit_digest=a.get("pre_edit_digest"),
+                post_edit_digest=a.get("post_edit_digest"),
+                is_succession=False, supersedes=None,
+                preserved=tuple(x for x in [a.get("expected_text_after")] if x),
+                unknown_fields=(), **common))
+        succ = doc.get(GOVERNED_ARTEFACT_SUCCESSION_FIELD)
+        for s in succ if isinstance(succ, list) else []:
+            if not (isinstance(s, dict) and s.get("path")):
+                continue
+            props = s.get("preserved_propositions")
+            out.append(ArtefactRecord(
+                action_id=str(s.get("succession_action_id") or ""),
+                path=str(s["path"]), artefact_type=s.get("artefact_type"),
+                pre_edit_digest=s.get("pre_edit_digest"),
+                post_edit_digest=s.get("post_edit_digest"),
+                is_succession=True,
+                supersedes=s.get("supersedes", _MISSING),
+                preserved=tuple(props) if isinstance(props, list) else (),
+                unknown_fields=tuple(sorted(
+                    set(s) - set(GOVERNED_ARTEFACT_SUCCESSION_FIELDS))),
+                **common))
+    return out
+
+
+def _artefact_states_for(records, path):
+    grouped: dict[tuple, list] = {}
+    for rec in records:
+        if rec.path == path:
+            grouped.setdefault(rec.state_key, []).append(rec)
+    states = {}
+    for key, members in grouped.items():
+        claims = [m.supersedes for m in members if m.is_succession]
+        claim = claims[0] if claims else None
+        # Co-owners of one state must agree on WHAT they are and WHERE they
+        # descend from. A root and a succession sharing one state, or two
+        # successions with different claims, are two histories for one file.
+        if (claims and len(claims) != len(members)) or any(
+                c != claim for c in claims[1:]):
+            claim = {"__conflict__": True}
+        states[key] = ArtefactState(
+            manifest=key[0], pre=key[1], post=key[2],
+            action_ids=tuple(m.action_id for m in members),
+            members=tuple(members), claim=claim)
+    return states
+
+
+def _artefact_link_problem(state, records, states, path):
+    """Shape, identity and continuity of ONE succession link, or why not."""
+    if isinstance(state.claim, dict) and state.claim.get("__conflict__"):
+        return None, (MALFORMED_CLAIM,
+                      "co-owners of %s disagree about descent" % state.describe())
+    for m in state.members:
+        if m.unknown_fields:
+            return None, (UNKNOWN_FIELD, "%s carries unknown succession field(s): %s"
+                          % (state.describe(), ", ".join(m.unknown_fields)))
+    claim = state.claim
+    if claim is _MISSING or claim is None:
+        return None, (MALFORMED_CLAIM,
+                      "%s declares a succession with no supersedes" % state.describe())
+    if not isinstance(claim, dict):
+        return None, (MALFORMED_CLAIM, "%s supersedes must be an object, got %s"
+                      % (state.describe(), type(claim).__name__))
+    extra = sorted(set(claim) - set(GOVERNED_ARTEFACT_SUPERSEDES_FIELDS))
+    if extra:
+        return None, (UNKNOWN_FIELD, "%s supersedes carries unknown field(s): %s"
+                      % (state.describe(), ", ".join(extra)))
+    missing = [f for f in GOVERNED_ARTEFACT_SUPERSEDES_FIELDS if not claim.get(f)]
+    me = state.first
+    if missing or not me.action_id or not me.artefact_type or not me.preserved:
+        return None, (MALFORMED_CLAIM, "%s is incomplete (missing %s)"
+                      % (state.describe(), ", ".join(
+                          missing or ["succession identity"])))
+    for label, value in (("pre", state.pre), ("post", state.post),
+                         ("supersedes.post", claim.get("post_edit_digest"))):
+        if not _is_artefact_digest(value):
+            return None, (DIGEST_CONVENTION_MISMATCH,
+                          "%s %s digest is %s chars; governed artefacts use the "
+                          "64-char LF-normalised whole-file convention only"
+                          % (state.describe(), label,
+                             len(value) if isinstance(value, str) else "no"))
+    if me.record_status != SUCCESSION_LINK_STATUS:
+        return None, (UNAUTHORISED_LINK, "%s is in a record with status=%s"
+                      % (state.describe(), me.record_status))
+
+    pname, paid = claim["manifest"], claim["action_id"]
+    if pname == state.manifest:
+        return None, (CHAIN_CYCLE, "%s supersedes its own record" % state.describe())
+    named = [r for r in records if r.manifest == pname and r.action_id == paid]
+    if not named:
+        return None, (MISSING_ANCESTOR, "predecessor %s/%s does not exist"
+                      % (pname, paid))
+    on_path = [r for r in named if r.path == path]
+    if not on_path:
+        return None, (PATH_MISMATCH, "predecessor %s/%s governs %s, not %s"
+                      % (pname, paid, named[0].path, path))
+    pred = on_path[0]
+    if pred.artefact_type != me.artefact_type:
+        return None, (TYPE_MISMATCH, "%s is %s but predecessor %s/%s is %s"
+                      % (state.describe(), me.artefact_type, pname, paid,
+                         pred.artefact_type))
+    if not _is_artefact_digest(pred.post_edit_digest):
+        return None, (DIGEST_CONVENTION_MISMATCH,
+                      "predecessor %s/%s pins a non-artefact digest" % (pname, paid))
+    if pred.post_edit_digest != claim["post_edit_digest"]:
+        # A rebaselined or tampered predecessor breaks the chain here rather
+        # than quietly becoming the new truth.
+        return None, (MISSING_ANCESTOR, "predecessor %s/%s pins %s, claim says %s"
+                      % (pname, paid, pred.post_edit_digest,
+                         claim["post_edit_digest"]))
+    if pred.record_status != SUCCESSION_LINK_STATUS:
+        return None, (UNAUTHORISED_LINK, "predecessor %s/%s is in a record with "
+                      "status=%s" % (pname, paid, pred.record_status))
+    pred_state = states.get(pred.state_key)
+    if pred_state is None:
+        return None, (MISSING_ANCESTOR, "predecessor state %s/%s not present for %s"
+                      % (pname, paid, path))
+    if pred_state.key == state.key:
+        return None, (CHAIN_CYCLE, "%s supersedes itself" % state.describe())
+    if state.pre != pred.post_edit_digest:
+        return None, (CHAIN_BREAK, "%s starts at %s but %s ended at %s"
+                      % (state.describe(), state.pre, pred_state.describe(),
+                         pred.post_edit_digest))
+    return pred_state, None
+
+
+def build_artefact_chain(path, records=None, directory=None):
+    """Order every pinned state of one governed artefact into one line of descent.
+
+    Returns ``(ordered_states, problem)`` exactly as ``build_chain`` does.
+    ``(None, None)`` means no succession is declared for this path anywhere:
+    the caller falls back to the plain pin comparison.
+    """
+    records = list(records if records is not None else load_artefact_records(directory))
+    states = _artefact_states_for(records, path)
+
+    # A succession filed under ANOTHER path that names a state of THIS path is
+    # an attempt to inherit this file's relationship. Fail closed for both.
+    keyed = {(r.manifest, r.action_id) for r in records if r.path == path}
+    for r in records:
+        if (r.is_succession and r.path != path and isinstance(r.supersedes, dict)
+                and (r.supersedes.get("manifest"), r.supersedes.get("action_id"))
+                in keyed):
+            return None, (PATH_MISMATCH, "%s/%s on %s claims descent from %s/%s on %s"
+                          % (r.manifest, r.action_id, r.path,
+                             r.supersedes.get("manifest"),
+                             r.supersedes.get("action_id"), path))
+    if not states:
+        return None, None
+    claimants = {k: s for k, s in states.items() if s.is_succession}
+    if not claimants:
+        return None, None                               # dormant
+
+    parent: dict[tuple, tuple] = {}
+    for key, state in sorted(claimants.items(), key=lambda kv: kv[1].describe()):
+        pred, problem = _artefact_link_problem(state, records, states, path)
+        if problem:
+            return None, problem
+        parent[key] = pred.key
+
+    # FORK: two futures for one file. Two successors naming one predecessor
+    # state is a fork whether or not their post-states happen to agree.
+    seen_parents: dict[tuple, tuple] = {}
+    for child, pred in sorted(parent.items()):
+        if pred in seen_parents:
+            return None, (CHAIN_FORK, "%s and %s both supersede %s"
+                          % (states[seen_parents[pred]].describe(),
+                             states[child].describe(), states[pred].describe()))
+        seen_parents[pred] = child
+
+    roots = [k for k in states if k not in parent]
+    if len(roots) != 1:
+        return None, (AMBIGUOUS_ROOT, "%d states have no predecessor: %s"
+                      % (len(roots), ", ".join(sorted(
+                          states[k].describe() for k in roots))))
+    root = states[roots[0]]
+    if root.first.record_status != SUCCESSION_LINK_STATUS:
+        return None, (UNAUTHORISED_LINK, "root %s is in a record with status=%s"
+                      % (root.describe(), root.first.record_status))
+    if not _is_artefact_digest(root.post):
+        return None, (DIGEST_CONVENTION_MISMATCH,
+                      "root %s pins a non-artefact digest" % root.describe())
+
+    terminals = [k for k in states if k not in seen_parents]
+    if len(terminals) != 1:
+        return None, (AMBIGUOUS_TERMINAL, "%d states have no successor: %s"
+                      % (len(terminals), ", ".join(sorted(
+                          states[k].describe() for k in terminals))))
+
+    child_of = dict(seen_parents)
+    order = [roots[0]]
+    while order[-1] in child_of:
+        if len(order) > len(states):
+            return None, (CHAIN_CYCLE, "cycle detected walking %s" % path)
+        order.append(child_of[order[-1]])
+    if len(order) != len(states):
+        unreached = sorted(states[k].describe() for k in states if k not in set(order))
+        return None, (CHAIN_CYCLE, "%d state(s) unreachable from the root: %s"
+                      % (len(unreached), ", ".join(unreached)))
+    return [states[k] for k in order], None
+
+
+def verify_artefact_chain_history(chain, path, history):
+    """Prove every link of a sound chain against repository history.
+
+    ``history`` must offer ``text_at(commit, path)`` and
+    ``is_ancestor(older, newer)`` -- ``oral_manifest.GitArtefactHistory`` in
+    production, a test double in memory. Returns None, or ``(status, reason)``.
+    """
+    if history is None:
+        return (HISTORY_UNVERIFIED, "a declared chain for %s is never accepted on "
+                "its JSON alone, and no repository history was supplied" % path)
+
+    def digest_at(commit):
+        text = history.text_at(commit, path) if commit else None
+        return text, (artefact_digest(text) if text is not None else None)
+
+    root = chain[0]
+    text, got = digest_at(root.first.governing_commit)
+    if got != root.post:
+        return (HISTORY_MISMATCH, "root %s pins %s but its governing commit %s "
+                "holds %s" % (root.describe(), root.post,
+                              root.first.governing_commit, got))
+    required = list(root.first.preserved)
+    lost = [x for x in required if x not in text]
+    if lost:
+        return (PROPOSITION_NOT_PRESERVED, "root %s governing commit lacks its own "
+                "expected text" % root.describe())
+
+    prev = root
+    for state in chain[1:]:
+        me = state.first
+        _base_text, base = digest_at(me.baseline_commit)
+        if base != state.pre:
+            return (HISTORY_MISMATCH, "%s declares pre %s but its baseline %s "
+                    "holds %s" % (state.describe(), state.pre,
+                                  me.baseline_commit, base))
+        post_text, post = digest_at(me.governing_commit)
+        if post != state.post:
+            return (HISTORY_MISMATCH, "%s declares post %s but its governing "
+                    "commit %s holds %s" % (state.describe(), state.post,
+                                            me.governing_commit, post))
+        if not history.is_ancestor(prev.first.governing_commit, me.baseline_commit):
+            return (HISTORY_MISMATCH, "%s baseline %s does not descend from %s "
+                    "governing commit %s" % (state.describe(), me.baseline_commit,
+                                             prev.describe(),
+                                             prev.first.governing_commit))
+        if not history.is_ancestor(me.baseline_commit, me.governing_commit):
+            return (HISTORY_MISMATCH, "%s governing commit %s does not descend "
+                    "from its baseline %s" % (state.describe(),
+                                              me.governing_commit,
+                                              me.baseline_commit))
+        dropped = [x for x in required if x not in me.preserved]
+        if dropped:
+            return (PROPOSITION_NOT_PRESERVED, "%s drops %d proposition(s) %s "
+                    "governs" % (state.describe(), len(dropped), prev.describe()))
+        lost = [x for x in me.preserved if x not in post_text]
+        if lost:
+            return (PROPOSITION_NOT_PRESERVED, "%s governing commit lacks %d "
+                    "preserved proposition(s)" % (state.describe(), len(lost)))
+        required = list(me.preserved)
+        prev = state
+    return None
+
+
+def resolve_authorised_artefact_state(*, manifest, action_id, path,
+                                      pinned_post_digest, live_digest,
+                                      records=None, directory=None,
+                                      history=None, live_text=None) -> Resolution:
+    """Is this record's whole-file pin still honoured by the live page?
+
+    Two acceptable answers, as for cards:
+
+    * no succession names this path anywhere, and the pin IS live
+      (``LIVE_TERMINAL`` -- the original ``pin == live`` check, unchanged); or
+    * a declared chain exists, every link is sound AND verified against
+      repository history, this record is a state in it, and the terminal
+      state is live (``LIVE_TERMINAL`` for the terminal, ``SUPERSEDED`` for
+      an ancestor).
+
+    Everything else fails, including an unregistered edit after the terminal.
+    """
+    records = list(records if records is not None else load_artefact_records(directory))
+    chain, problem = build_artefact_chain(path, records=records)
+    if problem is not None:
+        return Resolution(False, problem[0], problem[1])
+
+    if chain is None:
+        if pinned_post_digest == live_digest:
+            return Resolution(True, LIVE_TERMINAL, "pin is live")
+        return Resolution(False, PIN_MISMATCH, "pinned %s but live is %s"
+                          % (pinned_post_digest, live_digest))
+
+    path_desc = tuple(s.describe() for s in chain)
+    mine = [s for s in chain if s.manifest == manifest and action_id in s.action_ids]
+    if not mine:
+        return Resolution(False, NOT_IN_CHAIN, "%s/%s is not a state in the chain "
+                          "for %s" % (manifest, action_id, path), path_desc)
+    state = mine[0]
+    if state.post != pinned_post_digest:
+        return Resolution(False, PREDECESSOR_PIN_ALTERED, "record pins %s but the "
+                          "chain holds %s" % (pinned_post_digest, state.post),
+                          path_desc)
+
+    hist = verify_artefact_chain_history(chain, path, history)
+    if hist is not None:
+        return Resolution(False, hist[0], hist[1], path_desc)
+
+    terminal = chain[-1]
+    if not _is_artefact_digest(live_digest):
+        return Resolution(False, DIGEST_CONVENTION_MISMATCH, "live digest is not a "
+                          "64-char artefact digest", path_desc)
+    if terminal.post != live_digest:
+        return Resolution(False, TERMINAL_NOT_LIVE, "chain ends at %s (%s) but "
+                          "live is %s" % (terminal.describe(), terminal.post,
+                                          live_digest), path_desc)
+    if live_text is not None:
+        lost = [x for x in terminal.first.preserved if x not in live_text]
+        if lost:
+            return Resolution(False, PROPOSITION_NOT_PRESERVED, "%d preserved "
+                              "proposition(s) absent live" % len(lost), path_desc)
+
+    if terminal is state:
+        return Resolution(True, LIVE_TERMINAL, "pin is live; %d verified state(s) "
+                          "in chain" % len(chain), path_desc)
+    return Resolution(True, SUPERSEDED_OK, "authorised ancestor of live; "
+                      "superseded by %s, which is live; %d link(s) verified "
+                      "against history" % (terminal.describe(), len(chain) - 1),
+                      path_desc)
+
+
+def audit_artefact_succession_chains(directory=None, history=None) -> list:
+    """Every declared governed-artefact chain, with its verdict (silent if none)."""
+    records = load_artefact_records(directory)
+    paths = sorted({r.path for r in records if r.is_succession})
+    rows = []
+    for path in paths:
+        chain, problem = build_artefact_chain(path, records=records)
+        if problem is None and chain is not None:
+            problem = verify_artefact_chain_history(chain, path, history)
+        if problem is not None:
+            rows.append((path, False, "%s: %s" % problem, ()))
+            continue
+        rows.append((path, True, "%d verified state(s)" % len(chain),
+                     tuple(s.describe() for s in chain)))
+    return rows
+
+
 # ------------------------------------------------------------------ audit
 
 
@@ -639,9 +1129,23 @@ def _cli(argv):
     args = ap.parse_args(argv)
 
     rows = audit_supersession_chains(args.directory)
+
+    # Governed whole-file artefacts. Silent when none is declared, so this
+    # report is byte-identical to its earlier form on every such tree.
+    from oral_manifest import GitArtefactHistory
+    art_rows = audit_artefact_succession_chains(args.directory, GitArtefactHistory())
+    art_bad = 0
+    for path, ok, detail, chain in art_rows:
+        art_bad += 0 if ok else 1
+        print("%-4s %s %-28s %s" % ("PASS" if ok else "FAIL", path, detail,
+                                     " -> ".join(chain) if chain else "-"))
+    if art_rows:
+        print("governed artefact succession chains: %d, %d FAIL"
+              % (len(art_rows), art_bad))
+
     if not rows:
         print("no supersession chain declared; every pinned card is terminal")
-        return 0
+        return 1 if art_bad else 0
     bad = 0
     for (file, anchor), ok, detail, path in rows:
         bad += 0 if ok else 1
@@ -649,7 +1153,7 @@ def _cli(argv):
               % ("PASS" if ok else "FAIL", file, anchor, detail,
                  " -> ".join(path) if path else "-"))
     print("supersession chains: %d, %d FAIL" % (len(rows), bad))
-    return 1 if bad else 0
+    return 1 if (bad or art_bad) else 0
 
 
 if __name__ == "__main__":

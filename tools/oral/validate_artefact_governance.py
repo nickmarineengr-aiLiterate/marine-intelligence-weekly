@@ -49,8 +49,9 @@ REPO = HERE.parents[1]
 sys.path.insert(0, str(HERE))
 
 from oral_manifest import (                                     # noqa: E402
-    CORRECTION_MANIFEST_GLOB, audit_correction_manifest,
-    audit_governed_artefacts_live, authorisation_manifest_paths)
+    CORRECTION_MANIFEST_GLOB, GOVERNED_ARTEFACT_SUCCESSION_FIELD,
+    audit_correction_manifest, audit_governed_artefacts_live,
+    authorisation_manifest_paths)
 
 _checks = 0
 _failed: list[str] = []
@@ -74,10 +75,16 @@ def records_declaring_artefacts() -> list[Path]:
     from governance silenced the gate that would have objected, which is the
     same shape as the fail-closed problem `validate_corrections.py` documents
     for deleted records.
+
+    A record carrying `governed_artefact_successions` is selected on the same
+    terms: it governs a page, and emptying its declaration must reach the
+    check that rejects an empty one rather than drop the record from the gate.
     """
     out = []
     for path in sorted(HERE.glob(CORRECTION_MANIFEST_GLOB)):
-        if "governed_artefacts" in json.loads(path.read_text(encoding="utf-8")):
+        record = json.loads(path.read_text(encoding="utf-8"))
+        if ("governed_artefacts" in record
+                or GOVERNED_ARTEFACT_SUCCESSION_FIELD in record):
             out.append(path)
     return out
 
@@ -120,6 +127,8 @@ def main() -> int:
         # owned it, and each would be right about half of it.
         clash = sorted(str(a.get("path")).replace("\\", "/")
                        for a in (manifest.get("governed_artefacts") or [])
+                       + [x for x in (manifest.get(GOVERNED_ARTEFACT_SUCCESSION_FIELD)
+                                      or []) if isinstance(x, dict)]
                        if str(a.get("path")).replace("\\", "/") in owned_as_card)
         report("artefact_paths_are_not_card_pages", not clash,
                "claimed_as_both=%s" % (clash or "none"))
