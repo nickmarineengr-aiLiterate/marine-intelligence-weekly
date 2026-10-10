@@ -82,7 +82,10 @@ QB2C_ANSWER_SHA = {
     "q1": "44003998eba22268b24712029f32de0e8d67405868ca7f09edbca0f1028a2f3f",
     "q2": "79db29e41b6e094a81b7b10a2b61363fbb79d6d3107b90c51bf7af7814eaf6a3",
     "q3": "4071ee0fb4ce771f7e87b0fd901a4dedfcf2cf57d57f43f187250dd231e019e3",
-    "q4": "53a9ea1a96ba0443dd57846441411916195829c03652c6bc74194fdf30acf083",
+    # q4 re-pinned 10 Oct 2026: deliberate, governed answer edit - the accepted H-1 QB2_C#q4
+    # correction (CORR-H1-SOLAS-PHASE2-20261010): monitor figure 400 L/min -> MSC.1/Circ.1472
+    # 60 m3/h guideline; SOLAS II-2/10.7.3 (MSC.365(93)) carriage scope restored.
+    "q4": "9b82bcd560b3086a26877498777c75ba658460da8159f44ebe2b6d45ac52c3d8",
 }
 
 # Candidate-visible production / editorial markers.  Checked over the QB2_C
