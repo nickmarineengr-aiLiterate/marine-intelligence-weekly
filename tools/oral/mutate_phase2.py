@@ -454,6 +454,62 @@ def c_family_head_cancels_conflict(files):
     p.write_text(s, encoding="utf-8", newline="\n")
 
 
+def _me_notes_patch(files, name, old, new):
+    p = files / name
+    s = p.read_text(encoding="utf-8")
+    assert s.count(old) == 1, (name, old[:40])
+    p.write_text(s.replace(old, new), encoding="utf-8", newline="\n")
+
+
+def c_note_unit_series_mislabelled(files):
+    """M27 - a Part 29 note unit claims a series its page does not belong to:
+    Engineering Management Notes ME-GI text attributed to the Simon series."""
+    _me_notes_patch(files, "oral_notes.py", '                    "series": series,',
+                    '                    "series": (SERIES_SIMON if fname.endswith('
+                    '"-p29.html") else series),')
+
+
+def c_note_unit_under_qb_url(files):
+    """M28 - a Part 29 note unit is published under a canonical QB card URL,
+    so Notes text would stand in for the QB card's own identity."""
+    _me_notes_patch(files, "oral_notes.py",
+                    '                    "url": "/meoclass1/oralnotes/" + fname +',
+                    '                    "url": "/meoclass1/QB4_A.html#q20" '
+                    'if fname.endswith("-p29.html") else '
+                    '"/meoclass1/oralnotes/" + fname +')
+
+
+def c_me_member_dropped(files):
+    """M29 - the tokeniser silently drops one ME member (ME-GA) from text
+    that names it, so an ME-GA ask can never meet the Notes that teach it."""
+    _me_notes_patch(files, "oral_text.py",
+                    '_slot_value(m.group(2)))\n    return out\n',
+                    '_slot_value(m.group(2)))\n'
+                    '    out.discard(_DESIG_PREFIX + "me-ga")\n    return out\n')
+
+
+def c_me_member_invented(files):
+    """M30 - the tokeniser invents an ME member the text never names."""
+    _me_notes_patch(files, "oral_text.py",
+                    '_slot_value(m.group(2)))\n    return out\n',
+                    '_slot_value(m.group(2)))\n'
+                    '    if "ME-GI" in txt:\n'
+                    '        out.add(_DESIG_PREFIX + "me-gx")\n    return out\n')
+
+
+def c_me_family_conflict_ignored(files):
+    """M31 - the designator rule stops comparing the ME family, so an ME-GA
+    ask meets ME-GI-only Notes text."""
+    _me_notes_patch(files, "oral_text.py",
+                    "    for key in set(fa) & set(fb):",
+                    "    for key in (set(fa) & set(fb)) - {\"me\"}:")
+
+
+# The ME-family rule replaces a vacancy guard. Each of these mutations must be
+# caught BY that rule, not merely by a non-zero exit: the third field names the
+# control whose FAIL line the run must print.
+ME_RULE = "FAIL  ME engine family in Oral Notes"
+
 CODE_MUTATIONS = [
     ("M10 remove the SAME_CORE admission floor", c_remove_same_core_floor),
     ("M19 a shared family head cancels a specific conflict",
@@ -465,6 +521,16 @@ CODE_MUTATIONS = [
      c_page_level_notes_matching),
     ("M16 disable the non-examiner name controls",
      c_disable_non_examiner_controls),
+    ("M27 ME-family Note unit given another series",
+     c_note_unit_series_mislabelled, ME_RULE),
+    ("M28 ME-family Note unit under a QB card URL",
+     c_note_unit_under_qb_url, ME_RULE),
+    ("M29 tokeniser drops an ME member it reads",
+     c_me_member_dropped, ME_RULE),
+    ("M30 tokeniser invents an ME member",
+     c_me_member_invented, ME_RULE),
+    ("M31 designator rule ignores the ME family",
+     c_me_family_conflict_ignored, ME_RULE),
 ]
 
 
@@ -500,7 +566,7 @@ def main():
 
     scratch = Path(tempfile.mkdtemp(prefix="oral-mutate-"))
     try:
-        for name, apply in CODE_MUTATIONS:
+        for name, apply, *expect in CODE_MUTATIONS:
             work = scratch / re.sub(r"\W+", "_", name)
             shutil.copytree(TOOLS, work,
                             ignore=shutil.ignore_patterns("__pycache__"))
@@ -509,7 +575,10 @@ def main():
             m = re.search(r"(\d+) controls / (\d+) failures", out)
             detail = ("%s controls / %s failures" % (m.group(1), m.group(2))
                       if m else "exit %d" % code)
-            rows.append((name, code != 0, detail))
+            caught = code != 0 and all(e in out for e in expect)
+            if expect and not caught and code != 0:
+                detail += " (not by: %s)" % expect[0]
+            rows.append((name, caught, detail))
     finally:
         shutil.rmtree(scratch, ignore_errors=True)
 
