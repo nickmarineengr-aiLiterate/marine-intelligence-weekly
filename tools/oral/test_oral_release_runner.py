@@ -180,6 +180,12 @@ POST_E6_GATES = [
     # The closure-derivation controls. Sorted position, like every other row.
     "followup_closure_controls",
     "followup_register_mutate",
+    # Governed whole-file artefact succession: in-memory controls, the
+    # hermetic real-git mutation layer, and the live layer on the on-disk
+    # succession (exit-code parsed, so "nothing to attack" cannot pass).
+    "governed_artefact_supersession_controls",
+    "governed_artefact_supersession_live_mutate",
+    "governed_artefact_supersession_mutate",
     # The monthly-projection controls: runnable, never run by a release, so the
     # TEASER_SYNC refusal went unnoticed. Sorted position.
     "monthly_controls",
@@ -238,7 +244,10 @@ POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
                            "correction_nosdcp_mutate",
                            "correction_pass2_mutate",
                            "corrections_mutate",
-                           "followup_register_mutate"]
+                           "followup_register_mutate",
+                           # hermetic layer only; the --live gate is
+                           # exit-code parsed and so is not a parser suite
+                           "governed_artefact_supersession_mutate"]
 
 # E6 reported 266 mutations across 15 suites. That number is HISTORY and stays
 # pinned to the historical gates; post-E6 suites are counted separately rather
