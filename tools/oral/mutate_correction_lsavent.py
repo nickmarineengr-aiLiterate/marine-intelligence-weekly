@@ -187,10 +187,12 @@ MUTATIONS = [
      edit_manifest(lambda d: d["cards"][0].__setitem__("post_edit_digest", "0" * 64)),
      "lsavent", "card_digest_matches_manifest"),
 
+    # Re-anchored from q5 to q1 on 11 Oct 2026: CORR-H1-SOLAS-PHASE2-20261010 declares
+    # QB2_F#q5, so it is no longer undeclared. q1 is the only QB2_F card no record declares.
     ("G", "change an undeclared card on the same page",
      [CARD],
-     sub_in_card('<div class="q-card" id="q5"',
-                 '<div class="q-card" id="q5"><!--mutation-probe-->', 1),
+     sub_in_card('<div class="q-card" id="q1"',
+                 '<div class="q-card" id="q1"><!--mutation-probe-->', 1),
      "corrections", "no_undeclared_change_in_window"),
 
     ("H", "let a production batch pin this card without a supersession chain",
