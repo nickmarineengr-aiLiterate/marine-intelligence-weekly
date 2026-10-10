@@ -3875,7 +3875,7 @@ GREP: SKIP (proposition-scoped by design: the corrected sentences name the rejec
 ### 135. SOLAS sets no flow figure for a container-deck water monitor — 60 m³/h is the MSC.1/Circ.1472 guideline, and the count needs both the tier and the breadth condition
 
 **Flagged:** the H-1 Phase 2 candidate-wide shadow evaluation (Lane A triage, 8–10 October 2026),
-`CORR-H1-SOLAS-PHASE2-20261010` (provisional ID, Lane A landing review).
+`CORR-H1-SOLAS-PHASE2-20261010`.
 
 - **WRONG** (`QB2_B` Q10, its cheat sheet, page header/sidebar/footer): *"each portable monitor must
   … discharge a minimum of 24 m³/hr (400 L/min)"*, *"per SOLAS II-2/10.7.3.1"*, with a derived
