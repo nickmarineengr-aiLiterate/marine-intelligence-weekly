@@ -3871,3 +3871,60 @@ Over-correction guards keep QB3_J's capability trap, QB9_D's "has not ratified" 
 2025 citation alive.
 
 GREP: SKIP (proposition-scoped by design: the corrected sentences name the rejected bands and dates to reject them — enforced by the content gate, not by a literal scan)
+
+### 135. SOLAS sets no flow figure for a container-deck water monitor — 60 m³/h is the MSC.1/Circ.1472 guideline, and the count needs both the tier and the breadth condition
+
+**Flagged:** the H-1 Phase 2 candidate-wide shadow evaluation (Lane A triage, 8–10 October 2026),
+`CORR-H1-SOLAS-PHASE2-20261010` (provisional ID, Lane A landing review).
+
+- **WRONG** (`QB2_B` Q10, its cheat sheet, page header/sidebar/footer): *"each portable monitor must
+  … discharge a minimum of 24 m³/hr (400 L/min)"*, *"per SOLAS II-2/10.7.3.1"*, with a derived
+  *"800 L/min (48 m³/hr) combined"*. (`QB2_H` Q2): *"60 m³/h … minimum required … under SOLAS"* and
+  *"at least two mobile water monitors for vessels with a beam over 30 meters"*. (`QB2_F` Q5): monitor
+  counts and *"each ≥ 60 m³/hr"* inside the SOLAS mandate, with no tier condition. (`QB1_F` Q20): the
+  2016 lance/monitor rule taught as an *emerging* revision driven by lithium-ion cargo.
+- **CORRECT:** SOLAS II-2/10.7.3, added by MSC.365(93) (adopted 22 May 2014), applies to ships
+  constructed on or after 1 January 2016 designed to carry containers on or above the weather deck:
+  at least one water mist lance (7.3.1); ships designed to carry **five or more tiers** also carry
+  mobile water monitors — at least **two** where the breadth is less than 30 m, at least **four** where
+  it is 30 m or more (7.3.2). The regulation prescribes **no flow figure**. MSC.1/Circ.1472 para 3.5:
+  *"The minimum monitor capacity **should** be 60 m3/h (1000 l/min)"* — guidance, not SOLAS text.
+  400 L/min (24 m³/h) has no support in either instrument.
+
+GREP: SKIP (proposition-scoped by design: the accepted H-1 cards name the rejected 400 L/min figure to reject it — enforced by the H-1 content gate, not by a literal scan)
+
+### 136. The electronic-inclinometer mandate is SOLAS V/19.2.12 (MSC.532(107)), not Regulation 20 — and MSC.363(92) is the performance standard, with no ±0.2° figure
+
+**Flagged:** the H-1 Phase 2 shadow evaluation (Phase 1 F4, actual location `QB2_A` Q24),
+`CORR-H1-SOLAS-PHASE2-20261010`.
+
+- **WRONG** (`QB2_A` Q24): *"Under the amendments to SOLAS Chapter V (Regulation 20), the carriage of
+  … inclinometer is mandatory"*; *"± 0.2°: The mandatory static accuracy standard … under IMO
+  MSC.363(92)"*, *"± 1.0° under dynamic … conditions"*.
+- **CORRECT:** SOLAS V/19.2.12 (MSC.532(107), in force 1 January 2026): containerships and bulk
+  carriers of 3,000 GT and upwards **constructed on or after 1 January 2026** shall be fitted with an
+  electronic inclinometer, **or other means**, to determine, display and record roll motion. V/20 is
+  the voyage data recorder regulation. MSC.363(92) *recommends* performance standards for inclinometers
+  installed on or after 1 July 2015; its minimum accuracy is **5 % of reading or ± 1°, whichever is the
+  greater** (± 1 s for time). It contains no ± 0.2° figure.
+
+GREP: SKIP (proposition-scoped: "Regulation 20" is correct when it names the VDR regulation — enforced by the H-1 content gate, not by a literal scan)
+
+### 137. Container-loss reporting: the master reports to ships nearby, the nearest coastal State and the flag State — the flag State reports to IMO; MSC.550(108) puts no GISIS entry on the master
+
+**Flagged:** the H-1 Phase 2 shadow evaluation (`QB10_B` Q4, Lane A cluster UOW-02, content
+correction conditional on instrument verification — verified), `CORR-H1-SOLAS-PHASE2-20261010`.
+
+- **WRONG** (`QB10_B` Q4): *"master must report container losses to Coast Guard, Flag State, and
+  nearby vessels … and confirmed losses must also be entered in the IMO's GISIS database"*;
+  *"IMO GISIS database — central reporting point … alongside SOLAS V/31-32 notification chain"*;
+  drifting containers reported to the flag State.
+- **CORRECT:** SOLAS V/31 as amended by MSC.550(108) (adopted 23 May 2024, in force 1 January 2026):
+  the master of a ship involved in the loss of freight containers communicates the particulars without
+  delay to ships in the vicinity, **the nearest coastal State** and the flag State (2.1); the company
+  assumes the obligations if the ship is abandoned or its report is incomplete (2.2); **the flag State
+  reports to the Organization** (2.3); a ship observing drifting containers reports to ships in the
+  vicinity and the nearest coastal State (2.4). V/32.3 lists the report content. GISIS does not appear
+  in the resolution; UK MIN 728 describes the *flag State's* channel to IMO as GISIS.
+
+GREP: SKIP (proposition-scoped: GISIS is correctly named on other cards for other reporting duties — enforced by the H-1 content gate, not by a literal scan)
