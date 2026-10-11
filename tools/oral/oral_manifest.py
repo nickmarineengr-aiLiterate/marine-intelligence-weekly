@@ -228,11 +228,11 @@ class Finding:
             "PASS" if self.ok else "FAIL", self.manifest, self.check, self.detail)
 
 
-def _git_show(ref: str, rel: str) -> bytes | None:
+def _git_show(ref: str, rel: str, repo=None) -> bytes | None:
     try:
         out = subprocess.run(
             ["git", "show", "%s:%s" % (ref, rel.replace("\\", "/"))],
-            cwd=str(REPO), capture_output=True, check=False)
+            cwd=str(repo or REPO), capture_output=True, check=False)
     except OSError:
         return None
     return out.stdout if out.returncode == 0 else None
@@ -246,14 +246,14 @@ def _git_show(ref: str, rel: str) -> bytes | None:
 _COMMIT_ID = re.compile(r"[0-9a-f]{7,40}")
 
 
-def _resolve_commit(commit) -> str | None:
+def _resolve_commit(commit, repo=None) -> str | None:
     """The full SHA a declared authorisation_commit names, or None."""
     if not isinstance(commit, str) or not _COMMIT_ID.fullmatch(commit):
         return None
     try:
         out = subprocess.run(
             ["git", "rev-parse", "--verify", "--quiet", "%s^{commit}" % commit],
-            cwd=str(REPO), capture_output=True, text=True, check=False)
+            cwd=str(repo or REPO), capture_output=True, text=True, check=False)
     except OSError:
         return None
     # An ambiguous abbreviation exits non-zero too: not deterministic, so no.
@@ -363,6 +363,11 @@ CORRECTION_FIELD_CLASSES: dict[str, str] = {
     # below for why this is a second collection rather than a digest bolted
     # onto the INFORMATIONAL `artefacts` list.
     "governed_artefacts": LOAD_BEARING,
+    # A LATER record declaring that its whole-file edit to a governed artefact
+    # descends from an EARLIER record's pinned state. See
+    # GOVERNED_ARTEFACT_SUCCESSION_FIELDS below for why this is a separate
+    # collection and not a `supersedes` key inside `governed_artefacts`.
+    "governed_artefact_successions": LOAD_BEARING,
 
     # ---- informational ----
     "title": INFORMATIONAL,
@@ -497,6 +502,59 @@ GOVERNED_ARTEFACT_FIELDS = ("correction_action_id", "path", "artefact_type",
                             "pre_edit_digest", "post_edit_digest",
                             "governing_correction", "propagation_reason")
 
+# ---------------------------------------------------------------------------
+# GOVERNED ARTEFACT SUCCESSION
+#
+# WHY A FOURTH COLLECTION
+# -----------------------
+# A governed artefact's pin is whole-file, so ANY later edit to that file fails
+# the record that pinned it -- including an edit a later record legitimately
+# authorises. H-1 Phase 2 hit exactly that: its SQ-1/SQ-2 dependants on
+# `QB2_B_CheatSheet.html` are valid, and REL-BJ-CS-01 still pins the file at
+# 64f04f3c. Nothing could express "this later state descends from that one":
+#
+#   governed_artefacts[]   requires `governing_correction` -- a PARENT whose
+#                          proposition is being propagated -- and forbids a
+#                          record from naming itself. A succession is a
+#                          first-instance edit of a governed page; it has no
+#                          parent proposition, so spelling it here would be a
+#                          propagation fiction.
+#
+#   status=SUPERSEDED      would mean editing the historical record, and it
+#                          stops enforcing that record's pins altogether.
+#
+#   the card resolver      is keyed on "file#anchor" and does not read git;
+#                          a page with no card block must not enter it.
+#
+# So the LATER record carries the declaration, exactly as the card contract in
+# oral_supersession.py does ("the historical pin is never rewritten; the LATER
+# record declares descent"). The predecessor's bytes are never written. Its
+# live check then asserts "my pin is the authorised ANCESTOR of live" -- and
+# only once the whole chain has been verified against repository history by
+# `oral_supersession.resolve_authorised_artefact_state`.
+#
+# The set is CLOSED. An unknown key is UNKNOWN_FIELD, for the same reason an
+# unclassified top-level field is a failure: a claim nothing reads is
+# decoration. `succession_action_id` gives each link an identity a further
+# successor can name, which is what makes a two-link chain expressible at all.
+# ---------------------------------------------------------------------------
+
+GOVERNED_ARTEFACT_SUCCESSION_FIELD = "governed_artefact_successions"
+
+GOVERNED_ARTEFACT_SUCCESSION_FIELDS = (
+    "succession_action_id", "path", "artefact_type",
+    "pre_edit_digest", "post_edit_digest", "supersedes",
+    "preserved_propositions", "succession_reason")
+
+# What a succession's `supersedes` claim may name. Exact predecessor identity
+# (manifest + action id) and the predecessor's pinned digest, nothing else.
+GOVERNED_ARTEFACT_SUPERSEDES_FIELDS = ("manifest", "action_id", "post_edit_digest")
+
+# Only an AUTHORISED record may sit in a chain, on either side of a link.
+# CORRECTION_STATUSES is unchanged: SUPERSEDED still means "pins are history",
+# which is precisely why such a record cannot anchor or extend live descent.
+SUCCESSION_LINK_STATUS = "AUTHORISED"
+
 
 def artefact_digest(text: str) -> str:
     """sha256 of a whole non-card file, LF-normalised.
@@ -511,6 +569,46 @@ def artefact_digest(text: str) -> str:
         text.replace("\r\n", "\n").encode("utf-8")).hexdigest()
 
 _HEX64 = frozenset("0123456789abcdef")
+
+
+class GitArtefactHistory:
+    """Repository history as a governed-artefact succession chain reads it.
+
+    The resolver in oral_supersession.py deliberately does not touch git, so
+    that module stays free of subprocess and its algebra can be tested in
+    memory. A chain is never accepted on its JSON alone, though: the resolver
+    REQUIRES one of these (or a test double with the same two methods) before
+    it will let a historical pin pass as an ancestor of live.
+    """
+
+    def __init__(self, repo=None):
+        self.repo = pathlib.Path(repo or REPO)
+
+    def text_at(self, commit, rel):
+        """File text at a recorded commit identity, or None."""
+        sha = _resolve_commit(commit, self.repo)
+        if sha is None:
+            return None
+        blob = _git_show(sha, rel, self.repo)
+        if blob is None:
+            return None
+        try:
+            return blob.decode("utf-8")
+        except UnicodeDecodeError:
+            return None
+
+    def is_ancestor(self, older, newer) -> bool:
+        """True when `older` is `newer` or one of its ancestors."""
+        a, b = _resolve_commit(older, self.repo), _resolve_commit(newer, self.repo)
+        if a is None or b is None:
+            return False
+        try:
+            out = subprocess.run(["git", "merge-base", "--is-ancestor", a, b],
+                                 cwd=str(self.repo), capture_output=True,
+                                 check=False)
+        except OSError:
+            return False
+        return out.returncode == 0
 
 
 def classify_correction(field: str) -> str:
@@ -643,6 +741,15 @@ def audit_correction_manifest(path) -> list[Finding]:
 
     cards = manifest.get("cards") or []
     artefacts = manifest.get("governed_artefacts")
+    successions = manifest.get(GOVERNED_ARTEFACT_SUCCESSION_FIELD)
+    # A succession is a non-card target exactly as a governed artefact is. The
+    # three relaxations below that already apply to artefact records apply to
+    # it on the same terms, and only when the key is present: a record that
+    # declares neither keeps every original check, under its original name.
+    non_card = artefacts if successions is None else (
+        list(artefacts or []) + (list(successions)
+                                 if isinstance(successions, list) else []))
+    has_non_card_key = artefacts is not None or successions is not None
 
     # An artefact-only record has an empty cards[] by construction, so
     # `cards_present` cannot simply be relaxed: doing that globally would let a
@@ -650,16 +757,21 @@ def audit_correction_manifest(path) -> list[Finding]:
     # conditional on the record actually declaring governed artefacts, and the
     # historical records -- none of which carry the key -- keep the original
     # check under the original name, unchanged, as release evidence.
-    if artefacts is None:
+    if not has_non_card_key:
         add("cards_present", bool(cards), "%d card record(s)" % len(cards))
-    else:
+    elif successions is None:
         add("card_or_artefact_target_present", bool(cards) or bool(artefacts),
             "%d card record(s), %d governed artefact(s)"
             % (len(cards), len(artefacts)))
+    else:
+        add("card_or_artefact_target_present", bool(cards) or bool(non_card),
+            "%d card record(s), %d governed artefact(s), %d succession(s)"
+            % (len(cards), len(artefacts or []),
+               len(successions) if isinstance(successions, list) else 0))
 
     ids = [action_id_of(c) for c in cards]
     add("action_ids_unique_and_present",
-        (all(ids) and len(set(ids)) == len(ids)) if artefacts
+        (all(ids) and len(set(ids)) == len(ids)) if non_card
         else (bool(ids) and all(ids) and len(set(ids)) == len(ids)),
         "%d id(s), %d distinct" % (len(ids), len(set(ids))))
 
@@ -715,7 +827,7 @@ def audit_correction_manifest(path) -> list[Finding]:
     # takes the card assertion below, unchanged.
     primary = [action_id_of(c) for c in cards
                if c.get("classification") == "PRIMARY_CORRECTION"]
-    if not (artefacts and not cards):
+    if not (non_card and not cards):
         add("exactly_one_primary_correction", len(primary) == 1,
             "primary=%s" % (primary or "none"))
 
@@ -819,7 +931,143 @@ def audit_correction_manifest(path) -> list[Finding]:
         add("governed_artefact_parent_states_the_proposition", not disagreeing,
             "disagreeing=%s" % (disagreeing or "none"))
 
+    # 5e. GOVERNED ARTEFACT SUCCESSIONS -- the static half.
+    #
+    # Everything here is answerable from this record alone. Whether the chain
+    # it declares is sound, and whether repository history supports it, is
+    # asked by `audit_governed_artefacts_live` through the resolver, because
+    # those answers depend on every other record and on git.
+    #
+    # Emitted only when the key is present, so every record that declares no
+    # succession produces exactly the findings it produced before.
+    if successions is not None:
+        _audit_successions_static(p, manifest, successions, cards,
+                                  artefacts or [], add, REPO)
+
     return findings
+
+
+def audit_succession_schema(path, repo=None) -> list[Finding]:
+    """Only the static `governed_artefact_successions` assertions (5e) for one
+    record, against an explicit repository. ``audit_correction_manifest`` runs
+    the same function against REPO; this entry point exists so a hermetic
+    fixture repository can be audited without the REPO-bound record checks."""
+    p = pathlib.Path(path)
+    findings: list[Finding] = []
+
+    def add(check: str, ok: bool, detail: str = "") -> None:
+        findings.append(Finding(p.name, check, ok, detail))
+
+    manifest = json.loads(read_text(p))
+    successions = manifest.get(GOVERNED_ARTEFACT_SUCCESSION_FIELD)
+    if successions is not None:
+        _audit_successions_static(p, manifest, successions,
+                                  manifest.get("cards") or [],
+                                  manifest.get("governed_artefacts") or [], add,
+                                  pathlib.Path(repo or REPO))
+    return findings
+
+
+def _audit_successions_static(p, manifest, successions, cards, artefacts, add,
+                              repo):
+    """Schema assertions for `governed_artefact_successions` (see 5e)."""
+    entries = successions if isinstance(successions, list) else []
+    add("governed_artefact_successions_non_empty",
+        isinstance(successions, list) and bool(successions),
+        "%s succession(s)" % (len(successions) if isinstance(successions, list)
+                              else "malformed: not a list"))
+
+    def sid(s):
+        return str(s.get("succession_action_id") or "?") if isinstance(s, dict) else "?"
+
+    # UNKNOWN_FIELD. Closed key sets at BOTH levels -- the entry and its claim.
+    allowed = set(GOVERNED_ARTEFACT_SUCCESSION_FIELDS)
+    allowed_claim = set(GOVERNED_ARTEFACT_SUPERSEDES_FIELDS)
+    unknown = []
+    for s in entries:
+        if not isinstance(s, dict):
+            unknown.append("%s: not an object" % sid(s))
+            continue
+        extra = sorted(set(s) - allowed)
+        if extra:
+            unknown.append("%s: %s" % (sid(s), extra))
+        claim = s.get("supersedes")
+        if isinstance(claim, dict):
+            extra = sorted(set(claim) - allowed_claim)
+            if extra:
+                unknown.append("%s.supersedes: %s" % (sid(s), extra))
+    add("succession_fields_known", not unknown,
+        "UNKNOWN_FIELD=%s" % (unknown or "none"))
+
+    incomplete = []
+    for s in entries:
+        if not isinstance(s, dict):
+            continue
+        claim = s.get("supersedes")
+        props = s.get("preserved_propositions")
+        if (not all(s.get(f) for f in GOVERNED_ARTEFACT_SUCCESSION_FIELDS)
+                or not isinstance(claim, dict)
+                or not all(claim.get(f) for f in GOVERNED_ARTEFACT_SUPERSEDES_FIELDS)
+                or not isinstance(props, list)
+                or not all(isinstance(x, str) and x for x in props)):
+            incomplete.append(sid(s))
+    add("succession_identity_complete", not incomplete,
+        "incomplete=%s" % (incomplete or "none"))
+
+    sids = [s.get("succession_action_id") for s in entries if isinstance(s, dict)]
+    taken = {action_id_of(c) for c in cards} | {
+        a.get("correction_action_id") for a in artefacts if isinstance(a, dict)}
+    add("succession_ids_unique_and_present",
+        bool(sids) and all(sids) and len(set(sids)) == len(sids)
+        and not (set(sids) & taken),
+        "%d id(s), %d distinct, collides_with_cards_or_artefacts=%s"
+        % (len(sids), len(set(sids)), sorted(set(sids) & taken) or "none"))
+
+    bad_type = ["%s=%s" % (sid(s), s.get("artefact_type"))
+                for s in entries if isinstance(s, dict)
+                and s.get("artefact_type") not in GOVERNED_ARTEFACT_TYPES]
+    add("succession_type_governed", not bad_type,
+        "unknown=%s" % (bad_type or "none"))
+
+    # DIGEST_CONVENTION_MISMATCH. One convention -- `artefact_digest`, 64 hex.
+    # A 16-character card-style digest is reported as the wrong convention,
+    # never compared as a string and failed for the wrong reason.
+    wrong_conv = []
+    for s in entries:
+        if not isinstance(s, dict):
+            continue
+        claim = s.get("supersedes") if isinstance(s.get("supersedes"), dict) else {}
+        for label, value in (("pre", s.get("pre_edit_digest")),
+                             ("post", s.get("post_edit_digest")),
+                             ("supersedes.post", claim.get("post_edit_digest"))):
+            if not _is_digest(value):
+                wrong_conv.append("%s.%s (%s chars)" % (
+                    sid(s), label, len(value) if isinstance(value, str) else "-"))
+    add("succession_digest_convention", not wrong_conv,
+        "DIGEST_CONVENTION_MISMATCH=%s" % (wrong_conv or "none"))
+
+    inert = [sid(s) for s in entries if isinstance(s, dict)
+             and s.get("pre_edit_digest") == s.get("post_edit_digest")]
+    add("succession_digests_differ", not inert, "inert=%s" % (inert or "none"))
+
+    gone = [str(s.get("path")) for s in entries if isinstance(s, dict)
+            and not (repo / str(s.get("path") or "")).is_file()]
+    add("succession_path_exists", not gone, "missing=%s" % (gone or "none"))
+
+    # A record cannot succeed itself. Descent is a claim BETWEEN records; a
+    # record naming its own file would let one record rewrite its own pin.
+    own = [sid(s) for s in entries if isinstance(s, dict)
+           and isinstance(s.get("supersedes"), dict)
+           and s["supersedes"].get("manifest") == p.name]
+    add("succession_does_not_supersede_own_record", not own,
+        "self=%s" % (own or "none"))
+
+    # Only an AUTHORISED record may extend a chain. A SUPERSEDED record's pins
+    # are history, so a succession it declares would be live descent nothing
+    # enforces.
+    add("succession_record_is_authorised",
+        manifest.get("status") == SUCCESSION_LINK_STATUS,
+        "status=%s" % manifest.get("status"))
 
 
 def audit_manifest(path) -> list[Finding]:
@@ -1107,11 +1355,18 @@ def audit_governed_artefacts_live(path, repo=None) -> list[Finding]:
     form gets for free: that the file moved to the RIGHT text, not merely to
     some text the record then pinned.
 
-    Deliberately NOT routed through the supersession resolver -- that resolver
-    is keyed on "file#anchor", and feeding it a page with no anchor is exactly
-    the impersonation ``governed_artefact_is_not_a_card`` forbids.  A later edit
-    to a governed artefact must be declared by a new record, which is the right
-    default for a page a candidate reads on the morning of the oral.
+    Deliberately NOT routed through the CARD supersession resolver -- that
+    resolver is keyed on "file#anchor", and feeding it a page with no anchor is
+    exactly the impersonation ``governed_artefact_is_not_a_card`` forbids.
+
+    It IS routed through the whole-file resolver,
+    ``oral_supersession.resolve_authorised_artefact_state``. With no
+    succession declared anywhere for the path -- every record on main today --
+    that resolver is dormant and answers ``pin == live`` exactly as this
+    function always did, with the same detail text. Only an explicit
+    ``governed_artefact_successions`` declaration in a LATER record engages the
+    chain, and the chain is accepted only once every link has been verified
+    against repository history.
 
     Lives here rather than in the corpus gate so that the gate and the fast
     standalone probe cannot drift into asking different questions -- the drift
@@ -1126,44 +1381,89 @@ def audit_governed_artefacts_live(path, repo=None) -> list[Finding]:
 
     manifest = json.loads(read_text(p))
     governed = manifest.get("governed_artefacts") or []
-    if not governed:
+    successions = manifest.get(GOVERNED_ARTEFACT_SUCCESSION_FIELD)
+    if not governed and successions is None:
         return findings
     if manifest.get("status") == "SUPERSEDED":
         add("superseded_artefacts_not_enforced", True,
             "status=SUPERSEDED; pins are history, not live expectations")
         return findings
 
-    baseline = manifest.get("baseline_commit")
-    commits = manifest.get("governing_commits") or []
+    # Imported here: oral_supersession imports this module at load time.
+    from oral_supersession import (
+        resolve_authorised_artefact_state, PIN_MISMATCH, SUPERSEDED_OK)
+
+    history = GitArtefactHistory(repo)
 
     def live(rel):
         f = repo / str(rel)
         return f.read_text(encoding="utf-8", newline="") if f.is_file() else None
 
+    if governed:
+        _audit_governed_live(p, manifest, governed, live, history, repo, add,
+                             resolve_authorised_artefact_state,
+                             PIN_MISMATCH, SUPERSEDED_OK)
+    if successions is not None:
+        _audit_successions_live(p, manifest, successions, live, history, repo,
+                                add, resolve_authorised_artefact_state)
+    return findings
+
+
+def _audit_governed_live(p, manifest, governed, live, history, repo, add,
+                         resolve, PIN_MISMATCH, SUPERSEDED_OK):
+    """The original four governed-artefact pins. Check names, order and, on the
+    dormant path, detail text are exactly what they were before successions
+    existed."""
+    baseline = manifest.get("baseline_commit")
+    commits = manifest.get("governing_commits") or []
+
     missing = [a["path"] for a in governed if live(a["path"]) is None]
     add("governed_artefacts_present_live", not missing,
         "missing=%s" % (missing or "none"))
 
-    drifted, absent = [], []
+    drifted, absent, ancestors = [], [], []
     for a in governed:
         text = live(a["path"])
         if text is None:
             continue
         got = artefact_digest(text)
-        if got != a["post_edit_digest"]:
-            drifted.append("%s (live %s, authorised %s)"
-                           % (a["path"], got[:10], a["post_edit_digest"][:10]))
+        # THE PIN. Dormant (no succession names this state): exactly
+        # `got == post_edit_digest`. Declared: this record's pin must be a
+        # verified ANCESTOR of live, and every unmanifested edit still fails.
+        try:
+            res = resolve(manifest=p.name, action_id=a["correction_action_id"],
+                          path=a["path"], pinned_post_digest=a["post_edit_digest"],
+                          live_digest=got, directory=p.parent, history=history,
+                          live_text=text)
+            ok, status, why = res.ok, res.status, res.describe()
+        except Exception as exc:                          # noqa: BLE001
+            # A crash in a release guard is an unavailable guard, and an
+            # unavailable guard is not a passing one.
+            ok, status, why = False, "RESOLVER_ERROR", "%s: %s" % (
+                type(exc).__name__, exc)
+        if not ok:
+            if status == PIN_MISMATCH:
+                drifted.append("%s (live %s, authorised %s)"
+                               % (a["path"], got[:10], a["post_edit_digest"][:10]))
+            else:
+                drifted.append("%s (live %s, authorised %s) %s"
+                               % (a["path"], got[:10], a["post_edit_digest"][:10],
+                                  why))
+        elif status == SUPERSEDED_OK:
+            ancestors.append("%s/%s %s" % (a["path"], a["correction_action_id"], why))
         if a["expected_text_after"] not in text:
             absent.append("%s/%s" % (a["path"], a["correction_action_id"]))
-    add("live_matches_authorised_artefact_state", not drifted,
-        "drifted=%s" % (drifted or "none"))
+    detail = "drifted=%s" % (drifted or "none")
+    if ancestors:
+        detail += " authorised_ancestor_of_live=%s" % ancestors
+    add("live_matches_authorised_artefact_state", not drifted, detail)
     add("artefact_carries_expected_proposition_text", not absent,
         "absent=%s" % (absent or "none"))
 
     wrong_pre = []
     if baseline:
         for a in governed:
-            blob = _git_show(baseline, str(a["path"]))
+            blob = _git_show(baseline, str(a["path"]), repo)
             was = artefact_digest(blob.decode("utf-8")) if blob is not None else None
             if was != a["pre_edit_digest"]:
                 wrong_pre.append("%s (baseline %s, declared %s)"
@@ -1176,7 +1476,7 @@ def audit_governed_artefacts_live(path, repo=None) -> list[Finding]:
     wrong_post = []
     if commits:
         for a in governed:
-            blob = _git_show(commits[-1], str(a["path"]))
+            blob = _git_show(commits[-1], str(a["path"]), repo)
             got = artefact_digest(blob.decode("utf-8")) if blob is not None else None
             if got != a["post_edit_digest"]:
                 wrong_post.append(str(a["path"]))
@@ -1184,7 +1484,133 @@ def audit_governed_artefacts_live(path, repo=None) -> list[Finding]:
         bool(commits) and not wrong_post,
         "last=%s mismatched=%s" % (commits[-1] if commits else "-",
                                    wrong_post or "none"))
-    return findings
+
+
+def _audit_successions_live(p, manifest, successions, live, history, repo, add,
+                            resolve):
+    """The successor side of a governed-artefact succession (design 2.3).
+
+    The predecessor's check asks "is my pin an ancestor of live?". These ask
+    the successor's own questions, one named check per proposition so a
+    mutation can be bound to the check that owns it:
+
+      succession_pre_matches_baseline       the transition starts where git
+                                            says this record's baseline was
+      succession_post_produced_by_governing_commit
+                                            and ends where its last governing
+                                            commit put the file
+      succession_target_is_governed         the named predecessor really
+                                            governs THIS path as THIS type
+      succession_preserves_predecessor_propositions
+                                            nothing the predecessor governs is
+                                            dropped, from the declaration or
+                                            from the live file
+      succession_live_or_descended          the whole chain resolves, is
+                                            verified against history, and its
+                                            terminal is live
+    """
+    entries = [s for s in (successions if isinstance(successions, list) else [])
+               if isinstance(s, dict)]
+    baseline = manifest.get("baseline_commit")
+    commits = manifest.get("governing_commits") or []
+    last = commits[-1] if commits else None
+
+    def digest_at(ref, rel):
+        if not ref or not rel:
+            return None
+        blob = _git_show(ref, str(rel), repo)
+        return artefact_digest(blob.decode("utf-8")) if blob is not None else None
+
+    wrong_pre = ["%s (baseline %s, declared %s)"
+                 % (s.get("path"), (digest_at(baseline, s.get("path")) or "-")[:10],
+                    str(s.get("pre_edit_digest"))[:10])
+                 for s in entries
+                 if digest_at(baseline, s.get("path")) != s.get("pre_edit_digest")]
+    add("succession_pre_matches_baseline",
+        bool(baseline) and bool(entries) and not wrong_pre,
+        "baseline=%s mismatched=%s" % (baseline or "-", wrong_pre or "none"))
+
+    wrong_post = ["%s (governing %s, declared %s)"
+                  % (s.get("path"), (digest_at(last, s.get("path")) or "-")[:10],
+                     str(s.get("post_edit_digest"))[:10])
+                  for s in entries
+                  if digest_at(last, s.get("path")) != s.get("post_edit_digest")]
+    add("succession_post_produced_by_governing_commit",
+        bool(last) and bool(entries) and not wrong_post,
+        "last=%s mismatched=%s" % (last or "-", wrong_post or "none"))
+
+    # The predecessor named by each claim, read from disk. A claim naming a
+    # record or action that does not govern this exact path as this exact type
+    # must not let an unrelated artefact inherit the relationship.
+    untargeted, dropped, absent_live = [], [], []
+    for s in entries:
+        sid = str(s.get("succession_action_id") or "?")
+        claim = s.get("supersedes") if isinstance(s.get("supersedes"), dict) else {}
+        pname = str(claim.get("manifest") or "")
+        pred = None
+        ppath = p.parent / pname
+        if pname and pathlib.Path(pname).name == pname and ppath.is_file():
+            try:
+                pdoc = json.loads(read_text(ppath))
+            except Exception:                              # noqa: BLE001
+                pdoc = {}
+            for a in pdoc.get("governed_artefacts") or []:
+                if isinstance(a, dict) and a.get("correction_action_id") == claim.get("action_id"):
+                    pred = ("artefact", a)
+            for x in pdoc.get(GOVERNED_ARTEFACT_SUCCESSION_FIELD) or []:
+                if isinstance(x, dict) and x.get("succession_action_id") == claim.get("action_id"):
+                    pred = ("succession", x)
+        if pred is None:
+            untargeted.append("%s -> %s/%s (MISSING_ANCESTOR)"
+                              % (sid, pname or "-", claim.get("action_id") or "-"))
+            continue
+        kind, pe = pred
+        if pe.get("path") != s.get("path"):
+            untargeted.append("%s -> %s (PATH_MISMATCH: predecessor governs %s)"
+                              % (sid, s.get("path"), pe.get("path")))
+        elif pe.get("artefact_type") != s.get("artefact_type"):
+            untargeted.append("%s (TYPE_MISMATCH: %s vs predecessor %s)"
+                              % (sid, s.get("artefact_type"), pe.get("artefact_type")))
+
+        # What the predecessor governs, and therefore what must survive.
+        required = ([pe.get("expected_text_after")] if kind == "artefact"
+                    else list(pe.get("preserved_propositions") or []))
+        declared = s.get("preserved_propositions")
+        declared = declared if isinstance(declared, list) else []
+        missing = [r for r in required if r not in declared]
+        if missing or not required:
+            dropped.append("%s drops %d predecessor proposition(s)"
+                           % (sid, len(missing) or 1))
+        text = live(s.get("path"))
+        gone = [x for x in declared if not (isinstance(x, str) and text is not None
+                                            and x in text)]
+        if gone:
+            absent_live.append("%s: %d preserved proposition(s) absent live"
+                               % (sid, len(gone)))
+    add("succession_target_is_governed", bool(entries) and not untargeted,
+        "untargeted=%s" % (untargeted or "none"))
+    add("succession_preserves_predecessor_propositions",
+        bool(entries) and not dropped and not absent_live,
+        "dropped=%s absent_live=%s" % (dropped or "none", absent_live or "none"))
+
+    unresolved = []
+    for s in entries:
+        text = live(s.get("path"))
+        got = artefact_digest(text) if text is not None else None
+        try:
+            res = resolve(manifest=p.name,
+                          action_id=s.get("succession_action_id"),
+                          path=s.get("path"),
+                          pinned_post_digest=s.get("post_edit_digest"),
+                          live_digest=got, directory=p.parent, history=history,
+                          live_text=text)
+            ok, why = res.ok, res.describe()
+        except Exception as exc:                          # noqa: BLE001
+            ok, why = False, "RESOLVER_ERROR: %s: %s" % (type(exc).__name__, exc)
+        if not ok:
+            unresolved.append("%s %s" % (s.get("succession_action_id"), why))
+    add("succession_live_or_descended", bool(entries) and not unresolved,
+        "unresolved=%s" % (unresolved or "none"))
 
 
 def assert_manifest(path) -> None:

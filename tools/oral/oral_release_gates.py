@@ -584,6 +584,56 @@ GATES = (
                "sat beside a false claim; plus a vacuity trap that renames the "
                "block heading the gate extracts"),
 
+    # Governed whole-file artefact SUCCESSION (governed_artefact_successions),
+    # first used by CORR-H1-SOLAS-PHASE2-20261010 / H1SOLAS-P2-CS-01 to supersede
+    # the REL-BJ-CS-01 whole-file cheat-sheet pin. Three gates, because the
+    # three layers answer different questions and one must not mask another:
+    #
+    #   ..._controls       the resolver's negative matrix in memory, plus
+    #                      DORMANCY on the real corpus (a record declaring no
+    #                      succession keeps the bare pin == live verdict)
+    #   ..._mutate         HERMETIC: a throwaway git fixture under TEMP with
+    #                      real commits; the real gate functions must catch
+    #                      every mutation for its own reason. It touches no
+    #                      product bytes and is meaningful with or without a
+    #                      succession on disk; it is still marked mutating, as
+    #                      every mutation-parser gate is, so it runs serially
+    #                      under the runner's byte guard.
+    #   ..._live_mutate    --live: attacks the succession actually declared on
+    #                      disk, restoring every byte in `finally`.
+    #
+    # The live gate is parsed by EXIT CODE, not by the mutation parser.
+    # `classify_mutation` reads only the LAST summary line, and with no
+    # succession on disk the live layer prints no summary and exits 2: the
+    # parser would then read the hermetic layer's line and report a PASS for a
+    # suite that had nothing to attack. The exit code is 0 only when the
+    # hermetic layer, the live layer and live byte custody all hold, so
+    # inapplicability can never be counted as a pass.
+    _gate("governed_artefact_supersession_controls",
+          ["python", "%s/test_governed_artefact_supersession.py" % _ORAL],
+          CAT_UNIT, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="resolver negative matrix (break, fork, cycle, ambiguous root, "
+               "terminal not live, wrong path/type/convention, unauthorised or "
+               "unverified link) and dormancy on every governed artefact on disk"),
+    _gate("governed_artefact_supersession_mutate",
+          ["python", "%s/mutate_governed_artefact_supersession.py" % _ORAL],
+          CAT_AUTHORISATION, PARSER_MUTATION, mutates=True, timeout=600,
+          historical_39=False,
+          depends_on=("governed_artefact_supersession_controls",),
+          note="hermetic layer only: 29 mutations against a throwaway real-git "
+               "fixture, each bound to its owning check and reason; dormant, "
+               "one-link and two-link positive controls must be green first"),
+    _gate("governed_artefact_supersession_live_mutate",
+          ["python", "%s/mutate_governed_artefact_supersession.py" % _ORAL,
+           "--live"],
+          CAT_AUTHORISATION, PARSER_EXIT, mutates=True, timeout=900,
+          historical_39=False,
+          depends_on=("governed_artefact_supersession_mutate",
+                      "validate_corrections"),
+          note="hermetic layer plus 20 mutations of the on-disk succession "
+               "(H1SOLAS-P2-CS-01 -> REL-BJ-CS-01); exit 2 when no succession "
+               "is declared, which FAILS the gate rather than passing it"),
+
     # The shared-module controls. These were runnable but were NOT in the suite,
     # so the guard for the health-comparison contract could rot without any
     # release noticing -- the expired-guard defect class this repository has

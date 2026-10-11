@@ -1,0 +1,82 @@
+{
+ "schema": "b2.h1solas.phase2_site_registry.v1",
+ "status": "FINAL",
+ "purpose": "Governed H-1 site / ownership metadata for the H-1 Phase 2 governed correction candidate, and the successor record of the corrected F1-F5 source references. Data only: no gate reads this file and it changes no detector semantics, noun-head table or release-gate registration (Phase 3 is not authorised).",
+ "correction_record": {
+  "correction_id": "CORR-H1-SOLAS-PHASE2-20261010",
+  "manifest": "tools/oral/correction_corr_h1_solas_phase2_20261010_manifest.json",
+  "id_status": "FINAL — assigned by Lane A (10 Oct 2026) and retained at final integration (Lane A dispatch 'H-1 Phase 2 Final Integration and Release Qualification', 10 Oct 2026); satisfies correction_id_matches_filename."
+ },
+ "authority": "Lane A dispatch 'H-1 Phase 2 — Apply Lane A Triage Rulings and Build Governed Correction Candidate' (10 Oct 2026) §1-§17; Lane A mid-task rulings of 10 Oct 2026 (H-1-only overlay projection; provisional correction ID). Triage package B2_H1_PHASE2_LANE_A_TRIAGE_REVIEW_20261008.zip sha256 522125568412be02694da8521e3321f09400e82ee8f1186d8370a9797b3edbbb. Technical qualification B2_H1_PHASE2_SHADOW_CORRECTED_FINAL_PAIR_20261008.zip sha256 a31872b915cb318ed5a0199b8df137dc64e14a5b63f687f2c5df1d6ae10e4666.",
+ "phase2_sites": [
+  {"site": "meoclass1/QB2_B.html#q10", "clusters": ["TSF-01", "TSF-02"], "governance": ["SQ-1", "SQ-2"], "families": ["CAPACITY", "MONITORS"],
+   "proposition": "SOLAS II-2/10.7.3 sets no monitor flow figure; MSC.1/Circ.1472 3.5 gives 60 m3/h (1,000 l/min) as guidance (should); mobile water monitors are carried by ships constructed on or after 1 January 2016 designed to carry five or more tiers on or above the weather deck: at least two (breadth < 30 m) or four (breadth >= 30 m).",
+   "sources": ["MSC.365(93) sha256 f35f6339f9d6cf1354d6c41d6e56243f3282f6d1bfb1200bda40d70fae524edc", "MSC.1/Circ.1472 sha256 cf0eb0e88d204a6b553deab99d7ad8f811e3600c7c1c657c059a1364344fcc22"],
+   "existing_owners_preserved": "none recorded for the card",
+   "dependants": [
+    {"surface": "meoclass1/QB2_B.html", "region": "page header topic list (l.151)", "binding": "DERIVATIVE_OF_CANONICAL", "governance": "SQ-1 recorded dependant"},
+    {"surface": "meoclass1/QB2_B.html", "region": "page header correction banner (l.157)", "binding": "DERIVATIVE_OF_CANONICAL", "governance": "SQ-1 recorded dependant"},
+    {"surface": "meoclass1/QB2_B.html", "region": "sidebar note (l.203)", "binding": "DERIVATIVE_OF_CANONICAL", "governance": "SQ-1 recorded dependant"},
+    {"surface": "meoclass1/QB2_B.html", "region": "page footer (l.1791)", "binding": "DERIVATIVE_OF_CANONICAL", "governance": "SQ-1 recorded dependant"},
+    {"surface": "meoclass1/QB2_B_CheatSheet.html", "region": "header correction alert (l.101)", "binding": "DERIVATIVE_OF_CANONICAL", "governance": "SQ-1 recorded dependant"},
+    {"surface": "meoclass1/QB2_B_CheatSheet.html", "region": "Q10 five-tier rule (l.411)", "binding": "DERIVATIVE_OF_CANONICAL", "governance": "SQ-2 recorded dependant (no Phase 2 detector finding: MON_COUNT pattern gap)"},
+    {"surface": "meoclass1/QB2_B_CheatSheet.html", "region": "Q10 key numbers (l.415 and the derived combined-flow / pump-capability / 80 m3/h lines)", "binding": "DERIVATIVE_OF_CANONICAL", "governance": "SQ-1 recorded dependant"},
+    {"surface": "meoclass1/QB2_B_CheatSheet.html", "region": "footer note (l.524)", "binding": "DERIVATIVE_OF_CANONICAL", "governance": "SQ-1 recorded dependant"}
+   ]},
+  {"site": "meoclass1/QB2_H.html#q2", "clusters": ["PSR-01"], "governance": ["F2 (corrected reference)"], "families": ["CAPACITY", "MONITORS"],
+   "proposition": "As QB2_B#q10; H-1 owns only the capacity / monitor proposition on this card.",
+   "sources": ["MSC.365(93)", "MSC.1/Circ.1472"],
+   "existing_owners_preserved": "CORR-T5-HYDRANT-20260906 (T5-HYDRANT-03), CORR-P1REPAIR-20260906 (P1REPAIR-01), CORR-P1CLOSE-20260906 (P1CLOSE-03) — fire-main / hydrant propositions; the card-level digest chain is continued from P1CLOSE-03 (supersedes for the H-1 proposition only; no earlier record is rewritten).",
+   "dependants": [{"surface": "meoclass1/QB2_H.html", "region": "quick-recall flip card 'Mobile water monitor capacity and count rule?' (l.355)", "binding": "DERIVATIVE_OF_CANONICAL"}]},
+  {"site": "meoclass1/QB2_F.html#q5", "clusters": ["UOW-01"], "governance": ["F3 (corrected reference)"], "families": ["CAPACITY", "MONITORS"],
+   "proposition": "As QB2_B#q10.",
+   "sources": ["MSC.365(93)", "MSC.1/Circ.1472"],
+   "existing_owners_preserved": "none recorded for the card",
+   "dependants": [{"surface": "meoclass1/QB2_F.html", "region": "'Fast Recall' cheat-header recall grid 'Lance & Monitor Numbers' (l.416-418; l.418 entity-encoded)", "binding": "DERIVATIVE_OF_CANONICAL"}]},
+  {"site": "meoclass1/QB2_A.html#q24", "clusters": ["TSF-07"], "governance": ["F4 (corrected reference)"], "families": ["INCLINOMETER"],
+   "proposition": "Carriage: SOLAS V/19.2.12 (MSC.532(107), in force 1 January 2026) for containerships and bulk carriers of 3,000 GT and upwards constructed on or after 1 January 2026, 'or other means'; MSC.363(92) is the performance standard (a recommendation, installed on or after 1 July 2015), minimum accuracy 5% of reading or +/-1 degree / +/-1 s, whichever is greater; not 'Regulation 20'.",
+   "sources": ["MSC.532(107) sha256 d130b09de9a9902f32c9588f343f30fdcdce7d8ba16e63e33066d5cf6baec560", "MSC.363(92) sha256 fee98ae42cb841432a55cdef2f38e0ce33e1d327d368ae710c7ecf0ed35aa2e2"],
+   "existing_owners_preserved": "none recorded for the card",
+   "dependants": []},
+  {"site": "meoclass1/QB1_F.html#q20", "clusters": ["TSF-04"], "governance": [], "families": ["MONITORS"],
+   "proposition": "SOLAS II-2/10.7.3 (MSC.365(93), adopted 22 May 2014) applies to ships constructed on or after 1 January 2016 designed to carry containers on or above the weather deck: at least one water mist lance; with five or more tiers, at least two (breadth < 30 m) or four (breadth >= 30 m) mobile water monitors. Not a recent or Li-ion-driven revision.",
+   "sources": ["MSC.365(93)"],
+   "existing_owners_preserved": "CORR-T5-DDCASCADE-20260906 / T5-DDCASCADE-18 (a rendering-duplication repair that adds, removes or alters no regulatory proposition) — its historical record is not rewritten; the H-1 record supersedes its pinned digest for the regulatory proposition only, as Lane A did for QB1_G#q35 / T5-DDCASCADE-33.",
+   "dependants": []},
+  {"site": "meoclass1/QB10_B.html#q4", "clusters": ["UOW-02"], "governance": [], "families": ["CONTAINER_LOSS_DUTY"],
+   "proposition": "SOLAS V/31-32 as amended by MSC.550(108) (adopted 23 May 2024, in force 1 January 2026): the master reports a container loss without delay to ships in the vicinity, the nearest coastal State and the flag State (V/31.2.1); the company assumes the obligations if the ship is abandoned or the report incomplete (2.2); the flag State reports to IMO (2.3); drifting containers are reported to ships in the vicinity and the nearest coastal State (2.4). MSC.550(108) imposes no master GISIS entry.",
+   "sources": ["MSC.550(108) sha256 cc6fc698fa6f3303ab083b2222a044295d7b86af313beb19efd5a591ef45643e"],
+   "existing_owners_preserved": "none recorded for q4 (QB10_B#q1 remains the separate pass2 R6a item)",
+   "content_condition": "Content correction was conditional on instrument verification (Lane A UOW-02): VERIFIED against MSC.550(108). The 'MARPOL Protocol I' cross-references and the UOW-03 MSC.363(92) sentence are deliberately unchanged.",
+   "dependants": []}
+ ],
+ "phase1_overlay_sites_carried": {
+  "note": "The accepted Phase 1 H-1 overlays (evidence/h1-phase1/fixture/FIXTURE_OVERLAY_MANIFEST.json sha256 e6da86e6...) are carried as an H-1-only projection: 11 files byte-identical to the accepted overlays, except that the overlays' version-note date and correction-ID placeholders were resolved at landing (ba07496: 10 Oct 2026, CORR-H1-SOLAS-PHASE2-20261010) in QB2_C, QB4_A, QB4_E and QB8_B; QB1_C.html and QB1_G.html carry only their H-1 hunks (q5, q35), with the same resolution; QB4_A.html#q20 carries only its H-1 hunks (the H7 SOLAS XII titles hunks projected out in bf0546e). Owner H-1 per Lane A (5 Oct 2026). QB1_G#q35 supersedes T5-DDCASCADE-33 (Lane A decision, Phase 1).",
+  "cards": ["meoclass1/QB4_A.html#q19", "meoclass1/QB4_A.html#q20", "meoclass1/QB4_E.html#q4", "meoclass1/QB8_B.html#q6", "meoclass1/QB2_C.html#q4", "meoclass1/QB1_C.html#q5", "meoclass1/QB2_A.html#q6", "meoclass1/QB1_G.html#q35"],
+  "non_card_surfaces": ["meoclass1/QB4_A_CheatSheet.html", "meoclass1/QB2_C_CheatSheet.html", "meoclass1/QB8_B_CheatSheet.html", "meoclass1/QB1_C_CheatSheet.html", "meoclass1/QB1_FG_CheatSheet.html", "meoclass1/oralnotes/simon-notes-p7.html"],
+  "OUT_OF_SCOPE_NON_H1_OVERLAY_CONTENT": [
+   {"surface": "meoclass1/QB1_C.html", "content": "new card q10 ('taking delivery from the yard') and its four page-count / TOC / section-count lines", "disposition": "not applied; retained for the H7 lane; no ownership invented"},
+   {"surface": "meoclass1/QB1_G.html", "content": "q27 H7-batch 'v1.1 — 23 Sep 2026' edit (Moorsom 2.83 factor, two hunks)", "disposition": "not applied; retained for the H7 lane; no ownership invented"},
+   {"surface": "meoclass1/QB4_A.html", "content": "q20 hunks of the H7 correction CORR-SOLASXII-TITLES-20260923: the 15-second-answer Chapter XII measures list, the Reg 5, Reg 9 and Reg 14 table rows, and the H7 'v1.1 — 23 Sep 2026' version-note entry", "disposition": "projected out in bf0546e (production wording restored; H-1 note renumbered v1.1); retained for the H7 lane; no ownership invented"}
+  ]
+ },
+ "f_series_successor_references": {
+  "note": "Successor reference record. The historical Phase 1 records (evidence/h1-phase1/OWNERSHIP_AND_RESIDUALS_UPDATE.md, H1_CONTENT_GATE_DESIGN_v4_1.md) are NOT edited. Root cause of all five drifts: the read-only Phase 1 exploration helper evidence/h1-phase1/scripts/explore_clauses.py took element offsets in <script>/<style>-stripped text but resolved the card id in the unstripped HTML, attributing units to earlier cards; reproduced 30/30 (triage package evidence/F_SERIES_RECONCILIATION_EVIDENCE.json).",
+  "F1": {"phase1_reference": "QB2_B q16 + QB2_B_CheatSheet", "corrected_reference": "meoclass1/QB2_B.html#q10", "subsumed_by": "SQ-1", "status": "retired as a separate site"},
+  "F2": {"phase1_reference": "QB2_H q1, q3", "corrected_reference": "meoclass1/QB2_H.html#q2", "dependant": "QB2_H.html quick-recall l.355", "status": "H-1 site (PSR-01 INCLUDE_H1)"},
+  "F3": {"phase1_reference": "QB2_F q3, q4, q6", "corrected_reference": "meoclass1/QB2_F.html#q5", "dependant": "QB2_F.html Fast Recall l.416-418", "status": "H-1 site (UOW-01 ASSIGN_H1)"},
+  "F4": {"phase1_reference": "QB2_A q22 / q23", "corrected_reference": "meoclass1/QB2_A.html#q24", "status": "H-1 site (TSF-07 ASSIGN_H1)"},
+  "F5": {"phase1_reference": "QB2_B q17 / q18 + cheat sheet", "corrected_reference": "meoclass1/QB2_B.html#q19", "subsumed_by": "SQ-3 (CONFIRMED_OUT_OF_H1)", "status": "retired as a separate H-1 observation; not registered"}
+ },
+ "not_registered": {
+  "note": "Dispatch §17: these are NOT H-1 sites and receive no H-1 metadata beyond this exclusion list.",
+  "QB2_B#q17": "NON_H1_SOURCE_ACCURACY_CANDIDATE (UOW-04): DCP monitor / FSS attribution to be independently source-checked by a non-H-1 owner; no H-1 content edit, no H-1 registry entry",
+  "QB2_B#q19": "SQ-3 / F5 — CONFIRMED_OUT_OF_H1",
+  "TSF-06": ["meoclass1/QB2_A.html#q7", "meoclass1/QB2_A.html#q8", "meoclass1/QB2_C.html#q3"],
+  "PSR-04": ["meoclass1/QB2_B.html#q18", "meoclass1/QB2_F.html#q2", "meoclass1/QB2_F.html#q4"],
+  "UOW-05": ["meoclass1/QB2_B.html#q1", "meoclass1/QB2_B.html#q5", "meoclass1/QB2_B.html#q8"],
+  "UOW-03": "meoclass1/QB10_B.html#q4 'MSC.363(92) requires the inclinometer to operate continuously…' sentence — performance-standard statement, unchanged",
+  "other_excluded_detector_artefacts": "TSF-03, TSF-05, TSF-08, TSF-09, PSR-02, PSR-03, PSR-05..PSR-08, UOW-06..UOW-10 (approved CLEAR as proposed); the 5 GENERATED_TWIN findings are DERIVATIVE_ONLY; the 4 OUT_OF_H1 findings are CONFIRMED_OUT_OF_H1"
+ },
+ "recorded_detector_gaps_not_fixed": ["out-of-card header/sidebar/footer regions are outside the unit model", "the out-of-card anchor scan misses entity-encoded text (QB2_F l.418)", "DATE2016 misses month-first 'January 1, 2016'", "MON_COUNT misses 'minimum 2 portable water monitors' / 'two (2)'", "INCL_FORBIDDEN matches V/20 but not 'Regulation 20'", "CAP_WRONG misses '24 m3/h'"]
+}

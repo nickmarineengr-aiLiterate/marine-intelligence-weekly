@@ -21,6 +21,7 @@ Portability: repo-relative, no drive letters, no external inputs.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -272,9 +273,136 @@ _sentence_conflict = T.designator_conflict(
 ok("the mixed-case sentence conflict fires: ME-GI is not ME-GA in prose",
    _sentence_conflict is True,
    "the Phase 2A-iii designator repair has regressed")
-ok("no Oral Note text exercises the ME-GI / ME-GA family",
-   not any(d in u["text"] for u in UNITS
-           for d in ("ME-GI", "ME-GA", "ME-LGI")))
+
+
+# The ME engine family in REAL Notes text. This replaces a vacancy guard,
+# "no Oral Note text exercises the ME-GI / ME-GA family", which Phase 2A-ii
+# wrote to justify leaving the sentence conflict unrepaired: no Note named the
+# family, so no Note could be mis-scored by it. Phase 2A-iii repaired the
+# conflict; the guard stayed, pinning only an absence, and expired on the first
+# legitimate Notes page that teaches these engines (Engineering Management
+# Notes Parts 25 and 29). What the absence protected is now asserted on the
+# real text instead, for every unit of every series, so a future series is
+# held to the same rule the day it is added to the governed manifest:
+#
+#   1. series: the unit's series is the series the governed notes manifest
+#      claims for its page - read from the manifest itself, not from the
+#      classification under test - and a page carries no other series'
+#      compiler attribution;
+#   2. identity: the unit is a Note (NOTE-<series code>-, a URL under
+#      oralnotes/), never a canonical QB question;
+#   3. classification: the ME members the tokeniser assigns are exactly the
+#      members the text names - none dropped, none invented;
+#   4. behaviour: on the unit's own tokens, an ask naming a member the unit
+#      names does not conflict, and an ask naming a member it does not name
+#      (taken from the other Notes units) does.
+#
+# No file, page, author or designator is listed here: every expectation is
+# read from the manifest, the unit or the tokeniser's own family key.
+_ME_MENTION = re.compile(r"\bME(?:-[A-Z][A-Z0-9]*)+\b")
+_COMPILER = re.compile(r"Originally (?:compiled|prepared) by ([^.,<]+)")
+
+
+def _me_members(tokens):
+    """ME members the tokens carry, by the designator rule's own family key."""
+    out = set()
+    for t in tokens:
+        body = str(t)[len("dsg:"):] if str(t).startswith("dsg:") else None
+        if body:
+            key, sep, val = body.partition("-")
+            if key == "me" and sep and val and val != key:
+                out.update(val.split("-me-"))   # "ME-GI/ME-GA" is one designator
+    return out
+
+
+def me_family_note_violations(units, files, canonical_ids, tokens=None,
+                              conflict=None):
+    """Violations of the source-aware ME-family rule, plus the pairs it
+    exercised. `tokens` and `conflict` default to the production tokeniser and
+    designator rule; they are parameters so a mutation can stand in for them."""
+    tokens = tokens or T.mtokens
+    conflict = conflict or T.designator_conflict
+    claimed, compilers = {}, {}
+    governed = [(skey, sdef, N._MANIFEST_SERIES.get(skey))
+                for skey, sdef in json.loads(N.NOTES_MANIFEST.read_text(
+                    encoding="utf-8")).get("series", {}).items()]
+    if N.WRITTEN_MANIFEST.exists():
+        governed += [(skey, sdef, N.SERIES_WA)
+                     for skey, sdef in json.loads(N.WRITTEN_MANIFEST.read_text(
+                         encoding="utf-8")).get("series", {}).items()]
+    for skey, sdef, series in governed:
+        if series is None:
+            claimed.setdefault("__malformed__", []).append(skey)
+            continue
+        for fname in (sdef.get("files") or {}):
+            claimed.setdefault(fname, []).append(series)
+        m = _COMPILER.search(sdef.get("source_attribution", ""))
+        if m:
+            compilers[series] = m.group(1).strip()
+    rows = {r["file"]: r for r in files}
+    bad, carrying = [], []
+    if "__malformed__" in claimed:
+        bad.append("manifest series without a Notes series: %s"
+                   % claimed["__malformed__"])
+    for u in units:
+        named = {m.group(0)[3:].replace("/", "-")
+                 for m in _ME_MENTION.finditer(u["text"])}
+        named = {v.lower() for n in named for v in n.split("-ME-")}
+        assigned = _me_members(tokens(u["text"]))
+        if not named and not assigned:
+            continue
+        uid, fname, series = u["note_unit_id"], u["file"], u["series"]
+        carrying.append((u, assigned))
+        row = rows.get(fname)
+        if claimed.get(fname) != [series] or not row \
+                or row["series"] != series or row["role"] != N.ROLE_SUBSTANTIVE:
+            bad.append("%s: series %s, manifest %s, classified %s"
+                       % (uid, series, claimed.get(fname),
+                          row and (row["series"], row["role"])))
+        page = (N.NOTES_DIR / fname).read_text(encoding="utf-8",
+                                                errors="replace")
+        foreign = sorted(c for s, c in compilers.items()
+                         if s != series and c in page)
+        if foreign:
+            bad.append("%s: page carries another series' attribution %s"
+                       % (uid, foreign))
+        code = N.SERIES_CODE.get(series)
+        if not code or not uid.startswith("%s%s-" % (N.NOTE_ID_PREFIX, code)) \
+                or uid in canonical_ids or N.is_canonical_shaped(uid) \
+                or not u["url"].startswith("/meoclass1/oralnotes/%s" % fname):
+            bad.append("%s: not a Note identity for series %s (url %s)"
+                       % (uid, series, u["url"]))
+        if named - assigned:
+            bad.append("%s: ME members named but not classified %s"
+                       % (uid, sorted(named - assigned)))
+        if assigned - named:
+            bad.append("%s: ME members classified but not named %s"
+                       % (uid, sorted(assigned - named)))
+    pool = set().union(*[a for _, a in carrying]) if carrying else set()
+    pairs = [0, 0]
+    for u, assigned in carrying:
+        unit_toks = tokens(u["text"])
+        for member in sorted(pool):
+            ask = tokens("Explain the working of the ME-%s engine."
+                         % member.upper())
+            want = member not in assigned
+            if bool(conflict(ask, unit_toks)) != want:
+                bad.append("%s: ME-%s ask %s"
+                           % (u["note_unit_id"], member.upper(),
+                              "does not conflict" if want else "conflicts"))
+            pairs[want] += 1
+    if carrying and not (pairs[0] and pairs[1]):
+        bad.append("ME-family rule not exercised both ways on real text "
+                   "(agreeing %d, conflicting %d)" % (pairs[0], pairs[1]))
+    return bad, len(carrying), pairs
+
+
+_me_bad, _me_units, _me_pairs = me_family_note_violations(UNITS, FILES,
+                                                          canonical)
+ok("ME engine family in Oral Notes: series, identity, classification and "
+   "conflict hold on real text",
+   not _me_bad, "%d units, pairs agree/conflict %s: %s"
+   % (_me_units, _me_pairs, _me_bad[:4]))
 
 # A terse prompt is capped unless the unit is titled for it and answers it.
 tier, _ = C.classify_support(1.0, 0.2, 1, False, True, False, False)

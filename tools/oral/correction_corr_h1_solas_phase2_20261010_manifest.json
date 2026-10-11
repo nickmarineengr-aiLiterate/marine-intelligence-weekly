@@ -1,0 +1,270 @@
+{
+ "correction_id": "CORR-H1-SOLAS-PHASE2-20261010",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "title": "H-1 SOLAS container fire-fighting, inclinometer and container-loss corrections (Phase 1 overlays as an H-1-only projection + six Phase 2 sites)",
+ "note": "Correction ID assigned by Lane A (10 Oct 2026) and retained at final integration (Lane A dispatch 'H-1 Phase 2 Final Integration and Release Qualification', 10 Oct 2026): it satisfies the schema identity rule (correction_id_matches_filename) and the CORR-<SLUG>-<YYYYMMDD> convention with this record's date. The version notes of the H-1 cards cite it, and the version-note placeholders carried by the accepted Phase 1 overlays were resolved to it and to the record date in ba07496. Integration history: tooling 8bce331 and H-1 516f1f3 joined by a --no-ff merge without rewriting either (H-1 SHAs bf321a6, 5f58bfe, 485182c, 516f1f3 preserved).",
+ "origin": "h1_phase2_candidate_wide_shadow_triage_lane_a_rulings",
+ "date": "2026-10-10",
+ "baseline_commit": "d8b48e8",
+ "governing_commits": [
+  "5f58bfe",
+  "ba07496",
+  "bf0546e"
+ ],
+ "authorisation_source": "Lane A dispatch 'H-1 Phase 2 — Apply Lane A Triage Rulings and Build Governed Correction Candidate' of 10 October 2026, sections 1-17 (all 27 triage clusters ruled; six canonical sites assigned to H-1), with the Lane A mid-task rulings of 10 October 2026 (Phase 1 overlays applied as an H-1-only projection; provisional correction ID). Phase 1 H-1 overlay ownership: Lane A decision of 5 October 2026. Landing metadata (governed successor declaration H1SOLAS-P2-CS-01, version-note placeholder resolution, correction-ID status): Lane A dispatch 'H-1 Phase 2 Final Integration and Release Qualification' of 10 October 2026, on the accepted governed-artefact supersession tooling (8bce331). H7 ownership separation of QB4_A#q20 (H-1-only projection, H-1 note renumbered v1.1): Lane A H-1 Phase 2 release-unblock ruling of 10 October 2026.",
+ "known_traps_entries": [
+  135,
+  136,
+  137
+ ],
+ "candidate_claim": "Not a candidate report. Found by the H-1 Phase 2 candidate-wide shadow evaluation (technically qualified, B2_H1_PHASE2_SHADOW_CORRECTED_FINAL_PAIR_20261008.zip) and triaged by Lane A (B2_H1_PHASE2_LANE_A_TRIAGE_REVIEW_20261008.zip).",
+ "candidate_verdict": "INCORRECT on all six sites, verified at source.",
+ "authority": "MSC.365(93) (SOLAS II-2/10.7.3, adopted 22 May 2014, ships constructed on or after 1 January 2016); MSC.1/Circ.1472 para 3.5 (60 m3/h, 'should'); MSC.532(107) (SOLAS V/19.2.12); MSC.363(92) (performance standard, accuracy 5% of reading or +/-1 degree); MSC.550(108) (SOLAS V/31.2.1-2.4 and V/32.3, in force 1 January 2026). Pinned bytes and sha256 in the candidate evidence (sources/SOURCE_VERIFICATION_20261010.md).",
+ "propagation": {
+  "derived_surfaces": "No question stem changed; qb_content_index.json and every generated projection are unchanged; the five generated twins remain derivative of unchanged canonical stems.",
+  "excluded_overlay_content": "OUT_OF_SCOPE_NON_H1_OVERLAY_CONTENT: QB1_C#q10 (new card) with its page-count/TOC lines, and the QB1_G#q27 H7 edit, are not applied (H7 lane); nor are the QB4_A#q20 hunks of the H7 correction CORR-SOLASXII-TITLES-20260923 (the 15-second-answer Chapter XII measures list, the Reg 5, Reg 9 and Reg 14 table rows and the H7 'v1.1 - 23 Sep 2026' version-note entry), projected out in bf0546e."
+ },
+ "invariants": {
+  "cards_corrected": 14,
+  "new_cards": 0,
+  "stems_changed": 0,
+  "non_h1_overlay_hunks_imported": 0,
+  "detector_semantics_changed": false,
+  "noun_head_table_changed": false,
+  "release_gate_registration": false
+ },
+ "artefacts": [
+  {
+   "path": "meoclass1/QB2_B_CheatSheet.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Q10 card, header alert and footer: the 400 L/min (24 m3/h) figure, the derived 800 L/min / 48 m3/h and pump-capability claims, and the '80 m3/h' correction note replaced by the MSC.1/Circ.1472 guideline and the 2/4 breadth rule for five or more tiers (SQ-1/SQ-2 recorded dependants of QB2_B#q10). NOTE: this file is pinned whole-file by CORR-REL-BJ-CHEATSHEET-20260909 / REL-BJ-CS-01 (governed artefact, digest 64f04f3c...); this record supersedes that pin by the whole-file succession H1SOLAS-P2-CS-01 in governed_artefact_successions (verified against history; the REL-BJ-CS-01 Bulk Jupiter proposition is carried forward verbatim)."
+  },
+  {
+   "path": "meoclass1/QB2_B.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Out-of-card SQ-1 dependants of q10 (page header l.151, correction banner l.157, sidebar l.203, footer l.1791): the 400 L/min claim replaced by the MSC.1/Circ.1472 guideline."
+  },
+  {
+   "path": "meoclass1/QB2_H.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Out-of-card quick-recall flip card (l.355), dependant of q2: capacity attributed to the guideline; five-or-more-tiers condition added."
+  },
+  {
+   "path": "meoclass1/QB2_F.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Out-of-card 'Fast Recall' recall grid (l.416-418), dependant of q5: five-or-more-tiers condition added; capacity attributed to the guideline."
+  },
+  {
+   "path": "meoclass1/QB4_A_CheatSheet.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Accepted Phase 1 H-1 overlay (resolution disambiguation table and recall line), byte-identical to the accepted overlay."
+  },
+  {
+   "path": "meoclass1/QB2_C_CheatSheet.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Accepted Phase 1 H-1 overlay (cs-q4), byte-identical to the accepted overlay."
+  },
+  {
+   "path": "meoclass1/QB8_B_CheatSheet.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Accepted Phase 1 H-1 overlay (cs-q6), byte-identical to the accepted overlay."
+  },
+  {
+   "path": "meoclass1/QB1_C_CheatSheet.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Accepted Phase 1 H-1 overlay (cs-q5), byte-identical to the accepted overlay."
+  },
+  {
+   "path": "meoclass1/QB1_FG_CheatSheet.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Accepted Phase 1 H-1 overlay (cq38), byte-identical to the accepted overlay."
+  },
+  {
+   "path": "meoclass1/oralnotes/simon-notes-p7.html",
+   "classification": "DEPENDENCY_CORRECTION",
+   "rationale": "Accepted Phase 1 H-1 overlay (n11), byte-identical to the accepted overlay."
+  }
+ ],
+ "cards": [
+  {
+   "correction_action_id": "H1SOLAS-P2-01",
+   "file": "QB10_B.html",
+   "path": "meoclass1/QB10_B.html",
+   "anchor": "q4",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "dc48135186edb0c6be82eb1a104f38fd6940fedb6cd004be3428444a97e9f94e",
+   "post_edit_digest": "beafc5e20dcad45e4a7fb495d2cc2bdf0afdc134390c3bbdb7a4c092b7c7969f",
+   "what_changed": "UOW-02, verified against MSC.550(108): reporting chain is master -> ships in the vicinity, nearest coastal State, flag State (V/31.2.1); company (2.2); flag State -> IMO (2.3); drifting containers -> ships in the vicinity and nearest coastal State (2.4). No master GISIS entry. MARPOL Protocol I lines and the UOW-03 MSC.363(92) sentence unchanged."
+  },
+  {
+   "correction_action_id": "H1SOLAS-P2-02",
+   "file": "QB1_C.html",
+   "path": "meoclass1/QB1_C.html",
+   "anchor": "q5",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "56d28a99ae8fd0144bc26c0a92db7773973054b0cf12c00d204be692be3541f9",
+   "post_edit_digest": "fef68504f9fe735e5705026ee875203e0f2c703bc469c3dc6197de150ead549a",
+   "what_changed": "Accepted Phase 1 H-1 correction (fixture overlay, Lane A 5 Oct 2026), landed byte-identical to the accepted overlay for this card (H-1-only projection for QB1_C / QB1_G), except that the overlay's version-note date and correction-ID placeholders were resolved at landing (ba07496) to 10 Oct 2026 and CORR-H1-SOLAS-PHASE2-20261010."
+  },
+  {
+   "correction_action_id": "H1SOLAS-P2-03",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q20",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "6e2ed94515c2db28f3e93e55bf878d88ae65bb8557607f4809a4aeb81a626fd2",
+   "post_edit_digest": "147c96f23b5df26f309f7b1d9c32a579c0dc22d19dfcd2701beba75a2f662568",
+   "what_changed": "TSF-04: the lance/monitor carriage restated as SOLAS II-2/10.7.3 (in force since 1 January 2016) with its five-or-more-tiers and breadth conditions; no longer an 'emerging' or lithium-ion-driven revision.",
+   "supersedes": {
+    "manifest": "correction_corr_t5_ddcascade_20260906_manifest.json",
+    "action_id": "T5-DDCASCADE-18",
+    "post_edit_digest": "6e2ed94515c2db28f3e93e55bf878d88ae65bb8557607f4809a4aeb81a626fd2",
+    "note": "T5-DDCASCADE-18 pinned the state this H-1 correction edits; its post-edit digest is this record's pre-edit digest, so the chain is continued, not rewritten. Supersession is for the H-1 regulatory proposition only; the earlier record's own history stands."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "H1SOLAS-P2-04",
+   "file": "QB1_G.html",
+   "path": "meoclass1/QB1_G.html",
+   "anchor": "q35",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "8060df8afd46a16ca465fe4044cb7789301f70d57d81d3157646007201349642",
+   "post_edit_digest": "f81a7e15242206ea03f7c26bc91a1fe8add68c25aad75bf3b715d1b2702c7e59",
+   "what_changed": "Accepted Phase 1 H-1 correction (fixture overlay, Lane A 5 Oct 2026), landed byte-identical to the accepted overlay for this card (H-1-only projection for QB1_C / QB1_G), except that the overlay's version-note date and correction-ID placeholders were resolved at landing (ba07496) to 10 Oct 2026 and CORR-H1-SOLAS-PHASE2-20261010.",
+   "supersedes": {
+    "manifest": "correction_corr_t5_ddcascade_20260906_manifest.json",
+    "action_id": "T5-DDCASCADE-33",
+    "post_edit_digest": "8060df8afd46a16ca465fe4044cb7789301f70d57d81d3157646007201349642",
+    "note": "T5-DDCASCADE-33 pinned the state this H-1 correction edits; its post-edit digest is this record's pre-edit digest, so the chain is continued, not rewritten. Supersession is for the H-1 regulatory proposition only; the earlier record's own history stands."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "H1SOLAS-P2-05",
+   "file": "QB2_A.html",
+   "path": "meoclass1/QB2_A.html",
+   "anchor": "q6",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "ed066405845a6f526a5865f9da10e383d634627f6a04d100d7aed450dedd8259",
+   "post_edit_digest": "2fff810a03d3e092c4c788f0cf66733ade140be7df55037f0c2b3348f1c8204e",
+   "what_changed": "Accepted Phase 1 H-1 correction (fixture overlay, Lane A 5 Oct 2026), landed byte-identical to the accepted overlay for this card (H-1-only projection for QB1_C / QB1_G)."
+  },
+  {
+   "correction_action_id": "H1SOLAS-P2-06",
+   "file": "QB2_A.html",
+   "path": "meoclass1/QB2_A.html",
+   "anchor": "q24",
+   "classification": "SCOPE_PASS_CORRECTION",
+   "pre_edit_digest": "1bac597f1fae94629e0a982dadaa6f67d5c887184e01e15a487d9cc528ea59fc",
+   "post_edit_digest": "da8ce5e199daccdf857c6663b57398aef5b0b9b47dbcffe48692933d4350d608",
+   "what_changed": "F4 (TSF-07): carriage re-attributed from 'Chapter V (Regulation 20)' to SOLAS V/19.2.12 (MSC.532(107)) with the 1 January 2026 construction date; MSC.363(92) stated as the performance standard; unsupported +/-0.2 deg / +/-1.0 deg accuracy replaced by its published 5% of reading or +/-1 deg."
+  },
+  {
+   "correction_action_id": "H1SOLAS-P2-07",
+   "file": "QB2_B.html",
+   "path": "meoclass1/QB2_B.html",
+   "anchor": "q10",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "2faa662e63ad76ab60ae839f3253716bc85238634890957e84b0d99477cc1278",
+   "post_edit_digest": "d0665f5d867f0cda3ce9b186ec073b30b0bd685181c3f337ebbe00ec2d65c138",
+   "what_changed": "SQ-1/SQ-2 (TSF-01, TSF-02): 400 L/min (24 m3/h) was presented as the SOLAS II-2/10.7.3 monitor minimum and the monitor count had no breadth rule. SOLAS sets no flow figure; MSC.1/Circ.1472 3.5 gives 60 m3/h (1,000 l/min) as guidance; two monitors below 30 m breadth, four at 30 m or more, for five or more tiers. Derived 48 m3/h removed."
+  },
+  {
+   "correction_action_id": "H1SOLAS-P2-08",
+   "file": "QB2_C.html",
+   "path": "meoclass1/QB2_C.html",
+   "anchor": "q4",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "ef3bbf00f3c7e6ff147f438e78a03def157b27ba2329d7b0d21e3b87566a6a41",
+   "post_edit_digest": "e21599476c68e1f1f901ac47746d93ef7b9abe93940e0b491ff31e6926e2889d",
+   "what_changed": "Accepted Phase 1 H-1 correction (fixture overlay, Lane A 5 Oct 2026), landed byte-identical to the accepted overlay for this card (H-1-only projection for QB1_C / QB1_G), except that the overlay's version-note date and correction-ID placeholders were resolved at landing (ba07496) to 10 Oct 2026 and CORR-H1-SOLAS-PHASE2-20261010."
+  },
+  {
+   "correction_action_id": "H1SOLAS-P2-09",
+   "file": "QB2_F.html",
+   "path": "meoclass1/QB2_F.html",
+   "anchor": "q5",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "2935a34e1353fb8cf191066fdd97f4167244f96970c20e4e3e49b5c6274bf55b",
+   "post_edit_digest": "d09c82f2b05aff124148e4eea38c6a3657d10bb31b32d4452167e53a96b4ae0e",
+   "what_changed": "F3 (UOW-01): monitor capacity re-attributed to the MSC.1/Circ.1472 guideline; the five-or-more-tiers condition added to every monitor count."
+  },
+  {
+   "correction_action_id": "H1SOLAS-P2-10",
+   "file": "QB2_H.html",
+   "path": "meoclass1/QB2_H.html",
+   "anchor": "q2",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "31f7770c152da457232e548222ab89859270c7d33ad16dbf7577c3ef7f2d59a9",
+   "post_edit_digest": "9e5f6cab8c6646549b645d83af47eb2efe24027d3cfd088ffed303a1705263d7",
+   "what_changed": "F2 (PSR-01): '60 m3/h ... minimum required ... under SOLAS' re-attributed to the MSC.1/Circ.1472 guideline; 'at least two monitors for a beam over 30 meters' corrected to two below 30 m / four at 30 m or more for five or more tiers. Fire-main content of the earlier records unchanged.",
+   "supersedes": {
+    "manifest": "correction_corr_p1close_20260906_manifest.json",
+    "action_id": "P1CLOSE-03",
+    "post_edit_digest": "31f7770c152da457232e548222ab89859270c7d33ad16dbf7577c3ef7f2d59a9",
+    "note": "P1CLOSE-03 pinned the state this H-1 correction edits; its post-edit digest is this record's pre-edit digest, so the chain is continued, not rewritten. Supersession is for the H-1 regulatory proposition only; the earlier record's own history stands."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  },
+  {
+   "correction_action_id": "H1SOLAS-P2-11",
+   "file": "QB4_A.html",
+   "path": "meoclass1/QB4_A.html",
+   "anchor": "q19",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "2b23a7e2d6af8d602dcd2e39cc6bbd4a15432862e3560a411e75c4ffc7ee8556",
+   "post_edit_digest": "65c5ad7fcd76800ec88475a67eb4694c1c8e45ecba3be8618ee18c02b96eb4ab",
+   "what_changed": "Accepted Phase 1 H-1 correction (fixture overlay, Lane A 5 Oct 2026), landed byte-identical to the accepted overlay for this card (H-1-only projection for QB1_C / QB1_G), except that the overlay's version-note date and correction-ID placeholders were resolved at landing (ba07496) to 10 Oct 2026 and CORR-H1-SOLAS-PHASE2-20261010."
+  },
+  {
+   "correction_action_id": "H1SOLAS-P2-12",
+   "file": "QB4_A.html",
+   "path": "meoclass1/QB4_A.html",
+   "anchor": "q20",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "4c64b08b3524ec5e3d087895138a1c978ed949feff0062179da63b989630d09f",
+   "post_edit_digest": "a827b3aecbc6e177d6fdfe11bcac89ada164e0d214b0c36ea515336abf8a0139",
+   "what_changed": "Accepted Phase 1 H-1 correction (fixture overlay, Lane A 5 Oct 2026), landed byte-identical to the accepted overlay for this card (H-1-only projection for QB1_C / QB1_G), except that the overlay's version-note date and correction-ID placeholders were resolved at landing (ba07496) to 10 Oct 2026 and CORR-H1-SOLAS-PHASE2-20261010. The accepted overlay for this card had been built on the uncommitted H7 correction CORR-SOLASXII-TITLES-20260923 (not on main); its four H7-owned spans (the 15-second-answer Chapter XII measures list and the Reg 5, Reg 9 and Reg 14 table rows) and its embedded H7 'v1.1 - 23 Sep 2026' version-note entry were projected out in bf0546e (production wording restored), and the H-1 note entry, now the first correction on top of v1.0, is v1.1. Every H-1 span is byte-unchanged (Lane A H-1 release-unblock ruling, 10 Oct 2026)."
+  },
+  {
+   "correction_action_id": "H1SOLAS-P2-13",
+   "file": "QB4_E.html",
+   "path": "meoclass1/QB4_E.html",
+   "anchor": "q4",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "ca114e994dfdaf18dd1662c3e476bb1f08ce26a1627dc48fb379030c90b9e00b",
+   "post_edit_digest": "6c4794d78c3c358f6a09679989598d8d50c518adf9ecb0c472cb54a727194523",
+   "what_changed": "Accepted Phase 1 H-1 correction (fixture overlay, Lane A 5 Oct 2026), landed byte-identical to the accepted overlay for this card (H-1-only projection for QB1_C / QB1_G), except that the overlay's version-note date and correction-ID placeholders were resolved at landing (ba07496) to 10 Oct 2026 and CORR-H1-SOLAS-PHASE2-20261010."
+  },
+  {
+   "correction_action_id": "H1SOLAS-P2-14",
+   "file": "QB8_B.html",
+   "path": "meoclass1/QB8_B.html",
+   "anchor": "q6",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "c9799b56a36f501595d520485ba88cacdfa92bd54ed633d28f38b0f85ebcac02",
+   "post_edit_digest": "46e04c6b3df4c16d854adb36ea9d0e24d93f55e46b301214779bb2ab87b90553",
+   "what_changed": "Accepted Phase 1 H-1 correction (fixture overlay, Lane A 5 Oct 2026), landed byte-identical to the accepted overlay for this card (H-1-only projection for QB1_C / QB1_G), except that the overlay's version-note date and correction-ID placeholders were resolved at landing (ba07496) to 10 Oct 2026 and CORR-H1-SOLAS-PHASE2-20261010."
+  }
+ ],
+ "governed_artefact_successions": [
+  {
+   "succession_action_id": "H1SOLAS-P2-CS-01",
+   "path": "meoclass1/QB2_B_CheatSheet.html",
+   "artefact_type": "CHEAT_SHEET",
+   "pre_edit_digest": "64f04f3c50f47fd63be77634d88f4039cbe81ed7afd77f8199c0353aa04d1152",
+   "post_edit_digest": "0688c2ac3e2501ad0fbf41730999bdcae313f459e7316d4b3bdbb44f9faeba6d",
+   "supersedes": {
+    "manifest": "correction_corr_rel_bj_cheatsheet_20260909_manifest.json",
+    "action_id": "REL-BJ-CS-01",
+    "post_edit_digest": "64f04f3c50f47fd63be77634d88f4039cbe81ed7afd77f8199c0353aa04d1152"
+   },
+   "preserved_propositions": [
+    "<li>Casualties: <em>MV Bulk Jupiter (2015)</em> — bauxite; most probably liquefaction or a free-surface effect (flag State found no physical evidence of cause)</li>"
+   ],
+   "succession_reason": "H-1 Phase 2 SQ-1/SQ-2 recorded dependants of QB2_B#q10 (Lane A dispatch 10 Oct 2026): the Q10 card, header alert and footer of the cheat sheet move from the 400 L/min / 800 L/min / 80 m3/h figures to the MSC.1/Circ.1472 guideline and the 2/4 breadth rule. The REL-BJ-CS-01 Bulk Jupiter proposition is carried forward verbatim and unchanged."
+  }
+ ]
+}
