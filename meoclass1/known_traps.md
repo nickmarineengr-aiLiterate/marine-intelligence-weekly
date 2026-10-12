@@ -3871,3 +3871,58 @@ Over-correction guards keep QB3_J's capability trap, QB9_D's "has not ratified" 
 2025 citation alive.
 
 GREP: SKIP (proposition-scoped by design: the corrected sentences name the rejected bands and dates to reject them — enforced by the content gate, not by a literal scan)
+
+### 135. India's cargo regime is the Carriage of Goods by Sea Act, 2025 — and it was already Hague-Visby since 1993
+
+**Flagged:** production, 23 September 2026, while writing the Hamburg Rules card (`QB1_A` Q35) for
+a September 2026 intake ask. Upheld; corrected by CORR-COGSA2025-20260923.
+
+**WRONG** (as shipped on `QB1_A` Q27): *"India ratified the Hague Rules 1924 through the Carriage
+of Goods by Sea Act 1925. The Visby Protocol has not been formally ratified by India — in practice
+… incorporate Hague-Visby by reference"*, a trap built on it, and *"India's statute = COGSA 1925"*.
+
+**CORRECT:**
+
+- The **Multimodal Transportation of Goods Act, 1993** amended the 1925 Act to carry the rules as
+  amended by the 1968 and 1979 Protocols — Hague-Visby **by statute** from 1993, not by contract.
+- The **Carriage of Goods by Sea Act, 2025** (Act No. 19 of 2025; assent 8 Aug 2025; in force
+  10 Sep 2025 by S.O. 4082(E) — commencement from secondary sources, registered for recheck)
+  repeals the 1925 Act (s.12(1)) and re-enacts the Hague Rules as amended by those Protocols; limit
+  **666.67 SDR per package or 2 SDR per kg**.
+- India is **not** a party to the Hamburg Rules. Do not assert treaty accession to the 1968/1979
+  Protocols — statutory enactment is what the sources establish.
+
+GREP: SKIP (the corrected card quotes the 1925 Act as repealed; a literal scan would fire on the fix)
+
+### 136. SOLAS XII Reg 9 is not double side skin, Reg 14 is not loading plans, Reg 5 is not the stability standard
+
+**Flagged:** September 2026 intake independent review (SEP-0094) and the H7 technical review,
+23 September 2026. Upheld; corrected by CORR-SOLASXII-TITLES-20260923 on `QB4_A` Q20 and `QB3_A` Q1.
+
+**WRONG:** `QB4_A` Q20 — *"Reg 14 Loading and unloading plans"*, *"Reg 9 Double-side-skin for
+single-skin bulk carriers"*, *"Reg 5 One-hold flooding stability standard"*; `QB3_A` Q1 — *"Reg 9
+requires double-side-skin for new builds above 150m"* in three places.
+
+**CORRECT** (Chapter XII as adopted by MSC.170(79), in force 1 July 2006): Reg 4 damage stability;
+Reg 5 structural strength; Reg 8 information on compliance (8.3 the side-shell triangle); Reg 9
+bulk carriers not capable of complying with Reg 4.3 due to the design configuration of their
+holds; Reg 14 restrictions from sailing with any hold empty. The triangle is Reg 8.3, not Reg 14.
+
+GREP: SKIP (the corrected cards and version notes name the rejected titles in order to reject them)
+
+### 137. WinGD X-DF is a two-stroke engine — the comparison card that calls it four-stroke is HELD, not fixed
+
+**Flagged:** September 2026 intake adjudication (SEP-0068) and independent review, 23 September 2026.
+**Not yet corrected** — held in SEPTEMBER2026_PRODUCTION_QUEUE.json `held_corrections`.
+
+**WRONG** (as shipped on `QB7_I` Q3): X-DF filed among *"Four-stroke low-pressure Otto engines"*,
+with *"gas into the intake port at 4-8 bar"*, a table header *"4-Stroke LPDF (Wärtsilä/WinGD)"* and
+a trap contrasting ME-GA with *"a four-stroke X-DF"*.
+
+**CORRECT:** WinGD X-DF is a **two-stroke** low-pressure dual-fuel engine — lean-burn Otto in gas
+mode with pilot ignition in pre-chambers — the direct two-stroke counterpart of the ME-GA; iCER is
+its low-pressure EGR (up to 50% methane-slip reduction; Tier III in both modes). Four-stroke DF
+engines (e.g. Wärtsilä 31DF/46DF) are a separate family. Until the held rewrite ships, do not cite
+`QB7_I` Q3 for X-DF architecture.
+
+GREP: SKIP (held correction; the live card still carries the error and a literal scan would only restate it)

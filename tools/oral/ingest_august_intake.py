@@ -32,6 +32,46 @@ OUT = L.OUT
 RECORDS = OUT / "AUGUST2026_INTAKE_RECORDS.jsonl"
 REPORT = OUT / "AUGUST2026_INTAKE_REPORT.json"
 
+#: ONE INTAKE PER SITTING MONTH. Each month is its own denominator with its own
+#: carrier registry, derived records and identity space, so a September report
+#: can never renumber an August identity and an August late report can never
+#: acquire a SEP one (`S6` in test_intake_multicarrier.py pins the latter).
+#: The parser, the reconciliation gate and every control are SHARED -- a month
+#: is data, never a second copy of the code. August is the default so that
+#: every historical caller and control reads exactly what it always read.
+INTAKE_PROFILES = {
+    "2026-08": {
+        "label": "August",
+        "records": RECORDS,
+        "report": REPORT,
+        "carriers": OUT / "AUGUST2026_INTAKE_CARRIERS.json",
+        "inbox_dir": "New questions from August orals",
+        "submission_prefix": "AUG2026-S",
+        "occurrence_prefix": "AUG-",
+        "denominator_class": "CURRENT_AUGUST_INTAKE",
+        "result_bare": False,   # frozen: see RESULT_BARE_RE
+    },
+    "2026-09": {
+        "label": "September",
+        "records": OUT / "SEPTEMBER2026_INTAKE_RECORDS.jsonl",
+        "report": OUT / "SEPTEMBER2026_INTAKE_REPORT.json",
+        "carriers": OUT / "SEPTEMBER2026_INTAKE_CARRIERS.json",
+        "inbox_dir": "New Questions from Sept orals",
+        "submission_prefix": "SEP2026-S",
+        "occurrence_prefix": "SEP-",
+        "denominator_class": "CURRENT_SEPTEMBER_INTAKE",
+        "result_bare": True,
+    },
+}
+DEFAULT_MONTH = "2026-08"
+
+
+def profile(month: str = DEFAULT_MONTH) -> dict:
+    if month not in INTAKE_PROFILES:
+        raise SystemExit(f"unknown intake month {month!r}; "
+                         f"registered: {sorted(INTAKE_PROFILES)}")
+    return INTAKE_PROFILES[month]
+
 # "Ext- Rajappan sir" / "Int- Senthil sir"
 ROLE_RE = re.compile(r"^(Ext|Int|External|Internal)\s*[-:]\s*(.+?)\s*$", re.I)
 # "1. text" / "2. <U+2060>text"  (the source uses invisible separators after the dot)
@@ -40,6 +80,18 @@ ROLE_RE = re.compile(r"^(Ext|Int|External|Internal)\s*[-:]\s*(.+?)\s*$", re.I)
 # question into context. S004 lost two occurrences that way before this was
 # widened, and a lost occurrence raises no error: it just is not counted.
 Q_RE = re.compile(r"^(\d+)\s*[.)]\s*(.*)$", re.S)
+#: "1, Type of vessel" -- a COMMA after the number. One 23-September report
+#: numbered all seven asks this way; Q_RE did not see them, the
+#: block fell into unnumbered mode, and "Written-waiting for Result" and
+#: "Rest- pass" were promoted to examinable occurrences while every candidate
+#: number was lost. At most two digits and a space after the comma, so a figure
+#: such as "1,000 t" is never read as a question number.
+Q_COMMA_RE = re.compile(r"^(\d{1,2})\s*,\s+(\S.*)$", re.S)
+
+
+def q_match(t: str):
+    """A numbered question line in any separator style the carriers have shown."""
+    return Q_RE.match(t) or Q_COMMA_RE.match(t)
 # "Attempt 1" / "Attempt-1" / "Attempt : 2" - candidates punctuate this freely
 # and the attempt number is evidence about the sitting, not decoration.
 #: Candidates punctuate this line four ways the original pattern could not read,
@@ -64,6 +116,17 @@ ATTEMPT_RE = re.compile(
 ATTEMPT_ORDINAL_RE = re.compile(
     r"^(\d+)\s*(?:st|nd|rd|th)?\s+attempts?\s*$", re.I)
 RESULT_RE = re.compile(r"^Result\s*[-:]\s*(.+?)\s*$", re.I)
+#: "Result repeat" / "Result . Pass" -- no separator, or a full stop as one. Three
+#: 22-September reports wrote the outcome this way and all three lost it to the
+#: preamble. Deliberately bounded to the outcome words themselves, so the
+#: widening cannot swallow a question that merely begins with "Result...".
+#: MONTH-SCOPED (`result_bare` in INTAKE_PROFILES): applied to August it RECOVERS
+#: a result the August ingest lost -- AUG2026-S021 reads `pass` instead of null
+#: -- which would rewrite an issued record. That is an August finding for the
+#: Founder, never a side effect of a September change.
+RESULT_BARE_RE = re.compile(
+    r"^Result\s*[.]?\s*(pass(?:ed)?|repeat|fail(?:ed)?|cleared|not\s+cleared)"
+    r"\s*[.!]*\s*$", re.I)
 RULE_RE = re.compile(r"^[-]{3,}$")
 # A bare "<Name> :" line inside the body. It is treated as an attribution
 # marker ONLY when <Name> matches an examiner already declared by this same
@@ -200,7 +263,20 @@ def canonical_examiner(name: str) -> str:
 #: as the S007 loss and the 27-August starred probes, and just as silent.
 #: Exactly one capital letter before the separator, so "Internal:" and a
 #: numbered line cannot match it.
-LETTERED_ROOT_RE = re.compile(r"^([A-Z])\s*[.)]\s+(\S.*)$", re.S)
+#: A DOUBLED letter ("AA)" "BB)" "CC)") is the same device: the 22-September LNG
+#: candidate lettered the three asks he had failed at his previous attempt that
+#: way, and all three fell into the preamble as context. Only a REPEATED letter
+#: is accepted, so an abbreviation such as "UI." or "PR)" can never match.
+LETTERED_ROOT_RE = re.compile(r"^(?P<letter>([A-Z])\2?)\s*[.)]\s+(?P<body>\S.*)$", re.S)
+
+#: NOT A GRAMMAR RULE: INDENTATION. The 22-September LNG candidate indented
+#: "XDF technology , Icer and how NOx reduction , NOx technical file" under
+#: "1. Type of ship sailed - LNG", and promoting indented lines was tried. It
+#: renumbered eight August identities from AUG-0246 on, because the 31-August
+#: carriers indent examinable bullets AND pure commentary ("Conducting Yoga")
+#: alike. Indentation is layout, not the candidate's signal, so such a line stays
+#: a preserved context comment and adjudication carries it into the parent's ask
+#: -- the route the 31-August VOC / ODS / NOx bullets already took.
 
 #: The candidate's own word for "what follows hangs off the ask above". Checked
 #: BEFORE the attribution branch, which would otherwise read "Cross questions:"
@@ -222,7 +298,9 @@ def starred_probe(line: str):
 def parse_submission(lines, submission_id: str, seq_start: int,
                      unnumbered: bool = False,
                      received_date: str = "2026-08-24",
-                     attempt_date: str = "2026-08-24"):
+                     attempt_date: str = "2026-08-24",
+                     occ_prefix: str = "AUG-",
+                     result_bare: bool = False):
     """Parse one candidate report.
 
     `unnumbered` is set by parse_file when the candidate wrote no "1." "2."
@@ -256,7 +334,7 @@ def parse_submission(lines, submission_id: str, seq_start: int,
             continue
 
         m = ROLE_RE.match(t) or ROLE_NOSEP_RE.match(t)
-        if m and not Q_RE.match(t):
+        if m and not q_match(t):
             # "Internal: no question" is the candidate recording that this seat
             # asked NOTHING. It is not a person. Read as a name it would put a
             # fabricated examiner into the attribution store, so it is kept as
@@ -300,7 +378,7 @@ def parse_submission(lines, submission_id: str, seq_start: int,
             attempt_no = int(m.group(1))
             continue
 
-        m = RESULT_RE.match(t)
+        m = RESULT_RE.match(t) or (result_bare and RESULT_BARE_RE.match(t))
         if m:
             result = m.group(1).strip()
             continue
@@ -314,16 +392,16 @@ def parse_submission(lines, submission_id: str, seq_start: int,
             continue
 
         m = LETTERED_ROOT_RE.match(t)
-        if m and not Q_RE.match(t) and not ROLE_RE.match(t):
+        if m and not q_match(t) and not ROLE_RE.match(t):
             occurrences.append({
-                "occurrence_id": f"AUG-{seq_start + len(occurrences):04d}",
+                "occurrence_id": f"{occ_prefix}{seq_start + len(occurrences):04d}",
                 "submission_id": submission_id,
                 "source_question_number": None,
                 "source_line_style": "LETTERED_ROOT",
-                "source_letter": m.group(1),
-                "raw_question_text": m.group(2),
-                "normalised_question_text": normalise(m.group(2)),
-                "is_question": not looks_like_non_question(m.group(2)),
+                "source_letter": m.group("letter"),
+                "raw_question_text": m.group("body"),
+                "normalised_question_text": normalise(m.group("body")),
+                "is_question": not looks_like_non_question(m.group("body")),
                 "_attrib": current_attrib,
                 "_attrib_marker": attrib_marker,
                 "_attrib_basis": attrib_basis,
@@ -333,7 +411,7 @@ def parse_submission(lines, submission_id: str, seq_start: int,
             continue
 
         m = ATTRIB_RE.match(t)
-        if m and not Q_RE.match(t):
+        if m and not q_match(t):
             declared = {e["name_normalized"].lower() for e in examiners}
             cand = canonical_examiner(normalise_examiner(m.group(1)))
             if cand.lower() in declared:
@@ -348,7 +426,7 @@ def parse_submission(lines, submission_id: str, seq_start: int,
                     # be the parser inventing question boundaries the candidate
                     # never wrote. Adjudication splits it, on the record.
                     occurrences.append({
-                        "occurrence_id": f"AUG-{seq_start + len(occurrences):04d}",
+                        "occurrence_id": f"{occ_prefix}{seq_start + len(occurrences):04d}",
                         "submission_id": submission_id,
                         "source_question_number": None,
                         "raw_question_text": m.group(2),
@@ -375,7 +453,7 @@ def parse_submission(lines, submission_id: str, seq_start: int,
         probe = starred_probe(t)
         if probe is not None:
             occurrences.append({
-                "occurrence_id": f"AUG-{seq_start + len(occurrences):04d}",
+                "occurrence_id": f"{occ_prefix}{seq_start + len(occurrences):04d}",
                 "submission_id": submission_id,
                 "source_question_number": None,
                 "source_line_style": "STARRED_FOLLOWUP",
@@ -399,11 +477,11 @@ def parse_submission(lines, submission_id: str, seq_start: int,
             })
             continue
 
-        m = Q_RE.match(t)
+        m = q_match(t)
         if m:
             raw = m.group(2)
             rec = {
-                "occurrence_id": f"AUG-{seq_start + len(occurrences):04d}",
+                "occurrence_id": f"{occ_prefix}{seq_start + len(occurrences):04d}",
                 "submission_id": submission_id,
                 "source_question_number": int(m.group(1)),
                 "raw_question_text": raw,
@@ -435,7 +513,7 @@ def parse_submission(lines, submission_id: str, seq_start: int,
 
         if unnumbered and not DATE_ONLY_RE.match(t):
             occurrences.append({
-                "occurrence_id": f"AUG-{seq_start + len(occurrences):04d}",
+                "occurrence_id": f"{occ_prefix}{seq_start + len(occurrences):04d}",
                 "submission_id": submission_id,
                 "source_question_number": None,
                 "source_line_style": "UNNUMBERED",
@@ -457,7 +535,7 @@ def parse_submission(lines, submission_id: str, seq_start: int,
         # deliberately narrow, because the "?" is the candidate's own signal.
         if t.endswith("?") and not DATE_ONLY_RE.match(t):
             occurrences.append({
-                "occurrence_id": f"AUG-{seq_start + len(occurrences):04d}",
+                "occurrence_id": f"{occ_prefix}{seq_start + len(occurrences):04d}",
                 "submission_id": submission_id,
                 "source_question_number": None,
                 "source_line_style": "UNNUMBERED_QUESTION_MARK",
@@ -540,15 +618,15 @@ def block_is_submission(blk) -> tuple[bool, bool]:
     signal now identifies a submission. Shared with the ledger for the same
     reason `split_blocks` is.
     """
-    numbered = any(Q_RE.match(l.strip()) for l in blk)
-    declared = any(ROLE_RE.match(l.strip()) and not Q_RE.match(l.strip())
+    numbered = any(q_match(l.strip()) for l in blk)
+    declared = any(ROLE_RE.match(l.strip()) and not q_match(l.strip())
                    for l in blk)
     return (numbered or declared), numbered
 
 
 def parse_source(lines, *, submission_start: int = 1, seq_start: int = 1,
                  received_date: str = "2026-08-24", attempt_date: str = "2026-08-24",
-                 source_name: str = ""):
+                 source_name: str = "", month: str = DEFAULT_MONTH):
     """One carrier's lines may carry several candidate reports.
 
     `submission_start` and `seq_start` are where THIS carrier's identities
@@ -557,6 +635,7 @@ def parse_source(lines, *, submission_start: int = 1, seq_start: int = 1,
     collides with the committed corpus and, on a writer that overwrote,
     destroyed it.
     """
+    prof = profile(month)
     blocks = split_blocks(lines)
     subs, seq, skipped = [], seq_start, []
     for idx, blk in enumerate(blocks, 1):
@@ -569,9 +648,12 @@ def parse_source(lines, *, submission_start: int = 1, seq_start: int = 1,
                     "first_line": next(l.strip() for l in blk if l.strip()),
                 })
             continue
-        s = parse_submission(blk, f"AUG2026-S{submission_start + len(subs):03d}", seq,
-                             unnumbered=not numbered,
-                             received_date=received_date, attempt_date=attempt_date)
+        s = parse_submission(blk,
+                             f"{prof['submission_prefix']}{submission_start + len(subs):03d}",
+                             seq, unnumbered=not numbered,
+                             received_date=received_date, attempt_date=attempt_date,
+                             occ_prefix=prof["occurrence_prefix"],
+                             result_bare=prof["result_bare"])
         s["source_file"] = source_name
         s["line_style"] = "NUMBERED" if numbered else "UNNUMBERED"
         seq += len(s["occurrences"])
@@ -585,17 +667,18 @@ def parse_file(path: Path, **kw):
     return parse_source(path.read_text(encoding="utf-8").splitlines(), **kw)
 
 
-def load_carriers() -> list:
+def load_carriers(month: str = DEFAULT_MONTH) -> list:
     """The registered carriers, in the order that allocates their identities."""
-    return json.loads(CARRIERS.read_text(encoding="utf-8"))["carriers"]
+    reg = CARRIERS if month == DEFAULT_MONTH else profile(month)["carriers"]
+    return json.loads(reg.read_text(encoding="utf-8"))["carriers"]
 
 
-def carrier_path(carrier: dict) -> Path:
+def carrier_path(carrier: dict, month: str = DEFAULT_MONTH) -> Path:
     return L.REPO / "docs" / "MIW-master-Question-bank" / \
-        "New questions from August orals" / carrier["source_file"]
+        profile(month)["inbox_dir"] / carrier["source_file"]
 
 
-def ingest_carriers(regs: list):
+def ingest_carriers(regs: list, month: str = DEFAULT_MONTH):
     """Every registered carrier, walked in order, as ONE intake.
 
     Identities are allocated across the whole walk rather than per file, which
@@ -609,8 +692,9 @@ def ingest_carriers(regs: list):
     sub_n, seq = 1, 1
     for c in regs:
         s, skipped = parse_file(
-            carrier_path(c), submission_start=sub_n, seq_start=seq,
-            received_date=c["received_date"], attempt_date=c["attempt_date"])
+            carrier_path(c, month), submission_start=sub_n, seq_start=seq,
+            received_date=c["received_date"], attempt_date=c["attempt_date"],
+            month=month)
         o = [x for y in s for x in y["occurrences"]]
         reports.append({
             "source_file": c["source_file"],
@@ -632,19 +716,19 @@ def ingest_carriers(regs: list):
     return subs, occ, reports
 
 
-def verify_carriers(regs: list):
+def verify_carriers(regs: list, month: str = DEFAULT_MONTH):
     """EVERY registered carrier is present, unmodified and correctly dated.
 
     Checked before the record comparison, because a dropped carrier leaves the
     committed records perfectly self-consistent -- which is exactly how a whole
     submission went missing unnoticed once before.
     """
-    on_disk = {c["source_file"] for c in load_carriers()}
+    on_disk = {c["source_file"] for c in load_carriers(month)}
     named = {c["source_file"] for c in regs}
     if on_disk - named:
         return False, f"carrier(s) missing from this check: {sorted(on_disk - named)}"
     for c in regs:
-        p = carrier_path(c)
+        p = carrier_path(c, month)
         if not p.exists():
             return False, f"registered carrier is absent from disk: {c['source_file']}"
         import hashlib
@@ -652,9 +736,18 @@ def verify_carriers(regs: list):
         if got != c["sha256"]:
             return False, (f"{c['source_file']} sha256 {got[:16]} does not match the "
                            f"registered {c['sha256'][:16]}")
+        # A carrier that does NOT state the sitting date. The September inbox
+        # files are named by the day the Founder collected them and bundle
+        # several accounts, most of which carry no date at all, so asserting
+        # one would be inventing it. Only an explicit declaration makes a null
+        # attempt_date legitimate; a null without it is still refused.
+        if c["attempt_date"] is None:
+            if c.get("attempt_date_status") != "NOT_STATED_IN_CARRIER":
+                return False, (f"{c['source_file']} has no attempt_date and does not "
+                               f"declare attempt_date_status NOT_STATED_IN_CARRIER")
         # The EXAM date is the carrier's identity: a carrier is one day's
         # sitting, so attempt_date must equal carrier_date.
-        if c["attempt_date"] != c["carrier_date"]:
+        elif c["attempt_date"] != c["carrier_date"]:
             return False, (f"{c['source_file']} attempt_date {c['attempt_date']} disagrees "
                            f"with its carrier_date {c['carrier_date']}")
         # The REPORT date is a different fact and may be later. A candidate who
@@ -695,14 +788,19 @@ def main():
     ap.add_argument("--txt", help="ignored; the carrier registry is authoritative")
     ap.add_argument("--check", action="store_true",
                     help="verify committed records still match every registered carrier")
+    ap.add_argument("--month", default=DEFAULT_MONTH, choices=sorted(INTAKE_PROFILES),
+                    help="which sitting month's intake (default: the August intake)")
     a = ap.parse_args()
+    prof = profile(a.month)
+    records_path = RECORDS if a.month == DEFAULT_MONTH else prof["records"]
+    report_path = REPORT if a.month == DEFAULT_MONTH else prof["report"]
 
-    regs = load_carriers()
-    ok, why = verify_carriers(regs)
+    regs = load_carriers(a.month)
+    ok, why = verify_carriers(regs, a.month)
     if not ok:
         print(f"FAIL: {why}")
         return 1
-    subs, occ, carrier_reports = ingest_carriers(regs)
+    subs, occ, carrier_reports = ingest_carriers(regs, a.month)
     skipped = [b for r in carrier_reports for b in r["unparsed_source_blocks"]]
 
     roles = {}
@@ -711,7 +809,7 @@ def main():
             roles.setdefault(e["name_normalized"], e["role"])
 
     report = {
-        "denominator_class": "CURRENT_AUGUST_INTAKE",
+        "denominator_class": prof["denominator_class"],
         "isolated_from_historical_788": True,
         "submissions": len(subs),
         "raw_occurrences": len(occ),
@@ -759,14 +857,14 @@ def main():
             print(f"FAIL: {len(skipped)} source block(s) yielded no submission: "
                   f"{[s['block_index'] for s in skipped]}")
             return 1
-        have = [json.loads(l) for l in RECORDS.read_text(encoding="utf-8").splitlines() if l]
+        have = [json.loads(l) for l in records_path.read_text(encoding="utf-8").splitlines() if l]
         # Attribution is evidence too: a committed row may not claim an
         # examiner the source does not carry, nor drop one that it does.
         ok, why = verify_against_store(occ, have)
         if not ok:
             print(f"FAIL: {why}")
             return 1
-        print(f"OK: {len(occ)} August occurrences across {len(regs)} carrier(s) "
+        print(f"OK: {len(occ)} {prof['label']} occurrences across {len(regs)} carrier(s) "
               f"byte-match the source")
         return 0
 
@@ -779,9 +877,10 @@ def main():
     import intake_reconcile as _R
     _sub_n, _seq = 1, 1
     for c in regs:
-        led = _R.reconcile_text(carrier_path(c).read_text(encoding="utf-8"),
+        led = _R.reconcile_text(carrier_path(c, a.month).read_text(encoding="utf-8"),
                                 c["source_file"],
-                                submission_start=_sub_n, seq_start=_seq)
+                                submission_start=_sub_n, seq_start=_seq,
+                                month=a.month)
         _sub_n += led["submissions"]
         _seq += led["occurrences"]
         ok, why = _R.gate(led)
@@ -791,11 +890,14 @@ def main():
                   "the shape it shows, then widen the parser -- see SKILL.md 14a.")
             return 1
 
-    RECORDS.write_text(
-        "\n".join(json.dumps(o, ensure_ascii=False) for o in occ) + "\n",
-        encoding="utf-8")
-    REPORT.write_text(json.dumps(report, indent=2, ensure_ascii=False),
-                      encoding="utf-8")
+    # Explicit LF bytes: on Windows `write_text` turns every "\n" into CRLF, the
+    # product-file trap of SKILL.md section 6. The August records predate this
+    # writer and are LF in git, so writing LF keeps them byte-reproducible.
+    records_path.write_bytes(
+        ("\n".join(json.dumps(o, ensure_ascii=False) for o in occ) + "\n")
+        .encode("utf-8"))
+    report_path.write_bytes(
+        json.dumps(report, indent=2, ensure_ascii=False).encode("utf-8"))
     print(json.dumps(report, indent=2, ensure_ascii=False))
     return 0
 

@@ -60,6 +60,155 @@ def jsonl(p):
     return [json.loads(x) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()]
 
 
+SEP_RE = re.compile(r"^SEP-\d{4}$")
+
+
+def september_intake_checks(sid, inv, aug_ids):
+    """The September 2026 intake: a THIRD denominator, isolated from both others.
+
+    The same contract the A-checks enforce on August, stated once more over the
+    SEP-* records, plus two things August never needed: the SEP and AUG identity
+    spaces must be disjoint in BOTH directions, and the registered snapshot
+    carriers must still hash and re-parse to exactly the committed records -- the
+    month profile shares one parser, so a later grammar change that silently
+    moved a September identity would otherwise surface nowhere. Every August
+    check above is untouched; these are appended, never interleaved. Fails
+    closed: absent September evidence is a FAIL, never a skip.
+    """
+    try:
+        intake = jsonl(OUT / "SEPTEMBER2026_INTAKE_RECORDS.jsonl")
+        adj = json.loads((OUT / "SEPTEMBER2026_INTAKE_ADJUDICATIONS.json")
+                         .read_text(encoding="utf-8"))["adjudications"]
+        report = json.loads((OUT / "SEPTEMBER2026_INTAKE_REPORT.json")
+                            .read_text(encoding="utf-8"))
+    except (OSError, ValueError, KeyError) as e:
+        check("S0_september_intake_evidence_present", False, f"{type(e).__name__}: {e}")
+        return
+    check("S0_september_intake_evidence_present", True,
+          f"{len(intake)} occurrence(s), {len(adj)} adjudication(s)")
+
+    ids = [o["occurrence_id"] for o in intake]
+    check("S1_intake_ids_unique_and_wellformed",
+          len(set(ids)) == len(ids) and all(SEP_RE.match(i) for i in ids))
+    check("S2_every_intake_occurrence_adjudicated",
+          sorted(a["occurrence_id"] for a in adj) == sorted(ids),
+          f"intake={len(ids)} adjudicated={len(adj)}")
+    check("S3_intake_classifications_governed",
+          all(a["classification"] in CLASSES for a in adj))
+    check("S4_denominators_isolated_three_ways",
+          not (set(ids) & set(sid)) and not (set(ids) & aug_ids)
+          and not any(SEP_RE.match(i) for i in sid)
+          and not any(SEP_RE.match(i) for i in aug_ids)
+          and not any(ASC_RE.match(i) or AUG_RE.match(i) for i in ids))
+
+    wrong = [a["occurrence_id"] for a in adj
+             if (a["classification"] in NEEDS_TARGET) != bool(a.get("matched_question_id"))
+             and a["classification"] in NEEDS_TARGET | NEEDS_NO_TARGET]
+    check("S7_classification_and_target_agree", not wrong, f"{wrong}")
+
+    # Every card an adjudication names -- primary, co-target or secondary --
+    # must be live. A co-target is how a multi-limb ask reaches production, so
+    # an unresolved one is a limb that production would silently never see.
+    named = set()
+    for a in adj:
+        if a.get("matched_question_id"):
+            named.add(a["matched_question_id"])
+        for k in ("additional_matched_question_ids", "secondary_question_ids"):
+            named.update(a.get(k) or [])
+    bad = sorted(named - inv)
+    check("S8_intake_card_targets_resolve", not bad, f"unresolved: {bad[:5]}")
+
+    thin = []
+    for a in adj:
+        if a["classification"] != "GENUINE_NEW_QUESTION":
+            continue
+        ns = a.get("negative_search")
+        if not isinstance(ns, list) or not ns:
+            thin.append(a["occurrence_id"])
+            continue
+        for e in ns:
+            pat, hits = e.get("pattern"), e.get("hits")
+            rej = e.get("rejected", [])
+            if (not isinstance(pat, str) or not pat.strip()
+                    or not isinstance(hits, int) or hits < 0
+                    or not isinstance(rej, list) or len(rej) < hits
+                    or any(r.get("id") not in inv or not r.get("why") for r in rej)):
+                thin.append(a["occurrence_id"])
+                break
+    check("S9_new_card_claims_carry_negative_search", not thin, f"{sorted(set(thin))}")
+
+    declared = {sd["submission_id"]: {e["name_normalized"]
+                                      for e in sd.get("examiners", [])}
+                for sd in report.get("submissions_detail", [])}
+    bad_attr = []
+    for o in intake:
+        mode, who = o.get("examiner_attribution"), o.get("attributed_examiner")
+        if mode == "PANEL_LEVEL_ONLY":
+            if who is not None:
+                bad_attr.append(o["occurrence_id"])
+        elif mode == "INDIVIDUALLY_ATTRIBUTED":
+            if (not who or who not in declared.get(o["submission_id"], set())
+                    or not o.get("attribution_marker")):
+                bad_attr.append(o["occurrence_id"])
+        else:
+            bad_attr.append(o["occurrence_id"])
+    check("S10_intake_attribution_matches_evidence", not bad_attr, f"{bad_attr}")
+
+    byid = {o["occurrence_id"]: o["raw_question_text"] for o in intake}
+    check("S11_intake_raw_wording_present",
+          all(byid.get(a["occurrence_id"]) is not None for a in adj))
+
+    norm_ask = {}
+    for a in adj:
+        if a["classification"] == "GENUINE_NEW_QUESTION":
+            k = " ".join((a.get("ask") or "").lower().split())
+            norm_ask.setdefault(k, []).append(a["occurrence_id"])
+    dupes = {k: v for k, v in norm_ask.items() if len(v) > 1}
+    check("S12_no_two_occurrences_claim_the_same_new_card", not dupes,
+          f"{ {k[:40]: v for k, v in dupes.items()} }")
+
+    new_ids = {a["occurrence_id"] for a in adj
+               if a["classification"] == "GENUINE_NEW_QUESTION"}
+    bad_ref = [a["occurrence_id"] for a in adj
+               if a["classification"] in CROSS_BATCH
+               and a.get("prior_fresh_ask_ref") not in new_ids]
+    check("S13_cross_batch_rows_reference_the_ask_they_strengthen", not bad_ref,
+          f"{bad_ref}")
+
+    # The carriers still hash to their registration AND re-parse, through the
+    # shared month-profiled parser, to exactly the committed occurrences.
+    import ingest_august_intake as I
+    try:
+        regs = I.load_carriers("2026-09")
+        ok, why = I.verify_carriers(regs, "2026-09")
+        if ok:
+            _, occ, _ = I.ingest_carriers(regs, "2026-09")
+            ok = [json.dumps(o, ensure_ascii=False, sort_keys=True) for o in occ] \
+                == [json.dumps(o, ensure_ascii=False, sort_keys=True) for o in intake]
+            why = (f"{len(occ)} re-parsed occurrence(s) byte-match the committed store"
+                   if ok else "committed September records drifted from their carriers")
+    except (OSError, ValueError, KeyError, SystemExit) as e:
+        ok, why = False, f"{type(e).__name__}: {e}"
+    check("S14_carriers_verified_and_records_reproducible", ok, why)
+
+    carrier_dir = (L.REPO / "docs" / "MIW-master-Question-bank"
+                   / I.profile("2026-09")["inbox_dir"])
+    carriers = sorted(carrier_dir.rglob("*.txt")) if carrier_dir.is_dir() else []
+    not_ignored, tracked = [], []
+    for c in carriers:
+        rel = c.relative_to(L.REPO).as_posix()
+        if subprocess.run(["git", "check-ignore", "-q", rel],
+                          cwd=str(L.REPO), capture_output=True).returncode != 0:
+            not_ignored.append(rel)
+        if subprocess.run(["git", "ls-files", "--error-unmatch", rel],
+                          cwd=str(L.REPO), capture_output=True).returncode == 0:
+            tracked.append(rel)
+    check("SP1_september_carriers_are_git_ignored", carriers and not not_ignored,
+          "%d carrier file(s); not ignored: %s" % (len(carriers), not_ignored or "none"))
+    check("SP2_september_carriers_are_untracked", not tracked,
+          "tracked: %s" % (tracked or "none"))
+
+
 def main():
     # ---------------- historical ----------------
     src = jsonl(OUT / "ALL_SURVEYORS_SOURCE_RECORDS.jsonl")
@@ -292,6 +441,8 @@ def main():
     v26 = qb / "MEO_QB_master_v26.xlsx"
     check("Z2_prior_july_v26_workbooks_preserved",
           july.exists() and v26.exists())
+
+    september_intake_checks(sid, inv, set(aid))
 
     # ---------------- report ----------------
     width = max(len(n) for n, _, _ in results)

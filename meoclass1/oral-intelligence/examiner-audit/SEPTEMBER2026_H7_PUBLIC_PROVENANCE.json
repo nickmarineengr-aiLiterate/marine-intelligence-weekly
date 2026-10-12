@@ -1,0 +1,301 @@
+{
+ "record_class": "PUBLIC_MINIMISED_PROVENANCE",
+ "decision": "D-H7-3 (Founder, 12 Oct 2026): raw examiner-identifying September intake records are not committed to the public repository in the H7 release; they are preserved privately with traceable hashes.",
+ "private_originals": {
+  "held_at": "outside git: the preserved H7 worktree (8e291db, uncommitted) and the Lane A private evidence store",
+  "files": {
+   "SEPTEMBER2026_INTAKE_RECORDS.jsonl": {
+    "sha256": "124eccb5794bc4c0271b677a9c20862a8388a71a5824dc003ab647e3750ef057",
+    "bytes": 69163
+   },
+   "SEPTEMBER2026_INTAKE_REPORT.json": {
+    "sha256": "36f516c902be914ab2edec01ef4d2557ebc24dc5dc2dec9c076aee758c03e024",
+    "bytes": 23976
+   },
+   "SEPTEMBER2026_INTAKE_CARRIERS.json": {
+    "sha256": "1b29197e44cc0f4e6d0469c71925b93fadcd131098acb213cd856fe8a8f7e422",
+    "bytes": 5638
+   },
+   "SEPTEMBER2026_INTAKE_ADJUDICATIONS.json": {
+    "sha256": "c1b36ecf8e03393c89d07d47da03f650eec0969c8dcc6466dd8d727a1297d020",
+    "bytes": 227415
+   },
+   "SEPTEMBER2026_PRODUCTION_QUEUE.json": {
+    "sha256": "5a169f13ce24ca0af24552482703b55b59da89ecf4c707ed8e6d5bb96884dbe5",
+    "bytes": 48865
+   },
+   "batch_h7_manifest.json": {
+    "sha256": "656404f9852ccb53f6d87b92267ad2c97891220349bc8b99770b5d81b1882d4b",
+    "bytes": 14830
+   }
+  },
+  "note": "batch_h7_manifest.json and SEPTEMBER2026_PRODUCTION_QUEUE.json are published in minimised form; the hashes here are of the private ORIGINALS."
+ },
+ "fingerprint_method": "per occurrence: HMAC-SHA256(key = sha256('MIW-SEP2026-FP|' + private RECORDS bytes), message = RECORDS line + '\\n' + canonical JSON of its adjudication). Verifiable only with the private records; not reversible from public data.",
+ "dates": {
+  "original_intake_dates": [
+   "2026-09-22",
+   "2026-09-23"
+  ],
+  "editorial_observation_date": "2026-09-23",
+  "founder_batch_approval_date": "2026-09-26",
+  "effective_correction_month": "2026-10",
+  "effective_month_basis": "D-H7-7 option A (Founder, 12 Oct 2026): first committed in October 2026; oral_monthly attributes by declared date and first-commit month, which must agree",
+  "git_commit_dates": "as recorded by git; never back-dated",
+  "public_release_date": "TBD after Founder landing authorisation"
+ },
+ "approval_identity": {
+  "batch": "H7",
+  "decision": "APPROVED_WITH_AMENDMENTS",
+  "decided_on": "2026-09-26",
+  "decided_by": "Founder",
+  "source": "Founder brief 'MIW H7 - NEW SESSION ROLLOVER HANDOFF', 2026-09-26, §6 (H7 qualification preparation) and §7A",
+  "scope_action_ids": [
+   "H7-001",
+   "H7-002",
+   "H7-003",
+   "H7-004",
+   "H7-005",
+   "H7-006",
+   "H7-007",
+   "H7-008",
+   "H7-009",
+   "H7-010"
+  ],
+  "scope_corrections": [
+   "CORR-COGSA2025-20260923",
+   "CORR-SOLASXII-TITLES-20260923"
+  ],
+  "release_decisions_20261012": [
+   "D-H7-1 conditional acceptance of the QB4_A#q20 v1.2 wording",
+   "D-H7-3 privacy minimisation",
+   "D-H7-4 fast-forward landing",
+   "D-H7-7 option A effective month"
+  ]
+ },
+ "intake_summary": {
+  "submissions": 15,
+  "raw_occurrences": 153,
+  "by_classification": {
+   "ADMINISTRATIVE_NOT_EXAMINABLE": 8,
+   "PARAPHRASE_EXISTING": 82,
+   "FOLLOWUP": 22,
+   "EXACT_EXISTING": 30,
+   "AMBIGUOUS": 3,
+   "GENUINE_NEW_QUESTION": 5,
+   "EXPANDS_PRIOR_FRESH_ASK": 2,
+   "NON_QUESTION_UNRECOVERABLE": 1
+  },
+  "occurrences_answered_by_existing_cards": 134,
+  "occurrences_with_a_limb_gap": 44,
+  "genuine_new_roots": [
+   "SEP-0072",
+   "SEP-0090",
+   "SEP-0094",
+   "SEP-0135",
+   "SEP-0152"
+  ]
+ },
+ "actions": [
+  {
+   "action_id": "H7-001",
+   "question_id": "QB3_A#q19",
+   "action_kind": "NEW_CARD",
+   "rationale": "SOLAS XII Reg 8.3 side-shell triangle: what it signifies (restrictions for cargoes >= 1,780 kg/m3 recorded in the endorsed VI/7.2 booklet), what it does not (not a load line mark, not a ban), MSC.89(71) cases, Reg 14 any-hold-empty, where recorded on board and who endorses it, BC-A/B/C notations",
+   "source_occurrence_ids": [
+    "SEP-0094"
+   ],
+   "source_classifications": {
+    "SEP-0094": "GENUINE_NEW_QUESTION"
+   },
+   "source_record_fingerprints": {
+    "SEP-0094": "ff8188311581397baa861101d24a2dc58e1e5ad2e92cde2a70b4a5f8120e5a29"
+   },
+   "post_edit_digest": "3be951b18671d469cc34ec881c0582397c4f7aa9dcd1e3d3dca6cda920fde1aa"
+  },
+  {
+   "action_id": "H7-002",
+   "question_id": "QB1_A#q35",
+   "action_kind": "NEW_CARD",
+   "rationale": "Hamburg Rules 1978: why made, presumed-fault liability, no nautical-fault defence, fire burden reversed (Art 5(4)), port-to-port period, delay, limits 835/2.5 SDR, 2-year bar; shipper's Arts 12, 13, 17; 36 parties, India not a party - India applies Hague-Visby under COGSA 2025",
+   "source_occurrence_ids": [
+    "SEP-0135",
+    "SEP-0136"
+   ],
+   "source_classifications": {
+    "SEP-0135": "GENUINE_NEW_QUESTION",
+    "SEP-0136": "EXPANDS_PRIOR_FRESH_ASK"
+   },
+   "source_record_fingerprints": {
+    "SEP-0135": "1901fa0f9997e669eabfc9a19dba7ad22f2968d47c6f06940b3b79d6ee66520d",
+    "SEP-0136": "597e4642c7d68ab1276fdcf3a0dd17eb75505f4f0bfd433ecc1bd5f63b1f4b14"
+   },
+   "post_edit_digest": "ad94c966402b980347f53fd135b081614be13c0c0492039ffb82e89cea0c1203"
+  },
+  {
+   "action_id": "H7-003",
+   "question_id": "QB5_E#q9",
+   "action_kind": "NEW_CARD",
+   "rationale": "India's National Maritime Day: 5 April, SS Loyalty (Scindia) Bombay-London 1919, Merchant Navy Week since 1964, 63rd celebration 2026 and its theme, and the distinction from World Maritime Day and the Day of the Seafarer",
+   "source_occurrence_ids": [
+    "SEP-0152"
+   ],
+   "source_classifications": {
+    "SEP-0152": "GENUINE_NEW_QUESTION"
+   },
+   "source_record_fingerprints": {
+    "SEP-0152": "7848ea4d198a2a04d25deaeb5c8d487ea41c46b817e37efc811409984dfc3779"
+   },
+   "post_edit_digest": "49d85189b5cf649c98ee8ffdd89cd6abd97b634b082f41d3cd8422a4182a4392"
+  },
+  {
+   "action_id": "H7-004",
+   "question_id": "QB7_D#q16",
+   "action_kind": "NEW_CARD",
+   "rationale": "Ammonia bunkering: MSC.1/Circ.1687 status (interim, recommendatory, alternative design; no stand-alone IMO bunkering circular), properties that drive the controls, bunker-station arrangement (dry-disconnect, ERC/ERS, BSL, detection 110/220 ppm, toxic areas, decontamination, escape sets), operational sequence and leak response",
+   "source_occurrence_ids": [
+    "SEP-0090",
+    "SEP-0102",
+    "SEP-0091"
+   ],
+   "source_classifications": {
+    "SEP-0090": "GENUINE_NEW_QUESTION",
+    "SEP-0102": "EXPANDS_PRIOR_FRESH_ASK",
+    "SEP-0091": "PARAPHRASE_EXISTING"
+   },
+   "source_record_fingerprints": {
+    "SEP-0090": "1ef8d1d5b4d386962a4ba73151ad391dcd7b7a328b3acd09faae65306d094cb4",
+    "SEP-0102": "1d1350ccf970567159d9468d8f141663a98a2f39324a7cfd1209197525a9f75a",
+    "SEP-0091": "6c95bf52a06eb05f3799830e8e2271e9ab8aebbd767d3c18b4d2ea6608ed6714"
+   },
+   "post_edit_digest": "2509ae50eee3f42b5158cad43d6a941a94eb7108e62685d395361ac25ca45ac7"
+  },
+  {
+   "action_id": "H7-005",
+   "question_id": "QB1_C#q10",
+   "action_kind": "NEW_CARD",
+   "rationale": "Taking delivery of a newbuilding as CE: protocol of delivery and acceptance, contract guarantee terms (NEWBUILDCON cl 35-36, 12 months if blank, 30-day tail), trials, certificates and files (EIAPP/Technical File, inclining, IHM), documents and inventory, deficiency and guarantee register, baseline oil analysis",
+   "source_occurrence_ids": [
+    "SEP-0072"
+   ],
+   "source_classifications": {
+    "SEP-0072": "GENUINE_NEW_QUESTION"
+   },
+   "source_record_fingerprints": {
+    "SEP-0072": "6d0569360788a21ae1c11078a22a74e6df8b0ac12b81b321a08e1dc1eaff2d07"
+   },
+   "post_edit_digest": "db9f5608f6b7e35971ab481d76443ca08cc943aecffdc072365e927767007ec6"
+  },
+  {
+   "action_id": "H7-006",
+   "question_id": "QB5_E#q5",
+   "action_kind": "ENRICH_EXISTING",
+   "rationale": "Adds the LAST-HELD World Maritime Day theme (2025) against the 24 Sep 2026 date of the 2026 observance, and the pointer to National Maritime Day (Q9)",
+   "source_occurrence_ids": [
+    "SEP-0012",
+    "SEP-0022"
+   ],
+   "source_classifications": {
+    "SEP-0012": "PARAPHRASE_EXISTING",
+    "SEP-0022": "PARAPHRASE_EXISTING"
+   },
+   "source_record_fingerprints": {
+    "SEP-0012": "9521e7ee636de72aa2f9ad1ee037bb97e350435eda58108f17c2136ea2e2a7bf",
+    "SEP-0022": "d7e2788f1db03ae36c5a8673650c855632a60f5f245117e9b4b31b86413c252f"
+   },
+   "post_edit_digest": "53636f2c66a7710ff66445c20b841ce81d2aa9469b46c97c60506932acde4777"
+  },
+  {
+   "action_id": "H7-007",
+   "question_id": "QB1_H#q3",
+   "action_kind": "ENRICH_EXISTING",
+   "rationale": "Discharges the transfer-of-class letter the v1.1 correction deliberately withheld: PR 1A (Rev.11; Rev.12 from 1 Jan 2027), the PR 1A procedure and the PR 1B/1C/1D distinctions",
+   "source_occurrence_ids": [
+    "SEP-0130",
+    "SEP-0134",
+    "SEP-0062",
+    "SEP-0116"
+   ],
+   "source_classifications": {
+    "SEP-0130": "PARAPHRASE_EXISTING",
+    "SEP-0134": "PARAPHRASE_EXISTING",
+    "SEP-0062": "EXACT_EXISTING",
+    "SEP-0116": "PARAPHRASE_EXISTING"
+   },
+   "source_record_fingerprints": {
+    "SEP-0130": "baab9d2e6cd68aa0d5e9ead9fae1e9bd6e40669bac0b9da1224c1ed6713f574f",
+    "SEP-0134": "0945254e3a43ca1c1486b47875a01ebf3892370440d18d6a9bad17a085069ba6",
+    "SEP-0062": "504b5b42a8ccf4e0b1bacebbf98c0e8f4ac3c9ac0f76cc36c67c3322f19667f3",
+    "SEP-0116": "cd1c1a357713c08b2d89ccf4407c09b1a62eb90fae073a8310995ce908dfbb4a"
+   },
+   "post_edit_digest": "6681dab5839c37ab8a7086dc7174108b98db89bced7a2d476a9876ff7fe85c15"
+  },
+  {
+   "action_id": "H7-008",
+   "question_id": "QB7_D#q9",
+   "action_kind": "ENRICH_EXISTING",
+   "rationale": "Adds the IGF 2.2.28 definition against SOLAS II-2/4.2.1, the 43 C emergency-generator exception, the absence of a lower limit (no IMO 'range') and the methanol flash point",
+   "source_occurrence_ids": [
+    "SEP-0066",
+    "SEP-0100",
+    "SEP-0067"
+   ],
+   "source_classifications": {
+    "SEP-0066": "PARAPHRASE_EXISTING",
+    "SEP-0100": "PARAPHRASE_EXISTING",
+    "SEP-0067": "FOLLOWUP"
+   },
+   "source_record_fingerprints": {
+    "SEP-0066": "9014f46c90ec28d55fc633fc55fb0184904b38a77ac9b6ee711fedcdcfcc7161",
+    "SEP-0100": "1bce55e4a4db82a399de41d9121d29827c550efefb339174e180320ed432ed86",
+    "SEP-0067": "01cfa6da9384e8a8dd8f5c4ca86d3f4224dea7ac13f5f5d279e35e0978175728"
+   },
+   "post_edit_digest": "f5e1a6e4b4a78a6a36a1a5b60b7ea11032e21d47b8594e170675eb047444f923"
+  },
+  {
+   "action_id": "H7-009",
+   "question_id": "QB5_A#q7",
+   "action_kind": "CURRENCY_EXPANSION",
+   "rationale": "ISO 9001:2015 superseded by ISO 9001:2026 (published 16 Sep 2026); edition, lineage and transition",
+   "source_occurrence_ids": [
+    "SEP-0035",
+    "SEP-0113"
+   ],
+   "source_classifications": {
+    "SEP-0035": "FOLLOWUP",
+    "SEP-0113": "PARAPHRASE_EXISTING"
+   },
+   "source_record_fingerprints": {
+    "SEP-0035": "7a3698033cd2833eeebaf0c85a1a0df8029807abe6249e3ccf4289f05dd203cc",
+    "SEP-0113": "5f3369155dddc0aa3fe7ba122c6756f74b17f67c922c97dfd2fc247cd02e282d"
+   },
+   "post_edit_digest": "4794ded4e5c054c3a71a384fe2bf5ce82de4999223231820cd206526167c8fe9"
+  },
+  {
+   "action_id": "H7-010",
+   "question_id": "QB1_G#q27",
+   "action_kind": "ENRICH_EXISTING",
+   "rationale": "Adds the 2.83 factor (Moorsom 100 ft3 register ton), the deck-container position for NT, and the uses of NT and GT thresholds",
+   "source_occurrence_ids": [
+    "SEP-0017"
+   ],
+   "source_classifications": {
+    "SEP-0017": "PARAPHRASE_EXISTING"
+   },
+   "source_record_fingerprints": {
+    "SEP-0017": "95ac29d622bf81bef8e860bb46f6e236d80bf7819da40943697da73b907c2db6"
+   },
+   "post_edit_digest": "78b06b6f88fd17815a3cf38d7c26d74a1d235a9565aa98125523eaf732c3d2e4"
+  }
+ ],
+ "corrections": [
+  {
+   "correction_manifest": "correction_corr_cogsa2025_20260923_manifest.json",
+   "origin": "september_2026_intake_h7 (production-raised; no single source occurrence)"
+  },
+  {
+   "correction_manifest": "correction_corr_solasxii_titles_20260923_manifest.json",
+   "origin": "september_2026_intake_h7 (production-raised; no single source occurrence)"
+  }
+ ]
+}

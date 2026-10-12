@@ -313,6 +313,11 @@ EXPECTED_BATCH_MANIFESTS = [
     # card batch -- so the series numbering skips it by design rather than
     # by omission.
     "batch_h6_manifest.json",
+    # H7 (2026-09-23): the first September 2026 intake batch -- five genuine
+    # new roots and five targeted improvements from the 22/23 September
+    # Kochi reports. Its authorisation record is SEPTEMBER2026_PRODUCTION_QUEUE
+    # .json, not the August queue: a month's intake is its own denominator.
+    "batch_h7_manifest.json",
 ]
 manifests = sorted(HERE.glob("batch_*manifest.json"))
 check("every batch manifest on disk is audited, and no other",
