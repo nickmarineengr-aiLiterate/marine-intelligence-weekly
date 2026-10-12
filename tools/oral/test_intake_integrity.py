@@ -259,7 +259,12 @@ def t_write_gate():
     check("G-GATE-WIRED-INTO-INGEST",
           "reconcile" in src and "gate" in src,
           "ingest_august_intake.main does not consult the reconciliation gate")
-    write_at = src.find("RECORDS.write_text")
+    # The records writer, whatever its spelling. It is `records_path.write_bytes`
+    # since the month profile (a month's records path, written as LF bytes);
+    # `find` returns -1 for a writer that is renamed again without updating this
+    # probe, and -1 can never be greater than the gate's position, so a missed
+    # rename fails this check rather than passing it.
+    write_at = max(src.find("RECORDS.write_text"), src.find("records_path.write_bytes"))
     gate_at = min([i for i in (src.find("R.gate"), src.find("gate(")) if i >= 0]
                   or [10 ** 9])
     check("G-GATE-BEFORE-WRITE", gate_at < write_at,

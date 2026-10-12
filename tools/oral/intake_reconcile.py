@@ -55,7 +55,8 @@ DISPOSITIONS = (
 #: direction -- towards keeping copies of lines the parser had understood.
 def _metadata_match(line: str) -> bool:
     t = line.strip()
-    return bool(I.RESULT_RE.match(t) or I.ATTEMPT_RE.match(t)
+    return bool(I.RESULT_RE.match(t) or I.RESULT_BARE_RE.match(t)
+                or I.ATTEMPT_RE.match(t)
                 or I.ATTEMPT_ORDINAL_RE.match(t) or I.BARE_ROLE_RE.match(t)
                 or I.CROSS_Q_RE.match(t) or I.DATE_ONLY_RE.match(t))
 
@@ -81,7 +82,8 @@ def parse_text(text: str, source_name: str = "synthetic.txt"):
 
 
 def reconcile_text(text: str, source_name: str = "synthetic.txt", *,
-                   submission_start: int = 1, seq_start: int = 1) -> dict:
+                   submission_start: int = 1, seq_start: int = 1,
+                   month: str = I.DEFAULT_MONTH) -> dict:
     """The ledger for one carrier: every line disposed, every repeat linked.
 
     `submission_start` and `seq_start` are where THIS carrier's identities begin,
@@ -97,7 +99,7 @@ def reconcile_text(text: str, source_name: str = "synthetic.txt", *,
     blocks = I.split_blocks(lines)
     subs, skipped = I.parse_source(lines, source_name=source_name,
                                    submission_start=submission_start,
-                                   seq_start=seq_start)
+                                   seq_start=seq_start, month=month)
 
     # The i-th submission-yielding block produced the i-th submission. Both walks
     # use `split_blocks` and `block_is_submission`, so the pairing is exact
@@ -249,18 +251,18 @@ def public(led: dict) -> dict:
     return {k: v for k, v in led.items() if not k.startswith("_")}
 
 
-def reconcile_registered() -> dict:
+def reconcile_registered(month: str = I.DEFAULT_MONTH) -> dict:
     """Every registered carrier, read-only, in registry order."""
     out = []
     sub_n, seq = 1, 1
-    for c in I.load_carriers():
-        p = I.carrier_path(c)
+    for c in I.load_carriers(month):
+        p = I.carrier_path(c, month)
         if not p.exists():
             out.append({"sourceFile": c["source_file"], "clean": False,
                         "error": "registered carrier absent from disk"})
             continue
         led = reconcile_text(p.read_text(encoding="utf-8"), c["source_file"],
-                             submission_start=sub_n, seq_start=seq)
+                             submission_start=sub_n, seq_start=seq, month=month)
         sub_n += led["submissions"]
         seq += led["occurrences"]
         out.append(public(led))
@@ -288,9 +290,11 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--json", action="store_true", help="print the full ledger")
     ap.add_argument("--out", help="write the ledger to this path")
+    ap.add_argument("--month", default=I.DEFAULT_MONTH, choices=sorted(I.INTAKE_PROFILES),
+                    help="which sitting month's carriers (default: August)")
     a = ap.parse_args(argv)
 
-    led = reconcile_registered()
+    led = reconcile_registered(a.month)
     if a.json:
         print(json.dumps(led, indent=2, ensure_ascii=False))
     else:
