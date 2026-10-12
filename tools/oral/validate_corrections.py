@@ -277,6 +277,16 @@ def main() -> int:
            "tracked=%d on_disk=%d vanished=%s"
            % (len(tracked), len(on_disk), vanished or "none"))
 
+    # A trap number is an identity every correction record cites, and
+    # known_traps_entries_exist reads the headings as a SET -- so two entries
+    # sharing a number (the H-1 / H7 collision on 135-137, settled by moving
+    # H7's to 138-140) would let a record cite an ambiguous entry and pass.
+    traps = KNOWN_TRAPS.read_text(encoding="utf-8") if KNOWN_TRAPS.is_file() else ""
+    nums = [int(m) for m in re.findall(r"^###\s+(\d+)\.", traps, re.M)]
+    dup = sorted({n for n in nums if nums.count(n) > 1})
+    report("known_traps_headings_unique", bool(nums) and not dup,
+           "headings=%d duplicated=%s" % (len(nums), dup or "none"))
+
     for path in records:
         validate(path)
 
