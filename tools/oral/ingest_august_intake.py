@@ -39,6 +39,15 @@ REPORT = OUT / "AUGUST2026_INTAKE_REPORT.json"
 #: The parser, the reconciliation gate and every control are SHARED -- a month
 #: is data, never a second copy of the code. August is the default so that
 #: every historical caller and control reads exactly what it always read.
+#:
+#: PRIV-1 (Founder D-H7-3, Lane A 12 Oct 2026). The September derived records
+#: name examiners, so unlike August's they are NOT committed: they sit in the
+#: git-ignored owner area beside the carriers they were parsed from, and the
+#: public repository carries SEPTEMBER2026_H7_PUBLIC_PROVENANCE.json instead.
+#: There is no public fallback path -- a machine without the private evidence
+#: cannot read September at all, and validate_oral_intake fails closed on it.
+SEPTEMBER_PRIVATE_DIR = (L.REPO / "docs" / "MIW-master-Question-bank"
+                         / "New Questions from Sept orals" / "_records")
 INTAKE_PROFILES = {
     "2026-08": {
         "label": "August",
@@ -53,9 +62,10 @@ INTAKE_PROFILES = {
     },
     "2026-09": {
         "label": "September",
-        "records": OUT / "SEPTEMBER2026_INTAKE_RECORDS.jsonl",
-        "report": OUT / "SEPTEMBER2026_INTAKE_REPORT.json",
-        "carriers": OUT / "SEPTEMBER2026_INTAKE_CARRIERS.json",
+        "records": SEPTEMBER_PRIVATE_DIR / "SEPTEMBER2026_INTAKE_RECORDS.jsonl",
+        "report": SEPTEMBER_PRIVATE_DIR / "SEPTEMBER2026_INTAKE_REPORT.json",
+        "carriers": SEPTEMBER_PRIVATE_DIR / "SEPTEMBER2026_INTAKE_CARRIERS.json",
+        "adjudications": SEPTEMBER_PRIVATE_DIR / "SEPTEMBER2026_INTAKE_ADJUDICATIONS.json",
         "inbox_dir": "New Questions from Sept orals",
         "submission_prefix": "SEP2026-S",
         "occurrence_prefix": "SEP-",

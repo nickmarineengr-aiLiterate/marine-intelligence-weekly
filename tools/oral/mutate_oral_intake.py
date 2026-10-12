@@ -249,6 +249,116 @@ def m_overwrite_july_workbook(root):
     (root / QBK / "MIW_July2026_QuestionBank_SHARE.xlsx").unlink()
 
 
+# ------------------------------------------- PRIV-1: private September evidence
+SEP_PRIV = QBK / "New Questions from Sept orals" / "_records"
+SEP_RECORDS = SEP_PRIV / "SEPTEMBER2026_INTAKE_RECORDS.jsonl"
+SEP_CARRIERS = SEP_PRIV / "SEPTEMBER2026_INTAKE_CARRIERS.json"
+SEP_REPORT = SEP_PRIV / "SEPTEMBER2026_INTAKE_REPORT.json"
+SEP_FILES = ("SEPTEMBER2026_INTAKE_RECORDS.jsonl", "SEPTEMBER2026_INTAKE_REPORT.json",
+             "SEPTEMBER2026_INTAKE_CARRIERS.json", "SEPTEMBER2026_INTAKE_ADJUDICATIONS.json")
+PROV = REL_AUDIT / "SEPTEMBER2026_H7_PUBLIC_PROVENANCE.json"
+
+
+def _edit_prov(root, fn):
+    _edit_json(root / PROV, fn)
+
+
+def m_sep_private_record_missing(root):
+    (root / SEP_RECORDS).unlink()
+
+
+def m_sep_private_record_one_byte_appended(root):
+    p = root / SEP_CARRIERS
+    p.write_bytes(p.read_bytes() + b" ")
+
+
+def m_sep_private_record_one_byte_changed(root):
+    """One byte inside one raw question: still parses, still 153 rows."""
+    p = root / SEP_RECORDS
+    b = bytearray(p.read_bytes())
+    i = b.index(b'"raw_question_text": "') + len(b'"raw_question_text": "')
+    b[i] = ord("X") if b[i] != ord("X") else ord("Y")
+    p.write_bytes(bytes(b))
+
+
+def m_sep_provenance_pin_altered(root):
+    def fn(d):
+        f = d["private_originals"]["files"]["SEPTEMBER2026_INTAKE_RECORDS.jsonl"]
+        f["sha256"] = f["sha256"][:-1] + ("0" if f["sha256"][-1] != "0" else "1")
+    _edit_prov(root, fn)
+
+
+def m_sep_record_added_to_index(root):
+    """--info-only: the index names the blob, no object is written (see
+    stage_git_context), so the scratch tree stays removable on Windows."""
+    _git(["update-index", "--add", "--info-only", "--", SEP_RECORDS.as_posix()], root)
+
+
+def m_sep_record_at_public_path(root):
+    shutil.copyfile(root / SEP_RECORDS, root / REL_AUDIT / SEP_RECORDS.name)
+
+
+def m_sep_record_tracked_under_another_name(root):
+    dst = REL_AUDIT / "fixture_sep_records.jsonl"
+    shutil.copyfile(root / SEP_RECORDS, root / dst)
+    _git(["update-index", "--add", "--info-only", "--", dst.as_posix()], root)
+
+
+def m_sep_records_unignored(root):
+    p = root / ".gitignore"
+    p.write_text("\n".join(ln for ln in p.read_text(encoding="utf-8").splitlines()
+                           if "_records/" not in ln) + "\n", encoding="utf-8")
+
+
+def m_sep_approval_identity_altered(root):
+    _edit_prov(root, lambda d: d["approval_identity"].update(decided_by="Lane A"))
+
+
+def m_sep_approval_scope_altered(root):
+    _edit_prov(root, lambda d: d["approval_identity"]["scope_action_ids"].pop())
+
+
+def m_sep_original_intake_dates_removed(root):
+    _edit_prov(root, lambda d: d["dates"].pop("original_intake_dates"))
+
+
+def m_sep_original_intake_backdated_to_effective(root):
+    _edit_prov(root, lambda d: d["dates"].update(original_intake_dates=["2026-10-12"]))
+
+
+def m_sep_provenance_names_an_examiner(root):
+    """Takes the name from the private report at run time: no examiner name is
+    ever written into this public file."""
+    rep = json.loads((root / SEP_REPORT).read_text(encoding="utf-8"))
+    name = next(e["name_normalized"] for sd in rep["submissions_detail"]
+                for e in sd.get("examiners", []) if e.get("name_normalized"))
+    _edit_prov(root, lambda d: d["actions"][0].update(rationale=d["actions"][0]["rationale"]
+                                                      + " (asked by %s)" % name))
+
+
+def m_sep_provenance_fingerprint_altered(root):
+    def fn(d):
+        fps = d["actions"][0]["source_record_fingerprints"]
+        k = next(iter(fps))
+        fps[k] = "0" * 64
+    _edit_prov(root, fn)
+
+
+def m_sep_provenance_extra_key(root):
+    _edit_prov(root, lambda d: d.update(raw_records="see attached"))
+
+
+def m_sep_provenance_removed(root):
+    (root / PROV).unlink()
+
+
+SP3 = "SP3_september_private_records_present_ignored_untracked"
+SP4 = "SP4_september_private_records_match_both_pins"
+SP5 = "SP5_no_september_raw_record_on_a_public_path"
+SP6 = "SP6_public_provenance_minimised_and_consistent"
+SP7 = "SP7_approval_identity_matches_the_authorising_queue"
+SP8 = "SP8_original_intake_provenance_preserved"
+
 F3 = "F3_no_followup_claims_implemented_without_a_batch_manifest"
 
 SPECS = [
@@ -309,6 +419,31 @@ SPECS = [
     ("MUT-25_supporting_manifest_corrupted", m_supporting_manifest_corrupted, {F3}),
     ("MUT-26_supporting_manifest_stops_declaring_the_register",
      m_supporting_manifest_undeclared, {F3}),
+    # PRIV-1. Each must be caught by the privacy gate that names its fault, not
+    # merely by S0 going red: S0 alone would also fire on a harmless rename.
+    ("MUT-27_sep_private_record_missing", m_sep_private_record_missing, {SP3, SP4}),
+    ("MUT-28_sep_private_record_one_byte_appended",
+     m_sep_private_record_one_byte_appended, {SP4}),
+    ("MUT-29_sep_private_record_one_byte_changed",
+     m_sep_private_record_one_byte_changed, {SP4}),
+    ("MUT-30_sep_public_provenance_pin_altered", m_sep_provenance_pin_altered, {SP4}),
+    ("MUT-31_sep_raw_record_added_to_the_index", m_sep_record_added_to_index, {SP3, SP5}),
+    ("MUT-32_sep_raw_record_at_the_public_path", m_sep_record_at_public_path, {SP5}),
+    ("MUT-33_sep_raw_record_tracked_under_another_name",
+     m_sep_record_tracked_under_another_name, {SP5}),
+    ("MUT-34_sep_private_records_unignored", m_sep_records_unignored, {SP3}),
+    ("MUT-35_sep_approval_identity_altered", m_sep_approval_identity_altered, {SP7}),
+    ("MUT-36_sep_approval_scope_altered", m_sep_approval_scope_altered, {SP7}),
+    ("MUT-37_sep_original_intake_dates_removed",
+     m_sep_original_intake_dates_removed, {SP8}),
+    ("MUT-38_sep_original_intake_backdated_to_effective_month",
+     m_sep_original_intake_backdated_to_effective, {SP8}),
+    ("MUT-39_sep_provenance_names_an_examiner", m_sep_provenance_names_an_examiner, {SP6}),
+    ("MUT-40_sep_provenance_fingerprint_altered",
+     m_sep_provenance_fingerprint_altered, {SP6}),
+    ("MUT-41_sep_provenance_gains_an_unapproved_key", m_sep_provenance_extra_key, {SP6}),
+    ("MUT-42_sep_public_provenance_removed", m_sep_provenance_removed,
+     {SP4, SP6, SP7, SP8}),
 ]
 
 
@@ -362,6 +497,10 @@ def assert_git_context(base):
         problems.append("no carrier .txt staged, so P1 would pass vacuously")
     if not (base / ".vercelignore").is_file():
         problems.append(".vercelignore not staged, so P3 cannot be answered")
+    absent = [n for n in SEP_FILES if not (base / SEP_PRIV / n).is_file()]
+    if absent:
+        problems.append("private September records not staged (%s), so SP3-SP8 "
+                        "would be tested against nothing" % ", ".join(absent))
     return problems
 
 
