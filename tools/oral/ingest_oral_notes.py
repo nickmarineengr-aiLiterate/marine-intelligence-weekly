@@ -13,6 +13,15 @@ QB questions, or writes a live product file. The 788 coverage pass is an
 ANALYSIS: it reports what the Notes layer would move, and Phase 2A-iii performs
 the definitive recomputation.
 
+Examiner window (P2, F6 / D-I). `notes_units_naming_this_examiner` only looks
+inside the content top 5, so a series that outranks an examiner's own units -
+on a pure unit-id tie-break, often - hides them while content support is
+unchanged. `examiner_named_supporting_units` scans the full ranked hit list in
+the same total order instead. It is additive: `notes_support`, `notes_units`,
+the sort key and every ceiling are untouched, and the old field and its
+`occurrences_with_examiner_cued_unit` counter are kept, superseded by the new
+field and `occurrences_with_examiner_named_support`.
+
     PYTHONIOENCODING=utf-8 python tools/oral/ingest_oral_notes.py
 """
 from __future__ import annotations
@@ -28,6 +37,92 @@ import oral_notes as N  # noqa: E402
 import notes_coverage as C  # noqa: E402
 
 OUT = L.OUT
+
+# P2: at most this many examiner-named supporting units per source ask.
+EXAMINER_WINDOW = 5
+
+
+def examiner_named_support(ranked, examiner, unit_examiners,
+                           limit=EXAMINER_WINDOW):
+    """The first `limit` units of a full ranked hit list that name `examiner`.
+
+    `ranked` is best_support's output with no window, so the order is the
+    existing total order and nothing is re-ranked. A unit qualifies only if it
+    reaches NOTES_TOPIC_SUPPORT for the ask and the examiner ledger names this
+    examiner for it. A series with no examiner cues can therefore displace a
+    unit from `notes_units`, but never from this list.
+    """
+    floor = C.SUPPORT_RANK[C.TOPIC_SUPPORT]
+    named = []
+    for h in ranked:
+        if len(named) == limit:
+            break
+        if C.SUPPORT_RANK[h["notes_support"]] < floor:
+            continue
+        if examiner in unit_examiners.get(h["note_unit_id"], ()):
+            named.append(h["note_unit_id"])
+    return named
+
+
+def build_evidence(cues):
+    """The examiner evidence ledger: the explicit cues, numbered in order."""
+    # Only the explicit dispositions become evidence records. A heading
+    # mention, an incidental mention and a suppressed non-examiner name are
+    # counted in the audit and excluded from the ledger.
+    evidence = []
+    for i, c in enumerate(sorted(
+            cues, key=lambda c: (c["note_unit_id"], c["examiner"],
+                                 c["char_offset"], c["cue_disposition"]))):
+        if c["cue_disposition"] not in N.EXPLICIT_CUES:
+            continue
+        rec = dict(c)
+        rec["evidence_id"] = "NOTEV-%04d" % (len(evidence) + 1)
+        # Provenance, stated and never stronger than this: a Note is a Note.
+        rec["evidence_tier"] = N.NOTE_EVIDENCE_TIER
+        rec["source_type"] = N.NOTE_SOURCE_TYPE
+        rec["source_provenance"] = c["url"]
+        evidence.append(rec)
+    return evidence
+
+
+def build_coverage(src, recon, idx, idf, default, evidence):
+    """Notes coverage for every source ask, in source-id order."""
+    # The examiner window reads the ledger harvested in this run, the one this
+    # run writes, never a previously committed copy.
+    unit_examiners = defaultdict(set)
+    for e in evidence:
+        unit_examiners[e["note_unit_id"]].add(e["examiner"])
+
+    coverage = []
+    for s in sorted(src, key=lambda s: s["source_id"]):
+        toks = C.source_tokens(s)
+        hits = C.best_support(toks, idx, idf, default)
+        ranked = C.best_support(toks, idx, idf, default, limit=len(idx))
+        best = hits[0]["notes_support"] if hits else C.NO_SUPPORT
+        r = recon.get(s["source_id"], {})
+        examiner = s.get("surveyor_normalized")
+        # A Notes unit that names THIS examiner is a stronger reason to look at
+        # it, but it never raises the support tier: coverage is about content.
+        # Superseded by examiner_named_supporting_units; kept unchanged.
+        cued = sorted({u for h in hits for u in [h["note_unit_id"]]
+                       if examiner in unit_examiners.get(h["note_unit_id"], ())})
+        coverage.append({
+            "source_id": s["source_id"],
+            "examiner": examiner,
+            "source_ask": s.get("question_core_text") or s.get("raw_question_text"),
+            "source_family_id": s.get("source_family_id"),
+            "source_token_count": len(toks),
+            # the canonical dimension, carried unchanged for comparison only
+            "canonical_disposition": r.get("content_disposition"),
+            "canonical_question_id": r.get("matched_question_id"),
+            # the Notes dimension, computed here
+            "notes_support": best,
+            "notes_units": hits,
+            "notes_units_naming_this_examiner": cued,
+            "examiner_named_supporting_units": examiner_named_support(
+                ranked, examiner, unit_examiners),
+        })
+    return coverage
 
 
 def jsonl_dump(rows, name):
@@ -79,22 +174,7 @@ def main():
                "ORAL_NOTES_UNITS.jsonl")
 
     # --- examiner evidence -------------------------------------------------
-    # Only the explicit dispositions become evidence records. A heading
-    # mention, an incidental mention and a suppressed non-examiner name are
-    # counted in the audit and excluded from the ledger.
-    evidence = []
-    for i, c in enumerate(sorted(
-            cues, key=lambda c: (c["note_unit_id"], c["examiner"],
-                                 c["char_offset"], c["cue_disposition"]))):
-        if c["cue_disposition"] not in N.EXPLICIT_CUES:
-            continue
-        rec = dict(c)
-        rec["evidence_id"] = "NOTEV-%04d" % (len(evidence) + 1)
-        # Provenance, stated and never stronger than this: a Note is a Note.
-        rec["evidence_tier"] = N.NOTE_EVIDENCE_TIER
-        rec["source_type"] = N.NOTE_SOURCE_TYPE
-        rec["source_provenance"] = c["url"]
-        evidence.append(rec)
+    evidence = build_evidence(cues)
     jsonl_dump(evidence, "ORAL_NOTES_EXAMINER_EVIDENCE.jsonl")
 
     explicit_pairs = {(e["examiner"], e["note_unit_id"]) for e in evidence}
@@ -128,35 +208,7 @@ def main():
         json.loads(l) for l in
         (OUT / "ORAL_788_RECONCILIATION.jsonl").open(encoding="utf-8"))}
 
-    unit_examiners = defaultdict(set)
-    for e in evidence:
-        unit_examiners[e["note_unit_id"]].add(e["examiner"])
-
-    coverage = []
-    for s in sorted(src, key=lambda s: s["source_id"]):
-        toks = C.source_tokens(s)
-        hits = C.best_support(toks, idx, idf, default)
-        best = hits[0]["notes_support"] if hits else C.NO_SUPPORT
-        r = recon.get(s["source_id"], {})
-        examiner = s.get("surveyor_normalized")
-        # A Notes unit that names THIS examiner is a stronger reason to look at
-        # it, but it never raises the support tier: coverage is about content.
-        cued = sorted({u for h in hits for u in [h["note_unit_id"]]
-                       if examiner in unit_examiners.get(h["note_unit_id"], ())})
-        coverage.append({
-            "source_id": s["source_id"],
-            "examiner": examiner,
-            "source_ask": s.get("question_core_text") or s.get("raw_question_text"),
-            "source_family_id": s.get("source_family_id"),
-            "source_token_count": len(toks),
-            # the canonical dimension, carried unchanged for comparison only
-            "canonical_disposition": r.get("content_disposition"),
-            "canonical_question_id": r.get("matched_question_id"),
-            # the Notes dimension, computed here
-            "notes_support": best,
-            "notes_units": hits,
-            "notes_units_naming_this_examiner": cued,
-        })
+    coverage = build_coverage(src, recon, idx, idf, default, evidence)
     jsonl_dump(coverage, "ORAL_NOTES_COVERAGE.jsonl")
 
     matrix = defaultdict(Counter)
@@ -170,8 +222,11 @@ def main():
             k: dict(sorted(v.items())) for k, v in sorted(matrix.items())},
         "occurrences_with_any_support": sum(
             1 for c in coverage if c["notes_support"] != C.NO_SUPPORT),
+        # superseded by occurrences_with_examiner_named_support; kept unchanged
         "occurrences_with_examiner_cued_unit": sum(
             1 for c in coverage if c["notes_units_naming_this_examiner"]),
+        "occurrences_with_examiner_named_support": sum(
+            1 for c in coverage if c["examiner_named_supporting_units"]),
         "canonical_questions_unchanged": len(L.build_inventory()),
     }
     L.jdump(summary, "ORAL_NOTES_COVERAGE_SUMMARY.json")
