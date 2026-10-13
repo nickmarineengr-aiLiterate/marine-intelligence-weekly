@@ -1,0 +1,37 @@
+name: September Intake Privacy Check
+
+# PRIV-1 public half (Founder decision D-P1-CI, 13 Oct 2026).
+#
+# The raw September 2026 intake records are private and are never in this
+# repository; this job has no access to them and must not try to obtain them.
+# check_september_privacy_public.py proves only what a public checkout can:
+# no raw record is tracked or sits at the old public path, the private owner
+# area is git-ignored, and the public provenance record has its approved shape
+# and pins. It exits non-zero on any violation and states on every run that it
+# verified no private evidence. The evidence-dependent validate_oral_intake.py
+# runs only in an authorised private qualification, never here.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  september-privacy-public:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Run public September privacy check (no private data)
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python tools/oral/check_september_privacy_public.py

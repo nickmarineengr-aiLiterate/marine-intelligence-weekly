@@ -189,11 +189,15 @@ POST_E6_GATES = [
     # The monthly-projection controls: runnable, never run by a release, so the
     # TEASER_SYNC refusal went unnoticed. Sorted position.
     "monthly_controls",
+    # PRIV-1 (D-P1-REG): the private intake mutation suite, sorted position.
+    "oral_intake_mutate",
     # The shared-module controls, moved INTO the suite: a guard that never runs
     # has silently expired, which is why this is a gate and not a README line.
     "release_infra_controls",
     # The approval-packet controls, in sorted position.
     "release_packet_controls",
+    # PRIV-1 public half: the same no-private-data check public CI runs.
+    "september_privacy_public",
     # The study-spine hook: a new oral question cannot ship unmapped.
     "study_mapping_check",
     # ...and cannot ship mapped-but-invisible: both study surfaces must
@@ -225,6 +229,8 @@ POST_E6_GATES = [
     "validate_correction_pass2",
     "validate_corrections",
     "validate_followup_register",
+    # PRIV-1: S0-S14 + SP1-SP8 over the genuine private intake records.
+    "validate_oral_intake",
 ]
 POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
                            "batch_g1_mutate", "batch_g2_mutate",
@@ -247,7 +253,8 @@ POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
                            "followup_register_mutate",
                            # hermetic layer only; the --live gate is
                            # exit-code parsed and so is not a parser suite
-                           "governed_artefact_supersession_mutate"]
+                           "governed_artefact_supersession_mutate",
+                           "oral_intake_mutate"]
 
 # E6 reported 266 mutations across 15 suites. That number is HISTORY and stays
 # pinned to the historical gates; post-E6 suites are counted separately rather
@@ -614,6 +621,18 @@ for label, line, fails in (
     check("validator dialect parses: %s" % label,
           dt.get("failures") == fails and st == (R.PASS if not fails else R.FAIL),
           json.dumps(dt, sort_keys=True))
+
+# A summary is read from ONE line. validate_oral_intake's last check line ends
+# "effective 2026-10", and a newline-crossing pattern recorded 10 passes for 53.
+st, dt = R.classify_validator(
+    "PASS  SP8_original_intake  observed 2026-09-23, effective 2026-10\n\n"
+    "53 PASS / 0 FAIL", "", 0)
+check("a summary is not stitched to a number on the line before it",
+      st == R.PASS and dt.get("passes") == 53 and dt.get("failures") == 0,
+      json.dumps(dt, sort_keys=True))
+st, dt = R.classify_validator("106 notes controls / 0 failures", "", 0)
+check("a word qualifier between count and noun still parses",
+      st == R.PASS and dt.get("checks") == 106, json.dumps(dt, sort_keys=True))
 
 st, dt = R.classify_validator("\n107 PASS / 3 FAIL", "", 0)
 check("in the PASS/FAIL dialect the leading number is passes, not a total",

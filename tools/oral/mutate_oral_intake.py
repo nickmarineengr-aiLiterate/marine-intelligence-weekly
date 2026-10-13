@@ -571,7 +571,9 @@ def main():
                 print(f"ESCAPED  {name}  validator stayed green")
             shutil.rmtree(work)
 
-        print(f"\nmutations={len(SPECS)} caught={caught} escaped={escaped}")
+        # The runner reads this line through oral_mutation.parse_summary, whose
+        # grammar knows "escapes", not "escaped".
+        print(f"\nmutations={len(SPECS)} caught={caught} escapes={escaped}")
 
         rc, failed = run_validator(base)
         print(f"residue check: base still green = {rc == 0}")
