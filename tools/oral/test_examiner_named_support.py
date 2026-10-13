@@ -15,7 +15,8 @@ controls pin the additive fix and nothing more:
     F6-T6  ASC-0130 keeps Simon P1-N9 and P4-N18 with LOHAN present
     F6-T7  0 of 788 canonical dispositions change
     F6-T8  mutation: replacing P2 with the "top-5 intersect examiner" rule
-           must FAIL F6-T2 on ASC-0130
+           must FAIL F6-T2 on ASC-0130 while the mutant's top 5 still holds
+           Simon's units there, else on the first corpus-aware witness
 
 Without the LOHAN series in the corpus, F6-T6 runs against the synthetic
 cue-free series as a proxy and says so; the real F6-T6 needs a corpus that
@@ -33,7 +34,7 @@ import json
 import os
 import subprocess
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -273,11 +274,80 @@ ok("F6-T7 the canonical reconciliation reads nothing the examiner window "
        "examiner_named_supporting_units")))
 
 # ==========================================================================
-# F6-T8  the top-5 intersection mutant must fail F6-T2 on ASC-0130
+# F6-T8  the top-5 intersection mutant must fail F6-T2: on ASC-0130 while its
+#        prerequisite holds, else on a corpus-aware witness
 # ==========================================================================
-_t8 = t2_violations(top5_intersection)
-ok("F6-T8 the top-5 intersection fails F6-T2 on ASC-0130",
-   any(sid == ASC_0130 for sid, _ in _t8), str(_t8[:10]))
+# ASC-0130 is the historical witness: on the production corpus the mutant's
+# top 5 holds Simon P1-N9 and P4-N18 and the cue-free series removes them. An
+# expanded corpus can displace both before any synthetic competition (with
+# LOHAN they rank 6th and 7th), and the mutant then has nothing on ASC-0130 to
+# lose. The witness is then the first (source_id, unit) violation in sorted
+# order. Either way it must be a real F6-T2 violation by the mutant, and P2
+# must keep the same unit, both scored on the same fixed-IDF fixture.
+SRC_BY_SID = {s["source_id"]: s for s in SRC}
+
+
+def t8_facts(sid, unit):
+    """The mutant and P2 before / after the cue-free series, for one pair."""
+    ex = SRC_BY_SID[sid].get("surveyor_normalized")
+    facts = {"source_id": sid, "examiner": ex, "unit": unit}
+    for name, ranked in (("before", BASE_RANKED[sid]),
+                         ("after", SYN_RANKED[sid])):
+        rank = [h["note_unit_id"] for h in ranked]
+        facts["rank_" + name] = rank.index(unit) + 1 if unit in rank else None
+        facts["tier_" + name] = next((h["notes_support"] for h in ranked
+                                      if h["note_unit_id"] == unit),
+                                     C.NO_SUPPORT)
+        facts["mutant_" + name] = top5_intersection(ranked, ex,
+                                                    UNIT_EXAMINERS)
+        facts["p2_" + name] = I.examiner_named_support(ranked, ex,
+                                                       UNIT_EXAMINERS)
+    return facts
+
+
+def t8_detects(f):
+    """The mutant drops a supported, ledger-named unit with no tier fall, and
+    P2 keeps it."""
+    tier = C.SUPPORT_RANK
+    return (f["unit"] in f["mutant_before"]
+            and f["unit"] not in f["mutant_after"]
+            and tier[f["tier_before"]] >= tier[C.TOPIC_SUPPORT]
+            and tier[f["tier_after"]] >= tier[f["tier_before"]]
+            and f["examiner"] in UNIT_EXAMINERS.get(f["unit"], ())
+            and f["unit"] in f["p2_before"] and f["unit"] in f["p2_after"])
+
+
+_t8 = sorted(set(t2_violations(top5_intersection)))
+_t8_0130_base = top5_intersection(
+    BASE_RANKED[ASC_0130], SRC_BY_SID[ASC_0130].get("surveyor_normalized"),
+    UNIT_EXAMINERS)
+_t8_historical = any(u.startswith(SIMON_0130) for u in _t8_0130_base)
+_t8_pool = ([p for p in _t8 if p[0] == ASC_0130
+             and p[1].startswith(SIMON_0130)] if _t8_historical else _t8)
+_t8_witness = t8_facts(*_t8_pool[0]) if _t8_pool else None
+_t8_detected = _t8_witness is not None and t8_detects(_t8_witness)
+_t8_report = {
+    "corpus": {
+        "units": len(UNITS),
+        "lohan_present": LOHAN_PRESENT,
+        "series": dict(sorted(Counter(u["series"] for u in UNITS).items())),
+        "unit_ids_sha256": hashlib.sha256("\n".join(sorted(
+            IDX)).encode("utf-8")).hexdigest(),
+    },
+    "route": ("historical ASC-0130" if _t8_historical else "corpus-aware"),
+    "asc_0130_mutant_before": _t8_0130_base,
+    "mutant_violations": len(_t8),
+    "witness": _t8_witness,
+    "verdict": "MUTANT_DETECTED" if _t8_detected else "MUTANT_NOT_DETECTED",
+}
+ok("F6-T8 the top-5 intersection mutant has F6-T2 violations", bool(_t8),
+   "no violating witness: the mutant would pass F6-T2")
+ok("F6-T8 the top-5 intersection fails F6-T2 on ASC-0130 while ASC-0130's "
+   "prerequisite holds, else on the first corpus-aware witness",
+   _t8_witness is not None, json.dumps(_t8_report, sort_keys=True))
+ok("F6-T8 the witness is a supported, ledger-named unit the mutant drops "
+   "with no tier fall, and P2 keeps it on the same fixed-IDF fixture",
+   _t8_detected, json.dumps(_t8_witness, sort_keys=True))
 
 # ==========================================================================
 # read-only: the committed examiner ledger is untouched (A-4)
@@ -297,6 +367,7 @@ if __name__ == "__main__":
     print("F6-T1 digests %s" % json.dumps(_digests, sort_keys=True))
     print("F6-T8 mutant violations %d (ASC-0130: %s)" % (
         len(_t8), sorted(u for sid, u in _t8 if sid == ASC_0130)))
+    print("F6-T8 witness %s" % json.dumps(_t8_report, sort_keys=True))
     for f in FAILURES:
         print("FAIL  " + f)
     print("\n%d examiner window controls / %d failures" % (
