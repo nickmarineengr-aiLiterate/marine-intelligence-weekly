@@ -43,7 +43,7 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import {
   ROOT, VERCEL_DEFAULT_IGNORES, parsePatterns, isIgnored,
-  vercelignoreText, gitignoreText, PATTERNS, TRACKED,
+  vercelignoreText, gitignoreText, PATTERNS, TRACKED, KEEP,
 } from "./deploy_set.mjs";
 
 // -------------------------------------------------------------
@@ -383,7 +383,7 @@ describe("runtime allowlist — product and public surfaces still deploy", () =>
     "meoclass1/qb_content_index.json",
     "meoclass1/oralnotes/notes_content_index.json",
     "meoclass1/oralnotes/written-sample-january-2026.html",
-    "assets/logo.webp", "RulesApp/app/index.html", "archive/index.html",
+    "assets/logo.webp", "archive/index.html",
     "GHGDecarb/timeline.html", "ecosystem.html", "timeline.html",
   ];
   for (const p of MUST_DEPLOY) {
@@ -394,7 +394,7 @@ describe("runtime allowlist — product and public surfaces still deploy", () =>
   }
 
   test("no tracked file under the served product roots is excluded, except the named internals", () => {
-    const roots = ["solvedQP/", "SQ/", "api/", "assets/", "meoclass1/", "RulesApp/",
+    const roots = ["solvedQP/", "SQ/", "api/", "assets/", "meoclass1/",
       "articles/", "archive/", "GHGDecarb/"];
     const internals = [
       // The whole review tree, not its sub-classes: the 48 generated review
@@ -416,6 +416,35 @@ describe("runtime allowlist — product and public surfaces still deploy", () =>
       /\.(html|webp|txt|json|js)$/.test(f) && f !== "package-lock.json")
       .filter((f) => isIgnored(f, PATTERNS));
     assert.deepEqual(wrongly, []);
+  });
+});
+
+// -------------------------------------------------------------
+// 3b. RulesApp containment: the co-located RulesApp product is not
+//     cleared for public distribution, so NO deployment may carry any
+//     of its files. Excluded wholesale in .vercelignore section D.
+// -------------------------------------------------------------
+describe("RulesApp containment — no RulesApp file is deployable", () => {
+  const RA = TRACKED.filter((f) => f.startsWith("RulesApp/"));
+
+  test("POSITIVE CONTROL: RulesApp files are tracked, so the check is not vacuous", () => {
+    assert.ok(RA.length > 0, "no tracked RulesApp/ file -- fixture is stale");
+    assert.ok(RA.includes("RulesApp/repository/index/repo-data.json"));
+  });
+
+  test("every tracked RulesApp/ file is excluded from deploy", () => {
+    const deployable = RA.filter((f) => isIgnored(f, PATTERNS) === null);
+    assert.deepEqual(deployable, [], "RulesApp files that would be deployed");
+  });
+
+  test("KEEP holds no RulesApp/ path", () => {
+    assert.deepEqual(KEEP.filter((f) => f.startsWith("RulesApp/")), []);
+  });
+
+  test("NEGATIVE CONTROL: without the section D line, the tree would deploy again", () => {
+    const without = parsePatterns(vercelignoreText.split(/\r?\n/)
+      .filter((l) => l.trim() !== "RulesApp/").join("\n"), "without-RulesApp");
+    assert.ok(RA.some((f) => isIgnored(f, without) === null));
   });
 });
 

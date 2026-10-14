@@ -159,8 +159,25 @@ Claude skill/
 /*.md
 
 # -----------------------------------------------------------------------------
+# D. RULESAPP -- CO-LOCATED PRODUCT, NOT CLEARED FOR PUBLIC DISTRIBUTION
+#    (containment candidate, 2026-10-14; Founder approval pending)
+# -----------------------------------------------------------------------------
+# RulesApp is a separate product that sits in this repository (AI_SESSION_START
+# calls it out of scope). Its compiled index under RulesApp/repository/index/
+# carries official requirement text whose public distribution RulesApp's own
+# content matrix does not permit, and the only page that links here calls it
+# an internal, not-yet-launched testing build. Excluding the whole tree means
+# no deployment carries these bytes at all: there is no route to gate, so the
+# result does not depend on how the edge matcher or CDN normalises paths.
+# The files stay tracked; this controls the WEB copy only, not the public Git
+# copy or its history. deploy_surface.test.mjs asserts every tracked RulesApp/
+# file is excluded. Removing this line republishes the tree on the next deploy
+# and needs a recorded distribution authority first.
+RulesApp/
+
+# -----------------------------------------------------------------------------
 # NOT excluded, on purpose: middleware.js, api/, vercel.json, package.json,
 # SQ/, solvedQP/, meoclass1/ product pages and their content indexes,
-# assets/, articles/, archive/, RulesApp/, GHGDecarb/, robots.txt, CNAME and
+# assets/, articles/, archive/, GHGDecarb/, robots.txt, CNAME and
 # the root HTML issues.
 # -----------------------------------------------------------------------------
