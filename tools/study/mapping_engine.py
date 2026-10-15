@@ -712,7 +712,7 @@ def apply_adjudications(store, adjudications):
     already-overridden store is a no-op, while a genuine taxonomy move -- which
     produces a fresh record without that field -- is still caught.
     """
-    stats = {'applied': 0, 'reassigned': 0, 'held': 0,
+    stats = {'applied': 0, 'reassigned': 0, 'held': 0, 'refused_null_affirm': 0,
              'refused_topic_moved': 0, 'refused_unknown_id': 0}
     refusals = []
     for qid, a in adjudications.items():
@@ -734,6 +734,17 @@ def apply_adjudications(store, adjudications):
             refusals.append(
                 f'{qid}: adjudicated against mapper topic {expected}, mapper '
                 f'now says {actual} -- re-review required')
+            continue
+
+        # Null-mapper contract (Phase 2C): a question the mapper could not place
+        # (topic_id None) has nothing to AFFIRM. It must be placed (REASSIGN,
+        # restating mapper_topic_id: null) or held (HOLD_REVIEW); an AFFIRM would
+        # otherwise publish VALID_MAPPED with no topic.
+        if decision == 'AFFIRM' and actual is None:
+            stats['refused_null_affirm'] += 1
+            refusals.append(
+                f'{qid}: AFFIRM of a null mapper topic -- the question has no topic '
+                'to affirm; REASSIGN it to a topic or HOLD_REVIEW it')
             continue
 
         if decision == 'HOLD_REVIEW':

@@ -566,6 +566,74 @@ def test_held_is_not_counted_as_unadjudicated():
     ok('queue summary/3 mutations caught', not escapes, str(escapes))
 
 
+# --------------------------------------------------------------------------- #
+# Null-mapper contract (Phase 2C prerequisite; ORAL_TOPIC_ROADMAP_PHASE2A_
+# IMPLEMENTATION_20261008.md:177). The 42 Phase 2C questions have NO mapper
+# topic (UNRESOLVED, topic_id None). An adjudication of such a question must
+# either place it (REASSIGN) or hold it (HOLD_REVIEW); it can never "affirm"
+# a topic that does not exist. Technical contract only: no topic is decided here.
+
+def _null_store():
+    store = {'schema_version': ME.SCHEMA_VERSION,
+             'taxonomy_version': ME.taxonomy_version(), 'mappings': {}}
+    store, _ = ME.incremental_update(
+        store, [(NEW_ORAL_VAGUE, 'ORAL', {'file_name': MIXED_FILE})])
+    return store
+
+
+def test_null_mapper_contract():
+    qid = NEW_ORAL_VAGUE['id']
+    base = _null_store()
+    r0 = base['mappings'][qid]
+    ok('null/fixture is a null-mapper record',
+       r0['topic_id'] is None and r0['mapping_confidence'] == 'UNRESOLVED', str(r0['topic_id']))
+    # C1 AFFIRM of a null mapper is refused, with the key restated or not
+    for label, a in (('restated', {'decision': 'AFFIRM', 'mapper_topic_id': None, 'topic_id': None}),
+                     ('omitted', {'decision': 'AFFIRM', 'topic_id': None})):
+        store = copy.deepcopy(base)
+        store, stats, refusals = ME.apply_adjudications(
+            store, {qid: dict(a, last_reviewed='2026-10-16', reviewer='test')})
+        r = store['mappings'][qid]
+        ok(f'null/AFFIRM ({label}) is refused', stats['applied'] == 0 and len(refusals) == 1, str(refusals))
+        ok(f'null/AFFIRM ({label}) never publishes a topicless record',
+           r['mapping_status'] != 'VALID_MAPPED' and r['topic_id'] is None, r['mapping_status'])
+    # C2 REASSIGN from null places the question, recomputes the official join, validates, idempotent
+    store = copy.deepcopy(base)
+    adj = {qid: {'decision': 'REASSIGN', 'mapper_topic_id': None, 'topic_id': 'D07',
+                 'last_reviewed': '2026-10-16', 'reviewer': 'test', 'note': 'contract test'}}
+    store, stats, refusals = ME.apply_adjudications(store, adj)
+    r = store['mappings'][qid]
+    ok('null/REASSIGN from null applies', stats['reassigned'] == 1 and not refusals, str(refusals))
+    ok('null/REASSIGN sets the topic and records the null origin',
+       r['topic_id'] == 'D07' and r['adjudicated_from_topic_id'] is None and r['previous_topic_id'] is None,
+       str((r['topic_id'], r.get('adjudicated_from_topic_id'))))
+    ok('null/REASSIGN recomputes the official join',
+       r['official_syllabus_node_candidates'] == ME.official_nodes_for_topic('D07'))
+    ok('null/REASSIGN result passes the validator', ME.validate_mapping(r) == [], str(ME.validate_mapping(r)))
+    store, stats2, refusals2 = ME.apply_adjudications(store, adj)
+    ok('null/REASSIGN is idempotent', not refusals2 and store['mappings'][qid]['topic_id'] == 'D07', str(refusals2))
+    # C3 REASSIGN that does not restate the null mapper is refused (the guard defaults to topic_id)
+    store = copy.deepcopy(base)
+    store, stats, refusals = ME.apply_adjudications(
+        store, {qid: {'decision': 'REASSIGN', 'topic_id': 'D07', 'last_reviewed': '2026-10-16'}})
+    ok('null/REASSIGN without restating the null mapper is refused',
+       stats['refused_topic_moved'] == 1 and store['mappings'][qid]['topic_id'] is None, str(refusals))
+    # C4 HOLD_REVIEW on null stays unpublished and invents no topic
+    store = copy.deepcopy(base)
+    store, stats, refusals = ME.apply_adjudications(
+        store, {qid: {'decision': 'HOLD_REVIEW', 'mapper_topic_id': None, 'topic_id': None,
+                      'candidate_topic_ids': ['D02', 'D04'], 'last_reviewed': '2026-10-16'}})
+    r = store['mappings'][qid]
+    ok('null/HOLD_REVIEW is held, unpublished, topicless',
+       stats['held'] == 1 and r['mapping_status'] == 'REVIEW_PENDING' and r['topic_id'] is None, str(r['mapping_status']))
+    # C5 a stale null ruling is refused once the mapper has since placed the question
+    store = copy.deepcopy(base)
+    store['mappings'][qid]['topic_id'] = 'D03'
+    store, stats, refusals = ME.apply_adjudications(store, adj)
+    ok('null/stale null ruling is refused after the mapper moved',
+       stats['refused_topic_moved'] == 1 and store['mappings'][qid]['topic_id'] == 'D03', str(refusals))
+
+
 def main():
     for fn in (test_oral_high, test_oral_medium_routes_to_review,
                test_oral_unresolved, test_written,
@@ -590,6 +658,7 @@ def main():
                test_reassign_is_refused_when_the_mapper_has_moved,
                test_hold_review_is_never_published,
                test_held_is_not_counted_as_unadjudicated,
+               test_null_mapper_contract,
                test_no_fixture_leak):
         fn()
     print(f'mapping engine acceptance -- {len(PASS) + len(FAIL)} assertions')

@@ -163,6 +163,19 @@ describe("O-3 public-repository invariants", () => {
     assert.equal(PROTECTED_MOUNTS.length, 21);
     assert.ok(PROTECTED_MOUNTS.every((p) => SERVED.includes(p)));
   });
+  test("no derived Notes/examiner artefact carries LOHAN units (R3-F2 leak guard)", () => {
+    // ingest_oral_notes.py writes text-bearing UNITS/COVERAGE/EVIDENCE and would ingest mounted
+    // LOHAN pages if run in a private-overlay checkout. Regenerated artefacts must come from a
+    // PUBLIC checkout (R3-F2 / F7 / D-H, after landing); this fails if LOHAN text ever lands here.
+    const bad = [];
+    for (const f of TRACKED.filter((t) => t.startsWith("meoclass1/oral-intelligence/"))) {
+      const p = path.join(ROOT, f);
+      if (!fs.existsSync(p) || fs.statSync(p).size > 64 * 1024 * 1024) continue;
+      const s = fs.readFileSync(p, "utf8");
+      if (s.includes("NOTE-LOHAN-") || /lohan-notes-p\d+\.html/.test(s)) bad.push(f);
+    }
+    assert.deepEqual(bad, []);
+  });
   test("o3/ is build-only: never in the served set", () => {
     assert.deepEqual(SERVED.filter((f) => f.startsWith("o3/")), []);
   });
