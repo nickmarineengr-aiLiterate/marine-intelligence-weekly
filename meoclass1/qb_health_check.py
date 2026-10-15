@@ -127,7 +127,33 @@ def _keep(rel_path):
         return rel_path[len(QB_FOLDER_PREFIX):]
     if rel_path.startswith(SQ_FOLDER_PREFIX):
         return rel_path
+    if rel_path == O3_PIN_PATH:
+        return O3_PIN_KEY
     return None
+
+
+# O-3 private-source delivery (Founder FD-P1, 15 Oct 2026). The LOHAN pages live in a PRIVATE
+# repository and are mounted behind the ORAL_QB_NOTES gate by the production build, which fails
+# if any pinned page cannot be verified. A public checkout (local, ref or remote) therefore lists
+# them in notes_content_index.json without carrying their bytes. The public pin, read from the
+# SAME source as the manifest, names exactly which pages are protected; only those are not
+# "missing". Any other listed-but-absent file still fails.
+O3_PIN_PATH = "o3/lohan.pin.json"
+O3_PIN_KEY = "__o3__/lohan.pin.json"
+
+
+def _protected_notes_files(files):
+    raw = files.get(O3_PIN_KEY)
+    if raw is None:
+        return set()
+    try:
+        pin = json.loads(raw.decode("utf-8"))
+    except (ValueError, UnicodeDecodeError):
+        return set()
+    mount = pin.get("mount", "")
+    if mount != QB_FOLDER_PREFIX + NOTES_FOLDER_PREFIX:
+        return set()
+    return {f.get("path") for f in pin.get("deploy_files", []) if isinstance(f, dict)}
 
 
 def _normalise(raw):
@@ -212,6 +238,10 @@ def fetch_local_tree():
                         files[key] = _normalise(fh.read())
                 except OSError:
                     continue
+    pin = os.path.join(root, *O3_PIN_PATH.split("/"))
+    if os.path.isfile(pin):
+        with open(pin, "rb") as fh:
+            files[O3_PIN_KEY] = _normalise(fh.read())
     try:
         commit = _git(["rev-parse", "HEAD"])
         dirty = bool(_git(["status", "--porcelain"]))
@@ -693,6 +723,7 @@ def check_notes_manifest(files, notes_results):
     notes_files_on_disk = {f[len(NOTES_FOLDER_PREFIX):] for f in files
                             if f.startswith(NOTES_FOLDER_PREFIX) and f.lower().endswith(".html")}
     manifest_listed = set()
+    protected = _protected_notes_files(files)  # O-3: pin-declared, mounted only in production
 
     # Duplicate-truth guard. A second, divergent copy of the oral-notes manifest
     # (hyphenated) coexisted with the canonical one for 11 days in Jul-Aug 2026 and
@@ -720,7 +751,7 @@ def check_notes_manifest(files, notes_results):
         for series_key, series in manifest.get("series", {}).items():
             for fname in series.get("files", {}).keys():
                 manifest_listed.add(fname)
-                if fname not in notes_files_on_disk:
+                if fname not in notes_files_on_disk and fname not in protected:
                     errors.append(f"{label} series '{series_key}' references file not found on disk: {fname}")
 
     orphans = notes_files_on_disk - manifest_listed - NOTES_INDEX_UTILITY_FILES
