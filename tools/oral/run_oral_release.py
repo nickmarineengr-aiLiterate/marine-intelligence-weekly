@@ -220,9 +220,13 @@ class ArtefactGuard:
 # number is always the failure count, so only that is trusted for the verdict.
 # `\w+\s+` absorbs a qualifier between the count and the noun --
 # test_notes_controls prints "106 notes controls / 0 failures".
+#
+# A summary sits on ONE line, and the qualifier is a word, not a number: with
+# `\s` and `\w` here, a check line ending "effective 2026-10" followed by
+# "53 PASS / 0 FAIL" was read as "10 <qualifier 53> PASS / 0 FAIL".
 _VALIDATOR_SUMMARY = re.compile(
-    r"(\d+)\s+(?:\w+\s+)?(checks?|controls?|tests?|PASS)\b\s*[,/]\s*(\d+)\s*"
-    r"(FAIL\w*|fail\w*)", re.I)
+    r"(\d+)[ \t]+(?:[A-Za-z]\w*[ \t]+)?(checks?|controls?|tests?|PASS)\b[ \t]*"
+    r"[,/][ \t]*(\d+)[ \t]*(FAIL\w*|fail\w*)", re.I)
 
 
 def classify_validator(out, err, rc):

@@ -60,6 +60,394 @@ def jsonl(p):
     return [json.loads(x) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()]
 
 
+SEP_RE = re.compile(r"^SEP-\d{4}$")
+
+
+def september_intake_checks(sid, inv, aug_ids):
+    """The September 2026 intake: a THIRD denominator, isolated from both others.
+
+    The same contract the A-checks enforce on August, stated once more over the
+    SEP-* records, plus two things August never needed: the SEP and AUG identity
+    spaces must be disjoint in BOTH directions, and the registered snapshot
+    carriers must still hash and re-parse to exactly the committed records -- the
+    month profile shares one parser, so a later grammar change that silently
+    moved a September identity would otherwise surface nowhere. Every August
+    check above is untouched; these are appended, never interleaved. Fails
+    closed: absent September evidence is a FAIL, never a skip.
+
+    PRIV-1: the records are read from the private owner area named by the month
+    profile, and ONLY from there. Nothing here looks at the old public
+    examiner-audit path except SP5, which requires it to be empty.
+    """
+    import ingest_august_intake as I
+    prof = I.profile("2026-09")
+    try:
+        intake = jsonl(prof["records"])
+        adj = json.loads(prof["adjudications"].read_text(encoding="utf-8"))["adjudications"]
+        report = json.loads(prof["report"].read_text(encoding="utf-8"))
+    except (OSError, ValueError, KeyError) as e:
+        check("S0_september_intake_evidence_present", False, f"{type(e).__name__}: {e}")
+        september_privacy_checks(prof, None, None, None)
+        return
+    check("S0_september_intake_evidence_present", True,
+          f"{len(intake)} occurrence(s), {len(adj)} adjudication(s)")
+
+    ids = [o["occurrence_id"] for o in intake]
+    check("S1_intake_ids_unique_and_wellformed",
+          len(set(ids)) == len(ids) and all(SEP_RE.match(i) for i in ids))
+    check("S2_every_intake_occurrence_adjudicated",
+          sorted(a["occurrence_id"] for a in adj) == sorted(ids),
+          f"intake={len(ids)} adjudicated={len(adj)}")
+    check("S3_intake_classifications_governed",
+          all(a["classification"] in CLASSES for a in adj))
+    check("S4_denominators_isolated_three_ways",
+          not (set(ids) & set(sid)) and not (set(ids) & aug_ids)
+          and not any(SEP_RE.match(i) for i in sid)
+          and not any(SEP_RE.match(i) for i in aug_ids)
+          and not any(ASC_RE.match(i) or AUG_RE.match(i) for i in ids))
+
+    wrong = [a["occurrence_id"] for a in adj
+             if (a["classification"] in NEEDS_TARGET) != bool(a.get("matched_question_id"))
+             and a["classification"] in NEEDS_TARGET | NEEDS_NO_TARGET]
+    check("S7_classification_and_target_agree", not wrong, f"{wrong}")
+
+    # Every card an adjudication names -- primary, co-target or secondary --
+    # must be live. A co-target is how a multi-limb ask reaches production, so
+    # an unresolved one is a limb that production would silently never see.
+    named = set()
+    for a in adj:
+        if a.get("matched_question_id"):
+            named.add(a["matched_question_id"])
+        for k in ("additional_matched_question_ids", "secondary_question_ids"):
+            named.update(a.get(k) or [])
+    bad = sorted(named - inv)
+    check("S8_intake_card_targets_resolve", not bad, f"unresolved: {bad[:5]}")
+
+    thin = []
+    for a in adj:
+        if a["classification"] != "GENUINE_NEW_QUESTION":
+            continue
+        ns = a.get("negative_search")
+        if not isinstance(ns, list) or not ns:
+            thin.append(a["occurrence_id"])
+            continue
+        for e in ns:
+            pat, hits = e.get("pattern"), e.get("hits")
+            rej = e.get("rejected", [])
+            if (not isinstance(pat, str) or not pat.strip()
+                    or not isinstance(hits, int) or hits < 0
+                    or not isinstance(rej, list) or len(rej) < hits
+                    or any(r.get("id") not in inv or not r.get("why") for r in rej)):
+                thin.append(a["occurrence_id"])
+                break
+    check("S9_new_card_claims_carry_negative_search", not thin, f"{sorted(set(thin))}")
+
+    declared = {sd["submission_id"]: {e["name_normalized"]
+                                      for e in sd.get("examiners", [])}
+                for sd in report.get("submissions_detail", [])}
+    bad_attr = []
+    for o in intake:
+        mode, who = o.get("examiner_attribution"), o.get("attributed_examiner")
+        if mode == "PANEL_LEVEL_ONLY":
+            if who is not None:
+                bad_attr.append(o["occurrence_id"])
+        elif mode == "INDIVIDUALLY_ATTRIBUTED":
+            if (not who or who not in declared.get(o["submission_id"], set())
+                    or not o.get("attribution_marker")):
+                bad_attr.append(o["occurrence_id"])
+        else:
+            bad_attr.append(o["occurrence_id"])
+    check("S10_intake_attribution_matches_evidence", not bad_attr, f"{bad_attr}")
+
+    byid = {o["occurrence_id"]: o["raw_question_text"] for o in intake}
+    check("S11_intake_raw_wording_present",
+          all(byid.get(a["occurrence_id"]) is not None for a in adj))
+
+    norm_ask = {}
+    for a in adj:
+        if a["classification"] == "GENUINE_NEW_QUESTION":
+            k = " ".join((a.get("ask") or "").lower().split())
+            norm_ask.setdefault(k, []).append(a["occurrence_id"])
+    dupes = {k: v for k, v in norm_ask.items() if len(v) > 1}
+    check("S12_no_two_occurrences_claim_the_same_new_card", not dupes,
+          f"{ {k[:40]: v for k, v in dupes.items()} }")
+
+    new_ids = {a["occurrence_id"] for a in adj
+               if a["classification"] == "GENUINE_NEW_QUESTION"}
+    bad_ref = [a["occurrence_id"] for a in adj
+               if a["classification"] in CROSS_BATCH
+               and a.get("prior_fresh_ask_ref") not in new_ids]
+    check("S13_cross_batch_rows_reference_the_ask_they_strengthen", not bad_ref,
+          f"{bad_ref}")
+
+    # The carriers still hash to their registration AND re-parse, through the
+    # shared month-profiled parser, to exactly the committed occurrences.
+    try:
+        regs = I.load_carriers("2026-09")
+        ok, why = I.verify_carriers(regs, "2026-09")
+        if ok:
+            _, occ, _ = I.ingest_carriers(regs, "2026-09")
+            ok = [json.dumps(o, ensure_ascii=False, sort_keys=True) for o in occ] \
+                == [json.dumps(o, ensure_ascii=False, sort_keys=True) for o in intake]
+            why = (f"{len(occ)} re-parsed occurrence(s) byte-match the committed store"
+                   if ok else "committed September records drifted from their carriers")
+    except (OSError, ValueError, KeyError, SystemExit) as e:
+        ok, why = False, f"{type(e).__name__}: {e}"
+    check("S14_carriers_verified_and_records_reproducible", ok, why)
+
+    carrier_dir = (L.REPO / "docs" / "MIW-master-Question-bank"
+                   / I.profile("2026-09")["inbox_dir"])
+    carriers = sorted(carrier_dir.rglob("*.txt")) if carrier_dir.is_dir() else []
+    not_ignored, tracked = [], []
+    for c in carriers:
+        rel = c.relative_to(L.REPO).as_posix()
+        if subprocess.run(["git", "check-ignore", "-q", rel],
+                          cwd=str(L.REPO), capture_output=True).returncode != 0:
+            not_ignored.append(rel)
+        if subprocess.run(["git", "ls-files", "--error-unmatch", rel],
+                          cwd=str(L.REPO), capture_output=True).returncode == 0:
+            tracked.append(rel)
+    check("SP1_september_carriers_are_git_ignored", carriers and not not_ignored,
+          "%d carrier file(s); not ignored: %s" % (len(carriers), not_ignored or "none"))
+    check("SP2_september_carriers_are_untracked", not tracked,
+          "tracked: %s" % (tracked or "none"))
+
+    september_privacy_checks(prof, intake, adj, report)
+
+
+#: PRIV-1. The four private September records, pinned TWICE: here, and in the
+#: public provenance record. Each pin must equal the bytes, so re-pinning only
+#: the provenance, or only this table, cannot let a substitute record through.
+SEPTEMBER_PRIVATE_PINS = {
+    "SEPTEMBER2026_INTAKE_RECORDS.jsonl":
+        "124eccb5794bc4c0271b677a9c20862a8388a71a5824dc003ab647e3750ef057",
+    "SEPTEMBER2026_INTAKE_REPORT.json":
+        "36f516c902be914ab2edec01ef4d2557ebc24dc5dc2dec9c076aee758c03e024",
+    "SEPTEMBER2026_INTAKE_CARRIERS.json":
+        "1b29197e44cc0f4e6d0469c71925b93fadcd131098acb213cd856fe8a8f7e422",
+    "SEPTEMBER2026_INTAKE_ADJUDICATIONS.json":
+        "c1b36ecf8e03393c89d07d47da03f650eec0969c8dcc6466dd8d727a1297d020",
+}
+PUBLIC_PROVENANCE = OUT / "SEPTEMBER2026_H7_PUBLIC_PROVENANCE.json"
+SEPTEMBER_QUEUE = OUT / "SEPTEMBER2026_PRODUCTION_QUEUE.json"
+#: The approved shape of the public record (D-H7-3). A new top-level key is new
+#: published metadata, and that needs a decision, not a silent pass.
+PROVENANCE_KEYS = {"record_class", "decision", "private_originals",
+                   "fingerprint_method", "dates", "approval_identity",
+                   "intake_summary", "actions", "corrections"}
+APPROVAL_FIELDS = ("decision", "decided_on", "decided_by",
+                   "scope_action_ids", "scope_corrections")
+
+
+def _git_ok(args):
+    return subprocess.run(["git", *args], cwd=str(L.REPO),
+                          capture_output=True).returncode == 0
+
+
+def _git_out(args):
+    r = subprocess.run(["git", *args], cwd=str(L.REPO), capture_output=True)
+    return r.stdout.decode("utf-8", "replace") if r.returncode == 0 else None
+
+
+def _sha(b):
+    import hashlib
+    return hashlib.sha256(b).hexdigest()
+
+
+def _blob_id(b):
+    import hashlib
+    return hashlib.sha1(b"blob %d\0" % len(b) + b).hexdigest()
+
+
+def _fingerprint(rec_bytes, line, adjudication):
+    """The public provenance's per-occurrence fingerprint (its fingerprint_method)."""
+    import hashlib
+    import hmac
+    key = hashlib.sha256(b"MIW-SEP2026-FP|" + rec_bytes).digest()
+    payload = (line.encode("utf-8") + b"\n"
+               + json.dumps(adjudication, ensure_ascii=False, sort_keys=True).encode("utf-8"))
+    return hmac.new(key, payload, hashlib.sha256).hexdigest()
+
+
+def _strings(node):
+    if isinstance(node, dict):
+        for k, v in node.items():
+            yield str(k)
+            yield from _strings(v)
+    elif isinstance(node, list):
+        for v in node:
+            yield from _strings(v)
+    elif isinstance(node, str):
+        yield node
+
+
+def september_privacy_checks(prof, intake, adj, report):
+    """PRIV-1: the private September evidence is private, genuine, and agrees
+    with the minimised public record that stands in for it.
+
+    Every check fails closed. Absent private evidence fails SP3/SP4 (and S0
+    above); an absent or malformed public record fails SP4 and SP6-SP8. None
+    of them reads a September record from a public path.
+    """
+    priv = {n: prof["records"].parent / n for n in SEPTEMBER_PRIVATE_PINS}
+    data = {}
+    for n, p in priv.items():
+        try:
+            data[n] = p.read_bytes()
+        except OSError:
+            pass
+    try:
+        prov = json.loads(PUBLIC_PROVENANCE.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as e:
+        prov, prov_err = None, f"{type(e).__name__}: {e}"
+    else:
+        prov_err = None
+
+    # SP3 -- each private record exists, is git-ignored and is untracked.
+    missing = sorted(set(priv) - set(data))
+    not_ignored, tracked = [], []
+    for n, p in priv.items():
+        rel = p.relative_to(L.REPO).as_posix()
+        if not _git_ok(["check-ignore", "-q", "--no-index", rel]):
+            not_ignored.append(rel)
+        if _git_ok(["ls-files", "--error-unmatch", rel]):
+            tracked.append(rel)
+    check("SP3_september_private_records_present_ignored_untracked",
+          not missing and not not_ignored and not tracked,
+          "missing: %s; not ignored: %s; tracked: %s"
+          % (missing or "none", not_ignored or "none", tracked or "none"))
+
+    # SP4 -- the bytes equal BOTH pins, and the pins equal each other.
+    bad = []
+    files = ((prov or {}).get("private_originals") or {}).get("files") or {}
+    for n, want in SEPTEMBER_PRIVATE_PINS.items():
+        pin = files.get(n) or {}
+        if n not in data:
+            bad.append(f"{n}: absent")
+        elif _sha(data[n]) != want:
+            bad.append(f"{n}: sha256 {_sha(data[n])[:12]} != validator pin {want[:12]}")
+        elif pin.get("sha256") != want or pin.get("bytes") != len(data[n]):
+            bad.append(f"{n}: public provenance pin {str(pin.get('sha256'))[:12]}"
+                       f"/{pin.get('bytes')} disagrees")
+    check("SP4_september_private_records_match_both_pins", not prov_err and not bad,
+          prov_err or ("; ".join(bad) if bad else "4 record(s) match validator and provenance pins"))
+
+    # SP5 -- no raw September record on any public path: none on disk at the
+    # old examiner-audit location (a fallback that must not exist), none
+    # tracked under any name, and no tracked blob byte-identical to one.
+    on_disk = sorted(n for n in SEPTEMBER_PRIVATE_PINS if (OUT / n).exists())
+    listing = _git_out(["ls-files", "-s"])
+    leaked = []
+    if listing is None:
+        leaked.append("git ls-files failed")
+    else:
+        blobs = {_blob_id(b): n for n, b in data.items()}
+        for ln in listing.splitlines():
+            meta, _, path = ln.partition("\t")
+            parts = meta.split()
+            if path.rsplit("/", 1)[-1] in SEPTEMBER_PRIVATE_PINS:
+                leaked.append(f"{path} (tracked by name)")
+            elif len(parts) >= 2 and parts[1] in blobs:
+                leaked.append(f"{path} (tracked copy of {blobs[parts[1]]})")
+    check("SP5_no_september_raw_record_on_a_public_path", not on_disk and not leaked,
+          "public-path files: %s; tracked: %s" % (on_disk or "none", leaked or "none"))
+
+    # SP6 -- the public record has only the approved shape, says only what the
+    # private evidence supports, and names no examiner.
+    why = prov_err
+    if not why and intake is None:
+        why = "private September evidence unavailable; provenance cannot be verified"
+    if not why:
+        problems = []
+        if set(prov) != PROVENANCE_KEYS:
+            problems.append("keys %s" % sorted(set(prov) ^ PROVENANCE_KEYS))
+        if prov.get("record_class") != "PUBLIC_MINIMISED_PROVENANCE":
+            problems.append("record_class")
+        rec_bytes = data.get("SEPTEMBER2026_INTAKE_RECORDS.jsonl", b"")
+        lines = {json.loads(x)["occurrence_id"]: x
+                 for x in rec_bytes.decode("utf-8").splitlines() if x.strip()}
+        by_adj = {a["occurrence_id"]: a for a in adj}
+        for act in prov.get("actions") or []:
+            for oid in act.get("source_occurrence_ids") or []:
+                if oid not in lines or oid not in by_adj:
+                    problems.append(f"{act.get('action_id')}: {oid} not in private records")
+                    continue
+                if (act.get("source_record_fingerprints") or {}).get(oid) \
+                        != _fingerprint(rec_bytes, lines[oid], by_adj[oid]):
+                    problems.append(f"{act.get('action_id')}: {oid} fingerprint")
+                if (act.get("source_classifications") or {}).get(oid) \
+                        != by_adj[oid]["classification"]:
+                    problems.append(f"{act.get('action_id')}: {oid} classification")
+        summ = prov.get("intake_summary") or {}
+        if summ.get("raw_occurrences") != len(intake) \
+                or summ.get("by_classification") != dict(Counter(a["classification"] for a in adj)):
+            problems.append("intake_summary disagrees with the private records")
+        names = set()
+        for sd in report.get("submissions_detail", []):
+            for e in sd.get("examiners", []):
+                names.update(filter(None, (e.get("name_raw"), e.get("name_normalized"))))
+        for o in intake:
+            names.update(filter(None, (o.get("attributed_examiner"), o.get("attribution_marker"))))
+        text = "\n".join(_strings(prov)).lower()
+        named = sorted(n for n in names if len(n.strip()) >= 3 and n.lower() in text)
+        if named:
+            problems.append("%d examiner identity string(s) in the public record" % len(named))
+        why = "; ".join(problems)
+    check("SP6_public_provenance_minimised_and_consistent", not why,
+          why or "%d action(s) verified against the private records" % len(prov["actions"]))
+
+    # SP7 -- the approval identity the public record claims is the authority
+    # the production queue actually recorded for H7.
+    why = prov_err
+    if not why:
+        try:
+            h7 = json.loads(SEPTEMBER_QUEUE.read_text(encoding="utf-8"))["batches"]["H7"]
+            fa = h7["founder_authorisation"]
+        except (OSError, ValueError, KeyError) as e:
+            why = f"queue: {type(e).__name__}: {e}"
+        else:
+            ai = prov.get("approval_identity") or {}
+            diff = [f for f in APPROVAL_FIELDS if ai.get(f) != fa.get(f)]
+            if ai.get("batch") != "H7":
+                diff.append("batch")
+            if h7.get("status") != "FOUNDER_AUTHORISED":
+                diff.append("queue status")
+            if h7.get("action_ids") != ai.get("scope_action_ids") \
+                    or sorted(a.get("action_id") for a in prov.get("actions") or []) \
+                    != sorted(h7.get("action_ids") or []):
+                diff.append("action scope")
+            why = ("approval identity disagrees on: %s" % diff) if diff else None
+    check("SP7_approval_identity_matches_the_authorising_queue", not why,
+          why or "H7 APPROVED_WITH_AMENDMENTS by the Founder, scope agrees")
+
+    # SP8 -- the original intake provenance survives the D-H7-7 correction-month
+    # move: the public dates are the private carriers' dates, never the
+    # effective month that replaced them on the correction records.
+    why = prov_err
+    if not why:
+        try:
+            car = json.loads(data["SEPTEMBER2026_INTAKE_CARRIERS.json"].decode("utf-8"))
+        except (KeyError, ValueError) as e:
+            why = f"private carriers registry unavailable: {type(e).__name__}"
+        else:
+            d = prov.get("dates") or {}
+            want = sorted({c["carrier_date"] for c in car["carriers"]})
+            diff = []
+            if d.get("original_intake_dates") != want:
+                diff.append("original_intake_dates %s != carriers %s"
+                            % (d.get("original_intake_dates"), want))
+            if d.get("editorial_observation_date") != car["intake_window"]["as_at"]:
+                diff.append("editorial_observation_date")
+            if d.get("founder_batch_approval_date") \
+                    != (prov.get("approval_identity") or {}).get("decided_on"):
+                diff.append("founder_batch_approval_date")
+            if d.get("effective_correction_month") != "2026-10":
+                diff.append("effective_correction_month")
+            why = "; ".join(diff) or None
+    check("SP8_original_intake_provenance_preserved", not why,
+          why or "intake 2026-09-22/23, observed 2026-09-23, effective 2026-10")
+
+
 def main():
     # ---------------- historical ----------------
     src = jsonl(OUT / "ALL_SURVEYORS_SOURCE_RECORDS.jsonl")
@@ -292,6 +680,8 @@ def main():
     v26 = qb / "MEO_QB_master_v26.xlsx"
     check("Z2_prior_july_v26_workbooks_preserved",
           july.exists() and v26.exists())
+
+    september_intake_checks(sid, inv, set(aid))
 
     # ---------------- report ----------------
     width = max(len(n) for n, _, _ in results)

@@ -963,6 +963,29 @@ GATES = (
                       "the hold it names is real, still stands in G3's manifest, "
                       "and was frozen before it was ever answered"),
 
+    # ---- PRIV-1: intake evidence privacy (Founder D-P1-REG, 13 Oct 2026) ----
+    # The raw September 2026 intake records live ONLY in the git-ignored
+    # owner area. validate_oral_intake checks them there (S0-S14, SP1-SP8) and
+    # needs the genuine records, so this pair runs only in an authorised
+    # private qualification; on a public checkout it fails closed, which is
+    # the intended answer. september_privacy_public is the half that needs no
+    # private data and is what public CI runs; it states on every run that it
+    # verifies no private evidence.
+    _gate("validate_oral_intake",
+          ["python", "%s/validate_oral_intake.py" % _ORAL],
+          CAT_AUTHORISATION, PARSER_VALIDATOR, timeout=300, historical_39=False,
+          note="private intake evidence: S0-S14 plus SP1-SP8; needs the "
+               "genuine records in the git-ignored _records/ owner area"),
+    # 42 mutations x ~2.4s validator, each in its own scratch tree.
+    _gate("oral_intake_mutate",
+          ["python", "%s/mutate_oral_intake.py" % _ORAL],
+          CAT_AUTHORISATION, PARSER_MUTATION, mutates=True, timeout=1200,
+          historical_39=False, depends_on=("validate_oral_intake",)),
+    _gate("september_privacy_public",
+          ["python", "%s/check_september_privacy_public.py" % _ORAL],
+          CAT_SECURITY, PARSER_VALIDATOR, timeout=300, historical_39=False,
+          note="PUB1-PUB6, public structure only; the same check public CI runs"),
+
     # ---- health: candidate LOCAL vs clean ref ------------------------------
     _gate("qb_health_check",
           ["python", "meoclass1/qb_health_check.py", "--source", "local",

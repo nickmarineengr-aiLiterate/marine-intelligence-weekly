@@ -3,16 +3,16 @@
   "taxonomy_version": "23495e145a2e1b0e",
   "queue_states": {
     "what": "HELD is not UNADJUDICATED. A held item was read by a named human who recorded why the evidence does not settle it; a fresh item has been read by nobody. Never sum these into one backlog number.",
-    "total": 84,
-    "fresh_unadjudicated": 68,
+    "total": 86,
+    "fresh_unadjudicated": 70,
     "held_adjudicated": 16
   },
-  "total": 84,
+  "total": 86,
   "file_title_contradictions": {
     "what": "QB files whose title names one domain but which hold questions whose own text cues another. Follow-up inventory for the 2026-08-23 over-capture correction.",
-    "files": 6,
-    "total": 6,
-    "fresh_unadjudicated": 0,
+    "files": 7,
+    "total": 7,
+    "fresh_unadjudicated": 1,
     "held_adjudicated": 6,
     "by_file": {
       "QB1_A.html": {
@@ -25,6 +25,21 @@
             "review_status": "HELD_PENDING_EVIDENCE",
             "contradicting_topic_ids": [
               "D03"
+            ]
+          }
+        ]
+      },
+      "QB3_A.html": {
+        "file_topic_id": "D04",
+        "fresh_unadjudicated": 1,
+        "held_adjudicated": 0,
+        "questions": [
+          {
+            "canonical_question_id": "QB3_A#q19",
+            "review_status": "AWAITING_ADJUDICATION",
+            "contradicting_topic_ids": [
+              "D01",
+              "D07"
             ]
           }
         ]
@@ -377,6 +392,21 @@
       "reason": "human review found the evidence does not settle this question: 'MEPC 84 outcomes' is a current-affairs sweep, not a liability question. Its content splits between pollution (BWM, machinery) and the net-zero framework (D05), and which limb an examiner pursues is not knowable from the stem. Held.",
       "recommended_topic_id": "D02",
       "review_status": "HELD_PENDING_EVIDENCE"
+    },
+    {
+      "canonical_question_id": "QB1_C#q10",
+      "content_type": "ORAL",
+      "text": "You are the Chief Engineer taking delivery of a newbuilding from the yard. What will you check before accepting her, and how do you handle guarantee claims, deficiency reports and lube oil analysis afterwards?",
+      "source_file": "QB1_C.html",
+      "current_topic_id": "D02",
+      "candidate_topic_ids": [
+        "D02"
+      ],
+      "mapping_evidence": "TEXT_CUE",
+      "mapping_confidence": "MEDIUM",
+      "reason": "domain cue matched question text inside a mixed file",
+      "recommended_topic_id": "D02",
+      "review_status": "AWAITING_ADJUDICATION"
     },
     {
       "canonical_question_id": "QB1_C#q7",
@@ -941,6 +971,22 @@
       "mapping_confidence": "MEDIUM",
       "reason": "domain cue matched question text inside a mixed file",
       "recommended_topic_id": "D07",
+      "review_status": "AWAITING_ADJUDICATION"
+    },
+    {
+      "canonical_question_id": "QB3_A#q19",
+      "content_type": "ORAL",
+      "text": "Bulk carrier loading restrictions — what is the solid triangle painted on the side shell amidships, which SOLAS regulation requires it, how does it relate to the load line, and where on board will you find the restriction and who issues it?",
+      "source_file": "QB3_A.html",
+      "current_topic_id": "D04",
+      "candidate_topic_ids": [
+        "D01",
+        "D07"
+      ],
+      "mapping_evidence": "FILE_TITLE_CONTRADICTED",
+      "mapping_confidence": "MEDIUM",
+      "reason": "QB file title names D04, but the question text cues only D01/D07 -- file-level evidence does not settle it",
+      "recommended_topic_id": "D04",
       "review_status": "AWAITING_ADJUDICATION"
     },
     {

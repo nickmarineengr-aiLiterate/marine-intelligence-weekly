@@ -420,7 +420,24 @@ def build_mutations():
          [REPO / unowned_file],
          lambda: mutate_card(unowned_file, unowned_anchor),
          "batch_b", "pre_existing_cards_unchanged"),
+
+        ("T", "give a second known_traps entry an existing trap number",
+         [KNOWN_TRAPS], _duplicate_trap_number,
+         "corrections", "known_traps_headings_unique"),
     ]
+
+
+KNOWN_TRAPS = REPO / "meoclass1" / "known_traps.md"
+
+
+def _duplicate_trap_number():
+    """Renumber the LAST heading to the number before it: still one heading
+    per entry and nothing deleted, only an ambiguous identity."""
+    raw = KNOWN_TRAPS.read_bytes()
+    nums = re.findall(rb"^###\s+(\d+)\.", raw, re.M)
+    last, prev = nums[-1], nums[-2]
+    i = raw.rindex(b"### " + last + b".")
+    KNOWN_TRAPS.write_bytes(raw[:i] + b"### " + prev + b"." + raw[i + len(last) + 5:])
 
 
 def _retarget_q25_file(d):
