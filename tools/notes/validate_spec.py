@@ -10,6 +10,12 @@ TOP = ['part', 'prev_part', 'prev_pages', 'pages', 'title_topics',
        'meta_description', 'page_sub', 'qb_links', 'topics']
 TOPIC = ['n', 'toc', 'title', 'tag', 'pages', 'examiner',
          'definition', 'why', 'qa', 'exam', 'memory', 'refs']
+# Source-page series (spec["series"]["profile"] == "source-pages", e.g. LOHAN):
+# concise by design, so written-exam and memory blocks appear only where they
+# earn their place; every topic must instead cite its source PDF pages.
+TOPIC_SRC = ['n', 'toc', 'title', 'tag', 'pages', 'definition', 'qa', 'refs']
+# examiner is optional here: shown only when MIW's examiner corpus supports it.
+VERIFY_SOFT_MAX = 450  # chars; candidate-facing notes stay short, detail lives in the register
 
 
 def main(path):
@@ -27,11 +33,20 @@ def main(path):
         if k not in d:
             errs.append('missing top-level key: %s' % k)
     ns = []
+    src = (d.get('series') or {}).get('profile') == 'source-pages'
     for t in d.get('topics', []):
         ns.append(t.get('n'))
-        for k in TOPIC:
+        for k in (TOPIC_SRC if src else TOPIC):
             if k not in t:
                 errs.append('topic %s: missing key %s' % (t.get('n'), k))
+        if src:
+            if not t.get('qa'):
+                errs.append('topic %s: no oral Q&A item' % t.get('n'))
+            if 'PDF pp.' not in str(t.get('pages', '')) and 'PDF p.' not in str(t.get('pages', '')):
+                errs.append('topic %s: pages must cite source "PDF pp. a–b"' % t.get('n'))
+            if len(t.get('verify', '')) > VERIFY_SOFT_MAX:
+                print('  [WARN ] topic %s verify note %d chars (> %d)' % (t.get('n'), len(t['verify']), VERIFY_SOFT_MAX))
+            continue
         if len(t.get('qa', [])) < 3:
             errs.append('topic %s: fewer than 3 Q&A items' % t.get('n'))
         if len(t.get('exam', [])) < 3:

@@ -64,6 +64,11 @@ SERIES_SIMON = "SIMON_ORAL_NOTES"
 SERIES_MGMT = "ENGINEERING_MANAGEMENT_NOTES"
 SERIES_CURRENT = "CURRENT_TOPICS"
 SERIES_WA = "WRITTEN_ANSWER_SERIES"
+# LOHAN source-pages series (notes/lohan-*). A distinct source series, not a
+# part of the Uday management series: it shares the topic-block markup but not
+# the provenance, so it must never inherit SERIES_MGMT's code, manifest key or
+# unit-id namespace.
+SERIES_LOHAN = "LOHAN_SOURCE_NOTES"
 
 ROLE_SUBSTANTIVE = "SUBSTANTIVE_NOTES"
 ROLE_NAVIGATION = "NAVIGATION_INDEX"
@@ -71,12 +76,14 @@ ROLE_OUT_OF_SCOPE = "OUT_OF_SCOPE_WRITTEN_SAMPLE"
 ROLE_UNCLASSIFIED = "UNCLASSIFIED"
 
 SERIES_CODE = {SERIES_SIMON: "SIMON", SERIES_MGMT: "MGMT",
-               SERIES_CURRENT: "CURR", SERIES_WA: "WA"}
+               SERIES_CURRENT: "CURR", SERIES_WA: "WA",
+               SERIES_LOHAN: "LOHAN"}
 
 _MANIFEST_SERIES = {
     "simon-notes": SERIES_SIMON,
     "engineering-management-notes": SERIES_MGMT,
     "current-topics": SERIES_CURRENT,
+    "lohan-notes": SERIES_LOHAN,
 }
 
 
@@ -114,6 +121,13 @@ def classify_files():
             row = (None, ROLE_NAVIGATION, NAVIGATION_PAGES[n])
         elif n in OUT_OF_SCOPE_PAGES:
             row = (None, ROLE_OUT_OF_SCOPE, OUT_OF_SCOPE_PAGES[n])
+        elif n in notes_map and notes_map[n] not in _MANIFEST_SERIES:
+            # A manifest series this model does not know is surfaced as an
+            # unclassified page (and so trips the classification control)
+            # rather than raising KeyError at import time.
+            row = (None, ROLE_UNCLASSIFIED,
+                   "manifest series key %r has no Oral classification"
+                   % notes_map[n])
         elif n in notes_map:
             row = (_MANIFEST_SERIES[notes_map[n]], ROLE_SUBSTANTIVE,
                    "claimed by notes_content_index.json")
@@ -312,6 +326,18 @@ def _mgmt_units(html):
     return out
 
 
+def _lohan_units(html):
+    """lohan-notes-pN: one unit per topic block, plus its Q&A children.
+
+    LOHAN pages are written to the management-note topic-block dialect, so the
+    parse is shared with _mgmt_units. The series is nevertheless dispatched
+    through its own entry so identity (series code, unit-id namespace,
+    manifest key) stays LOHAN's and the two series can diverge in markup
+    without a silent mis-parse.
+    """
+    return _mgmt_units(html)
+
+
 def _wa_units(html):
     """WA*: one unit per section heading run, plus its exam prompts."""
     out = []
@@ -379,6 +405,7 @@ DIALECT = {
     SERIES_MGMT: _mgmt_units,
     SERIES_WA: _wa_units,
     SERIES_CURRENT: _current_units,
+    SERIES_LOHAN: _lohan_units,
 }
 
 

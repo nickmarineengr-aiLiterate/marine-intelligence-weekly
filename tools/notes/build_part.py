@@ -9,6 +9,11 @@ Assembles meoclass1/oralnotes/miw-notes-mgmt-p<N>.html from:
 Usage:
   python build_part.py <spec.json> [-o <outfile>] [--gated]
 
+Series: a spec may carry an optional "series" object (see SERIES_DEFAULT) to
+build another page-range notes series (e.g. lohan-notes) on the same shell.
+Without it the output is the Engineering Management series, byte-for-byte as
+before.
+
 Design rule: the shell (CSS, watermark, topbar, scripts) is NEVER retyped —
 it is lifted from the reference Part and only its variable text is rewritten.
 This keeps per-Part authoring cost to the topic content alone.
@@ -23,6 +28,33 @@ GATE = '<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace(
 GATE_STUB = '<!-- GATE SCRIPT STRIPPED FOR REVIEW COPY -->'
 BASE = 'https://marineintelligenceweekly.com'
 NOTES_DIR = BASE + '/meoclass1/oralnotes/'
+
+# Engineering Management ("Uday") series = historical behaviour. Any key may be
+# overridden by spec["series"]. attribution/footer None => legacy Uday text.
+SERIES_DEFAULT = {
+    'file_prefix': 'miw-notes-mgmt-p',
+    'title_fmt': 'MIW Engineering Management Notes — Part {p} | MEO Class 1 | {topics}',
+    'badge_fmt': 'Engineering Management · Part {p} of {total_parts}',
+    'h1_fmt': 'Engineering Management Notes — Part {p}',
+    'subject': 'Engineering Management',
+    'pages_label': 'Pages',
+    'total_parts': 31,
+    'total_pages': 768,
+    'version_prefix': 'Notes-p',
+    'why_head': '⚓ Why It Matters (CE Perspective)',
+    'examiner_label': 'Examiner',
+    'attribution': None,
+    'footer': None,
+    # False hides the per-topic and header source-page citations (the page
+    # ranges stay in the spec for provenance). Uday keeps the default True.
+    'show_source_pages': True,
+}
+
+
+def series_of(sp):
+    s = dict(SERIES_DEFAULT)
+    s.update(sp.get('series') or {})
+    return s
 
 
 def esc(s):
@@ -58,7 +90,7 @@ def _body_nodes(nodes, out):
             raise SystemExit('Unknown body node: %r' % nd)
 
 
-def build_topic(part, t):
+def build_topic(part, t, ser=SERIES_DEFAULT):
     n = t['n']
     tid = 'topic-p%d-%d' % (part, n)
     o = []
@@ -69,11 +101,15 @@ def build_topic(part, t):
     o.append('      <h2 class="topic-title">%s</h2>' % esc(t['title']))
     o.append('      <div class="topic-meta">')
     o.append('        <span class="topic-tag">%s</span>' % esc(t['tag']))
-    o.append('        <span class="topic-pages">%s</span>' % esc(t['pages']))
-    o.append('        <span class="topic-examiner">Examiner: %s</span>' % esc(t['examiner']))
+    if ser.get('show_source_pages', True):
+        o.append('        <span class="topic-pages">%s</span>' % esc(t['pages']))
+    if t.get('examiner'):
+        o.append('        <span class="topic-examiner">%s: %s</span>'
+                 % (ser['examiner_label'], esc(t['examiner'])))
     freq = t.get('freq', 'high')
-    label = {'high': '⭐ High Frequency', 'medium': '◆ Medium Frequency'}[freq]
-    o.append('        <span class="freq-%s">%s</span>' % (freq, label))
+    if freq:  # null/"" = no evidence-based frequency, so no badge
+        label = {'high': '⭐ High Frequency', 'medium': '◆ Medium Frequency'}[freq]
+        o.append('        <span class="freq-%s">%s</span>' % (freq, label))
     o.append('      </div>')
     o.append('    </div>')
     o.append('  </div>')
@@ -89,12 +125,13 @@ def build_topic(part, t):
     o.append('  <p class="notes-body">%s</p>' % esc(t['definition']))
     o.append('')
 
-    o.append('  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>')
-    o.append('  <ul class="notes-list">')
-    for li in t['why']:
-        o.append('    <li>%s</li>' % esc(li))
-    o.append('  </ul>')
-    o.append('')
+    if t.get('why'):
+        o.append('  <div class="section-head">%s</div>' % ser['why_head'])
+        o.append('  <ul class="notes-list">')
+        for li in t['why']:
+            o.append('    <li>%s</li>' % esc(li))
+        o.append('  </ul>')
+        o.append('')
 
     if t.get('timeline'):
         o.append('  <div class="section-head">📅 Historical Background</div>')
@@ -120,8 +157,9 @@ def build_topic(part, t):
 
     if t.get('ce_tip'):
         c = t['ce_tip']
-        o.append('  <div class="ce-tip"><strong>🎓 CE Oral Tip (%s):</strong> %s</div>'
-                 % (esc(c.get('examiner', t['examiner'])), esc(c['text'])))
+        who = c.get('examiner', t.get('examiner'))
+        o.append('  <div class="ce-tip"><strong>🎓 CE Oral Tip%s:</strong> %s</div>'
+                 % (' (%s)' % esc(who) if who else '', esc(c['text'])))
         o.append('')
 
     o.append('  <div class="section-head">🎯 Oral Q&amp;A</div>')
@@ -133,22 +171,24 @@ def build_topic(part, t):
     o.append('  </div>')
     o.append('')
 
-    o.append('  <div class="exam-focus-box">')
-    o.append('    <div class="exam-focus-head">✍ Written Exam Focus</div>')
-    for marks, q in t['exam']:
-        o.append('    <div class="exam-q"><span class="marks-badge">%s</span>%s</div>'
-                 % (esc(marks), esc(q)))
-    o.append('  </div>')
-    o.append('')
+    if t.get('exam'):
+        o.append('  <div class="exam-focus-box">')
+        o.append('    <div class="exam-focus-head">✍ Written Exam Focus</div>')
+        for marks, q in t['exam']:
+            o.append('    <div class="exam-q"><span class="marks-badge">%s</span>%s</div>'
+                     % (esc(marks), esc(q)))
+        o.append('  </div>')
+        o.append('')
 
-    o.append('  <div class="memory-box">')
-    o.append('    <div class="memory-head">🧠 Memory Box</div>')
-    o.append('    <ul class="memory-list">')
-    for li in t['memory']:
-        o.append('      <li>%s</li>' % esc(li))
-    o.append('    </ul>')
-    o.append('  </div>')
-    o.append('')
+    if t.get('memory'):
+        o.append('  <div class="memory-box">')
+        o.append('    <div class="memory-head">🧠 Memory Box</div>')
+        o.append('    <ul class="memory-list">')
+        for li in t['memory']:
+            o.append('      <li>%s</li>' % esc(li))
+        o.append('    </ul>')
+        o.append('  </div>')
+        o.append('')
 
     if t.get('deep_dive'):
         d = t['deep_dive']
@@ -171,10 +211,10 @@ def build_topic(part, t):
 
     o.append('  <div class="topic-footer">')
     o.append('    <div class="correction-link">Found an error? <a href="mailto:contactus@'
-             'marineintelligenceweekly.com?subject=Notes-p%d · Topic %d · Correction Required">'
-             'Report correction</a></div>' % (part, n))
-    o.append('    <div class="topic-version">Notes-p%d · P%d-T%d · v%s</div>'
-             % (part, part, n, t.get('version', '1.0')))
+             'marineintelligenceweekly.com?subject=%s%d · Topic %d · Correction Required">'
+             'Report correction</a></div>' % (ser['version_prefix'], part, n))
+    o.append('    <div class="topic-version">%s%d · P%d-T%d · v%s</div>'
+             % (ser['version_prefix'], part, part, n, t.get('version', '1.0')))
     o.append('  </div>')
     o.append('</div>')
     return '\n'.join(o)
@@ -191,41 +231,46 @@ def _sub(pat, repl, s, label):
 
 def render_shell(head, tail, sp):
     p = sp['part']
-    fname = 'miw-notes-mgmt-p%d.html' % p
+    ser = series_of(sp)
+    fname = '%s%d.html' % (ser['file_prefix'], p)
     topics = sp['topics']
+    total_pages = sp.get('total_pages', ser['total_pages'])
+    fmt = dict(p=p, topics=esc(sp['title_topics']), total_parts=ser['total_parts'],
+               pages=sp['pages'], prev=sp.get('prev_part'), prev_pages=sp.get('prev_pages'),
+               total_pages=total_pages)
 
     head = _sub(r'<title>.*?</title>',
-                '<title>MIW Engineering Management Notes — Part %d | MEO Class 1 | %s</title>'
-                % (p, esc(sp['title_topics'])), head, 'title')
+                '<title>%s</title>' % ser['title_fmt'].format(**fmt), head, 'title')
     head = _sub(r'(<meta name="description" content=").*?(">)',
                 '<meta name="description" content="%s">' % esc(sp['meta_description']),
                 head, 'description')
     head = _sub(r'(<link rel="canonical" href=").*?(">)',
                 '<link rel="canonical" href="%s%s">' % (NOTES_DIR, fname), head, 'canonical')
     head = _sub(r'(<span class="notes-badge-text">).*?(</span>)',
-                '<span class="notes-badge-text">Engineering Management · Part %d of 31</span>' % p,
+                '<span class="notes-badge-text">%s</span>' % ser['badge_fmt'].format(**fmt),
                 head, 'notes-badge-text')
     head = _sub(r'<h1 class="page-title">.*?</h1>',
-                '<h1 class="page-title">Engineering Management Notes — Part %d</h1>' % p,
+                '<h1 class="page-title">%s</h1>' % ser['h1_fmt'].format(**fmt),
                 head, 'h1')
     head = _sub(r'<p class="page-sub">.*?</p>',
                 '<p class="page-sub">%s</p>' % esc(sp['page_sub']), head, 'page-sub')
 
     meta = ['<div class="header-meta">']
-    meta.append('            <span class="header-meta-item"><strong>Pages:</strong> %s of %s</span>'
-                % (sp['pages'], sp.get('total_pages', 768)))
+    if ser['show_source_pages']:
+        meta.append('            <span class="header-meta-item"><strong>%s:</strong> %s of %s</span>'
+                    % (ser['pages_label'], sp['pages'], total_pages))
     meta.append('            <span class="header-meta-item"><strong>Topics:</strong> %d '
                 '(local P%d-T1–P%d-T%d — see note below)</span>'
                 % (len(topics), p, p, len(topics)))
     meta.append('            <span class="header-meta-item"><strong>Access:</strong> Subscriber Only</span>')
-    meta.append('            <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>')
+    meta.append('            <span class="header-meta-item"><strong>Subject:</strong> %s</span>' % ser['subject'])
     meta.append('            <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>')
     meta.append('        </div>')
     head = _sub(r'<div class="header-meta">.*?</div>\s*(?=<div class="attribution-strip">)',
                 '\n'.join(meta) + '\n        ', head, 'header-meta')
 
     prev = sp.get('prev_part')
-    seq = ('Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded '
+    seq = ser['attribution'].format(**fmt) if ser['attribution'] is not None else ('Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded '
            'and verified by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly. '
            '<strong>Sequencing note:</strong> Part %d (pp. %s) continues directly from Part %d (pp. %s). '
            'Topic numbering below uses local <strong>Part %d</strong> badges (not a continuous global '
@@ -244,10 +289,11 @@ def render_shell(head, tail, sp):
     sb.append('    <div class="toc-head">Navigate</div>')
     sb.append('    <a class="toc-link" href="%s">← Notes Index</a>' % NOTES_DIR)
     if prev:
-        sb.append('    <a class="toc-link" href="miw-notes-mgmt-p%d.html">← Part %d</a>' % (prev, prev))
+        sb.append('    <a class="toc-link" href="%s%d.html">← Part %d</a>'
+                  % (ser['file_prefix'], prev, prev))
     if sp.get('next_part'):
-        sb.append('    <a class="toc-link" href="miw-notes-mgmt-p%d.html">Part %d →</a>'
-                  % (sp['next_part'], sp['next_part']))
+        sb.append('    <a class="toc-link" href="%s%d.html">Part %d →</a>'
+                  % (ser['file_prefix'], sp['next_part'], sp['next_part']))
     sb.append('    <div class="toc-divider"></div>')
     sb.append('    <div class="qb-sidebar-box">')
     sb.append('        <div class="qb-sidebar-title">🔗 Related QB Files</div>')
@@ -264,6 +310,15 @@ def render_shell(head, tail, sp):
         head = head.replace(GATE, GATE_STUB)
 
     foot = ['<div class="page-footer">']
+    if ser['footer'] is not None:
+        foot += ['    ' + line.format(**fmt) for line in ser['footer']]
+        foot.append('    Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject='
+                    '%s%d · Correction Required">Contact us</a> ·' % (ser['version_prefix'], p))
+        foot.append('    <a href="%s">← Back to Notes Index</a>' % NOTES_DIR)
+        foot.append('</div>')
+        tail = _sub(r'<div class="page-footer">.*?</div>\s*(?=<script>)',
+                    '\n'.join(foot) + '\n\n', tail, 'page-footer')
+        return head, tail
     foot.append('    Part %d of 31 · Pages %s of %s · Engineering Management Notes — '
                 'Marine Intelligence Weekly<br>' % (p, sp['pages'], sp.get('total_pages', 768)))
     foot.append('    Originally compiled by Uday Sankar S., Anglo-Eastern. Transcribed, expanded and '
@@ -298,11 +353,11 @@ def main():
         bar = '<!-- ' + '=' * 74 + ' -->'
         body.append('\n%s\n<!-- TOPIC %d — %s -->\n%s\n'
                     % (bar, t['n'], t.get('toc', t['title']).upper(), bar))
-        body.append(build_topic(sp['part'], t))
+        body.append(build_topic(sp['part'], t, series_of(sp)))
     out = head + '\n'.join(body) + tail
 
     dest = a.out or os.path.join(HERE, '..', '..', 'meoclass1', 'oralnotes',
-                                 'miw-notes-mgmt-p%d.html' % sp['part'])
+                                 '%s%d.html' % (series_of(sp)['file_prefix'], sp['part']))
     dest = os.path.abspath(dest)
     with open(dest, 'w', encoding='utf-8', newline='\n') as f:
         f.write(out)

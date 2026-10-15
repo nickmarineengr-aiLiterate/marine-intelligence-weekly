@@ -300,7 +300,7 @@ def validate(status: dict, node_keys: set, pages: dict) -> list:
 
 def main(argv=None) -> int:
     reg, errors = V.load_registry()
-    node_keys = {r['source_node_key'] for r in reg['source_nodes']}
+    node_keys = {r['source_node_key'] for r in reg['source_nodes'] if r['series'] == V.SERIES}  # status cores bind Uday nodes only
     pages = load_pages()
     errors = [e for e in errors if e[0].startswith('STATUS') or e[0] == 'MISSING_FILE'] + validate(reg['status'], node_keys, pages)
     n_markers = sum(len(find_markers(h)) for h in pages.values())

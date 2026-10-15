@@ -95,5 +95,30 @@ export function tracked() {
 }
 export const TRACKED = tracked();
 
-/** The served set: tracked files that survive every exclusion. */
-export const KEEP = TRACKED.filter((f) => !isIgnored(f, PATTERNS));
+// O-3 (private-content delivery, Founder FD-P1 15 Oct 2026). The production build
+// (vercel.json buildCommand -> o3/assemble-protected.mjs) changes the served set in two
+// exact ways, both fixed by the public pin:
+//   * it MOUNTS the pin's deploy_files under the pin's mount (gated pages that are never
+//     tracked here), or fails the build;
+//   * it REMOVES o3/ (the build step and the pin) from the output.
+// Replacements (the pin's replace_files) swap bytes of files already served, so the path
+// set is unchanged.
+export const BUILD_ONLY_PREFIX = "o3/";
+export const PIN_REL = "o3/lohan.pin.json";
+export const PROTECTED_PIN = fs.existsSync(path.join(ROOT, PIN_REL))
+  ? JSON.parse(fs.readFileSync(path.join(ROOT, PIN_REL), "utf8")) : null;
+export const PROTECTED_MOUNTS = PROTECTED_PIN
+  ? PROTECTED_PIN.deploy_files.map((f) => PROTECTED_PIN.mount + f.path) : [];
+
+/** SERVED: every path production serves: tracked files that survive every exclusion, minus
+ *  the build-only o3/, plus the pin-declared protected mounts. Use it for path resolution. */
+export const SERVED = [
+  ...TRACKED.filter((f) => !isIgnored(f, PATTERNS) && !f.startsWith(BUILD_ONLY_PREFIX)),
+  ...PROTECTED_MOUNTS.filter((f) => !TRACKED.includes(f)),
+];
+/** KEEP: the served files whose bytes are in THIS checkout. In a public checkout the protected
+ *  mounts are absent (PROTECTED_CONTENT_UNAVAILABLE: their bytes are verified by the pinned
+ *  build and by the private qualification); with the private overlay, or after the production
+ *  mount, they are present and every content audit reads them. */
+export const KEEP = SERVED.filter((f) => !PROTECTED_MOUNTS.includes(f) || fs.existsSync(path.join(ROOT, f)));
+export const PROTECTED_UNAVAILABLE = PROTECTED_MOUNTS.filter((f) => !fs.existsSync(path.join(ROOT, f)));

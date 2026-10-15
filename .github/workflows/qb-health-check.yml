@@ -24,3 +24,64 @@ jobs:
           BREVO_SMTP_KEY: ${{ secrets.BREVO_SMTP_KEY }}
           QB_HEALTH_EMAIL_TO: ${{ secrets.QB_HEALTH_EMAIL_TO }}
         run: python3 meoclass1/qb_health_check.py
+
+  # Node security suite: every tools/security/*.test.mjs, including regulatory_facts
+  # (dated facts on published pages, e.g. the resumed MEPC/ES.2) and link_integrity.
+  # Independent of the QB job above: no secrets, no email, its own pass/fail.
+  #
+  # Runtime: Node 24 (package.json engines "24.x"); built-in modules only, so no
+  # npm install. The tests also call `git ls-files` and `python3`, both present on
+  # ubuntu-latest. Locally: node --test "tools/security/*.test.mjs" (Node >= 21
+  # expands the quoted glob itself; never pass the directory, Node 24 rejects it).
+  #
+  # A suite that did not run is never reported as a pass: missing Node, a missing
+  # required test file or zero executed tests fail the job; skipped/todo tests are
+  # listed as warnings and in the summary, never counted as passes.
+  node-security-suite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Run Node security suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v node >/dev/null 2>&1; then
+            echo "::error::Node.js is not available: the security suite did NOT run (not a pass)"
+            exit 1
+          fi
+          echo "node $(node --version)"
+          for req in tools/security/regulatory_facts.test.mjs tools/security/link_integrity.test.mjs; do
+            [ -f "$req" ] || { echo "::error::required security test $req is missing"; exit 1; }
+          done
+          shopt -s nullglob
+          files=(tools/security/*.test.mjs)
+          echo "${#files[@]} test files"
+          node --test --test-reporter=tap "${files[@]}" | tee node-security.tap
+          count() { sed -n "s/^# $1 \([0-9][0-9]*\)$/\1/p" node-security.tap | tail -1; }
+          tests=$(count tests); pass=$(count pass); fail=$(count fail)
+          skipped=$(count skipped); todo=$(count todo)
+          if [ "${tests:-0}" -eq 0 ] || [ "${pass:-0}" -eq 0 ]; then
+            echo "::error::no security tests executed: the suite did NOT run (not a pass)"
+            exit 1
+          fi
+          # Node reports a file that defines no tests as one passing top-level test named
+          # after the file; that is a file that ran nothing, not a pass.
+          empty=$(grep -E '^ok [0-9]+ - .*\.test\.mjs$' node-security.tap || true)
+          if [ -n "$empty" ]; then
+            echo "::error::security test file(s) executed no tests (not a pass):"
+            echo "$empty"
+            exit 1
+          fi
+          if [ "${skipped:-0}" -gt 0 ] || [ "${todo:-0}" -gt 0 ]; then
+            echo "::warning::${skipped:-0} skipped / ${todo:-0} todo security test(s), reported and not counted as passes"
+            grep -E '# (SKIP|TODO)' node-security.tap || true
+          fi
+          echo "Node security suite: ${pass} pass / ${fail:-0} fail / ${skipped:-0} skipped / ${todo:-0} todo of ${tests} tests (${#files[@]} files)" | tee -a "$GITHUB_STEP_SUMMARY"

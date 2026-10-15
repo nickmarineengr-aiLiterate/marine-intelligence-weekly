@@ -56,7 +56,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { ROOT, KEEP, TRACKED } from "./deploy_set.mjs";
+import { ROOT, SERVED as KEEP, TRACKED } from "./deploy_set.mjs";
 
 // --- entitlement policy (mirrors api/_lib/routes.js; kept literal so the
 //     scanner has no runtime dependency on the edge bundle) ---------------

@@ -542,6 +542,106 @@ ok("the designator alias rule satisfies an emphasis-capitalised word",
 
 
 # ==========================================================================
+# 9. LOHAN source series - a distinct series, never a canonical or Uday unit
+#
+# The fixture block runs against a scratch notes folder so the LOHAN controls
+# are non-vacuous before the production manifest names `lohan-notes`; the
+# real-tree block binds the same properties to the committed pages once it does.
+# ==========================================================================
+import tempfile  # noqa: E402
+
+_TB = ('<div class="topic-block" id="t1" data-kw="x"><span class="topic-pages">'
+       'p1</span><h2 class="topic-title">Fixture topic</h2><div class="qa-item">'
+       '<div class="qa-q">What is it?</div><div class="qa-a">An answer.</div>'
+       '</div></div>')
+
+
+def _fixture(manifest_series, pages):
+    """(classify rows, units) for a scratch notes folder, globals restored."""
+    saved = (N.NOTES_DIR, N.NOTES_MANIFEST, N.WRITTEN_MANIFEST)
+    with tempfile.TemporaryDirectory(prefix="oral-lohan-fixture-") as td:
+        d = Path(td)
+        for name, body in pages.items():
+            (d / name).write_text("<html><body>" + body + "</body></html>",
+                                  encoding="utf-8")
+        (d / "notes_content_index.json").write_text(json.dumps({"series": {
+            k: {"files": {f: {} for f in v}}
+            for k, v in manifest_series.items()}}), encoding="utf-8")
+        N.NOTES_DIR = d
+        N.NOTES_MANIFEST = d / "notes_content_index.json"
+        N.WRITTEN_MANIFEST = d / "written_content_index.json"
+        try:
+            return N.classify_files(), N.build_units()
+        finally:
+            N.NOTES_DIR, N.NOTES_MANIFEST, N.WRITTEN_MANIFEST = saved
+
+
+_FX_ROWS, _FX_UNITS = _fixture(
+    {"lohan-notes": ["lohan-notes-p3.html"],
+     "engineering-management-notes": ["miw-notes-mgmt-p3.html"],
+     "future-series": ["future-notes-p1.html"]},
+    {"lohan-notes-p3.html": _TB, "miw-notes-mgmt-p3.html": _TB,
+     "future-notes-p1.html": _TB})
+_FX = {r["file"]: r for r in _FX_ROWS}
+_FX_U = {}
+for _u in _FX_UNITS:
+    _FX_U.setdefault(_u["file"], []).append(_u)
+
+ok("LOHAN is a distinct series with its own code and manifest key",
+   N.SERIES_LOHAN not in (N.SERIES_SIMON, N.SERIES_MGMT, N.SERIES_CURRENT,
+                          N.SERIES_WA)
+   and N.SERIES_CODE[N.SERIES_LOHAN] == "LOHAN"
+   and N._MANIFEST_SERIES.get("lohan-notes") == N.SERIES_LOHAN
+   and len(set(N.SERIES_CODE.values())) == len(N.SERIES_CODE))
+ok("a lohan-notes manifest page classifies as SUBSTANTIVE LOHAN",
+   _FX["lohan-notes-p3.html"]["series"] == N.SERIES_LOHAN
+   and _FX["lohan-notes-p3.html"]["role"] == N.ROLE_SUBSTANTIVE,
+   str(_FX["lohan-notes-p3.html"]))
+ok("an engineering-management page keeps its MGMT classification",
+   _FX["miw-notes-mgmt-p3.html"]["series"] == N.SERIES_MGMT,
+   str(_FX["miw-notes-mgmt-p3.html"]))
+ok("a manifest series the model does not know is UNCLASSIFIED, not a crash",
+   _FX["future-notes-p1.html"]["role"] == N.ROLE_UNCLASSIFIED,
+   str(_FX["future-notes-p1.html"]))
+ok("LOHAN topic blocks parse to a topic and its Q&A child",
+   [u["unit_level"] for u in _FX_U.get("lohan-notes-p3.html", [])]
+   == [N.LEVEL_TOPIC, N.LEVEL_QA], str(_FX_U.get("lohan-notes-p3.html")))
+_lid = [u["note_unit_id"] for u in _FX_U.get("lohan-notes-p3.html", [])]
+_mid = [u["note_unit_id"] for u in _FX_U.get("miw-notes-mgmt-p3.html", [])]
+ok("LOHAN and MGMT units of identical markup and page number get disjoint ids",
+   bool(_lid) and bool(_mid) and not set(_lid) & set(_mid),
+   "%s / %s" % (_lid, _mid))
+ok("LOHAN unit ids carry the NOTE-LOHAN- namespace and MGMT ids do not",
+   all(i.startswith("NOTE-LOHAN-") for i in _lid)
+   and all(i.startswith("NOTE-MGMT-") for i in _mid), "%s / %s" % (_lid, _mid))
+ok("a LOHAN unit id is not canonical-shaped",
+   not any(N.is_canonical_shaped(i) for i in _lid))
+ok("every LOHAN unit records series LOHAN_SOURCE_NOTES",
+   all(u["series"] == N.SERIES_LOHAN for u in _FX_U.get("lohan-notes-p3.html", [])))
+
+# real tree: binds once notes_content_index.json names lohan-notes.
+_lohan_disk = sorted(p.name for p in N.NOTES_DIR.glob("lohan-notes-p*.html"))
+_lohan_rows = [r for r in FILES if r["file"].startswith("lohan-notes-p")]
+ok("every lohan-notes-pN page on disk classifies as SUBSTANTIVE LOHAN",
+   all(r["series"] == N.SERIES_LOHAN and r["role"] == N.ROLE_SUBSTANTIVE
+       for r in _lohan_rows) and len(_lohan_rows) == len(_lohan_disk),
+   str([r["file"] for r in _lohan_rows if r["series"] != N.SERIES_LOHAN]))
+ok("no page outside the lohan-notes-pN file family is classified LOHAN",
+   all(r["file"].startswith("lohan-notes-p") for r in FILES
+       if r["series"] == N.SERIES_LOHAN))
+_lohan_units = [u for u in UNITS if u["series"] == N.SERIES_LOHAN]
+ok("every LOHAN unit id is in the NOTE-LOHAN- namespace and only those are",
+   all(u["note_unit_id"].startswith("NOTE-LOHAN-") for u in _lohan_units)
+   and not any(u["note_unit_id"].startswith("NOTE-LOHAN-")
+               for u in UNITS if u["series"] != N.SERIES_LOHAN))
+_FORBIDDEN_ID_TOKENS = {"MERGE", "PCT", "CAND", "CANON"}
+ok("no note unit id carries a MERGE / PCT / CAND / CANON token",
+   not [u["note_unit_id"] for u in UNITS
+        if _FORBIDDEN_ID_TOKENS & set(u["note_unit_id"].split("-"))],
+   str([u["note_unit_id"] for u in UNITS
+        if _FORBIDDEN_ID_TOKENS & set(u["note_unit_id"].split("-"))][:3]))
+
+# ==========================================================================
 if __name__ == "__main__":
     for f in FAILURES:
         print("FAIL  " + f)

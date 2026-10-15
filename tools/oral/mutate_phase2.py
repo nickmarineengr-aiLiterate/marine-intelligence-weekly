@@ -16,6 +16,7 @@ temp directory obtained at run time, never a hardcoded path.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -454,6 +455,37 @@ def c_family_head_cancels_conflict(files):
     p.write_text(s, encoding="utf-8", newline="\n")
 
 
+def c_lohan_manifest_key_dropped(files):
+    """M30 - the `lohan-notes` manifest key stops mapping to a series, so the
+    LOHAN pages fall out of classification."""
+    p = files / "oral_notes.py"
+    s = p.read_text(encoding="utf-8")
+    assert '    "lohan-notes": SERIES_LOHAN,\n' in s
+    s = s.replace('    "lohan-notes": SERIES_LOHAN,\n', "")
+    p.write_text(s, encoding="utf-8", newline="\n")
+
+
+def c_lohan_series_code_collides(files):
+    """M31 - LOHAN takes the management series code, so a LOHAN unit becomes
+    indistinguishable from an Uday unit of the same page number."""
+    p = files / "oral_notes.py"
+    s = p.read_text(encoding="utf-8")
+    assert '               SERIES_LOHAN: "LOHAN"}' in s
+    s = s.replace('               SERIES_LOHAN: "LOHAN"}',
+                  '               SERIES_LOHAN: "MGMT"}')
+    p.write_text(s, encoding="utf-8", newline="\n")
+
+
+def c_lohan_dialect_empty(files):
+    """M32 - the LOHAN dialect yields no units, so classified pages contribute
+    nothing to the semantic universe."""
+    p = files / "oral_notes.py"
+    s = p.read_text(encoding="utf-8")
+    assert "    return _mgmt_units(html)\n" in s
+    s = s.replace("    return _mgmt_units(html)\n", "    return []\n")
+    p.write_text(s, encoding="utf-8", newline="\n")
+
+
 def _me_notes_patch(files, name, old, new):
     p = files / name
     s = p.read_text(encoding="utf-8")
@@ -489,7 +521,8 @@ def c_me_member_dropped(files):
 
 
 def c_me_member_invented(files):
-    """M30 - the tokeniser invents an ME member the text never names."""
+    """M38 (M30 in source commit 64e000a; M30 is LOHAN's here) - the tokeniser
+    invents an ME member the text never names."""
     _me_notes_patch(files, "oral_text.py",
                     '_slot_value(m.group(2)))\n    return out\n',
                     '_slot_value(m.group(2)))\n'
@@ -498,8 +531,9 @@ def c_me_member_invented(files):
 
 
 def c_me_family_conflict_ignored(files):
-    """M31 - the designator rule stops comparing the ME family, so an ME-GA
-    ask meets ME-GI-only Notes text."""
+    """M39 (M31 in source commit 64e000a; M31 is LOHAN's here) - the designator
+    rule stops comparing the ME family, so an ME-GA ask meets ME-GI-only Notes
+    text."""
     _me_notes_patch(files, "oral_text.py",
                     "    for key in set(fa) & set(fb):",
                     "    for key in (set(fa) & set(fb)) - {\"me\"}:")
@@ -521,15 +555,20 @@ CODE_MUTATIONS = [
      c_page_level_notes_matching),
     ("M16 disable the non-examiner name controls",
      c_disable_non_examiner_controls),
+    ("M30 the lohan-notes manifest key no longer classifies",
+     c_lohan_manifest_key_dropped),
+    ("M31 LOHAN unit ids collide with the MGMT namespace",
+     c_lohan_series_code_collides),
+    ("M32 the LOHAN dialect yields no units", c_lohan_dialect_empty),
     ("M27 ME-family Note unit given another series",
      c_note_unit_series_mislabelled, ME_RULE),
     ("M28 ME-family Note unit under a QB card URL",
      c_note_unit_under_qb_url, ME_RULE),
     ("M29 tokeniser drops an ME member it reads",
      c_me_member_dropped, ME_RULE),
-    ("M30 tokeniser invents an ME member",
+    ("M38 tokeniser invents an ME member",
      c_me_member_invented, ME_RULE),
-    ("M31 designator rule ignores the ME family",
+    ("M39 designator rule ignores the ME family",
      c_me_family_conflict_ignored, ME_RULE),
 ]
 
@@ -542,6 +581,26 @@ def run_controls(tools_dir):
     p = subprocess.run([sys.executable, str(tools_dir / "test_oral_controls.py")],
                        capture_output=True, text=True, env=env)
     return p.returncode, (p.stdout or "") + (p.stderr or "")
+
+
+def failed_controls(out):
+    """Names of the controls that reported FAIL in a controls run."""
+    return {l[6:].strip() for l in out.splitlines() if l.startswith("FAIL  ")}
+
+
+def _fails_on(fails, expect):
+    """True when a FAIL line in `fails` belongs to the control `expect` names."""
+    return any(("FAIL  " + f).startswith(expect) for f in fails)
+
+
+def _tree_digest(root):
+    """One digest over every file under root (path and bytes), caches excluded."""
+    h = hashlib.sha256()
+    for p in sorted(root.rglob("*")):
+        if p.is_file() and "__pycache__" not in p.parts:
+            h.update(p.relative_to(root).as_posix().encode("utf-8") + b"\0")
+            h.update(p.read_bytes())
+    return h.hexdigest()
 
 
 # --------------------------------------------------------------------------
@@ -562,25 +621,61 @@ def main():
             detail = "%s PASS / %s FAIL" % (m.group(1), m.group(2))
         elif code != 0:
             detail = "validator exited %d (fails closed)" % code
+        if any((OUT / n).read_bytes() != b for n, b in snap.items()):
+            caught = False
+            detail += " (target not restored)"
         rows.append((name, caught, detail))
 
     scratch = Path(tempfile.mkdtemp(prefix="oral-mutate-"))
+    # A control that already fails on the unmutated tree makes "exit != 0"
+    # vacuous: every code mutation would be reported caught. A code mutation
+    # counts as caught only when
+    #   - it changed the bytes of its scratch copy (an inert mutation proves
+    #     nothing);
+    #   - it adds a FAIL line the unmutated tree does not have (a bare non-zero
+    #     exit, a crash or a standing failure is not a catch);
+    #   - when it names a control, that control passes on the unmutated tree
+    #     and is among the new failures (an unrelated failure is not a catch);
+    # and the real tools tree must be byte-identical when the run ends.
+    base_code, base_out = run_controls(TOOLS)
+    base_fail = failed_controls(base_out)
+    print("baseline controls: exit %d, %d standing failure(s)"
+          % (base_code, len(base_fail)))
+    tools_digest = _tree_digest(TOOLS)
     try:
         for name, apply, *expect in CODE_MUTATIONS:
             work = scratch / re.sub(r"\W+", "_", name)
             shutil.copytree(TOOLS, work,
                             ignore=shutil.ignore_patterns("__pycache__"))
+            before = _tree_digest(work)
             apply(work)
+            effective = _tree_digest(work) != before
             code, out = run_controls(work)
+            new_fail = failed_controls(out) - base_fail
             m = re.search(r"(\d+) controls / (\d+) failures", out)
             detail = ("%s controls / %s failures" % (m.group(1), m.group(2))
                       if m else "exit %d" % code)
-            caught = code != 0 and all(e in out for e in expect)
-            if expect and not caught and code != 0:
-                detail += " (not by: %s)" % expect[0]
+            if m:
+                detail += " (%d new)" % len(new_fail)
+            standing = [e for e in expect if _fails_on(base_fail, e)]
+            missing = [e for e in expect if not _fails_on(new_fail, e)]
+            leaked = _tree_digest(TOOLS) != tools_digest
+            caught = (effective and code != 0 and bool(new_fail)
+                      and not standing and not missing and not leaked)
+            if leaked:
+                detail += " (real tools tree changed)"
+            elif not effective:
+                detail += " (mutation changed no bytes)"
+            elif standing:
+                detail += " (target already fails on baseline: %s)" % standing[0]
+            elif missing and code != 0:
+                detail += " (not by: %s)" % missing[0]
             rows.append((name, caught, detail))
+            for f in sorted(new_fail):
+                print("    %s new: %s" % (name.split()[0], f[:110]))
     finally:
         shutil.rmtree(scratch, ignore_errors=True)
+    tools_restored = _tree_digest(TOOLS) == tools_digest
 
     escapes = [n for n, caught, _ in rows if not caught]
     for name, caught, detail in rows:
@@ -591,7 +686,8 @@ def main():
     # the harness must leave the tree exactly as it found it
     code, _ = run_validator()
     print("post-run validator exit %d" % code)
-    return 1 if (escapes or code != 0) else 0
+    print("tools tree byte-identical after the run: %s" % tools_restored)
+    return 1 if (escapes or code != 0 or not tools_restored) else 0
 
 
 if __name__ == "__main__":

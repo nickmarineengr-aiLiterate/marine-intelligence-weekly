@@ -1,0 +1,42 @@
+name: Notes Release Gate
+
+# PROPOSED blocking gate (D-L4 governance, 11 Oct 2026). It blocks only once the Founder makes
+# "notes-release-gate" a required status check on main; until then it reports.
+# Mode "main": a PREVIEW_NONPUBLISHING LOHAN state, an unapproved study-material disclaimer, a
+# manifest/entitlement/gate defect or a failing Notes control fails the job. The private Founder
+# rights record is never in CI; the D-J pre-push run uses --mode release --rights-record locally.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "meoclass1/oralnotes/**"
+      - "tools/notes/**"
+      - "tools/oral/test_notes_controls.py"
+      - "api/_lib/routes.js"
+      - ".github/workflows/notes-release-gate.yml"
+  pull_request:
+    paths:
+      - "meoclass1/oralnotes/**"
+      - "tools/notes/**"
+      - "tools/oral/test_notes_controls.py"
+      - "api/_lib/routes.js"
+  workflow_dispatch: {}
+
+jobs:
+  notes-release-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Notes release gate (mode main)
+        run: python3 -X utf8 tools/notes/notes_release_gate.py --mode main --json notes-release-gate.json
+      - name: Summary
+        if: always()
+        run: |
+          [ -f notes-release-gate.json ] && python3 -c "import json;d=json.load(open('notes-release-gate.json'));print('Notes release gate:',d['verdict'])" >> "$GITHUB_STEP_SUMMARY" || echo "Notes release gate did NOT run (not a pass)" >> "$GITHUB_STEP_SUMMARY"

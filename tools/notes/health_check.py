@@ -23,6 +23,14 @@ VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link',
 # '🎯 Oral Q&' matches both the legacy raw-ampersand form and the escaped form.
 MANDATORY_SECTIONS = ['📖 Definition', '⚓ Why It Matters', '🎯 Oral Q&',
                       '✍ Written Exam Focus', '🧠 Memory Box', '📚 References']
+# Source-page series (LOHAN, "MIW MEO Class 1 Engineering Study Standard"): concise profile.
+# Founder decision 15 Oct 2026: the historical source is acknowledged only in disclaimer
+# clause 2, so a page must NOT display source-PDF page citations (FORBIDDEN_SOURCE). The
+# provenance itself stays mandatory in the private spec: validate_spec.py fails any topic
+# whose "pages" field does not cite its source pages.
+SOURCE_SERIES = ('lohan-notes-p',)
+MANDATORY_SOURCE = ['📖 Definition', '🎯 Oral Q&', '📚 References']
+FORBIDDEN_SOURCE = ['PDF p']
 
 
 class Balance(HTMLParser):
@@ -88,9 +96,13 @@ def check(path, require_gate=False):
     for blk in re.split(r'<div class="topic-block"', h)[1:]:
         tid = re.search(r'id="(topic-p\d+-\d+)"', blk)
         tid = tid.group(1) if tid else '?'
-        for s in MANDATORY_SECTIONS:
+        for s in (MANDATORY_SOURCE if name.startswith(SOURCE_SERIES) else MANDATORY_SECTIONS):
             if s not in blk:
                 errs.append('TOPIC %s: missing mandatory section "%s"' % (tid, s))
+        if name.startswith(SOURCE_SERIES):
+            for s in FORBIDDEN_SOURCE:
+                if s in blk:
+                    errs.append('TOPIC %s: displays a source citation "%s" (provenance lives in the private spec)' % (tid, s))
         if 'class="verify-note"' not in blk:
             warns.append('TOPIC %s: no verify-note (OK only if nothing needed correction)' % tid)
         if 'class="ce-tip"' not in blk:

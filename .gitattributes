@@ -23,3 +23,7 @@
 
 # Source-copy scans are binary and must never be line-ending converted.
 *.pdf    binary
+
+# Founder-approved text whose sha256 is pinned (tools/notes/policy/study_material_disclaimer.json):
+# checkout must never rewrite its bytes.
+tools/notes/policy/*.txt text eol=lf

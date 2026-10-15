@@ -27,7 +27,7 @@ HUB_HREF = 'href="miw-notes-mgmt-p22.html#topic-p22-3"'
 def real():
     reg, errors = V.load_registry()
     assert not errors, errors
-    keys = {r['source_node_key'] for r in reg['source_nodes']}
+    keys = {r['source_node_key'] for r in reg['source_nodes'] if r['series'] == V.SERIES}
     return reg['status'], keys, S.load_pages()
 
 
