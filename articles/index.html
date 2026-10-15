@@ -941,6 +941,41 @@ body {
   gap: 10px;
   flex: 1;
 }
+
+/* ── INTELLIGENCE BRIEF FEATURE CARD (B1, Oct 2026): image variant of .article-card-featured ── */
+.article-card-featured.brief-card {
+  grid-template-columns: minmax(0,5fr) minmax(0,6fr);
+  padding: 0;
+  gap: 0;
+  align-items: stretch;
+  border-top-color: var(--gold);
+}
+.brief-card-img { position: relative; overflow: hidden; min-height: 280px; background: #13243f; }
+.brief-card-img picture, .brief-card-img img { display: block; width: 100%; height: 100%; }
+.brief-card-img img { object-fit: cover; object-position: 50% 60%; }
+.brief-ai-label {
+  position: absolute; left: 0; bottom: 0;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #fff; background: rgba(13,27,42,0.82); padding: 5px 10px;
+}
+.brief-card-body { padding: clamp(24px,4vw,40px); display: flex; flex-direction: column; justify-content: center; }
+.brief-card .featured-series { color: var(--gold); font-size: 9px; }
+.brief-card .featured-series::before { background: var(--gold); }
+.brief-card .featured-title em { color: var(--gold); }
+.brief-card .featured-desc { margin-bottom: 16px; color: rgba(255,255,255,0.72); }
+.brief-topics { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.brief-topics li {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 8px; border: 1px solid rgba(201,168,76,0.45); color: rgba(255,255,255,0.75); border-radius: 1px;
+}
+.brief-card .featured-cta { align-self: flex-start; background: var(--gold); color: var(--navy); }
+.article-card-featured.brief-card:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.article-card-featured.brief-card:hover .featured-cta { background: #fff; }
+@media(max-width: 760px) {
+  .article-card-featured.brief-card { grid-template-columns: 1fr; }
+  .brief-card-img { min-height: 0; }
+  .brief-card-img picture, .brief-card-img img { height: auto; }
+}
 </style>
 </head>
 <body>
@@ -1004,18 +1039,21 @@ body {
   </div>
   <p class="section-desc">Short, primary-sourced briefings on related regulatory and technical developments. Unnumbered; not counted as issues.</p>
 
-  <a href="https://marineintelligenceweekly.com/articles/brief-2026-10-rules-for-machines-that-act.html" class="article-card-featured" style="margin-bottom: 28px;">
-    <div>
-      <div class="featured-series">
-        Intelligence Brief · IMO / Regulation · October 2026
-      </div>
+  <a href="https://marineintelligenceweekly.com/articles/brief-2026-10-rules-for-machines-that-act.html" class="article-card-featured brief-card" style="margin-bottom: 28px;" aria-label="Read the Intelligence Brief: The rules for machines that act are still being written (14 October 2026)">
+    <div class="brief-card-img">
+      <picture><source media="(max-width: 760px)" srcset="https://marineintelligenceweekly.com/articles/assets/brief-2026-10-rules-for-machines-that-act-bridge-800.webp" width="800" height="600"><img src="https://marineintelligenceweekly.com/articles/assets/brief-2026-10-rules-for-machines-that-act-bridge-1600.webp" width="1600" height="640" alt="Illustration: an officer of the watch, seen from behind in silhouette, at a ship&#x27;s bridge console at dusk, with the open sea beyond the bridge windows." decoding="async"></picture>
+      <span class="brief-ai-label">Illustrative AI-generated image</span>
+    </div>
+    <div class="brief-card-body">
+      <div class="featured-series">Intelligence Brief — unnumbered · 14 October 2026</div>
       <h2 class="featured-title">The rules for machines that act<br><em>are still being written</em></h2>
       <p class="featured-desc">The IMO has invited a proposal for a non-mandatory instrument on AI in safety-critical ship equipment; no AI performance standard has been adopted or is under development. The mandatory MASS Code runs on dates the IMO says may move, and the IMO cyber code is still in development. What it means on board.</p>
+      <ul class="brief-topics" aria-label="Topics"><li>AI equipment regulation</li><li>MASS</li><li>Maritime cybersecurity</li></ul>
+      <span class="featured-cta">
+        Read Brief
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </span>
     </div>
-    <span class="featured-cta">
-      Read Brief
-      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </span>
   </a>
 
   <!-- FEATURE ARTICLES -->
