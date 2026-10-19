@@ -1,0 +1,125 @@
+{
+ "correction_id": "CORR-SAFETY-ENCLOSED-SPACE-PROPAGATION-20261019",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "founder_authorisation": {
+  "state": "PENDING_FOUNDER_DECISION",
+  "prepared_under": "Founder decision MIW-P0-SAFETY-FINAL-QUALIFICATION (19 Oct 2026): GO for local safety-correction completion and full qualification; NO production GO, no push, no deploy, no distribution, no bypass of correction authorisation",
+  "prepared_on": "2026-10-19"
+ },
+ "origin": "p0_safety_propagation_sweep_20261019",
+ "date": "2026-10-19",
+ "title": "QB5_B#q15 and QB5_A#q10: the QB5_A#q11 rejected entry criteria restated",
+ "baseline_commit": "e016b2549182812b50f16d8e6e1512b3b32bfb2d",
+ "governing_commits": [
+  "9afcb4185121767dfb26dc9de533fc148f9e08b1",
+  "d06bf3ded1a225d754240da4a8087cfaf3b476db",
+  "05645a1ae7ec92198da6c701ce660e14cc1d2883",
+  "be507089e7e6541833633cb6d8cb2c5a285184e2",
+  "6df9f0ceafd8ce2712966b0f44918f22c92d6e3d",
+  "0ab57b3271a999a81a9910dd00e7ad94ae52066d",
+  "02259156e3367b7e68b8cd358d87ff64fc095e94"
+ ],
+ "authorisation_source": "reports/governance/P0_SAFETY_PREPARATION_AUTHORITY_20261019.md",
+ "candidate_claim": "P0 propagation sweep (19 Oct 2026): the QB5_A#q11 error restated on QB5_B#q15 (step 2 and reg box, audit S2), QB5_A#q10 (audit S2; S1 panel downgrade) and both cheat sheets (never audited).",
+ "candidate_verdict": "UPHELD",
+ "authority": "MSC.581(110) 2.1, 6.5.3, 7.1, 7.3, 7.4, 7.7, 8.1, 8.3, 8.5, sections 9 and 11; SOLAS III/19.3.6; XI-1/7; ISM 1.2.2.2, 7. Evidence: P0S_EVIDENCE_MATRIX.json.",
+ "cards": [
+  {
+   "correction_action_id": "SAFETY-ENCL-PROP-01",
+   "file": "QB5_B.html",
+   "path": "meoclass1/QB5_B.html",
+   "anchor": "q15",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "0fa3c444a079507899e5d7b93934850839af2f8247a26967238bad57206affa1",
+   "post_edit_digest": "0783279c28ebca26936da952f567c75772fb22f1eff271279ead31acf11ab24b"
+  },
+  {
+   "correction_action_id": "SAFETY-ENCL-PROP-02",
+   "file": "QB5_A.html",
+   "path": "meoclass1/QB5_A.html",
+   "anchor": "q10",
+   "classification": "PROPAGATED_FACT_CORRECTION",
+   "pre_edit_digest": "47f48807d45e0d63342a79122f07129faeeebbfb845da0a0fc7166a0d241a531",
+   "post_edit_digest": "f862f2f34eff917b8f489aec248aade7ed424b1963e0af4cfb3d780b64b801ec"
+  }
+ ],
+ "propagation": {
+  "sweep": "Broad atmosphere sweep (150 blocks, 35 files) read and dispositioned: P0S pack 06_propagation/ATMOSPHERE_SWEEP_DISPOSITION.md."
+ },
+ "invariants": {
+  "canonical_questions_before": 766,
+  "canonical_questions_after": 766,
+  "new_cards": 0,
+  "q_text_changed": false,
+  "note": "Answer-body corrections only; stems, anchors and card counts unchanged, so qb_content_index regenerates to a no-op."
+ },
+ "known_traps_entries": [
+  163,
+  166
+ ],
+ "artefacts": [
+  {
+   "path": "tools/oral/validate_correction_safety.py",
+   "role": "content gate for all CORR-SAFETY records: closed-world card propositions and open-world corpus propositions"
+  },
+  {
+   "path": "tools/oral/mutate_correction_safety.py",
+   "role": "mutation suite; every mutation trips its own named check"
+  },
+  {
+   "path": "tools/oral/check_founder_authorisation_for_landing.py",
+   "role": "landing gate L1-L4 (not in the qualification run)"
+  },
+  {
+   "path": "tools/oral/test_founder_authorisation.py",
+   "role": "in-memory controls for founder_authorisation and L4"
+  },
+  {
+   "path": "tools/oral/test_e1_timed_supersession.py",
+   "role": "controls for validate_batch_e1's supersession-aware timed-blocks check (P0S-7)"
+  },
+  {
+   "path": "tools/oral/validate_batch_e1.py",
+   "role": "historical E1 validator: timed_blocks_unchanged reads E1's own produced state once a card is superseded"
+  },
+  {
+   "path": "reports/governance/P0_SAFETY_PREPARATION_AUTHORITY_20261019.md",
+   "role": "preparation authority (not landing authority)"
+  }
+ ],
+ "review": {
+  "method": "independent clean-context whole-card review, every section, primary sources opened by the reviewer; repeated until ACCEPT or ACCEPT_WITH_NITS with no open S1-S3 finding and safety resolved everywhere (P0S_SAFETY_SUCCESSOR_20261019/03_review)",
+  "final": [
+   {
+    "item": "QB5_B_q15",
+    "round": "round2",
+    "review_file": "P0S_SAFETY_SUCCESSOR_20261019/03_review/round2/G6_QB5_B_framo.review.json",
+    "reviewer": "P0S-EDREV2-G6_QB5_B_framo",
+    "content_commit_reviewed": "6df9f0ceafd8ce2712966b0f44918f22c92d6e3d",
+    "verdict": "ACCEPT_WITH_NITS",
+    "reviewed_digest": "0783279c28ebca26936da952f567c75772fb22f1eff271279ead31acf11ab24b",
+    "open_findings_by_severity": {
+     "S4": 2,
+     "S5": 2
+    },
+    "reviewed_content_identical_to_record_content_commit": true
+   },
+   {
+    "item": "QB5_A_q10",
+    "round": "round3",
+    "review_file": "P0S_SAFETY_SUCCESSOR_20261019/03_review/round3/G3_QB5_A_enclosed.review.json",
+    "reviewer": "P0S-EDREV3-G3_QB5_A_enclosed",
+    "content_commit_reviewed": "0ab57b3271a999a81a9910dd00e7ad94ae52066d",
+    "verdict": "ACCEPT_WITH_NITS",
+    "reviewed_digest": "f862f2f34eff917b8f489aec248aade7ed424b1963e0af4cfb3d780b64b801ec",
+    "open_findings_by_severity": {
+     "S4": 1,
+     "S5": 1
+    },
+    "reviewed_content_identical_to_record_content_commit": true
+   }
+  ]
+ },
+ "note": "Prepared and qualified locally; full evidence in P0_SAFETY_CORRECTION_20261019 and P0S_SAFETY_SUCCESSOR_20261019 (job root, outside the repository)."
+}

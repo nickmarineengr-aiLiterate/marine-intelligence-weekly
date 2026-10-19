@@ -1,0 +1,107 @@
+{
+ "correction_id": "CORR-SAFETY-ENCLOSED-SPACE-20261019",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "founder_authorisation": {
+  "state": "PENDING_FOUNDER_DECISION",
+  "prepared_under": "Founder decision MIW-P0-SAFETY-FINAL-QUALIFICATION (19 Oct 2026): GO for local safety-correction completion and full qualification; NO production GO, no push, no deploy, no distribution, no bypass of correction authorisation",
+  "prepared_on": "2026-10-19"
+ },
+ "origin": "miw_qb_technical_answer_audit_20261019_s1",
+ "date": "2026-10-19",
+ "title": "QB5_A#q11: enclosed-space entry at O2 19.5-23.5%, no CO2, fixed H2S/CO ppm; MSC.581(110) 7.4",
+ "baseline_commit": "e016b2549182812b50f16d8e6e1512b3b32bfb2d",
+ "governing_commits": [
+  "9afcb4185121767dfb26dc9de533fc148f9e08b1",
+  "d06bf3ded1a225d754240da4a8087cfaf3b476db",
+  "05645a1ae7ec92198da6c701ce660e14cc1d2883",
+  "be507089e7e6541833633cb6d8cb2c5a285184e2",
+  "6df9f0ceafd8ce2712966b0f44918f22c92d6e3d",
+  "0ab57b3271a999a81a9910dd00e7ad94ae52066d",
+  "02259156e3367b7e68b8cd358d87ff64fc095e94"
+ ],
+ "authorisation_source": "reports/governance/P0_SAFETY_PREPARATION_AUTHORITY_20261019.md",
+ "candidate_claim": "MIW technical answer audit (frozen pack, 2026-10-19): CORRECTION REQUIRED S1, confirmed by the S1 panel. 'O2 between 19.5% and 23.5%; ... H2S strictly below 1 ppm TLV-TWA; CO below 25 ppm'.",
+ "candidate_verdict": "UPHELD",
+ "authority": "Proposition: MSC.581(110) 7.4 entry criteria -- steady 20.9% O2, CO2 below 0.5%, below 1% LFL, toxic gases below 50% OEL; not a 19.5-23.5% band or a fixed ppm. Sources: MSC.581(110) 6.5.3, 7.4, 7.5, 7.7, 8.1, 8.3, sections 9 and 11; SOLAS III/19.3.6; XI-1/7; ISM 1.2.2.2, 5.2, 7; STCW Table A-III/2. Evidence: P0S_EVIDENCE_MATRIX.json.",
+ "cards": [
+  {
+   "correction_action_id": "SAFETY-ENCL-01",
+   "file": "QB5_A.html",
+   "path": "meoclass1/QB5_A.html",
+   "anchor": "q11",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "f913e950434fb28f778b188ff378218abc31628160d22e4d37d6c13d8f442990",
+   "post_edit_digest": "5df110f73776ced6c2e0f841cf2ed80b1ab4f3e6595777e28fc42e355c25c503",
+   "supersedes": {
+    "manifest": "correction_corr_rel_bj_foundering_20260908_manifest.json",
+    "action_id": "REL-BJ-02",
+    "post_edit_digest": "f913e950434fb28f778b188ff378218abc31628160d22e4d37d6c13d8f442990",
+    "note": "This record starts from the state that record pins (its post_edit_digest is this record's pre_edit_digest at e016b25); the earlier pin is not rewritten."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  }
+ ],
+ "propagation": {
+  "sweep": "Propagated sites carried by CORR-SAFETY-ENCLOSED-SPACE-PROPAGATION-20261019 and CORR-SAFETY-ENCLOSED-SPACE-EXT-20261019."
+ },
+ "invariants": {
+  "canonical_questions_before": 766,
+  "canonical_questions_after": 766,
+  "new_cards": 0,
+  "q_text_changed": false,
+  "note": "Answer-body corrections only; stems, anchors and card counts unchanged, so qb_content_index regenerates to a no-op."
+ },
+ "known_traps_entries": [
+  163
+ ],
+ "artefacts": [
+  {
+   "path": "tools/oral/validate_correction_safety.py",
+   "role": "content gate for all CORR-SAFETY records: closed-world card propositions and open-world corpus propositions"
+  },
+  {
+   "path": "tools/oral/mutate_correction_safety.py",
+   "role": "mutation suite; every mutation trips its own named check"
+  },
+  {
+   "path": "tools/oral/check_founder_authorisation_for_landing.py",
+   "role": "landing gate L1-L4 (not in the qualification run)"
+  },
+  {
+   "path": "tools/oral/test_founder_authorisation.py",
+   "role": "in-memory controls for founder_authorisation and L4"
+  },
+  {
+   "path": "tools/oral/test_e1_timed_supersession.py",
+   "role": "controls for validate_batch_e1's supersession-aware timed-blocks check (P0S-7)"
+  },
+  {
+   "path": "tools/oral/validate_batch_e1.py",
+   "role": "historical E1 validator: timed_blocks_unchanged reads E1's own produced state once a card is superseded"
+  },
+  {
+   "path": "reports/governance/P0_SAFETY_PREPARATION_AUTHORITY_20261019.md",
+   "role": "preparation authority (not landing authority)"
+  }
+ ],
+ "review": {
+  "method": "independent clean-context whole-card review, every section, primary sources opened by the reviewer; repeated until ACCEPT or ACCEPT_WITH_NITS with no open S1-S3 finding and safety resolved everywhere (P0S_SAFETY_SUCCESSOR_20261019/03_review)",
+  "final": [
+   {
+    "item": "QB5_A_q11",
+    "round": "round3",
+    "review_file": "P0S_SAFETY_SUCCESSOR_20261019/03_review/round3/G3_QB5_A_enclosed.review.json",
+    "reviewer": "P0S-EDREV3-G3_QB5_A_enclosed",
+    "content_commit_reviewed": "0ab57b3271a999a81a9910dd00e7ad94ae52066d",
+    "verdict": "ACCEPT_WITH_NITS",
+    "reviewed_digest": "5df110f73776ced6c2e0f841cf2ed80b1ab4f3e6595777e28fc42e355c25c503",
+    "open_findings_by_severity": {
+     "S5": 3
+    },
+    "reviewed_content_identical_to_record_content_commit": true
+   }
+  ]
+ },
+ "note": "Prepared and qualified locally; full evidence in P0_SAFETY_CORRECTION_20261019 and P0S_SAFETY_SUCCESSOR_20261019 (job root, outside the repository)."
+}
