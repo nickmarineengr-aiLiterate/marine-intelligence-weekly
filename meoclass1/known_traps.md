@@ -3983,3 +3983,57 @@ engines (e.g. Wärtsilä 31DF/46DF) are a separate family. Until the held rewrit
 `QB7_I` Q3 for X-DF architecture.
 
 GREP: SKIP (held correction; the live card still carries the error and a literal scan would only restate it)
+
+### 141. Sewage sludge is no longer on the London Protocol's Annex 1 list — Resolution LP.6(17) removed it (in force 15 January 2023)
+
+**Flagged:** candidate feedback on `QB1_A` Q13 (*"London Convention — Explain with cross questions."*),
+CE Oral Tip, October 2026; screenshots reviewed by the Founder (per the Founder's correction brief; the
+screenshots are not held in this repository). Upheld; corrected by
+CORR-LP617-SEWAGE-SLUDGE-20261028.
+
+**WRONG** (as shipped on `QB1_A` Q13 and its `SQ` twin): *"Sewage sludge: on the permitted list under
+1996 Protocol (subject to conditions)"* in the CE Oral Tip, and sewage sludge listed among the Annex 1
+permitted materials in the reverse-list paragraph and the 60-second answer.
+
+**CORRECT:**
+
+- **Resolution LP.6(17)**, adopted by the 17th Meeting of Contracting Parties to the London Protocol on
+  **7 October 2022**, deletes Annex 1 sub-paragraph 1.2 (*"sewage sludge"*) and renumbers the rest, with a
+  consequential deletion in Annex 2 paragraph 4.
+- It **entered into force on 15 January 2023** under Article 22.4 (100 days after adoption) — except, at
+  first, for Canada, Finland and China, which objected within the 100 days. All three objections have since
+  been withdrawn (Canada 29 Nov 2023; China 17 Apr 2025, not applying to Macao SAR unless notified; Finland
+  from 1 Oct 2025), per the depositary's *Status of IMO Treaties* Vol. II, 30 September 2026.
+- **No new permits** for dumping sewage sludge after entry into force; **active permits may run to their
+  expiry date, but not later than 31 May 2027**. Sludge previously dumped is not to be diverted to other
+  ocean placement.
+- Scope: it binds **Contracting Parties to the 1996 Protocol**. A State party only to the 1972 Convention is
+  not bound by the Protocol's Annex 1 — do not teach it as an unconditional worldwide ban.
+- It is **dumping** law. It does not touch MARPOL Annex IV (a ship's own sewage discharge) or MARPOL
+  Annex VI reg 16 (burning the ship's own sewage sludge in boilers outside ports) — `QB3_C` and
+  `oralnotes/simon-notes-p4.html` are Annex VI and correct.
+- Sources: Resolution LP.6(17) (IMO), Status of IMO Treaties Vol. II (30 Sep 2026), 1996 Protocol Art. 22 —
+  registered as SRC-IMO-LP6-17 and SRC-IMO-STATUS-TREATIES-VOL2-2026-09-30.
+
+**Open follow-ups (NOT actioned here — each is a separate correction under this workflow, by Founder
+decision of 28 Oct 2026; none is part of CORR-LP617-SEWAGE-SLUDGE-20261028):**
+
+- **A.** `QB9_A` Q7 (London Convention 1972 vs 1996 Protocol) still lists sewage sludge among the
+  explicitly permitted substances.
+- **B.** `oralnotes/simon-notes-p8.html`, "1996 Protocol — Permitted Reverse List (Annex 1)", still lists
+  sewage sludge. The rest of that page was not reviewed. Its derived projection
+  `meoclass1/oral-intelligence/examiner-audit/ORAL_NOTES_UNITS.jsonl` carries the same list and follows B.
+- **B1. Verification item — not confirmed as an error.** The same list names "mining waste". Annex 1 in
+  IMO's consolidated text of the 1996 Protocol has eight categories and none is named mining waste; the
+  nearest, .5 "inert, inorganic geological material", is listed separately on the page. Whether the item
+  is wrong, and what replaces it, is for the separate correction to settle at primary source.
+- **B2. Verification item — not confirmed as an error.** The page's comparison table gives "Annex 4 —
+  Marine geo-engineering regulation" and its amendments list says the 2013 amendment "regulates and
+  prohibits most ocean fertilisation activities". Status of IMO Treaties Vol. II (30 Sep 2026) records
+  LP.4(8), adopted 18 October 2013 under Article 21, as not in force: it needs acceptance by two-thirds of
+  Contracting Parties and has 9. Whether the page teaches it as in force, and what the ocean-fertilisation
+  limb rests on, was not checked.
+- **C.** RulesApp `repository/index/repo-data.json` and `search-index.json` carry the pre-2023 Annex 1 list
+  (a separate product; not reviewed).
+
+GREP: on the permitted list under 1996 Protocol

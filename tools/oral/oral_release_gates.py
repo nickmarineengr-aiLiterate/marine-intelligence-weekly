@@ -826,6 +826,37 @@ GATES = (
                "including a softened sub-issue verdict and a card filed under the wrong "
                "proposition; 28/28 caught, 1922s measured 17 Sep 2026"),
 
+    # Content gates for CORR-LP617-SEWAGE-SLUDGE-20261028, a candidate report on
+    # QB1_A Q13: the card taught sewage sludge as still on the London Protocol's
+    # Annex 1 list after Resolution LP.6(17) removed it (in force 15 January
+    # 2023). The corrected card must name sewage sludge to say it was removed, so
+    # the gate asserts the removal in every limb rather than banning the phrase.
+    # The two sites trap 141 logs as separate follow-ups are tolerated, never
+    # required, so their own correction can land without editing this pair. The
+    # suite probes only its own validator (2.8s; 103s for 35 mutations measured
+    # 28 Oct 2026); budget ~x6.
+    _gate("validate_correction_lp617",
+          ["python", "%s/validate_correction_lp617.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="sewage sludge removed from Annex 1 in all three limbs that shipped "
+               "the defect and in the SQ twin; closed-world 15 January 2023 entry "
+               "into force and 31 May 2027 permit cut-off over the claims the code "
+               "recognises; Protocol-Parties scope, "
+               "never a worldwide ban; MARPOL Annex IV separate; corpus re-infection "
+               "outside the two logged follow-ups; QB3_C's Annex VI text survives"),
+    _gate("correction_lp617_mutate",
+          ["python", "%s/mutate_correction_lp617.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=600,
+          historical_39=False, depends_on=("validate_correction_lp617",),
+          note="35 mutations, each tripping its OWN named check: one-limb "
+               "regressions, adoption date given as entry into force, moved permit "
+               "cut-offs (including onto the card's other true dates), a wrong date "
+               "before its verb, contradictions added beside correct text, scope "
+               "deleted, widened to 1972 Parties or to a worldwide ban, the "
+               "cross-question answered Yes, twin drift, an untouched page "
+               "re-infected, a blanket substitution over QB3_C, and the record "
+               "cases; 35/35 caught, 103s measured 28 Oct 2026"),
+
     # ---- follow-up authorisation register ---------------------------------
     # Postdates E6, so outside the historical 39, and not held back either.
     #

@@ -79,6 +79,7 @@ check("the correction gates are registered",
           "correction_g1_010_mutate", "correction_grainterm_mutate",
           "correction_india_oilspill_mutate",
           "correction_ismspares_mutate", "correction_itc51_mutate",
+          "correction_lp617_mutate",
           "correction_lsavent_mutate", "correction_msactsea_mutate",
           "correction_nosdcp_mutate",
           # The Pass-2 remediation pair, registered for the first time:
@@ -92,6 +93,7 @@ check("the correction gates are registered",
           "validate_correction_india_oilspill",
           "validate_correction_ismspares",
           "validate_correction_itc51",
+          "validate_correction_lp617",
           "validate_correction_lsavent", "validate_correction_msactsea",
           "validate_correction_nosdcp",
           "validate_correction_pass2",
@@ -166,6 +168,11 @@ POST_E6_GATES = [
     # they named ITC-Hulls, and all fourteen defective sites said yes. The
     # instrument was right and the clause inside it was wrong.
     "correction_itc51_mutate",
+    # CORR-LP617-SEWAGE-SLUDGE-20261028, a candidate report: QB1_A Q13 kept
+    # sewage sludge on the London Protocol Annex 1 list after LP.6(17)
+    # removed it. The card must name the phrase to retract it, so the gate
+    # asserts the removal in each limb rather than banning the phrase.
+    "correction_lp617_mutate",
     "correction_lsavent_mutate",
     "correction_msactsea_mutate",
     # CORR-NOSDCP-MINISTRY-20260916, a candidate report: NOSDCP taught under
@@ -223,6 +230,7 @@ POST_E6_GATES = [
     "validate_correction_india_oilspill",
     "validate_correction_ismspares",
     "validate_correction_itc51",
+    "validate_correction_lp617",
     "validate_correction_lsavent",
     "validate_correction_msactsea",
     "validate_correction_nosdcp",
@@ -245,6 +253,7 @@ POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
                            "correction_india_oilspill_mutate",
                            "correction_ismspares_mutate",
                            "correction_itc51_mutate",
+                           "correction_lp617_mutate",
                            "correction_lsavent_mutate",
                            "correction_msactsea_mutate",
                            "correction_nosdcp_mutate",
