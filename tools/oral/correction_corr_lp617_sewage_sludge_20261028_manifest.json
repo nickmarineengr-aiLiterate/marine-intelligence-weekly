@@ -1,0 +1,116 @@
+{
+ "correction_id": "CORR-LP617-SEWAGE-SLUDGE-20261028",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "origin": "candidate_feedback",
+ "date": "2026-10-28",
+ "title": "QB1_A#q13 taught sewage sludge as still on the London Protocol's Annex 1 permitted list after Resolution LP.6(17) removed it",
+ "baseline_commit": "e016b25",
+ "governing_commits": [
+  "ce642c3"
+ ],
+ "authorisation_source": "meoclass1/known_traps.md",
+ "known_traps_entries": [
+  141
+ ],
+ "candidate_claim": "Transcribed from the Founder's correction brief, not the reporter's own words (the original message and screenshots are not held in this repository): CE Oral Tip on Q13 reads 'Sewage sludge: on the permitted list under 1996 Protocol (subject to conditions)'; sewage sludge was subsequently removed from Annex 1 of the London Protocol.",
+ "candidate_verdict": "CORRECT",
+ "authority": "PRIMARY. (1) Resolution LP.6(17), adopted 7 October 2022 by the Seventeenth Meeting of Contracting Parties to the 1996 Protocol, Annex: Annex 1 paragraph 1 'Delete sub-paragraph 1.2 ... .2 sewage sludge; Renumber the subsequent sub-paragraphs'; consequential deletion in Annex 2 paragraph 4; operative: 'Contracting Parties shall not issue new permits for dumping of sewage sludge after the entry into force of the amendment' and active permits may be maintained 'until the expiry date, but not later than 31 May 2027'. Registered as SRC-IMO-LP6-17. (2) Status of IMO Treaties Vol. II, 30 September 2026, LC PROT 1996 (3) 2022 amendments: entered into force 15 January 2023 under Article 22.4 except for Canada, Finland and China, whose objections were later withdrawn (Canada 29 Nov 2023; China 17 Apr 2025, not Macao SAR unless notified; Finland from 1 Oct 2025); LC PROT 1996 has 56 Contracting States, LC 1972 has 87. Registered as SRC-IMO-STATUS-TREATIES-VOL2-2026-09-30. (3) 1996 Protocol Article 22.4 (IMO consolidated text). All read 2026-10-28.",
+ "rationale": "The CE Oral Tip stated the pre-2023 position as current, and two further limbs of the same card - the reverse-list paragraph and the 60-second answer - listed sewage sludge among the Annex 1 permitted materials, so correcting the tip alone would have left the card contradicting itself (miw-correction-workflow SKILL.md 'Scope creep' and 2a). All three limbs are corrected; the reg-box gains the LP.6(17) row; the CE Oral Tip carries the examiner cross-question; version v1.0 -> v1.1. The corrected text states the amendment's legal scope (binds Contracting Parties to the 1996 Protocol; not States party only to the 1972 Convention) and separates it from MARPOL Annex IV, so it is not taught as an unconditional worldwide ban.",
+ "note": "SCOPE. One card (QB1_A Q13) and its SQ free-sample twin; known_traps entry 141; two source-registry rows; governed changelog entry and its derived index. NOT DONE HERE, by Founder decision D-3 of 28 Oct 2026: QB9_A Q7 and oralnotes/simon-notes-p8.html still list sewage sludge as permitted (entry 141 follow-ups A and B); each is a SEPARATE correction under this workflow and is not part of this record. Entry 141 also logs two verification items on simon-notes-p8 that are NOT confirmed as errors (B1 'mining waste'; B2 'Annex 4' / LP.4(8), not in force). RulesApp index data (follow-up C) is a separate product. CONTENT GATES (Founder decision D-2, 28 Oct 2026): validate_correction_lp617.py and mutate_correction_lp617.py, registered as the pair validate_correction_lp617 / correction_lp617_mutate in oral_release_gates.py and in the three registration lists of test_oral_release_runner.py, per SKILL.md 8.2a; the two follow-up sites are tolerated by the corpus check, never required. No existing gate was removed, weakened or reclassified. STATUS: 'AUTHORISED' is one of the only two values the schema allows (oral_manifest.CORRECTION_STATUSES). It means this record's pins are live expectations that the guards enforce; 'SUPERSEDED' would mean its pins are history and stops enforcing them. Neither value records Founder approval or release authorisation: Founder Review is the separate gate in reports/governance/IMPLEMENTATION_CONTRACT.md section 2, recorded in 'review' below, and release is the release runner and packet. The Founder authorised the local commit only (see review.founder_review); this record is not authorised for push, merge, release, deployment or publication. GOVERNING COMMITS: ce642c3, the substantive correction commit, made after Founder Review per IMPLEMENTATION_CONTRACT.md section 2; this record lands in the governance commit that follows it, as CORR-NOSDCP-MINISTRY-20260916 did. DATE: the record's date and its first-commit month must agree for oral_monthly; if the commit lands after October 2026 this date and the v1.1 stamp's date must be revised in the same change.",
+ "propagation": {
+  "method": "Repo-wide text search of the clean baseline for 'sewage sludge', 'London Convention', 'London Protocol', 'reverse list', 'LP.6(17)' and 'LP.6', each hit read in context.",
+  "error_sites_corrected": [
+   "meoclass1/QB1_A.html#q13 (reverse-list paragraph, 60-second answer, CE Oral Tip)",
+   "SQ/QB1_A.html#q13 (same three limbs)"
+  ],
+  "error_sites_not_corrected": [
+   "meoclass1/QB9_A.html#q7 - lists sewage sludge among explicitly permitted substances (follow-up A)",
+   "meoclass1/oralnotes/simon-notes-p8.html - Annex 1 list includes sewage sludge (follow-up B)",
+   "RulesApp/repository/index/repo-data.json and search-index.json - pre-2023 Annex 1 list (follow-up C, separate product)",
+   "meoclass1/oral-intelligence/examiner-audit/ORAL_NOTES_UNITS.jsonl - derived from simon-notes-p8; follows follow-up B"
+  ],
+  "consistent_already": [
+   "meoclass1/QB3_C.html - MARPOL Annex VI reg 16 burning of the ship's own sewage sludge; a different regime, correct",
+   "meoclass1/oralnotes/simon-notes-p4.html - MARPOL Annex VI incineration exception; correct",
+   "no candidate page cited LP.6(17) before this correction"
+  ]
+ },
+ "invariants": [
+  "corpus 766 canonical questions / 86 question-bearing files, unchanged.",
+  "No new cards, no cards removed, no question text, tags, anchor, sequence or navigation altered.",
+  "Only q13 moves on either QB1_A page.",
+  "SQ twin byte-identical to the gated copy for q13, before and after.",
+  "MARPOL Annex VI sewage-sludge burning text on QB3_C and simon-notes-p4 untouched."
+ ],
+ "cards": [
+  {
+   "correction_action_id": "LP617-01",
+   "file": "QB1_A.html",
+   "path": "meoclass1/QB1_A.html",
+   "anchor": "q13",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "0da698df11222a2ec4cf54fd474e57842531e6bc401c4466784d91daaee71d86",
+   "post_edit_digest": "2c0edf9eea6971f29046252979419cdd79d40ac488f07356135e116d30020102",
+   "digest_pinned_by_earlier_manifest": false,
+   "known_traps_entry": 141,
+   "rationale": "The card the candidate reported. Sewage sludge removed from the Annex 1 list in the reverse-list paragraph and the 60-second answer, with LP.6(17), entry into force, the no-new-permits rule, the 31 May 2027 limit and the treaty scope stated; CE Oral Tip line replaced and the examiner cross-question added; reg-box row for LP.6(17); v1.1 stamp."
+  },
+  {
+   "correction_action_id": "LP617-02",
+   "file": "QB1_A.html",
+   "path": "SQ/QB1_A.html",
+   "anchor": "q13",
+   "classification": "TEASER_SYNC",
+   "pre_edit_digest": "0da698df11222a2ec4cf54fd474e57842531e6bc401c4466784d91daaee71d86",
+   "post_edit_digest": "2c0edf9eea6971f29046252979419cdd79d40ac488f07356135e116d30020102",
+   "digest_pinned_by_earlier_manifest": false,
+   "known_traps_entry": 141,
+   "rationale": "Free-sample copy of the primary card. Byte-identical to the gated copy before and after."
+  }
+ ],
+ "artefacts": [
+  {
+   "path": "meoclass1/known_traps.md",
+   "classification": "INDEX_METADATA",
+   "known_traps_entry": 141,
+   "rationale": "Entry 141 added, with follow-ups A-C as separate corrections and verification items B1-B2 not confirmed. GREP is the exact shipped wrong phrase, which the corrected text does not contain.",
+   "guarded_by": "validate_corrections (known_traps_entries_exist); qb_health_check GREP scan; validate_correction_lp617 (trap_141_*)"
+  },
+  {
+   "path": "tools/oral/qb_content_index_governed.json",
+   "classification": "INDEX_METADATA",
+   "rationale": "recently_updated entry for 2026-10-28.",
+   "guarded_by": "validate_qb_content_index, validate_correction_lp617"
+  },
+  {
+   "path": "meoclass1/qb_content_index.json",
+   "classification": "INDEX_METADATA",
+   "rationale": "Regenerated by build_qb_content_index.py; never hand-edited.",
+   "guarded_by": "build_qb_content_index --check, validate_correction_lp617"
+  },
+  {
+   "path": "docs/sources/MIW_SOURCE_REGISTRY.json",
+   "classification": "INDEX_METADATA",
+   "rationale": "Two rows: SRC-IMO-LP6-17, SRC-IMO-STATUS-TREATIES-VOL2-2026-09-30. No existing row changed.",
+   "guarded_by": "validate_correction_lp617 (sources_registered_for_the_card)"
+  },
+  {
+   "path": "tools/oral/validate_correction_lp617.py",
+   "classification": "INDEX_METADATA",
+   "rationale": "Content gate.",
+   "guarded_by": "oral_release_gates: validate_correction_lp617"
+  },
+  {
+   "path": "tools/oral/mutate_correction_lp617.py",
+   "classification": "INDEX_METADATA",
+   "rationale": "Mutation suite for the content gate: 35 mutations, each required to trip its own named check.",
+   "guarded_by": "oral_release_gates: correction_lp617_mutate"
+  }
+ ],
+ "review": {
+  "producer_verification": "verified at primary source by the producer on 2026-10-28 (see authority); evidence bytes and hashes held in the correction sandbox outside the repository",
+  "independent_review": "First pass 28 Oct 2026, a separate read-only reviewer in a fresh context, against git diff e016b25 sha256 70c9d51a: PASS WITH FIXES for local-commit readiness only. Content verified accurate against the IMO primary sources; scope, twin identity, provenance hashes and index consistency verified. Should-fix: F1 the permit cut-off check exempted the card's other two dates by value, so a tip cut-off moved onto either escaped; F5 the producer's handover was stale; F6 this field. Notes F2 (entry-into-force date before its verb) and F3 (worldwide reach outside a sludge sentence) were also demonstrated escapes. Producer response: F1-F3 fixed in validate_correction_lp617.py and mutations I2, I3, I4 and K2 added (30/30 caught); F8 candidate_claim labelled as transcribed; F13 derived notes file added to trap 141 follow-up B; F5 handover reissued outside the repository as Founder Review v2. Re-check 28 Oct 2026 by the same reviewer: PASS WITH FIXES; F1, F2, F3, F6, F8 and F13 closed. New R1: the F3 fix had dropped the reg-box row from the worldwide-ban scan, a regression; R2: this field claimed the v2 handover before it existed; note R3: contradictory sentences added beside correct text escaped. Producer response: R1 fixed (scan over the whole card, mutation K3); R2 fixed (this wording; v2 issued); R3 fixed for every demonstrated case (ending-verb cut-off rule, 'effective' as an entry-into-force verb, authorisation/licence as permits, new check scope_not_extended_to_1972_parties; mutations I5, I6, I7, J2), 35/35 caught. Final re-check 28 Oct 2026 by the same reviewer, against git diff e016b25 sha256 e29eb8db: PASS for local-commit readiness; R1, R2 and R3 closed; no open blocking or should-fix finding. Notes kept as technical debt, deliberately not changed under the review: the scope_not_extended_to_1972_parties 'not'/'only' exemption admits a 'not only ... but also' widening, and lexical variants (day-less or numeric dates, 'came into effect', '87 Parties of the London Convention', 'all maritime nations') are outside a lexical gate. The ten reviewed files were committed in ce642c3 byte-identical to the reviewed hashes.",
+  "founder_review": "Founder decision of 28 Oct 2026: GO for the local two-commit sequence only (substantive commit ce642c3 and this governance commit) in the isolated sandbox clone, after Founder Review v2 and the independent review. status AUTHORISED accepted as the schema's marker that this record's pins are enforced. NOT approved for push, merge, release, deployment or publication."
+ }
+}
