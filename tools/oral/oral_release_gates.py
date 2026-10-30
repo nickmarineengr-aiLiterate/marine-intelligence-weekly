@@ -857,11 +857,12 @@ GATES = (
                "re-infected, a blanket substitution over QB3_C, and the record "
                "cases; 35/35 caught, 103s measured 28 Oct 2026"),
 
-    # Content gate for CORR-LP617-QB9A-Q7-20261030, follow-up A of trap 141: the
-    # same LP.6(17) proposition carried to QB9_A Q7. The pair imports the
-    # extraction helpers of validate_correction_lp617.py, so the two gates read a
-    # card the same way; the corpus re-infection scan stays in that gate. The
-    # suite probes only its own validator (0.4s; 7.1s measured 30 Oct 2026);
+    # Content gates for CORR-LP617-QB9A-Q7-20261030 and CORR-LP617-SIMON-P8-20261030,
+    # follow-ups A and B of trap 141: the same LP.6(17) proposition carried to
+    # QB9_A Q7 and to simon-notes-p8 card N3. Each pair imports the extraction
+    # helpers of validate_correction_lp617.py, so the three gates read a card the
+    # same way; the corpus re-infection scan stays in that gate. Each suite
+    # probes only its own validator (0.4s; 7.1s and 8.4s measured 30 Oct 2026);
     # budget ~x50.
     _gate("validate_correction_lp617_qb9a",
           ["python", "%s/validate_correction_lp617_qb9a.py" % _ORAL],
@@ -877,6 +878,20 @@ GATES = (
           historical_39=False, depends_on=("validate_correction_lp617_qb9a",),
           note="21 mutations, each tripping its OWN named check; 21/21 caught, "
                "7.1s measured 30 Oct 2026"),
+    _gate("validate_correction_lp617_simonp8",
+          ["python", "%s/validate_correction_lp617_simonp8.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=300, historical_39=False,
+          note="simon-notes-p8 N3: sewage sludge out of the Annex 1 list and its "
+               "removal stated; closed-world dates; never a worldwide ban nor extended "
+               "to 1972 Parties (whole card); LP.6(17) "
+               "reg-box row; v1.1 stamp; the other seven cards byte-identical to the "
+               "baseline; record governs the page as a NOTES_PAGE propagation"),
+    _gate("correction_lp617_simonp8_mutate",
+          ["python", "%s/mutate_correction_lp617_simonp8.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=300,
+          historical_39=False, depends_on=("validate_correction_lp617_simonp8",),
+          note="23 mutations, each tripping its OWN named check; 23/23 caught, "
+               "8.4s measured 30 Oct 2026"),
 
     # ---- follow-up authorisation register ---------------------------------
     # Postdates E6, so outside the historical 39, and not held back either.

@@ -4042,4 +4042,14 @@ deletion from Annex 1 by Resolution LP.6(17) (adopted 7 October 2022, in force 1
 permits, existing permits not beyond 31 May 2027), the reg-box gains the LP.6(17) row, and the card moves to
 v1.2. The text of A above is the record of what was open and is not rewritten.
 
+**Closure of follow-up B (30 Oct 2026):** `oralnotes/simon-notes-p8.html` card N3
+corrected by CORR-LP617-SIMON-P8-20261030. Sewage sludge is removed from the Annex 1 list, a following line
+states its deletion by Resolution LP.6(17) (adopted 7 October 2022, in force 15 January 2023; no new permits,
+existing permits not beyond 31 May 2027), the reg-box gains the LP.6(17) row, and N3 moves to v1.1. The
+derived `ORAL_NOTES_UNITS.jsonl` is NOT regenerated: regenerating at the baseline alone rewrites about 1,600
+lines of the frozen Phase 2A-ii snapshot, so it stays a recorded, uncorrected derived surface pending a
+separate governed refresh. Verification items B1 and B2 were checked at primary source on 30 Oct 2026 (with
+four further items on the same card); they are a separate proposed correction and are not part of this one.
+The text of B, B1 and B2 above is the record of what was open and is not rewritten.
+
 GREP: on the permitted list under 1996 Protocol
