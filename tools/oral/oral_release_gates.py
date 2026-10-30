@@ -857,6 +857,27 @@ GATES = (
                "re-infected, a blanket substitution over QB3_C, and the record "
                "cases; 35/35 caught, 103s measured 28 Oct 2026"),
 
+    # Content gate for CORR-LP617-QB9A-Q7-20261030, follow-up A of trap 141: the
+    # same LP.6(17) proposition carried to QB9_A Q7. The pair imports the
+    # extraction helpers of validate_correction_lp617.py, so the two gates read a
+    # card the same way; the corpus re-infection scan stays in that gate. The
+    # suite probes only its own validator (0.4s; 7.1s measured 30 Oct 2026);
+    # budget ~x50.
+    _gate("validate_correction_lp617_qb9a",
+          ["python", "%s/validate_correction_lp617_qb9a.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=300, historical_39=False,
+          note="QB9_A Q7: sewage sludge out of the reverse-list example and its "
+               "removal stated; closed-world 15 January 2023 / 31 May 2027; never a "
+               "worldwide ban nor extended to 1972 Parties (whole card); LP.6(17) "
+               "reg-box row; v1.2 stamp; no SQ twin; record "
+               "continues the T4a pin through supersedes"),
+    _gate("correction_lp617_qb9a_mutate",
+          ["python", "%s/mutate_correction_lp617_qb9a.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=300,
+          historical_39=False, depends_on=("validate_correction_lp617_qb9a",),
+          note="21 mutations, each tripping its OWN named check; 21/21 caught, "
+               "7.1s measured 30 Oct 2026"),
+
     # ---- follow-up authorisation register ---------------------------------
     # Postdates E6, so outside the historical 39, and not held back either.
     #

@@ -4036,4 +4036,10 @@ decision of 28 Oct 2026; none is part of CORR-LP617-SEWAGE-SLUDGE-20261028):**
 - **C.** RulesApp `repository/index/repo-data.json` and `search-index.json` carry the pre-2023 Annex 1 list
   (a separate product; not reviewed).
 
+**Closure of follow-up A (30 Oct 2026):** `QB9_A` Q7 corrected by
+CORR-LP617-QB9A-Q7-20261030. The reverse-list example no longer names sewage sludge, the card states its
+deletion from Annex 1 by Resolution LP.6(17) (adopted 7 October 2022, in force 15 January 2023; no new
+permits, existing permits not beyond 31 May 2027), the reg-box gains the LP.6(17) row, and the card moves to
+v1.2. The text of A above is the record of what was open and is not rewritten.
+
 GREP: on the permitted list under 1996 Protocol
