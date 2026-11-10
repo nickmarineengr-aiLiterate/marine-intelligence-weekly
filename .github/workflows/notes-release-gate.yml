@@ -22,6 +22,9 @@ on:
       - "api/_lib/routes.js"
   workflow_dispatch: {}
 
+permissions:
+  contents: read   # explicit, not inherited from the repository default (review V9b-2)
+
 jobs:
   notes-release-gate:
     runs-on: ubuntu-latest
