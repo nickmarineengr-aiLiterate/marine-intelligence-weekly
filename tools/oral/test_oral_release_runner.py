@@ -80,6 +80,7 @@ check("the correction gates are registered",
           "correction_india_oilspill_mutate",
           "correction_ismspares_mutate", "correction_itc51_mutate",
           "correction_lp617_mutate",
+          "correction_lp617_qb9a_mutate", "correction_lp617_simonp8_mutate",
           "correction_lsavent_mutate", "correction_msactsea_mutate",
           "correction_nosdcp_mutate",
           # The Pass-2 remediation pair, registered for the first time:
@@ -94,6 +95,7 @@ check("the correction gates are registered",
           "validate_correction_ismspares",
           "validate_correction_itc51",
           "validate_correction_lp617",
+          "validate_correction_lp617_qb9a", "validate_correction_lp617_simonp8",
           "validate_correction_lsavent", "validate_correction_msactsea",
           "validate_correction_nosdcp",
           "validate_correction_pass2",
@@ -173,6 +175,11 @@ POST_E6_GATES = [
     # removed it. The card must name the phrase to retract it, so the gate
     # asserts the removal in each limb rather than banning the phrase.
     "correction_lp617_mutate",
+    # CORR-LP617-QB9A-Q7-20261030 and CORR-LP617-SIMON-P8-20261030, follow-ups
+    # A and B of trap 141: the same proposition carried to QB9_A Q7 and to
+    # simon-notes-p8 N3.
+    "correction_lp617_qb9a_mutate",
+    "correction_lp617_simonp8_mutate",
     "correction_lsavent_mutate",
     "correction_msactsea_mutate",
     # CORR-NOSDCP-MINISTRY-20260916, a candidate report: NOSDCP taught under
@@ -231,6 +238,8 @@ POST_E6_GATES = [
     "validate_correction_ismspares",
     "validate_correction_itc51",
     "validate_correction_lp617",
+    "validate_correction_lp617_qb9a",
+    "validate_correction_lp617_simonp8",
     "validate_correction_lsavent",
     "validate_correction_msactsea",
     "validate_correction_nosdcp",
@@ -254,6 +263,8 @@ POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
                            "correction_ismspares_mutate",
                            "correction_itc51_mutate",
                            "correction_lp617_mutate",
+                           "correction_lp617_qb9a_mutate",
+                           "correction_lp617_simonp8_mutate",
                            "correction_lsavent_mutate",
                            "correction_msactsea_mutate",
                            "correction_nosdcp_mutate",
