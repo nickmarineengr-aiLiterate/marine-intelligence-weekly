@@ -9,7 +9,7 @@
 | 2023 | 11 | May |
 | 2024 | 11 | May |
 | 2025 | 11 | May |
-| 2026 | 8 | May, October, November, December |
+| 2026 | 9 | May, November, December |
 
 **May is absent in all three years.** The printed serials support that as a fact about the source set rather than merely about MIW's backlog: the 2024 serials run &hellip;2404, 2406&hellip; and the 2025 serials run &hellip;2504, 2506&hellip;, with nothing at 2405 or 2505. It is still recorded as source metadata, not as a finding about the examination calendar: MIW holds no official confirmation that no May sitting took place.
 
@@ -56,6 +56,7 @@
 | QP2607 | July 2026 | `07 - JULY - 2026.pdf` | &mdash; | 2 | 9 | ? of 2 |
 | QP2608 | August 2026 | `August 2026.pdf` | &mdash; | 2 | 9 | ? of 2 |
 | QP2609 | September 2026 | `September 2026.pdf` | &mdash; | 2 | 9 | ? of 2 |
+| QP2610 | October 2026 | `October 2026.pdf` | &mdash; | 2 | 9 | ? of 2 |
 
 Source copies are **third-party, unverified**. No independently authoritative DG Shipping or MMD copy has been located or compared, so no paper may be described as an officially verified source. Host identity is recorded locally only, outside this public repository. The PDFs themselves are git-ignored by `.gitignore:42` and must be neither committed nor deleted.
 
@@ -69,7 +70,7 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 
 ### Questions printing NO mark allocation
 
-**53 of 369**, across 12 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
+**54 of 378**, across 13 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
 
 | Question | Sitting | Title |
 |---|---|---|
@@ -126,6 +127,7 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 | QP2511-Q6 | November 2025 Q6 | Propeller Blade Crack Found in Dry Dock |
 | QP2512-Q1 | December 2025 Q1 | Disease Vector Control and Ship Health Certificates |
 | QP2512-Q2 | December 2025 Q2 | LNG Bunkering Procedures |
+| QP2610-Q9 | October 2026 Q9 | UNCLOS Pollution Definition, Coastal State Obligations, and the Three Compensation Tiers |
 
 Printed marks are **metadata, not examiner wording**. `recurrence_model.normalise_stem` removes a marks token before comparing two stems, so the same task set once with a printed (16) and once without is EXACT rather than "reworded". Three real pairs in this corpus turn on exactly that, and the guard against over-stripping is tested in `recurrence_check.py`.
 
@@ -327,4 +329,7 @@ Examiner wording is reproduced exactly, errors included. Each is recorded in a n
 | QP2604-Q9 | Two printed limbs, (6) and (10), summing exactly to 16. Note the re-weighting against the January 2026 and February 2026 settings, both of which printed 8 + 8. April moves two marks from the STCW limb to the fatigue limb, which is consistent with the fatigue limb having acquired two additional tasks. |
 | QP2606-Q6 | The paper prints (16) against the whole question and sets no lettered limbs. The question nevertheless contains three distinct tasks - the three cost families, the Chief Engineer's role in optimising them, and the modern management principles used in inventory control - and the answer is structured on those three rather than on printed limbs, because none exist. |
 | QP2606-Q9 | The paper prints (16) against the whole question and sets no lettered limbs. The stem nevertheless names three deliverables - objectives, characteristics and processes - and then singles out three of the five steps for 'specific explanation'. The answer is structured on that demand rather than on printed limbs, because none exist. |
+| QP2610-Q2 | Printed '[4x4]' against the whole question; the general structure is examined inside the four limbs, so it carries no separate marks. |
+| QP2610-Q4 | The question mark in limb (a) is printed mid-sentence, before the parenthetical expansion: "component of GISIS? (Global Integrated Shipping Information System of the IMO) and how it facilitates". Reproduced as printed. |
+| QP2610-Q5 | Printed [6] for (a) and [2x5] for (b); the two 5-mark halves are assigned to (b)(i) and (b)(ii) in print order. |
 

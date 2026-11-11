@@ -1004,6 +1004,42 @@ const FIXTURES = {
     // what separates them.
     narrow: ['reactivation survey', 'QP2608-Q1'],
   },
+  QP2610: {
+    // Every probe below was proved UNIQUE against the nine real data-search
+    // payloads of the built page, under the search's own token-AND semantics
+    // (QP2610 C-1, 11 Nov 2026). Rejected by that proof: 'article 13' reaches
+    // Q3 and Q7 (MLC Article XIII is not the cause; the token '13' recurs).
+    probes: [
+      ['fueleu', 'QP2610-Q1'],
+      ['electrochlorination', 'QP2610-Q2'],
+      ['lof 2000', 'QP2610-Q3'],
+      ['gisis', 'QP2610-Q4'],
+      ['blackout', 'QP2610-Q5'],
+      ['york-antwerp', 'QP2610-Q6'],
+      ['e-navik', 'QP2610-Q7'],
+      ['bearer', 'QP2610-Q8'],
+      ['stopia', 'QP2610-Q9'],
+    ],
+    aliases: [
+      // Search-only aliases from each question's search_aliases; each proved to
+      // reach exactly one card.
+      ['clydebank', 'QP2610-Q1', 'Q1 (the declaration that launched green corridors)'],
+      ['deoxygenation', 'QP2610-Q2', 'Q2 (the second gas-treatment family)'],
+      ['scopic', 'QP2610-Q3', 'Q3 (the contractual special-compensation clause)'],
+      ['focal point', 'QP2610-Q4', 'Q4 (the national data-entry role)'],
+      ['dead ship', 'QP2610-Q5', 'Q5 (the SOLAS term for total loss of power)'],
+      ['rule vii', 'QP2610-Q6', 'Q6 (the dispositive York-Antwerp rule)'],
+      ['dgma', 'QP2610-Q7', 'Q7 (the renamed Indian administration)'],
+      ['endorsement in blank', 'QP2610-Q8', 'Q8 (what turns an order bill into a bearer bill)'],
+      ['supplementary fund', 'QP2610-Q9', 'Q9 (the third tier)'],
+    ],
+    // MEPC.300(72) - the BWMS Code - reaches only Q2 on this paper.
+    regulation: ['mepc.300(72)', 'QP2610-Q2'],
+    // Leak probe: QP2306-Q1 is the Q9 answer donor; its host pointer must stay
+    // out of the shipped payload.
+    recurrence: ['2023/june/q1'],
+    narrow: ['dgma e-navik', 'QP2610-Q7'],
+  },
   QP2609: {
     // Every probe below was proved UNIQUE against the nine real data-search
     // payloads of the built page, under the search's own token-AND semantics
