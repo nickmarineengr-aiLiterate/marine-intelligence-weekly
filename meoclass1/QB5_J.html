@@ -99,12 +99,12 @@ body{-webkit-user-select:none;user-select:none}
   <span class="qb-badge">QB5_J</span>
   <h1>QB5_J — Main Engine, Fuel &amp; Turbocharger</h1>
   <p>MEO Class 1 Oral Exam Question Bank — Kochi MMD-focused, Examiner: Simon, Jul 2026 batch</p>
-  <div class="header-meta"><span>2 Questions</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span><span>v1.0</span></div>
+  <div class="header-meta"><span>4 Questions</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span><span>v1.0</span></div>
 </div>
 <div class="controls-bar">
   <input id="search-input" placeholder="Search questions..." oninput="applyFilters()">
   <button class="filter-btn active" onclick="filterTag('all',this)">All</button><button class="filter-btn" onclick="filterTag('machinery',this)">Machinery</button>
-  <span id="q-count-label">Showing 2 of 2</span>
+  <span id="q-count-label">Showing 4 of 4</span>
 </div>
 <div class="main-layout">
   <div class="sidebar">
@@ -115,7 +115,7 @@ body{-webkit-user-select:none;user-select:none}
     <div style="font-size:11px;color:#64748b">More QB files at <a href="/meoclass1/" style="color:#0d9488">/meoclass1/</a></div>
   </div>
   <div id="q-feed">
-    <div class="section-head"><h2>🔧 QB5_J — Main Engine, Fuel &amp; Turbocharger</h2><span class="sec-count">2 questions</span></div>
+    <div class="section-head"><h2>🔧 QB5_J — Main Engine, Fuel &amp; Turbocharger</h2><span class="sec-count">4 questions</span></div>
     <div class="q-card" id="q1" data-tags="machinery">
   <div class="q-header" onclick="toggleCard(this)">
     <div class="q-num-badge">1</div>
@@ -260,6 +260,134 @@ body{-webkit-user-select:none;user-select:none}
   <div class="q-footer">
     <button class="correction-btn" onclick="openComment('QB5_J','Q2 · v1.0')">💬 Report a correction</button>
     <span class="q-version">QB5_J · Q2 · v1.0</span>
+  </div>
+</div>
+
+<div class="q-card" id="q3" data-tags="machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is the propeller curve, and what are the light running margin, sea margin and engine margin? Why is an allowance of around 10% built in?</div>
+      <div class="q-tags"><span class="q-tag">MACHINERY</span><span class="q-tag">PROPULSION</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">A fixed-pitch propeller absorbs power roughly as the <strong>cube of its rpm</strong> (P ∝ n³). That relationship, plotted on the engine load diagram, is the propeller curve. Three margins are added when the engine is specified. The <strong>sea margin</strong> (traditionally about 15% power) keeps service speed in average weather. The <strong>engine margin</strong> (10–15% power) means service speed is reached at 85–90% load. The <strong>light running margin</strong> (normally 4–7% rpm, up to 10% in special cases) means that when the hull fouls and the propeller runs heavy, the engine still reaches full power without hitting its torque limit.</p>
+      <h4>60-Second Answer</h4>
+      <p>&ldquo;Sir, for a fixed-pitch propeller the power absorbed rises approximately with the cube of the rpm, so on a log–log load diagram the propeller curve is a straight line. The yard designs the propeller for the <strong>light running</strong> condition: clean hull, calm weather, trial draught. In service the hull and propeller foul, the weather adds resistance, and the propeller needs <strong>more torque for the same rpm</strong>. The curve moves to the left. That is <strong>heavy running</strong>. If the engine had been matched exactly to the clean-hull curve, the fouled ship would hit the engine's torque or mean-pressure limit before reaching full power. So three margins are built in. The <strong>sea margin</strong>, traditionally about 15% of the clean-hull, calm-weather power, keeps service speed in average weather. The <strong>engine margin</strong>, 10 to 15%, lets the ship make service speed at 85 to 90% load. The <strong>light running margin</strong> is an rpm margin: the clean-hull propeller turns 4 to 7% faster at a given power than the engine layout curve, and up to 10% for ships in heavy weather, full-bodied hulls or ships with shaft generators. So the &lsquo;around 10%&rsquo; could mean either the engine margin or the upper end of the light running margin. I would say which, because one is power and the other is rpm.&rdquo;</p>
+      <h4>Governing instrument</h4>
+      <p>There is no IMO rule for propulsion margins. They are design practice, set out in the engine maker's project guide. The figures here are from Everllence (formerly MAN Energy Solutions), two-stroke project guide section <strong>2.01 &ldquo;Propeller layout and engine matching with margins&rdquo;, 199 06 13-4.1 (June 2025)</strong>. Other makers use the same concepts with their own figures. <strong>EEDI</strong> (MARPOL Annex VI) constrains how large the installed-power margins may be, and the maker notes that margins are chosen &ldquo;if allowed by the EEDI regulation&rdquo;.</p>
+      <h4>1. The propeller curve</h4>
+      <ul>
+        <li><strong>Propeller law:</strong> for a fixed-pitch propeller, P ∝ n³ approximately (torque ∝ n²). On the log–log engine load diagram it is a straight line.</li>
+        <li><strong>Propeller design point (PD):</strong> the design speed and power, placed on the <strong>light running</strong> curve (clean hull, calm weather).</li>
+        <li><strong>Heavy running (HR):</strong> fouling, ageing, heavy weather, shallow water or a larger displacement need more torque at the same rpm. The operating curve shifts <strong>left</strong>, to lower rpm at the same power, towards the engine's torque and mean-pressure limits.</li>
+        <li><strong>Light running:</strong> the opposite case, newly cleaned or polished, ballast, calm sea. The propeller can over-speed towards the rpm limit before the engine reaches full power.</li>
+      </ul>
+      <h4>2. The three margins: what each protects</h4>
+      <table class="comp-table"><tr><th>Margin</th><th>Kind</th><th>Typical value (Everllence)</th><th>What it buys</th></tr>
+        <tr><td><strong>Sea margin</strong></td><td>Power</td><td>Traditionally ~15% of PD power</td><td>Maintains design speed in average wind and waves. It may need to be larger as design speeds fall, because added resistance does not fall with them.</td></tr>
+        <tr><td><strong>Engine margin</strong></td><td>Power</td><td>10–15%</td><td>Service speed at 85–90% load. Gives lower SFOC and a power reserve, and lets liner trades catch up delays. Increased for a shaft generator.</td></tr>
+        <tr><td><strong>Light running margin (LRM)</strong></td><td>Rpm</td><td>Normally 4.0–7.0%; up to 10% (or beyond) in special cases</td><td>When the propeller runs heavy, maximum power is still available without exceeding the engine's torque limits. The 7–10% end is for adverse-weather trades, full-bodied tankers and bulkers, shaft-generator ships and high ice class.</td></tr>
+      </table>
+      <p>The <strong>service propulsion point (SP)</strong> is the design point plus the sea margin and the LRM. Adding the engine margin as well gives the <strong>specified MCR for propulsion (MP)</strong>, which must lie inside the engine's layout area. The maker applies the LRM recommendation at every intended draught and from <strong>50 to 100% load</strong>.</p>
+      <h4>3. Why the &ldquo;~10%&rdquo; is ambiguous, and how to answer it</h4>
+      <ul>
+        <li>If the examiner means <strong>power held in reserve at service speed</strong>, it is the <strong>engine margin</strong> (10–15%).</li>
+        <li>If the examiner means <strong>how far the clean-hull propeller is from the engine's layout rpm</strong>, it is the <strong>light running margin</strong>, normally 4–7% and up to 10%.</li>
+        <li>The <strong>sea margin</strong> is the ~15% figure. Do not quote it as the 10%.</li>
+      </ul>
+      <h4>4. CE practice</h4>
+      <ul>
+        <li>Trend <strong>rpm against shaft power</strong> (or fuel index) at steady conditions, and compare with the sea-trial curve. A drift to lower rpm at the same power is heavy running, meaning hull or propeller fouling. That evidence supports a hull clean or propeller polish (see <a href="#q2">Q2</a> for separating hull from engine).</li>
+        <li>In heavy running the engine reaches its <strong>torque/load limiter</strong> early. That is protection working. Do not override it to force speed.</li>
+        <li>After drydock the ship runs light. Watch for over-speed in ballast and calm water, and remember that the same power now comes at higher rpm, which can move the operating point relative to a barred speed range.</li>
+        <li><strong>Slip</strong> is a separate check: see <a href="QB1_supplementary.html#q19">QB1_supplementary, Q19</a> and Q2.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>The light running margin is an <strong>rpm</strong> margin, not a power margin. And a ship whose propeller has been designed with too little LRM will, once fouled, hit the engine's torque limit and be unable to develop full power, even though the engine is healthy.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">Everllence (MAN ES) project guide 2.01, 199 06 13-4.1 (2025)</span><span class="reg-desc">Propeller layout and engine matching with margins: sea margin ~15%, engine margin 10–15%, light running margin normally 4–7%, up to 10% in special cases; SP and MP definitions; LRM applies at all draughts, 50–100% load</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Regs. 22 and 24 (attained and required EEDI)</span><span class="reg-desc">The required EEDI caps the attained EEDI, which limits installed power and so the size of the margins a design can carry</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Draw it if you are allowed to: the load diagram with a straight propeller line, the clean-hull curve to the right, the fouled curve to the left, and the three margins stacked between the design point and the specified MCR. Then say the one sentence that shows understanding: <em>&ldquo;the sea and engine margins are power, the light running margin is rpm, and the LRM is what lets a fouled ship still reach full power.&rdquo;</em></div>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: &ldquo;Your engine cannot reach MCR rpm after 18 months out of dock. Engine fault?&rdquo; A: Probably not. Heavy running from hull and propeller fouling moves the curve left, and the engine reaches its torque limit at lower rpm. Prove it with rpm against power and the fuel index. Q: &ldquo;What happens right after drydock?&rdquo; A: The ship runs light, so the same power is reached at higher rpm, and the risk is rpm, not torque. Q: &ldquo;Is the sea margin the same as the engine margin?&rdquo; A: No. Both are power margins, but sea margin covers weather and engine margin is the operating headroom below MCR.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>P ∝ n³ (fixed pitch) · sea margin <strong>~15%</strong> · engine margin <strong>10–15%</strong> (service at <strong>85–90%</strong> load) · LRM <strong>4–7%</strong>, up to <strong>10%</strong> in special cases · LRM applies <strong>50–100%</strong> load. These are one maker's design recommendations. Quote your own ship's sea-trial and project-guide figures where you know them.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB5_J','Q3 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB5_J · Q3 · v1.0 — Nov 2026 (H8)</span>
+  </div>
+</div>
+
+<div class="q-card" id="q4" data-tags="machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">4</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Slow steaming: why is it done, how does the CE prepare the main engine for long periods at low load, what precautions are taken, and what spares should be held?</div>
+      <div class="q-tags"><span class="q-tag">MACHINERY</span><span class="q-tag">LOW LOAD</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Slow steaming means running deliberately below design speed, usually for long periods at low main-engine load. Ships do it to cut fuel cost and emissions (and CII), absorb fleet overcapacity or fit a schedule. Low load harms an engine built for high load in three ways: poorer air supply and combustion, fouling and deposits, and cylinder-condition problems. The CE prepares by following the maker's low-load guidance. That means adapting cylinder-oil feed rate and BN, managing the auxiliary blowers and turbocharger configuration, and keeping fuel injection in good order. He watches scavenge spaces, the exhaust gas boiler and turbochargers for fouling, and loads the engine up periodically. He holds extra spares for the components low load wears: fuel valves and nozzles, exhaust valves, piston rings, and turbocharger and boiler-cleaning items.</p>
+      <h4>60-Second Answer</h4>
+      <p>&ldquo;Sir, slow steaming saves fuel because propulsion power rises roughly with the cube of speed. Fuel per mile therefore falls roughly with the square of speed, so a modest speed cut saves a large share of the fuel. It also lowers CO<sub>2</sub> and improves the CII rating. The engine, though, is normally specified to make service speed at about 85 to 90% of its specified MCR (see Q3), and sustained low load brings predictable problems. The turbocharger delivers less air, so the auxiliary blowers run. Combustion is poorer, and that gives soot, coked fuel nozzles, and deposits in the scavenge spaces, exhaust valves, turbochargers and the exhaust gas boiler, with a soot-fire risk in the boiler. Exhaust temperatures fall, so the boiler makes less steam. The cylinder-oil feed and base number must be matched to the actual load and sulphur, or you get either deposits or cold corrosion. So I follow the maker's low-load instructions. Those cover feed-rate control and sweep tests, blower operation, and any low-load tuning, turbocharger cut-out or exhaust-bypass arrangement the engine has. I increase scavenge-port inspections and drain checks, clean the turbochargers and boiler more often, and load the engine up periodically if the maker requires it. I hold extra fuel valves and nozzles, exhaust valve spindles and seats, piston rings and turbocharger spares, because those are the items low load wears.&rdquo;</p>
+      <h4>Governing instrument</h4>
+      <p>No convention regulates slow steaming as such. It is commercial and operational, and since 2023 it has been one of the main levers in a ship's <strong>SEEMP Part III</strong> for the <strong>CII</strong> (MARPOL Annex VI Reg. 26 and 28; for the arithmetic see <a href="QB6.html#q1">QB6, Q1</a> and <a href="QB6_E.html#q1">QB6_E, Q1</a>). The technical rules come from the <strong>engine maker's service letters and instruction manual</strong> for low-load operation. They differ by engine type (mechanical or electronic, turbocharger arrangement, low-load tuning fitted or not). Quote <em>your</em> engine's limits and do not give a universal figure. Any change of engine settings or components must stay within the <strong>NOx Technical File</strong> (see Q2).</p>
+      <h4>1. Purpose</h4>
+      <ul>
+        <li><strong>Fuel and cost:</strong> P ∝ V³ approximately, so fuel per nautical mile ∝ V². A 20% speed reduction cuts fuel per mile by roughly a third, at the price of longer voyages and more ships in the loop. The real saving is somewhat less, because SFOC rises at low load and the auxiliary engines run for a longer voyage.</li>
+        <li><strong>Emissions and CII:</strong> lower CO<sub>2</sub> per transport work. Speed is the single biggest operational CII lever.</li>
+        <li><strong>Commercial:</strong> it absorbs fleet overcapacity and fits schedules, including Just-In-Time arrival (<a href="QB7_I.html#q11">QB7_I, Q11</a>).</li>
+      </ul>
+      <h4>2. What low load does to a two-stroke engine</h4>
+      <ul>
+        <li><strong>Air side:</strong> turbocharger efficiency falls and scavenge pressure drops, so the <strong>auxiliary blowers</strong> cut in (the cut-in and cut-out points are set by the maker). The air–fuel ratio and combustion quality suffer.</li>
+        <li><strong>Combustion and fouling:</strong> poorer atomisation and lower temperatures. Soot and carbon build up on fuel nozzles, exhaust valves, piston crowns and ring lands, in the scavenge spaces, on the turbine and nozzle ring, and in the <strong>exhaust gas boiler</strong>, which is where soot fires start.</li>
+        <li><strong>Cylinder condition:</strong> the cylinder-oil feed must suit both the load and the fuel sulphur. Over-lubrication gives deposits and ring and liner wear. Too little alkalinity for the sulphur and liner temperature gives <strong>cold corrosion</strong> (mechanism and feed-rate control: <a href="QB7_C.html#q3">QB7_C, Q3</a>; on new engines, <a href="QB6_G.html#q1">QB6_G, Q1</a>).</li>
+        <li><strong>Heat recovery:</strong> lower exhaust temperature means less exhaust-boiler steam, so the oil-fired boiler may be needed for fuel heating.</li>
+        <li><strong>Vibration:</strong> operating rpm may sit near a <strong>barred speed range</strong>, which must be passed through quickly and never run in. The range and its origin are on the engine's torsional-vibration calculation and the barred-range notice at the control position.</li>
+      </ul>
+      <h4>3. CE preparation and precautions</h4>
+      <ol>
+        <li><strong>Read and apply the maker's low-load guidance</strong> for this engine: the minimum continuous load, the blower logic, and whether a low-load or part-load tuning package, turbocharger cut-out or exhaust-gas bypass is fitted or recommended. A retrofit is a technical-file matter.</li>
+        <li><strong>Cylinder lubrication:</strong> set the feed-rate control to load and sulphur per the maker. Confirm with <strong>scrape-down/drain oil analysis</strong> (iron, residual BN) and <strong>scavenge-port inspections</strong>, and change the rate in small steps only.</li>
+        <li><strong>Fuel system:</strong> keep viscosity and temperature at injection correct. Overhaul or test <strong>fuel valves</strong> to schedule, and consider slide-type valves where the maker recommends them.</li>
+        <li><strong>Air and exhaust side:</strong> clean the turbochargers (water or dry washing as the maker allows), check air-cooler pressure drop, and <strong>soot-blow and inspect the exhaust gas boiler</strong> more often, monitoring its outlet temperature and differential pressure.</li>
+        <li><strong>Scavenge spaces:</strong> drain regularly and inspect more often. Deposits there mean scavenge-fire risk.</li>
+        <li><strong>Periodic load-up</strong>, if the maker requires it, to burn off deposits. Agree it with the bridge and the charterer.</li>
+        <li><strong>Trend everything</strong> at the new steady load: performance against the sea-trial curve (<a href="#q2">Q2</a>, <a href="#q3">Q3</a>), exhaust deviation, turbocharger speed against scavenge pressure.</li>
+      </ol>
+      <h4>4. Spares to hold</h4>
+      <ul>
+        <li>Fuel valves and <strong>atomiser nozzles</strong> (extra sets), plus the fuel-valve test rig in good order.</li>
+        <li><strong>Exhaust valve</strong> spindles, seats and bottom pieces.</li>
+        <li><strong>Piston rings</strong>, and liner and ring inspection gauges.</li>
+        <li><strong>Turbocharger</strong> spares (nozzle ring, gaskets, cleaning equipment) and <strong>auxiliary blower</strong> motor and starter spares, since at low load the blowers may run for long periods.</li>
+        <li><strong>Exhaust gas boiler</strong> soot-blower parts and cleaning equipment, and fire-fighting readiness for a soot fire.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Slow steaming is not &ldquo;easier on the engine&rdquo;. Mechanical load falls, but the engine runs off its design point, so fouling, deposits and cylinder-condition risks rise. The precautions are what make low load safe, and they are engine-specific: quote your maker's instructions, not a figure from memory.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 26 &amp; 28</span><span class="reg-desc">SEEMP (Part III: CII implementation plan) and the CII rating, where speed reduction is an operational measure</span></div>
+      <div class="reg-item"><span class="reg-code">Engine maker's service letters / instruction manual</span><span class="reg-desc">Low-load operation limits, auxiliary blower logic, cylinder-oil feed-rate control, low-load tuning options. These are engine-specific and authoritative for that engine</span></div>
+      <div class="reg-item"><span class="reg-code">NOx Technical Code 2008 / Technical File</span><span class="reg-desc">Low-load tuning, turbocharger cut-out or other changes to NOx-relevant settings and components must follow the approved route</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Structure it as <em>why → what goes wrong → what I do → what I carry</em>. The marks are in the middle two. Name the mechanisms (air side, fouling, cylinder condition, boiler) and match each one with its precaution. Finish by saying that the numbers come from your engine maker's low-load instructions. That shows you know the guidance is engine-specific.</div>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: &ldquo;At low load, should you increase or decrease the cylinder oil?&rdquo; A: Neither by habit. Set the feed rate to the maker's load-dependent control and the fuel sulphur, then confirm with drain-oil analysis and port inspection. Q: &ldquo;Why do soot fires in the exhaust boiler increase during slow steaming?&rdquo; A: Lower gas velocity and temperature, and poorer combustion, deposit more soot. Soot-blow and inspect more often. Q: &ldquo;Can you fit turbocharger cut-out to improve low-load SFOC?&rdquo; A: Only as an approved modification, because it affects NOx-relevant components and needs the technical-file route.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>P ∝ V³ · fuel per mile ∝ V² · a 20% speed cut ≈ one-third less fuel per mile (approximate). <em>Engine limits (minimum continuous load, blower cut-in point, feed-rate settings) are deliberately not given: they are engine-specific and come from the maker.</em></p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB5_J','Q4 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB5_J · Q4 · v1.0 — Nov 2026 (H8)</span>
   </div>
 </div>
   </div>

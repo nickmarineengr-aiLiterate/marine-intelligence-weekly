@@ -4037,3 +4037,47 @@ decision of 28 Oct 2026; none is part of CORR-LP617-SEWAGE-SLUDGE-20261028):**
   (a separate product; not reviewed).
 
 GREP: on the permitted list under 1996 Protocol
+
+### 142. ISM Code 14.4.3 reads "planned the **internal** audit of the ship within three months" — the word was inserted by MSC.273(85); the 2000 text (MSC.104(73)) does not have it
+
+**Flagged:** H8 Tier A authoring and independent review, 11 November 2026, on the `QB4_J` Q7 enrichment (ISM interim certification). Caught before release; no live card carried the wrong text.
+
+**WRONG:** quoting 14.4.3 as *"the Company has planned the audit of the ship within three months"*. That is the text adopted in 2000 by MSC.104(73), and it is what an unamended copy shows.
+
+**CORRECT:** MSC.273(85) (adopted 4 December 2008), item 14: *"In paragraph 14.4.3, the word 'internal' is inserted after the words 'planned the'"*. The current condition for an interim SMC is that the Company has planned the **internal** audit of the ship within three months. MSC.179(79) and MSC.195(80) amend only the certificate forms, and MSC.353(92) amends 6.2 and inserts 12.2. No other amendment touches section 14. Sources: SRC-IMO-MSC104-73 and SRC-ISMCODE-CONSOLIDATED.
+
+**Lesson:** a primary text is only current once every later amending resolution has been checked. Reading the amending instrument proves the wording at adoption, not today.
+
+GREP: planned the audit of the ship
+
+### 143. The Indian Bills of Lading Act, 1856 is repealed — India's statute is the Bills of Lading Act, 2025 (Act No. 18 of 2025), in force 10 September 2025
+
+**Flagged:** H8 Tier A authoring, 11 November 2026, on the new `QB8_B` Q7. Recorded so that the 1856 Act is not cited as current anywhere in the bank.
+
+**WRONG:** *"the Indian Bills of Lading Act, 1856 governs the transfer of rights of suit"*, or citing the 1856 Act as current law.
+
+**CORRECT:** the **Bills of Lading Act, 2025** (Act No. 18 of 2025, assented 24 July 2025; S.O. 4083(E) of 8 September 2025 brought it into force on **10 September 2025**).
+- s.6(1) repeals the 1856 Act.
+- s.2 passes all rights of suit, and the same liabilities, to the named consignee or endorsee to whom the property in the goods passes.
+- s.3 saves stoppage in transit and freight.
+- s.4 makes a "shipped" bill conclusive evidence of shipment against the signatory, unless the signatory shows the misrepresentation was caused wholly by fraud without his own default, or the holder had notice.
+- The **carrier's liability** regime is a separate statute, the Carriage of Goods by Sea Act, 2025 (trap 138).
+
+Source: SRC-INDIA-BOLA-2025.
+
+GREP: Indian Bills of Lading Act, 1856 governs
+
+### 144. "Around 10%" in propeller–engine matching is ambiguous — it is not "the light running margin"
+
+**Flagged:** FD-6 independent root review and H8 Tier A authoring, 11 November 2026, on the new `QB5_J` Q3. The adjudicated ask had assumed that the candidate's "~10% allowance" was the light running margin.
+
+**WRONG:** *"the propeller is designed with a 10% light running margin"*, stated as the rule. Also wrong: quoting the 15% sea margin as "the 10%".
+
+**CORRECT** (Everllence / MAN ES project guide 2.01, 199 06 13-4.1, 2025):
+- the **sea margin** is a **power** margin of traditionally about **15%**;
+- the **engine margin** is a **power** margin of **10–15%** (service at 85–90% load);
+- the **light running margin** is an **rpm** margin, normally **4.0–7.0%**, up to **10%** in special cases.
+
+"Around 10%" therefore means either the engine margin or the upper end of the LRM. Say which, because one is power and the other is rpm. Source: SRC-EVERLLENCE-PG-201-2025.
+
+GREP: 10% light running margin
