@@ -376,7 +376,11 @@ CORRECTION_STATUSES = ("AUTHORISED", "SUPERSEDED")
 # either lane audit identically under it.
 # ---------------------------------------------------------------------------
 FOUNDER_AUTHORISATION_STATES = ("PENDING_FOUNDER_DECISION", "FOUNDER_AUTHORISED")
-FOUNDER_AUTHORISATION_LEGACY_COMMIT = "e016b2549182812b50f16d8e6e1512b3b32bfb2d"
+# Legacy boundary = the production commit this control first lands on. Prepared on e016b25 (19 Oct 2026);
+# re-based on integration (12 Nov 2026) to production ad7cd3d, so the only records newly exempted are the three
+# CORR-LP617-* records already authorised and live on production before the control existed. Every record
+# created after this boundary, including all CORR-SAFETY-* records, must carry founder_authorisation.
+FOUNDER_AUTHORISATION_LEGACY_COMMIT = "ad7cd3db8c802891b13585163743df340837d291"
 _FA_PENDING_FIELDS = {"state", "prepared_under", "prepared_on", "note"}
 _FA_DECIDED_FIELDS = {"state", "decided_on", "decided_by", "decision_ref", "scope", "note"}
 
