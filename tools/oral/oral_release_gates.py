@@ -683,6 +683,15 @@ GATES = (
           note="calendar-month boundaries, TEASER_SYNC counts zero and only "
                "beside its counted gated twin, unknown action kinds fail closed, "
                "and closed-month counts do not drift"),
+    # R-7 (FOUNDER-DECISION-R7-R8-20261113): the one rebased correction whose
+    # October origin is proved from re-hashed git objects carried in the repo.
+    # Positive, conservation (every other record keeps the plain rule) and
+    # forged/missing/contradictory-provenance refusals. Reads only.
+    _gate("monthly_provenance_controls",
+          ["python", "%s/test_oral_monthly_provenance.py" % _ORAL],
+          CAT_UNIT, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="rebased-correction provenance: one pinned entry, re-hashed "
+               "origin objects, origin month = declared month, no general bypass"),
 
     # Content gates for CORR-DEFN-TREATY-20260825. Third pair of this shape,
     # and the one that shows why the shape is needed: QB9_G#q6 shipped a legal

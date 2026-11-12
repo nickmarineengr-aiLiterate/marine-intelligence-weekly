@@ -215,6 +215,8 @@ POST_E6_GATES = [
     # The monthly-projection controls: runnable, never run by a release, so the
     # TEASER_SYNC refusal went unnoticed. Sorted position.
     "monthly_controls",
+    # R-7 (13 Nov 2026): the single pinned rebased-correction provenance entry. Sorted position.
+    "monthly_provenance_controls",
     # PRIV-1 (D-P1-REG): the private intake mutation suite, sorted position.
     "oral_intake_mutate",
     # The shared-module controls, moved INTO the suite: a guard that never runs
