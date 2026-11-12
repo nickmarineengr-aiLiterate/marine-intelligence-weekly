@@ -56,6 +56,26 @@ CONTROLS = [
          {"item_id": "XP-1", "product": "RulesApp", "status": "PROPOSED_FIX"}]}}) == ["XP-1 (RulesApp)"]),
     ("L_free_text_propagation_has_no_items",
      lambda: open_cross_product_items({"propagation": "prose only"}) == []),
+    # ---- U-2 explicit three-record compatibility allowance (12 Nov 2026) ----
+    ("M_allowance_is_exactly_the_three_lp617_records",
+     lambda: sorted(M.FOUNDER_AUTHORISATION_LEGACY_COMPAT_RECORDS) == sorted([
+         "correction_corr_lp617_sewage_sludge_20261028_manifest.json",
+         "correction_corr_lp617_qb9a_q7_20261030_manifest.json",
+         "correction_corr_lp617_simon_p8_20261030_manifest.json"])),
+    ("N_allowlisted_name_with_released_blob_is_exempt",
+     lambda: all(M.legacy_compat_allows(n, b) for n, b in M.FOUNDER_AUTHORISATION_LEGACY_COMPAT_RECORDS.items())),
+    ("O_allowlisted_name_with_edited_content_is_not_exempt",
+     lambda: not any(M.legacy_compat_allows(n, "0" * 40) for n in M.FOUNDER_AUTHORISATION_LEGACY_COMPAT_RECORDS)
+     and not M.legacy_compat_allows("correction_corr_lp617_sewage_sludge_20261028_manifest.json", None)),
+    ("P_future_or_renamed_record_cannot_inherit",
+     lambda: not M.legacy_compat_allows("correction_corr_lp617_sewage_sludge_20261112_manifest.json",
+                                        "89bd478484ad29625d5f2280de61e3409d1f5506")
+     and not M.legacy_compat_allows("correction_corr_future_20261201_manifest.json",
+                                    "89bd478484ad29625d5f2280de61e3409d1f5506")),
+    ("Q_no_safety_record_in_allowance",
+     lambda: not any("safety" in n for n in M.FOUNDER_AUTHORISATION_LEGACY_COMPAT_RECORDS)),
+    ("R_legacy_commit_is_the_p0_baseline",
+     lambda: M.FOUNDER_AUTHORISATION_LEGACY_COMMIT == "e016b2549182812b50f16d8e6e1512b3b32bfb2d"),
 ]
 
 

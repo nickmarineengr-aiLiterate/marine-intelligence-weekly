@@ -376,11 +376,20 @@ CORRECTION_STATUSES = ("AUTHORISED", "SUPERSEDED")
 # either lane audit identically under it.
 # ---------------------------------------------------------------------------
 FOUNDER_AUTHORISATION_STATES = ("PENDING_FOUNDER_DECISION", "FOUNDER_AUTHORISED")
-# Legacy boundary = the production commit this control first lands on. Prepared on e016b25 (19 Oct 2026);
-# re-based on integration (12 Nov 2026) to production ad7cd3d, so the only records newly exempted are the three
-# CORR-LP617-* records already authorised and live on production before the control existed. Every record
-# created after this boundary, including all CORR-SAFETY-* records, must carry founder_authorisation.
-FOUNDER_AUTHORISATION_LEGACY_COMMIT = "ad7cd3db8c802891b13585163743df340837d291"
+# Legacy boundary: records present at the P0 lane's own baseline (19 Oct 2026) predate this control.
+FOUNDER_AUTHORISATION_LEGACY_COMMIT = "e016b2549182812b50f16d8e6e1512b3b32bfb2d"
+# Explicit compatibility allowance (Founder decision U-2, 12 Nov 2026, FOUNDER-DECISION-U1-U2-U3-20261112).
+# Exactly three records were authorised and released to production (Q13 LP.6(17) on 30 Oct; D-4 on 11 Nov) after
+# the legacy commit but before this control landed. Their authorisation provenance stays as released
+# (status AUTHORISED, authorisation_source meoclass1/known_traps.md); no retrospective founder_authorisation is
+# written into them. Each is exempt ONLY by exact filename AND exact git blob as released at production ad7cd3d,
+# so an edited copy, a renamed copy or any future record cannot inherit the allowance. Closed list: adding an
+# entry is a governance change that needs its own Founder decision.
+FOUNDER_AUTHORISATION_LEGACY_COMPAT_RECORDS = {
+    "correction_corr_lp617_sewage_sludge_20261028_manifest.json": "89bd478484ad29625d5f2280de61e3409d1f5506",
+    "correction_corr_lp617_qb9a_q7_20261030_manifest.json": "bb665c0af88707681226a801cd12427aaad5f822",
+    "correction_corr_lp617_simon_p8_20261030_manifest.json": "312378cd58d7cf51d3f21525b7515322de549400",
+}
 _FA_PENDING_FIELDS = {"state", "prepared_under", "prepared_on", "note"}
 _FA_DECIDED_FIELDS = {"state", "decided_on", "decided_by", "decision_ref", "scope", "note"}
 
@@ -423,15 +432,34 @@ def founder_authorisation_findings(manifest: dict, is_legacy: bool) -> list[tupl
     return out
 
 
+def legacy_compat_allows(name: str, blob: str | None) -> bool:
+    """Pure: True only for an allow-listed filename whose content is byte-identical to the released blob."""
+    pinned = FOUNDER_AUTHORISATION_LEGACY_COMPAT_RECORDS.get(name)
+    return bool(pinned) and blob == pinned
+
+
+def _git_blob_of_file(path) -> str | None:
+    try:
+        out = subprocess.run(["git", "hash-object", "--no-filters", str(path)], cwd=str(REPO),
+                             capture_output=True, text=True, check=False)
+    except OSError:
+        return None
+    return out.stdout.strip() if out.returncode == 0 else None
+
+
 def _is_legacy_record(path) -> bool:
-    """Present (by name) in the legacy commit's tree. Fails closed to False."""
-    rel = "tools/oral/%s" % pathlib.Path(path).name
+    """Present (by name) in the legacy commit's tree, or an exact allow-listed compatibility record.
+    Fails closed to False."""
+    name = pathlib.Path(path).name
+    rel = "tools/oral/%s" % name
     try:
         out = subprocess.run(["git", "cat-file", "-e", "%s:%s" % (FOUNDER_AUTHORISATION_LEGACY_COMMIT, rel)],
                              cwd=str(REPO), capture_output=True, check=False)
     except OSError:
         return False
-    return out.returncode == 0
+    if out.returncode == 0:
+        return True
+    return name in FOUNDER_AUTHORISATION_LEGACY_COMPAT_RECORDS and legacy_compat_allows(name, _git_blob_of_file(path))
 
 CORRECTION_FIELD_CLASSES: dict[str, str] = {
     # ---- identity and authorisation (all asserted) ----
