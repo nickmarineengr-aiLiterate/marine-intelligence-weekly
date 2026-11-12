@@ -1,0 +1,143 @@
+{
+ "correction_id": "CORR-SAFETY-LSA-FALLS-COLDSTART-20261019",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "founder_authorisation": {
+  "state": "PENDING_FOUNDER_DECISION",
+  "prepared_under": "Founder decision MIW-P0-SAFETY-FINAL-QUALIFICATION (19 Oct 2026): GO for local safety-correction completion and full qualification; NO production GO, no push, no deploy, no distribution, no bypass of correction authorisation",
+  "prepared_on": "2026-10-19"
+ },
+ "origin": "miw_qb_technical_answer_audit_20261019_s1",
+ "date": "2026-10-19",
+ "title": "QB1_E#q1: falls 'renewed, or turned end-for-end' and a +15 C engine start; SOLAS III/20.4 and LSA 4.4.6.2",
+ "baseline_commit": "e016b2549182812b50f16d8e6e1512b3b32bfb2d",
+ "governing_commits": [
+  "9afcb4185121767dfb26dc9de533fc148f9e08b1",
+  "d06bf3ded1a225d754240da4a8087cfaf3b476db",
+  "05645a1ae7ec92198da6c701ce660e14cc1d2883",
+  "be507089e7e6541833633cb6d8cb2c5a285184e2",
+  "6df9f0ceafd8ce2712966b0f44918f22c92d6e3d",
+  "0ab57b3271a999a81a9910dd00e7ad94ae52066d",
+  "02259156e3367b7e68b8cd358d87ff64fc095e94"
+ ],
+ "authorisation_source": "reports/governance/P0_SAFETY_PREPARATION_AUTHORITY_20261019.md",
+ "candidate_claim": "MIW technical answer audit (frozen pack, 2026-10-19): CORRECTION REQUIRED S1, confirmed by the S1 panel. 'Falls must have been renewed, or turned end-for-end, within the last 5 years'; '15°C'.",
+ "candidate_verdict": "UPHELD",
+ "authority": "SOLAS III/20.4 as replaced by MSC.216(82) (in force 1 July 2008); LSA Code 4.4.6.2 and 5.1.1.1 (MSC.48(66) as amended); SOLAS III/20.6.2 (MSC.152(78)); A.1207(34) annex 1 (revokes A.1186(33)); MSC.402(96). Evidence: P0S_EVIDENCE_MATRIX.json.",
+ "cards": [
+  {
+   "correction_action_id": "SAFETY-LSA-01",
+   "file": "QB1_E.html",
+   "path": "meoclass1/QB1_E.html",
+   "anchor": "q1",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "4f2e837a3b1865939aa7e76d6b11a92eb21d9596756139a07152efdf0979b467",
+   "post_edit_digest": "f46e3003f44fe6645e604e2c6f4e0e8465d0aeb0675c86a0a7e65b7fbb28731a",
+   "supersedes": {
+    "manifest": "batch_e2_enrichment_manifest.json",
+    "action_id": "ENRICH-A012",
+    "post_edit_digest": "4f2e837a3b186593",
+    "note": "This record starts from the state that record pins (its post_edit_digest is this record's pre_edit_digest at e016b25); the earlier pin is not rewritten."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  }
+ ],
+ "propagation": {
+  "sweep": "Falls and cold-start propositions swept: the QB1_E page cheat-sheet row (outside the card) was corrected in the same commits; no other MIW site.",
+  "cross_product_safety_items": [
+   {
+    "item_id": "XP-RULESAPP-FALLS-01",
+    "product": "RulesApp",
+    "status": "OPEN",
+    "path": "RulesApp/repository/index/repo-data.json",
+    "proposition": "falls_no_end_for_end_alternative",
+    "match": "Five-yearly: davit falls (wires) must be turned end-for-end or replaced outright",
+    "record": "extensions[22] targetNodeId LSACode-IV-44 (maintenance-guidance), provenance ai_paraphrase, pending human verification; authoritative source in the separate RulesApp repository",
+    "owner_action": "P0S_SAFETY_SUCCESSOR_20261019/07_RULESAPP_SEPARATE_ACTION.md"
+   },
+   {
+    "item_id": "XP-RULESAPP-FALLS-01",
+    "product": "RulesApp",
+    "status": "OPEN",
+    "path": "RulesApp/repository/index/search-index.json",
+    "proposition": "falls_no_end_for_end_alternative",
+    "match": "Five-yearly: davit falls (wires) must be turned end-for-end or replaced outright",
+    "record": "extensions[22] targetNodeId LSACode-IV-44 (maintenance-guidance), provenance ai_paraphrase, pending human verification; authoritative source in the separate RulesApp repository",
+    "owner_action": "P0S_SAFETY_SUCCESSOR_20261019/07_RULESAPP_SEPARATE_ACTION.md"
+   }
+  ]
+ },
+ "invariants": {
+  "canonical_questions_before": 766,
+  "canonical_questions_after": 766,
+  "new_cards": 0,
+  "q_text_changed": false,
+  "note": "Answer-body corrections only; stems, anchors and card counts unchanged, so qb_content_index regenerates to a no-op."
+ },
+ "known_traps_entries": [
+  161,
+  162
+ ],
+ "artefacts": [
+  {
+   "path": "tools/oral/validate_correction_safety.py",
+   "role": "content gate for all CORR-SAFETY records: closed-world card propositions and open-world corpus propositions"
+  },
+  {
+   "path": "tools/oral/mutate_correction_safety.py",
+   "role": "mutation suite; every mutation trips its own named check"
+  },
+  {
+   "path": "tools/oral/check_founder_authorisation_for_landing.py",
+   "role": "landing gate L1-L4 (not in the qualification run)"
+  },
+  {
+   "path": "tools/oral/test_founder_authorisation.py",
+   "role": "in-memory controls for founder_authorisation and L4"
+  },
+  {
+   "path": "tools/oral/test_e1_timed_supersession.py",
+   "role": "controls for validate_batch_e1's supersession-aware timed-blocks check (P0S-7)"
+  },
+  {
+   "path": "tools/oral/validate_batch_e1.py",
+   "role": "historical E1 validator: timed_blocks_unchanged reads E1's own produced state once a card is superseded"
+  },
+  {
+   "path": "reports/governance/P0_SAFETY_PREPARATION_AUTHORITY_20261019.md",
+   "role": "preparation authority (not landing authority)"
+  }
+ ],
+ "review": {
+  "method": "independent clean-context whole-card review, every section, primary sources opened by the reviewer; repeated until ACCEPT or ACCEPT_WITH_NITS with no open S1-S3 finding and safety resolved everywhere (P0S_SAFETY_SUCCESSOR_20261019/03_review)",
+  "final": [
+   {
+    "item": "QB1_E_q1",
+    "round": "round2",
+    "review_file": "P0S_SAFETY_SUCCESSOR_20261019/03_review/round2/G2_QB1_E.review.json",
+    "reviewer": "P0S-EDREV2-G2_QB1_E",
+    "content_commit_reviewed": "6df9f0ceafd8ce2712966b0f44918f22c92d6e3d",
+    "verdict": "ACCEPT_WITH_NITS",
+    "reviewed_digest": "f46e3003f44fe6645e604e2c6f4e0e8465d0aeb0675c86a0a7e65b7fbb28731a",
+    "open_findings_by_severity": {
+     "S5": 3
+    },
+    "reviewed_content_identical_to_record_content_commit": true
+   },
+   {
+    "item": "QB1_E_PAGE",
+    "round": "round2",
+    "review_file": "P0S_SAFETY_SUCCESSOR_20261019/03_review/round2/G2_QB1_E.review.json",
+    "reviewer": "P0S-EDREV2-G2_QB1_E",
+    "content_commit_reviewed": "6df9f0ceafd8ce2712966b0f44918f22c92d6e3d",
+    "verdict": "ACCEPT_WITH_NITS",
+    "reviewed_digest": "e6b46913becaf9b04b4b0b2c92fdc249359b3b752f712729987c9ca53fb9d304",
+    "open_findings_by_severity": {
+     "S5": 1
+    },
+    "reviewed_content_identical_to_record_content_commit": true
+   }
+  ]
+ },
+ "note": "Prepared and qualified locally; full evidence in P0_SAFETY_CORRECTION_20261019 and P0S_SAFETY_SUCCESSOR_20261019 (job root, outside the repository)."
+}

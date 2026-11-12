@@ -1,0 +1,108 @@
+{
+ "correction_id": "CORR-SAFETY-EEBD-ENTRY-20261019",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "founder_authorisation": {
+  "state": "PENDING_FOUNDER_DECISION",
+  "prepared_under": "Founder decision MIW-P0-SAFETY-FINAL-QUALIFICATION (19 Oct 2026): GO for local safety-correction completion and full qualification; NO production GO, no push, no deploy, no distribution, no bypass of correction authorisation",
+  "prepared_on": "2026-10-19"
+ },
+ "origin": "miw_qb_technical_answer_audit_20261019_s1",
+ "date": "2026-10-19",
+ "title": "QB1_F#q1: the fire party entered on EEBDs; entry is in fire-fighter's outfits with breathing apparatus",
+ "baseline_commit": "e016b2549182812b50f16d8e6e1512b3b32bfb2d",
+ "governing_commits": [
+  "9afcb4185121767dfb26dc9de533fc148f9e08b1",
+  "d06bf3ded1a225d754240da4a8087cfaf3b476db",
+  "05645a1ae7ec92198da6c701ce660e14cc1d2883",
+  "be507089e7e6541833633cb6d8cb2c5a285184e2",
+  "6df9f0ceafd8ce2712966b0f44918f22c92d6e3d",
+  "0ab57b3271a999a81a9910dd00e7ad94ae52066d",
+  "02259156e3367b7e68b8cd358d87ff64fc095e94"
+ ],
+ "authorisation_source": "reports/governance/P0_SAFETY_PREPARATION_AUTHORITY_20261019.md",
+ "candidate_claim": "MIW technical answer audit (frozen pack, 2026-10-19): CORRECTION REQUIRED S1, confirmed by the S1 panel. 60-second answer: 'The ship's fire squad made entry using appropriate PPE and EEBD'.",
+ "candidate_verdict": "UPHELD",
+ "authority": "FSS Code ch.3 2.2.1.2 (MSC.98(73)); MSC/Circ.849 2.2; SOLAS II-2/10.10; FSS ch.5 2.1.3.2; ITC Hulls cl.6; IACS UR E24 Rev.1; ISO 3941 via A.951(23); DGS/DGMA MS Notice 04 of 2026; drive maker's manual (DC-link capacitors after isolation). Evidence: P0S_EVIDENCE_MATRIX.json.",
+ "cards": [
+  {
+   "correction_action_id": "SAFETY-EEBD-01",
+   "file": "QB1_F.html",
+   "path": "meoclass1/QB1_F.html",
+   "anchor": "q1",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "648c62dc9d63efa9648be0ded3b9fa29b1157d531db492b6974d20aabf68b738",
+   "post_edit_digest": "ba8766b1a1dc9d23006ea1fdc8e3aba4e95fc679f4354e55c2db220e6d54179a",
+   "supersedes": {
+    "manifest": "correction_corr_t5_ddcascade_20260906_manifest.json",
+    "action_id": "T5-DDCASCADE-01",
+    "post_edit_digest": "648c62dc9d63efa9648be0ded3b9fa29b1157d531db492b6974d20aabf68b738",
+    "note": "This record starts from the state that record pins (its post_edit_digest is this record's pre_edit_digest at e016b25); the earlier pin is not rewritten."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  }
+ ],
+ "propagation": {
+  "sweep": "EEBD-entry proposition swept over every authored surface: no other site."
+ },
+ "invariants": {
+  "canonical_questions_before": 766,
+  "canonical_questions_after": 766,
+  "new_cards": 0,
+  "q_text_changed": false,
+  "note": "Answer-body corrections only; stems, anchors and card counts unchanged, so qb_content_index regenerates to a no-op."
+ },
+ "known_traps_entries": [
+  160
+ ],
+ "artefacts": [
+  {
+   "path": "tools/oral/validate_correction_safety.py",
+   "role": "content gate for all CORR-SAFETY records: closed-world card propositions and open-world corpus propositions"
+  },
+  {
+   "path": "tools/oral/mutate_correction_safety.py",
+   "role": "mutation suite; every mutation trips its own named check"
+  },
+  {
+   "path": "tools/oral/check_founder_authorisation_for_landing.py",
+   "role": "landing gate L1-L4 (not in the qualification run)"
+  },
+  {
+   "path": "tools/oral/test_founder_authorisation.py",
+   "role": "in-memory controls for founder_authorisation and L4"
+  },
+  {
+   "path": "tools/oral/test_e1_timed_supersession.py",
+   "role": "controls for validate_batch_e1's supersession-aware timed-blocks check (P0S-7)"
+  },
+  {
+   "path": "tools/oral/validate_batch_e1.py",
+   "role": "historical E1 validator: timed_blocks_unchanged reads E1's own produced state once a card is superseded"
+  },
+  {
+   "path": "reports/governance/P0_SAFETY_PREPARATION_AUTHORITY_20261019.md",
+   "role": "preparation authority (not landing authority)"
+  }
+ ],
+ "review": {
+  "method": "independent clean-context whole-card review, every section, primary sources opened by the reviewer; repeated until ACCEPT or ACCEPT_WITH_NITS with no open S1-S3 finding and safety resolved everywhere (P0S_SAFETY_SUCCESSOR_20261019/03_review)",
+  "final": [
+   {
+    "item": "QB1_F_q1",
+    "round": "round4",
+    "review_file": "P0S_SAFETY_SUCCESSOR_20261019/03_review/round4/G1_QB1_F.review.json",
+    "reviewer": "P0S-EDREV4-G1_QB1_F",
+    "content_commit_reviewed": "02259156e3367b7e68b8cd358d87ff64fc095e94",
+    "verdict": "ACCEPT_WITH_NITS",
+    "reviewed_digest": "ba8766b1a1dc9d23006ea1fdc8e3aba4e95fc679f4354e55c2db220e6d54179a",
+    "open_findings_by_severity": {
+     "S4": 5,
+     "S5": 3
+    },
+    "reviewed_content_identical_to_record_content_commit": true
+   }
+  ]
+ },
+ "note": "Prepared and qualified locally; full evidence in P0_SAFETY_CORRECTION_20261019 and P0S_SAFETY_SUCCESSOR_20261019 (job root, outside the repository)."
+}

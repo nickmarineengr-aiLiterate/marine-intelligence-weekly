@@ -251,6 +251,22 @@ def git_show(ref, rel):
     return r.stdout.decode("utf-8", "replace")
 
 
+def e1_produced_card(fname, anchor, post_digest):
+    """The card text E1 shipped: the newest committed state of `fname` whose
+    `anchor` card has E1's pinned post digest. None if history holds no such
+    state (a shallow clone, or a pin that never shipped) - callers fail."""
+    r = subprocess.run(["git", "log", "--format=%H", "--", "meoclass1/" + fname],
+                       cwd=REPO, capture_output=True)
+    if r.returncode != 0 or not post_digest:
+        return None
+    for sha in r.stdout.decode("ascii", "replace").split():
+        raw = git_show(sha, "meoclass1/" + fname)
+        card = cards_of(raw).get(anchor) if raw else None
+        if card is not None and digest16(card.replace("\r\n", "\n")) == post_digest:
+            return card.replace("\r\n", "\n")
+    return None
+
+
 def load_consolidation(manifest):
     p = REPO / CONSOL_REL
     if p.exists():
@@ -553,7 +569,18 @@ def main():
     report("no_candidate_visible_metadata", not dirty, "%s" % (dirty or "-"))
 
     # ---- timed blocks are untouched: enrichment is body-only ----
-    timed_bad = []
+    # Like "purely additive" above, this is a claim about the state E1
+    # PRODUCED. While E1's state is live it is checked against the live card,
+    # exactly as before. Once a later authorised record supersedes the card
+    # (the chain resolves SUPERSEDED), the live card is that record's state,
+    # and an authorised correction to a 15- or 60-second answer would be read
+    # as E1's defect. So the claim is then checked against E1's own produced
+    # state, recovered from history by its pinned digest - the comparison is
+    # still made, on the state E1 actually shipped. If that state cannot be
+    # found the check fails: a superseded card is never silently skipped.
+    timed_bad, timed_on_e1_state = [], []
+    pat = re.compile(
+        r'<div class="(?:practice-block|oral-box)[^"]*"[^>]*>.*?</div>', re.S)
     for fname, wanted in sorted(by_file.items()):
         raw = (QB_DIR / fname).read_text(encoding="utf-8", newline="")
         live = cards_of(raw)
@@ -563,14 +590,27 @@ def main():
             a = c["anchor"]
             if a not in live or a not in based:
                 continue
-            pat = re.compile(
-                r'<div class="(?:practice-block|oral-box)[^"]*"[^>]*>.*?</div>',
-                re.S)
-            lb = pat.findall(live[a].replace("\r\n", "\n"))
+            subject = live[a].replace("\r\n", "\n")
+            res = resolve_authorised_card_state(
+                manifest=MANIFEST.name, action_id=c["action_id"],
+                file=fname, anchor=a,
+                pinned_post_digest=c.get("post_edit_digest"),
+                live_digest=digest16(subject), directory=MANIFEST.parent)
+            if res.describe().startswith("SUPERSEDED"):
+                produced = e1_produced_card(fname, a, c.get("post_edit_digest"))
+                if produced is None:
+                    timed_bad.append("%s#%s (superseded; E1's produced state "
+                                     "not found in history)" % (fname, a))
+                    continue
+                subject = produced
+                timed_on_e1_state.append("%s#%s" % (fname, a))
+            lb = pat.findall(subject)
             bb = pat.findall(based[a].replace("\r\n", "\n"))
             if lb != bb and not c.get("timed_blocks_changed"):
                 timed_bad.append("%s#%s" % (fname, a))
-    report("timed_blocks_unchanged", not timed_bad, "%s" % (timed_bad or "-"))
+    report("timed_blocks_unchanged", not timed_bad,
+           "%s; superseded, checked on E1's produced state=%s"
+           % (timed_bad or "-", timed_on_e1_state or "-"))
 
     # ---- no relationship delta is authorised for an enrichment batch ----
     r = subprocess.run([sys.executable, "tools/oral/build_examiner_index.py",

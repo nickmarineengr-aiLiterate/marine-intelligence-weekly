@@ -4053,3 +4053,94 @@ four further items on the same card); they are a separate proposed correction an
 The text of B, B1 and B2 above is the record of what was open and is not rewritten.
 
 GREP: on the permitted list under 1996 Protocol
+
+### 160. An EEBD is an escape device — it is never what a fire party wears to go in
+
+**Where it was found:** `QB1_F#q1` (CORR-SAFETY-EEBD-ENTRY-20261019), in the 60-second model answer: "The ship's fire
+squad made entry using appropriate PPE and EEBD". The card's own detailed answer said fire-fighter's outfits.
+
+**Why it is wrong.** FSS Code ch.3 para 2.2.1.2: EEBDs "shall not be used for fighting fires, entering oxygen deficient
+voids or tanks, or worn by fire-fighters"; MSC/Circ.849 2.2 says the same and names self-contained breathing apparatus
+for those cases. Entry is in the fire-fighter's outfit (SOLAS II-2/10.10; FSS ch.3 2.1), which includes breathing
+apparatus. An EEBD has a service duration of at least 10 minutes (FSS 2.2.3.1) and is built to get one person out.
+
+**What to check.** Any sentence where a fire party, rescue team or entrant uses, wears or enters with an EEBD.
+Familiarisation lists ("locate the EEBDs") and carriage requirements are correct and are not this trap.
+
+### 161. Lifeboat falls are renewed on condition AND at five years — end-for-ending is not an alternative
+
+**Where it was found:** `QB1_E#q1` (CORR-SAFETY-LSA-FALLS-COLDSTART-20261019): "Falls must have been renewed, or turned
+end-for-end, within the last 5 years", in four places. The same error is in the RulesApp lifeboat
+maintenance-guidance record (a separate product, open item XP-RULESAPP-FALLS-01).
+
+**Why it is wrong.** SOLAS III/20.4 as replaced by MSC.216(82) (in force 1 July 2008): falls used in launching are
+"inspected periodically with special regard for areas passing through sheaves, and renewed when necessary due to
+deterioration of the falls or at intervals of not more than 5 years, whichever is the earlier". The pre-2008 text
+required turning end-for-end at 30 months IN ADDITION to renewal at 5 years; it was never an alternative, and it is
+gone. Five years is a cap, not a fixed interval.
+
+**What to check.** "end-for-end" anywhere near falls; any wording that makes renewal purely calendar-based or purely
+condition-based.
+
+### 162. The lifeboat engine cold-start condition is minus 15 °C
+
+**Where it was found:** `QB1_E#q1` numbers box and the QB1_E page cheat sheet: "at an ambient temperature of 15°C".
+
+**Why it is wrong.** LSA Code 4.4.6.2: the starting system shall start the engine "at an ambient temperature of -15 °C
+within 2 min of commencing the start procedure", unless the Administration accepts a different temperature for the
+ship's voyages; rescue boats via LSA 5.1.1.1. The weekly test is a separate duty: SOLAS III/20.6.2, run for not less
+than 3 min with the gearbox shown to engage. Do not attribute "ahead/astern" to 4.4.6.2.
+
+### 163. Enclosed-space entry criteria are MSC.581(110) 7.4 — steady 20.9 % O₂, CO₂ < 0.5 %, < 1 % LFL, toxic < 50 % OEL
+
+**Where it was found:** `QB5_A#q11` and its cheat sheet (CORR-SAFETY-ENCLOSED-SPACE-20261019); `QB5_B#q15`, its cheat
+sheet and `QB5_A#q10` (CORR-SAFETY-ENCLOSED-SPACE-PROPAGATION-20261019); `QB1_F#q8`, `QB3_B#q1`, `QB3_B#q3`
+(CORR-SAFETY-ENCLOSED-SPACE-EXT-20261019). The cards gave a 19.5–23.5 % oxygen band, omitted CO₂, gave fixed H₂S/CO ppm
+figures (1, 5 or 25 ppm, "toxics 0 ppm") as entry limits, and cited the superseded A.1050(27) and SOLAS XI-1/5.
+
+**Why it is wrong.** MSC.581(110) (27 June 2025, revoking A.1050(27)) 7.4: steady readings of 20.9 % oxygen by volume;
+CO₂ checked and below 0.5 % (5,000 ppm); below 1 % of the LFL where flammables are possible; below 50 % of the
+occupational exposure limit of any toxic vapour or gas — "National requirements may differ". The OEL comes from
+accepted national or international standards (7.7); the resolution gives no H₂S or CO ppm entry figure (Appendix 5
+values are information). A lower or unsteady O₂ reading means the space is treated as one where the atmosphere is
+unsafe (6.5.3), and section 9 then applies. The recommendations are not mandatory; the mandatory hooks are SOLAS
+III/19.3.6 (drills), XI-1/7 (testing instruments) and the ISM Code.
+
+**What to check.** Any O₂ percentage, ppm figure or "TLV" presented as an entry go/no-go value; any citation of
+A.1050(27) as current or XI-1/5 for enclosed spaces. Chemical-specific exposure limits stated as exposure limits (e.g.
+ammonia TLV-TWA 25 ppm) are not this trap.
+
+### 164. A crankcase warning means slow down or stop and keep the crankcase shut until cooled — never ventilate
+
+**Where it was found:** `QB5_A#q8` (CORR-SAFETY-CRANKCASE-RESPONSE-20261019) CE tip: "Decision (emergency stop — SOLAS
+§II-1 obligation), Execute (stop, ventilate, investigate per maker's manual)".
+
+**Why it is wrong.** Air admitted to a crankcase with a hot spot can cause a second explosion; MAN SL2022-730 reports
+one caused by "fresh air to rush into the crankcase", and gives the response as slow down or stop and then fault
+identification. WinGD X82DF OM 2.6: decrease speed, stop if possible, do not open the crankcase doors for at least
+20 minutes after engine stop (that figure is maker- and model-specific; cite the maker's period). SOLAS II-1 contains
+equipment duties (relief valves, oil-mist detection), not an emergency-stop duty; IACS UR M10 requires alarm and slow
+down for low-speed engines.
+
+### 165. IMDG stowage category D is ON deck only; "separated from" under deck means different compartments
+
+**Where it was found:** `QB8_A#q5` (CORR-SAFETY-IMDG-STOWAGE-SEGREGATION-20261019): category D "under deck only",
+category E "restricted" on passenger ships, "separated from" as 6 m / 12 m.
+
+**Why it is wrong.** IMDG 42-24 (MSC.556(108)) 7.1.3.2: D — cargo ships (and passenger ships within the limit) ON DECK
+ONLY, other passenger ships PROHIBITED; E — ON DECK OR UNDER DECK / PROHIBITED. 7.6.3.2 (conventional stowage): "away
+from" 3 m; "separated from" different compartments or holds under deck, 6 m on deck; complete compartment 12 m on deck;
+longitudinally 24 m. Container ships with closed holds use the 7.4.3.2 table (hatchless: 7.4.3.3).
+
+### 166. Entry criteria are not exposure limits, a non-gas-free tank is not a routine entry, and a recycling yard is a different regime
+
+**Where it was found:** `QB5_B#q15` (lowering a Framo pump into a cargo tank treated as an entry with entry limits),
+`QB3_G#q4` (ship-recycling hot-work criteria with an unsourced "0 ppm" toxic target).
+
+**What to keep apart.** (1) The shipboard ENTRY criteria (MSC.581(110) 7.4). (2) A chemical's EXPOSURE LIMIT (the OEL /
+TLV — the input to criterion 4, not the criterion). (3) Work done from outside a space, such as lowering a pump from
+deck, which is not an entry — but the people at the opening still need gas detection. (4) A space whose atmosphere is
+known or suspected to be unsafe: any entry is a section 9 case, with very careful consideration and positive-pressure
+breathing apparatus, and no one goes in alone to rescue (section 11). (5) Ship recycling facilities, where a Competent
+person certifies "Safe-for-entry" (21 % O₂, ≤ 1 % LFL, ≤ 50 % OEL) and "Safe-for-hot work" under MEPC.210(63) 3.3.4 —
+a different instrument for a different place. Do not move numbers between these five.
