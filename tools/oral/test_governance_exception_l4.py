@@ -10,9 +10,12 @@ Every control states what MUST block or pass. A crash is a FAIL. Prints "<N> che
 """
 from __future__ import annotations
 
+import contextlib
 import copy
 import datetime as dt
+import io
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -23,6 +26,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import governance_exceptions as GX  # noqa: E402
 import oral_manifest as M  # noqa: E402
+import check_founder_authorisation_for_landing as GATE  # noqa: E402
 
 REAL_NAME = "governance_exception_gx_s1_rulesapp_falls_20261112.json"
 REAL = json.loads((HERE / REAL_NAME).read_text(encoding="utf-8"))
@@ -207,6 +211,12 @@ CONTROLS = [
     ("N55_unused_unknown_file_blocks", lambda: blocks_with("unknown exception", open_items=[], ev=None, files={"governance_exception_gx_rogue.json": b'{"exception_id": "GX-ROGUE"}'})),
     ("N56_unparseable_file_blocks", lambda: blocks_with("unparseable", files={"governance_exception_x.json": b"{"})),
     ("N57_l4_is_not_hardcoded_pass", lambda: not run(files={}, known={})[0]),
+    # R7 surviving-mutation gaps
+    ("N58_third_SELF_entry_blocks",
+     lambda: blocks_with("SELF entries", facts=Facts(changed=dict(Facts()._changed, **{"tools/oral/extra.py": "A"})),
+                         e=mod(["release", "diff_pin"], dict(PIN, **{"tools/oral/extra.py": {"status": "A", "blob": GX.SELF}})))),
+    ("N59_indented_non_rule_line_blocks", lambda: blocks_with("indented line", facts=Facts(vi=VI_OK + "\tnode_modules2/\n"))),
+    ("N60_bytecode_required", lambda: bool(GX.bytecode_problems(False)) and not GX.bytecode_problems(True)),
 ]
 
 
@@ -225,22 +235,26 @@ def write(repo, rel, text):
     p.write_bytes(text.encode("utf-8"))
 
 
+FA = {"state": "FOUNDER_AUTHORISED", "decided_on": "2026-11-12", "decided_by": "Founder", "decision_ref": "fixture", "scope": []}
+
+
 def build_fixture():
     """B (baseline) -> C1 (content + records) -> C2 (module + exception). Returns (repo, exception, raw, known)."""
     repo = Path(tempfile.mkdtemp(prefix="gx_fixture_"))
     git(repo, "init", "-q")
     write(repo, ".vercelignore", VI_OK)
-    write(repo, ".gitignore", "*.local.json\n")
+    write(repo, ".gitignore", "*.local.json\n__pycache__/\n")
     write(repo, "vercel.json", "{}\n")
     write(repo, "RulesApp/repository/index/repo-data.json", '{"falls": "wrong"}\n')
     write(repo, "meoclass1/QB1_E.html", "<p>falls wrong</p>\n")
-    write(repo, "tools/oral/correction_corr_old_20260901_manifest.json", '{"correction_id": "OLD"}\n')
+    write(repo, "tools/oral/correction_corr_old_20260901_manifest.json",
+          json.dumps({"correction_id": "OLD", "founder_authorisation": FA}) + "\n")
     git(repo, "add", "-A")
     git(repo, "commit", "-q", "-m", "baseline")
     base = git(repo, "rev-parse", "HEAD")
     items = [{"item_id": "XP-T-01", "product": "RulesApp", "status": "OPEN", "path": "RulesApp/repository/index/repo-data.json",
               "proposition": "p", "match": "wrong"}]
-    rec = {"correction_id": "CORR-T-FALLS", "founder_authorisation": {"state": "FOUNDER_AUTHORISED"},
+    rec = {"correction_id": "CORR-T-FALLS", "founder_authorisation": FA,
            "propagation": {"cross_product_safety_items": items}}
     write(repo, "meoclass1/QB1_E.html", "<p>falls right</p>\n")
     write(repo, "tools/oral/correction_corr_t_falls_manifest.json", json.dumps(rec) + "\n")
@@ -326,11 +340,12 @@ def hermetic_controls():
                lambda: (git(repo, "mv", "tools/oral/correction_corr_old_20260901_manifest.json",
                             "tools/oral/correction_corr_rogue_20261112_manifest.json"), commit_all("f4")))
         attack("B9_F4_edit_existing_record_blocks", "correction records",
-               lambda: (write(repo, "tools/oral/correction_corr_old_20260901_manifest.json", '{"correction_id": "OLD2"}\n'),
+               lambda: (write(repo, "tools/oral/correction_corr_old_20260901_manifest.json",
+                              json.dumps({"correction_id": "OLD2", "founder_authorisation": FA}) + "\n"),
                         commit_all("f4m")))
         attack("B10_F5_extra_item_same_id_blocks", "differ from the pinned list",
                lambda: (write(repo, "tools/oral/correction_corr_t_falls_manifest.json", json.dumps(
-                   {"correction_id": "CORR-T-FALLS", "founder_authorisation": {"state": "FOUNDER_AUTHORISED"},
+                   {"correction_id": "CORR-T-FALLS", "founder_authorisation": FA,
                     "propagation": {"cross_product_safety_items": e["cross_product_item"]["items"] + [
                         dict(e["cross_product_item"]["items"][0], proposition="other")]}}) + "\n"), commit_all("f5")))
         attack("B11_untracked_file_blocks", "uncommitted or untracked",
@@ -341,8 +356,124 @@ def hermetic_controls():
                ev_over={"commit": "0" * 40})
         attack("B14_unrelated_page_change_blocks", "unpinned path",
                lambda: (write(repo, "meoclass1/QB9_Z.html", "<p>new</p>\n"), commit_all("page")))
+        try:
+            git(repo, "mv", "tools/oral/correction_corr_old_20260901_manifest.json",
+                "tools/oral/correction_corr_moved_manifest.json")
+            commit_all("mv")
+            cp = GX.RepoFacts(repo).changed_paths(e["release"]["production_baseline"]) or {}
+            out.append(("B15_no_renames_splits_a_rename_into_D_and_A",
+                        cp.get("tools/oral/correction_corr_old_20260901_manifest.json") == "D"
+                        and cp.get("tools/oral/correction_corr_moved_manifest.json") == "A", str(cp)[:200]))
+        finally:
+            git(repo, "reset", "-q", "--hard", c2)
+        out += gate_main_controls(repo, e, known, c2, commit_all)
     finally:
         shutil.rmtree(repo, ignore_errors=True)
+    return out
+
+
+def gate(repo, known, ev=None, dwb=True, env=None):
+    """Run the REAL landing gate main() against the fixture repository. Returns (exit code, output)."""
+    f = GX.RepoFacts(repo)
+    args, tmpdir = [], None
+    if ev is not None:
+        tmpdir = Path(tempfile.mkdtemp(prefix="gx_ev_"))
+        (tmpdir / "ev.json").write_text(json.dumps(ev), encoding="utf-8")
+        args = ["--deployment-evidence", str(tmpdir / "ev.json")]
+    old = dict(os.environ)
+    try:
+        os.environ.update(env or {})
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            rc = GATE.main(args, facts=f, known=known, now=NOW, dont_write_bytecode=dwb)
+    finally:
+        os.environ.clear()
+        os.environ.update(old)
+        if tmpdir is not None:
+            shutil.rmtree(tmpdir, ignore_errors=True)
+    return rc, buf.getvalue()
+
+
+def gate_main_controls(repo, e, known, c2, commit_all):
+    out = []
+
+    def good_ev():
+        f = GX.RepoFacts(repo)
+        return evidence(e, commit=f.head_commit(), tree=f.head_tree(), exception_sha256=known[e["exception_id"]])
+
+    def reset():
+        for r in git(repo, "for-each-ref", "--format=%(refname)", "refs/replace/", check=False).split():
+            git(repo, "update-ref", "-d", r, check=False)
+        git(repo, "reset", "-q", "--hard", c2)
+        git(repo, "clean", "-qfdx")
+
+    rc, txt = gate(repo, known, good_ev())
+    out.append(("G1_real_gate_main_passes_on_fixture_with_evidence", rc == 0, txt[-300:]))
+    rc, txt = gate(repo, known, None)
+    out.append(("G2_real_gate_main_without_evidence_fails_L4", rc == 1 and "FAIL  L4" in txt, txt[-300:]))
+    rc, txt = gate(repo, known, good_ev(), dwb=False)
+    out.append(("G3_real_gate_main_refuses_without_python_B", rc == 1 and "python -B" in txt, txt[-300:]))
+    try:  # R7 B1: committed OPEN item for a deployed product, working tree "fixed" -> must still fail
+        rec = json.loads((repo / "tools/oral/correction_corr_t_falls_manifest.json").read_text(encoding="utf-8"))
+        bad = copy.deepcopy(rec)
+        bad["propagation"]["cross_product_safety_items"].append(
+            dict(rec["propagation"]["cross_product_safety_items"][0], item_id="XP-MIW-01", product="MIW"))
+        write(repo, "tools/oral/correction_corr_t_falls_manifest.json", json.dumps(bad) + "\n")
+        commit_all("b1")
+        closed = copy.deepcopy(rec)
+        for i in closed["propagation"]["cross_product_safety_items"]:
+            i["status"] = "CLOSED_VERIFIED"
+        write(repo, "tools/oral/correction_corr_t_falls_manifest.json", json.dumps(closed) + "\n")
+        rc, txt = gate(repo, known, None)
+        out.append(("G4_R7_B1_working_tree_cannot_mask_committed_open_items",
+                    rc == 1 and "FAIL  L0" in txt and "XP-MIW-01" in txt, txt[-400:]))
+    finally:
+        reset()
+    try:  # R7 M1: a replace ref makes a bad HEAD look like the good one
+        write(repo, ".vercelignore", "node_modules/\n")
+        commit_all("bad")
+        bad = git(repo, "rev-parse", "HEAD")
+        git(repo, "replace", bad, c2)
+        rc, txt = gate(repo, known, good_ev())
+        out.append(("G5_R7_M1_replace_ref_refused_and_not_honoured",
+                    rc == 1 and "replace refs" in txt and "may be deployed" in txt, txt[-400:]))
+    finally:
+        reset()
+    pristine = Path(tempfile.mkdtemp(prefix="gx_pristine_"))
+    try:  # R7 M1: GIT_DIR / GIT_WORK_TREE pointing at a pristine clone are scrubbed
+        shutil.rmtree(pristine)
+        git(Path(tempfile.gettempdir()), "clone", "-q", str(repo), str(pristine))
+        write(repo, ".vercelignore", "node_modules/\n")
+        commit_all("bad2")
+        rc, txt = gate(repo, known, good_ev(), env={"GIT_DIR": str(pristine / ".git"), "GIT_WORK_TREE": str(pristine)})
+        out.append(("G6_R7_M1_GIT_DIR_redirection_scrubbed", rc == 1 and "may be deployed" in txt, txt[-400:]))
+    finally:
+        shutil.rmtree(pristine, ignore_errors=True)
+        reset()
+    try:  # R7 M1: a committed gitlink, with local diff.ignoreSubmodules=all
+        git(repo, "update-index", "--add", "--cacheinfo", "160000,%s,sub" % c2)
+        git(repo, "commit", "-q", "-m", "gitlink")
+        git(repo, "config", "diff.ignoreSubmodules", "all")
+        rc, txt = gate(repo, known, good_ev())
+        out.append(("G7_R7_M1_gitlink_refused_despite_local_ignoreSubmodules", rc == 1 and "gitlink" in txt, txt[-400:]))
+    finally:
+        git(repo, "config", "--unset", "diff.ignoreSubmodules", check=False)
+        reset()
+    try:  # R7 M2: a shadow .pyc (git-ignored) in the checkout
+        write(repo, "tools/oral/__pycache__/governance_exceptions.cpython-314.pyc", "x")
+        rc, txt = gate(repo, known, good_ev())
+        out.append(("G8_R7_M2_shadow_pyc_or_any_ignored_file_refused", rc == 1 and "ignored files" in txt, txt[-400:]))
+    finally:
+        reset()
+    try:  # R7 m3: a file hidden through .git/info/exclude
+        (repo / ".git/info").mkdir(exist_ok=True)
+        (repo / ".git/info/exclude").write_text("hidden.txt\n")
+        write(repo, "hidden.txt", "x")
+        rc, txt = gate(repo, known, good_ev())
+        out.append(("G9_R7_m3_info_exclude_hidden_file_refused", rc == 1 and "ignored files" in txt, txt[-400:]))
+    finally:
+        (repo / ".git/info/exclude").write_text("")
+        reset()
     return out
 
 

@@ -5,7 +5,8 @@ Reads the named exception, sends one anonymous GET per live_probe_path to live_o
 redirects and without cookies, and writes a JSON evidence file bound to this repository's HEAD commit and tree.
 Read-only: it changes no file in the repository and no remote state.
 
-  python tools/oral/verify_rulesapp_not_deployed.py --exception GX-S1-RULESAPP-FALLS-20261112 --out FILE
+  python -B -X utf8 tools/oral/verify_rulesapp_not_deployed.py --exception GX-S1-RULESAPP-FALLS-20261112 --out FILE
+(run it from the out-of-repository launcher's fresh clone; a working checkout with caches records clean=false)
 Exit 0 only if every probe returned exactly the exception's required_status and .vercelignore excludes the product.
 Run it at release qualification and again immediately before any production push.
 """
@@ -48,7 +49,7 @@ def main(argv=None) -> int:
     facts = GX.RepoFacts()
     vi = facts.vercelignore()
     vi_probs = GX.vercelignore_problems(facts.show_head(".vercelignore"), dc["vercelignore_rule"])
-    clean_probs = facts.clean_problems()
+    clean_probs = facts.integrity_problems() + facts.clean_problems() + GX.bytecode_problems(sys.flags.dont_write_bytecode)
     ev = {
         "kind": "DEPLOYMENT_EVIDENCE",
         "exception_id": eid,

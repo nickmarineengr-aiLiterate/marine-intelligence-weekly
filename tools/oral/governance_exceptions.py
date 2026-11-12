@@ -38,8 +38,10 @@ Every exception file present (committed or not) must itself pass X1-X3, whether 
 from __future__ import annotations
 
 import datetime as _dt
+import fnmatch
 import hashlib
 import json
+import os
 import pathlib
 import subprocess
 
@@ -49,7 +51,21 @@ EXCEPTION_GLOB = "governance_exception_*.json"
 ORAL = "tools/oral/"
 # Deployment surface: never allowed to differ from the production baseline under an exception.
 DEPLOY_SURFACE = (".vercelignore", "vercel.json", "middleware.js", "package.json", "package-lock.json", "api/",
-                  ".github/", "RulesApp/")
+                  ".github/", "RulesApp/", "o3/")
+# Git is run so that nothing local can substitute objects, trees or diff semantics (independent review R7, M1).
+GIT_FIXED = ("--no-replace-objects", "-c", "core.quotepath=off", "-c", "diff.ignoreSubmodules=none",
+             "-c", "core.fsmonitor=false", "-c", "diff.external=", "-c", "status.showUntrackedFiles=all")
+
+
+def scrubbed_env() -> dict:
+    env = {k: v for k, v in os.environ.items() if not k.upper().startswith("GIT_")}
+    env.update(GIT_CONFIG_NOSYSTEM="1", GIT_CONFIG_GLOBAL=os.devnull, GIT_NO_REPLACE_OBJECTS="1")
+    return env
+
+
+def bytecode_problems(dont_write_bytecode: bool) -> list[str]:
+    """R7 M2: the landing run must not write or trust cached bytecode (python -B, fresh clone)."""
+    return [] if dont_write_bytecode else ["the landing gate must run with python -B (no bytecode cache)"]
 SELF = "SELF"  # diff_pin value for the two files that cannot pin themselves (this module and the exception file)
 
 # Closed list. Adding or changing an exception changes this pin, which is a reviewed governance change.
@@ -296,7 +312,8 @@ class RepoFacts:
         self.repo = pathlib.Path(repo)
 
     def _git(self, *a, text=True):
-        return subprocess.run(["git", *a], cwd=str(self.repo), capture_output=True, text=text, check=False)
+        return subprocess.run(["git", *GIT_FIXED, *a], cwd=str(self.repo), capture_output=True, text=text,
+                              check=False, env=scrubbed_env())
 
     def head_commit(self):
         r = self._git("rev-parse", "--verify", "-q", "HEAD^{commit}")
@@ -328,9 +345,50 @@ class RepoFacts:
         r = self._git("rev-parse", "--verify", "-q", "HEAD:%s" % path)
         return r.stdout.strip() if r.returncode == 0 else None
 
+    def show_head_bytes(self, path):
+        r = self._git("cat-file", "blob", "HEAD:%s" % path, text=False)
+        return r.stdout if r.returncode == 0 else None
+
     def show_head(self, path):
-        r = subprocess.run(["git", "show", "HEAD:%s" % path], cwd=str(self.repo), capture_output=True, check=False)
-        return r.stdout.decode("utf-8") if r.returncode == 0 else None
+        b = self.show_head_bytes(path)
+        try:
+            return b.decode("utf-8") if b is not None else None
+        except UnicodeDecodeError:
+            return None
+
+    def list_head(self, prefix):
+        r = self._git("ls-tree", "--name-only", "-z", "HEAD", prefix)
+        return [p for p in r.stdout.split("\0") if p] if r.returncode == 0 else None
+
+    def exists_at(self, commit, path):
+        return self._git("cat-file", "-e", "%s:%s" % (commit, path)).returncode == 0
+
+    def integrity_problems(self):
+        """R7 M1: refuse any local mechanism that can make git report a different history or tree."""
+        probs = []
+        top = self._git("rev-parse", "--show-toplevel")
+        if top.returncode != 0 or pathlib.Path(top.stdout.strip()).resolve() != self.repo.resolve():
+            probs.append("git toplevel is not this repository")
+        gd = self.repo / ".git"
+        if not gd.is_dir():
+            probs.append(".git is not a directory (worktree or gitfile redirection)")
+        else:
+            if (gd / "info" / "grafts").exists():
+                probs.append("grafts present")
+            alt = gd / "objects" / "info" / "alternates"
+            if alt.exists() and alt.read_text(errors="replace").strip():
+                probs.append("object alternates present")
+            if (gd / "shallow").exists():
+                probs.append("shallow clone")
+        rr = self._git("for-each-ref", "--format=%(refname)", "refs/replace/")
+        if rr.returncode != 0 or rr.stdout.strip():
+            probs.append("replace refs present")
+        lt = self._git("ls-tree", "-r", "-z", "HEAD")
+        if lt.returncode != 0:
+            probs.append("cannot list HEAD tree")
+        elif any(e.startswith("160000 ") for e in lt.stdout.split("\0")):
+            probs.append("gitlink (submodule) in HEAD tree")
+        return probs
 
     def head_record(self, name):
         t = self.show_head(ORAL + name)
@@ -347,9 +405,9 @@ class RepoFacts:
         flags = self._git("ls-files", "-v")
         if flags.returncode != 0 or any(l[:1].islower() or l[:2] == "S " for l in flags.stdout.splitlines()):
             probs.append("skip-worktree or assume-unchanged index entries")
-        ig = self._git("status", "--porcelain", "--ignored", "--untracked-files=all", "--", ORAL)
-        if ig.returncode != 0 or any(l.startswith("!! ") and l.endswith(".json") for l in ig.stdout.splitlines()):
-            probs.append("ignored *.json under %s" % ORAL)
+        ig = self._git("status", "--porcelain", "--ignored", "--untracked-files=all")
+        if ig.returncode != 0 or any(l.startswith("!! ") for l in ig.stdout.splitlines()):
+            probs.append("ignored files present (a landing run needs a fresh clone: no caches, no shadow .pyc)")
         return probs
 
     def vercelignore(self):
@@ -358,3 +416,16 @@ class RepoFacts:
 
 def load_exception_files(directory: pathlib.Path = HERE) -> dict:
     return {p.name: p.read_bytes() for p in sorted(directory.glob(EXCEPTION_GLOB))}
+
+
+def load_exception_files_at_head(facts) -> dict | None:
+    """Exception files as committed (R7 B1: the gate never reads them from the working tree)."""
+    names = facts.list_head(ORAL)
+    if names is None:
+        return None
+    out = {}
+    for p in names:
+        n = pathlib.PurePosixPath(p).name
+        if fnmatch.fnmatch(n, EXCEPTION_GLOB):
+            out[n] = facts.show_head_bytes(p) or b""
+    return out
