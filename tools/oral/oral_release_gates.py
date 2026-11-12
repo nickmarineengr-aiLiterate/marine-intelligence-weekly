@@ -1077,6 +1077,14 @@ GATES = (
           ["python", "%s/test_founder_authorisation.py" % _ORAL],
           CAT_CORRECTION, PARSER_VALIDATOR, timeout=120, historical_39=False,
           note="founder_authorisation well-formedness, fail-closed presence, L4 cross-product rule"),
+    # Founder decisions U-1/U-2 (12 Nov 2026): the single SHA-pinned L4 governance exception
+    # GX-S1-RULESAPP-FALLS-20261112 and the explicit three-record compatibility allowance. Positive and
+    # negative controls: deployed product, missing/stale/foreign evidence, unrelated items, scope changes,
+    # unauthorised records, unknown/edited/expired exceptions, and that L4 is not a hard-coded pass.
+    _gate("governance_exception_l4_controls",
+          ["python", "%s/test_governance_exception_l4.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=300, historical_39=False,
+          note="L4 exception X1-X9 controls and U-2 legacy-compat controls"),
     # validate_batch_e1's timed-blocks check reads E1's own produced state for a
     # card a later authorised record supersedes; these controls prove it still
     # fails on an unauthorised edit, a missing E1 state and a changed E1 state.

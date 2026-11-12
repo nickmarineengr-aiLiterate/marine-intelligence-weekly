@@ -1,0 +1,79 @@
+{
+ "exception_id": "GX-S1-RULESAPP-FALLS-20261112",
+ "kind": "GOVERNANCE_EXCEPTION",
+ "schema_version": 1,
+ "gate": "check_founder_authorisation_for_landing.L4_no_open_cross_product_safety_item",
+ "decision": {
+  "decided_by": "Founder",
+  "decided_on": "2026-11-12",
+  "decision_ref": "FOUNDER-DECISION-U1-U2-U3-20261112, section 2 (U-1 CONDITIONAL GO)",
+  "record": "reports/governance/FOUNDER_DECISION_U1_U2_U3_20261112.md"
+ },
+ "authorises": "L4 may treat XP-RULESAPP-FALLS-01 as non-blocking for the MIW S1 safety remediation release only, while RulesApp is not deployed. It does not close, verify, waive or change the RulesApp item, and it authorises no production push.",
+ "product": "Marine Intelligence Weekly",
+ "release": {
+  "release_id": "S1-SAFETY-REMEDIATION-20261112",
+  "production_baseline": "ad7cd3db8c802891b13585163743df340837d291",
+  "candidate_commit": "aea3531f877f076f22da43e5daf1e90ffa2bc969",
+  "correction_records": [
+   "correction_corr_safety_crankcase_response_20261019_manifest.json",
+   "correction_corr_safety_eebd_entry_20261019_manifest.json",
+   "correction_corr_safety_enclosed_space_20261019_manifest.json",
+   "correction_corr_safety_enclosed_space_cheatsheets_20261019_manifest.json",
+   "correction_corr_safety_enclosed_space_ext_20261019_manifest.json",
+   "correction_corr_safety_enclosed_space_propagation_20261019_manifest.json",
+   "correction_corr_safety_hpfuel_pipe_20261022_manifest.json",
+   "correction_corr_safety_imdg_stowage_segregation_20261019_manifest.json",
+   "correction_corr_safety_lsa_falls_coldstart_20261019_manifest.json"
+  ]
+ },
+ "cross_product_item": {
+  "item_id": "XP-RULESAPP-FALLS-01",
+  "product": "RulesApp",
+  "required_status": "OPEN",
+  "correction_id": "CORR-SAFETY-LSA-FALLS-COLDSTART-20261019",
+  "correction_manifest": "correction_corr_safety_lsa_falls_coldstart_20261019_manifest.json",
+  "paths": [
+   "RulesApp/repository/index/repo-data.json",
+   "RulesApp/repository/index/search-index.json"
+  ]
+ },
+ "rulesapp_obligation": {
+  "owner": "RulesApp product owner. No named individual is recorded in the MIW records; the 23 Oct 2026 owner sign-off fields were blank. This exception does not name or replace the owner.",
+  "outstanding": "Correct node LSACode-IV-44 (maintenance-guidance) in the RulesApp source store, promote the corrected index, verify the served copy, then close XP-RULESAPP-FALLS-01 as CLOSED_VERIFIED through the RulesApp owner's own process.",
+  "owner_action": "MIW-EXCEL-QB-766-20261016/P0S_SAFETY_SUCCESSOR_20261019/07_RULESAPP_SEPARATE_ACTION.md (outside the repository)",
+  "status_unchanged": "OPEN"
+ },
+ "deployment_condition": {
+  "statement": "The exception applies only while RulesApp is excluded from the MIW deployment. If RulesApp becomes deployed, the exception does not apply.",
+  "vercelignore_rule": "RulesApp/",
+  "live_origin": "https://marineintelligenceweekly.com",
+  "live_probe_paths": [
+   "/RulesApp/",
+   "/RulesApp/index.html",
+   "/RulesApp/repository/index/repo-data.json",
+   "/RulesApp/repository/index/search-index.json",
+   "/RulesApp/repository/CHANGELOG.json"
+  ],
+  "required_status": 404,
+  "evidence_max_age_hours": 24,
+  "evidence_tool": "tools/oral/verify_rulesapp_not_deployed.py",
+  "evidence_required_at": [
+   "release qualification",
+   "immediately before any production push"
+  ]
+ },
+ "valid_from": "2026-11-12",
+ "expires_on": "2026-12-12",
+ "safeguards": [
+  "No RulesApp source or index file is changed.",
+  "XP-RULESAPP-FALLS-01 is not marked CLOSED or VERIFIED.",
+  "The RulesApp owner and the outstanding verification obligation are preserved.",
+  "The RulesApp deployment exclusion is not changed.",
+  "No general bypass: L4 still blocks every open cross-product item this record does not exactly match.",
+  "This decision is recorded under a stable identifier (exception_id) and pinned by SHA-256 in the landing gate.",
+  "The exception is linked to CORR-SAFETY-LSA-FALLS-COLDSTART-20261019 and release S1-SAFETY-REMEDIATION-20261112 only.",
+  "Fresh evidence that RulesApp is not deployed is required at qualification and immediately before any production push."
+ ],
+ "note": "Expiry 2026-12-12 is a conservative 30-day limit chosen at implementation and disclosed to the Founder; after it, a new Founder decision is needed. The exception is honoured only when the landing gate is given a deployment-evidence file produced for the exact tree being landed."
+}
