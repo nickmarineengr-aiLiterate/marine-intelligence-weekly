@@ -4144,3 +4144,20 @@ known or suspected to be unsafe: any entry is a section 9 case, with very carefu
 breathing apparatus, and no one goes in alone to rescue (section 11). (5) Ship recycling facilities, where a Competent
 person certifies "Safe-for-entry" (21 % O₂, ≤ 1 % LFL, ≤ 50 % OEL) and "Safe-for-hot work" under MEPC.210(63) 3.3.4 —
 a different instrument for a different place. Do not move numbers between these five.
+
+### 167. A leaking high-pressure fuel pipe is replaced with the engine stopped and depressurised — never clamped and run on
+
+**Where it was found:** `QB5_A#q11` "On My Vessel" (CORR-SAFETY-HPFUEL-PIPE-20261022): "reduce to slow ahead to reduce
+FO injection pressure, isolate that injector and fit a temporary clamp ... Full repair deferred to next port." Found by
+the 22 Oct 2026 oral/Excel closeout; independent severity review S1.
+
+**Why it is wrong.** A pinhole spray from a high-pressure fuel line onto a hot surface is a classic engine-room fire
+source; that is why SOLAS II-2/4.2.2.5 requires external high-pressure delivery lines to be jacketed, with leak
+collection and an alarm. A clamp is not an accepted repair on a high-pressure fuel pipe, and slow ahead does not make
+the line safe. The maker's instruction (WinGD X82DF OM, supply-unit leak check and 10.14) is: replace a defective HP
+fuel pipe only with the engine stopped and the pressure released; if it cannot be replaced at once, cut out that fuel
+pump, which is itself done only with the engine stopped, and run within the cylinder-cut-out limits (10.19).
+
+**What to check.** Any clamp, tape, wrap or other temporary repair on an HP fuel or injection pipe; running on with a
+known HP leak; a repair deferred to port while the leak is live; a cut-out done with the engine running where the maker
+requires it stopped. A pipe support clamp (a fixing, not a repair) is not this trap.

@@ -15,6 +15,9 @@ Every mutation names the check that OWNS its proposition; a digest pin is never 
                  a card dropped from its record, and a production label in a public footer.
   * ROUND 2      each S1-S3 finding of the independent whole-card review put back (AH-AY), including the round-2
                  withdrawal of SOLAS II-2/19.3.8 from the container-hold card (AK).
+  * HPFUEL       CORR-SAFETY-HPFUEL-PIPE-20261022 (BA-BI): the clamp put back on QB5_A#q11 and planted on an untouched
+                 page (also as repair tape, and beside an unrelated "never"), and each reviewed safe step removed or
+                 reordered (fire watch first, stop before cut-out, load transfer, no deferral, the clamp statement).
 """
 from __future__ import annotations
 
@@ -39,6 +42,7 @@ RA_SEARCH = REPO / "RulesApp/repository/index/search-index.json"
 REC = {k: HERE / ("correction_corr_safety_%s_20261019_manifest.json" % k) for k in
        ("eebd_entry", "lsa_falls_coldstart", "enclosed_space", "crankcase_response", "imdg_stowage_segregation",
         "enclosed_space_propagation", "enclosed_space_ext", "enclosed_space_cheatsheets")}
+REC["hpfuel_pipe"] = HERE / "correction_corr_safety_hpfuel_pipe_20261022_manifest.json"
 PROBE = "validate_correction_safety.py"
 
 
@@ -301,6 +305,47 @@ MUTATIONS = [
      sub_in_file(QB5_A, "— if air goes into the crankcase an explosion can occur;",
                  "— fresh air reaching a hot spot can cause a second explosion;", count=1),
      "no_invented_wording_QB5_A_q8"),
+    # ---- HPFUEL (CORR-SAFETY-HPFUEL-PIPE-20261022) ---------------------------
+    ("BA", "QB5_A#q11: slow ahead + temporary clamp on the HP fuel pipe back",
+     sub_in_file(QB5_A, "Decision: post a fire watch with fire-fighting equipment ready and keep people clear of the "
+                        "spray.", "Decision: reduce to slow ahead to reduce FO injection pressure, isolate that injector "
+                        "and fit a temporary clamp, reduce likelihood to 1.", count=1),
+     "corpus_hp_fuel_pipe_no_clamp_repair"),
+    ("BB", "QB2_E (never corrected): HP fuel-pipe clamp planted",
+     sub_in_file(QB2_E, "</body>", "<p>A leaking high-pressure fuel pipe can be fitted with a temporary clamp until "
+                                   "the next port.</p></body>", count=1),
+     "corpus_hp_fuel_pipe_no_clamp_repair"),
+    ("BC", "QB2_E: injection pipe wrapped with repair tape planted",
+     sub_in_file(QB2_E, "</body>", "<p>Leaking injection pipe: wrap it with repair tape and run on to port.</p></body>",
+                 count=1),
+     "corpus_hp_fuel_pipe_no_clamp_repair"),
+    ("BD", "QB2_E: clamp beside an unrelated 'never' (the negation must be about the repair)",
+     sub_in_file(QB2_E, "</body>", "<p>Never run with an open leak: isolate that injector and fit a temporary clamp."
+                                   "</p></body>", count=1),
+     "corpus_hp_fuel_pipe_no_clamp_repair"),
+    ("BE", "QB5_A#q11: 'a clamp is not an accepted repair' statement dropped",
+     sub_in_file(QB5_A, "A clamp is not an accepted repair on a high-pressure fuel pipe: if no spare",
+                 "If no spare", count=1),
+     "qb5a_q11_hp_pipe_clamp_not_accepted"),
+    ("BF", "QB5_A#q11: repair deferred to next port again",
+     sub_in_file(QB5_A, "Entire process documented in engine log and defect report raised.",
+                 "Full repair deferred to next port. Entire process documented in engine log and defect report raised.",
+                 count=1),
+     "qb5a_q11_hp_pipe_no_deferral_to_port"),
+    ("BG", "QB5_A#q11: fire watch no longer posted first",
+     sub_in_file(QB5_A, "Decision: post a fire watch with fire-fighting equipment ready and keep people clear of the "
+                        "spray. With the Master's agreement", "Decision: with the Master's agreement", count=1),
+     "qb5a_q11_hp_pipe_fire_watch_first"),
+    ("BH", "QB5_A#q11: injection cut out before the engine is stopped (WinGD 10.14: engine stopped first)",
+     sub_in_file(QB5_A, "then stop the engine and cut out that cylinder's injection",
+                 "then cut out that cylinder's injection and stop the engine", count=1),
+     "qb5a_q11_hp_pipe_stop_then_cut_out"),
+    ("BI", "QB5_A#q11: auxiliary engine stopped without transferring the load",
+     sub_in_file(QB5_A, "start the standby generator, transfer the load to it, then stop the leaking engine",
+                 "start the standby generator and stop the leaking engine", count=1),
+     "qb5a_q11_hp_pipe_aux_load_transfer"),
+    ("BJ", "the HP fuel-pipe record loses founder_authorisation",
+     edit_json(REC["hpfuel_pipe"], drop_founder_authorisation), "records_carry_founder_authorisation"),
 ]
 
 WATCHED = [QB1_F, QB1_E, QB5_A, QB5_B, QB8_A, QB3_B, QB3_G, QB2_E, CS_A, CS_B, RA_DATA, RA_SEARCH] + list(REC.values())

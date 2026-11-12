@@ -14,6 +14,10 @@ renewal; a +15 C lifeboat engine start; a 19.5-23.5 % oxygen band, or a fixed H2
 entry criterion; ventilating or opening a crankcase after an oil-mist / crankcase-explosion warning (and the false
 "SOLAS II-1 obligation"); IMDG stowage category D "under deck only" and "separated from" as 6 m / 12 m.
 
+A seventh position was added by CORR-SAFETY-HPFUEL-PIPE-20261022 (22 Oct 2026 closeout, QB5_A#q11 "On My Vessel"): a
+clamp or other temporary repair on a leaking high-pressure fuel / injection pipe. The maker's rule is that the pipe is
+replaced with the engine stopped and the pressure released, or the cylinder stays cut out (WinGD X82DF OM 10.14).
+
 A corpus hit inside a SEPARATELY GOVERNED PRODUCT (RulesApp) is not this gate's to fix. It passes only if a CORR-SAFETY
 record declares it in `propagation.cross_product_safety_items` with status OPEN and the exact matching fragment; the
 landing gate (check_founder_authorisation_for_landing.py L4) then refuses landing until that item is CLOSED_VERIFIED.
@@ -153,6 +157,18 @@ def unsafe_imdg(s):
                              r"(horizontal separation )?under deck)", s, re.I))
 
 
+HP_FUEL_CONTEXT = (r"(high[- ]pressure (fuel|FO|oil pipe|pipe)|\bHP (fuel|FO|pipe)|fuel (oil )?(injection|high[- ]pressure)"
+                   r"|injection (pipe|line)|\binjectors?\b|FO injection)")
+HP_FUEL_TEMP_REPAIR = (r"\b(clamp(ed|ing|s)?|temporary (repair|patch|wrap|bandage|sleeve|fix)|(repair|pipe|leak) "
+                       r"(tape|clip|bandage|wrap))\b")
+HP_FUEL_SAFE = r"(not an accepted repair|never (fit|use|clamp|patch)|is not a repair|must not be (clamp|patch|repair)ed)"
+
+
+def unsafe_hp_fuel_clamp(s):
+    return bool(re.search(HP_FUEL_CONTEXT, s, re.I) and re.search(HP_FUEL_TEMP_REPAIR, s, re.I)
+                and not re.search(HP_FUEL_SAFE, s, re.I))
+
+
 PROPOSITIONS = {
     "eebd_not_entry_equipment": unsafe_eebd,
     "falls_no_end_for_end_alternative": unsafe_falls,
@@ -162,6 +178,7 @@ PROPOSITIONS = {
     "crankcase_no_ventilate_on_warning": unsafe_crankcase,
     "crankcase_no_solas_stop_attribution": unsafe_solas_stop,
     "imdg_cat_d_and_separated_from": unsafe_imdg,
+    "hp_fuel_pipe_no_clamp_repair": unsafe_hp_fuel_clamp,
 }
 
 # ------------------------------------------------------------------ closed-world card checks
@@ -195,6 +212,16 @@ CARD_CHECKS = {
         ("qb5a_q11_no_xi1_5_enclosed", NOT(r"XI-1,? ?(Reg\.?|/) ?5\b")),
         ("qb5a_q11_low_level_toxic_flammable_6_5_3", H(r"6\.5\.3[^;]{0,140}even low levels of flammable or toxic")),
         ("qb5a_q11_oel_from_accepted_standards_7_7", H(r"accepted national or international standards")),
+        # CORR-SAFETY-HPFUEL-PIPE-20261022: the On My Vessel HP fuel-pipe leak
+        ("qb5a_q11_hp_pipe_clamp_not_accepted", H(r"a clamp is not an accepted repair on a high-pressure fuel pipe")),
+        ("qb5a_q11_hp_pipe_fire_watch_first", H(r"Decision: post a fire watch with fire-fighting equipment ready")),
+        ("qb5a_q11_hp_pipe_stop_then_cut_out", H(r"stop the engine and cut out that cylinder's injection")),
+        ("qb5a_q11_hp_pipe_aux_load_transfer", H(r"transfer the load to it, then stop the leaking engine")),
+        ("qb5a_q11_hp_pipe_replaced_depressurised", H(r"depressurised, drained and cooled, replace the leaking "
+                                                      r"high-pressure pipe with a spare")),
+        ("qb5a_q11_hp_pipe_jacket_and_leak_alarm", H(r"check the pipe's jacket and leak alarm")),
+        ("qb5a_q11_hp_pipe_no_deferral_to_port", NOT(r"(repair|replacement)[^.]{0,20}deferred to (the )?next port|slow "
+                                                     r"ahead to reduce FO injection pressure")),
     ],
     ("meoclass1/QB5_A.html", "q8"): [
         ("qb5a_q8_no_air_before_cooling", H(r"do not open the crankcase doors[^.]{0,80}until the engine has cooled")),
