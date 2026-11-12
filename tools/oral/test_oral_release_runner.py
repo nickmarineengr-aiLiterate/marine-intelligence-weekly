@@ -86,7 +86,12 @@ check("the correction gates are registered",
           # The Pass-2 remediation pair, registered for the first time:
           # it had existed and been maintained without ever being run.
           "correction_pass2_mutate",
-          "corrections_mutate", "validate_correction_annexvi_eif",
+          # P0 safety successor (19 Oct 2026) and the S1 remediation controls (12 Nov 2026).
+          "correction_safety_mutate",
+          "corrections_mutate",
+          "e1_timed_supersession_controls", "founder_authorisation_controls",
+          "governance_exception_l4_controls",
+          "validate_correction_annexvi_eif",
           "validate_correction_bulkjupiter",
           "validate_correction_cicstem",
           "validate_correction_defntreaty", "validate_correction_g1_010",
@@ -99,6 +104,7 @@ check("the correction gates are registered",
           "validate_correction_lsavent", "validate_correction_msactsea",
           "validate_correction_nosdcp",
           "validate_correction_pass2",
+          "validate_correction_safety",
           "validate_corrections"],
       str(sorted(g["id"] for g in _correction)))
 check("correction gates are post-E6, so not part of the historical 39",
@@ -190,10 +196,16 @@ POST_E6_GATES = [
     # existed and been maintained without ever being run by a release, which
     # is how its mutation TN kept a target the corpus no longer contained.
     "correction_pass2_mutate",
+    # P0 safety successor CORR-SAFETY-* (19 Oct 2026): propositions, mutations, the founder_authorisation contract
+    # and E1 supersession controls; plus the S1 remediation's L4 governance-exception and U-2 controls (12 Nov 2026).
+    "correction_safety_mutate",
     "corrections_mutate",
+    "e1_timed_supersession_controls",
     # The closure-derivation controls. Sorted position, like every other row.
     "followup_closure_controls",
     "followup_register_mutate",
+    "founder_authorisation_controls",
+    "governance_exception_l4_controls",
     # Governed whole-file artefact succession: in-memory controls, the
     # hermetic real-git mutation layer, and the live layer on the on-disk
     # succession (exit-code parsed, so "nothing to attack" cannot pass).
@@ -244,6 +256,7 @@ POST_E6_GATES = [
     "validate_correction_msactsea",
     "validate_correction_nosdcp",
     "validate_correction_pass2",
+    "validate_correction_safety",
     "validate_corrections",
     "validate_followup_register",
     # PRIV-1: S0-S14 + SP1-SP8 over the genuine private intake records.
@@ -269,6 +282,7 @@ POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
                            "correction_msactsea_mutate",
                            "correction_nosdcp_mutate",
                            "correction_pass2_mutate",
+                           "correction_safety_mutate",
                            "corrections_mutate",
                            "followup_register_mutate",
                            # hermetic layer only; the --live gate is
