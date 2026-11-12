@@ -47,7 +47,8 @@ def main(argv=None) -> int:
     dc = exc["deployment_condition"]
     facts = GX.RepoFacts()
     vi = facts.vercelignore()
-    head = facts._git("rev-parse", "HEAD").stdout.strip()
+    vi_probs = GX.vercelignore_problems(facts.show_head(".vercelignore"), dc["vercelignore_rule"])
+    clean_probs = facts.clean_problems()
     ev = {
         "kind": "DEPLOYMENT_EVIDENCE",
         "exception_id": eid,
@@ -55,15 +56,20 @@ def main(argv=None) -> int:
         "product": exc["cross_product_item"]["product"],
         "origin": dc["live_origin"],
         "checked_at_utc": _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "commit": head,
+        "commit": facts.head_commit(),
         "tree": facts.head_tree(),
-        "clean": facts.clean(),
+        "clean": not clean_probs,
+        "clean_problems": clean_probs,
+        "production_baseline": exc["release"]["production_baseline"],
         "vercelignore_sha256": hashlib.sha256(vi.encode("utf-8")).hexdigest(),
-        "vercelignore_excludes": GX.vercelignore_excludes(vi, dc["vercelignore_rule"]),
+        "vercelignore_excludes": not vi_probs,
+        "vercelignore_problems": vi_probs,
         "probes": [probe(dc["live_origin"], p) for p in dc["live_probe_paths"]],
         "method": "anonymous GET, no cookies, redirects not followed",
+        "scope": "attests to production as it stands now; the candidate's deployment surface equals the baseline "
+                 "only because the exception's diff_pin (X5) is enforced by the landing gate",
     }
-    ok = ev["vercelignore_excludes"] and all(p["status"] == dc["required_status"] for p in ev["probes"])
+    ok = ev["vercelignore_excludes"] and ev["clean"] and all(p["status"] == dc["required_status"] for p in ev["probes"])
     ev["result"] = "NOT_DEPLOYED" if ok else "DEPLOYED_OR_UNKNOWN"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(ev, indent=1) + "\n", encoding="utf-8")

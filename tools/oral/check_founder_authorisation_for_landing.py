@@ -13,9 +13,11 @@ run at the landing/GO step only, and it fails closed:
       (propagation.cross_product_safety_items[].status == "OPEN") -- a safety
       error the record found in another product stays blocking until that
       product's owner has corrected and verified it -- UNLESS one exactly matching, SHA-pinned governance
-      exception applies (governance_exceptions.py, X1-X9): known, in date, same item/record/paths, release scope
-      unchanged, every release record authorised, clean tree, product excluded from deployment in the tree AND
-      fresh live non-deployment evidence for this exact tree. The item itself stays OPEN.
+      exception applies (governance_exceptions.py, X1-X9, judged at HEAD): known and SHA-pinned, in date, same
+      item/record/path with the record's item list pinned, the WHOLE diff from the production baseline pinned path by
+      path and blob by blob (so no deployment-surface or other change can ride along), every release record
+      authorised at HEAD, a clean tree with no hidden index flags, and fresh live non-deployment evidence for this
+      exact commit and tree. The item itself stays OPEN.
 
 Schema-identical to the Engineering R1 lane's landing gate (L1-L3); L4 is added
 by the P0 safety lane. See oral_manifest.FOUNDER_AUTHORISATION_STATES.
@@ -74,7 +76,7 @@ def main(argv=None) -> int:
         if (m.get("founder_authorisation") or {}).get("state") == "PENDING_FOUNDER_DECISION":
             pending.append(p.name)
         open_items += [(p.name, i) for i in open_cross_product_entries(m)]
-    l4_ok, l4_blocks, l4_info = GX.evaluate_l4(records, open_items, GX.load_exception_files(HERE), GX.RepoFacts(),
+    l4_ok, l4_blocks, l4_info = GX.evaluate_l4(open_items, GX.load_exception_files(HERE), GX.RepoFacts(),
                                                evidence, _dt.datetime.now(_dt.timezone.utc))
     res.append(("L1_founder_authorisation_well_formed", not malformed, "; ".join(malformed[:5])))
     res.append(("L2_new_records_carry_founder_authorisation", not missing, "; ".join(missing[:5])))
