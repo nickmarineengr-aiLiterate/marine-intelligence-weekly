@@ -48,6 +48,10 @@ REPORT = OUT / "AUGUST2026_INTAKE_REPORT.json"
 #: cannot read September at all, and validate_oral_intake fails closed on it.
 SEPTEMBER_PRIVATE_DIR = (L.REPO / "docs" / "MIW-master-Question-bank"
                          / "New Questions from Sept orals" / "_records")
+#: Same PRIV-1 rule for October (H8 / FD-3): examiner-naming records are
+#: git-ignored owner-area files, never committed.
+OCTOBER_PRIVATE_DIR = (L.REPO / "docs" / "MIW-master-Question-bank"
+                       / "New Questions from Oct orals" / "_records")
 INTAKE_PROFILES = {
     "2026-08": {
         "label": "August",
@@ -71,6 +75,25 @@ INTAKE_PROFILES = {
         "occurrence_prefix": "SEP-",
         "denominator_class": "CURRENT_SEPTEMBER_INTAKE",
         "result_bare": True,
+    },
+    #: H8 / FD-3 (Founder, 11 Nov 2026): October 2026 is its own intake and
+    #: identity space (OCT-*); late-September reports (24-25 Sept) stay in the
+    #: September space (SEP-0154 onward). Registration only: FD-4 makes the
+    #: curated line-disposition record authoritative for October, so this
+    #: profile is never used to RE-PARSE the October carrier with the shared
+    #: parser (16 known October-format defects, recorded as technical debt).
+    "2026-10": {
+        "label": "October",
+        "records": OCTOBER_PRIVATE_DIR / "OCTOBER2026_INTAKE_RECORDS.jsonl",
+        "report": OCTOBER_PRIVATE_DIR / "OCTOBER2026_INTAKE_REPORT.json",
+        "carriers": OCTOBER_PRIVATE_DIR / "OCTOBER2026_INTAKE_CARRIERS.json",
+        "adjudications": OCTOBER_PRIVATE_DIR / "OCTOBER2026_INTAKE_ADJUDICATIONS.json",
+        "inbox_dir": "New Questions from Oct orals",
+        "submission_prefix": "OCT2026-S",
+        "occurrence_prefix": "OCT-",
+        "denominator_class": "CURRENT_OCTOBER_INTAKE",
+        "result_bare": True,
+        "curated_records_authoritative": True,
     },
 }
 DEFAULT_MONTH = "2026-08"
@@ -802,6 +825,13 @@ def main():
                     help="which sitting month's intake (default: the August intake)")
     a = ap.parse_args()
     prof = profile(a.month)
+    if prof.get("curated_records_authoritative"):
+        # FD-4: the shared parser is known to mis-read this month's carrier
+        # format and its self-check is not proof that it handles it. Refuse
+        # rather than overwrite the curated, Founder-accepted record.
+        print(f"REFUSED: the {prof['label']} intake is a curated line-disposition record "
+              f"(FD-4); the shared parser must not re-derive or overwrite it")
+        return 2
     records_path = RECORDS if a.month == DEFAULT_MONTH else prof["records"]
     report_path = REPORT if a.month == DEFAULT_MONTH else prof["report"]
 

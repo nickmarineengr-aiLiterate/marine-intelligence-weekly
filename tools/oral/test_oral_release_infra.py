@@ -318,6 +318,7 @@ EXPECTED_BATCH_MANIFESTS = [
     # Kochi reports. Its authorisation record is SEPTEMBER2026_PRODUCTION_QUEUE
     # .json, not the August queue: a month's intake is its own denominator.
     "batch_h7_manifest.json",
+    "batch_h8_manifest.json",
 ]
 manifests = sorted(HERE.glob("batch_*manifest.json"))
 check("every batch manifest on disk is audited, and no other",

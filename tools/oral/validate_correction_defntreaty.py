@@ -60,6 +60,8 @@ sys.path.insert(0, str(HERE))
 
 from oral_bytes import read_text                       # noqa: E402
 from validate_batch_b import card_digests              # noqa: E402
+from oral_supersession import (                        # noqa: E402
+    resolve_authorised_card_state)
 
 CORRECTION_ID = "CORR-DEFN-TREATY-20260825"
 MANIFEST = HERE / "correction_corr_defn_treaty_20260825_manifest.json"
@@ -240,10 +242,23 @@ def main() -> int:
     both = q6 + " " + q3
     sheet_flat = flat(sheet)
 
+    # Resolved THROUGH the supersession chain, not compared raw (the contract
+    # in oral_supersession.py, as already folded into G1-010 and GPT-PASS1).
+    # H8-006 (batch_h8_manifest.json) edits QB9_G#q3 and declares descent from
+    # CORR-DEFN-TREATY-02, so this record's claim becomes "my state is the
+    # ancestor of what is live, through a continuous chain". With no successor
+    # declared this is byte-for-byte the original comparison; an unmanifested
+    # edit still fails. The check count is unchanged.
     for anchor, card in declared.items():
         live = card_digests(page).get(anchor)
+        res = resolve_authorised_card_state(
+            manifest=MANIFEST.name, action_id=card.get("correction_action_id"),
+            file="QB9_G.html", anchor=anchor,
+            pinned_post_digest=card.get("post_edit_digest"),
+            live_digest=live, directory=MANIFEST.parent)
         report("card_digest_matches_manifest_%s" % anchor,
-               live == card.get("post_edit_digest"), "live=%s" % (live or "-")[:16])
+               bool(getattr(res, "ok", False)),
+               "%s live=%s" % (getattr(res, "status", res), (live or "-")[:16]))
 
     report("question_text_unchanged",
            Q6_TEXT in htmllib.unescape(page) and Q3_MARK in htmllib.unescape(page),

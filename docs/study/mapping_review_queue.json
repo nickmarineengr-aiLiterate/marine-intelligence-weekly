@@ -3,16 +3,16 @@
   "taxonomy_version": "23495e145a2e1b0e",
   "queue_states": {
     "what": "HELD is not UNADJUDICATED. A held item was read by a named human who recorded why the evidence does not settle it; a fresh item has been read by nobody. Never sum these into one backlog number.",
-    "total": 86,
-    "fresh_unadjudicated": 70,
+    "total": 88,
+    "fresh_unadjudicated": 72,
     "held_adjudicated": 16
   },
-  "total": 86,
+  "total": 88,
   "file_title_contradictions": {
     "what": "QB files whose title names one domain but which hold questions whose own text cues another. Follow-up inventory for the 2026-08-23 over-capture correction.",
-    "files": 7,
-    "total": 7,
-    "fresh_unadjudicated": 1,
+    "files": 9,
+    "total": 9,
+    "fresh_unadjudicated": 3,
     "held_adjudicated": 6,
     "by_file": {
       "QB1_A.html": {
@@ -82,6 +82,34 @@
             "review_status": "HELD_PENDING_EVIDENCE",
             "contradicting_topic_ids": [
               "D01"
+            ]
+          }
+        ]
+      },
+      "QB5_J.html": {
+        "file_topic_id": "D09",
+        "fresh_unadjudicated": 1,
+        "held_adjudicated": 0,
+        "questions": [
+          {
+            "canonical_question_id": "QB5_J#q3",
+            "review_status": "AWAITING_ADJUDICATION",
+            "contradicting_topic_ids": [
+              "D10"
+            ]
+          }
+        ]
+      },
+      "QB8_B.html": {
+        "file_topic_id": "D07",
+        "fresh_unadjudicated": 1,
+        "held_adjudicated": 0,
+        "questions": [
+          {
+            "canonical_question_id": "QB8_B#q7",
+            "review_status": "AWAITING_ADJUDICATION",
+            "contradicting_topic_ids": [
+              "D02"
             ]
           }
         ]
@@ -1232,6 +1260,36 @@
       "reason": "human review found the evidence does not settle this question: WHO-related ship certificates. Two genuine limbs and no clean owner: the Ship Sanitation Control / Exemption Certificate is an IHR 2005 port-health certificate with its own validity and extension rules (D01 grammar), while the second half is seafarer medical fitness under ILO/WHO guidelines read through STCW and MLC (D03, and the card is authored with data-tags='mlc'). No MIW domain claims the public-health regime outright. Held rather than forced; the hold is count-neutral so D03 is unaffected.",
       "recommended_topic_id": "D03",
       "review_status": "HELD_PENDING_EVIDENCE"
+    },
+    {
+      "canonical_question_id": "QB5_J#q3",
+      "content_type": "ORAL",
+      "text": "What is the propeller curve, and what are the light running margin, sea margin and engine margin? Why is an allowance of around 10% built in?",
+      "source_file": "QB5_J.html",
+      "current_topic_id": "D09",
+      "candidate_topic_ids": [
+        "D10"
+      ],
+      "mapping_evidence": "FILE_TITLE_CONTRADICTED",
+      "mapping_confidence": "MEDIUM",
+      "reason": "QB file title names D09, but the question text cues only D10 -- file-level evidence does not settle it",
+      "recommended_topic_id": "D09",
+      "review_status": "AWAITING_ADJUDICATION"
+    },
+    {
+      "canonical_question_id": "QB8_B#q7",
+      "content_type": "ORAL",
+      "text": "Bill of lading — what is it, what are its functions, and what are the different types?",
+      "source_file": "QB8_B.html",
+      "current_topic_id": "D07",
+      "candidate_topic_ids": [
+        "D02"
+      ],
+      "mapping_evidence": "FILE_TITLE_CONTRADICTED",
+      "mapping_confidence": "MEDIUM",
+      "reason": "QB file title names D07, but the question text cues only D02 -- file-level evidence does not settle it",
+      "recommended_topic_id": "D07",
+      "review_status": "AWAITING_ADJUDICATION"
     },
     {
       "canonical_question_id": "QB9_A#q7",
