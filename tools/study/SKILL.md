@@ -122,6 +122,8 @@ semantically wrong parents.
 ```bash
 python tools/study/ingest_official_syllabus.py        # official Annexure III
 python tools/study/build_official_crosswalk.py        # official node -> topic
+python tools/pastpapers/build_sixyear_intelligence.py # ignored derived input the spine reads (sixyear_families.json)
+python tools/pastpapers/sixyear_temporal_and_topics.py # ignored derived input the spine reads (sixyear_temporal_watch.json)
 python tools/study/build_study_mappings.py            # incremental map
 python tools/study/reconcile_official_mappings.py     # attach official join
 python tools/study/build_study_spine.py               # aggregate
