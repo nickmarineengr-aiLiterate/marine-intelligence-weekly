@@ -70,7 +70,7 @@ SELF = "SELF"  # diff_pin value for the two files that cannot pin themselves (th
 
 # Closed list. Adding or changing an exception changes this pin, which is a reviewed governance change.
 KNOWN_EXCEPTIONS = {
-    "GX-S1-RULESAPP-FALLS-20261112": "292d90e1f0f2861434ff6ea07e0f5e84966f9596c9f342feb945244affc0e58e",
+    "GX-S1-RULESAPP-FALLS-20261112": "8981a610918822393c3ccb4ce9e64e068d02db16eafdf21c94afcf71771439c8",
 }
 
 _REQUIRED = ("exception_id", "kind", "schema_version", "gate", "decision", "authorises", "product", "release",

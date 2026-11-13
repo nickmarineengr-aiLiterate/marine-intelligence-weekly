@@ -7,13 +7,21 @@
   "decided_by": "Founder",
   "decided_on": "2026-11-12",
   "decision_ref": "FOUNDER-DECISION-U1-U2-U3-20261112, section 2 (U-1 CONDITIONAL GO)",
-  "record": "reports/governance/FOUNDER_DECISION_U1_U2_U3_20261112.md"
+  "record": "reports/governance/FOUNDER_DECISION_U1_U2_U3_20261112.md",
+  "amended_by": [
+   {
+    "decision_ref": "FOUNDER-DECISION-R7-R8-20261113 (R-7 Option B; R-8 separate study-data release) and the Option A approval of 13 Nov 2026, sections 1 and 5",
+    "decided_on": "2026-11-13",
+    "decided_by": "Founder",
+    "changes": "release.production_baseline moved from ad7cd3d to the frozen study-data release SD 89480f2 (on ad7cd3d); release.diff_pin regenerated whole against SD (the S1 scope plus the R-7 provenance files). No other field changed: cross-product items, nine records, candidate_commit, deployment condition, validity and safeguards are as decided on 2026-11-12."
+   }
+  ]
  },
  "authorises": "L4 may treat XP-RULESAPP-FALLS-01 as non-blocking for the MIW S1 safety remediation release only, while RulesApp is not deployed. It does not close, verify, waive or change the RulesApp item, and it authorises no production push.",
  "product": "Marine Intelligence Weekly",
  "release": {
   "release_id": "S1-SAFETY-REMEDIATION-20261112",
-  "production_baseline": "ad7cd3db8c802891b13585163743df340837d291",
+  "production_baseline": "89480f2ad63663fdd67fb9375731e09349b18fe8",
   "candidate_commit": "aea3531f877f076f22da43e5daf1e90ffa2bc969",
   "correction_records": [
    "correction_corr_safety_crankcase_response_20261019_manifest.json",
@@ -75,6 +83,10 @@
     "status": "A",
     "blob": "f02e262e0622bb47e1e0878cb4f622907ad7610c"
    },
+   "reports/governance/R7_REBASED_PROVENANCE_HPFUEL_20261113.md": {
+    "status": "A",
+    "blob": "3203776f5160f437a30c91546c14514647f4408f"
+   },
    "reports/governance/SAFETY_HPFUEL_PIPE_PREPARATION_AUTHORITY_20261022.md": {
     "status": "A",
     "blob": "5adca75450daaaf23fd77f5525e7087bfbbbedd8"
@@ -135,9 +147,17 @@
     "status": "M",
     "blob": "fad09888e7ef86a33effdae0b2c2c9a0ea75efa0"
    },
+   "tools/oral/oral_monthly.py": {
+    "status": "M",
+    "blob": "cb7cca22d63bd45d685003015b0b94674c5a79f0"
+   },
    "tools/oral/oral_release_gates.py": {
     "status": "M",
-    "blob": "4fbd9886dba5415f2581891de2d390c49f2c8857"
+    "blob": "24102e4ca26412cc67ceb43a02aac2e05dff13c5"
+   },
+   "tools/oral/provenance/rebased_corr_safety_hpfuel_pipe_20261022.json": {
+    "status": "A",
+    "blob": "1d060df445b217f9077a00b600ddcfc207c809b1"
    },
    "tools/oral/test_e1_timed_supersession.py": {
     "status": "A",
@@ -151,9 +171,13 @@
     "status": "A",
     "blob": "ba30acce9f46b9b03f30435c6c98d435a1411cc9"
    },
+   "tools/oral/test_oral_monthly_provenance.py": {
+    "status": "A",
+    "blob": "692e1b0d7349e4fb38a87c303bd963e1d4fef26e"
+   },
    "tools/oral/test_oral_release_runner.py": {
     "status": "M",
-    "blob": "7860bd8c35a47208f8cd969a4d1ace7426f908ed"
+    "blob": "62e3ae2af2520c993dc77cf3d2d5a4e386679548"
    },
    "tools/oral/validate_batch_e1.py": {
     "status": "M",
