@@ -1,0 +1,121 @@
+{
+ "correction_id": "CORR-SAFETY-HPFUEL-PIPE-20261022",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "founder_authorisation": {
+  "state": "FOUNDER_AUTHORISED",
+  "decided_on": "2026-11-12",
+  "decided_by": "Founder",
+  "decision_ref": "FOUNDER-DECISION-U1-U2-U3-20261112, section 6 (reports/governance/FOUNDER_DECISION_U1_U2_U3_20261112.md)",
+  "scope": [
+   "SAFETY-HPFUEL-01"
+  ],
+  "note": "Content correction authorised for local integration and qualification, within this record's documented action IDs. This is not a production push approval: publication needs a separate Founder decision naming the exact final commit and tree. Governance exception GX-S1-RULESAPP-FALLS-20261112 is a separate authorisation and applies only to CORR-SAFETY-LSA-FALLS-COLDSTART-20261019. Release qualification is evidence, not an authorisation. Prepared under: Founder authorisation for the 22 Oct 2026 oral/Excel closeout: controlled safety-release preparation and bounded independently reviewed successors; NO production deployment, no push, no Excel distribution, no change to founder_authorisation metadata (prepared_on 2026-10-22)."
+ },
+ "origin": "oral_excel_release_readiness_20261022_closeout_s1_reconciliation",
+ "date": "2026-10-22",
+ "title": "QB5_A#q11 On My Vessel: temporary clamp on a leaking high-pressure fuel pipe, repair deferred to port",
+ "baseline_commit": "7e4a94129908d5cd7ac57dfbc6a37b0a74e159e4",
+ "governing_commits": [
+  "234323040306494cb22d0819477b903a8dd461c2",
+  "b3efed43732f3ed2249286b2c6937d62b1f7100f",
+  "a673bdca0ce3ca1cf0b3a4409de905143f1d508f",
+  "b8c293a548ab5ae47176e820078fd5e4df6a788f"
+ ],
+ "authorisation_source": "reports/governance/SAFETY_HPFUEL_PIPE_PREPARATION_AUTHORITY_20261022.md",
+ "candidate_claim": "Oral/Excel closeout S1 reconciliation (2026-10-22, section 3): QB5_A#q11 On My Vessel: 'reduce to slow ahead to reduce FO injection pressure, isolate that injector and fit a temporary clamp ... Full repair deferred to next port.' Independent severity review: S1 (about 75 %).",
+ "candidate_verdict": "UPHELD",
+ "authority": "WinGD X82DF Operation Manual Issue 002: supply-unit leak check (replace a defective HP fuel pipe only with the engine stopped and the pressure released; otherwise cut out the fuel pump), 10.14 (fuel pump cut-out only with the engine stopped), 10.19 (cylinder cut-out limits); SOLAS II-2/4.2.2.5 (jacketed external high-pressure fuel delivery lines, leak collection, alarm; formerly II-2/15.2.9, MSC.31(63)); MAN ME project guide (double-walled HP pipes, leak alarm). Evidence: reviews R1-R3 in MIW-QB-HPFUEL-CORR-20261022/03_review.",
+ "cards": [
+  {
+   "correction_action_id": "SAFETY-HPFUEL-01",
+   "file": "QB5_A.html",
+   "path": "meoclass1/QB5_A.html",
+   "anchor": "q11",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "5df110f73776ced6c2e0f841cf2ed80b1ab4f3e6595777e28fc42e355c25c503",
+   "post_edit_digest": "3bc72ea50577231a8b58705df64a3e94b5d08c7e1d7329a78b98d7157a32d4a4",
+   "supersedes": {
+    "manifest": "correction_corr_safety_enclosed_space_20261019_manifest.json",
+    "action_id": "SAFETY-ENCL-01",
+    "post_edit_digest": "5df110f73776ced6c2e0f841cf2ed80b1ab4f3e6595777e28fc42e355c25c503",
+    "note": "This record starts from the state that record pins (its post_edit_digest is this record's pre_edit_digest at 446e726); the earlier pin is not rewritten. Only the On My Vessel paragraph and the q-version footer change; the enclosed-space teaching is untouched."
+   },
+   "digest_pinned_by_earlier_manifest": true
+  }
+ ],
+ "propagation": {
+  "sweep": "HP fuel-pipe temporary-repair propositions swept on the candidate tree (meoclass1, oralnotes, pastpapers, solvedQP, RulesApp index): no other site. The p28 'support clamp' is a pipe fixing in a different context, not a repair; the proposition does not match it."
+ },
+ "invariants": {
+  "canonical_questions_before": 766,
+  "canonical_questions_after": 766,
+  "new_cards": 0,
+  "q_text_changed": false,
+  "note": "Answer-body correction only (one On My Vessel paragraph and the q-version footer); stems, anchors and card counts unchanged, so qb_content_index regenerates to a no-op."
+ },
+ "known_traps_entries": [
+  167
+ ],
+ "artefacts": [
+  {
+   "path": "tools/oral/validate_correction_safety.py",
+   "role": "content gate for all CORR-SAFETY records; this record adds the hp_fuel_pipe_no_clamp_repair proposition and the qb5a_q11_hp_pipe_* card checks"
+  },
+  {
+   "path": "tools/oral/mutate_correction_safety.py",
+   "role": "mutation suite; this record adds mutations BA-BJ, each tripping its own named check"
+  },
+  {
+   "path": "tools/oral/check_founder_authorisation_for_landing.py",
+   "role": "landing gate L1-L4 (not in the qualification run)"
+  },
+  {
+   "path": "reports/governance/SAFETY_HPFUEL_PIPE_PREPARATION_AUTHORITY_20261022.md",
+   "role": "preparation authority (not landing authority)"
+  }
+ ],
+ "review": {
+  "method": "independent clean-context review of the On My Vessel paragraph and footer, maker manual (WinGD X82DF OM) and SOLAS jacketed-pipe text opened by the reviewer; one fresh reviewer per round, repeated until ACCEPT or ACCEPT_WITH_NITS with no open S1-S4 finding and safety resolved (MIW-QB-HPFUEL-CORR-20261022/03_review). Earlier: closeout severity review S1 (~75 %) and content review of 840b7d1 ACCEPT_WITH_NITS.",
+  "rounds": [
+   {
+    "round": "round1",
+    "reviewer": "HPFUEL-EDREV-R1",
+    "content_commit_reviewed": "9eba120c0a36423e1b5e99a70db994ec3925f8fc",
+    "verdict": "ACCEPT_WITH_NITS",
+    "open_findings_by_severity": {
+     "S4": 2,
+     "S5": 3
+    },
+    "disposition": "all adopted in 951e39c"
+   },
+   {
+    "round": "round2",
+    "reviewer": "HPFUEL-EDREV-R2",
+    "content_commit_reviewed": "951e39cd3ebc6806ee0d45bc0b2b8bde022da4d4",
+    "verdict": "ACCEPT_WITH_NITS",
+    "open_findings_by_severity": {
+     "S4": 2,
+     "S5": 3
+    },
+    "disposition": "N1, N2, N4 adopted in ab10fe6; N3, N5 S5 noted"
+   }
+  ],
+  "final": [
+   {
+    "item": "QB5_A_q11",
+    "round": "round3",
+    "review_file": "MIW-QB-HPFUEL-CORR-20261022/03_review/round3/R3_QB5_A_q11_hpfuel.review.json",
+    "reviewer": "HPFUEL-EDREV-R3",
+    "content_commit_reviewed": "ab10fe691da06319eb938009e334a8f624c75da5",
+    "verdict": "ACCEPT_WITH_NITS",
+    "reviewed_digest": "3bc72ea50577231a8b58705df64a3e94b5d08c7e1d7329a78b98d7157a32d4a4",
+    "open_findings_by_severity": {
+     "S5": 4
+    },
+    "reviewed_content_identical_to_record_content_commit": true
+   }
+  ]
+ },
+ "note": "Prepared and qualified locally; full evidence in MIW-QB-HPFUEL-CORR-20261022 (job root, outside the repository). Lands only after Transaction A's authorisation commit, as its own transaction. Integrated 12 Nov 2026 (Founder S-1/S-2): cherry-picked (-x) onto the P0S merge on production ad7cd3d without the RulesApp commits c145294..bf14420 or the RulesApp closure 446e726. baseline_commit and governing_commits are rebound to the cherry-picked commits; each content commit's QB5_A.html diff is identical to the original. Original baseline_commit 446e7266dc23edaab65edc8f30952a9736df1c1c; original governing_commits 840b7d18a848b0e904ec352bf1412f8b1d846b03, 9eba120c0a36423e1b5e99a70db994ec3925f8fc, 951e39cd3ebc6806ee0d45bc0b2b8bde022da4d4, ab10fe691da06319eb938009e334a8f624c75da5. The SHAs in the review block refer to those original reviewed commits."
+}

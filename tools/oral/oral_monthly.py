@@ -328,6 +328,209 @@ def _git_added_date(path):
     return _dt.date.fromisoformat(out.splitlines()[0]) if out else None
 
 
+# ------------------------------------------------- rebased-correction provenance
+#
+# R-7 (FOUNDER-DECISION-R7-R8-20261113). A correction prepared and committed in
+# one month can be CHERRY-PICKED into a later integration, which gives its file a
+# later first-add commit. The month cross-check below then refuses it -- rightly,
+# because a date the repository cannot corroborate is a date anyone could write.
+#
+# This allow-list admits exactly one such record, and only on immutable evidence
+# carried inside the repository: the raw git objects of the ORIGINAL commit
+# (commit, the three trees on the record's path, the original record blob),
+# re-hashed here. It is NOT a date bypass: every condition in
+# rebased_provenance_problems() must hold, the entry is pinned to exact object ids
+# and an evidence SHA-256, and every record not listed keeps the plain rule. A new
+# entry is a reviewed code change. See
+# reports/governance/R7_REBASED_PROVENANCE_HPFUEL_20261113.md.
+
+REBASED_PROVENANCE = {
+    "tools/oral/correction_corr_safety_hpfuel_pipe_20261022_manifest.json": {
+        "correction_id": "CORR-SAFETY-HPFUEL-PIPE-20261022",
+        "origin_commit": "c2118cc7a18b37ddef3d852bb0c1f80bb7973c30",
+        "origin_record_blob": "d30bc748af5a7d5d324b299d39c9ad95ee428370",
+        "integration_commit": "8e7eff905eac95a2e641ef7c2fc8045831bbecca",
+        "evidence": "tools/oral/provenance/rebased_corr_safety_hpfuel_pipe_20261022.json",
+        "evidence_sha256": "29d6a4f8ae8a93c2ee978de148328fce115d9000db5db4e7e16d1ffe8cdcbd55",
+        "decision_ref": "FOUNDER-DECISION-R7-R8-20261113",
+    },
+}
+
+# The only fields the documented 12 Nov rebind changed. Everything else in the
+# record must equal the original byte-for-byte as JSON values.
+REBIND_FIELDS = frozenset({"founder_authorisation", "baseline_commit",
+                           "governing_commits", "note"})
+PROVENANCE_SCHEMA = "miw-rebased-provenance/1"
+_OBJ_TYPES = ("commit", "tree", "blob")
+
+
+def _object_id(otype, body):
+    import hashlib
+    return hashlib.sha1(b"%s %d\0" % (otype.encode(), len(body)) + body).hexdigest()
+
+
+def _parse_tree(body):
+    """{name: (mode, sha)} from a raw git tree body."""
+    out, i = {}, 0
+    while i < len(body):
+        sp = body.index(b" ", i)
+        nul = body.index(b"\0", sp)
+        mode, name = body[i:sp].decode(), body[sp + 1:nul].decode("utf-8")
+        out[name] = (mode, body[nul + 1:nul + 21].hex())
+        i = nul + 21
+    return out
+
+
+def _person_date(commit_body, role):
+    """Calendar date of the author/committer line, in that line's own offset
+    (the same convention as `git log --date=short`)."""
+    for line in commit_body.decode("utf-8", "replace").split("\n"):
+        if line == "":
+            break
+        if line.startswith(role + " "):
+            m = re.search(r" (\d+) ([+-])(\d{2})(\d{2})$", line)
+            if not m:
+                return None
+            off = (int(m.group(3)) * 60 + int(m.group(4))) * (1 if m.group(2) == "+" else -1)
+            tz = _dt.timezone(_dt.timedelta(minutes=off))
+            return _dt.datetime.fromtimestamp(int(m.group(1)), tz)
+    return None
+
+
+def rebased_provenance_problems(rel, manifest, entry, evidence_bytes, added_commit,
+                                integration_message, integration_date, local_origin=None):
+    """Pure check. [] means the rebased record's ORIGIN month is proved.
+    Inputs are everything the decision rests on, so each can be mutated by a test."""
+    import base64
+    import hashlib
+    p = []
+    if not isinstance(entry, dict):
+        return ["%s: no rebased-provenance entry" % rel]
+    if manifest.get("correction_id") != entry.get("correction_id"):
+        p.append("%s: correction_id %r is not the entry's %r"
+                 % (rel, manifest.get("correction_id"), entry.get("correction_id")))
+    declared = manifest.get("date")
+    if not (isinstance(declared, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", declared)):
+        return p + ["%s: no valid declared date" % rel]
+    declared = _dt.date.fromisoformat(declared)
+    if evidence_bytes is None:
+        return p + ["%s: provenance evidence %s is missing" % (rel, entry.get("evidence"))]
+    if hashlib.sha256(evidence_bytes).hexdigest() != entry.get("evidence_sha256"):
+        return p + ["%s: provenance evidence sha256 is not the pinned one" % rel]
+    try:
+        ev = json.loads(evidence_bytes.decode("utf-8"))
+    except (ValueError, UnicodeDecodeError) as e:
+        return p + ["%s: provenance evidence unreadable: %s" % (rel, e)]
+    for k, want in (("schema", PROVENANCE_SCHEMA), ("path", rel),
+                    ("correction_id", entry.get("correction_id")),
+                    ("origin_commit", entry.get("origin_commit"))):
+        if ev.get(k) != want:
+            p.append("%s: evidence %s %r != %r" % (rel, k, ev.get(k), want))
+    objs = {}
+    for o in ev.get("objects") or []:
+        try:
+            body = base64.b64decode(o["base64"], validate=True)
+        except (KeyError, TypeError, ValueError):
+            p.append("%s: evidence object not decodable" % rel)
+            continue
+        if o.get("type") not in _OBJ_TYPES or _object_id(o["type"], body) != o.get("id"):
+            p.append("%s: evidence object %s does not hash to its id" % (rel, o.get("id")))
+            continue
+        if o["id"] in objs:
+            p.append("%s: duplicate evidence object %s" % (rel, o["id"]))
+        objs[o["id"]] = (o["type"], body)
+    if p:
+        return p
+    origin = entry.get("origin_commit")
+    if objs.get(origin, ("",))[0] != "commit":
+        return ["%s: origin commit %s is not in the evidence" % (rel, origin)]
+    cbody = objs[origin][1]
+    if local_origin is not None and local_origin != cbody:
+        p.append("%s: local object %s differs from the evidence" % (rel, origin))
+    m = re.match(rb"tree ([0-9a-f]{40})\n", cbody)
+    chain, cur, needed = rel.split("/"), (m.group(1).decode() if m else None), {origin}
+    for i, name in enumerate(chain):
+        if objs.get(cur, ("",))[0] != "tree":
+            return p + ["%s: tree %s on the origin path is not in the evidence" % (rel, cur)]
+        needed.add(cur)
+        ent = _parse_tree(objs[cur][1]).get(name)
+        last = i == len(chain) - 1
+        if not ent or ent[0] != ("100644" if last else "40000"):
+            return p + ["%s: origin tree has no %s %r" % (rel, "file" if last else "dir", name)]
+        cur = ent[1]
+    if cur != entry.get("origin_record_blob") or objs.get(cur, ("",))[0] != "blob":
+        return p + ["%s: origin record blob %s is not the pinned %s"
+                    % (rel, cur, entry.get("origin_record_blob"))]
+    needed.add(cur)
+    if set(objs) != needed:
+        p.append("%s: evidence carries objects beyond the origin chain: %s"
+                 % (rel, sorted(set(objs) - needed)))
+    cdt, adt = _person_date(cbody, "committer"), _person_date(cbody, "author")
+    for label, d in (("committer", cdt), ("author", adt)):
+        if d is None or (d.year, d.month) != (declared.year, declared.month):
+            p.append("%s: origin %s date %s is not in the declared month %s"
+                     % (rel, label, d and d.date(), declared.strftime("%Y-%m")))
+    try:
+        orig = json.loads(objs[cur][1].decode("utf-8"))
+    except (ValueError, UnicodeDecodeError):
+        return p + ["%s: origin record is not JSON" % rel]
+    if set(orig) != set(manifest):
+        p.append("%s: origin and current record differ in key set" % rel)
+    for k in sorted((set(orig) | set(manifest)) - REBIND_FIELDS):
+        if orig.get(k) != manifest.get(k):
+            p.append("%s: field %r differs from the origin record" % (rel, k))
+    if added_commit != entry.get("integration_commit"):
+        p.append("%s: first-add commit %s is not the pinned integration commit %s"
+                 % (rel, added_commit, entry.get("integration_commit")))
+    if "(cherry picked from commit %s)" % origin not in (integration_message or ""):
+        p.append("%s: integration commit does not name %s as its cherry-pick origin"
+                 % (rel, origin))
+    if cdt is None or integration_date is None or not cdt < integration_date:
+        p.append("%s: origin date does not precede the integration date" % rel)
+    return p
+
+
+def _rel(path):
+    try:
+        return Path(path).resolve().relative_to(Path(L.REPO).resolve()).as_posix()
+    except ValueError:
+        return Path(path).as_posix()
+
+
+def rebased_provenance(path, manifest, entry=None):
+    """Gather the live inputs and run the pure check. Returns the two dates kept
+    separately, or fails closed with every problem found."""
+    rel = _rel(path)
+    entry = entry if entry is not None else REBASED_PROVENANCE.get(rel)
+    if entry is None:
+        fail("%s: no rebased-provenance entry" % rel)
+    evp = Path(L.REPO) / entry["evidence"]
+    ev = evp.read_bytes() if evp.is_file() else None
+    log = _git("log", "--diff-filter=A", "--format=%H", "-1", "--", str(path)).strip()
+    added = log.splitlines()[0] if log else None
+    msg, idate = None, None
+    if added:
+        msg = _git("log", "-1", "--format=%B", added)
+        idate = _dt.datetime.fromisoformat(_git("log", "-1", "--format=%cI", added).strip())
+    local = None
+    r = subprocess.run(["git", "-C", str(L.REPO), "cat-file", "commit", entry["origin_commit"]],
+                       capture_output=True)
+    if r.returncode == 0:
+        local = r.stdout
+    probs = rebased_provenance_problems(rel, manifest, entry, ev, added, msg, idate, local)
+    if probs:
+        fail("rebased provenance refused: " + "; ".join(probs))
+    cbody = None
+    import base64
+    for o in json.loads(ev.decode("utf-8"))["objects"]:
+        if o["id"] == entry["origin_commit"]:
+            cbody = base64.b64decode(o["base64"])
+    return {"origin_commit": entry["origin_commit"],
+            "origin_date": _person_date(cbody, "committer").date(),
+            "integration_commit": added, "integration_date": idate.date(),
+            "decision_ref": entry["decision_ref"]}
+
+
 def manifest_event_date(path, manifest, gid):
     """When this governance record HAPPENED -- (date, source).
 
@@ -342,6 +545,13 @@ def manifest_event_date(path, manifest, gid):
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", declared):
             fail("%s: manifest `date` %r is not YYYY-MM-DD" % (gid, declared))
         declared = _dt.date.fromisoformat(declared)
+    if _rel(path) in REBASED_PROVENANCE:
+        # Listed records are ALWAYS verified, mismatch or not: the entry is a
+        # claim about immutable history and must stay true for as long as it
+        # exists. On success the declared (origin) month owns the event; the
+        # integration date is kept separately by rebased_provenance().
+        rebased_provenance(path, manifest)
+        return declared, "declared+rebased-provenance"
     added = _git_added_date(path)
     if declared and added and (declared.year, declared.month) != (added.year, added.month):
         fail("%s: declared date %s and first-commit date %s fall in different "

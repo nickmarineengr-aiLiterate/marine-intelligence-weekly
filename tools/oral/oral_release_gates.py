@@ -683,6 +683,15 @@ GATES = (
           note="calendar-month boundaries, TEASER_SYNC counts zero and only "
                "beside its counted gated twin, unknown action kinds fail closed, "
                "and closed-month counts do not drift"),
+    # R-7 (FOUNDER-DECISION-R7-R8-20261113): the one rebased correction whose
+    # October origin is proved from re-hashed git objects carried in the repo.
+    # Positive, conservation (every other record keeps the plain rule) and
+    # forged/missing/contradictory-provenance refusals. Reads only.
+    _gate("monthly_provenance_controls",
+          ["python", "%s/test_oral_monthly_provenance.py" % _ORAL],
+          CAT_UNIT, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="rebased-correction provenance: one pinned entry, re-hashed "
+               "origin objects, origin month = declared month, no general bypass"),
 
     # Content gates for CORR-DEFN-TREATY-20260825. Third pair of this shape,
     # and the one that shows why the shape is needed: QB9_G#q6 shipped a legal
@@ -1052,6 +1061,46 @@ GATES = (
           ["python", "%s/check_september_privacy_public.py" % _ORAL],
           CAT_SECURITY, PARSER_VALIDATOR, timeout=300, historical_39=False,
           note="PUB1-PUB6, public structure only; the same check public CI runs"),
+
+    # ---- P0 safety corrections (CORR-SAFETY-*, 19 Oct 2026) -----------------
+    # Propositions, not pins: the six unsafe positions (EEBD entry, falls
+    # end-for-end, +15 C cold start, 19.5% / fixed-ppm entry criteria,
+    # ventilate-on-crankcase-warning, IMDG cat. D under deck / 6m-12m) are
+    # asserted absent corpus-wide and the safe positions present on all twelve
+    # corrected cards and both cheat sheets. A RulesApp hit passes only as a
+    # declared OPEN cross-product item, which the landing gate refuses.
+    _gate("validate_correction_safety",
+          ["python", "%s/validate_correction_safety.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=900, historical_39=False,
+          note="closed-world card propositions + open-world corpus propositions; "
+               "kn-card and arrow units are not split (the first P0 gate's blind spot)"),
+    _gate("correction_safety_mutate",
+          ["python", "%s/mutate_correction_safety.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=3600,
+          historical_39=False, depends_on=("validate_correction_safety",),
+          note="each mutation trips its own named check, never a digest pin"),
+    # The landing gate (check_founder_authorisation_for_landing.py) is
+    # deliberately NOT registered: a candidate must be qualifiable while its
+    # records are PENDING_FOUNDER_DECISION. Its contract is tested here.
+    _gate("founder_authorisation_controls",
+          ["python", "%s/test_founder_authorisation.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=120, historical_39=False,
+          note="founder_authorisation well-formedness, fail-closed presence, L4 cross-product rule"),
+    # Founder decisions U-1/U-2 (12 Nov 2026): the single SHA-pinned L4 governance exception
+    # GX-S1-RULESAPP-FALLS-20261112 and the explicit three-record compatibility allowance. Positive and
+    # negative controls: deployed product, missing/stale/foreign evidence, unrelated items, scope changes,
+    # unauthorised records, unknown/edited/expired exceptions, and that L4 is not a hard-coded pass.
+    _gate("governance_exception_l4_controls",
+          ["python", "%s/test_governance_exception_l4.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=300, historical_39=False,
+          note="L4 exception X1-X9 controls and U-2 legacy-compat controls"),
+    # validate_batch_e1's timed-blocks check reads E1's own produced state for a
+    # card a later authorised record supersedes; these controls prove it still
+    # fails on an unauthorised edit, a missing E1 state and a changed E1 state.
+    _gate("e1_timed_supersession_controls",
+          ["python", "%s/test_e1_timed_supersession.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=900, historical_39=False, mutates=True,
+          note="E1 timed_blocks_unchanged: supersession-aware, fail-closed"),
 
     # ---- health: candidate LOCAL vs clean ref ------------------------------
     _gate("qb_health_check",

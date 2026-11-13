@@ -348,6 +348,119 @@ CORRECTION_CLASSES = (
 
 CORRECTION_STATUSES = ("AUTHORISED", "SUPERSEDED")
 
+# ---------------------------------------------------------------------------
+# FOUNDER AUTHORISATION -- separate from `status`, on purpose.
+#
+# `status: AUTHORISED` means "these pins are live and enforced": the content
+# gates, the supersession contract and validate_corrections all read it that
+# way, and SUPERSEDED switches enforcement OFF. A third status value for a
+# candidate would therefore either stop testing the candidate or force those
+# gates to be weakened. So the human decision lives in its own LOAD_BEARING
+# field with a closed vocabulary:
+#
+#   {"state": "PENDING_FOUNDER_DECISION", "prepared_under": ..., "prepared_on": ...}
+#   {"state": "FOUNDER_AUTHORISED", "decided_on": ..., "decided_by": ...,
+#    "decision_ref": ..., "scope": [<this record's action ids>]}
+#
+# FAIL-CLOSED: a correction record not already present at the legacy commit
+# must carry the field, so a forgotten field never reads as authorised. Records
+# present at the legacy commit keep their historical meaning untouched. The
+# landing gate (check_founder_authorisation_for_landing.py) refuses any PENDING
+# record; qualification gates keep enforcing pins exactly as before.
+#
+# Provenance: this field and its vocabulary are SCHEMA-IDENTICAL to the design
+# prepared in the separate Engineering R1 lane (candidate commit a635110). That
+# lane is not integrated here; the mechanism is implemented independently in
+# the P0 safety lane so that P0's records can be held fail-closed. On
+# integration of both lanes, keep ONE implementation -- records written by
+# either lane audit identically under it.
+# ---------------------------------------------------------------------------
+FOUNDER_AUTHORISATION_STATES = ("PENDING_FOUNDER_DECISION", "FOUNDER_AUTHORISED")
+# Legacy boundary: records present at the P0 lane's own baseline (19 Oct 2026) predate this control.
+FOUNDER_AUTHORISATION_LEGACY_COMMIT = "e016b2549182812b50f16d8e6e1512b3b32bfb2d"
+# Explicit compatibility allowance (Founder decision U-2, 12 Nov 2026, FOUNDER-DECISION-U1-U2-U3-20261112).
+# Exactly three records were authorised and released to production (Q13 LP.6(17) on 30 Oct; D-4 on 11 Nov) after
+# the legacy commit but before this control landed. Their authorisation provenance stays as released
+# (status AUTHORISED, authorisation_source meoclass1/known_traps.md); no retrospective founder_authorisation is
+# written into them. Each is exempt ONLY by exact filename AND exact git blob as released at production ad7cd3d,
+# so an edited copy, a renamed copy or any future record cannot inherit the allowance. Closed list: adding an
+# entry is a governance change that needs its own Founder decision.
+FOUNDER_AUTHORISATION_LEGACY_COMPAT_RECORDS = {
+    "correction_corr_lp617_sewage_sludge_20261028_manifest.json": "89bd478484ad29625d5f2280de61e3409d1f5506",
+    "correction_corr_lp617_qb9a_q7_20261030_manifest.json": "bb665c0af88707681226a801cd12427aaad5f822",
+    "correction_corr_lp617_simon_p8_20261030_manifest.json": "312378cd58d7cf51d3f21525b7515322de549400",
+}
+_FA_PENDING_FIELDS = {"state", "prepared_under", "prepared_on", "note"}
+_FA_DECIDED_FIELDS = {"state", "decided_on", "decided_by", "decision_ref", "scope", "note"}
+
+
+def founder_authorisation_findings(manifest: dict, is_legacy: bool) -> list[tuple]:
+    """(check, ok, detail) for a correction record's founder_authorisation.
+
+    Pure: the caller decides legacy status (present at the legacy commit or not)."""
+    out = []
+    fa = manifest.get("founder_authorisation")
+    out.append(("founder_authorisation_present_unless_legacy", fa is not None or is_legacy,
+                "legacy=%s present=%s" % (is_legacy, fa is not None)))
+    if fa is None:
+        return out
+    bad = []
+    if not isinstance(fa, dict):
+        bad.append("not an object")
+    else:
+        state = fa.get("state")
+        if state not in FOUNDER_AUTHORISATION_STATES:
+            bad.append("state=%r" % state)
+        elif state == "PENDING_FOUNDER_DECISION":
+            extra = sorted(set(fa) - _FA_PENDING_FIELDS)
+            if extra:
+                bad.append("PENDING carries %s" % extra)
+            if not fa.get("prepared_under") or not fa.get("prepared_on"):
+                bad.append("PENDING needs prepared_under and prepared_on")
+        else:
+            extra = sorted(set(fa) - _FA_DECIDED_FIELDS)
+            if extra:
+                bad.append("FOUNDER_AUTHORISED carries %s" % extra)
+            missing = [k for k in ("decided_on", "decided_by", "decision_ref") if not fa.get(k)]
+            if missing:
+                bad.append("FOUNDER_AUTHORISED missing %s" % missing)
+            ids = sorted([c.get("correction_action_id") for c in manifest.get("cards") or []]
+                         + [a.get("correction_action_id") for a in manifest.get("governed_artefacts") or []])
+            if sorted(fa.get("scope") or []) != ids:
+                bad.append("scope %s != record action ids %s" % (sorted(fa.get("scope") or []), ids))
+    out.append(("founder_authorisation_well_formed", not bad, "; ".join(bad) or str(fa.get("state"))))
+    return out
+
+
+def legacy_compat_allows(name: str, blob: str | None) -> bool:
+    """Pure: True only for an allow-listed filename whose content is byte-identical to the released blob."""
+    pinned = FOUNDER_AUTHORISATION_LEGACY_COMPAT_RECORDS.get(name)
+    return bool(pinned) and blob == pinned
+
+
+def _git_blob_of_file(path) -> str | None:
+    try:
+        out = subprocess.run(["git", "hash-object", "--no-filters", str(path)], cwd=str(REPO),
+                             capture_output=True, text=True, check=False)
+    except OSError:
+        return None
+    return out.stdout.strip() if out.returncode == 0 else None
+
+
+def _is_legacy_record(path) -> bool:
+    """Present (by name) in the legacy commit's tree, or an exact allow-listed compatibility record.
+    Fails closed to False."""
+    name = pathlib.Path(path).name
+    rel = "tools/oral/%s" % name
+    try:
+        out = subprocess.run(["git", "cat-file", "-e", "%s:%s" % (FOUNDER_AUTHORISATION_LEGACY_COMMIT, rel)],
+                             cwd=str(REPO), capture_output=True, check=False)
+    except OSError:
+        return False
+    if out.returncode == 0:
+        return True
+    return name in FOUNDER_AUTHORISATION_LEGACY_COMPAT_RECORDS and legacy_compat_allows(name, _git_blob_of_file(path))
+
 CORRECTION_FIELD_CLASSES: dict[str, str] = {
     # ---- identity and authorisation (all asserted) ----
     "correction_id": LOAD_BEARING,
@@ -368,6 +481,10 @@ CORRECTION_FIELD_CLASSES: dict[str, str] = {
     # GOVERNED_ARTEFACT_SUCCESSION_FIELDS below for why this is a separate
     # collection and not a `supersedes` key inside `governed_artefacts`.
     "governed_artefact_successions": LOAD_BEARING,
+    # The Founder's decision on THIS record, separate from `status` (see
+    # FOUNDER_AUTHORISATION_STATES). Mandatory on any record not present at the
+    # legacy commit; asserted by founder_authorisation_* below.
+    "founder_authorisation": LOAD_BEARING,
 
     # ---- informational ----
     "title": INFORMATIONAL,
@@ -717,6 +834,8 @@ def audit_correction_manifest(path) -> list[Finding]:
 
     add("status_known", manifest.get("status") in CORRECTION_STATUSES,
         "status=%s" % manifest.get("status"))
+    for _check, _ok, _detail in founder_authorisation_findings(manifest, _is_legacy_record(p)):
+        add(_check, _ok, _detail)
     add("origin_present", bool(manifest.get("origin")),
         "origin=%s" % manifest.get("origin"))
 

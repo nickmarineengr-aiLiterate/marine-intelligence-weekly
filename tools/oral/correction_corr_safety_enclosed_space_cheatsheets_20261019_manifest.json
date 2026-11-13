@@ -1,0 +1,143 @@
+{
+ "correction_id": "CORR-SAFETY-ENCLOSED-SPACE-CHEATSHEETS-20261019",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "founder_authorisation": {
+  "state": "FOUNDER_AUTHORISED",
+  "decided_on": "2026-11-12",
+  "decided_by": "Founder",
+  "decision_ref": "FOUNDER-DECISION-U1-U2-U3-20261112, section 6 (reports/governance/FOUNDER_DECISION_U1_U2_U3_20261112.md)",
+  "scope": [
+   "SAFETY-ENCL-CS-01",
+   "SAFETY-ENCL-CS-02"
+  ],
+  "note": "Content correction authorised for local integration and qualification, within this record's documented action IDs. This is not a production push approval: publication needs a separate Founder decision naming the exact final commit and tree. Governance exception GX-S1-RULESAPP-FALLS-20261112 is a separate authorisation and applies only to CORR-SAFETY-LSA-FALLS-COLDSTART-20261019. Release qualification is evidence, not an authorisation. Prepared under: Founder decision MIW-P0-SAFETY-FINAL-QUALIFICATION (19 Oct 2026): GO for local safety-correction completion and full qualification; NO production GO, no push, no deploy, no distribution, no bypass of correction authorisation (prepared_on 2026-10-19)."
+ },
+ "origin": "p0_safety_propagation_sweep_20261019",
+ "date": "2026-10-19",
+ "title": "QB5_A and QB5_B cheat sheets: the rejected enclosed-space entry criteria, propagated from QB5_A#q11",
+ "baseline_commit": "e016b2549182812b50f16d8e6e1512b3b32bfb2d",
+ "governing_commits": [
+  "9afcb4185121767dfb26dc9de533fc148f9e08b1",
+  "d06bf3ded1a225d754240da4a8087cfaf3b476db",
+  "05645a1ae7ec92198da6c701ce660e14cc1d2883",
+  "be507089e7e6541833633cb6d8cb2c5a285184e2",
+  "6df9f0ceafd8ce2712966b0f44918f22c92d6e3d",
+  "0ab57b3271a999a81a9910dd00e7ad94ae52066d",
+  "02259156e3367b7e68b8cd358d87ff64fc095e94"
+ ],
+ "authorisation_source": "reports/governance/P0_SAFETY_PREPARATION_AUTHORITY_20261019.md",
+ "candidate_claim": "P0 propagation sweep and successor broad sweep (19 Oct 2026): both cheat sheets restated the QB5_A#q11 / QB5_B#q15 entry figures (O2 19.5-23.5%, H2S 1 ppm, CO 25 ppm).",
+ "candidate_verdict": "UPHELD",
+ "authority": "Propagation of CORR-SAFETY-ENCLOSED-SPACE-20261019 (MSC.581(110) 7.4) onto two non-card pages.",
+ "cards": [],
+ "propagation": {
+  "sweep": "Cheat sheets are outside the 766-card audit and were never audited."
+ },
+ "invariants": {
+  "canonical_questions_before": 766,
+  "canonical_questions_after": 766,
+  "new_cards": 0,
+  "q_text_changed": false,
+  "note": "Answer-body corrections only; stems, anchors and card counts unchanged, so qb_content_index regenerates to a no-op."
+ },
+ "known_traps_entries": [
+  163
+ ],
+ "artefacts": [
+  {
+   "path": "tools/oral/validate_correction_safety.py",
+   "role": "content gate for all CORR-SAFETY records: closed-world card propositions and open-world corpus propositions"
+  },
+  {
+   "path": "tools/oral/mutate_correction_safety.py",
+   "role": "mutation suite; every mutation trips its own named check"
+  },
+  {
+   "path": "tools/oral/check_founder_authorisation_for_landing.py",
+   "role": "landing gate L1-L4 (not in the qualification run)"
+  },
+  {
+   "path": "tools/oral/test_founder_authorisation.py",
+   "role": "in-memory controls for founder_authorisation and L4"
+  },
+  {
+   "path": "tools/oral/test_e1_timed_supersession.py",
+   "role": "controls for validate_batch_e1's supersession-aware timed-blocks check (P0S-7)"
+  },
+  {
+   "path": "tools/oral/validate_batch_e1.py",
+   "role": "historical E1 validator: timed_blocks_unchanged reads E1's own produced state once a card is superseded"
+  },
+  {
+   "path": "reports/governance/P0_SAFETY_PREPARATION_AUTHORITY_20261019.md",
+   "role": "preparation authority (not landing authority)"
+  }
+ ],
+ "review": {
+  "method": "independent clean-context whole-card review, every section, primary sources opened by the reviewer; repeated until ACCEPT or ACCEPT_WITH_NITS with no open S1-S3 finding and safety resolved everywhere (P0S_SAFETY_SUCCESSOR_20261019/03_review)",
+  "final": [
+   {
+    "item": "QB5_A_CheatSheet_FILE",
+    "round": "round3",
+    "review_file": "P0S_SAFETY_SUCCESSOR_20261019/03_review/round3/G3_QB5_A_enclosed.review.json",
+    "reviewer": "P0S-EDREV3-G3_QB5_A_enclosed",
+    "content_commit_reviewed": "0ab57b3271a999a81a9910dd00e7ad94ae52066d",
+    "verdict": "ACCEPT_WITH_NITS",
+    "reviewed_digest": "5616d9fb5c00bd598665343e64964161be9115a710745c569936ffc2fe54f60e",
+    "open_findings_by_severity": {
+     "S5": 3
+    },
+    "reviewed_content_identical_to_record_content_commit": true
+   },
+   {
+    "item": "QB5_B_CheatSheet_FILE",
+    "round": "round2",
+    "review_file": "P0S_SAFETY_SUCCESSOR_20261019/03_review/round2/G6_QB5_B_framo.review.json",
+    "reviewer": "P0S-EDREV2-G6_QB5_B_framo",
+    "content_commit_reviewed": "6df9f0ceafd8ce2712966b0f44918f22c92d6e3d",
+    "verdict": "ACCEPT_WITH_NITS",
+    "reviewed_digest": "77a61a1f71264818c494b17d0b245ebdaadb90f8d88cdda0bf8314b9c72e2667",
+    "open_findings_by_severity": {
+     "S5": 1
+    },
+    "reviewed_content_identical_to_record_content_commit": true
+   }
+  ]
+ },
+ "note": "Prepared and qualified locally; full evidence in P0_SAFETY_CORRECTION_20261019 and P0S_SAFETY_SUCCESSOR_20261019 (job root, outside the repository).",
+ "governed_artefacts": [
+  {
+   "correction_action_id": "SAFETY-ENCL-CS-01",
+   "path": "meoclass1/QB5_A_CheatSheet.html",
+   "artefact_type": "CHEAT_SHEET",
+   "classification": "ARTEFACT_PROPAGATION",
+   "proposition": "Enclosed-space entry criteria are MSC.581(110) 7.4: steady 20.9% O2, CO2 <0.5%, <1% LFL, toxic gases <50% of the OEL; not a 19.5-23.5% band or a fixed ppm.",
+   "proposition_markers": [
+    "steady 20.9%",
+    "MSC.581(110)"
+   ],
+   "expected_text_after": "<tr><td class=\"hi\">Toxic (H₂S, CO)</td><td><strong>&lt;50% of OEL</strong></td>",
+   "pre_edit_digest": "13b6f4d27d9fe6ed7c7dcd38db625a2acd21a7d8e87fcac4f1bbc77e5762f1e5",
+   "post_edit_digest": "5616d9fb5c00bd598665343e64964161be9115a710745c569936ffc2fe54f60e",
+   "governing_correction": "CORR-SAFETY-ENCLOSED-SPACE-20261019",
+   "propagation_reason": "SAME-PROPOSITION PROPAGATION: the cheat sheet restated the rejected entry criteria of its parent card(s); found by the P0 propagation sweep and the successor's broad sweep."
+  },
+  {
+   "correction_action_id": "SAFETY-ENCL-CS-02",
+   "path": "meoclass1/QB5_B_CheatSheet.html",
+   "artefact_type": "CHEAT_SHEET",
+   "classification": "ARTEFACT_PROPAGATION",
+   "proposition": "Framo / enclosed-space entry: no entry unless the MSC.581(110) 7.4 criteria are met; no fixed H2S ppm limit.",
+   "proposition_markers": [
+    "MSC.581(110) 7.4",
+    "50% OEL"
+   ],
+   "expected_text_after": "<div class=\"kn-val\">&lt;50% OEL</div>",
+   "pre_edit_digest": "9ff2f1873e09e53c1a68453bc050cbbb649ce0a07f4994662a7f897702456c4c",
+   "post_edit_digest": "77a61a1f71264818c494b17d0b245ebdaadb90f8d88cdda0bf8314b9c72e2667",
+   "governing_correction": "CORR-SAFETY-ENCLOSED-SPACE-20261019",
+   "propagation_reason": "SAME-PROPOSITION PROPAGATION: the cheat sheet restated the rejected entry criteria of its parent card(s); found by the P0 propagation sweep and the successor's broad sweep."
+  }
+ ]
+}

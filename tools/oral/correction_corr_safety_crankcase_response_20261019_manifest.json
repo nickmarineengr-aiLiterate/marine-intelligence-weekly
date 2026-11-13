@@ -1,0 +1,106 @@
+{
+ "correction_id": "CORR-SAFETY-CRANKCASE-RESPONSE-20261019",
+ "kind": "POST_RELEASE_CORRECTION",
+ "status": "AUTHORISED",
+ "founder_authorisation": {
+  "state": "FOUNDER_AUTHORISED",
+  "decided_on": "2026-11-12",
+  "decided_by": "Founder",
+  "decision_ref": "FOUNDER-DECISION-U1-U2-U3-20261112, section 6 (reports/governance/FOUNDER_DECISION_U1_U2_U3_20261112.md)",
+  "scope": [
+   "SAFETY-CRANK-01"
+  ],
+  "note": "Content correction authorised for local integration and qualification, within this record's documented action IDs. This is not a production push approval: publication needs a separate Founder decision naming the exact final commit and tree. Governance exception GX-S1-RULESAPP-FALLS-20261112 is a separate authorisation and applies only to CORR-SAFETY-LSA-FALLS-COLDSTART-20261019. Release qualification is evidence, not an authorisation. Prepared under: Founder decision MIW-P0-SAFETY-FINAL-QUALIFICATION (19 Oct 2026): GO for local safety-correction completion and full qualification; NO production GO, no push, no deploy, no distribution, no bypass of correction authorisation (prepared_on 2026-10-19)."
+ },
+ "origin": "miw_qb_technical_answer_audit_20261019_s1",
+ "date": "2026-10-19",
+ "title": "QB5_A#q8: 'stop, ventilate, investigate' after a crankcase-explosion warning, called a SOLAS duty",
+ "baseline_commit": "e016b2549182812b50f16d8e6e1512b3b32bfb2d",
+ "governing_commits": [
+  "9afcb4185121767dfb26dc9de533fc148f9e08b1",
+  "d06bf3ded1a225d754240da4a8087cfaf3b476db",
+  "05645a1ae7ec92198da6c701ce660e14cc1d2883",
+  "be507089e7e6541833633cb6d8cb2c5a285184e2",
+  "6df9f0ceafd8ce2712966b0f44918f22c92d6e3d",
+  "0ab57b3271a999a81a9910dd00e7ad94ae52066d",
+  "02259156e3367b7e68b8cd358d87ff64fc095e94"
+ ],
+ "authorisation_source": "reports/governance/P0_SAFETY_PREPARATION_AUTHORITY_20261019.md",
+ "candidate_claim": "MIW technical answer audit (frozen pack, 2026-10-19): CORRECTION REQUIRED S1, confirmed by the S1 panel. CE tip: 'Decision (emergency stop - SOLAS II-1 obligation), Execute (stop, ventilate, investigate)'.",
+ "candidate_verdict": "UPHELD",
+ "authority": "WinGD X82DF Operation Manual Issue 002 s.2.6; MAN SL2022-730 (MAN B&W two-strokes older than 2004); IACS UR M10.7/.8 (Rev.4); SOLAS II-1/27, 31, 47 (no stop duty); Hansard 8 Nov 2000 (Derbyshire). Evidence: P0S_EVIDENCE_MATRIX.json.",
+ "cards": [
+  {
+   "correction_action_id": "SAFETY-CRANK-01",
+   "file": "QB5_A.html",
+   "path": "meoclass1/QB5_A.html",
+   "anchor": "q8",
+   "classification": "PRIMARY_CORRECTION",
+   "pre_edit_digest": "2ebef5d854e41db5a98e427bbc6250b706af8e81ba6dd3e77be4318ff6aad344",
+   "post_edit_digest": "8a442a9ee6c1a08ba49a0cc31d3cd54ded8241f5b577883bbdf4b4d3249d8e3e"
+  }
+ ],
+ "propagation": {
+  "sweep": "Crankcase-warning propositions swept: no other site (QB8_F scavenge fire already correct)."
+ },
+ "invariants": {
+  "canonical_questions_before": 766,
+  "canonical_questions_after": 766,
+  "new_cards": 0,
+  "q_text_changed": false,
+  "note": "Answer-body corrections only; stems, anchors and card counts unchanged, so qb_content_index regenerates to a no-op."
+ },
+ "known_traps_entries": [
+  164
+ ],
+ "artefacts": [
+  {
+   "path": "tools/oral/validate_correction_safety.py",
+   "role": "content gate for all CORR-SAFETY records: closed-world card propositions and open-world corpus propositions"
+  },
+  {
+   "path": "tools/oral/mutate_correction_safety.py",
+   "role": "mutation suite; every mutation trips its own named check"
+  },
+  {
+   "path": "tools/oral/check_founder_authorisation_for_landing.py",
+   "role": "landing gate L1-L4 (not in the qualification run)"
+  },
+  {
+   "path": "tools/oral/test_founder_authorisation.py",
+   "role": "in-memory controls for founder_authorisation and L4"
+  },
+  {
+   "path": "tools/oral/test_e1_timed_supersession.py",
+   "role": "controls for validate_batch_e1's supersession-aware timed-blocks check (P0S-7)"
+  },
+  {
+   "path": "tools/oral/validate_batch_e1.py",
+   "role": "historical E1 validator: timed_blocks_unchanged reads E1's own produced state once a card is superseded"
+  },
+  {
+   "path": "reports/governance/P0_SAFETY_PREPARATION_AUTHORITY_20261019.md",
+   "role": "preparation authority (not landing authority)"
+  }
+ ],
+ "review": {
+  "method": "independent clean-context whole-card review, every section, primary sources opened by the reviewer; repeated until ACCEPT or ACCEPT_WITH_NITS with no open S1-S3 finding and safety resolved everywhere (P0S_SAFETY_SUCCESSOR_20261019/03_review)",
+  "final": [
+   {
+    "item": "QB5_A_q8",
+    "round": "round2",
+    "review_file": "P0S_SAFETY_SUCCESSOR_20261019/03_review/round2/G4_QB5_A_crankcase.review.json",
+    "reviewer": "P0S-EDREV2-G4_QB5_A_crankcase",
+    "content_commit_reviewed": "6df9f0ceafd8ce2712966b0f44918f22c92d6e3d",
+    "verdict": "ACCEPT_WITH_NITS",
+    "reviewed_digest": "8a442a9ee6c1a08ba49a0cc31d3cd54ded8241f5b577883bbdf4b4d3249d8e3e",
+    "open_findings_by_severity": {
+     "S4": 1,
+     "S5": 2
+    },
+    "reviewed_content_identical_to_record_content_commit": true
+   }
+  ]
+ },
+ "note": "Prepared and qualified locally; full evidence in P0_SAFETY_CORRECTION_20261019 and P0S_SAFETY_SUCCESSOR_20261019 (job root, outside the repository)."
+}
