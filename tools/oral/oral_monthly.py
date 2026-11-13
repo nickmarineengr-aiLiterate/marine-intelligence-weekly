@@ -490,6 +490,38 @@ def rebased_provenance_problems(rel, manifest, entry, evidence_bytes, added_comm
     return p
 
 
+# R9a M-2: the provenance decision reads history through the same hardened
+# invocation as governance_exceptions.GIT_FIXED -- replace refs ignored, no
+# fsmonitor / external diff, no system or global config, no inherited GIT_*
+# environment (GIT_DIR, GIT_OBJECT_DIRECTORY, GIT_ALTERNATE_OBJECT_DIRECTORIES,
+# GIT_REPLACE_REF_BASE ...) -- so a local setting cannot change which commit
+# "first added" the record or what its message and date are.
+_GIT_PROV_FIXED = ("--no-replace-objects", "-c", "core.quotepath=off",
+                   "-c", "core.fsmonitor=false", "-c", "diff.external=",
+                   "-c", "log.showSignature=false")
+
+
+def _git_prov_env():
+    import os
+    env = {k: v for k, v in os.environ.items() if not k.upper().startswith("GIT_")}
+    env.update(GIT_CONFIG_NOSYSTEM="1", GIT_CONFIG_GLOBAL=os.devnull,
+               GIT_NO_REPLACE_OBJECTS="1")
+    return env
+
+
+def _git_prov_run(*args):
+    return subprocess.run(["git", *_GIT_PROV_FIXED, "-C", str(L.REPO), *args],
+                          capture_output=True, env=_git_prov_env())
+
+
+def _git_prov(*args):
+    r = _git_prov_run(*args)
+    if r.returncode != 0:
+        fail("git %s failed: %s" % (" ".join(args[:2]),
+                                     r.stderr.decode("utf-8", "replace").strip()[:200]))
+    return r.stdout.decode("utf-8", "replace")
+
+
 def _rel(path):
     try:
         return Path(path).resolve().relative_to(Path(L.REPO).resolve()).as_posix()
@@ -506,15 +538,14 @@ def rebased_provenance(path, manifest, entry=None):
         fail("%s: no rebased-provenance entry" % rel)
     evp = Path(L.REPO) / entry["evidence"]
     ev = evp.read_bytes() if evp.is_file() else None
-    log = _git("log", "--diff-filter=A", "--format=%H", "-1", "--", str(path)).strip()
+    log = _git_prov("log", "--diff-filter=A", "--format=%H", "-1", "--", str(path)).strip()
     added = log.splitlines()[0] if log else None
     msg, idate = None, None
     if added:
-        msg = _git("log", "-1", "--format=%B", added)
-        idate = _dt.datetime.fromisoformat(_git("log", "-1", "--format=%cI", added).strip())
+        msg = _git_prov("log", "-1", "--format=%B", added)
+        idate = _dt.datetime.fromisoformat(_git_prov("log", "-1", "--format=%cI", added).strip())
     local = None
-    r = subprocess.run(["git", "-C", str(L.REPO), "cat-file", "commit", entry["origin_commit"]],
-                       capture_output=True)
+    r = _git_prov_run("cat-file", "commit", entry["origin_commit"])
     if r.returncode == 0:
         local = r.stdout
     probs = rebased_provenance_problems(rel, manifest, entry, ev, added, msg, idate, local)

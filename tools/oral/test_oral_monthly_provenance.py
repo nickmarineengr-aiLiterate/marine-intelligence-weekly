@@ -268,6 +268,30 @@ def main():
     finally:
         MM.REBASED_PROVENANCE = saved
 
+    # ------------------------------------------------- H: hardened git (R9a M-2)
+    import os
+    check("H1 provenance git ignores replace refs and fsmonitor",
+          "--no-replace-objects" in MM._GIT_PROV_FIXED and "core.fsmonitor=false" in MM._GIT_PROV_FIXED)
+    hostile = {"GIT_DIR": str(MM.L.REPO / "no-such-git-dir"), "GIT_OBJECT_DIRECTORY": str(MM.L.REPO / "nope"),
+               "GIT_REPLACE_REF_BASE": "refs/attack/", "GIT_CONFIG_PARAMETERS": "'core.fsmonitor=evil'"}
+    saved_env = {k: os.environ.get(k) for k in hostile}
+    try:
+        os.environ.update(hostile)
+        env = MM._git_prov_env()
+        check("H2 inherited GIT_* environment is scrubbed", not any(k in env for k in hostile))
+        try:
+            rp2 = MM.rebased_provenance(PATH, MAN)
+            check("H3 provenance still verifies under a hostile GIT_* environment",
+                  rp2["integration_commit"] == ENTRY["integration_commit"])
+        except MM.MonthlyFailure as ex:
+            check("H3 provenance still verifies under a hostile GIT_* environment", False, str(ex)[:150])
+    finally:
+        for k, v in saved_env.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+
     n_fail = sum(1 for _, ok in RESULTS if not ok)
     print("%d checks, %d FAIL" % (len(RESULTS), n_fail))
     return 1 if n_fail else 0
