@@ -19,8 +19,13 @@ An exception is honoured only if ALL of these hold:
       exception's diff_pin (same paths, same A/M status, and the same git blob at HEAD for every pinned path).
       Nothing else in the repository may differ from the production baseline: no other page, record, config,
       .vercelignore, vercel.json, middleware, copied RulesApp content, rename or deletion. The correction
-      records added are exactly the release's nine. production_baseline and candidate_commit are ancestors of HEAD.
-  X6  authorised: every release correction record AT HEAD is FOUNDER_AUTHORISED
+      records added are exactly the release's declared correction_records (S1: nine) and none other is touched;
+      the content-batch manifests (tools/oral/batch_*_manifest.json) added are exactly its declared
+      content_batches and none other is touched. production_baseline and candidate_commit are ancestors of HEAD.
+  X6  authorised: every release correction record AT HEAD is FOUNDER_AUTHORISED, and every declared content batch
+      is FOUNDER_AUTHORISED in its own authorisation source AT HEAD (the manifest names that source and key, and
+      the source's entry names that manifest). A release must declare at least one correction record or content
+      batch: an exception can never cover an empty or unauthorised release.
   X7  clean: no uncommitted change, no skip-worktree / assume-unchanged index entry, no ignored *.json under
       tools/oral/ (an ignored file could shadow what the gate reads)
   X8  not deployed (tree): no deployment-surface file differs from the production baseline (implied by X5, checked
@@ -34,6 +39,11 @@ An exception is honoured only if ALL of these hold:
       probe (= the baseline deployment); it is re-run immediately before and after any push.
 
 Every exception file present (committed or not) must itself pass X1-X3, whether or not it is used.
+
+One exception per release. Several known exceptions may therefore match the same open item (S1's and H8's both name
+XP-RULESAPP-FALLS-01). The item is non-blocking only if AT LEAST ONE of them satisfies X4-X9 in full, on its own;
+no condition is ever combined across exceptions, and when none applies every matching exception's failures are
+reported. (Added for H8, 14 Nov 2026: before, only the first matching exception was judged.)
 """
 from __future__ import annotations
 
@@ -43,12 +53,17 @@ import hashlib
 import json
 import os
 import pathlib
+import re
 import subprocess
 
 HERE = pathlib.Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 EXCEPTION_GLOB = "governance_exception_*.json"
 ORAL = "tools/oral/"
+# X5/X6 for content releases (H8): a content batch is a tools/oral/batch_*_manifest.json authorised through the
+# authorisation source it names (e.g. OCTOBER2026_PRODUCTION_QUEUE.json, key "batches.H8").
+BATCH_MANIFEST_RE = re.compile(r"^tools/oral/batch_[a-z0-9_]+_manifest\.json$")
+BATCH_FIELDS = ("manifest", "authorisation_source", "authorisation_batch_key")
 # Deployment surface: never allowed to differ from the production baseline under an exception.
 DEPLOY_SURFACE = (".vercelignore", "vercel.json", "middleware.js", "package.json", "package-lock.json", "api/",
                   ".github/", "RulesApp/", "o3/")
@@ -71,6 +86,8 @@ SELF = "SELF"  # diff_pin value for the two files that cannot pin themselves (th
 # Closed list. Adding or changing an exception changes this pin, which is a reviewed governance change.
 KNOWN_EXCEPTIONS = {
     "GX-S1-RULESAPP-FALLS-20261112": "8981a610918822393c3ccb4ce9e64e068d02db16eafdf21c94afcf71771439c8",
+    # H8 Tier A content release; Founder directive "H8 governance remediation", Q-2 (14 Nov 2026)
+    "GX-H8-RULESAPP-FALLS-20261114": "4be194db7cde7154beadd1f5485f0c8997045b11bd88a437795172248a48d75e",
 }
 
 _REQUIRED = ("exception_id", "kind", "schema_version", "gate", "decision", "authorises", "product", "release",
@@ -130,7 +147,14 @@ def _shape(e):
     for k in ("release_id", "production_baseline", "candidate_commit"):
         if not isinstance(rel[k], str) or not rel[k]:
             raise ValueError("release.%s" % k)
-    if not rel["correction_records"] or not isinstance(rel["diff_pin"], dict) or not rel["diff_pin"]:
+    cr, cb = rel["correction_records"], rel.get("content_batches", [])
+    if not isinstance(cr, list) or not isinstance(cb, list) or not (cr or cb):
+        raise ValueError("release scope empty (no correction_records and no content_batches)")
+    for b in cb:
+        if not (isinstance(b, dict) and all(isinstance(b.get(k), str) and b.get(k) for k in BATCH_FIELDS)
+                and BATCH_MANIFEST_RE.match(b["manifest"])):
+            raise ValueError("content_batches entry %r" % (b,))
+    if not isinstance(rel["diff_pin"], dict) or not rel["diff_pin"]:
         raise ValueError("release scope empty")
     for p, v in rel["diff_pin"].items():
         if not (isinstance(v, dict) and v.get("status") in ("A", "M") and isinstance(v.get("blob"), str)):
@@ -219,6 +243,40 @@ def _canon_item(i):
         if isinstance(i, dict) else {"_not_object": repr(i)}
 
 
+def _json_at_head(facts, path):
+    t = facts.show_head(path)
+    try:
+        return json.loads(t) if t is not None else None
+    except ValueError:
+        return None
+
+
+def batch_authorisation_problems(batches: list, facts) -> list[str]:
+    """X6 for content batches, all from HEAD: the manifest and its authorisation source agree with the exception,
+    and the source's entry is FOUNDER_AUTHORISED for exactly that manifest."""
+    probs = []
+    for b in batches:
+        man = _json_at_head(facts, b["manifest"])
+        if not isinstance(man, dict):
+            probs.append("content batch %s missing or unparseable at HEAD" % b["manifest"])
+            continue
+        if man.get("authorisation_source") != b["authorisation_source"] or \
+                man.get("authorisation_batch_key") != b["authorisation_batch_key"]:
+            probs.append("content batch %s names authorisation %s/%s, exception declares %s/%s"
+                         % (b["manifest"], man.get("authorisation_source"), man.get("authorisation_batch_key"),
+                            b["authorisation_source"], b["authorisation_batch_key"]))
+            continue
+        entry = _json_at_head(facts, b["authorisation_source"])
+        for k in b["authorisation_batch_key"].split("."):
+            entry = entry.get(k) if isinstance(entry, dict) else None
+        if not isinstance(entry, dict) or entry.get("status") != "FOUNDER_AUTHORISED" \
+                or entry.get("manifest") != b["manifest"]:
+            probs.append("unauthorised content batch %s (status at HEAD %s, manifest %s)"
+                         % (b["manifest"], (entry or {}).get("status") if isinstance(entry, dict) else None,
+                            (entry or {}).get("manifest") if isinstance(entry, dict) else None))
+    return probs
+
+
 def release_problems(exc: dict, facts) -> list[str]:
     """X4 (second half) and X5-X8, all from HEAD."""
     rel, x = exc["release"], exc["cross_product_item"]
@@ -252,8 +310,16 @@ def release_problems(exc: dict, facts) -> list[str]:
     touched = sorted(pathlib.PurePosixPath(p).name for p in changed
                      if p.startswith(ORAL + "correction_") and p.endswith("_manifest.json"))
     if added != sorted(rel["correction_records"]) or touched != added:
-        probs.append("release scope changed: correction records added %s / touched %s != declared nine"
-                     % (added, touched))
+        probs.append("release scope changed: correction records added %s / touched %s != declared %s"
+                     % (added, touched, sorted(rel["correction_records"])))
+    batches = rel.get("content_batches", [])
+    declared_b = sorted(b["manifest"] for b in batches)
+    added_b = sorted(p for p, s in changed.items() if s == "A" and BATCH_MANIFEST_RE.match(p))
+    touched_b = sorted(p for p in changed if BATCH_MANIFEST_RE.match(p))
+    if added_b != declared_b or touched_b != added_b:
+        probs.append("release scope changed: content batches added %s / touched %s != declared %s"
+                     % (added_b, touched_b, declared_b))
+    probs += batch_authorisation_problems(batches, facts)
     # X4 second half: the record at HEAD declares exactly the pinned items
     rec = facts.head_record(x["correction_manifest"])
     items = (((rec or {}).get("propagation") or {}).get("cross_product_safety_items")
@@ -296,12 +362,20 @@ def evaluate_l4(open_items: list, exception_files: dict, facts, evidence, now: _
         if not cands:
             blocks.append("%s OPEN with no matching governance exception" % label)
             continue
-        e = cands[0]
-        probs = release_problems(e, facts) + evidence_problems(evidence, e, facts, now, known)
-        if probs:
-            blocks.append("%s: exception %s does not apply: %s" % (label, e["exception_id"], "; ".join(probs)))
+        # Each matching exception is judged whole and on its own; the item is non-blocking only if one passes.
+        failed, applied = [], None
+        for e in cands:
+            probs = release_problems(e, facts) + evidence_problems(evidence, e, facts, now, known)
+            if probs:
+                failed.append("%s: exception %s does not apply: %s" % (label, e["exception_id"], "; ".join(probs)))
+            else:
+                applied = e
+                break
+        if applied is None:
+            blocks += failed
         else:
-            info.append("%s: non-blocking under %s (item stays OPEN)" % (label, e["exception_id"]))
+            info.append("%s: non-blocking under %s (item stays OPEN)" % (label, applied["exception_id"]))
+            info += ["(not applicable) %s" % f for f in failed]
     return (not blocks), blocks, info
 
 

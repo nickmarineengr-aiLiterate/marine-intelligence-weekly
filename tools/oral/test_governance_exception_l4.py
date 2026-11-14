@@ -29,6 +29,7 @@ import oral_manifest as M  # noqa: E402
 import check_founder_authorisation_for_landing as GATE  # noqa: E402
 
 REAL_NAME = "governance_exception_gx_s1_rulesapp_falls_20261112.json"
+H8_NAME = "governance_exception_gx_h8_rulesapp_falls_20261114.json"   # H8 Tier A content release (14 Nov 2026)
 REAL = json.loads((HERE / REAL_NAME).read_text(encoding="utf-8"))
 FALLS = REAL["cross_product_item"]["correction_manifest"]
 NOW = dt.datetime(2026, 11, 12, 12, 0, tzinfo=dt.timezone.utc)
@@ -217,6 +218,90 @@ CONTROLS = [
                          e=mod(["release", "diff_pin"], dict(PIN, **{"tools/oral/extra.py": {"status": "A", "blob": GX.SELF}})))),
     ("N59_indented_non_rule_line_blocks", lambda: blocks_with("indented line", facts=Facts(vi=VI_OK + "\tnode_modules2/\n"))),
     ("N60_bytecode_required", lambda: bool(GX.bytecode_problems(False)) and not GX.bytecode_problems(True)),
+]
+
+
+# ------------------------------------------------------------------ H8 (14 Nov 2026): content batches, >1 exception
+BATCH = "tools/oral/batch_t8_manifest.json"
+QUEUE = "meoclass1/oral-intelligence/examiner-audit/T8_PRODUCTION_QUEUE.json"
+BDECL = {"manifest": BATCH, "authorisation_source": QUEUE, "authorisation_batch_key": "batches.T8"}
+
+
+def content_exception(eid="GX-T8-RULESAPP-FALLS-20261114", batches=_D):
+    """A content-release exception shaped like H8's: no correction records, one authorised batch."""
+    e = copy.deepcopy(REAL)
+    e["exception_id"] = eid
+    pin = {p: v for p, v in PIN.items()
+           if not (p.startswith("tools/oral/correction_") or p == "tools/oral/" + REAL_NAME)}
+    pin[BATCH] = {"status": "A", "blob": "b" * 40}
+    pin[QUEUE] = {"status": "A", "blob": "q" * 40}
+    pin["tools/oral/" + GX.exception_filename(eid)] = {"status": "A", "blob": GX.SELF}
+    e["release"].update(release_id="T8", correction_records=[], diff_pin=pin,
+                        content_batches=[dict(BDECL)] if batches is _D else batches)
+    return e
+
+
+T8 = content_exception()
+
+
+class BatchFacts(Facts):
+    """A fake HEAD for the content release T8."""
+
+    def __init__(self, status="FOUNDER_AUTHORISED", man=_D, entry_manifest=BATCH, extra=None, **kw):
+        pin = T8["release"]["diff_pin"]
+        kw.setdefault("changed", dict({p: v["status"] for p, v in pin.items()}, **(extra or {})))
+        super().__init__(blobs={p: v["blob"] for p, v in pin.items()}, **kw)
+        self._man = {"batch_id": "T8", "authorisation_source": QUEUE, "authorisation_batch_key": "batches.T8"} \
+            if man is _D else man
+        self._queue = {"batches": {"T8": {"manifest": entry_manifest, "status": status}}}
+
+    def show_head(self, p):
+        if p == BATCH:
+            return None if self._man is None else json.dumps(self._man)
+        if p == QUEUE:
+            return json.dumps(self._queue)
+        return super().show_head(p)
+
+
+def run_both(facts, ev_for=T8, order=(REAL, T8), now=NOW):
+    files = {GX.exception_filename(e["exception_id"]): raw_of(e) for e in order}
+    known = {e["exception_id"]: GX.sha256_bytes(raw_of(e)) for e in order}
+    ok, blocks, info = GX.evaluate_l4([(FALLS, item())], files, facts, evidence(ev_for), now, known)
+    return ok, " | ".join(blocks), " | ".join(info)
+
+
+CONTROLS += [
+    ("H8_B1_content_release_with_authorised_batch_passes", lambda: run(e=T8, facts=BatchFacts())[0]),
+    ("H8_B2_no_records_and_no_batches_is_malformed",
+     lambda: blocks_with("malformed body", e=content_exception(batches=[]), facts=BatchFacts())),
+    ("H8_B3_pending_batch_blocks", lambda: blocks_with("unauthorised content batch", e=T8, facts=BatchFacts(status="PENDING_FOUNDER_DECISION"))),
+    ("H8_B4_queue_entry_for_other_manifest_blocks",
+     lambda: blocks_with("unauthorised content batch", e=T8, facts=BatchFacts(entry_manifest="tools/oral/batch_x_manifest.json"))),
+    ("H8_B5_manifest_names_other_authorisation_blocks",
+     lambda: blocks_with("names authorisation", e=T8, facts=BatchFacts(man={"authorisation_source": "x.json", "authorisation_batch_key": "batches.T8"}))),
+    ("H8_B6_manifest_missing_at_head_blocks", lambda: blocks_with("missing or unparseable", e=T8, facts=BatchFacts(man=None))),
+    ("H8_B7_undeclared_batch_manifest_added_blocks",
+     lambda: blocks_with("content batches added", e=T8, facts=BatchFacts(extra={"tools/oral/batch_rogue_manifest.json": "A"}))),
+    ("H8_B8_existing_batch_manifest_edited_blocks",
+     lambda: blocks_with("content batches added", e=T8, facts=BatchFacts(extra={"tools/oral/batch_h2_manifest.json": "M"}))),
+    ("H8_B9_declared_batch_not_added_but_modified_blocks",
+     lambda: blocks_with("content batches", e=T8, facts=BatchFacts(extra={BATCH: "M"}))),
+    ("H8_B10_bad_batch_manifest_path_is_malformed",
+     lambda: blocks_with("malformed body", e=content_exception(batches=[dict(BDECL, manifest="meoclass1/x.json")]), facts=BatchFacts())),
+    ("H8_B11_correction_record_added_to_content_release_blocks",
+     lambda: blocks_with("correction records", e=T8, facts=BatchFacts(extra={"tools/oral/correction_corr_rogue_20261114_manifest.json": "A"}))),
+    ("H8_B12_S1_exception_still_refuses_any_batch_manifest",
+     lambda: blocks_with("content batches added", facts=Facts(changed=dict(Facts()._changed, **{BATCH: "A"})))),
+    # several exceptions matching one item: judged one by one, never combined
+    ("H8_M1_second_matching_exception_applies_and_first_is_reported_not_applicable",
+     lambda: (lambda r: r[0] and "non-blocking under GX-T8" in r[2] and "GX-S1-RULESAPP-FALLS-20261112 does not apply" in r[2])(run_both(BatchFacts()))),
+    ("H8_M2_order_of_exception_files_does_not_matter", lambda: run_both(BatchFacts(), order=(T8, REAL))[0]),
+    ("H8_M3_none_applies_blocks_and_reports_every_exception",
+     lambda: (lambda r: not r[0] and "GX-S1-RULESAPP-FALLS-20261112 does not apply" in r[1] and "GX-T8-RULESAPP-FALLS-20261114 does not apply" in r[1])(
+         run_both(BatchFacts(status="PENDING_FOUNDER_DECISION")))),
+    ("H8_M4_evidence_for_one_exception_does_not_serve_another",
+     lambda: not run_both(BatchFacts(), ev_for=REAL)[0]),
+    ("H8_M5_S1_facts_still_pass_under_S1_with_T8_present", lambda: run_both(Facts(), ev_for=REAL)[0]),
 ]
 
 
@@ -481,19 +566,36 @@ def gate_main_controls(repo, e, known, c2, commit_all):
 def real_repo_controls():
     out = []
     files = GX.load_exception_files(HERE)
-    out.append(("R1_exactly_one_exception_file_in_repo", sorted(files) == [REAL_NAME]))
+    h8 = json.loads((HERE / H8_NAME).read_text(encoding="utf-8"))
+    out.append(("R1_exactly_the_S1_and_H8_exception_files_in_repo", sorted(files) == sorted([REAL_NAME, H8_NAME])))
     e, probs = GX.check_exception_file(REAL_NAME, files.get(REAL_NAME, b""), dt.date(2026, 11, 12))
     out.append(("R2_repo_exception_matches_pin_and_is_well_formed_on_2026_11_12", e is not None and not probs))
-    out.append(("R3_repo_exception_is_known_and_unique", list(GX.KNOWN_EXCEPTIONS) == [REAL["exception_id"]]))
+    e8, probs8 = GX.check_exception_file(H8_NAME, files.get(H8_NAME, b""), dt.date(2026, 11, 14))
+    out.append(("R2b_H8_exception_matches_pin_and_is_well_formed_on_2026_11_14", e8 is not None and not probs8))
+    out.append(("R3_repo_exceptions_are_exactly_S1_and_H8",
+                sorted(GX.KNOWN_EXCEPTIONS) == sorted([REAL["exception_id"], h8["exception_id"]])))
     fallsrec = json.loads((HERE / FALLS).read_text(encoding="utf-8"))
     xp = fallsrec["propagation"]["cross_product_safety_items"]
-    out.append(("R4_rulesapp_item_still_OPEN_and_equal_to_pinned_items",
+    out.append(("R4_rulesapp_item_still_OPEN_and_equal_to_pinned_items_of_both_exceptions",
                 len(xp) == 2 and all(i["status"] == "OPEN" for i in xp)
-                and [GX._canon_item(i) for i in xp] == [GX._canon_item(i) for i in REAL["cross_product_item"]["items"]]))
+                and all([GX._canon_item(i) for i in xp] == [GX._canon_item(i) for i in x["cross_product_item"]["items"]]
+                        for x in (REAL, h8))))
     out.append(("R5_head_vercelignore_passes_necessary_conditions",
                 GX.vercelignore_problems(GX.RepoFacts().show_head(".vercelignore"), "RulesApp/") == []))
-    out.append(("R5b_diff_pin_has_no_deployment_surface_path",
-                not [p for p in REAL["release"]["diff_pin"] if p.startswith(GX.DEPLOY_SURFACE) or p in GX.DEPLOY_SURFACE]))
+    out.append(("R5b_diff_pins_have_no_deployment_surface_path",
+                not [p for x in (REAL, h8) for p in x["release"]["diff_pin"]
+                     if p.startswith(GX.DEPLOY_SURFACE) or p in GX.DEPLOY_SURFACE]))
+    b = h8["release"]["content_batches"]
+    queue = json.loads((GX.REPO / b[0]["authorisation_source"]).read_text(encoding="utf-8")) if len(b) == 1 else {}
+    out.append(("R5c_H8_exception_declares_only_the_authorised_H8_batch_and_no_correction_record",
+                h8["release"]["correction_records"] == [] and len(b) == 1
+                and b[0]["manifest"] == "tools/oral/batch_h8_manifest.json"
+                and queue.get("batches", {}).get("H8", {}).get("status") == "FOUNDER_AUTHORISED"
+                and h8["release"]["production_baseline"] == "a740ed0dd12abc22d40022c9fb20e3be33d72c02"
+                and h8["release"]["candidate_commit"] == "b5183c7dee8a4422b827c3fc1766208b055a759f"))
+    out.append(("R5d_S1_exception_scope_unchanged", REAL["release"]["release_id"] == "S1-SAFETY-REMEDIATION-20261112"
+                and REAL["release"]["production_baseline"] == "89480f2ad63663fdd67fb9375731e09349b18fe8"
+                and len(REAL["release"]["correction_records"]) == 9))
     exempt = sorted(p.name for p in HERE.glob("correction_*_manifest.json")
                     if p.name in M.FOUNDER_AUTHORISATION_LEGACY_COMPAT_RECORDS and M._is_legacy_record(p))
     out.append(("R6_exactly_three_lp617_records_exempt_via_allowance", exempt == sorted(M.FOUNDER_AUTHORISATION_LEGACY_COMPAT_RECORDS)))
